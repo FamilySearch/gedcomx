@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <artifactId>gedcom-parent</artifactId>
+  <groupId>org.familysearch.gedcom</groupId>
+  <parent>
+    <groupId>org.familysearch</groupId>
+    <artifactId>root</artifactId>
+    <version>1.8</version>
+  </parent>
+
+  <modelVersion>4.0.0</modelVersion>
+  <name>GEDCOM X Parent Project</name>
+  <version>1.0.0.BUILD-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>
+      <version>5.14</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <scm>
+    <connection>scm:svn:https://vcs.fsglobal.net/svn/data-framework/gedcomx/trunk</connection>
+    <developerConnection>scm:svn:https://vcs.fsglobal.net/svn/data-framework/gedcomx/trunk</developerConnection>
+    <url>https://vcs.fsglobal.net/svn/data-framework/gedcomx/trunk</url>
+  </scm>
+
+  <properties>
+    <enunciate.version>1.21.1</enunciate.version>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+    </dependencies>
+  </dependencyManagement>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-idea-plugin</artifactId>
+        <configuration>
+          <downloadSources>false</downloadSources>
+          <downloadJavadocs>false</downloadJavadocs>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <phase>package</phase>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <ciManagement>
+    <system>hudson</system>
+    <url>http://build5.usys.org:8080/job/gedcomx/</url>
+    <notifiers>
+      <notifier>
+        <type>mail</type>
+        <configuration>
+          <recipients>heatonra@familysearch.org</recipients>
+        </configuration>
+        <sendOnSuccess>true</sendOnSuccess>
+        <sendOnError>true</sendOnError>
+        <sendOnFailure>true</sendOnFailure>
+        <sendOnWarning>true</sendOnWarning>
+      </notifier>
+    </notifiers>
+  </ciManagement>
+
+  <modules>
+    <module>gedcom-attribution</module>
+    <module>gedcom-rex</module>
+  </modules>
+</project>
