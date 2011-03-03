@@ -25,9 +25,9 @@
   </dependencies>
 
   <scm>
-    <connection>scm:svn:https://vcs.fsglobal.net/svn/data-framework/gedcomx/trunk</connection>
-    <developerConnection>scm:svn:https://vcs.fsglobal.net/svn/data-framework/gedcomx/trunk</developerConnection>
-    <url>https://vcs.fsglobal.net/svn/data-framework/gedcomx/trunk</url>
+    <connection>scm:svn:https://vcs.fsglobal.net/svn/model/gedcomx/trunk</connection>
+    <developerConnection>scm:svn:https://vcs.fsglobal.net/svn/model/gedcomx/trunk</developerConnection>
+    <url>https://vcs.fsglobal.net/svn/model/gedcomx/trunk</url>
   </scm>
 
   <properties>
