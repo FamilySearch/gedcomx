@@ -16,7 +16,6 @@ public class PlacePartType {
 
   private PlacePartType() {}
 
-  //todo: align with standards?
   public static final QName COUNTRY = new QName(GedcomConstants.GEDCOM_TYPES_PLACE_NAMESPACE, "country");
   public static final QName STATE = new QName(GedcomConstants.GEDCOM_TYPES_PLACE_NAMESPACE, "state");
   public static final QName PROVINCE = new QName(GedcomConstants.GEDCOM_TYPES_PLACE_NAMESPACE, "province");

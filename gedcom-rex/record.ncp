@@ -41,7 +41,7 @@
         <Collapsed>False</Collapsed>
         <Member type="Field">public String id</Member>
         <Member type="Field">public EventType type</Member>
-        <Member type="Field">public boolean principal</Member>
+        <Member type="Field">public boolean primary</Member>
         <Member type="Field">public String description</Member>
         <Member type="Field">public Date date</Member>
         <Member type="Field">public Place place</Member>
@@ -77,7 +77,6 @@
         <Size width="167" height="216" />
         <Collapsed>False</Collapsed>
         <Member type="Field">public String id</Member>
-        <Member type="Field">public boolean principal</Member>
         <Member type="Field">public NameType type</Member>
         <Member type="Field">public NameGenre genre</Member>
         <Member type="Field">public NameValue original</Member>
@@ -114,9 +113,10 @@
         <Name>EventRole</Name>
         <Access>Public</Access>
         <Location left="541" top="432" />
-        <Size width="162" height="145" />
+        <Size width="162" height="162" />
         <Collapsed>False</Collapsed>
         <Member type="Field">public String id</Member>
+        <Member type="Field">public boolean principal</Member>
         <Member type="Field">public String description</Member>
         <Member type="Field">public EventRoleType type</Member>
         <Member type="Field">public Event event</Member>
@@ -281,7 +281,7 @@
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Comment">
-        <Text>Value will hold attribution and source citation.</Text>
+        <Text>Value is anticipated as a placeholder for attribution and source citation.</Text>
         <Location left="966" top="1335" />
         <Size width="160" height="75" />
       </Entity>
