@@ -23,7 +23,6 @@ public class Name {
   public Name() {
   }
 
-
   @XmlID
   @XmlAttribute
   public String getId() {

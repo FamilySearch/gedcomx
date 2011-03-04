@@ -5,20 +5,19 @@ import org.familysearch.gedcom.rex.event.Event;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlIDREF;
-import javax.xml.namespace.QName;
 
 /**
  * @author Merlin Carpenter
  *         Date: Aug 8, 2008
  */
-public class RoleInEvent {
+public class EventRole {
 
   private String id;
-  private QName roleType;
   private String description;
   private Event event;
+  private Boolean principal;
 
-  public RoleInEvent() {
+  public EventRole() {
   }
 
   @XmlID
@@ -29,15 +28,6 @@ public class RoleInEvent {
 
   public void setId(String id) {
     this.id = id;
-  }
-
-  @XmlAttribute
-  public QName getRoleType() {
-    return roleType;
-  }
-
-  public void setRoleType(QName roleType) {
-    this.roleType = roleType;
   }
 
   @XmlAttribute
@@ -59,4 +49,12 @@ public class RoleInEvent {
     this.event = event;
   }
 
+  @XmlAttribute
+  public Boolean getPrincipal() {
+    return principal;
+  }
+
+  public void setPrincipal(Boolean principal) {
+    this.principal = principal;
+  }
 }

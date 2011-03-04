@@ -1,20 +1,20 @@
 package org.familysearch.gedcom.rex;
 
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlID;
 
 /**
- * @author CarpenterMP
- *         Date: Jul 13, 2009
+ * @author Merlin Carpenter
+ *         Date: Aug 14, 2008
  */
-@XmlType(name = "text")
-@XmlAccessorType
-public abstract class Part {
+public class Field {
 
   private String id;
   private String text;
   private String fieldId;
 
-  public Part() {
+  public Field() {
   }
 
   @XmlID

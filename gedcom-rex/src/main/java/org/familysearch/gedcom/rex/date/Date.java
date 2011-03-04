@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlType;
  * @author Merlin Carpenter
  *         Date: Jul 30, 2008
  */
-@XmlType(propOrder = {"original", "interpreted", "normalized", "astro"})
+@XmlType(propOrder = {"original", "interpreted", "normalized"})
 @ClientName("DateInfo")
 public class Date {
 
@@ -19,7 +19,6 @@ public class Date {
   private DateValue original;
   private DateValue interpreted;
   private DateValue normalized;
-  private AstroDate astro;
 
   public Date() {
   }
@@ -59,15 +58,6 @@ public class Date {
 
   public void setNormalized(DateValue normalized) {
     this.normalized = normalized;
-  }
-
-  @XmlElement
-  public AstroDate getAstro() {
-    return astro;
-  }
-
-  public void setAstro(AstroDate astro) {
-    this.astro = astro;
   }
 
 }

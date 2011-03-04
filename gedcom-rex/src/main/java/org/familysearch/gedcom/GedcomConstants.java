@@ -25,5 +25,6 @@ public class GedcomConstants {
   public static final String GEDCOM_TYPES_PERSON_CHARACTERISTIC_NAMESPACE = GEDCOM_TYPES_NAMESPACE + "/person/characteristic";
   public static final String GEDCOM_TYPES_COUPLE_CHARACTERISTIC_NAMESPACE = GEDCOM_TYPES_NAMESPACE + "/couple/characteristic";
   public static final String GEDCOM_TYPES_RELATIONSHIP_LINEAGE_NAMESPACE = GEDCOM_TYPES_NAMESPACE + "/relationship/lineage";
+  public static final String GEDCOM_TYPES_RELATIONSHIP_ROLE_NAMESPACE = GEDCOM_TYPES_NAMESPACE + "/relationship/role";
 
 }

@@ -1,6 +1,6 @@
 package org.familysearch.gedcom.rex.relationship;
 
-import org.familysearch.gedcom.rex.record.Person;
+import org.familysearch.gedcom.rex.record.Persona;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlIDREF;
@@ -16,22 +16,22 @@ public class CoupleRelationship extends Relationship {
 
   @XmlAttribute
   @XmlIDREF
-  public Person getPerson1() {
-    return getRole1Person();
+  public Persona getPersona1() {
+    return getRole1Persona();
   }
 
-  public void setPerson1(Person person1) {
-    role1Person = person1;
+  public void setPersona1(Persona person1) {
+    role1Persona = person1;
   }
 
   @XmlAttribute
   @XmlIDREF
-  public Person getPerson2() {
-    return getRole2Person();
+  public Persona getPersona2() {
+    return getRole2Persona();
   }
 
-  public void setPerson2(Person person2) {
-    role2Person = person2;
+  public void setPersona2(Persona person2) {
+    role2Persona = person2;
   }
 
 }

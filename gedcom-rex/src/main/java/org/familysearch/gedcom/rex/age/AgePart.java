@@ -1,6 +1,6 @@
 package org.familysearch.gedcom.rex.age;
 
-import org.familysearch.gedcom.rex.Part;
+import org.familysearch.gedcom.rex.Field;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.namespace.QName;
@@ -8,7 +8,7 @@ import javax.xml.namespace.QName;
 /**
  * @author Ryan Heaton
  */
-public class AgePart extends Part {
+public class AgePart extends Field {
 
   private QName units;
 

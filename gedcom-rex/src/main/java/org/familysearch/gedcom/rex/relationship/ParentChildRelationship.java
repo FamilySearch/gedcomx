@@ -1,6 +1,6 @@
 package org.familysearch.gedcom.rex.relationship;
 
-import org.familysearch.gedcom.rex.record.Person;
+import org.familysearch.gedcom.rex.record.Persona;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlIDREF;
@@ -28,21 +28,21 @@ public class ParentChildRelationship extends Relationship {
 
   @XmlAttribute
   @XmlIDREF
-  public Person getParent() {
-    return getRole1Person();
+  public Persona getParent() {
+    return getRole1Persona();
   }
 
-  public void setParent(Person parent) {
-    role1Person = parent;
+  public void setParent(Persona parent) {
+    role1Persona = parent;
   }
 
   @XmlAttribute
   @XmlIDREF
-  public Person getChild() {
-    return getRole2Person();
+  public Persona getChild() {
+    return getRole2Persona();
   }
 
-  public void setChild(Person child) {
-    role2Person = child;
+  public void setChild(Persona child) {
+    role2Persona = child;
   }
 }

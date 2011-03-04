@@ -15,17 +15,17 @@ import java.util.List;
  * @author Merlin Carpenter
  *         Date: Jul 30, 2008
  */
-public class Person {
+public class Persona {
 
   private String id;
   private Gender gender;
   private Age age;
   private List<Name> names = new ArrayList<Name>();
   private List<Characteristic> characteristics = new ArrayList<Characteristic>();
-  private List<RoleInEvent> rolesInEvents = new ArrayList<RoleInEvent>();
+  private List<EventRole> eventRoles = new ArrayList<EventRole>();
   private Boolean principal;
 
-  public Person() {
+  public Persona() {
   }
 
   @XmlAttribute
@@ -81,13 +81,13 @@ public class Person {
     this.characteristics = characteristics;
   }
 
-  @XmlElement(name = "roleInEvent")
-  public List<RoleInEvent> getRolesInEvents() {
-    return rolesInEvents;
+  @XmlElement(name = "eventRole")
+  public List<EventRole> getEventRoles() {
+    return eventRoles;
   }
 
-  public void setRolesInEvents(List<RoleInEvent> rolesInEvents) {
-    this.rolesInEvents = rolesInEvents;
+  public void setEventRoles(List<EventRole> eventRoles) {
+    this.eventRoles = eventRoles;
   }
 
   @XmlAttribute(name = "principal")

@@ -13,12 +13,12 @@ import java.util.List;
  *         Date: Jul 30, 2008
  */
 @XmlRootElement(name = "record")
-@XmlType(propOrder = {"persons", "events", "relationships", "characteristics"})
+@XmlType(propOrder = {"personas", "events", "relationships", "characteristics"})
 public class Record {
 
   private String id;
   private QName type;
-  private List<Person> persons;
+  private List<Persona> personas;
   private List<Event> events;
   private List<Relationship> relationships;
   private List<Characteristic> characteristics;
@@ -46,12 +46,12 @@ public class Record {
   }
 
   @XmlElement(name = "person")
-  public List<Person> getPersons() {
-    return persons;
+  public List<Persona> getPersonas() {
+    return personas;
   }
 
-  public void setPersons(List<Person> persons) {
-    this.persons = persons;
+  public void setPersonas(List<Persona> personas) {
+    this.personas = personas;
   }
 
   @XmlElement(name = "event")

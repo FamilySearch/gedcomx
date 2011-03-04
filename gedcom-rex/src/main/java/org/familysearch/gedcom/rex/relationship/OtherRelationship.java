@@ -4,7 +4,7 @@ package org.familysearch.gedcom.rex.relationship;
  * @author Ryan Heaton
  */
 
-import org.familysearch.gedcom.rex.record.Person;
+import org.familysearch.gedcom.rex.record.Persona;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlIDREF;
@@ -52,21 +52,21 @@ public class OtherRelationship extends Relationship {
 
   @XmlAttribute
   @XmlIDREF
-  public Person getRole1Person() {
-    return super.getRole1Person();
+  public Persona getRole1Persona() {
+    return super.getRole1Persona();
   }
 
-  public void setRole1Person(Person role1Person) {
-    this.role1Person = role1Person;
+  public void setRole1Persona(Persona role1Persona) {
+    super.setRole1Persona(role1Persona);
   }
 
   @XmlAttribute
   @XmlIDREF
-  public Person getRole2Person() {
-    return super.getRole2Person();
+  public Persona getRole2Persona() {
+    return super.getRole2Persona();
   }
 
-  public void setRole2Person(Person role2Person) {
-    this.role2Person = role2Person;
+  public void setRole2Persona(Persona role2Persona) {
+    super.setRole2Persona(role2Persona);
   }
 }

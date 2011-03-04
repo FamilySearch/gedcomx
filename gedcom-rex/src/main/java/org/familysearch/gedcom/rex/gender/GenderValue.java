@@ -1,6 +1,6 @@
 package org.familysearch.gedcom.rex.gender;
 
-import org.familysearch.gedcom.rex.Value;
+import org.familysearch.gedcom.rex.Field;
 
 import javax.xml.bind.annotation.XmlAttribute;
 
@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlAttribute;
  * @author Merlin Carpenter
  *         Date: Aug 14, 2008
  */
-public class GenderValue extends Value {
+public class GenderValue extends Field {
 
   private GenderType type;
 

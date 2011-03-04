@@ -1,10 +1,9 @@
 package org.familysearch.gedcom.rex.relationship;
 
 import org.familysearch.gedcom.rex.characteristic.Characteristic;
-import org.familysearch.gedcom.rex.record.Person;
+import org.familysearch.gedcom.rex.record.Persona;
 
 import javax.xml.bind.annotation.*;
-import javax.xml.namespace.QName;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,21 +15,11 @@ import java.util.List;
 public abstract class Relationship {
 
   private String id;
-  private QName type;
-  protected Person role1Person;
-  protected Person role2Person;
+  protected Persona role1Persona;
+  protected Persona role2Persona;
   private List<Characteristic> characteristics = new ArrayList<Characteristic>();
 
   public Relationship() {
-  }
-
-  @XmlAttribute
-  public QName getType() {
-    return type;
-  }
-
-  public void setType(QName type) {
-    this.type = type;
   }
 
   @XmlAttribute
@@ -43,22 +32,22 @@ public abstract class Relationship {
     this.id = id;
   }
 
-  public Person getRole1Person() {
-    return role1Person;
+  @XmlTransient
+  public Persona getRole1Persona() {
+    return role1Persona;
+  }
+
+  public void setRole1Persona(Persona role1Persona) {
+    this.role1Persona = role1Persona;
   }
 
   @XmlTransient
-  public void setRole1Person(Person role1Person) {
-    this.role1Person = role1Person;
+  public Persona getRole2Persona() {
+    return role2Persona;
   }
 
-  public Person getRole2Person() {
-    return role2Person;
-  }
-
-  @XmlTransient
-  public void setRole2Person(Person role2Person) {
-    this.role2Person = role2Person;
+  public void setRole2Persona(Persona role2Persona) {
+    this.role2Persona = role2Persona;
   }
 
   @XmlElement(name = "characteristic")

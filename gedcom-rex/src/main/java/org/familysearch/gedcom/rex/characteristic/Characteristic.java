@@ -1,8 +1,6 @@
 package org.familysearch.gedcom.rex.characteristic;
 
 import org.familysearch.gedcom.rex.Value;
-import org.familysearch.gedcom.rex.date.Date;
-import org.familysearch.gedcom.rex.place.Place;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
@@ -21,8 +19,6 @@ public class Characteristic {
   private Value original;
   private Value interpreted;
   private Value normalized;
-  private Date date;
-  private Place place;
 
   public Characteristic() {
   }
@@ -71,24 +67,6 @@ public class Characteristic {
 
   public void setNormalized(Value normalized) {
     this.normalized = normalized;
-  }
-
-  @XmlElement
-  public Date getDate() {
-    return date;
-  }
-
-  public void setDate(Date date) {
-    this.date = date;
-  }
-
-  @XmlElement
-  public Place getPlace() {
-    return place;
-  }
-
-  public void setPlace(Place place) {
-    this.place = place;
   }
 
 }
