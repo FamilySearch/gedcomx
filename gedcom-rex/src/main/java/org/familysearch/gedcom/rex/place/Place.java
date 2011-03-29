@@ -1,60 +1,31 @@
 package org.familysearch.gedcom.rex.place;
 
-import javax.xml.bind.annotation.XmlAttribute;
+import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlType;
+import org.familysearch.gedcom.rex.Field;
 
 /**
  * @author Merlin Carpenter
  *         Place: Jul 30, 2008
  */
-@XmlType(propOrder = {"original", "interpreted", "normalized"})
-public class Place {
-
-  private String id;
-  private PlaceValue original;
-  private PlaceValue interpreted;
-  private PlaceValue normalized;
+@XmlType
+public class Place extends Field {
 
   public Place() {
   }
 
-  @XmlID
-  @XmlAttribute
-  public String getId() {
-    return id;
+  private List<PlacePart> parts;
+
+  @XmlElementWrapper(name = "parts")
+  @XmlElement(name = "part")
+  public List<PlacePart> getParts() {
+    return parts;
   }
 
-  public void setId(String id) {
-    this.id = id;
-  }
-
-  @XmlElement
-  public PlaceValue getOriginal() {
-    return original;
-  }
-
-  public void setOriginal(PlaceValue original) {
-    this.original = original;
-  }
-
-  @XmlElement
-  public PlaceValue getInterpreted() {
-    return interpreted;
-  }
-
-  public void setInterpreted(PlaceValue interpreted) {
-    this.interpreted = interpreted;
-  }
-
-  @XmlElement
-  public PlaceValue getNormalized() {
-    return normalized;
-  }
-
-  public void setNormalized(PlaceValue normalized) {
-    this.normalized = normalized;
+  public void setParts(List<PlacePart> parts) {
+    this.parts = parts;
   }
 
 }

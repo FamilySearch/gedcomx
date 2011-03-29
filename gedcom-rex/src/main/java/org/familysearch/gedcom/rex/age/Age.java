@@ -1,60 +1,31 @@
 package org.familysearch.gedcom.rex.age;
 
-import javax.xml.bind.annotation.XmlAttribute;
+import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlType;
+import org.familysearch.gedcom.rex.Field;
 
 /**
  * @author Merlin Carpenter
  *         Date: Jul 30, 2008
  */
-@XmlType(propOrder = {"original", "interpreted", "normalized"})
-public class Age {
+@XmlType
+public class Age extends Field {
 
-  private String id;
-  private AgeValue original;
-  private AgeValue interpreted;
-  private AgeValue normalized;
+  private List<AgePart> parts;
 
   public Age() {
   }
 
-  @XmlID
-  @XmlAttribute
-  public String getId() {
-    return id;
+  @XmlElementWrapper (name = "parts")
+  @XmlElement (name = "part")
+  public List<AgePart> getParts() {
+    return parts;
   }
 
-  public void setId(String id) {
-    this.id = id;
-  }
-
-  @XmlElement
-  public AgeValue getOriginal() {
-    return original;
-  }
-
-  public void setOriginal(AgeValue original) {
-    this.original = original;
-  }
-
-  @XmlElement
-  public AgeValue getInterpreted() {
-    return interpreted;
-  }
-
-  public void setInterpreted(AgeValue interpreted) {
-    this.interpreted = interpreted;
-  }
-
-  @XmlElement
-  public AgeValue getNormalized() {
-    return normalized;
-  }
-
-  public void setNormalized(AgeValue normalized) {
-    this.normalized = normalized;
+  public void setParts(List<AgePart> parts) {
+    this.parts = parts;
   }
 
 }

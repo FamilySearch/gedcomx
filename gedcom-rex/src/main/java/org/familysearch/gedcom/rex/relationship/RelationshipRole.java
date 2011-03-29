@@ -5,7 +5,7 @@ import javax.xml.namespace.QName;
 import org.familysearch.gedcom.GedcomConstants;
 
 /**
- * @author phillipsjp
+ * @author Jeff Phillips
  * Date: Feb 16, 2011
  */
 @XmlTransient

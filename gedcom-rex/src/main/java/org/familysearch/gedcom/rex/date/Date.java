@@ -1,63 +1,33 @@
 package org.familysearch.gedcom.rex.date;
 
+import java.util.List;
 import org.codehaus.enunciate.ClientName;
 
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlType;
+import org.familysearch.gedcom.rex.Field;
 
 /**
  * @author Merlin Carpenter
  *         Date: Jul 30, 2008
  */
-@XmlType(propOrder = {"original", "interpreted", "normalized"})
+@XmlType
 @ClientName("DateInfo")
-public class Date {
+public class Date extends Field {
 
-  private String id;
-  private DateValue original;
-  private DateValue interpreted;
-  private DateValue normalized;
+  private List<DatePart> parts;
 
   public Date() {
   }
 
-  @XmlID
-  @XmlAttribute
-  public String getId() {
-    return id;
+  @XmlElementWrapper(name = "parts")
+  @XmlElement(name = "part")
+  public List<DatePart> getParts() {
+    return parts;
   }
 
-  public void setId(String id) {
-    this.id = id;
+  public void setParts(List<DatePart> parts) {
+    this.parts = parts;
   }
-
-  @XmlElement
-  public DateValue getOriginal() {
-    return original;
-  }
-
-  public void setOriginal(DateValue original) {
-    this.original = original;
-  }
-
-  @XmlElement
-  public DateValue getInterpreted() {
-    return interpreted;
-  }
-
-  public void setInterpreted(DateValue interpreted) {
-    this.interpreted = interpreted;
-  }
-
-  @XmlElement
-  public DateValue getNormalized() {
-    return normalized;
-  }
-
-  public void setNormalized(DateValue normalized) {
-    this.normalized = normalized;
-  }
-
 }

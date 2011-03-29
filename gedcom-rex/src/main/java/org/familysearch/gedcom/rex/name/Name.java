@@ -1,36 +1,25 @@
 package org.familysearch.gedcom.rex.name;
 
+import java.util.List;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.namespace.QName;
+import org.familysearch.gedcom.rex.Field;
 
 /**
  * @author Merlin Carpenter
  *         Date: Jul 30, 2008
  */
-@XmlType(propOrder = {"original", "interpreted", "normalized"})
-public class Name {
+@XmlType
+public class Name extends Field {
 
-  private String id;
   private QName type = NameType.NAME;
   private QName genre;
-  private NameValue original;
-  private NameValue interpreted;
-  private NameValue normalized;
+  private List<NamePart> parts;
 
   public Name() {
-  }
-
-  @XmlID
-  @XmlAttribute
-  public String getId() {
-    return id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
   }
 
   @XmlAttribute
@@ -51,31 +40,13 @@ public class Name {
     this.genre = genre;
   }
 
-  @XmlElement
-  public NameValue getOriginal() {
-    return original;
+  @XmlElementWrapper(name = "parts")
+  @XmlElement(name = "part")
+  public List<NamePart> getParts() {
+    return parts;
   }
 
-  public void setOriginal(NameValue original) {
-    this.original = original;
+  public void setParts(List<NamePart> parts) {
+    this.parts = parts;
   }
-
-  @XmlElement
-  public NameValue getNormalized() {
-    return normalized;
-  }
-
-  public void setNormalized(NameValue normalized) {
-    this.normalized = normalized;
-  }
-
-  @XmlElement
-  public NameValue getInterpreted() {
-    return interpreted;
-  }
-
-  public void setInterpreted(NameValue interpreted) {
-    this.interpreted = interpreted;
-  }
-
 }
