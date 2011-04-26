@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>gedcomx-source</artifactId>
+  <name>GEDCOM X - Source</name>
+
+  <parent>
+    <groupId>org.familysearch.gedcom</groupId>
+    <artifactId>gedcomx-parent</artifactId>
+    <version>1.0.0.BUILD-SNAPSHOT</version>
+  </parent>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.enunciate</groupId>
+        <artifactId>maven-enunciate-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>process-sources</phase>
+            <goals>
+              <goal>docs</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <dependencies>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>gedcomx-types</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+  </dependencies>
+</project>

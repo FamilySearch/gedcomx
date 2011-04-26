@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
-  <artifactId>gedcom-parent</artifactId>
+  <artifactId>gedcomx-parent</artifactId>
   <groupId>org.familysearch.gedcom</groupId>
   <parent>
     <groupId>org.familysearch</groupId>
@@ -15,12 +15,21 @@
   <version>1.0.0.BUILD-SNAPSHOT</version>
   <packaging>pom</packaging>
 
+  <properties>
+    <enunciate.version>1.22</enunciate.version>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>org.testng</groupId>
       <artifactId>testng</artifactId>
       <version>5.14</version>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.enunciate</groupId>
+      <artifactId>enunciate-core-rt</artifactId>
+      <version>${enunciate.version}</version>
     </dependency>
   </dependencies>
 
@@ -30,12 +39,13 @@
     <url>https://vcs.fsglobal.net/svn/model/gedcomx/trunk</url>
   </scm>
 
-  <properties>
-    <enunciate.version>1.21.1</enunciate.version>
-  </properties>
-
   <dependencyManagement>
     <dependencies>
+      <dependency>
+        <groupId>org.codehaus.enunciate</groupId>
+        <artifactId>enunciate-core-rt</artifactId>
+        <version>${enunciate.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
@@ -63,6 +73,15 @@
         </executions>
       </plugin>
     </plugins>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.codehaus.enunciate</groupId>
+          <artifactId>maven-enunciate-plugin</artifactId>
+          <version>${enunciate.version}</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
   </build>
 
   <ciManagement>
@@ -83,7 +102,11 @@
   </ciManagement>
 
   <modules>
-    <module>gedcom-attribution</module>
-    <module>gedcom-rex</module>
+    <module>gedcomx-types</module>
+    <module>gedcomx-source</module>
+    <module>gedcomx-record</module>
+    <module>gedcomx-www</module>
+    <module>gedcomx-metadata</module>
+    <module>gedcomx-record-www</module>
   </modules>
 </project>
