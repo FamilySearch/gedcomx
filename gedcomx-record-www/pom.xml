@@ -6,7 +6,7 @@
   <name>GEDCOM X - WWW Extension for Record</name>
 
   <parent>
-    <groupId>org.familysearch.gedcom</groupId>
+    <groupId>org.gedcomx</groupId>
     <artifactId>gedcomx-parent</artifactId>
     <version>1.0.0.BUILD-SNAPSHOT</version>
   </parent>
@@ -30,12 +30,12 @@
 
   <dependencies>
     <dependency>
-      <groupId>org.familysearch.gedcom</groupId>
+      <groupId>org.gedcomx</groupId>
       <artifactId>gedcomx-record</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.familysearch.gedcom</groupId>
+      <groupId>org.gedcomx</groupId>
       <artifactId>gedcomx-www</artifactId>
       <version>1.0.0.BUILD-SNAPSHOT</version>
     </dependency>

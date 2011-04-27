@@ -6,7 +6,7 @@
   <name>GEDCOM X - Metadata</name>
 
   <parent>
-    <groupId>org.familysearch.gedcom</groupId>
+    <groupId>org.gedcomx</groupId>
     <artifactId>gedcomx-parent</artifactId>
     <version>1.0.0.BUILD-SNAPSHOT</version>
   </parent>

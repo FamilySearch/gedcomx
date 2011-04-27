@@ -6,7 +6,7 @@
   <name>GEDCOM X - Record Model</name>
 
   <parent>
-    <groupId>org.familysearch.gedcom</groupId>
+    <groupId>org.gedcomx</groupId>
     <artifactId>gedcomx-parent</artifactId>
     <version>1.0.0.BUILD-SNAPSHOT</version>
   </parent>
@@ -30,12 +30,12 @@
 
   <dependencies>
     <dependency>
-      <groupId>org.familysearch.gedcom</groupId>
+      <groupId>org.gedcomx</groupId>
       <artifactId>gedcomx-types</artifactId>
       <version>1.0.0.BUILD-SNAPSHOT</version>
     </dependency>
     <dependency>
-      <groupId>org.familysearch.gedcom</groupId>
+      <groupId>org.gedcomx</groupId>
       <artifactId>gedcomx-source</artifactId>
       <version>1.0.0.BUILD-SNAPSHOT</version>
     </dependency>
