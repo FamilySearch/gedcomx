@@ -1,19 +1,16 @@
 package org.gedcomx.record;
 
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlType;
-import java.util.List;
 
 @XmlType (
   name = "baseCollection",
-  propOrder = { "alternateIds", "parent", "title", "description", "publisher" }
+  propOrder = { "parent", "title", "description", "publisher" }
 )
 public class Collection {
 
   private String id;
-  private List<AlternateId> alternateIds;
   private CollectionReference parent;
   private String title;
   private String description;
@@ -28,15 +25,6 @@ public class Collection {
 
   public void setId(String id) {
     this.id = id;
-  }
-
-  @XmlElement (name="alternateId")
-  public List<AlternateId> getAlternateIds() {
-    return alternateIds;
-  }
-
-  public void setAlternateIds(List<AlternateId> alternateIds) {
-    this.alternateIds = alternateIds;
   }
 
   public CollectionReference getParent() {
