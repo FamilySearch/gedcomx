@@ -1,4 +1,4 @@
-package org.gedcomx.record.www;
+package org.gedcomx.record;
 
 import org.codehaus.enunciate.ClientName;
 

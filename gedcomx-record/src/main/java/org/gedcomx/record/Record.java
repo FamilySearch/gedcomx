@@ -4,18 +4,21 @@ import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.enunciate.qname.XmlQNameEnumRef;
 import org.gedcomx.source.SourceReference;
 import org.gedcomx.types.RecordType;
+import org.gedcomx.www.Links;
+import org.gedcomx.www.PAL;
 
 import javax.xml.bind.annotation.*;
 import javax.xml.namespace.QName;
 import java.util.List;
 
+@XmlRootElement
 @XmlType (
-  name = "baseRecord",
-  propOrder = {"alternateIds", "collection", "personas", "events", "relationships", "characteristics", "sources"}
+  propOrder = {"pal", "alternateIds", "collection", "personas", "events", "relationships", "characteristics", "sources", "links"}
 )
 public class Record {
 
   private String id;
+  private PAL pal;
   private QName type;
   private List<AlternateId> alternateIds;
   private CollectionReference collection;
@@ -24,6 +27,7 @@ public class Record {
   private List<Relationship> relationships;
   private List<Characteristic> characteristics;
   private List<SourceReference> sources;
+  private Links links;
 
   public Record() {
   }
@@ -55,6 +59,14 @@ public class Record {
 
   public void setKnownType(RecordType knownType) {
     this.type = XmlQNameEnumUtil.toQName(knownType);
+  }
+
+  public PAL getPal() {
+    return pal;
+  }
+
+  public void setPal(PAL pal) {
+    this.pal = pal;
   }
 
   @XmlElement(name="alternateId")
@@ -121,5 +133,13 @@ public class Record {
 
   public void setSources(List<SourceReference> sources) {
     this.sources = sources;
+  }
+
+  public Links getLinks() {
+    return links;
+  }
+
+  public void setLinks(Links links) {
+    this.links = links;
   }
 }

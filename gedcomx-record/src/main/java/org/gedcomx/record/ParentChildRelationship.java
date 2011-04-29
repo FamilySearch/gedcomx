@@ -6,9 +6,11 @@ import org.gedcomx.types.LineageType;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlIDREF;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.namespace.QName;
 
+@XmlRootElement
 public class ParentChildRelationship extends Relationship {
 
   private QName lineageType;

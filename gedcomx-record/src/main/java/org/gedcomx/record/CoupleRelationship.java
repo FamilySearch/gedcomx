@@ -2,11 +2,9 @@ package org.gedcomx.record;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlIDREF;
+import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- * @author Merlin Carpenter
- *         Date: Jul 30, 2008
- */
+@XmlRootElement
 public class CoupleRelationship extends Relationship {
 
   public CoupleRelationship() {

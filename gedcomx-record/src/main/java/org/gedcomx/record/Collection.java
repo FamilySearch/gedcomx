@@ -1,12 +1,15 @@
 package org.gedcomx.record;
 
+import org.gedcomx.www.Links;
+
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+@XmlRootElement
 @XmlType (
-  name = "baseCollection",
-  propOrder = { "parent", "title", "description", "publisher" }
+  propOrder = { "parent", "title", "description", "publisher", "links" }
 )
 public class Collection {
 
@@ -15,7 +18,7 @@ public class Collection {
   private String title;
   private String description;
   private String publisher;
-  //todo: support contents of this collection? records, images, and waypoints
+  private Links links;
 
   @XmlAttribute
   @XmlID
@@ -57,5 +60,13 @@ public class Collection {
 
   public void setPublisher(String publisher) {
     this.publisher = publisher;
+  }
+
+  public Links getLinks() {
+    return links;
+  }
+
+  public void setLinks(Links links) {
+    this.links = links;
   }
 }

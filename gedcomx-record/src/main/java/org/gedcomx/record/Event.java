@@ -5,17 +5,11 @@ import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.enunciate.qname.XmlQNameEnumRef;
 import org.gedcomx.types.EventType;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.*;
 import javax.xml.namespace.QName;
 import java.util.List;
 
-/**
- * @author Merlin Carpenter
- *         Date: Jul 30, 2008
- */
+@XmlRootElement
 @ClientName("EventInfo")
 public class Event {
 

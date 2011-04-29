@@ -6,9 +6,11 @@ import org.gedcomx.types.RelationshipRole;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlIDREF;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.namespace.QName;
 
+@XmlRootElement( name = "relationship" )
 public class OtherRelationship extends Relationship {
 
   private String description;

@@ -1,25 +1,21 @@
 package org.gedcomx.record;
 
 import org.gedcomx.source.SourceReference;
+import org.gedcomx.www.Links;
+import org.gedcomx.www.PAL;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author Merlin Carpenter
- *         Date: Jul 30, 2008
- */
+@XmlRootElement
 @XmlType (
-  name = "basePersona",
-  propOrder = {"alternateIds", "gender", "age", "names", "eventRoles", "characteristics", "sources"}
+  propOrder = {"pal", "alternateIds", "gender", "age", "names", "eventRoles", "characteristics", "sources", "links"}
 )
 public class Persona {
 
   private String id;
+  private PAL pal;
   private List<AlternateId> alternateIds;
   private Gender gender;
   private Age age;
@@ -28,6 +24,7 @@ public class Persona {
   private List<Characteristic> characteristics = new ArrayList<Characteristic>();
   private Boolean principal;
   private List<SourceReference> sources;
+  private Links links;
 
   public Persona() {
   }
@@ -51,7 +48,14 @@ public class Persona {
     this.alternateIds = alternateIds;
   }
 
-  @XmlElement
+  public PAL getPal() {
+    return pal;
+  }
+
+  public void setPal(PAL pal) {
+    this.pal = pal;
+  }
+
   public Gender getGender() {
     return gender;
   }
@@ -60,7 +64,6 @@ public class Persona {
     this.gender = gender;
   }
 
-  @XmlElement
   public Age getAge() {
     return age;
   }
@@ -119,5 +122,13 @@ public class Persona {
 
   public void setSources(List<SourceReference> sources) {
     this.sources = sources;
+  }
+
+  public Links getLinks() {
+    return links;
+  }
+
+  public void setLinks(Links links) {
+    this.links = links;
   }
 }
