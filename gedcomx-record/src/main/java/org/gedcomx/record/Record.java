@@ -4,8 +4,8 @@ import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.enunciate.qname.XmlQNameEnumRef;
 import org.gedcomx.source.SourceReference;
 import org.gedcomx.types.RecordType;
+import org.gedcomx.www.PersistentIdentifier;
 import org.gedcomx.www.Links;
-import org.gedcomx.www.PAL;
 
 import javax.xml.bind.annotation.*;
 import javax.xml.namespace.QName;
@@ -13,12 +13,12 @@ import java.util.List;
 
 @XmlRootElement
 @XmlType (
-  propOrder = {"pal", "alternateIds", "collection", "personas", "events", "relationships", "characteristics", "sources", "links"}
+  propOrder = {"persistentId", "alternateIds", "collection", "personas", "events", "relationships", "characteristics", "sources", "links"}
 )
 public class Record {
 
   private String id;
-  private PAL pal;
+  private PersistentIdentifier persistentId;
   private QName type;
   private List<AlternateId> alternateIds;
   private CollectionReference collection;
@@ -61,12 +61,12 @@ public class Record {
     this.type = XmlQNameEnumUtil.toQName(knownType);
   }
 
-  public PAL getPal() {
-    return pal;
+  public PersistentIdentifier getPersistentId() {
+    return persistentId;
   }
 
-  public void setPal(PAL pal) {
-    this.pal = pal;
+  public void setPersistentId(PersistentIdentifier persistentId) {
+    this.persistentId = persistentId;
   }
 
   @XmlElement(name="alternateId")

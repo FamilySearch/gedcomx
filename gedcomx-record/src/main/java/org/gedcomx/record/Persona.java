@@ -1,8 +1,8 @@
 package org.gedcomx.record;
 
 import org.gedcomx.source.SourceReference;
+import org.gedcomx.www.PersistentIdentifier;
 import org.gedcomx.www.Links;
-import org.gedcomx.www.PAL;
 
 import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
@@ -10,12 +10,12 @@ import java.util.List;
 
 @XmlRootElement
 @XmlType (
-  propOrder = {"pal", "alternateIds", "gender", "age", "names", "eventRoles", "characteristics", "sources", "links"}
+  propOrder = {"persistentId", "alternateIds", "gender", "age", "names", "eventRoles", "characteristics", "sources", "links"}
 )
 public class Persona {
 
   private String id;
-  private PAL pal;
+  private PersistentIdentifier persistentId;
   private List<AlternateId> alternateIds;
   private Gender gender;
   private Age age;
@@ -48,12 +48,12 @@ public class Persona {
     this.alternateIds = alternateIds;
   }
 
-  public PAL getPal() {
-    return pal;
+  public PersistentIdentifier getPersistentId() {
+    return persistentId;
   }
 
-  public void setPal(PAL pal) {
-    this.pal = pal;
+  public void setPersistentId(PersistentIdentifier persistentId) {
+    this.persistentId = persistentId;
   }
 
   public Gender getGender() {
