@@ -103,29 +103,6 @@
     </notifiers>
   </ciManagement>
 
-  <profiles>
-    <profile>
-      <id>fs-cloudbees-snapshot</id>
-      <repositories>
-        <repository>
-          <id>fs-cloudbees-snapshot</id>
-          <name>FamilySearch Cloudbees Snapshot Build</name>
-          <url>dav:https://repository-familysearch.forge.cloudbees.com/snapshot/</url>
-        </repository>
-      </repositories>
-    </profile>
-    <profile>
-      <id>fs-cloudbees-release</id>
-      <repositories>
-        <repository>
-          <id>fs-cloudbees-release</id>
-          <name>FamilySearch Cloudbees Release Build</name>
-          <url>dav:https://repository-familysearch.forge.cloudbees.com/release/</url>
-        </repository>
-      </repositories>
-    </profile>
-  </profiles>
-
   <modules>
     <module>gedcomx-types</module>
     <module>gedcomx-source</module>
