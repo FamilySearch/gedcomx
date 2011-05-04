@@ -6,7 +6,7 @@
   <artifactId>gedcomx-parent</artifactId>
   <groupId>org.gedcomx</groupId>
   <name>GEDCOM X Parent Project</name>
-  <version>1.0.0.BUILD-SNAPSHOT</version>
+  <version>0.1.0.BUILD-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <properties>
