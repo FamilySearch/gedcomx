@@ -1,13 +1,17 @@
 package org.gedcomx.www;
 
-import junit.framework.TestCase;
+import org.testng.annotations.Test;
 
 import java.net.URI;
+
+import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertNull;
 
 /**
  * @author Ryan Heaton
  */
-public class TestPersistentIdentifier extends TestCase {
+@Test
+public class TestPersistentIdentifier {
 
   /**
    * Can persistent identifiers be URIs?

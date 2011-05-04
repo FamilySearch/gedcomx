@@ -11,6 +11,8 @@
 
   <properties>
     <enunciate.version>1.22</enunciate.version>
+    <root.basedir>${project.basedir}</root.basedir>
+    <year>${inceptionYear}</year>
   </properties>
 
   <dependencies>
@@ -70,6 +72,28 @@
             <phase>package</phase>
             <goals>
               <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>com.google.code.maven-license-plugin</groupId>
+        <artifactId>maven-license-plugin</artifactId>
+        <version>1.4.0</version>
+        <configuration>
+          <header>${root.basedir}/LICENSE-header.txt</header>
+          <includes>
+            <include>src/main/java/**</include>
+          </includes>
+          <properties>
+            <copyright.year>${inceptionYear}</copyright.year>
+          </properties>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>verify</phase>
+            <goals>
+              <goal>check</goal>
             </goals>
           </execution>
         </executions>
