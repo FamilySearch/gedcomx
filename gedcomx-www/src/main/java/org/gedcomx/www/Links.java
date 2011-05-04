@@ -28,7 +28,8 @@ import java.util.List;
  */
 public class Links {
 
-  //todo: should PAL be inside 'Links' so it can take advantage of the xml:base?
+  //Q. (heatonra) should persistent identifier be inside 'Links' so it can take advantage of the xml:base?
+  //A. (heatonra) no because the persistent identifier base will more often than not need to be different from the links base.
   private List<Link> links;
   private URI base;
 
