@@ -1,3 +1,18 @@
+/**
+ * Copyright 2011 Intellectual Reserve, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.gedcomx.record.www;
 
 import org.gedcomx.record.Record;
@@ -18,7 +33,7 @@ import java.net.URI;
 public class WebRecord extends Record {
 
   private URI base;
-  private PersistentIdentifier identifier;
+  private PersistentIdentifier persistentId;
   private Links links;
 
   @XmlAttribute (namespace = XMLConstants.XML_NS_URI)
@@ -30,12 +45,12 @@ public class WebRecord extends Record {
     this.base = base;
   }
 
-  public PersistentIdentifier getIdentifier() {
-    return identifier;
+  public PersistentIdentifier getPersistentId() {
+    return persistentId;
   }
 
-  public void setIdentifier(PersistentIdentifier identifier) {
-    this.identifier = identifier;
+  public void setPersistentId(PersistentIdentifier persistentId) {
+    this.persistentId = persistentId;
   }
 
   public Links getLinks() {

@@ -74,6 +74,7 @@ public class Source {
     this.type = XmlQNameEnumUtil.toQName(knownType);
   }
 
+  @XmlElement(name = "alternateId")
   public List<AlternateId> getAlternateIds() {
     return alternateIds;
   }

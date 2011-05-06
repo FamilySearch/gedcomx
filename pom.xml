@@ -105,6 +105,14 @@
           <groupId>org.codehaus.enunciate</groupId>
           <artifactId>maven-enunciate-plugin</artifactId>
           <version>${enunciate.version}</version>
+
+          <dependencies>
+            <dependency>
+              <groupId>org.gedcomx</groupId>
+              <artifactId>enunciate-gedcomx-support</artifactId>
+              <version>0.1.0.BUILD-SNAPSHOT</version>
+            </dependency>
+          </dependencies>
         </plugin>
       </plugins>
     </pluginManagement>
@@ -128,6 +136,8 @@
   </ciManagement>
 
   <modules>
+    <module>enunciate-gedcomx-support</module>
+
     <module>gedcomx-types</module>
     <module>gedcomx-attribution</module>
 

@@ -13,27 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.conclusion.www;
+package org.gedcomx.build.enunciate;
 
-import org.gedcomx.conclusion.Event;
-import org.gedcomx.www.Links;
-
-import javax.xml.bind.annotation.XmlType;
+import org.codehaus.enunciate.contract.validation.Validator;
+import org.codehaus.enunciate.modules.BasicDeploymentModule;
 
 /**
  * @author Ryan Heaton
  */
-@XmlType (name = "event")
-public class WebEvent extends Event {
-  //todo: what are the implications of using this in the model? does it deserialize correctly? what about for json?
+public class GEDCOMXDeploymentModule extends BasicDeploymentModule {
 
-  private Links links;
-
-  public Links getLinks() {
-    return links;
-  }
-
-  public void setLinks(Links links) {
-    this.links = links;
+  @Override
+  public Validator getValidator() {
+    return new GEDCOMXValidator();
   }
 }
