@@ -28,7 +28,7 @@ public class TestRecord {
     record.setCollection(collectionReference);
     ByteArrayOutputStream out = new ByteArrayOutputStream();
     JAXBContext jaxbContext = JAXBContext.newInstance(Record.class);
-    jaxbContext.createMarshaller().marshal(new JAXBElement(new QName(RecordConstants.GEDCOMX_RECORD_NAMESPACE, "record"), Record.class, record), out);
+    jaxbContext.createMarshaller().marshal(new JAXBElement<Record>(new QName(RecordConstants.GEDCOMX_RECORD_NAMESPACE, "record"), Record.class, record), out);
 //    System.out.println(out.toString("utf-8"));
     record = jaxbContext.createUnmarshaller().unmarshal(new StreamSource(new ByteArrayInputStream(out.toByteArray())), Record.class).getValue();
     assertEquals("urn:hello", record.getCollection().getHref().toString());

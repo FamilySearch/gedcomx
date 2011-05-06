@@ -15,8 +15,6 @@
  */
 package org.gedcomx.record;
 
-import org.gedcomx.www.Links;
-
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -24,7 +22,7 @@ import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement
 @XmlType (
-  propOrder = { "parent", "title", "description", "publisher", "links" }
+  propOrder = { "parent", "title", "description", "publisher" }
 )
 public class Collection {
 
@@ -33,7 +31,6 @@ public class Collection {
   private String title;
   private String description;
   private String publisher;
-  private Links links;
 
   @XmlAttribute
   @XmlID
@@ -77,11 +74,4 @@ public class Collection {
     this.publisher = publisher;
   }
 
-  public Links getLinks() {
-    return links;
-  }
-
-  public void setLinks(Links links) {
-    this.links = links;
-  }
 }

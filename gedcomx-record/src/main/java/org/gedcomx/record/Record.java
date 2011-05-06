@@ -20,8 +20,6 @@ import org.codehaus.enunciate.qname.XmlQNameEnumRef;
 import org.gedcomx.attribution.AttributionReference;
 import org.gedcomx.source.SourceReference;
 import org.gedcomx.types.RecordType;
-import org.gedcomx.www.PersistentIdentifier;
-import org.gedcomx.www.Links;
 
 import javax.xml.bind.annotation.*;
 import javax.xml.namespace.QName;
@@ -29,12 +27,11 @@ import java.util.List;
 
 @XmlRootElement
 @XmlType (
-  propOrder = {"persistentId", "alternateIds", "attribution", "collection", "personas", "events", "relationships", "characteristics", "sources", "links"}
+  propOrder = {"alternateIds", "attribution", "collection", "personas", "events", "relationships", "characteristics", "sources"}
 )
 public class Record {
 
   private String id;
-  private PersistentIdentifier persistentId;
   private QName type;
   private List<AlternateId> alternateIds;
   private AttributionReference attribution;
@@ -44,7 +41,6 @@ public class Record {
   private List<Relationship> relationships;
   private List<Characteristic> characteristics;
   private List<SourceReference> sources;
-  private Links links;
 
   public Record() {
   }
@@ -76,14 +72,6 @@ public class Record {
 
   public void setKnownType(RecordType knownType) {
     this.type = XmlQNameEnumUtil.toQName(knownType);
-  }
-
-  public PersistentIdentifier getPersistentId() {
-    return persistentId;
-  }
-
-  public void setPersistentId(PersistentIdentifier persistentId) {
-    this.persistentId = persistentId;
   }
 
   @XmlElement(name="alternateId")
@@ -160,11 +148,4 @@ public class Record {
     this.sources = sources;
   }
 
-  public Links getLinks() {
-    return links;
-  }
-
-  public void setLinks(Links links) {
-    this.links = links;
-  }
 }

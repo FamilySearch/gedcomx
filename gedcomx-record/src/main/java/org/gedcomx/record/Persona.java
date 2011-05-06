@@ -15,20 +15,16 @@
  */
 package org.gedcomx.record;
 
-import org.gedcomx.www.PersistentIdentifier;
-import org.gedcomx.www.Links;
-
 import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @XmlType (
-  propOrder = {"persistentId", "alternateIds", "gender", "age", "names", "eventRoles", "characteristics", "links"}
+  propOrder = {"alternateIds", "gender", "age", "names", "eventRoles", "characteristics"}
 )
 public class Persona {
 
   private String id;
-  private PersistentIdentifier persistentId;
   private List<AlternateId> alternateIds;
   private Gender gender;
   private Age age;
@@ -36,7 +32,6 @@ public class Persona {
   private List<EventRole> eventRoles = new ArrayList<EventRole>();
   private List<Characteristic> characteristics = new ArrayList<Characteristic>();
   private Boolean principal;
-  private Links links;
 
   public Persona() {
   }
@@ -58,14 +53,6 @@ public class Persona {
 
   public void setAlternateIds(List<AlternateId> alternateIds) {
     this.alternateIds = alternateIds;
-  }
-
-  public PersistentIdentifier getPersistentId() {
-    return persistentId;
-  }
-
-  public void setPersistentId(PersistentIdentifier persistentId) {
-    this.persistentId = persistentId;
   }
 
   public Gender getGender() {
@@ -125,13 +112,5 @@ public class Persona {
 
   public void setPrincipal(Boolean isPrincipal) {
     this.principal = isPrincipal;
-  }
-
-  public Links getLinks() {
-    return links;
-  }
-
-  public void setLinks(Links links) {
-    this.links = links;
   }
 }
