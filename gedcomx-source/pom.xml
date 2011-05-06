@@ -35,11 +35,6 @@
   <dependencies>
     <dependency>
       <groupId>org.gedcomx</groupId>
-      <artifactId>gedcomx-types</artifactId>
-      <version>0.1.0.BUILD-SNAPSHOT</version>
-    </dependency>
-    <dependency>
-      <groupId>org.gedcomx</groupId>
       <artifactId>gedcomx-attribution</artifactId>
       <version>0.1.0.BUILD-SNAPSHOT</version>
     </dependency>
