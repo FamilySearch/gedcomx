@@ -30,7 +30,6 @@ public class Field {
   private String interpreted;
   private String normalized;
   private AttributionReference attribution;
-  //todo: how do we extend 'field' for the api when we want to support links?
 
   public Field() {
   }

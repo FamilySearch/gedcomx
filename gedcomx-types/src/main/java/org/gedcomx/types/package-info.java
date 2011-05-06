@@ -18,6 +18,8 @@
   elementFormDefault = XmlNsForm.QUALIFIED
 )
 package org.gedcomx.types;
+//todo: figure out all the valid types
+//todo: figure out user-defined types: come up with conventions for extending known types (e.g. qname ns/localpart should resolve to a description of the type)
 
 import javax.xml.bind.annotation.XmlNsForm;
 import javax.xml.bind.annotation.XmlSchema;
