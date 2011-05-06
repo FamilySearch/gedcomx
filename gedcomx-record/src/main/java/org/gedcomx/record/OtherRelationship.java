@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.namespace.QName;
 
-@XmlRootElement( name = "relationship" )
+@XmlRootElement
 public class OtherRelationship extends Relationship {
 
   private String description;

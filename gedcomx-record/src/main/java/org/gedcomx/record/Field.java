@@ -15,14 +15,11 @@
  */
 package org.gedcomx.record;
 
-import org.gedcomx.source.SourceReference;
-
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlType;
 
-@XmlType ( propOrder = { "original", "interpreted", "normalized", "source" })
+@XmlType ( propOrder = { "original", "interpreted", "normalized" })
 public class Field {
 
   private String id;
@@ -30,7 +27,7 @@ public class Field {
   private String original;
   private String interpreted;
   private String normalized;
-  private SourceReference source;
+  //todo: how do we extend 'field' for the api when we want to support links?
 
   public Field() {
   }
@@ -96,11 +93,4 @@ public class Field {
     this.normalized = normalized;
   }
 
-  public SourceReference getSource() {
-    return source;
-  }
-
-  public void setSource(SourceReference source) {
-    this.source = source;
-  }
 }

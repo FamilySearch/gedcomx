@@ -24,7 +24,6 @@ import javax.xml.bind.annotation.*;
 import javax.xml.namespace.QName;
 import java.util.List;
 
-@XmlRootElement
 @ClientName("EventInfo")
 public class Event {
 

@@ -15,7 +15,6 @@
  */
 package org.gedcomx.record;
 
-import org.gedcomx.source.SourceReference;
 import org.gedcomx.www.PersistentIdentifier;
 import org.gedcomx.www.Links;
 
@@ -23,9 +22,8 @@ import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@XmlRootElement
 @XmlType (
-  propOrder = {"persistentId", "alternateIds", "gender", "age", "names", "eventRoles", "characteristics", "sources", "links"}
+  propOrder = {"persistentId", "alternateIds", "gender", "age", "names", "eventRoles", "characteristics", "links"}
 )
 public class Persona {
 
@@ -38,7 +36,6 @@ public class Persona {
   private List<EventRole> eventRoles = new ArrayList<EventRole>();
   private List<Characteristic> characteristics = new ArrayList<Characteristic>();
   private Boolean principal;
-  private List<SourceReference> sources;
   private Links links;
 
   public Persona() {
@@ -128,15 +125,6 @@ public class Persona {
 
   public void setPrincipal(Boolean isPrincipal) {
     this.principal = isPrincipal;
-  }
-
-  @XmlElement(name = "source")
-  public List<SourceReference> getSources() {
-    return sources;
-  }
-
-  public void setSources(List<SourceReference> sources) {
-    this.sources = sources;
   }
 
   public Links getLinks() {

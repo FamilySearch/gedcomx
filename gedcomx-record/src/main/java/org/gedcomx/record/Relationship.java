@@ -23,7 +23,6 @@ import java.util.List;
  * @author Merlin Carpenter
  *         Date: Jul 30, 2008
  */
-@XmlType(name = "relationship")
 public abstract class Relationship {
 
   private String id;
