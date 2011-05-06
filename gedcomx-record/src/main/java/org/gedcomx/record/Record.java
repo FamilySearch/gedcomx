@@ -17,6 +17,7 @@ package org.gedcomx.record;
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.enunciate.qname.XmlQNameEnumRef;
+import org.gedcomx.attribution.AttributionReference;
 import org.gedcomx.source.SourceReference;
 import org.gedcomx.types.RecordType;
 import org.gedcomx.www.PersistentIdentifier;
@@ -28,7 +29,7 @@ import java.util.List;
 
 @XmlRootElement
 @XmlType (
-  propOrder = {"persistentId", "alternateIds", "collection", "personas", "events", "relationships", "characteristics", "sources", "links"}
+  propOrder = {"persistentId", "alternateIds", "attribution", "collection", "personas", "events", "relationships", "characteristics", "sources", "links"}
 )
 public class Record {
 
@@ -36,6 +37,7 @@ public class Record {
   private PersistentIdentifier persistentId;
   private QName type;
   private List<AlternateId> alternateIds;
+  private AttributionReference attribution;
   private CollectionReference collection;
   private List<Persona> personas;
   private List<Event> events;
@@ -91,6 +93,14 @@ public class Record {
 
   public void setAlternateIds(List<AlternateId> alternateIds) {
     this.alternateIds = alternateIds;
+  }
+
+  public AttributionReference getAttribution() {
+    return attribution;
+  }
+
+  public void setAttribution(AttributionReference attribution) {
+    this.attribution = attribution;
   }
 
   public CollectionReference getCollection() {

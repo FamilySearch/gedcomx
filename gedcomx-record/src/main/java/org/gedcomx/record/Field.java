@@ -15,11 +15,13 @@
  */
 package org.gedcomx.record;
 
+import org.gedcomx.attribution.AttributionReference;
+
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlType;
 
-@XmlType ( propOrder = { "original", "interpreted", "normalized" })
+@XmlType ( propOrder = { "attribution", "original", "interpreted", "normalized" })
 public class Field {
 
   private String id;
@@ -27,6 +29,7 @@ public class Field {
   private String original;
   private String interpreted;
   private String normalized;
+  private AttributionReference attribution;
   //todo: how do we extend 'field' for the api when we want to support links?
 
   public Field() {
@@ -93,4 +96,11 @@ public class Field {
     this.normalized = normalized;
   }
 
+  public AttributionReference getAttribution() {
+    return attribution;
+  }
+
+  public void setAttribution(AttributionReference attribution) {
+    this.attribution = attribution;
+  }
 }
