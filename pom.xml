@@ -129,9 +129,11 @@
 
   <modules>
     <module>gedcomx-types</module>
+    <module>gedcomx-attribution</module>
     <module>gedcomx-source</module>
-    <module>gedcomx-www</module>
     <module>gedcomx-record</module>
+    <module>gedcomx-conclusion</module>
     <module>gedcomx-metadata</module>
+    <module>gedcomx-www</module>
   </modules>
 </project>

@@ -13,28 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.types;
+package org.gedcomx.source;
 
-import org.codehaus.enunciate.qname.XmlQNameEnum;
-import org.codehaus.enunciate.qname.XmlUnknownQNameEnumValue;
+import org.gedcomx.attribution.AttributionReference;
 
-@XmlQNameEnum
-public enum RelationshipRole {
+/**
+ * @author Ryan Heaton
+ */
+public class AttributedSourceReference extends SourceReference {
 
-  husband,
-  wife,
-  father,
-  mother,
-  parent,
-  grandfather,
-  grandmother,
-  grandparent,
-  grandchild,
-  ancestor,
-  descendant,
-  cousin,
-  in_law,
-  @XmlUnknownQNameEnumValue
-  other
+  private AttributionReference attribution;
 
+  public AttributionReference getAttribution() {
+    return attribution;
+  }
+
+  public void setAttribution(AttributionReference attribution) {
+    this.attribution = attribution;
+  }
 }

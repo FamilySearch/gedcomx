@@ -24,17 +24,21 @@ import org.codehaus.enunciate.qname.XmlUnknownQNameEnumValue;
 @XmlQNameEnum
 public enum SourceQualifierProperty {
 
-  x,
+  x_pixels,
 
-  y,
+  y_pixels,
 
-  width,
+  width_pixels,
 
-  height,
+  height_pixels,
 
   start_milliseconds,
 
   end_milliseconds,
+
+  field_id,
+
+  conclusion_id,
 
   @XmlUnknownQNameEnumValue
   other

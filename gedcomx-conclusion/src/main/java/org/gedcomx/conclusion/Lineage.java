@@ -13,38 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.source;
+package org.gedcomx.conclusion;
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.enunciate.qname.XmlQNameEnumRef;
-import org.gedcomx.types.SourceReferenceType;
+import org.gedcomx.types.LineageType;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.namespace.QName;
-import java.net.URI;
-import java.util.List;
 
 /**
+ * A lineage conclusion.
+ *
  * @author Ryan Heaton
  */
-public class SourceReference {
+public class Lineage extends Conclusion {
 
-  private URI href;
   private QName type;
-  private List<SourceQualifier> qualifiers;
-
-  @XmlAttribute(namespace="http://www.w3.org/1999/xlink")
-  public URI getHref() {
-    return href;
-  }
-
-  public void setHref(URI href) {
-    this.href = href;
-  }
 
   @XmlAttribute
-  @XmlQNameEnumRef (SourceReferenceType.class)
+  @XmlQNameEnumRef ( LineageType.class )
   public QName getType() {
     return type;
   }
@@ -54,19 +43,12 @@ public class SourceReference {
   }
 
   @XmlTransient
-  public SourceReferenceType getKnownType() {
-    return XmlQNameEnumUtil.fromQName(getType(), SourceReferenceType.class);
+  public LineageType getKnownType() {
+    return XmlQNameEnumUtil.fromQName(getType(), LineageType.class);
   }
 
-  public void setKnownType(SourceReferenceType knownType) {
-    this.type = XmlQNameEnumUtil.toQName(knownType);
+  public void setKnownType(LineageType knownLineageType) {
+    this.type = XmlQNameEnumUtil.toQName(knownLineageType);
   }
 
-  public List<SourceQualifier> getQualifiers() {
-    return qualifiers;
-  }
-
-  public void setQualifiers(List<SourceQualifier> qualifiers) {
-    this.qualifiers = qualifiers;
-  }
 }

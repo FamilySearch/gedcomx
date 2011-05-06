@@ -13,28 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.types;
+package org.gedcomx.conclusion;
 
-import org.codehaus.enunciate.qname.XmlQNameEnum;
-import org.codehaus.enunciate.qname.XmlUnknownQNameEnumValue;
+/**
+ * @author Ryan Heaton
+ */
+public enum GenderType {
 
-@XmlQNameEnum
-public enum RelationshipRole {
+  male,
 
-  husband,
-  wife,
-  father,
-  mother,
-  parent,
-  grandfather,
-  grandmother,
-  grandparent,
-  grandchild,
-  ancestor,
-  descendant,
-  cousin,
-  in_law,
-  @XmlUnknownQNameEnumValue
-  other
+  female,
 
+  unknown
+  
 }

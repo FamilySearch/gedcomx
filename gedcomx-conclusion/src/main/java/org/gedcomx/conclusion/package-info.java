@@ -13,28 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.types;
+@XmlSchema(
+  namespace = ConclusionConstants.GEDCOMX_CONCLUSION_NAMESPACE,
+  elementFormDefault = XmlNsForm.QUALIFIED
+)
+@XmlAccessorOrder ( XmlAccessOrder.ALPHABETICAL )
+package org.gedcomx.conclusion;
 
-import org.codehaus.enunciate.qname.XmlQNameEnum;
-import org.codehaus.enunciate.qname.XmlUnknownQNameEnumValue;
-
-@XmlQNameEnum
-public enum RelationshipRole {
-
-  husband,
-  wife,
-  father,
-  mother,
-  parent,
-  grandfather,
-  grandmother,
-  grandparent,
-  grandchild,
-  ancestor,
-  descendant,
-  cousin,
-  in_law,
-  @XmlUnknownQNameEnumValue
-  other
-
-}
+import javax.xml.bind.annotation.XmlAccessOrder;
+import javax.xml.bind.annotation.XmlAccessorOrder;
+import javax.xml.bind.annotation.XmlNsForm;
+import javax.xml.bind.annotation.XmlSchema;

@@ -13,28 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.types;
+package org.gedcomx.conclusion;
 
-import org.codehaus.enunciate.qname.XmlQNameEnum;
-import org.codehaus.enunciate.qname.XmlUnknownQNameEnumValue;
+import javax.xml.bind.annotation.XmlAttribute;
 
-@XmlQNameEnum
-public enum RelationshipRole {
+/**
+ * @author Ryan Heaton
+ */
+public class GeoCode {
 
-  husband,
-  wife,
-  father,
-  mother,
-  parent,
-  grandfather,
-  grandmother,
-  grandparent,
-  grandchild,
-  ancestor,
-  descendant,
-  cousin,
-  in_law,
-  @XmlUnknownQNameEnumValue
-  other
+  private float longitude;
+  private float latitude;
 
+  @XmlAttribute
+  public float getLongitude() {
+    return longitude;
+  }
+
+  public void setLongitude(float longitude) {
+    this.longitude = longitude;
+  }
+
+  @XmlAttribute
+  public float getLatitude() {
+    return latitude;
+  }
+
+  public void setLatitude(float latitude) {
+    this.latitude = latitude;
+  }
 }

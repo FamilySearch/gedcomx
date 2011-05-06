@@ -13,28 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.types;
+package org.gedcomx.conclusion;
 
-import org.codehaus.enunciate.qname.XmlQNameEnum;
-import org.codehaus.enunciate.qname.XmlUnknownQNameEnumValue;
+import javax.xml.bind.annotation.XmlAttribute;
 
-@XmlQNameEnum
-public enum RelationshipRole {
+/**
+ * A conclusion about the gender of a person.
+ *
+ * @author Ryan Heaton
+ */
+public class Gender extends Conclusion {
 
-  husband,
-  wife,
-  father,
-  mother,
-  parent,
-  grandfather,
-  grandmother,
-  grandparent,
-  grandchild,
-  ancestor,
-  descendant,
-  cousin,
-  in_law,
-  @XmlUnknownQNameEnumValue
-  other
+  private GenderType type;
+
+  @XmlAttribute
+  public GenderType getType() {
+    return type;
+  }
+
+  public void setType(GenderType type) {
+    this.type = type;
+  }
 
 }

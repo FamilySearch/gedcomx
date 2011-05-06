@@ -19,21 +19,14 @@ import org.codehaus.enunciate.qname.XmlQNameEnum;
 import org.codehaus.enunciate.qname.XmlUnknownQNameEnumValue;
 
 @XmlQNameEnum
-public enum RelationshipRole {
+public enum NameScript {
 
-  husband,
-  wife,
-  father,
-  mother,
-  parent,
-  grandfather,
-  grandmother,
-  grandparent,
-  grandchild,
-  ancestor,
-  descendant,
-  cousin,
-  in_law,
+  chinese,
+  kana,
+  hangul,
+  cyrillic,
+  spanish,
+  portugese,
   @XmlUnknownQNameEnumValue
   other
 

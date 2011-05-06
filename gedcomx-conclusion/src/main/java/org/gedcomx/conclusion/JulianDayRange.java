@@ -13,28 +13,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.types;
+package org.gedcomx.conclusion;
 
-import org.codehaus.enunciate.qname.XmlQNameEnum;
-import org.codehaus.enunciate.qname.XmlUnknownQNameEnumValue;
+import javax.xml.bind.annotation.XmlAttribute;
 
-@XmlQNameEnum
-public enum RelationshipRole {
+/**
+ * Range between two <a href="http://en.wikipedia.org/wiki/Julian_day">Julian Days</a>.
+ *
+ * @author Ryan Heaton
+ */
+public class JulianDayRange {
 
-  husband,
-  wife,
-  father,
-  mother,
-  parent,
-  grandfather,
-  grandmother,
-  grandparent,
-  grandchild,
-  ancestor,
-  descendant,
-  cousin,
-  in_law,
-  @XmlUnknownQNameEnumValue
-  other
+  private int earliest;
+  private int latest;
 
+  @XmlAttribute
+  public int getEarliest() {
+    return earliest;
+  }
+
+  public void setEarliest(int earliest) {
+    this.earliest = earliest;
+  }
+
+  @XmlAttribute
+  public int getLatest() {
+    return latest;
+  }
+
+  public void setLatest(int latest) {
+    this.latest = latest;
+  }
 }

@@ -13,28 +13,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.types;
+package org.gedcomx.conclusion;
 
-import org.codehaus.enunciate.qname.XmlQNameEnum;
-import org.codehaus.enunciate.qname.XmlUnknownQNameEnumValue;
+public class Date {
 
-@XmlQNameEnum
-public enum RelationshipRole {
+  private String original;
+  private String normalized;
+  private JulianDayRange julianDay;
 
-  husband,
-  wife,
-  father,
-  mother,
-  parent,
-  grandfather,
-  grandmother,
-  grandparent,
-  grandchild,
-  ancestor,
-  descendant,
-  cousin,
-  in_law,
-  @XmlUnknownQNameEnumValue
-  other
+  public String getOriginal() {
+    return original;
+  }
 
+  public void setOriginal(String original) {
+    this.original = original;
+  }
+
+  public String getNormalized() {
+    return normalized;
+  }
+
+  public void setNormalized(String normalized) {
+    this.normalized = normalized;
+  }
+
+  public JulianDayRange getJulianDay() {
+    return julianDay;
+  }
+
+  public void setJulianDay(JulianDayRange julianDay) {
+    this.julianDay = julianDay;
+  }
 }

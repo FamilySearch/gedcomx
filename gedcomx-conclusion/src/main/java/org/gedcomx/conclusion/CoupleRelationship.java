@@ -13,28 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.types;
+package org.gedcomx.conclusion;
 
-import org.codehaus.enunciate.qname.XmlQNameEnum;
-import org.codehaus.enunciate.qname.XmlUnknownQNameEnumValue;
+public class CoupleRelationship extends Relationship {
 
-@XmlQNameEnum
-public enum RelationshipRole {
+  private SpouseReference person1;
+  private SpouseReference person2;
 
-  husband,
-  wife,
-  father,
-  mother,
-  parent,
-  grandfather,
-  grandmother,
-  grandparent,
-  grandchild,
-  ancestor,
-  descendant,
-  cousin,
-  in_law,
-  @XmlUnknownQNameEnumValue
-  other
+  public SpouseReference getPerson1() {
+    return person1;
+  }
 
+  public void setPerson1(SpouseReference person1) {
+    this.person1 = person1;
+  }
+
+  public SpouseReference getPerson2() {
+    return person2;
+  }
+
+  public void setPerson2(SpouseReference person2) {
+    this.person2 = person2;
+  }
 }
