@@ -15,6 +15,7 @@
  */
 package org.gedcomx.conclusion;
 
+import org.gedcomx.attribution.AttributionReference;
 import org.gedcomx.source.AttributedSourceReference;
 
 import javax.xml.bind.annotation.XmlAttribute;
@@ -28,12 +29,13 @@ import java.util.List;
  * @author Ryan Heaton
  */
 @XmlType (
-  propOrder = {"alternateIds", "events", "characteristics", "sources"}
+  propOrder = {"alternateIds", "attribution", "events", "characteristics", "sources"}
 )
 public abstract class Relationship {
 
   private String id;
   private List<AlternateId> alternateIds;
+  private AttributionReference attribution;
   private Collection<Event> events;
   private Collection<Characteristic> characteristics;
   private Collection<AttributedSourceReference> sources;
@@ -55,6 +57,14 @@ public abstract class Relationship {
 
   public void setAlternateIds(List<AlternateId> alternateIds) {
     this.alternateIds = alternateIds;
+  }
+
+  public AttributionReference getAttribution() {
+    return attribution;
+  }
+
+  public void setAttribution(AttributionReference attribution) {
+    this.attribution = attribution;
   }
 
   public Collection<Event> getEvents() {
