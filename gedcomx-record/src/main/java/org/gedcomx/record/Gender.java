@@ -16,27 +16,30 @@
 package org.gedcomx.record;
 
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
 
 /**
- * @author Merlin Carpenter
- *         Date: Jul 30, 2008
+ * A gender field.
  */
-@XmlType
 public class Gender extends Field {
 
   private GenderType type;
 
-  public Gender() {
-  }
-
+  /**
+   * The type of the gender.
+   *
+   * @return The type of the gender.
+   */
   @XmlAttribute
   public GenderType getType() {
     return type;
   }
 
+  /**
+   * The type of the gender.
+   *
+   * @param type The type of the gender.
+   */
   public void setType(GenderType type) {
     this.type = type;
   }
-
 }

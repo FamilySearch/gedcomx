@@ -23,6 +23,9 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.namespace.QName;
 
+/**
+ * A conclusion about a characteristic of a person or relationship.
+ */
 public class Characteristic extends Conclusion {
 
   private QName type;
@@ -30,45 +33,95 @@ public class Characteristic extends Conclusion {
   private Place place;
   private String value;
 
+  /**
+   * The type of the characteristic.
+   *
+   * @return The type of the characteristic.
+   */
   @XmlAttribute
   @XmlQNameEnumRef (CharacteristicType.class)
   public QName getType() {
     return type;
   }
 
+  /**
+   * The type of the characteristic.
+   *
+   * @param type The type of the characteristic.
+   */
   public void setType(QName type) {
     this.type = type;
   }
 
+  /**
+   * The enum referencing the known type of the characteristic, or {@link org.gedcomx.types.CharacteristicType#other} if not known.
+   *
+   * @return The enum referencing the known type of the characteristic, or {@link org.gedcomx.types.CharacteristicType#other} if not known.
+   */
   @XmlTransient
   public org.gedcomx.types.CharacteristicType getKnownType() {
     return XmlQNameEnumUtil.fromQName(getType(), org.gedcomx.types.CharacteristicType.class);
   }
 
+  /**
+   * Set the type of this characteristic from a known enumeration of types.
+   *
+   * @param knownType The known type.
+   */
   public void setKnownType(org.gedcomx.types.CharacteristicType knownType) {
     this.type = XmlQNameEnumUtil.toQName(knownType);
   }
 
+  /**
+   * The date of applicability of this characteristic.
+   *
+   * @return The date of applicability of this characteristic.
+   */
   public Date getDate() {
     return date;
   }
 
+  /**
+   * The date of applicability of this characteristic.
+   *
+   * @param date The date of applicability of this characteristic.
+   */
   public void setDate(Date date) {
     this.date = date;
   }
 
+  /**
+   * The place of applicability of this characteristic.
+   *
+   * @return The place of applicability of this characteristic.
+   */
   public Place getPlace() {
     return place;
   }
 
+  /**
+   * The place of applicability of this characteristic.
+   *
+   * @param place The place of applicability of this characteristic.
+   */
   public void setPlace(Place place) {
     this.place = place;
   }
 
+  /**
+   * The value of this characteristic.
+   *
+   * @return The value of this characteristic.
+   */
   public String getValue() {
     return value;
   }
 
+  /**
+   * The value of this characteristic.
+   *
+   * @param value The value of this characteristic.
+   */
   public void setValue(String value) {
     this.value = value;
   }

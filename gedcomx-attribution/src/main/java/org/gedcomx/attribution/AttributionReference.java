@@ -19,17 +19,29 @@ import javax.xml.bind.annotation.XmlAttribute;
 import java.net.URI;
 
 /**
+ * A reference to attribution metadata.
+ *
  * @author Ryan Heaton
  */
 public class AttributionReference {
 
   private URI href;
 
+  /**
+   * The link to the attribution.
+   *
+   * @return The link to the attribution.
+   */
   @XmlAttribute (namespace="http://www.w3.org/1999/xlink")
   public URI getHref() {
     return href;
   }
 
+  /**
+   * The link to the attribution.
+   *
+   * @param href The link to the attribution.
+   */
   public void setHref(URI href) {
     this.href = href;
   }

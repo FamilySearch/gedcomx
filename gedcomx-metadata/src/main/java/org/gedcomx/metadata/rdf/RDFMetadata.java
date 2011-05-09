@@ -17,29 +17,38 @@ package org.gedcomx.metadata.rdf;
 
 import javax.xml.bind.annotation.XmlAnyAttribute;
 import javax.xml.bind.annotation.XmlAnyElement;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.namespace.QName;
+import java.net.URI;
 import java.util.List;
 import java.util.Map;
 
 /**
  * @author Ryan Heaton
  */
-@XmlRootElement(name = "RDF")
 public class RDFMetadata {
 
-  private List<RDFDataDescription> dataDescriptions;
+  private String id; 
+  private URI dataRef;
   private Map<QName, String> otherAttributes;
   private List<Object> otherElements;
 
-  @XmlElement ( name = "Description" )
-  public List<RDFDataDescription> getDataDescriptions() {
-    return dataDescriptions;
+  @XmlAttribute( name = "ID" )
+  public String getId() {
+    return id;
   }
 
-  public void setDataDescriptions(List<RDFDataDescription> dataDescriptions) {
-    this.dataDescriptions = dataDescriptions;
+  public void setId(String id) {
+    this.id = id;
+  }
+  
+  @XmlAttribute( name = "about" )
+  public URI getDataRef() {
+    return dataRef;
+  }
+
+  public void setDataRef(URI dataRef) {
+    this.dataRef = dataRef;
   }
 
   @XmlAnyAttribute
@@ -51,7 +60,7 @@ public class RDFMetadata {
     this.otherAttributes = otherAttributes;
   }
 
-  @XmlAnyElement( lax = true )
+  @XmlAnyElement ( lax = true )
   public List<Object> getOtherElements() {
     return otherElements;
   }

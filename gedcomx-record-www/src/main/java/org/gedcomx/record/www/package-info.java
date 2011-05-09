@@ -18,6 +18,10 @@
   elementFormDefault = XmlNsForm.QUALIFIED
 )
 @XmlAccessorOrder ( XmlAccessOrder.ALPHABETICAL )
+/**
+ * The <b>record-www</b> profile models the necessary extensions to the record model to support
+ * providing record data via the World Wide Web.
+ */
 package org.gedcomx.record.www;
 
 import javax.xml.bind.annotation.XmlAccessOrder;

@@ -19,6 +19,9 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlType;
 
+/**
+ * The vital information about a conclusion person; a subset of the full person data.
+ */
 @XmlType (
   propOrder = {"name", "gender", "birth", "christening", "death", "burial"}
 )
@@ -32,60 +35,130 @@ public class PersonVitals {
   private Event death;
   private Event burial;
 
+  /**
+   * The id of the person, unique to the context and not necessarily globally unique.
+   *
+   * @return The id of the person, unique to the context and not necessarily globally unique.
+   */
   @XmlID
   @XmlAttribute
   public String getId() {
     return id;
   }
 
+  /**
+   * The id of the person, unique to the context and not necessarily globally unique.
+   *
+   * @param id The id of the person, unique to the context and not necessarily globally unique.
+   */
   public void setId(String id) {
     this.id = id;
   }
 
+  /**
+   * The conclusion for the primary name of the person.
+   *
+   * @return The conclusion for the primary name of the person.
+   */
   public Name getName() {
     return name;
   }
 
+  /**
+   * The conclusion for the primary name of the person.
+   *
+   * @param name The conclusion for the primary name of the person.
+   */
   public void setName(Name name) {
     this.name = name;
   }
 
+  /**
+   * The conclusion for the gender of the person.
+   *
+   * @return The conclusion for the gender of the person.
+   */
   public Gender getGender() {
     return gender;
   }
 
+  /**
+   * The conclusion for the gender of the person.
+   *
+   * @param gender The conclusion for the gender of the person.
+   */
   public void setGender(Gender gender) {
     this.gender = gender;
   }
 
+  /**
+   * The conclusion for the birth of the person.
+   *
+   * @return The conclusion for the birth of the person.
+   */
   public Event getBirth() {
     return birth;
   }
 
+  /**
+   * The conclusion for the birth of the person.
+   *
+   * @param birth The conclusion for the birth of the person.
+   */
   public void setBirth(Event birth) {
     this.birth = birth;
   }
 
+  /**
+   * The conclusion for the christening of the person.
+   *
+   * @return The conclusion for the christening of the person.
+   */
   public Event getChristening() {
     return christening;
   }
 
+  /**
+   * The conclusion for the christening of the person.
+   *
+   * @param christening The conclusion for the christening of the person.
+   */
   public void setChristening(Event christening) {
     this.christening = christening;
   }
 
+  /**
+   * The conclusion for the death of the person.
+   *
+   * @return The conclusion for the death of the person.
+   */
   public Event getDeath() {
     return death;
   }
 
+  /**
+   * The conclusion for the death of the person.
+   *
+   * @param death The conclusion for the death of the person.
+   */
   public void setDeath(Event death) {
     this.death = death;
   }
 
+  /**
+   * The conclusion for the burial of the person.
+   *
+   * @return The conclusion for the burial of the person.
+   */
   public Event getBurial() {
     return burial;
   }
 
+  /**
+   * The conclusion for the burial of the person.
+   *
+   * @param burial The conclusion for the burial of the person.
+   */
   public void setBurial(Event burial) {
     this.burial = burial;
   }

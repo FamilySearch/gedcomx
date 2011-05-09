@@ -18,6 +18,9 @@ package org.gedcomx.types;
 import org.codehaus.enunciate.qname.XmlQNameEnum;
 import org.codehaus.enunciate.qname.XmlUnknownQNameEnumValue;
 
+/**
+ * Enumeration of standard relationship roles.
+ */
 @XmlQNameEnum
 public enum RelationshipRole {
 
@@ -25,11 +28,12 @@ public enum RelationshipRole {
   wife,
   father,
   mother,
+  child,
   parent,
   grandfather,
   grandmother,
-  grandparent,
   grandchild,
+  grandparent,
   ancestor,
   descendant,
   cousin,

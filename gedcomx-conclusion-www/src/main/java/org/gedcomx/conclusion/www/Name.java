@@ -15,24 +15,35 @@
  */
 package org.gedcomx.conclusion.www;
 
-import org.gedcomx.conclusion.Name;
 import org.gedcomx.www.Links;
 
 import javax.xml.bind.annotation.XmlType;
 
 /**
+ * A name conclusion that can support WWW links.
+ *
  * @author Ryan Heaton
  */
 @XmlType (name = "name")
-public class WebName extends Name {
+public class Name extends org.gedcomx.conclusion.Name {
   //todo: what are the implications of using this in the model? does it deserialize correctly? what about for json?
 
   private Links links;
 
+  /**
+   * The WWW links for this name.
+   *
+   * @return The WWW links for this name.
+   */
   public Links getLinks() {
     return links;
   }
 
+  /**
+   * The links.
+   *
+   * @param links The links.
+   */
   public void setLinks(Links links) {
     this.links = links;
   }

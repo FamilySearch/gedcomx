@@ -18,6 +18,9 @@ package org.gedcomx.types;
 import org.codehaus.enunciate.qname.XmlQNameEnum;
 import org.codehaus.enunciate.qname.XmlUnknownQNameEnumValue;
 
+/**
+ * Enumeration of standard text scripts for names.
+ */
 @XmlQNameEnum
 public enum NameScript {
 

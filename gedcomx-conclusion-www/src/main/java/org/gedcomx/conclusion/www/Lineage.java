@@ -15,24 +15,35 @@
  */
 package org.gedcomx.conclusion.www;
 
-import org.gedcomx.conclusion.Lineage;
 import org.gedcomx.www.Links;
 
 import javax.xml.bind.annotation.XmlType;
 
 /**
+ * A lineage conclusion that can support WWW links.
+ *
  * @author Ryan Heaton
  */
 @XmlType (name = "lineage")
-public class WebLineage extends Lineage {
+public class Lineage extends org.gedcomx.conclusion.Lineage {
   //todo: what are the implications of using this in the model? does it deserialize correctly? what about for json?
 
   private Links links;
 
+  /**
+   * The WWW links for this lineage.
+   *
+   * @return The WWW links for this lineage.
+   */
   public Links getLinks() {
     return links;
   }
 
+  /**
+   * The links.
+   *
+   * @param links The links.
+   */
   public void setLinks(Links links) {
     this.links = links;
   }

@@ -13,6 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+/**
+ * The <b>conclusion-www</b> profile models the necessary extensions to the conclusion model to support
+ * providing conclusion data via the World Wide Web.
+ */
 @XmlSchema(
   namespace = ConclusionWWWConstants.GEDCOMX_CONCLUSION_WWW_NAMESPACE,
   elementFormDefault = XmlNsForm.QUALIFIED

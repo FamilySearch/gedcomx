@@ -13,6 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+/**
+ * The Dublin Core metadata model.
+ *
+ * @see http://dublincore.org/
+ */
 @XmlSchema(
   namespace = MetadataConstants.DUBLIN_CORE_NAMESPACE,
   elementFormDefault = XmlNsForm.QUALIFIED,

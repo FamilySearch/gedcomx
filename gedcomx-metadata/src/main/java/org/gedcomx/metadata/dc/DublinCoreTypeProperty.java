@@ -21,25 +21,47 @@ import javax.xml.bind.annotation.XmlValue;
 import javax.xml.namespace.QName;
 
 /**
+ * A Dublin Core property whose value is a Dublin Core type.
+ *
  * @author Ryan Heaton
  */
 public class DublinCoreTypeProperty extends DublinCoreProperty<QName> {
 
   private QName value;
 
+  /**
+   * The value of the type.
+   *
+   * @return The value of the type.
+   */
   @XmlValue
   public QName getValue() {
     return value;
   }
 
+  /**
+   * The value of the type.
+   *
+   * @param value The value of the type.
+   */
   public void setValue(QName value) {
     this.value = value;
   }
 
+  /**
+   * Get the type from an enumeration of known types, or null if unknown.
+   *
+   * @return The type from an enumeration of known types, or null if unknown.
+   */
   public DublinCoreType getKnownValue() {
     return XmlQNameEnumUtil.fromQName(getValue(), DublinCoreType.class);
   }
 
+  /**
+   * Set the type from a known enumeration of Dublin Core types.
+   *
+   * @param knownType The type.
+   */
   public void setKnownValue(DublinCoreType knownType) {
     this.value = XmlQNameEnumUtil.toQName(knownType);
   }

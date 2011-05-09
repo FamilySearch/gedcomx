@@ -20,54 +20,72 @@ import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlIDREF;
 
 /**
- * @author Merlin Carpenter
- *         Date: Aug 8, 2008
+ * A role played by a persona in a recorded event.
  */
 public class EventRole {
 
-  private String id;
   private String description;
   private Event event;
   private Boolean principal;
 
-  public EventRole() {
-  }
-
-  @XmlID
-  @XmlAttribute
-  public String getId() {
-    return id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
-  }
-
-  @XmlAttribute
-  public String getDescription() {
-    return description;
-  }
-
-  public void setDescription(String description) {
-    this.description = description;
-  }
-
+  /**
+   * The reference to the event.
+   *
+   * @return The reference to the event.
+   */
   @XmlAttribute
   @XmlIDREF
   public Event getEvent() {
     return event;
   }
 
+  /**
+   * The reference to the event.
+   *
+   * @param event The reference to the event.
+   */
   public void setEvent(Event event) {
     this.event = event;
   }
 
+  /**
+   * Whether this is the principal event for the persona in the record. For example, the principal event for a persona recorded in a birth certificate is
+   * the birth event.
+   *
+   * @return Whether this is the principal event for the persona in the record. For example, the principal event for a persona recorded in a birth certificate is
+   * the birth event.
+   */
   @XmlAttribute
   public Boolean getPrincipal() {
     return principal;
   }
 
+  /**
+   * Whether this is the principal event for the persona in the record. For example, the principal event for a persona recorded in a birth certificate is
+   * the birth event.
+   *
+   * @param principal Whether this is the principal event for the persona in the record. For example, the principal event for a persona recorded in a birth certificate is
+   * the birth event.
+   */
   public void setPrincipal(Boolean principal) {
     this.principal = principal;
+  }
+
+  /**
+   * The description of the role found on the record.
+   *
+   * @return The description of the role found on the record.
+   */
+  public String getDescription() {
+    return description;
+  }
+
+  /**
+   * The description of the role found on the record.
+   *
+   * @param description The description of the role found on the record.
+   */
+  public void setDescription(String description) {
+    this.description = description;
   }
 }

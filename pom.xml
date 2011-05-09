@@ -118,23 +118,6 @@
     </pluginManagement>
   </build>
 
-  <ciManagement>
-    <system>hudson</system>
-    <url>http://build5.usys.org:8080/job/gedcomx/</url>
-    <notifiers>
-      <notifier>
-        <type>mail</type>
-        <configuration>
-          <recipients>heatonra@familysearch.org</recipients>
-        </configuration>
-        <sendOnSuccess>true</sendOnSuccess>
-        <sendOnError>true</sendOnError>
-        <sendOnFailure>true</sendOnFailure>
-        <sendOnWarning>true</sendOnWarning>
-      </notifier>
-    </notifiers>
-  </ciManagement>
-
   <modules>
     <module>enunciate-gedcomx-support</module>
 

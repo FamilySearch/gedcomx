@@ -15,32 +15,84 @@
  */
 package org.gedcomx.conclusion;
 
+import org.codehaus.enunciate.ClientName;
+
+/**
+ * A concluded genealogical date.
+ */
+@ClientName ("DateInfo")
 public class Date {
 
   private String original;
   private String normalized;
   private JulianDayRange julianDay;
 
+  /**
+   * The original value of the date that was concluded as supplied by the user.
+   *
+   * @return The original value of the date that was concluded as supplied by the user.
+   */
   public String getOriginal() {
     return original;
   }
 
+  /**
+   * The original value of the date that was concluded as supplied by the user.
+   *
+   * @param original The original value of the date that was concluded as supplied by the user.
+   */
   public void setOriginal(String original) {
     this.original = original;
   }
 
+  /**
+   * The normalized representation of the original value of the date. Intended for convenience
+   * to the user in interpreting the date. The normalized representation is optional and is
+   * often supplied by an automated standardization process.
+   *
+   * @return The normalized representation of the original value of the date. Intended for convenience
+   * to the user in interpreting the date. The normalized representation is optional and is
+   * often supplied by an automated standardization process.
+   */
   public String getNormalized() {
     return normalized;
   }
 
+  /**
+   * The normalized representation of the original value of the date. Intended for convenience
+   * to the user in interpreting the date. The normalized representation is optional and is
+   * often supplied by an automated standardization process.
+   *
+   * @param normalized The normalized representation of the original value of the date. Intended for convenience
+   * to the user in interpreting the date. The normalized representation is optional and is
+   * often supplied by an automated standardization process.
+   */
   public void setNormalized(String normalized) {
     this.normalized = normalized;
   }
 
+  /**
+   * The julian day range for this date. Intended for convenience to an automated process in
+   * interpreting the date (e.g. for sorting purposes). The julian day range is optional and is
+   * often supplied by an automated standardization process.
+   *
+   * @return The julian day range for this date. Intended for convenience to an automated process in
+   * interpreting the date (e.g. for sorting purposes). The julian day range is optional and is
+   * often supplied by an automated standardization process.
+   */
   public JulianDayRange getJulianDay() {
     return julianDay;
   }
 
+  /**
+   * The julian day range for this date. Intended for convenience to an automated process in
+   * interpreting the date (e.g. for sorting purposes). The julian day range is optional and is
+   * often supplied by an automated standardization process.
+   *
+   * @param julianDay The julian day range for this date. Intended for convenience to an automated process in
+   * interpreting the date (e.g. for sorting purposes). The julian day range is optional and is
+   * often supplied by an automated standardization process.
+   */
   public void setJulianDay(JulianDayRange julianDay) {
     this.julianDay = julianDay;
   }

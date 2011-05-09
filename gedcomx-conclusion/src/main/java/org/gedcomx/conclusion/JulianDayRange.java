@@ -27,20 +27,40 @@ public class JulianDayRange {
   private int earliest;
   private int latest;
 
+  /**
+   * The earliest julian day in the range.
+   *
+   * @return The earliest julian day in the range.
+   */
   @XmlAttribute
   public int getEarliest() {
     return earliest;
   }
 
+  /**
+   * The earliest julian day in the range.
+   *
+   * @param earliest The earliest julian day in the range.
+   */
   public void setEarliest(int earliest) {
     this.earliest = earliest;
   }
 
+  /**
+   * The latest julian day in the range.
+   *
+   * @return The latest julian day in the range.
+   */
   @XmlAttribute
   public int getLatest() {
     return latest;
   }
 
+  /**
+   * The latest julian day in the range.
+   *
+   * @param latest The latest julian day in the range.
+   */
   public void setLatest(int latest) {
     this.latest = latest;
   }

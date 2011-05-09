@@ -27,59 +27,109 @@ import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.namespace.QName;
 import java.util.List;
 
+/**
+ * A name field.
+ */
 public class Name extends Field {
 
   private QName type;
   private QName style;
   private List<NamePart> parts;
 
-  public Name() {
-  }
-
+  /**
+   * The type of the name.
+   *
+   * @return The type of the name.
+   */
   @XmlAttribute
-  @XmlQNameEnumRef(NameType.class)
+  @XmlQNameEnumRef (NameType.class)
   public QName getType() {
     return type;
   }
 
+  /**
+   * The type of the name.
+   *
+   * @param type The type of the name.
+   */
   public void setType(QName type) {
     this.type = type;
   }
 
+  /**
+   * The enum referencing the known name type, or {@link org.gedcomx.types.NameType#other} if not known.
+   *
+   * @return The enum referencing the known name type, or {@link org.gedcomx.types.NameType#other} if not known.
+   */
   @XmlTransient
   public NameType getKnownType() {
     return XmlQNameEnumUtil.fromQName(getType(), NameType.class);
   }
 
+  /**
+   * Set the name type from an enumeration of known name types.
+   *
+   * @param knownType The known type.
+   */
   public void setKnownType(NameType knownType) {
     this.type = XmlQNameEnumUtil.toQName(knownType);
   }
 
+  /**
+   * The style of the name.
+   *
+   * @return The style of the name.
+   */
   @XmlAttribute
   @XmlQNameEnumRef(NameStyle.class)
   public QName getStyle() {
     return style;
   }
 
+  /**
+   * The style of the name.
+   *
+   * @param style The style of the name.
+   */
   public void setStyle(QName style) {
     this.style = style;
   }
 
+  /**
+   * The enum referencing the known name style, or {@link org.gedcomx.types.NameStyle#other} if not known.
+   *
+   * @return The enum referencing the known name style, or {@link org.gedcomx.types.NameStyle#other} if not known.
+   */
   @XmlTransient
   public NameStyle getKnownStyle() {
     return XmlQNameEnumUtil.fromQName(getType(), NameStyle.class);
   }
 
+  /**
+   * Set the name style from an enumeration of known name styles.
+   *
+   * @param knownStyle The name style.
+   */
   public void setKnownStyle(NameStyle knownStyle) {
     this.style = XmlQNameEnumUtil.toQName(knownStyle);
   }
 
-  @XmlElementWrapper(name = "parts")
-  @XmlElement(name = "part")
+  /**
+   * The different parts of the name field.
+   *
+   * @return The different parts of the name field.
+   */
+  @XmlElementWrapper (name = "parts")
+  @XmlElement (name = "part")
   public List<NamePart> getParts() {
     return parts;
   }
 
+  /**
+   * The different parts of the name field.
+   *
+   * @param parts The different parts of the name field.
+   */
   public void setParts(List<NamePart> parts) {
     this.parts = parts;
   }

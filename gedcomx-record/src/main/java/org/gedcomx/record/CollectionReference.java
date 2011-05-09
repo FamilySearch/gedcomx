@@ -19,6 +19,8 @@ import javax.xml.bind.annotation.XmlAttribute;
 import java.net.URI;
 
 /**
+ * A reference to a collection.
+ *
  * @author Ryan Heaton
  */
 public class CollectionReference {
@@ -26,20 +28,40 @@ public class CollectionReference {
   private URI href;
   private String sortValue;
 
+  /**
+   * The link to the collection.
+   *
+   * @return The link to the collection.
+   */
   @XmlAttribute(namespace="http://www.w3.org/1999/xlink")
   public URI getHref() {
     return href;
   }
 
+  /**
+   * The link to the collection.
+   *
+   * @param href The link to the collection.
+   */
   public void setHref(URI href) {
     this.href = href;
   }
 
+  /**
+   * The alphanumeric value on which the referring entity is to be sorted in the collection.
+   *
+   * @return The alphanumeric value on which the referring entity is to be sorted in the collection.
+   */
   @XmlAttribute
   public String getSortValue() {
     return sortValue;
   }
 
+  /**
+   * The alphanumeric value on which the referring entity is to be sorted in the collection.
+   *
+   * @param sortValue The alphanumeric value on which the referring entity is to be sorted in the collection.
+   */
   public void setSortValue(String sortValue) {
     this.sortValue = sortValue;
   }

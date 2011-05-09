@@ -13,7 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-//todo: document how we're going to extend metadata later
+
+/**
+ * The RDF-based metadata model.
+ *
+ * @see http://www.w3.org/TR/2004/REC-rdf-primer-20040210/
+ */
 @XmlSchema (
   namespace = MetadataConstants.RDF_NAMESPACE,
   elementFormDefault = XmlNsForm.QUALIFIED,
@@ -21,6 +26,7 @@
 )
 @XmlAccessorOrder ( XmlAccessOrder.ALPHABETICAL )
 package org.gedcomx.metadata.rdf;
+//todo: document how metadata refers to data and how metadata refers to other metadata.
 
 import org.gedcomx.metadata.MetadataConstants;
 

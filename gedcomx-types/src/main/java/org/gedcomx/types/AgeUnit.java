@@ -19,10 +19,12 @@ import org.codehaus.enunciate.qname.XmlQNameEnum;
 import org.codehaus.enunciate.qname.XmlUnknownQNameEnumValue;
 
 /**
+ * Enumeration of standard age units.
+ *
  * @author Ryan Heaton
  */
 @XmlQNameEnum
-public enum AgeUnits {
+public enum AgeUnit {
 
   years,
 

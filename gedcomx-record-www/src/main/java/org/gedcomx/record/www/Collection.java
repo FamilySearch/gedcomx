@@ -13,21 +13,44 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.conclusion.www;
+package org.gedcomx.record.www;
 
-import org.gedcomx.conclusion.Gender;
 import org.gedcomx.www.Links;
+import org.gedcomx.www.PersistentIdentifier;
 
+import javax.xml.XMLConstants;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import java.net.URI;
 
 /**
  * @author Ryan Heaton
  */
-@XmlType (name = "gender")
-public class WebGender extends Gender {
-  //todo: what are the implications of using this in the model? does it deserialize correctly? what about for json?
+@XmlRootElement (name = "collection")
+@XmlType (name = "collection")
+public class Collection extends org.gedcomx.record.Collection {
 
+  private URI base;
+  private PersistentIdentifier persistentId;
   private Links links;
+
+  @XmlAttribute (namespace = XMLConstants.XML_NS_URI)
+  public URI getBase() {
+    return base;
+  }
+
+  public void setBase(URI base) {
+    this.base = base;
+  }
+
+  public PersistentIdentifier getPersistentId() {
+    return persistentId;
+  }
+
+  public void setPersistentId(PersistentIdentifier persistentId) {
+    this.persistentId = persistentId;
+  }
 
   public Links getLinks() {
     return links;

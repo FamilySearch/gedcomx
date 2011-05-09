@@ -15,34 +15,98 @@
  */
 package org.gedcomx.record;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlIDREF;
-import javax.xml.bind.annotation.XmlRootElement;
+import org.codehaus.enunciate.qname.XmlQNameEnumRef;
+import org.gedcomx.types.RelationshipRole;
 
-@XmlRootElement
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.namespace.QName;
+
+/**
+ * A relationship between two personas, making a genealogical "couple".
+ */
 public class CoupleRelationship extends Relationship {
 
-  public CoupleRelationship() {
-  }
-
-  @XmlAttribute
-  @XmlIDREF
+  /**
+   * A persona in the relationship. The name "persona1" is used only to distinguish it from
+   * the other persona in this relationship and implies neither order nor role.
+   * 
+   * @return A persona in the relationship. The name "persona1" is used only to distinguish it from
+   * the other persona in this relationship and implies neither order nor role.
+   */
   public Persona getPersona1() {
-    return getRole1Persona();
+    return super.getPersona1();
   }
 
-  public void setPersona1(Persona person1) {
-    role1Persona = person1;
+  /**
+   * A persona in the relationship. The name "persona1" is used only to distinguish it from
+   * the other persona in this relationship and implies neither order nor role.
+   * 
+   * @param persona1 A persona in the relationship. The name "persona1" is used only to distinguish it from
+   * the other persona in this relationship and implies neither order nor role.
+   */
+  public void setPersona1(Persona persona1) {
+    super.setPersona1(persona1);
   }
 
+  /**
+   * The role of the persona1 of this relationship.
+   *
+   * @return The role of the persona1 of this relationship.
+   */
   @XmlAttribute
-  @XmlIDREF
+  @XmlQNameEnumRef (RelationshipRole.class)
+  public QName getRole1() {
+    return super.getRole1();
+  }
+
+  /**
+   * The role of the persona1 of this relationship.
+   *
+   * @param role1 The role of the persona1 of this relationship.
+   */
+  public void setRole1(QName role1) {
+    super.setRole1(role1);
+  }
+
+  /**
+   * A persona in the relationship. The name "persona2" is used only to distinguish it from
+   * the other persona in this relationship and implies neither order nor role.
+   * 
+   * @return A persona in the relationship. The name "persona2" is used only to distinguish it from
+   * the other persona in this relationship and implies neither order nor role.
+   */
   public Persona getPersona2() {
-    return getRole2Persona();
+    return super.getPersona2();
   }
 
-  public void setPersona2(Persona person2) {
-    role2Persona = person2;
+  /**
+   * A persona in the relationship. The name "persona2" is used only to distinguish it from
+   * the other persona in this relationship and implies neither order nor role.
+   * 
+   * @param persona2 A persona in the relationship. The name "persona2" is used only to distinguish it from
+   * the other persona in this relationship and implies neither order nor role.
+   */
+  public void setPersona2(Persona persona2) {
+    super.setPersona2(persona2);
   }
 
+  /**
+   * The role of the persona2 of this relationship.
+   *
+   * @return The role of the persona2 of this relationship.
+   */
+  @XmlAttribute
+  @XmlQNameEnumRef(RelationshipRole.class)
+  public QName getRole2() {
+    return super.getRole2();
+  }
+
+  /**
+   * The role of the persona2 of this relationship.
+   *
+   * @param role2 The role of the persona2 of this relationship.
+   */
+  public void setRole2(QName role2) {
+    super.setRole2(role2);
+  }
 }

@@ -13,6 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+/**
+ * The <b>types</b> profile provides the standard set of types of genealogical data.
+ */
 @XmlSchema(
   namespace = TypeConstants.GEDCOMX_TYPES_NAMESPACE,
   elementFormDefault = XmlNsForm.QUALIFIED

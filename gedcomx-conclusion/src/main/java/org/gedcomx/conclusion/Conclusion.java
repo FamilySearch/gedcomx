@@ -21,6 +21,8 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlID;
 
 /**
+ * A conclusion about a person.
+ *
  * @author Ryan Heaton
  */
 public abstract class Conclusion {
@@ -29,20 +31,40 @@ public abstract class Conclusion {
   private AttributionReference attribution;
   //todo: how do we extend this for the api when we want to support links?
 
+  /**
+   * The id of this conclusion, unique to its person or relationship.
+   *
+   * @return The id of this conclusion, unique to its person or relationship.
+   */
   @XmlID
   @XmlAttribute
   public String getId() {
     return id;
   }
 
+  /**
+   * The id of this conclusion, unique to its person or relationship.
+   *
+   * @param id The id of this conclusion, unique to its person or relationship.
+   */
   public void setId(String id) {
     this.id = id;
   }
 
+  /**
+   * The link to the attribution metadata for this conclusion.
+   *
+   * @return The link to the attribution metadata for this conclusion.
+   */
   public AttributionReference getAttribution() {
     return attribution;
   }
 
+  /**
+   * The link to the attribution metadata for this conclusion.
+   *
+   * @param attribution The link to the attribution metadata for this conclusion.
+   */
   public void setAttribution(AttributionReference attribution) {
     this.attribution = attribution;
   }

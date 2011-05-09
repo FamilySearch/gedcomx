@@ -17,23 +17,33 @@ package org.gedcomx.record;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlType;
 import java.util.List;
 
-@XmlType
+/**
+ * A field that states the age of a person.
+ *
+ * @author Ryan Heaton
+ */
 public class Age extends Field {
 
   private List<AgePart> parts;
 
-  public Age() {
-  }
-
+  /**
+   * The parts of the age.
+   *
+   * @return The parts of the age.
+   */
   @XmlElementWrapper (name = "parts")
   @XmlElement (name = "part")
   public List<AgePart> getParts() {
     return parts;
   }
 
+  /**
+   * The parts of the age.
+   *
+   * @param parts The parts of the age.
+   */
   public void setParts(List<AgePart> parts) {
     this.parts = parts;
   }

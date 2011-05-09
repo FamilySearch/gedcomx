@@ -25,6 +25,8 @@ import javax.xml.bind.annotation.XmlValue;
 import javax.xml.namespace.QName;
 
 /**
+ * An alternate id for a record entity.
+ *
  * @author Ryan Heaton
  */
 public class AlternateId {
@@ -32,30 +34,60 @@ public class AlternateId {
   private String value;
   private QName type;
 
+  /**
+   * The id value.
+   *
+   * @return The id value.
+   */
   @XmlValue
   public String getValue() {
     return value;
   }
 
+  /**
+   * The id value.
+   *
+   * @param value The id value.
+   */
   public void setValue(String value) {
     this.value = value;
   }
 
+  /**
+   * The type of the id.
+   *
+   * @return The type of the id.
+   */
   @XmlAttribute
   @XmlQNameEnumRef(AlternateIdType.class)
   public QName getType() {
     return type;
   }
 
+  /**
+   * The type of the id.
+   *
+   * @param type The type of the id.
+   */
   public void setType(QName type) {
     this.type = type;
   }
 
+  /**
+   * The enum referencing a known alternate id type.
+   *
+   * @return The enum referencing a known alternate id type, or {@link org.gedcomx.types.AlternateIdType#other} if not known.
+   */
   @XmlTransient
   public AlternateIdType getKnownType() {
     return XmlQNameEnumUtil.fromQName(getType(), AlternateIdType.class);
   }
 
+  /**
+   * Set the value of the id type from a known alternate id type.
+   *
+   * @param knownType The known alternate id type.
+   */
   public void setKnownType(AlternateIdType knownType) {
     this.type = XmlQNameEnumUtil.toQName(knownType);
   }

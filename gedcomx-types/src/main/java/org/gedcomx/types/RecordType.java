@@ -22,6 +22,9 @@ import java.util.Collections;
 import java.util.EnumSet;
 import java.util.Set;
 
+/**
+ * Enumeration of known record types.
+ */
 @XmlQNameEnum
 public enum RecordType {
 

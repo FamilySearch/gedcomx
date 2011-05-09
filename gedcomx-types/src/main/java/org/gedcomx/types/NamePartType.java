@@ -18,6 +18,9 @@ package org.gedcomx.types;
 import org.codehaus.enunciate.qname.XmlQNameEnum;
 import org.codehaus.enunciate.qname.XmlUnknownQNameEnumValue;
 
+/**
+ * Enumeration of standard name part types.
+ */
 @XmlQNameEnum
 public enum NamePartType {
 

@@ -18,7 +18,7 @@ package org.gedcomx.conclusion;
 import javax.xml.bind.annotation.XmlAttribute;
 
 /**
- * A conclusion about the gender of a person.
+ * A gender conclusion.
  *
  * @author Ryan Heaton
  */
@@ -26,11 +26,21 @@ public class Gender extends Conclusion {
 
   private GenderType type;
 
+  /**
+   * The type of the gender.
+   *
+   * @return The type of the gender.
+   */
   @XmlAttribute
   public GenderType getType() {
     return type;
   }
 
+  /**
+   * The type of the gender.
+   *
+   * @param type The type of the gender.
+   */
   public void setType(GenderType type) {
     this.type = type;
   }

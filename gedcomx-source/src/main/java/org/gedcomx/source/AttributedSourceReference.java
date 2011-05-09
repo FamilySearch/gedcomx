@@ -18,16 +18,28 @@ package org.gedcomx.source;
 import org.gedcomx.attribution.AttributionReference;
 
 /**
+ * A source reference that can be attributed.
+ *
  * @author Ryan Heaton
  */
 public class AttributedSourceReference extends SourceReference {
 
   private AttributionReference attribution;
 
+  /**
+   * The reference to the attribution metadata for the source reference.
+   *
+   * @return The reference to the attribution metadata for the source reference.
+   */
   public AttributionReference getAttribution() {
     return attribution;
   }
 
+  /**
+   * The reference to the attribution metadata for the source reference.
+   *
+   * @param attribution The reference to the attribution metadata for the source reference.
+   */
   public void setAttribution(AttributionReference attribution) {
     this.attribution = attribution;
   }

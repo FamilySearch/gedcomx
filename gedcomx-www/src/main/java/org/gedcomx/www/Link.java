@@ -21,6 +21,8 @@ import javax.xml.namespace.QName;
 import java.net.URI;
 
 /**
+ * A WWW link.
+ *
  * @author Ryan Heaton
  */
 public class Link {
@@ -28,20 +30,40 @@ public class Link {
   private QName rel;
   private URI href;
 
+  /**
+   * The link relationship.
+   *
+   * @return The link relationship.
+   */
   @XmlAttribute
   public QName getRel() {
     return rel;
   }
 
+  /**
+   * The link relationship.
+   *
+   * @param rel The link relationship.
+   */
   public void setRel(QName rel) {
     this.rel = rel;
   }
 
+  /**
+   * The link URI.
+   *
+   * @return The link URI.
+   */
   @XmlAttribute(namespace="http://www.w3.org/1999/xlink")
   public URI getHref() {
     return href;
   }
 
+  /**
+   * The link URI.
+   *
+   * @param href The link URI.
+   */
   public void setHref(URI href) {
     this.href = href;
   }

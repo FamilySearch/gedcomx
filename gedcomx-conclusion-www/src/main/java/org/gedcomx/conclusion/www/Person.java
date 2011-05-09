@@ -15,7 +15,6 @@
  */
 package org.gedcomx.conclusion.www;
 
-import org.gedcomx.conclusion.Person;
 import org.gedcomx.www.Links;
 import org.gedcomx.www.PersistentIdentifier;
 
@@ -26,37 +25,69 @@ import javax.xml.bind.annotation.XmlType;
 import java.net.URI;
 
 /**
+ * A person that can support WWW links.
+ *
  * @author Ryan Heaton
  */
 @XmlRootElement (name = "person")
 @XmlType (name = "person")
-public class WebPerson extends Person {
+public class Person extends org.gedcomx.conclusion.Person {
 
   private URI base;
   private PersistentIdentifier persistentId;
   private Links links;
 
+  /**
+   * The base uri for all relative links within the context of this person.
+   *
+   * @return The base uri for all relative links within the context of this person.
+   */
   @XmlAttribute (namespace = XMLConstants.XML_NS_URI)
   public URI getBase() {
     return base;
   }
 
+  /**
+   * The base uri for all relative links within the context of this person.
+   *
+   * @param base The base uri for all relative links within the context of this person.
+   */
   public void setBase(URI base) {
     this.base = base;
   }
 
+  /**
+   * A long-term, persistent, globally unique identifier for this person.
+   *
+   * @return A long-term, persistent, globally unique identifier for this person.
+   */
   public PersistentIdentifier getPersistentId() {
     return persistentId;
   }
 
+  /**
+   * A long-term, persistent, globally unique identifier for this person.
+   *
+   * @param persistentId A long-term, persistent, globally unique identifier for this person.
+   */
   public void setPersistentId(PersistentIdentifier persistentId) {
     this.persistentId = persistentId;
   }
 
+  /**
+   * The WWW links for this person.
+   *
+   * @return The WWW links for this person.
+   */
   public Links getLinks() {
     return links;
   }
 
+  /**
+   * The WWW links for this person.
+   *
+   * @param links The WWW links for this person.
+   */
   public void setLinks(Links links) {
     this.links = links;
   }

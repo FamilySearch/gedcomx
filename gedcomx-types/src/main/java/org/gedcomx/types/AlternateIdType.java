@@ -19,6 +19,8 @@ import org.codehaus.enunciate.qname.XmlQNameEnum;
 import org.codehaus.enunciate.qname.XmlUnknownQNameEnumValue;
 
 /**
+ * Enumeration of standard alternate id types.
+ *
  * @author Ryan Heaton
  */
 @XmlQNameEnum

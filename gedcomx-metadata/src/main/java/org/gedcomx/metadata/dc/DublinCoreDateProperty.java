@@ -19,17 +19,29 @@ import javax.xml.bind.annotation.XmlValue;
 import java.util.Date;
 
 /**
+ * A Dublin Core metadata property in the form of a date, e.g. created, modified, issued, valid, etc.
+ *
  * @author Ryan Heaton
  */
 public class DublinCoreDateProperty extends DublinCoreProperty<Date> {
 
   private Date value;
 
+  /**
+   * The date value of this property.
+   *
+   * @return The date value of this property.
+   */
   @XmlValue
   public Date getValue() {
     return value;
   }
 
+  /**
+   * The date value of this property.
+   *
+   * @param value The date value of this property.
+   */
   public void setValue(Date value) {
     this.value = value;
   }

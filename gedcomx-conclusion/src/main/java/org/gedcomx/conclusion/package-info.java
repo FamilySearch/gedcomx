@@ -13,6 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+/**
+ * The <b>conclusion profile</b> models genealogical conclusion data.
+ */
 @XmlSchema(
   namespace = ConclusionConstants.GEDCOMX_CONCLUSION_NAMESPACE,
   elementFormDefault = XmlNsForm.QUALIFIED

@@ -18,6 +18,8 @@ package org.gedcomx.attribution;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
+ * Static constants related to the attribution profile of the GEDCOM X standard.
+ * 
  * @author Ryan Heaton
  */
 @XmlTransient

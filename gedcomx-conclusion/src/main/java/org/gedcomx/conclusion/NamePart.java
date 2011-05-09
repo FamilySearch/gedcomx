@@ -24,6 +24,8 @@ import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.namespace.QName;
 
 /**
+ * A part of a name.
+ *
  * @author Ryan Heaton
  */
 public class NamePart {
@@ -31,29 +33,59 @@ public class NamePart {
   private QName type;
   private String text;
 
+  /**
+   * The type of the name part.
+   *
+   * @return The type of the name part.
+   */
   @XmlAttribute
   @XmlQNameEnumRef (NamePartType.class)
   public QName getType() {
     return type;
   }
 
+  /**
+   * The type of the name part.
+   *
+   * @param type The type of the name part.
+   */
   public void setType(QName type) {
     this.type = type;
   }
 
+  /**
+   * The enum referencing the known name part type, or {@link org.gedcomx.types.NamePartType#other} if not known.
+   *
+   * @return The enum referencing the known name part type, or {@link org.gedcomx.types.NamePartType#other} if not known.
+   */
   @XmlTransient
   public NamePartType getKnownType() {
     return XmlQNameEnumUtil.fromQName(getType(), NamePartType.class);
   }
 
+  /**
+   * Set the type of this name part from an enumeration of known name part types.
+   *
+   * @param knownType The name part type.
+   */
   public void setKnownType(NamePartType knownType) {
     this.type = XmlQNameEnumUtil.toQName(knownType);
   }
 
+  /**
+   * The text of the name part.
+   *
+   * @return The text of the name part.
+   */
   public String getText() {
     return text;
   }
 
+  /**
+   * The text of the name part.
+   *
+   * @param text The text of the name part.
+   */
   public void setText(String text) {
     this.text = text;
   }

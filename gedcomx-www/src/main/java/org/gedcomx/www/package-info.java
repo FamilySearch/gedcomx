@@ -13,6 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+/**
+ * The <b>www</b> profile models the necessary extensions to provide genealogical data via the World Wide Web.
+ */
 @XmlSchema (
   namespace = WebConstants.GEDCOMX_WWW_NAMESPACE,
   elementFormDefault = XmlNsForm.QUALIFIED

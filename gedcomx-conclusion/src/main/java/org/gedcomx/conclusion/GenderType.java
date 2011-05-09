@@ -16,14 +16,25 @@
 package org.gedcomx.conclusion;
 
 /**
+ * Enumeration of gender types.
+ *
  * @author Ryan Heaton
  */
 public enum GenderType {
 
+  /**
+   * Male.
+   */
   male,
 
+  /**
+   * Female.
+   */
   female,
 
+  /**
+   * Unknown.
+   */
   unknown
   
 }

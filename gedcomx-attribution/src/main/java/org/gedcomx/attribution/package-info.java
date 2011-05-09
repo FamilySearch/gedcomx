@@ -13,6 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+/**
+ * <h1>GEDCOM X Attribution</h1>
+ *
+ * <p>The <b>attribution profile</b> models the objects necessary to support attribution metadata for genealogical data. Attribution
+ * metadata intends to answer the "who, why, when" questions about genealogical data.</p>
+ */
 @XmlSchema(
   namespace = AttributionConstants.GEDCOMX_ATTRIBUTION_NAMESPACE,
   elementFormDefault = XmlNsForm.QUALIFIED

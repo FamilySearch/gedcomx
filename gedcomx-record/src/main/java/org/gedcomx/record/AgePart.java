@@ -16,36 +16,58 @@
 package org.gedcomx.record;
 
 import org.codehaus.enunciate.qname.XmlQNameEnumRef;
-import org.gedcomx.types.AgeUnits;
+import org.gedcomx.types.AgeUnit;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.namespace.QName;
 
 /**
+ * A part of an age field.
+ *
  * @author Ryan Heaton
  */
 public class AgePart extends Field {
 
   private QName units;
 
+  /**
+   * The units in which this age part is defined.
+   *
+   * @return The units in which this age part is defined.
+   */
   @XmlAttribute
-  @XmlQNameEnumRef(AgeUnits.class)
+  @XmlQNameEnumRef(AgeUnit.class)
   public QName getUnits() {
     return units;
   }
 
+  /**
+   * The units in which this age part is defined.
+   *
+   * @param units The units in which this age part is defined.
+   */
   public void setUnits(QName units) {
     this.units = units;
   }
 
+  /**
+   * The enum referencing the known age unit, or {@link org.gedcomx.types.AgeUnit#other} if not known.
+   *
+   * @return The enum referencing the known age unit, or {@link org.gedcomx.types.AgeUnit#other} if not known.
+   */
   @XmlTransient
-  public AgeUnits getKnownUnits() {
-    return org.codehaus.enunciate.XmlQNameEnumUtil.fromQName(getUnits(), AgeUnits.class);
+  public AgeUnit getKnownUnits() {
+    return org.codehaus.enunciate.XmlQNameEnumUtil.fromQName(getUnits(), AgeUnit.class);
   }
 
-  public void setKnownUnits(AgeUnits units) {
-    this.units = org.codehaus.enunciate.XmlQNameEnumUtil.toQName(units);
+  /**
+   * Set the age unit from a known enumeration of age units.
+   *
+   * @param unit The age unit.
+   */
+  public void setKnownUnits(AgeUnit unit) {
+    this.units = org.codehaus.enunciate.XmlQNameEnumUtil.toQName(unit);
   }
 
 }

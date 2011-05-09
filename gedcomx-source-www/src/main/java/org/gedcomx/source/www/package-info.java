@@ -13,6 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+/**
+ * The <b>source-www</b> profile models the necessary extensions to the source model to support
+ * providing source data via the World Wide Web.
+ */
 @XmlSchema (
   namespace = SourceWWWConstants.GEDCOMX_SOURCE_WWW_NAMESPACE,
   elementFormDefault = XmlNsForm.QUALIFIED

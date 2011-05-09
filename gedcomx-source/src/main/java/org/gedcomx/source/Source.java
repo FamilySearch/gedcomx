@@ -45,80 +45,170 @@ public class Source {
   private String bibliographicCitation;
   private AttributionReference attribution;
 
+  /**
+   * The id of the source, unique to the context and not necessarily globally unique.
+   *
+   * @return The id of the source, unique to the context and not necessarily globally unique.
+   */
   @XmlID
   @XmlAttribute
   public String getId() {
     return id;
   }
 
+  /**
+   * The id of the source, unique to the context and not necessarily globally unique.
+   *
+   * @param id The id of the source, unique to the context and not necessarily globally unique.
+   */
   public void setId(String id) {
     this.id = id;
   }
 
+  /**
+   * The type of the source.
+   *
+   * @return The type of the source.
+   */
   @XmlAttribute
   @XmlQNameEnumRef(SourceType.class)
   public QName getType() {
     return type;
   }
 
+  /**
+   * The type of the source.
+   *
+   * @param type The type of the source.
+   */
   public void setType(QName type) {
     this.type = type;
   }
 
+  /**
+   * The enum referencing the known type of the source, or {@link org.gedcomx.types.SourceType#other} if not known.
+   *
+   * @return The enum referencing the known type of the source, or {@link org.gedcomx.types.SourceType#other} if not known.
+   */
   @XmlTransient
   public SourceType getKnownType() {
     return XmlQNameEnumUtil.fromQName(getType(), SourceType.class);
   }
 
+  /**
+   * Set the source type from an enumeration of known source types.
+   * 
+   * @param knownType The source type.
+   */
   public void setKnownType(SourceType knownType) {
     this.type = XmlQNameEnumUtil.toQName(knownType);
   }
 
-  @XmlElement(name = "alternateId")
+  /**
+   * The list of alternate ids of the source.
+   *
+   * @return The list of alternate ids of the source.
+   */
+  @XmlElement (name="alternateId")
   public List<AlternateId> getAlternateIds() {
     return alternateIds;
   }
 
+  /**
+   * The list of alternate ids of the source.
+   *
+   * @param alternateIds The list of alternate ids of the source.
+   */
   public void setAlternateIds(List<AlternateId> alternateIds) {
     this.alternateIds = alternateIds;
   }
 
+  /**
+   * The online location of the source.
+   * 
+   * @return The online location of the source.
+   */
   public URI getWebLocation() {
     return webLocation;
   }
 
+  /**
+   * The online location of the source.
+   * 
+   * @param webLocation The online location of the source.
+   */
   public void setWebLocation(URI webLocation) {
     this.webLocation = webLocation;
   }
 
+  /**
+   * The title of the source.
+   * 
+   * @return The title of the source.
+   */
   public String getTitle() {
     return title;
   }
 
+  /**
+   * The title of the source.
+   * 
+   * @param title The title of the source.
+   */
   public void setTitle(String title) {
     this.title = title;
   }
 
+  /**
+   * A note for the source.
+   * 
+   * @return A note for the source.
+   */
   public String getNote() {
     return note;
   }
 
+  /**
+   * A note for the source.
+   * 
+   * @param note A note for the source.
+   */
   public void setNote(String note) {
     this.note = note;
   }
 
+  /**
+   * The bibliographic citation for the source.
+   * 
+   * @return The bibliographic citation for the source.
+   */
   public String getBibliographicCitation() {
     return bibliographicCitation;
   }
 
+  /**
+   * The bibliographic citation for the source.
+   * 
+   * @param bibliographicCitation The bibliographic citation for the source.
+   */
   public void setBibliographicCitation(String bibliographicCitation) {
     this.bibliographicCitation = bibliographicCitation;
   }
 
+  /**
+   * The link to the attribution metadata for this source.
+   *
+   * @return The link to the attribution metadata for this source.
+   */
   public AttributionReference getAttribution() {
     return attribution;
   }
 
+  /**
+   * The link to the attribution metadata for this source.
+   *
+   * @param attribution The link to the attribution metadata for this source.
+   */
   public void setAttribution(AttributionReference attribution) {
     this.attribution = attribution;
   }

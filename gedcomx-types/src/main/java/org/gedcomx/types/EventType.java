@@ -22,6 +22,9 @@ import java.util.Collections;
 import java.util.EnumSet;
 import java.util.Set;
 
+/**
+ * Enumeration of standard event types.
+ */
 @XmlQNameEnum
 public enum EventType {
 

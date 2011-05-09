@@ -15,24 +15,35 @@
  */
 package org.gedcomx.conclusion.www;
 
-import org.gedcomx.conclusion.Event;
 import org.gedcomx.www.Links;
 
 import javax.xml.bind.annotation.XmlType;
 
 /**
+ * A gender conclusion that can support WWW links.
+ *
  * @author Ryan Heaton
  */
-@XmlType (name = "event")
-public class WebEvent extends Event {
+@XmlType (name = "gender")
+public class Gender extends org.gedcomx.conclusion.Gender {
   //todo: what are the implications of using this in the model? does it deserialize correctly? what about for json?
 
   private Links links;
 
+  /**
+   * The WWW links for this gender.
+   *
+   * @return The WWW links for this gender.
+   */
   public Links getLinks() {
     return links;
   }
 
+  /**
+   * The links.
+   *
+   * @param links The links.
+   */
   public void setLinks(Links links) {
     this.links = links;
   }

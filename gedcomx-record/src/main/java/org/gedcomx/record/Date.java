@@ -19,24 +19,32 @@ import org.codehaus.enunciate.ClientName;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlType;
 import java.util.List;
 
-@XmlType
+/**
+ * A date field.
+ */
 @ClientName("DateInfo")
 public class Date extends Field {
 
   private List<DatePart> parts;
 
-  public Date() {
-  }
-
+  /**
+   * The parts of the date.
+   *
+   * @return The parts of the date.
+   */
   @XmlElementWrapper(name = "parts")
   @XmlElement(name = "part")
   public List<DatePart> getParts() {
     return parts;
   }
 
+  /**
+   * The parts of the date.
+   *
+   * @param parts The parts of the date.
+   */
   public void setParts(List<DatePart> parts) {
     this.parts = parts;
   }

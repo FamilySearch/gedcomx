@@ -17,38 +17,41 @@ package org.gedcomx.metadata.rdf;
 
 import javax.xml.bind.annotation.XmlAnyAttribute;
 import javax.xml.bind.annotation.XmlAnyElement;
-import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.namespace.QName;
-import java.net.URI;
 import java.util.List;
 import java.util.Map;
 
 /**
+ * RDF metadata bundle, <a href="http://www.w3.org/TR/2004/REC-rdf-primer-20040210/#rdfxml">according to the RDF spec</a>.
+ *
  * @author Ryan Heaton
  */
-public class RDFDataDescription {
+@XmlRootElement(name = "RDF")
+public class RDFMetadataBundle {
 
-  private String id; 
-  private URI dataRef;
+  private List<RDFMetadata> metadataList;
   private Map<QName, String> otherAttributes;
   private List<Object> otherElements;
 
-  @XmlAttribute( name = "ID" )
-  public String getId() {
-    return id;
+  /**
+   * The list of items in this bundle of metadata.
+   *
+   * @return The list of items in this bundle of metadata.
+   */
+  @XmlElement ( name = "Description" )
+  public List<RDFMetadata> getMetadataList() {
+    return metadataList;
   }
 
-  public void setId(String id) {
-    this.id = id;
-  }
-  
-  @XmlAttribute( name = "about" )
-  public URI getDataRef() {
-    return dataRef;
-  }
-
-  public void setDataRef(URI dataRef) {
-    this.dataRef = dataRef;
+  /**
+   * The list of items in this bundle of metadata.
+   *
+   * @param metadataList The list of items in this bundle of metadata.
+   */
+  public void setMetadataList(List<RDFMetadata> metadataList) {
+    this.metadataList = metadataList;
   }
 
   @XmlAnyAttribute
@@ -60,7 +63,7 @@ public class RDFDataDescription {
     this.otherAttributes = otherAttributes;
   }
 
-  @XmlAnyElement ( lax = true )
+  @XmlAnyElement( lax = true )
   public List<Object> getOtherElements() {
     return otherElements;
   }

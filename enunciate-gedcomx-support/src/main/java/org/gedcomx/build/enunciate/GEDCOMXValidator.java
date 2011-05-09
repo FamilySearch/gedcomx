@@ -79,6 +79,10 @@ public class GEDCOMXValidator extends BaseValidator {
           result.addError(attribute, "Entity links should be make with an attribute named 'href' in the 'http://www.w3.org/1999/xlink' namespace.");
         }
 
+        if ("id".equals(attribute.getName()) && !attribute.isXmlID()) {
+          result.addError(attribute, "Id attributes should be annotated as @XmlID.");
+        }
+
         TypeMirror accessorType = attribute.getAccessorType();
         if (accessorType instanceof EnumType && ((EnumType) accessorType).getDeclaration().getAnnotation(XmlQNameEnum.class) != null) {
           result.addError(attribute, "Accessors should not reference QName enums directly. You probably want to annotate this accessor with @XmlTransient.");
@@ -100,6 +104,10 @@ public class GEDCOMXValidator extends BaseValidator {
         for (Element choice : element.getChoices()) {
           if ("href".equals(choice.getName()) && !"http://www.w3.org/1999/xlink".equals(choice.getNamespace())) {
             result.addError(choice, "Entity links should be make with an attribute named 'href' in the 'http://www.w3.org/1999/xlink' namespace. You probably need to apply @XmlAttribute(namespace='http://www.w3.org/1999/xlink')");
+          }
+
+          if ("id".equals(choice.getName()) && !choice.isXmlID()) {
+            result.addError(choice, "Accessors named 'id' should be attributes and annotated with @XmlID.");
           }
 
           TypeMirror accessorType = choice.getAccessorType();

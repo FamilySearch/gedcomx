@@ -24,6 +24,8 @@ import java.net.URI;
 import java.util.List;
 
 /**
+ * A set of links.
+ *
  * @author Ryan Heaton
  */
 public class Links {
@@ -31,21 +33,41 @@ public class Links {
   private List<Link> links;
   private URI base;
 
+  /**
+   * The 'base' URI for all links in this set.
+   *
+   * @return The 'base' URI for all links in this set.
+   */
   @XmlAttribute (namespace = XMLConstants.XML_NS_URI)
   public URI getBase() {
     return base;
   }
 
+  /**
+   * The 'base' URI for all links in this set.
+   *
+   * @param base The 'base' URI for all links in this set.
+   */
   public void setBase(URI base) {
     this.base = base;
   }
 
+  /**
+   * The links.
+   *
+   * @return The links.
+   */
   @XmlElement( name="link" )
   @ClientName( "linkList" )
   public List<Link> getLinks() {
     return links;
   }
 
+  /**
+   * The links.
+   *
+   * @param links The links.
+   */
   public void setLinks(List<Link> links) {
     this.links = links;
   }

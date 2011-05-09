@@ -37,39 +37,79 @@ public class NameForm {
   private String fullText;
   private List<NamePart> parts;
 
+  /**
+   * The script of the name form.
+   *
+   * @return The script of the name form.
+   */
   @XmlAttribute
   @XmlQNameEnumRef (NameScript.class)
   public QName getScript() {
     return script;
   }
 
+  /**
+   * The script of the name form.
+   *
+   * @param script The script of the name form.
+   */
   public void setScript(QName script) {
     this.script = script;
   }
 
+  /**
+   * The enum referencing the known name form script, or {@link org.gedcomx.types.NameScript#other} if not known.
+   *
+   * @return The enum referencing the known name form script, or {@link org.gedcomx.types.NameScript#other} if not known.
+   */
   @XmlTransient
   public NameScript getKnownScript() {
     return XmlQNameEnumUtil.fromQName(getScript(), NameScript.class);
   }
 
+  /**
+   * The enum referencing the known name form script, or {@link org.gedcomx.types.NameScript#other} if not known.
+   *
+   * @param knownScript The enum referencing the known name form script, or {@link org.gedcomx.types.NameScript#other} if not known.
+   */
   public void setKnownScript(NameScript knownScript) {
     this.script = XmlQNameEnumUtil.toQName(knownScript);
   }
 
+  /**
+   * The full text of the name form.
+   *
+   * @return The full text of the name form.
+   */
   public String getFullText() {
     return fullText;
   }
 
+  /**
+   * The full text of the name form.
+   *
+   * @param fullText The full text of the name form.
+   */
   public void setFullText(String fullText) {
     this.fullText = fullText;
   }
 
+  /**
+   * The different parts of the name form.
+   *
+   * @return The different parts of the name form.
+   */
   @XmlElementWrapper (name = "parts")
   @XmlElement (name = "part")
   public List<NamePart> getParts() {
     return parts;
   }
 
+  /**
+   * The different parts of the name form.
+   *
+   * @param parts The different parts of the name form.
+   */
   public void setParts(List<NamePart> parts) {
     this.parts = parts;
   }

@@ -20,6 +20,9 @@ import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+/**
+ * A collection of records.
+ */
 @XmlRootElement
 @XmlType (
   propOrder = { "parent", "title", "description", "publisher" }
@@ -32,44 +35,94 @@ public class Collection {
   private String description;
   private String publisher;
 
-  @XmlAttribute
+  /**
+   * The id of the collection, unique to the context and not necessarily globally unique.
+   *
+   * @return The id of the collection, unique to the context and not necessarily globally unique.
+   */
   @XmlID
+  @XmlAttribute
   public String getId() {
     return id;
   }
 
+  /**
+   * The id of the collection, unique to the context and not necessarily globally unique.
+   *
+   * @param id The id of the collection, unique to the context and not necessarily globally unique.
+   */
   public void setId(String id) {
     this.id = id;
   }
 
+  /**
+   * The reference to the "parent" collection for this collection, i.e. the collection that contains this collection.
+   *
+   * @return The reference to the "parent" collection for this collection, i.e. the collection that contains this collection.
+   */
   public CollectionReference getParent() {
     return parent;
   }
 
+  /**
+   * The reference to the "parent" collection for this collection, i.e. the collection that contains this collection.
+   *
+   * @param parent The reference to the "parent" collection for this collection, i.e. the collection that contains this collection.
+   */
   public void setParent(CollectionReference parent) {
     this.parent = parent;
   }
 
+  /**
+   * The title for the collection.
+   *
+   * @return The title for the collection.
+   */
   public String getTitle() {
     return title;
   }
 
+  /**
+   * The title for the collection.
+   *
+   * @param title The title for the collection.
+   */
   public void setTitle(String title) {
     this.title = title;
   }
 
+  /**
+   * A description of the collection.
+   *
+   * @return A description of the collection.
+   */
   public String getDescription() {
     return description;
   }
 
+  /**
+   * A description of the collection.
+   *
+   * @param description A description of the collection.
+   */
   public void setDescription(String description) {
     this.description = description;
   }
 
+  /**
+   * The publisher for the collection.
+   *
+   * @return The publisher for the collection.
+   */
   public String getPublisher() {
     return publisher;
   }
 
+  /**
+   * The publisher for the collection.
+   *
+   * @param publisher The publisher for the collection.
+   */
   public void setPublisher(String publisher) {
     this.publisher = publisher;
   }

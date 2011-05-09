@@ -20,6 +20,9 @@ import org.codehaus.enunciate.qname.XmlUnknownQNameEnumValue;
 
 import javax.xml.bind.annotation.XmlTransient;
 
+/**
+ * Enumeration of standard characteristic types.
+ */
 @XmlQNameEnum
 public enum CharacteristicType {
 

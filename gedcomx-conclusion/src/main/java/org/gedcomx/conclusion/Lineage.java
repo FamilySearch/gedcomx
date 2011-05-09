@@ -32,21 +32,41 @@ public class Lineage extends Conclusion {
 
   private QName type;
 
+  /**
+   * The lineage type.
+   *
+   * @return The lineage type.
+   */
   @XmlAttribute
   @XmlQNameEnumRef ( LineageType.class )
   public QName getType() {
     return type;
   }
 
+  /**
+   * The lineage type.
+   *
+   * @param type The lineage type.
+   */
   public void setType(QName type) {
     this.type = type;
   }
 
+  /**
+   * The enum referencing the known lineage type, or {@link org.gedcomx.types.LineageType#other} if not known.
+   *
+   * @return The enum referencing the known lineage type, or {@link org.gedcomx.types.LineageType#other} if not known.
+   */
   @XmlTransient
   public LineageType getKnownType() {
     return XmlQNameEnumUtil.fromQName(getType(), LineageType.class);
   }
 
+  /**
+   * Set the lineage type from an enumeration of known lineage types.
+   *
+   * @param knownLineageType The lineage type.
+   */
   public void setKnownType(LineageType knownLineageType) {
     this.type = XmlQNameEnumUtil.toQName(knownLineageType);
   }

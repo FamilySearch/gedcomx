@@ -13,6 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+/**
+ * The <b>source profile</b> models genealogical sources.
+ */
 @XmlSchema (
   namespace = SourceConstants.GEDCOMX_SOURCE_NAMESPACE,
   elementFormDefault = XmlNsForm.QUALIFIED

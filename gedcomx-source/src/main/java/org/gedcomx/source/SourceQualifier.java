@@ -23,29 +23,59 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * A qualifier for a source. Used for specifying things like bounding boxes and applicable fields.
+ *
  * @author Ryan Heaton
  */
 public class SourceQualifier {
 
   private Map<QName, String> properties;
 
+  /**
+   * The qualifier properties.
+   *
+   * @return The qualifier properties.
+   */
   @XmlAnyAttribute
   public Map<QName, String> getProperties() {
     return properties;
   }
 
+  /**
+   * The qualifier properties.
+   *
+   * @param properties The qualifier properties.
+   */
   public void setProperties(Map<QName, String> properties) {
     this.properties = properties;
   }
 
+  /**
+   * Get a property by a qname.
+   *
+   * @param property The property qname.
+   * @return The property value.
+   */
   public String getProperty(QName property) {
     return this.properties == null ? null : this.properties.get(property);
   }
 
+  /**
+   * Get a property from an enumeration known qualifier properties.
+   *
+   * @param property The property.
+   * @return The property value.
+   */
   public String getProperty(SourceQualifierProperty property) {
     return getProperty(XmlQNameEnumUtil.toQName(property));
   }
-  
+
+  /**
+   * Set a property value by qname.
+   *
+   * @param property The property qname.
+   * @param value The value of the property.
+   */
   public void setProperty(QName property, String value) {
     if (this.properties == null) {
       this.properties = new HashMap<QName, String>();
@@ -53,7 +83,13 @@ public class SourceQualifier {
 
     this.properties.put(property, value);
   }
-  
+
+  /**
+   * Set a source qualifier property from an enumeration of known qualifier properties.
+   *
+   * @param property The qualifier property.
+   * @param value The value of the qualifier property.
+   */
   public void setProperty(SourceQualifierProperty property, String value) {
     setProperty(XmlQNameEnumUtil.toQName(property), value);
   }

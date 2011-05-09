@@ -18,6 +18,8 @@ package org.gedcomx.conclusion;
 import javax.xml.bind.annotation.XmlAttribute;
 
 /**
+ * A geocode.
+ * 
  * @author Ryan Heaton
  */
 public class GeoCode {
@@ -25,20 +27,40 @@ public class GeoCode {
   private float longitude;
   private float latitude;
 
+  /**
+   * The longitude.
+   * 
+   * @return The longitude.
+   */
   @XmlAttribute
   public float getLongitude() {
     return longitude;
   }
 
+  /**
+   * The longitude.
+   * 
+   * @param longitude The longitude.
+   */
   public void setLongitude(float longitude) {
     this.longitude = longitude;
   }
 
+  /**
+   * The latitude.
+   * 
+   * @return The latitude.
+   */
   @XmlAttribute
   public float getLatitude() {
     return latitude;
   }
 
+  /**
+   * The latitude.
+   * 
+   * @param latitude The latitude.
+   */
   public void setLatitude(float latitude) {
     this.latitude = latitude;
   }

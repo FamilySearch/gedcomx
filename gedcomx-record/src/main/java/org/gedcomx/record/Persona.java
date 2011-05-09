@@ -16,9 +16,12 @@
 package org.gedcomx.record;
 
 import javax.xml.bind.annotation.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.Collection;
 
+/**
+ * A persona is the set of data about a person bounded by a single record.
+ */
 @XmlType (
   propOrder = {"alternateIds", "gender", "age", "names", "eventRoles", "characteristics"}
 )
@@ -28,88 +31,162 @@ public class Persona {
   private List<AlternateId> alternateIds;
   private Gender gender;
   private Age age;
-  private List<Name> names = new ArrayList<Name>();
-  private List<EventRole> eventRoles = new ArrayList<EventRole>();
-  private List<Characteristic> characteristics = new ArrayList<Characteristic>();
+  private java.util.Collection<Name> names;
+  private java.util.Collection<EventRole> eventRoles = new ArrayList<EventRole>();
+  private java.util.Collection<Characteristic> characteristics = new ArrayList<Characteristic>();
   private Boolean principal;
 
-  public Persona() {
-  }
-
-  @XmlAttribute
+  /**
+   * The id of the persona, unique to the context and not necessarily globally unique.
+   *
+   * @return The id of the persona, unique to the context and not necessarily globally unique.
+   */
   @XmlID
+  @XmlAttribute
   public String getId() {
     return id;
   }
 
+  /**
+   * The id of the persona, unique to the context and not necessarily globally unique.
+   *
+   * @param id The id of the persona, unique to the context and not necessarily globally unique.
+   */
   public void setId(String id) {
     this.id = id;
   }
 
-  @XmlElement(name="alternateId")
+  /**
+   * The list of alternate ids of the persona.
+   *
+   * @return The list of alternate ids of the persona.
+   */
+  @XmlElement (name="alternateId")
   public List<AlternateId> getAlternateIds() {
     return alternateIds;
   }
 
+  /**
+   * The list of alternate ids of the persona.
+   *
+   * @param alternateIds The list of alternate ids of the persona.
+   */
   public void setAlternateIds(List<AlternateId> alternateIds) {
     this.alternateIds = alternateIds;
   }
 
+  /**
+   * The gender of the persona.
+   *
+   * @return The gender of the persona.
+   */
   public Gender getGender() {
     return gender;
   }
 
+  /**
+   * The gender conclusion for the persona.
+   *
+   * @param gender The gender conclusion for the persona.
+   */
   public void setGender(Gender gender) {
     this.gender = gender;
   }
 
+  /**
+   * The age field for the persona.
+   * 
+   * @return The age field for the persona.
+   */
   public Age getAge() {
     return age;
   }
 
+  /**
+   * The age field for the persona.
+   * 
+   * @param age The age field for the persona.
+   */
   public void setAge(Age age) {
     this.age = age;
   }
 
-  @XmlElement(name = "name")
-  public List<Name> getNames() {
+  /**
+   * The name conclusions for the persona.
+   *
+   * @return The name conclusions for the persona.
+   */
+  @XmlElement(name="name")
+  public java.util.Collection<Name> getNames() {
     return names;
   }
 
-  public void addName(Name name) {
-    if (names == null) {
-      names = new ArrayList<Name>();
-    }
-    names.add(name);
-  }
-
-  public void setNames(List<Name> names) {
+  /**
+   * The name conclusions for the persona.
+   *
+   * @param names The name conclusions for the persona.
+   */
+  public void setNames(java.util.Collection<Name> names) {
     this.names = names;
   }
 
-  @XmlElement(name = "characteristic")
-  public List<Characteristic> getCharacteristics() {
+  /**
+   * The characteristic fields on this persona.
+   *
+   * @return The characteristic fields on this persona.
+   */
+  @XmlElement(name="characteristic")
+  public Collection<Characteristic> getCharacteristics() {
     return characteristics;
   }
 
-  public void setCharacteristics(List<Characteristic> characteristics) {
+  /**
+   * The characteristic fields on this persona.
+   *
+   * @param characteristics The characteristic fields on this persona.
+   */
+  public void setCharacteristics(Collection<Characteristic> characteristics) {
     this.characteristics = characteristics;
   }
 
+  /**
+   * The roles this persona plays in the events of the record.
+   *
+   * @return The roles this persona plays in the events of the record.
+   */
   @XmlElement(name = "eventRole")
-  public List<EventRole> getEventRoles() {
+  public Collection<EventRole> getEventRoles() {
     return eventRoles;
   }
 
-  public void setEventRoles(List<EventRole> eventRoles) {
+  /**
+   * The roles this persona plays in the events of the record.
+   *
+   * @param eventRoles The roles this persona plays in the events of the record.
+   */
+  public void setEventRoles(Collection<EventRole> eventRoles) {
     this.eventRoles = eventRoles;
   }
 
+  /**
+   * Whether this is the principal persona in the record. For example, the principal persona in a birth certificate is the persona whose birth
+   * was recorded.
+   *
+   * @return Whether this is the principal persona in the record. For example, the principal persona in a birth certificate is the persona whose birth
+   * was recorded.
+   */
   @XmlAttribute
   public Boolean getPrincipal() {
     return principal;
   }
 
+  /**
+   * Whether this is the principal persona in the record. For example, the principal persona in a birth certificate is the persona whose birth
+   * was recorded.
+   *
+   * @param isPrincipal Whether this is the principal persona in the record. For example, the principal persona in a birth certificate is the persona whose birth
+   * was recorded.
+   */
   public void setPrincipal(Boolean isPrincipal) {
     this.principal = isPrincipal;
   }

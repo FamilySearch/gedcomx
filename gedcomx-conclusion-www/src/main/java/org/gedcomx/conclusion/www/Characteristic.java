@@ -13,50 +13,37 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.source.www;
+package org.gedcomx.conclusion.www;
 
-import org.gedcomx.source.Source;
 import org.gedcomx.www.Links;
-import org.gedcomx.www.PersistentIdentifier;
 
-import javax.xml.XMLConstants;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-import java.net.URI;
 
 /**
+ * A characteristic conclusion that can support WWW links.
+ *
  * @author Ryan Heaton
  */
-@XmlRootElement (name = "source")
-@XmlType (name = "source")
-public class WebSource extends Source {
+@XmlType (name = "characteristic")
+public class Characteristic extends org.gedcomx.conclusion.Characteristic {
+  //todo: what are the implications of using this in the model? does it deserialize correctly? what about for json?
 
-  private URI base;
-  private PersistentIdentifier persistentId;
   private Links links;
 
-  @XmlAttribute (namespace = XMLConstants.XML_NS_URI)
-  public URI getBase() {
-    return base;
-  }
-
-  public void setBase(URI base) {
-    this.base = base;
-  }
-
-  public PersistentIdentifier getPersistentId() {
-    return persistentId;
-  }
-
-  public void setPersistentId(PersistentIdentifier persistentId) {
-    this.persistentId = persistentId;
-  }
-
+  /**
+   * The WWW links for this characteristic.
+   *
+   * @return The WWW links for this characteristic.
+   */
   public Links getLinks() {
     return links;
   }
 
+  /**
+   * The links.
+   *
+   * @param links The links.
+   */
   public void setLinks(Links links) {
     this.links = links;
   }

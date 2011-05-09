@@ -18,14 +18,13 @@ package org.gedcomx.conclusion;
 import org.gedcomx.attribution.AttributionReference;
 import org.gedcomx.source.AttributedSourceReference;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import java.util.Collection;
 import java.util.List;
 
 /**
+ * A relationship between two or more persons.
+ *
  * @author Ryan Heaton
  */
 @XmlType (
@@ -40,54 +39,125 @@ public abstract class Relationship {
   private Collection<Characteristic> characteristics;
   private Collection<AttributedSourceReference> sources;
 
+  /**
+   * The id of the relationship, unique to the context and not necessarily globally unique.
+   *
+   * @return The id of the relationship, unique to the context and not necessarily globally unique.
+   */
   @XmlID
   @XmlAttribute
   public String getId() {
     return id;
   }
 
+  /**
+   * The id of the relationship, unique to the context and not necessarily globally unique.
+   *
+   * @param id The id of the relationship, unique to the context and not necessarily globally unique.
+   */
   public void setId(String id) {
     this.id = id;
   }
 
+  /**
+   * The list of alternate ids of the relationship.
+   *
+   * @return The list of alternate ids of the relationship.
+   */
   @XmlElement (name="alternateId")
   public List<AlternateId> getAlternateIds() {
     return alternateIds;
   }
 
+  /**
+   * The list of alternate ids of the relationship.
+   *
+   * @param alternateIds The list of alternate ids of the relationship.
+   */
   public void setAlternateIds(List<AlternateId> alternateIds) {
     this.alternateIds = alternateIds;
   }
 
+  /**
+   * The link to the attribution metadata for this relationship.
+   *
+   * @return The link to the attribution metadata for this relationship.
+   */
   public AttributionReference getAttribution() {
     return attribution;
   }
 
+  /**
+   * The link to the attribution metadata for this relationship.
+   *
+   * @param attribution The link to the attribution metadata for this relationship.
+   */
   public void setAttribution(AttributionReference attribution) {
     this.attribution = attribution;
   }
 
+  /**
+   * The event conclusions for the relationship.
+   *
+   * @return The event conclusions for the relationship.
+   */
+  @XmlElement(name="event")
   public Collection<Event> getEvents() {
     return events;
   }
 
+  /**
+   * The event conclusions for the relationship.
+   *
+   * @param events The event conclusions for the relationship.
+   */
   public void setEvents(Collection<Event> events) {
     this.events = events;
   }
 
+  /**
+   * The characteristic conclusions for the relationship.
+   *
+   * @return The characteristic conclusions for the relationship.
+   */
+  @XmlElement(name="characteristic")
   public Collection<Characteristic> getCharacteristics() {
     return characteristics;
   }
 
+  /**
+   * The characteristic conclusions for the relationship.
+   *
+   * @param characteristics The characteristic conclusions for the relationship.
+   */
   public void setCharacteristics(Collection<Characteristic> characteristics) {
     this.characteristics = characteristics;
   }
 
+  /**
+   * The sources for the conclusions about this relationship.
+   *
+   * @return The sources for the conclusions about this relationship.
+   */
+  @XmlElement(name="source")
   public Collection<AttributedSourceReference> getSources() {
     return sources;
   }
 
+  /**
+   * The sources for the conclusions about this relationship.
+   *
+   * @param sources The sources for the conclusions about this relationship.
+   */
   public void setSources(Collection<AttributedSourceReference> sources) {
     this.sources = sources;
   }
+
+  /**
+   * Get the list of person references for this relationship.
+   *
+   * @return the person references. Note the possibility of null items in the list.
+   */
+  @XmlTransient
+  public abstract List<? extends PersonReference> getPersonReferences();
 }

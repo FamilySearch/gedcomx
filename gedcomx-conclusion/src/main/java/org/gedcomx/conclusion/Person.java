@@ -22,6 +22,8 @@ import java.util.Collection;
 import java.util.List;
 
 /**
+ * A person.
+ *
  * @author Ryan Heaton
  */
 @XmlRootElement
@@ -39,69 +41,154 @@ public class Person {
   private Collection<RelationshipReference> relationships;
   private Collection<AttributedSourceReference> sources;
 
+  /**
+   * The id of the person, unique to the context and not necessarily globally unique.
+   *
+   * @return The id of the person, unique to the context and not necessarily globally unique.
+   */
   @XmlID
   @XmlAttribute
   public String getId() {
     return id;
   }
 
+  /**
+   * The id of the person, unique to the context and not necessarily globally unique.
+   *
+   * @param id The id of the person, unique to the context and not necessarily globally unique.
+   */
   public void setId(String id) {
     this.id = id;
   }
 
+  /**
+   * The list of alternate ids of the person.
+   *
+   * @return The list of alternate ids of the person.
+   */
   @XmlElement (name="alternateId")
   public List<AlternateId> getAlternateIds() {
     return alternateIds;
   }
 
+  /**
+   * The list of alternate ids of the person.
+   *
+   * @param alternateIds The list of alternate ids of the person.
+   */
   public void setAlternateIds(List<AlternateId> alternateIds) {
     this.alternateIds = alternateIds;
   }
 
+  /**
+   * The gender of the person.
+   *
+   * @return The gender of the person.
+   */
   public Gender getGender() {
     return gender;
   }
 
+  /**
+   * The gender conclusion for the person.
+   *
+   * @param gender The gender conclusion for the person.
+   */
   public void setGender(Gender gender) {
     this.gender = gender;
   }
 
+  /**
+   * The name conclusions for the person.
+   *
+   * @return The name conclusions for the person.
+   */
+  @XmlElement(name="name")
   public Collection<Name> getNames() {
     return names;
   }
 
+  /**
+   * The name conclusions for the person.
+   *
+   * @param names The name conclusions for the person.
+   */
   public void setNames(Collection<Name> names) {
     this.names = names;
   }
 
+  /**
+   * The event conclusions for the person.
+   *
+   * @return The event conclusions for the person.
+   */
+  @XmlElement(name="event")
   public Collection<Event> getEvents() {
     return events;
   }
 
+  /**
+   * The event conclusions for the person.
+   *
+   * @param events The event conclusions for the person.
+   */
   public void setEvents(Collection<Event> events) {
     this.events = events;
   }
 
+  /**
+   * The characteristic conclusions for the person.
+   *
+   * @return The characteristic conclusions for the person.
+   */
+  @XmlElement(name="characteristic")
   public Collection<Characteristic> getCharacteristics() {
     return characteristics;
   }
 
+  /**
+   * The characteristic conclusions for the person.
+   *
+   * @param characteristics The characteristic conclusions for the person.
+   */
   public void setCharacteristics(Collection<Characteristic> characteristics) {
     this.characteristics = characteristics;
   }
 
+  /**
+   * The references to the relationships of the person.
+   *
+   * @return The references to the relationships of the person.
+   */
+  @XmlElement(name="relationship")
   public Collection<RelationshipReference> getRelationships() {
     return relationships;
   }
 
+  /**
+   * The references to the relationships of the person.
+   *
+   * @param relationships The references to the relationships of the person.
+   */
   public void setRelationships(Collection<RelationshipReference> relationships) {
     this.relationships = relationships;
   }
 
+  /**
+   * The sources for the conclusions about this person.
+   *
+   * @return The sources for the conclusions about this person.
+   */
+  @XmlElement(name="source")
   public Collection<AttributedSourceReference> getSources() {
     return sources;
   }
 
+  /**
+   * The sources for the conclusions about this person.
+   *
+   * @param sources The sources for the conclusions about this person.
+   */
   public void setSources(Collection<AttributedSourceReference> sources) {
     this.sources = sources;
   }

@@ -18,6 +18,8 @@ package org.gedcomx.conclusion;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
+ * Static constants relative to the conclusion profile of GEDCOM X.
+ *
  * @author Ryan Heaton
  */
 @XmlTransient

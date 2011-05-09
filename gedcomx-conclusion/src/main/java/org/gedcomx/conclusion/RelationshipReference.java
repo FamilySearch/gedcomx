@@ -25,37 +25,69 @@ import javax.xml.namespace.QName;
 import java.net.URI;
 
 /**
+ * A reference to a relationship.
+ *
  * @author Ryan Heaton
  */
 public class RelationshipReference {
 
   private QName role;
   private URI href;
-  
+
+  /**
+   * The applicable role in the relationship. Context-specific.
+   *
+   * @return The applicable role in the relationship. Context-specific.
+   */
   @XmlAttribute
   @XmlQNameEnumRef (RelationshipRole.class)
   public QName getRole() {
     return role;
   }
 
+  /**
+   * The applicable role in the relationship. Context-specific.
+   *
+   * @param role The applicable role in the relationship. Context-specific.
+   */
   public void setRole(QName role) {
     this.role = role;
   }
 
+  /**
+   * The enum referencing the known role, or {@link org.gedcomx.types.RelationshipRole#other} if not known.
+   *
+   * @return The enum referencing the known role, or {@link org.gedcomx.types.RelationshipRole#other} if not known.
+   */
   @XmlTransient
   public RelationshipRole getKnownRole() {
     return XmlQNameEnumUtil.fromQName(getRole(), RelationshipRole.class);
   }
 
+  /**
+   * Set the role from a known enumeration of roles.
+   *
+   * @param knownRole The role.
+   */
   public void setKnownRole(RelationshipRole knownRole) {
     this.role = XmlQNameEnumUtil.toQName(knownRole);
   }
 
+  /**
+   * The link to the person.
+   *
+   * @return The link to the person.
+   */
   @XmlAttribute(namespace="http://www.w3.org/1999/xlink")
   public URI getHref() {
     return href;
   }
 
+  /**
+   * The link to the person.
+   *
+   * @param href The link to the person.
+   */
   public void setHref(URI href) {
     this.href = href;
   }

@@ -21,17 +21,24 @@ import java.util.List;
 
 public class Place extends Field {
 
-  public Place() {
-  }
-
   private List<PlacePart> parts;
 
+  /**
+   * The parts of the place.
+   *
+   * @return The parts of the place.
+   */
   @XmlElementWrapper(name = "parts")
   @XmlElement(name = "part")
   public List<PlacePart> getParts() {
     return parts;
   }
 
+  /**
+   * The parts of the place.
+   *
+   * @param parts The parts of the place.
+   */
   public void setParts(List<PlacePart> parts) {
     this.parts = parts;
   }

@@ -23,28 +23,48 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.namespace.QName;
 
+/**
+ * A date part field.
+ */
 public class DatePart extends Field {
 
   private QName type;
 
-  public DatePart() {
-  }
-
+  /**
+   * The date part type.
+   *
+   * @return The date part type.
+   */
   @XmlAttribute
   @XmlQNameEnumRef(DatePartType.class)
   public QName getType() {
     return type;
   }
 
+  /**
+   * The date part type.
+   *
+   * @param type The date part type.
+   */
   public void setType(QName type) {
     this.type = type;
   }
 
+  /**
+   * The enum referencing the known type of the date part, or {@link org.gedcomx.types.DatePartType#other} if not known.
+   *
+   * @return The enum referencing the known type of the date part, or {@link org.gedcomx.types.DatePartType#other} if not known.
+   */
   @XmlTransient
   public DatePartType getKnownType() {
     return XmlQNameEnumUtil.fromQName(getType(), DatePartType.class);
   }
 
+  /**
+   * Set the date part type from a known enumeration of date part types.
+   *
+   * @param knownType The date part type.
+   */
   public void setKnownType(DatePartType knownType) {
     this.type = XmlQNameEnumUtil.toQName(knownType);
   }

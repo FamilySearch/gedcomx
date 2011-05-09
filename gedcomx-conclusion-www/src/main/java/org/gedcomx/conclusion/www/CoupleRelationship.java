@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.record.www;
+package org.gedcomx.conclusion.www;
 
-import org.gedcomx.record.Record;
 import org.gedcomx.www.Links;
 import org.gedcomx.www.PersistentIdentifier;
 
@@ -26,37 +25,69 @@ import javax.xml.bind.annotation.XmlType;
 import java.net.URI;
 
 /**
+ * A couple relationship that can support WWW links.
+ *
  * @author Ryan Heaton
  */
-@XmlRootElement (name = "record")
-@XmlType (name = "record")
-public class WebRecord extends Record {
+@XmlRootElement (name = "coupleRelationship")
+@XmlType (name = "coupleRelationship")
+public class CoupleRelationship extends org.gedcomx.conclusion.CoupleRelationship {
 
   private URI base;
   private PersistentIdentifier persistentId;
   private Links links;
 
+  /**
+   * The base uri for all relative links within the context of this relationship.
+   *
+   * @return The base uri for all relative links within the context of this relationship.
+   */
   @XmlAttribute (namespace = XMLConstants.XML_NS_URI)
   public URI getBase() {
     return base;
   }
 
+  /**
+   * The base uri for all relative links within the context of this relationship.
+   *
+   * @param base The base uri for all relative links within the context of this relationship.
+   */
   public void setBase(URI base) {
     this.base = base;
   }
 
+  /**
+   * A long-term, persistent, globally unique identifier for this relationship.
+   *
+   * @return A long-term, persistent, globally unique identifier for this relationship.
+   */
   public PersistentIdentifier getPersistentId() {
     return persistentId;
   }
 
+  /**
+   * A long-term, persistent, globally unique identifier for this relationship.
+   *
+   * @param persistentId A long-term, persistent, globally unique identifier for this relationship.
+   */
   public void setPersistentId(PersistentIdentifier persistentId) {
     this.persistentId = persistentId;
   }
 
+  /**
+   * The WWW links for this relationship.
+   *
+   * @return The WWW links for this relationship.
+   */
   public Links getLinks() {
     return links;
   }
 
+  /**
+   * The WWW links for this relationship.
+   *
+   * @param links The WWW links for this relationship.
+   */
   public void setLinks(Links links) {
     this.links = links;
   }

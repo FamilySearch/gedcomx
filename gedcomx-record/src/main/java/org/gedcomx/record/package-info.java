@@ -13,6 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+/**
+ * The <b>record profile</b> models genealogical data as is transcribed from a record.
+ */
 @XmlSchema(
   namespace = RecordConstants.GEDCOMX_RECORD_NAMESPACE,
   elementFormDefault = XmlNsForm.QUALIFIED

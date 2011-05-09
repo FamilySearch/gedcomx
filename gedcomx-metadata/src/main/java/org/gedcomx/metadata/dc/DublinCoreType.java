@@ -20,6 +20,8 @@ import org.codehaus.enunciate.qname.XmlUnknownQNameEnumValue;
 import org.gedcomx.metadata.MetadataConstants;
 
 /**
+ * A <a href="http://dublincore.org/documents/dcmi-type-vocabulary/">Dublin Core type</a>.
+ * 
  * @author Ryan Heaton
  */
 @XmlQNameEnum (namespace = MetadataConstants.DUBLIN_CORE_TYPE_NAMESPACE)

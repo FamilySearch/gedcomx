@@ -29,24 +29,41 @@ public class PlacePart extends Field {
 
   private QName type;
 
-  public PlacePart() {
-  }
-
-  @XmlAttribute(name = "type")
+  /**
+   * The place part type.
+   *
+   * @return The place part type.
+   */
+  @XmlAttribute
   @XmlQNameEnumRef(PlacePartType.class)
   public QName getType() {
     return type;
   }
 
+  /**
+   * The place part type.
+   *
+   * @param type The place part type.
+   */
   public void setType(QName type) {
     this.type = type;
   }
 
+  /**
+   * The enum referencing the known type of the place part, or {@link org.gedcomx.types.PlacePartType#other} if not known.
+   *
+   * @return The enum referencing the known type of the place part, or {@link org.gedcomx.types.PlacePartType#other} if not known.
+   */
   @XmlTransient
   public PlacePartType getKnownType() {
     return XmlQNameEnumUtil.fromQName(getType(), PlacePartType.class);
   }
 
+  /**
+   * Set the place part type from a known enumeration of place part types.
+   *
+   * @param knownType The place part type.
+   */
   public void setKnownType(PlacePartType knownType) {
     this.type = XmlQNameEnumUtil.toQName(knownType);
   }

@@ -27,7 +27,7 @@ import javax.xml.namespace.QName;
 import java.util.List;
 
 /**
- * A conclusion about the name of a person.
+ * A name conclusion.
  *
  * @author Ryan Heaton
  */
@@ -39,56 +39,116 @@ public class Name extends Conclusion {
   private NameForm primaryForm;
   private List<NameForm> alternateForms;
 
+  /**
+   * The type of the name.
+   *
+   * @return The type of the name.
+   */
   @XmlAttribute
   @XmlQNameEnumRef (NameType.class)
   public QName getType() {
     return type;
   }
 
+  /**
+   * The type of the name.
+   *
+   * @param type The type of the name.
+   */
   public void setType(QName type) {
     this.type = type;
   }
 
+  /**
+   * The enum referencing the known name type, or {@link org.gedcomx.types.NameType#other} if not known.
+   *
+   * @return The enum referencing the known name type, or {@link org.gedcomx.types.NameType#other} if not known.
+   */
   @XmlTransient
   public NameType getKnownType() {
     return XmlQNameEnumUtil.fromQName(getType(), NameType.class);
   }
 
+  /**
+   * Set the name type from an enumeration of known name types.
+   *
+   * @param knownType The known type.
+   */
   public void setKnownType(NameType knownType) {
     this.type = XmlQNameEnumUtil.toQName(knownType);
   }
 
+  /**
+   * The style of the name.
+   *
+   * @return The style of the name.
+   */
   @XmlAttribute
   @XmlQNameEnumRef(NameStyle.class)
   public QName getStyle() {
     return style;
   }
 
+  /**
+   * The style of the name.
+   *
+   * @param style The style of the name.
+   */
   public void setStyle(QName style) {
     this.style = style;
   }
 
+  /**
+   * The enum referencing the known name style, or {@link org.gedcomx.types.NameStyle#other} if not known.
+   *
+   * @return The enum referencing the known name style, or {@link org.gedcomx.types.NameStyle#other} if not known.
+   */
   @XmlTransient
   public NameStyle getKnownStyle() {
     return XmlQNameEnumUtil.fromQName(getType(), NameStyle.class);
   }
 
+  /**
+   * Set the name style from an enumeration of known name styles.
+   *
+   * @param knownStyle The name style.
+   */
   public void setKnownStyle(NameStyle knownStyle) {
     this.style = XmlQNameEnumUtil.toQName(knownStyle);
   }
 
+  /**
+   * The primary form of the name.
+   *
+   * @return The primary form of the name.
+   */
   public NameForm getPrimaryForm() {
     return primaryForm;
   }
 
+  /**
+   * The primary form of the name.
+   *
+   * @param primaryForm The primary form of the name.
+   */
   public void setPrimaryForm(NameForm primaryForm) {
     this.primaryForm = primaryForm;
   }
 
+  /**
+   * Alternate forms of the name, such as the romanized form of a non-latin name.
+   *
+   * @return Alternate forms of the name, such as the romanized form of a non-latin name.
+   */
   public List<NameForm> getAlternateForms() {
     return alternateForms;
   }
 
+  /**
+   * Alternate forms of the name, such as the romanized form of a non-latin name.
+   *
+   * @param alternateForms Alternate forms of the name, such as the romanized form of a non-latin name.
+   */
   public void setAlternateForms(List<NameForm> alternateForms) {
     this.alternateForms = alternateForms;
   }

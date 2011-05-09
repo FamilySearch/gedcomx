@@ -18,17 +18,29 @@ package org.gedcomx.metadata.dc;
 import javax.xml.bind.annotation.XmlValue;
 
 /**
+ * A Dublin Core metadata property in the form of a string.
+ *
  * @author Ryan Heaton
  */
 public class DublinCoreStringProperty extends DublinCoreProperty<String> {
 
   private String value;
 
+  /**
+   * The string value.
+   *
+   * @return The string value.
+   */
   @XmlValue
   public String getValue() {
     return value;
   }
 
+  /**
+   * The string value.
+   *
+   * @param value The string value.
+   */
   public void setValue(String value) {
     this.value = value;
   }

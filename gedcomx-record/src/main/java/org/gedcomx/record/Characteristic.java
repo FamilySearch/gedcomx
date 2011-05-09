@@ -21,53 +21,91 @@ import org.codehaus.enunciate.qname.XmlQNameEnumRef;
 import org.gedcomx.types.CharacteristicType;
 
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.namespace.QName;
 
+/**
+ * A field specifying a characteristic about a record, persona, or relationship.
+ */
 public class Characteristic extends Field {
 
   private QName type;
   private Date date;
   private Place place;
 
-  public Characteristic() {
-  }
-
+  /**
+   * The type of the characteristic.
+   *
+   * @return The type of the characteristic.
+   */
   @XmlAttribute
-  @XmlQNameEnumRef(CharacteristicType.class)
+  @XmlQNameEnumRef (CharacteristicType.class)
   public QName getType() {
     return type;
   }
 
+  /**
+   * The type of the characteristic.
+   *
+   * @param type The type of the characteristic.
+   */
   public void setType(QName type) {
     this.type = type;
   }
 
-  @XmlElement
+  /**
+   * The enum referencing the known type of the characteristic, or {@link org.gedcomx.types.CharacteristicType#other} if not known.
+   *
+   * @return The enum referencing the known type of the characteristic, or {@link org.gedcomx.types.CharacteristicType#other} if not known.
+   */
+  @XmlTransient
+  public org.gedcomx.types.CharacteristicType getKnownType() {
+    return XmlQNameEnumUtil.fromQName(getType(), org.gedcomx.types.CharacteristicType.class);
+  }
+
+  /**
+   * Set the type of this characteristic from a known enumeration of types.
+   *
+   * @param knownType The known type.
+   */
+  public void setKnownType(org.gedcomx.types.CharacteristicType knownType) {
+    this.type = XmlQNameEnumUtil.toQName(knownType);
+  }
+
+  /**
+   * The date of applicability of this characteristic.
+   *
+   * @return The date of applicability of this characteristic.
+   */
   public Date getDate() {
     return date;
   }
 
+  /**
+   * The date of applicability of this characteristic.
+   *
+   * @param date The date of applicability of this characteristic.
+   */
   public void setDate(Date date) {
     this.date = date;
   }
 
-  @XmlElement
+  /**
+   * The place of applicability of this characteristic.
+   *
+   * @return The place of applicability of this characteristic.
+   */
   public Place getPlace() {
     return place;
   }
 
+  /**
+   * The place of applicability of this characteristic.
+   *
+   * @param place The place of applicability of this characteristic.
+   */
   public void setPlace(Place place) {
     this.place = place;
   }
 
-  @XmlTransient
-  public CharacteristicType getKnownType() {
-    return XmlQNameEnumUtil.fromQName(getType(), CharacteristicType.class);
-  }
-
-  public void setKnownType(CharacteristicType knownType) {
-    this.type = XmlQNameEnumUtil.toQName(knownType);
-  }
 }
