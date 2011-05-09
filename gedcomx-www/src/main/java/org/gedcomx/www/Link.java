@@ -25,7 +25,6 @@ import java.net.URI;
  */
 public class Link {
 
-  private URI base;
   private QName rel;
   private URI href;
 
@@ -36,15 +35,6 @@ public class Link {
 
   public void setRel(QName rel) {
     this.rel = rel;
-  }
-
-  @XmlAttribute (namespace = XMLConstants.XML_NS_URI)
-  public URI getBase() {
-    return base;
-  }
-
-  public void setBase(URI base) {
-    this.base = base;
   }
 
   @XmlAttribute(namespace="http://www.w3.org/1999/xlink")
