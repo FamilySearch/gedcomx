@@ -23,12 +23,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.net.URI;
 
 /**
- * A parent-child relationship that can support WWW links.
+ * A couple relationship that can support WWW links.
  *
  * @author Ryan Heaton
  */
 @XmlRootElement
-public class ParentChildRelationship extends org.gedcomx.conclusion.ParentChildRelationship {
+public class OtherRelationship extends org.gedcomx.conclusion.OtherRelationship {
 
   private URI base;
   private Links links;

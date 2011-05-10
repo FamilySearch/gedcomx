@@ -15,6 +15,9 @@
  */
 package org.gedcomx.record;
 
+import org.gedcomx.id.AlternateId;
+import org.gedcomx.id.PersistentIdentifier;
+
 import javax.xml.bind.annotation.*;
 import java.util.*;
 import java.util.Collection;
@@ -23,11 +26,12 @@ import java.util.Collection;
  * A persona is the set of data about a person bounded by a single record.
  */
 @XmlType (
-  propOrder = {"alternateIds", "gender", "age", "names", "eventRoles", "characteristics"}
+  propOrder = {"persistentId", "alternateIds", "gender", "age", "names", "eventRoles", "characteristics"}
 )
 public class Persona {
 
   private String id;
+  private PersistentIdentifier persistentId;
   private List<AlternateId> alternateIds;
   private Gender gender;
   private Age age;
@@ -54,6 +58,24 @@ public class Persona {
    */
   public void setId(String id) {
     this.id = id;
+  }
+
+  /**
+   * A long-term, persistent, globally unique identifier for this persona.
+   *
+   * @return A long-term, persistent, globally unique identifier for this persona.
+   */
+  public PersistentIdentifier getPersistentId() {
+    return persistentId;
+  }
+
+  /**
+   * A long-term, persistent, globally unique identifier for this persona.
+   *
+   * @param persistentId A long-term, persistent, globally unique identifier for this persona.
+   */
+  public void setPersistentId(PersistentIdentifier persistentId) {
+    this.persistentId = persistentId;
   }
 
   /**
@@ -190,4 +212,5 @@ public class Persona {
   public void setPrincipal(Boolean isPrincipal) {
     this.principal = isPrincipal;
   }
+
 }

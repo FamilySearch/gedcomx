@@ -16,46 +16,56 @@
 package org.gedcomx.record.www;
 
 import org.gedcomx.www.Links;
-import org.gedcomx.www.PersistentIdentifier;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
 import java.net.URI;
 
 /**
+ * A persona that can support WWW links.
+ * 
  * @author Ryan Heaton
  */
-@XmlRootElement (name = "persona")
-@XmlType (name = "persona")
+@XmlRootElement
 public class Persona extends org.gedcomx.record.Persona {
 
   private URI base;
-  private PersistentIdentifier persistentId;
   private Links links;
 
+  /**
+   * The base uri for all relative links within the context of this persona.
+   *
+   * @return The base uri for all relative links within the context of this persona.
+   */
   @XmlAttribute (namespace = XMLConstants.XML_NS_URI)
   public URI getBase() {
     return base;
   }
 
+  /**
+   * The base uri for all relative links within the context of this persona.
+   *
+   * @param base The base uri for all relative links within the context of this persona.
+   */
   public void setBase(URI base) {
     this.base = base;
   }
 
-  public PersistentIdentifier getPersistentId() {
-    return persistentId;
-  }
-
-  public void setPersistentId(PersistentIdentifier persistentId) {
-    this.persistentId = persistentId;
-  }
-
+  /**
+   * The WWW links for this persona.
+   *
+   * @return The WWW links for this persona.
+   */
   public Links getLinks() {
     return links;
   }
 
+  /**
+   * The WWW links for this persona.
+   *
+   * @param links The WWW links for this persona.
+   */
   public void setLinks(Links links) {
     this.links = links;
   }

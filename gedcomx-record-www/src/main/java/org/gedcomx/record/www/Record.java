@@ -16,47 +16,57 @@
 package org.gedcomx.record.www;
 
 import org.gedcomx.www.Links;
-import org.gedcomx.www.PersistentIdentifier;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
 import java.net.URI;
 
 /**
+ * A record that can support WWW links.
+ * 
  * @author Ryan Heaton
  */
-@XmlRootElement (name = "record")
-@XmlType (name = "record")
+@XmlRootElement
 public class Record extends org.gedcomx.record.Record {
   //todo: override the accessors to return/set www fields?
 
   private URI base;
-  private PersistentIdentifier persistentId;
   private Links links;
 
+  /**
+   * The base uri for all relative links within the context of this record.
+   *
+   * @return The base uri for all relative links within the context of this record.
+   */
   @XmlAttribute (namespace = XMLConstants.XML_NS_URI)
   public URI getBase() {
     return base;
   }
 
+  /**
+   * The base uri for all relative links within the context of this record.
+   *
+   * @param base The base uri for all relative links within the context of this record.
+   */
   public void setBase(URI base) {
     this.base = base;
   }
 
-  public PersistentIdentifier getPersistentId() {
-    return persistentId;
-  }
-
-  public void setPersistentId(PersistentIdentifier persistentId) {
-    this.persistentId = persistentId;
-  }
-
+  /**
+   * The WWW links for this record.
+   *
+   * @return The WWW links for this record.
+   */
   public Links getLinks() {
     return links;
   }
 
+  /**
+   * The WWW links for this source.
+   *
+   * @param links The WWW links for this record.
+   */
   public void setLinks(Links links) {
     this.links = links;
   }

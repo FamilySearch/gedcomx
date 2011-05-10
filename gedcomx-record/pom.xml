@@ -35,6 +35,11 @@
   <dependencies>
     <dependency>
       <groupId>org.gedcomx</groupId>
+      <artifactId>gedcomx-id</artifactId>
+      <version>0.1.0.BUILD-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>org.gedcomx</groupId>
       <artifactId>gedcomx-source</artifactId>
       <version>0.1.0.BUILD-SNAPSHOT</version>
     </dependency>

@@ -13,22 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.types;
+package org.gedcomx.id;
 
-import org.codehaus.enunciate.qname.XmlQNameEnum;
-import org.codehaus.enunciate.qname.XmlUnknownQNameEnumValue;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
- * Enumeration of standard alternate id types.
- *
  * @author Ryan Heaton
  */
-@XmlQNameEnum
-public enum AlternateIdType {
+@XmlTransient
+public class IdConstants {
 
-  forwarded,
+  private IdConstants() {}
 
-  @XmlUnknownQNameEnumValue
-  other
+  public static final String GEDCOMX_ID_NAMESPACE = "http://gedcomx.org/id/v1";
 
 }

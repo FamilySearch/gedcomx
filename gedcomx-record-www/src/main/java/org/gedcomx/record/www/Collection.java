@@ -16,46 +16,56 @@
 package org.gedcomx.record.www;
 
 import org.gedcomx.www.Links;
-import org.gedcomx.www.PersistentIdentifier;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
 import java.net.URI;
 
 /**
+ * A collection that can support WWW links.
+ * 
  * @author Ryan Heaton
  */
-@XmlRootElement (name = "collection")
-@XmlType (name = "collection")
+@XmlRootElement
 public class Collection extends org.gedcomx.record.Collection {
 
   private URI base;
-  private PersistentIdentifier persistentId;
   private Links links;
 
+  /**
+   * The base uri for all relative links within the context of this collection.
+   *
+   * @return The base uri for all relative links within the context of this collection.
+   */
   @XmlAttribute (namespace = XMLConstants.XML_NS_URI)
   public URI getBase() {
     return base;
   }
 
+  /**
+   * The base uri for all relative links within the context of this collection.
+   *
+   * @param base The base uri for all relative links within the context of this collection.
+   */
   public void setBase(URI base) {
     this.base = base;
   }
 
-  public PersistentIdentifier getPersistentId() {
-    return persistentId;
-  }
-
-  public void setPersistentId(PersistentIdentifier persistentId) {
-    this.persistentId = persistentId;
-  }
-
+  /**
+   * The WWW links for this collection.
+   *
+   * @return The WWW links for this collection.
+   */
   public Links getLinks() {
     return links;
   }
 
+  /**
+   * The WWW links for this collection.
+   *
+   * @param links The WWW links for this collection.
+   */
   public void setLinks(Links links) {
     this.links = links;
   }

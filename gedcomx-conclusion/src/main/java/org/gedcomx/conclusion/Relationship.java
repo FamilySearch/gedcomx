@@ -16,6 +16,8 @@
 package org.gedcomx.conclusion;
 
 import org.gedcomx.attribution.AttributionReference;
+import org.gedcomx.id.AlternateId;
+import org.gedcomx.id.PersistentIdentifier;
 import org.gedcomx.source.AttributedSourceReference;
 
 import javax.xml.bind.annotation.*;
@@ -28,11 +30,12 @@ import java.util.List;
  * @author Ryan Heaton
  */
 @XmlType (
-  propOrder = {"alternateIds", "attribution", "events", "characteristics", "sources"}
+  propOrder = {"persistentId", "alternateIds", "attribution", "events", "characteristics", "sources"}
 )
 public abstract class Relationship {
 
   private String id;
+  private PersistentIdentifier persistentId;
   private List<AlternateId> alternateIds;
   private AttributionReference attribution;
   private Collection<Event> events;
@@ -57,6 +60,24 @@ public abstract class Relationship {
    */
   public void setId(String id) {
     this.id = id;
+  }
+
+  /**
+   * A long-term, persistent, globally unique identifier for this relationship.
+   *
+   * @return A long-term, persistent, globally unique identifier for this relationship.
+   */
+  public PersistentIdentifier getPersistentId() {
+    return persistentId;
+  }
+
+  /**
+   * A long-term, persistent, globally unique identifier for this relationship.
+   *
+   * @param persistentId A long-term, persistent, globally unique identifier for this relationship.
+   */
+  public void setPersistentId(PersistentIdentifier persistentId) {
+    this.persistentId = persistentId;
   }
 
   /**

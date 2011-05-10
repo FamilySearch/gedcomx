@@ -15,6 +15,9 @@
  */
 package org.gedcomx.record;
 
+import org.codehaus.enunciate.XmlQNameEnumUtil;
+import org.gedcomx.types.RelationshipRole;
+
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlID;
@@ -76,7 +79,6 @@ public abstract class Relationship {
    * @param persona1 A persona in the relationship. The name "persona1" is used only to distinguish it from
    * the other persona in this relationship and implies neither order nor role.
    */
-  @XmlTransient
   public void setPersona1(Persona persona1) {
     this.persona1 = persona1;
   }
@@ -98,6 +100,25 @@ public abstract class Relationship {
    */
   public void setRole1(QName role1) {
     this.role1 = role1;
+  }
+
+  /**
+   * The enum referencing the known role1, or {@link org.gedcomx.types.RelationshipRole#other} if not known.
+   *
+   * @return The enum referencing the known role1, or {@link org.gedcomx.types.RelationshipRole#other} if not known.
+   */
+  @XmlTransient
+  public RelationshipRole getKnownRole1() {
+    return XmlQNameEnumUtil.fromQName(getRole1(), RelationshipRole.class);
+  }
+
+  /**
+   * Set the role1 from an enumeration of known roles.
+   *
+   * @param role The role.
+   */
+  public void setKnownRole1(RelationshipRole role) {
+    this.role1 = XmlQNameEnumUtil.toQName(role);
   }
 
   /**
@@ -140,6 +161,25 @@ public abstract class Relationship {
    */
   public void setRole2(QName role2) {
     this.role2 = role2;
+  }
+
+  /**
+   * The enum referencing the known role2, or {@link org.gedcomx.types.RelationshipRole#other} if not known.
+   *
+   * @return The enum referencing the known role2, or {@link org.gedcomx.types.RelationshipRole#other} if not known.
+   */
+  @XmlTransient
+  public RelationshipRole getKnownRole2() {
+    return XmlQNameEnumUtil.fromQName(getRole2(), RelationshipRole.class);
+  }
+
+  /**
+   * Set the role2 from an enumeration of known roles.
+   *
+   * @param role The role.
+   */
+  public void setKnownRole2(RelationshipRole role) {
+    this.role2 = XmlQNameEnumUtil.toQName(role);
   }
 
   /**

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.conclusion.www;
+package org.gedcomx.record.www;
 
 import org.gedcomx.www.Links;
 
@@ -24,11 +24,11 @@ import java.net.URI;
 
 /**
  * A parent-child relationship that can support WWW links.
- *
+ * 
  * @author Ryan Heaton
  */
 @XmlRootElement
-public class ParentChildRelationship extends org.gedcomx.conclusion.ParentChildRelationship {
+public class ParentChildRelationship extends org.gedcomx.record.ParentChildRelationship {
 
   private URI base;
   private Links links;

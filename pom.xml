@@ -122,6 +122,7 @@
     <module>enunciate-gedcomx-support</module>
 
     <module>gedcomx-types</module>
+    <module>gedcomx-id</module>
     <module>gedcomx-attribution</module>
 
     <module>gedcomx-source</module>

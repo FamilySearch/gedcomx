@@ -18,6 +18,8 @@ package org.gedcomx.source;
 import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.enunciate.qname.XmlQNameEnumRef;
 import org.gedcomx.attribution.AttributionReference;
+import org.gedcomx.id.AlternateId;
+import org.gedcomx.id.PersistentIdentifier;
 import org.gedcomx.types.SourceType;
 
 import javax.xml.bind.annotation.*;
@@ -32,11 +34,12 @@ import java.util.List;
  */
 @XmlRootElement
 @XmlType (
-  propOrder =  {"alternateIds", "webLocation", "title", "note", "bibliographicCitation", "attribution"}
+  propOrder =  {"persistentId", "alternateIds", "webLocation", "title", "note", "bibliographicCitation", "attribution"}
 )
 public class Source {
 
   private String id;
+  private PersistentIdentifier persistentId;
   private List<AlternateId> alternateIds;
   private QName type;
   private URI webLocation;
@@ -102,6 +105,24 @@ public class Source {
    */
   public void setKnownType(SourceType knownType) {
     this.type = XmlQNameEnumUtil.toQName(knownType);
+  }
+
+  /**
+   * A long-term, persistent, globally unique identifier for this source.
+   *
+   * @return A long-term, persistent, globally unique identifier for this source.
+   */
+  public PersistentIdentifier getPersistentId() {
+    return persistentId;
+  }
+
+  /**
+   * A long-term, persistent, globally unique identifier for this source.
+   *
+   * @param persistentId A long-term, persistent, globally unique identifier for this source.
+   */
+  public void setPersistentId(PersistentIdentifier persistentId) {
+    this.persistentId = persistentId;
   }
 
   /**

@@ -13,11 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.source;
+package org.gedcomx.id;
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.enunciate.qname.XmlQNameEnumRef;
-import org.gedcomx.types.AlternateIdType;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlTransient;
@@ -25,7 +24,8 @@ import javax.xml.bind.annotation.XmlValue;
 import javax.xml.namespace.QName;
 
 /**
- * An alternate id for a source entity.
+ * An alternate id for an entity, such as the id in another system or
+ * an id prior to a merge operation.
  *
  * @author Ryan Heaton
  */
@@ -76,7 +76,7 @@ public class AlternateId {
   /**
    * The enum referencing a known alternate id type.
    *
-   * @return The enum referencing a known alternate id type, or {@link org.gedcomx.types.AlternateIdType#other} if not known.
+   * @return The enum referencing a known alternate id type, or {@link AlternateIdType#other} if not known.
    */
   @XmlTransient
   public AlternateIdType getKnownType() {

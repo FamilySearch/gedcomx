@@ -13,35 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.source.www;
-
-import org.gedcomx.www.Links;
 
 /**
- * A source reference that can support WWW links.
- *
- * @author Ryan Heaton
+ * The <b>id</b> profile provides the standard mechanisms for identifying genealogical entities.
  */
-public class SourceReference extends org.gedcomx.source.SourceReference {
+@XmlSchema(
+  namespace = IdConstants.GEDCOMX_ID_NAMESPACE,
+  elementFormDefault = XmlNsForm.QUALIFIED
+)
+package org.gedcomx.id;
 
-  private Links links;
-
-  /**
-   * The WWW links for this source reference.
-   *
-   * @return The WWW links for this reference.
-   */
-  public Links getLinks() {
-    return links;
-  }
-
-  /**
-   * The links.
-   *
-   * @param links The links.
-   */
-  public void setLinks(Links links) {
-    this.links = links;
-  }
-
-}
+import javax.xml.bind.annotation.XmlNsForm;
+import javax.xml.bind.annotation.XmlSchema;

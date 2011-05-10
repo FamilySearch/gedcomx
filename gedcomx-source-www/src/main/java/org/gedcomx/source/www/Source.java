@@ -16,12 +16,10 @@
 package org.gedcomx.source.www;
 
 import org.gedcomx.www.Links;
-import org.gedcomx.www.PersistentIdentifier;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
 import java.net.URI;
 
 /**
@@ -29,12 +27,10 @@ import java.net.URI;
  * 
  * @author Ryan Heaton
  */
-@XmlRootElement (name = "source")
-@XmlType (name = "source")
+@XmlRootElement
 public class Source extends org.gedcomx.source.Source {
 
   private URI base;
-  private PersistentIdentifier persistentId;
   private Links links;
 
   /**
@@ -54,24 +50,6 @@ public class Source extends org.gedcomx.source.Source {
    */
   public void setBase(URI base) {
     this.base = base;
-  }
-
-  /**
-   * A long-term, persistent, globally unique identifier for this source.
-   *
-   * @return A long-term, persistent, globally unique identifier for this source.
-   */
-  public PersistentIdentifier getPersistentId() {
-    return persistentId;
-  }
-
-  /**
-   * A long-term, persistent, globally unique identifier for this source.
-   *
-   * @param persistentId A long-term, persistent, globally unique identifier for this source.
-   */
-  public void setPersistentId(PersistentIdentifier persistentId) {
-    this.persistentId = persistentId;
   }
 
   /**

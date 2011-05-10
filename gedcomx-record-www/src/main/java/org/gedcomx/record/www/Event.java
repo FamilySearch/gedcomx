@@ -16,46 +16,31 @@
 package org.gedcomx.record.www;
 
 import org.gedcomx.www.Links;
-import org.gedcomx.www.PersistentIdentifier;
 
-import javax.xml.XMLConstants;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-import java.net.URI;
 
 /**
  * @author Ryan Heaton
  */
-@XmlRootElement (name = "event")
 @XmlType (name = "event")
 public class Event extends org.gedcomx.record.Event {
 
-  private URI base;
-  private PersistentIdentifier persistentId;
   private Links links;
 
-  @XmlAttribute (namespace = XMLConstants.XML_NS_URI)
-  public URI getBase() {
-    return base;
-  }
-
-  public void setBase(URI base) {
-    this.base = base;
-  }
-
-  public PersistentIdentifier getPersistentId() {
-    return persistentId;
-  }
-
-  public void setPersistentId(PersistentIdentifier persistentId) {
-    this.persistentId = persistentId;
-  }
-
+  /**
+   * The WWW links for this event.
+   *
+   * @return The WWW links for this event.
+   */
   public Links getLinks() {
     return links;
   }
 
+  /**
+   * The links.
+   *
+   * @param links The links.
+   */
   public void setLinks(Links links) {
     this.links = links;
   }

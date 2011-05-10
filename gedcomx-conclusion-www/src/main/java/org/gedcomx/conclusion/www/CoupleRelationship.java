@@ -16,12 +16,10 @@
 package org.gedcomx.conclusion.www;
 
 import org.gedcomx.www.Links;
-import org.gedcomx.www.PersistentIdentifier;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
 import java.net.URI;
 
 /**
@@ -29,12 +27,10 @@ import java.net.URI;
  *
  * @author Ryan Heaton
  */
-@XmlRootElement (name = "coupleRelationship")
-@XmlType (name = "coupleRelationship")
+@XmlRootElement
 public class CoupleRelationship extends org.gedcomx.conclusion.CoupleRelationship {
 
   private URI base;
-  private PersistentIdentifier persistentId;
   private Links links;
 
   /**
@@ -54,24 +50,6 @@ public class CoupleRelationship extends org.gedcomx.conclusion.CoupleRelationshi
    */
   public void setBase(URI base) {
     this.base = base;
-  }
-
-  /**
-   * A long-term, persistent, globally unique identifier for this relationship.
-   *
-   * @return A long-term, persistent, globally unique identifier for this relationship.
-   */
-  public PersistentIdentifier getPersistentId() {
-    return persistentId;
-  }
-
-  /**
-   * A long-term, persistent, globally unique identifier for this relationship.
-   *
-   * @param persistentId A long-term, persistent, globally unique identifier for this relationship.
-   */
-  public void setPersistentId(PersistentIdentifier persistentId) {
-    this.persistentId = persistentId;
   }
 
   /**

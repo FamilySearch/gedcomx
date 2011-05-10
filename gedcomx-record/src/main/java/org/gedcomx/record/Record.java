@@ -18,6 +18,8 @@ package org.gedcomx.record;
 import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.enunciate.qname.XmlQNameEnumRef;
 import org.gedcomx.attribution.AttributionReference;
+import org.gedcomx.id.AlternateId;
+import org.gedcomx.id.PersistentIdentifier;
 import org.gedcomx.source.SourceReference;
 import org.gedcomx.types.RecordType;
 
@@ -30,12 +32,13 @@ import java.util.List;
  */
 @XmlRootElement
 @XmlType (
-  propOrder = {"alternateIds", "attribution", "collection", "personas", "events", "relationships", "characteristics", "sources"}
+  propOrder = {"persistentId", "alternateIds", "attribution", "collection", "personas", "events", "relationships", "characteristics", "sources"}
 )
 public class Record {
 
   private String id;
   private QName type;
+  private PersistentIdentifier persistentId;
   private List<AlternateId> alternateIds;
   private AttributionReference attribution;
   private CollectionReference collection;
@@ -102,6 +105,25 @@ public class Record {
    */
   public void setKnownType(RecordType knownType) {
     this.type = XmlQNameEnumUtil.toQName(knownType);
+  }
+
+
+  /**
+   * A long-term, persistent, globally unique identifier for this record.
+   *
+   * @return A long-term, persistent, globally unique identifier for this record.
+   */
+  public PersistentIdentifier getPersistentId() {
+    return persistentId;
+  }
+
+  /**
+   * A long-term, persistent, globally unique identifier for this record.
+   *
+   * @param persistentId A long-term, persistent, globally unique identifier for this record.
+   */
+  public void setPersistentId(PersistentIdentifier persistentId) {
+    this.persistentId = persistentId;
   }
 
   /**
@@ -257,5 +279,4 @@ public class Record {
   public void setSources(List<SourceReference> sources) {
     this.sources = sources;
   }
-
 }

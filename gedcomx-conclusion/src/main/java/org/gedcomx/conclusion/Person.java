@@ -15,6 +15,8 @@
  */
 package org.gedcomx.conclusion;
 
+import org.gedcomx.id.AlternateId;
+import org.gedcomx.id.PersistentIdentifier;
 import org.gedcomx.source.AttributedSourceReference;
 
 import javax.xml.bind.annotation.*;
@@ -28,12 +30,13 @@ import java.util.List;
  */
 @XmlRootElement
 @XmlType (
-  propOrder = {"alternateIds", "gender", "names", "events", "characteristics", "relationships", "sources"}
+  propOrder = {"persistentId", "alternateIds", "gender", "names", "events", "characteristics", "relationships", "sources"}
 )
 public class Person {
 
   private String id;
   private List<AlternateId> alternateIds;
+  private PersistentIdentifier persistentId;
   private Gender gender;
   private Collection<Name> names;
   private Collection<Event> events;
@@ -59,6 +62,24 @@ public class Person {
    */
   public void setId(String id) {
     this.id = id;
+  }
+
+  /**
+   * A long-term, persistent, globally unique identifier for this person.
+   *
+   * @return A long-term, persistent, globally unique identifier for this person.
+   */
+  public PersistentIdentifier getPersistentId() {
+    return persistentId;
+  }
+
+  /**
+   * A long-term, persistent, globally unique identifier for this person.
+   *
+   * @param persistentId A long-term, persistent, globally unique identifier for this person.
+   */
+  public void setPersistentId(PersistentIdentifier persistentId) {
+    this.persistentId = persistentId;
   }
 
   /**
