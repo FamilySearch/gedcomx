@@ -42,6 +42,11 @@
         <artifactId>enunciate-core-rt</artifactId>
         <version>${enunciate.version}</version>
       </dependency>
+      <dependency>
+        <groupId>org.codehaus.jackson</groupId>
+        <artifactId>jackson-mapper-asl</artifactId>
+        <version>1.7.4</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 

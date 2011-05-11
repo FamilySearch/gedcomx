@@ -22,13 +22,14 @@
  */
 @XmlSchema(
   namespace = AttributionConstants.GEDCOMX_ATTRIBUTION_NAMESPACE,
-  elementFormDefault = XmlNsForm.QUALIFIED
+  elementFormDefault = XmlNsForm.QUALIFIED,
+  xmlns = {
+    @XmlNs( prefix = "gxa", namespaceURI = AttributionConstants.GEDCOMX_ATTRIBUTION_NAMESPACE),
+    @XmlNs( prefix = "xlink", namespaceURI = "http://www.w3.org/1999/xlink")
+  }
 )
 @XmlAccessorOrder ( XmlAccessOrder.ALPHABETICAL )
 package org.gedcomx.attribution;
 //todo: model attribution, contributor, contribution(?)
 
-import javax.xml.bind.annotation.XmlAccessOrder;
-import javax.xml.bind.annotation.XmlAccessorOrder;
-import javax.xml.bind.annotation.XmlNsForm;
-import javax.xml.bind.annotation.XmlSchema;
+import javax.xml.bind.annotation.*;

@@ -38,5 +38,12 @@
       <artifactId>gedcomx-types</artifactId>
       <version>0.1.0.BUILD-SNAPSHOT</version>
     </dependency>
+    
+    <dependency>
+      <groupId>org.codehaus.jackson</groupId>
+      <artifactId>jackson-mapper-asl</artifactId>
+
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 </project>
