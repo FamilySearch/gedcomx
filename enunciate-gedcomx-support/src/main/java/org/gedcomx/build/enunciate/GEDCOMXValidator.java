@@ -64,6 +64,9 @@ public class GEDCOMXValidator extends BaseValidator {
   public ValidationResult validateTypeDefinition(TypeDefinition typeDef) {
     ValidationResult result = new ValidationResult();
 
+    //todo: validate the @XmlSeeAlso for a QName enum so the namespace can be included.
+    //todo: validate the @XmlSeeAlso for a WWW extension so its subclasses can be correctly marshalled.
+
     if ("".equals(typeDef.getNamespace())) {
       result.addError(typeDef, "Type definition should not be in the empty namespace.");
     }
