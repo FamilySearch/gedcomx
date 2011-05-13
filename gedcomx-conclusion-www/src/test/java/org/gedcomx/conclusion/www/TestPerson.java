@@ -1,6 +1,6 @@
 package org.gedcomx.conclusion.www;
 
-import org.gedcomx.conclusion.GenderType;
+import org.gedcomx.types.GenderType;
 import org.gedcomx.www.Link;
 import org.gedcomx.www.Links;
 import org.testng.annotations.Test;
