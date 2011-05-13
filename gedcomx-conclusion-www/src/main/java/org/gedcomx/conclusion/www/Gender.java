@@ -15,6 +15,7 @@
  */
 package org.gedcomx.conclusion.www;
 
+import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.gedcomx.www.Links;
 
 import javax.xml.bind.annotation.XmlType;
@@ -25,6 +26,7 @@ import javax.xml.bind.annotation.XmlType;
  * @author Ryan Heaton
  */
 @XmlType (name = "gender")
+@JsonTypeInfo ( use =JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "@type")
 public class Gender extends org.gedcomx.conclusion.Gender {
   //todo: what are the implications of using this in the model? does it deserialize correctly? what about for json?
 

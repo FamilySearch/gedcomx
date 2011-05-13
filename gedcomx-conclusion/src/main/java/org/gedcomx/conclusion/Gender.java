@@ -15,6 +15,10 @@
  */
 package org.gedcomx.conclusion;
 
+import org.codehaus.jackson.annotate.JsonTypeInfo;
+import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
+import org.gedcomx.id.XmlTypeIdResolver;
+
 import javax.xml.bind.annotation.XmlAttribute;
 
 /**
@@ -22,6 +26,8 @@ import javax.xml.bind.annotation.XmlAttribute;
  *
  * @author Ryan Heaton
  */
+@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, include = JsonTypeInfo.As.PROPERTY, property = "@type")
+@JsonTypeIdResolver (XmlTypeIdResolver.class)
 public class Gender extends Conclusion {
 
   private GenderType type;

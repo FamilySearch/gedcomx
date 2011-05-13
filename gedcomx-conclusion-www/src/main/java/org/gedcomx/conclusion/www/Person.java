@@ -15,11 +15,15 @@
  */
 package org.gedcomx.conclusion.www;
 
+import org.codehaus.jackson.annotate.JsonSubTypes;
+import org.codehaus.jackson.annotate.JsonTypeInfo;
+import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.www.Links;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSeeAlso;
 import java.net.URI;
 
 /**
@@ -28,6 +32,8 @@ import java.net.URI;
  * @author Ryan Heaton
  */
 @XmlRootElement
+@XmlSeeAlso( {Gender.class} )
+@JsonTypeInfo ( use =JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "@class")
 public class Person extends org.gedcomx.conclusion.Person {
 
   private URI base;

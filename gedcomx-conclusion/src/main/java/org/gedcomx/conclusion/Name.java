@@ -21,6 +21,7 @@ import org.gedcomx.types.NameStyle;
 import org.gedcomx.types.NameType;
 
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.namespace.QName;
@@ -32,6 +33,7 @@ import java.util.List;
  * @author Ryan Heaton
  */
 @XmlType (propOrder = { "primaryForm", "alternateForms" })
+@XmlSeeAlso({NameType.class})
 public class Name extends Conclusion {
 
   private QName type;
