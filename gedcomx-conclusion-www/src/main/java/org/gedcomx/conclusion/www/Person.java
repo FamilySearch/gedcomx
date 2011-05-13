@@ -32,7 +32,7 @@ import java.net.URI;
  * @author Ryan Heaton
  */
 @XmlRootElement
-@XmlSeeAlso({Gender.class})
+@XmlSeeAlso({Characteristic.class, Event.class, Gender.class, Name.class })
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 public class Person extends org.gedcomx.conclusion.Person {

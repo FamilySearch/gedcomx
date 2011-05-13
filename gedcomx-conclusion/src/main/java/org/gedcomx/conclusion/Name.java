@@ -111,7 +111,7 @@ public class Name extends Conclusion {
    */
   @XmlTransient
   public NameStyle getKnownStyle() {
-    return XmlQNameEnumUtil.fromQName(getType(), NameStyle.class);
+    return XmlQNameEnumUtil.fromQName(getStyle(), NameStyle.class);
   }
 
   /**

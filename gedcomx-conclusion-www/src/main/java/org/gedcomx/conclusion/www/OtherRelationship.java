@@ -23,6 +23,7 @@ import org.gedcomx.www.Links;
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSeeAlso;
 import java.net.URI;
 
 /**
@@ -31,6 +32,7 @@ import java.net.URI;
  * @author Ryan Heaton
  */
 @XmlRootElement
+@XmlSeeAlso ({Characteristic.class, Event.class})
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 public class OtherRelationship extends org.gedcomx.conclusion.OtherRelationship {

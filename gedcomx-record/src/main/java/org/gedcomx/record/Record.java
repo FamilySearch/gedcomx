@@ -47,6 +47,8 @@ public class Record {
   private List<AlternateId> alternateIds;
   private AttributionReference attribution;
   private CollectionReference collection;
+
+  //todo: change to List<? extends Persona> when http://jira.codehaus.org/browse/ENUNCIATE-562 is fixed.
   private List<Persona> personas;
   private List<Event> events;
   private List<Relationship> relationships;

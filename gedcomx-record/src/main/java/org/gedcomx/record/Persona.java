@@ -21,9 +21,12 @@ import org.gedcomx.id.AlternateId;
 import org.gedcomx.id.PersistentIdentifier;
 import org.gedcomx.id.XmlTypeIdResolver;
 
-import javax.xml.bind.annotation.*;
-import java.util.*;
-import java.util.Collection;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlType;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A persona is the set of data about a person bounded by a single record.
@@ -40,9 +43,11 @@ public class Persona {
   private List<AlternateId> alternateIds;
   private Gender gender;
   private Age age;
-  private java.util.Collection<Name> names;
-  private java.util.Collection<EventRole> eventRoles = new ArrayList<EventRole>();
-  private java.util.Collection<Characteristic> characteristics = new ArrayList<Characteristic>();
+
+  //todo: change to List<? extends Name> when http://jira.codehaus.org/browse/ENUNCIATE-562 is fixed.
+  private java.util.List<Name> names;
+  private java.util.List<EventRole> eventRoles = new ArrayList<EventRole>();
+  private java.util.List<Characteristic> characteristics = new ArrayList<Characteristic>();
   private Boolean principal;
 
   /**
@@ -144,7 +149,7 @@ public class Persona {
    * @return The name conclusions for the persona.
    */
   @XmlElement(name="name")
-  public java.util.Collection<Name> getNames() {
+  public java.util.List<Name> getNames() {
     return names;
   }
 
@@ -153,7 +158,7 @@ public class Persona {
    *
    * @param names The name conclusions for the persona.
    */
-  public void setNames(java.util.Collection<Name> names) {
+  public void setNames(java.util.List<Name> names) {
     this.names = names;
   }
 
@@ -163,7 +168,7 @@ public class Persona {
    * @return The characteristic fields on this persona.
    */
   @XmlElement(name="characteristic")
-  public Collection<Characteristic> getCharacteristics() {
+  public List<Characteristic> getCharacteristics() {
     return characteristics;
   }
 
@@ -172,7 +177,7 @@ public class Persona {
    *
    * @param characteristics The characteristic fields on this persona.
    */
-  public void setCharacteristics(Collection<Characteristic> characteristics) {
+  public void setCharacteristics(List<Characteristic> characteristics) {
     this.characteristics = characteristics;
   }
 
@@ -182,7 +187,7 @@ public class Persona {
    * @return The roles this persona plays in the events of the record.
    */
   @XmlElement(name = "eventRole")
-  public Collection<EventRole> getEventRoles() {
+  public List<EventRole> getEventRoles() {
     return eventRoles;
   }
 
@@ -191,7 +196,7 @@ public class Persona {
    *
    * @param eventRoles The roles this persona plays in the events of the record.
    */
-  public void setEventRoles(Collection<EventRole> eventRoles) {
+  public void setEventRoles(List<EventRole> eventRoles) {
     this.eventRoles = eventRoles;
   }
 

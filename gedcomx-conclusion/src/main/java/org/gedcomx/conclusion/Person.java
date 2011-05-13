@@ -23,7 +23,6 @@ import org.gedcomx.id.XmlTypeIdResolver;
 import org.gedcomx.source.AttributedSourceReference;
 
 import javax.xml.bind.annotation.*;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -43,11 +42,13 @@ public class Person {
   private List<AlternateId> alternateIds;
   private PersistentIdentifier persistentId;
   private Gender gender;
-  private Collection<Name> names;
-  private Collection<Event> events;
-  private Collection<Characteristic> characteristics;
-  private Collection<RelationshipReference> relationships;
-  private Collection<AttributedSourceReference> sources;
+
+  //todo: change to List<? extends Name> when http://jira.codehaus.org/browse/ENUNCIATE-562 is fixed.
+  private List<Name> names;
+  private List<Event> events;
+  private List<Characteristic> characteristics;
+  private List<RelationshipReference> relationships;
+  private List<AttributedSourceReference> sources;
 
   /**
    * The id of the person, unique to the context and not necessarily globally unique.
@@ -130,7 +131,7 @@ public class Person {
    * @return The name conclusions for the person.
    */
   @XmlElement(name="name")
-  public Collection<Name> getNames() {
+  public List<Name> getNames() {
     return names;
   }
 
@@ -139,7 +140,7 @@ public class Person {
    *
    * @param names The name conclusions for the person.
    */
-  public void setNames(Collection<Name> names) {
+  public void setNames(List<Name> names) {
     this.names = names;
   }
 
@@ -149,7 +150,7 @@ public class Person {
    * @return The event conclusions for the person.
    */
   @XmlElement(name="event")
-  public Collection<Event> getEvents() {
+  public List<Event> getEvents() {
     return events;
   }
 
@@ -158,7 +159,7 @@ public class Person {
    *
    * @param events The event conclusions for the person.
    */
-  public void setEvents(Collection<Event> events) {
+  public void setEvents(List<Event> events) {
     this.events = events;
   }
 
@@ -168,7 +169,7 @@ public class Person {
    * @return The characteristic conclusions for the person.
    */
   @XmlElement(name="characteristic")
-  public Collection<Characteristic> getCharacteristics() {
+  public List<Characteristic> getCharacteristics() {
     return characteristics;
   }
 
@@ -177,7 +178,7 @@ public class Person {
    *
    * @param characteristics The characteristic conclusions for the person.
    */
-  public void setCharacteristics(Collection<Characteristic> characteristics) {
+  public void setCharacteristics(List<Characteristic> characteristics) {
     this.characteristics = characteristics;
   }
 
@@ -187,7 +188,7 @@ public class Person {
    * @return The references to the relationships of the person.
    */
   @XmlElement(name="relationship")
-  public Collection<RelationshipReference> getRelationships() {
+  public List<RelationshipReference> getRelationships() {
     return relationships;
   }
 
@@ -196,7 +197,7 @@ public class Person {
    *
    * @param relationships The references to the relationships of the person.
    */
-  public void setRelationships(Collection<RelationshipReference> relationships) {
+  public void setRelationships(List<RelationshipReference> relationships) {
     this.relationships = relationships;
   }
 
@@ -206,7 +207,7 @@ public class Person {
    * @return The sources for the conclusions about this person.
    */
   @XmlElement(name="source")
-  public Collection<AttributedSourceReference> getSources() {
+  public List<AttributedSourceReference> getSources() {
     return sources;
   }
 
@@ -215,7 +216,7 @@ public class Person {
    *
    * @param sources The sources for the conclusions about this person.
    */
-  public void setSources(Collection<AttributedSourceReference> sources) {
+  public void setSources(List<AttributedSourceReference> sources) {
     this.sources = sources;
   }
 }

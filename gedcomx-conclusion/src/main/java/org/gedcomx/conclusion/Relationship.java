@@ -24,7 +24,6 @@ import org.gedcomx.id.XmlTypeIdResolver;
 import org.gedcomx.source.AttributedSourceReference;
 
 import javax.xml.bind.annotation.*;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -43,9 +42,11 @@ public abstract class Relationship {
   private PersistentIdentifier persistentId;
   private List<AlternateId> alternateIds;
   private AttributionReference attribution;
-  private Collection<Event> events;
-  private Collection<Characteristic> characteristics;
-  private Collection<AttributedSourceReference> sources;
+
+  //todo: change to Collection<? extends Event> when http://jira.codehaus.org/browse/ENUNCIATE-562 is fixed.
+  private List<Event> events;
+  private List<Characteristic> characteristics;
+  private List<AttributedSourceReference> sources;
 
   /**
    * The id of the relationship, unique to the context and not necessarily globally unique.
@@ -128,7 +129,7 @@ public abstract class Relationship {
    * @return The event conclusions for the relationship.
    */
   @XmlElement(name="event")
-  public Collection<Event> getEvents() {
+  public List<Event> getEvents() {
     return events;
   }
 
@@ -137,7 +138,7 @@ public abstract class Relationship {
    *
    * @param events The event conclusions for the relationship.
    */
-  public void setEvents(Collection<Event> events) {
+  public void setEvents(List<Event> events) {
     this.events = events;
   }
 
@@ -147,7 +148,7 @@ public abstract class Relationship {
    * @return The characteristic conclusions for the relationship.
    */
   @XmlElement(name="characteristic")
-  public Collection<Characteristic> getCharacteristics() {
+  public List<Characteristic> getCharacteristics() {
     return characteristics;
   }
 
@@ -156,7 +157,7 @@ public abstract class Relationship {
    *
    * @param characteristics The characteristic conclusions for the relationship.
    */
-  public void setCharacteristics(Collection<Characteristic> characteristics) {
+  public void setCharacteristics(List<Characteristic> characteristics) {
     this.characteristics = characteristics;
   }
 
@@ -166,7 +167,7 @@ public abstract class Relationship {
    * @return The sources for the conclusions about this relationship.
    */
   @XmlElement(name="source")
-  public Collection<AttributedSourceReference> getSources() {
+  public List<AttributedSourceReference> getSources() {
     return sources;
   }
 
@@ -175,7 +176,7 @@ public abstract class Relationship {
    *
    * @param sources The sources for the conclusions about this relationship.
    */
-  public void setSources(Collection<AttributedSourceReference> sources) {
+  public void setSources(List<AttributedSourceReference> sources) {
     this.sources = sources;
   }
 
