@@ -1,5 +1,6 @@
 package org.gedcomx.attribution;
 
+import org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.SerializationConfig;
 import org.testng.annotations.Test;
@@ -71,12 +72,12 @@ public class TestAttributionReference {
 
   @SuppressWarnings ( {"unchecked"} )
   private <C> C processThroughJson(C reference, Class<? extends C> instanceClass) throws IOException {
-    ObjectMapper mapper = new ObjectMapper();
+    ObjectMapper mapper = new JacksonJaxbJsonProvider().locateMapper(instanceClass, null);
     ByteArrayOutputStream out = new ByteArrayOutputStream();
     mapper.getSerializationConfig().enable(SerializationConfig.Feature.INDENT_OUTPUT);
     mapper.writeValue(out, reference);
     if ("true".equals(System.getProperty("show.output"))) {
-      System.out.println(new String(out.toByteArray(),"utf-8"));
+      System.out.println(new String(out.toByteArray(), "utf-8"));
     }
     reference = mapper.readValue(new ByteArrayInputStream(out.toByteArray()), instanceClass);
     return reference;

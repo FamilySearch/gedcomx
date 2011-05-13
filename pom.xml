@@ -27,6 +27,16 @@
       <artifactId>enunciate-core-rt</artifactId>
       <version>${enunciate.version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.codehaus.jackson</groupId>
+      <artifactId>jackson-jaxrs</artifactId>
+      <version>1.8.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.jackson</groupId>
+      <artifactId>jackson-xc</artifactId>
+      <version>1.8.0</version>
+    </dependency>
   </dependencies>
 
   <scm>
@@ -34,21 +44,6 @@
     <developerConnection>scm:svn:https://vcs.fsglobal.net/svn/model/gedcomx/trunk</developerConnection>
     <url>https://vcs.fsglobal.net/svn/model/gedcomx/trunk</url>
   </scm>
-
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>org.codehaus.enunciate</groupId>
-        <artifactId>enunciate-core-rt</artifactId>
-        <version>${enunciate.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.codehaus.jackson</groupId>
-        <artifactId>jackson-mapper-asl</artifactId>
-        <version>1.7.4</version>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
 
   <build>
     <plugins>
