@@ -15,16 +15,18 @@
  */
 package org.gedcomx.conclusion.www;
 
+import org.codehaus.jackson.annotate.JsonTypeInfo;
+import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
+import org.gedcomx.id.XmlTypeIdResolver;
 import org.gedcomx.www.Links;
-
-import javax.xml.bind.annotation.XmlType;
 
 /**
  * A lineage conclusion that can support WWW links.
  *
  * @author Ryan Heaton
  */
-@XmlType (name = "lineage")
+@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
+@JsonTypeIdResolver (XmlTypeIdResolver.class)
 public class Lineage extends org.gedcomx.conclusion.Lineage {
   //todo: what are the implications of using this in the model? does it deserialize correctly? what about for json?
 

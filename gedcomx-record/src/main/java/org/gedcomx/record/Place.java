@@ -15,10 +15,16 @@
  */
 package org.gedcomx.record;
 
+import org.codehaus.jackson.annotate.JsonTypeInfo;
+import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
+import org.gedcomx.id.XmlTypeIdResolver;
+
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import java.util.List;
 
+@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
+@JsonTypeIdResolver (XmlTypeIdResolver.class)
 public class Place extends Field {
 
   private List<PlacePart> parts;

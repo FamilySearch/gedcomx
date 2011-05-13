@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlAttribute;
  * 
  * @author Ryan Heaton
  */
-public class GeoCode {
+public final class GeoCode {
 
   private float longitude;
   private float latitude;

@@ -15,8 +15,11 @@
  */
 package org.gedcomx.record;
 
+import org.codehaus.jackson.annotate.JsonTypeInfo;
+import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.id.AlternateId;
 import org.gedcomx.id.PersistentIdentifier;
+import org.gedcomx.id.XmlTypeIdResolver;
 
 import javax.xml.bind.annotation.*;
 import java.util.*;
@@ -28,6 +31,8 @@ import java.util.Collection;
 @XmlType (
   propOrder = {"persistentId", "alternateIds", "gender", "age", "names", "eventRoles", "characteristics"}
 )
+@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
+@JsonTypeIdResolver (XmlTypeIdResolver.class)
 public class Persona {
 
   private String id;

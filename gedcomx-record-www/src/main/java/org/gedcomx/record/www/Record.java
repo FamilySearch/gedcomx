@@ -15,6 +15,9 @@
  */
 package org.gedcomx.record.www;
 
+import org.codehaus.jackson.annotate.JsonTypeInfo;
+import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
+import org.gedcomx.id.XmlTypeIdResolver;
 import org.gedcomx.www.Links;
 
 import javax.xml.XMLConstants;
@@ -28,6 +31,8 @@ import java.net.URI;
  * @author Ryan Heaton
  */
 @XmlRootElement
+@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
+@JsonTypeIdResolver (XmlTypeIdResolver.class)
 public class Record extends org.gedcomx.record.Record {
   //todo: override the accessors to return/set www fields?
 

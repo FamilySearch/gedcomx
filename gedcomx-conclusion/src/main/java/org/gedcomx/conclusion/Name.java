@@ -17,6 +17,9 @@ package org.gedcomx.conclusion;
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.enunciate.qname.XmlQNameEnumRef;
+import org.codehaus.jackson.annotate.JsonTypeInfo;
+import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
+import org.gedcomx.id.XmlTypeIdResolver;
 import org.gedcomx.types.NameStyle;
 import org.gedcomx.types.NameType;
 
@@ -33,7 +36,8 @@ import java.util.List;
  * @author Ryan Heaton
  */
 @XmlType (propOrder = { "primaryForm", "alternateForms" })
-@XmlSeeAlso({NameType.class})
+@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
+@JsonTypeIdResolver (XmlTypeIdResolver.class)
 public class Name extends Conclusion {
 
   private QName type;

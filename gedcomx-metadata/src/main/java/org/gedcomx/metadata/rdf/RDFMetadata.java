@@ -15,9 +15,14 @@
  */
 package org.gedcomx.metadata.rdf;
 
+import org.codehaus.jackson.annotate.JsonTypeInfo;
+import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
+import org.gedcomx.id.XmlTypeIdResolver;
+
 import javax.xml.bind.annotation.XmlAnyAttribute;
 import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlID;
 import javax.xml.namespace.QName;
 import java.net.URI;
 import java.util.List;
@@ -26,6 +31,8 @@ import java.util.Map;
 /**
  * @author Ryan Heaton
  */
+@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
+@JsonTypeIdResolver (XmlTypeIdResolver.class)
 public class RDFMetadata {
 
   private String id; 
@@ -34,6 +41,7 @@ public class RDFMetadata {
   private List<Object> otherElements;
 
   @XmlAttribute( name = "ID" )
+  @XmlID
   public String getId() {
     return id;
   }

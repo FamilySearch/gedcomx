@@ -15,13 +15,18 @@
  */
 package org.gedcomx.source;
 
+import org.codehaus.jackson.annotate.JsonTypeInfo;
+import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.attribution.AttributionReference;
+import org.gedcomx.id.XmlTypeIdResolver;
 
 /**
  * A source reference that can be attributed.
  *
  * @author Ryan Heaton
  */
+@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
+@JsonTypeIdResolver (XmlTypeIdResolver.class)
 public class AttributedSourceReference extends SourceReference {
 
   private AttributionReference attribution;

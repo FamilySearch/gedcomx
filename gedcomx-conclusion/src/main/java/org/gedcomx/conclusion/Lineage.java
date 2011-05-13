@@ -17,6 +17,9 @@ package org.gedcomx.conclusion;
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.enunciate.qname.XmlQNameEnumRef;
+import org.codehaus.jackson.annotate.JsonTypeInfo;
+import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
+import org.gedcomx.id.XmlTypeIdResolver;
 import org.gedcomx.types.LineageType;
 
 import javax.xml.bind.annotation.XmlAttribute;
@@ -28,6 +31,8 @@ import javax.xml.namespace.QName;
  *
  * @author Ryan Heaton
  */
+@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
+@JsonTypeIdResolver (XmlTypeIdResolver.class)
 public class Lineage extends Conclusion {
 
   private QName type;

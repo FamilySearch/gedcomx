@@ -17,9 +17,12 @@ package org.gedcomx.record;
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.enunciate.qname.XmlQNameEnumRef;
+import org.codehaus.jackson.annotate.JsonTypeInfo;
+import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.attribution.AttributionReference;
 import org.gedcomx.id.AlternateId;
 import org.gedcomx.id.PersistentIdentifier;
+import org.gedcomx.id.XmlTypeIdResolver;
 import org.gedcomx.source.SourceReference;
 import org.gedcomx.types.RecordType;
 
@@ -34,6 +37,8 @@ import java.util.List;
 @XmlType (
   propOrder = {"persistentId", "alternateIds", "attribution", "collection", "personas", "events", "relationships", "characteristics", "sources"}
 )
+@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
+@JsonTypeIdResolver (XmlTypeIdResolver.class)
 public class Record {
 
   private String id;

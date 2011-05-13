@@ -15,6 +15,9 @@
  */
 package org.gedcomx.record.www;
 
+import org.codehaus.jackson.annotate.JsonTypeInfo;
+import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
+import org.gedcomx.id.XmlTypeIdResolver;
 import org.gedcomx.www.Links;
 
 /**
@@ -22,6 +25,8 @@ import org.gedcomx.www.Links;
  *
  * @author Ryan Heaton
  */
+@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
+@JsonTypeIdResolver (XmlTypeIdResolver.class)
 public class Characteristic extends org.gedcomx.record.Characteristic {
 
   private Links links;

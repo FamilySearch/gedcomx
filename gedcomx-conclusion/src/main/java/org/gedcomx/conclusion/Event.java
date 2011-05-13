@@ -18,6 +18,9 @@ package org.gedcomx.conclusion;
 import org.codehaus.enunciate.ClientName;
 import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.enunciate.qname.XmlQNameEnumRef;
+import org.codehaus.jackson.annotate.JsonTypeInfo;
+import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
+import org.gedcomx.id.XmlTypeIdResolver;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlTransient;
@@ -29,6 +32,8 @@ import javax.xml.namespace.QName;
  * @author Ryan Heaton
  */
 @ClientName ("EventInfo")
+@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
+@JsonTypeIdResolver (XmlTypeIdResolver.class)
 public class Event extends Conclusion {
 
   private QName type;

@@ -17,11 +17,16 @@ package org.gedcomx.build.enunciate;
 
 import com.sun.mirror.type.DeclaredType;
 import com.sun.mirror.type.EnumType;
+import com.sun.mirror.type.MirroredTypeException;
 import com.sun.mirror.type.TypeMirror;
 import org.codehaus.enunciate.contract.jaxb.*;
+import org.codehaus.enunciate.contract.jaxb.types.XmlClassType;
+import org.codehaus.enunciate.contract.jaxb.types.XmlType;
 import org.codehaus.enunciate.contract.validation.BaseValidator;
 import org.codehaus.enunciate.contract.validation.ValidationResult;
 import org.codehaus.enunciate.qname.XmlQNameEnum;
+import org.codehaus.jackson.annotate.JsonTypeInfo;
+import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 
 import javax.xml.namespace.QName;
 import java.util.Collection;
@@ -33,7 +38,52 @@ public class GEDCOMXValidator extends BaseValidator {
 
   @Override
   public ValidationResult validateComplexType(ComplexTypeDefinition complexType) {
-    return validateTypeDefinition(complexType);
+    ValidationResult result = validateTypeDefinition(complexType);
+    if (!complexType.isFinal() && !complexType.isAbstract()) {
+      //validate the json type info.
+      JsonTypeInfo jsonTypeInfo = complexType.getAnnotation(JsonTypeInfo.class);
+      if (jsonTypeInfo == null || jsonTypeInfo.include() != JsonTypeInfo.As.PROPERTY || jsonTypeInfo.use() != JsonTypeInfo.Id.CUSTOM || !"@type".equals(jsonTypeInfo.property())) {
+        result.addError(complexType, "Non-final, non-abstract complex types need to be annotated with @JsonTypeInfo(use=JsonTypeInfo.Id.CUSTOM, property=\"@type\")");
+      }
+
+      String idResolverName = "";
+      JsonTypeIdResolver typeIdResolverInfo = complexType.getAnnotation(JsonTypeIdResolver.class);
+      if (typeIdResolverInfo != null) {
+        try {
+          idResolverName = typeIdResolverInfo.value().getName();
+        }
+        catch (MirroredTypeException e) {
+          idResolverName = ((DeclaredType) e.getTypeMirror()).getDeclaration().getQualifiedName();
+        }
+      }
+
+      if (!"org.gedcomx.id.XmlTypeIdResolver".equals(idResolverName)) {
+        result.addError(complexType, "Non-final, non-abstract complex types need to be annotated with @org.codehaus.jackson.map.annotate.JsonTypeIdResolver(org.gedcomx.id.XmlTypeIdResolver.class) to specify their JSON type id.");
+      }
+
+      if (!hasIdAttribute(complexType)) {
+        result.addWarning(complexType, "Non-final, non-abstract complex types might need to have an 'id' attribute so they can be referenced.");
+      }
+    }
+    return result;
+  }
+
+  protected boolean hasIdAttribute(ComplexTypeDefinition complexType) {
+    boolean idAttributeFound = false;
+    for (Attribute attribute : complexType.getAttributes()) {
+      if (attribute.isXmlID()) {
+        idAttributeFound = true;
+        break;
+      }
+    }
+    XmlType baseType = complexType.getBaseType();
+    if (baseType instanceof XmlClassType) {
+      TypeDefinition typeDefinition = ((XmlClassType) baseType).getTypeDefinition();
+      if (typeDefinition.isComplex()) {
+        idAttributeFound = hasIdAttribute((ComplexTypeDefinition) typeDefinition);
+      }
+    }
+    return idAttributeFound;
   }
 
   @Override
@@ -82,7 +132,7 @@ public class GEDCOMXValidator extends BaseValidator {
           result.addError(attribute, "Entity links should be make with an attribute named 'href' in the 'http://www.w3.org/1999/xlink' namespace.");
         }
 
-        if ("id".equals(attribute.getName()) && !attribute.isXmlID()) {
+        if ("id".equalsIgnoreCase(attribute.getName()) && !attribute.isXmlID()) {
           result.addError(attribute, "Id attributes should be annotated as @XmlID.");
         }
 

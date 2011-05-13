@@ -23,7 +23,7 @@ import java.net.URI;
  *
  * @author Ryan Heaton
  */
-public class AttributionReference {
+public final class AttributionReference {
 
   private URI href;
 

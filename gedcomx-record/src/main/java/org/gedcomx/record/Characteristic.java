@@ -18,6 +18,9 @@ package org.gedcomx.record;
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.enunciate.qname.XmlQNameEnumRef;
+import org.codehaus.jackson.annotate.JsonTypeInfo;
+import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
+import org.gedcomx.id.XmlTypeIdResolver;
 import org.gedcomx.types.CharacteristicType;
 
 import javax.xml.bind.annotation.XmlAttribute;
@@ -27,6 +30,8 @@ import javax.xml.namespace.QName;
 /**
  * A field specifying a characteristic about a record, persona, or relationship.
  */
+@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
+@JsonTypeIdResolver (XmlTypeIdResolver.class)
 public class Characteristic extends Field {
 
   private QName type;

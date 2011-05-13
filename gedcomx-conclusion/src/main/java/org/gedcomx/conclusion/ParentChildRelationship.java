@@ -15,6 +15,10 @@
  */
 package org.gedcomx.conclusion;
 
+import org.codehaus.jackson.annotate.JsonTypeInfo;
+import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
+import org.gedcomx.id.XmlTypeIdResolver;
+
 import javax.xml.bind.annotation.XmlTransient;
 import java.util.Arrays;
 import java.util.List;
@@ -24,6 +28,8 @@ import java.util.List;
  *
  * @author Ryan Heaton
  */
+@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
+@JsonTypeIdResolver (XmlTypeIdResolver.class)
 public class ParentChildRelationship extends Relationship {
 
   private PersonReference parent1;

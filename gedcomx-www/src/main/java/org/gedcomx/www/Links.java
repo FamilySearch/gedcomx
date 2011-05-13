@@ -28,7 +28,7 @@ import java.util.List;
  *
  * @author Ryan Heaton
  */
-public class Links {
+public final class Links {
 
   private List<Link> links;
   private URI base;

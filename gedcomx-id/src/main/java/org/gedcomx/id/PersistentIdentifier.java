@@ -29,7 +29,7 @@ import java.net.URI;
  *
  * @author Ryan Heaton
  */
-public class PersistentIdentifier {
+public final class PersistentIdentifier {
 
   private QName type;
   private URI value;

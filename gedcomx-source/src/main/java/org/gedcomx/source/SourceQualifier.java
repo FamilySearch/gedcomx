@@ -27,7 +27,7 @@ import java.util.Map;
  *
  * @author Ryan Heaton
  */
-public class SourceQualifier {
+public final class SourceQualifier {
 
   private Map<QName, String> properties;
 

@@ -21,7 +21,7 @@ import org.codehaus.enunciate.ClientName;
  * A concluded genealogical date.
  */
 @ClientName ("DateInfo")
-public class Date {
+public final class Date {
 
   private String original;
   private String normalized;

@@ -15,9 +15,12 @@
  */
 package org.gedcomx.conclusion;
 
+import org.codehaus.jackson.annotate.JsonTypeInfo;
+import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.attribution.AttributionReference;
 import org.gedcomx.id.AlternateId;
 import org.gedcomx.id.PersistentIdentifier;
+import org.gedcomx.id.XmlTypeIdResolver;
 import org.gedcomx.source.AttributedSourceReference;
 
 import javax.xml.bind.annotation.*;
@@ -32,6 +35,8 @@ import java.util.List;
 @XmlType (
   propOrder = {"persistentId", "alternateIds", "attribution", "events", "characteristics", "sources"}
 )
+@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
+@JsonTypeIdResolver (XmlTypeIdResolver.class)
 public abstract class Relationship {
 
   private String id;

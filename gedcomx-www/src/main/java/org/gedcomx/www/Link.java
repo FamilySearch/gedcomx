@@ -25,7 +25,7 @@ import java.net.URI;
  *
  * @author Ryan Heaton
  */
-public class Link {
+public final class Link {
 
   private QName rel;
   private URI href;

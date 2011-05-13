@@ -25,7 +25,7 @@ import javax.xml.namespace.QName;
  *
  * @author Ryan Heaton
  */
-public class DublinCoreTypeProperty extends DublinCoreProperty<QName> {
+public final class DublinCoreTypeProperty extends DublinCoreProperty<QName> {
 
   private QName value;
 

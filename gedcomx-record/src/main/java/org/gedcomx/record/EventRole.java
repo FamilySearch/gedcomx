@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlIDREF;
 /**
  * A role played by a persona in a recorded event.
  */
-public class EventRole {
+public final class EventRole {
 
   private String description;
   private Event event;

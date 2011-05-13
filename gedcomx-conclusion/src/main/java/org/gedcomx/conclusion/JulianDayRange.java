@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlAttribute;
  *
  * @author Ryan Heaton
  */
-public class JulianDayRange {
+public final class JulianDayRange {
 
   private int earliest;
   private int latest;

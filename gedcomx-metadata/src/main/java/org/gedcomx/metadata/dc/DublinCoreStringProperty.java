@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlValue;
  *
  * @author Ryan Heaton
  */
-public class DublinCoreStringProperty extends DublinCoreProperty<String> {
+public final class DublinCoreStringProperty extends DublinCoreProperty<String> {
 
   private String value;
 

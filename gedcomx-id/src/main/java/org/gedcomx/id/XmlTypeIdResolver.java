@@ -21,14 +21,18 @@ import org.codehaus.jackson.map.type.SimpleType;
 import org.codehaus.jackson.type.JavaType;
 
 import javax.xml.bind.annotation.XmlSchema;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.namespace.QName;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
+ * JSON type id resolver for supporting <a href="http://wiki.fasterxml.com/JacksonPolymorphicDeserialization ">polymorphic type handling</a> in JSON.
+ *
  * @author Ryan Heaton
  */
+@XmlTransient
 public class XmlTypeIdResolver implements TypeIdResolver {
 
   private static final Map<String, JavaType> ID_TO_TYPE = new ConcurrentHashMap<String, JavaType>();

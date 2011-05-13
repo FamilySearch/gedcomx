@@ -23,7 +23,7 @@ import java.util.Date;
  *
  * @author Ryan Heaton
  */
-public class DublinCoreDateProperty extends DublinCoreProperty<Date> {
+public final class DublinCoreDateProperty extends DublinCoreProperty<Date> {
 
   private Date value;
 

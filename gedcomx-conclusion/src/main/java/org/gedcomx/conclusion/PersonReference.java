@@ -29,7 +29,7 @@ import java.net.URI;
  *
  * @author Ryan Heaton
  */
-public class PersonReference {
+public final class PersonReference {
 
   private QName role;
   private URI href;

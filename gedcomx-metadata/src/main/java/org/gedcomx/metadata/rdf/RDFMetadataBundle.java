@@ -15,10 +15,11 @@
  */
 package org.gedcomx.metadata.rdf;
 
-import javax.xml.bind.annotation.XmlAnyAttribute;
-import javax.xml.bind.annotation.XmlAnyElement;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import org.codehaus.jackson.annotate.JsonTypeInfo;
+import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
+import org.gedcomx.id.XmlTypeIdResolver;
+
+import javax.xml.bind.annotation.*;
 import javax.xml.namespace.QName;
 import java.util.List;
 import java.util.Map;
@@ -29,11 +30,34 @@ import java.util.Map;
  * @author Ryan Heaton
  */
 @XmlRootElement(name = "RDF")
+@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
+@JsonTypeIdResolver (XmlTypeIdResolver.class)
 public class RDFMetadataBundle {
 
+  private String id;
   private List<RDFMetadata> metadataList;
   private Map<QName, String> otherAttributes;
   private List<Object> otherElements;
+
+  /**
+   * The id of this bundle.
+   *
+   * @return The id of this bundle.
+   */
+  @XmlAttribute ( name = "ID" )
+  @XmlID
+  public String getId() {
+    return id;
+  }
+
+  /**
+   * The id of this bundle.
+   *
+   * @param id The id of this bundle.
+   */
+  public void setId(String id) {
+    this.id = id;
+  }
 
   /**
    * The list of items in this bundle of metadata.

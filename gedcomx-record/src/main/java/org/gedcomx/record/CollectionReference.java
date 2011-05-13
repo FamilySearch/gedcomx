@@ -23,7 +23,7 @@ import java.net.URI;
  *
  * @author Ryan Heaton
  */
-public class CollectionReference {
+public final class CollectionReference {
 
   private URI href;
   private String sortValue;

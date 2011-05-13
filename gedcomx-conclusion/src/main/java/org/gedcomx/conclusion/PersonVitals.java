@@ -15,6 +15,10 @@
  */
 package org.gedcomx.conclusion;
 
+import org.codehaus.jackson.annotate.JsonTypeInfo;
+import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
+import org.gedcomx.id.XmlTypeIdResolver;
+
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlType;
@@ -25,7 +29,9 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType (
   propOrder = {"name", "gender", "birth", "christening", "death", "burial"}
 )
-public class PersonVitals {
+@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
+@JsonTypeIdResolver (XmlTypeIdResolver.class)
+public final class PersonVitals {
 
   private String id;
   private Name name;

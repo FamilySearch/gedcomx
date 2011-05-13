@@ -31,7 +31,7 @@ import java.util.List;
  *
  * @author Ryan Heaton
  */
-public class NameForm {
+public final class NameForm {
 
   private QName script;
   private String fullText;

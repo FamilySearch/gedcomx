@@ -28,7 +28,7 @@ import javax.xml.namespace.QName;
  *
  * @author Ryan Heaton
  */
-public class NamePart {
+public final class NamePart {
 
   private QName type;
   private String text;

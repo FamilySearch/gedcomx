@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlType;
  * @author Ryan Heaton
  */
 @XmlType (propOrder = {"original", "normalized", "geoCode"})
-public class Place {
+public final class Place {
 
   private String original;
   private String normalized;

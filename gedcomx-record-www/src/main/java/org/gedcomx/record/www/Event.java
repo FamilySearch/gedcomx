@@ -15,6 +15,9 @@
  */
 package org.gedcomx.record.www;
 
+import org.codehaus.jackson.annotate.JsonTypeInfo;
+import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
+import org.gedcomx.id.XmlTypeIdResolver;
 import org.gedcomx.www.Links;
 
 import javax.xml.bind.annotation.XmlType;
@@ -23,6 +26,8 @@ import javax.xml.bind.annotation.XmlType;
  * @author Ryan Heaton
  */
 @XmlType (name = "event")
+@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
+@JsonTypeIdResolver (XmlTypeIdResolver.class)
 public class Event extends org.gedcomx.record.Event {
 
   private Links links;

@@ -17,6 +17,9 @@ package org.gedcomx.record;
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.enunciate.qname.XmlQNameEnumRef;
+import org.codehaus.jackson.annotate.JsonTypeInfo;
+import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
+import org.gedcomx.id.XmlTypeIdResolver;
 import org.gedcomx.types.NamePartType;
 
 import javax.xml.bind.annotation.XmlAttribute;
@@ -26,6 +29,8 @@ import javax.xml.namespace.QName;
 /**
  * A part of a name.
  */
+@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
+@JsonTypeIdResolver (XmlTypeIdResolver.class)
 public class NamePart extends Field {
 
   private QName type;

@@ -16,6 +16,9 @@
 package org.gedcomx.record;
 
 import org.codehaus.enunciate.qname.XmlQNameEnumRef;
+import org.codehaus.jackson.annotate.JsonTypeInfo;
+import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
+import org.gedcomx.id.XmlTypeIdResolver;
 import org.gedcomx.types.RelationshipRole;
 
 import javax.xml.bind.annotation.XmlAttribute;
@@ -24,6 +27,8 @@ import javax.xml.namespace.QName;
 /**
  * A basic relationship between two people, used to model basic relationships that are neither couple nor parent-child relationships.
  */
+@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
+@JsonTypeIdResolver (XmlTypeIdResolver.class)
 public class OtherRelationship extends Relationship {
 
   private String description;

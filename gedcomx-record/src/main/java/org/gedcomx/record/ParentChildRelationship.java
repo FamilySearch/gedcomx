@@ -17,6 +17,9 @@ package org.gedcomx.record;
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.enunciate.qname.XmlQNameEnumRef;
+import org.codehaus.jackson.annotate.JsonTypeInfo;
+import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
+import org.gedcomx.id.XmlTypeIdResolver;
 import org.gedcomx.types.LineageType;
 import org.gedcomx.types.RelationshipRole;
 
@@ -30,6 +33,8 @@ import javax.xml.namespace.QName;
  * A recorded relationship between a parent and a child.
  */
 @XmlRootElement
+@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
+@JsonTypeIdResolver (XmlTypeIdResolver.class)
 public class ParentChildRelationship extends Relationship {
 
   private QName lineageType;

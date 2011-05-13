@@ -29,7 +29,7 @@ import javax.xml.namespace.QName;
  *
  * @author Ryan Heaton
  */
-public class AlternateId {
+public final class AlternateId {
 
   private String value;
   private QName type;
