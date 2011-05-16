@@ -43,7 +43,6 @@ public class Event {
   private String description;
   private Date date;
   private Place place;
-  private Collection<Characteristic> characteristics;
 
   /**
    * The id of the event, unique to the context and not necessarily globally unique.
@@ -175,25 +174,6 @@ public class Event {
    */
   public void setPlace(Place place) {
     this.place = place;
-  }
-
-  /**
-   * The characteristic fields on this event.
-   *
-   * @return The characteristic fields on this event.
-   */
-  @XmlElement(name="characteristic")
-  public Collection<Characteristic> getCharacteristics() {
-    return characteristics;
-  }
-
-  /**
-   * The characteristic fields on this event.
-   *
-   * @param characteristics The characteristic fields on this event.
-   */
-  public void setCharacteristics(Collection<Characteristic> characteristics) {
-    this.characteristics = characteristics;
   }
 
 }
