@@ -201,6 +201,8 @@ public class TestRecord {
   }
 
   private void assertTestRecord(Record record, boolean json) {
+    //todo: get rid of the 'json' parameter, see https://almtools.ldschurch.org/fhjira/browse/XT-42
+
     assertEquals(1, record.getAlternateIds().size());
     assertEquals(AlternateIdType.forwarded, record.getAlternateIds().get(0).getKnownType());
     assertEquals("forward-value", record.getAlternateIds().get(0).getValue());

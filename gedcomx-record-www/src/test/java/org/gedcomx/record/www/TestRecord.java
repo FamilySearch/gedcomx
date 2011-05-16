@@ -40,11 +40,11 @@ public class TestRecord {
   /**
    * tests processing a WWW record through json...
    */
+  @Test(enabled = false) //todo: https://almtools.ldschurch.org/fhjira/browse/XT-41
   public void testRecordJson() throws Exception {
     Record record = createTestRecord();
-    //todo: figure out json deserialization problems with the element choice.
-    //record = processThroughJson(record);
-    //assertTestRecord(record, true);
+    record = processThroughJson(record);
+    assertTestRecord(record, true);
   }
 
   private Record createTestRecord() {
