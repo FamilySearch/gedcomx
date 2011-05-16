@@ -1,3 +1,18 @@
+/**
+ * Copyright 2011 Intellectual Reserve, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.gedcomx.rt;
 
 import org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider;
@@ -23,12 +38,12 @@ import java.io.UnsupportedEncodingException;
 public class SerializationUtil {
 
   @SuppressWarnings ( {"unchecked"} )
-  public static <C> C processThroughXml(C reference) throws JAXBException, UnsupportedEncodingException {
+  public static <C> C processThroughXml(Object reference) throws JAXBException, UnsupportedEncodingException {
     return (C) processThroughXml(reference, reference.getClass());
   }
 
   @SuppressWarnings ( {"unchecked"} )
-  public static <C> C processThroughXml(C reference, Class<? extends C> instanceClass) throws JAXBException, UnsupportedEncodingException {
+  public static <C> C processThroughXml(Object reference, Class<? extends C> instanceClass) throws JAXBException, UnsupportedEncodingException {
     JAXBContext context = JAXBContext.newInstance(instanceClass);
     ByteArrayOutputStream out = new ByteArrayOutputStream();
     Marshaller marshaller = context.createMarshaller();
@@ -48,16 +63,16 @@ public class SerializationUtil {
     }
     JAXBElement<? extends C> element = context.createUnmarshaller().unmarshal(new StreamSource(new ByteArrayInputStream(out.toByteArray())), instanceClass);
     reference = element.getValue();
-    return reference;
+    return (C) reference;
   }
 
   @SuppressWarnings ( {"unchecked"} )
-  public static <C> C processThroughJson(C reference) throws IOException {
+  public static <C> C processThroughJson(Object reference) throws IOException {
     return (C) processThroughJson(reference, reference.getClass());
   }
 
   @SuppressWarnings ( {"unchecked"} )
-  public static <C> C processThroughJson(C reference, Class<? extends C> instanceClass) throws IOException {
+  public static <C> C processThroughJson(Object reference, Class<? extends C> instanceClass) throws IOException {
     ObjectMapper mapper = new JacksonJaxbJsonProvider().locateMapper(instanceClass, null);
     ByteArrayOutputStream out = new ByteArrayOutputStream();
     mapper.getSerializationConfig().enable(SerializationConfig.Feature.INDENT_OUTPUT);
@@ -66,7 +81,7 @@ public class SerializationUtil {
       System.out.println(new String(out.toByteArray(), "utf-8"));
     }
     reference = mapper.readValue(new ByteArrayInputStream(out.toByteArray()), instanceClass);
-    return reference;
+    return (C) reference;
   }
 
 }

@@ -11,6 +11,10 @@
     <version>0.1.0.BUILD-SNAPSHOT</version>
   </parent>
 
+  <properties>
+    <root.basedir>${project.parent.basedir}</root.basedir>
+  </properties>
+
   <dependencies>
     <!--
         we explicitly depend on jaxb-impl (even for JDK6) in order to implement
