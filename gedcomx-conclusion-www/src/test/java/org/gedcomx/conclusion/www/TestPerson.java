@@ -35,6 +35,8 @@ public class TestPerson {
   public void testWWWPersonXml() throws Exception {
     Person person = createTestPerson();
     person = processThroughXml(person);
+    //todo: create a 'common' module to consolidate namespace bloat?
+    //todo: use @XmlElementRef to refer to entities in other modules that are not being extended (e.g. links)? does it look/feel better?
     assertTestPerson(person);
   }
 

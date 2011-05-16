@@ -28,7 +28,6 @@ import org.gedcomx.www.Links;
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 public class Lineage extends org.gedcomx.conclusion.Lineage {
-  //todo: what are the implications of using this in the model? does it deserialize correctly? what about for json?
 
   private Links links;
 

@@ -34,7 +34,6 @@ import java.net.URI;
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 public class Record extends org.gedcomx.record.Record {
-  //todo: override the accessors to return/set www fields?
 
   private URI base;
   private Links links;

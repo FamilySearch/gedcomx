@@ -34,7 +34,6 @@ public abstract class Conclusion {
 
   private String id;
   private AttributionReference attribution;
-  //todo: how do we extend this for the api when we want to support links?
 
   /**
    * The id of this conclusion, unique to its person or relationship.

@@ -43,7 +43,7 @@ public abstract class Relationship {
   private List<AlternateId> alternateIds;
   private AttributionReference attribution;
 
-  //todo: change to Collection<? extends Event> when http://jira.codehaus.org/browse/ENUNCIATE-562 is fixed.
+  //todo: change to List<? extends Event> when http://jira.codehaus.org/browse/ENUNCIATE-562 is fixed.
   private List<Event> events;
   private List<Characteristic> characteristics;
   private List<AttributedSourceReference> sources;
