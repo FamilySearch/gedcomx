@@ -30,7 +30,7 @@ import java.util.List;
  *
  * @author Ryan Heaton
  */
-@XmlRootElement
+@XmlRootElement(name = "person")
 @XmlType (
   propOrder = {"persistentId", "alternateIds", "gender", "names", "events", "characteristics", "relationships", "sources"}
 )

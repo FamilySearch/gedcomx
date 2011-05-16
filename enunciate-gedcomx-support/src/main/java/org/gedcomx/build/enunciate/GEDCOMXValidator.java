@@ -114,8 +114,7 @@ public class GEDCOMXValidator extends BaseValidator {
   public ValidationResult validateTypeDefinition(TypeDefinition typeDef) {
     ValidationResult result = new ValidationResult();
 
-    //todo: validate the @XmlSeeAlso for a QName enum so the namespace can be included?
-
+    //heatonra: using @XmlSeeAlso for a QName enum doesn't actually include the xmlns declaration, so there's no reason to validate it here...
     //heatonra: I couldn't figure out a good way to validate the use of @XmlSeeAlso for extended types at build-time. I think we'll have to rely on unit tests to validate this.
 
     if ("".equals(typeDef.getNamespace())) {

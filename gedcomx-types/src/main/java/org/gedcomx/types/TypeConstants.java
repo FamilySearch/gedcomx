@@ -26,5 +26,6 @@ public class TypeConstants {
   private TypeConstants() {}
 
   public static final String GEDCOMX_TYPES_NAMESPACE = "http://gedcomx.org/types";
+  public static final String GEDCOMX_TYPES_NAMESPACE_PREFIX = "gedtype";
 
 }

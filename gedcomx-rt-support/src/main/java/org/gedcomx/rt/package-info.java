@@ -13,18 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.source.www;
-
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
- * @author Ryan Heaton
+ * Runtime-only support for GEDCOM X.
  */
-@XmlTransient
-public class SourceWWWConstants {
+package org.gedcomx.rt;
 
-  private SourceWWWConstants() {}
-
-  public static final String GEDCOMX_SOURCE_WWW_NAMESPACE = "http://gedcomx.org/source/www/v1";
-  public static final String GEDCOMX_SOURCE_WWW_NAMESPACE_PREFIX = "gedsrcw";
-}

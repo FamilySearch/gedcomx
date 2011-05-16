@@ -24,7 +24,7 @@
   namespace = AttributionConstants.GEDCOMX_ATTRIBUTION_NAMESPACE,
   elementFormDefault = XmlNsForm.QUALIFIED,
   xmlns = {
-    @XmlNs( prefix = "gxa", namespaceURI = AttributionConstants.GEDCOMX_ATTRIBUTION_NAMESPACE),
+    @XmlNs( prefix = AttributionConstants.GEDCOMX_ATTRIBUTION_NAMESPACE_PREFIX, namespaceURI = AttributionConstants.GEDCOMX_ATTRIBUTION_NAMESPACE),
     @XmlNs( prefix = "xlink", namespaceURI = "http://www.w3.org/1999/xlink")
   }
 )

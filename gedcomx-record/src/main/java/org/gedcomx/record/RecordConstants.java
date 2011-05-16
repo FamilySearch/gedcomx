@@ -26,5 +26,6 @@ public class RecordConstants {
   private RecordConstants() {}
 
   public static final String GEDCOMX_RECORD_NAMESPACE = "http://gedcomx.org/record/v1";
+  public static final String GEDCOMX_RECORD_NAMESPACE_PREFIX = "gedrec";
 
 }

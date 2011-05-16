@@ -28,5 +28,6 @@ public class ConclusionConstants {
   private ConclusionConstants() {}
 
   public static final String GEDCOMX_CONCLUSION_NAMESPACE = "http://gedcomx.org/conclusion/v1";
+  public static final String GEDCOMX_CONCLUSION_NAMESPACE_PREFIX = "gedconc";
 
 }

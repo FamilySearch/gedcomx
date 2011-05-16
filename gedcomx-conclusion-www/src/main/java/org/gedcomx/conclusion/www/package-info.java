@@ -20,12 +20,28 @@
  */
 @XmlSchema(
   namespace = ConclusionWWWConstants.GEDCOMX_CONCLUSION_WWW_NAMESPACE,
-  elementFormDefault = XmlNsForm.QUALIFIED
+  elementFormDefault = XmlNsForm.QUALIFIED,
+  xmlns = {
+    @XmlNs ( prefix = AttributionConstants.GEDCOMX_ATTRIBUTION_NAMESPACE_PREFIX, namespaceURI = AttributionConstants.GEDCOMX_ATTRIBUTION_NAMESPACE),
+    @XmlNs ( prefix = SourceConstants.GEDCOMX_SOURCE_NAMESPACE_PREFIX, namespaceURI = SourceConstants.GEDCOMX_SOURCE_NAMESPACE),
+    @XmlNs ( prefix = IdConstants.GEDCOMX_ID_NAMESPACE_PREFIX, namespaceURI = IdConstants.GEDCOMX_ID_NAMESPACE),
+    @XmlNs ( prefix = TypeConstants.GEDCOMX_TYPES_NAMESPACE_PREFIX, namespaceURI = TypeConstants.GEDCOMX_TYPES_NAMESPACE),
+    @XmlNs ( prefix = SourceWWWConstants.GEDCOMX_SOURCE_WWW_NAMESPACE_PREFIX, namespaceURI = SourceWWWConstants.GEDCOMX_SOURCE_WWW_NAMESPACE),
+    @XmlNs ( prefix = WebConstants.GEDCOMX_WWW_NAMESPACE_PREFIX, namespaceURI = WebConstants.GEDCOMX_WWW_NAMESPACE),
+    @XmlNs ( prefix = "", namespaceURI = ConclusionConstants.GEDCOMX_CONCLUSION_NAMESPACE),
+    @XmlNs ( prefix = ConclusionWWWConstants.GEDCOMX_CONCLUSION_WWW_NAMESPACE_PREFIX, namespaceURI = ConclusionWWWConstants.GEDCOMX_CONCLUSION_WWW_NAMESPACE),
+    @XmlNs ( prefix = "xlink", namespaceURI = "http://www.w3.org/1999/xlink")
+  }
 )
 @XmlAccessorOrder ( XmlAccessOrder.ALPHABETICAL )
 package org.gedcomx.conclusion.www;
 
-import javax.xml.bind.annotation.XmlAccessOrder;
-import javax.xml.bind.annotation.XmlAccessorOrder;
-import javax.xml.bind.annotation.XmlNsForm;
-import javax.xml.bind.annotation.XmlSchema;
+import org.gedcomx.attribution.AttributionConstants;
+import org.gedcomx.conclusion.ConclusionConstants;
+import org.gedcomx.id.IdConstants;
+import org.gedcomx.source.SourceConstants;
+import org.gedcomx.source.www.SourceWWWConstants;
+import org.gedcomx.types.TypeConstants;
+import org.gedcomx.www.WebConstants;
+
+import javax.xml.bind.annotation.*;

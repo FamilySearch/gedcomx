@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>gedcomx-rt-support</artifactId>
+  <version>0.1.0.BUILD-SNAPSHOT</version>
+  <name>GEDCOM X - Runtime Support</name>
+
+  <parent>
+    <groupId>org.gedcomx</groupId>
+    <artifactId>gedcomx-parent</artifactId>
+    <version>0.1.0.BUILD-SNAPSHOT</version>
+  </parent>
+
+  <dependencies>
+    <!--
+        we explicitly depend on jaxb-impl (even for JDK6) in order to implement
+        the namespace prefix mapper, which doesn't work with the JDK 6 implementation.
+    -->
+    <dependency>
+      <groupId>com.sun.xml.bind</groupId>
+      <artifactId>jaxb-impl</artifactId>
+      <version>2.1.13</version>
+    </dependency>
+
+  </dependencies>
+
+</project>

@@ -19,9 +19,18 @@
  */
 @XmlSchema(
   namespace = IdConstants.GEDCOMX_ID_NAMESPACE,
-  elementFormDefault = XmlNsForm.QUALIFIED
+  elementFormDefault = XmlNsForm.QUALIFIED,
+  xmlns = {
+    @XmlNs ( prefix = IdConstants.GEDCOMX_ID_NAMESPACE_PREFIX, namespaceURI = IdConstants.GEDCOMX_ID_NAMESPACE),
+    @XmlNs ( prefix = TypeConstants.GEDCOMX_TYPES_NAMESPACE_PREFIX, namespaceURI = TypeConstants.GEDCOMX_TYPES_NAMESPACE),
+    @XmlNs ( prefix = "xlink", namespaceURI = "http://www.w3.org/1999/xlink")
+  }
+
 )
 package org.gedcomx.id;
 
+import org.gedcomx.types.TypeConstants;
+
+import javax.xml.bind.annotation.XmlNs;
 import javax.xml.bind.annotation.XmlNsForm;
 import javax.xml.bind.annotation.XmlSchema;

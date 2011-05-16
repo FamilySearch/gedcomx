@@ -3,9 +3,9 @@ package org.gedcomx.conclusion.www;
 import org.gedcomx.attribution.AttributionReference;
 import org.gedcomx.conclusion.*;
 import org.gedcomx.id.AlternateId;
-import org.gedcomx.id.AlternateIdType;
+import org.gedcomx.types.AlternateIdType;
 import org.gedcomx.id.PersistentIdentifier;
-import org.gedcomx.id.PersistentIdentifierType;
+import org.gedcomx.types.PersistentIdentifierType;
 import org.gedcomx.source.AttributedSourceReference;
 import org.gedcomx.source.SourceQualifier;
 import org.gedcomx.source.SourceQualifierProperty;
@@ -18,8 +18,8 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.gedcomx.conclusion.www.SerializationUtil.processThroughJson;
-import static org.gedcomx.conclusion.www.SerializationUtil.processThroughXml;
+import static org.gedcomx.rt.SerializationUtil.processThroughJson;
+import static org.gedcomx.rt.SerializationUtil.processThroughXml;
 import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertTrue;
 
@@ -35,8 +35,6 @@ public class TestPerson {
   public void testWWWPersonXml() throws Exception {
     Person person = createTestPerson();
     person = processThroughXml(person);
-    //todo: create a 'common' module to consolidate namespace bloat?
-    //todo: use @XmlElementRef to refer to entities in other modules that are not being extended (e.g. links)? does it look/feel better?
     assertTestPerson(person);
   }
 

@@ -1,14 +1,15 @@
-package org.gedcomx.conclusion.www;
+package org.gedcomx.rt;
 
 import org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.SerializationConfig;
-import org.gedcomx.attribution.AttributionConstants;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSchema;
 import javax.xml.namespace.QName;
 import javax.xml.transform.stream.StreamSource;
 import java.io.ByteArrayInputStream;
@@ -32,7 +33,16 @@ public class SerializationUtil {
     ByteArrayOutputStream out = new ByteArrayOutputStream();
     Marshaller marshaller = context.createMarshaller();
     marshaller.setProperty("jaxb.formatted.output", Boolean.TRUE);
-    marshaller.marshal(new JAXBElement(new QName(AttributionConstants.GEDCOMX_ATTRIBUTION_NAMESPACE, instanceClass.getSimpleName()), instanceClass, reference), out);
+    Object el = instanceClass.isAnnotationPresent(XmlRootElement.class) ? reference : null;
+    if (el == null) {
+      String ns = "";
+      if (instanceClass.getPackage() != null && instanceClass.getPackage().getAnnotation(XmlSchema.class) != null) {
+        ns = instanceClass.getPackage().getAnnotation(XmlSchema.class).namespace();
+      }
+      el = new JAXBElement(new QName(ns, instanceClass.getSimpleName()), instanceClass, reference);
+    }
+    marshaller.setProperty("com.sun.xml.bind.namespacePrefixMapper", new GedcomNamespacePrefixMapper(instanceClass));
+    marshaller.marshal(el, out);
     if ("true".equals(System.getProperty("show.output"))) {
       System.out.println(new String(out.toByteArray(),"utf-8"));
     }

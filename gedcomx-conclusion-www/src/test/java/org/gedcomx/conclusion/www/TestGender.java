@@ -8,10 +8,9 @@ import org.testng.annotations.Test;
 import java.net.URI;
 import java.util.ArrayList;
 
-import static org.gedcomx.conclusion.www.SerializationUtil.processThroughJson;
-import static org.gedcomx.conclusion.www.SerializationUtil.processThroughXml;
+import static org.gedcomx.rt.SerializationUtil.processThroughJson;
+import static org.gedcomx.rt.SerializationUtil.processThroughXml;
 import static org.testng.AssertJUnit.assertEquals;
-import static org.testng.AssertJUnit.assertTrue;
 
 /**
  * @author Ryan Heaton
@@ -54,19 +53,4 @@ public class TestGender {
     assertEquals("urn:gender", gender.getLinks().getLinks().get(0).getHref().toString());
   }
   
-  /**
-   * tests serializing an instance of the www person to/from a "base" person via xml.
-   */
-  public void testWWWPersonToBasePersonViaXml() throws Exception {
-    //todo: figure this out.
-  }
-
-  /**
-   * tests serializing an instance of the www person to/from a "base" person via json.
-   */
-  public void testWWWPersonToBasePersonViaJson() throws Exception {
-    //todo: figure this out.
-  }
-
-
 }

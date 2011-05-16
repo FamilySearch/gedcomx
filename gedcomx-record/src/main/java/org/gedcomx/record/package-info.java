@@ -19,12 +19,22 @@
  */
 @XmlSchema(
   namespace = RecordConstants.GEDCOMX_RECORD_NAMESPACE,
-  elementFormDefault = XmlNsForm.QUALIFIED
+  elementFormDefault = XmlNsForm.QUALIFIED,
+  xmlns = {
+    @XmlNs ( prefix = AttributionConstants.GEDCOMX_ATTRIBUTION_NAMESPACE_PREFIX, namespaceURI = AttributionConstants.GEDCOMX_ATTRIBUTION_NAMESPACE),
+    @XmlNs ( prefix = SourceConstants.GEDCOMX_SOURCE_NAMESPACE_PREFIX, namespaceURI = SourceConstants.GEDCOMX_SOURCE_NAMESPACE),
+    @XmlNs ( prefix = IdConstants.GEDCOMX_ID_NAMESPACE_PREFIX, namespaceURI = IdConstants.GEDCOMX_ID_NAMESPACE),
+    @XmlNs ( prefix = TypeConstants.GEDCOMX_TYPES_NAMESPACE_PREFIX, namespaceURI = TypeConstants.GEDCOMX_TYPES_NAMESPACE),
+    @XmlNs ( prefix = "xlink", namespaceURI = "http://www.w3.org/1999/xlink")
+  }
+
 )
 @XmlAccessorOrder ( XmlAccessOrder.ALPHABETICAL )
 package org.gedcomx.record;
 
-import javax.xml.bind.annotation.XmlAccessOrder;
-import javax.xml.bind.annotation.XmlAccessorOrder;
-import javax.xml.bind.annotation.XmlNsForm;
-import javax.xml.bind.annotation.XmlSchema;
+import org.gedcomx.attribution.AttributionConstants;
+import org.gedcomx.id.IdConstants;
+import org.gedcomx.source.SourceConstants;
+import org.gedcomx.types.TypeConstants;
+
+import javax.xml.bind.annotation.*;
