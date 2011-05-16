@@ -107,7 +107,7 @@ public class Name extends Field {
    */
   @XmlTransient
   public NameStyle getKnownStyle() {
-    return XmlQNameEnumUtil.fromQName(getType(), NameStyle.class);
+    return XmlQNameEnumUtil.fromQName(getStyle(), NameStyle.class);
   }
 
   /**

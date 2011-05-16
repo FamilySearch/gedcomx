@@ -23,6 +23,7 @@ import org.gedcomx.id.XmlTypeIdResolver;
 import org.gedcomx.types.RelationshipType;
 
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.namespace.QName;
 
@@ -102,6 +103,8 @@ public class OtherRelationship extends Relationship {
    * the other persona in this relationship. When the relationship type implies direction, it
    * goes from "persona1" to "persona2".
    */
+  @XmlAttribute
+  @XmlIDREF
   public Persona getPersona1() {
     return super.getPersona1();
   }
@@ -128,6 +131,8 @@ public class OtherRelationship extends Relationship {
    * the other persona in this relationship. When the relationship type implies direction, it
    * goes from "persona1" to "persona2".
    */
+  @XmlAttribute
+  @XmlIDREF
   public Persona getPersona2() {
     return super.getPersona2();
   }

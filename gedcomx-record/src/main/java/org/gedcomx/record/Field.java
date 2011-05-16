@@ -15,10 +15,7 @@
  */
 package org.gedcomx.record;
 
-import org.codehaus.jackson.annotate.JsonTypeInfo;
-import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.attribution.AttributionReference;
-import org.gedcomx.id.XmlTypeIdResolver;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlID;
@@ -28,9 +25,7 @@ import javax.xml.bind.annotation.XmlType;
  * A field on a record.
  */
 @XmlType ( propOrder = { "attribution", "original", "interpreted", "normalized" })
-@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
-@JsonTypeIdResolver (XmlTypeIdResolver.class)
-public class Field {
+public abstract class Field {
 
   private String id;
   private String fieldId;

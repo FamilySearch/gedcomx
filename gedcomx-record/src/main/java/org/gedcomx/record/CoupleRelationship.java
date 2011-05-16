@@ -20,6 +20,8 @@ import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.id.XmlTypeIdResolver;
 import org.gedcomx.types.RelationshipType;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
@@ -36,6 +38,8 @@ public class CoupleRelationship extends Relationship {
    * @return A persona in the relationship. The name "persona1" is used only to distinguish it from
    * the other persona in this relationship and implies neither order nor role.
    */
+  @XmlAttribute
+  @XmlIDREF
   public Persona getPersona1() {
     return super.getPersona1();
   }
@@ -58,6 +62,8 @@ public class CoupleRelationship extends Relationship {
    * @return A persona in the relationship. The name "persona2" is used only to distinguish it from
    * the other persona in this relationship and implies neither order nor role.
    */
+  @XmlAttribute
+  @XmlIDREF
   public Persona getPersona2() {
     return super.getPersona2();
   }

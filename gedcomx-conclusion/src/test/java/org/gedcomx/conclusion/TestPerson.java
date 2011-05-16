@@ -15,7 +15,7 @@ import java.util.List;
 
 import static org.gedcomx.rt.SerializationUtil.processThroughJson;
 import static org.gedcomx.rt.SerializationUtil.processThroughXml;
-import static org.testng.AssertJUnit.*;
+import static org.testng.AssertJUnit.assertEquals;
 
 /**
  * @author Ryan Heaton

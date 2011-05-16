@@ -23,6 +23,7 @@ import org.gedcomx.www.Links;
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSeeAlso;
 import java.net.URI;
 
 /**
@@ -33,6 +34,9 @@ import java.net.URI;
 @XmlRootElement
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
+@XmlSeeAlso ({ Age.class, AgePart.class, Characteristic.class, CoupleRelationship.class, Date.class, DatePart.class,
+               Event.class, Gender.class, Name.class, NamePart.class, OtherRelationship.class, ParentChildRelationship.class,
+               Persona.class, Place.class, PlacePart.class, RecordField.class})
 public class Record extends org.gedcomx.record.Record {
 
   private URI base;

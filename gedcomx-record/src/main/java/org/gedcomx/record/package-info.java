@@ -25,6 +25,7 @@
     @XmlNs ( prefix = SourceConstants.GEDCOMX_SOURCE_NAMESPACE_PREFIX, namespaceURI = SourceConstants.GEDCOMX_SOURCE_NAMESPACE),
     @XmlNs ( prefix = IdConstants.GEDCOMX_ID_NAMESPACE_PREFIX, namespaceURI = IdConstants.GEDCOMX_ID_NAMESPACE),
     @XmlNs ( prefix = TypeConstants.GEDCOMX_TYPES_NAMESPACE_PREFIX, namespaceURI = TypeConstants.GEDCOMX_TYPES_NAMESPACE),
+    @XmlNs ( prefix = "", namespaceURI = RecordConstants.GEDCOMX_RECORD_NAMESPACE),
     @XmlNs ( prefix = "xlink", namespaceURI = "http://www.w3.org/1999/xlink")
   }
 
