@@ -15,14 +15,12 @@
  */
 package org.gedcomx.record;
 
-import org.codehaus.enunciate.qname.XmlQNameEnumRef;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.id.XmlTypeIdResolver;
-import org.gedcomx.types.RelationshipRole;
+import org.gedcomx.types.RelationshipType;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.namespace.QName;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * A relationship between two personas, making a genealogical "couple".
@@ -54,26 +52,6 @@ public class CoupleRelationship extends Relationship {
   }
 
   /**
-   * The role of the persona1 of this relationship.
-   *
-   * @return The role of the persona1 of this relationship.
-   */
-  @XmlAttribute
-  @XmlQNameEnumRef (RelationshipRole.class)
-  public QName getRole1() {
-    return super.getRole1();
-  }
-
-  /**
-   * The role of the persona1 of this relationship.
-   *
-   * @param role1 The role of the persona1 of this relationship.
-   */
-  public void setRole1(QName role1) {
-    super.setRole1(role1);
-  }
-
-  /**
    * A persona in the relationship. The name "persona2" is used only to distinguish it from
    * the other persona in this relationship and implies neither order nor role.
    * 
@@ -95,23 +73,9 @@ public class CoupleRelationship extends Relationship {
     super.setPersona2(persona2);
   }
 
-  /**
-   * The role of the persona2 of this relationship.
-   *
-   * @return The role of the persona2 of this relationship.
-   */
-  @XmlAttribute
-  @XmlQNameEnumRef(RelationshipRole.class)
-  public QName getRole2() {
-    return super.getRole2();
-  }
-
-  /**
-   * The role of the persona2 of this relationship.
-   *
-   * @param role2 The role of the persona2 of this relationship.
-   */
-  public void setRole2(QName role2) {
-    super.setRole2(role2);
+  @XmlTransient
+  @Override
+  public RelationshipType getKnownRelationshipType() {
+    return RelationshipType.couple;
   }
 }

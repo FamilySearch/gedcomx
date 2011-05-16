@@ -15,13 +15,15 @@
  */
 package org.gedcomx.record;
 
+import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.enunciate.qname.XmlQNameEnumRef;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.id.XmlTypeIdResolver;
-import org.gedcomx.types.RelationshipRole;
+import org.gedcomx.types.RelationshipType;
 
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.namespace.QName;
 
 /**
@@ -31,7 +33,47 @@ import javax.xml.namespace.QName;
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 public class OtherRelationship extends Relationship {
 
+  private QName type;
   private String description;
+
+  /**
+   * The type of this relationship.
+   *
+   * @return The type of this relationship.
+   */
+  @XmlAttribute
+  @XmlQNameEnumRef(RelationshipType.class)
+  public QName getType() {
+    return type;
+  }
+
+  /**
+   * The type of this relationship.
+   *
+   * @param type The type of this relationship.
+   */
+  public void setType(QName type) {
+    this.type = type;
+  }
+
+  /**
+   * The enum referencing the known type of the relationship, or {@link org.gedcomx.types.RelationshipType#other} if not known.
+   *
+   * @return The enum referencing the known type of the relationship, or {@link org.gedcomx.types.RelationshipType#other} if not known.
+   */
+  @XmlTransient
+  public RelationshipType getKnownRelationshipType() {
+    return XmlQNameEnumUtil.fromQName(getType(), RelationshipType.class);
+  }
+
+  /**
+   * Set the relationship type from a known enumeration of relationship types.
+   *
+   * @param type The relationship type.
+   */
+  public void setKnownRelationshipType(RelationshipType type) {
+    this.type = XmlQNameEnumUtil.toQName(type);
+  }
 
   /**
    * The description of the relationship as found on the record.
@@ -53,10 +95,12 @@ public class OtherRelationship extends Relationship {
 
   /**
    * A persona in the relationship. The name "persona1" is used only to distinguish it from
-   * the other persona in this relationship and implies neither order nor role.
+   * the other persona in this relationship. When the relationship type implies direction, it
+   * goes from "persona1" to "persona2".
    * 
    * @return A persona in the relationship. The name "persona1" is used only to distinguish it from
-   * the other persona in this relationship and implies neither order nor role.
+   * the other persona in this relationship. When the relationship type implies direction, it
+   * goes from "persona1" to "persona2".
    */
   public Persona getPersona1() {
     return super.getPersona1();
@@ -64,41 +108,25 @@ public class OtherRelationship extends Relationship {
 
   /**
    * A persona in the relationship. The name "persona1" is used only to distinguish it from
-   * the other persona in this relationship and implies neither order nor role.
+   * the other persona in this relationship. When the relationship type implies direction, it
+   * goes from "persona1" to "persona2".
    * 
    * @param persona1 A persona in the relationship. The name "persona1" is used only to distinguish it from
-   * the other persona in this relationship and implies neither order nor role.
+   * the other persona in this relationship. When the relationship type implies direction, it
+   * goes from "persona1" to "persona2".
    */
   public void setPersona1(Persona persona1) {
     super.setPersona1(persona1);
   }
 
   /**
-   * The role of the persona1 of this relationship.
-   *
-   * @return The role of the persona1 of this relationship.
-   */
-  @XmlAttribute
-  @XmlQNameEnumRef(RelationshipRole.class)
-  public QName getRole1() {
-    return super.getRole1();
-  }
-
-  /**
-   * The role of the persona1 of this relationship.
-   *
-   * @param role1 The role of the persona1 of this relationship.
-   */
-  public void setRole1(QName role1) {
-    super.setRole1(role1);
-  }
-
-  /**
    * A persona in the relationship. The name "persona2" is used only to distinguish it from
-   * the other persona in this relationship and implies neither order nor role.
+   * the other persona in this relationship. When the relationship type implies direction, it
+   * goes from "persona1" to "persona2".
    * 
    * @return A persona in the relationship. The name "persona2" is used only to distinguish it from
-   * the other persona in this relationship and implies neither order nor role.
+   * the other persona in this relationship. When the relationship type implies direction, it
+   * goes from "persona1" to "persona2".
    */
   public Persona getPersona2() {
     return super.getPersona2();
@@ -106,32 +134,15 @@ public class OtherRelationship extends Relationship {
 
   /**
    * A persona in the relationship. The name "persona2" is used only to distinguish it from
-   * the other persona in this relationship and implies neither order nor role.
+   * the other persona in this relationship. When the relationship type implies direction, it
+   * goes from "persona1" to "persona2".
    * 
    * @param persona2 A persona in the relationship. The name "persona2" is used only to distinguish it from
-   * the other persona in this relationship and implies neither order nor role.
+   * the other persona in this relationship. When the relationship type implies direction, it
+   * goes from "persona1" to "persona2".
    */
   public void setPersona2(Persona persona2) {
     super.setPersona2(persona2);
   }
 
-  /**
-   * The role of the persona2 of this relationship.
-   *
-   * @return The role of the persona2 of this relationship.
-   */
-  @XmlAttribute
-  @XmlQNameEnumRef(RelationshipRole.class)
-  public QName getRole2() {
-    return super.getRole2();
-  }
-
-  /**
-   * The role of the persona2 of this relationship.
-   *
-   * @param role2 The role of the persona2 of this relationship.
-   */
-  public void setRole2(QName role2) {
-    super.setRole2(role2);
-  }
 }

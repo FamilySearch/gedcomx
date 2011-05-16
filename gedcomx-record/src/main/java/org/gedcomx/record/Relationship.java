@@ -15,14 +15,12 @@
  */
 package org.gedcomx.record;
 
-import org.codehaus.enunciate.XmlQNameEnumUtil;
-import org.gedcomx.types.RelationshipRole;
+import org.gedcomx.types.RelationshipType;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.namespace.QName;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,13 +29,12 @@ import java.util.List;
  */
 public abstract class Relationship {
 
-  //todo: why are we even subclassing relationship?
+  //heatonra - consideration was given to not subclassing relationship into couple, p/c, and other. It was decided to optimize for the common case and
+  //provide subclasses.
 
   private String id;
-  private QName role1;
-  protected Persona persona1;
-  private QName role2;
-  protected Persona persona2;
+  private Persona persona1;
+  private Persona persona2;
   private List<Characteristic> characteristics = new ArrayList<Characteristic>();
 
   /**
@@ -84,44 +81,6 @@ public abstract class Relationship {
   }
 
   /**
-   * The role of the persona1 of this relationship.
-   *
-   * @return The role of the persona1 of this relationship.
-   */
-  @XmlTransient
-  public QName getRole1() {
-    return this.role1;
-  }
-
-  /**
-   * The role of the persona1 of this relationship.
-   *
-   * @param role1 The role of the persona1 of this relationship.
-   */
-  public void setRole1(QName role1) {
-    this.role1 = role1;
-  }
-
-  /**
-   * The enum referencing the known role1, or {@link org.gedcomx.types.RelationshipRole#other} if not known.
-   *
-   * @return The enum referencing the known role1, or {@link org.gedcomx.types.RelationshipRole#other} if not known.
-   */
-  @XmlTransient
-  public RelationshipRole getKnownRole1() {
-    return XmlQNameEnumUtil.fromQName(getRole1(), RelationshipRole.class);
-  }
-
-  /**
-   * Set the role1 from an enumeration of known roles.
-   *
-   * @param role The role.
-   */
-  public void setKnownRole1(RelationshipRole role) {
-    this.role1 = XmlQNameEnumUtil.toQName(role);
-  }
-
-  /**
    * A persona in the relationship. The name "persona2" is used only to distinguish it from
    * the other persona in this relationship and implies neither order nor role.
    *
@@ -145,44 +104,6 @@ public abstract class Relationship {
   }
 
   /**
-   * The role of the persona2 of this relationship.
-   *
-   * @return The role of the persona2 of this relationship.
-   */
-  @XmlTransient
-  public QName getRole2() {
-    return this.role2;
-  }
-
-  /**
-   * The role of the persona2 of this relationship.
-   *
-   * @param role2 The role of the persona2 of this relationship.
-   */
-  public void setRole2(QName role2) {
-    this.role2 = role2;
-  }
-
-  /**
-   * The enum referencing the known role2, or {@link org.gedcomx.types.RelationshipRole#other} if not known.
-   *
-   * @return The enum referencing the known role2, or {@link org.gedcomx.types.RelationshipRole#other} if not known.
-   */
-  @XmlTransient
-  public RelationshipRole getKnownRole2() {
-    return XmlQNameEnumUtil.fromQName(getRole2(), RelationshipRole.class);
-  }
-
-  /**
-   * Set the role2 from an enumeration of known roles.
-   *
-   * @param role The role.
-   */
-  public void setKnownRole2(RelationshipRole role) {
-    this.role2 = XmlQNameEnumUtil.toQName(role);
-  }
-
-  /**
    * The characteristic fields of the relationship.
    *
    * @return The characteristic fields of the relationship.
@@ -201,4 +122,11 @@ public abstract class Relationship {
     this.characteristics = characteristics;
   }
 
+  /**
+   * The known type of this relationship.
+   *
+   * @return The known type of this relationship.
+   */
+  @XmlTransient
+  public abstract RelationshipType getKnownRelationshipType();
 }
