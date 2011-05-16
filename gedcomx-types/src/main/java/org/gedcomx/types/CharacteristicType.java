@@ -106,12 +106,4 @@ public enum CharacteristicType {
     public static final CharacteristicType number_of_children = CharacteristicType.number_of_children;
   }
 
-  @XmlTransient
-  public static final class Record {
-    private Record() {}
-
-    public static final CharacteristicType batch_number = CharacteristicType.batch_number;
-    public static final CharacteristicType household = CharacteristicType.household;
-  }
-
 }

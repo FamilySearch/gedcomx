@@ -35,7 +35,7 @@ import java.util.List;
  */
 @XmlRootElement
 @XmlType (
-  propOrder = {"persistentId", "alternateIds", "attribution", "collection", "personas", "events", "relationships", "characteristics", "sources"}
+  propOrder = {"persistentId", "alternateIds", "attribution", "collection", "personas", "events", "relationships", "fields", "sources"}
 )
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
@@ -52,7 +52,7 @@ public class Record {
   private List<Persona> personas;
   private List<Event> events;
   private List<Relationship> relationships;
-  private List<Characteristic> characteristics;
+  private List<RecordField> fields;
   private List<SourceReference> sources;
 
   /**
@@ -250,22 +250,22 @@ public class Record {
   }
 
   /**
-   * The characteristic fiels of the record.
+   * Any generic fields that are on the record (not belonging to a persona or relationship).
    *
-   * @return The characteristic fiels of the record.
+   * @return Any generic fields that are on the record (not belonging to a persona or relationship).
    */
-  @XmlElement(name = "characteristic")
-  public List<Characteristic> getCharacteristics() {
-    return characteristics;
+  @XmlElement(name = "field")
+  public List<RecordField> getFields() {
+    return fields;
   }
 
   /**
-   * The characteristic fiels of the record.
+   * Any generic fields that are on the record (not belonging to a persona or relationship).
    *
-   * @param characteristics The characteristic fiels of the record.
+   * @param fields Any generic fields that are on the record (not belonging to a persona or relationship).
    */
-  public void setCharacteristics(List<Characteristic> characteristics) {
-    this.characteristics = characteristics;
+  public void setFields(List<RecordField> fields) {
+    this.fields = fields;
   }
 
   /**
