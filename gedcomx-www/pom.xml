@@ -22,10 +22,13 @@
         <artifactId>maven-enunciate-plugin</artifactId>
         <executions>
           <execution>
-            <phase>process-sources</phase>
             <goals>
-              <goal>docs</goal>
+              <goal>assemble</goal>
             </goals>
+            <configuration>
+              <stepTo>generate</stepTo>
+              <forceWarPackaging>false</forceWarPackaging>
+            </configuration>
           </execution>
         </executions>
       </plugin>
