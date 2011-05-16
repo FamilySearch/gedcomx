@@ -35,4 +35,12 @@
     </plugins>
   </build>
 
+  <dependencies>
+    <dependency>
+      <groupId>org.gedcomx</groupId>
+      <artifactId>gedcomx-types</artifactId>
+      <version>0.1.0.BUILD-SNAPSHOT</version>
+    </dependency>
+  </dependencies>
+
 </project>
