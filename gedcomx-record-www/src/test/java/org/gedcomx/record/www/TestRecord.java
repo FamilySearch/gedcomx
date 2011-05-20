@@ -40,7 +40,6 @@ public class TestRecord {
   /**
    * tests processing a WWW record through json...
    */
-  @Test(enabled = false) //todo: https://almtools.ldschurch.org/fhjira/browse/XT-41
   public void testRecordJson() throws Exception {
     Record record = createTestRecord();
     record = processThroughJson(record);
@@ -289,8 +288,9 @@ public class TestRecord {
 
     assertEquals("pal", record.getPersistentId().getValue().toString());
 
-    assertEquals(2, record.getRelationships().size());
-    CoupleRelationship coupleRelationship = (CoupleRelationship) record.getRelationships().get(0);
+    assertEquals(1, record.getCoupleRelationships().size());
+    assertEquals(1, record.getParentChildRelationships().size());
+    CoupleRelationship coupleRelationship = (CoupleRelationship) record.getCoupleRelationships().get(0);
     assertEquals(1, coupleRelationship.getCharacteristics().size());
     Characteristic coupleCharacteristic = (Characteristic) coupleRelationship.getCharacteristics().get(0);
     assertField(coupleCharacteristic, "couple-characteristic");
@@ -311,7 +311,7 @@ public class TestRecord {
       assertNull(coupleRelationship.getPersona2());
     }
 
-    ParentChildRelationship parentRelationship = (ParentChildRelationship) record.getRelationships().get(1);
+    ParentChildRelationship parentRelationship = (ParentChildRelationship) record.getParentChildRelationships().get(0);
     assertEquals("parent-relationship-id", parentRelationship.getId());
     if (!json) {
       assertSame(persona, parentRelationship.getParent());

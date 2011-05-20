@@ -28,14 +28,14 @@ import org.gedcomx.types.RecordType;
 
 import javax.xml.bind.annotation.*;
 import javax.xml.namespace.QName;
-import java.util.List;
+import java.util.*;
 
 /**
  * A record.
  */
 @XmlRootElement
 @XmlType (
-  propOrder = {"persistentId", "alternateIds", "attribution", "collection", "personas", "events", "relationships", "fields", "sources"}
+  propOrder = {"persistentId", "alternateIds", "attribution", "collection", "personas", "events", "coupleRelationships", "parentChildRelationships", "otherRelationships", "fields", "sources"}
 )
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
@@ -51,7 +51,9 @@ public class Record {
   //todo: change to List<? extends Persona> when http://jira.codehaus.org/browse/ENUNCIATE-562 is fixed.
   private List<Persona> personas;
   private List<Event> events;
-  private List<Relationship> relationships;
+  private List<CoupleRelationship> coupleRelationships;
+  private List<ParentChildRelationship> parentChildRelationships;
+  private List<OtherRelationship> otherRelationships;
   private List<RecordField> fields;
   private List<SourceReference> sources;
 
@@ -227,26 +229,112 @@ public class Record {
   }
 
   /**
-   * The relationships of the record.
+   * The couple relationships on this record.
    *
-   * @return The relationships of the record.
+   * @return The couple relationships on this record.
    */
-  @XmlElements({
-    @XmlElement(name = "coupleRelationship", type = CoupleRelationship.class),
-    @XmlElement(name = "parentChildRelationship", type = ParentChildRelationship.class),
-    @XmlElement(name = "otherRelationship", type = OtherRelationship.class)
-  })
-  public List<Relationship> getRelationships() {
-    return relationships;
+  @XmlElement(name = "coupleRelationship")
+  public List<CoupleRelationship> getCoupleRelationships() {
+    return coupleRelationships;
+  }
+
+  /**
+   * The couple relationships on this record.
+   *
+   * @param coupleRelationships The couple relationships on this record.
+   */
+  public void setCoupleRelationships(List<CoupleRelationship> coupleRelationships) {
+    this.coupleRelationships = coupleRelationships;
+  }
+
+  /**
+   * The parent-child relationships on this record.
+   *
+   * @return The parent-child relationships on this record.
+   */
+  @XmlElement(name = "parentChildRelationship")
+  public List<ParentChildRelationship> getParentChildRelationships() {
+    return parentChildRelationships;
+  }
+
+  /**
+   * The parent-child relationships on this record.
+   *
+   * @param parentChildRelationships The parent-child relationships on this record.
+   */
+  public void setParentChildRelationships(List<ParentChildRelationship> parentChildRelationships) {
+    this.parentChildRelationships = parentChildRelationships;
+  }
+
+  /**
+   * The "other" (i.e. not couple, parent-child) relationships on this record.
+   *
+   * @return The "other" (i.e. not couple, parent-child) relationships on this record.
+   */
+  @XmlElement(name = "otherRelationship")
+  public List<OtherRelationship> getOtherRelationships() {
+    return otherRelationships;
+  }
+
+  /**
+   * The "other" (i.e. not couple, parent-child) relationships on this record.
+   *
+   * @param otherRelationships The "other" (i.e. not couple, parent-child) relationships on this record.
+   */
+  public void setOtherRelationships(List<OtherRelationship> otherRelationships) {
+    this.otherRelationships = otherRelationships;
   }
 
   /**
    * The relationships of the record.
    *
+   * @return The relationships of the record.
+   */
+  @XmlTransient
+  public java.util.Collection<Relationship> getRelationships() {
+    ArrayList<Relationship> relationships = new ArrayList<Relationship>();
+    if (this.coupleRelationships != null) {
+      relationships.addAll(this.coupleRelationships);
+    }
+    if (this.parentChildRelationships != null) {
+      relationships.addAll(this.parentChildRelationships);
+    }
+    if (this.otherRelationships != null) {
+      relationships.addAll(this.otherRelationships);
+    }
+    return relationships;
+  }
+
+  /**
+   * The relationships of the record. Convenience method for setting the collection of couple, parent-child, and other relationships.
+   *
    * @param relationships The relationships of the record.
    */
-  public void setRelationships(List<Relationship> relationships) {
-    this.relationships = relationships;
+  public void setRelationships(java.util.Collection<Relationship> relationships) {
+    ArrayList<CoupleRelationship> coupleRelationships = new ArrayList<CoupleRelationship>();
+    ArrayList<ParentChildRelationship> parentChildRelationships = new ArrayList<ParentChildRelationship>();
+    ArrayList<OtherRelationship> otherRelationships = new ArrayList<OtherRelationship>();
+
+    if (relationships != null) {
+      for (Relationship relationship : relationships) {
+        if (relationship instanceof CoupleRelationship) {
+          coupleRelationships.add((CoupleRelationship) relationship);
+        }
+        else if (relationship instanceof ParentChildRelationship) {
+          parentChildRelationships.add((ParentChildRelationship) relationship);
+        }
+        else if (relationship instanceof OtherRelationship) {
+          otherRelationships.add((OtherRelationship) relationship);
+        }
+        else {
+          throw new IllegalArgumentException("Unknown relationship type: " + relationship.getClass().getName());
+        }
+      }
+    }
+
+    this.coupleRelationships = coupleRelationships.isEmpty() ? null : coupleRelationships;
+    this.parentChildRelationships = parentChildRelationships.isEmpty() ? null : parentChildRelationships;
+    this.otherRelationships = otherRelationships.isEmpty() ? null : otherRelationships;
   }
 
   /**

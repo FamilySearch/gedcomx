@@ -270,8 +270,9 @@ public class TestRecord {
 
     assertEquals("pal", record.getPersistentId().getValue().toString());
 
-    assertEquals(2, record.getRelationships().size());
-    CoupleRelationship coupleRelationship = (CoupleRelationship) record.getRelationships().get(0);
+    assertEquals(1, record.getCoupleRelationships().size());
+    assertEquals(1, record.getCoupleRelationships().size());
+    CoupleRelationship coupleRelationship = record.getCoupleRelationships().get(0);
     assertEquals(1, coupleRelationship.getCharacteristics().size());
     Characteristic coupleCharacteristic = coupleRelationship.getCharacteristics().get(0);
     assertField(coupleCharacteristic, "couple-characteristic");
@@ -292,7 +293,7 @@ public class TestRecord {
       assertNull(coupleRelationship.getPersona2());
     }
 
-    ParentChildRelationship parentRelationship = (ParentChildRelationship) record.getRelationships().get(1);
+    ParentChildRelationship parentRelationship = record.getParentChildRelationships().get(0);
     assertEquals("parent-relationship-id", parentRelationship.getId());
     if (!json) {
       assertSame(persona, parentRelationship.getParent());
