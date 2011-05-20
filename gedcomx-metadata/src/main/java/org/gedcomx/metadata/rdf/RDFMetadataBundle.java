@@ -15,6 +15,8 @@
  */
 package org.gedcomx.metadata.rdf;
 
+import org.codehaus.enunciate.json.JsonName;
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.id.XmlTypeIdResolver;
@@ -65,6 +67,8 @@ public class RDFMetadataBundle {
    * @return The list of items in this bundle of metadata.
    */
   @XmlElement ( name = "Description" )
+  @JsonProperty ("Descriptions")
+  @JsonName ("Descriptions")
   public List<RDFMetadata> getMetadataList() {
     return metadataList;
   }
@@ -74,6 +78,7 @@ public class RDFMetadataBundle {
    *
    * @param metadataList The list of items in this bundle of metadata.
    */
+  @JsonProperty ("Descriptions")
   public void setMetadataList(List<RDFMetadata> metadataList) {
     this.metadataList = metadataList;
   }

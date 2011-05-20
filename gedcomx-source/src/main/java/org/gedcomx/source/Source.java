@@ -16,7 +16,9 @@
 package org.gedcomx.source;
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
+import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.enunciate.qname.XmlQNameEnumRef;
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.attribution.AttributionReference;
@@ -136,6 +138,8 @@ public class Source {
    * @return The list of alternate ids of the source.
    */
   @XmlElement (name="alternateId")
+  @JsonProperty ("alternateIds")
+  @JsonName ("alternateIds")
   public List<AlternateId> getAlternateIds() {
     return alternateIds;
   }
@@ -145,6 +149,7 @@ public class Source {
    *
    * @param alternateIds The list of alternate ids of the source.
    */
+  @JsonProperty ("alternateIds")
   public void setAlternateIds(List<AlternateId> alternateIds) {
     this.alternateIds = alternateIds;
   }

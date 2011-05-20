@@ -15,16 +15,20 @@
  */
 package org.gedcomx.build.enunciate;
 
+import com.sun.mirror.declaration.FieldDeclaration;
 import com.sun.mirror.type.DeclaredType;
 import com.sun.mirror.type.EnumType;
 import com.sun.mirror.type.MirroredTypeException;
 import com.sun.mirror.type.TypeMirror;
+import net.sf.jelly.apt.decorations.declaration.DecoratedMethodDeclaration;
+import net.sf.jelly.apt.decorations.declaration.PropertyDeclaration;
 import org.codehaus.enunciate.contract.jaxb.*;
 import org.codehaus.enunciate.contract.jaxb.types.XmlClassType;
 import org.codehaus.enunciate.contract.jaxb.types.XmlType;
 import org.codehaus.enunciate.contract.validation.BaseValidator;
 import org.codehaus.enunciate.contract.validation.ValidationResult;
 import org.codehaus.enunciate.qname.XmlQNameEnum;
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 
@@ -184,6 +188,36 @@ public class GEDCOMXValidator extends BaseValidator {
           String ns = ref != null ? ref.getNamespaceURI() : choice.getNamespace();
           if (ns == null || "".equals(ns)) {
             result.addError(choice, "Choice should not reference the empty namespace.");
+          }
+        }
+
+        if (element.isCollectionType()) {
+          if (!element.isWrapped() && element.getName().endsWith("s")) {
+            result.addWarning(element, "You may want to use @XmlElement to change the name to a non-plural form.");
+          }
+          else {
+            //make sure collection types have a proper json name.
+            String jsonMemberName = element.getJsonMemberName();
+            if (!jsonMemberName.endsWith("s")) {
+              result.addWarning(element, "Collection element should probably have a JSON name that ends with 's'. Consider annotating it with @JsonName.");
+            }
+            else if (!element.isWrapped()) {
+              if (element.getDelegate() instanceof PropertyDeclaration) {
+                DecoratedMethodDeclaration getter = ((PropertyDeclaration) element.getDelegate()).getGetter();
+                if (getter == null || getter.getAnnotation(JsonProperty.class) == null || !jsonMemberName.equals(getter.getAnnotation(JsonProperty.class).value())) {
+                  result.addWarning(element, "Collection element is annotated with @JsonName, but the getter needs to also be annotated with @JsonProperty(\"" + jsonMemberName + "\").");
+                }
+                DecoratedMethodDeclaration setter = ((PropertyDeclaration) element.getDelegate()).getSetter();
+                if (setter == null || setter.getAnnotation(JsonProperty.class) == null || !jsonMemberName.equals(setter.getAnnotation(JsonProperty.class).value())) {
+                  result.addWarning(element, "Collection element is annotated with @JsonName, but the setter needs to also be annotated with @JsonProperty(\"" + jsonMemberName + "\").");
+                }
+              }
+              else if (element.getDelegate() instanceof FieldDeclaration) {
+                if (element.getAnnotation(JsonProperty.class) == null || !jsonMemberName.equals(element.getAnnotation(JsonProperty.class).value())) {
+                  result.addWarning(element, "Collection element is annotated with @JsonName, but the field needs to also be annotated with @JsonProperty(\"" + jsonMemberName + "\").");
+                }
+              }
+            }
           }
         }
       }

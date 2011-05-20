@@ -15,6 +15,8 @@
  */
 package org.gedcomx.record;
 
+import org.codehaus.enunciate.json.JsonName;
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.gedcomx.types.RelationshipType;
 
 import javax.xml.bind.annotation.XmlAttribute;
@@ -97,6 +99,8 @@ public abstract class Relationship {
    * @return The characteristic fields of the relationship.
    */
   @XmlElement(name = "characteristic")
+  @JsonProperty ("characteristics")
+  @JsonName ("characteristics")
   public List<Characteristic> getCharacteristics() {
     return characteristics;
   }
@@ -106,6 +110,7 @@ public abstract class Relationship {
    *
    * @param characteristics The characteristic fields of the relationship.
    */
+  @JsonProperty ("characteristics")
   public void setCharacteristics(List<Characteristic> characteristics) {
     this.characteristics = characteristics;
   }

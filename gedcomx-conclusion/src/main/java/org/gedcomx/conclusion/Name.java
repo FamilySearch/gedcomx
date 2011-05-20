@@ -16,17 +16,16 @@
 package org.gedcomx.conclusion;
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
+import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.enunciate.qname.XmlQNameEnumRef;
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.id.XmlTypeIdResolver;
 import org.gedcomx.types.NameStyle;
 import org.gedcomx.types.NameType;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.namespace.QName;
 import java.util.List;
 
@@ -146,6 +145,9 @@ public class Name extends Conclusion {
    *
    * @return Alternate forms of the name, such as the romanized form of a non-latin name.
    */
+  @XmlElement (name = "alternateForm")
+  @JsonName ("alternateForms")
+  @JsonProperty ("alternateForms")
   public List<NameForm> getAlternateForms() {
     return alternateForms;
   }
@@ -155,6 +157,7 @@ public class Name extends Conclusion {
    *
    * @param alternateForms Alternate forms of the name, such as the romanized form of a non-latin name.
    */
+  @JsonProperty ("alternateForms")
   public void setAlternateForms(List<NameForm> alternateForms) {
     this.alternateForms = alternateForms;
   }

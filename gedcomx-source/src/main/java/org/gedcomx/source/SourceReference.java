@@ -16,13 +16,16 @@
 package org.gedcomx.source;
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
+import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.enunciate.qname.XmlQNameEnumRef;
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.id.XmlTypeIdResolver;
 import org.gedcomx.types.SourceReferenceType;
 
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.namespace.QName;
@@ -126,6 +129,9 @@ public class SourceReference {
    *
    * @return The qualifiers for the source being referenced.
    */
+  @XmlElement(name = "qualifier")
+  @JsonName("qualifiers")
+  @JsonProperty("qualifiers")
   public List<SourceQualifier> getQualifiers() {
     return qualifiers;
   }
@@ -135,6 +141,7 @@ public class SourceReference {
    *
    * @param qualifiers The qualifiers for the source being referenced.
    */
+  @JsonProperty("qualifiers")
   public void setQualifiers(List<SourceQualifier> qualifiers) {
     this.qualifiers = qualifiers;
   }

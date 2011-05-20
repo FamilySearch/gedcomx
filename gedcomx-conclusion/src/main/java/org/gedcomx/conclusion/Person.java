@@ -15,6 +15,8 @@
  */
 package org.gedcomx.conclusion;
 
+import org.codehaus.enunciate.json.JsonName;
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.id.AlternateId;
@@ -94,6 +96,8 @@ public class Person {
    * @return The list of alternate ids of the person.
    */
   @XmlElement (name="alternateId")
+  @JsonProperty ("alternateIds")
+  @JsonName ("alternateIds")
   public List<AlternateId> getAlternateIds() {
     return alternateIds;
   }
@@ -103,6 +107,7 @@ public class Person {
    *
    * @param alternateIds The list of alternate ids of the person.
    */
+  @JsonProperty ("alternateIds")
   public void setAlternateIds(List<AlternateId> alternateIds) {
     this.alternateIds = alternateIds;
   }
@@ -131,6 +136,8 @@ public class Person {
    * @return The name conclusions for the person.
    */
   @XmlElement(name="name")
+  @JsonProperty("names")
+  @JsonName("names")
   public List<Name> getNames() {
     return names;
   }
@@ -140,6 +147,7 @@ public class Person {
    *
    * @param names The name conclusions for the person.
    */
+  @JsonProperty("names")
   public void setNames(List<Name> names) {
     this.names = names;
   }
@@ -150,6 +158,8 @@ public class Person {
    * @return The event conclusions for the person.
    */
   @XmlElement(name="event")
+  @JsonProperty("events")
+  @JsonName("events")
   public List<Event> getEvents() {
     return events;
   }
@@ -159,6 +169,7 @@ public class Person {
    *
    * @param events The event conclusions for the person.
    */
+  @JsonProperty("events")
   public void setEvents(List<Event> events) {
     this.events = events;
   }
@@ -169,6 +180,8 @@ public class Person {
    * @return The characteristic conclusions for the person.
    */
   @XmlElement(name="characteristic")
+  @JsonProperty("characteristics")
+  @JsonName("characteristics")
   public List<Characteristic> getCharacteristics() {
     return characteristics;
   }
@@ -178,6 +191,7 @@ public class Person {
    *
    * @param characteristics The characteristic conclusions for the person.
    */
+  @JsonProperty("characteristics")
   public void setCharacteristics(List<Characteristic> characteristics) {
     this.characteristics = characteristics;
   }
@@ -188,6 +202,8 @@ public class Person {
    * @return The references to the relationships of the person.
    */
   @XmlElement(name="relationship")
+  @JsonProperty("relationships")
+  @JsonName("relationships")
   public List<RelationshipReference> getRelationships() {
     return relationships;
   }
@@ -197,6 +213,7 @@ public class Person {
    *
    * @param relationships The references to the relationships of the person.
    */
+  @JsonProperty("relationships")
   public void setRelationships(List<RelationshipReference> relationships) {
     this.relationships = relationships;
   }
@@ -207,6 +224,8 @@ public class Person {
    * @return The sources for the conclusions about this person.
    */
   @XmlElement(name="source")
+  @JsonProperty("sources")
+  @JsonName("sources")
   public List<AttributedSourceReference> getSources() {
     return sources;
   }
@@ -216,6 +235,7 @@ public class Person {
    *
    * @param sources The sources for the conclusions about this person.
    */
+  @JsonProperty("sources")
   public void setSources(List<AttributedSourceReference> sources) {
     this.sources = sources;
   }

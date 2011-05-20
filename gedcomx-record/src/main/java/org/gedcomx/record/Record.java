@@ -16,7 +16,9 @@
 package org.gedcomx.record;
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
+import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.enunciate.qname.XmlQNameEnumRef;
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.attribution.AttributionReference;
@@ -141,6 +143,8 @@ public class Record {
    * @return The list of alternate ids of the record.
    */
   @XmlElement (name="alternateId")
+  @JsonProperty("alternateIds")
+  @JsonName("alternateIds")
   public List<AlternateId> getAlternateIds() {
     return alternateIds;
   }
@@ -150,6 +154,7 @@ public class Record {
    *
    * @param alternateIds The list of alternate ids of the record.
    */
+  @JsonProperty("alternateIds")
   public void setAlternateIds(List<AlternateId> alternateIds) {
     this.alternateIds = alternateIds;
   }
@@ -196,6 +201,8 @@ public class Record {
    * @return The personas of this record.
    */
   @XmlElement(name = "persona")
+  @JsonProperty("personas")
+  @JsonName("personas")
   public List<Persona> getPersonas() {
     return personas;
   }
@@ -205,6 +212,7 @@ public class Record {
    *
    * @param personas The personas of this record.
    */
+  @JsonProperty("personas")
   public void setPersonas(List<Persona> personas) {
     this.personas = personas;
   }
@@ -215,6 +223,8 @@ public class Record {
    * @return The events of the record.
    */
   @XmlElement(name = "event")
+  @JsonProperty("events")
+  @JsonName("events")
   public List<Event> getEvents() {
     return events;
   }
@@ -224,6 +234,7 @@ public class Record {
    *
    * @param events The events of the record.
    */
+  @JsonProperty("events")
   public void setEvents(List<Event> events) {
     this.events = events;
   }
@@ -234,6 +245,8 @@ public class Record {
    * @return The couple relationships on this record.
    */
   @XmlElement(name = "coupleRelationship")
+  @JsonProperty("coupleRelationships")
+  @JsonName("coupleRelationships")
   public List<CoupleRelationship> getCoupleRelationships() {
     return coupleRelationships;
   }
@@ -243,6 +256,7 @@ public class Record {
    *
    * @param coupleRelationships The couple relationships on this record.
    */
+  @JsonProperty("coupleRelationships")
   public void setCoupleRelationships(List<CoupleRelationship> coupleRelationships) {
     this.coupleRelationships = coupleRelationships;
   }
@@ -253,6 +267,8 @@ public class Record {
    * @return The parent-child relationships on this record.
    */
   @XmlElement(name = "parentChildRelationship")
+  @JsonProperty("parentChildRelationships")
+  @JsonName("parentChildRelationships")
   public List<ParentChildRelationship> getParentChildRelationships() {
     return parentChildRelationships;
   }
@@ -262,6 +278,7 @@ public class Record {
    *
    * @param parentChildRelationships The parent-child relationships on this record.
    */
+  @JsonProperty("parentChildRelationships")
   public void setParentChildRelationships(List<ParentChildRelationship> parentChildRelationships) {
     this.parentChildRelationships = parentChildRelationships;
   }
@@ -272,6 +289,8 @@ public class Record {
    * @return The "other" (i.e. not couple, parent-child) relationships on this record.
    */
   @XmlElement(name = "otherRelationship")
+  @JsonProperty("otherRelationships")
+  @JsonName("otherRelationships")
   public List<OtherRelationship> getOtherRelationships() {
     return otherRelationships;
   }
@@ -281,6 +300,7 @@ public class Record {
    *
    * @param otherRelationships The "other" (i.e. not couple, parent-child) relationships on this record.
    */
+  @JsonProperty("otherRelationships")
   public void setOtherRelationships(List<OtherRelationship> otherRelationships) {
     this.otherRelationships = otherRelationships;
   }
@@ -343,6 +363,8 @@ public class Record {
    * @return Any generic fields that are on the record (not belonging to a persona or relationship).
    */
   @XmlElement(name = "field")
+  @JsonProperty("fields")
+  @JsonName("fields")
   public List<RecordField> getFields() {
     return fields;
   }
@@ -352,6 +374,7 @@ public class Record {
    *
    * @param fields Any generic fields that are on the record (not belonging to a persona or relationship).
    */
+  @JsonProperty("fields")
   public void setFields(List<RecordField> fields) {
     this.fields = fields;
   }
@@ -362,6 +385,8 @@ public class Record {
    * @return The references to the sources of the record.
    */
   @XmlElement(name = "source")
+  @JsonProperty("sources")
+  @JsonName("sources")
   public List<SourceReference> getSources() {
     return sources;
   }
@@ -371,6 +396,7 @@ public class Record {
    *
    * @param sources The references to the sources of the record.
    */
+  @JsonProperty("sources")
   public void setSources(List<SourceReference> sources) {
     this.sources = sources;
   }

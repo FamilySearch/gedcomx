@@ -15,6 +15,8 @@
  */
 package org.gedcomx.record;
 
+import org.codehaus.enunciate.json.JsonName;
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.id.AlternateId;
@@ -94,6 +96,8 @@ public class Persona {
    * @return The list of alternate ids of the persona.
    */
   @XmlElement (name="alternateId")
+  @JsonProperty ("alternateIds")
+  @JsonName ("alternateIds")
   public List<AlternateId> getAlternateIds() {
     return alternateIds;
   }
@@ -103,6 +107,7 @@ public class Persona {
    *
    * @param alternateIds The list of alternate ids of the persona.
    */
+  @JsonProperty ("alternateIds")
   public void setAlternateIds(List<AlternateId> alternateIds) {
     this.alternateIds = alternateIds;
   }
@@ -149,6 +154,8 @@ public class Persona {
    * @return The name conclusions for the persona.
    */
   @XmlElement(name="name")
+  @JsonProperty("names")
+  @JsonName("names")
   public java.util.List<Name> getNames() {
     return names;
   }
@@ -158,6 +165,7 @@ public class Persona {
    *
    * @param names The name conclusions for the persona.
    */
+  @JsonProperty("names")
   public void setNames(java.util.List<Name> names) {
     this.names = names;
   }
@@ -168,6 +176,8 @@ public class Persona {
    * @return The characteristic fields on this persona.
    */
   @XmlElement(name="characteristic")
+  @JsonProperty("characteristics")
+  @JsonName("characteristics")
   public List<Characteristic> getCharacteristics() {
     return characteristics;
   }
@@ -177,6 +187,7 @@ public class Persona {
    *
    * @param characteristics The characteristic fields on this persona.
    */
+  @JsonProperty("characteristics")
   public void setCharacteristics(List<Characteristic> characteristics) {
     this.characteristics = characteristics;
   }
@@ -187,6 +198,8 @@ public class Persona {
    * @return The roles this persona plays in the events of the record.
    */
   @XmlElement(name = "eventRole")
+  @JsonProperty("eventRoles")
+  @JsonName("eventRoles")
   public List<EventRole> getEventRoles() {
     return eventRoles;
   }
@@ -196,6 +209,7 @@ public class Persona {
    *
    * @param eventRoles The roles this persona plays in the events of the record.
    */
+  @JsonProperty("eventRoles")
   public void setEventRoles(List<EventRole> eventRoles) {
     this.eventRoles = eventRoles;
   }

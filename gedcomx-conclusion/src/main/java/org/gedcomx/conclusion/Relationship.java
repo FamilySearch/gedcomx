@@ -15,6 +15,8 @@
  */
 package org.gedcomx.conclusion;
 
+import org.codehaus.enunciate.json.JsonName;
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.attribution.AttributionReference;
@@ -92,6 +94,8 @@ public abstract class Relationship {
    * @return The list of alternate ids of the relationship.
    */
   @XmlElement (name="alternateId")
+  @JsonProperty("alternateIds")
+  @JsonName("alternateIds")
   public List<AlternateId> getAlternateIds() {
     return alternateIds;
   }
@@ -101,6 +105,7 @@ public abstract class Relationship {
    *
    * @param alternateIds The list of alternate ids of the relationship.
    */
+  @JsonProperty("alternateIds")
   public void setAlternateIds(List<AlternateId> alternateIds) {
     this.alternateIds = alternateIds;
   }
@@ -129,6 +134,8 @@ public abstract class Relationship {
    * @return The event conclusions for the relationship.
    */
   @XmlElement(name="event")
+  @JsonProperty("events")
+  @JsonName("events")
   public List<Event> getEvents() {
     return events;
   }
@@ -138,6 +145,7 @@ public abstract class Relationship {
    *
    * @param events The event conclusions for the relationship.
    */
+  @JsonProperty("events")
   public void setEvents(List<Event> events) {
     this.events = events;
   }
@@ -148,6 +156,8 @@ public abstract class Relationship {
    * @return The characteristic conclusions for the relationship.
    */
   @XmlElement(name="characteristic")
+  @JsonProperty("characteristics")
+  @JsonName("characteristics")
   public List<Characteristic> getCharacteristics() {
     return characteristics;
   }
@@ -157,6 +167,7 @@ public abstract class Relationship {
    *
    * @param characteristics The characteristic conclusions for the relationship.
    */
+  @JsonProperty("characteristics")
   public void setCharacteristics(List<Characteristic> characteristics) {
     this.characteristics = characteristics;
   }
@@ -167,6 +178,8 @@ public abstract class Relationship {
    * @return The sources for the conclusions about this relationship.
    */
   @XmlElement(name="source")
+  @JsonProperty ("sources")
+  @JsonName ("sources")
   public List<AttributedSourceReference> getSources() {
     return sources;
   }
@@ -176,6 +189,7 @@ public abstract class Relationship {
    *
    * @param sources The sources for the conclusions about this relationship.
    */
+  @JsonProperty ("sources")
   public void setSources(List<AttributedSourceReference> sources) {
     this.sources = sources;
   }
