@@ -126,7 +126,6 @@ public class TestRecord {
 
     persona.setId("persona-id");
     persona.setPersistentId(new PersistentIdentifier());
-    persona.getPersistentId().setKnownType(PersistentIdentifierType.pal);
     persona.getPersistentId().setValue(URI.create("urn:persona-id-value"));
     persona.setPrincipal(true);
     ArrayList<EventRole> eventRoles = new ArrayList<EventRole>();
@@ -152,7 +151,6 @@ public class TestRecord {
     record.setFields(fields);
 
     record.setPersistentId(new PersistentIdentifier());
-    record.getPersistentId().setKnownType(PersistentIdentifierType.pal);
     record.getPersistentId().setValue(URI.create("pal"));
 
     ArrayList<org.gedcomx.record.Relationship> relationships = new ArrayList<org.gedcomx.record.Relationship>();
@@ -266,7 +264,6 @@ public class TestRecord {
     assertEquals(GenderType.female, persona.getGender().getType());
 
     assertEquals("persona-id", persona.getId());
-    assertEquals(PersistentIdentifierType.pal, persona.getPersistentId().getKnownType());
     assertEquals("urn:persona-id-value", persona.getPersistentId().getValue().toString());
     assertTrue(persona.getPrincipal());
     assertEquals(1, persona.getEventRoles().size());
@@ -290,7 +287,6 @@ public class TestRecord {
     assertEquals("field-value-interpreted", field.getInterpreted());
     assertEquals("field-value-normalized", field.getNormalized());
 
-    assertEquals(PersistentIdentifierType.pal, record.getPersistentId().getKnownType());
     assertEquals("pal", record.getPersistentId().getValue().toString());
 
     assertEquals(2, record.getRelationships().size());

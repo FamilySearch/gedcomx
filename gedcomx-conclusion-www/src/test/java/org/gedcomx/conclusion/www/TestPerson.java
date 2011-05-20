@@ -5,7 +5,6 @@ import org.gedcomx.conclusion.*;
 import org.gedcomx.id.AlternateId;
 import org.gedcomx.types.AlternateIdType;
 import org.gedcomx.id.PersistentIdentifier;
-import org.gedcomx.types.PersistentIdentifierType;
 import org.gedcomx.source.AttributedSourceReference;
 import org.gedcomx.source.SourceQualifier;
 import org.gedcomx.source.SourceQualifierProperty;
@@ -184,7 +183,6 @@ public class TestPerson {
     person.setNames(names);
 
     person.setPersistentId(new PersistentIdentifier());
-    person.getPersistentId().setKnownType(PersistentIdentifierType.pal);
     person.getPersistentId().setValue(URI.create("pal"));
 
     person.setRelationships(new ArrayList<RelationshipReference>());
@@ -300,7 +298,6 @@ public class TestPerson {
     person.setNames(names);
 
     person.setPersistentId(new PersistentIdentifier());
-    person.getPersistentId().setKnownType(PersistentIdentifierType.pal);
     person.getPersistentId().setValue(URI.create("pal"));
 
     person.setRelationships(new ArrayList<RelationshipReference>());
@@ -400,7 +397,6 @@ public class TestPerson {
     assertEquals(NamePartType.surname, name.getPrimaryForm().getParts().get(0).getKnownType());
 
     assertEquals("pal", person.getPersistentId().getValue().toString());
-    assertEquals(PersistentIdentifierType.pal, person.getPersistentId().getKnownType());
 
     assertEquals(1, person.getRelationships().size());
     relationshipReference = person.getRelationships().iterator().next();
@@ -481,7 +477,6 @@ public class TestPerson {
     assertEquals(NamePartType.surname, name.getPrimaryForm().getParts().get(0).getKnownType());
 
     assertEquals("pal", person.getPersistentId().getValue().toString());
-    assertEquals(PersistentIdentifierType.pal, person.getPersistentId().getKnownType());
 
     assertEquals(1, person.getRelationships().size());
     relationshipReference = person.getRelationships().iterator().next();

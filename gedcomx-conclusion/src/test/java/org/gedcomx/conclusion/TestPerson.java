@@ -129,7 +129,6 @@ public class TestPerson {
     person.setNames(names);
 
     person.setPersistentId(new PersistentIdentifier());
-    person.getPersistentId().setKnownType(PersistentIdentifierType.pal);
     person.getPersistentId().setValue(URI.create("pal"));
 
     person.setRelationships(new ArrayList<RelationshipReference>());
@@ -217,7 +216,6 @@ public class TestPerson {
     assertEquals(NamePartType.surname, name.getPrimaryForm().getParts().get(0).getKnownType());
 
     assertEquals("pal", person.getPersistentId().getValue().toString());
-    assertEquals(PersistentIdentifierType.pal, person.getPersistentId().getKnownType());
 
     assertEquals(1, person.getRelationships().size());
     relationshipReference = person.getRelationships().iterator().next();

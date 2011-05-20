@@ -15,14 +15,7 @@
  */
 package org.gedcomx.id;
 
-import org.codehaus.enunciate.XmlQNameEnumUtil;
-import org.codehaus.enunciate.qname.XmlQNameEnumRef;
-import org.gedcomx.types.PersistentIdentifierType;
-
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlValue;
-import javax.xml.namespace.QName;
 import java.net.URI;
 
 /**
@@ -32,47 +25,7 @@ import java.net.URI;
  */
 public final class PersistentIdentifier {
 
-  private QName type;
   private URI value;
-
-  /**
-   * The type of the persistent identifier.
-   *
-   * @return The type of the persistent identifier.
-   */
-  @XmlAttribute
-  @XmlQNameEnumRef(PersistentIdentifierType.class)
-  public QName getType() {
-    return type;
-  }
-
-  /**
-   * The type of the persistent identifier.
-   *
-   * @param type The type of the persistent identifier.
-   */
-  public void setType(QName type) {
-    this.type = type;
-  }
-
-  /**
-   * The enum referencing the known type of the persistent identifier, or {@link PersistentIdentifierType#other} if not known.
-   *
-   * @return The enum referencing the known type of the persistent identifier, or {@link PersistentIdentifierType#other} if not known.
-   */
-  @XmlTransient
-  public PersistentIdentifierType getKnownType() {
-    return XmlQNameEnumUtil.fromQName(getType(), PersistentIdentifierType.class);
-  }
-
-  /**
-   * Set the persistent identifier type from a enumeration of known types.
-   *
-   * @param type The peristent identifier type.
-   */
-  public void setKnownType(PersistentIdentifierType type) {
-    this.type = XmlQNameEnumUtil.toQName(type);
-  }
 
   /**
    * The value of the persistent identifier.
