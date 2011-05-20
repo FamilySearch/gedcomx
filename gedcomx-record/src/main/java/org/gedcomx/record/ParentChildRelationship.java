@@ -24,7 +24,6 @@ import org.gedcomx.types.LineageType;
 import org.gedcomx.types.RelationshipType;
 
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.namespace.QName;
@@ -38,6 +37,8 @@ import javax.xml.namespace.QName;
 public class ParentChildRelationship extends Relationship {
 
   private QName lineageType;
+  private PersonaReference parent;
+  private PersonaReference child;
 
   /**
    * The lineage type.
@@ -79,43 +80,59 @@ public class ParentChildRelationship extends Relationship {
   }
 
   /**
-   * The parent persona in the relationship.
+   * Reference to the parent persona in the relationship.
    *
    * @return The parent persona in the relationship.
    */
-  @XmlAttribute
-  @XmlIDREF
-  public Persona getParent() {
-    return getPersona1();
+  public PersonaReference getParent() {
+    return this.parent;
   }
 
   /**
-   * The parent persona in the relationship.
+   * Reference to the parent persona in the relationship.
    *
-   * @param parent The parent persona in the relationship.
+   * @param parent Reference to the parent persona in the relationship.
    */
-  public void setParent(Persona parent) {
-    setPersona1(parent);
+  public void setParent(PersonaReference parent) {
+    this.parent = parent;
   }
 
   /**
-   * The child in the relationship.
+   * Reference to the child in the relationship.
    *
-   * @return The child in the relationship.
+   * @return Reference to the child in the relationship.
    */
-  @XmlAttribute
-  @XmlIDREF
-  public Persona getChild() {
-    return getPersona2();
+  public PersonaReference getChild() {
+    return this.child;
   }
 
   /**
-   * The child in the relationship.
+   * Reference to the child in the relationship.
    *
-   * @param child The child in the relationship.
+   * @param child Reference to the child in the relationship.
    */
-  public void setChild(Persona child) {
-    setPersona2(child);
+  public void setChild(PersonaReference child) {
+    this.child = child;
+  }
+
+  @Override
+  public PersonaReference getPersona1() {
+    return getParent();
+  }
+
+  @Override
+  public void setPersona1(PersonaReference persona1) {
+    setParent(persona1);
+  }
+
+  @Override
+  public PersonaReference getPersona2() {
+    return getChild();
+  }
+
+  @Override
+  public void setPersona2(PersonaReference persona2) {
+    setChild(persona2);
   }
 
   @XmlTransient

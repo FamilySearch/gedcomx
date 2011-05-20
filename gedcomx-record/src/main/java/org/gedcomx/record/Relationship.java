@@ -33,8 +33,6 @@ public abstract class Relationship {
   //provide subclasses.
 
   private String id;
-  private Persona persona1;
-  private Persona persona2;
   private List<Characteristic> characteristics = new ArrayList<Characteristic>();
 
   /**
@@ -64,10 +62,7 @@ public abstract class Relationship {
    * @return A persona in the relationship. The name "persona1" is used only to distinguish it from
    * the other persona in this relationship and implies neither order nor role.
    */
-  @XmlTransient
-  public Persona getPersona1() {
-    return this.persona1;
-  }
+  public abstract PersonaReference getPersona1();
 
   /**
    * A persona in the relationship. The name "persona1" is used only to distinguish it from
@@ -76,9 +71,7 @@ public abstract class Relationship {
    * @param persona1 A persona in the relationship. The name "persona1" is used only to distinguish it from
    * the other persona in this relationship and implies neither order nor role.
    */
-  public void setPersona1(Persona persona1) {
-    this.persona1 = persona1;
-  }
+  public abstract void setPersona1(PersonaReference persona1);
 
   /**
    * A persona in the relationship. The name "persona2" is used only to distinguish it from
@@ -87,10 +80,7 @@ public abstract class Relationship {
    * @return A persona in the relationship. The name "persona2" is used only to distinguish it from
    * the other persona in this relationship and implies neither order nor role.
    */
-  @XmlTransient
-  public Persona getPersona2() {
-    return this.persona2;
-  }
+  public abstract PersonaReference getPersona2();
 
   /**
    * A persona in the relationship. The name "persona2" is used only to distinguish it from
@@ -99,9 +89,7 @@ public abstract class Relationship {
    * @param persona2 A persona in the relationship. The name "persona2" is used only to distinguish it from
    * the other persona in this relationship and implies neither order nor role.
    */
-  public void setPersona2(Persona persona2) {
-    this.persona2 = persona2;
-  }
+  public abstract void setPersona2(PersonaReference persona2);
 
   /**
    * The characteristic fields of the relationship.

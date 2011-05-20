@@ -23,7 +23,6 @@ import org.gedcomx.id.XmlTypeIdResolver;
 import org.gedcomx.types.RelationshipType;
 
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.namespace.QName;
 
@@ -36,6 +35,8 @@ public class OtherRelationship extends Relationship {
 
   private QName type;
   private String description;
+  private PersonaReference persona1;
+  private PersonaReference persona2;
 
   /**
    * The type of this relationship.
@@ -103,23 +104,21 @@ public class OtherRelationship extends Relationship {
    * the other persona in this relationship. When the relationship type implies direction, it
    * goes from "persona1" to "persona2".
    */
-  @XmlAttribute
-  @XmlIDREF
-  public Persona getPersona1() {
-    return super.getPersona1();
+  public PersonaReference getPersona1() {
+    return this.persona1;
   }
 
   /**
    * A persona in the relationship. The name "persona1" is used only to distinguish it from
    * the other persona in this relationship. When the relationship type implies direction, it
    * goes from "persona1" to "persona2".
-   * 
+   *
    * @param persona1 A persona in the relationship. The name "persona1" is used only to distinguish it from
    * the other persona in this relationship. When the relationship type implies direction, it
    * goes from "persona1" to "persona2".
    */
-  public void setPersona1(Persona persona1) {
-    super.setPersona1(persona1);
+  public void setPersona1(PersonaReference persona1) {
+    this.persona1 = persona1;
   }
 
   /**
@@ -131,23 +130,21 @@ public class OtherRelationship extends Relationship {
    * the other persona in this relationship. When the relationship type implies direction, it
    * goes from "persona1" to "persona2".
    */
-  @XmlAttribute
-  @XmlIDREF
-  public Persona getPersona2() {
-    return super.getPersona2();
+  public PersonaReference getPersona2() {
+    return this.persona2;
   }
 
   /**
    * A persona in the relationship. The name "persona2" is used only to distinguish it from
    * the other persona in this relationship. When the relationship type implies direction, it
    * goes from "persona1" to "persona2".
-   * 
+   *
    * @param persona2 A persona in the relationship. The name "persona2" is used only to distinguish it from
    * the other persona in this relationship. When the relationship type implies direction, it
    * goes from "persona1" to "persona2".
    */
-  public void setPersona2(Persona persona2) {
-    super.setPersona2(persona2);
+  public void setPersona2(PersonaReference persona2) {
+    this.persona2 = persona2;
   }
 
 }

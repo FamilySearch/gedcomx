@@ -16,8 +16,6 @@
 package org.gedcomx.record;
 
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlIDREF;
 
 /**
  * A role played by a persona in a recorded event.
@@ -25,7 +23,7 @@ import javax.xml.bind.annotation.XmlIDREF;
 public final class EventRole {
 
   private String description;
-  private Event event;
+  private EventReference event;
   private Boolean principal;
 
   /**
@@ -33,9 +31,7 @@ public final class EventRole {
    *
    * @return The reference to the event.
    */
-  @XmlAttribute
-  @XmlIDREF
-  public Event getEvent() {
+  public EventReference getEvent() {
     return event;
   }
 
@@ -44,7 +40,7 @@ public final class EventRole {
    *
    * @param event The reference to the event.
    */
-  public void setEvent(Event event) {
+  public void setEvent(EventReference event) {
     this.event = event;
   }
 

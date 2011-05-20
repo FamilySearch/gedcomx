@@ -20,8 +20,6 @@ import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.id.XmlTypeIdResolver;
 import org.gedcomx.types.RelationshipType;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
@@ -31,6 +29,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 public class CoupleRelationship extends Relationship {
 
+  private PersonaReference persona1;
+  private PersonaReference persona2;
+
   /**
    * A persona in the relationship. The name "persona1" is used only to distinguish it from
    * the other persona in this relationship and implies neither order nor role.
@@ -38,45 +39,41 @@ public class CoupleRelationship extends Relationship {
    * @return A persona in the relationship. The name "persona1" is used only to distinguish it from
    * the other persona in this relationship and implies neither order nor role.
    */
-  @XmlAttribute
-  @XmlIDREF
-  public Persona getPersona1() {
-    return super.getPersona1();
+  public PersonaReference getPersona1() {
+    return this.persona1;
   }
 
   /**
-   * A persona in the relationship. The name "persona1" is used only to distinguish it from
+   * Reference to a persona in the relationship. The name "persona1" is used only to distinguish it from
    * the other persona in this relationship and implies neither order nor role.
-   * 
+   *
    * @param persona1 A persona in the relationship. The name "persona1" is used only to distinguish it from
    * the other persona in this relationship and implies neither order nor role.
    */
-  public void setPersona1(Persona persona1) {
-    super.setPersona1(persona1);
+  public void setPersona1(PersonaReference persona1) {
+    this.persona1 = persona1;
   }
 
   /**
-   * A persona in the relationship. The name "persona2" is used only to distinguish it from
+   * Reference to a persona in the relationship. The name "persona2" is used only to distinguish it from
    * the other persona in this relationship and implies neither order nor role.
    * 
    * @return A persona in the relationship. The name "persona2" is used only to distinguish it from
    * the other persona in this relationship and implies neither order nor role.
    */
-  @XmlAttribute
-  @XmlIDREF
-  public Persona getPersona2() {
-    return super.getPersona2();
+  public PersonaReference getPersona2() {
+    return this.persona2;
   }
 
   /**
    * A persona in the relationship. The name "persona2" is used only to distinguish it from
    * the other persona in this relationship and implies neither order nor role.
-   * 
+   *
    * @param persona2 A persona in the relationship. The name "persona2" is used only to distinguish it from
    * the other persona in this relationship and implies neither order nor role.
    */
-  public void setPersona2(Persona persona2) {
-    super.setPersona2(persona2);
+  public void setPersona2(PersonaReference persona2) {
+    this.persona2 = persona2;
   }
 
   @XmlTransient
