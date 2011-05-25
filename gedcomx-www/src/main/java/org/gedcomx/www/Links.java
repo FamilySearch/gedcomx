@@ -16,6 +16,8 @@
 package org.gedcomx.www;
 
 import org.codehaus.enunciate.ClientName;
+import org.codehaus.enunciate.json.JsonName;
+import org.codehaus.jackson.annotate.JsonProperty;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -59,6 +61,8 @@ public final class Links {
    */
   @XmlElement( name="link" )
   @ClientName( "linkList" )
+  @JsonName ("links")
+  @JsonProperty ("links")
   public List<Link> getLinks() {
     return links;
   }
@@ -68,6 +72,7 @@ public final class Links {
    *
    * @param links The links.
    */
+  @JsonProperty ("links")
   public void setLinks(List<Link> links) {
     this.links = links;
   }
