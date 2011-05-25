@@ -21,7 +21,7 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.attribution.AttributionReference;
 import org.gedcomx.id.AlternateId;
-import org.gedcomx.id.PersistentIdentifier;
+import org.gedcomx.id.PersistentId;
 import org.gedcomx.id.XmlTypeIdResolver;
 import org.gedcomx.source.AttributedSourceReference;
 
@@ -41,7 +41,7 @@ import java.util.List;
 public abstract class Relationship {
 
   private String id;
-  private PersistentIdentifier persistentId;
+  private PersistentId persistentId;
   private List<AlternateId> alternateIds;
   private AttributionReference attribution;
 
@@ -75,7 +75,7 @@ public abstract class Relationship {
    *
    * @return A long-term, persistent, globally unique identifier for this relationship.
    */
-  public PersistentIdentifier getPersistentId() {
+  public PersistentId getPersistentId() {
     return persistentId;
   }
 
@@ -84,7 +84,7 @@ public abstract class Relationship {
    *
    * @param persistentId A long-term, persistent, globally unique identifier for this relationship.
    */
-  public void setPersistentId(PersistentIdentifier persistentId) {
+  public void setPersistentId(PersistentId persistentId) {
     this.persistentId = persistentId;
   }
 

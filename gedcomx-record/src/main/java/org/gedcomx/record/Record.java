@@ -23,7 +23,7 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.attribution.AttributionReference;
 import org.gedcomx.id.AlternateId;
-import org.gedcomx.id.PersistentIdentifier;
+import org.gedcomx.id.PersistentId;
 import org.gedcomx.id.XmlTypeIdResolver;
 import org.gedcomx.source.SourceReference;
 import org.gedcomx.types.RecordType;
@@ -45,7 +45,7 @@ public class Record {
 
   private String id;
   private QName type;
-  private PersistentIdentifier persistentId;
+  private PersistentId persistentId;
   private List<AlternateId> alternateIds;
   private AttributionReference attribution;
   private CollectionReference collection;
@@ -124,7 +124,7 @@ public class Record {
    *
    * @return A long-term, persistent, globally unique identifier for this record.
    */
-  public PersistentIdentifier getPersistentId() {
+  public PersistentId getPersistentId() {
     return persistentId;
   }
 
@@ -133,7 +133,7 @@ public class Record {
    *
    * @param persistentId A long-term, persistent, globally unique identifier for this record.
    */
-  public void setPersistentId(PersistentIdentifier persistentId) {
+  public void setPersistentId(PersistentId persistentId) {
     this.persistentId = persistentId;
   }
 

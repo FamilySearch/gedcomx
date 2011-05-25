@@ -23,7 +23,7 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.attribution.AttributionReference;
 import org.gedcomx.id.AlternateId;
-import org.gedcomx.id.PersistentIdentifier;
+import org.gedcomx.id.PersistentId;
 import org.gedcomx.id.XmlTypeIdResolver;
 import org.gedcomx.types.SourceType;
 
@@ -46,7 +46,7 @@ import java.util.List;
 public class Source {
 
   private String id;
-  private PersistentIdentifier persistentId;
+  private PersistentId persistentId;
   private List<AlternateId> alternateIds;
   private QName type;
   private URI webLocation;
@@ -119,7 +119,7 @@ public class Source {
    *
    * @return A long-term, persistent, globally unique identifier for this source.
    */
-  public PersistentIdentifier getPersistentId() {
+  public PersistentId getPersistentId() {
     return persistentId;
   }
 
@@ -128,7 +128,7 @@ public class Source {
    *
    * @param persistentId A long-term, persistent, globally unique identifier for this source.
    */
-  public void setPersistentId(PersistentIdentifier persistentId) {
+  public void setPersistentId(PersistentId persistentId) {
     this.persistentId = persistentId;
   }
 

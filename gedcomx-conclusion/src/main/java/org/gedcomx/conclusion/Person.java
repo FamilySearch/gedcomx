@@ -20,7 +20,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.id.AlternateId;
-import org.gedcomx.id.PersistentIdentifier;
+import org.gedcomx.id.PersistentId;
 import org.gedcomx.id.XmlTypeIdResolver;
 import org.gedcomx.source.AttributedSourceReference;
 
@@ -42,7 +42,7 @@ public class Person {
 
   private String id;
   private List<AlternateId> alternateIds;
-  private PersistentIdentifier persistentId;
+  private PersistentId persistentId;
   private Gender gender;
 
   //todo: change to List<? extends Name> when http://jira.codehaus.org/browse/ENUNCIATE-562 is fixed.
@@ -77,7 +77,7 @@ public class Person {
    *
    * @return A long-term, persistent, globally unique identifier for this person.
    */
-  public PersistentIdentifier getPersistentId() {
+  public PersistentId getPersistentId() {
     return persistentId;
   }
 
@@ -86,7 +86,7 @@ public class Person {
    *
    * @param persistentId A long-term, persistent, globally unique identifier for this person.
    */
-  public void setPersistentId(PersistentIdentifier persistentId) {
+  public void setPersistentId(PersistentId persistentId) {
     this.persistentId = persistentId;
   }
 

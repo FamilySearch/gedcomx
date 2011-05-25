@@ -20,7 +20,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.id.AlternateId;
-import org.gedcomx.id.PersistentIdentifier;
+import org.gedcomx.id.PersistentId;
 import org.gedcomx.id.XmlTypeIdResolver;
 
 import javax.xml.bind.annotation.XmlAttribute;
@@ -41,7 +41,7 @@ import java.util.List;
 public class Persona {
 
   private String id;
-  private PersistentIdentifier persistentId;
+  private PersistentId persistentId;
   private List<AlternateId> alternateIds;
   private Gender gender;
   private Age age;
@@ -77,7 +77,7 @@ public class Persona {
    *
    * @return A long-term, persistent, globally unique identifier for this persona.
    */
-  public PersistentIdentifier getPersistentId() {
+  public PersistentId getPersistentId() {
     return persistentId;
   }
 
@@ -86,7 +86,7 @@ public class Persona {
    *
    * @param persistentId A long-term, persistent, globally unique identifier for this persona.
    */
-  public void setPersistentId(PersistentIdentifier persistentId) {
+  public void setPersistentId(PersistentId persistentId) {
     this.persistentId = persistentId;
   }
 

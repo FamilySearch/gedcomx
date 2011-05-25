@@ -4,7 +4,7 @@ import org.gedcomx.attribution.AttributionReference;
 import org.gedcomx.conclusion.*;
 import org.gedcomx.id.AlternateId;
 import org.gedcomx.types.AlternateIdType;
-import org.gedcomx.id.PersistentIdentifier;
+import org.gedcomx.id.PersistentId;
 import org.gedcomx.source.AttributedSourceReference;
 import org.gedcomx.source.SourceQualifier;
 import org.gedcomx.source.SourceQualifierProperty;
@@ -182,7 +182,7 @@ public class TestPerson {
     names.add(name);
     person.setNames(names);
 
-    person.setPersistentId(new PersistentIdentifier());
+    person.setPersistentId(new PersistentId());
     person.getPersistentId().setValue(URI.create("pal"));
 
     person.setRelationships(new ArrayList<RelationshipReference>());
@@ -297,7 +297,7 @@ public class TestPerson {
     names.add(name);
     person.setNames(names);
 
-    person.setPersistentId(new PersistentIdentifier());
+    person.setPersistentId(new PersistentId());
     person.getPersistentId().setValue(URI.create("pal"));
 
     person.setRelationships(new ArrayList<RelationshipReference>());

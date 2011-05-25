@@ -2,7 +2,7 @@ package org.gedcomx.record;
 
 import org.gedcomx.attribution.AttributionReference;
 import org.gedcomx.id.AlternateId;
-import org.gedcomx.id.PersistentIdentifier;
+import org.gedcomx.id.PersistentId;
 import org.gedcomx.source.SourceQualifier;
 import org.gedcomx.source.SourceQualifierProperty;
 import org.gedcomx.source.SourceReference;
@@ -109,7 +109,7 @@ public class TestRecord {
     persona.setGender(gender);
 
     persona.setId("persona-id");
-    persona.setPersistentId(new PersistentIdentifier());
+    persona.setPersistentId(new PersistentId());
     persona.getPersistentId().setValue(URI.create("urn:persona-id-value"));
     persona.setPrincipal(true);
     ArrayList<EventRole> eventRoles = new ArrayList<EventRole>();
@@ -135,7 +135,7 @@ public class TestRecord {
     fields.add(field);
     record.setFields(fields);
 
-    record.setPersistentId(new PersistentIdentifier());
+    record.setPersistentId(new PersistentId());
     record.getPersistentId().setValue(URI.create("pal"));
 
     ArrayList<Relationship> relationships = new ArrayList<Relationship>();

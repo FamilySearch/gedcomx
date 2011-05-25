@@ -23,7 +23,7 @@ import java.net.URI;
  *
  * @author Ryan Heaton
  */
-public final class PersistentIdentifier {
+public final class PersistentId {
 
   private URI value;
 
