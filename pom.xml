@@ -15,6 +15,26 @@
     <year>${inceptionYear}</year>
   </properties>
 
+  <modules>
+    <module>enunciate-gedcomx-support</module>
+    <module>gedcomx-rt-support</module>
+
+    <module>gedcomx-types</module>
+    <module>gedcomx-id</module>
+    <module>gedcomx-attribution</module>
+
+    <module>gedcomx-source</module>
+    <module>gedcomx-record</module>
+    <module>gedcomx-conclusion</module>
+
+    <module>gedcomx-metadata</module>
+
+    <module>gedcomx-www</module>
+    <module>gedcomx-source-www</module>
+    <module>gedcomx-record-www</module>
+    <module>gedcomx-conclusion-www</module>
+  </modules>
+
   <dependencies>
     <dependency>
       <groupId>org.testng</groupId>
@@ -40,9 +60,9 @@
   </dependencies>
 
   <scm>
-    <connection>scm:svn:https://vcs.fsglobal.net/svn/model/gedcomx/trunk</connection>
-    <developerConnection>scm:svn:https://vcs.fsglobal.net/svn/model/gedcomx/trunk</developerConnection>
-    <url>https://vcs.fsglobal.net/svn/model/gedcomx/trunk</url>
+    <connection>scm:git:git@github.com:FamilySearch/gedcomx.git</connection>
+    <developerConnection>scm:git:git@github.com:FamilySearch/gedcomx.git</developerConnection>
+    <url>https://github.com/FamilySearch/gedcomx</url>
   </scm>
 
   <build>
@@ -118,23 +138,40 @@
     </pluginManagement>
   </build>
 
-  <modules>
-    <module>enunciate-gedcomx-support</module>
-    <module>gedcomx-rt-support</module>
+  <profiles>
+    <profile>
+      <!--activate some sugar for the jenkins build instance-->
+      <id>jenkins</id>
+      <activation>
+        <property>
+          <name>BUILD_NUMBER</name>
+        </property>
+      </activation>
+      <build>
+        <pluginManagement>
+          <plugins>
+            <plugin>
+              <groupId>org.codehaus.mojo</groupId>
+              <artifactId>cobertura-maven-plugin</artifactId>
+              <version>2.5.1</version>
+              <configuration>
+                <formats>
+                  <format>xml</format>
+                </formats>
+              </configuration>
+              <executions>
+                <execution>
+                  <phase>package</phase>
+                  <goals>
+                    <goal>cobertura</goal>
+                  </goals>
+                </execution>
+              </executions>
+            </plugin>
+          </plugins>
+        </pluginManagement>
+      </build>
+    </profile>
+  </profiles>
 
-    <module>gedcomx-types</module>
-    <module>gedcomx-id</module>
-    <module>gedcomx-attribution</module>
-
-    <module>gedcomx-source</module>
-    <module>gedcomx-record</module>
-    <module>gedcomx-conclusion</module>
-
-    <module>gedcomx-metadata</module>
-
-    <module>gedcomx-www</module>
-    <module>gedcomx-source-www</module>
-    <module>gedcomx-record-www</module>
-    <module>gedcomx-conclusion-www</module>
-  </modules>
 </project>
