@@ -195,10 +195,49 @@ public abstract class Relationship {
   }
 
   /**
-   * Get the list of person references for this relationship.
+   * A person in the relationship. The name "person1" is used only to distinguish it from
+   * the other person in this relationship and implies neither order nor role. When the relationship type
+   * implies direction, it goes from "person1" to "person2".
    *
-   * @return the person references. Note the possibility of null items in the list.
+   * @return A person in the relationship. The name "person1" is used only to distinguish it from
+   * the other person in this relationship and implies neither order nor role. When the relationship type
+   * implies direction, it goes from "person1" to "person2".
    */
   @XmlTransient
-  public abstract List<? extends PersonReference> getPersonReferences();
+  public abstract PersonReference getPerson1();
+
+  /**
+   * A person in the relationship. The name "person1" is used only to distinguish it from
+   * the other person in this relationship and implies neither order nor role. When the relationship type
+   * implies direction, it goes from "person1" to "person2".
+   *
+   * @param person1 A person in the relationship. The name "person1" is used only to distinguish it from
+   * the other person in this relationship and implies neither order nor role. When the relationship type
+   * implies direction, it goes from "person1" to "person2".
+   */
+  public abstract void setPerson1(PersonReference person1);
+
+  /**
+   * A person in the relationship. The name "person2" is used only to distinguish it from
+   * the other person in this relationship and implies neither order nor role. When the relationship type
+   * implies direction, it goes from "person1" to "person2".
+   *
+   * @return A person in the relationship. The name "person2" is used only to distinguish it from
+   * the other person in this relationship and implies neither order nor role. When the relationship type
+   * implies direction, it goes from "person1" to "person2".
+   */
+  @XmlTransient
+  public abstract PersonReference getPerson2();
+
+  /**
+   * A person in the relationship. The name "person2" is used only to distinguish it from
+   * the other person in this relationship and implies neither order nor role. When the relationship type
+   * implies direction, it goes from "person1" to "person2".
+   *
+   * @param person2 A person in the relationship. The name "person2" is used only to distinguish it from
+   * the other person in this relationship and implies neither order nor role. When the relationship type
+   * implies direction, it goes from "person1" to "person2".
+   */
+  public abstract void setPerson2(PersonReference person2);
+
 }

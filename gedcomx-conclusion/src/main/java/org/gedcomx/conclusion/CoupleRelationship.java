@@ -19,10 +19,6 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.id.XmlTypeIdResolver;
 
-import javax.xml.bind.annotation.XmlTransient;
-import java.util.Arrays;
-import java.util.List;
-
 /**
  * A relationship between two persons, making a genealogical "couple".
  */
@@ -77,9 +73,4 @@ public class CoupleRelationship extends Relationship {
     this.person2 = person2;
   }
 
-  @Override
-  @XmlTransient
-  public List<PersonReference> getPersonReferences() {
-    return Arrays.asList(getPerson1(), getPerson2());
-  }
 }

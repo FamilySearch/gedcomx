@@ -20,9 +20,6 @@ import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.id.XmlTypeIdResolver;
 
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * A basic relationship between two people, used to model basic relationships that are neither couple nor parent-child relationships.
@@ -39,10 +36,12 @@ public class OtherRelationship extends Relationship {
 
   /**
    * A reference to a person in the relationship. The name "person1" is used only to distinguish it from
-   * the other person in this relationship and implies neither order nor role.
+   * the other person in this relationship and implies neither order nor role. When the relationship type
+   * implies direction, it goes from "person1" to "person2".
    *
    * @return A reference to a person in the relationship. The name "person1" is used only to distinguish it from
-   * the other person in this relationship and implies neither order nor role.
+   * the other person in this relationship and implies neither order nor role. When the relationship type
+   * implies direction, it goes from "person1" to "person2".
    */
   public PersonReference getPerson1() {
     return person1;
@@ -50,10 +49,12 @@ public class OtherRelationship extends Relationship {
 
   /**
    * A reference to a person in the relationship. The name "person1" is used only to distinguish it from
-   * the other person in this relationship and implies neither order nor role.
+   * the other person in this relationship and implies neither order nor role. When the relationship type
+   * implies direction, it goes from "person1" to "person2".
    *
    * @param person1 A reference to a person in the relationship. The name "person1" is used only to distinguish it from
-   * the other person in this relationship and implies neither order nor role.
+   * the other person in this relationship and implies neither order nor role. When the relationship type
+   * implies direction, it goes from "person1" to "person2".
    */
   public void setPerson1(PersonReference person1) {
     this.person1 = person1;
@@ -61,10 +62,12 @@ public class OtherRelationship extends Relationship {
 
   /**
    * A reference to a person in the relationship. The name "person2" is used only to distinguish it from
-   * the other person in this relationship and implies neither order nor role.
+   * the other person in this relationship and implies neither order nor role. When the relationship type
+   * implies direction, it goes from "person1" to "person2".
    *
    * @return A reference to a person in the relationship. The name "person2" is used only to distinguish it from
-   * the other person in this relationship and implies neither order nor role.
+   * the other person in this relationship and implies neither order nor role. When the relationship type
+   * implies direction, it goes from "person1" to "person2".
    */
   public PersonReference getPerson2() {
     return person2;
@@ -72,18 +75,15 @@ public class OtherRelationship extends Relationship {
 
   /**
    * A reference to a person in the relationship. The name "person2" is used only to distinguish it from
-   * the other person in this relationship and implies neither order nor role.
+   * the other person in this relationship and implies neither order nor role. When the relationship type
+   * implies direction, it goes from "person1" to "person2".
    *
    * @param person2 A reference to a person in the relationship. The name "person2" is used only to distinguish it from
-   * the other person in this relationship and implies neither order nor role.
+   * the other person in this relationship and implies neither order nor role. When the relationship type
+   * implies direction, it goes from "person1" to "person2".
    */
   public void setPerson2(PersonReference person2) {
     this.person2 = person2;
   }
 
-  @Override
-  @XmlTransient
-  public List<PersonReference> getPersonReferences() {
-    return Arrays.asList(getPerson1(), getPerson2());
-  }
 }

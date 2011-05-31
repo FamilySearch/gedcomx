@@ -20,11 +20,9 @@ import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.id.XmlTypeIdResolver;
 
 import javax.xml.bind.annotation.XmlTransient;
-import java.util.Arrays;
-import java.util.List;
 
 /**
- * A relationship between a child and two parents.
+ * A relationship between a child and a parent.
  *
  * @author Ryan Heaton
  */
@@ -32,90 +30,44 @@ import java.util.List;
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 public class ParentChildRelationship extends Relationship {
 
-  private PersonReference parent1;
-  private Lineage parent1Lineage;
-  private PersonReference parent2;
-  private Lineage parent2Lineage;
+  private PersonReference parent;
+  private Lineage lineage;
   private PersonReference child;
 
   /**
-   * A reference to a parent in this relationship. The name "parent1" is used only to distinguish it from
-   * the other parent in this relationship and implies neither order nor role.
+   * A reference to the parent in this relationship.
    *
-   * @return A reference to a parent in this relationship. The name "parent1" is used only to distinguish it from
-   * the other parent in this relationship and implies neither order nor role.
+   * @return A reference to a parent in this relationship.
    */
-  public PersonReference getParent1() {
-    return parent1;
+  public PersonReference getParent() {
+    return parent;
   }
 
   /**
-   * A reference to a parent in this relationship. The name "parent1" is used only to distinguish it from
-   * the other parent in this relationship and implies neither order nor role.
+   * A reference to a parent in this relationship.
    *
-   * @param parent1 A reference to a parent in this relationship. The name "parent1" is used only to distinguish it from
-   * the other parent in this relationship and implies neither order nor role.
+   * @param parent A reference to a parent in this relationship.
    */
-  public void setParent1(PersonReference parent1) {
-    this.parent1 = parent1;
+  public void setParent(PersonReference parent) {
+    this.parent = parent;
   }
 
   /**
-   * The conclusion about the lineage of the parent1 in this relationship.
+   * The conclusion about the lineage of this relationship.
    *
-   * @return The conclusion about the lineage of the parent1 in this relationship.
+   * @return The conclusion about the lineage of this relationship.
    */
-  public Lineage getParent1Lineage() {
-    return parent1Lineage;
+  public Lineage getLineage() {
+    return lineage;
   }
 
   /**
-   * The conclusion about the lineage of the parent1 in this relationship.
+   * The conclusion about the lineage of this relationship.
    *
-   * @param parent1Lineage The conclusion about the lineage of the parent1 in this relationship.
+   * @param lineage The conclusion about the lineage of this relationship.
    */
-  public void setParent1Lineage(Lineage parent1Lineage) {
-    this.parent1Lineage = parent1Lineage;
-  }
-
-  /**
-   * A reference to a parent in this relationship. The name "parent2" is used only to distinguish it from
-   * the other parent in this relationship and implies neither order nor role.
-   *
-   * @return A reference to a parent in this relationship. The name "parent2" is used only to distinguish it from
-   * the other parent in this relationship and implies neither order nor role.
-   */
-  public PersonReference getParent2() {
-    return parent2;
-  }
-
-  /**
-   * A reference to a parent in this relationship. The name "parent2" is used only to distinguish it from
-   * the other parent in this relationship and implies neither order nor role.
-   *
-   * @param parent2 A reference to a parent in this relationship. The name "parent2" is used only to distinguish it from
-   * the other parent in this relationship and implies neither order nor role.
-   */
-  public void setParent2(PersonReference parent2) {
-    this.parent2 = parent2;
-  }
-
-  /**
-   * The conclusion about the lineage of the parent2 in this relationship.
-   *
-   * @return The conclusion about the lineage of the parent2 in this relationship.
-   */
-  public Lineage getParent2Lineage() {
-    return parent2Lineage;
-  }
-
-  /**
-   * The conclusion about the lineage of the parent2 in this relationship.
-   *
-   * @param parent2Lineage The conclusion about the lineage of the parent2 in this relationship.
-   */
-  public void setParent2Lineage(Lineage parent2Lineage) {
-    this.parent2Lineage = parent2Lineage;
+  public void setLineage(Lineage lineage) {
+    this.lineage = lineage;
   }
 
   /**
@@ -136,9 +88,27 @@ public class ParentChildRelationship extends Relationship {
     this.child = child;
   }
 
-  @Override
   @XmlTransient
-  public List<? extends PersonReference> getPersonReferences() {
-    return Arrays.asList(getChild(), getParent1(), getParent2());
+  @Override
+  public PersonReference getPerson1() {
+    return getParent();
+  }
+
+  @XmlTransient
+  @Override
+  public void setPerson1(PersonReference person1) {
+    setParent(person1);
+  }
+
+  @XmlTransient
+  @Override
+  public PersonReference getPerson2() {
+    return getChild();
+  }
+
+  @XmlTransient
+  @Override
+  public void setPerson2(PersonReference person2) {
+    setChild(person2);
   }
 }
