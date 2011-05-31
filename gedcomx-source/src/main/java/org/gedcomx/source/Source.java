@@ -21,7 +21,7 @@ import org.codehaus.enunciate.qname.XmlQNameEnumRef;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.attribution.AttributionReference;
+import org.gedcomx.attribution.Attribution;
 import org.gedcomx.id.AlternateId;
 import org.gedcomx.id.PersistentId;
 import org.gedcomx.id.XmlTypeIdResolver;
@@ -53,7 +53,7 @@ public class Source {
   private String title;
   private String note; //todo: rename to something like "user note" or something?
   private String bibliographicCitation;
-  private AttributionReference attribution;
+  private Attribution attribution;
 
   /**
    * The id of the source, unique to the context and not necessarily globally unique.
@@ -227,20 +227,20 @@ public class Source {
   }
 
   /**
-   * The link to the attribution metadata for this source.
+   * The attribution metadata for this source.
    *
-   * @return The link to the attribution metadata for this source.
+   * @return The attribution metadata for this source.
    */
-  public AttributionReference getAttribution() {
+  public Attribution getAttribution() {
     return attribution;
   }
 
   /**
-   * The link to the attribution metadata for this source.
+   * The attribution metadata for this source.
    *
-   * @param attribution The link to the attribution metadata for this source.
+   * @param attribution The attribution metadata for this source.
    */
-  public void setAttribution(AttributionReference attribution) {
+  public void setAttribution(Attribution attribution) {
     this.attribution = attribution;
   }
 }

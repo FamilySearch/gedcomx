@@ -19,7 +19,7 @@ import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.attribution.AttributionReference;
+import org.gedcomx.attribution.Attribution;
 import org.gedcomx.id.AlternateId;
 import org.gedcomx.id.PersistentId;
 import org.gedcomx.id.XmlTypeIdResolver;
@@ -43,7 +43,7 @@ public abstract class Relationship {
   private String id;
   private PersistentId persistentId;
   private List<AlternateId> alternateIds;
-  private AttributionReference attribution;
+  private Attribution attribution;
 
   //todo: change to List<? extends Event> when http://jira.codehaus.org/browse/ENUNCIATE-562 is fixed.
   private List<Event> events;
@@ -111,20 +111,20 @@ public abstract class Relationship {
   }
 
   /**
-   * The link to the attribution metadata for this relationship.
+   * The attribution metadata for this relationship.
    *
-   * @return The link to the attribution metadata for this relationship.
+   * @return The attribution metadata for this relationship.
    */
-  public AttributionReference getAttribution() {
+  public Attribution getAttribution() {
     return attribution;
   }
 
   /**
-   * The link to the attribution metadata for this relationship.
+   * The attribution metadata for this relationship.
    *
-   * @param attribution The link to the attribution metadata for this relationship.
+   * @param attribution The attribution metadata for this relationship.
    */
-  public void setAttribution(AttributionReference attribution) {
+  public void setAttribution(Attribution attribution) {
     this.attribution = attribution;
   }
 

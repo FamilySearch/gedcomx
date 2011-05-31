@@ -17,7 +17,7 @@ package org.gedcomx.source;
 
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.attribution.AttributionReference;
+import org.gedcomx.attribution.Attribution;
 import org.gedcomx.id.XmlTypeIdResolver;
 
 /**
@@ -29,23 +29,23 @@ import org.gedcomx.id.XmlTypeIdResolver;
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 public class AttributedSourceReference extends SourceReference {
 
-  private AttributionReference attribution;
+  private Attribution attribution;
 
   /**
-   * The reference to the attribution metadata for the source reference.
+   * The attribution metadata for the source reference.
    *
-   * @return The reference to the attribution metadata for the source reference.
+   * @return The attribution metadata for the source reference.
    */
-  public AttributionReference getAttribution() {
+  public Attribution getAttribution() {
     return attribution;
   }
 
   /**
-   * The reference to the attribution metadata for the source reference.
+   * The attribution metadata for the source reference.
    *
-   * @param attribution The reference to the attribution metadata for the source reference.
+   * @param attribution The attribution metadata for the source reference.
    */
-  public void setAttribution(AttributionReference attribution) {
+  public void setAttribution(Attribution attribution) {
     this.attribution = attribution;
   }
 }

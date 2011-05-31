@@ -15,7 +15,7 @@
  */
 package org.gedcomx.record;
 
-import org.gedcomx.attribution.AttributionReference;
+import org.gedcomx.attribution.Attribution;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlID;
@@ -32,7 +32,7 @@ public abstract class Field {
   private String original;
   private String interpreted;
   private String normalized;
-  private AttributionReference attribution;
+  private Attribution attribution;
 
   /**
    * The id of this field data, unique to its record.
@@ -128,20 +128,20 @@ public abstract class Field {
   }
 
   /**
-   * The link to the attribution metadata for this field.
+   * The attribution metadata for this field.
    *
-   * @return The link to the attribution metadata for this field.
+   * @return The attribution metadata for this field.
    */
-  public AttributionReference getAttribution() {
+  public Attribution getAttribution() {
     return attribution;
   }
 
   /**
-   * The link to the attribution metadata for this field.
+   * The attribution metadata for this field.
    *
-   * @param attribution The link to the attribution metadata for this field.
+   * @param attribution The attribution metadata for this field.
    */
-  public void setAttribution(AttributionReference attribution) {
+  public void setAttribution(Attribution attribution) {
     this.attribution = attribution;
   }
 }

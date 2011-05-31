@@ -1,6 +1,7 @@
 package org.gedcomx.record.www;
 
-import org.gedcomx.attribution.AttributionReference;
+import org.gedcomx.attribution.Attribution;
+import org.gedcomx.attribution.ContributorReference;
 import org.gedcomx.id.AlternateId;
 import org.gedcomx.id.PersistentId;
 import org.gedcomx.record.EventReference;
@@ -142,8 +143,9 @@ public class TestRecord {
 
     List<org.gedcomx.record.RecordField> fields = new ArrayList<org.gedcomx.record.RecordField>();
     RecordField field = new RecordField();
-    field.setAttribution(new AttributionReference());
-    field.getAttribution().setHref(URI.create("urn:field-attribution"));
+    field.setAttribution(new Attribution());
+    field.getAttribution().setContributor(new ContributorReference());
+    field.getAttribution().getContributor().setHref(URI.create("urn:field-attribution"));
     field.setId("field-id");
     field.setKnownType(FieldType.batch_number);
     field.setOriginal("field-value-original");
@@ -201,8 +203,9 @@ public class TestRecord {
   }
 
   private void fillInField(Field field, String label) {
-    field.setAttribution(new AttributionReference());
-    field.getAttribution().setHref(URI.create("urn:" + label + "-attribution"));
+    field.setAttribution(new Attribution());
+    field.getAttribution().setContributor(new ContributorReference());
+    field.getAttribution().getContributor().setHref(URI.create("urn:" + label + "-attribution"));
     field.setFieldId(label + "-field-id");
     field.setId(label + "-id");
     field.setOriginal(label + "-original");
@@ -211,7 +214,7 @@ public class TestRecord {
   }
 
   private void assertField(Field field, String label) {
-    assertEquals("urn:" + label + "-attribution", field.getAttribution().getHref().toString());
+    assertEquals("urn:" + label + "-attribution", field.getAttribution().getContributor().getHref().toString());
     assertEquals(label + "-field-id", field.getFieldId());
     assertEquals(label + "-id", field.getId());
     assertEquals(label + "-original", field.getOriginal());
@@ -280,7 +283,7 @@ public class TestRecord {
 
     assertEquals(1, record.getFields().size());
     RecordField field = (RecordField) record.getFields().get(0);
-    assertEquals("urn:field-attribution", field.getAttribution().getHref().toString());
+    assertEquals("urn:field-attribution", field.getAttribution().getContributor().getHref().toString());
     assertEquals("field-id", field.getId());
     assertEquals(FieldType.batch_number, field.getKnownType());
     assertEquals("field-value-original", field.getOriginal());

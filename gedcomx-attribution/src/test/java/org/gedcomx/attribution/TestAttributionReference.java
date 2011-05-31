@@ -3,6 +3,7 @@ package org.gedcomx.attribution;
 import org.testng.annotations.Test;
 
 import java.net.URI;
+import java.util.Date;
 
 import static org.gedcomx.rt.SerializationUtil.processThroughJson;
 import static org.gedcomx.rt.SerializationUtil.processThroughXml;
@@ -18,20 +19,32 @@ public class TestAttributionReference {
    * tests attribution reference xml
    */
   public void testAttributionReferenceXml() throws Exception {
-    AttributionReference reference = new AttributionReference();
-    reference.setHref(URI.create("urn:someid"));
-    reference = processThroughXml(reference);
-    assertEquals("urn:someid", reference.getHref().toString());
+    Attribution attribution = new Attribution();
+    attribution.setContributor(new ContributorReference());
+    attribution.getContributor().setHref(URI.create("urn:someid"));
+    attribution.setExplanation("hello, there.");
+    Date ts = new Date();
+    attribution.setTimestamp(ts);
+    attribution = processThroughXml(attribution);
+    assertEquals("urn:someid", attribution.getContributor().getHref().toString());
+    assertEquals("hello, there.", attribution.getExplanation());
+    assertEquals(ts, attribution.getTimestamp());
   }
 
   /**
    * tests attribution reference json
    */
   public void testAttributionReferenceJson() throws Exception {
-    AttributionReference reference = new AttributionReference();
-    reference.setHref(URI.create("urn:someid"));
-    reference = processThroughJson(reference);
-    assertEquals("urn:someid", reference.getHref().toString());
+    Attribution attribution = new Attribution();
+    attribution.setContributor(new ContributorReference());
+    attribution.getContributor().setHref(URI.create("urn:someid"));
+    attribution.setExplanation("hello, there.");
+    Date ts = new Date();
+    attribution.setTimestamp(ts);
+    attribution = processThroughJson(attribution);
+    assertEquals("urn:someid", attribution.getContributor().getHref().toString());
+    assertEquals("hello, there.", attribution.getExplanation());
+    assertEquals(ts, attribution.getTimestamp());
   }
 
 }

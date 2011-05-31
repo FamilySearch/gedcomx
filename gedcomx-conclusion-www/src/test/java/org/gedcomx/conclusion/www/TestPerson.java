@@ -1,6 +1,7 @@
 package org.gedcomx.conclusion.www;
 
-import org.gedcomx.attribution.AttributionReference;
+import org.gedcomx.attribution.Attribution;
+import org.gedcomx.attribution.ContributorReference;
 import org.gedcomx.conclusion.*;
 import org.gedcomx.id.AlternateId;
 import org.gedcomx.types.AlternateIdType;
@@ -100,8 +101,9 @@ public class TestPerson {
     Link characteristicLink = new Link();
     characteristicLink.setHref(URI.create("urn:characteristic"));
     characteristic.getLinks().getLinks().add(characteristicLink);
-    characteristic.setAttribution(new AttributionReference());
-    characteristic.getAttribution().setHref(URI.create("urn:characteristic-attribution"));
+    characteristic.setAttribution(new Attribution());
+    characteristic.getAttribution().setContributor(new ContributorReference());
+    characteristic.getAttribution().getContributor().setHref(URI.create("urn:characteristic-attribution"));
     characteristic.setDate(new Date());
     characteristic.getDate().setOriginal("original date");
     characteristic.getDate().setNormalized("normalized date");
@@ -127,8 +129,9 @@ public class TestPerson {
     Link eventLink = new Link();
     eventLink.setHref(URI.create("urn:event"));
     event.getLinks().getLinks().add(eventLink);
-    event.setAttribution(new AttributionReference());
-    event.getAttribution().setHref(URI.create("urn:event-attribution"));
+    event.setAttribution(new Attribution());
+    event.getAttribution().setContributor(new ContributorReference());
+    event.getAttribution().getContributor().setHref(URI.create("urn:event-attribution"));
     event.setDate(new Date());
     event.getDate().setOriginal("original date");
     event.getDate().setNormalized("normalized date");
@@ -165,8 +168,9 @@ public class TestPerson {
     nameForm.setParts(parts);
     alternateForms.add(nameForm);
     name.setAlternateForms(alternateForms);
-    name.setAttribution(new AttributionReference());
-    name.getAttribution().setHref(URI.create("urn:name-attribution"));
+    name.setAttribution(new Attribution());
+    name.getAttribution().setContributor(new ContributorReference());
+    name.getAttribution().getContributor().setHref(URI.create("urn:name-attribution"));
     name.setId("name-id");
     name.setKnownStyle(NameStyle.spanish);
     name.setKnownType(NameType.formal);
@@ -193,8 +197,9 @@ public class TestPerson {
 
     ArrayList<AttributedSourceReference> sources = new ArrayList<AttributedSourceReference>();
     AttributedSourceReference attributedSourceReference = new AttributedSourceReference();
-    attributedSourceReference.setAttribution(new AttributionReference());
-    attributedSourceReference.getAttribution().setHref(URI.create("urn:source-reference-attribution"));
+    attributedSourceReference.setAttribution(new Attribution());
+    attributedSourceReference.getAttribution().setContributor(new ContributorReference());
+    attributedSourceReference.getAttribution().getContributor().setHref(URI.create("urn:source-reference-attribution"));
     attributedSourceReference.setHref(URI.create("urn:source-uri"));
     attributedSourceReference.setId("source-reference-id");
     attributedSourceReference.setKnownType(SourceReferenceType.source);
@@ -225,8 +230,9 @@ public class TestPerson {
 
     List<org.gedcomx.conclusion.Characteristic> characteristics = new ArrayList<org.gedcomx.conclusion.Characteristic>();
     org.gedcomx.conclusion.Characteristic characteristic = new org.gedcomx.conclusion.Characteristic();
-    characteristic.setAttribution(new AttributionReference());
-    characteristic.getAttribution().setHref(URI.create("urn:characteristic-attribution"));
+    characteristic.setAttribution(new Attribution());
+    characteristic.getAttribution().setContributor(new ContributorReference());
+    characteristic.getAttribution().getContributor().setHref(URI.create("urn:characteristic-attribution"));
     characteristic.setDate(new Date());
     characteristic.getDate().setOriginal("original date");
     characteristic.getDate().setNormalized("normalized date");
@@ -247,8 +253,9 @@ public class TestPerson {
 
     List<org.gedcomx.conclusion.Event> events = new ArrayList<org.gedcomx.conclusion.Event>();
     org.gedcomx.conclusion.Event event = new org.gedcomx.conclusion.Event();
-    event.setAttribution(new AttributionReference());
-    event.getAttribution().setHref(URI.create("urn:event-attribution"));
+    event.setAttribution(new Attribution());
+    event.getAttribution().setContributor(new ContributorReference());
+    event.getAttribution().getContributor().setHref(URI.create("urn:event-attribution"));
     event.setDate(new Date());
     event.getDate().setOriginal("original date");
     event.getDate().setNormalized("normalized date");
@@ -280,8 +287,9 @@ public class TestPerson {
     nameForm.setParts(parts);
     alternateForms.add(nameForm);
     name.setAlternateForms(alternateForms);
-    name.setAttribution(new AttributionReference());
-    name.getAttribution().setHref(URI.create("urn:name-attribution"));
+    name.setAttribution(new Attribution());
+    name.getAttribution().setContributor(new ContributorReference());
+    name.getAttribution().getContributor().setHref(URI.create("urn:name-attribution"));
     name.setId("name-id");
     name.setKnownStyle(NameStyle.spanish);
     name.setKnownType(NameType.formal);
@@ -308,8 +316,9 @@ public class TestPerson {
 
     ArrayList<AttributedSourceReference> sources = new ArrayList<AttributedSourceReference>();
     AttributedSourceReference attributedSourceReference = new AttributedSourceReference();
-    attributedSourceReference.setAttribution(new AttributionReference());
-    attributedSourceReference.getAttribution().setHref(URI.create("urn:source-reference-attribution"));
+    attributedSourceReference.setAttribution(new Attribution());
+    attributedSourceReference.getAttribution().setContributor(new ContributorReference());
+    attributedSourceReference.getAttribution().getContributor().setHref(URI.create("urn:source-reference-attribution"));
     attributedSourceReference.setHref(URI.create("urn:source-uri"));
     attributedSourceReference.setId("source-reference-id");
     attributedSourceReference.setKnownType(SourceReferenceType.source);
@@ -346,7 +355,7 @@ public class TestPerson {
     assertEquals(1, ((Characteristic) person.getCharacteristics().iterator().next()).getLinks().getLinks().size());
     characteristic = (Characteristic) person.getCharacteristics().iterator().next();
     assertEquals("urn:characteristic", characteristic.getLinks().getLinks().get(0).getHref().toString());
-    assertEquals("urn:characteristic-attribution", characteristic.getAttribution().getHref().toString());
+    assertEquals("urn:characteristic-attribution", characteristic.getAttribution().getContributor().getHref().toString());
     assertEquals("original date", characteristic.getDate().getOriginal());
     assertEquals("normalized date", characteristic.getDate().getNormalized());
     assertEquals(1, characteristic.getDate().getJulianDay().getEarliest());
@@ -363,7 +372,7 @@ public class TestPerson {
     assertEquals(1, ((Event) person.getEvents().iterator().next()).getLinks().getLinks().size());
     event = (Event) person.getEvents().iterator().next();
     assertEquals("urn:event", event.getLinks().getLinks().get(0).getHref().toString());
-    assertEquals("urn:event-attribution", event.getAttribution().getHref().toString());
+    assertEquals("urn:event-attribution", event.getAttribution().getContributor().getHref().toString());
     assertEquals("original date", event.getDate().getOriginal());
     assertEquals("normalized date", event.getDate().getNormalized());
     assertEquals(1, event.getDate().getJulianDay().getEarliest());
@@ -386,7 +395,7 @@ public class TestPerson {
     assertEquals(1, name.getAlternateForms().get(0).getParts().size());
     assertEquals("alternate name part", name.getAlternateForms().get(0).getParts().get(0).getText());
     assertEquals(NamePartType.given, name.getAlternateForms().get(0).getParts().get(0).getKnownType());
-    assertEquals("urn:name-attribution", name.getAttribution().getHref().toString());
+    assertEquals("urn:name-attribution", name.getAttribution().getContributor().getHref().toString());
     assertEquals("name-id", name.getId());
     assertEquals(NameStyle.spanish, name.getKnownStyle());
     assertEquals(NameType.formal, name.getKnownType());
@@ -405,7 +414,7 @@ public class TestPerson {
 
     assertEquals(1, person.getSources().size());
     attributedSourceReference = person.getSources().iterator().next();
-    assertEquals("urn:source-reference-attribution", attributedSourceReference.getAttribution().getHref().toString());
+    assertEquals("urn:source-reference-attribution", attributedSourceReference.getAttribution().getContributor().getHref().toString());
     assertEquals("urn:source-uri", attributedSourceReference.getHref().toString());
     assertEquals("source-reference-id", attributedSourceReference.getId());
     assertEquals(SourceReferenceType.source, attributedSourceReference.getKnownType());
@@ -431,7 +440,7 @@ public class TestPerson {
 
     assertEquals(1, person.getCharacteristics().size());
     characteristic = person.getCharacteristics().iterator().next();
-    assertEquals("urn:characteristic-attribution", characteristic.getAttribution().getHref().toString());
+    assertEquals("urn:characteristic-attribution", characteristic.getAttribution().getContributor().getHref().toString());
     assertEquals("original date", characteristic.getDate().getOriginal());
     assertEquals("normalized date", characteristic.getDate().getNormalized());
     assertEquals(1, characteristic.getDate().getJulianDay().getEarliest());
@@ -446,7 +455,7 @@ public class TestPerson {
 
     assertEquals(1, person.getEvents().size());
     event = person.getEvents().iterator().next();
-    assertEquals("urn:event-attribution", event.getAttribution().getHref().toString());
+    assertEquals("urn:event-attribution", event.getAttribution().getContributor().getHref().toString());
     assertEquals("original date", event.getDate().getOriginal());
     assertEquals("normalized date", event.getDate().getNormalized());
     assertEquals(1, event.getDate().getJulianDay().getEarliest());
@@ -466,7 +475,7 @@ public class TestPerson {
     assertEquals(1, name.getAlternateForms().get(0).getParts().size());
     assertEquals("alternate name part", name.getAlternateForms().get(0).getParts().get(0).getText());
     assertEquals(NamePartType.given, name.getAlternateForms().get(0).getParts().get(0).getKnownType());
-    assertEquals("urn:name-attribution", name.getAttribution().getHref().toString());
+    assertEquals("urn:name-attribution", name.getAttribution().getContributor().getHref().toString());
     assertEquals("name-id", name.getId());
     assertEquals(NameStyle.spanish, name.getKnownStyle());
     assertEquals(NameType.formal, name.getKnownType());
@@ -485,7 +494,7 @@ public class TestPerson {
 
     assertEquals(1, person.getSources().size());
     attributedSourceReference = person.getSources().iterator().next();
-    assertEquals("urn:source-reference-attribution", attributedSourceReference.getAttribution().getHref().toString());
+    assertEquals("urn:source-reference-attribution", attributedSourceReference.getAttribution().getContributor().getHref().toString());
     assertEquals("urn:source-uri", attributedSourceReference.getHref().toString());
     assertEquals("source-reference-id", attributedSourceReference.getId());
     assertEquals(SourceReferenceType.source, attributedSourceReference.getKnownType());

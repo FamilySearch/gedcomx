@@ -21,7 +21,7 @@ import org.codehaus.enunciate.qname.XmlQNameEnumRef;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.attribution.AttributionReference;
+import org.gedcomx.attribution.Attribution;
 import org.gedcomx.id.AlternateId;
 import org.gedcomx.id.PersistentId;
 import org.gedcomx.id.XmlTypeIdResolver;
@@ -47,7 +47,7 @@ public class Record {
   private QName type;
   private PersistentId persistentId;
   private List<AlternateId> alternateIds;
-  private AttributionReference attribution;
+  private Attribution attribution;
   private CollectionReference collection;
 
   //todo: change to List<? extends Persona> when http://jira.codehaus.org/browse/ENUNCIATE-562 is fixed.
@@ -160,20 +160,20 @@ public class Record {
   }
 
   /**
-   * The link to the attribution metadata for this record.
+   * The attribution metadata for this record.
    *
-   * @return The link to the attribution metadata for this record.
+   * @return The attribution metadata for this record.
    */
-  public AttributionReference getAttribution() {
+  public Attribution getAttribution() {
     return attribution;
   }
 
   /**
-   * The link to the attribution metadata for this record.
+   * The attribution metadata for this record.
    *
-   * @param attribution The link to the attribution metadata for this record.
+   * @param attribution The attribution metadata for this record.
    */
-  public void setAttribution(AttributionReference attribution) {
+  public void setAttribution(Attribution attribution) {
     this.attribution = attribution;
   }
 

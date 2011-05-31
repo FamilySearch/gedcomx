@@ -17,7 +17,7 @@ package org.gedcomx.conclusion;
 
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.attribution.AttributionReference;
+import org.gedcomx.attribution.Attribution;
 import org.gedcomx.id.XmlTypeIdResolver;
 
 import javax.xml.bind.annotation.XmlAttribute;
@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlID;
 public abstract class Conclusion {
 
   private String id;
-  private AttributionReference attribution;
+  private Attribution attribution;
 
   /**
    * The id of this conclusion, unique to its person or relationship.
@@ -56,20 +56,20 @@ public abstract class Conclusion {
   }
 
   /**
-   * The link to the attribution metadata for this conclusion.
+   * The attribution metadata for this conclusion.
    *
-   * @return The link to the attribution metadata for this conclusion.
+   * @return The attribution metadata for this conclusion.
    */
-  public AttributionReference getAttribution() {
+  public Attribution getAttribution() {
     return attribution;
   }
 
   /**
-   * The link to the attribution metadata for this conclusion.
+   * The attribution metadata for this conclusion.
    *
-   * @param attribution The link to the attribution metadata for this conclusion.
+   * @param attribution The attribution metadata for this conclusion.
    */
-  public void setAttribution(AttributionReference attribution) {
+  public void setAttribution(Attribution attribution) {
     this.attribution = attribution;
   }
 }
