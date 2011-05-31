@@ -50,17 +50,17 @@ public class GedcomNamespacePrefixMapper extends NamespacePrefixMapper {
 
   public GedcomNamespacePrefixMapper(Map<String, String> overrides, String defaultns) {
     Map<String, String> ns2prefix = new HashMap<String, String>();
-    ns2prefix.put("http://gedcomx.org/types", "gedtype");
-    ns2prefix.put("http://gedcomx.org/id/v1", "gedid");
-    ns2prefix.put("http://gedcomx.org/attribution/v1", "gedatt");
-    ns2prefix.put("http://gedcomx.org/source/v1", "gedsrc");
-    ns2prefix.put("http://gedcomx.org/record/v1", "gedrec");
-    ns2prefix.put("http://gedcomx.org/conclusion/v1", "gedconc");
+    ns2prefix.put("http://gedcomx.org/types", "gxt");
+    ns2prefix.put("http://gedcomx.org/id/v1", "gxid");
+    ns2prefix.put("http://gedcomx.org/attribution/v1", "gxa");
+    ns2prefix.put("http://gedcomx.org/source/v1", "gxs");
+    ns2prefix.put("http://gedcomx.org/record/v1", "gxr");
+    ns2prefix.put("http://gedcomx.org/conclusion/v1", "gxc");
 
-    ns2prefix.put("http://gedcomx.org/www/v1", "gedwww");
-    ns2prefix.put("http://gedcomx.org/source/www/v1", "gedsrcw");
-    ns2prefix.put("http://gedcomx.org/record/www/v1", "gedrecw");
-    ns2prefix.put("http://gedcomx.org/conclusion/www/v1", "gedconcw");
+    ns2prefix.put("http://gedcomx.org/www/v1", "gxw");
+    ns2prefix.put("http://gedcomx.org/source/www/v1", "gxsw");
+    ns2prefix.put("http://gedcomx.org/record/www/v1", "gxrw");
+    ns2prefix.put("http://gedcomx.org/conclusion/www/v1", "gxcw");
 
     ns2prefix.put("http://www.w3.org/1999/02/22-rdf-syntax-ns#", "rdf");
     ns2prefix.put("http://purl.org/dc/terms/", "dcterms");

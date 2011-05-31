@@ -26,5 +26,5 @@ public class SourceConstants {
   private SourceConstants() {}
 
   public static final String GEDCOMX_SOURCE_NAMESPACE = "http://gedcomx.org/source/v1";
-  public static final String GEDCOMX_SOURCE_NAMESPACE_PREFIX = "gedsrc";
+  public static final String GEDCOMX_SOURCE_NAMESPACE_PREFIX = "gxs";
 }

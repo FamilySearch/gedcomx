@@ -26,6 +26,6 @@ public class IdConstants {
   private IdConstants() {}
 
   public static final String GEDCOMX_ID_NAMESPACE = "http://gedcomx.org/id/v1";
-  public static final String GEDCOMX_ID_NAMESPACE_PREFIX = "gedid";
+  public static final String GEDCOMX_ID_NAMESPACE_PREFIX = "gxid";
 
 }
