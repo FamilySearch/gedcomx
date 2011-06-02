@@ -49,24 +49,7 @@ public class GedcomNamespacePrefixMapper extends NamespacePrefixMapper {
   }
 
   public GedcomNamespacePrefixMapper(Map<String, String> overrides, String defaultns) {
-    Map<String, String> ns2prefix = new HashMap<String, String>();
-    ns2prefix.put("http://gedcomx.org/types", "gxt");
-    ns2prefix.put("http://gedcomx.org/id/v1", "gxid");
-    ns2prefix.put("http://gedcomx.org/attribution/v1", "gxa");
-    ns2prefix.put("http://gedcomx.org/source/v1", "gxs");
-    ns2prefix.put("http://gedcomx.org/record/v1", "gxr");
-    ns2prefix.put("http://gedcomx.org/conclusion/v1", "gxc");
-
-    ns2prefix.put("http://gedcomx.org/www/v1", "gxw");
-    ns2prefix.put("http://gedcomx.org/source/www/v1", "gxsw");
-    ns2prefix.put("http://gedcomx.org/record/www/v1", "gxrw");
-    ns2prefix.put("http://gedcomx.org/conclusion/www/v1", "gxcw");
-
-    ns2prefix.put("http://www.w3.org/1999/02/22-rdf-syntax-ns#", "rdf");
-    ns2prefix.put("http://purl.org/dc/terms/", "dcterms");
-    ns2prefix.put("http://purl.org/dc/dcmitype/", "dctypes");
-    ns2prefix.put("http://www.w3.org/1999/xlink", "xlink");
-    ns2prefix.put("http://www.w3.org/2001/XMLSchema-instance", "xsi");
+    Map<String, String> ns2prefix = getKnownPrefixes();
     if (overrides != null) {
       ns2prefix.putAll(overrides);
     }
@@ -87,6 +70,33 @@ public class GedcomNamespacePrefixMapper extends NamespacePrefixMapper {
 
   public GedcomNamespacePrefixMapper() {
     this(null, null);
+  }
+
+  /**
+   * The known set of namespace-to-prefix mappings.
+   *
+   * @return The known set of namespace-to-prefix mappings.
+   */
+  public static Map<String, String> getKnownPrefixes() {
+    Map<String, String> ns2prefix = new HashMap<String, String>();
+    ns2prefix.put("http://gedcomx.org/types", "gxt");
+    ns2prefix.put("http://gedcomx.org/id/v1", "gxid");
+    ns2prefix.put("http://gedcomx.org/attribution/v1", "gxa");
+    ns2prefix.put("http://gedcomx.org/source/v1", "gxs");
+    ns2prefix.put("http://gedcomx.org/record/v1", "gxr");
+    ns2prefix.put("http://gedcomx.org/conclusion/v1", "gxc");
+
+    ns2prefix.put("http://gedcomx.org/www/v1", "gxw");
+    ns2prefix.put("http://gedcomx.org/source/www/v1", "gxsw");
+    ns2prefix.put("http://gedcomx.org/record/www/v1", "gxrw");
+    ns2prefix.put("http://gedcomx.org/conclusion/www/v1", "gxcw");
+
+    ns2prefix.put("http://www.w3.org/1999/02/22-rdf-syntax-ns#", "rdf");
+    ns2prefix.put("http://purl.org/dc/terms/", "dcterms");
+    ns2prefix.put("http://purl.org/dc/dcmitype/", "dctypes");
+    ns2prefix.put("http://www.w3.org/1999/xlink", "xlink");
+    ns2prefix.put("http://www.w3.org/2001/XMLSchema-instance", "xsi");
+    return ns2prefix;
   }
 
   @Override

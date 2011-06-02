@@ -21,6 +21,11 @@
       <artifactId>enunciate-core</artifactId>
       <version>${enunciate.version}</version>
     </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>gedcomx-rt-support</artifactId>
+      <version>${project.version}</version>
+    </dependency>
   </dependencies>
 
 </project>

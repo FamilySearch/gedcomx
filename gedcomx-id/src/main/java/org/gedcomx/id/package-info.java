@@ -15,7 +15,9 @@
  */
 
 /**
- * The <b>id</b> profile provides the standard mechanisms for identifying genealogical entities.
+ * The <b>id profile</b> provides the standard mechanisms for identifying genealogical entities.
+ *
+ * @label ID Profile
  */
 @XmlSchema(
   namespace = IdConstants.GEDCOMX_ID_NAMESPACE,

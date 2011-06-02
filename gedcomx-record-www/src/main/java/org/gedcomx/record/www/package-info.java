@@ -13,6 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+/**
+ * The <b>record-www profile</b> models the necessary extensions to the record model to support
+ * providing record data via the World Wide Web.
+ *
+ * @label Record WWW Profile
+ */
 @XmlSchema(
   namespace = RecordWWWConstants.GEDCOMX_RECORD_WWW_NAMESPACE,
   elementFormDefault = XmlNsForm.QUALIFIED,
@@ -30,10 +37,6 @@
 
 )
 @XmlAccessorOrder ( XmlAccessOrder.ALPHABETICAL )
-/**
- * The <b>record-www</b> profile models the necessary extensions to the record model to support
- * providing record data via the World Wide Web.
- */
 package org.gedcomx.record.www;
 
 import org.gedcomx.attribution.AttributionConstants;

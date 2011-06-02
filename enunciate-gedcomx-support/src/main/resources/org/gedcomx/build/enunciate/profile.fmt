@@ -1,0 +1,66 @@
+[#ftl]
+[#--macro for writing a profile page--]
+[#-- @ftlvariable name="schema" type="org.codehaus.enunciate.config.SchemaInfo" --]
+[#import "boilerplate.fmt" as libBoilerplate/]
+[#macro writeProfilePage schema]
+  [#assign profile = schema.typeDefinitions[0].package/]
+  [@libBoilerplate.writeStartBody label=schema.properties.label/]
+  <div class="container">
+    <header>
+      <div id="header" class="column first last span-20">
+        [@libBoilerplate.writePrimaryNav/]
+        <div id="secondary" class="column span-18 append-1 prepend-1 first last">
+          <ul class="navigation">
+            <li><a href="index.html">Profiles</a> &gt;</li>
+            <li><a href="#">${schema.properties.label}</a></li>
+          </ul>
+        </div>
+      </div>
+    </header>
+    <div id="main" class="column first last span-20">
+      <h1>${schema.properties.label}</h1>
+
+      <hr/>
+
+      <table>
+        <tr>
+          <td align="right">Profile ID:</td>
+          <td>${schema.id}</td>
+        </tr>
+        <tr>
+          <td align="right">Profile Namespace:</td>
+          <td>${schema.namespace}</td>
+        </tr>
+        <tr>
+          <td align="right">XML Schema:</td>
+          <td><a href="${schema.properties.filename!"#"}">${schema.properties.filename!"n/a"}</a></td>
+        </tr>
+      </table>
+
+      ${profile.docValue!""}
+
+      [#if schema.globalElements?size > 0]
+      <h3>Root Elements</h3>
+
+      <ul>
+        [#list schema.globalElements as element]
+        <li><a href="${schema.id}_el_${element.name}.html">${element.name}</a></li>
+        [/#list]
+      </ul>
+
+      [/#if]
+      <h3>Data Types</h3>
+
+      <ul>
+        [#list schema.typeDefinitions as type]
+        <li><a href="${schema.id}_${type.name}.html">${type.name}</a></li>
+        [/#list]
+      </ul>
+
+      <div class="clear" />
+    </div>
+    [@libBoilerplate.writeFooter/]
+  </div> <!--! end of #container -->
+
+  [@libBoilerplate.writeEndBody/]
+[/#macro]

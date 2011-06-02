@@ -16,6 +16,8 @@
 
 /**
  * The <b>source profile</b> models genealogical sources.
+ *
+ * @label Source Profile
  */
 @XmlSchema (
   namespace = SourceConstants.GEDCOMX_SOURCE_NAMESPACE,

@@ -15,7 +15,9 @@
  */
 
 /**
- * The <b>www</b> profile models the necessary extensions to provide genealogical data via the World Wide Web.
+ * The <b>www profile</b> models the necessary extensions to provide genealogical data via the World Wide Web.
+ *
+ * @label WWW Profile
  */
 @XmlSchema (
   namespace = WebConstants.GEDCOMX_WWW_NAMESPACE,

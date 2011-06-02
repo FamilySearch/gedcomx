@@ -1,0 +1,138 @@
+[#ftl]
+[#--macro for writing a profile page--]
+[#-- @ftlvariable name="type" type="org.codehaus.enunciate.contract.jaxb.TypeDefinition" --]
+[#import "boilerplate.fmt" as libBoilerplate/]
+[#macro writeTypePage type]
+  [#assign schema=schemaForNamespace(type)/]
+  [#assign typeLabel=type.javaDoc["label"]!type.name!"Anonymous"/]
+  [@libBoilerplate.writeStartBody label=typeLabel/]
+  <div class="container">
+    <header>
+      <div id="header" class="column first last span-20">
+        [@libBoilerplate.writePrimaryNav/]
+        <div id="secondary" class="column span-18 append-1 prepend-1 first last">
+          <ul class="navigation">
+            <li><a href="index.html">Documentation</a> &gt;</li>
+            <li><a href="${schema.id}.html">${schema.properties.label}</a> &gt;</li>
+            <li><a href="#">${typeLabel}</a></li>
+          </ul>
+        </div>
+      </div>
+    </header>
+    <div id="main" class="column first last span-20">
+      <h1>${typeLabel}</h1>
+
+      <hr/>
+
+      <table>
+        <tr>
+          <td align="right">Name:</td>
+          <td>${type.name}</td>
+        </tr>
+        <tr>
+          <td align="right">Namespace:</td>
+          <td>${type.namespace}</td>
+        </tr>
+        <tr>
+          <td align="right">QName:</td>
+          <td>{${type.namespace}}${type.name}</td>
+        </tr>
+        [#if !type.baseObject]
+        <tr>
+          <td align="right">Extends:</td>
+          <td><a href="${schemaForNamespace(type.baseType).id}_${type.baseType.name}.html">${typeName(type.baseType, type.namespace)}</a></td>
+        </tr>
+        [/#if]
+      </table>
+
+      <h3>Description</h3>
+
+      ${type.docValue!""}
+
+    [#if type.enum!false]
+      <h3>Enumerated Values</h3>
+      <table>
+        <tr>
+          <th align="center">[#if type.QNameEnum!false]qname[#else]value[/#if]</th>
+          <th align="center">description</th>
+        </tr>
+      [#assign enumValueMap=type.enumValues/]
+      [#list type.enumConstants as constant]
+        [#if enumValueMap[constant.simpleName]??]
+        <tr>
+          <td>${enumValueMap[constant.simpleName]}</td>
+          <td>${constant.docComment!""}</td>
+        </tr>
+        [/#if]
+      [/#list]
+      </table>
+    [#else]
+      <h3>Properties</h3>
+      <table>
+        <tr>
+          <th colspan="3" align="center">xml</th>
+          <th colspan="2" align="center">json</th>
+          <th rowspan="2" align="center">description</th>
+        </tr>
+        <tr>
+          <th align="center">name</th>
+          <th align="center">type</th>
+          <th align="center">occurs</th>
+          <th align="center">name</th>
+          <th align="center">type</th>
+        </tr>
+      [#list type.attributes as attribute]
+        [#assign hasSchema=schemaForNamespace(attribute)??/]
+        <tr>
+          <td>${attribute.name}</td>
+          <td>[#if hasSchema]<a href="${schemaForNamespace(attribute).id}_${attribute.baseType.qname.localPart}.html">[/#if]${typeName(attribute, type.namespace)}[#if hasSchema]</a>[/#if]</td>
+          <td>0..1 (attribute)</td>
+          <td>${attribute.jsonMemberName}</td>
+          <td>[#if hasSchema]<a href="${schemaForNamespace(attribute).id}_${attribute.baseType.qname.localPart}.html">[/#if]${typeName(attribute, type.namespace)}[#if hasSchema]</a>[/#if]</td>
+          <td>${attribute.docValue!""}</td>
+        </tr>
+      [/#list]
+      [#list type.elements as element]
+        [#assign hasSchema=schemaForNamespace(element)??/]
+        <tr>
+          <td>${element.name}[#if element.wrapped!false] (wrapped in "${element.wrapperName}" element)[/#if]</td>
+          <td>[#if hasSchema]<a href="${schemaForNamespace(element).id}_${element.baseType.qname.localPart}.html">[/#if]${typeName(element, type.namespace)}[#if hasSchema]</a>[/#if]</td>
+          <td>${element.minOccurs}..[#if "unbounded" = element.maxOccurs]*[#else]${element.maxOccurs}[/#if]</td>
+          <td>${element.jsonMemberName}</td>
+          <td>[#if element.collectionType!false]array of [/#if][#if hasSchema]<a href="${schemaForNamespace(element).id}_${element.baseType.qname.localPart}.html">[/#if]${typeName(element, type.namespace)}[#if hasSchema]</a>[/#if]</td>
+          <td>${element.docValue!""}</td>
+        </tr>
+      [/#list]
+      [#if type.value??]
+        [#assign hasSchema=schemaForNamespace(type.value)??/]
+        <tr>
+          <td>(value)</td>
+          <td>[#if hasSchema]<a href="${schemaForNamespace(type.value).id}_${type.value.baseType.qname.localPart}.html">[/#if]${typeName(type.value, type.namespace)}[#if hasSchema]</a>[/#if]</td>
+          <td>(value)</td>
+          <td>${type.value.jsonMemberName}</td>
+          <td>[#if hasSchema]<a href="${schemaForNamespace(type.value).id}_${type.value.baseType.qname.localPart}.html">[/#if]${typeName(type.value, type.namespace)}[#if hasSchema]</a>[/#if]</td>
+          <td>${type.value.docValue!""}</td>
+        </tr>
+      [/#if]
+      </table>
+    [/#if]
+
+      <h3>Example XML</h3>
+
+      <pre>
+${generateExampleXml(type)?html}
+      </pre>
+
+      <h3>Example JSON</h3>
+
+      <pre>
+${generateExampleJson(type)}
+      </pre>
+
+      <div class="clear" />
+    </div>
+    [@libBoilerplate.writeFooter/]
+  </div> <!--! end of #container -->
+
+  [@libBoilerplate.writeEndBody/]
+[/#macro]

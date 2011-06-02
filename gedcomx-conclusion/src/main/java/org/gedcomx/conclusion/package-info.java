@@ -16,6 +16,8 @@
 
 /**
  * The <b>conclusion profile</b> models genealogical conclusion data.
+ *
+ * @label Conclusion Profile
  */
 @XmlSchema(
   namespace = ConclusionConstants.GEDCOMX_CONCLUSION_NAMESPACE,

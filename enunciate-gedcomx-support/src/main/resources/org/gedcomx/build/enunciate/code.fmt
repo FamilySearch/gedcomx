@@ -1,0 +1,70 @@
+[#ftl]
+[#-- @ftlvariable name="schema" type="org.codehaus.enunciate.config.SchemaInfo" --]
+[#import "boilerplate.fmt" as libBoilerplate/]
+[@file name="code.html" charset="utf-8"]
+  [@libBoilerplate.writeStartBody label="Code"/]
+  <div class="container">
+    <header>
+      <div id="header" class="column first last span-20">
+        [@libBoilerplate.writePrimaryNav/]
+        <div id="secondary" class="column span-18 append-1 prepend-1 first last">
+          <ul class="navigation">
+            <li><a href="index.html">Profiles</a> &gt;</li>
+            <li><a href="#">Code</a></li>
+          </ul>
+        </div>
+      </div>
+    </header>
+    <div id="main" class="column first last span-20">
+      <h1>GEDCOM X Code</h1>
+
+      <hr/>
+
+      <p>The following libraries are available for use in consuming and producing GEDCOM X. For information on how to use these libraries, refer
+      to the <a href="../Code.html">wiki page</a>.</p>
+      
+      [#list downloads as download]
+      <h3>${download.name?default("unknown")}</h3>
+
+      ${(download.description!"")?replace("h1", "h4")}
+
+        [#if download.artifacts??]
+      <h4>files</h4>
+
+      <table>
+        <tr>
+          <th>name</th>
+          <th>size</th>
+          <th>description</th>
+        </tr>
+          [#list download.artifacts as artifact]
+            [#if artifact.name??]
+        <tr>
+          <td><a href="${artifact.name}">${artifact.name}</a></td>
+          <td>${artifact.size}</td>
+          <td>${artifact.description!("")}</td>
+        </tr>
+            [/#if]
+          [/#list]
+      </table>
+        [#elseif download.name??]
+      <table>
+        <tr>
+          <td align="right">File:</td>
+          <td><a href="${download.name}">${download.name}</a></td>
+        </tr>
+        <tr>
+          <td align="right">Size:</td>
+          <td>${download.size}</td>
+        </tr>
+      </table>
+        [/#if]
+      [/#list]
+
+      <div class="clear" />
+    </div>
+    [@libBoilerplate.writeFooter/]
+  </div> <!--! end of #container -->
+
+  [@libBoilerplate.writeEndBody/]
+[/@file]

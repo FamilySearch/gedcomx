@@ -15,8 +15,10 @@
  */
 
 /**
- * The <b>conclusion-www</b> profile models the necessary extensions to the conclusion model to support
+ * The <b>conclusion www profile</b> models the necessary extensions to the conclusion model to support
  * providing conclusion data via the World Wide Web.
+ *
+ * @label Conclusion WWW Profile
  */
 @XmlSchema(
   namespace = ConclusionWWWConstants.GEDCOMX_CONCLUSION_WWW_NAMESPACE,

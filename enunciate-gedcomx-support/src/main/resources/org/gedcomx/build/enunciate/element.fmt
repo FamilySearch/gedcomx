@@ -1,0 +1,63 @@
+[#ftl]
+[#--macro for writing a profile page--]
+[#import "boilerplate.fmt" as libBoilerplate/]
+[#macro writeElementPage element]
+  [#assign schema=schemaForNamespace(element)/]
+  [#assign elementLabel="Element " + element.name/]
+  [@libBoilerplate.writeStartBody label=elementLabel/]
+  <div class="container">
+    <header>
+      <div id="header" class="column first last span-20">
+        [@libBoilerplate.writePrimaryNav/]
+        <div id="secondary" class="column span-18 append-1 prepend-1 first last">
+          <ul class="navigation">
+            <li><a href="index.html">Profiles</a> &gt;</li>
+            <li><a href="${schema.id}.html">${schema.properties.label}</a> &gt;</li>
+            <li><a href="#">${elementLabel}</a></li>
+          </ul>
+        </div>
+      </div>
+    </header>
+    <div id="main" class="column first last span-20">
+      <h1>${elementLabel}</h1>
+
+      <hr/>
+
+      <table>
+        <tr>
+          <td align="right">Type:</td>
+          <td><a href="${schemaForNamespace(element.typeDefinition).id}_${element.typeDefinition.name}.html">${element.typeDefinition.name}</a></td>
+        </tr>
+        <tr>
+          <td align="right">Name:</td>
+          <td>${element.name}</td>
+        </tr>
+        <tr>
+          <td align="right">Namespace:</td>
+          <td>${element.namespace}</td>
+        </tr>
+      </table>
+
+      <h3>Description</h3>
+
+      ${element.docValue}
+
+      <h3>Example XML</h3>
+
+      <pre>
+${generateExampleXml(element)?html}
+      </pre>
+
+      <h3>Example JSON</h3>
+
+      <pre>
+${generateExampleJson(element)}
+      </pre>
+
+      <div class="clear" />
+    </div>
+    [@libBoilerplate.writeFooter/]
+  </div> <!--! end of #container -->
+
+  [@libBoilerplate.writeEndBody/]
+[/#macro]

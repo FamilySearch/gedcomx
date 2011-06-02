@@ -15,10 +15,10 @@
  */
 
 /**
- * <h1>GEDCOM X Attribution</h1>
- *
  * <p>The <b>attribution profile</b> models the objects necessary to support attribution metadata for genealogical data. Attribution
  * metadata intends to answer the "who, why, when" questions about genealogical data.</p>
+ *
+ * @label Attribution Profile
  */
 @XmlSchema(
   namespace = AttributionConstants.GEDCOMX_ATTRIBUTION_NAMESPACE,

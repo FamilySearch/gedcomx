@@ -15,7 +15,9 @@
  */
 
 /**
- * The <b>metadata</b> profile models genealogical "data about data".
+ * The <b>metadata profile</b> models genealogical "data about data".
+ *
+ * @label Metadata Profile
  */
 package org.gedcomx.metadata;
 //todo: document how we're going to extend metadata in the future

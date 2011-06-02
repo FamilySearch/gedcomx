@@ -17,8 +17,8 @@
   </properties>
 
   <modules>
-    <module>enunciate-gedcomx-support</module>
     <module>gedcomx-rt-support</module>
+    <module>enunciate-gedcomx-support</module>
 
     <module>gedcomx-types</module>
     <module>gedcomx-id</module>

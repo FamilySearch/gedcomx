@@ -15,8 +15,10 @@
  */
 
 /**
- * The <b>source-www</b> profile models the necessary extensions to the source model to support
+ * The <b>source-www profile</b> models the necessary extensions to the source model to support
  * providing source data via the World Wide Web.
+ *
+ * @label Source WWW Profile
  */
 @XmlSchema (
   namespace = SourceWWWConstants.GEDCOMX_SOURCE_WWW_NAMESPACE,

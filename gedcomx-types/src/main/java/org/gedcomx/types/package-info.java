@@ -15,7 +15,9 @@
  */
 
 /**
- * The <b>types</b> profile provides the standard set of types of genealogical data.
+ * The <b>types profile</b> provides the standard set of types of genealogical data.
+ *
+ * @label Types Profile
  */
 @XmlSchema(
   namespace = TypeConstants.GEDCOMX_TYPES_NAMESPACE,

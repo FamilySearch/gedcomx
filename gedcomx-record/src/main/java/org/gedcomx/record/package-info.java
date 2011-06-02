@@ -16,6 +16,8 @@
 
 /**
  * The <b>record profile</b> models genealogical data as is transcribed from a record.
+ *
+ * @label Record Profile
  */
 @XmlSchema(
   namespace = RecordConstants.GEDCOMX_RECORD_NAMESPACE,
