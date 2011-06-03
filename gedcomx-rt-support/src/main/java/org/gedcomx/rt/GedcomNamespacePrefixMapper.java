@@ -19,9 +19,9 @@ import com.sun.xml.bind.marshaller.NamespacePrefixMapper;
 
 import javax.xml.bind.annotation.XmlNs;
 import javax.xml.bind.annotation.XmlSchema;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.IOException;
+import java.net.URL;
+import java.util.*;
 
 /**
  * A nice namespace prefix mapper that can be used to make XML output as pretty as it can be.
@@ -32,6 +32,8 @@ public class GedcomNamespacePrefixMapper extends NamespacePrefixMapper {
 
   private final String defaultns;
   private final Map<String, String> ns2prefix;
+
+  private static Map<String, String> KNOWN_PREFIXES = null;
 
   public GedcomNamespacePrefixMapper(Class<?> rootClass) {
     this(gatherOverrides(rootClass), null);
@@ -77,26 +79,51 @@ public class GedcomNamespacePrefixMapper extends NamespacePrefixMapper {
    *
    * @return The known set of namespace-to-prefix mappings.
    */
-  public static Map<String, String> getKnownPrefixes() {
-    Map<String, String> ns2prefix = new HashMap<String, String>();
-    ns2prefix.put("http://gedcomx.org/types", "gxt");
-    ns2prefix.put("http://gedcomx.org/id/v1", "gxid");
-    ns2prefix.put("http://gedcomx.org/attribution/v1", "gxa");
-    ns2prefix.put("http://gedcomx.org/source/v1", "gxs");
-    ns2prefix.put("http://gedcomx.org/record/v1", "gxr");
-    ns2prefix.put("http://gedcomx.org/conclusion/v1", "gxc");
+  public static synchronized Map<String, String> getKnownPrefixes() {
+    if (KNOWN_PREFIXES == null) {
+      Map<String, String> ns2prefix = new HashMap<String, String>();
+      ns2prefix.put("http://www.w3.org/1999/02/22-rdf-syntax-ns#", "rdf");
+      ns2prefix.put("http://purl.org/dc/terms/", "dcterms");
+      ns2prefix.put("http://purl.org/dc/dcmitype/", "dctypes");
+      ns2prefix.put("http://www.w3.org/1999/xlink", "xlink");
+      ns2prefix.put("http://www.w3.org/2001/XMLSchema-instance", "xsi");
 
-    ns2prefix.put("http://gedcomx.org/www/v1", "gxw");
-    ns2prefix.put("http://gedcomx.org/source/www/v1", "gxsw");
-    ns2prefix.put("http://gedcomx.org/record/www/v1", "gxrw");
-    ns2prefix.put("http://gedcomx.org/conclusion/www/v1", "gxcw");
+      try {
+        Enumeration<URL> resources = GedcomNamespacePrefixMapper.class.getClassLoader().getResources("/META-INF/gedcomx-profile.properties");
+        while (resources.hasMoreElements()) {
+          URL resource = resources.nextElement();
+          Properties props = new Properties();
+          props.load(resource.openStream());
 
-    ns2prefix.put("http://www.w3.org/1999/02/22-rdf-syntax-ns#", "rdf");
-    ns2prefix.put("http://purl.org/dc/terms/", "dcterms");
-    ns2prefix.put("http://purl.org/dc/dcmitype/", "dctypes");
-    ns2prefix.put("http://www.w3.org/1999/xlink", "xlink");
-    ns2prefix.put("http://www.w3.org/2001/XMLSchema-instance", "xsi");
-    return ns2prefix;
+          String namespace = props.getProperty("profile.namespace");
+          if (namespace != null) {
+            String id = props.getProperty("profile.id");
+            if (id != null) {
+              ns2prefix.put(namespace, id);
+            }
+
+            int i = 0;
+            while (i <= 2 || props.getProperty("profile" + i + ".namespace") != null) {
+              namespace = props.getProperty("profile" + i + ".namespace");
+              if (namespace != null) {
+                id = props.getProperty("profile" + i + ".id");
+                if (id != null) {
+                  ns2prefix.put(namespace, id);
+                }
+              }
+              i++;
+            }
+          }
+        }
+      }
+      catch (IOException e) {
+        //no-op.
+      }
+
+      KNOWN_PREFIXES = ns2prefix;
+    }
+
+    return KNOWN_PREFIXES;
   }
 
   @Override

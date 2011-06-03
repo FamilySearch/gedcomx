@@ -42,7 +42,7 @@
       <ul>
     [@forEachSchema]
       [#if (schema.typeDefinitions?size > 0) || (schema.globalElements?size > 0)]
-        <li><a href="${schema.id}.html">${schema.properties.label}</a>[#if schema.properties.summary??]<br/><p>${schema.properties.summary}</p>[/#if]</li>
+        <li><a href="${schema.id}.html">${schema.properties.label}</a>[#if schema.properties.description??]<br/><p>${schema.properties.description}</p>[/#if]</li>
       [/#if]
     [/@forEachSchema]
       </ul>
