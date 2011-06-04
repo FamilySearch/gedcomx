@@ -127,6 +127,10 @@
           <artifactId>maven-enunciate-plugin</artifactId>
           <version>${enunciate.version}</version>
 
+          <configuration>
+            <configFile>${root.basedir}/enunciate.xml</configFile>
+          </configuration>
+
           <dependencies>
             <dependency>
               <groupId>org.gedcomx</groupId>

@@ -18,11 +18,9 @@ package org.gedcomx.metadata.rdf;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.id.XmlTypeIdResolver;
+import org.gedcomx.metadata.dc.DublinCoreMetadata;
 
-import javax.xml.bind.annotation.XmlAnyAttribute;
-import javax.xml.bind.annotation.XmlAnyElement;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.*;
 import javax.xml.namespace.QName;
 import java.net.URI;
 import java.util.List;
