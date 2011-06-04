@@ -28,6 +28,5 @@ public class AttributionConstants {
   private AttributionConstants() {}
 
   public static final String GEDCOMX_ATTRIBUTION_NAMESPACE = "http://gedcomx.org/attribution/v1";
-  public static final String GEDCOMX_ATTRIBUTION_NAMESPACE_PREFIX = "gxa";
 
 }

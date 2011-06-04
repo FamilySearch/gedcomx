@@ -13,19 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package org.gedcomx.rt;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
- * The <b>types profile</b> provides the standard set of types of genealogical data.
+ * Annotation for specifying a hint about the default namespace when serializing a particular class to/from xml.
  *
- * @label Types Profile
+ * @author Ryan Heaton
  */
-@XmlSchema(
-  namespace = TypeConstants.GEDCOMX_TYPES_NAMESPACE,
-  elementFormDefault = XmlNsForm.QUALIFIED
-)
-package org.gedcomx.types;
-//todo: figure out all the valid types
-//todo: figure out user-defined types: come up with conventions for extending known types (e.g. qname ns/localpart should resolve to a description of the type)
+@Retention( RetentionPolicy.RUNTIME )
+@Target( { ElementType.TYPE, ElementType.PACKAGE } )
+public @interface DefaultNamespace {
 
-import javax.xml.bind.annotation.XmlNsForm;
-import javax.xml.bind.annotation.XmlSchema;
+  String value();
+}

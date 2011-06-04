@@ -26,6 +26,5 @@ public class RecordWWWConstants {
   private RecordWWWConstants() {}
 
   public static final String GEDCOMX_RECORD_WWW_NAMESPACE = "http://gedcomx.org/record/www/v1";
-  public static final String GEDCOMX_RECORD_WWW_NAMESPACE_PREFIX = "gxrw";
 
 }

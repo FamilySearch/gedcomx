@@ -17,7 +17,7 @@ package org.gedcomx.rt;
 
 import com.sun.xml.bind.marshaller.NamespacePrefixMapper;
 
-import javax.xml.bind.annotation.XmlNs;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchema;
 import java.util.Collections;
 import java.util.HashMap;
@@ -34,18 +34,37 @@ public class GedcomNamespacePrefixMapper extends NamespacePrefixMapper {
   private final Map<String, String> ns2prefix;
 
   public GedcomNamespacePrefixMapper(Class<?> rootClass) {
-    this(gatherOverrides(rootClass), null);
+    this(getDefaultNamespace(rootClass));
   }
 
-  private static Map<String, String> gatherOverrides(Class<?> rootClass) {
-    Map<String, String> overrides = new HashMap<String, String>();
-    if (rootClass.getPackage() != null) {
-      XmlSchema schemaInfo = rootClass.getPackage().getAnnotation(XmlSchema.class);
-      for (XmlNs xmlNs : schemaInfo.xmlns()) {
-        overrides.put(xmlNs.namespaceURI(), xmlNs.prefix());
+  private static String getDefaultNamespace(Class<?> rootClass) {
+    DefaultNamespace defaultNs = rootClass.getAnnotation(DefaultNamespace.class);
+    if (defaultNs == null && rootClass.getPackage() != null) {
+      defaultNs = rootClass.getPackage().getAnnotation(DefaultNamespace.class);
+    }
+
+    String defaultNamespace = "";
+    if (defaultNs != null) {
+      defaultNamespace = defaultNs.value();
+    }
+    else {
+      XmlRootElement rootElement = rootClass.getAnnotation(XmlRootElement.class);
+      if (rootElement != null) {
+        if ("##default".equals(rootElement.namespace())) {
+          if (rootClass.getPackage() != null) {
+            XmlSchema xmlSchema = rootClass.getPackage().getAnnotation(XmlSchema.class);
+            if (xmlSchema != null) {
+              defaultNamespace = xmlSchema.namespace();
+            }
+          }
+        }
+        else {
+          defaultNamespace = rootElement.namespace();
+        }
       }
     }
-    return overrides;
+
+    return defaultNamespace;
   }
 
   public GedcomNamespacePrefixMapper(Map<String, String> overrides, String defaultns) {

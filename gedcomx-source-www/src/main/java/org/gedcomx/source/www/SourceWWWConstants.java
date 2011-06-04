@@ -26,5 +26,4 @@ public class SourceWWWConstants {
   private SourceWWWConstants() {}
 
   public static final String GEDCOMX_SOURCE_WWW_NAMESPACE = "http://gedcomx.org/source/www/v1";
-  public static final String GEDCOMX_SOURCE_WWW_NAMESPACE_PREFIX = "gxsw";
 }

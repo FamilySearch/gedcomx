@@ -26,6 +26,5 @@ public class ConclusionWWWConstants {
   private ConclusionWWWConstants() {}
 
   public static final String GEDCOMX_CONCLUSION_WWW_NAMESPACE = "http://gedcomx.org/conclusion/www/v1";
-  public static final String GEDCOMX_CONCLUSION_WWW_NAMESPACE_PREFIX = "gxcw";
 
 }

@@ -26,5 +26,4 @@ public class WebConstants {
   private WebConstants() {}
 
   public static final String GEDCOMX_WWW_NAMESPACE = "http://gedcomx.org/www/v1";
-  public static final String GEDCOMX_WWW_NAMESPACE_PREFIX = "gxw";
 }
