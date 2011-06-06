@@ -13,7 +13,11 @@
   </parent>
 
   <properties>
-    <root.basedir>${project.parent.basedir}</root.basedir>
+    <!--we either have to refer to the parent directory (making modules-->
+    <!--incapable of building outside the context of the parent) or-->
+    <!--we have to duplicate the config files to all modules. Currently-->
+    <!--opting for the former.-->
+    <root.basedir>${basedir}/..</root.basedir>
   </properties>
 
   <build>
