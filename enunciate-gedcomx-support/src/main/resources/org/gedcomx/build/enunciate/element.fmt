@@ -1,5 +1,5 @@
 [#ftl]
-[#--macro for writing a profile page--]
+[#--macro for writing a element page--]
 [#import "boilerplate.fmt" as libBoilerplate/]
 [#macro writeElementPage element]
   [#assign schema=schemaForNamespace(element)/]
@@ -11,8 +11,8 @@
         [@libBoilerplate.writePrimaryNav/]
         <div id="secondary" class="column span-18 append-1 prepend-1 first last">
           <ul class="navigation">
-            <li><a href="index.html">Profiles</a> &gt;</li>
-            <li><a href="${schema.id}.html">${schema.properties.label}</a> &gt;</li>
+            <li><a href="index.html">Namespaces</a> &gt;</li>
+            <li><a href="${schema.id}.html">${schema.properties.label!("\"" + schema.id + "\" Namespace")}</a> &gt;</li>
             <li><a href="#">${elementLabel}</a></li>
           </ul>
         </div>

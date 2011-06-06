@@ -1,13 +1,13 @@
 [#ftl]
 [#-- @ftlvariable name="schema" type="org.codehaus.enunciate.config.SchemaInfo" --]
-[#import "profile.fmt" as libProfile/]
+[#import "ns.fmt" as libNamespace/]
 [#import "element.fmt" as libElement/]
 [#import "type.fmt" as libType/]
 [#import "boilerplate.fmt" as libBoilerplate/]
 [@forEachSchema]
   [#if (schema.typeDefinitions?size > 0) || (schema.globalElements?size > 0)]
     [@file name=(schema.id + ".html") charset="utf-8"]
-      [@libProfile.writeProfilePage schema=schema/]
+      [@libNamespace.writeNamespacePage schema=schema/]
     [/@file]
     [#list schema.globalElements as element]
       [@file name=(schema.id + "_el_" + element.name + ".html") charset="utf-8"]
@@ -22,27 +22,27 @@
   [/#if]
 [/@forEachSchema]
 [@file name="index.html" charset="utf-8"]
-  [@libBoilerplate.writeStartBody label="Profiles"/]
+  [@libBoilerplate.writeStartBody label="Namespaces"/]
   <div class="container">
     <header>
       <div id="header" class="column first last span-20">
         [@libBoilerplate.writePrimaryNav/]
         <div id="secondary" class="column span-18 append-1 prepend-1 first last">
           <ul class="navigation">
-            <li><a href="#">Profiles</a></li>
+            <li><a href="#">Namespaces</a></li>
           </ul>
         </div>
       </div>
     </header>
     <div id="main" class="column first last span-20">
-      <h1>GEDCOM X Profiles</h1>
+      <h1>GEDCOM X Namespaces</h1>
 
       <hr/>
 
       <ul>
     [@forEachSchema]
       [#if (schema.typeDefinitions?size > 0) || (schema.globalElements?size > 0)]
-        <li><a href="${schema.id}.html">${schema.properties.label}</a>[#if schema.properties.description??]<br/><p>${schema.properties.description}</p>[/#if]</li>
+        <li><a href="${schema.id}.html">${schema.properties.label!("\"" + schema.id + "\" Namespace")}</a>[#if schema.properties.description??]<br/><p>${schema.properties.description}</p>[/#if]</li>
       [/#if]
     [/@forEachSchema]
       </ul>

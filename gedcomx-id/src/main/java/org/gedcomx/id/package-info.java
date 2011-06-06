@@ -23,7 +23,23 @@
   namespace = IdConstants.GEDCOMX_ID_NAMESPACE,
   elementFormDefault = XmlNsForm.QUALIFIED
 )
+@Profile (
+  label = "ID Profile",
+  description = "The id profile supports the mechanisms for identifying genealogical entities.",
+  namespaces = {
+    @Namespace (
+      id = "gxid",
+      uri = IdConstants.GEDCOMX_ID_NAMESPACE,
+      label = "ID Namespace",
+      description = "The id namespace contains the objects necessary identifying genealogical entities.",
+      version = "v1"
+    )
+  }
+)
 package org.gedcomx.id;
+
+import org.gedcomx.rt.Namespace;
+import org.gedcomx.rt.Profile;
 
 import javax.xml.bind.annotation.XmlNsForm;
 import javax.xml.bind.annotation.XmlSchema;

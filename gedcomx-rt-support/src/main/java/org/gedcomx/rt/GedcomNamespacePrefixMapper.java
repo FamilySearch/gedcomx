@@ -19,7 +19,10 @@ import com.sun.xml.bind.marshaller.NamespacePrefixMapper;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchema;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.*;
 
@@ -101,37 +104,27 @@ public class GedcomNamespacePrefixMapper extends NamespacePrefixMapper {
   public static synchronized Map<String, String> getKnownPrefixes() {
     if (KNOWN_PREFIXES == null) {
       Map<String, String> ns2prefix = new HashMap<String, String>();
-      ns2prefix.put("http://www.w3.org/1999/02/22-rdf-syntax-ns#", "rdf");
-      ns2prefix.put("http://purl.org/dc/terms/", "dcterms");
-      ns2prefix.put("http://purl.org/dc/dcmitype/", "dctypes");
       ns2prefix.put("http://www.w3.org/1999/xlink", "xlink");
       ns2prefix.put("http://www.w3.org/2001/XMLSchema-instance", "xsi");
 
       try {
-        Enumeration<URL> resources = GedcomNamespacePrefixMapper.class.getClassLoader().getResources("/META-INF/gedcomx-profile.properties");
+        Enumeration<URL> resources = Thread.currentThread().getContextClassLoader().getResources("/META-INF/gedcomx.profiles");
         while (resources.hasMoreElements()) {
-          URL resource = resources.nextElement();
-          Properties props = new Properties();
-          props.load(resource.openStream());
-
-          String namespace = props.getProperty("profile.namespace");
-          if (namespace != null) {
-            String id = props.getProperty("profile.id");
-            if (id != null) {
-              ns2prefix.put(namespace, id);
-            }
-
-            int i = 0;
-            while (i <= 2 || props.getProperty("profile" + i + ".namespace") != null) {
-              namespace = props.getProperty("profile" + i + ".namespace");
-              if (namespace != null) {
-                id = props.getProperty("profile" + i + ".id");
-                if (id != null) {
-                  ns2prefix.put(namespace, id);
-                }
+          try {
+            URL resource = resources.nextElement();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(resource.openStream()));
+            String packageName = reader.readLine();
+            while (packageName != null) {
+              Package pkg = Package.getPackage(packageName);
+              Profile profileInfo = pkg.getAnnotation(Profile.class);
+              for (Namespace ns : profileInfo.namespaces()) {
+                ns2prefix.put(ns.uri(), ns.id());
               }
-              i++;
+              packageName = reader.readLine();
             }
+          }
+          catch (Exception e) {
+            //no-op...
           }
         }
       }

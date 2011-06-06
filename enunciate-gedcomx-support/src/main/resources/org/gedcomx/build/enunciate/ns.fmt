@@ -1,43 +1,60 @@
 [#ftl]
-[#--macro for writing a profile page--]
+[#--macro for writing a namespace page--]
 [#-- @ftlvariable name="schema" type="org.codehaus.enunciate.config.SchemaInfo" --]
 [#import "boilerplate.fmt" as libBoilerplate/]
-[#macro writeProfilePage schema]
-  [#assign profile = schema.typeDefinitions[0].package/]
-  [@libBoilerplate.writeStartBody label=schema.properties.label/]
+[#macro writeNamespacePage schema]
+  [@libBoilerplate.writeStartBody label=schema.properties.label!("\"" + schema.id + "\" Namespace")/]
   <div class="container">
     <header>
       <div id="header" class="column first last span-20">
         [@libBoilerplate.writePrimaryNav/]
         <div id="secondary" class="column span-18 append-1 prepend-1 first last">
           <ul class="navigation">
-            <li><a href="index.html">Profiles</a> &gt;</li>
-            <li><a href="#">${schema.properties.label}</a></li>
+            <li><a href="index.html">Namespaces</a> &gt;</li>
+            <li><a href="#">${schema.properties.label!("\"" + schema.id + "\" Namespace")}</a></li>
           </ul>
         </div>
       </div>
     </header>
     <div id="main" class="column first last span-20">
-      <h1>${schema.properties.label}</h1>
+      <h1>${schema.properties.label!("\"" + schema.id + "\" Namespace")}</h1>
 
       <hr/>
 
       <table>
         <tr>
-          <td align="right">Profile ID:</td>
+          <td align="right">Namespace ID:</td>
           <td>${schema.id}</td>
         </tr>
         <tr>
-          <td align="right">Profile Namespace:</td>
+          <td align="right">Namespace URI:</td>
           <td>${schema.namespace}</td>
         </tr>
+        [#if schema.properties.version??]
+        <tr>
+          <td align="right">Version:</td>
+          <td>${schema.properties.version}</td>
+        </tr>
+        [/#if]
         <tr>
           <td align="right">XML Schema:</td>
           <td><a href="${schema.properties.filename!"#"}">${schema.properties.filename!"n/a"}</a></td>
         </tr>
+        [#if schema.properties.xmlMediaType??]
+        <tr>
+          <td align="right">XML Media Type:</td>
+          <td>${schema.properties.xmlMediaType}</td>
+        </tr>
+        [/#if]
+        [#if schema.properties.jsonMediaType??]
+        <tr>
+          <td align="right">JSON Media Type:</td>
+          <td>${schema.properties.jsonMediaType}</td>
+        </tr>
+        [/#if]
       </table>
 
-      ${profile.docValue!""}
+      <p>${schema.properties.description!""}</p>
 
       [#if schema.globalElements?size > 0]
       <h3>Root Elements</h3>

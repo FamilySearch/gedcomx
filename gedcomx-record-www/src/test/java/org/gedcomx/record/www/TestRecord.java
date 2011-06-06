@@ -36,6 +36,7 @@ public class TestRecord {
    */
   public void testRecordXml() throws Exception {
     Record record = createTestRecord();
+    System.out.println("HELLO?");
     record = processThroughXml(record);
     assertTestRecord(record);
   }

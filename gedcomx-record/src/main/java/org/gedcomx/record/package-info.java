@@ -24,7 +24,25 @@
   elementFormDefault = XmlNsForm.QUALIFIED
 )
 @XmlAccessorOrder ( XmlAccessOrder.ALPHABETICAL )
+@Profile (
+  label = "Record Profile",
+  description = "The record profile supports genealogical record data.",
+  namespaces = {
+    @Namespace (
+      id = "gxr",
+      uri = RecordConstants.GEDCOMX_RECORD_NAMESPACE,
+      label = "Record Namespace",
+      description = "The record namespace contains the objects necessary for modeling genealogical record data.",
+      version = "v1",
+      xmlMediaType = "application/gedcomx-record-v1+xml",
+      jsonMediaType = "application/gedcomx-record-v1+json"
+    )
+  }
+)
 package org.gedcomx.record;
+
+import org.gedcomx.rt.Namespace;
+import org.gedcomx.rt.Profile;
 
 import javax.xml.bind.annotation.XmlAccessOrder;
 import javax.xml.bind.annotation.XmlAccessorOrder;

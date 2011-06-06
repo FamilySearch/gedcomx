@@ -15,12 +15,15 @@
  */
 package org.gedcomx.build.enunciate;
 
+import com.sun.mirror.declaration.PackageDeclaration;
+import com.sun.mirror.declaration.TypeDeclaration;
 import freemarker.template.TemplateException;
 import org.codehaus.enunciate.EnunciateException;
-import org.codehaus.enunciate.apt.EnunciateClasspathListener;
 import org.codehaus.enunciate.apt.EnunciateFreemarkerModel;
+import org.codehaus.enunciate.apt.EnunciateTypeDeclarationListener;
 import org.codehaus.enunciate.config.SchemaInfo;
 import org.codehaus.enunciate.config.WsdlInfo;
+import org.codehaus.enunciate.contract.validation.ValidationException;
 import org.codehaus.enunciate.contract.validation.Validator;
 import org.codehaus.enunciate.main.Artifact;
 import org.codehaus.enunciate.main.Enunciate;
@@ -32,14 +35,13 @@ import org.codehaus.enunciate.template.freemarker.GetGroupsMethod;
 import org.codehaus.enunciate.template.freemarker.IsDefinedGloballyMethod;
 import org.codehaus.enunciate.template.freemarker.UniqueContentTypesMethod;
 import org.gedcomx.rt.GedcomNamespacePrefixMapper;
+import org.gedcomx.rt.Namespace;
+import org.gedcomx.rt.Profile;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Date;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  * The GEDCOM X deployment module handles the generation of the GEDCOM X documentation, validates common patterns, and
@@ -47,9 +49,9 @@ import java.util.TreeSet;
  *
  * @author Ryan Heaton
  */
-public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implements DocumentationAwareModule, EnunciateClasspathListener {
+public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implements DocumentationAwareModule, EnunciateTypeDeclarationListener {
 
-  private final GEDCOMXClasspathHandler classpathHandler = new GEDCOMXClasspathHandler();
+  private final Map<String, PackageDeclaration> knownPackages = new HashMap<String, PackageDeclaration>();
 
   /**
    * @return "gedcomx"
@@ -126,7 +128,11 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
   public void setDocsDir(String docsDir) {
   }
 
-  public void onClassesFound(Set<String> classes) {
+  public void onTypeDeclarationInspected(TypeDeclaration typeDeclaration) {
+    PackageDeclaration pkg = typeDeclaration.getPackage();
+    if (pkg != null) {
+      this.knownPackages.put(pkg.getQualifiedName(), pkg);
+    }
   }
 
   protected URL getDocsTemplateURL() {
@@ -135,13 +141,6 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
 
   protected URL getCodeTemplateURL() {
     return GEDCOMXDeploymentModule.class.getResource("code.fmt");
-  }
-
-  @Override
-  public void init(Enunciate enunciate) throws EnunciateException {
-    super.init(enunciate);
-
-    enunciate.addClasspathHandler(classpathHandler);
   }
 
   @Override
@@ -155,66 +154,106 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
       if (knownPrefix != null) {
         schemaInfo.setId(knownPrefix);
       }
+    }
 
-      if (!schemaInfo.getTypeDefinitions().isEmpty()) {
-        ProfileMetadata metadata = this.classpathHandler.getProfileMetadata(schemaInfo.getNamespace());
-        if (metadata == null) {
-          warn("Missing profile metadata for namespace %s. You're probably missing a profile entry in /META-INF/gedcomx-profile.properties.", schemaInfo.getNamespace());
-        }
+    Collection<PackageDeclaration> profileDeclarations = gatherProfileDeclarations();
+    Map<String, String> prefix_version_to_ns = new HashMap<String, String>();
+    Map<String, String> media_type_to_ns = new HashMap<String, String>();
+    for (PackageDeclaration profileDeclaration : profileDeclarations) {
+      info("Found profile declaration at %s.", profileDeclaration.getQualifiedName());
+      Profile profileInfo = profileDeclaration.getAnnotation(Profile.class);
+      for (Namespace ns : profileInfo.namespaces()) {
+        SchemaInfo schemaInfo = model.getNamespacesToSchemas().get(ns.uri());
+        if (schemaInfo != null) {
+          String version = ns.version();
 
-        String version = metadata == null ? null : metadata.getVersion();
-        if (version == null) {
-          version = "0.0.0";
-          warn("Profile metadata for namespace %s is missing a version. Check /META-INF/gedcomx-profile.properties. Using \"%s\" as the version.", schemaInfo.getNamespace(), version);
-        }
-        schemaInfo.setProperty("version", version);
+          schemaInfo.setProperty("version", version);
 
-        String xmlMediaType = metadata == null ? null : metadata.getXmlMediaType();
-        if (!schemaInfo.getGlobalElements().isEmpty() && xmlMediaType == null) {
-          warn("Profile metadata for namespace %s is missing an xml media type for its root elements. Check /META-INF/gedcomx-profile.properties.", schemaInfo.getNamespace());
-        }
-        schemaInfo.setProperty("xmlMediaType", xmlMediaType);
+          String xmlMediaType = ns.xmlMediaType();
+          if ("".equals(xmlMediaType)) {
+            xmlMediaType = null;
+          }
+          if (!schemaInfo.getGlobalElements().isEmpty() && xmlMediaType == null) {
+            warn("Namespace %s is missing an xml media type for its root elements.", schemaInfo.getNamespace());
+          }
+          if (xmlMediaType != null) {
+            String previousNamespace = media_type_to_ns.put(xmlMediaType, schemaInfo.getNamespace());
+            if (previousNamespace != null && !previousNamespace.equals(schemaInfo.getNamespace())) {
+              String message = profileDeclaration.getPosition() == null ?
+                String.format("Media type %s is already being used by namespace %s.", xmlMediaType, previousNamespace) :
+                String.format("%s: Media type %s is already being used by namespace %s.", profileDeclaration.getQualifiedName(), xmlMediaType, previousNamespace);
+              throw new ValidationException(profileDeclaration.getPosition(), message);
+            }
+          }
+          schemaInfo.setProperty("xmlMediaType", xmlMediaType);
 
-        String jsonMediaType = metadata == null ? null : metadata.getJsonMediaType();
-        if (!schemaInfo.getGlobalElements().isEmpty() && jsonMediaType == null) {
-          warn("Profile metadata for namespace %s is missing an json media type for its root elements. Check /META-INF/gedcomx-profile.properties.", schemaInfo.getNamespace());
-        }
-        schemaInfo.setProperty("jsonMediaType", jsonMediaType);
+          String jsonMediaType = ns.jsonMediaType();
+          if ("".equals(jsonMediaType)) {
+            jsonMediaType = null;
+          }
+          if (!schemaInfo.getGlobalElements().isEmpty() && jsonMediaType == null) {
+            warn("Profile metadata for namespace %s is missing an json media type for its root elements. Check /META-INF/gedcomx-profile.properties.", schemaInfo.getNamespace());
+          }
+          if (jsonMediaType != null) {
+            String previousNamespace = media_type_to_ns.put(jsonMediaType, schemaInfo.getNamespace());
+            if (previousNamespace != null && !previousNamespace.equals(schemaInfo.getNamespace())) {
+              String message = profileDeclaration.getPosition() == null ?
+                String.format("Media type %s is already being used by namespace %s.", jsonMediaType, previousNamespace) :
+                String.format("%s: Media type %s is already being used by namespace %s.", profileDeclaration.getQualifiedName(), jsonMediaType, previousNamespace);
+              throw new ValidationException(profileDeclaration.getPosition(), message);
+            }
+          }
+          schemaInfo.setProperty("jsonMediaType", jsonMediaType);
 
-        String label = metadata == null ? null : metadata.getLabel();
-        if (label == null) {
-          label = "\"" + schemaInfo.getId() + "\" Profile";
-          warn("Profile metadata for namespace %s is missing a label. Check /META-INF/gedcomx-profile.properties. Using \"%s\" as the label.", schemaInfo.getNamespace(), label);
-        }
-        schemaInfo.setProperty("label", label);
-
-        String id = metadata == null ? null : metadata.getId();
-        if (id == null) {
-          id = schemaInfo.getId();
-          warn("Profile metadata for namespace %s is missing an id. Check /META-INF/gedcomx-profile.properties. Using \"%s\" as the id.", schemaInfo.getNamespace(), id);
-        }
-        else {
+          String id = ns.id();
           schemaInfo.setId(id);
+          String previousNamespace = prefix_version_to_ns.put(id + version, schemaInfo.getNamespace());
+          if (previousNamespace != null && !previousNamespace.equals(schemaInfo.getNamespace())) {
+            String message = profileDeclaration.getPosition() == null ?
+              String.format("%s version %s is already being used by namespace %s.", id, version, previousNamespace) :
+              String.format("%s: %s version %s is already being used by namespace %s.", profileDeclaration.getQualifiedName(), id, version, previousNamespace);
+            throw new ValidationException(profileDeclaration.getPosition(), message);
+          }
+
           model.getNamespacesToPrefixes().put(schemaInfo.getNamespace(), id);
-        }
 
-        String description = metadata == null ? null : metadata.getDescription();
-        if (description == null) {
-          warn("Profile metadata for namespace %s is missing a description. Check /META-INF/gedcomx-profile.properties.", schemaInfo.getNamespace());
-        }
-        schemaInfo.setProperty("description", description);
+          String label = ns.label();
+          if ("".equals(label)) {
+            label = "\"" + id + "\" Namespace";
+          }
+          schemaInfo.setProperty("label", label);
 
-        //ensure the correct filenames are used for the schemas.
-        schemaInfo.setProperty("filename", id + "-" + version + ".xsd");
-        schemaInfo.setProperty("location", id + "-" + version + ".xsd");
+          String description = ns.description();
+          if ("".equals(description)) {
+            description = null;
+          }
+          schemaInfo.setProperty("description", description);
+
+          //ensure the correct filenames are used for the schemas.
+          schemaInfo.setProperty("filename", id + "-" + version + ".xsd");
+          schemaInfo.setProperty("location", id + "-" + version + ".xsd");
+
+          if (schemaInfo.getProperty("profile") != null && !schemaInfo.getProperty("profile").equals(profileInfo.label())) {
+            warn("Namespace %s appears to be in multiple profiles (%s and %s).", schemaInfo.getProperty("profile"), profileInfo.label());
+          }
+          schemaInfo.setProperty("profile", profileInfo.label());
+        }
       }
     }
   }
 
+  protected Collection<PackageDeclaration> gatherProfileDeclarations() {
+    ArrayList<PackageDeclaration> profileDeclarations = new ArrayList<PackageDeclaration>();
+    for (PackageDeclaration packageDeclaration : this.knownPackages.values()) {
+      if (packageDeclaration.getAnnotation(Profile.class) != null) {
+        profileDeclarations.add(packageDeclaration);
+      }
+    }
+    return profileDeclarations;
+  }
+
   public void doFreemarkerGenerate() throws EnunciateException, IOException, TemplateException {
-    //add properties to the profile package.
-    EnunciateFreemarkerModel model = getModel();
-    getGenerateDir().mkdirs();
+    //no-op...
   }
 
   @Override

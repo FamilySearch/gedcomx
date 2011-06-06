@@ -1,5 +1,5 @@
 [#ftl]
-[#--macro for writing a profile page--]
+[#--macro for writing a type page--]
 [#-- @ftlvariable name="type" type="org.codehaus.enunciate.contract.jaxb.TypeDefinition" --]
 [#import "boilerplate.fmt" as libBoilerplate/]
 [#macro writeTypePage type]
@@ -13,7 +13,7 @@
         <div id="secondary" class="column span-18 append-1 prepend-1 first last">
           <ul class="navigation">
             <li><a href="index.html">Documentation</a> &gt;</li>
-            <li><a href="${schema.id}.html">${schema.properties.label}</a> &gt;</li>
+            <li><a href="${schema.id}.html">${schema.properties.label!("\"" + schema.id + "\" Namespace")}</a> &gt;</li>
             <li><a href="#">${typeLabel}</a></li>
           </ul>
         </div>

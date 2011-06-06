@@ -19,5 +19,37 @@
  *
  * @label Metadata Profile
  */
+@Profile (
+  label = "Metadata Profile",
+  description = "The metadata profile supports genealogical metadata.",
+  namespaces = {
+    @Namespace (
+      id = "rdf",
+      uri = MetadataConstants.RDF_NAMESPACE,
+      label = "RDF Namespace",
+      description = "The rdf namespace contains the objects for RDF support.",
+      version = "1999-02-22",
+      xmlMediaType = MetadataConstants.RDF_MEDIA_TYPE,
+      jsonMediaType = "application/rdf+json"
+    ),
+    @Namespace (
+      id = "dcterms",
+      uri = MetadataConstants.DUBLIN_CORE_NAMESPACE,
+      label = "Dublin Core Terms Namespace",
+      description = "The dublin core terms namespace contains the objects for support Dublin Core Terms.",
+      version = "2010-10-11"
+    ),
+    @Namespace (
+      id = "dctypes",
+      uri = MetadataConstants.DUBLIN_CORE_TYPE_NAMESPACE,
+      label = "Dublin Core Types Namespace",
+      description = "The dublin core types namespace contains the Dublin Core types.",
+      version = "2010-10-11"
+    )
+  }
+)
 package org.gedcomx.metadata;
 //todo: document how we're going to extend metadata in the future
+
+import org.gedcomx.rt.Namespace;
+import org.gedcomx.rt.Profile;

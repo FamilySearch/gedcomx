@@ -24,7 +24,23 @@
   elementFormDefault = XmlNsForm.QUALIFIED
 )
 @XmlAccessorOrder ( XmlAccessOrder.ALPHABETICAL )
+@Profile (
+  label = "WWW Profile",
+  description = "The www profile supports exposing genealogical data to the World Wide Web.",
+  namespaces = {
+    @Namespace (
+      id = "gxwww",
+      uri = WebConstants.GEDCOMX_WWW_NAMESPACE,
+      label = "WWW Namespace",
+      description = "The www namespace contains the objects necessary exposing genealogical data to the World Wide Web.",
+      version = "v1"
+    )
+  }
+)
 package org.gedcomx.www;
+
+import org.gedcomx.rt.Namespace;
+import org.gedcomx.rt.Profile;
 
 import javax.xml.bind.annotation.XmlAccessOrder;
 import javax.xml.bind.annotation.XmlAccessorOrder;
