@@ -106,36 +106,42 @@ public class GedcomNamespacePrefixMapper extends NamespacePrefixMapper {
       Map<String, String> ns2prefix = new HashMap<String, String>();
       ns2prefix.put("http://www.w3.org/1999/xlink", "xlink");
       ns2prefix.put("http://www.w3.org/2001/XMLSchema-instance", "xsi");
-
-      try {
-        Enumeration<URL> resources = Thread.currentThread().getContextClassLoader().getResources("/META-INF/gedcomx.profiles");
-        while (resources.hasMoreElements()) {
-          try {
-            URL resource = resources.nextElement();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(resource.openStream()));
-            String packageName = reader.readLine();
-            while (packageName != null) {
-              Package pkg = Package.getPackage(packageName);
-              Profile profileInfo = pkg.getAnnotation(Profile.class);
-              for (Namespace ns : profileInfo.namespaces()) {
-                ns2prefix.put(ns.uri(), ns.id());
-              }
-              packageName = reader.readLine();
-            }
-          }
-          catch (Exception e) {
-            //no-op...
-          }
-        }
-      }
-      catch (IOException e) {
-        //no-op.
-      }
+      Map<String, String> profilePrefixes = loadProfilePrefixes(Thread.currentThread().getContextClassLoader());
+      ns2prefix.putAll(profilePrefixes);
 
       KNOWN_PREFIXES = ns2prefix;
     }
 
     return KNOWN_PREFIXES;
+  }
+
+  protected static Map<String, String> loadProfilePrefixes(ClassLoader loader) {
+    Map<String, String> profilePrefixes = new HashMap<String, String>();
+    try {
+      Enumeration<URL> resources = loader.getResources("META-INF/gedcomx.profiles");
+      while (resources.hasMoreElements()) {
+        try {
+          URL resource = resources.nextElement();
+          BufferedReader reader = new BufferedReader(new InputStreamReader(resource.openStream()));
+          String packageName = reader.readLine();
+          while (packageName != null) {
+            Package pkg = Package.getPackage(packageName);
+            Profile profileInfo = pkg.getAnnotation(Profile.class);
+            for (Namespace ns : profileInfo.namespaces()) {
+              profilePrefixes.put(ns.uri(), ns.id());
+            }
+            packageName = reader.readLine();
+          }
+        }
+        catch (Exception e) {
+          //no-op...
+        }
+      }
+    }
+    catch (IOException e) {
+      //no-op.
+    }
+    return profilePrefixes;
   }
 
   @Override
