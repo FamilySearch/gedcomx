@@ -48,7 +48,7 @@ public class Record {
   private PersistentId persistentId;
   private List<AlternateId> alternateIds;
   private Attribution attribution;
-  private CollectionReference collection;
+  private RecordCollectionReference collection;
 
   //todo: change to List<? extends Persona> when http://jira.codehaus.org/browse/ENUNCIATE-562 is fixed.
   private List<Persona> personas;
@@ -182,7 +182,7 @@ public class Record {
    *
    * @return The reference to the collection containing this record.
    */
-  public CollectionReference getCollection() {
+  public RecordCollectionReference getCollection() {
     return collection;
   }
 
@@ -191,7 +191,7 @@ public class Record {
    *
    * @param collection The reference to the collection containing this record.
    */
-  public void setCollection(CollectionReference collection) {
+  public void setCollection(RecordCollectionReference collection) {
     this.collection = collection;
   }
 

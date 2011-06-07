@@ -19,11 +19,11 @@ import javax.xml.bind.annotation.XmlAttribute;
 import java.net.URI;
 
 /**
- * A reference to a collection.
+ * A reference to a record collection.
  *
  * @author Ryan Heaton
  */
-public final class CollectionReference {
+public final class RecordCollectionReference {
 
   private URI href;
   private String sortValue;

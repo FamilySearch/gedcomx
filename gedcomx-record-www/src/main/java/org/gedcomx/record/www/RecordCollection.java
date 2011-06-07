@@ -33,7 +33,7 @@ import java.net.URI;
 @XmlRootElement
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-public class Collection extends org.gedcomx.record.Collection {
+public class RecordCollection extends org.gedcomx.record.RecordCollection {
 
   private URI base;
   private Links links;

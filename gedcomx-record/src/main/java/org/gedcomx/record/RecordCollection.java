@@ -33,10 +33,10 @@ import javax.xml.bind.annotation.XmlType;
 )
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-public class Collection {
+public class RecordCollection {
 
   private String id;
-  private CollectionReference parent;
+  private RecordCollectionReference parent;
   private String title;
   private String description;
   private String publisher;
@@ -66,7 +66,7 @@ public class Collection {
    *
    * @return The reference to the "parent" collection for this collection, i.e. the collection that contains this collection.
    */
-  public CollectionReference getParent() {
+  public RecordCollectionReference getParent() {
     return parent;
   }
 
@@ -75,7 +75,7 @@ public class Collection {
    *
    * @param parent The reference to the "parent" collection for this collection, i.e. the collection that contains this collection.
    */
-  public void setParent(CollectionReference parent) {
+  public void setParent(RecordCollectionReference parent) {
     this.parent = parent;
   }
 
