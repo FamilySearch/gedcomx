@@ -3,13 +3,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <artifactId>gedcomx-record-www</artifactId>
-  <version>0.1.0.BUILD-SNAPSHOT</version>
+  <version>0.1.0.RELEASE</version>
   <name>GEDCOM X - Record WWW Support</name>
 
   <parent>
     <groupId>org.gedcomx</groupId>
     <artifactId>gedcomx-parent</artifactId>
-    <version>0.1.0.BUILD-SNAPSHOT</version>
+    <version>0.1.0.RELEASE</version>
   </parent>
 
   <properties>
@@ -44,18 +44,18 @@
     <dependency>
       <groupId>org.gedcomx</groupId>
       <artifactId>gedcomx-record</artifactId>
-      <version>0.1.0.BUILD-SNAPSHOT</version>
+      <version>0.1.0.RELEASE</version>
     </dependency>
     <dependency>
       <groupId>org.gedcomx</groupId>
       <artifactId>gedcomx-source-www</artifactId>
-      <version>0.1.0.BUILD-SNAPSHOT</version>
+      <version>0.1.0.RELEASE</version>
     </dependency>
 
     <dependency>
       <groupId>org.gedcomx</groupId>
       <artifactId>gedcomx-rt-support</artifactId>
-      <version>0.1.0.BUILD-SNAPSHOT</version>
+      <version>0.1.0.RELEASE</version>
 
       <!--provided scope so it doesn't get propogated unless explicit.-->
       <scope>provided</scope>

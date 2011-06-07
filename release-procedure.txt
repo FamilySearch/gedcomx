@@ -1,0 +1,12 @@
+To cut a new version:
+
+1. Switch to the 'release' branch.
+2. Merge changes from the master branch.
+3. Update pom files to reflect new version change
+4. Commit
+5. Push
+6. Switch back to master branch.
+7. merge changes from release branch.
+8. Update pom files to reflect a new snapshot.
+
+todo: document the procedure for cutting a new version of a single profile and releasing it.
