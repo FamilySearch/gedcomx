@@ -2,13 +2,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <artifactId>gedcomx-metadata</artifactId>
-  <version>0.1.0.RELEASE</version>
+  <version>0.2.0.BUILD-SNAPSHOT</version>
   <name>GEDCOM X - Metadata</name>
 
   <parent>
     <groupId>org.gedcomx</groupId>
     <artifactId>gedcomx-parent</artifactId>
-    <version>0.1.0.RELEASE</version>
+    <version>0.2.0.BUILD-SNAPSHOT</version>
   </parent>
 
   <properties>
@@ -43,13 +43,13 @@
     <dependency>
       <groupId>org.gedcomx</groupId>
       <artifactId>gedcomx-id</artifactId>
-      <version>0.1.0.RELEASE</version>
+      <version>0.2.0.BUILD-SNAPSHOT</version>
     </dependency>
 
     <dependency>
       <groupId>org.gedcomx</groupId>
       <artifactId>gedcomx-rt-support</artifactId>
-      <version>0.1.0.RELEASE</version>
+      <version>0.2.0.BUILD-SNAPSHOT</version>
 
       <!--provided scope so it doesn't get propogated unless explicit.-->
       <scope>provided</scope>
