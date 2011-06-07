@@ -15,11 +15,15 @@
  */
 package org.gedcomx.conclusion;
 
+import org.codehaus.enunciate.qname.XmlQNameEnumRef;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.id.XmlTypeIdResolver;
+import org.gedcomx.types.RelationshipType;
 
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.namespace.QName;
 
 /**
  * A basic relationship between two people, used to model basic relationships that are neither couple nor parent-child relationships.
@@ -33,6 +37,27 @@ public class OtherRelationship extends Relationship {
 
   private PersonReference person1;
   private PersonReference person2;
+  private QName type;
+
+  /**
+   * The type of this relationship.
+   *
+   * @return The type of this relationship.
+   */
+  @XmlAttribute
+  @XmlQNameEnumRef (RelationshipType.class)
+  public QName getType() {
+    return type;
+  }
+
+  /**
+   * The type of this relationship.
+   *
+   * @param type The type of this relationship.
+   */
+  public void setType(QName type) {
+    this.type = type;
+  }
 
   /**
    * A reference to a person in the relationship. The name "person1" is used only to distinguish it from

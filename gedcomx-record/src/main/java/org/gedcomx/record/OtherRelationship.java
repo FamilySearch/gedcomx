@@ -34,7 +34,6 @@ import javax.xml.namespace.QName;
 public class OtherRelationship extends Relationship {
 
   private QName type;
-  private String description;
   private PersonaReference persona1;
   private PersonaReference persona2;
 
@@ -75,24 +74,6 @@ public class OtherRelationship extends Relationship {
    */
   public void setKnownRelationshipType(RelationshipType type) {
     this.type = XmlQNameEnumUtil.toQName(type);
-  }
-
-  /**
-   * The description of the relationship as found on the record.
-   *
-   * @return The description of the relationship as found on the record.
-   */
-  public String getDescription() {
-    return description;
-  }
-
-  /**
-   * The description of the relationship as found on the record.
-   * 
-   * @param description The description of the relationship as found on the record.
-   */
-  public void setDescription(String description) {
-    this.description = description;
   }
 
   /**
