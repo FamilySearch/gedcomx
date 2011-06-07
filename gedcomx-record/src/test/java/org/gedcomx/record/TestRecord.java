@@ -61,7 +61,6 @@ public class TestRecord {
     event.setKnownType(EventType.adoption);
     event.setPlace(new Place());
     fillInField(event.getPlace(), "event-place");
-    event.setDescription("event description");
     event.setPrimary(true);
     events.add(event);
     record.setEvents(events);
@@ -216,7 +215,6 @@ public class TestRecord {
     assertEquals("event-id", event.getId());
     assertEquals(EventType.adoption, event.getKnownType());
     assertField(event.getPlace(), "event-place");
-    assertEquals("event description", event.getDescription());
     assertTrue(event.getPrimary());
 
     assertEquals(1, record.getPersonas().size());

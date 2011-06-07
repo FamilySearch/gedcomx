@@ -38,7 +38,6 @@ public class Event {
   private String id;
   private QName type;
   private Boolean primary;
-  private String description;
   private Date date;
   private Place place;
 
@@ -118,24 +117,6 @@ public class Event {
    */
   public void setPrimary(Boolean primary) {
     this.primary = primary;
-  }
-
-  /**
-   * The description of the event found on the record.
-   *
-   * @return The description of the event found on the record.
-   */
-  public String getDescription() {
-    return description;
-  }
-
-  /**
-   * The description of the event found on the record.
-   *
-   * @param description The description of the event found on the record.
-   */
-  public void setDescription(String description) {
-    this.description = description;
   }
 
   /**
