@@ -40,7 +40,7 @@
 
       <h3>Description</h3>
 
-      ${element.docValue}
+      ${element.docValue!""}
 
       <h3>Example XML</h3>
 
