@@ -20,12 +20,12 @@ import freemarker.template.TemplateMethodModelEx;
 import freemarker.template.TemplateModel;
 import freemarker.template.TemplateModelException;
 import org.codehaus.enunciate.config.SchemaInfo;
-import org.codehaus.enunciate.contract.common.rest.RESTResourcePayload;
 import org.codehaus.enunciate.contract.jaxb.Accessor;
 import org.codehaus.enunciate.contract.jaxb.ElementDeclaration;
 import org.codehaus.enunciate.contract.jaxb.ElementRef;
 import org.codehaus.enunciate.contract.jaxb.TypeDefinition;
 import org.codehaus.enunciate.contract.jaxb.types.XmlType;
+import org.codehaus.enunciate.contract.jaxrs.ResourceEntityParameter;
 
 import java.util.List;
 import java.util.Map;
@@ -60,8 +60,8 @@ public class SchemaForNamespaceMethod implements TemplateMethodModelEx {
     else if (object instanceof ElementDeclaration) {
       namespace = ((ElementDeclaration)object).getNamespace();
     }
-    else if (object instanceof RESTResourcePayload) {
-      ElementDeclaration element = ((RESTResourcePayload) object).getXmlElement();
+    else if (object instanceof ResourceEntityParameter) {
+      ElementDeclaration element = ((ResourceEntityParameter) object).getXmlElement();
       if (element == null) {
         return null;
       }

@@ -45,12 +45,11 @@ public class Person {
   private PersistentId persistentId;
   private Gender gender;
 
-  //todo: change to List<? extends Name> when http://jira.codehaus.org/browse/ENUNCIATE-562 is fixed.
-  private List<Name> names;
-  private List<Event> events;
-  private List<Characteristic> characteristics;
-  private List<RelationshipReference> relationships;
-  private List<AttributedSourceReference> sources;
+  private List<? extends Name> names;
+  private List<? extends Event> events;
+  private List<? extends Characteristic> characteristics;
+  private List<? extends RelationshipReference> relationships;
+  private List<? extends AttributedSourceReference> sources;
 
   /**
    * The id of the person, unique to the context and not necessarily globally unique.
@@ -138,7 +137,7 @@ public class Person {
   @XmlElement(name="name")
   @JsonProperty("names")
   @JsonName("names")
-  public List<Name> getNames() {
+  public List<? extends Name> getNames() {
     return names;
   }
 
@@ -148,7 +147,7 @@ public class Person {
    * @param names The name conclusions for the person.
    */
   @JsonProperty("names")
-  public void setNames(List<Name> names) {
+  public void setNames(List<? extends Name> names) {
     this.names = names;
   }
 
@@ -160,7 +159,7 @@ public class Person {
   @XmlElement(name="event")
   @JsonProperty("events")
   @JsonName("events")
-  public List<Event> getEvents() {
+  public List<? extends Event> getEvents() {
     return events;
   }
 
@@ -170,7 +169,7 @@ public class Person {
    * @param events The event conclusions for the person.
    */
   @JsonProperty("events")
-  public void setEvents(List<Event> events) {
+  public void setEvents(List<? extends Event> events) {
     this.events = events;
   }
 
@@ -182,7 +181,7 @@ public class Person {
   @XmlElement(name="characteristic")
   @JsonProperty("characteristics")
   @JsonName("characteristics")
-  public List<Characteristic> getCharacteristics() {
+  public List<? extends Characteristic> getCharacteristics() {
     return characteristics;
   }
 
@@ -192,7 +191,7 @@ public class Person {
    * @param characteristics The characteristic conclusions for the person.
    */
   @JsonProperty("characteristics")
-  public void setCharacteristics(List<Characteristic> characteristics) {
+  public void setCharacteristics(List<? extends Characteristic> characteristics) {
     this.characteristics = characteristics;
   }
 
@@ -204,7 +203,7 @@ public class Person {
   @XmlElement(name="relationship")
   @JsonProperty("relationships")
   @JsonName("relationships")
-  public List<RelationshipReference> getRelationships() {
+  public List<? extends RelationshipReference> getRelationships() {
     return relationships;
   }
 
@@ -214,7 +213,7 @@ public class Person {
    * @param relationships The references to the relationships of the person.
    */
   @JsonProperty("relationships")
-  public void setRelationships(List<RelationshipReference> relationships) {
+  public void setRelationships(List<? extends RelationshipReference> relationships) {
     this.relationships = relationships;
   }
 
@@ -226,7 +225,7 @@ public class Person {
   @XmlElement(name="source")
   @JsonProperty("sources")
   @JsonName("sources")
-  public List<AttributedSourceReference> getSources() {
+  public List<? extends AttributedSourceReference> getSources() {
     return sources;
   }
 
@@ -236,7 +235,7 @@ public class Person {
    * @param sources The sources for the conclusions about this person.
    */
   @JsonProperty("sources")
-  public void setSources(List<AttributedSourceReference> sources) {
+  public void setSources(List<? extends AttributedSourceReference> sources) {
     this.sources = sources;
   }
 }

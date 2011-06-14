@@ -50,14 +50,13 @@ public class Record {
   private Attribution attribution;
   private RecordCollectionReference collection;
 
-  //todo: change to List<? extends Persona> when http://jira.codehaus.org/browse/ENUNCIATE-562 is fixed.
-  private List<Persona> personas;
-  private List<Event> events;
-  private List<CoupleRelationship> coupleRelationships;
-  private List<ParentChildRelationship> parentChildRelationships;
-  private List<OtherRelationship> otherRelationships;
-  private List<RecordField> fields;
-  private List<SourceReference> sources;
+  private List<? extends Persona> personas;
+  private List<? extends Event> events;
+  private List<? extends CoupleRelationship> coupleRelationships;
+  private List<? extends ParentChildRelationship> parentChildRelationships;
+  private List<? extends OtherRelationship> otherRelationships;
+  private List<? extends RecordField> fields;
+  private List<? extends SourceReference> sources;
 
   /**
    * The id of the record, unique to the context and not necessarily globally unique.
@@ -203,7 +202,7 @@ public class Record {
   @XmlElement(name = "persona")
   @JsonProperty("personas")
   @JsonName("personas")
-  public List<Persona> getPersonas() {
+  public List<? extends Persona> getPersonas() {
     return personas;
   }
 
@@ -213,7 +212,7 @@ public class Record {
    * @param personas The personas of this record.
    */
   @JsonProperty("personas")
-  public void setPersonas(List<Persona> personas) {
+  public void setPersonas(List<? extends Persona> personas) {
     this.personas = personas;
   }
 
@@ -225,7 +224,7 @@ public class Record {
   @XmlElement(name = "event")
   @JsonProperty("events")
   @JsonName("events")
-  public List<Event> getEvents() {
+  public List<? extends Event> getEvents() {
     return events;
   }
 
@@ -235,7 +234,7 @@ public class Record {
    * @param events The events of the record.
    */
   @JsonProperty("events")
-  public void setEvents(List<Event> events) {
+  public void setEvents(List<? extends Event> events) {
     this.events = events;
   }
 
@@ -247,7 +246,7 @@ public class Record {
   @XmlElement(name = "coupleRelationship")
   @JsonProperty("coupleRelationships")
   @JsonName("coupleRelationships")
-  public List<CoupleRelationship> getCoupleRelationships() {
+  public List<? extends CoupleRelationship> getCoupleRelationships() {
     return coupleRelationships;
   }
 
@@ -257,7 +256,7 @@ public class Record {
    * @param coupleRelationships The couple relationships on this record.
    */
   @JsonProperty("coupleRelationships")
-  public void setCoupleRelationships(List<CoupleRelationship> coupleRelationships) {
+  public void setCoupleRelationships(List<? extends CoupleRelationship> coupleRelationships) {
     this.coupleRelationships = coupleRelationships;
   }
 
@@ -269,7 +268,7 @@ public class Record {
   @XmlElement(name = "parentChildRelationship")
   @JsonProperty("parentChildRelationships")
   @JsonName("parentChildRelationships")
-  public List<ParentChildRelationship> getParentChildRelationships() {
+  public List<? extends ParentChildRelationship> getParentChildRelationships() {
     return parentChildRelationships;
   }
 
@@ -279,7 +278,7 @@ public class Record {
    * @param parentChildRelationships The parent-child relationships on this record.
    */
   @JsonProperty("parentChildRelationships")
-  public void setParentChildRelationships(List<ParentChildRelationship> parentChildRelationships) {
+  public void setParentChildRelationships(List<? extends ParentChildRelationship> parentChildRelationships) {
     this.parentChildRelationships = parentChildRelationships;
   }
 
@@ -291,7 +290,7 @@ public class Record {
   @XmlElement(name = "otherRelationship")
   @JsonProperty("otherRelationships")
   @JsonName("otherRelationships")
-  public List<OtherRelationship> getOtherRelationships() {
+  public List<? extends OtherRelationship> getOtherRelationships() {
     return otherRelationships;
   }
 
@@ -301,7 +300,7 @@ public class Record {
    * @param otherRelationships The "other" (i.e. not couple, parent-child) relationships on this record.
    */
   @JsonProperty("otherRelationships")
-  public void setOtherRelationships(List<OtherRelationship> otherRelationships) {
+  public void setOtherRelationships(List<? extends OtherRelationship> otherRelationships) {
     this.otherRelationships = otherRelationships;
   }
 
@@ -311,7 +310,7 @@ public class Record {
    * @return The relationships of the record.
    */
   @XmlTransient
-  public java.util.Collection<Relationship> getRelationships() {
+  public java.util.Collection<? extends Relationship> getRelationships() {
     ArrayList<Relationship> relationships = new ArrayList<Relationship>();
     if (this.coupleRelationships != null) {
       relationships.addAll(this.coupleRelationships);
@@ -330,7 +329,7 @@ public class Record {
    *
    * @param relationships The relationships of the record.
    */
-  public void setRelationships(java.util.Collection<Relationship> relationships) {
+  public void setRelationships(java.util.Collection<? extends Relationship> relationships) {
     ArrayList<CoupleRelationship> coupleRelationships = new ArrayList<CoupleRelationship>();
     ArrayList<ParentChildRelationship> parentChildRelationships = new ArrayList<ParentChildRelationship>();
     ArrayList<OtherRelationship> otherRelationships = new ArrayList<OtherRelationship>();
@@ -365,7 +364,7 @@ public class Record {
   @XmlElement(name = "field")
   @JsonProperty("fields")
   @JsonName("fields")
-  public List<RecordField> getFields() {
+  public List<? extends RecordField> getFields() {
     return fields;
   }
 
@@ -375,7 +374,7 @@ public class Record {
    * @param fields Any generic fields that are on the record (not belonging to a persona or relationship).
    */
   @JsonProperty("fields")
-  public void setFields(List<RecordField> fields) {
+  public void setFields(List<? extends RecordField> fields) {
     this.fields = fields;
   }
 
@@ -387,7 +386,7 @@ public class Record {
   @XmlElement(name = "source")
   @JsonProperty("sources")
   @JsonName("sources")
-  public List<SourceReference> getSources() {
+  public List<? extends SourceReference> getSources() {
     return sources;
   }
 
@@ -397,7 +396,7 @@ public class Record {
    * @param sources The references to the sources of the record.
    */
   @JsonProperty("sources")
-  public void setSources(List<SourceReference> sources) {
+  public void setSources(List<? extends SourceReference> sources) {
     this.sources = sources;
   }
 }

@@ -46,10 +46,9 @@ public class Persona {
   private Gender gender;
   private Age age;
 
-  //todo: change to List<? extends Name> when http://jira.codehaus.org/browse/ENUNCIATE-562 is fixed.
-  private java.util.List<Name> names;
-  private java.util.List<EventRole> eventRoles = new ArrayList<EventRole>();
-  private java.util.List<Characteristic> characteristics = new ArrayList<Characteristic>();
+  private List<? extends Name> names;
+  private List<? extends EventRole> eventRoles = new ArrayList<EventRole>();
+  private List<? extends Characteristic> characteristics = new ArrayList<Characteristic>();
   private Boolean principal;
 
   /**
@@ -156,7 +155,7 @@ public class Persona {
   @XmlElement(name="name")
   @JsonProperty("names")
   @JsonName("names")
-  public java.util.List<Name> getNames() {
+  public List<? extends Name> getNames() {
     return names;
   }
 
@@ -166,7 +165,7 @@ public class Persona {
    * @param names The name conclusions for the persona.
    */
   @JsonProperty("names")
-  public void setNames(java.util.List<Name> names) {
+  public void setNames(List<? extends Name> names) {
     this.names = names;
   }
 
@@ -178,7 +177,7 @@ public class Persona {
   @XmlElement(name="characteristic")
   @JsonProperty("characteristics")
   @JsonName("characteristics")
-  public List<Characteristic> getCharacteristics() {
+  public List<? extends Characteristic> getCharacteristics() {
     return characteristics;
   }
 
@@ -188,7 +187,7 @@ public class Persona {
    * @param characteristics The characteristic fields on this persona.
    */
   @JsonProperty("characteristics")
-  public void setCharacteristics(List<Characteristic> characteristics) {
+  public void setCharacteristics(List<? extends Characteristic> characteristics) {
     this.characteristics = characteristics;
   }
 
@@ -200,7 +199,7 @@ public class Persona {
   @XmlElement(name = "eventRole")
   @JsonProperty("eventRoles")
   @JsonName("eventRoles")
-  public List<EventRole> getEventRoles() {
+  public List<? extends EventRole> getEventRoles() {
     return eventRoles;
   }
 
@@ -210,7 +209,7 @@ public class Persona {
    * @param eventRoles The roles this persona plays in the events of the record.
    */
   @JsonProperty("eventRoles")
-  public void setEventRoles(List<EventRole> eventRoles) {
+  public void setEventRoles(List<? extends EventRole> eventRoles) {
     this.eventRoles = eventRoles;
   }
 

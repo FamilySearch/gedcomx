@@ -16,6 +16,7 @@
 package org.gedcomx.source;
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
+import org.codehaus.enunciate.qname.XmlQNameEnumRef;
 
 import javax.xml.bind.annotation.XmlAnyAttribute;
 import javax.xml.namespace.QName;
@@ -37,6 +38,7 @@ public final class SourceQualifier {
    * @return The qualifier properties.
    */
   @XmlAnyAttribute
+  @XmlQNameEnumRef( SourceQualifierProperty.class )
   public Map<QName, String> getProperties() {
     return properties;
   }
