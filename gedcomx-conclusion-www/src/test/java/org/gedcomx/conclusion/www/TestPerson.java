@@ -189,12 +189,11 @@ public class TestPerson {
     person.setPersistentId(new PersistentId());
     person.getPersistentId().setValue(URI.create("pal"));
 
-    ArrayList<RelationshipReference> relationships = new ArrayList<RelationshipReference>();
-    person.setRelationships(relationships);
+    person.setRelationships(new ArrayList<RelationshipReference>());
     RelationshipReference relationshipReference = new RelationshipReference();
     relationshipReference.setKnownRole(RelationshipRole.child);
     relationshipReference.setHref(URI.create("urn:relationship"));
-    relationships.add(relationshipReference);
+    person.getRelationships().add(relationshipReference);
 
     ArrayList<AttributedSourceReference> sources = new ArrayList<AttributedSourceReference>();
     AttributedSourceReference attributedSourceReference = new AttributedSourceReference();
@@ -309,12 +308,11 @@ public class TestPerson {
     person.setPersistentId(new PersistentId());
     person.getPersistentId().setValue(URI.create("pal"));
 
-    ArrayList<RelationshipReference> relationships = new ArrayList<RelationshipReference>();
-    person.setRelationships(relationships);
+    person.setRelationships(new ArrayList<RelationshipReference>());
     RelationshipReference relationshipReference = new RelationshipReference();
     relationshipReference.setKnownRole(RelationshipRole.child);
     relationshipReference.setHref(URI.create("urn:relationship"));
-    relationships.add(relationshipReference);
+    person.getRelationships().add(relationshipReference);
 
     ArrayList<AttributedSourceReference> sources = new ArrayList<AttributedSourceReference>();
     AttributedSourceReference attributedSourceReference = new AttributedSourceReference();

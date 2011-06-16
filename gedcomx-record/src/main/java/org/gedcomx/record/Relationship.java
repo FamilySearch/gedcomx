@@ -23,6 +23,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlTransient;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,7 +35,7 @@ public abstract class Relationship {
   //provide subclasses.
 
   private String id;
-  private List<? extends Characteristic> characteristics;
+  private List<Characteristic> characteristics = new ArrayList<Characteristic>();
 
   /**
    * The id of the relationship, unique to the context and not necessarily globally unique.
@@ -100,7 +101,7 @@ public abstract class Relationship {
   @XmlElement(name = "characteristic")
   @JsonProperty ("characteristics")
   @JsonName ("characteristics")
-  public List<? extends Characteristic> getCharacteristics() {
+  public List<Characteristic> getCharacteristics() {
     return characteristics;
   }
 
@@ -110,7 +111,7 @@ public abstract class Relationship {
    * @param characteristics The characteristic fields of the relationship.
    */
   @JsonProperty ("characteristics")
-  public void setCharacteristics(List<? extends Characteristic> characteristics) {
+  public void setCharacteristics(List<Characteristic> characteristics) {
     this.characteristics = characteristics;
   }
 
