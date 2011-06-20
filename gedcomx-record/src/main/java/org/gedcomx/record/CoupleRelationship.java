@@ -79,12 +79,6 @@ public class CoupleRelationship extends Relationship {
 
   @XmlTransient
   @Override
-  public QName getType() {
-    return null;
-  }
-
-  @XmlTransient
-  @Override
   public RelationshipType getKnownRelationshipType() {
     return RelationshipType.couple;
   }
