@@ -21,6 +21,7 @@ import org.gedcomx.id.XmlTypeIdResolver;
 import org.gedcomx.types.RelationshipType;
 
 import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.namespace.QName;
 
 /**
  * A relationship between two personas, making a genealogical "couple".
@@ -74,6 +75,12 @@ public class CoupleRelationship extends Relationship {
    */
   public void setPersona2(PersonaReference persona2) {
     this.persona2 = persona2;
+  }
+
+  @XmlTransient
+  @Override
+  public QName getType() {
+    return null;
   }
 
   @XmlTransient

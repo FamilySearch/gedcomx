@@ -15,7 +15,9 @@
  */
 package org.gedcomx.record;
 
+import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.enunciate.json.JsonName;
+import org.codehaus.enunciate.qname.XmlQNameEnumRef;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.gedcomx.types.RelationshipType;
 
@@ -23,6 +25,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.namespace.QName;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -113,6 +116,15 @@ public abstract class Relationship {
   @JsonProperty ("characteristics")
   public void setCharacteristics(List<Characteristic> characteristics) {
     this.characteristics = characteristics;
+  }
+
+  /**
+   * The type of this relationship.
+   *
+   * @return The type of this relationship.
+   */
+  public QName getType() {
+    return XmlQNameEnumUtil.toQName(getKnownRelationshipType());
   }
 
   /**

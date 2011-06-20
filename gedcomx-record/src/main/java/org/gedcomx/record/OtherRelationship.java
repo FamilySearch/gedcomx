@@ -42,6 +42,7 @@ public class OtherRelationship extends Relationship {
    *
    * @return The type of this relationship.
    */
+  @Override
   @XmlAttribute
   @XmlQNameEnumRef(RelationshipType.class)
   public QName getType() {
