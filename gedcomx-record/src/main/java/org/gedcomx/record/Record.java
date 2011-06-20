@@ -37,7 +37,7 @@ import java.util.*;
  */
 @XmlRootElement
 @XmlType (
-  propOrder = {"persistentId", "alternateIds", "attribution", "collection", "personas", "events", "coupleRelationships", "parentChildRelationships", "otherRelationships", "fields", "sources"}
+  propOrder = {"persistentId", "alternateIds", "attribution", "collection", "personas", "events", "coupleRelationships", "parentChildRelationships", "otherRelationships", "fields", "sources", "extension"}
 )
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
@@ -58,6 +58,7 @@ public class Record {
   private List<OtherRelationship> otherRelationships;
   private List<RecordField> fields;
   private List<SourceReference> sources;
+  private Extension extension;
 
   /**
    * The id of the record, unique to the context and not necessarily globally unique.
@@ -399,5 +400,24 @@ public class Record {
   @JsonProperty("sources")
   public void setSources(List<SourceReference> sources) {
     this.sources = sources;
+  }
+
+  /**
+   * The extension point for the field.
+   *
+   * @return The extension point for the field.
+   */
+  @XmlElement( name = "ext" )
+  public Extension getExtension() {
+    return extension;
+  }
+
+  /**
+   * The extension point for the field.
+   *
+   * @param extension The extension point for the field.
+   */
+  public void setExtension(Extension extension) {
+    this.extension = extension;
   }
 }

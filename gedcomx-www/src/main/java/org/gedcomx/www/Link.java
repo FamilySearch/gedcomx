@@ -15,8 +15,8 @@
  */
 package org.gedcomx.www;
 
-import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.namespace.QName;
 import java.net.URI;
 
@@ -25,6 +25,7 @@ import java.net.URI;
  *
  * @author Ryan Heaton
  */
+@XmlRootElement
 public final class Link {
 
   private QName rel;

@@ -22,6 +22,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.net.URI;
 import java.util.List;
 
@@ -30,8 +31,10 @@ import java.util.List;
  *
  * @author Ryan Heaton
  */
+@XmlRootElement
 public final class Links {
 
+  //todo: figure out whether this class is even needed anymore; we could instead just add links to the model extension points.
   private List<Link> links;
   private URI base;
 
