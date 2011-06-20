@@ -18,6 +18,8 @@ package org.gedcomx.types;
 import org.codehaus.enunciate.qname.XmlQNameEnum;
 import org.codehaus.enunciate.qname.XmlUnknownQNameEnumValue;
 
+import javax.xml.namespace.QName;
+
 /**
  * Enumeration of known source reference types.
  */
@@ -27,6 +29,25 @@ public enum SourceReferenceType {
   source,
   image,
   @XmlUnknownQNameEnumValue
-  other
+  other;
+
+  /**
+   * Return the QName value for this enum.
+   *
+   * @return The QName value for this enum.
+   */
+  public QName toQName() {
+    return org.codehaus.enunciate.XmlQNameEnumUtil.toQName(this);
+  }
+
+  /**
+   * Get the enumeration from the QName.
+   *
+   * @param qname The qname.
+   * @return The enumeration.
+   */
+  public static SourceReferenceType fromQName(QName qname) {
+    return org.codehaus.enunciate.XmlQNameEnumUtil.fromQName(qname, SourceReferenceType.class);
+  }
 
 }

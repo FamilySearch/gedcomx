@@ -18,6 +18,8 @@ package org.gedcomx.types;
 import org.codehaus.enunciate.qname.XmlQNameEnum;
 import org.codehaus.enunciate.qname.XmlUnknownQNameEnumValue;
 
+import javax.xml.namespace.QName;
+
 /**
  * Enumeration of standard age units.
  *
@@ -37,6 +39,25 @@ public enum AgeUnit {
   minutes,
 
   @XmlUnknownQNameEnumValue
-  other
+  other;
+
+  /**
+   * Return the QName value for this enum.
+   *
+   * @return The QName value for this enum.
+   */
+  public QName toQName() {
+    return org.codehaus.enunciate.XmlQNameEnumUtil.toQName(this);
+  }
+
+  /**
+   * Get the enumeration from the QName.
+   *
+   * @param qname The qname.
+   * @return The enumeration.
+   */
+  public static AgeUnit fromQName(QName qname) {
+    return org.codehaus.enunciate.XmlQNameEnumUtil.fromQName(qname, AgeUnit.class);
+  }
 
 }

@@ -18,6 +18,7 @@ package org.gedcomx.types;
 import org.codehaus.enunciate.qname.XmlQNameEnum;
 import org.codehaus.enunciate.qname.XmlUnknownQNameEnumValue;
 
+import javax.xml.namespace.QName;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.Set;
@@ -57,6 +58,25 @@ public enum RecordType {
   public static final Set<RecordType> VITAL_TYPES = Collections.unmodifiableSet(EnumSet.of(birth, death, marriage));
   public static final Set<RecordType> MILITARY_TYPES = Collections.unmodifiableSet(EnumSet.of(draft, pension, roll));
   public static final Set<RecordType> LEGAL_TYPES = Collections.unmodifiableSet(EnumSet.of(bank, land, probate, tax));
+
+  /**
+   * Return the QName value for this enum.
+   *
+   * @return The QName value for this enum.
+   */
+  public QName toQName() {
+    return org.codehaus.enunciate.XmlQNameEnumUtil.toQName(this);
+  }
+
+  /**
+   * Get the enumeration from the QName.
+   *
+   * @param qname The qname.
+   * @return The enumeration.
+   */
+  public static RecordType fromQName(QName qname) {
+    return org.codehaus.enunciate.XmlQNameEnumUtil.fromQName(qname, RecordType.class);
+  }
 
   public boolean isVital() {
     return this == vital || VITAL_TYPES.contains(this);

@@ -18,6 +18,7 @@ package org.gedcomx.types;
 import org.codehaus.enunciate.qname.XmlQNameEnum;
 import org.codehaus.enunciate.qname.XmlUnknownQNameEnumValue;
 
+import javax.xml.namespace.QName;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.Set;
@@ -82,6 +83,25 @@ public enum EventType {
   public final static Set<EventType> MARRIAGELIKE_EVENT_TYPES = Collections.unmodifiableSet(EnumSet.of(marriage, engagement, marriage_banns, marriage_contract, marriage_license, marriage_notice, marriage_settlement));
   public final static Set<EventType> DIVORCELIKE_EVENT_TYPES = Collections.unmodifiableSet(EnumSet.of(divorce, divorce_filing, annulment, separation));
   public final static Set<EventType> MIGRATIONLIKE_EVENT_TYPES = Collections.unmodifiableSet(EnumSet.of(immigration, emigration, naturalization, move));
+
+  /**
+   * Return the QName value for this enum.
+   *
+   * @return The QName value for this enum.
+   */
+  public QName toQName() {
+    return org.codehaus.enunciate.XmlQNameEnumUtil.toQName(this);
+  }
+
+  /**
+   * Get the enumeration from the QName.
+   *
+   * @param qname The qname.
+   * @return The enumeration.
+   */
+  public static EventType fromQName(QName qname) {
+    return org.codehaus.enunciate.XmlQNameEnumUtil.fromQName(qname, EventType.class);
+  }
 
   public boolean isBirthLike() {
     return BIRTHLIKE_EVENT_TYPES.contains(this);

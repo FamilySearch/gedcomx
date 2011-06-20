@@ -18,6 +18,8 @@ package org.gedcomx.types;
 import org.codehaus.enunciate.qname.XmlQNameEnum;
 import org.codehaus.enunciate.qname.XmlUnknownQNameEnumValue;
 
+import javax.xml.namespace.QName;
+
 /**
  * Enumeration of standard relationship roles.
  */
@@ -39,6 +41,25 @@ public enum RelationshipRole {
   cousin,
   in_law,
   @XmlUnknownQNameEnumValue
-  other
+  other;
+
+  /**
+   * Return the QName value for this enum.
+   *
+   * @return The QName value for this enum.
+   */
+  public QName toQName() {
+    return org.codehaus.enunciate.XmlQNameEnumUtil.toQName(this);
+  }
+
+  /**
+   * Get the enumeration from the QName.
+   *
+   * @param qname The qname.
+   * @return The enumeration.
+   */
+  public static RelationshipRole fromQName(QName qname) {
+    return org.codehaus.enunciate.XmlQNameEnumUtil.fromQName(qname, RelationshipRole.class);
+  }
 
 }

@@ -19,6 +19,7 @@ import org.codehaus.enunciate.qname.XmlQNameEnum;
 import org.codehaus.enunciate.qname.XmlUnknownQNameEnumValue;
 
 import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.namespace.QName;
 
 /**
  * Enumeration of standard characteristic types.
@@ -60,6 +61,25 @@ public enum CharacteristicType {
   batch_number,
   @XmlUnknownQNameEnumValue
   other;
+
+  /**
+   * Return the QName value for this enum.
+   *
+   * @return The QName value for this enum.
+   */
+  public QName toQName() {
+    return org.codehaus.enunciate.XmlQNameEnumUtil.toQName(this);
+  }
+
+  /**
+   * Get the enumeration from the QName.
+   *
+   * @param qname The qname.
+   * @return The enumeration.
+   */
+  public static CharacteristicType fromQName(QName qname) {
+    return org.codehaus.enunciate.XmlQNameEnumUtil.fromQName(qname, CharacteristicType.class);
+  }
 
   @XmlTransient
   public static final class Person {

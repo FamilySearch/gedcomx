@@ -17,7 +17,6 @@ package org.gedcomx.record;
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.enunciate.json.JsonName;
-import org.codehaus.enunciate.qname.XmlQNameEnumRef;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.gedcomx.types.RelationshipType;
 

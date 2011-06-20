@@ -44,9 +44,6 @@
       <groupId>org.gedcomx</groupId>
       <artifactId>gedcomx-rt-support</artifactId>
       <version>0.2.0.BUILD-SNAPSHOT</version>
-
-      <!--provided scope so it doesn't get propogated unless explicit.-->
-      <scope>provided</scope>
     </dependency>
   </dependencies>
 
