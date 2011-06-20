@@ -17,6 +17,8 @@ package org.gedcomx.record;
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.enunciate.qname.XmlQNameEnumRef;
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.id.XmlTypeIdResolver;
@@ -33,6 +35,7 @@ import javax.xml.namespace.QName;
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 public class OtherRelationship extends Relationship {
 
+  @JsonProperty("type")
   private QName type;
   private PersonaReference persona1;
   private PersonaReference persona2;
@@ -45,6 +48,7 @@ public class OtherRelationship extends Relationship {
   @Override
   @XmlAttribute
   @XmlQNameEnumRef(RelationshipType.class)
+  @JsonIgnore
   public QName getType() {
     return type;
   }
@@ -54,6 +58,7 @@ public class OtherRelationship extends Relationship {
    *
    * @param type The type of this relationship.
    */
+  @JsonIgnore
   public void setType(QName type) {
     this.type = type;
   }

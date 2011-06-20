@@ -17,6 +17,7 @@ package org.gedcomx.record;
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.enunciate.json.JsonName;
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.gedcomx.types.RelationshipType;
 
@@ -122,6 +123,8 @@ public abstract class Relationship {
    *
    * @return The type of this relationship.
    */
+  @JsonIgnore
+  @XmlTransient
   public QName getType() {
     return XmlQNameEnumUtil.toQName(getKnownRelationshipType());
   }
