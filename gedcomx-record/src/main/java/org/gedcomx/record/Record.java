@@ -403,9 +403,9 @@ public class Record {
   }
 
   /**
-   * The extension point for the field.
+   * The extension point for the record.
    *
-   * @return The extension point for the field.
+   * @return The extension point for the record.
    */
   @XmlElement( name = "ext" )
   public Extension getExtension() {
@@ -413,9 +413,9 @@ public class Record {
   }
 
   /**
-   * The extension point for the field.
+   * The extension point for the record.
    *
-   * @param extension The extension point for the field.
+   * @param extension The extension point for the record.
    */
   public void setExtension(Extension extension) {
     this.extension = extension;

@@ -132,9 +132,9 @@ public class RecordCollection {
   }
 
   /**
-   * The extension point for the field.
+   * The extension point for the collection.
    *
-   * @return The extension point for the field.
+   * @return The extension point for the collection.
    */
   @XmlElement ( name = "ext" )
   public Extension getExtension() {
@@ -142,9 +142,9 @@ public class RecordCollection {
   }
 
   /**
-   * The extension point for the field.
+   * The extension point for the collection.
    *
-   * @param extension The extension point for the field.
+   * @param extension The extension point for the collection.
    */
   public void setExtension(Extension extension) {
     this.extension = extension;

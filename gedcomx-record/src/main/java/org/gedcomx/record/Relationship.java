@@ -120,9 +120,9 @@ public abstract class Relationship {
   }
 
   /**
-   * The extension point for the field.
+   * The extension point for the relationship.
    *
-   * @return The extension point for the field.
+   * @return The extension point for the relationship.
    */
   @XmlElement( name = "ext" )
   public Extension getExtension() {
@@ -130,9 +130,9 @@ public abstract class Relationship {
   }
 
   /**
-   * The extension point for the field.
+   * The extension point for the relationship.
    *
-   * @param extension The extension point for the field.
+   * @param extension The extension point for the relationship.
    */
   public void setExtension(Extension extension) {
     this.extension = extension;

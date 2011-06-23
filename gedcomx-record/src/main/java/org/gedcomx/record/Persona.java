@@ -239,9 +239,9 @@ public class Persona {
   }
 
   /**
-   * The extension point for the field.
+   * The extension point for the persona.
    *
-   * @return The extension point for the field.
+   * @return The extension point for the persona.
    */
   @XmlElement( name = "ext" )
   public Extension getExtension() {
@@ -249,9 +249,9 @@ public class Persona {
   }
 
   /**
-   * The extension point for the field.
+   * The extension point for the persona.
    *
-   * @param extension The extension point for the field.
+   * @param extension The extension point for the persona.
    */
   public void setExtension(Extension extension) {
     this.extension = extension;
