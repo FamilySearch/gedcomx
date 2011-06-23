@@ -19,27 +19,11 @@
  * metadata intends to answer the "who, why, when" questions about genealogical data.</p>
  */
 @XmlSchema(
-  namespace = AttributionConstants.GEDCOMX_ATTRIBUTION_NAMESPACE,
+  namespace = AttributionProfile.GEDCOMX_ATTRIBUTION_NAMESPACE,
   elementFormDefault = XmlNsForm.QUALIFIED
 )
 @XmlAccessorOrder ( XmlAccessOrder.ALPHABETICAL )
-@Profile (
-  label = "Attribution Profile",
-  description = "The attribution profile supports attribution metadata for genealogical data. Attribution metadata intends to answer the \"who, why, when\" questions about genealogical data.",
-  namespaces = {
-    @Namespace (
-      id = "gxa",
-      uri = AttributionConstants.GEDCOMX_ATTRIBUTION_NAMESPACE,
-      label = "Attribution Namespace",
-      description = "The attribution namespace contains the objects necessary for modeling attribution metadata.",
-      version = "v1"
-    )
-  }
-)
 package org.gedcomx.attribution;
 //todo: model attribution, contributor, contribution(?)
-
-import org.gedcomx.rt.Namespace;
-import org.gedcomx.rt.Profile;
 
 import javax.xml.bind.annotation.*;

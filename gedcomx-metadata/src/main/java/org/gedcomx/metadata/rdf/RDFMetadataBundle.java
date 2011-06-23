@@ -20,7 +20,6 @@ import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.id.XmlTypeIdResolver;
-import org.gedcomx.metadata.MetadataConstants;
 
 import javax.xml.bind.annotation.*;
 import javax.xml.namespace.QName;
@@ -35,7 +34,6 @@ import java.util.Map;
 @XmlRootElement(name = "RDF")
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlSeeAlso (MetadataConstants.class)
 public class RDFMetadataBundle {
 
   private String id;

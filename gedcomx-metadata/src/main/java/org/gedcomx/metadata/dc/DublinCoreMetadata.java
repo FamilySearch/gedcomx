@@ -18,10 +18,8 @@ package org.gedcomx.metadata.dc;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.id.XmlTypeIdResolver;
-import org.gedcomx.metadata.MetadataConstants;
 import org.gedcomx.metadata.rdf.RDFMetadata;
 
-import javax.xml.bind.annotation.XmlSeeAlso;
 import java.util.List;
 
 /**
@@ -34,7 +32,6 @@ import java.util.List;
  */
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlSeeAlso (MetadataConstants.class)
 public class DublinCoreMetadata extends RDFMetadata {
 
   private List<DublinCoreStringProperty> abstrct;

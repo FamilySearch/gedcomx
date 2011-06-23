@@ -20,29 +20,11 @@
  * @label Conclusion Profile
  */
 @XmlSchema(
-  namespace = ConclusionConstants.GEDCOMX_CONCLUSION_NAMESPACE,
+  namespace = ConclusionProfile.GEDCOMX_CONCLUSION_NAMESPACE,
   elementFormDefault = XmlNsForm.QUALIFIED
 )
 @XmlAccessorOrder ( XmlAccessOrder.ALPHABETICAL )
-@Profile (
-  label = "Conclusion Profile",
-  description = "The conclusion profile supports genealogical conclusion data.",
-  namespaces = {
-    @Namespace (
-      id = "gxc",
-      uri = ConclusionConstants.GEDCOMX_CONCLUSION_NAMESPACE,
-      label = "Conclusion Namespace",
-      description = "The conclusion namespace contains the objects necessary for modeling genealogical conclusion data.",
-      version = "v1",
-      xmlMediaType = "application/gedcomx-conclusion-v1+xml",
-      jsonMediaType = "application/gedcomx-conclusion-v1+json"
-    )
-  }
-)
 package org.gedcomx.conclusion;
-
-import org.gedcomx.rt.Namespace;
-import org.gedcomx.rt.Profile;
 
 import javax.xml.bind.annotation.XmlAccessOrder;
 import javax.xml.bind.annotation.XmlAccessorOrder;

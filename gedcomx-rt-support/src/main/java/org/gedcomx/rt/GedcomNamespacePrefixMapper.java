@@ -123,14 +123,13 @@ public class GedcomNamespacePrefixMapper extends NamespacePrefixMapper {
         try {
           URL resource = resources.nextElement();
           BufferedReader reader = new BufferedReader(new InputStreamReader(resource.openStream()));
-          String packageName = reader.readLine();
-          while (packageName != null) {
-            Package pkg = Package.getPackage(packageName);
-            Profile profileInfo = pkg.getAnnotation(Profile.class);
+          String classname = reader.readLine();
+          while (classname != null) {
+            Profile profileInfo = Class.forName(classname, true, loader).getAnnotation(Profile.class);
             for (Namespace ns : profileInfo.namespaces()) {
               profilePrefixes.put(ns.uri(), ns.id());
             }
-            packageName = reader.readLine();
+            classname = reader.readLine();
           }
         }
         catch (Exception e) {

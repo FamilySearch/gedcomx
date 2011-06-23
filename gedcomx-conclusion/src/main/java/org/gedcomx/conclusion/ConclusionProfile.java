@@ -15,17 +15,35 @@
  */
 package org.gedcomx.conclusion;
 
+import org.gedcomx.rt.Namespace;
+import org.gedcomx.rt.Profile;
+
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- * Static constants relative to the conclusion profile of GEDCOM X.
+ * Definition of the GEDCOM X conclusion profile.
  *
  * @author Ryan Heaton
  */
 @XmlTransient
-public class ConclusionConstants {
+@Profile (
+  label = "Conclusion Profile",
+  description = "The conclusion profile supports genealogical conclusion data.",
+  namespaces = {
+    @Namespace (
+      id = "gxc",
+      uri = ConclusionProfile.GEDCOMX_CONCLUSION_NAMESPACE,
+      label = "Conclusion Namespace",
+      description = "The conclusion namespace contains the objects necessary for modeling genealogical conclusion data.",
+      version = "v1",
+      xmlMediaType = "application/gedcomx-conclusion-v1+xml",
+      jsonMediaType = "application/gedcomx-conclusion-v1+json"
+    )
+  }
+)
+public class ConclusionProfile {
 
-  private ConclusionConstants() {}
+  private ConclusionProfile() {}
 
   public static final String GEDCOMX_CONCLUSION_NAMESPACE = "http://gedcomx.org/conclusion/v1";
 

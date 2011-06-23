@@ -26,7 +26,7 @@ import java.lang.annotation.Target;
  * @author Ryan Heaton
  */
 @Retention( RetentionPolicy.RUNTIME )
-@Target( ElementType.PACKAGE )
+@Target( ElementType.TYPE )
 public @interface Profile {
 
   /**

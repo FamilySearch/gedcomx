@@ -15,15 +15,33 @@
  */
 package org.gedcomx.source;
 
+import org.gedcomx.rt.Namespace;
+import org.gedcomx.rt.Profile;
+
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * @author Ryan Heaton
  */
 @XmlTransient
-public class SourceConstants {
+@Profile (
+  label = "Source Profile",
+  description = "The source profile supports genealogical sources.",
+  namespaces = {
+    @Namespace (
+      id = "gxs",
+      uri = SourceProfile.GEDCOMX_SOURCE_NAMESPACE,
+      label = "Source Namespace",
+      description = "The source namespace contains the objects necessary for modeling sources.",
+      version = "v1",
+      xmlMediaType = "application/gedcomx-source-v1+xml",
+      jsonMediaType = "application/gedcomx-source-v1+json"
+    )
+  }
+)
+public class SourceProfile {
 
-  private SourceConstants() {}
+  private SourceProfile() {}
 
   public static final String GEDCOMX_SOURCE_NAMESPACE = "http://gedcomx.org/source/v1";
 }
