@@ -29,8 +29,10 @@ import org.codehaus.enunciate.main.Artifact;
 import org.codehaus.enunciate.main.Enunciate;
 import org.codehaus.enunciate.main.FileArtifact;
 import org.codehaus.enunciate.main.NamedArtifact;
+import org.codehaus.enunciate.modules.DeploymentModule;
 import org.codehaus.enunciate.modules.DocumentationAwareModule;
 import org.codehaus.enunciate.modules.FreemarkerDeploymentModule;
+import org.codehaus.enunciate.modules.objc.ObjCDeploymentModule;
 import org.codehaus.enunciate.template.freemarker.GetGroupsMethod;
 import org.codehaus.enunciate.template.freemarker.IsDefinedGloballyMethod;
 import org.codehaus.enunciate.template.freemarker.UniqueContentTypesMethod;
@@ -141,6 +143,18 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
 
   protected URL getCodeTemplateURL() {
     return GEDCOMXDeploymentModule.class.getResource("code.fmt");
+  }
+
+  @Override
+  public void init(Enunciate enunciate) throws EnunciateException {
+    super.init(enunciate);
+
+    SortedSet<DeploymentModule> modules = enunciate.getConfig().getAllModules();
+    for (DeploymentModule module : modules) {
+      if (module instanceof ObjCDeploymentModule) {
+        ((ObjCDeploymentModule)module).setTranslateIdTo("objectId");
+      }
+    }
   }
 
   @Override
