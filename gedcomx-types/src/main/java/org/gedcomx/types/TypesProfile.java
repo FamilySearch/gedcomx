@@ -13,7 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.www;
+package org.gedcomx.types;
+
+import org.gedcomx.rt.Namespace;
+import org.gedcomx.rt.Profile;
 
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -21,9 +24,23 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Ryan Heaton
  */
 @XmlTransient
-public class WebConstants {
+@Profile (
+  label = "Types Profile",
+  description = "The types profile defines the standard set of types of genealogical data.",
+  namespaces = {
+    @Namespace (
+      id = "gxt",
+      uri = TypesProfile.GEDCOMX_TYPES_NAMESPACE,
+      label = "Types Namespace",
+      description = "The types namespace contains the definitions of the standard set of genealogical types.",
+      version = "v1"
+    )
+  }
+)
+public class TypesProfile {
 
-  private WebConstants() {}
+  private TypesProfile() {}
 
-  public static final String GEDCOMX_WWW_NAMESPACE = "http://gedcomx.org/www/v1";
+  public static final String GEDCOMX_TYPES_NAMESPACE = "http://gedcomx.org/types";
+
 }

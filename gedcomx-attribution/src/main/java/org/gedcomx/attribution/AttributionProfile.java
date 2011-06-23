@@ -15,17 +15,33 @@
  */
 package org.gedcomx.attribution;
 
+import org.gedcomx.rt.Namespace;
+import org.gedcomx.rt.Profile;
+
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- * Static constants related to the attribution profile of the GEDCOM X standard.
+ * Definition of the attribution profile of the GEDCOM X standard.
  * 
  * @author Ryan Heaton
  */
 @XmlTransient
-public class AttributionConstants {
+@Profile (
+  label = "Attribution Profile",
+  description = "The attribution profile supports attribution metadata for genealogical data. Attribution metadata intends to answer the \"who, why, when\" questions about genealogical data.",
+  namespaces = {
+    @Namespace (
+      id = "gxa",
+      uri = AttributionProfile.GEDCOMX_ATTRIBUTION_NAMESPACE,
+      label = "Attribution Namespace",
+      description = "The attribution namespace contains the objects necessary for modeling attribution metadata.",
+      version = "v1"
+    )
+  }
+)
+public class AttributionProfile {
 
-  private AttributionConstants() {}
+  private AttributionProfile() {}
 
   public static final String GEDCOMX_ATTRIBUTION_NAMESPACE = "http://gedcomx.org/attribution/v1";
 

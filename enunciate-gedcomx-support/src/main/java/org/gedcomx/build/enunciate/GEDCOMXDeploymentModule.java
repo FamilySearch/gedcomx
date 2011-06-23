@@ -15,7 +15,6 @@
  */
 package org.gedcomx.build.enunciate;
 
-import com.sun.mirror.declaration.PackageDeclaration;
 import com.sun.mirror.declaration.TypeDeclaration;
 import freemarker.template.TemplateException;
 import org.codehaus.enunciate.EnunciateException;
@@ -29,8 +28,10 @@ import org.codehaus.enunciate.main.Artifact;
 import org.codehaus.enunciate.main.Enunciate;
 import org.codehaus.enunciate.main.FileArtifact;
 import org.codehaus.enunciate.main.NamedArtifact;
+import org.codehaus.enunciate.modules.DeploymentModule;
 import org.codehaus.enunciate.modules.DocumentationAwareModule;
 import org.codehaus.enunciate.modules.FreemarkerDeploymentModule;
+import org.codehaus.enunciate.modules.objc.ObjCDeploymentModule;
 import org.codehaus.enunciate.template.freemarker.GetGroupsMethod;
 import org.codehaus.enunciate.template.freemarker.IsDefinedGloballyMethod;
 import org.codehaus.enunciate.template.freemarker.UniqueContentTypesMethod;
@@ -51,7 +52,7 @@ import java.util.*;
  */
 public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implements DocumentationAwareModule, EnunciateTypeDeclarationListener {
 
-  private final Map<String, PackageDeclaration> knownPackages = new HashMap<String, PackageDeclaration>();
+  private final Map<String, TypeDeclaration> knownProfileDeclarations = new HashMap<String, TypeDeclaration>();
 
   /**
    * @return "gedcomx"
@@ -129,9 +130,8 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
   }
 
   public void onTypeDeclarationInspected(TypeDeclaration typeDeclaration) {
-    PackageDeclaration pkg = typeDeclaration.getPackage();
-    if (pkg != null) {
-      this.knownPackages.put(pkg.getQualifiedName(), pkg);
+    if (typeDeclaration.getAnnotation(Profile.class) != null) {
+      this.knownProfileDeclarations.put(typeDeclaration.getQualifiedName(), typeDeclaration);
     }
   }
 
@@ -141,6 +141,18 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
 
   protected URL getCodeTemplateURL() {
     return GEDCOMXDeploymentModule.class.getResource("code.fmt");
+  }
+
+  @Override
+  public void init(Enunciate enunciate) throws EnunciateException {
+    super.init(enunciate);
+
+    SortedSet<DeploymentModule> modules = enunciate.getConfig().getAllModules();
+    for (DeploymentModule module : modules) {
+      if (module instanceof ObjCDeploymentModule) {
+        ((ObjCDeploymentModule)module).setTranslateIdTo("objectId");
+      }
+    }
   }
 
   @Override
@@ -156,10 +168,10 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
       }
     }
 
-    Collection<PackageDeclaration> profileDeclarations = gatherProfileDeclarations();
+    Collection<TypeDeclaration> profileDeclarations = gatherProfileDeclarations();
     Map<String, String> prefix_version_to_ns = new HashMap<String, String>();
     Map<String, String> media_type_to_ns = new HashMap<String, String>();
-    for (PackageDeclaration profileDeclaration : profileDeclarations) {
+    for (TypeDeclaration profileDeclaration : profileDeclarations) {
       info("Found profile declaration at %s.", profileDeclaration.getQualifiedName());
       Profile profileInfo = profileDeclaration.getAnnotation(Profile.class);
       for (Namespace ns : profileInfo.namespaces()) {
@@ -242,14 +254,8 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
     }
   }
 
-  protected Collection<PackageDeclaration> gatherProfileDeclarations() {
-    ArrayList<PackageDeclaration> profileDeclarations = new ArrayList<PackageDeclaration>();
-    for (PackageDeclaration packageDeclaration : this.knownPackages.values()) {
-      if (packageDeclaration.getAnnotation(Profile.class) != null) {
-        profileDeclarations.add(packageDeclaration);
-      }
-    }
-    return profileDeclarations;
+  protected Collection<TypeDeclaration> gatherProfileDeclarations() {
+    return this.knownProfileDeclarations.values();
   }
 
   public void doFreemarkerGenerate() throws EnunciateException, IOException, TemplateException {

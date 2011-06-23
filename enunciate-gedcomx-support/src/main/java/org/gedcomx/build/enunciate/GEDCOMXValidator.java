@@ -15,6 +15,7 @@
  */
 package org.gedcomx.build.enunciate;
 
+import com.sun.mirror.declaration.Declaration;
 import com.sun.mirror.declaration.FieldDeclaration;
 import com.sun.mirror.type.DeclaredType;
 import com.sun.mirror.type.EnumType;
@@ -33,6 +34,7 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 
 import javax.xml.namespace.QName;
+import java.util.Arrays;
 import java.util.Collection;
 
 /**
@@ -65,11 +67,16 @@ public class GEDCOMXValidator extends BaseValidator {
         result.addError(complexType, "Non-final, non-abstract complex types need to be annotated with @org.codehaus.jackson.map.annotate.JsonTypeIdResolver(org.gedcomx.id.XmlTypeIdResolver.class) to specify their JSON type id.");
       }
 
-      if (!hasIdAttribute(complexType)) {
+      if (!suppressWarning(complexType, "gedcomx:no_id") && !hasIdAttribute(complexType)) {
         result.addWarning(complexType, "Non-final, non-abstract complex types might need to have an 'id' attribute so they can be referenced.");
       }
     }
     return result;
+  }
+
+  private boolean suppressWarning(Declaration declaration, String warning) {
+    SuppressWarnings suppressionInfo = declaration.getAnnotation(SuppressWarnings.class);
+    return suppressionInfo != null && Arrays.asList(suppressionInfo.value()).contains(warning);
   }
 
   protected boolean hasIdAttribute(ComplexTypeDefinition complexType) {
@@ -193,13 +200,17 @@ public class GEDCOMXValidator extends BaseValidator {
 
         if (element.isCollectionType()) {
           if (!element.isWrapped() && element.getName().endsWith("s")) {
-            result.addWarning(element, "You may want to use @XmlElement to change the name to a non-plural form.");
+            if (!suppressWarning(element, "gedcomx:plural_xml_name")) {
+              result.addWarning(element, "You may want to use @XmlElement to change the name to a non-plural form.");
+            }
           }
           else {
             //make sure collection types have a proper json name.
             String jsonMemberName = element.getJsonMemberName();
             if (!jsonMemberName.endsWith("s")) {
-              result.addWarning(element, "Collection element should probably have a JSON name that ends with 's'. Consider annotating it with @JsonName.");
+              if (!suppressWarning(element, "gedcomx:non_plural_json_name")) {
+                result.addWarning(element, "Collection element should probably have a JSON name that ends with 's'. Consider annotating it with @JsonName.");
+              }
             }
             else if (!element.isWrapped()) {
               if (element.getDelegate() instanceof PropertyDeclaration) {

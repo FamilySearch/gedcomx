@@ -13,7 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.id;
+package org.gedcomx.www;
+
+import org.gedcomx.rt.Namespace;
+import org.gedcomx.rt.Profile;
 
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -21,10 +24,22 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Ryan Heaton
  */
 @XmlTransient
-public class IdConstants {
+@Profile (
+  label = "WWW Profile",
+  description = "The www profile supports exposing genealogical data to the World Wide Web.",
+  namespaces = {
+    @Namespace (
+      id = "gxwww",
+      uri = WWWProfile.GEDCOMX_WWW_NAMESPACE,
+      label = "WWW Namespace",
+      description = "The www namespace contains the objects necessary exposing genealogical data to the World Wide Web.",
+      version = "v1"
+    )
+  }
+)
+public class WWWProfile {
 
-  private IdConstants() {}
+  private WWWProfile() {}
 
-  public static final String GEDCOMX_ID_NAMESPACE = "http://gedcomx.org/id/v1";
-
+  public static final String GEDCOMX_WWW_NAMESPACE = "http://gedcomx.org/www/v1";
 }

@@ -31,6 +31,7 @@ import java.util.Map;
  */
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
+@XmlSeeAlso( DublinCoreMetadata.class )
 public class RDFMetadata {
 
   private String id; 

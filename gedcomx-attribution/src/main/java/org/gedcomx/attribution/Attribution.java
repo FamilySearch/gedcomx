@@ -28,6 +28,7 @@ import java.util.Date;
  */
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
+@SuppressWarnings("gedcomx:no_id")
 public class Attribution {
 
   private ContributorReference contributor;

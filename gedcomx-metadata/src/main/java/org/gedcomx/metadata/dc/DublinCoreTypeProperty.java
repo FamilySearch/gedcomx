@@ -16,33 +16,91 @@
 package org.gedcomx.metadata.dc;
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
+import org.codehaus.enunciate.qname.XmlQNameEnumRef;
+import org.gedcomx.metadata.MetadataProfile;
 
-import javax.xml.bind.annotation.XmlValue;
+import javax.xml.XMLConstants;
+import javax.xml.bind.annotation.*;
 import javax.xml.namespace.QName;
+import java.net.URI;
+import java.util.Map;
 
 /**
  * A Dublin Core property whose value is a Dublin Core type.
  *
  * @author Ryan Heaton
  */
-public final class DublinCoreTypeProperty extends DublinCoreProperty<QName> {
+public final class DublinCoreTypeProperty {
 
+  private String id;
+  private String lang;
   private QName value;
+  private URI valueRef;
+  private Map<QName, String> otherAttributes;
 
   /**
-   * The value of the type.
+   * Set the type from a known enumeration of Dublin Core types.
    *
-   * @return The value of the type.
+   * @param knownType The type.
+   */
+  public void setKnownValue(DublinCoreType knownType) {
+    this.value = XmlQNameEnumUtil.toQName(knownType);
+  }
+
+  /**
+   * The id of the property. Used so that other properties can refer to it and possibly refine it's value.
+   *
+   * @return The id of the property. Used so that other properties can refer to it and possibly refine it's value.
+   */
+  @XmlAttribute ( name = "ID", namespace = MetadataProfile.RDF_NAMESPACE )
+  @XmlID
+  public String getId() {
+    return id;
+  }
+
+  /**
+   * The id of the property. Used so that other properties can refer to it and possibly refine it's value.
+   *
+   * @param id The id of the property. Used so that other properties can refer to it and possibly refine it's value.
+   */
+  public void setId(String id) {
+    this.id = id;
+  }
+
+  /**
+   * The language of the value of the property.
+   *
+   * @return The language of the value of the property.
+   */
+  @XmlAttribute( namespace = XMLConstants.XML_NS_URI )
+  public String getLang() {
+    return lang;
+  }
+
+  /**
+   * The language of the value of the property.
+   *
+   * @param lang The language of the value of the property.
+   */
+  public void setLang(String lang) {
+    this.lang = lang;
+  }
+
+  /**
+   * The value of the property.
+   *
+   * @return The value of the property.
    */
   @XmlValue
+  @XmlQNameEnumRef(DublinCoreType.class)
   public QName getValue() {
     return value;
   }
 
   /**
-   * The value of the type.
+   * The value of the property.
    *
-   * @param value The value of the type.
+   * @param value The value of the property.
    */
   public void setValue(QName value) {
     this.value = value;
@@ -53,16 +111,46 @@ public final class DublinCoreTypeProperty extends DublinCoreProperty<QName> {
    *
    * @return The type from an enumeration of known types, or null if unknown.
    */
+  @XmlTransient
   public DublinCoreType getKnownValue() {
     return XmlQNameEnumUtil.fromQName(getValue(), DublinCoreType.class);
   }
 
   /**
-   * Set the type from a known enumeration of Dublin Core types.
+   * The URI reference to the value, if the value is structured data.
    *
-   * @param knownType The type.
+   * @return The URI reference to the value, if the value is structured data.
    */
-  public void setKnownValue(DublinCoreType knownType) {
-    this.value = XmlQNameEnumUtil.toQName(knownType);
+  @XmlAttribute( name = "resource", namespace = MetadataProfile.RDF_NAMESPACE )
+  public URI getValueRef() {
+    return valueRef;
+  }
+
+  /**
+   * The URI reference to the value, if the value is structured data.
+   *
+   * @param valueRef The URI reference to the value, if the value is structured data.
+   */
+  public void setValueRef(URI valueRef) {
+    this.valueRef = valueRef;
+  }
+
+  /**
+   * Attribute extensions to the property.
+   *
+   * @return Attribute extensions to the property.
+   */
+  @XmlAnyAttribute
+  public Map<QName, String> getOtherAttributes() {
+    return otherAttributes;
+  }
+
+  /**
+   * Attribute extensions to the property.
+   *
+   * @param otherAttributes Attribute extensions to the property.
+   */
+  public void setOtherAttributes(Map<QName, String> otherAttributes) {
+    this.otherAttributes = otherAttributes;
   }
 }
