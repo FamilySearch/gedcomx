@@ -15,6 +15,10 @@
  */
 package org.gedcomx.www;
 
+import org.codehaus.jackson.annotate.JsonTypeInfo;
+import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
+import org.gedcomx.rt.XmlTypeIdResolver;
+
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.namespace.QName;
@@ -26,6 +30,8 @@ import java.net.URI;
  * @author Ryan Heaton
  */
 @XmlRootElement
+@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
+@JsonTypeIdResolver (XmlTypeIdResolver.class)
 public final class Link {
 
   private QName rel;

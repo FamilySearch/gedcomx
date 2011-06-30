@@ -26,7 +26,6 @@ import static org.testng.AssertJUnit.assertTrue;
 public class TestExtensionElements {
 
   public void testCharacteristicTypes() throws Exception {
-
     Characteristic ch = new Characteristic();
     ch.setId("id");
 

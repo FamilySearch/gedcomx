@@ -18,6 +18,9 @@ package org.gedcomx.www;
 import org.codehaus.enunciate.ClientName;
 import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.codehaus.jackson.annotate.JsonTypeInfo;
+import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
+import org.gedcomx.rt.XmlTypeIdResolver;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -32,6 +35,8 @@ import java.util.List;
  * @author Ryan Heaton
  */
 @XmlRootElement
+@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
+@JsonTypeIdResolver (XmlTypeIdResolver.class)
 public final class Links {
 
   //todo: figure out whether this class is even needed anymore; we could instead just add links to the model extension points.

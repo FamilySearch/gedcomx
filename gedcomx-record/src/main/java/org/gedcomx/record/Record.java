@@ -24,7 +24,7 @@ import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.attribution.Attribution;
 import org.gedcomx.id.AlternateId;
 import org.gedcomx.id.PersistentId;
-import org.gedcomx.id.XmlTypeIdResolver;
+import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.source.SourceReference;
 import org.gedcomx.types.RecordType;
 
