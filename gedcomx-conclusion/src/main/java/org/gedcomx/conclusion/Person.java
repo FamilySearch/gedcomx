@@ -20,11 +20,12 @@ import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.id.AlternateId;
-import org.gedcomx.id.PersistentId;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.source.AttributedSourceReference;
 
+import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.*;
+import java.net.URI;
 import java.util.List;
 
 /**
@@ -42,7 +43,7 @@ public class Person {
 
   private String id;
   private List<AlternateId> alternateIds;
-  private PersistentId persistentId;
+  private URI persistentId;
   private Gender gender;
 
   //todo: change to List<? extends Name> when http://jira.codehaus.org/browse/ENUNCIATE-562 is fixed.
@@ -77,7 +78,8 @@ public class Person {
    *
    * @return A long-term, persistent, globally unique identifier for this person.
    */
-  public PersistentId getPersistentId() {
+  @XmlSchemaType(name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
+  public URI getPersistentId() {
     return persistentId;
   }
 
@@ -86,7 +88,7 @@ public class Person {
    *
    * @param persistentId A long-term, persistent, globally unique identifier for this person.
    */
-  public void setPersistentId(PersistentId persistentId) {
+  public void setPersistentId(URI persistentId) {
     this.persistentId = persistentId;
   }
 

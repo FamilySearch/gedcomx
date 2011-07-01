@@ -21,11 +21,12 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.attribution.Attribution;
 import org.gedcomx.id.AlternateId;
-import org.gedcomx.id.PersistentId;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.source.AttributedSourceReference;
 
+import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.*;
+import java.net.URI;
 import java.util.List;
 
 /**
@@ -41,7 +42,7 @@ import java.util.List;
 public abstract class Relationship {
 
   private String id;
-  private PersistentId persistentId;
+  private URI persistentId;
   private List<AlternateId> alternateIds;
   private Attribution attribution;
 
@@ -75,7 +76,8 @@ public abstract class Relationship {
    *
    * @return A long-term, persistent, globally unique identifier for this relationship.
    */
-  public PersistentId getPersistentId() {
+  @XmlSchemaType(name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
+  public URI getPersistentId() {
     return persistentId;
   }
 
@@ -84,7 +86,7 @@ public abstract class Relationship {
    *
    * @param persistentId A long-term, persistent, globally unique identifier for this relationship.
    */
-  public void setPersistentId(PersistentId persistentId) {
+  public void setPersistentId(URI persistentId) {
     this.persistentId = persistentId;
   }
 

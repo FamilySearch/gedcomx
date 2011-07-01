@@ -5,7 +5,6 @@ import org.gedcomx.attribution.ContributorReference;
 import org.gedcomx.conclusion.*;
 import org.gedcomx.id.AlternateId;
 import org.gedcomx.types.AlternateIdType;
-import org.gedcomx.id.PersistentId;
 import org.gedcomx.source.AttributedSourceReference;
 import org.gedcomx.source.SourceQualifier;
 import org.gedcomx.source.SourceQualifierProperty;
@@ -186,8 +185,7 @@ public class TestPerson {
     names.add(name);
     person.setNames(names);
 
-    person.setPersistentId(new PersistentId());
-    person.getPersistentId().setValue(URI.create("pal"));
+    person.setPersistentId(URI.create("pal"));
 
     person.setRelationships(new ArrayList<RelationshipReference>());
     RelationshipReference relationshipReference = new RelationshipReference();
@@ -305,8 +303,7 @@ public class TestPerson {
     names.add(name);
     person.setNames(names);
 
-    person.setPersistentId(new PersistentId());
-    person.getPersistentId().setValue(URI.create("pal"));
+    person.setPersistentId(URI.create("pal"));
 
     person.setRelationships(new ArrayList<RelationshipReference>());
     RelationshipReference relationshipReference = new RelationshipReference();
@@ -405,7 +402,7 @@ public class TestPerson {
     assertEquals("primary surname", name.getPrimaryForm().getParts().get(0).getText());
     assertEquals(NamePartType.surname, name.getPrimaryForm().getParts().get(0).getKnownType());
 
-    assertEquals("pal", person.getPersistentId().getValue().toString());
+    assertEquals("pal", person.getPersistentId().toString());
 
     assertEquals(1, person.getRelationships().size());
     relationshipReference = person.getRelationships().iterator().next();
@@ -485,7 +482,7 @@ public class TestPerson {
     assertEquals("primary surname", name.getPrimaryForm().getParts().get(0).getText());
     assertEquals(NamePartType.surname, name.getPrimaryForm().getParts().get(0).getKnownType());
 
-    assertEquals("pal", person.getPersistentId().getValue().toString());
+    assertEquals("pal", person.getPersistentId().toString());
 
     assertEquals(1, person.getRelationships().size());
     relationshipReference = person.getRelationships().iterator().next();

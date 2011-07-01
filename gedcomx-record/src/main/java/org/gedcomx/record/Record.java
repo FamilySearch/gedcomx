@@ -23,13 +23,14 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.attribution.Attribution;
 import org.gedcomx.id.AlternateId;
-import org.gedcomx.id.PersistentId;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.source.SourceReference;
 import org.gedcomx.types.RecordType;
 
+import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.*;
 import javax.xml.namespace.QName;
+import java.net.URI;
 import java.util.*;
 
 /**
@@ -45,7 +46,7 @@ public class Record {
 
   private String id;
   private QName type;
-  private PersistentId persistentId;
+  private URI persistentId;
   private List<AlternateId> alternateIds;
   private Attribution attribution;
   private RecordCollectionReference collection;
@@ -125,7 +126,8 @@ public class Record {
    *
    * @return A long-term, persistent, globally unique identifier for this record.
    */
-  public PersistentId getPersistentId() {
+  @XmlSchemaType(name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
+  public URI getPersistentId() {
     return persistentId;
   }
 
@@ -134,7 +136,7 @@ public class Record {
    *
    * @param persistentId A long-term, persistent, globally unique identifier for this record.
    */
-  public void setPersistentId(PersistentId persistentId) {
+  public void setPersistentId(URI persistentId) {
     this.persistentId = persistentId;
   }
 
