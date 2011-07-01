@@ -15,12 +15,10 @@
  */
 
 /**
- * The <b>conclusion profile</b> models genealogical conclusion data.
- *
- * @label Conclusion Profile
+ * The conclusion model defines genealogical conclusion data.
  */
 @XmlSchema(
-  namespace = ConclusionProfile.GEDCOMX_CONCLUSION_NAMESPACE,
+  namespace = ConclusionNamespaces.GEDCOMX_CONCLUSION_NAMESPACE,
   elementFormDefault = XmlNsForm.QUALIFIED
 )
 @XmlAccessorOrder ( XmlAccessOrder.ALPHABETICAL )

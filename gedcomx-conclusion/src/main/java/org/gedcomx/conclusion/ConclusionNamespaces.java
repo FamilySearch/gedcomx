@@ -13,35 +13,34 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.source;
+package org.gedcomx.conclusion;
 
 import org.gedcomx.rt.Namespace;
-import org.gedcomx.rt.Profile;
+import org.gedcomx.rt.Namespaces;
 
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
+ * Definition of the GEDCOM X conclusion namespaces.
+ *
  * @author Ryan Heaton
  */
 @XmlTransient
-@Profile (
-  label = "Source Profile",
-  description = "The source profile supports genealogical sources.",
-  namespaces = {
-    @Namespace (
-      id = "gxs",
-      uri = SourceProfile.GEDCOMX_SOURCE_NAMESPACE,
-      label = "Source Namespace",
-      description = "The source namespace contains the objects necessary for modeling sources.",
-      version = "v1",
-      xmlMediaType = "application/gedcomx-source-v1+xml",
-      jsonMediaType = "application/gedcomx-source-v1+json"
-    )
-  }
-)
-public class SourceProfile {
+@Namespaces ( {
+  @Namespace (
+    id = "gxc",
+    uri = ConclusionNamespaces.GEDCOMX_CONCLUSION_NAMESPACE,
+    label = "Conclusion Namespace",
+    description = "The conclusion namespace contains the objects necessary for modeling genealogical conclusion data.",
+    version = "v1",
+    xmlMediaType = "application/gedcomx-conclusion-v1+xml",
+    jsonMediaType = "application/gedcomx-conclusion-v1+json"
+  )
+} )
+public class ConclusionNamespaces {
 
-  private SourceProfile() {}
+  private ConclusionNamespaces() {}
 
-  public static final String GEDCOMX_SOURCE_NAMESPACE = "http://gedcomx.org/source/v1";
+  public static final String GEDCOMX_CONCLUSION_NAMESPACE = "http://gedcomx.org/conclusion/v1";
+
 }

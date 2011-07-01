@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.www;
+package org.gedcomx.record;
 
 import org.gedcomx.rt.Namespace;
-import org.gedcomx.rt.Profile;
+import org.gedcomx.rt.Namespaces;
 
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -24,24 +24,21 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Ryan Heaton
  */
 @XmlTransient
-@Profile (
-  label = "WWW Profile",
-  description = "The www profile supports exposing genealogical data to the World Wide Web.",
-  namespaces = {
-    @Namespace (
-      id = "gxwww",
-      uri = WWWProfile.GEDCOMX_WWW_NAMESPACE,
-      label = "WWW Namespace",
-      description = "The www namespace contains the objects necessary exposing genealogical data to the World Wide Web.",
-      version = "v1",
-      xmlMediaType = "application/gedcomx-www-v1+xml",
-      jsonMediaType = "application/gedcomx-www-v1+json"
-    )
-  }
-)
-public class WWWProfile {
+@Namespaces ( {
+  @Namespace (
+    id = "gxr",
+    uri = RecordNamespaces.GEDCOMX_RECORD_NAMESPACE,
+    label = "Record Namespace",
+    description = "The record namespace contains the objects necessary for modeling genealogical record data.",
+    version = "v1",
+    xmlMediaType = "application/gedcomx-record-v1+xml",
+    jsonMediaType = "application/gedcomx-record-v1+json"
+  )
+} )
+public class RecordNamespaces {
 
-  private WWWProfile() {}
+  private RecordNamespaces() {}
 
-  public static final String GEDCOMX_WWW_NAMESPACE = "http://gedcomx.org/www/v1";
+  public static final String GEDCOMX_RECORD_NAMESPACE = "http://gedcomx.org/record/v1";
+
 }

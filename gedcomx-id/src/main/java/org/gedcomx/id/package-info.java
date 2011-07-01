@@ -15,12 +15,10 @@
  */
 
 /**
- * The <b>id profile</b> provides the standard mechanisms for identifying genealogical entities.
- *
- * @label ID Profile
+ * The id model defines the standard mechanisms for identifying genealogical entities.
  */
 @XmlSchema(
-  namespace = IdProfile.GEDCOMX_ID_NAMESPACE,
+  namespace = IdNamespaces.GEDCOMX_ID_NAMESPACE,
   elementFormDefault = XmlNsForm.QUALIFIED
 )
 package org.gedcomx.id;

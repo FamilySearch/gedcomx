@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.record;
+package org.gedcomx.id;
 
 import org.gedcomx.rt.Namespace;
-import org.gedcomx.rt.Profile;
+import org.gedcomx.rt.Namespaces;
 
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -24,25 +24,19 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Ryan Heaton
  */
 @XmlTransient
-@Profile (
-  label = "Record Profile",
-  description = "The record profile supports genealogical record data.",
-  namespaces = {
-    @Namespace (
-      id = "gxr",
-      uri = RecordProfile.GEDCOMX_RECORD_NAMESPACE,
-      label = "Record Namespace",
-      description = "The record namespace contains the objects necessary for modeling genealogical record data.",
-      version = "v1",
-      xmlMediaType = "application/gedcomx-record-v1+xml",
-      jsonMediaType = "application/gedcomx-record-v1+json"
-    )
-  }
-)
-public class RecordProfile {
+@Namespaces ( {
+  @Namespace (
+    id = "gxid",
+    uri = IdNamespaces.GEDCOMX_ID_NAMESPACE,
+    label = "ID Namespace",
+    description = "The id namespace contains the objects necessary identifying genealogical entities.",
+    version = "v1"
+  )
+} )
+public class IdNamespaces {
 
-  private RecordProfile() {}
+  private IdNamespaces() {}
 
-  public static final String GEDCOMX_RECORD_NAMESPACE = "http://gedcomx.org/record/v1";
+  public static final String GEDCOMX_ID_NAMESPACE = "http://gedcomx.org/id/v1";
 
 }

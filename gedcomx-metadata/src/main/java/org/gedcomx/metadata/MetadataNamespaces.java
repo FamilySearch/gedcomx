@@ -16,7 +16,7 @@
 package org.gedcomx.metadata;
 
 import org.gedcomx.rt.Namespace;
-import org.gedcomx.rt.Profile;
+import org.gedcomx.rt.Namespaces;
 
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -24,38 +24,34 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Ryan Heaton
  */
 @XmlTransient
-@Profile (
-  label = "Metadata Profile",
-  description = "The metadata profile supports genealogical metadata.",
-  namespaces = {
-    @Namespace (
-      id = "rdf",
-      uri = MetadataProfile.RDF_NAMESPACE,
-      label = "RDF Namespace",
-      description = "The rdf namespace contains the objects for RDF support.",
-      version = "1999-02-22",
-      xmlMediaType = MetadataProfile.RDF_MEDIA_TYPE,
-      jsonMediaType = "application/rdf+json"
-    ),
-    @Namespace (
-      id = "dcterms",
-      uri = MetadataProfile.DUBLIN_CORE_NAMESPACE,
-      label = "Dublin Core Terms Namespace",
-      description = "The dublin core terms namespace contains the objects for support Dublin Core Terms.",
-      version = "2010-10-11"
-    ),
-    @Namespace (
-      id = "dctypes",
-      uri = MetadataProfile.DUBLIN_CORE_TYPE_NAMESPACE,
-      label = "Dublin Core Types Namespace",
-      description = "The dublin core types namespace contains the Dublin Core types.",
-      version = "2010-10-11"
-    )
-  }
-)
-public class MetadataProfile {
+@Namespaces ( {
+  @Namespace (
+    id = "rdf",
+    uri = MetadataNamespaces.RDF_NAMESPACE,
+    label = "RDF Namespace",
+    description = "The rdf namespace contains the objects for RDF support.",
+    version = "1999-02-22",
+    xmlMediaType = MetadataNamespaces.RDF_MEDIA_TYPE,
+    jsonMediaType = "application/rdf+json"
+  ),
+  @Namespace (
+    id = "dcterms",
+    uri = MetadataNamespaces.DUBLIN_CORE_NAMESPACE,
+    label = "Dublin Core Terms Namespace",
+    description = "The dublin core terms namespace contains the objects for support Dublin Core Terms.",
+    version = "2010-10-11"
+  ),
+  @Namespace (
+    id = "dctypes",
+    uri = MetadataNamespaces.DUBLIN_CORE_TYPE_NAMESPACE,
+    label = "Dublin Core Types Namespace",
+    description = "The dublin core types namespace contains the Dublin Core types.",
+    version = "2010-10-11"
+  )
+} )
+public class MetadataNamespaces {
 
-  private MetadataProfile() {}
+  private MetadataNamespaces() {}
 
   public static final String RDF_NAMESPACE = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
   public static final String RDF_MEDIA_TYPE = "application/rdf+xml";

@@ -16,7 +16,7 @@
 package org.gedcomx.conclusion.www;
 
 import org.gedcomx.rt.Namespace;
-import org.gedcomx.rt.Profile;
+import org.gedcomx.rt.Namespaces;
 
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -24,24 +24,20 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Ryan Heaton
  */
 @XmlTransient
-@Profile (
-  label = "Conclusion WWW Profile",
-  description = "The conclusion www profile supports extensions to the conclusion profile necessary to expose conclusion data to the World Wide Web.",
-  namespaces = {
-    @Namespace (
-      id = "gxcw",
-      uri = ConclusionWWWProfile.GEDCOMX_CONCLUSION_WWW_NAMESPACE,
-      label = "Conclusion WWW Namespace",
-      description = "The conclusion www namespace contains the objects necessary for modeling conclusion data exposed via the World Wide Web.",
-      version = "v1",
-      xmlMediaType = "application/gedcomx-conclusion-www-v1+xml",
-      jsonMediaType = "application/gedcomx-conclusion-www-v1+json"
-    )
-  }
-)
-public class ConclusionWWWProfile {
+@Namespaces ( {
+  @Namespace (
+    id = "gxcw",
+    uri = ConclusionWWWNamespaces.GEDCOMX_CONCLUSION_WWW_NAMESPACE,
+    label = "Conclusion WWW Namespace",
+    description = "The conclusion www namespace contains the objects necessary for modeling conclusion data exposed via the World Wide Web.",
+    version = "v1",
+    xmlMediaType = "application/gedcomx-conclusion-www-v1+xml",
+    jsonMediaType = "application/gedcomx-conclusion-www-v1+json"
+  )
+} )
+public class ConclusionWWWNamespaces {
 
-  private ConclusionWWWProfile() {}
+  private ConclusionWWWNamespaces() {}
 
   public static final String GEDCOMX_CONCLUSION_WWW_NAMESPACE = "http://gedcomx.org/conclusion/www/v1";
 

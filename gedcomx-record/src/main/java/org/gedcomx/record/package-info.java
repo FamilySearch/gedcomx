@@ -15,12 +15,10 @@
  */
 
 /**
- * The <b>record profile</b> models genealogical data as is transcribed from a record.
- *
- * @label Record Profile
+ * The record model defines genealogical data as is transcribed from a record.
  */
 @XmlSchema(
-  namespace = RecordProfile.GEDCOMX_RECORD_NAMESPACE,
+  namespace = RecordNamespaces.GEDCOMX_RECORD_NAMESPACE,
   elementFormDefault = XmlNsForm.QUALIFIED
 )
 @XmlAccessorOrder ( XmlAccessOrder.ALPHABETICAL )

@@ -15,11 +15,11 @@
  */
 
 /**
- * <p>The <b>attribution profile</b> models the objects necessary to support attribution metadata for genealogical data. Attribution
+ * <p>The attribution model defines the objects necessary to support attribution metadata for genealogical data. Attribution
  * metadata intends to answer the "who, why, when" questions about genealogical data.</p>
  */
 @XmlSchema(
-  namespace = AttributionProfile.GEDCOMX_ATTRIBUTION_NAMESPACE,
+  namespace = AttributionNamespaces.GEDCOMX_ATTRIBUTION_NAMESPACE,
   elementFormDefault = XmlNsForm.QUALIFIED
 )
 @XmlAccessorOrder ( XmlAccessOrder.ALPHABETICAL )

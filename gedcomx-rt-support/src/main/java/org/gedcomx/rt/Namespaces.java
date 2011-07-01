@@ -21,32 +21,12 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Metadata about a GEDCOM X profile.
- *
  * @author Ryan Heaton
  */
 @Retention( RetentionPolicy.RUNTIME )
 @Target( ElementType.TYPE )
-public @interface Profile {
+public @interface Namespaces {
 
-  /**
-   * A label for the profile.
-   *
-   * @return A label for the profile.
-   */
-  String label();
+  Namespace[] value();
 
-  /**
-   * A description for the profile.
-   *
-   * @return A description for the profile.
-   */
-  String description();
-
-  /**
-   * The namespaces associated with the profile.
-   *
-   * @return The namespaces associated with the profile.
-   */
-  Namespace[] namespaces();
 }

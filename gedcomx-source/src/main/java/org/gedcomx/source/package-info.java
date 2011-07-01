@@ -15,12 +15,10 @@
  */
 
 /**
- * The <b>source profile</b> models genealogical sources.
- *
- * @label Source Profile
+ * The source model defines genealogical sources.
  */
 @XmlSchema (
-  namespace = SourceProfile.GEDCOMX_SOURCE_NAMESPACE,
+  namespace = SourceNamespaces.GEDCOMX_SOURCE_NAMESPACE,
   elementFormDefault = XmlNsForm.QUALIFIED
 )
 @XmlAccessorOrder ( XmlAccessOrder.ALPHABETICAL )

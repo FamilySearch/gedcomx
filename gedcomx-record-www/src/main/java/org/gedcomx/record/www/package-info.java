@@ -15,20 +15,18 @@
  */
 
 /**
- * The <b>record-www profile</b> models the necessary extensions to the record model to support
+ * The record model defines the necessary extensions to the record model to support
  * providing record data via the World Wide Web.
- *
- * @label Record WWW Profile
  */
 @XmlSchema(
-  namespace = RecordWWWProfile.GEDCOMX_RECORD_WWW_NAMESPACE,
+  namespace = RecordWWWNamespaces.GEDCOMX_RECORD_WWW_NAMESPACE,
   elementFormDefault = XmlNsForm.QUALIFIED
 )
 @XmlAccessorOrder ( XmlAccessOrder.ALPHABETICAL )
-@DefaultNamespace ( RecordProfile.GEDCOMX_RECORD_NAMESPACE )
+@DefaultNamespace ( RecordNamespaces.GEDCOMX_RECORD_NAMESPACE )
 package org.gedcomx.record.www;
 
-import org.gedcomx.record.RecordProfile;
+import org.gedcomx.record.RecordNamespaces;
 import org.gedcomx.rt.DefaultNamespace;
 
 import javax.xml.bind.annotation.XmlAccessOrder;
