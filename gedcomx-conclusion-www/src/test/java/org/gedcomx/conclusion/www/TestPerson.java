@@ -115,8 +115,8 @@ public class TestPerson {
     characteristic.getPlace().setOriginal("original place");
     characteristic.getPlace().setNormalized("normalized place");
     characteristic.getPlace().setGeoCode(new GeoCode());
-    characteristic.getPlace().getGeoCode().setLatitude(1.2F);
-    characteristic.getPlace().getGeoCode().setLongitude(3.4F);
+    characteristic.getPlace().getGeoCode().setLatitude(1.2D);
+    characteristic.getPlace().getGeoCode().setLongitude(3.4D);
     characteristic.setValue("characteristic-value");
     characteristics.add(characteristic);
     person.setCharacteristics(characteristics);
@@ -143,8 +143,8 @@ public class TestPerson {
     event.getPlace().setOriginal("original place");
     event.getPlace().setNormalized("normalized place");
     event.getPlace().setGeoCode(new GeoCode());
-    event.getPlace().getGeoCode().setLatitude(1.2F);
-    event.getPlace().getGeoCode().setLongitude(3.4F);
+    event.getPlace().getGeoCode().setLatitude(1.2D);
+    event.getPlace().getGeoCode().setLongitude(3.4D);
     events.add(event);
     person.setEvents(events);
 
@@ -243,8 +243,8 @@ public class TestPerson {
     characteristic.getPlace().setOriginal("original place");
     characteristic.getPlace().setNormalized("normalized place");
     characteristic.getPlace().setGeoCode(new GeoCode());
-    characteristic.getPlace().getGeoCode().setLatitude(1.2F);
-    characteristic.getPlace().getGeoCode().setLongitude(3.4F);
+    characteristic.getPlace().getGeoCode().setLatitude(1.2D);
+    characteristic.getPlace().getGeoCode().setLongitude(3.4D);
     characteristic.setValue("characteristic-value");
     characteristics.add(characteristic);
     person.setCharacteristics(characteristics);
@@ -266,8 +266,8 @@ public class TestPerson {
     event.getPlace().setOriginal("original place");
     event.getPlace().setNormalized("normalized place");
     event.getPlace().setGeoCode(new GeoCode());
-    event.getPlace().getGeoCode().setLatitude(1.2F);
-    event.getPlace().getGeoCode().setLongitude(3.4F);
+    event.getPlace().getGeoCode().setLatitude(1.2D);
+    event.getPlace().getGeoCode().setLongitude(3.4D);
     events.add(event);
     person.setEvents(events);
 
@@ -361,8 +361,8 @@ public class TestPerson {
     assertEquals(CharacteristicType.occupation, characteristic.getKnownType());
     assertEquals("original place", characteristic.getPlace().getOriginal());
     assertEquals("normalized place", characteristic.getPlace().getNormalized());
-    assertEquals(1.2F, characteristic.getPlace().getGeoCode().getLatitude());
-    assertEquals(3.4F, characteristic.getPlace().getGeoCode().getLongitude());
+    assertEquals(1.2D, characteristic.getPlace().getGeoCode().getLatitude());
+    assertEquals(3.4D, characteristic.getPlace().getGeoCode().getLongitude());
     assertEquals("characteristic-value", characteristic.getValue());
 
     assertEquals(1, person.getEvents().size());
@@ -378,8 +378,8 @@ public class TestPerson {
     assertEquals(EventType.adoption, event.getKnownType());
     assertEquals("original place", event.getPlace().getOriginal());
     assertEquals("normalized place", event.getPlace().getNormalized());
-    assertEquals(1.2F, event.getPlace().getGeoCode().getLatitude());
-    assertEquals(3.4F, event.getPlace().getGeoCode().getLongitude());
+    assertEquals(1.2D, event.getPlace().getGeoCode().getLatitude());
+    assertEquals(3.4D, event.getPlace().getGeoCode().getLongitude());
 
     assertEquals(1, person.getNames().size());
     assertEquals(1, ((Name) person.getNames().iterator().next()).getLinks().getLinks().size());
@@ -446,8 +446,8 @@ public class TestPerson {
     assertEquals(CharacteristicType.occupation, characteristic.getKnownType());
     assertEquals("original place", characteristic.getPlace().getOriginal());
     assertEquals("normalized place", characteristic.getPlace().getNormalized());
-    assertEquals(1.2F, characteristic.getPlace().getGeoCode().getLatitude());
-    assertEquals(3.4F, characteristic.getPlace().getGeoCode().getLongitude());
+    assertEquals(1.2D, characteristic.getPlace().getGeoCode().getLatitude());
+    assertEquals(3.4D, characteristic.getPlace().getGeoCode().getLongitude());
     assertEquals("characteristic-value", characteristic.getValue());
 
     assertEquals(1, person.getEvents().size());
@@ -461,8 +461,8 @@ public class TestPerson {
     assertEquals(EventType.adoption, event.getKnownType());
     assertEquals("original place", event.getPlace().getOriginal());
     assertEquals("normalized place", event.getPlace().getNormalized());
-    assertEquals(1.2F, event.getPlace().getGeoCode().getLatitude());
-    assertEquals(3.4F, event.getPlace().getGeoCode().getLongitude());
+    assertEquals(1.2D, event.getPlace().getGeoCode().getLatitude());
+    assertEquals(3.4D, event.getPlace().getGeoCode().getLongitude());
 
     assertEquals(1, person.getNames().size());
     name = person.getNames().iterator().next();

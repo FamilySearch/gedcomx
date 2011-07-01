@@ -24,8 +24,8 @@ import javax.xml.bind.annotation.XmlAttribute;
  */
 public final class GeoCode {
 
-  private float longitude;
-  private float latitude;
+  private double longitude;
+  private double latitude;
 
   /**
    * The longitude.
@@ -33,7 +33,7 @@ public final class GeoCode {
    * @return The longitude.
    */
   @XmlAttribute
-  public float getLongitude() {
+  public double getLongitude() {
     return longitude;
   }
 
@@ -42,7 +42,7 @@ public final class GeoCode {
    * 
    * @param longitude The longitude.
    */
-  public void setLongitude(float longitude) {
+  public void setLongitude(double longitude) {
     this.longitude = longitude;
   }
 
@@ -52,7 +52,7 @@ public final class GeoCode {
    * @return The latitude.
    */
   @XmlAttribute
-  public float getLatitude() {
+  public double getLatitude() {
     return latitude;
   }
 
@@ -61,7 +61,7 @@ public final class GeoCode {
    * 
    * @param latitude The latitude.
    */
-  public void setLatitude(float latitude) {
+  public void setLatitude(double latitude) {
     this.latitude = latitude;
   }
 }
