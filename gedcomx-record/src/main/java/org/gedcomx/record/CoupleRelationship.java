@@ -17,11 +17,10 @@ package org.gedcomx.record;
 
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.id.XmlTypeIdResolver;
+import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.RelationshipType;
 
 import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.namespace.QName;
 
 /**
  * A relationship between two personas, making a genealogical "couple".

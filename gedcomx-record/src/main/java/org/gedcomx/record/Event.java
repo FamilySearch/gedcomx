@@ -20,9 +20,10 @@ import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.enunciate.qname.XmlQNameEnumRef;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.id.XmlTypeIdResolver;
+import org.gedcomx.rt.XmlTypeIdResolver;
 
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.namespace.QName;
@@ -40,6 +41,7 @@ public class Event {
   private Boolean primary;
   private Date date;
   private Place place;
+  private Extension extension;
 
   /**
    * The id of the event, unique to the context and not necessarily globally unique.
@@ -155,4 +157,22 @@ public class Event {
     this.place = place;
   }
 
+  /**
+   * The extension point for the event.
+   *
+   * @return The extension point for the event.
+   */
+  @XmlElement ( name = "ext" )
+  public Extension getExtension() {
+    return extension;
+  }
+
+  /**
+   * The extension point for the event.
+   *
+   * @param extension The extension point for the event.
+   */
+  public void setExtension(Extension extension) {
+    this.extension = extension;
+  }
 }

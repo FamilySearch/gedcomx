@@ -17,14 +17,12 @@ package org.gedcomx.record;
 
 import org.gedcomx.attribution.Attribution;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 /**
  * A field on a record.
  */
-@XmlType ( propOrder = { "attribution", "original", "interpreted", "normalized" })
+@XmlType ( propOrder = { "attribution", "original", "interpreted", "normalized", "extension"})
 public abstract class Field {
 
   private String id;
@@ -33,6 +31,7 @@ public abstract class Field {
   private String interpreted;
   private String normalized;
   private Attribution attribution;
+  private Extension extension;
 
   /**
    * The id of this field data, unique to its record.
@@ -143,5 +142,24 @@ public abstract class Field {
    */
   public void setAttribution(Attribution attribution) {
     this.attribution = attribution;
+  }
+
+  /**
+   * The extension point for the field.
+   *
+   * @return The extension point for the field.
+   */
+  @XmlElement( name = "ext" )
+  public Extension getExtension() {
+    return extension;
+  }
+
+  /**
+   * The extension point for the field.
+   *
+   * @param extension The extension point for the field.
+   */
+  public void setExtension(Extension extension) {
+    this.extension = extension;
   }
 }

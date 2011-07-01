@@ -204,7 +204,7 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
             jsonMediaType = null;
           }
           if (!schemaInfo.getGlobalElements().isEmpty() && jsonMediaType == null) {
-            warn("Profile metadata for namespace %s is missing an json media type for its root elements. Check /META-INF/gedcomx-profile.properties.", schemaInfo.getNamespace());
+            warn("Profile metadata for namespace %s is missing an json media type for its root elements.", schemaInfo.getNamespace());
           }
           if (jsonMediaType != null) {
             String previousNamespace = media_type_to_ns.put(jsonMediaType, schemaInfo.getNamespace());

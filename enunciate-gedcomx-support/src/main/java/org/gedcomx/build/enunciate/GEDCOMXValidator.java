@@ -32,6 +32,7 @@ import org.codehaus.enunciate.qname.XmlQNameEnum;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
+import org.gedcomx.rt.XmlTypeIdResolver;
 
 import javax.xml.namespace.QName;
 import java.util.Arrays;
@@ -63,7 +64,7 @@ public class GEDCOMXValidator extends BaseValidator {
         }
       }
 
-      if (!"org.gedcomx.id.XmlTypeIdResolver".equals(idResolverName)) {
+      if (!XmlTypeIdResolver.class.getName().equals(idResolverName)) {
         result.addError(complexType, "Non-final, non-abstract complex types need to be annotated with @org.codehaus.jackson.map.annotate.JsonTypeIdResolver(org.gedcomx.id.XmlTypeIdResolver.class) to specify their JSON type id.");
       }
 

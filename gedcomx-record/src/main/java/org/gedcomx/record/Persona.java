@@ -21,7 +21,7 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.id.AlternateId;
 import org.gedcomx.id.PersistentId;
-import org.gedcomx.id.XmlTypeIdResolver;
+import org.gedcomx.rt.XmlTypeIdResolver;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
@@ -34,7 +34,7 @@ import java.util.List;
  * A persona is the set of data about a person bounded by a single record.
  */
 @XmlType (
-  propOrder = {"persistentId", "alternateIds", "gender", "age", "names", "eventRoles", "characteristics"}
+  propOrder = {"persistentId", "alternateIds", "gender", "age", "names", "eventRoles", "characteristics", "extension"}
 )
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
@@ -51,6 +51,7 @@ public class Persona {
   private java.util.List<EventRole> eventRoles = new ArrayList<EventRole>();
   private java.util.List<Characteristic> characteristics = new ArrayList<Characteristic>();
   private Boolean principal;
+  private Extension extension;
 
   /**
    * The id of the persona, unique to the context and not necessarily globally unique.
@@ -237,4 +238,22 @@ public class Persona {
     this.principal = isPrincipal;
   }
 
+  /**
+   * The extension point for the persona.
+   *
+   * @return The extension point for the persona.
+   */
+  @XmlElement( name = "ext" )
+  public Extension getExtension() {
+    return extension;
+  }
+
+  /**
+   * The extension point for the persona.
+   *
+   * @param extension The extension point for the persona.
+   */
+  public void setExtension(Extension extension) {
+    this.extension = extension;
+  }
 }

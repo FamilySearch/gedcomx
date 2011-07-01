@@ -39,6 +39,7 @@ public abstract class Relationship {
 
   private String id;
   private List<Characteristic> characteristics = new ArrayList<Characteristic>();
+  private Extension extension;
 
   /**
    * The id of the relationship, unique to the context and not necessarily globally unique.
@@ -116,6 +117,25 @@ public abstract class Relationship {
   @JsonProperty ("characteristics")
   public void setCharacteristics(List<Characteristic> characteristics) {
     this.characteristics = characteristics;
+  }
+
+  /**
+   * The extension point for the relationship.
+   *
+   * @return The extension point for the relationship.
+   */
+  @XmlElement( name = "ext" )
+  public Extension getExtension() {
+    return extension;
+  }
+
+  /**
+   * The extension point for the relationship.
+   *
+   * @param extension The extension point for the relationship.
+   */
+  public void setExtension(Extension extension) {
+    this.extension = extension;
   }
 
   /**
