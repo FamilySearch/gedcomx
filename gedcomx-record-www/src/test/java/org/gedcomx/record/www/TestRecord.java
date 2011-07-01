@@ -4,10 +4,7 @@ import org.gedcomx.attribution.Attribution;
 import org.gedcomx.attribution.ContributorReference;
 import org.gedcomx.id.AlternateId;
 import org.gedcomx.id.PersistentId;
-import org.gedcomx.record.EventReference;
-import org.gedcomx.record.EventRole;
-import org.gedcomx.record.Field;
-import org.gedcomx.record.PersonaReference;
+import org.gedcomx.record.*;
 import org.gedcomx.source.SourceQualifier;
 import org.gedcomx.source.SourceQualifierProperty;
 import org.gedcomx.source.SourceReference;
@@ -16,6 +13,7 @@ import org.gedcomx.www.Link;
 import org.gedcomx.www.Links;
 import org.testng.annotations.Test;
 
+import javax.xml.bind.JAXBContext;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,7 +34,7 @@ public class TestRecord {
    */
   public void testRecordXml() throws Exception {
     Record record = createTestRecord();
-    record = processThroughXml(record);
+    record = processThroughXml(record, Record.class, JAXBContext.newInstance(Record.class, Links.class));
     assertTestRecord(record);
   }
 
@@ -59,13 +57,12 @@ public class TestRecord {
     alternateIds.add(alternateId);
     record.setAlternateIds(alternateIds);
 
-    List<org.gedcomx.record.Event> events = new ArrayList<org.gedcomx.record.Event>();
+    List<Event> events = new ArrayList<Event>();
     Event event = new Event();
-    event.setLinks(new Links());
-    event.getLinks().setLinks(new ArrayList<Link>());
+    event.setExtension(new Extension());
     Link eventLink = new Link();
     eventLink.setHref(URI.create("urn:event-link"));
-    event.getLinks().getLinks().add(eventLink);
+    event.getExtension().addElement(eventLink);
     event.setDate(new Date());
     fillInField(event.getDate(), "event-date");
     event.setId("event-id");
@@ -77,12 +74,10 @@ public class TestRecord {
     record.setEvents(events);
 
     Persona persona = new Persona();
-    Links personaLinks = new Links();
-    personaLinks.setLinks(new ArrayList<Link>());
     Link personaLink = new Link();
     personaLink.setHref(URI.create("urn:persona-link"));
-    personaLinks.getLinks().add(personaLink);
-    persona.setLinks(personaLinks);
+    persona.setExtension(new Extension());
+    persona.getExtension().addElement(personaLink);
     List<org.gedcomx.record.Characteristic> characteristics = new ArrayList<org.gedcomx.record.Characteristic>();
     Characteristic characteristic = new Characteristic();
     fillInField(characteristic, "characteristic");
@@ -227,19 +222,21 @@ public class TestRecord {
     assertEquals("forward-value", record.getAlternateIds().get(0).getValue());
 
     assertEquals(1, record.getEvents().size());
-    Event event = (Event) record.getEvents().get(0);
+    Event event = record.getEvents().get(0);
     assertField(event.getDate(), "event-date");
     assertEquals("event-id", event.getId());
     assertEquals(EventType.adoption, event.getKnownType());
     assertField(event.getPlace(), "event-place");
     assertTrue(event.getPrimary());
-    assertEquals(1, event.getLinks().getLinks().size());
-    assertEquals("urn:event-link", event.getLinks().getLinks().get(0).getHref().toString());
+    List<Link> links = event.getExtension().findExtensionsOfType(Link.class);
+    assertEquals(1, links.size());
+    assertEquals("urn:event-link", links.get(0).getHref().toString());
 
     assertEquals(1, record.getPersonas().size());
-    Persona persona = (Persona) record.getPersonas().get(0);
-    assertEquals(1, persona.getLinks().getLinks().size());
-    assertEquals("urn:persona-link", persona.getLinks().getLinks().get(0).getHref().toString());
+    Persona persona = record.getPersonas().get(0);
+    links = persona.getExtension().findExtensionsOfType(Link.class);
+    assertEquals(1, links.size());
+    assertEquals("urn:persona-link", links.get(0).getHref().toString());
 
     assertEquals(1, persona.getCharacteristics().size());
     assertField(persona.getCharacteristics().get(0), "characteristic");
@@ -248,19 +245,19 @@ public class TestRecord {
     assertField(persona.getCharacteristics().get(0).getPlace(), "characteristic-place");
 
     assertEquals(1, persona.getNames().size());
-    Name name = (Name) persona.getNames().get(0);
+    Name name = persona.getNames().get(0);
     assertField(name, "name");
     assertEquals(NameStyle.spanish, name.getKnownStyle());
     assertEquals(NameType.formal, name.getKnownType());
 
     assertEquals(1, name.getParts().size());
-    NamePart namePart = (NamePart) name.getParts().get(0);
+    NamePart namePart = name.getParts().get(0);
     namePart.setKnownType(NamePartType.surname);
     assertField(namePart, "name-part");
 
     assertField(persona.getAge(), "age");
     assertEquals(1, persona.getAge().getParts().size());
-    AgePart agePart = (AgePart) persona.getAge().getParts().get(0);
+    AgePart agePart = persona.getAge().getParts().get(0);
     assertField(agePart, "age-part");
 
     assertEquals(1, persona.getAlternateIds().size());
@@ -280,7 +277,7 @@ public class TestRecord {
     assertEquals("#" + event.getId(), eventRole.getEvent().getHref().toString());
 
     assertEquals(1, record.getFields().size());
-    RecordField field = (RecordField) record.getFields().get(0);
+    RecordField field = record.getFields().get(0);
     assertEquals("urn:field-attribution", field.getAttribution().getContributor().getHref().toString());
     assertEquals("field-id", field.getId());
     assertEquals(FieldType.batch_number, field.getKnownType());
@@ -292,9 +289,9 @@ public class TestRecord {
 
     assertEquals(1, record.getCoupleRelationships().size());
     assertEquals(1, record.getParentChildRelationships().size());
-    CoupleRelationship coupleRelationship = (CoupleRelationship) record.getCoupleRelationships().get(0);
+    CoupleRelationship coupleRelationship = record.getCoupleRelationships().get(0);
     assertEquals(1, coupleRelationship.getCharacteristics().size());
-    Characteristic coupleCharacteristic = (Characteristic) coupleRelationship.getCharacteristics().get(0);
+    Characteristic coupleCharacteristic = coupleRelationship.getCharacteristics().get(0);
     assertField(coupleCharacteristic, "couple-characteristic");
     assertEquals(CharacteristicType.Couple.common_law_marriage, coupleCharacteristic.getKnownType());
     assertField(coupleCharacteristic.getDate(), "couple-characteristic-date");
@@ -303,7 +300,7 @@ public class TestRecord {
     assertEquals("#" + persona.getId(), coupleRelationship.getPersona1().getHref().toString());
     assertEquals("#" + persona.getId(), coupleRelationship.getPersona2().getHref().toString());
 
-    ParentChildRelationship parentRelationship = (ParentChildRelationship) record.getParentChildRelationships().get(0);
+    ParentChildRelationship parentRelationship = record.getParentChildRelationships().get(0);
     assertEquals("parent-relationship-id", parentRelationship.getId());
     assertEquals("#" + persona.getId(), parentRelationship.getParent().getHref().toString());
     assertEquals("#" + persona.getId(), parentRelationship.getChild().getHref().toString());
