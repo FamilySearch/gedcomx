@@ -22,7 +22,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.attribution.Attribution;
-import org.gedcomx.id.AlternateId;
+import org.gedcomx.common.AlternateId;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.source.SourceReference;
 import org.gedcomx.types.RecordType;

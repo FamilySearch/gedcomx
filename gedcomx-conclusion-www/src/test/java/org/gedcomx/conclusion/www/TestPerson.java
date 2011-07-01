@@ -3,7 +3,7 @@ package org.gedcomx.conclusion.www;
 import org.gedcomx.attribution.Attribution;
 import org.gedcomx.attribution.ContributorReference;
 import org.gedcomx.conclusion.*;
-import org.gedcomx.id.AlternateId;
+import org.gedcomx.common.AlternateId;
 import org.gedcomx.types.AlternateIdType;
 import org.gedcomx.source.AttributedSourceReference;
 import org.gedcomx.source.SourceQualifier;

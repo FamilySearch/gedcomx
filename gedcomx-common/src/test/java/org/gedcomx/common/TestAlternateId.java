@@ -1,4 +1,4 @@
-package org.gedcomx.id;
+package org.gedcomx.common;
 
 import org.gedcomx.types.AlternateIdType;
 import org.testng.annotations.Test;

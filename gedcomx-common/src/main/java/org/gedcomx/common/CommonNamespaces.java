@@ -13,15 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package org.gedcomx.common;
+
+import org.gedcomx.rt.Namespace;
+import org.gedcomx.rt.Namespaces;
+
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
- * The id model defines the standard mechanisms for identifying genealogical entities.
+ * @author Ryan Heaton
  */
-@XmlSchema(
-  namespace = IdNamespaces.GEDCOMX_ID_NAMESPACE,
-  elementFormDefault = XmlNsForm.QUALIFIED
-)
-package org.gedcomx.id;
+@XmlTransient
+@Namespaces ( {
+  @Namespace (
+    id = "gx",
+    uri = CommonNamespaces.GEDCOMX_COMMON_NAMESPACE,
+    label = "Common Namespace",
+    description = "The common namespace contains the objects that are common to all profiles and namespaces.",
+    version = "v1"
+  )
+} )
+public class CommonNamespaces {
 
-import javax.xml.bind.annotation.XmlNsForm;
-import javax.xml.bind.annotation.XmlSchema;
+  private CommonNamespaces() {}
+
+  public static final String GEDCOMX_COMMON_NAMESPACE = "http://gedcomx.org/common/v1";
+
+}

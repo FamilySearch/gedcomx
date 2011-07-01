@@ -2,7 +2,7 @@ package org.gedcomx.record.www;
 
 import org.gedcomx.attribution.Attribution;
 import org.gedcomx.attribution.ContributorReference;
-import org.gedcomx.id.AlternateId;
+import org.gedcomx.common.AlternateId;
 import org.gedcomx.record.*;
 import org.gedcomx.source.SourceQualifier;
 import org.gedcomx.source.SourceQualifierProperty;
