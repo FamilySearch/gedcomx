@@ -21,7 +21,7 @@ import org.codehaus.enunciate.qname.XmlQNameEnumRef;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.id.XmlTypeIdResolver;
+import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.RelationshipType;
 
 import javax.xml.bind.annotation.XmlAttribute;
@@ -44,6 +44,7 @@ public class Relationship {
   private PersonaReference persona1;
   private PersonaReference persona2;
   private List<Characteristic> characteristics = new ArrayList<Characteristic>();
+  private Extension extension;
 
   /**
    * The id of the relationship, unique to the context and not necessarily globally unique.
@@ -178,4 +179,22 @@ public class Relationship {
     this.characteristics = characteristics;
   }
 
+  /**
+   * The extension point for the relationship.
+   *
+   * @return The extension point for the relationship.
+   */
+  @XmlElement( name = "ext" )
+  public Extension getExtension() {
+    return extension;
+  }
+
+  /**
+   * The extension point for the relationship.
+   *
+   * @param extension The extension point for the relationship.
+   */
+  public void setExtension(Extension extension) {
+    this.extension = extension;
+  }
 }

@@ -24,7 +24,7 @@ import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.attribution.Attribution;
 import org.gedcomx.id.AlternateId;
 import org.gedcomx.id.PersistentId;
-import org.gedcomx.id.XmlTypeIdResolver;
+import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.source.SourceReference;
 import org.gedcomx.types.RecordType;
 
@@ -37,7 +37,7 @@ import java.util.*;
  */
 @XmlRootElement
 @XmlType (
-  propOrder = {"persistentId", "alternateIds", "attribution", "collection", "personas", "events", "relationships", "fields", "sources"}
+  propOrder = {"persistentId", "alternateIds", "attribution", "collection", "personas", "events", "relationships", "fields", "sources", "extension"}
 )
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
@@ -56,6 +56,7 @@ public class Record {
   private List<Relationship> relationships;
   private List<RecordField> fields;
   private List<SourceReference> sources;
+  private Extension extension;
 
   /**
    * The id of the record, unique to the context and not necessarily globally unique.
@@ -301,5 +302,24 @@ public class Record {
   @JsonProperty("sources")
   public void setSources(List<SourceReference> sources) {
     this.sources = sources;
+  }
+
+  /**
+   * The extension point for the record.
+   *
+   * @return The extension point for the record.
+   */
+  @XmlElement( name = "ext" )
+  public Extension getExtension() {
+    return extension;
+  }
+
+  /**
+   * The extension point for the record.
+   *
+   * @param extension The extension point for the record.
+   */
+  public void setExtension(Extension extension) {
+    this.extension = extension;
   }
 }

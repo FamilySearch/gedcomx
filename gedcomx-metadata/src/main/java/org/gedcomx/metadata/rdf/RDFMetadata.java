@@ -17,7 +17,7 @@ package org.gedcomx.metadata.rdf;
 
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.id.XmlTypeIdResolver;
+import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.metadata.dc.DublinCoreMetadata;
 
 import javax.xml.bind.annotation.*;

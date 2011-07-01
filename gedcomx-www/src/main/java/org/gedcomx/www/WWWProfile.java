@@ -33,7 +33,9 @@ import javax.xml.bind.annotation.XmlTransient;
       uri = WWWProfile.GEDCOMX_WWW_NAMESPACE,
       label = "WWW Namespace",
       description = "The www namespace contains the objects necessary exposing genealogical data to the World Wide Web.",
-      version = "v1"
+      version = "v1",
+      xmlMediaType = "application/gedcomx-www-v1+xml",
+      jsonMediaType = "application/gedcomx-www-v1+json"
     )
   }
 )

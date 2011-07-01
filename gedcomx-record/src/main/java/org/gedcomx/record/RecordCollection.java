@@ -17,19 +17,16 @@ package org.gedcomx.record;
 
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.id.XmlTypeIdResolver;
+import org.gedcomx.rt.XmlTypeIdResolver;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 /**
  * A collection of records.
  */
 @XmlRootElement
 @XmlType (
-  propOrder = { "parent", "title", "description", "publisher" }
+  propOrder = { "parent", "title", "description", "publisher", "extension" }
 )
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
@@ -40,6 +37,7 @@ public class RecordCollection {
   private String title;
   private String description;
   private String publisher;
+  private Extension extension;
 
   /**
    * The id of the collection, unique to the context and not necessarily globally unique.
@@ -133,4 +131,22 @@ public class RecordCollection {
     this.publisher = publisher;
   }
 
+  /**
+   * The extension point for the collection.
+   *
+   * @return The extension point for the collection.
+   */
+  @XmlElement ( name = "ext" )
+  public Extension getExtension() {
+    return extension;
+  }
+
+  /**
+   * The extension point for the collection.
+   *
+   * @param extension The extension point for the collection.
+   */
+  public void setExtension(Extension extension) {
+    this.extension = extension;
+  }
 }

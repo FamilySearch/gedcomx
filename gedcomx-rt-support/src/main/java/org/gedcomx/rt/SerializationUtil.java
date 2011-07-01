@@ -47,16 +47,31 @@ public class SerializationUtil {
 
   @SuppressWarnings ( {"unchecked"} )
   public static <C> C processThroughXml(Object reference, Class<? extends C> instanceClass) throws JAXBException, UnsupportedEncodingException {
-    byte[] out = toXmlStream(reference, instanceClass);
-    JAXBElement<? extends C> element = JAXBContext.newInstance(instanceClass).createUnmarshaller().unmarshal(new StreamSource(new ByteArrayInputStream(out)), instanceClass);
+    return processThroughXml(reference, instanceClass, JAXBContext.newInstance(instanceClass));
+  }
+
+  @SuppressWarnings ( {"unchecked"} )
+  public static <C> C processThroughXml(Object reference, Class<? extends C> instanceClass, JAXBContext context) throws JAXBException, UnsupportedEncodingException {
+    byte[] out = toXmlStream(reference, instanceClass, context);
+    JAXBElement<? extends C> element = context.createUnmarshaller().unmarshal(new StreamSource(new ByteArrayInputStream(out)), instanceClass);
     reference = element.getValue();
     return (C) reference;
   }
 
   @SuppressWarnings ( {"unchecked"} )
+  public static byte[] toXmlStream(Object reference) throws JAXBException, UnsupportedEncodingException {
+    return toXmlStream(reference, reference.getClass());
+  }
+
+  @SuppressWarnings ( {"unchecked"} )
   public static <C> byte[] toXmlStream(Object reference, Class<? extends C> instanceClass) throws JAXBException, UnsupportedEncodingException {
+    return toXmlStream(reference, instanceClass, JAXBContext.newInstance(instanceClass));
+  }
+
+  @SuppressWarnings ( {"unchecked"} )
+  public static <C> byte[] toXmlStream(Object reference, Class<? extends C> instanceClass, JAXBContext context) throws JAXBException, UnsupportedEncodingException {
     ByteArrayOutputStream out = new ByteArrayOutputStream();
-    Marshaller marshaller = JAXBContext.newInstance(instanceClass).createMarshaller();
+    Marshaller marshaller = context.createMarshaller();
     marshaller.setProperty("jaxb.formatted.output", Boolean.TRUE);
     Object el = instanceClass.isAnnotationPresent(XmlRootElement.class) ? reference : null;
     if (el == null) {
@@ -74,14 +89,22 @@ public class SerializationUtil {
     return out.toByteArray();
   }
 
-  @SuppressWarnings ( {"unchecked"} )
   public static Document toXmlDom(Object reference) throws JAXBException, UnsupportedEncodingException {
     return toXmlDom(reference, reference.getClass());
   }
 
-  @SuppressWarnings ( {"unchecked"} )
   public static Document toXmlDom(Object reference, Class<?> instanceClass) throws JAXBException, UnsupportedEncodingException {
     byte[] out = toXmlStream(reference, instanceClass);
+    try {
+      return DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new ByteArrayInputStream(out));
+    }
+    catch (Exception e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  public static Document toXmlDom(Object reference, Class<?> instanceClass, JAXBContext context) throws JAXBException, UnsupportedEncodingException {
+    byte[] out = toXmlStream(reference, instanceClass, context);
     try {
       return DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new ByteArrayInputStream(out));
     }
@@ -97,13 +120,25 @@ public class SerializationUtil {
 
   @SuppressWarnings ( {"unchecked"} )
   public static <C> C processThroughJson(Object reference, Class<? extends C> instanceClass) throws IOException {
-    byte[] buffer = toJsonStream(reference, instanceClass);
-    reference = new JacksonJaxbJsonProvider().locateMapper(instanceClass, null).readValue(new ByteArrayInputStream(buffer), instanceClass);
+    return processThroughJson(reference, instanceClass, new JacksonJaxbJsonProvider().locateMapper(instanceClass, null));
+  }
+
+  @SuppressWarnings ( {"unchecked"} )
+  public static <C> C processThroughJson(Object reference, Class<? extends C> instanceClass, ObjectMapper mapper) throws IOException {
+    byte[] buffer = toJsonStream(reference, instanceClass, mapper);
+    reference = mapper.readValue(new ByteArrayInputStream(buffer), instanceClass);
     return (C) reference;
   }
 
+  public static <C> byte[] toJsonStream(Object reference) throws IOException {
+    return toJsonStream(reference, reference.getClass());
+  }
+
   public static <C> byte[] toJsonStream(Object reference, Class<? extends C> instanceClass) throws IOException {
-    ObjectMapper mapper = new JacksonJaxbJsonProvider().locateMapper(instanceClass, null);
+    return toJsonStream(reference, instanceClass, new JacksonJaxbJsonProvider().locateMapper(instanceClass, null));
+  }
+
+  protected static <C> byte[] toJsonStream(Object reference, Class<? extends C> instanceClass, ObjectMapper mapper) throws IOException {
     ByteArrayOutputStream out = new ByteArrayOutputStream();
     mapper.getSerializationConfig().enable(SerializationConfig.Feature.INDENT_OUTPUT);
     mapper.writeValue(out, reference);
@@ -113,15 +148,17 @@ public class SerializationUtil {
     return out.toByteArray();
   }
 
-  @SuppressWarnings ( {"unchecked"} )
   public static ObjectNode toJsonNode(Object reference) throws IOException {
     return toJsonNode(reference, reference.getClass());
   }
 
-  @SuppressWarnings ( {"unchecked"} )
   public static ObjectNode toJsonNode(Object reference, Class<?> instanceClass) throws IOException {
-    byte[] out = toJsonStream(reference, instanceClass);
-    return new JacksonJaxbJsonProvider().locateMapper(instanceClass, null).readValue(new ByteArrayInputStream(out), ObjectNode.class);
+    return toJsonNode(reference, instanceClass, new JacksonJaxbJsonProvider().locateMapper(instanceClass, null));
+  }
+
+  public static ObjectNode toJsonNode(Object reference, Class<?> instanceClass, ObjectMapper mapper) throws IOException {
+    byte[] out = toJsonStream(reference, instanceClass, mapper);
+    return mapper.readValue(new ByteArrayInputStream(out), ObjectNode.class);
   }
 
 }
