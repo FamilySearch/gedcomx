@@ -17,8 +17,11 @@ package org.gedcomx.record;
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.enunciate.json.JsonName;
-import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.enunciate.qname.XmlQNameEnumRef;
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.codehaus.jackson.annotate.JsonTypeInfo;
+import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
+import org.gedcomx.id.XmlTypeIdResolver;
 import org.gedcomx.types.RelationshipType;
 
 import javax.xml.bind.annotation.XmlAttribute;
@@ -32,12 +35,14 @@ import java.util.List;
 /**
  * A recorded relationship.
  */
-public abstract class Relationship {
-
-  //heatonra - consideration was given to not subclassing relationship into couple, p/c, and other. It was decided to optimize for the common case and
-  //provide subclasses.
+@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
+@JsonTypeIdResolver (XmlTypeIdResolver.class)
+public class Relationship {
 
   private String id;
+  private QName type;
+  private PersonaReference persona1;
+  private PersonaReference persona2;
   private List<Characteristic> characteristics = new ArrayList<Characteristic>();
 
   /**
@@ -61,40 +66,95 @@ public abstract class Relationship {
   }
 
   /**
+   * The type of this relationship.
+   *
+   * @return The type of this relationship.
+   */
+  @XmlAttribute
+  @XmlQNameEnumRef (RelationshipType.class)
+  public QName getType() {
+    return type;
+  }
+
+  /**
+   * The type of this relationship.
+   *
+   * @param type The type of this relationship.
+   */
+  public void setType(QName type) {
+    this.type = type;
+  }
+
+  /**
+   * The enum referencing the known type of the relationship, or {@link org.gedcomx.types.RelationshipType#other} if not known.
+   *
+   * @return The enum referencing the known type of the relationship, or {@link org.gedcomx.types.RelationshipType#other} if not known.
+   */
+  @XmlTransient
+  public RelationshipType getKnownType() {
+    return XmlQNameEnumUtil.fromQName(getType(), RelationshipType.class);
+  }
+
+  /**
+   * Set the relationship type from a known enumeration of relationship types.
+   *
+   * @param type The relationship type.
+   */
+  public void setKnownType(RelationshipType type) {
+    this.type = XmlQNameEnumUtil.toQName(type);
+  }
+
+  /**
    * A persona in the relationship. The name "persona1" is used only to distinguish it from
-   * the other persona in this relationship and implies neither order nor role.
+   * the other persona in this relationship. When the relationship type implies direction, it
+   * goes from "persona1" to "persona2".
    *
    * @return A persona in the relationship. The name "persona1" is used only to distinguish it from
-   * the other persona in this relationship and implies neither order nor role.
+   * the other persona in this relationship. When the relationship type implies direction, it
+   * goes from "persona1" to "persona2".
    */
-  public abstract PersonaReference getPersona1();
+  public PersonaReference getPersona1() {
+    return this.persona1;
+  }
 
   /**
    * A persona in the relationship. The name "persona1" is used only to distinguish it from
-   * the other persona in this relationship and implies neither order nor role.
+   * the other persona in this relationship. When the relationship type implies direction, it
+   * goes from "persona1" to "persona2".
    *
    * @param persona1 A persona in the relationship. The name "persona1" is used only to distinguish it from
-   * the other persona in this relationship and implies neither order nor role.
+   * the other persona in this relationship. When the relationship type implies direction, it
+   * goes from "persona1" to "persona2".
    */
-  public abstract void setPersona1(PersonaReference persona1);
+  public void setPersona1(PersonaReference persona1) {
+    this.persona1 = persona1;
+  }
 
   /**
    * A persona in the relationship. The name "persona2" is used only to distinguish it from
-   * the other persona in this relationship and implies neither order nor role.
+   * the other persona in this relationship. When the relationship type implies direction, it
+   * goes from "persona1" to "persona2".
    *
    * @return A persona in the relationship. The name "persona2" is used only to distinguish it from
-   * the other persona in this relationship and implies neither order nor role.
+   * the other persona in this relationship. When the relationship type implies direction, it
+   * goes from "persona1" to "persona2".
    */
-  public abstract PersonaReference getPersona2();
+  public PersonaReference getPersona2() {
+    return this.persona2;
+  }
 
   /**
    * A persona in the relationship. The name "persona2" is used only to distinguish it from
-   * the other persona in this relationship and implies neither order nor role.
+   * the other persona in this relationship. When the relationship type implies direction, it
+   * goes from "persona1" to "persona2".
    *
    * @param persona2 A persona in the relationship. The name "persona2" is used only to distinguish it from
-   * the other persona in this relationship and implies neither order nor role.
+   * the other persona in this relationship. When the relationship type implies direction, it
+   * goes from "persona1" to "persona2".
    */
-  public abstract void setPersona2(PersonaReference persona2);
+  public void setPersona2(PersonaReference persona2) {
+    this.persona2 = persona2;
+  }
 
   /**
    * The characteristic fields of the relationship.
@@ -118,22 +178,4 @@ public abstract class Relationship {
     this.characteristics = characteristics;
   }
 
-  /**
-   * The type of this relationship.
-   *
-   * @return The type of this relationship.
-   */
-  @JsonIgnore
-  @XmlTransient
-  public QName getType() {
-    return XmlQNameEnumUtil.toQName(getKnownRelationshipType());
-  }
-
-  /**
-   * The known type of this relationship.
-   *
-   * @return The known type of this relationship.
-   */
-  @XmlTransient
-  public abstract RelationshipType getKnownRelationshipType();
 }

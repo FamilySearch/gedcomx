@@ -26,11 +26,6 @@ import javax.xml.namespace.QName;
 @XmlQNameEnum
 public enum LineageType {
 
-  biological,
-  adopted,
-  step,
-  foster,
-  guardianship,
   @XmlUnknownQNameEnumValue
   other;
 

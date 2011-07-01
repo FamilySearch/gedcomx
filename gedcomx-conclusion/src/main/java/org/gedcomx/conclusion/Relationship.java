@@ -15,7 +15,9 @@
  */
 package org.gedcomx.conclusion;
 
+import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.enunciate.json.JsonName;
+import org.codehaus.enunciate.qname.XmlQNameEnumRef;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
@@ -24,8 +26,10 @@ import org.gedcomx.id.AlternateId;
 import org.gedcomx.id.PersistentId;
 import org.gedcomx.id.XmlTypeIdResolver;
 import org.gedcomx.source.AttributedSourceReference;
+import org.gedcomx.types.RelationshipType;
 
 import javax.xml.bind.annotation.*;
+import javax.xml.namespace.QName;
 import java.util.List;
 
 /**
@@ -34,15 +38,18 @@ import java.util.List;
  * @author Ryan Heaton
  */
 @XmlType (
-  propOrder = {"persistentId", "alternateIds", "attribution", "events", "characteristics", "sources"}
+  propOrder = {"persistentId", "alternateIds", "person1", "person2", "attribution", "events", "characteristics", "sources"}
 )
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-public abstract class Relationship {
+public class Relationship {
 
   private String id;
+  private QName type;
   private PersistentId persistentId;
   private List<AlternateId> alternateIds;
+  private PersonReference person1;
+  private PersonReference person2;
   private Attribution attribution;
 
   //todo: change to List<? extends Event> when http://jira.codehaus.org/browse/ENUNCIATE-562 is fixed.
@@ -68,6 +75,45 @@ public abstract class Relationship {
    */
   public void setId(String id) {
     this.id = id;
+  }
+
+  /**
+   * The type of this relationship.
+   *
+   * @return The type of this relationship.
+   */
+  @XmlAttribute
+  @XmlQNameEnumRef (RelationshipType.class)
+  public QName getType() {
+    return type;
+  }
+
+  /**
+   * The type of this relationship.
+   *
+   * @param type The type of this relationship.
+   */
+  public void setType(QName type) {
+    this.type = type;
+  }
+
+  /**
+   * The enum referencing the known type of the relationship, or {@link org.gedcomx.types.RelationshipType#other} if not known.
+   *
+   * @return The enum referencing the known type of the relationship, or {@link org.gedcomx.types.RelationshipType#other} if not known.
+   */
+  @XmlTransient
+  public RelationshipType getKnownType() {
+    return XmlQNameEnumUtil.fromQName(getType(), RelationshipType.class);
+  }
+
+  /**
+   * Set the relationship type from a known enumeration of relationship types.
+   *
+   * @param type The relationship type.
+   */
+  public void setKnownType(RelationshipType type) {
+    this.type = XmlQNameEnumUtil.toQName(type);
   }
 
   /**
@@ -108,6 +154,58 @@ public abstract class Relationship {
   @JsonProperty("alternateIds")
   public void setAlternateIds(List<AlternateId> alternateIds) {
     this.alternateIds = alternateIds;
+  }
+
+  /**
+   * A reference to a person in the relationship. The name "person1" is used only to distinguish it from
+   * the other person in this relationship and implies neither order nor role. When the relationship type
+   * implies direction, it goes from "person1" to "person2".
+   *
+   * @return A reference to a person in the relationship. The name "person1" is used only to distinguish it from
+   * the other person in this relationship and implies neither order nor role. When the relationship type
+   * implies direction, it goes from "person1" to "person2".
+   */
+  public PersonReference getPerson1() {
+    return person1;
+  }
+
+  /**
+   * A reference to a person in the relationship. The name "person1" is used only to distinguish it from
+   * the other person in this relationship and implies neither order nor role. When the relationship type
+   * implies direction, it goes from "person1" to "person2".
+   *
+   * @param person1 A reference to a person in the relationship. The name "person1" is used only to distinguish it from
+   * the other person in this relationship and implies neither order nor role. When the relationship type
+   * implies direction, it goes from "person1" to "person2".
+   */
+  public void setPerson1(PersonReference person1) {
+    this.person1 = person1;
+  }
+
+  /**
+   * A reference to a person in the relationship. The name "person2" is used only to distinguish it from
+   * the other person in this relationship and implies neither order nor role. When the relationship type
+   * implies direction, it goes from "person1" to "person2".
+   *
+   * @return A reference to a person in the relationship. The name "person2" is used only to distinguish it from
+   * the other person in this relationship and implies neither order nor role. When the relationship type
+   * implies direction, it goes from "person1" to "person2".
+   */
+  public PersonReference getPerson2() {
+    return person2;
+  }
+
+  /**
+   * A reference to a person in the relationship. The name "person2" is used only to distinguish it from
+   * the other person in this relationship and implies neither order nor role. When the relationship type
+   * implies direction, it goes from "person1" to "person2".
+   *
+   * @param person2 A reference to a person in the relationship. The name "person2" is used only to distinguish it from
+   * the other person in this relationship and implies neither order nor role. When the relationship type
+   * implies direction, it goes from "person1" to "person2".
+   */
+  public void setPerson2(PersonReference person2) {
+    this.person2 = person2;
   }
 
   /**
@@ -193,51 +291,5 @@ public abstract class Relationship {
   public void setSources(List<AttributedSourceReference> sources) {
     this.sources = sources;
   }
-
-  /**
-   * A person in the relationship. The name "person1" is used only to distinguish it from
-   * the other person in this relationship and implies neither order nor role. When the relationship type
-   * implies direction, it goes from "person1" to "person2".
-   *
-   * @return A person in the relationship. The name "person1" is used only to distinguish it from
-   * the other person in this relationship and implies neither order nor role. When the relationship type
-   * implies direction, it goes from "person1" to "person2".
-   */
-  @XmlTransient
-  public abstract PersonReference getPerson1();
-
-  /**
-   * A person in the relationship. The name "person1" is used only to distinguish it from
-   * the other person in this relationship and implies neither order nor role. When the relationship type
-   * implies direction, it goes from "person1" to "person2".
-   *
-   * @param person1 A person in the relationship. The name "person1" is used only to distinguish it from
-   * the other person in this relationship and implies neither order nor role. When the relationship type
-   * implies direction, it goes from "person1" to "person2".
-   */
-  public abstract void setPerson1(PersonReference person1);
-
-  /**
-   * A person in the relationship. The name "person2" is used only to distinguish it from
-   * the other person in this relationship and implies neither order nor role. When the relationship type
-   * implies direction, it goes from "person1" to "person2".
-   *
-   * @return A person in the relationship. The name "person2" is used only to distinguish it from
-   * the other person in this relationship and implies neither order nor role. When the relationship type
-   * implies direction, it goes from "person1" to "person2".
-   */
-  @XmlTransient
-  public abstract PersonReference getPerson2();
-
-  /**
-   * A person in the relationship. The name "person2" is used only to distinguish it from
-   * the other person in this relationship and implies neither order nor role. When the relationship type
-   * implies direction, it goes from "person1" to "person2".
-   *
-   * @param person2 A person in the relationship. The name "person2" is used only to distinguish it from
-   * the other person in this relationship and implies neither order nor role. When the relationship type
-   * implies direction, it goes from "person1" to "person2".
-   */
-  public abstract void setPerson2(PersonReference person2);
 
 }

@@ -9,9 +9,7 @@ import javax.xml.namespace.QName;
 
 import static org.gedcomx.rt.SerializationUtil.toJsonNode;
 import static org.gedcomx.rt.SerializationUtil.toXmlDom;
-import static org.testng.AssertJUnit.assertEquals;
-import static org.testng.AssertJUnit.assertNotNull;
-import static org.testng.AssertJUnit.assertNull;
+import static org.testng.AssertJUnit.*;
 
 /**
  * @author Ryan Heaton
@@ -20,16 +18,17 @@ import static org.testng.AssertJUnit.assertNull;
 public class TestRelationship {
 
   public void testSerializationOfRelationshipType() throws Exception {
-    CoupleRelationship cr = new CoupleRelationship();
+    Relationship cr = new Relationship();
+    cr.setKnownType(RelationshipType.couple);
     cr.setId("id");
     Document dom = toXmlDom(cr);
-    assertNull(dom.getDocumentElement().getAttributeNode("type"));
+    assertNotNull(dom.getDocumentElement().getAttributeNode("type"));
     assertEquals(0, dom.getDocumentElement().getElementsByTagName("type").getLength());
 
     ObjectNode node = toJsonNode(cr);
-    assertNull(node.get("type"));
+    assertNotNull(node.get("type"));
     
-    OtherRelationship or = new OtherRelationship();
+    Relationship or = new Relationship();
     or.setId("id");
     or.setType(new QName("urn:custom", "custom"));
     dom = toXmlDom(or);

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.record.www;
+package org.gedcomx.conclusion.www;
 
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
@@ -23,17 +23,19 @@ import org.gedcomx.www.Links;
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSeeAlso;
 import java.net.URI;
 
 /**
  * A parent-child relationship that can support WWW links.
- * 
+ *
  * @author Ryan Heaton
  */
 @XmlRootElement
+@XmlSeeAlso ({Characteristic.class, Event.class})
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-public class ParentChildRelationship extends org.gedcomx.record.ParentChildRelationship {
+public class Relationship extends org.gedcomx.conclusion.Relationship {
 
   private URI base;
   private Links links;

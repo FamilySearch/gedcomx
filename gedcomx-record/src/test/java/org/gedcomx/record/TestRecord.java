@@ -140,7 +140,8 @@ public class TestRecord {
     record.getPersistentId().setValue(URI.create("pal"));
 
     ArrayList<Relationship> relationships = new ArrayList<Relationship>();
-    CoupleRelationship coupleRelationship = new CoupleRelationship();
+    Relationship coupleRelationship = new Relationship();
+    coupleRelationship.setKnownType(RelationshipType.couple);
     ArrayList<Characteristic> coupleCharacteristics = new ArrayList<Characteristic>();
     Characteristic coupleCharacteristic = new Characteristic();
     fillInField(coupleCharacteristic, "couple-characteristic");
@@ -157,12 +158,13 @@ public class TestRecord {
     coupleRelationship.setPersona2(new PersonaReference());
     coupleRelationship.getPersona2().setHref(URI.create("#" + persona.getId()));
     relationships.add(coupleRelationship);
-    ParentChildRelationship parentRelationship = new ParentChildRelationship();
+    Relationship parentRelationship = new Relationship();
+    parentRelationship.setKnownType(RelationshipType.parent_child);
     parentRelationship.setId("parent-relationship-id");
-    parentRelationship.setParent(new PersonaReference());
-    parentRelationship.getParent().setHref(URI.create("#" + persona.getId()));
-    parentRelationship.setChild(new PersonaReference());
-    parentRelationship.getChild().setHref(URI.create("#" + persona.getId()));
+    parentRelationship.setPersona1(new PersonaReference());
+    parentRelationship.getPersona1().setHref(URI.create("#" + persona.getId()));
+    parentRelationship.setPersona2(new PersonaReference());
+    parentRelationship.getPersona2().setHref(URI.create("#" + persona.getId()));
     relationships.add(parentRelationship);
 
     record.setRelationships(relationships);
@@ -268,9 +270,9 @@ public class TestRecord {
 
     assertEquals("pal", record.getPersistentId().getValue().toString());
 
-    assertEquals(1, record.getCoupleRelationships().size());
-    assertEquals(1, record.getCoupleRelationships().size());
-    CoupleRelationship coupleRelationship = record.getCoupleRelationships().get(0);
+    assertEquals(2, record.getRelationships().size());
+    Relationship coupleRelationship = record.getRelationships().get(0);
+    assertEquals(RelationshipType.couple, coupleRelationship.getKnownType());
     assertEquals(1, coupleRelationship.getCharacteristics().size());
     Characteristic coupleCharacteristic = coupleRelationship.getCharacteristics().get(0);
     assertField(coupleCharacteristic, "couple-characteristic");
@@ -281,10 +283,11 @@ public class TestRecord {
     assertEquals("#" + persona.getId(), coupleRelationship.getPersona1().getHref().toString());
     assertEquals("#" + persona.getId(), coupleRelationship.getPersona2().getHref().toString());
 
-    ParentChildRelationship parentRelationship = record.getParentChildRelationships().get(0);
+    Relationship parentRelationship = record.getRelationships().get(1);
+    assertEquals(RelationshipType.parent_child, parentRelationship.getKnownType());
     assertEquals("parent-relationship-id", parentRelationship.getId());
-    assertEquals("#" + persona.getId(), parentRelationship.getParent().getHref().toString());
-    assertEquals("#" + persona.getId(), parentRelationship.getChild().getHref().toString());
+    assertEquals("#" + persona.getId(), parentRelationship.getPersona1().getHref().toString());
+    assertEquals("#" + persona.getId(), parentRelationship.getPersona2().getHref().toString());
 
     assertEquals(1, record.getSources().size());
     SourceReference sourceReference = record.getSources().get(0);

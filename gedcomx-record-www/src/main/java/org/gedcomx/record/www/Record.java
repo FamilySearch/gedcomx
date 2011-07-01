@@ -34,9 +34,9 @@ import java.net.URI;
 @XmlRootElement
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlSeeAlso ({ Age.class, AgePart.class, Characteristic.class, CoupleRelationship.class, Date.class, DatePart.class,
-               Event.class, Gender.class, Name.class, NamePart.class, OtherRelationship.class, ParentChildRelationship.class,
-               Persona.class, Place.class, PlacePart.class, RecordField.class})
+@XmlSeeAlso ({ Age.class, AgePart.class, Characteristic.class, Date.class, DatePart.class,
+               Event.class, Gender.class, Name.class, NamePart.class,
+               Persona.class, Place.class, PlacePart.class, RecordField.class, Relationship.class})
 public class Record extends org.gedcomx.record.Record {
 
   private URI base;
