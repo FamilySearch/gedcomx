@@ -19,6 +19,7 @@ import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.gedcomx.common.Extension;
 import org.gedcomx.types.RelationshipType;
 
 import javax.xml.bind.annotation.XmlAttribute;

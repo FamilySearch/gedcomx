@@ -21,6 +21,7 @@ import org.codehaus.enunciate.qname.XmlQNameEnumRef;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
+import org.gedcomx.common.Extension;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.SourceReferenceType;
 
@@ -45,6 +46,7 @@ public class SourceReference {
   private URI href;
   private QName type;
   private List<SourceQualifier> qualifiers;
+  private Extension extension;
 
   /**
    * The id of this source reference, unique to its entity.
@@ -144,5 +146,24 @@ public class SourceReference {
   @JsonProperty("qualifiers")
   public void setQualifiers(List<SourceQualifier> qualifiers) {
     this.qualifiers = qualifiers;
+  }
+
+  /**
+   * The extension point for the source reference.
+   *
+   * @return The extension point for the source reference.
+   */
+  @XmlElement( name = "ext" )
+  public Extension getExtension() {
+    return extension;
+  }
+
+  /**
+   * The extension point for the source reference.
+   *
+   * @param extension The extension point for the source reference.
+   */
+  public void setExtension(Extension extension) {
+    this.extension = extension;
   }
 }

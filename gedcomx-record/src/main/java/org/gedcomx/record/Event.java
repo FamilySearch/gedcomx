@@ -20,6 +20,7 @@ import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.enunciate.qname.XmlQNameEnumRef;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
+import org.gedcomx.common.Extension;
 import org.gedcomx.rt.XmlTypeIdResolver;
 
 import javax.xml.bind.annotation.XmlAttribute;

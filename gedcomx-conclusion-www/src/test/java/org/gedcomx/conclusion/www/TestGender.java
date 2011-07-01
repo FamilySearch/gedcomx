@@ -1,12 +1,13 @@
 package org.gedcomx.conclusion.www;
 
+import org.gedcomx.common.Extension;
+import org.gedcomx.conclusion.Gender;
 import org.gedcomx.types.GenderType;
 import org.gedcomx.www.Link;
-import org.gedcomx.www.Links;
 import org.testng.annotations.Test;
 
+import javax.xml.bind.JAXBContext;
 import java.net.URI;
-import java.util.ArrayList;
 
 import static org.gedcomx.rt.SerializationUtil.processThroughJson;
 import static org.gedcomx.rt.SerializationUtil.processThroughXml;
@@ -24,16 +25,14 @@ public class TestGender {
   public void testWWWGenderXml() throws Exception {
     Gender gender = new Gender();
     gender.setType(GenderType.male);
-    gender.setLinks(new Links());
-    gender.getLinks().setLinks(new ArrayList<Link>());
     Link link = new Link();
     link.setHref(URI.create("urn:gender"));
-    gender.getLinks().getLinks().add(link);
+    gender.setExtension(new Extension());
+    gender.getExtension().addElement(link);
 
-    gender = processThroughXml(gender);
+    gender = processThroughXml(gender, Gender.class, JAXBContext.newInstance(Gender.class, Link.class));
     assertEquals(GenderType.male, gender.getType());
-    assertEquals("urn:gender", gender.getLinks().getLinks().get(0).getHref().toString());
-
+    assertEquals("urn:gender", gender.getExtension().findExtensionsOfType(Link.class).get(0).getHref().toString());
   }
 
   /**
@@ -42,15 +41,14 @@ public class TestGender {
   public void testWWWGenderJson() throws Exception {
     Gender gender = new Gender();
     gender.setType(GenderType.male);
-    gender.setLinks(new Links());
-    gender.getLinks().setLinks(new ArrayList<Link>());
     Link link = new Link();
     link.setHref(URI.create("urn:gender"));
-    gender.getLinks().getLinks().add(link);
+    gender.setExtension(new Extension());
+    gender.getExtension().addElement(link);
 
     gender = processThroughJson(gender);
     assertEquals(GenderType.male, gender.getType());
-    assertEquals("urn:gender", gender.getLinks().getLinks().get(0).getHref().toString());
+    assertEquals("urn:gender", gender.getExtension().findExtensionsOfType(Link.class).get(0).getHref().toString());
   }
   
 }

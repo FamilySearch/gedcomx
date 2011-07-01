@@ -38,6 +38,7 @@ public class Characteristic extends Conclusion {
   private Place place;
   private String value;
 
+
   /**
    * The type of the characteristic.
    *

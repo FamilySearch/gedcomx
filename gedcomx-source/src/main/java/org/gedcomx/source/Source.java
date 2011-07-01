@@ -23,6 +23,7 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.attribution.Attribution;
 import org.gedcomx.common.AlternateId;
+import org.gedcomx.common.Extension;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.SourceType;
 
@@ -39,7 +40,7 @@ import java.util.List;
  */
 @XmlRootElement
 @XmlType (
-  propOrder =  {"persistentId", "alternateIds", "webLocation", "title", "note", "bibliographicCitation", "attribution"}
+  propOrder =  {"persistentId", "alternateIds", "webLocation", "title", "note", "bibliographicCitation", "attribution", "extension"}
 )
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
@@ -54,6 +55,7 @@ public class Source {
   private String note; //todo: rename to something like "user note" or something?
   private String bibliographicCitation;
   private Attribution attribution;
+  private Extension extension;
 
   /**
    * The id of the source, unique to the context and not necessarily globally unique.
@@ -243,5 +245,24 @@ public class Source {
    */
   public void setAttribution(Attribution attribution) {
     this.attribution = attribution;
+  }
+
+  /**
+   * The extension point for the source.
+   *
+   * @return The extension point for the source.
+   */
+  @XmlElement( name = "ext" )
+  public Extension getExtension() {
+    return extension;
+  }
+
+  /**
+   * The extension point for the source.
+   *
+   * @param extension The extension point for the source.
+   */
+  public void setExtension(Extension extension) {
+    this.extension = extension;
   }
 }

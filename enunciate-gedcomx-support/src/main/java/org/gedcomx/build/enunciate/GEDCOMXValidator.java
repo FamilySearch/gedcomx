@@ -204,9 +204,9 @@ public class GEDCOMXValidator extends BaseValidator {
               (!"alternateId".equals(element.getName()) || element.isWrapped())) {
               result.addWarning(element, "Element name for AlternateId should probably be named 'alternateId' to be consistent.");
             }
-            if ("persistentidentifier".equals(((DeclaredType)accessorType).getDeclaration().getSimpleName().toLowerCase()) &&
-              (!"persistentId".equals(element.getName()) || element.isWrapped())) {
-              result.addWarning(element, "Element name for PersistentIdentifier should probably be named 'persistentId' to be consistent.");
+            if ("extension".equals(((DeclaredType)accessorType).getDeclaration().getSimpleName().toLowerCase()) &&
+              (!"ext".equals(element.getName()) || element.isWrapped())) {
+              result.addWarning(element, "Element name for Extension should probably be named 'ext' to be consistent.");
             }
           }
 

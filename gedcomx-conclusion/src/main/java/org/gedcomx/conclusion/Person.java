@@ -20,6 +20,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.common.AlternateId;
+import org.gedcomx.common.Extension;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.source.AttributedSourceReference;
 
@@ -35,7 +36,7 @@ import java.util.List;
  */
 @XmlRootElement(name = "person")
 @XmlType (
-  propOrder = {"persistentId", "alternateIds", "gender", "names", "events", "characteristics", "relationships", "sources"}
+  propOrder = {"persistentId", "alternateIds", "gender", "names", "events", "characteristics", "relationships", "sources", "extension"}
 )
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
@@ -52,6 +53,7 @@ public class Person {
   private List<Characteristic> characteristics;
   private List<RelationshipReference> relationships;
   private List<AttributedSourceReference> sources;
+  private Extension extension;
 
   /**
    * The id of the person, unique to the context and not necessarily globally unique.
@@ -240,5 +242,24 @@ public class Person {
   @JsonProperty("sources")
   public void setSources(List<AttributedSourceReference> sources) {
     this.sources = sources;
+  }
+
+  /**
+   * The extension point for the person.
+   *
+   * @return The extension point for the person.
+   */
+  @XmlElement( name = "ext" )
+  public Extension getExtension() {
+    return extension;
+  }
+
+  /**
+   * The extension point for the person.
+   *
+   * @param extension The extension point for the person.
+   */
+  public void setExtension(Extension extension) {
+    this.extension = extension;
   }
 }

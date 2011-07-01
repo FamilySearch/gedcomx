@@ -1,7 +1,7 @@
 package org.gedcomx.record.www;
 
+import org.gedcomx.common.Extension;
 import org.gedcomx.record.Characteristic;
-import org.gedcomx.record.Extension;
 import org.gedcomx.www.Link;
 import org.gedcomx.www.Links;
 import org.testng.annotations.Test;

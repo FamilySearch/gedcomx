@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.record;
+package org.gedcomx.common;
 
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
@@ -27,7 +27,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * An extension point to the record model.
+ * An extension point to the model.
  *
  * @author Ryan Heaton
  */

@@ -21,6 +21,7 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.attribution.Attribution;
 import org.gedcomx.common.AlternateId;
+import org.gedcomx.common.Extension;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.source.AttributedSourceReference;
 
@@ -35,7 +36,7 @@ import java.util.List;
  * @author Ryan Heaton
  */
 @XmlType (
-  propOrder = {"persistentId", "alternateIds", "attribution", "events", "characteristics", "sources"}
+  propOrder = {"persistentId", "alternateIds", "attribution", "events", "characteristics", "sources", "extension"}
 )
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
@@ -50,6 +51,7 @@ public abstract class Relationship {
   private List<Event> events;
   private List<Characteristic> characteristics;
   private List<AttributedSourceReference> sources;
+  private Extension extension;
 
   /**
    * The id of the relationship, unique to the context and not necessarily globally unique.
@@ -242,4 +244,22 @@ public abstract class Relationship {
    */
   public abstract void setPerson2(PersonReference person2);
 
+  /**
+   * The extension point for the relationship.
+   *
+   * @return The extension point for the relationship.
+   */
+  @XmlElement( name = "ext" )
+  public Extension getExtension() {
+    return extension;
+  }
+
+  /**
+   * The extension point for the relationship.
+   *
+   * @param extension The extension point for the relationship.
+   */
+  public void setExtension(Extension extension) {
+    this.extension = extension;
+  }
 }
