@@ -10,7 +10,6 @@ import org.gedcomx.source.SourceQualifierProperty;
 import org.gedcomx.source.SourceReference;
 import org.gedcomx.types.*;
 import org.gedcomx.www.Link;
-import org.gedcomx.www.Links;
 import org.testng.annotations.Test;
 
 import javax.xml.bind.JAXBContext;
@@ -34,7 +33,7 @@ public class TestRecord {
    */
   public void testRecordXml() throws Exception {
     Record record = createTestRecord();
-    record = processThroughXml(record, Record.class, JAXBContext.newInstance(Record.class, Links.class));
+    record = processThroughXml(record, Record.class, JAXBContext.newInstance(Record.class, Link.class));
     assertTestRecord(record);
   }
 
