@@ -233,8 +233,7 @@ public class TestPerson {
     assertEquals(SourceReferenceType.source, attributedSourceReference.getKnownType());
     assertEquals(1, attributedSourceReference.getQualifiers().size());
     assertEquals(1, attributedSourceReference.getQualifiers().get(0).getProperties().size());
-    //todo: figure out JSON deserialization of 'other attributes'
-    //assertEquals("2", attributedSourceReference.getQualifiers().get(0).getProperty(SourceQualifierProperty.x_pixels));
+    assertEquals("2", attributedSourceReference.getQualifiers().get(0).getProperty(SourceQualifierProperty.x_pixels));
 
     assertEquals("pid", person.getId());
   }

@@ -16,8 +16,10 @@
 package org.gedcomx.metadata.rdf;
 
 import org.codehaus.jackson.annotate.JsonTypeInfo;
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.rt.XmlTypeIdResolver;
+import org.gedcomx.rt.*;
 import org.gedcomx.metadata.dc.DublinCoreMetadata;
 
 import javax.xml.bind.annotation.*;
@@ -59,19 +61,23 @@ public class RDFMetadata {
   }
 
   @XmlAnyAttribute
+  @JsonSerialize (using = AnyAttributeSerializer.class)
   public Map<QName, String> getOtherAttributes() {
     return otherAttributes;
   }
 
+  @JsonDeserialize (using = AnyAttributeDeserializer.class)
   public void setOtherAttributes(Map<QName, String> otherAttributes) {
     this.otherAttributes = otherAttributes;
   }
 
   @XmlAnyElement ( lax = true )
+  @JsonSerialize ( using = AnyElementSerializer.class )
   public List<Object> getOtherElements() {
     return otherElements;
   }
 
+  @JsonDeserialize( using = AnyElementDeserializer.class )
   public void setOtherElements(List<Object> otherElements) {
     this.otherElements = otherElements;
   }

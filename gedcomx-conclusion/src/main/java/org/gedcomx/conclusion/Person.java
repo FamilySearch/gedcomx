@@ -46,8 +46,6 @@ public class Person {
   private List<AlternateId> alternateIds;
   private URI persistentId;
   private Gender gender;
-
-  //todo: change to List<? extends Name> when http://jira.codehaus.org/browse/ENUNCIATE-562 is fixed.
   private List<Name> names;
   private List<Event> events;
   private List<Characteristic> characteristics;

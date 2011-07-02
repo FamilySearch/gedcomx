@@ -290,8 +290,7 @@ public class TestRecord {
     assertEquals(SourceReferenceType.source, sourceReference.getKnownType());
     assertEquals(1, sourceReference.getQualifiers().size());
     SourceQualifier qualifier = sourceReference.getQualifiers().get(0);
-    //todo: figure out why json can't figure out xmlanyattribute.
-    //assertEquals("2", qualifier.getProperty(SourceQualifierProperty.x_pixels));
+    assertEquals("2", qualifier.getProperty(SourceQualifierProperty.x_pixels));
 
     assertEquals("rid", record.getId());
   }

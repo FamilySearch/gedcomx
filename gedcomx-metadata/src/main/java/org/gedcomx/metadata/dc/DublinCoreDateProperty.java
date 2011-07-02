@@ -15,7 +15,11 @@
  */
 package org.gedcomx.metadata.dc;
 
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.gedcomx.metadata.MetadataNamespaces;
+import org.gedcomx.rt.AnyAttributeDeserializer;
+import org.gedcomx.rt.AnyAttributeSerializer;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlAnyAttribute;
@@ -123,6 +127,7 @@ public final class DublinCoreDateProperty {
    * @return Attribute extensions to the property.
    */
   @XmlAnyAttribute
+  @JsonSerialize(using = AnyAttributeSerializer.class)
   public Map<QName, String> getOtherAttributes() {
     return otherAttributes;
   }
@@ -132,6 +137,7 @@ public final class DublinCoreDateProperty {
    *
    * @param otherAttributes Attribute extensions to the property.
    */
+  @JsonDeserialize(using = AnyAttributeDeserializer.class)
   public void setOtherAttributes(Map<QName, String> otherAttributes) {
     this.otherAttributes = otherAttributes;
   }

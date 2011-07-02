@@ -17,6 +17,7 @@ package org.gedcomx.build.enunciate;
 
 import com.sun.mirror.declaration.Declaration;
 import com.sun.mirror.declaration.FieldDeclaration;
+import com.sun.mirror.declaration.MemberDeclaration;
 import com.sun.mirror.type.DeclaredType;
 import com.sun.mirror.type.EnumType;
 import com.sun.mirror.type.MirroredTypeException;
@@ -34,9 +35,12 @@ import org.codehaus.enunciate.contract.validation.ValidationResult;
 import org.codehaus.enunciate.qname.XmlQNameEnum;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.rt.XmlTypeIdResolver;
+import org.gedcomx.rt.*;
 
+import javax.xml.bind.annotation.XmlAnyAttribute;
 import javax.xml.namespace.QName;
 import java.net.URI;
 import java.util.Arrays;
@@ -249,6 +253,89 @@ public class GEDCOMXValidator extends BaseValidator {
               }
             }
           }
+        }
+      }
+    }
+
+    AnyElement anyElement = typeDef.getAnyElement();
+    if (anyElement != null) {
+      if (!anyElement.isCollectionType()) {
+        result.addError(anyElement, "Properties that are @XmlAnyElement should be collections.");
+      }
+
+      JsonSerialize jsonSerialize = anyElement.getDelegate() instanceof PropertyDeclaration ? 
+        ((PropertyDeclaration)anyElement.getDelegate()).getGetter().getAnnotation(JsonSerialize.class) : 
+        anyElement.getAnnotation(JsonSerialize.class);
+      if (jsonSerialize == null) {
+        String message = "Properties annotated with @XmlAnyElement should be annotated with @JsonSerialize(using = AnyElementSerializer.class).";
+        if (anyElement.getDelegate() instanceof PropertyDeclaration) {
+          message += " (And the annotation should be on the getter.)";
+        }
+        result.addError(anyElement, message);
+      }
+      else if (!AnyElementSerializer.class.isAssignableFrom(jsonSerialize.using())) {
+        result.addError(anyElement, "Properties annotated with @XmlAnyElement should be annotated with @JsonSerialize(using = AnyElementSerializer.class).");
+      }
+
+      JsonDeserialize jsonDeserialize = anyElement.getDelegate() instanceof PropertyDeclaration ?
+        ((PropertyDeclaration)anyElement.getDelegate()).getSetter().getAnnotation(JsonDeserialize.class) :
+        anyElement.getAnnotation(JsonDeserialize.class);
+      if (jsonDeserialize == null) {
+        String message = "Properties annotated with @XmlAnyElement should be annotated with @JsonDeserialize(using = AnyElementDeserializer.class).";
+        if (anyElement.getDelegate() instanceof PropertyDeclaration) {
+          message += " (And the annotation should be on the setter.)";
+        }
+        result.addError(anyElement, message);
+      }
+      else if (!AnyElementDeserializer.class.isAssignableFrom(jsonDeserialize.using())) {
+        result.addError(anyElement, "Properties annotated with @XmlAnyElement should be annotated with @JsonDeserialize(using = AnyElementDeserializer.class).");
+      }
+    }
+
+    if (typeDef.isHasAnyAttribute()) {
+      MemberDeclaration anyAttribute = null;
+      for (PropertyDeclaration prop : typeDef.getProperties()) {
+        if (prop.getAnnotation(XmlAnyAttribute.class) != null) {
+          anyAttribute = prop;
+        }
+      }
+
+      if (anyAttribute == null) {
+        //must be a field.
+        for (FieldDeclaration field : typeDef.getFields()) {
+          if (field.getAnnotation(XmlAnyAttribute.class) != null) {
+            anyAttribute = field;
+          }
+        }
+      }
+
+      if (anyAttribute != null) {
+        JsonSerialize jsonSerialize = anyAttribute instanceof PropertyDeclaration ?
+          ((PropertyDeclaration)anyAttribute).getGetter().getAnnotation(JsonSerialize.class) :
+          anyAttribute.getAnnotation(JsonSerialize.class);
+        if (jsonSerialize == null) {
+          String message = "Properties annotated with @XmlAnyAttribute should be annotated with @JsonSerialize(using = AnyAttributeSerializer.class).";
+          if (anyAttribute instanceof PropertyDeclaration) {
+            message += " (And the annotation should be on the getter.)";
+          }
+          result.addError(anyAttribute, message);
+        }
+        else if (!AnyAttributeSerializer.class.isAssignableFrom(jsonSerialize.using())) {
+          result.addError(anyAttribute, "Properties annotated with @XmlAnyAttribute should be annotated with @JsonSerialize(using = AnyAttributeSerializer.class).");
+        }
+
+        JsonDeserialize jsonDeserialize = anyAttribute instanceof PropertyDeclaration ?
+          ((PropertyDeclaration)anyAttribute).getSetter().getAnnotation(JsonDeserialize.class) :
+          anyAttribute.getAnnotation(JsonDeserialize.class);
+        if (jsonDeserialize == null) {
+          String message = "Properties annotated with @XmlAnyAttribute should be annotated with @JsonDeserialize(using = AnyAttributeDeserializer.class).";
+          if (anyAttribute instanceof PropertyDeclaration) {
+            message += " (And the annotation should be on the setter.)";
+          }
+          result.addError(anyAttribute, message);
+        }
+        else if (!AnyAttributeDeserializer.class.isAssignableFrom(jsonDeserialize.using())) {
+          result.addError(anyAttribute, "Properties annotated with @XmlAnyAttribute should be annotated with @JsonDeserialize(using = AnyAttributeDeserializer.class).");
         }
       }
     }

@@ -44,8 +44,6 @@ public class Persona {
   private List<AlternateId> alternateIds;
   private Gender gender;
   private Age age;
-
-  //todo: change to List<? extends Name> when http://jira.codehaus.org/browse/ENUNCIATE-562 is fixed.
   private java.util.List<Name> names;
   private java.util.List<EventRole> eventRoles = new ArrayList<EventRole>();
   private java.util.List<Characteristic> characteristics = new ArrayList<Characteristic>();

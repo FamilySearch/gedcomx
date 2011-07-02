@@ -18,8 +18,10 @@ package org.gedcomx.metadata.rdf;
 import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.rt.XmlTypeIdResolver;
+import org.gedcomx.rt.*;
 
 import javax.xml.bind.annotation.*;
 import javax.xml.namespace.QName;
@@ -31,9 +33,9 @@ import java.util.Map;
  *
  * @author Ryan Heaton
  */
-@XmlRootElement(name = "RDF")
-@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
-@JsonTypeIdResolver (XmlTypeIdResolver.class)
+@XmlRootElement ( name = "RDF" )
+@JsonTypeInfo ( use = JsonTypeInfo.Id.CUSTOM, property = "@type" )
+@JsonTypeIdResolver ( XmlTypeIdResolver.class )
 public class RDFMetadataBundle {
 
   private String id;
@@ -67,8 +69,8 @@ public class RDFMetadataBundle {
    * @return The list of items in this bundle of metadata.
    */
   @XmlElement ( name = "Description" )
-  @JsonProperty ("Descriptions")
-  @JsonName ("Descriptions")
+  @JsonProperty ( "Descriptions" )
+  @JsonName ( "Descriptions" )
   public List<RDFMetadata> getMetadataList() {
     return metadataList;
   }
@@ -78,25 +80,29 @@ public class RDFMetadataBundle {
    *
    * @param metadataList The list of items in this bundle of metadata.
    */
-  @JsonProperty ("Descriptions")
+  @JsonProperty ( "Descriptions" )
   public void setMetadataList(List<RDFMetadata> metadataList) {
     this.metadataList = metadataList;
   }
 
   @XmlAnyAttribute
+  @JsonSerialize ( using = AnyAttributeSerializer.class )
   public Map<QName, String> getOtherAttributes() {
     return otherAttributes;
   }
 
+  @JsonDeserialize ( using = AnyAttributeDeserializer.class )
   public void setOtherAttributes(Map<QName, String> otherAttributes) {
     this.otherAttributes = otherAttributes;
   }
 
-  @XmlAnyElement( lax = true )
+  @XmlAnyElement ( lax = true )
+  @JsonSerialize ( using = AnyElementSerializer.class )
   public List<Object> getOtherElements() {
     return otherElements;
   }
 
+  @JsonDeserialize( using = AnyElementDeserializer.class )
   public void setOtherElements(List<Object> otherElements) {
     this.otherElements = otherElements;
   }

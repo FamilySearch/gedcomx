@@ -17,6 +17,10 @@ package org.gedcomx.source;
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.enunciate.qname.XmlQNameEnumRef;
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.gedcomx.rt.AnyAttributeDeserializer;
+import org.gedcomx.rt.AnyAttributeSerializer;
 
 import javax.xml.bind.annotation.XmlAnyAttribute;
 import javax.xml.namespace.QName;
@@ -39,6 +43,7 @@ public final class SourceQualifier {
    */
   @XmlAnyAttribute
   @XmlQNameEnumRef( SourceQualifierProperty.class )
+  @JsonSerialize(using = AnyAttributeSerializer.class)
   public Map<QName, String> getProperties() {
     return properties;
   }
@@ -48,6 +53,7 @@ public final class SourceQualifier {
    *
    * @param properties The qualifier properties.
    */
+  @JsonDeserialize(using = AnyAttributeDeserializer.class)
   public void setProperties(Map<QName, String> properties) {
     this.properties = properties;
   }
