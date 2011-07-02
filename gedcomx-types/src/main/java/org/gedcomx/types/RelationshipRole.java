@@ -26,16 +26,11 @@ import javax.xml.namespace.QName;
 @XmlQNameEnum
 public enum RelationshipRole {
 
-  husband,
-  wife,
-  father,
-  mother,
-  child,
+  spouse,
   parent,
-  grandfather,
-  grandmother,
-  grandchild,
+  child,
   grandparent,
+  grandchild,
   ancestor,
   descendant,
   cousin,
