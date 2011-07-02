@@ -58,7 +58,11 @@ public enum CharacteristicType {
   universal_id,
   currently_spouses,
   number_of_children,
-  batch_number,
+  biological,
+  adopted,
+  step,
+  foster,
+  guardianship,
   @XmlUnknownQNameEnumValue
   other;
 
@@ -124,6 +128,17 @@ public enum CharacteristicType {
     public static final CharacteristicType never_had_children = CharacteristicType.never_had_children;
     public static final CharacteristicType never_married = CharacteristicType.never_married;
     public static final CharacteristicType number_of_children = CharacteristicType.number_of_children;
+  }
+
+  @XmlTransient
+  public static final class ParentChild {
+    private ParentChild() {}
+
+    public static final CharacteristicType biological = CharacteristicType.biological;
+    public static final CharacteristicType adopted = CharacteristicType.adopted;
+    public static final CharacteristicType step = CharacteristicType.step;
+    public static final CharacteristicType foster = CharacteristicType.foster;
+    public static final CharacteristicType guardianship = CharacteristicType.guardianship;
   }
 
 }
