@@ -15,12 +15,10 @@
  */
 
 /**
- * The <b>www profile</b> models the necessary extensions to provide genealogical data via the World Wide Web.
- *
- * @label WWW Profile
+ * The www model defines the necessary extensions to provide genealogical data via the World Wide Web.
  */
 @XmlSchema (
-  namespace = WWWProfile.GEDCOMX_WWW_NAMESPACE,
+  namespace = WWWNamespaces.GEDCOMX_WWW_NAMESPACE,
   elementFormDefault = XmlNsForm.QUALIFIED
 )
 @XmlAccessorOrder ( XmlAccessOrder.ALPHABETICAL )

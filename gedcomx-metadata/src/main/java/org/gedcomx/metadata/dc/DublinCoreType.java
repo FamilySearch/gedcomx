@@ -16,14 +16,14 @@
 package org.gedcomx.metadata.dc;
 
 import org.codehaus.enunciate.qname.XmlQNameEnum;
-import org.gedcomx.metadata.MetadataProfile;
+import org.gedcomx.metadata.MetadataNamespaces;
 
 /**
  * A <a href="http://dublincore.org/documents/dcmi-type-vocabulary/">Dublin Core type</a>.
  * 
  * @author Ryan Heaton
  */
-@XmlQNameEnum (namespace = MetadataProfile.DUBLIN_CORE_TYPE_NAMESPACE)
+@XmlQNameEnum (namespace = MetadataNamespaces.DUBLIN_CORE_TYPE_NAMESPACE)
 public enum DublinCoreType {
 
   Collection,

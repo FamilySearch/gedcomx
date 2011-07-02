@@ -1,5 +1,6 @@
 package org.gedcomx.record;
 
+import org.gedcomx.common.Extension;
 import org.testng.annotations.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;

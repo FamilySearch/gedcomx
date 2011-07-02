@@ -2,18 +2,17 @@ package org.gedcomx.conclusion.www;
 
 import org.gedcomx.attribution.Attribution;
 import org.gedcomx.attribution.ContributorReference;
+import org.gedcomx.common.AlternateId;
+import org.gedcomx.common.Extension;
 import org.gedcomx.conclusion.*;
-import org.gedcomx.id.AlternateId;
-import org.gedcomx.types.AlternateIdType;
-import org.gedcomx.id.PersistentId;
 import org.gedcomx.source.AttributedSourceReference;
 import org.gedcomx.source.SourceQualifier;
 import org.gedcomx.source.SourceQualifierProperty;
 import org.gedcomx.types.*;
 import org.gedcomx.www.Link;
-import org.gedcomx.www.Links;
 import org.testng.annotations.Test;
 
+import javax.xml.bind.JAXBContext;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +20,6 @@ import java.util.List;
 import static org.gedcomx.rt.SerializationUtil.processThroughJson;
 import static org.gedcomx.rt.SerializationUtil.processThroughXml;
 import static org.testng.AssertJUnit.assertEquals;
-import static org.testng.AssertJUnit.assertFalse;
-import static org.testng.AssertJUnit.assertTrue;
 
 /**
  * @author Ryan Heaton
@@ -35,7 +32,7 @@ public class TestPerson {
    */
   public void testWWWPersonXml() throws Exception {
     Person person = createTestWWWPerson();
-    person = processThroughXml(person);
+    person = processThroughXml(person, Person.class, JAXBContext.newInstance(Person.class, Link.class));
     assertTestWWWPerson(person);
   }
 
@@ -49,20 +46,6 @@ public class TestPerson {
   }
 
   /**
-   * tests serializing an instance of the www person to/from a "base" person via xml.
-   */
-  public void testWWWPersonToBasePersonViaXml() throws Exception {
-    Person person = createTestWWWPerson();
-    org.gedcomx.conclusion.Person p = processThroughXml(person, org.gedcomx.conclusion.Person.class);
-    assertFalse(p instanceof Person);
-    assertTestBasePerson(p);
-
-    p = createTestBasePerson();
-    person = processThroughXml(p, Person.class);
-    assertTestBasePerson(person);
-  }
-
-  /**
    * tests serializing an instance of the www person to/from a "base" person via json.
    */
   public void testWWWPersonToBasePersonViaJson() throws Exception {
@@ -73,19 +56,17 @@ public class TestPerson {
   private Person createTestWWWPerson() {
     Person person = new Person();
     Gender gender = new Gender();
-    gender.setLinks(new Links());
-    gender.getLinks().setLinks(new ArrayList<Link>());
+    gender.setExtension(new Extension());
     Link genderLink = new Link();
     genderLink.setHref(URI.create("urn:gender"));
-    gender.getLinks().getLinks().add(genderLink);
+    gender.getExtension().addElement(genderLink);
     gender.setType(GenderType.male);
     person.setGender(gender);
 
-    person.setLinks(new Links());
-    person.getLinks().setLinks(new ArrayList<Link>());
+    person.setExtension(new Extension());
     Link personLink = new Link();
     personLink.setHref(URI.create("urn:person"));
-    person.getLinks().getLinks().add(personLink);
+    person.getExtension().addElement(personLink);
 
     ArrayList<AlternateId> alternateIds = new ArrayList<AlternateId>();
     AlternateId alternateId = new AlternateId();
@@ -96,11 +77,10 @@ public class TestPerson {
 
     List<org.gedcomx.conclusion.Characteristic> characteristics = new ArrayList<org.gedcomx.conclusion.Characteristic>();
     Characteristic characteristic = new Characteristic();
-    characteristic.setLinks(new Links());
-    characteristic.getLinks().setLinks(new ArrayList<Link>());
+    characteristic.setExtension(new Extension());
     Link characteristicLink = new Link();
     characteristicLink.setHref(URI.create("urn:characteristic"));
-    characteristic.getLinks().getLinks().add(characteristicLink);
+    characteristic.getExtension().addElement(characteristicLink);
     characteristic.setAttribution(new Attribution());
     characteristic.getAttribution().setContributor(new ContributorReference());
     characteristic.getAttribution().getContributor().setHref(URI.create("urn:characteristic-attribution"));
@@ -116,19 +96,18 @@ public class TestPerson {
     characteristic.getPlace().setOriginal("original place");
     characteristic.getPlace().setNormalized("normalized place");
     characteristic.getPlace().setGeoCode(new GeoCode());
-    characteristic.getPlace().getGeoCode().setLatitude(1.2F);
-    characteristic.getPlace().getGeoCode().setLongitude(3.4F);
+    characteristic.getPlace().getGeoCode().setLatitude(1.2D);
+    characteristic.getPlace().getGeoCode().setLongitude(3.4D);
     characteristic.setValue("characteristic-value");
     characteristics.add(characteristic);
     person.setCharacteristics(characteristics);
 
     List<org.gedcomx.conclusion.Event> events = new ArrayList<org.gedcomx.conclusion.Event>();
     Event event = new Event();
-    event.setLinks(new Links());
-    event.getLinks().setLinks(new ArrayList<Link>());
+    event.setExtension(new Extension());
     Link eventLink = new Link();
     eventLink.setHref(URI.create("urn:event"));
-    event.getLinks().getLinks().add(eventLink);
+    event.getExtension().addElement(eventLink);
     event.setAttribution(new Attribution());
     event.getAttribution().setContributor(new ContributorReference());
     event.getAttribution().getContributor().setHref(URI.create("urn:event-attribution"));
@@ -144,18 +123,17 @@ public class TestPerson {
     event.getPlace().setOriginal("original place");
     event.getPlace().setNormalized("normalized place");
     event.getPlace().setGeoCode(new GeoCode());
-    event.getPlace().getGeoCode().setLatitude(1.2F);
-    event.getPlace().getGeoCode().setLongitude(3.4F);
+    event.getPlace().getGeoCode().setLatitude(1.2D);
+    event.getPlace().getGeoCode().setLongitude(3.4D);
     events.add(event);
     person.setEvents(events);
 
     List<org.gedcomx.conclusion.Name> names = new ArrayList<org.gedcomx.conclusion.Name>();
     Name name = new Name();
-    name.setLinks(new Links());
-    name.getLinks().setLinks(new ArrayList<Link>());
+    name.setExtension(new Extension());
     Link nameLink = new Link();
     nameLink.setHref(URI.create("urn:name"));
-    name.getLinks().getLinks().add(nameLink);
+    name.getExtension().addElement(nameLink);
     ArrayList<NameForm> alternateForms = new ArrayList<NameForm>();
     NameForm nameForm = new NameForm();
     nameForm.setFullText("alternate name form");
@@ -186,8 +164,7 @@ public class TestPerson {
     names.add(name);
     person.setNames(names);
 
-    person.setPersistentId(new PersistentId());
-    person.getPersistentId().setValue(URI.create("pal"));
+    person.setPersistentId(URI.create("pal"));
 
     person.setRelationships(new ArrayList<RelationshipReference>());
     RelationshipReference relationshipReference = new RelationshipReference();
@@ -245,8 +222,8 @@ public class TestPerson {
     characteristic.getPlace().setOriginal("original place");
     characteristic.getPlace().setNormalized("normalized place");
     characteristic.getPlace().setGeoCode(new GeoCode());
-    characteristic.getPlace().getGeoCode().setLatitude(1.2F);
-    characteristic.getPlace().getGeoCode().setLongitude(3.4F);
+    characteristic.getPlace().getGeoCode().setLatitude(1.2D);
+    characteristic.getPlace().getGeoCode().setLongitude(3.4D);
     characteristic.setValue("characteristic-value");
     characteristics.add(characteristic);
     person.setCharacteristics(characteristics);
@@ -268,8 +245,8 @@ public class TestPerson {
     event.getPlace().setOriginal("original place");
     event.getPlace().setNormalized("normalized place");
     event.getPlace().setGeoCode(new GeoCode());
-    event.getPlace().getGeoCode().setLatitude(1.2F);
-    event.getPlace().getGeoCode().setLongitude(3.4F);
+    event.getPlace().getGeoCode().setLatitude(1.2D);
+    event.getPlace().getGeoCode().setLongitude(3.4D);
     events.add(event);
     person.setEvents(events);
 
@@ -305,8 +282,7 @@ public class TestPerson {
     names.add(name);
     person.setNames(names);
 
-    person.setPersistentId(new PersistentId());
-    person.getPersistentId().setValue(URI.create("pal"));
+    person.setPersistentId(URI.create("pal"));
 
     person.setRelationships(new ArrayList<RelationshipReference>());
     RelationshipReference relationshipReference = new RelationshipReference();
@@ -341,20 +317,19 @@ public class TestPerson {
     RelationshipReference relationshipReference;
     AttributedSourceReference attributedSourceReference;
     assertEquals(GenderType.male, person.getGender().getType());
-    assertTrue(person.getGender() instanceof Gender);
-    assertEquals("urn:gender", ((Gender) person.getGender()).getLinks().getLinks().get(0).getHref().toString());
+    assertEquals("urn:gender", person.getGender().getExtension().findExtensionsOfType(Link.class).get(0).getHref().toString());
 
-    assertEquals(1, person.getLinks().getLinks().size());
-    assertEquals("urn:person", person.getLinks().getLinks().get(0).getHref().toString());
+    assertEquals(1, person.getExtension().findExtensionsOfType(Link.class).size());
+    assertEquals("urn:person", person.getExtension().findExtensionsOfType(Link.class).get(0).getHref().toString());
 
     assertEquals(1, person.getAlternateIds().size());
     assertEquals(AlternateIdType.forwarded, person.getAlternateIds().get(0).getKnownType());
     assertEquals("forward-value", person.getAlternateIds().get(0).getValue());
 
     assertEquals(1, person.getCharacteristics().size());
-    assertEquals(1, ((Characteristic) person.getCharacteristics().iterator().next()).getLinks().getLinks().size());
-    characteristic = (Characteristic) person.getCharacteristics().iterator().next();
-    assertEquals("urn:characteristic", characteristic.getLinks().getLinks().get(0).getHref().toString());
+    assertEquals(1, person.getCharacteristics().iterator().next().getExtension().findExtensionsOfType(Link.class).size());
+    characteristic = person.getCharacteristics().iterator().next();
+    assertEquals("urn:characteristic", characteristic.getExtension().findExtensionsOfType(Link.class).get(0).getHref().toString());
     assertEquals("urn:characteristic-attribution", characteristic.getAttribution().getContributor().getHref().toString());
     assertEquals("original date", characteristic.getDate().getOriginal());
     assertEquals("normalized date", characteristic.getDate().getNormalized());
@@ -364,14 +339,14 @@ public class TestPerson {
     assertEquals(CharacteristicType.occupation, characteristic.getKnownType());
     assertEquals("original place", characteristic.getPlace().getOriginal());
     assertEquals("normalized place", characteristic.getPlace().getNormalized());
-    assertEquals(1.2F, characteristic.getPlace().getGeoCode().getLatitude());
-    assertEquals(3.4F, characteristic.getPlace().getGeoCode().getLongitude());
+    assertEquals(1.2D, characteristic.getPlace().getGeoCode().getLatitude());
+    assertEquals(3.4D, characteristic.getPlace().getGeoCode().getLongitude());
     assertEquals("characteristic-value", characteristic.getValue());
 
     assertEquals(1, person.getEvents().size());
-    assertEquals(1, ((Event) person.getEvents().iterator().next()).getLinks().getLinks().size());
-    event = (Event) person.getEvents().iterator().next();
-    assertEquals("urn:event", event.getLinks().getLinks().get(0).getHref().toString());
+    assertEquals(1, person.getEvents().iterator().next().getExtension().findExtensionsOfType(Link.class).size());
+    event = person.getEvents().iterator().next();
+    assertEquals("urn:event", event.getExtension().findExtensionsOfType(Link.class).get(0).getHref().toString());
     assertEquals("urn:event-attribution", event.getAttribution().getContributor().getHref().toString());
     assertEquals("original date", event.getDate().getOriginal());
     assertEquals("normalized date", event.getDate().getNormalized());
@@ -381,14 +356,14 @@ public class TestPerson {
     assertEquals(EventType.adoption, event.getKnownType());
     assertEquals("original place", event.getPlace().getOriginal());
     assertEquals("normalized place", event.getPlace().getNormalized());
-    assertEquals(1.2F, event.getPlace().getGeoCode().getLatitude());
-    assertEquals(3.4F, event.getPlace().getGeoCode().getLongitude());
+    assertEquals(1.2D, event.getPlace().getGeoCode().getLatitude());
+    assertEquals(3.4D, event.getPlace().getGeoCode().getLongitude());
 
     assertEquals(1, person.getNames().size());
-    assertEquals(1, ((Name) person.getNames().iterator().next()).getLinks().getLinks().size());
-    name = (Name) person.getNames().iterator().next();
-    assertEquals("urn:name", name.getLinks().getLinks().get(0).getHref().toString());
-    name = (Name) person.getNames().iterator().next();
+    assertEquals(1, person.getNames().iterator().next().getExtension().findExtensionsOfType(Link.class).size());
+    name = person.getNames().iterator().next();
+    assertEquals("urn:name", name.getExtension().findExtensionsOfType(Link.class).get(0).getHref().toString());
+    name = person.getNames().iterator().next();
     assertEquals(1, name.getAlternateForms().size());
     assertEquals("alternate name form", name.getAlternateForms().get(0).getFullText());
     assertEquals(NameScript.chinese, name.getAlternateForms().get(0).getKnownScript());
@@ -405,7 +380,7 @@ public class TestPerson {
     assertEquals("primary surname", name.getPrimaryForm().getParts().get(0).getText());
     assertEquals(NamePartType.surname, name.getPrimaryForm().getParts().get(0).getKnownType());
 
-    assertEquals("pal", person.getPersistentId().getValue().toString());
+    assertEquals("pal", person.getPersistentId().toString());
 
     assertEquals(1, person.getRelationships().size());
     relationshipReference = person.getRelationships().iterator().next();
@@ -449,8 +424,8 @@ public class TestPerson {
     assertEquals(CharacteristicType.occupation, characteristic.getKnownType());
     assertEquals("original place", characteristic.getPlace().getOriginal());
     assertEquals("normalized place", characteristic.getPlace().getNormalized());
-    assertEquals(1.2F, characteristic.getPlace().getGeoCode().getLatitude());
-    assertEquals(3.4F, characteristic.getPlace().getGeoCode().getLongitude());
+    assertEquals(1.2D, characteristic.getPlace().getGeoCode().getLatitude());
+    assertEquals(3.4D, characteristic.getPlace().getGeoCode().getLongitude());
     assertEquals("characteristic-value", characteristic.getValue());
 
     assertEquals(1, person.getEvents().size());
@@ -464,8 +439,8 @@ public class TestPerson {
     assertEquals(EventType.adoption, event.getKnownType());
     assertEquals("original place", event.getPlace().getOriginal());
     assertEquals("normalized place", event.getPlace().getNormalized());
-    assertEquals(1.2F, event.getPlace().getGeoCode().getLatitude());
-    assertEquals(3.4F, event.getPlace().getGeoCode().getLongitude());
+    assertEquals(1.2D, event.getPlace().getGeoCode().getLatitude());
+    assertEquals(3.4D, event.getPlace().getGeoCode().getLongitude());
 
     assertEquals(1, person.getNames().size());
     name = person.getNames().iterator().next();
@@ -485,7 +460,7 @@ public class TestPerson {
     assertEquals("primary surname", name.getPrimaryForm().getParts().get(0).getText());
     assertEquals(NamePartType.surname, name.getPrimaryForm().getParts().get(0).getKnownType());
 
-    assertEquals("pal", person.getPersistentId().getValue().toString());
+    assertEquals("pal", person.getPersistentId().toString());
 
     assertEquals(1, person.getRelationships().size());
     relationshipReference = person.getRelationships().iterator().next();

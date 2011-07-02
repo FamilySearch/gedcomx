@@ -22,14 +22,16 @@ import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.attribution.Attribution;
-import org.gedcomx.id.AlternateId;
-import org.gedcomx.id.PersistentId;
+import org.gedcomx.common.AlternateId;
+import org.gedcomx.common.Extension;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.source.AttributedSourceReference;
 import org.gedcomx.types.RelationshipType;
 
+import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.*;
 import javax.xml.namespace.QName;
+import java.net.URI;
 import java.util.List;
 
 /**
@@ -38,7 +40,7 @@ import java.util.List;
  * @author Ryan Heaton
  */
 @XmlType (
-  propOrder = {"persistentId", "alternateIds", "person1", "person2", "attribution", "events", "characteristics", "sources"}
+  propOrder = {"persistentId", "alternateIds", "person1", "person2", "attribution", "events", "characteristics", "sources", "extension"}
 )
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
@@ -46,7 +48,7 @@ public class Relationship {
 
   private String id;
   private QName type;
-  private PersistentId persistentId;
+  private URI persistentId;
   private List<AlternateId> alternateIds;
   private PersonReference person1;
   private PersonReference person2;
@@ -56,6 +58,7 @@ public class Relationship {
   private List<Event> events;
   private List<Characteristic> characteristics;
   private List<AttributedSourceReference> sources;
+  private Extension extension;
 
   /**
    * The id of the relationship, unique to the context and not necessarily globally unique.
@@ -121,7 +124,8 @@ public class Relationship {
    *
    * @return A long-term, persistent, globally unique identifier for this relationship.
    */
-  public PersistentId getPersistentId() {
+  @XmlSchemaType(name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
+  public URI getPersistentId() {
     return persistentId;
   }
 
@@ -130,7 +134,7 @@ public class Relationship {
    *
    * @param persistentId A long-term, persistent, globally unique identifier for this relationship.
    */
-  public void setPersistentId(PersistentId persistentId) {
+  public void setPersistentId(URI persistentId) {
     this.persistentId = persistentId;
   }
 
@@ -292,4 +296,22 @@ public class Relationship {
     this.sources = sources;
   }
 
+  /**
+   * The extension point for the relationship.
+   *
+   * @return The extension point for the relationship.
+   */
+  @XmlElement( name = "ext" )
+  public Extension getExtension() {
+    return extension;
+  }
+
+  /**
+   * The extension point for the relationship.
+   *
+   * @param extension The extension point for the relationship.
+   */
+  public void setExtension(Extension extension) {
+    this.extension = extension;
+  }
 }

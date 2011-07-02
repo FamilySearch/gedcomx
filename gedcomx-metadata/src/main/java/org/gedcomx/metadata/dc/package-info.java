@@ -20,14 +20,14 @@
  * @see http://dublincore.org/
  */
 @XmlSchema(
-  namespace = MetadataProfile.DUBLIN_CORE_NAMESPACE,
+  namespace = MetadataNamespaces.DUBLIN_CORE_NAMESPACE,
   elementFormDefault = XmlNsForm.QUALIFIED,
   attributeFormDefault = XmlNsForm.QUALIFIED
 )
 @XmlAccessorOrder( XmlAccessOrder.ALPHABETICAL )
 package org.gedcomx.metadata.dc;
 
-import org.gedcomx.metadata.MetadataProfile;
+import org.gedcomx.metadata.MetadataNamespaces;
 
 import javax.xml.bind.annotation.XmlAccessOrder;
 import javax.xml.bind.annotation.XmlAccessorOrder;

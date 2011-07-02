@@ -1,12 +1,13 @@
 package org.gedcomx.source.www;
 
+import org.gedcomx.common.Extension;
+import org.gedcomx.source.SourceReference;
 import org.gedcomx.types.SourceReferenceType;
 import org.gedcomx.www.Link;
-import org.gedcomx.www.Links;
 import org.testng.annotations.Test;
 
+import javax.xml.bind.JAXBContext;
 import java.net.URI;
-import java.util.ArrayList;
 
 import static org.gedcomx.rt.SerializationUtil.processThroughJson;
 import static org.gedcomx.rt.SerializationUtil.processThroughXml;
@@ -26,19 +27,18 @@ public class TestSourceReference {
     reference.setHref(URI.create("urn:someid"));
     reference.setKnownType(SourceReferenceType.source);
     reference.setId("refid");
-    reference.setLinks(new Links());
-    reference.getLinks().setLinks(new ArrayList<Link>());
+    reference.setExtension(new Extension());
     Link link = new Link();
     link.setHref(URI.create("urn:href"));
-    reference.getLinks().getLinks().add(link);
+    reference.getExtension().addElement(link);
     //todo: test source qualifiers
     //reference.setQualifiers();
-    reference = processThroughXml(reference);
+    reference = processThroughXml(reference, SourceReference.class, JAXBContext.newInstance(SourceReference.class, Link.class));
     assertEquals("urn:someid", reference.getHref().toString());
     assertEquals(SourceReferenceType.source, reference.getKnownType());
     assertEquals("refid", reference.getId());
-    assertEquals(1, reference.getLinks().getLinks().size());
-    assertEquals("urn:href", reference.getLinks().getLinks().get(0).getHref().toString());
+    assertEquals(1, reference.getExtension().findExtensionsOfType(Link.class).size());
+    assertEquals("urn:href", reference.getExtension().findExtensionsOfType(Link.class).get(0).getHref().toString());
   }
 
   /**
@@ -49,19 +49,18 @@ public class TestSourceReference {
     reference.setHref(URI.create("urn:someid"));
     reference.setKnownType(SourceReferenceType.source);
     reference.setId("refid");
-    reference.setLinks(new Links());
-    reference.getLinks().setLinks(new ArrayList<Link>());
+    reference.setExtension(new Extension());
     Link link = new Link();
     link.setHref(URI.create("urn:href"));
-    reference.getLinks().getLinks().add(link);
+    reference.getExtension().addElement(link);
     //todo: test source qualifiers
     //reference.setQualifiers();
     reference = processThroughJson(reference);
     assertEquals("urn:someid", reference.getHref().toString());
     assertEquals(SourceReferenceType.source, reference.getKnownType());
     assertEquals("refid", reference.getId());
-    assertEquals(1, reference.getLinks().getLinks().size());
-    assertEquals("urn:href", reference.getLinks().getLinks().get(0).getHref().toString());
+    assertEquals(1, reference.getExtension().findExtensionsOfType(Link.class).size());
+    assertEquals("urn:href", reference.getExtension().findExtensionsOfType(Link.class).get(0).getHref().toString());
   }
 
 }

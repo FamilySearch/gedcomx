@@ -18,9 +18,11 @@ package org.gedcomx.conclusion;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.attribution.Attribution;
+import org.gedcomx.common.Extension;
 import org.gedcomx.rt.XmlTypeIdResolver;
 
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlID;
 
 /**
@@ -34,6 +36,7 @@ public abstract class Conclusion {
 
   private String id;
   private Attribution attribution;
+  private Extension extension;
 
   /**
    * The id of this conclusion, unique to its person or relationship.
@@ -71,5 +74,24 @@ public abstract class Conclusion {
    */
   public void setAttribution(Attribution attribution) {
     this.attribution = attribution;
+  }
+
+  /**
+   * The extension point for the field.
+   *
+   * @return The extension point for the field.
+   */
+  @XmlElement ( name = "ext" )
+  public Extension getExtension() {
+    return extension;
+  }
+
+  /**
+   * The extension point for the field.
+   *
+   * @param extension The extension point for the field.
+   */
+  public void setExtension(Extension extension) {
+    this.extension = extension;
   }
 }

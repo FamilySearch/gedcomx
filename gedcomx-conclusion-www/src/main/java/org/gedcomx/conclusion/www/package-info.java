@@ -15,20 +15,18 @@
  */
 
 /**
- * The <b>conclusion www profile</b> models the necessary extensions to the conclusion model to support
+ * The conclusion www modules defines the necessary extensions to the conclusion model to support
  * providing conclusion data via the World Wide Web.
- *
- * @label Conclusion WWW Profile
  */
 @XmlSchema(
-  namespace = ConclusionWWWProfile.GEDCOMX_CONCLUSION_WWW_NAMESPACE,
+  namespace = ConclusionWWWNamespaces.GEDCOMX_CONCLUSION_WWW_NAMESPACE,
   elementFormDefault = XmlNsForm.QUALIFIED
 )
 @XmlAccessorOrder ( XmlAccessOrder.ALPHABETICAL )
-@DefaultNamespace ( ConclusionProfile.GEDCOMX_CONCLUSION_NAMESPACE )
+@DefaultNamespace ( ConclusionNamespaces.GEDCOMX_CONCLUSION_NAMESPACE )
 package org.gedcomx.conclusion.www;
 
-import org.gedcomx.conclusion.ConclusionProfile;
+import org.gedcomx.conclusion.ConclusionNamespaces;
 import org.gedcomx.rt.DefaultNamespace;
 
 import javax.xml.bind.annotation.XmlAccessOrder;

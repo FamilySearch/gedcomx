@@ -22,11 +22,12 @@ import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.attribution.Attribution;
-import org.gedcomx.id.AlternateId;
-import org.gedcomx.id.PersistentId;
+import org.gedcomx.common.AlternateId;
+import org.gedcomx.common.Extension;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.SourceType;
 
+import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.*;
 import javax.xml.namespace.QName;
 import java.net.URI;
@@ -39,14 +40,14 @@ import java.util.List;
  */
 @XmlRootElement
 @XmlType (
-  propOrder =  {"persistentId", "alternateIds", "webLocation", "title", "note", "bibliographicCitation", "attribution"}
+  propOrder =  {"persistentId", "alternateIds", "webLocation", "title", "note", "bibliographicCitation", "attribution", "extension"}
 )
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 public class Source {
 
   private String id;
-  private PersistentId persistentId;
+  private URI persistentId;
   private List<AlternateId> alternateIds;
   private QName type;
   private URI webLocation;
@@ -54,6 +55,7 @@ public class Source {
   private String note; //todo: rename to something like "user note" or something?
   private String bibliographicCitation;
   private Attribution attribution;
+  private Extension extension;
 
   /**
    * The id of the source, unique to the context and not necessarily globally unique.
@@ -119,7 +121,8 @@ public class Source {
    *
    * @return A long-term, persistent, globally unique identifier for this source.
    */
-  public PersistentId getPersistentId() {
+  @XmlSchemaType(name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
+  public URI getPersistentId() {
     return persistentId;
   }
 
@@ -128,7 +131,7 @@ public class Source {
    *
    * @param persistentId A long-term, persistent, globally unique identifier for this source.
    */
-  public void setPersistentId(PersistentId persistentId) {
+  public void setPersistentId(URI persistentId) {
     this.persistentId = persistentId;
   }
 
@@ -242,5 +245,24 @@ public class Source {
    */
   public void setAttribution(Attribution attribution) {
     this.attribution = attribution;
+  }
+
+  /**
+   * The extension point for the source.
+   *
+   * @return The extension point for the source.
+   */
+  @XmlElement( name = "ext" )
+  public Extension getExtension() {
+    return extension;
+  }
+
+  /**
+   * The extension point for the source.
+   *
+   * @param extension The extension point for the source.
+   */
+  public void setExtension(Extension extension) {
+    this.extension = extension;
   }
 }

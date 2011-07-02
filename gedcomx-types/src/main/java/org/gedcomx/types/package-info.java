@@ -15,12 +15,10 @@
  */
 
 /**
- * The <b>types profile</b> provides the standard set of types of genealogical data.
- *
- * @label Types Profile
+ * The types model defines the standard set of types of genealogical data.
  */
 @XmlSchema(
-  namespace = TypesProfile.GEDCOMX_TYPES_NAMESPACE,
+  namespace = TypesNamespaces.GEDCOMX_TYPES_NAMESPACE,
   elementFormDefault = XmlNsForm.QUALIFIED
 )
 package org.gedcomx.types;

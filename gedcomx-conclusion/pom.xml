@@ -42,7 +42,7 @@
   <dependencies>
     <dependency>
       <groupId>org.gedcomx</groupId>
-      <artifactId>gedcomx-id</artifactId>
+      <artifactId>gedcomx-common</artifactId>
       <version>0.2.0.BUILD-SNAPSHOT</version>
     </dependency>
     

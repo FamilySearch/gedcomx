@@ -17,7 +17,7 @@ package org.gedcomx.metadata.dc;
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.enunciate.qname.XmlQNameEnumRef;
-import org.gedcomx.metadata.MetadataProfile;
+import org.gedcomx.metadata.MetadataNamespaces;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.*;
@@ -52,7 +52,7 @@ public final class DublinCoreTypeProperty {
    *
    * @return The id of the property. Used so that other properties can refer to it and possibly refine it's value.
    */
-  @XmlAttribute ( name = "ID", namespace = MetadataProfile.RDF_NAMESPACE )
+  @XmlAttribute ( name = "ID", namespace = MetadataNamespaces.RDF_NAMESPACE )
   @XmlID
   public String getId() {
     return id;
@@ -121,7 +121,7 @@ public final class DublinCoreTypeProperty {
    *
    * @return The URI reference to the value, if the value is structured data.
    */
-  @XmlAttribute( name = "resource", namespace = MetadataProfile.RDF_NAMESPACE )
+  @XmlAttribute( name = "resource", namespace = MetadataNamespaces.RDF_NAMESPACE )
   public URI getValueRef() {
     return valueRef;
   }

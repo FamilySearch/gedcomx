@@ -19,12 +19,14 @@ import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.id.AlternateId;
-import org.gedcomx.id.PersistentId;
+import org.gedcomx.common.AlternateId;
+import org.gedcomx.common.Extension;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.source.AttributedSourceReference;
 
+import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.*;
+import java.net.URI;
 import java.util.List;
 
 /**
@@ -34,7 +36,7 @@ import java.util.List;
  */
 @XmlRootElement(name = "person")
 @XmlType (
-  propOrder = {"persistentId", "alternateIds", "gender", "names", "events", "characteristics", "relationships", "sources"}
+  propOrder = {"persistentId", "alternateIds", "gender", "names", "events", "characteristics", "relationships", "sources", "extension"}
 )
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
@@ -42,7 +44,7 @@ public class Person {
 
   private String id;
   private List<AlternateId> alternateIds;
-  private PersistentId persistentId;
+  private URI persistentId;
   private Gender gender;
 
   //todo: change to List<? extends Name> when http://jira.codehaus.org/browse/ENUNCIATE-562 is fixed.
@@ -51,6 +53,7 @@ public class Person {
   private List<Characteristic> characteristics;
   private List<RelationshipReference> relationships;
   private List<AttributedSourceReference> sources;
+  private Extension extension;
 
   /**
    * The id of the person, unique to the context and not necessarily globally unique.
@@ -77,7 +80,8 @@ public class Person {
    *
    * @return A long-term, persistent, globally unique identifier for this person.
    */
-  public PersistentId getPersistentId() {
+  @XmlSchemaType(name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
+  public URI getPersistentId() {
     return persistentId;
   }
 
@@ -86,7 +90,7 @@ public class Person {
    *
    * @param persistentId A long-term, persistent, globally unique identifier for this person.
    */
-  public void setPersistentId(PersistentId persistentId) {
+  public void setPersistentId(URI persistentId) {
     this.persistentId = persistentId;
   }
 
@@ -238,5 +242,24 @@ public class Person {
   @JsonProperty("sources")
   public void setSources(List<AttributedSourceReference> sources) {
     this.sources = sources;
+  }
+
+  /**
+   * The extension point for the person.
+   *
+   * @return The extension point for the person.
+   */
+  @XmlElement( name = "ext" )
+  public Extension getExtension() {
+    return extension;
+  }
+
+  /**
+   * The extension point for the person.
+   *
+   * @param extension The extension point for the person.
+   */
+  public void setExtension(Extension extension) {
+    this.extension = extension;
   }
 }

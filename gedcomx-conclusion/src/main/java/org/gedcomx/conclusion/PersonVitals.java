@@ -17,6 +17,7 @@ package org.gedcomx.conclusion;
 
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
+import org.gedcomx.common.Extension;
 import org.gedcomx.rt.XmlTypeIdResolver;
 
 import javax.xml.bind.annotation.XmlAttribute;
@@ -27,7 +28,7 @@ import javax.xml.bind.annotation.XmlType;
  * The vital information about a conclusion person; a subset of the full person data.
  */
 @XmlType (
-  propOrder = {"name", "gender", "birth", "christening", "death", "burial"}
+  propOrder = {"name", "gender", "birth", "death", "extension"}
 )
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
@@ -37,9 +38,8 @@ public final class PersonVitals {
   private Name name;
   private Gender gender;
   private Event birth;
-  private Event christening;
   private Event death;
-  private Event burial;
+  private Extension extension;
 
   /**
    * The id of the person, unique to the context and not necessarily globally unique.
@@ -116,24 +116,6 @@ public final class PersonVitals {
   }
 
   /**
-   * The conclusion for the christening of the person.
-   *
-   * @return The conclusion for the christening of the person.
-   */
-  public Event getChristening() {
-    return christening;
-  }
-
-  /**
-   * The conclusion for the christening of the person.
-   *
-   * @param christening The conclusion for the christening of the person.
-   */
-  public void setChristening(Event christening) {
-    this.christening = christening;
-  }
-
-  /**
    * The conclusion for the death of the person.
    *
    * @return The conclusion for the death of the person.
@@ -152,20 +134,20 @@ public final class PersonVitals {
   }
 
   /**
-   * The conclusion for the burial of the person.
+   * The extension point for the person vitals.
    *
-   * @return The conclusion for the burial of the person.
+   * @return The extension point for the person vitals.
    */
-  public Event getBurial() {
-    return burial;
+  public Extension getExtension() {
+    return extension;
   }
 
   /**
-   * The conclusion for the burial of the person.
+   * The extension point for the person vitals.
    *
-   * @param burial The conclusion for the burial of the person.
+   * @param extension The extension point for the person vitals.
    */
-  public void setBurial(Event burial) {
-    this.burial = burial;
+  public void setExtension(Extension extension) {
+    this.extension = extension;
   }
 }

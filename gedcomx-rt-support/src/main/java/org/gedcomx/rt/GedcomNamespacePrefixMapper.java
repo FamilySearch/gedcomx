@@ -21,7 +21,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchema;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.*;
@@ -106,8 +105,8 @@ public class GedcomNamespacePrefixMapper extends NamespacePrefixMapper {
       Map<String, String> ns2prefix = new HashMap<String, String>();
       ns2prefix.put("http://www.w3.org/1999/xlink", "xlink");
       ns2prefix.put("http://www.w3.org/2001/XMLSchema-instance", "xsi");
-      Map<String, String> profilePrefixes = loadProfilePrefixes(Thread.currentThread().getContextClassLoader());
-      ns2prefix.putAll(profilePrefixes);
+      Map<String, String> namespacePrefixes = loadNamespacePrefixes(Thread.currentThread().getContextClassLoader());
+      ns2prefix.putAll(namespacePrefixes);
 
       KNOWN_PREFIXES = ns2prefix;
     }
@@ -115,19 +114,19 @@ public class GedcomNamespacePrefixMapper extends NamespacePrefixMapper {
     return KNOWN_PREFIXES;
   }
 
-  protected static Map<String, String> loadProfilePrefixes(ClassLoader loader) {
-    Map<String, String> profilePrefixes = new HashMap<String, String>();
+  protected static Map<String, String> loadNamespacePrefixes(ClassLoader loader) {
+    Map<String, String> namespacePrefixes = new HashMap<String, String>();
     try {
-      Enumeration<URL> resources = loader.getResources("META-INF/gedcomx.profiles");
+      Enumeration<URL> resources = loader.getResources("META-INF/gedcomx.namespaces");
       while (resources.hasMoreElements()) {
         try {
           URL resource = resources.nextElement();
           BufferedReader reader = new BufferedReader(new InputStreamReader(resource.openStream()));
           String classname = reader.readLine();
           while (classname != null) {
-            Profile profileInfo = Class.forName(classname, true, loader).getAnnotation(Profile.class);
-            for (Namespace ns : profileInfo.namespaces()) {
-              profilePrefixes.put(ns.uri(), ns.id());
+            Namespaces namespacesInfo = Class.forName(classname, true, loader).getAnnotation(Namespaces.class);
+            for (Namespace ns : namespacesInfo.value()) {
+              namespacePrefixes.put(ns.uri(), ns.id());
             }
             classname = reader.readLine();
           }
@@ -140,7 +139,7 @@ public class GedcomNamespacePrefixMapper extends NamespacePrefixMapper {
     catch (IOException e) {
       //no-op.
     }
-    return profilePrefixes;
+    return namespacePrefixes;
   }
 
   @Override

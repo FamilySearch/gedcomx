@@ -37,7 +37,7 @@ import org.codehaus.enunciate.template.freemarker.IsDefinedGloballyMethod;
 import org.codehaus.enunciate.template.freemarker.UniqueContentTypesMethod;
 import org.gedcomx.rt.GedcomNamespacePrefixMapper;
 import org.gedcomx.rt.Namespace;
-import org.gedcomx.rt.Profile;
+import org.gedcomx.rt.Namespaces;
 
 import java.io.File;
 import java.io.IOException;
@@ -46,13 +46,13 @@ import java.util.*;
 
 /**
  * The GEDCOM X deployment module handles the generation of the GEDCOM X documentation, validates common patterns, and
- * supplies needed metadata for the profiles.
+ * supplies needed metadata for the namespaces.
  *
  * @author Ryan Heaton
  */
 public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implements DocumentationAwareModule, EnunciateTypeDeclarationListener {
 
-  private final Map<String, TypeDeclaration> knownProfileDeclarations = new HashMap<String, TypeDeclaration>();
+  private final Map<String, TypeDeclaration> knownNamespaceDeclarations = new HashMap<String, TypeDeclaration>();
 
   /**
    * @return "gedcomx"
@@ -130,8 +130,8 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
   }
 
   public void onTypeDeclarationInspected(TypeDeclaration typeDeclaration) {
-    if (typeDeclaration.getAnnotation(Profile.class) != null) {
-      this.knownProfileDeclarations.put(typeDeclaration.getQualifiedName(), typeDeclaration);
+    if (typeDeclaration.getAnnotation(Namespaces.class) != null) {
+      this.knownNamespaceDeclarations.put(typeDeclaration.getQualifiedName(), typeDeclaration);
     }
   }
 
@@ -168,13 +168,13 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
       }
     }
 
-    Collection<TypeDeclaration> profileDeclarations = gatherProfileDeclarations();
+    Collection<TypeDeclaration> namespaceDeclarations = gatherNamespaceDeclarations();
     Map<String, String> prefix_version_to_ns = new HashMap<String, String>();
     Map<String, String> media_type_to_ns = new HashMap<String, String>();
-    for (TypeDeclaration profileDeclaration : profileDeclarations) {
-      info("Found profile declaration at %s.", profileDeclaration.getQualifiedName());
-      Profile profileInfo = profileDeclaration.getAnnotation(Profile.class);
-      for (Namespace ns : profileInfo.namespaces()) {
+    for (TypeDeclaration namespacesDeclaration : namespaceDeclarations) {
+      info("Found namespaces declaration at %s.", namespacesDeclaration.getQualifiedName());
+      Namespaces namespacesInfo = namespacesDeclaration.getAnnotation(Namespaces.class);
+      for (Namespace ns : namespacesInfo.value()) {
         SchemaInfo schemaInfo = model.getNamespacesToSchemas().get(ns.uri());
         if (schemaInfo != null) {
           String version = ns.version();
@@ -191,10 +191,10 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
           if (xmlMediaType != null) {
             String previousNamespace = media_type_to_ns.put(xmlMediaType, schemaInfo.getNamespace());
             if (previousNamespace != null && !previousNamespace.equals(schemaInfo.getNamespace())) {
-              String message = profileDeclaration.getPosition() == null ?
+              String message = namespacesDeclaration.getPosition() == null ?
                 String.format("Media type %s is already being used by namespace %s.", xmlMediaType, previousNamespace) :
-                String.format("%s: Media type %s is already being used by namespace %s.", profileDeclaration.getQualifiedName(), xmlMediaType, previousNamespace);
-              throw new ValidationException(profileDeclaration.getPosition(), message);
+                String.format("%s: Media type %s is already being used by namespace %s.", namespacesDeclaration.getQualifiedName(), xmlMediaType, previousNamespace);
+              throw new ValidationException(namespacesDeclaration.getPosition(), message);
             }
           }
           schemaInfo.setProperty("xmlMediaType", xmlMediaType);
@@ -204,15 +204,15 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
             jsonMediaType = null;
           }
           if (!schemaInfo.getGlobalElements().isEmpty() && jsonMediaType == null) {
-            warn("Profile metadata for namespace %s is missing an json media type for its root elements.", schemaInfo.getNamespace());
+            warn("Metadata for namespace %s is missing an json media type for its root elements.", schemaInfo.getNamespace());
           }
           if (jsonMediaType != null) {
             String previousNamespace = media_type_to_ns.put(jsonMediaType, schemaInfo.getNamespace());
             if (previousNamespace != null && !previousNamespace.equals(schemaInfo.getNamespace())) {
-              String message = profileDeclaration.getPosition() == null ?
+              String message = namespacesDeclaration.getPosition() == null ?
                 String.format("Media type %s is already being used by namespace %s.", jsonMediaType, previousNamespace) :
-                String.format("%s: Media type %s is already being used by namespace %s.", profileDeclaration.getQualifiedName(), jsonMediaType, previousNamespace);
-              throw new ValidationException(profileDeclaration.getPosition(), message);
+                String.format("%s: Media type %s is already being used by namespace %s.", namespacesDeclaration.getQualifiedName(), jsonMediaType, previousNamespace);
+              throw new ValidationException(namespacesDeclaration.getPosition(), message);
             }
           }
           schemaInfo.setProperty("jsonMediaType", jsonMediaType);
@@ -221,10 +221,10 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
           schemaInfo.setId(id);
           String previousNamespace = prefix_version_to_ns.put(id + version, schemaInfo.getNamespace());
           if (previousNamespace != null && !previousNamespace.equals(schemaInfo.getNamespace())) {
-            String message = profileDeclaration.getPosition() == null ?
+            String message = namespacesDeclaration.getPosition() == null ?
               String.format("%s version %s is already being used by namespace %s.", id, version, previousNamespace) :
-              String.format("%s: %s version %s is already being used by namespace %s.", profileDeclaration.getQualifiedName(), id, version, previousNamespace);
-            throw new ValidationException(profileDeclaration.getPosition(), message);
+              String.format("%s: %s version %s is already being used by namespace %s.", namespacesDeclaration.getQualifiedName(), id, version, previousNamespace);
+            throw new ValidationException(namespacesDeclaration.getPosition(), message);
           }
 
           model.getNamespacesToPrefixes().put(schemaInfo.getNamespace(), id);
@@ -244,18 +244,13 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
           //ensure the correct filenames are used for the schemas.
           schemaInfo.setProperty("filename", id + "-" + version + ".xsd");
           schemaInfo.setProperty("location", id + "-" + version + ".xsd");
-
-          if (schemaInfo.getProperty("profile") != null && !schemaInfo.getProperty("profile").equals(profileInfo.label())) {
-            warn("Namespace %s appears to be in multiple profiles (%s and %s).", schemaInfo.getProperty("profile"), profileInfo.label());
-          }
-          schemaInfo.setProperty("profile", profileInfo.label());
         }
       }
     }
   }
 
-  protected Collection<TypeDeclaration> gatherProfileDeclarations() {
-    return this.knownProfileDeclarations.values();
+  protected Collection<TypeDeclaration> gatherNamespaceDeclarations() {
+    return this.knownNamespaceDeclarations.values();
   }
 
   public void doFreemarkerGenerate() throws EnunciateException, IOException, TemplateException {

@@ -21,9 +21,12 @@ import com.sun.mirror.type.DeclaredType;
 import com.sun.mirror.type.EnumType;
 import com.sun.mirror.type.MirroredTypeException;
 import com.sun.mirror.type.TypeMirror;
+import net.sf.jelly.apt.decorations.TypeMirrorDecorator;
 import net.sf.jelly.apt.decorations.declaration.DecoratedMethodDeclaration;
 import net.sf.jelly.apt.decorations.declaration.PropertyDeclaration;
+import net.sf.jelly.apt.decorations.type.DecoratedTypeMirror;
 import org.codehaus.enunciate.contract.jaxb.*;
+import org.codehaus.enunciate.contract.jaxb.types.KnownXmlType;
 import org.codehaus.enunciate.contract.jaxb.types.XmlClassType;
 import org.codehaus.enunciate.contract.jaxb.types.XmlType;
 import org.codehaus.enunciate.contract.validation.BaseValidator;
@@ -35,6 +38,7 @@ import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.rt.XmlTypeIdResolver;
 
 import javax.xml.namespace.QName;
+import java.net.URI;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -148,6 +152,10 @@ public class GEDCOMXValidator extends BaseValidator {
           result.addError(attribute, "Id attributes should be annotated as @XmlID.");
         }
 
+        if ("persistentId".equalsIgnoreCase(attribute.getName())) {
+          result.addWarning(attribute, "Persistent IDs should be elements to conform to the established pattern.");
+        }
+
         TypeMirror accessorType = attribute.getAccessorType();
         if (accessorType instanceof EnumType && ((EnumType) accessorType).getDeclaration().getAnnotation(XmlQNameEnum.class) != null) {
           result.addError(attribute, "Accessors should not reference QName enums directly. You probably want to annotate this accessor with @XmlTransient.");
@@ -175,6 +183,16 @@ public class GEDCOMXValidator extends BaseValidator {
             result.addError(choice, "Accessors named 'id' should be attributes and annotated with @XmlID.");
           }
 
+          if ("persistentId".equals(choice.getName())) {
+            if (!((DecoratedTypeMirror) TypeMirrorDecorator.decorate(choice.getAccessorType())).isInstanceOf(URI.class.getName())) {
+              result.addError(choice, "Accessors named 'persistentId' should be elements of type URI.");
+            }
+            
+            if (!KnownXmlType.ANY_URI.getQname().equals(choice.getBaseType().getQname())) {
+              result.addError(choice, "Accessors named 'persistentId' should of type xs:anyURI. Please annotate the element with @XmlSchemaType(name = \"anyURI\", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)");
+            }
+          }
+
           TypeMirror accessorType = choice.getAccessorType();
           if (accessorType instanceof EnumType && ((EnumType) accessorType).getDeclaration().getAnnotation(XmlQNameEnum.class) != null) {
             result.addError(choice, "Accessors should not reference QName enums directly. You probably want to annotate this accessor with @XmlTransient.");
@@ -186,9 +204,9 @@ public class GEDCOMXValidator extends BaseValidator {
               (!"alternateId".equals(element.getName()) || element.isWrapped())) {
               result.addWarning(element, "Element name for AlternateId should probably be named 'alternateId' to be consistent.");
             }
-            if ("persistentidentifier".equals(((DeclaredType)accessorType).getDeclaration().getSimpleName().toLowerCase()) &&
-              (!"persistentId".equals(element.getName()) || element.isWrapped())) {
-              result.addWarning(element, "Element name for PersistentIdentifier should probably be named 'persistentId' to be consistent.");
+            if ("extension".equals(((DeclaredType)accessorType).getDeclaration().getSimpleName().toLowerCase()) &&
+              (!"ext".equals(element.getName()) || element.isWrapped())) {
+              result.addWarning(element, "Element name for Extension should probably be named 'ext' to be consistent.");
             }
           }
 

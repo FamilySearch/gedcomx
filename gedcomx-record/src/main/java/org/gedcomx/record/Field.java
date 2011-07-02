@@ -16,6 +16,7 @@
 package org.gedcomx.record;
 
 import org.gedcomx.attribution.Attribution;
+import org.gedcomx.common.Extension;
 
 import javax.xml.bind.annotation.*;
 

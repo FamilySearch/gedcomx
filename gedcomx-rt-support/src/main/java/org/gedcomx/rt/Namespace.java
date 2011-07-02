@@ -20,7 +20,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Metadata about specific namespace within the context of a profile.
+ * Metadata about specific namespace.
  *
  * @author Ryan Heaton
  */

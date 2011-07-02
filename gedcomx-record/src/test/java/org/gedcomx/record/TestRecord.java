@@ -2,8 +2,7 @@ package org.gedcomx.record;
 
 import org.gedcomx.attribution.Attribution;
 import org.gedcomx.attribution.ContributorReference;
-import org.gedcomx.id.AlternateId;
-import org.gedcomx.id.PersistentId;
+import org.gedcomx.common.AlternateId;
 import org.gedcomx.source.SourceQualifier;
 import org.gedcomx.source.SourceQualifierProperty;
 import org.gedcomx.source.SourceReference;
@@ -109,8 +108,7 @@ public class TestRecord {
     persona.setGender(gender);
 
     persona.setId("persona-id");
-    persona.setPersistentId(new PersistentId());
-    persona.getPersistentId().setValue(URI.create("urn:persona-id-value"));
+    persona.setPersistentId(URI.create("urn:persona-id-value"));
     persona.setPrincipal(true);
     ArrayList<EventRole> eventRoles = new ArrayList<EventRole>();
     EventRole eventRole = new EventRole();
@@ -136,8 +134,7 @@ public class TestRecord {
     fields.add(field);
     record.setFields(fields);
 
-    record.setPersistentId(new PersistentId());
-    record.getPersistentId().setValue(URI.create("pal"));
+    record.setPersistentId(URI.create("pal"));
 
     ArrayList<Relationship> relationships = new ArrayList<Relationship>();
     Relationship coupleRelationship = new Relationship();
@@ -251,7 +248,7 @@ public class TestRecord {
     assertEquals(GenderType.female, persona.getGender().getType());
 
     assertEquals("persona-id", persona.getId());
-    assertEquals("urn:persona-id-value", persona.getPersistentId().getValue().toString());
+    assertEquals("urn:persona-id-value", persona.getPersistentId().toString());
     assertTrue(persona.getPrincipal());
     assertEquals(1, persona.getEventRoles().size());
     EventRole eventRole = persona.getEventRoles().get(0);
@@ -268,7 +265,7 @@ public class TestRecord {
     assertEquals("field-value-interpreted", field.getInterpreted());
     assertEquals("field-value-normalized", field.getNormalized());
 
-    assertEquals("pal", record.getPersistentId().getValue().toString());
+    assertEquals("pal", record.getPersistentId().toString());
 
     assertEquals(2, record.getRelationships().size());
     Relationship coupleRelationship = record.getRelationships().get(0);

@@ -15,21 +15,19 @@
  */
 
 /**
- * The <b>source-www profile</b> models the necessary extensions to the source model to support
+ * The source-www model defines the necessary extensions to the source model to support
  * providing source data via the World Wide Web.
- *
- * @label Source WWW Profile
  */
 @XmlSchema (
-  namespace = SourceWWWProfile.GEDCOMX_SOURCE_WWW_NAMESPACE,
+  namespace = SourceWWWNamespaces.GEDCOMX_SOURCE_WWW_NAMESPACE,
   elementFormDefault = XmlNsForm.QUALIFIED
 )
 @XmlAccessorOrder ( XmlAccessOrder.ALPHABETICAL )
-@DefaultNamespace ( SourceProfile.GEDCOMX_SOURCE_NAMESPACE )
+@DefaultNamespace ( SourceNamespaces.GEDCOMX_SOURCE_NAMESPACE )
 package org.gedcomx.source.www;
 
 import org.gedcomx.rt.DefaultNamespace;
-import org.gedcomx.source.SourceProfile;
+import org.gedcomx.source.SourceNamespaces;
 
 import javax.xml.bind.annotation.XmlAccessOrder;
 import javax.xml.bind.annotation.XmlAccessorOrder;
