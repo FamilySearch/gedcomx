@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlType;
  * The vital information about a conclusion person; a subset of the full person data.
  */
 @XmlType (
-  propOrder = {"name", "gender", "birth", "death"}
+  propOrder = {"name", "gender", "birth", "death", "extension"}
 )
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
