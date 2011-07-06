@@ -27,6 +27,7 @@ import org.codehaus.enunciate.contract.jaxb.Element;
 import org.codehaus.enunciate.contract.jaxb.types.XmlClassType;
 import org.codehaus.enunciate.contract.jaxb.types.XmlType;
 import org.codehaus.enunciate.doc.DocumentationExample;
+import org.gedcomx.rt.DefaultNamespace;
 import org.jdom.*;
 import org.jdom.output.XMLOutputter;
 
@@ -55,11 +56,16 @@ public class GenerateExampleXmlMethod implements TemplateMethodModelEx {
     String namespace;
     String name;
     TypeDefinition type;
+    String defaultNs = null;
     if (object instanceof RootElementDeclaration) {
       RootElementDeclaration rootEl = (RootElementDeclaration) object;
       namespace = rootEl.getNamespace();
       name = rootEl.getName();
       type = rootEl.getTypeDefinition();
+      DefaultNamespace defaulNsInfo = rootEl.getSchema().getAnnotation(DefaultNamespace.class);
+      if (defaulNsInfo != null) {
+        defaultNs = defaulNsInfo.value();
+      }
     }
     else if (object instanceof TypeDefinition) {
       type = (TypeDefinition) object;
@@ -71,7 +77,7 @@ public class GenerateExampleXmlMethod implements TemplateMethodModelEx {
     }
 
     try {
-      String prefix = namespace == null ? null : ((EnunciateFreemarkerModel) FreemarkerModel.get()).getNamespacesToPrefixes().get(namespace);
+      String prefix = namespace == null ? null : defaultNs == null ? "" : ((EnunciateFreemarkerModel) FreemarkerModel.get()).getNamespacesToPrefixes().get(namespace);
       Namespace jdomNS;
       if (org.jdom.Namespace.XML_NAMESPACE.getURI().equals(namespace)) {
         jdomNS = org.jdom.Namespace.XML_NAMESPACE;
@@ -83,7 +89,13 @@ public class GenerateExampleXmlMethod implements TemplateMethodModelEx {
         jdomNS = Namespace.getNamespace(prefix, namespace);
       }
       org.jdom.Element rootElement = new org.jdom.Element(name, jdomNS);
-      generateExampleXml(type, rootElement);
+      if (defaultNs != null) {
+        rootElement.addNamespaceDeclaration(Namespace.getNamespace("", defaultNs));
+      }
+      else {
+        defaultNs = namespace;
+      }
+      generateExampleXml(type, rootElement, defaultNs);
       org.jdom.Document document = new org.jdom.Document(rootElement);
 
       XMLOutputter out = new XMLOutputter(org.jdom.output.Format.getPrettyFormat());
@@ -97,7 +109,7 @@ public class GenerateExampleXmlMethod implements TemplateMethodModelEx {
     }
   }
 
-  protected void generateExampleXml(TypeDefinition type, org.jdom.Element parent) {
+  protected void generateExampleXml(TypeDefinition type, org.jdom.Element parent, String defaultNs) {
     if (TYPE_DEF_STACK.get() == null) {
       TYPE_DEF_STACK.set(new Stack<String>());
     }
@@ -108,14 +120,14 @@ public class GenerateExampleXmlMethod implements TemplateMethodModelEx {
     else {
       TYPE_DEF_STACK.get().push(type.getQualifiedName());
       for (Attribute attribute : type.getAttributes()) {
-        generateExampleXml(attribute, parent);
+        generateExampleXml(attribute, parent, defaultNs);
       }
       if (type.getValue() != null) {
         generateExampleXml(type.getValue(), parent);
       }
       else {
         for (Element element : type.getElements()) {
-          generateExampleXml(element, parent);
+          generateExampleXml(element, parent, defaultNs);
         }
       }
       TYPE_DEF_STACK.get().pop();
@@ -125,12 +137,12 @@ public class GenerateExampleXmlMethod implements TemplateMethodModelEx {
     if (baseType instanceof XmlClassType) {
       TypeDefinition typeDef = ((XmlClassType) baseType).getTypeDefinition();
       if (typeDef != null) {
-        generateExampleXml(typeDef, parent);
+        generateExampleXml(typeDef, parent, defaultNs);
       }
     }
   }
 
-  protected void generateExampleXml(Attribute attribute, org.jdom.Element parent) {
+  protected void generateExampleXml(Attribute attribute, org.jdom.Element parent, String defaultNs) {
     DocumentationExample exampleInfo = attribute.getAnnotation(DocumentationExample.class);
     if (exampleInfo == null || !exampleInfo.exclude()) {
       String namespace = attribute.getNamespace();
@@ -140,7 +152,7 @@ public class GenerateExampleXmlMethod implements TemplateMethodModelEx {
       if (org.jdom.Namespace.XML_NAMESPACE.getURI().equals(namespace)) {
         jdomNS = org.jdom.Namespace.XML_NAMESPACE;
       }
-      else if (namespace == null || "".equals(namespace)) {
+      else if (namespace == null || "".equals(namespace) || namespace.equals(defaultNs)) {
         jdomNS = org.jdom.Namespace.NO_NAMESPACE;
       }
       else {
@@ -158,7 +170,7 @@ public class GenerateExampleXmlMethod implements TemplateMethodModelEx {
     }
   }
 
-  protected void generateExampleXml(Element element, org.jdom.Element parent) {
+  protected void generateExampleXml(Element element, org.jdom.Element parent, String defaultNs) {
     DocumentationExample exampleInfo = element.getAnnotation(DocumentationExample.class);
     if (exampleInfo == null || !exampleInfo.exclude()) {
       if (element.isWrapped()) {
@@ -170,6 +182,9 @@ public class GenerateExampleXmlMethod implements TemplateMethodModelEx {
         }
         else if (namespace == null || "".equals(namespace)) {
           jdomNS = org.jdom.Namespace.NO_NAMESPACE;
+        }
+        else if (namespace.equals(defaultNs)) {
+          jdomNS = Namespace.getNamespace("", namespace);
         }
         else {
           jdomNS = Namespace.getNamespace(prefix, namespace);
@@ -193,6 +208,9 @@ public class GenerateExampleXmlMethod implements TemplateMethodModelEx {
             else if (namespace == null || "".equals(namespace)) {
               jdomNS = org.jdom.Namespace.NO_NAMESPACE;
             }
+            else if (namespace.equals(defaultNs)) {
+              jdomNS = Namespace.getNamespace("", namespace);
+            }
             else {
               jdomNS = Namespace.getNamespace(prefix, namespace);
             }
@@ -200,12 +218,12 @@ public class GenerateExampleXmlMethod implements TemplateMethodModelEx {
             String exampleValue = exampleInfo == null || "##default".equals(exampleInfo.value()) ? "..." : exampleInfo.value();
             XmlType xmlType = choice.getBaseType();
             if (i == 0) {
-              generateExampleXml(xmlType, el, exampleValue);
+              generateExampleXml(xmlType, el, exampleValue, defaultNs);
             }
             else {
               if (xmlType instanceof XmlClassType) {
                 for (Attribute attribute : ((XmlClassType)xmlType).getTypeDefinition().getAttributes()) {
-                  generateExampleXml(attribute, parent);
+                  generateExampleXml(attribute, parent, defaultNs);
                 }
               }
               el.addContent(new Comment("..."));
@@ -224,6 +242,9 @@ public class GenerateExampleXmlMethod implements TemplateMethodModelEx {
             else if (namespace == null || "".equals(namespace)) {
               jdomNS = org.jdom.Namespace.NO_NAMESPACE;
             }
+            else if (namespace.equals(defaultNs)) {
+              jdomNS = Namespace.getNamespace("", namespace);
+            }
             else {
               jdomNS = Namespace.getNamespace(prefix, namespace);
             }
@@ -239,9 +260,9 @@ public class GenerateExampleXmlMethod implements TemplateMethodModelEx {
     }
   }
 
-  public void generateExampleXml(XmlType type, org.jdom.Element parent, String example) {
+  public void generateExampleXml(XmlType type, org.jdom.Element parent, String example, String defaultNs) {
     if (type instanceof XmlClassType) {
-      generateExampleXml(((XmlClassType)type).getTypeDefinition(), parent);
+      generateExampleXml(((XmlClassType)type).getTypeDefinition(), parent, defaultNs);
     }
     else {
       type.generateExampleXml(parent, example);
