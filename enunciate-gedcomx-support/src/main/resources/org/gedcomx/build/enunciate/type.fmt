@@ -119,13 +119,13 @@
 
       <h3>Example XML</h3>
 
-      <pre>
+      <pre class="prettyprint lang-xml">
 ${generateExampleXml(type)?html}
       </pre>
 
       <h3>Example JSON</h3>
 
-      <pre>
+      <pre class="prettyprint lang-js">
 ${generateExampleJson(type)}
       </pre>
 
