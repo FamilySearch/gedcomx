@@ -69,8 +69,12 @@ public class GenerateExampleXmlMethod implements TemplateMethodModelEx {
     }
     else if (object instanceof TypeDefinition) {
       type = (TypeDefinition) object;
-      namespace = "";
+      namespace = type.getNamespace();
       name = type.getName();
+      DefaultNamespace defaulNsInfo = type.getSchema().getAnnotation(DefaultNamespace.class);
+      if (defaulNsInfo != null) {
+        defaultNs = defaulNsInfo.value();
+      }
     }
     else {
       throw new TemplateModelException("The generateExampleJson method must have a root element as a parameter.");

@@ -37,7 +37,7 @@
           <ul class="navigation">
             <li id="nav-about"><a href="../About.html">About</a></li>
             <li id="nav-documentation"><a href="../Home.html">Documentation</a></li>
-            <li id="nav-code"><a href="../Code.html">Code</a></li>
+            <li id="nav-code"><a href="../Developers-Guide.html">Dev</a></li>
             <li id="nav-community"><a href="../Community.html">Community</a></li>
             <li id="nav-faq"><a href="../FAQ.html">FAQ</a></li>
           </ul>
