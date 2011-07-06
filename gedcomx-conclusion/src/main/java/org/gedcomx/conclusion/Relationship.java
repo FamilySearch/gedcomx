@@ -25,7 +25,7 @@ import org.gedcomx.attribution.Attribution;
 import org.gedcomx.common.AlternateId;
 import org.gedcomx.common.Extension;
 import org.gedcomx.rt.XmlTypeIdResolver;
-import org.gedcomx.source.AttributedSourceReference;
+import org.gedcomx.source.SourceReference;
 import org.gedcomx.types.RelationshipType;
 
 import javax.xml.XMLConstants;
@@ -56,7 +56,7 @@ public class Relationship {
   private Attribution attribution;
   private List<Event> events;
   private List<Characteristic> characteristics;
-  private List<AttributedSourceReference> sources;
+  private List<SourceReference> sources;
   private Extension extension;
 
   /**
@@ -281,7 +281,7 @@ public class Relationship {
   @XmlElement(name="source")
   @JsonProperty ("sources")
   @JsonName ("sources")
-  public List<AttributedSourceReference> getSources() {
+  public List<SourceReference> getSources() {
     return sources;
   }
 
@@ -291,7 +291,7 @@ public class Relationship {
    * @param sources The sources for the conclusions about this relationship.
    */
   @JsonProperty ("sources")
-  public void setSources(List<AttributedSourceReference> sources) {
+  public void setSources(List<SourceReference> sources) {
     this.sources = sources;
   }
 

@@ -5,9 +5,9 @@ import org.gedcomx.attribution.ContributorReference;
 import org.gedcomx.common.AlternateId;
 import org.gedcomx.common.Extension;
 import org.gedcomx.conclusion.*;
-import org.gedcomx.source.AttributedSourceReference;
 import org.gedcomx.source.SourceQualifier;
 import org.gedcomx.source.SourceQualifierProperty;
+import org.gedcomx.source.SourceReference;
 import org.gedcomx.types.*;
 import org.gedcomx.www.Link;
 import org.testng.annotations.Test;
@@ -164,11 +164,13 @@ public class TestPerson {
     relationshipReference.setHref(URI.create("urn:relationship"));
     person.getRelationships().add(relationshipReference);
 
-    ArrayList<AttributedSourceReference> sources = new ArrayList<AttributedSourceReference>();
-    AttributedSourceReference attributedSourceReference = new AttributedSourceReference();
-    attributedSourceReference.setAttribution(new Attribution());
-    attributedSourceReference.getAttribution().setContributor(new ContributorReference());
-    attributedSourceReference.getAttribution().getContributor().setHref(URI.create("urn:source-reference-attribution"));
+    ArrayList<SourceReference> sources = new ArrayList<SourceReference>();
+    SourceReference attributedSourceReference = new SourceReference();
+    Attribution attribution = new Attribution();
+    attributedSourceReference.setExtension(new Extension());
+    attributedSourceReference.getExtension().addElement(attribution);
+    attribution.setContributor(new ContributorReference());
+    attribution.getContributor().setHref(URI.create("urn:source-reference-attribution"));
     attributedSourceReference.setHref(URI.create("urn:source-uri"));
     attributedSourceReference.setId("source-reference-id");
     attributedSourceReference.setKnownType(SourceReferenceType.source);
@@ -189,7 +191,7 @@ public class TestPerson {
     Event event;
     Name name;
     RelationshipReference relationshipReference;
-    AttributedSourceReference attributedSourceReference;
+    SourceReference attributedSourceReference;
     assertEquals(GenderType.male, person.getGender().getType());
     assertEquals("urn:gender", person.getGender().getExtension().findExtensionsOfType(Link.class).get(0).getHref().toString());
 
@@ -263,7 +265,7 @@ public class TestPerson {
 
     assertEquals(1, person.getSources().size());
     attributedSourceReference = person.getSources().iterator().next();
-    assertEquals("urn:source-reference-attribution", attributedSourceReference.getAttribution().getContributor().getHref().toString());
+    assertEquals("urn:source-reference-attribution", attributedSourceReference.getExtension().findExtensionOfType(Attribution.class).getContributor().getHref().toString());
     assertEquals("urn:source-uri", attributedSourceReference.getHref().toString());
     assertEquals("source-reference-id", attributedSourceReference.getId());
     assertEquals(SourceReferenceType.source, attributedSourceReference.getKnownType());

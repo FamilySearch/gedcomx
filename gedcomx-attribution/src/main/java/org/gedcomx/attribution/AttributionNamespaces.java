@@ -32,7 +32,9 @@ import javax.xml.bind.annotation.XmlTransient;
     uri = AttributionNamespaces.GEDCOMX_ATTRIBUTION_NAMESPACE,
     label = "Attribution Namespace",
     description = "The attribution namespace contains the objects necessary for modeling attribution metadata.",
-    version = "v1"
+    version = "v1",
+    xmlMediaType = "application/gedcomx-attribution-v1+xml",
+    jsonMediaType = "application/gedcomx-attribution-v1+json"
   )
 } )
 public class AttributionNamespaces {
