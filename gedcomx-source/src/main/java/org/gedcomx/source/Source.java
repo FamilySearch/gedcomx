@@ -162,6 +162,7 @@ public class Source {
    * 
    * @return The online location of the source.
    */
+  @XmlSchemaType(name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
   public URI getWebLocation() {
     return webLocation;
   }

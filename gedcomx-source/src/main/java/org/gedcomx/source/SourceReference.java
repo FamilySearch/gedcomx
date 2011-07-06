@@ -25,10 +25,8 @@ import org.gedcomx.common.Extension;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.SourceReferenceType;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.XMLConstants;
+import javax.xml.bind.annotation.*;
 import javax.xml.namespace.QName;
 import java.net.URI;
 import java.util.List;
@@ -74,6 +72,7 @@ public class SourceReference {
    * @return The link to the source.
    */
   @XmlAttribute(namespace="http://www.w3.org/1999/xlink")
+  @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
   public URI getHref() {
     return href;
   }

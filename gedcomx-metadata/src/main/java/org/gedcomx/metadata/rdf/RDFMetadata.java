@@ -22,6 +22,7 @@ import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.rt.*;
 import org.gedcomx.metadata.dc.DublinCoreMetadata;
 
+import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.*;
 import javax.xml.namespace.QName;
 import java.net.URI;
@@ -52,6 +53,7 @@ public class RDFMetadata {
   }
   
   @XmlAttribute( name = "about" )
+  @XmlSchemaType(name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
   public URI getDataRef() {
     return dataRef;
   }

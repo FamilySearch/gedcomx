@@ -126,6 +126,7 @@ public final class DublinCoreTypeProperty {
    * @return The URI reference to the value, if the value is structured data.
    */
   @XmlAttribute( name = "resource", namespace = MetadataNamespaces.RDF_NAMESPACE )
+  @XmlSchemaType(name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
   public URI getValueRef() {
     return valueRef;
   }

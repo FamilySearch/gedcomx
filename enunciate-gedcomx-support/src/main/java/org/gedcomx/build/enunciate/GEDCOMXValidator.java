@@ -148,6 +148,11 @@ public class GEDCOMXValidator extends BaseValidator {
     Collection<Attribute> attributes = typeDef.getAttributes();
     if (attributes != null && !attributes.isEmpty()) {
       for (Attribute attribute : attributes) {
+        boolean isURI = ((DecoratedTypeMirror) TypeMirrorDecorator.decorate(attribute.getAccessorType())).isInstanceOf(URI.class.getName());
+        if (isURI && !KnownXmlType.ANY_URI.getQname().equals(attribute.getBaseType().getQname())) {
+          result.addError(attribute, "Accessors of type 'java.net.URI' should of type xs:anyURI. Please annotate the attribute with @XmlSchemaType(name = \"anyURI\", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)");
+        }
+
         if ("href".equals(attribute.getName()) && !"http://www.w3.org/1999/xlink".equals(attribute.getNamespace())) {
           result.addError(attribute, "Entity links should be make with an attribute named 'href' in the 'http://www.w3.org/1999/xlink' namespace.");
         }
@@ -173,12 +178,22 @@ public class GEDCOMXValidator extends BaseValidator {
       if (accessorType instanceof EnumType && ((EnumType) accessorType).getDeclaration().getAnnotation(XmlQNameEnum.class) != null) {
         result.addError(value, "Accessors should not reference QName enums directly. You probably want to annotate this accessor with @XmlTransient.");
       }
+
+      boolean isURI = ((DecoratedTypeMirror) TypeMirrorDecorator.decorate(accessorType)).isInstanceOf(URI.class.getName());
+      if (isURI && !KnownXmlType.ANY_URI.getQname().equals(value.getBaseType().getQname())) {
+        result.addError(value, "Accessors of type 'java.net.URI' should of type xs:anyURI. Please annotate the value with @XmlSchemaType(name = \"anyURI\", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)");
+      }
     }
 
     Collection<Element> elements = typeDef.getElements();
     if (elements != null && !elements.isEmpty()) {
       for (Element element : elements) {
         for (Element choice : element.getChoices()) {
+          boolean isURI = ((DecoratedTypeMirror) TypeMirrorDecorator.decorate(choice.getAccessorType())).isInstanceOf(URI.class.getName());
+          if (isURI && !KnownXmlType.ANY_URI.getQname().equals(choice.getBaseType().getQname())) {
+            result.addError(choice, "Accessors of type 'java.net.URI' should of type xs:anyURI. Please annotate the element with @XmlSchemaType(name = \"anyURI\", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)");
+          }
+
           if ("href".equals(choice.getName()) && !"http://www.w3.org/1999/xlink".equals(choice.getNamespace())) {
             result.addError(choice, "Entity links should be make with an attribute named 'href' in the 'http://www.w3.org/1999/xlink' namespace. You probably need to apply @XmlAttribute(namespace='http://www.w3.org/1999/xlink')");
           }
@@ -187,14 +202,8 @@ public class GEDCOMXValidator extends BaseValidator {
             result.addError(choice, "Accessors named 'id' should be attributes and annotated with @XmlID.");
           }
 
-          if ("persistentId".equals(choice.getName())) {
-            if (!((DecoratedTypeMirror) TypeMirrorDecorator.decorate(choice.getAccessorType())).isInstanceOf(URI.class.getName())) {
-              result.addError(choice, "Accessors named 'persistentId' should be elements of type URI.");
-            }
-            
-            if (!KnownXmlType.ANY_URI.getQname().equals(choice.getBaseType().getQname())) {
-              result.addError(choice, "Accessors named 'persistentId' should of type xs:anyURI. Please annotate the element with @XmlSchemaType(name = \"anyURI\", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)");
-            }
+          if ("persistentId".equals(choice.getName()) && !isURI) {
+            result.addError(choice, "Accessors named 'persistentId' should be elements of type URI.");
           }
 
           TypeMirror accessorType = choice.getAccessorType();

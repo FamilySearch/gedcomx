@@ -15,7 +15,9 @@
  */
 package org.gedcomx.conclusion;
 
+import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlSchemaType;
 import java.net.URI;
 
 /**
@@ -33,6 +35,7 @@ public final class PersonReference {
    * @return The link to the person.
    */
   @XmlAttribute(namespace="http://www.w3.org/1999/xlink")
+  @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
   public URI getHref() {
     return href;
   }
