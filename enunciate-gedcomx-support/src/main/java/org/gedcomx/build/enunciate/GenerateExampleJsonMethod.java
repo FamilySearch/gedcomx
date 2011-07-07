@@ -55,22 +55,25 @@ public class GenerateExampleJsonMethod implements TemplateMethodModelEx {
 
     Object object = BeansWrapper.getDefaultInstance().unwrap((TemplateModel) list.get(0));
     TypeDefinition type;
+    int maxDepth = Integer.MAX_VALUE;
     if (object instanceof RootElementDeclaration) {
       RootElementDeclaration rootEl = (RootElementDeclaration) object;
       type = rootEl.getTypeDefinition();
     }
     else if (object instanceof TypeDefinition) {
       type = (TypeDefinition) object;
+      maxDepth = 2;
     }
     else {
       throw new TemplateModelException("The generateExampleJson method must have a root element as a parameter.");
     }
 
     try {
-      ObjectNode node = generateExampleJson(type);
+      ObjectNode node = generateExampleJson(type, maxDepth);
       StringWriter sw = new StringWriter();
       JsonGenerator generator = new JsonFactory().createJsonGenerator(sw);
       generator.useDefaultPrettyPrinter();
+      generator.disable(JsonGenerator.Feature.QUOTE_FIELD_NAMES);
       node.serialize(generator, null);
       generator.flush();
       sw.flush();
@@ -81,17 +84,17 @@ public class GenerateExampleJsonMethod implements TemplateMethodModelEx {
     }
   }
 
-  public ObjectNode generateExampleJson(TypeDefinition type) {
+  public ObjectNode generateExampleJson(TypeDefinition type, int maxDepth) {
     if (TYPE_DEF_STACK.get() == null) {
       TYPE_DEF_STACK.set(new Stack<String>());
     }
 
     ObjectNode jsonNode = JsonNodeFactory.instance.objectNode();
-    generateExampleJson(type, jsonNode);
+    generateExampleJson(type, jsonNode, maxDepth);
     return jsonNode;
   }
 
-  protected void generateExampleJson(TypeDefinition type, ObjectNode jsonNode) {
+  protected void generateExampleJson(TypeDefinition type, ObjectNode jsonNode, int maxDepth) {
     if (TYPE_DEF_STACK.get().contains(type.getQualifiedName())) {
       jsonNode.put("...", WhateverNode.instance);
     }
@@ -101,14 +104,14 @@ public class GenerateExampleJsonMethod implements TemplateMethodModelEx {
         jsonNode.put("@type", JsonNodeFactory.instance.textNode(type.getQname().toString()));
       }
       for (Attribute attribute : type.getAttributes()) {
-        generateExampleJson(attribute, jsonNode);
+        generateExampleJson(attribute, jsonNode, maxDepth);
       }
       if (type.getValue() != null) {
-        generateExampleJson(type.getValue(), jsonNode);
+        generateExampleJson(type.getValue(), jsonNode, maxDepth);
       }
       else {
         for (Element element : type.getElements()) {
-          generateExampleJson(element, jsonNode);
+          generateExampleJson(element, jsonNode, maxDepth);
         }
       }
       TYPE_DEF_STACK.get().pop();
@@ -119,28 +122,40 @@ public class GenerateExampleJsonMethod implements TemplateMethodModelEx {
     if (baseType instanceof XmlClassType) {
       TypeDefinition typeDef = ((XmlClassType) baseType).getTypeDefinition();
       if (typeDef != null) {
-        generateExampleJson(typeDef, jsonNode);
+        generateExampleJson(typeDef, jsonNode, maxDepth);
       }
     }
   }
 
-  protected void generateExampleJson(Attribute attribute, ObjectNode jsonNode) {
+  protected void generateExampleJson(Attribute attribute, ObjectNode jsonNode, int maxDepth) {
+    if (TYPE_DEF_STACK.get().size() > maxDepth) {
+      return;
+    }
+
     DocumentationExample exampleInfo = attribute.getAnnotation(DocumentationExample.class);
     if (exampleInfo == null || !exampleInfo.exclude()) {
-      JsonNode valueNode = generateExampleJson(attribute.getBaseType(), exampleInfo == null || "##default".equals(exampleInfo.value()) ? null : exampleInfo.value());
+      JsonNode valueNode = generateExampleJson(attribute.getBaseType(), exampleInfo == null || "##default".equals(exampleInfo.value()) ? null : exampleInfo.value(), maxDepth);
       jsonNode.put(attribute.getJsonMemberName(), valueNode);
     }
   }
 
-  protected void generateExampleJson(Value value, ObjectNode jsonNode) {
+  protected void generateExampleJson(Value value, ObjectNode jsonNode, int maxDepth) {
+    if (TYPE_DEF_STACK.get().size() > maxDepth) {
+      return;
+    }
+
     DocumentationExample exampleInfo = value.getAnnotation(DocumentationExample.class);
     if (exampleInfo == null || !exampleInfo.exclude()) {
-      JsonNode valueNode = generateExampleJson(value.getBaseType(), exampleInfo == null || "##default".equals(exampleInfo.value()) ? null : exampleInfo.value());
+      JsonNode valueNode = generateExampleJson(value.getBaseType(), exampleInfo == null || "##default".equals(exampleInfo.value()) ? null : exampleInfo.value(), maxDepth);
       jsonNode.put(value.getJsonMemberName(), valueNode);
     }
   }
 
-  protected void generateExampleJson(Element element, ObjectNode jsonNode) {
+  protected void generateExampleJson(Element element, ObjectNode jsonNode, int maxDepth) {
+    if (TYPE_DEF_STACK.get().size() > maxDepth) {
+      return;
+    }
+
     DocumentationExample exampleInfo = element.getAnnotation(DocumentationExample.class);
     if (exampleInfo == null || !exampleInfo.exclude()) {
       String name = element.getJsonMemberName();
@@ -148,7 +163,7 @@ public class GenerateExampleJsonMethod implements TemplateMethodModelEx {
       if (!element.isCollectionType()) {
         String exampleValue = exampleInfo == null || "##default".equals(exampleInfo.value()) ? "..." : exampleInfo.value();
         if (element.getRef() == null) {
-          elementNode = generateExampleJson(element.getBaseType(), exampleValue);
+          elementNode = generateExampleJson(element.getBaseType(), exampleValue, maxDepth);
         }
         else {
           elementNode = JsonNodeFactory.instance.objectNode();
@@ -164,7 +179,7 @@ public class GenerateExampleJsonMethod implements TemplateMethodModelEx {
               String exampleValue = exampleInfo == null || "##default".equals(exampleInfo.value()) ? null : exampleInfo.value();
               XmlType xmlType = choice.getBaseType();
               if (i == 0) {
-                exampleChoices.add(generateExampleJson(xmlType, exampleValue));
+                exampleChoices.add(generateExampleJson(xmlType, exampleValue, maxDepth));
               }
               else {
                 exampleChoices.add(WhateverNode.instance);
@@ -181,9 +196,9 @@ public class GenerateExampleJsonMethod implements TemplateMethodModelEx {
     }
   }
 
-  protected JsonNode generateExampleJson(XmlType type, String value) {
+  protected JsonNode generateExampleJson(XmlType type, String value, int maxDepth) {
     if (type instanceof XmlClassType) {
-      return generateExampleJson(((XmlClassType) type).getTypeDefinition());
+      return generateExampleJson(((XmlClassType) type).getTypeDefinition(), maxDepth);
     }
     else {
       return type.generateExampleJson(value);

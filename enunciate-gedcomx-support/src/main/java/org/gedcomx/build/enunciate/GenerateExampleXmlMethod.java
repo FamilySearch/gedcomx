@@ -57,6 +57,7 @@ public class GenerateExampleXmlMethod implements TemplateMethodModelEx {
     String name;
     TypeDefinition type;
     String defaultNs = null;
+    int maxDepth = Integer.MAX_VALUE;
     if (object instanceof RootElementDeclaration) {
       RootElementDeclaration rootEl = (RootElementDeclaration) object;
       namespace = rootEl.getNamespace();
@@ -75,6 +76,7 @@ public class GenerateExampleXmlMethod implements TemplateMethodModelEx {
       if (defaulNsInfo != null) {
         defaultNs = defaulNsInfo.value();
       }
+      maxDepth = 2;
     }
     else {
       throw new TemplateModelException("The generateExampleJson method must have a root element as a parameter.");
@@ -99,7 +101,7 @@ public class GenerateExampleXmlMethod implements TemplateMethodModelEx {
       else {
         defaultNs = namespace;
       }
-      generateExampleXml(type, rootElement, defaultNs);
+      generateExampleXml(type, rootElement, defaultNs, maxDepth);
       org.jdom.Document document = new org.jdom.Document(rootElement);
 
       XMLOutputter out = new XMLOutputter(org.jdom.output.Format.getPrettyFormat());
@@ -113,7 +115,7 @@ public class GenerateExampleXmlMethod implements TemplateMethodModelEx {
     }
   }
 
-  protected void generateExampleXml(TypeDefinition type, org.jdom.Element parent, String defaultNs) {
+  protected void generateExampleXml(TypeDefinition type, org.jdom.Element parent, String defaultNs, int maxDepth) {
     if (TYPE_DEF_STACK.get() == null) {
       TYPE_DEF_STACK.set(new Stack<String>());
     }
@@ -131,7 +133,7 @@ public class GenerateExampleXmlMethod implements TemplateMethodModelEx {
       }
       else {
         for (Element element : type.getElements()) {
-          generateExampleXml(element, parent, defaultNs);
+          generateExampleXml(element, parent, defaultNs, maxDepth);
         }
       }
       TYPE_DEF_STACK.get().pop();
@@ -141,7 +143,7 @@ public class GenerateExampleXmlMethod implements TemplateMethodModelEx {
     if (baseType instanceof XmlClassType) {
       TypeDefinition typeDef = ((XmlClassType) baseType).getTypeDefinition();
       if (typeDef != null) {
-        generateExampleXml(typeDef, parent, defaultNs);
+        generateExampleXml(typeDef, parent, defaultNs, maxDepth);
       }
     }
   }
@@ -174,7 +176,11 @@ public class GenerateExampleXmlMethod implements TemplateMethodModelEx {
     }
   }
 
-  protected void generateExampleXml(Element element, org.jdom.Element parent, String defaultNs) {
+  protected void generateExampleXml(Element element, org.jdom.Element parent, String defaultNs, int maxDepth) {
+    if (TYPE_DEF_STACK.get().size() > maxDepth) {
+      return;
+    }
+    
     DocumentationExample exampleInfo = element.getAnnotation(DocumentationExample.class);
     if (exampleInfo == null || !exampleInfo.exclude()) {
       if (element.isWrapped()) {
@@ -222,15 +228,24 @@ public class GenerateExampleXmlMethod implements TemplateMethodModelEx {
             String exampleValue = exampleInfo == null || "##default".equals(exampleInfo.value()) ? "..." : exampleInfo.value();
             XmlType xmlType = choice.getBaseType();
             if (i == 0) {
-              generateExampleXml(xmlType, el, exampleValue, defaultNs);
+              generateExampleXml(xmlType, el, exampleValue, defaultNs, maxDepth);
             }
             else {
               if (xmlType instanceof XmlClassType) {
-                for (Attribute attribute : ((XmlClassType)xmlType).getTypeDefinition().getAttributes()) {
-                  generateExampleXml(attribute, parent, defaultNs);
+                TypeDefinition typedef = ((XmlClassType) xmlType).getTypeDefinition();
+                for (Attribute attribute : typedef.getAttributes()) {
+                  generateExampleXml(attribute, el, defaultNs);
+                }
+                if (typedef.getValue() != null) {
+                  el.addContent(new org.jdom.Text("..."));
+                }
+                else {
+                  el.addContent(new Comment("..."));
                 }
               }
-              el.addContent(new Comment("..."));
+              else {
+                el.addContent(new org.jdom.Text("..."));
+              }
             }
 
             parent.addContent(el);
@@ -264,9 +279,9 @@ public class GenerateExampleXmlMethod implements TemplateMethodModelEx {
     }
   }
 
-  public void generateExampleXml(XmlType type, org.jdom.Element parent, String example, String defaultNs) {
+  public void generateExampleXml(XmlType type, org.jdom.Element parent, String example, String defaultNs, int maxDepth) {
     if (type instanceof XmlClassType) {
-      generateExampleXml(((XmlClassType)type).getTypeDefinition(), parent, defaultNs);
+      generateExampleXml(((XmlClassType)type).getTypeDefinition(), parent, defaultNs, maxDepth);
     }
     else {
       type.generateExampleXml(parent, example);

@@ -42,20 +42,25 @@
 
       ${element.docValue!""}
 
-      <h3>Example XML</h3>
-
-      <pre class="prettyprint lang-xml">
+      <div id="accordion">
+        <h3><a href="#">XML</a></h3>
+        <div>
+          <b style="font-weight: bold">Example</b>
+          <pre class="prettyprint lang-xml">
 ${generateExampleXml(element)?html}
-      </pre>
+          </pre>
+        </div>
 
-      <h3>Example JSON</h3>
-
-      <pre class="prettyprint lang-js">
+        <h3><a href="#">JSON</a></h3>
+        <div>
+          <b style="font-weight: bold">Example</b>
+          <pre class="prettyprint lang-js">
 ${generateExampleJson(element)}
-      </pre>
-
-      <div class="clear" />
+          </pre>
+        </div>
     </div>
+
+    <div class="clear" />
     [@libBoilerplate.writeFooter/]
   </div> <!--! end of #container -->
 
