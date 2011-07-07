@@ -3,13 +3,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <artifactId>gedcomx-attribution</artifactId>
-  <version>0.2.0.RELEASE</version>
+  <version>0.3.0.BUILD-SNAPSHOT</version>
   <name>GEDCOM X - Attribution</name>
 
   <parent>
     <groupId>org.gedcomx</groupId>
     <artifactId>gedcomx-parent</artifactId>
-    <version>0.2.0.RELEASE</version>
+    <version>0.3.0.BUILD-SNAPSHOT</version>
   </parent>
 
   <properties>
@@ -44,19 +44,19 @@
     <dependency>
       <groupId>org.gedcomx</groupId>
       <artifactId>gedcomx-types</artifactId>
-      <version>0.2.0.RELEASE</version>
+      <version>0.3.0.BUILD-SNAPSHOT</version>
     </dependency>
 
     <dependency>
       <groupId>org.gedcomx</groupId>
       <artifactId>gedcomx-common</artifactId>
-      <version>0.2.0.RELEASE</version>
+      <version>0.3.0.BUILD-SNAPSHOT</version>
     </dependency>
 
     <dependency>
       <groupId>org.gedcomx</groupId>
       <artifactId>gedcomx-rt-support</artifactId>
-      <version>0.2.0.RELEASE</version>
+      <version>0.3.0.BUILD-SNAPSHOT</version>
     </dependency>
   </dependencies>
 
