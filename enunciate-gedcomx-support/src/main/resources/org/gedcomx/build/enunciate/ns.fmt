@@ -57,7 +57,7 @@
       <p>${schema.properties.description!""}</p>
 
       [#if schema.globalElements?size > 0]
-      <h3>Root Elements</h3>
+      <h3>Entities</h3>
 
       <ul>
         [#list schema.globalElements as element]

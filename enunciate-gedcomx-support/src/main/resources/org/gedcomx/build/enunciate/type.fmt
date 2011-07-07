@@ -186,10 +186,10 @@ ${generateExampleXml(type)?html}
 ${generateExampleJson(type)}
         </pre>
       </div>
+    </div>
     [/#if]
 
-      <div class="clear" />
-    </div>
+    <div class="clear" />
     [@libBoilerplate.writeFooter/]
   </div> <!--! end of #container -->
 

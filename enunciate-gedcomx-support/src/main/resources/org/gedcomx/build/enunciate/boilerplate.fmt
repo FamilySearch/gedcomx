@@ -55,7 +55,7 @@
       </div>
     </footer>
 [/#macro]
-[#macro writeEndBody]
+[#macro writeEndBody active=true]
   <!-- JavaScript at the bottom for fast page loading -->
 
   <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if necessary -->
@@ -67,6 +67,9 @@
   <script>
     $(function() {
       $("#accordion").accordion({
+  [#if !active]
+        active: false,
+  [/#if]
 			  collapsible: true
 		  });
     });
