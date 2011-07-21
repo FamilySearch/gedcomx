@@ -31,8 +31,8 @@ import javax.xml.bind.annotation.XmlTransient;
     label = "Source Namespace",
     description = "The source namespace contains the objects necessary for modeling sources.",
     version = "v1",
-    xmlMediaType = "application/gedcomx-source-v1+xml",
-    jsonMediaType = "application/gedcomx-source-v1+json"
+    xmlMediaType = SourceNamespaces.GEDCOMX_SOURCE_XML_MEDIA_TYPE,
+    jsonMediaType = SourceNamespaces.GEDCOMX_SOURCE_JSON_MEDIA_TYPE
   )
 } )
 public class SourceNamespaces {
@@ -40,4 +40,6 @@ public class SourceNamespaces {
   private SourceNamespaces() {}
 
   public static final String GEDCOMX_SOURCE_NAMESPACE = "http://gedcomx.org/source/v1";
+  public static final String GEDCOMX_SOURCE_XML_MEDIA_TYPE = "application/gedcomx-source-v1+xml";
+  public static final String GEDCOMX_SOURCE_JSON_MEDIA_TYPE = "application/gedcomx-source-v1+json";
 }

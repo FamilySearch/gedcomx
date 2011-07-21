@@ -31,8 +31,8 @@ import javax.xml.bind.annotation.XmlTransient;
     label = "Source WWW Namespace",
     description = "The source www namespace contains the objects necessary for modeling source data exposed via the World Wide Web.",
     version = "v1",
-    xmlMediaType = "application/gedcomx-source-www-v1+xml",
-    jsonMediaType = "application/gedcomx-source-www-v1+json"
+    xmlMediaType = SourceWWWNamespaces.GEDCOMX_SOURCE_WWW_XML_MEDIA_TYPE,
+    jsonMediaType = SourceWWWNamespaces.GEDCOMX_SOURCE_WWW_JSON_MEDIA_TYPE
   )
 } )
 public class SourceWWWNamespaces {
@@ -40,4 +40,6 @@ public class SourceWWWNamespaces {
   private SourceWWWNamespaces() {}
 
   public static final String GEDCOMX_SOURCE_WWW_NAMESPACE = "http://gedcomx.org/source/www/v1";
+  public static final String GEDCOMX_SOURCE_WWW_XML_MEDIA_TYPE = "application/x-gedcom-source-www-v1+xml";
+  public static final String GEDCOMX_SOURCE_WWW_JSON_MEDIA_TYPE = "application/x-gedcom-source-www-v1+json";
 }

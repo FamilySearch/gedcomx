@@ -31,8 +31,8 @@ import javax.xml.bind.annotation.XmlTransient;
     label = "Conclusion WWW Namespace",
     description = "The conclusion www namespace contains the objects necessary for modeling conclusion data exposed via the World Wide Web.",
     version = "v1",
-    xmlMediaType = "application/gedcomx-conclusion-www-v1+xml",
-    jsonMediaType = "application/gedcomx-conclusion-www-v1+json"
+    xmlMediaType = ConclusionWWWNamespaces.GEDCOMX_CONCLUSION_WWW_XML_MEDIA_TYPE,
+    jsonMediaType = ConclusionWWWNamespaces.GEDCOMX_CONCLUSION_WWW_JSON_MEDIA_TYPE
   )
 } )
 public class ConclusionWWWNamespaces {
@@ -40,5 +40,7 @@ public class ConclusionWWWNamespaces {
   private ConclusionWWWNamespaces() {}
 
   public static final String GEDCOMX_CONCLUSION_WWW_NAMESPACE = "http://gedcomx.org/conclusion/www/v1";
+  public static final String GEDCOMX_CONCLUSION_WWW_XML_MEDIA_TYPE = "application/x-gedcom-conclusion-www-v1+xml";
+  public static final String GEDCOMX_CONCLUSION_WWW_JSON_MEDIA_TYPE = "application/x-gedcom-conclusion-www-v1+json";
 
 }

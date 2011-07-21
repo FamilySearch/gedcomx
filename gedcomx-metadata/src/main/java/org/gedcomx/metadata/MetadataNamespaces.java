@@ -31,8 +31,8 @@ import javax.xml.bind.annotation.XmlTransient;
     label = "RDF Namespace",
     description = "The rdf namespace contains the objects for RDF support.",
     version = "1999-02-22",
-    xmlMediaType = MetadataNamespaces.RDF_MEDIA_TYPE,
-    jsonMediaType = "application/rdf+json"
+    xmlMediaType = MetadataNamespaces.RDF_XML_MEDIA_TYPE,
+    jsonMediaType = MetadataNamespaces.RDF_JSON_MEDIA_TYPE
   ),
   @Namespace (
     id = "dcterms",
@@ -54,7 +54,8 @@ public class MetadataNamespaces {
   private MetadataNamespaces() {}
 
   public static final String RDF_NAMESPACE = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
-  public static final String RDF_MEDIA_TYPE = "application/rdf+xml";
+  public static final String RDF_XML_MEDIA_TYPE = "application/rdf+xml";
+  public static final String RDF_JSON_MEDIA_TYPE = "application/rdf+json";
   public static final String DUBLIN_CORE_NAMESPACE = "http://purl.org/dc/terms/";
   public static final String DUBLIN_CORE_TYPE_NAMESPACE = "http://purl.org/dc/dcmitype/";
 

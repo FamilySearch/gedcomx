@@ -31,8 +31,8 @@ import javax.xml.bind.annotation.XmlTransient;
     label = "Record Namespace",
     description = "The record namespace contains the objects necessary for modeling genealogical record data.",
     version = "v1",
-    xmlMediaType = "application/gedcomx-record-v1+xml",
-    jsonMediaType = "application/gedcomx-record-v1+json"
+    xmlMediaType = RecordNamespaces.GEDCOMX_RECORD_XML_MEDIA_TYPE,
+    jsonMediaType = RecordNamespaces.GEDCOMX_RECORD_JSON_MEDIA_TYPE
   )
 } )
 public class RecordNamespaces {
@@ -40,5 +40,7 @@ public class RecordNamespaces {
   private RecordNamespaces() {}
 
   public static final String GEDCOMX_RECORD_NAMESPACE = "http://gedcomx.org/record/v1";
+  public static final String GEDCOMX_RECORD_XML_MEDIA_TYPE = "application/x-gedcom-record-v1+xml";
+  public static final String GEDCOMX_RECORD_JSON_MEDIA_TYPE = "application/x-gedcom-record-v1+json";
 
 }
