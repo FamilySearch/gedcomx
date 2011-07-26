@@ -40,6 +40,7 @@ import java.beans.Introspector;
 import java.io.*;
 import java.lang.annotation.Annotation;
 import java.util.*;
+import java.util.zip.GZIPInputStream;
 
 /**
  * Implementation of {@link org.gedcomx.fileformat.GedcomxFileWriter} that uses the jersey-multipart library to do the dirty work.
@@ -283,7 +284,19 @@ public class JerseyMultipartGedcomxFileReader implements GedcomxFileReader {
       Object entity = bp.getEntity();
 
       if (entity instanceof BodyPartEntity) {
-        InputStream in = ((BodyPartEntity)entity).getInputStream();
+        final BodyPartEntity bpe = (BodyPartEntity) entity;
+        InputStream in = bpe.getInputStream();
+
+        List<String> encodings = bp.getHeaders().get("Content-Encoding");
+        if (encodings != null) {
+          for (String encoding : encodings) {
+            if ("gzip".equalsIgnoreCase(encoding)) {
+              in = new GZIPInputStream(in);
+              break;
+            }
+          }
+        }
+
         if (!knownClasses.isEmpty() && (isXml(mediaType) || isJson(mediaType))) {
           Class<?> associatedClass = null;
           //this is xml or json; let's see if we recognize an associated class...
@@ -346,17 +359,20 @@ public class JerseyMultipartGedcomxFileReader implements GedcomxFileReader {
             MessageBodyReader reader = client.getProviders().getMessageBodyReader(associatedClass, associatedClass, new Annotation[0], mediaType);
             entity = reader.readFrom(associatedClass, associatedClass, new Annotation[0], mediaType, this.bp.getHeaders(), in);
             bp.setEntity(entity);
+            bpe.cleanup();
           }
           else {
             //we didn't recognize the body as a known class, so just return the input stream.
             bp.setEntity(in);
             entity = in;
+            bpe.cleanup();
           }
         }
         else {
           //neither xml nor json; just return the inputstream.
           bp.setEntity(in);
           entity = in;
+          bpe.cleanup();
         }
       }
 

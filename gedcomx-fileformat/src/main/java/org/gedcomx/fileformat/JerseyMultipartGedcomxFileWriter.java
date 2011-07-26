@@ -40,6 +40,8 @@ import java.util.*;
  */
 public class JerseyMultipartGedcomxFileWriter implements GedcomxFileWriter {
 
+  //todo: support using writing using gzip compression.
+
   private final MultiPart root;
   private final Client client;
   private final OutBoundHeaders headers = new OutBoundHeaders();

@@ -1,5 +1,6 @@
 package org.gedcomx.fileformat;
 
+import com.sun.jersey.multipart.Boundary;
 import org.gedcomx.common.Extension;
 import org.gedcomx.conclusion.ConclusionNamespaces;
 import org.gedcomx.conclusion.Person;
@@ -27,6 +28,8 @@ import java.net.URI;
 import java.util.Collection;
 import java.util.Properties;
 import java.util.UUID;
+import java.util.zip.GZIPInputStream;
+import java.util.zip.GZIPOutputStream;
 
 import static org.testng.AssertJUnit.*;
 
@@ -210,10 +213,60 @@ public class TestJerseyMultipartGedcomxFileReader {
   }
 
   /**
-   * tests the notion of gzipping parts of the message.
+   * Tests the basic structure of the format...
    */
   public void testGZippedParts() throws Exception {
-    //todo: try it out.
+    //create a message using the standard multipart library.
+    Marshaller marshaller = JAXBContext.newInstance(Record.class, Person.class, Relationship.class, Link.class).createMarshaller();
+    ByteArrayOutputStream messageOut = new ByteArrayOutputStream(); //we have to construct our multipart message by hand because javamail doesn't let us but raw binary data in the content body.
+    MediaType boundedContentType = Boundary.addBoundary(GedcomxFileWriter.MEDIA_TYPE);
+    String boundary = boundedContentType.getParameters().get("boundary");
+    messageOut.write(String.format("Content-Type: %s\r\n\r\n--%s\r\n", boundedContentType, boundary).getBytes("utf-8"));
+
+    Record record = new Record();
+    record.setId(UUID.randomUUID().toString());
+    URI recordPersistentId = URI.create("record_pid");
+    record.setPersistentId(recordPersistentId);
+    record.setExtension(new Extension());
+    Link link = new Link();
+    link.setHref(URI.create("urn:some-source"));
+    record.getExtension().addElement(link);
+    messageOut.write(String.format("Content-ID: %s\r\nContent-Type: %s\r\nContent-Encoding: gzip\r\n\r\n", record.getId(), RecordNamespaces.GEDCOMX_RECORD_XML_MEDIA_TYPE).getBytes("utf-8"));
+    GZIPOutputStream gzipOut = new GZIPOutputStream(messageOut);
+    marshaller.marshal(record, gzipOut);
+    gzipOut.flush();
+    gzipOut.finish();
+    messageOut.write(String.format("\r\n--%s\r\n", boundary).getBytes("utf-8"));
+
+    messageOut.write(String.format("Content-ID: %s\r\nContent-Type: %s\r\nContent-Encoding: gzip\r\n\r\n", UUID.randomUUID().toString(), "text/html").getBytes("utf-8"));
+    gzipOut = new GZIPOutputStream(messageOut);
+    gzipOut.write("<b>here</b> is some html text".getBytes("utf-8"));
+    gzipOut.flush();
+    gzipOut.finish();
+    messageOut.write(String.format("\r\n--%s--", boundary).getBytes("utf-8"));
+
+//    System.out.println(new String(messageOut.toByteArray(), "utf-8"));
+
+    JerseyMultipartGedcomxFileReader reader = new JerseyMultipartGedcomxFileReader(new ByteArrayInputStream(messageOut.toByteArray()), Record.class, Person.class, Relationship.class, Link.class);
+    Collection<GedcomxFilePart> parts = reader.getParts();
+    assertEquals(2, parts.size());
+    for (GedcomxFilePart part : parts) {
+      assertNotNull(part.getCid());
+      MediaType mt = MediaType.valueOf(part.getMediaType());
+      Object content = part.getContent();
+      if (content instanceof Record) {
+        record = (Record) content;
+        assertEquals(RecordNamespaces.GEDCOMX_RECORD_XML_MEDIA_TYPE, mt.toString());
+        assertEquals(recordPersistentId, record.getPersistentId());
+        assertNotNull(record.getExtension());
+        assertEquals(link.getHref(), record.getExtension().findExtensionOfType(Link.class).getHref());
+      }
+      else {
+        assertEquals("text", mt.getType());
+        assertEquals("html", mt.getSubtype());
+        assertEquals("<b>here</b> is some html text", readString((InputStream) content));
+      }
+    }
   }
 
 }
