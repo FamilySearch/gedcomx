@@ -30,6 +30,7 @@ import javax.ws.rs.ext.MessageBodyWriter;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.*;
+import java.lang.annotation.Annotation;
 import java.util.*;
 
 /**
@@ -38,8 +39,6 @@ import java.util.*;
  * @author Ryan Heaton
  */
 public class JerseyMultipartGedcomxFileWriter implements GedcomxFileWriter {
-
-  public static final MediaType MEDIA_TYPE = MediaType.valueOf("multipart/x-gedcom");
 
   private final MultiPart root;
   private final Client client;
@@ -83,6 +82,7 @@ public class JerseyMultipartGedcomxFileWriter implements GedcomxFileWriter {
         }
       }
       clientConfig.getSingletons().add(new SpecifiedClassesJAXBContextResolver(jaxbClasses));
+      clientConfig.getSingletons().add(new ObjectMapperContextResolver(contextClasses));
     }
     catch (JAXBException e) {
       throw new IllegalArgumentException(e);
@@ -196,7 +196,7 @@ public class JerseyMultipartGedcomxFileWriter implements GedcomxFileWriter {
     // headerWriter.write("Here is some text that you can put as a preamble in case the file ever gets opened by a text editor. It should be ignored");
     // headerWriter.flush();
 
-    MessageBodyWriter<MultiPart> writer = this.client.getProviders().getMessageBodyWriter(MultiPart.class, MultiPart.class, null, mediaType);
+    MessageBodyWriter<MultiPart> writer = this.client.getProviders().getMessageBodyWriter(MultiPart.class, MultiPart.class, new Annotation[0], mediaType);
     writer.writeTo(root, MultiPart.class, MultiPart.class, null, boundaryMediaType, new UnmodifiableMultivaluedMap<String, Object>(headers), out);
   }
 }

@@ -38,7 +38,13 @@
       <artifactId>jersey-multipart</artifactId>
       <version>1.5</version>
     </dependency>
+    <dependency>
+      <groupId>org.gedcomx</groupId>
+      <artifactId>gedcomx-rt-support</artifactId>
+      <version>${project.version}</version>
+    </dependency>
 
+    <!--test dependencies-->
     <dependency>
       <groupId>javax.mail</groupId>
       <artifactId>mail</artifactId>
@@ -48,25 +54,25 @@
     <dependency>
       <groupId>org.gedcomx</groupId>
       <artifactId>gedcomx-conclusion</artifactId>
-      <version>0.3.0.BUILD-SNAPSHOT</version>
+      <version>${project.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.gedcomx</groupId>
       <artifactId>gedcomx-record</artifactId>
-      <version>0.3.0.BUILD-SNAPSHOT</version>
+      <version>${project.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.gedcomx</groupId>
       <artifactId>gedcomx-source</artifactId>
-      <version>0.3.0.BUILD-SNAPSHOT</version>
+      <version>${project.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.gedcomx</groupId>
       <artifactId>gedcomx-www</artifactId>
-      <version>0.3.0.BUILD-SNAPSHOT</version>
+      <version>${project.version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>

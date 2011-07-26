@@ -38,11 +38,15 @@ public class XmlTypeIdResolver implements TypeIdResolver {
   private static final Map<String, JavaType> ID_TO_TYPE = new ConcurrentHashMap<String, JavaType>();
   private static final Map<Class<?>, String> TYPE_TO_ID = new ConcurrentHashMap<Class<?>, String>();
 
-  public void init(JavaType javaType) {
+  public static void initContextClass(JavaType javaType) {
     Class<?> rawClass = javaType.getRawClass();
     String typeQName = typeQName(rawClass);
     ID_TO_TYPE.put(typeQName, javaType);
     TYPE_TO_ID.put(rawClass, typeQName);
+  }
+
+  public void init(JavaType javaType) {
+    initContextClass(javaType);
   }
 
   public String idFromValue(Object o) {

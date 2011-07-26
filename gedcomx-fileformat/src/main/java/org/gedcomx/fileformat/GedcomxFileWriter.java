@@ -15,6 +15,7 @@
  */
 package org.gedcomx.fileformat;
 
+import javax.ws.rs.core.MediaType;
 import java.io.IOException;
 import java.io.OutputStream;
 
@@ -24,6 +25,8 @@ import java.io.OutputStream;
  * @author Ryan Heaton
  */
 public interface GedcomxFileWriter {
+
+  MediaType MEDIA_TYPE = MediaType.valueOf("multipart/x-gedcom-v1");
 
   /**
    * Add a part to the file.

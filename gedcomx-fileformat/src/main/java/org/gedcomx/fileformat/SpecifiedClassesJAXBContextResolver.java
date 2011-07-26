@@ -15,10 +15,11 @@
  */
 package org.gedcomx.fileformat;
 
+import org.gedcomx.rt.GedcomNamespacePrefixMapper;
+
 import javax.ws.rs.ext.ContextResolver;
 import javax.ws.rs.ext.Provider;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
+import javax.xml.bind.*;
 import java.util.Set;
 
 /**
@@ -29,12 +30,12 @@ import java.util.Set;
 @Provider
 public class SpecifiedClassesJAXBContextResolver implements ContextResolver<JAXBContext> {
 
-  private final Set<Class<?>> contextClasses;
-  private final JAXBContext context;
+  final Set<Class<?>> contextClasses;
+  final JAXBContext context;
 
   public SpecifiedClassesJAXBContextResolver(Set<Class<?>> contextClasses) throws JAXBException {
     this.contextClasses = contextClasses;
-    this.context = JAXBContext.newInstance(contextClasses.toArray(new Class<?>[contextClasses.size()]));
+    this.context = new PrettierJAXBContextAdapter(JAXBContext.newInstance(contextClasses.toArray(new Class<?>[contextClasses.size()])));
   }
 
   /**
@@ -42,5 +43,32 @@ public class SpecifiedClassesJAXBContextResolver implements ContextResolver<JAXB
    */
   public JAXBContext getContext(Class<?> type) {
     return contextClasses.contains(type) ? context : null;
+  }
+
+  private static class PrettierJAXBContextAdapter extends JAXBContext {
+
+    private final JAXBContext delegate;
+
+    public PrettierJAXBContextAdapter(JAXBContext delegate) {
+      this.delegate = delegate;
+    }
+
+    @Override
+    public Unmarshaller createUnmarshaller() throws JAXBException {
+      return this.delegate.createUnmarshaller();
+    }
+
+    @Override
+    public Marshaller createMarshaller() throws JAXBException {
+      Marshaller marshaller = this.delegate.createMarshaller();
+      marshaller.setProperty("jaxb.formatted.output", Boolean.TRUE);
+      marshaller.setProperty("com.sun.xml.bind.namespacePrefixMapper", new GedcomNamespacePrefixMapper());
+      return marshaller;
+    }
+
+    @Override
+    public Validator createValidator() throws JAXBException {
+      return this.delegate.createValidator();
+    }
   }
 }
