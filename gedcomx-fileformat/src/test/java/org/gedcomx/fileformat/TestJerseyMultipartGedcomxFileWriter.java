@@ -7,6 +7,7 @@ import org.gedcomx.conclusion.PersonReference;
 import org.gedcomx.conclusion.Relationship;
 import org.gedcomx.record.Record;
 import org.gedcomx.record.RecordNamespaces;
+import org.gedcomx.types.RelationshipType;
 import org.gedcomx.www.Link;
 import org.testng.annotations.Test;
 
@@ -77,6 +78,7 @@ public class TestJerseyMultipartGedcomxFileWriter {
     relationship.setPerson1(new PersonReference());
     relationship.getPerson1().setHref(URI.create("cid:" + person.getId()));
     cid = writer.addPart(ConclusionNamespaces.GEDCOMX_CONCLUSION_XML_MEDIA_TYPE, relationship);
+    relationship.setKnownType(RelationshipType.couple);
     relationship.setId(cid);
 
     ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -106,6 +108,7 @@ public class TestJerseyMultipartGedcomxFileWriter {
     relationship = (Relationship) unmarshaller.unmarshal(relationshipPart.getDataHandler().getInputStream());
     assertEquals(relationshipPersistentId, relationship.getPersistentId());
     assertNotNull(relationship.getPerson1());
+    assertEquals(RelationshipType.couple, relationship.getKnownType());
     URI href = relationship.getPerson1().getHref();
     assertEquals("relationship should be referencing the person", person.getId(), href.getSchemeSpecificPart());
   }

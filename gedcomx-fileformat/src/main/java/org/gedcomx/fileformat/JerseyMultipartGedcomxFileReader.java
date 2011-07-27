@@ -297,6 +297,8 @@ public class JerseyMultipartGedcomxFileReader implements GedcomxFileReader {
           }
         }
 
+        //todo: support for Content-Transfer-Encoding header.
+
         if (!knownClasses.isEmpty() && (isXml(mediaType) || isJson(mediaType))) {
           Class<?> associatedClass = null;
           //this is xml or json; let's see if we recognize an associated class...
