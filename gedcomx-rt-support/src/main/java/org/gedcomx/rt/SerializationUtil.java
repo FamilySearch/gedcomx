@@ -15,9 +15,9 @@
  */
 package org.gedcomx.rt;
 
-import org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.SerializationConfig;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.node.ObjectNode;
 import org.w3c.dom.Document;
 
@@ -120,7 +120,7 @@ public class SerializationUtil {
 
   @SuppressWarnings ( {"unchecked"} )
   public static <C> C processThroughJson(Object reference, Class<? extends C> instanceClass) throws IOException {
-    return processThroughJson(reference, instanceClass, new JacksonJaxbJsonProvider().locateMapper(instanceClass, null));
+    return processThroughJson(reference, instanceClass, new GedcomJsonProvider().locateMapper(instanceClass, null));
   }
 
   @SuppressWarnings ( {"unchecked"} )
@@ -135,12 +135,13 @@ public class SerializationUtil {
   }
 
   public static <C> byte[] toJsonStream(Object reference, Class<? extends C> instanceClass) throws IOException {
-    return toJsonStream(reference, instanceClass, new JacksonJaxbJsonProvider().locateMapper(instanceClass, null));
+    return toJsonStream(reference, instanceClass, new GedcomJsonProvider().locateMapper(instanceClass, null));
   }
 
   protected static <C> byte[] toJsonStream(Object reference, Class<? extends C> instanceClass, ObjectMapper mapper) throws IOException {
     ByteArrayOutputStream out = new ByteArrayOutputStream();
     mapper.getSerializationConfig().enable(SerializationConfig.Feature.INDENT_OUTPUT);
+    mapper.getSerializationConfig().setSerializationInclusion(JsonSerialize.Inclusion.NON_NULL);
     mapper.writeValue(out, reference);
     if ("true".equals(System.getProperty("show.output"))) {
       System.out.println(new String(out.toByteArray(), "utf-8"));
@@ -153,7 +154,7 @@ public class SerializationUtil {
   }
 
   public static ObjectNode toJsonNode(Object reference, Class<?> instanceClass) throws IOException {
-    return toJsonNode(reference, instanceClass, new JacksonJaxbJsonProvider().locateMapper(instanceClass, null));
+    return toJsonNode(reference, instanceClass, new GedcomJsonProvider().locateMapper(instanceClass, null));
   }
 
   public static ObjectNode toJsonNode(Object reference, Class<?> instanceClass, ObjectMapper mapper) throws IOException {

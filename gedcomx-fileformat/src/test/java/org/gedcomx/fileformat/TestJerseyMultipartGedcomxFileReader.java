@@ -1,6 +1,7 @@
 package org.gedcomx.fileformat;
 
 import com.sun.jersey.multipart.Boundary;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.gedcomx.common.Extension;
 import org.gedcomx.conclusion.ConclusionNamespaces;
 import org.gedcomx.conclusion.Person;
@@ -28,7 +29,6 @@ import java.net.URI;
 import java.util.Collection;
 import java.util.Properties;
 import java.util.UUID;
-import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
 import static org.testng.AssertJUnit.*;
@@ -134,7 +134,7 @@ public class TestJerseyMultipartGedcomxFileReader {
     link.setHref(URI.create("urn:some-source"));
     record.getExtension().addElement(link);
     MimeBodyPart bp = new MimeBodyPart();
-    bp.setContentID(record.getId());
+    bp.setContentID("<" + record.getId() + ">");
     bp.addHeader("Content-Type", RecordNamespaces.GEDCOMX_RECORD_XML_MEDIA_TYPE);
     ByteArrayOutputStream out = new ByteArrayOutputStream();
     marshaller.marshal(record, out);
@@ -146,7 +146,7 @@ public class TestJerseyMultipartGedcomxFileReader {
     person.setPersistentId(personPersistentId);
     person.setId(UUID.randomUUID().toString());
     bp = new MimeBodyPart();
-    bp.setContentID(person.getId());
+    bp.setContentID("<" + person.getId() + ">");
     bp.addHeader("Content-Type", ConclusionNamespaces.GEDCOMX_CONCLUSION_XML_MEDIA_TYPE);
     out = new ByteArrayOutputStream();
     marshaller.marshal(person, out);
@@ -160,7 +160,7 @@ public class TestJerseyMultipartGedcomxFileReader {
     relationship.getPerson1().setHref(URI.create("cid:" + person.getId()));
     relationship.setId(UUID.randomUUID().toString());
     bp = new MimeBodyPart();
-    bp.setContentID(relationship.getId());
+    bp.setContentID("<" + relationship.getId() + ">");
     bp.addHeader("Content-Type", ConclusionNamespaces.GEDCOMX_CONCLUSION_XML_MEDIA_TYPE);
     out = new ByteArrayOutputStream();
     marshaller.marshal(relationship, out);
@@ -168,7 +168,7 @@ public class TestJerseyMultipartGedcomxFileReader {
     mp.addBodyPart(bp);
 
     bp = new MimeBodyPart();
-    bp.setContentID(UUID.randomUUID().toString());
+    bp.setContentID("<" + UUID.randomUUID().toString() + ">");
     bp.addHeader("Content-Type", "text/html");
     bp.setDataHandler(new DataHandler(new ByteArrayDataSource("<b>here</b> is some html text", "text/html")));
     mp.addBodyPart(bp);
@@ -208,6 +208,92 @@ public class TestJerseyMultipartGedcomxFileReader {
         assertEquals("text", mt.getType());
         assertEquals("html", mt.getSubtype());
         assertEquals("<b>here</b> is some html text", readString((InputStream) content));
+      }
+    }
+  }
+
+  /**
+   * Tests writing more complex objects.
+   */
+  public void testReadMoreComplexJsonObjects() throws Exception {
+    //create a message using the standard multipart library.
+    ObjectMapper mapper = new ObjectMapper();
+    MimeMessage message = new MimeMessage(Session.getDefaultInstance(new Properties()));
+    MimeMultipart mp = new MimeMultipart(GedcomxFileWriter.MEDIA_TYPE.getSubtype());
+    message.setContent(mp);
+
+    Record record = new Record();
+    record.setId(UUID.randomUUID().toString());
+    URI recordPersistentId = URI.create("record_pid");
+    record.setPersistentId(recordPersistentId);
+    record.setExtension(new Extension());
+    Link link = new Link();
+    link.setHref(URI.create("urn:some-source"));
+    record.getExtension().addElement(link);
+    MimeBodyPart bp = new MimeBodyPart();
+    bp.setContentID("<" + record.getId() + ">");
+    bp.addHeader("Content-Type", RecordNamespaces.GEDCOMX_RECORD_JSON_MEDIA_TYPE);
+    ByteArrayOutputStream out = new ByteArrayOutputStream();
+    mapper.writeValue(out, record);
+    bp.setDataHandler(new DataHandler(new ByteArrayDataSource(out.toByteArray(), RecordNamespaces.GEDCOMX_RECORD_JSON_MEDIA_TYPE)));
+    mp.addBodyPart(bp);
+
+    Person person = new Person();
+    URI personPersistentId = URI.create("person_pid");
+    person.setPersistentId(personPersistentId);
+    person.setId(UUID.randomUUID().toString());
+    bp = new MimeBodyPart();
+    bp.setContentID("<" + person.getId() + ">");
+    bp.addHeader("Content-Type", ConclusionNamespaces.GEDCOMX_CONCLUSION_JSON_MEDIA_TYPE);
+    out = new ByteArrayOutputStream();
+    mapper.writeValue(out, person);
+    bp.setDataHandler(new DataHandler(new ByteArrayDataSource(out.toByteArray(), ConclusionNamespaces.GEDCOMX_CONCLUSION_JSON_MEDIA_TYPE)));
+    mp.addBodyPart(bp);
+
+    Relationship relationship = new Relationship();
+    URI relationshipPersistentId = URI.create("relationship_pid");
+    relationship.setPersistentId(relationshipPersistentId);
+    relationship.setPerson1(new PersonReference());
+    relationship.getPerson1().setHref(URI.create("cid:" + person.getId()));
+    relationship.setId(UUID.randomUUID().toString());
+    bp = new MimeBodyPart();
+    bp.setContentID("<" + relationship.getId() + ">");
+    bp.addHeader("Content-Type", ConclusionNamespaces.GEDCOMX_CONCLUSION_JSON_MEDIA_TYPE);
+    out = new ByteArrayOutputStream();
+    mapper.writeValue(out, relationship);
+    bp.setDataHandler(new DataHandler(new ByteArrayDataSource(out.toByteArray(), ConclusionNamespaces.GEDCOMX_CONCLUSION_JSON_MEDIA_TYPE)));
+    mp.addBodyPart(bp);
+
+    out = new ByteArrayOutputStream();
+    message.writeTo(out);
+    //writer.writeTo(System.out);
+
+    JerseyMultipartGedcomxFileReader reader = new JerseyMultipartGedcomxFileReader(new ByteArrayInputStream(out.toByteArray()), Record.class, Person.class, Link.class);
+    Collection<GedcomxFilePart> parts = reader.getParts();
+    assertEquals(3, parts.size());
+    for (GedcomxFilePart part : parts) {
+      assertNotNull(part.getCid());
+      MediaType mt = MediaType.valueOf(part.getMediaType());
+      Object content = part.getContent();
+      if (content instanceof Record) {
+        record = (Record) content;
+        assertEquals(RecordNamespaces.GEDCOMX_RECORD_JSON_MEDIA_TYPE, mt.toString());
+        assertEquals(recordPersistentId, record.getPersistentId());
+        assertNotNull(record.getExtension());
+        assertEquals(link.getHref(), record.getExtension().findExtensionOfType(Link.class).getHref());
+      }
+      else if (content instanceof Person) {
+        person = (Person) content;
+        assertEquals(ConclusionNamespaces.GEDCOMX_CONCLUSION_JSON_MEDIA_TYPE, mt.toString());
+        assertEquals(personPersistentId, person.getPersistentId());
+      }
+      else {
+        relationship = mapper.readValue((InputStream) content, Relationship.class);
+        assertEquals(ConclusionNamespaces.GEDCOMX_CONCLUSION_JSON_MEDIA_TYPE, mt.toString());
+        assertEquals(relationshipPersistentId, relationship.getPersistentId());
+        assertNotNull(relationship.getPerson1());
+        URI href = relationship.getPerson1().getHref();
+        assertEquals("relationship should be referencing the person", person.getId(), href.getSchemeSpecificPart());
       }
     }
   }

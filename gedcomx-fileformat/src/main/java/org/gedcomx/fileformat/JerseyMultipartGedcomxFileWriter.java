@@ -16,8 +16,6 @@
 package org.gedcomx.fileformat;
 
 import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.config.ClientConfig;
-import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.core.header.OutBoundHeaders;
 import com.sun.jersey.core.util.UnmodifiableMultivaluedMap;
 import com.sun.jersey.multipart.BodyPart;
@@ -27,8 +25,6 @@ import com.sun.jersey.multipart.MultiPart;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.ext.MessageBodyWriter;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.*;
 import java.lang.annotation.Annotation;
 import java.util.*;
@@ -61,7 +57,7 @@ public class JerseyMultipartGedcomxFileWriter implements GedcomxFileWriter {
    * @param contextClasses The classes with which to initialize the context.
    */
   public JerseyMultipartGedcomxFileWriter(Class<?>... contextClasses) {
-    this(Client.create(createCustomClientConfig(contextClasses)));
+    this(Client.create(JerseyMultipartGedcomxFileReader.createCustomClientConfig(null, contextClasses)));
   }
 
   /**
@@ -72,24 +68,6 @@ public class JerseyMultipartGedcomxFileWriter implements GedcomxFileWriter {
   public JerseyMultipartGedcomxFileWriter(Client client) {
     this.root = new MultiPart(MEDIA_TYPE);
     this.client = client;
-  }
-
-  private static ClientConfig createCustomClientConfig(Class<?>... contextClasses) {
-    DefaultClientConfig clientConfig = new DefaultClientConfig();
-    try {
-      Set<Class<?>> jaxbClasses = new HashSet<Class<?>>();
-      for (Class<?> contextClass : contextClasses) {
-        if (contextClass.isAnnotationPresent(XmlRootElement.class)) {
-          jaxbClasses.add(contextClass);
-        }
-      }
-      clientConfig.getSingletons().add(new SpecifiedClassesJAXBContextResolver(jaxbClasses));
-      clientConfig.getSingletons().add(new ObjectMapperContextResolver(contextClasses));
-    }
-    catch (JAXBException e) {
-      throw new IllegalArgumentException(e);
-    }
-    return clientConfig;
   }
 
   /**
@@ -146,7 +124,7 @@ public class JerseyMultipartGedcomxFileWriter implements GedcomxFileWriter {
    * @return this.
    */
   public JerseyMultipartGedcomxFileWriter header(String name, String value) {
-    this.headers.putSingle(name, value);
+    setHeader(name, value);
     return this;
   }
 

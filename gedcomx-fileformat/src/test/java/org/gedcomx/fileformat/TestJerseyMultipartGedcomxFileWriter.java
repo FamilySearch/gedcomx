@@ -14,19 +14,62 @@ import org.testng.annotations.Test;
 import javax.mail.BodyPart;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.util.ByteArrayDataSource;
+import javax.ws.rs.core.MediaType;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 import java.io.ByteArrayOutputStream;
 import java.net.URI;
 
-import static org.testng.AssertJUnit.assertEquals;
-import static org.testng.AssertJUnit.assertNotNull;
+import static org.testng.AssertJUnit.*;
 
 /**
  * @author Ryan Heaton
  */
 @Test
 public class TestJerseyMultipartGedcomxFileWriter {
+
+  /**
+   * tests the builder methods for the writer.
+   */
+  public void testBuilder() throws Exception {
+    JerseyMultipartGedcomxFileWriter writer = new JerseyMultipartGedcomxFileWriter();
+    com.sun.jersey.multipart.BodyPart bp = new com.sun.jersey.multipart.BodyPart();
+    try {
+      writer.part(bp);
+      fail();
+    }
+    catch (IllegalArgumentException e) {
+    }
+
+    bp.getHeaders().putSingle("Content-ID", "12345");
+    try {
+      writer.part(bp);
+      fail();
+    }
+    catch (IllegalArgumentException e) {
+    }
+
+    bp.setMediaType(MediaType.APPLICATION_JSON_TYPE);
+    try {
+      writer.part(bp);
+      fail();
+    }
+    catch (IllegalArgumentException e) {
+    }
+
+    bp.setEntity(new Object());
+    writer.part(bp); //success.
+
+    try {
+      writer.header("X-Custom", "value");
+      fail();
+    }
+    catch (IllegalArgumentException e) {
+
+    }
+
+    writer.header("Content-Description", "Description");
+  }
 
   /**
    * Tests the basic structure of the format...

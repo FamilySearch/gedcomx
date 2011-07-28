@@ -26,6 +26,7 @@ import com.sun.jersey.multipart.MultiPartConfig;
 import org.codehaus.jackson.JsonFactory;
 import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.JsonToken;
+import org.gedcomx.rt.GedcomJsonProvider;
 
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.ext.MessageBodyReader;
@@ -158,9 +159,7 @@ public class JerseyMultipartGedcomxFileReader implements GedcomxFileReader {
           currentName = line.substring(0, firstColon).trim();
           currentValue.append(trimLeft(line.substring(firstColon + 1)));
         }
-        else {
-          //no-op. we'll try to create a lenient reader.
-        }
+        // else do nothing in an attempt to create a lenient reader.
       }
 
       line = reader.readLine();
@@ -201,7 +200,7 @@ public class JerseyMultipartGedcomxFileReader implements GedcomxFileReader {
     return line;
   }
 
-  private static ClientConfig createCustomClientConfig(MultiPartConfig config, Class<?>... contextClasses) {
+  static ClientConfig createCustomClientConfig(MultiPartConfig config, Class<?>... contextClasses) {
     DefaultClientConfig clientConfig = new DefaultClientConfig();
     try {
       Set<Class<?>> jaxbClasses = new HashSet<Class<?>>();
@@ -211,7 +210,7 @@ public class JerseyMultipartGedcomxFileReader implements GedcomxFileReader {
         }
       }
       clientConfig.getSingletons().add(new SpecifiedClassesJAXBContextResolver(jaxbClasses));
-      clientConfig.getSingletons().add(new ObjectMapperContextResolver(contextClasses));
+      clientConfig.getSingletons().add(new GedcomJsonProvider(contextClasses));
     }
     catch (JAXBException e) {
       throw new IllegalArgumentException(e);
@@ -285,7 +284,8 @@ public class JerseyMultipartGedcomxFileReader implements GedcomxFileReader {
 
       if (entity instanceof BodyPartEntity) {
         final BodyPartEntity bpe = (BodyPartEntity) entity;
-        InputStream in = bpe.getInputStream();
+        entity = null;
+        InputStream in = new BodyPartEntityStream(bpe);
 
         List<String> encodings = bp.getHeaders().get("Content-Encoding");
         if (encodings != null) {
@@ -350,6 +350,7 @@ public class JerseyMultipartGedcomxFileReader implements GedcomxFileReader {
           }
           catch (Exception e) {
             //fall through...
+            associatedClass = null;
           }
           finally {
             //reset the inputstream.
@@ -359,26 +360,42 @@ public class JerseyMultipartGedcomxFileReader implements GedcomxFileReader {
           if (associatedClass != null) {
             //we found an associated class.
             MessageBodyReader reader = client.getProviders().getMessageBodyReader(associatedClass, associatedClass, new Annotation[0], mediaType);
-            entity = reader.readFrom(associatedClass, associatedClass, new Annotation[0], mediaType, this.bp.getHeaders(), in);
-            bp.setEntity(entity);
-            bpe.cleanup();
-          }
-          else {
-            //we didn't recognize the body as a known class, so just return the input stream.
-            bp.setEntity(in);
-            entity = in;
-            bpe.cleanup();
+            if (reader != null) {
+              entity = reader.readFrom(associatedClass, associatedClass, new Annotation[0], mediaType, this.bp.getHeaders(), in);
+              bpe.cleanup();
+              in.close();
+            }
           }
         }
-        else {
-          //neither xml nor json; just return the inputstream.
-          bp.setEntity(in);
+
+        if (entity == null) {
+          //we didn't find an entity, so we'll assign the input stream as the entity.
           entity = in;
-          bpe.cleanup();
         }
+
+        bp.setEntity(entity);
       }
 
       return entity;
+    }
+  }
+
+  /**
+   * A stream that cleans up its body part entity when closed.
+   */
+  private static class BodyPartEntityStream extends FilterInputStream {
+
+    private final BodyPartEntity entity;
+
+    private BodyPartEntityStream(BodyPartEntity entity) {
+      super(entity.getInputStream());
+      this.entity = entity;
+    }
+
+    @Override
+    public void close() throws IOException {
+      super.close();
+      this.entity.cleanup();
     }
   }
 

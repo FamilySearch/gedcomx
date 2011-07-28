@@ -13,46 +13,52 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.fileformat;
+package org.gedcomx.rt;
 
+import org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider;
 import org.codehaus.jackson.map.AnnotationIntrospector;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.introspect.JacksonAnnotationIntrospector;
 import org.codehaus.jackson.map.type.SimpleType;
 import org.codehaus.jackson.xc.JaxbAnnotationIntrospector;
-import org.gedcomx.rt.XmlTypeIdResolver;
 
-import javax.ws.rs.ext.ContextResolver;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.ext.Provider;
-import javax.xml.bind.JAXBException;
-import java.util.Set;
 
 /**
- * A context resolver that resolves a JAXB context for a specified set of classes.
+ * The custom json provider for GEDCOM JSON data.
  *
  * @author Ryan Heaton
  */
 @Provider
-public class ObjectMapperContextResolver implements ContextResolver<ObjectMapper> {
+@Consumes ({MediaType.WILDCARD}) //wildcard to support our custom "+json" media types.
+@Produces ({MediaType.WILDCARD}) //wildcard to support our custom "+json" media types.
+public class GedcomJsonProvider extends JacksonJaxbJsonProvider {
 
-  final ObjectMapper mapper;
+  public GedcomJsonProvider() {
+    super(createObjectMapper(), DEFAULT_ANNOTATIONS);
+  }
 
-  public ObjectMapperContextResolver(Class<?>... contextClasses) throws JAXBException {
+  public GedcomJsonProvider(Class<?>... classes) {
+    super(createObjectMapper(classes), DEFAULT_ANNOTATIONS);
+  }
+
+  /**
+   * Creates an object mapper given the specified context classes.
+   *
+   * @param classes the context classes.
+   * @return The object mapper.
+   */
+  public static ObjectMapper createObjectMapper(Class<?>... classes) {
     ObjectMapper mapper = new ObjectMapper();
     AnnotationIntrospector introspector = AnnotationIntrospector.pair(new JacksonAnnotationIntrospector(), new JaxbAnnotationIntrospector());
     mapper.getSerializationConfig().withAnnotationIntrospector(introspector);
     mapper.getDeserializationConfig().withAnnotationIntrospector(introspector);
-    for (Class<?> contextClass : contextClasses) {
+    for (Class<?> contextClass : classes) {
       XmlTypeIdResolver.initContextClass(SimpleType.construct(contextClass));
     }
-    this.mapper = mapper;
+    return mapper;
   }
-
-  /**
-   * {@inheritDoc}
-   */
-  public ObjectMapper getContext(Class<?> type) {
-    return this.mapper;
-  }
-
 }

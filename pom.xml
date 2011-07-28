@@ -194,6 +194,9 @@
               <version>2.5</version>
               <configuration>
                 <targetJdk>1.6</targetJdk>
+                <excludes>
+                  <exclude>**/package-info.java</exclude>
+                </excludes>
               </configuration>
               <executions>
                 <execution>

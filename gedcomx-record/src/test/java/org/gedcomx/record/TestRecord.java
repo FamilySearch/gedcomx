@@ -56,10 +56,20 @@ public class TestRecord {
     Event event = new Event();
     event.setDate(new Date());
     fillInField(event.getDate(), "event-date");
+    event.getDate().setParts(new ArrayList<DatePart>());
+    DatePart datePart = new DatePart();
+    fillInField(datePart, "event-date-part");
+    datePart.setKnownType(DatePartType.month);
+    event.getDate().getParts().add(datePart);
     event.setId("event-id");
     event.setKnownType(EventType.adoption);
     event.setPlace(new Place());
     fillInField(event.getPlace(), "event-place");
+    event.getPlace().setParts(new ArrayList<PlacePart>());
+    PlacePart placePart = new PlacePart();
+    fillInField(placePart, "event-place-part");
+    placePart.setKnownType(PlacePartType.cemetery);
+    event.getPlace().getParts().add(placePart);
     event.setPrimary(true);
     events.add(event);
     record.setEvents(events);
@@ -96,6 +106,7 @@ public class TestRecord {
     ArrayList<AgePart> ageParts = new ArrayList<AgePart>();
     AgePart agePart = new AgePart();
     fillInField(agePart, "age-part");
+    agePart.setKnownUnits(AgeUnit.days);
     ageParts.add(agePart);
     age.setParts(ageParts);
     persona.setAge(age);
@@ -179,6 +190,9 @@ public class TestRecord {
     sources.add(sourceReference);
     record.setSources(sources);
 
+    record.setCollection(new RecordCollectionReference());
+    record.getCollection().setHref(URI.create("urn:collection-ref"));
+
     record.setId("rid");
     return record;
   }
@@ -215,6 +229,12 @@ public class TestRecord {
     assertEquals(EventType.adoption, event.getKnownType());
     assertField(event.getPlace(), "event-place");
     assertTrue(event.getPrimary());
+    assertEquals(1, event.getDate().getParts().size());
+    assertField(event.getDate().getParts().get(0), "event-date-part");
+    assertEquals(DatePartType.month, event.getDate().getParts().get(0).getKnownType());
+    assertEquals(1, event.getPlace().getParts().size());
+    assertField(event.getPlace().getParts().get(0), "event-place-part");
+    assertEquals(PlacePartType.cemetery, event.getPlace().getParts().get(0).getKnownType());
 
     assertEquals(1, record.getPersonas().size());
     Persona persona = record.getPersonas().get(0);
@@ -239,6 +259,7 @@ public class TestRecord {
     assertEquals(1, persona.getAge().getParts().size());
     AgePart agePart = persona.getAge().getParts().get(0);
     assertField(agePart, "age-part");
+    assertEquals(AgeUnit.days, agePart.getKnownUnits());
 
     assertEquals(1, persona.getAlternateIds().size());
     assertEquals(AlternateIdType.forwarded, persona.getAlternateIds().get(0).getKnownType());
@@ -295,6 +316,7 @@ public class TestRecord {
     SourceQualifier qualifier = sourceReference.getQualifiers().get(0);
     assertEquals("2", qualifier.getProperty(SourceQualifierProperty.x_pixels));
 
+    assertEquals(URI.create("urn:collection-ref"), record.getCollection().getHref());
     assertEquals("rid", record.getId());
   }
 
