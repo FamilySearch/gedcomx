@@ -34,8 +34,6 @@
     <module>gedcomx-source-www</module>
     <module>gedcomx-record-www</module>
     <module>gedcomx-conclusion-www</module>
-
-    <module>gedcomx-fileformat</module>
   </modules>
 
   <dependencies>
