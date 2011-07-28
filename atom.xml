@@ -22,9 +22,14 @@ layout: nil
    <updated>{{ post.date | date_to_xmlschema }}</updated>
    <id>http://familysearch.github.com/gedcomx/{{ post.id }}</id>
    <content type="html">{{ post.content | xml_escape }}</content>
+   {% if post.author %}
    <author>
      <name>{{ post.author }}</name>
+     {% if post.author_email %}
+     <email>{{ post.author_email }}</email>
+     {% endif %}
    </author>
+   {% endif %}
  </entry>
  {% endfor %}
  
