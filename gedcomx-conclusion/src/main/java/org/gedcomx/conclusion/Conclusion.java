@@ -23,6 +23,7 @@ import org.gedcomx.rt.XmlTypeIdResolver;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlID;
 
 /**
@@ -63,6 +64,7 @@ public abstract class Conclusion {
    *
    * @return The attribution metadata for this conclusion.
    */
+  @XmlElementRef
   public Attribution getAttribution() {
     return attribution;
   }

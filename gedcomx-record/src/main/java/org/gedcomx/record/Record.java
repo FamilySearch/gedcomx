@@ -164,6 +164,7 @@ public class Record {
    *
    * @return The attribution metadata for this record.
    */
+  @XmlElementRef
   public Attribution getAttribution() {
     return attribution;
   }

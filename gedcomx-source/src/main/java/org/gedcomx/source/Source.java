@@ -237,6 +237,7 @@ public class Source {
    *
    * @return The attribution metadata for this source.
    */
+  @XmlElementRef
   public Attribution getAttribution() {
     return attribution;
   }

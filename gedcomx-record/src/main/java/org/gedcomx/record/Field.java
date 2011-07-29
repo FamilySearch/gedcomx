@@ -132,6 +132,7 @@ public abstract class Field {
    *
    * @return The attribution metadata for this field.
    */
+  @XmlElementRef
   public Attribution getAttribution() {
     return attribution;
   }

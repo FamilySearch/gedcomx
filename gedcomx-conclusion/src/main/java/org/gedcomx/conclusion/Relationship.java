@@ -216,6 +216,7 @@ public class Relationship {
    *
    * @return The attribution metadata for this relationship.
    */
+  @XmlElementRef
   public Attribution getAttribution() {
     return attribution;
   }
