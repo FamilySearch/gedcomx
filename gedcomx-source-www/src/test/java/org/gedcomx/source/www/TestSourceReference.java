@@ -2,7 +2,7 @@ package org.gedcomx.source.www;
 
 import org.gedcomx.common.Extension;
 import org.gedcomx.source.SourceReference;
-import org.gedcomx.types.SourceReferenceType;
+import org.gedcomx.types.SourceType;
 import org.gedcomx.www.Link;
 import org.testng.annotations.Test;
 
@@ -25,7 +25,7 @@ public class TestSourceReference {
   public void testSourceReferenceXml() throws Exception {
     SourceReference reference = new SourceReference();
     reference.setHref(URI.create("urn:someid"));
-    reference.setKnownType(SourceReferenceType.source);
+    reference.setKnownType(SourceType.source);
     reference.setId("refid");
     reference.setExtension(new Extension());
     Link link = new Link();
@@ -35,7 +35,7 @@ public class TestSourceReference {
     //reference.setQualifiers();
     reference = processThroughXml(reference, SourceReference.class, JAXBContext.newInstance(SourceReference.class, Link.class));
     assertEquals("urn:someid", reference.getHref().toString());
-    assertEquals(SourceReferenceType.source, reference.getKnownType());
+    assertEquals(SourceType.source, reference.getKnownType());
     assertEquals("refid", reference.getId());
     assertEquals(1, reference.getExtension().findExtensionsOfType(Link.class).size());
     assertEquals("urn:href", reference.getExtension().findExtensionsOfType(Link.class).get(0).getHref().toString());
@@ -47,7 +47,7 @@ public class TestSourceReference {
   public void testSourceReferenceJson() throws Exception {
     SourceReference reference = new SourceReference();
     reference.setHref(URI.create("urn:someid"));
-    reference.setKnownType(SourceReferenceType.source);
+    reference.setKnownType(SourceType.source);
     reference.setId("refid");
     reference.setExtension(new Extension());
     Link link = new Link();
@@ -57,7 +57,7 @@ public class TestSourceReference {
     //reference.setQualifiers();
     reference = processThroughJson(reference);
     assertEquals("urn:someid", reference.getHref().toString());
-    assertEquals(SourceReferenceType.source, reference.getKnownType());
+    assertEquals(SourceType.source, reference.getKnownType());
     assertEquals("refid", reference.getId());
     assertEquals(1, reference.getExtension().findExtensionsOfType(Link.class).size());
     assertEquals("urn:href", reference.getExtension().findExtensionsOfType(Link.class).get(0).getHref().toString());

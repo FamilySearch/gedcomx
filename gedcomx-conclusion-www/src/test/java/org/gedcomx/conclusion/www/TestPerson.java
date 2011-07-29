@@ -159,7 +159,7 @@ public class TestPerson {
     attribution.getContributor().setHref(URI.create("urn:source-reference-attribution"));
     attributedSourceReference.setHref(URI.create("urn:source-uri"));
     attributedSourceReference.setId("source-reference-id");
-    attributedSourceReference.setKnownType(SourceReferenceType.source);
+    attributedSourceReference.setKnownType(SourceType.source);
     ArrayList<SourceQualifier> qualifiers = new ArrayList<SourceQualifier>();
     SourceQualifier qualifier = new SourceQualifier();
     qualifier.setProperty(SourceQualifierProperty.x_pixels, "2");
@@ -244,7 +244,7 @@ public class TestPerson {
     assertEquals("urn:source-reference-attribution", attributedSourceReference.getExtension().findExtensionOfType(Attribution.class).getContributor().getHref().toString());
     assertEquals("urn:source-uri", attributedSourceReference.getHref().toString());
     assertEquals("source-reference-id", attributedSourceReference.getId());
-    assertEquals(SourceReferenceType.source, attributedSourceReference.getKnownType());
+    assertEquals(SourceType.source, attributedSourceReference.getKnownType());
     assertEquals(1, attributedSourceReference.getQualifiers().size());
     assertEquals(1, attributedSourceReference.getQualifiers().get(0).getProperties().size());
     assertEquals("2", attributedSourceReference.getQualifiers().get(0).getProperty(SourceQualifierProperty.x_pixels));

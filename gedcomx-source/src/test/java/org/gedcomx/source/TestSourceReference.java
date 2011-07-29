@@ -1,6 +1,6 @@
 package org.gedcomx.source;
 
-import org.gedcomx.types.SourceReferenceType;
+import org.gedcomx.types.SourceType;
 import org.testng.annotations.Test;
 
 import java.net.URI;
@@ -22,7 +22,7 @@ public class TestSourceReference {
   public void testSourceReferenceXml() throws Exception {
     SourceReference reference = new SourceReference();
     reference.setHref(URI.create("urn:someid"));
-    reference.setKnownType(SourceReferenceType.source);
+    reference.setKnownType(SourceType.source);
     reference.setId("refid");
     reference.setQualifiers(new ArrayList<SourceQualifier>());
     SourceQualifier q = new SourceQualifier();
@@ -30,7 +30,7 @@ public class TestSourceReference {
     reference.getQualifiers().add(q);
     reference = processThroughXml(reference);
     assertEquals("urn:someid", reference.getHref().toString());
-    assertEquals(SourceReferenceType.source, reference.getKnownType());
+    assertEquals(SourceType.source, reference.getKnownType());
     assertEquals("refid", reference.getId());
     assertEquals("1234", reference.getQualifiers().get(0).getProperty(SourceQualifierProperty.height_pixels));
   }
@@ -41,7 +41,7 @@ public class TestSourceReference {
   public void testSourceReferenceJson() throws Exception {
     SourceReference reference = new SourceReference();
     reference.setHref(URI.create("urn:someid"));
-    reference.setKnownType(SourceReferenceType.source);
+    reference.setKnownType(SourceType.source);
     reference.setId("refid");
     reference.setQualifiers(new ArrayList<SourceQualifier>());
     SourceQualifier q = new SourceQualifier();
@@ -49,7 +49,7 @@ public class TestSourceReference {
     reference.getQualifiers().add(q);
     reference = processThroughJson(reference);
     assertEquals("urn:someid", reference.getHref().toString());
-    assertEquals(SourceReferenceType.source, reference.getKnownType());
+    assertEquals(SourceType.source, reference.getKnownType());
     assertEquals("refid", reference.getId());
     assertEquals("1234", reference.getQualifiers().get(0).getProperty(SourceQualifierProperty.height_pixels));
   }

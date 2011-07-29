@@ -23,7 +23,7 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.common.Extension;
 import org.gedcomx.rt.XmlTypeIdResolver;
-import org.gedcomx.types.SourceReferenceType;
+import org.gedcomx.types.SourceType;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.*;
@@ -92,7 +92,7 @@ public class SourceReference {
    * @return The type of the source reference.
    */
   @XmlAttribute
-  @XmlQNameEnumRef (SourceReferenceType.class)
+  @XmlQNameEnumRef (SourceType.class)
   public QName getType() {
     return type;
   }
@@ -107,13 +107,13 @@ public class SourceReference {
   }
 
   /**
-   * The enum referencing the known type of the source reference, or {@link org.gedcomx.types.SourceReferenceType#other} if not known.
+   * The enum referencing the known type of the source reference, or {@link org.gedcomx.types.SourceType#other} if not known.
    *
-   * @return The enum referencing the known type of the source reference, or {@link org.gedcomx.types.SourceReferenceType#other} if not known.
+   * @return The enum referencing the known type of the source reference, or {@link org.gedcomx.types.SourceType#other} if not known.
    */
   @XmlTransient
-  public SourceReferenceType getKnownType() {
-    return XmlQNameEnumUtil.fromQName(getType(), SourceReferenceType.class);
+  public SourceType getKnownType() {
+    return XmlQNameEnumUtil.fromQName(getType(), SourceType.class);
   }
 
   /**
@@ -121,7 +121,7 @@ public class SourceReference {
    *
    * @param knownType The source reference type.
    */
-  public void setKnownType(SourceReferenceType knownType) {
+  public void setKnownType(SourceType knownType) {
     this.type = XmlQNameEnumUtil.toQName(knownType);
   }
 
