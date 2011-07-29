@@ -59,6 +59,7 @@ public enum EventType {
   marriage,
   marriage_banns,
   marriage_contract,
+  marriage_intent,
   marriage_license,
   marriage_notice,
   marriage_settlement,

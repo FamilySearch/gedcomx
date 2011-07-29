@@ -29,14 +29,20 @@ public enum CharacteristicType {
 
   age,
   caste_name,
+  citizenship,
   clan_name,
   count_of_children,
   count_of_marriages,
   died_before_eight,
   dwelling,
+  ethnicity,
   gedcom_uuid,
   household,
   marital_status,
+  military_company,
+  military_rank,
+  military_regiment,
+  military_service_branch,
   namesake,
   national_id,
   national_origin,
@@ -96,6 +102,7 @@ public enum CharacteristicType {
     public static final CharacteristicType count_of_marriages = CharacteristicType.count_of_marriages;
     public static final CharacteristicType died_before_eight = CharacteristicType.died_before_eight;
     public static final CharacteristicType dwelling = CharacteristicType.dwelling;
+    public static final CharacteristicType ethnicity = CharacteristicType.ethnicity;
     public static final CharacteristicType gedcom_uuid = CharacteristicType.gedcom_uuid;
     public static final CharacteristicType household = CharacteristicType.household;
     public static final CharacteristicType marital_status = CharacteristicType.marital_status;
