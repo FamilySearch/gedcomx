@@ -25,7 +25,6 @@ public final class Date {
 
   private String original;
   private String normalized;
-  private JulianDayRange julianDay;
 
   /**
    * The original value of the date that was concluded as supplied by the user.
@@ -71,29 +70,4 @@ public final class Date {
     this.normalized = normalized;
   }
 
-  /**
-   * The julian day range for this date. Intended for convenience to an automated process in
-   * interpreting the date (e.g. for sorting purposes). The julian day range is optional and is
-   * often supplied by an automated standardization process.
-   *
-   * @return The julian day range for this date. Intended for convenience to an automated process in
-   * interpreting the date (e.g. for sorting purposes). The julian day range is optional and is
-   * often supplied by an automated standardization process.
-   */
-  public JulianDayRange getJulianDay() {
-    return julianDay;
-  }
-
-  /**
-   * The julian day range for this date. Intended for convenience to an automated process in
-   * interpreting the date (e.g. for sorting purposes). The julian day range is optional and is
-   * often supplied by an automated standardization process.
-   *
-   * @param julianDay The julian day range for this date. Intended for convenience to an automated process in
-   * interpreting the date (e.g. for sorting purposes). The julian day range is optional and is
-   * often supplied by an automated standardization process.
-   */
-  public void setJulianDay(JulianDayRange julianDay) {
-    this.julianDay = julianDay;
-  }
 }

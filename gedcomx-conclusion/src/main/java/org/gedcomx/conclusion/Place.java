@@ -22,12 +22,11 @@ import javax.xml.bind.annotation.XmlType;
  *
  * @author Ryan Heaton
  */
-@XmlType (propOrder = {"original", "normalized", "geoCode"})
+@XmlType (propOrder = {"original", "normalized"})
 public final class Place {
 
   private String original;
   private String normalized;
-  private GeoCode geoCode;
 
   /**
    * The original value of the place that was concluded as supplied by the user.
@@ -73,29 +72,4 @@ public final class Place {
     this.normalized = normalized;
   }
 
-  /**
-   * The geocode for this place. Intended for convenience to an automated process in
-   * interpreting the place (e.g. for sorting purposes). The geocode is optional and is
-   * often supplied by an automated standardization process.
-   *
-   * @return The geocode for this place. Intended for convenience to an automated process in
-   * interpreting the place (e.g. for sorting purposes). The geocode is optional and is
-   * often supplied by an automated standardization process.
-   */
-  public GeoCode getGeoCode() {
-    return geoCode;
-  }
-
-  /**
-   * The geocode for this place. Intended for convenience to an automated process in
-   * interpreting the place (e.g. for sorting purposes). The geocode is optional and is
-   * often supplied by an automated standardization process.
-   *
-   * @param geoCode The geocode for this place. Intended for convenience to an automated process in
-   * interpreting the place (e.g. for sorting purposes). The geocode is optional and is
-   * often supplied by an automated standardization process.
-   */
-  public void setGeoCode(GeoCode geoCode) {
-    this.geoCode = geoCode;
-  }
 }
