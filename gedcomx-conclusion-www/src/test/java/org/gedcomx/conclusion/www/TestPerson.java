@@ -117,7 +117,6 @@ public class TestPerson {
     ArrayList<NameForm> alternateForms = new ArrayList<NameForm>();
     NameForm nameForm = new NameForm();
     nameForm.setFullText("alternate name form");
-    nameForm.setKnownScript(NameScript.chinese);
     ArrayList<NamePart> parts = new ArrayList<NamePart>();
     NamePart part = new NamePart();
     part.setKnownType(NamePartType.given);
@@ -134,7 +133,6 @@ public class TestPerson {
     name.setKnownType(NameType.formal);
     NameForm primaryForm = new NameForm();
     primaryForm.setFullText("primary form");
-    primaryForm.setKnownScript(NameScript.chinese);
     primaryForm.setParts(new ArrayList<NamePart>());
     NamePart namePart = new NamePart();
     namePart.setKnownType(NamePartType.surname);
@@ -222,7 +220,6 @@ public class TestPerson {
     name = person.getNames().iterator().next();
     assertEquals(1, name.getAlternateForms().size());
     assertEquals("alternate name form", name.getAlternateForms().get(0).getFullText());
-    assertEquals(NameScript.chinese, name.getAlternateForms().get(0).getKnownScript());
     assertEquals(1, name.getAlternateForms().get(0).getParts().size());
     assertEquals("alternate name part", name.getAlternateForms().get(0).getParts().get(0).getText());
     assertEquals(NamePartType.given, name.getAlternateForms().get(0).getParts().get(0).getKnownType());
@@ -231,7 +228,6 @@ public class TestPerson {
     assertEquals(NameStyle.spanish, name.getKnownStyle());
     assertEquals(NameType.formal, name.getKnownType());
     assertEquals("primary form", name.getPrimaryForm().getFullText());
-    assertEquals(NameScript.chinese, name.getPrimaryForm().getKnownScript());
     assertEquals(1, name.getPrimaryForm().getParts().size());
     assertEquals("primary surname", name.getPrimaryForm().getParts().get(0).getText());
     assertEquals(NamePartType.surname, name.getPrimaryForm().getParts().get(0).getKnownType());
