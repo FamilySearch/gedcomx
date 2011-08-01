@@ -25,58 +25,60 @@ public class TestSource {
    * tests alternate id xml
    */
   public void testSourceXml() throws Exception {
-    Source source = new Source();
-    source.setAlternateIds(new ArrayList<AlternateId>());
-    source.getAlternateIds().add(new AlternateId());
-    source.setAttribution(new Attribution());
-    source.setBibliographicCitation("citation");
-    source.setExtension(new Extension());
-    source.setId("source");
-    source.setType(new QName("urn:custom", "custom"));
-    source.setNote("note");
-    source.setPersistentId(URI.create("urn:pid"));
-    source.setTitle("title");
-    source.setWebLocation(URI.create("urn:here"));
-    source = processThroughXml(source);
-    assertNotNull(source.getAlternateIds());
-    assertNotNull(source.getAttribution());
-    assertEquals("citation", source.getBibliographicCitation());
-    assertNotNull(source.getExtension());
-    assertEquals("source", source.getId());
-    assertEquals(SourceType.other, source.getKnownType());
-    assertEquals("note", source.getNote());
-    assertEquals(URI.create("urn:pid"), source.getPersistentId());
-    assertEquals("title", source.getTitle());
-    assertEquals(URI.create("urn:here"), source.getWebLocation());
+    SourceDescription sourceDescription = new SourceDescription();
+    sourceDescription.setAlternateIds(new ArrayList<AlternateId>());
+    sourceDescription.getAlternateIds().add(new AlternateId());
+    sourceDescription.setAttribution(new Attribution());
+    sourceDescription.setBibliographicCitation("citation");
+    sourceDescription.setExtension(new Extension());
+    sourceDescription.setId("source");
+    sourceDescription.setType(new QName("urn:custom", "custom"));
+    sourceDescription.setPersistentId(URI.create("urn:pid"));
+    sourceDescription.setTitle("title");
+    sourceDescription.setAbout(URI.create("urn:here"));
+    sourceDescription.setSources(new ArrayList<SourceReference>());
+    sourceDescription.getSources().add(new SourceReference());
+    sourceDescription = processThroughXml(sourceDescription);
+    assertNotNull(sourceDescription.getAlternateIds());
+    assertNotNull(sourceDescription.getAttribution());
+    assertEquals("citation", sourceDescription.getBibliographicCitation());
+    assertNotNull(sourceDescription.getExtension());
+    assertEquals("source", sourceDescription.getId());
+    assertEquals(SourceType.other, sourceDescription.getKnownType());
+    assertEquals(URI.create("urn:pid"), sourceDescription.getPersistentId());
+    assertEquals("title", sourceDescription.getTitle());
+    assertEquals(URI.create("urn:here"), sourceDescription.getAbout());
+    assertEquals(1, sourceDescription.getSources().size());
   }
 
   /**
    * tests alternate id json
    */
   public void testSourceJson() throws Exception {
-    Source source = new Source();
-    source.setAlternateIds(new ArrayList<AlternateId>());
-    source.getAlternateIds().add(new AlternateId());
-    source.setAttribution(new Attribution());
-    source.setBibliographicCitation("citation");
-    source.setExtension(new Extension());
-    source.setId("source");
-    source.setType(new QName("urn:custom", "custom"));
-    source.setNote("note");
-    source.setPersistentId(URI.create("urn:pid"));
-    source.setTitle("title");
-    source.setWebLocation(URI.create("urn:here"));
-    source = processThroughJson(source);
-    assertNotNull(source.getAlternateIds());
-    assertNotNull(source.getAttribution());
-    assertEquals("citation", source.getBibliographicCitation());
-    assertNotNull(source.getExtension());
-    assertEquals("source", source.getId());
-    assertEquals(SourceType.other, source.getKnownType());
-    assertEquals("note", source.getNote());
-    assertEquals(URI.create("urn:pid"), source.getPersistentId());
-    assertEquals("title", source.getTitle());
-    assertEquals(URI.create("urn:here"), source.getWebLocation());
+    SourceDescription sourceDescription = new SourceDescription();
+    sourceDescription.setAlternateIds(new ArrayList<AlternateId>());
+    sourceDescription.getAlternateIds().add(new AlternateId());
+    sourceDescription.setAttribution(new Attribution());
+    sourceDescription.setBibliographicCitation("citation");
+    sourceDescription.setExtension(new Extension());
+    sourceDescription.setId("source");
+    sourceDescription.setType(new QName("urn:custom", "custom"));
+    sourceDescription.setPersistentId(URI.create("urn:pid"));
+    sourceDescription.setTitle("title");
+    sourceDescription.setAbout(URI.create("urn:here"));
+    sourceDescription.setSources(new ArrayList<SourceReference>());
+    sourceDescription.getSources().add(new SourceReference());
+    sourceDescription = processThroughJson(sourceDescription);
+    assertNotNull(sourceDescription.getAlternateIds());
+    assertNotNull(sourceDescription.getAttribution());
+    assertEquals("citation", sourceDescription.getBibliographicCitation());
+    assertNotNull(sourceDescription.getExtension());
+    assertEquals("source", sourceDescription.getId());
+    assertEquals(SourceType.other, sourceDescription.getKnownType());
+    assertEquals(URI.create("urn:pid"), sourceDescription.getPersistentId());
+    assertEquals("title", sourceDescription.getTitle());
+    assertEquals(URI.create("urn:here"), sourceDescription.getAbout());
+    assertEquals(1, sourceDescription.getSources().size());
   }
 
 }

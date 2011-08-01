@@ -35,33 +35,34 @@ import java.net.URI;
 import java.util.List;
 
 /**
- * A user-defined, user-managed source.
+ * A description of a source. The source being described may have a presence on the World Wide Web (e.g. a digital image)
+ * or it may be a <i>physical artifact</i> that doesn't have an online presence.
  *
  * @author Ryan Heaton
  */
 @XmlRootElement
 @XmlType (
-  propOrder =  {"persistentId", "alternateIds", "webLocation", "title", "note", "bibliographicCitation", "attribution", "extension"}
+  propOrder =  {"persistentId", "alternateIds", "about", "title", "bibliographicCitation", "sources", "attribution", "extension"}
 )
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-public class Source {
+public class SourceDescription {
 
   private String id;
   private URI persistentId;
   private List<AlternateId> alternateIds;
   private QName type;
-  private URI webLocation;
+  private URI about;
   private String title;
-  private String note; //todo: rename to something like "user note" or something?
   private String bibliographicCitation;
+  private List<SourceReference> sources;
   private Attribution attribution;
   private Extension extension;
 
   /**
-   * The id of the source, unique to the context and not necessarily globally unique.
+   * The id of this source description, unique to the context and not necessarily globally unique.
    *
-   * @return The id of the source, unique to the context and not necessarily globally unique.
+   * @return The id of this source description, unique to the context and not necessarily globally unique.
    */
   @XmlID
   @XmlAttribute
@@ -70,9 +71,9 @@ public class Source {
   }
 
   /**
-   * The id of the source, unique to the context and not necessarily globally unique.
+   * The id of this source description, unique to the context and not necessarily globally unique.
    *
-   * @param id The id of the source, unique to the context and not necessarily globally unique.
+   * @param id The id of this source description, unique to the context and not necessarily globally unique.
    */
   public void setId(String id) {
     this.id = id;
@@ -119,9 +120,9 @@ public class Source {
   }
 
   /**
-   * A long-term, persistent, globally unique identifier for this source.
+   * A long-term, persistent, globally unique identifier for this source description.
    *
-   * @return A long-term, persistent, globally unique identifier for this source.
+   * @return A long-term, persistent, globally unique identifier for this source description.
    */
   @XmlSchemaType(name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
   public URI getPersistentId() {
@@ -129,9 +130,9 @@ public class Source {
   }
 
   /**
-   * A long-term, persistent, globally unique identifier for this source.
+   * A long-term, persistent, globally unique identifier for this source description.
    *
-   * @param persistentId A long-term, persistent, globally unique identifier for this source.
+   * @param persistentId A long-term, persistent, globally unique identifier for this source description.
    */
   public void setPersistentId(URI persistentId) {
     this.persistentId = persistentId;
@@ -160,82 +161,86 @@ public class Source {
   }
 
   /**
-   * The online location of the source.
+   * The URI to the source being described, if the source has an online presence (e.g. a digital image).
    * 
-   * @return The online location of the source.
+   * @return The URI to the source being described, if the source has an online presence (e.g. a digital image).
    */
   @XmlSchemaType(name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
-  public URI getWebLocation() {
-    return webLocation;
+  public URI getAbout() {
+    return about;
   }
 
   /**
-   * The online location of the source.
+   * The URI to the source being described, if the source has an online presence (e.g. a digital image).
    * 
-   * @param webLocation The online location of the source.
+   * @param about The URI to the source being described, if the source has an online presence (e.g. a digital image).
    */
-  public void setWebLocation(URI webLocation) {
-    this.webLocation = webLocation;
+  public void setAbout(URI about) {
+    this.about = about;
   }
 
   /**
-   * The title of the source.
+   * The title of the source being described.
    * 
-   * @return The title of the source.
+   * @return The title of the source being described.
    */
   public String getTitle() {
     return title;
   }
 
   /**
-   * The title of the source.
+   * The title of the source being described.
    * 
-   * @param title The title of the source.
+   * @param title The title of the source being described.
    */
   public void setTitle(String title) {
     this.title = title;
   }
 
   /**
-   * A note for the source.
+   * The bibliographic citation for the source being described.
    * 
-   * @return A note for the source.
-   */
-  public String getNote() {
-    return note;
-  }
-
-  /**
-   * A note for the source.
-   * 
-   * @param note A note for the source.
-   */
-  public void setNote(String note) {
-    this.note = note;
-  }
-
-  /**
-   * The bibliographic citation for the source.
-   * 
-   * @return The bibliographic citation for the source.
+   * @return The bibliographic citation for the source being described.
    */
   public String getBibliographicCitation() {
     return bibliographicCitation;
   }
 
   /**
-   * The bibliographic citation for the source.
+   * The bibliographic citation for the source being described.
    * 
-   * @param bibliographicCitation The bibliographic citation for the source.
+   * @param bibliographicCitation The bibliographic citation for the source being described.
    */
   public void setBibliographicCitation(String bibliographicCitation) {
     this.bibliographicCitation = bibliographicCitation;
   }
 
   /**
-   * The attribution metadata for this source.
+   * The sources of the source being described.
    *
-   * @return The attribution metadata for this source.
+   * @return The sources of the source being described.
+   */
+  @XmlElement(name="source")
+  @JsonProperty("sources")
+  @JsonName("sources")
+  public List<SourceReference> getSources() {
+    return sources;
+  }
+
+  /**
+   * The sources of the source being described.
+   *
+   * @param sources The sources of the source being described.
+   */
+  @JsonProperty("sources")
+  public void setSources(List<SourceReference> sources) {
+    this.sources = sources;
+  }
+
+  /**
+   * The attribution metadata for this source description.
+   *
+   * @return The attribution metadata for this source description.
    */
   @XmlElementRef
   public Attribution getAttribution() {
@@ -243,18 +248,18 @@ public class Source {
   }
 
   /**
-   * The attribution metadata for this source.
+   * The attribution metadata for this source description.
    *
-   * @param attribution The attribution metadata for this source.
+   * @param attribution The attribution metadata for this source description.
    */
   public void setAttribution(Attribution attribution) {
     this.attribution = attribution;
   }
 
   /**
-   * The extension point for the source.
+   * The extension point for this source description.
    *
-   * @return The extension point for the source.
+   * @return The extension point for this source description.
    */
   @XmlElement( name = "ext" )
   public Extension getExtension() {
@@ -262,9 +267,9 @@ public class Source {
   }
 
   /**
-   * The extension point for the source.
+   * The extension point for this source description.
    *
-   * @param extension The extension point for the source.
+   * @param extension The extension point for this source description.
    */
   public void setExtension(Extension extension) {
     this.extension = extension;
