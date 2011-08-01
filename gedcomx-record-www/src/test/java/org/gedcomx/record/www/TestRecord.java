@@ -183,7 +183,7 @@ public class TestRecord {
     SourceReference sourceReference = new SourceReference();
     sourceReference.setHref(URI.create("urn:source-uri"));
     sourceReference.setId("source-reference-id");
-    sourceReference.setKnownType(SourceType.source);
+    sourceReference.setKnownType(SourceType.collection);
     ArrayList<SourceQualifier> qualifiers = new ArrayList<SourceQualifier>();
     SourceQualifier qualifier = new SourceQualifier();
     qualifier.setProperty(SourceQualifierProperty.x_pixels, "2");
@@ -309,7 +309,7 @@ public class TestRecord {
     SourceReference sourceReference = record.getSources().get(0);
     assertEquals("urn:source-uri", sourceReference.getHref().toString());
     assertEquals("source-reference-id", sourceReference.getId());
-    assertEquals(SourceType.source, sourceReference.getKnownType());
+    assertEquals(SourceType.collection, sourceReference.getKnownType());
     assertEquals(1, sourceReference.getQualifiers().size());
     SourceQualifier qualifier = sourceReference.getQualifiers().get(0);
     assertEquals("2", qualifier.getProperty(SourceQualifierProperty.x_pixels));

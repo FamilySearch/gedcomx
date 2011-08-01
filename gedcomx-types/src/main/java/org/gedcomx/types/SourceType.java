@@ -26,14 +26,12 @@ import javax.xml.namespace.QName;
 @XmlQNameEnum
 public enum SourceType {
 
-  source,
   record,
   persona,
   person,
   collection,
   digital_artifact,
   physical_artifact,
-  image,
   @XmlUnknownQNameEnumValue
   other;
 

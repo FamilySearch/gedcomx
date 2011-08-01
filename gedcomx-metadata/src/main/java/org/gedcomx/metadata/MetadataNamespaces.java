@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
     id = "rdf",
     uri = MetadataNamespaces.RDF_NAMESPACE,
     label = "RDF Namespace",
-    description = "The rdf namespace contains the objects for RDF support.",
+    description = "The RDF namespace defines the model used to represent metadata in RDF format.",
     version = "1999-02-22",
     xmlMediaType = MetadataNamespaces.RDF_XML_MEDIA_TYPE,
     jsonMediaType = MetadataNamespaces.RDF_JSON_MEDIA_TYPE
@@ -38,14 +38,14 @@ import javax.xml.bind.annotation.XmlTransient;
     id = "dcterms",
     uri = MetadataNamespaces.DUBLIN_CORE_NAMESPACE,
     label = "Dublin Core Terms Namespace",
-    description = "The dublin core terms namespace contains the objects for support Dublin Core Terms.",
+    description = "The Dublin Core Terms namespace defines the model used to represent metadata using Dublin Core Terms.",
     version = "2010-10-11"
   ),
   @Namespace (
     id = "dctypes",
     uri = MetadataNamespaces.DUBLIN_CORE_TYPE_NAMESPACE,
     label = "Dublin Core Types Namespace",
-    description = "The dublin core types namespace contains the Dublin Core types.",
+    description = "The dublin core types namespace defines the types of Dublin Core metadata.",
     version = "2010-10-11"
   )
 } )

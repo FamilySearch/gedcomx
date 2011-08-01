@@ -22,7 +22,7 @@ public class TestSourceReference {
   public void testSourceReferenceXml() throws Exception {
     SourceReference reference = new SourceReference();
     reference.setHref(URI.create("urn:someid"));
-    reference.setKnownType(SourceType.source);
+    reference.setKnownType(SourceType.collection);
     reference.setId("refid");
     reference.setQualifiers(new ArrayList<SourceQualifier>());
     SourceQualifier q = new SourceQualifier();
@@ -30,7 +30,7 @@ public class TestSourceReference {
     reference.getQualifiers().add(q);
     reference = processThroughXml(reference);
     assertEquals("urn:someid", reference.getHref().toString());
-    assertEquals(SourceType.source, reference.getKnownType());
+    assertEquals(SourceType.collection, reference.getKnownType());
     assertEquals("refid", reference.getId());
     assertEquals("1234", reference.getQualifiers().get(0).getProperty(SourceQualifierProperty.height_pixels));
   }
@@ -41,7 +41,7 @@ public class TestSourceReference {
   public void testSourceReferenceJson() throws Exception {
     SourceReference reference = new SourceReference();
     reference.setHref(URI.create("urn:someid"));
-    reference.setKnownType(SourceType.source);
+    reference.setKnownType(SourceType.collection);
     reference.setId("refid");
     reference.setQualifiers(new ArrayList<SourceQualifier>());
     SourceQualifier q = new SourceQualifier();
@@ -49,7 +49,7 @@ public class TestSourceReference {
     reference.getQualifiers().add(q);
     reference = processThroughJson(reference);
     assertEquals("urn:someid", reference.getHref().toString());
-    assertEquals(SourceType.source, reference.getKnownType());
+    assertEquals(SourceType.collection, reference.getKnownType());
     assertEquals("refid", reference.getId());
     assertEquals("1234", reference.getQualifiers().get(0).getProperty(SourceQualifierProperty.height_pixels));
   }
