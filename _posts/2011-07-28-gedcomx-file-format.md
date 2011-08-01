@@ -6,8 +6,7 @@ date: 2011-07-28 16:18:00
 The initial draft of the GEDCOM X File Format is now available! This file format is designed to replace the legacy GEDCOM format 
 (GEDCOM 5.x) and is designed to be robust and flexible enough to be able to encode a broad set of types of
 genealogical data, including [record](http://www.gedcomx.org/Record-Profile.html), [source](http://www.gedcomx.org/Source-Profile.html), 
-and [conclusion](http://www.gedcomx.org/Conclusion-Profile.html) data--and the [metadata](http://www.gedcomx.org/Metadata.html) describing 
-such data.
+and [conclusion](http://www.gedcomx.org/Conclusion-Profile.html) data.
 
 Wanna know what else is cool? The GEDCOM X File Format is designed to not only supply structured genealogical data, but also media files
 like your images, audio, or video files.
