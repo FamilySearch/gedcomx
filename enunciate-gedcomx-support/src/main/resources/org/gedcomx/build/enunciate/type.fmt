@@ -124,7 +124,7 @@
           [#assign hasSchema=schemaForNamespace(element)??/]
           <tr>
             <td>${element.name}[#if element.wrapped!false] (wrapped in "${element.wrapperName}" element)[/#if]</td>
-            <td>[#if hasSchema]<a href="${schemaForNamespace(element).id}_${element.baseType.qname.localPart}.html">[/#if]${typeName(element, type.namespace)}[#if hasSchema]</a>[/#if]</td>
+            <td>[#if hasSchema]<a href="${schemaForNamespace(element).id}_[#if element.ref??]${element.ref.localPart}[#else]${element.baseType.qname.localPart}[/#if].html">[/#if]${typeName(element, type.namespace)}[#if hasSchema]</a>[/#if]</td>
             <td>${element.minOccurs}..[#if "unbounded" = element.maxOccurs]*[#else]${element.maxOccurs}[/#if]</td>
             <td>${element.docValue!""}</td>
           </tr>
@@ -167,7 +167,7 @@ ${generateExampleXml(type)?html}
           [#assign hasSchema=schemaForNamespace(element)??/]
           <tr>
             <td>${element.jsonMemberName}</td>
-            <td>[#if element.collectionType!false]array of [/#if][#if hasSchema]<a href="${schemaForNamespace(element).id}_${element.baseType.qname.localPart}.html">[/#if]${typeName(element, type.namespace)}[#if hasSchema]</a>[/#if]</td>
+            <td>[#if element.collectionType!false]array of [/#if][#if hasSchema]<a href="${schemaForNamespace(element).id}_[#if element.ref??]${element.ref.localPart}[#else]${element.baseType.qname.localPart}[/#if].html">[/#if]${typeName(element, type.namespace)}[#if hasSchema]</a>[/#if]</td>
             <td>${element.docValue!""}</td>
           </tr>
         [/#list]

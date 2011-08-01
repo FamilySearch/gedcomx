@@ -23,6 +23,7 @@ import org.codehaus.enunciate.contract.jaxb.Accessor;
 import org.codehaus.enunciate.contract.jaxb.RootElementDeclaration;
 import org.codehaus.enunciate.contract.jaxb.types.XmlType;
 
+import javax.xml.namespace.QName;
 import java.util.List;
 import java.util.Map;
 
@@ -51,8 +52,16 @@ public class TypeNameMethod implements TemplateMethodModelEx {
     }
 
     if (object instanceof Accessor) {
-      namespace = ((Accessor) object).getBaseType().getNamespace();
-      name = ((Accessor) object).getBaseType().getName();
+      Accessor accessor = (Accessor) object;
+      QName ref = accessor.getRef();
+      if (ref != null) {
+        namespace = ref.getNamespaceURI();
+        name = ref.getLocalPart();
+      }
+      else {
+        namespace = accessor.getBaseType().getNamespace();
+        name = accessor.getBaseType().getName();
+      }
     }
     else if (object instanceof RootElementDeclaration) {
       namespace = ((RootElementDeclaration) object).getTypeDefinition().getNamespace();
