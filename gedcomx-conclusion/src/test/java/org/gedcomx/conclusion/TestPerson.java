@@ -105,7 +105,6 @@ public class TestPerson {
     name.getAttribution().setContributor(new ContributorReference());
     name.getAttribution().getContributor().setHref(URI.create("urn:name-attribution"));
     name.setId("name-id");
-    name.setKnownStyle(NameStyle.spanish);
     name.setKnownType(NameType.formal);
     NameForm primaryForm = new NameForm();
     primaryForm.setFullText("primary form");
@@ -187,7 +186,6 @@ public class TestPerson {
     assertEquals(NamePartType.given, name.getAlternateForms().get(0).getParts().get(0).getKnownType());
     assertEquals("urn:name-attribution", name.getAttribution().getContributor().getHref().toString());
     assertEquals("name-id", name.getId());
-    assertEquals(NameStyle.spanish, name.getKnownStyle());
     assertEquals(NameType.formal, name.getKnownType());
     assertEquals("primary form", name.getPrimaryForm().getFullText());
     assertEquals(1, name.getPrimaryForm().getParts().size());

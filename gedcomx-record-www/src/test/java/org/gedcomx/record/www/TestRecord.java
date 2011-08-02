@@ -93,7 +93,6 @@ public class TestRecord {
     List<org.gedcomx.record.Name> names = new ArrayList<org.gedcomx.record.Name>();
     Name name = new Name();
     fillInField(name, "name");
-    name.setKnownStyle(NameStyle.spanish);
     name.setKnownType(NameType.formal);
 
     ArrayList<org.gedcomx.record.NamePart> nameParts = new ArrayList<org.gedcomx.record.NamePart>();
@@ -247,7 +246,6 @@ public class TestRecord {
     assertEquals(1, persona.getNames().size());
     Name name = persona.getNames().get(0);
     assertField(name, "name");
-    assertEquals(NameStyle.spanish, name.getKnownStyle());
     assertEquals(NameType.formal, name.getKnownType());
 
     assertEquals(1, name.getParts().size());

@@ -22,7 +22,6 @@ import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.rt.XmlTypeIdResolver;
-import org.gedcomx.types.NameStyle;
 import org.gedcomx.types.NameType;
 
 import javax.xml.bind.annotation.*;
@@ -40,7 +39,6 @@ import java.util.List;
 public class Name extends Conclusion {
 
   private QName type;
-  private QName style;
   private NameForm primaryForm;
   private List<NameForm> alternateForms;
 
@@ -81,45 +79,6 @@ public class Name extends Conclusion {
    */
   public void setKnownType(NameType knownType) {
     this.type = XmlQNameEnumUtil.toQName(knownType);
-  }
-
-  /**
-   * The style of the name.
-   *
-   * @return The style of the name.
-   */
-  @XmlAttribute
-  @XmlQNameEnumRef(NameStyle.class)
-  public QName getStyle() {
-    return style;
-  }
-
-  /**
-   * The style of the name.
-   *
-   * @param style The style of the name.
-   */
-  public void setStyle(QName style) {
-    this.style = style;
-  }
-
-  /**
-   * The enum referencing the known name style, or {@link org.gedcomx.types.NameStyle#other} if not known.
-   *
-   * @return The enum referencing the known name style, or {@link org.gedcomx.types.NameStyle#other} if not known.
-   */
-  @XmlTransient
-  public NameStyle getKnownStyle() {
-    return XmlQNameEnumUtil.fromQName(getStyle(), NameStyle.class);
-  }
-
-  /**
-   * Set the name style from an enumeration of known name styles.
-   *
-   * @param knownStyle The name style.
-   */
-  public void setKnownStyle(NameStyle knownStyle) {
-    this.style = XmlQNameEnumUtil.toQName(knownStyle);
   }
 
   /**
