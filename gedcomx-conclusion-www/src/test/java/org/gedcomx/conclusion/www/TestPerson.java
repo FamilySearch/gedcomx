@@ -144,12 +144,6 @@ public class TestPerson {
 
     person.setPersistentId(URI.create("pal"));
 
-    person.setRelationships(new ArrayList<RelationshipReference>());
-    RelationshipReference relationshipReference = new RelationshipReference();
-    relationshipReference.setKnownRole(RelationshipRole.child);
-    relationshipReference.setHref(URI.create("urn:relationship"));
-    person.getRelationships().add(relationshipReference);
-
     ArrayList<SourceReference> sources = new ArrayList<SourceReference>();
     SourceReference attributedSourceReference = new SourceReference();
     Attribution attribution = new Attribution();
@@ -176,7 +170,6 @@ public class TestPerson {
     Characteristic characteristic;
     Event event;
     Name name;
-    RelationshipReference relationshipReference;
     SourceReference attributedSourceReference;
     assertEquals(GenderType.male, person.getGender().getType());
     assertEquals("urn:gender", person.getGender().getExtension().findExtensionsOfType(Link.class).get(0).getHref().toString());
@@ -233,11 +226,6 @@ public class TestPerson {
     assertEquals(NamePartType.surname, name.getPrimaryForm().getParts().get(0).getKnownType());
 
     assertEquals("pal", person.getPersistentId().toString());
-
-    assertEquals(1, person.getRelationships().size());
-    relationshipReference = person.getRelationships().iterator().next();
-    assertEquals(RelationshipRole.child, relationshipReference.getKnownRole());
-    assertEquals("urn:relationship", relationshipReference.getHref().toString());
 
     assertEquals(1, person.getSources().size());
     attributedSourceReference = person.getSources().iterator().next();

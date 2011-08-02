@@ -36,7 +36,7 @@ import java.util.List;
  */
 @XmlRootElement(name = "person")
 @XmlType (
-  propOrder = {"persistentId", "alternateIds", "gender", "names", "events", "characteristics", "relationships", "sources", "extension"}
+  propOrder = {"persistentId", "alternateIds", "gender", "names", "events", "characteristics", "sources", "extension"}
 )
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
@@ -49,7 +49,6 @@ public class Person {
   private List<Name> names;
   private List<Event> events;
   private List<Characteristic> characteristics;
-  private List<RelationshipReference> relationships;
   private List<SourceReference> sources;
   private Extension extension;
 
@@ -196,28 +195,6 @@ public class Person {
   @JsonProperty("characteristics")
   public void setCharacteristics(List<Characteristic> characteristics) {
     this.characteristics = characteristics;
-  }
-
-  /**
-   * The references to the relationships of the person.
-   *
-   * @return The references to the relationships of the person.
-   */
-  @XmlElement(name="relationship")
-  @JsonProperty("relationships")
-  @JsonName("relationships")
-  public List<RelationshipReference> getRelationships() {
-    return relationships;
-  }
-
-  /**
-   * The references to the relationships of the person.
-   *
-   * @param relationships The references to the relationships of the person.
-   */
-  @JsonProperty("relationships")
-  public void setRelationships(List<RelationshipReference> relationships) {
-    this.relationships = relationships;
   }
 
   /**
