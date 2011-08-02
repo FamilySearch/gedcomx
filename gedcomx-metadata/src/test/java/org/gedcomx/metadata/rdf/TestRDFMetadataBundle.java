@@ -24,7 +24,7 @@ public class TestRDFMetadataBundle {
   public void testRDFMetadataBundleXml() throws Exception {
     RDFMetadataBundle meta = new RDFMetadataBundle();
     meta.setId("id");
-    meta.setMetadataList(Arrays.asList((RDFMetadata) new DublinCoreMetadata()));
+    meta.setContents(Arrays.asList((RDFMetadata) new DublinCoreMetadata()));
     meta.setOtherAttributes(new HashMap<QName, String>());
     meta.getOtherAttributes().put(new QName("urn:data", "data"), "custom");
     meta.setOtherElements(new ArrayList<Object>());
@@ -33,7 +33,7 @@ public class TestRDFMetadataBundle {
     assertEquals("id", meta.getId());
     assertEquals("custom", meta.getOtherAttributes().get(new QName("urn:data", "data")));
     assertEquals(1, meta.getOtherElements().size());
-    assertEquals(1, meta.getMetadataList().size());
+    assertEquals(1, meta.getContents().size());
   }
 
   /**
@@ -42,7 +42,7 @@ public class TestRDFMetadataBundle {
   public void testRDFMetadataJson() throws Exception {
     RDFMetadataBundle meta = new RDFMetadataBundle();
     meta.setId("id");
-    meta.setMetadataList(Arrays.asList((RDFMetadata) new DublinCoreMetadata()));
+    meta.setContents(Arrays.asList((RDFMetadata) new DublinCoreMetadata()));
     meta.setOtherAttributes(new HashMap<QName, String>());
     meta.getOtherAttributes().put(new QName("urn:data", "data"), "custom");
     meta.setOtherElements(new ArrayList<Object>());
@@ -51,7 +51,7 @@ public class TestRDFMetadataBundle {
     assertEquals("id", meta.getId());
     assertEquals("custom", meta.getOtherAttributes().get(new QName("urn:data", "data")));
     assertEquals(1, meta.getOtherElements().size());
-    assertEquals(1, meta.getMetadataList().size());
+    assertEquals(1, meta.getContents().size());
   }
 
 }

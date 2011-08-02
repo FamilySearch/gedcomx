@@ -29,7 +29,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * RDF metadata bundle, <a href="http://www.w3.org/TR/2004/REC-rdf-primer-20040210/#rdfxml">according to the RDF spec</a>.
+ * A bunle of RDF metadata, <a href="http://www.w3.org/TR/2004/REC-rdf-primer-20040210/#rdfxml">according to the RDF spec</a>.
  *
  * @author Ryan Heaton
  */
@@ -39,7 +39,7 @@ import java.util.Map;
 public class RDFMetadataBundle {
 
   private String id;
-  private List<RDFMetadata> metadataList;
+  private List<RDFMetadata> contents;
   private Map<QName, String> otherAttributes;
   private List<Object> otherElements;
 
@@ -64,44 +64,64 @@ public class RDFMetadataBundle {
   }
 
   /**
-   * The list of items in this bundle of metadata.
+   * The pieces of metadata contained in this bundle.
    *
-   * @return The list of items in this bundle of metadata.
+   * @return The pieces of metadata contained in this bundle.
    */
   @XmlElement ( name = "Description" )
   @JsonProperty ( "Descriptions" )
   @JsonName ( "Descriptions" )
-  public List<RDFMetadata> getMetadataList() {
-    return metadataList;
+  public List<RDFMetadata> getContents() {
+    return contents;
   }
 
   /**
-   * The list of items in this bundle of metadata.
+   * The pieces of metadata contained in this bundle.
    *
-   * @param metadataList The list of items in this bundle of metadata.
+   * @param contents The pieces of metadata contained in this bundle.
    */
   @JsonProperty ( "Descriptions" )
-  public void setMetadataList(List<RDFMetadata> metadataList) {
-    this.metadataList = metadataList;
+  public void setContents(List<RDFMetadata> contents) {
+    this.contents = contents;
   }
 
+  /**
+   * Custom attributes for this bundle.
+   *
+   * @return Custom attributes for this bundle.
+   */
   @XmlAnyAttribute
   @JsonSerialize ( using = AnyAttributeSerializer.class )
   public Map<QName, String> getOtherAttributes() {
     return otherAttributes;
   }
 
+  /**
+   * Custom attributes for this bundle.
+   *
+   * @param otherAttributes Custom attributes for this bundle.
+   */
   @JsonDeserialize ( using = AnyAttributeDeserializer.class )
   public void setOtherAttributes(Map<QName, String> otherAttributes) {
     this.otherAttributes = otherAttributes;
   }
 
+  /**
+   * Custom pieces of non-RDF metadata contained in this bundle.
+   *
+   * @return Custom pieces of non-RDF metadata contained in this bundle.
+   */
   @XmlAnyElement ( lax = true )
   @JsonSerialize ( using = AnyElementSerializer.class )
   public List<Object> getOtherElements() {
     return otherElements;
   }
 
+  /**
+   * Custom pieces of non-RDF metadata contained in this bundle.
+   *
+   * @param otherElements Custom pieces of non-RDF metadata contained in this bundle.
+   */
   @JsonDeserialize( using = AnyElementDeserializer.class )
   public void setOtherElements(List<Object> otherElements) {
     this.otherElements = otherElements;

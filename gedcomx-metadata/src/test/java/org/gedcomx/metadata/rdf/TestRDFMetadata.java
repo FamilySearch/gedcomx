@@ -24,14 +24,14 @@ public class TestRDFMetadata {
   public void testRDFMetadataXml() throws Exception {
     RDFMetadata meta = new RDFMetadata();
     meta.setId("id");
-    meta.setDataRef(URI.create("urn:dataref"));
+    meta.setAbout(URI.create("urn:dataref"));
     meta.setOtherAttributes(new HashMap<QName, String>());
     meta.getOtherAttributes().put(new QName("urn:data", "data"), "custom");
     meta.setOtherElements(new ArrayList<Object>());
     meta.getOtherElements().add(new RDFMetadataBundle());
     meta = processThroughXml(meta, RDFMetadata.class, JAXBContext.newInstance(RDFMetadata.class, RDFMetadataBundle.class));
     assertEquals("id", meta.getId());
-    assertEquals(URI.create("urn:dataref"), meta.getDataRef());
+    assertEquals(URI.create("urn:dataref"), meta.getAbout());
     assertEquals("custom", meta.getOtherAttributes().get(new QName("urn:data", "data")));
     assertEquals(1, meta.getOtherElements().size());
   }
@@ -42,14 +42,14 @@ public class TestRDFMetadata {
   public void testRDFMetadataJson() throws Exception {
     RDFMetadata meta = new RDFMetadata();
     meta.setId("id");
-    meta.setDataRef(URI.create("urn:dataref"));
+    meta.setAbout(URI.create("urn:dataref"));
     meta.setOtherAttributes(new HashMap<QName, String>());
     meta.getOtherAttributes().put(new QName("urn:data", "data"), "custom");
     meta.setOtherElements(new ArrayList<Object>());
     meta.getOtherElements().add(new RDFMetadataBundle());
     meta = processThroughJson(meta);
     assertEquals("id", meta.getId());
-    assertEquals(URI.create("urn:dataref"), meta.getDataRef());
+    assertEquals(URI.create("urn:dataref"), meta.getAbout());
     assertEquals("custom", meta.getOtherAttributes().get(new QName("urn:data", "data")));
     assertEquals(1, meta.getOtherElements().size());
   }

@@ -38,7 +38,6 @@ public final class DublinCoreDateProperty {
   private String id;
   private String lang;
   private Date value;
-  private URI valueRef;
   private Map<QName, String> otherAttributes;
 
   /**
@@ -97,26 +96,6 @@ public final class DublinCoreDateProperty {
    */
   public void setValue(Date value) {
     this.value = value;
-  }
-
-  /**
-   * The URI reference to the value, if the value is structured data.
-   *
-   * @return The URI reference to the value, if the value is structured data.
-   */
-  @XmlAttribute( name = "resource", namespace = MetadataNamespaces.RDF_NAMESPACE )
-  @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
-  public URI getValueRef() {
-    return valueRef;
-  }
-
-  /**
-   * The URI reference to the value, if the value is structured data.
-   *
-   * @param valueRef The URI reference to the value, if the value is structured data.
-   */
-  public void setValueRef(URI valueRef) {
-    this.valueRef = valueRef;
   }
 
   /**

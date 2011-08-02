@@ -15,11 +15,17 @@
  */
 package org.gedcomx.metadata.dc;
 
+import org.codehaus.enunciate.XmlQNameEnumUtil;
+import org.codehaus.enunciate.json.JsonName;
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.metadata.rdf.RDFMetadata;
+import org.gedcomx.rt.XmlTypeIdResolver;
 
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.namespace.QName;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -34,61 +40,61 @@ import java.util.List;
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 public class DublinCoreMetadata extends RDFMetadata {
 
-  private List<DublinCoreStringProperty> abstrct;
+  private DublinCoreStringProperty abstrct;
   private List<DublinCoreStringProperty> accessRights;
-  private List<DublinCoreStringProperty> accrualMethod;
-  private List<DublinCoreStringProperty> accrualPeriodicity;
-  private List<DublinCoreStringProperty> accrualPolicy;
+  private DublinCoreStringProperty accrualMethod;
+  private DublinCoreStringProperty accrualPeriodicity;
+  private DublinCoreStringProperty accrualPolicy;
   private List<DublinCoreStringProperty> alternative;
   private List<DublinCoreStringProperty> audience;
-  private List<DublinCoreDateProperty> available;
-  private List<DublinCoreStringProperty> bibliographicCitation;
+  private Date available;
+  private DublinCoreStringProperty bibliographicCitation;
   private List<DublinCoreStringProperty> conformsTo;
   private List<DublinCoreStringProperty> contributor;
-  private List<DublinCoreStringProperty> coverage;
-  private List<DublinCoreDateProperty> created;
+  private DublinCoreStringProperty coverage;
+  private Date created;
   private List<DublinCoreStringProperty> creator;
-  private List<DublinCoreDateProperty> date;
-  private List<DublinCoreDateProperty> dateAccepted;
-  private List<DublinCoreDateProperty> dateCopyrighted;
-  private List<DublinCoreDateProperty> dateSubmitted;
-  private List<DublinCoreStringProperty> description;
-  private List<DublinCoreStringProperty> educationLevel;
-  private List<DublinCoreStringProperty> extent;
-  private List<DublinCoreStringProperty> format;
+  private Date date;
+  private Date dateAccepted;
+  private Date dateCopyrighted;
+  private Date dateSubmitted;
+  private DublinCoreStringProperty description;
+  private DublinCoreStringProperty educationLevel;
+  private DublinCoreStringProperty extent;
+  private DublinCoreStringProperty format;
   private List<DublinCoreStringProperty> hasFormat;
   private List<DublinCoreStringProperty> hasPart;
   private List<DublinCoreStringProperty> hasVersion;
-  private List<DublinCoreStringProperty> identifier;
-  private List<DublinCoreStringProperty> instructionalMethod;
+  private DublinCoreStringProperty identifier;
+  private DublinCoreStringProperty instructionalMethod;
   private List<DublinCoreStringProperty> isFormatOf;
   private List<DublinCoreStringProperty> isPartOf;
   private List<DublinCoreStringProperty> isReferencedBy;
   private List<DublinCoreStringProperty> isReplacedBy;
   private List<DublinCoreStringProperty> isRequiredBy;
-  private List<DublinCoreDateProperty> issued;
-  private List<DublinCoreStringProperty> isVersionOf;
+  private Date issued;
+  private DublinCoreStringProperty isVersionOf;
   private List<DublinCoreStringProperty> language;
   private List<DublinCoreStringProperty> license;
   private List<DublinCoreStringProperty> mediator;
-  private List<DublinCoreStringProperty> medium;
-  private List<DublinCoreDateProperty> modified;
-  private List<DublinCoreStringProperty> provenance;
-  private List<DublinCoreStringProperty> publisher;
+  private DublinCoreStringProperty medium;
+  private Date modified;
+  private DublinCoreStringProperty provenance;
+  private DublinCoreStringProperty publisher;
   private List<DublinCoreStringProperty> references;
   private List<DublinCoreStringProperty> relation;
   private List<DublinCoreStringProperty> replaces;
   private List<DublinCoreStringProperty> requires;
   private List<DublinCoreStringProperty> rights;
-  private List<DublinCoreStringProperty> rightsHolder;
+  private DublinCoreStringProperty rightsHolder;
   private List<DublinCoreStringProperty> source;
   private List<DublinCoreStringProperty> spatial;
   private List<DublinCoreStringProperty> subject;
-  private List<DublinCoreStringProperty> tableOfContents;
+  private DublinCoreStringProperty tableOfContents;
   private List<DublinCoreStringProperty> temporal;
-  private List<DublinCoreStringProperty> title;
-  private List<DublinCoreTypeProperty> type;
-  private List<DublinCoreDateProperty> valid;
+  private DublinCoreStringProperty title;
+  private QName type;
+  private List<DublinCoreStringProperty> valid;
 
   /**
    * A summary of the resource.
@@ -96,8 +102,7 @@ public class DublinCoreMetadata extends RDFMetadata {
    * @return A summary of the resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-abstract
    */
-  @SuppressWarnings("gedcomx:non_plural_json_name")
-  public List<DublinCoreStringProperty> getAbstract() {
+  public DublinCoreStringProperty getAbstract() {
     return abstrct;
   }
 
@@ -107,7 +112,7 @@ public class DublinCoreMetadata extends RDFMetadata {
    * @param abstrct A summary of the resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-abstract
    */
-  public void setAbstract(List<DublinCoreStringProperty> abstrct) {
+  public void setAbstract(DublinCoreStringProperty abstrct) {
     this.abstrct = abstrct;
   }
 
@@ -144,8 +149,7 @@ public class DublinCoreMetadata extends RDFMetadata {
    * @return The method by which items are added to a collection.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-accrualMethod
    */
-  @SuppressWarnings("gedcomx:non_plural_json_name")
-  public List<DublinCoreStringProperty> getAccrualMethod() {
+  public DublinCoreStringProperty getAccrualMethod() {
     return accrualMethod;
   }
 
@@ -155,7 +159,7 @@ public class DublinCoreMetadata extends RDFMetadata {
    * @param accrualMethod The method by which items are added to a collection.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-accrualMethod
    */
-  public void setAccrualMethod(List<DublinCoreStringProperty> accrualMethod) {
+  public void setAccrualMethod(DublinCoreStringProperty accrualMethod) {
     this.accrualMethod = accrualMethod;
   }
 
@@ -165,8 +169,7 @@ public class DublinCoreMetadata extends RDFMetadata {
    * @return The frequency with which items are added to a collection.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-accrualPeriodicity
    */
-  @SuppressWarnings("gedcomx:non_plural_json_name")
-  public List<DublinCoreStringProperty> getAccrualPeriodicity() {
+  public DublinCoreStringProperty getAccrualPeriodicity() {
     return accrualPeriodicity;
   }
 
@@ -176,7 +179,7 @@ public class DublinCoreMetadata extends RDFMetadata {
    * @param accrualPeriodicity The frequency with which items are added to a collection.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-accrualPeriodicity
    */
-  public void setAccrualPeriodicity(List<DublinCoreStringProperty> accrualPeriodicity) {
+  public void setAccrualPeriodicity(DublinCoreStringProperty accrualPeriodicity) {
     this.accrualPeriodicity = accrualPeriodicity;
   }
 
@@ -186,8 +189,7 @@ public class DublinCoreMetadata extends RDFMetadata {
    * @return The policy governing the addition of items to a collection.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-accrualPolicy
    */
-  @SuppressWarnings("gedcomx:non_plural_json_name")
-  public List<DublinCoreStringProperty> getAccrualPolicy() {
+  public DublinCoreStringProperty getAccrualPolicy() {
     return accrualPolicy;
   }
 
@@ -197,38 +199,41 @@ public class DublinCoreMetadata extends RDFMetadata {
    * @param accrualPolicy The policy governing the addition of items to a collection.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-accrualPolicy
    */
-  public void setAccrualPolicy(List<DublinCoreStringProperty> accrualPolicy) {
+  public void setAccrualPolicy(DublinCoreStringProperty accrualPolicy) {
     this.accrualPolicy = accrualPolicy;
   }
 
   /**
-   * An alternative name for the resource. The distinction between titles and alternative titles is application-specific.
+   * Alternative names for the resource. The distinction between titles and alternative titles is application-specific.
    *
-   * @return An alternative name for the resource. The distinction between titles and alternative titles is application-specific.
+   * @return Alternative names for the resource. The distinction between titles and alternative titles is application-specific.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-alternative
    */
-  @SuppressWarnings("gedcomx:non_plural_json_name")
+  @JsonName ("alternatives")
+  @JsonProperty ("alternatives")
   public List<DublinCoreStringProperty> getAlternative() {
     return alternative;
   }
 
   /**
-   * An alternative name for the resource. The distinction between titles and alternative titles is application-specific.
+   * Alternative names for the resource. The distinction between titles and alternative titles is application-specific.
    *
-   * @param alternative An alternative name for the resource. The distinction between titles and alternative titles is application-specific.
+   * @param alternative Alternative names for the resource. The distinction between titles and alternative titles is application-specific.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-alternative
    */
+  @JsonProperty ("alternatives")
   public void setAlternative(List<DublinCoreStringProperty> alternative) {
     this.alternative = alternative;
   }
 
   /**
-   * A class of entity for whom the resource is intended or useful.
+   * Classes of entities for whom the resource is intended or useful.
    *
-   * @return A class of entity for whom the resource is intended or useful.
+   * @return Classes of entities for whom the resource is intended or useful.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-audience
    */
-  @SuppressWarnings("gedcomx:non_plural_json_name")
+  @JsonName ("audiences")
+  @JsonProperty ("audiences")
   public List<DublinCoreStringProperty> getAudience() {
     return audience;
   }
@@ -239,6 +244,7 @@ public class DublinCoreMetadata extends RDFMetadata {
    * @param audience A class of entity for whom the resource is intended or useful.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-audience
    */
+  @JsonProperty ("audiences")
   public void setAudience(List<DublinCoreStringProperty> audience) {
     this.audience = audience;
   }
@@ -249,8 +255,7 @@ public class DublinCoreMetadata extends RDFMetadata {
    * @return Date that the resource became or will become available.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-available
    */
-  @SuppressWarnings("gedcomx:non_plural_json_name")
-  public List<DublinCoreDateProperty> getAvailable() {
+  public Date getAvailable() {
     return available;
   }
 
@@ -260,7 +265,7 @@ public class DublinCoreMetadata extends RDFMetadata {
    * @param available Date that the resource became or will become available.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-available
    */
-  public void setAvailable(List<DublinCoreDateProperty> available) {
+  public void setAvailable(Date available) {
     this.available = available;
   }
 
@@ -272,8 +277,7 @@ public class DublinCoreMetadata extends RDFMetadata {
    * bibliographic detail to identify the resource as unambiguously as possible.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-bibliographicCitation
    */
-  @SuppressWarnings("gedcomx:non_plural_json_name")
-  public List<DublinCoreStringProperty> getBibliographicCitation() {
+  public DublinCoreStringProperty getBibliographicCitation() {
     return bibliographicCitation;
   }
 
@@ -285,14 +289,14 @@ public class DublinCoreMetadata extends RDFMetadata {
    * bibliographic detail to identify the resource as unambiguously as possible.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-bibliographicCitation
    */
-  public void setBibliographicCitation(List<DublinCoreStringProperty> bibliographicCitation) {
+  public void setBibliographicCitation(DublinCoreStringProperty bibliographicCitation) {
     this.bibliographicCitation = bibliographicCitation;
   }
 
   /**
-   * An established standard to which the described resource conforms.
+   * Established standards to which the described resource conforms.
    *
-   * @return An established standard to which the described resource conforms.
+   * @return Established standards to which the described resource conforms.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-conformsTo
    */
   @SuppressWarnings("gedcomx:non_plural_json_name")
@@ -301,9 +305,9 @@ public class DublinCoreMetadata extends RDFMetadata {
   }
 
   /**
-   * An established standard to which the described resource conforms.
+   * Established standards to which the described resource conforms.
    *
-   * @param conformsTo An established standard to which the described resource conforms.
+   * @param conformsTo Established standards to which the described resource conforms.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-conformsTo
    */
   public void setConformsTo(List<DublinCoreStringProperty> conformsTo) {
@@ -311,22 +315,24 @@ public class DublinCoreMetadata extends RDFMetadata {
   }
 
   /**
-   * An entity responsible for making contributions to the resource. Examples of a Contributor include a person, an organization, or a service.
+   * Entities responsible for making contributions to the resource. Examples of a Contributor include a person, an organization, or a service.
    *
-   * @return An entity responsible for making contributions to the resource. Examples of a Contributor include a person, an organization, or a service.
+   * @return Entities responsible for making contributions to the resource. Examples of a Contributor include a person, an organization, or a service.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-contributor
    */
-  @SuppressWarnings("gedcomx:non_plural_json_name")
+  @JsonName ("contributors")
+  @JsonProperty ("contributors")
   public List<DublinCoreStringProperty> getContributor() {
     return contributor;
   }
 
   /**
-   * An entity responsible for making contributions to the resource. Examples of a Contributor include a person, an organization, or a service.
+   * Entities responsible for making contributions to the resource. Examples of a Contributor include a person, an organization, or a service.
    *
-   * @param contributor An entity responsible for making contributions to the resource. Examples of a Contributor include a person, an organization, or a service.
+   * @param contributor Entities responsible for making contributions to the resource. Examples of a Contributor include a person, an organization, or a service.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-contributor
    */
+  @JsonProperty ("contributors")
   public void setContributor(List<DublinCoreStringProperty> contributor) {
     this.contributor = contributor;
   }
@@ -337,8 +343,7 @@ public class DublinCoreMetadata extends RDFMetadata {
    * @return The spatial or temporal topic of the resource, the spatial applicability of the resource, or the jurisdiction under which the resource is relevant.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-coverage
    */
-  @SuppressWarnings("gedcomx:non_plural_json_name")
-  public List<DublinCoreStringProperty> getCoverage() {
+  public DublinCoreStringProperty getCoverage() {
     return coverage;
   }
 
@@ -348,7 +353,7 @@ public class DublinCoreMetadata extends RDFMetadata {
    * @param coverage The spatial or temporal topic of the resource, the spatial applicability of the resource, or the jurisdiction under which the resource is relevant.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-coverage
    */
-  public void setCoverage(List<DublinCoreStringProperty> coverage) {
+  public void setCoverage(DublinCoreStringProperty coverage) {
     this.coverage = coverage;
   }
 
@@ -358,8 +363,7 @@ public class DublinCoreMetadata extends RDFMetadata {
    * @return Date of creation of the resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-created
    */
-  @SuppressWarnings("gedcomx:non_plural_json_name")
-  public List<DublinCoreDateProperty> getCreated() {
+  public Date getCreated() {
     return created;
   }
 
@@ -369,27 +373,29 @@ public class DublinCoreMetadata extends RDFMetadata {
    * @param created Date of creation of the resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-created
    */
-  public void setCreated(List<DublinCoreDateProperty> created) {
+  public void setCreated(Date created) {
     this.created = created;
   }
 
   /**
-   * An entity primarily responsible for making the resource.
+   * Entities primarily responsible for making the resource.
    *
-   * @return An entity primarily responsible for making the resource.
+   * @return Entities primarily responsible for making the resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-creator
    */
-  @SuppressWarnings("gedcomx:non_plural_json_name")
+  @JsonName ("creators")
+  @JsonProperty ("creators")
   public List<DublinCoreStringProperty> getCreator() {
     return creator;
   }
 
   /**
-   * An entity primarily responsible for making the resource.
+   * Entities primarily responsible for making the resource.
    *
-   * @param creator An entity primarily responsible for making the resource.
+   * @param creator Entities primarily responsible for making the resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-creator
    */
+  @JsonProperty ("creators")
   public void setCreator(List<DublinCoreStringProperty> creator) {
     this.creator = creator;
   }
@@ -400,8 +406,7 @@ public class DublinCoreMetadata extends RDFMetadata {
    * @return A point or period of time associated with an event in the lifecycle of the resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-date
    */
-  @SuppressWarnings("gedcomx:non_plural_json_name")
-  public List<DublinCoreDateProperty> getDate() {
+  public Date getDate() {
     return date;
   }
 
@@ -411,7 +416,7 @@ public class DublinCoreMetadata extends RDFMetadata {
    * @param date A point or period of time associated with an event in the lifecycle of the resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-date
    */
-  public void setDate(List<DublinCoreDateProperty> date) {
+  public void setDate(Date date) {
     this.date = date;
   }
 
@@ -421,8 +426,7 @@ public class DublinCoreMetadata extends RDFMetadata {
    * @return Date of acceptance of the resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-dateAccepted
    */
-  @SuppressWarnings("gedcomx:non_plural_json_name")
-  public List<DublinCoreDateProperty> getDateAccepted() {
+  public Date getDateAccepted() {
     return dateAccepted;
   }
 
@@ -432,7 +436,7 @@ public class DublinCoreMetadata extends RDFMetadata {
    * @param dateAccepted Date of acceptance of the resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-dateAccepted
    */
-  public void setDateAccepted(List<DublinCoreDateProperty> dateAccepted) {
+  public void setDateAccepted(Date dateAccepted) {
     this.dateAccepted = dateAccepted;
   }
 
@@ -442,8 +446,7 @@ public class DublinCoreMetadata extends RDFMetadata {
    * @return Date of copyright.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-dateCopyrighted
    */
-  @SuppressWarnings("gedcomx:non_plural_json_name")
-  public List<DublinCoreDateProperty> getDateCopyrighted() {
+  public Date getDateCopyrighted() {
     return dateCopyrighted;
   }
 
@@ -453,7 +456,7 @@ public class DublinCoreMetadata extends RDFMetadata {
    * @param dateCopyrighted Date of copyright.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-dateCopyrighted
    */
-  public void setDateCopyrighted(List<DublinCoreDateProperty> dateCopyrighted) {
+  public void setDateCopyrighted(Date dateCopyrighted) {
     this.dateCopyrighted = dateCopyrighted;
   }
 
@@ -463,8 +466,7 @@ public class DublinCoreMetadata extends RDFMetadata {
    * @return Date of submission of the resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-dateSubmitted
    */
-  @SuppressWarnings("gedcomx:non_plural_json_name")
-  public List<DublinCoreDateProperty> getDateSubmitted() {
+  public Date getDateSubmitted() {
     return dateSubmitted;
   }
 
@@ -474,7 +476,7 @@ public class DublinCoreMetadata extends RDFMetadata {
    * @param dateSubmitted Date of submission of the resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-dateSubmitted
    */
-  public void setDateSubmitted(List<DublinCoreDateProperty> dateSubmitted) {
+  public void setDateSubmitted(Date dateSubmitted) {
     this.dateSubmitted = dateSubmitted;
   }
 
@@ -484,8 +486,7 @@ public class DublinCoreMetadata extends RDFMetadata {
    * @return An account of the resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-description
    */
-  @SuppressWarnings("gedcomx:non_plural_json_name")
-  public List<DublinCoreStringProperty> getDescription() {
+  public DublinCoreStringProperty getDescription() {
     return description;
   }
 
@@ -495,7 +496,7 @@ public class DublinCoreMetadata extends RDFMetadata {
    * @param description An account of the resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-description
    */
-  public void setDescription(List<DublinCoreStringProperty> description) {
+  public void setDescription(DublinCoreStringProperty description) {
     this.description = description;
   }
 
@@ -505,8 +506,7 @@ public class DublinCoreMetadata extends RDFMetadata {
    * @return A class of entity, defined in terms of progression through an educational or training context, for which the described resource is intended.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-educationLevel
    */
-  @SuppressWarnings("gedcomx:non_plural_json_name")
-  public List<DublinCoreStringProperty> getEducationLevel() {
+  public DublinCoreStringProperty getEducationLevel() {
     return educationLevel;
   }
 
@@ -516,7 +516,7 @@ public class DublinCoreMetadata extends RDFMetadata {
    * @param educationLevel A class of entity, defined in terms of progression through an educational or training context, for which the described resource is intended.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-educationLevel
    */
-  public void setEducationLevel(List<DublinCoreStringProperty> educationLevel) {
+  public void setEducationLevel(DublinCoreStringProperty educationLevel) {
     this.educationLevel = educationLevel;
   }
 
@@ -526,8 +526,7 @@ public class DublinCoreMetadata extends RDFMetadata {
    * @return The size or duration of the resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-extent
    */
-  @SuppressWarnings("gedcomx:non_plural_json_name")
-  public List<DublinCoreStringProperty> getExtent() {
+  public DublinCoreStringProperty getExtent() {
     return extent;
   }
 
@@ -537,7 +536,7 @@ public class DublinCoreMetadata extends RDFMetadata {
    * @param extent The size or duration of the resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-extent
    */
-  public void setExtent(List<DublinCoreStringProperty> extent) {
+  public void setExtent(DublinCoreStringProperty extent) {
     this.extent = extent;
   }
 
@@ -550,8 +549,7 @@ public class DublinCoreMetadata extends RDFMetadata {
    *
    * @link http://dublincore.org/documents/dcmi-terms/#terms-format
    */
-  @SuppressWarnings("gedcomx:non_plural_json_name")
-  public List<DublinCoreStringProperty> getFormat() {
+  public DublinCoreStringProperty getFormat() {
     return format;
   }
 
@@ -564,69 +562,81 @@ public class DublinCoreMetadata extends RDFMetadata {
    *
    * @link http://dublincore.org/documents/dcmi-terms/#terms-format
    */
-  public void setFormat(List<DublinCoreStringProperty> format) {
+  public void setFormat(DublinCoreStringProperty format) {
     this.format = format;
   }
 
   /**
-   * A related resource that is substantially the same as the pre-existing described resource, but in another format.
+   * List of alternate formats of the pre-existing described resource. In REST terms, a list of the alternate "representations" that are available
+   * for the described resource, probably in terms of the MIME type. If the alternate representations of the resource are accessed at
+   * a different URI (bad practice, but an accepted reality), use a custom {http://www.w3.org/1999/xlink}href attribute instead of the
+   * {http://www.w3.org/1999/02/22-rdf-syntax-ns#}resource attribute.
    *
-   * @return A related resource that is substantially the same as the pre-existing described resource, but in another format.
+   * @return Alternate formats of the described resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-hasFormat
    */
-  @SuppressWarnings("gedcomx:non_plural_json_name")
+  @JsonName ("hasFormats")
+  @JsonProperty ("hasFormats")
   public List<DublinCoreStringProperty> getHasFormat() {
     return hasFormat;
   }
 
   /**
-   * A related resource that is substantially the same as the pre-existing described resource, but in another format.
+   * List of alternate formats of the pre-existing described resource. In REST terms, a list of the alternate "representations" that are available
+   * for the described resource, probably in terms of the MIME type. If the alternate representations of the resource are accessed at
+   * a different URI (bad practice, but an accepted reality), use a custom {http://www.w3.org/1999/xlink}href attribute instead of the
+   * {http://www.w3.org/1999/02/22-rdf-syntax-ns#}resource attribute.
    *
-   * @param hasFormat A related resource that is substantially the same as the pre-existing described resource, but in another format.
+   * @param hasFormat Alternate formats of the described resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-hasFormat
    */
+  @JsonProperty ("hasFormats")
   public void setHasFormat(List<DublinCoreStringProperty> hasFormat) {
     this.hasFormat = hasFormat;
   }
 
   /**
-   * A related resource that is included either physically or logically in the described resource.
+   * Related resources that are included either physically or logically in the described resource.
    *
-   * @return A related resource that is included either physically or logically in the described resource.
+   * @return Related resources that are included either physically or logically in the described resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-hasPart
    */
-  @SuppressWarnings("gedcomx:non_plural_json_name")
+  @JsonName ("hasParts")
+  @JsonProperty ("hasParts")
   public List<DublinCoreStringProperty> getHasPart() {
     return hasPart;
   }
 
   /**
-   * A related resource that is included either physically or logically in the described resource.
+   * Related resources that are included either physically or logically in the described resource.
    *
-   * @param hasPart A related resource that is included either physically or logically in the described resource.
+   * @param hasPart Related resources that are included either physically or logically in the described resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-hasPart
    */
+  @JsonProperty ("hasParts")
   public void setHasPart(List<DublinCoreStringProperty> hasPart) {
     this.hasPart = hasPart;
   }
 
   /**
-   * A related resource that is a version, edition, or adaptation of the described resource.
+   * Related resources that are a version, edition, or adaptation of the described resource.
    *
-   * @return A related resource that is a version, edition, or adaptation of the described resource.
+   * @return Related resources that are a version, edition, or adaptation of the described resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-hasVersion
    */
-  @SuppressWarnings("gedcomx:non_plural_json_name")
+  @JsonName ("hasVersions")
+  @JsonProperty ("hasVersions")
   public List<DublinCoreStringProperty> getHasVersion() {
     return hasVersion;
   }
 
   /**
-   * A related resource that is a version, edition, or adaptation of the described resource.
+   * Related resources that are a version, edition, or adaptation of the described resource.
    *
-   * @param hasVersion A related resource that is a version, edition, or adaptation of the described resource.
+   * @param hasVersion Related resources that are a version, edition, or adaptation of the described resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-hasVersion
    */
+  @JsonProperty ("hasVersions")
   public void setHasVersion(List<DublinCoreStringProperty> hasVersion) {
     this.hasVersion = hasVersion;
   }
@@ -637,8 +647,7 @@ public class DublinCoreMetadata extends RDFMetadata {
    * @return An unambiguous reference to the resource within a given context.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-identifier
    */
-  @SuppressWarnings("gedcomx:non_plural_json_name")
-  public List<DublinCoreStringProperty> getIdentifier() {
+  public DublinCoreStringProperty getIdentifier() {
     return identifier;
   }
 
@@ -648,7 +657,7 @@ public class DublinCoreMetadata extends RDFMetadata {
    * @param identifier An unambiguous reference to the resource within a given context.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-identifier
    */
-  public void setIdentifier(List<DublinCoreStringProperty> identifier) {
+  public void setIdentifier(DublinCoreStringProperty identifier) {
     this.identifier = identifier;
   }
 
@@ -658,8 +667,7 @@ public class DublinCoreMetadata extends RDFMetadata {
    * @return A process, used to engender knowledge, attitudes and skills, that the described resource is designed to support.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-instructionalMethod
    */
-  @SuppressWarnings("gedcomx:non_plural_json_name")
-  public List<DublinCoreStringProperty> getInstructionalMethod() {
+  public DublinCoreStringProperty getInstructionalMethod() {
     return instructionalMethod;
   }
 
@@ -669,14 +677,16 @@ public class DublinCoreMetadata extends RDFMetadata {
    * @param instructionalMethod A process, used to engender knowledge, attitudes and skills, that the described resource is designed to support.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-instructionalMethod
    */
-  public void setInstructionalMethod(List<DublinCoreStringProperty> instructionalMethod) {
+  public void setInstructionalMethod(DublinCoreStringProperty instructionalMethod) {
     this.instructionalMethod = instructionalMethod;
   }
 
   /**
-   * A related resource that is substantially the same as the described resource, but in another format.
+   * Related resources that are substantially the same as the described resource, but in another format. In REST terms, the URI of
+   * an alternate representation of the same resource. Note that having more than one URI for the same resource is generally bad
+   * practice (see http://www.w3.org/TR/webarch/) but still an accepted reality.
    *
-   * @return A related resource that is substantially the same as the described resource, but in another format.
+   * @return Related resources that are substantially the same as the described resource, but in another format.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-isFormatOf
    */
   @SuppressWarnings("gedcomx:non_plural_json_name")
@@ -685,9 +695,11 @@ public class DublinCoreMetadata extends RDFMetadata {
   }
 
   /**
-   * A related resource that is substantially the same as the described resource, but in another format.
+   * Related resources that are substantially the same as the described resource, but in another format. In REST terms, the URI of
+   * an alternate representation of the same resource. Note that having more than one URI for the same resource is generally bad
+   * practice (see http://www.w3.org/TR/webarch/) but still an accepted reality.
    *
-   * @param formatOf A related resource that is substantially the same as the described resource, but in another format.
+   * @param formatOf Related resources that are substantially the same as the described resource, but in another format.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-isFormatOf
    */
   public void setFormatOf(List<DublinCoreStringProperty> formatOf) {
@@ -695,9 +707,9 @@ public class DublinCoreMetadata extends RDFMetadata {
   }
 
   /**
-   * A related resource in which the described resource is physically or logically included.
+   * Related resources in which the described resource is physically or logically included.
    *
-   * @return A related resource in which the described resource is physically or logically included.
+   * @return Related resources in which the described resource is physically or logically included.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-isPartOf
    */
   @SuppressWarnings("gedcomx:non_plural_json_name")
@@ -706,9 +718,9 @@ public class DublinCoreMetadata extends RDFMetadata {
   }
 
   /**
-   * A related resource in which the described resource is physically or logically included.
+   * Related resources in which the described resource is physically or logically included.
    *
-   * @param partOf A related resource in which the described resource is physically or logically included.
+   * @param partOf Related resources in which the described resource is physically or logically included.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-isPartOf
    */
   public void setPartOf(List<DublinCoreStringProperty> partOf) {
@@ -716,9 +728,9 @@ public class DublinCoreMetadata extends RDFMetadata {
   }
 
   /**
-   * A related resource that references, cites, or otherwise points to the described resource.
+   * Related resources that reference, cite, or otherwise point to the described resource.
    *
-   * @return A related resource that references, cites, or otherwise points to the described resource.
+   * @return Related resources that reference, cite, or otherwise point to the described resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-isReferencedBy
    */
   @SuppressWarnings("gedcomx:non_plural_json_name")
@@ -727,9 +739,9 @@ public class DublinCoreMetadata extends RDFMetadata {
   }
 
   /**
-   * A related resource that references, cites, or otherwise points to the described resource.
+   * Related resources that reference, cite, or otherwise point to the described resource.
    *
-   * @param referencedBy A related resource that references, cites, or otherwise points to the described resource.
+   * @param referencedBy Related resources that reference, cite, or otherwise point to the described resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-isReferencedBy
    */
   public void setReferencedBy(List<DublinCoreStringProperty> referencedBy) {
@@ -737,9 +749,9 @@ public class DublinCoreMetadata extends RDFMetadata {
   }
 
   /**
-   * A related resource that supplants, displaces, or supersedes the described resource.
+   * Related resources that supplant, displace, or supersede the described resource.
    *
-   * @return A related resource that supplants, displaces, or supersedes the described resource.
+   * @return Related resources that supplant, displace, or supersede the described resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-isReplacedBy
    */
   @SuppressWarnings("gedcomx:non_plural_json_name")
@@ -748,9 +760,9 @@ public class DublinCoreMetadata extends RDFMetadata {
   }
 
   /**
-   * A related resource that supplants, displaces, or supersedes the described resource.
+   * Related resources that supplant, displace, or supersede the described resource.
    *
-   * @param replacedBy A related resource that supplants, displaces, or supersedes the described resource.
+   * @param replacedBy Related resources that supplant, displace, or supersede the described resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-isReplacedBy
    */
   public void setReplacedBy(List<DublinCoreStringProperty> replacedBy) {
@@ -758,9 +770,9 @@ public class DublinCoreMetadata extends RDFMetadata {
   }
 
   /**
-   * A related resource that requires the described resource to support its function, delivery, or coherence.
+   * Related resources that require the described resource to support its function, delivery, or coherence.
    *
-   * @return A related resource that requires the described resource to support its function, delivery, or coherence.
+   * @return Related resources that require the described resource to support its function, delivery, or coherence.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-isRequiredBy
    */
   @SuppressWarnings("gedcomx:non_plural_json_name")
@@ -769,9 +781,9 @@ public class DublinCoreMetadata extends RDFMetadata {
   }
 
   /**
-   * A related resource that requires the described resource to support its function, delivery, or coherence.
+   * Related resources that require the described resource to support its function, delivery, or coherence.
    *
-   * @param requiredBy A related resource that requires the described resource to support its function, delivery, or coherence.
+   * @param requiredBy Related resources that require the described resource to support its function, delivery, or coherence.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-isRequiredBy
    */
   public void setRequiredBy(List<DublinCoreStringProperty> requiredBy) {
@@ -784,8 +796,7 @@ public class DublinCoreMetadata extends RDFMetadata {
    * @return Date of formal issuance (e.g., publication) of the resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-issued
    */
-  @SuppressWarnings("gedcomx:non_plural_json_name")
-  public List<DublinCoreDateProperty> getIssued() {
+  public Date getIssued() {
     return issued;
   }
 
@@ -795,7 +806,7 @@ public class DublinCoreMetadata extends RDFMetadata {
    * @param issued Date of formal issuance (e.g., publication) of the resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-issued
    */
-  public void setIssued(List<DublinCoreDateProperty> issued) {
+  public void setIssued(Date issued) {
     this.issued = issued;
   }
 
@@ -808,8 +819,7 @@ public class DublinCoreMetadata extends RDFMetadata {
    *
    * @link http://dublincore.org/documents/dcmi-terms/#terms-isVersionOf
    */
-  @SuppressWarnings("gedcomx:non_plural_json_name")
-  public List<DublinCoreStringProperty> getVersionOf() {
+  public DublinCoreStringProperty getVersionOf() {
     return isVersionOf;
   }
 
@@ -822,69 +832,75 @@ public class DublinCoreMetadata extends RDFMetadata {
    *
    * @link http://dublincore.org/documents/dcmi-terms/#terms-isVersionOf
    */
-  public void setVersionOf(List<DublinCoreStringProperty> versionOf) {
+  public void setVersionOf(DublinCoreStringProperty versionOf) {
     isVersionOf = versionOf;
   }
 
   /**
-   * A language of the resource. Recommended best practice is to use a controlled vocabulary such as RFC 4646 [RFC4646].
+   * Languages of the resource. Recommended best practice is to use a controlled vocabulary such as RFC 4646 [RFC4646].
    *
-   * @return A language of the resource. Recommended best practice is to use a controlled vocabulary such as RFC 4646 [RFC4646].
+   * @return Languages of the resource. Recommended best practice is to use a controlled vocabulary such as RFC 4646 [RFC4646].
    * @link http://dublincore.org/documents/dcmi-terms/#terms-language
    */
-  @SuppressWarnings("gedcomx:non_plural_json_name")
+  @JsonName ("languages")
+  @JsonProperty ("languages")
   public List<DublinCoreStringProperty> getLanguage() {
     return language;
   }
 
   /**
-   * A language of the resource. Recommended best practice is to use a controlled vocabulary such as RFC 4646 [RFC4646].
+   * Languages of the resource. Recommended best practice is to use a controlled vocabulary such as RFC 4646 [RFC4646].
    *
-   * @param language A language of the resource. Recommended best practice is to use a controlled vocabulary such as RFC 4646 [RFC4646].
+   * @param language Languages of the resource. Recommended best practice is to use a controlled vocabulary such as RFC 4646 [RFC4646].
    * @link http://dublincore.org/documents/dcmi-terms/#terms-language
    */
+  @JsonProperty ("languages")
   public void setLanguage(List<DublinCoreStringProperty> language) {
     this.language = language;
   }
 
   /**
-   * A legal document giving official permission to do something with the resource.
+   * Legal documents giving official permission to do something with the resource.
    *
-   * @return A legal document giving official permission to do something with the resource.
+   * @return Legal documents giving official permission to do something with the resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-license
    */
-  @SuppressWarnings("gedcomx:non_plural_json_name")
+  @JsonName ("licenses")
+  @JsonProperty ("licenses")
   public List<DublinCoreStringProperty> getLicense() {
     return license;
   }
 
   /**
-   * A legal document giving official permission to do something with the resource.
+   * Legal documents giving official permission to do something with the resource.
    *
-   * @param license A legal document giving official permission to do something with the resource.
+   * @param license Legal documents giving official permission to do something with the resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-license
    */
+  @JsonProperty ("licenses")
   public void setLicense(List<DublinCoreStringProperty> license) {
     this.license = license;
   }
 
   /**
-   * An entity that mediates access to the resource and for whom the resource is intended or useful.
+   * Entities that mediate access to the resource and for whom the resource is intended or useful.
    *
-   * @return An entity that mediates access to the resource and for whom the resource is intended or useful.
+   * @return Entities that mediate access to the resource and for whom the resource is intended or useful.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-mediator
    */
-  @SuppressWarnings("gedcomx:non_plural_json_name")
+  @JsonName ("mediators")
+  @JsonProperty ("mediators")
   public List<DublinCoreStringProperty> getMediator() {
     return mediator;
   }
 
   /**
-   * An entity that mediates access to the resource and for whom the resource is intended or useful.
+   * Entities that mediate access to the resource and for whom the resource is intended or useful.
    *
-   * @param mediator An entity that mediates access to the resource and for whom the resource is intended or useful.
+   * @param mediator Entities that mediate access to the resource and for whom the resource is intended or useful.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-mediator
    */
+  @JsonProperty ("mediators")
   public void setMediator(List<DublinCoreStringProperty> mediator) {
     this.mediator = mediator;
   }
@@ -895,8 +911,7 @@ public class DublinCoreMetadata extends RDFMetadata {
    * @return The material or physical carrier of the resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-medium
    */
-  @SuppressWarnings("gedcomx:non_plural_json_name")
-  public List<DublinCoreStringProperty> getMedium() {
+  public DublinCoreStringProperty getMedium() {
     return medium;
   }
 
@@ -906,7 +921,7 @@ public class DublinCoreMetadata extends RDFMetadata {
    * @param medium The material or physical carrier of the resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-medium
    */
-  public void setMedium(List<DublinCoreStringProperty> medium) {
+  public void setMedium(DublinCoreStringProperty medium) {
     this.medium = medium;
   }
 
@@ -916,8 +931,7 @@ public class DublinCoreMetadata extends RDFMetadata {
    * @return Date on which the resource was changed.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-modified
    */
-  @SuppressWarnings("gedcomx:non_plural_json_name")
-  public List<DublinCoreDateProperty> getModified() {
+  public Date getModified() {
     return modified;
   }
 
@@ -927,7 +941,7 @@ public class DublinCoreMetadata extends RDFMetadata {
    * @param modified Date on which the resource was changed.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-modified
    */
-  public void setModified(List<DublinCoreDateProperty> modified) {
+  public void setModified(Date modified) {
     this.modified = modified;
   }
 
@@ -937,8 +951,7 @@ public class DublinCoreMetadata extends RDFMetadata {
    * @return A statement of any changes in ownership and custody of the resource since its creation that are significant for its authenticity, integrity, and interpretation.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-provenance
    */
-  @SuppressWarnings("gedcomx:non_plural_json_name")
-  public List<DublinCoreStringProperty> getProvenance() {
+  public DublinCoreStringProperty getProvenance() {
     return provenance;
   }
 
@@ -948,7 +961,7 @@ public class DublinCoreMetadata extends RDFMetadata {
    * @param provenance A statement of any changes in ownership and custody of the resource since its creation that are significant for its authenticity, integrity, and interpretation.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-provenance
    */
-  public void setProvenance(List<DublinCoreStringProperty> provenance) {
+  public void setProvenance(DublinCoreStringProperty provenance) {
     this.provenance = provenance;
   }
 
@@ -958,8 +971,7 @@ public class DublinCoreMetadata extends RDFMetadata {
    * @return An entity responsible for making the resource available.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-publisher
    */
-  @SuppressWarnings("gedcomx:non_plural_json_name")
-  public List<DublinCoreStringProperty> getPublisher() {
+  public DublinCoreStringProperty getPublisher() {
     return publisher;
   }
 
@@ -969,14 +981,14 @@ public class DublinCoreMetadata extends RDFMetadata {
    * @param publisher An entity responsible for making the resource available.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-publisher
    */
-  public void setPublisher(List<DublinCoreStringProperty> publisher) {
+  public void setPublisher(DublinCoreStringProperty publisher) {
     this.publisher = publisher;
   }
 
   /**
-   * A related resource that is referenced, cited, or otherwise pointed to by the described resource.
+   * Related resources that are referenced, cited, or otherwise pointed to by the described resource.
    *
-   * @return A related resource that is referenced, cited, or otherwise pointed to by the described resource.
+   * @return Related resources that are referenced, cited, or otherwise pointed to by the described resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-references
    */
   @SuppressWarnings("gedcomx:plural_xml_name")
@@ -985,9 +997,9 @@ public class DublinCoreMetadata extends RDFMetadata {
   }
 
   /**
-   * A related resource that is referenced, cited, or otherwise pointed to by the described resource.
+   * Related resources that are referenced, cited, or otherwise pointed to by the described resource.
    *
-   * @param references A related resource that is referenced, cited, or otherwise pointed to by the described resource.
+   * @param references Related resources that are referenced, cited, or otherwise pointed to by the described resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-references
    */
   public void setReferences(List<DublinCoreStringProperty> references) {
@@ -995,30 +1007,32 @@ public class DublinCoreMetadata extends RDFMetadata {
   }
 
   /**
-   * A related resource.
+   * Related resources.
    *
-   * @return A related resource.
+   * @return Related resources.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-relation
    */
-  @SuppressWarnings("gedcomx:non_plural_json_name")
+  @JsonName ("relations")
+  @JsonProperty ("relations")
   public List<DublinCoreStringProperty> getRelation() {
     return relation;
   }
 
   /**
-   * A related resource.
+   * Related resources.
    *
-   * @param relation A related resource.
+   * @param relation Related resources.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-relation
    */
+  @JsonProperty ("relations")
   public void setRelation(List<DublinCoreStringProperty> relation) {
     this.relation = relation;
   }
 
   /**
-   * A related resource that is supplanted, displaced, or superseded by the described resource.
+   * Related resources that are supplanted, displaced, or superseded by the described resource.
    *
-   * @return A related resource that is supplanted, displaced, or superseded by the described resource.
+   * @return Related resources that are supplanted, displaced, or superseded by the described resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-replaces
    */
   @SuppressWarnings("gedcomx:plural_xml_name")
@@ -1027,9 +1041,9 @@ public class DublinCoreMetadata extends RDFMetadata {
   }
 
   /**
-   * A related resource that is supplanted, displaced, or superseded by the described resource.
+   * Related resources that are supplanted, displaced, or superseded by the described resource.
    *
-   * @param replaces A related resource that is supplanted, displaced, or superseded by the described resource.
+   * @param replaces Related resources that are supplanted, displaced, or superseded by the described resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-replaces
    */
   public void setReplaces(List<DublinCoreStringProperty> replaces) {
@@ -1037,9 +1051,9 @@ public class DublinCoreMetadata extends RDFMetadata {
   }
 
   /**
-   * A related resource that is required by the described resource to support its function, delivery, or coherence.
+   * Related resources that are required by the described resource to support its function, delivery, or coherence.
    *
-   * @return A related resource that is required by the described resource to support its function, delivery, or coherence.
+   * @return Related resources that are required by the described resource to support its function, delivery, or coherence.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-requires
    */
   @SuppressWarnings("gedcomx:plural_xml_name")
@@ -1048,9 +1062,9 @@ public class DublinCoreMetadata extends RDFMetadata {
   }
 
   /**
-   * A related resource that is required by the described resource to support its function, delivery, or coherence.
+   * Related resources that are required by the described resource to support its function, delivery, or coherence.
    *
-   * @param requires A related resource that is required by the described resource to support its function, delivery, or coherence.
+   * @param requires Related resources that are required by the described resource to support its function, delivery, or coherence.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-requires
    */
   public void setRequires(List<DublinCoreStringProperty> requires) {
@@ -1084,8 +1098,7 @@ public class DublinCoreMetadata extends RDFMetadata {
    * @return A person or organization owning or managing rights over the resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-rightsHolder
    */
-  @SuppressWarnings("gedcomx:non_plural_json_name")
-  public List<DublinCoreStringProperty> getRightsHolder() {
+  public DublinCoreStringProperty getRightsHolder() {
     return rightsHolder;
   }
 
@@ -1095,7 +1108,7 @@ public class DublinCoreMetadata extends RDFMetadata {
    * @param rightsHolder A person or organization owning or managing rights over the resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-rightsHolder
    */
-  public void setRightsHolder(List<DublinCoreStringProperty> rightsHolder) {
+  public void setRightsHolder(DublinCoreStringProperty rightsHolder) {
     this.rightsHolder = rightsHolder;
   }
 
@@ -1105,7 +1118,8 @@ public class DublinCoreMetadata extends RDFMetadata {
    * @return A related resource from which the described resource is derived.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-source
    */
-  @SuppressWarnings("gedcomx:non_plural_json_name")
+  @JsonName ("sources")
+  @JsonProperty ("sources")
   public List<DublinCoreStringProperty> getSource() {
     return source;
   }
@@ -1116,6 +1130,7 @@ public class DublinCoreMetadata extends RDFMetadata {
    * @param source A related resource from which the described resource is derived.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-source
    */
+  @JsonProperty ("sources")
   public void setSource(List<DublinCoreStringProperty> source) {
     this.source = source;
   }
@@ -1127,7 +1142,8 @@ public class DublinCoreMetadata extends RDFMetadata {
    * @see #getCoverage()
    * @link http://dublincore.org/documents/dcmi-terms/#terms-spatial
    */
-  @SuppressWarnings("gedcomx:non_plural_json_name")
+  @JsonName ("spatials")
+  @JsonProperty ("spatials")
   public List<DublinCoreStringProperty> getSpatial() {
     return spatial;
   }
@@ -1139,6 +1155,7 @@ public class DublinCoreMetadata extends RDFMetadata {
    * @see #getCoverage()
    * @link http://dublincore.org/documents/dcmi-terms/#terms-spatial
    */
+  @JsonProperty ("spatials")
   public void setSpatial(List<DublinCoreStringProperty> spatial) {
     this.spatial = spatial;
   }
@@ -1153,7 +1170,8 @@ public class DublinCoreMetadata extends RDFMetadata {
    * use the Coverage element.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-subject
    */
-  @SuppressWarnings("gedcomx:non_plural_json_name")
+  @JsonName ("subjects")
+  @JsonProperty ("subjects")
   public List<DublinCoreStringProperty> getSubject() {
     return subject;
   }
@@ -1168,6 +1186,7 @@ public class DublinCoreMetadata extends RDFMetadata {
    * use the Coverage element.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-subject
    */
+  @JsonProperty ("subjects")
   public void setSubject(List<DublinCoreStringProperty> subject) {
     this.subject = subject;
   }
@@ -1179,7 +1198,7 @@ public class DublinCoreMetadata extends RDFMetadata {
    * @link http://dublincore.org/documents/dcmi-terms/#terms-tableOfContents
    */
   @SuppressWarnings("gedcomx:plural_xml_name")
-  public List<DublinCoreStringProperty> getTableOfContents() {
+  public DublinCoreStringProperty getTableOfContents() {
     return tableOfContents;
   }
 
@@ -1189,7 +1208,7 @@ public class DublinCoreMetadata extends RDFMetadata {
    * @param tableOfContents A list of subunits of the resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-tableOfContents
    */
-  public void setTableOfContents(List<DublinCoreStringProperty> tableOfContents) {
+  public void setTableOfContents(DublinCoreStringProperty tableOfContents) {
     this.tableOfContents = tableOfContents;
   }
 
@@ -1199,7 +1218,8 @@ public class DublinCoreMetadata extends RDFMetadata {
    * @return Temporal characteristics of the resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-temporal
    */
-  @SuppressWarnings("gedcomx:non_plural_json_name")
+  @JsonName ("temporals")
+  @JsonProperty ("temporals")
   public List<DublinCoreStringProperty> getTemporal() {
     return temporal;
   }
@@ -1210,6 +1230,7 @@ public class DublinCoreMetadata extends RDFMetadata {
    * @param temporal Temporal characteristics of the resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-temporal
    */
+  @JsonProperty ("temporals")
   public void setTemporal(List<DublinCoreStringProperty> temporal) {
     this.temporal = temporal;
   }
@@ -1220,8 +1241,7 @@ public class DublinCoreMetadata extends RDFMetadata {
    * @return A name given to the resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-title
    */
-  @SuppressWarnings("gedcomx:non_plural_json_name")
-  public List<DublinCoreStringProperty> getTitle() {
+  public DublinCoreStringProperty getTitle() {
     return title;
   }
 
@@ -1231,7 +1251,7 @@ public class DublinCoreMetadata extends RDFMetadata {
    * @param title A name given to the resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-title
    */
-  public void setTitle(List<DublinCoreStringProperty> title) {
+  public void setTitle(DublinCoreStringProperty title) {
     this.title = title;
   }
 
@@ -1243,8 +1263,7 @@ public class DublinCoreMetadata extends RDFMetadata {
    * To describe the file format, physical medium, or dimensions of the resource, use the Format element.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-type
    */
-  @SuppressWarnings("gedcomx:non_plural_json_name")
-  public List<DublinCoreTypeProperty> getType() {
+  public QName getType() {
     return type;
   }
 
@@ -1256,8 +1275,27 @@ public class DublinCoreMetadata extends RDFMetadata {
    * To describe the file format, physical medium, or dimensions of the resource, use the Format element.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-type
    */
-  public void setType(List<DublinCoreTypeProperty> type) {
+  public void setType(QName type) {
     this.type = type;
+  }
+
+  /**
+   * Get the type from an enumeration of known types, or null if unknown.
+   *
+   * @return The type from an enumeration of known types, or null if unknown.
+   */
+  @XmlTransient
+  public DublinCoreType getKnownType() {
+    return XmlQNameEnumUtil.fromQName(getType(), DublinCoreType.class);
+  }
+
+  /**
+   * Set the type from a known enumeration of Dublin Core types.
+   *
+   * @param knownType The type.
+   */
+  public void setKnownType(DublinCoreType knownType) {
+    setType(XmlQNameEnumUtil.toQName(knownType));
   }
 
   /**
@@ -1267,7 +1305,7 @@ public class DublinCoreMetadata extends RDFMetadata {
    * @link http://dublincore.org/documents/dcmi-terms/#terms-valid
    */
   @SuppressWarnings("gedcomx:non_plural_json_name")
-  public List<DublinCoreDateProperty> getValid() {
+  public List<DublinCoreStringProperty> getValid() {
     return valid;
   }
 
@@ -1277,7 +1315,7 @@ public class DublinCoreMetadata extends RDFMetadata {
    * @param valid Date of validity of a resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-valid
    */
-  public void setValid(List<DublinCoreDateProperty> valid) {
+  public void setValid(List<DublinCoreStringProperty> valid) {
     this.valid = valid;
   }
 }

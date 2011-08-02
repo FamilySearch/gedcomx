@@ -30,6 +30,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * A piece of RDF metadata.
+ *
  * @author Ryan Heaton
  */
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
@@ -38,47 +40,87 @@ import java.util.Map;
 public class RDFMetadata {
 
   private String id; 
-  private URI dataRef;
+  private URI about;
   private Map<QName, String> otherAttributes;
   private List<Object> otherElements;
 
+  /**
+   * The id of this piece of metadata.
+   *
+   * @return The id of this piece of metadata.
+   */
   @XmlAttribute( name = "ID" )
   @XmlID
   public String getId() {
     return id;
   }
 
+  /**
+   * The id of this piece of metadata.
+   *
+   * @param id The id of this piece of metadata.
+   */
   public void setId(String id) {
     this.id = id;
   }
-  
-  @XmlAttribute( name = "about" )
+
+  /**
+   * URI to the resource that this metadata is describing.
+   *
+   * @return URI to the resource that this metadata is describing.
+   */
+  @XmlAttribute
   @XmlSchemaType(name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
-  public URI getDataRef() {
-    return dataRef;
+  public URI getAbout() {
+    return about;
   }
 
-  public void setDataRef(URI dataRef) {
-    this.dataRef = dataRef;
+  /**
+   * URI to the resource that this metadata is describing.
+   *
+   * @param about URI to the resource that this metadata is describing.
+   */
+  public void setAbout(URI about) {
+    this.about = about;
   }
 
+  /**
+   * Custom attributes applicable as part of this metadata.
+   *
+   * @return Custom attributes applicable as part of this metadata.
+   */
   @XmlAnyAttribute
   @JsonSerialize (using = AnyAttributeSerializer.class)
   public Map<QName, String> getOtherAttributes() {
     return otherAttributes;
   }
 
+  /**
+   * Custom attributes applicable as part of this metadata.
+   *
+   * @param otherAttributes Custom attributes applicable as part of this metadata.
+   */
   @JsonDeserialize (using = AnyAttributeDeserializer.class)
   public void setOtherAttributes(Map<QName, String> otherAttributes) {
     this.otherAttributes = otherAttributes;
   }
 
+  /**
+   * Custom elements applicable as part of this metadata.
+   *
+   * @return Custom elements applicable as part of this metadata.
+   */
   @XmlAnyElement ( lax = true )
   @JsonSerialize ( using = AnyElementSerializer.class )
   public List<Object> getOtherElements() {
     return otherElements;
   }
 
+  /**
+   * Custom elements applicable as part of this metadata.
+   *
+   * @param otherElements Custom elements applicable as part of this metadata.
+   */
   @JsonDeserialize( using = AnyElementDeserializer.class )
   public void setOtherElements(List<Object> otherElements) {
     this.otherElements = otherElements;

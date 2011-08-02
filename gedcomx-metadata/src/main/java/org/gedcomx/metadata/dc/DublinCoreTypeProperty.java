@@ -39,7 +39,6 @@ public final class DublinCoreTypeProperty {
   private String id;
   private String lang;
   private QName value;
-  private URI valueRef;
   private Map<QName, String> otherAttributes;
 
   /**
@@ -118,26 +117,6 @@ public final class DublinCoreTypeProperty {
   @XmlTransient
   public DublinCoreType getKnownValue() {
     return XmlQNameEnumUtil.fromQName(getValue(), DublinCoreType.class);
-  }
-
-  /**
-   * The URI reference to the value, if the value is structured data.
-   *
-   * @return The URI reference to the value, if the value is structured data.
-   */
-  @XmlAttribute( name = "resource", namespace = MetadataNamespaces.RDF_NAMESPACE )
-  @XmlSchemaType(name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
-  public URI getValueRef() {
-    return valueRef;
-  }
-
-  /**
-   * The URI reference to the value, if the value is structured data.
-   *
-   * @param valueRef The URI reference to the value, if the value is structured data.
-   */
-  public void setValueRef(URI valueRef) {
-    this.valueRef = valueRef;
   }
 
   /**

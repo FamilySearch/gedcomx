@@ -28,15 +28,14 @@ import java.net.URI;
 import java.util.Map;
 
 /**
- * A Dublin Core metadata property in the form of a string.
+ * A Dublin Core metadata property that may only reference another resource as its value.
  *
  * @author Ryan Heaton
  */
-public final class DublinCoreStringProperty {
+public final class DublinCoreRefProperty {
 
   private String id;
   private String lang;
-  private String value;
   private URI valueRef;
   private Map<QName, String> otherAttributes;
 
@@ -80,30 +79,9 @@ public final class DublinCoreStringProperty {
   }
 
   /**
-   * The value of the property.
+   * The URI reference to the value, if the value is structured data.
    *
-   * @return The value of the property.
-   */
-  @XmlValue
-  public String getValue() {
-    return value;
-  }
-
-  /**
-   * The value of the property.
-   *
-   * @param value The value of the property.
-   */
-  public void setValue(String value) {
-    this.value = value;
-  }
-
-  /**
-   * The URI reference to the value. To be used, for example, if the value is structured data.
-   * If a {@link #getValue() value} is assigned as well as a value reference, the value is to
-   * be treated as a string representation of the resource being referenced.
-   *
-   * @return The URI reference to the value. To be used, for example, if the value is structured data.
+   * @return The URI reference to the value, if the value is structured data.
    */
   @XmlAttribute( name = "resource", namespace = MetadataNamespaces.RDF_NAMESPACE )
   @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
@@ -112,11 +90,9 @@ public final class DublinCoreStringProperty {
   }
 
   /**
-   * The URI reference to the value. To be used, for example, if the value is structured data.
-   * If a {@link #getValue() value} is assigned as well as a value reference, the value is to
-   * be treated as a string representation of the resource being referenced.
+   * The URI reference to the value, if the value is structured data.
    *
-   * @param valueRef The URI reference to the value. To be used, for example, if the value is structured data.
+   * @param valueRef The URI reference to the value, if the value is structured data.
    */
   public void setValueRef(URI valueRef) {
     this.valueRef = valueRef;
