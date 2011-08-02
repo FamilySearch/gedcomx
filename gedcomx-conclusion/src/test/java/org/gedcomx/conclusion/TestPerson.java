@@ -119,10 +119,6 @@ public class TestPerson {
 
     person.setPersistentId(URI.create("pal"));
 
-    RelationshipReference relationshipReference = new RelationshipReference();
-    relationshipReference.setKnownRole(RelationshipRole.child);
-    relationshipReference.setHref(URI.create("urn:relationship"));
-
     ArrayList<SourceReference> sources = new ArrayList<SourceReference>();
     SourceReference attributedSourceReference = new SourceReference();
     Attribution attribution = new Attribution();
