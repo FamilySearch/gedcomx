@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.*;
 public abstract class Field {
 
   private String id;
-  private String fieldId;
+  private String label;
   private String original;
   private String interpreted;
   private String normalized;
@@ -55,22 +55,24 @@ public abstract class Field {
   }
 
   /**
-   * The id of the field, unique to the record but common across records of the same type. Used, for example, for record templates.
+   * A label for the field. The label can be used to associate fields that were taken from the same section of
+   * the source, such as identified by an indexing template.
    *
-   * @return The id of the field, unique to the record but common across records of the same type. Used, for example, for record templates.
+   * @return The field label.
    */
   @XmlAttribute
-  public String getFieldId() {
-    return fieldId;
+  public String getLabel() {
+    return label;
   }
 
   /**
-   * The id of the field, unique to the record but common across records of the same type. Used, for example, for record templates.
+   * A label for the field. The label can be used to associate fields that were taken from the same section of
+   * the source, such as identified by an indexing template.
    *
-   * @param fieldId The id of the field, unique to the record but common across records of the same type. Used, for example, for record templates.
+   * @param label The field label.
    */
-  public void setFieldId(String fieldId) {
-    this.fieldId = fieldId;
+  public void setLabel(String label) {
+    this.label = label;
   }
 
   /**

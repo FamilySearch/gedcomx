@@ -200,7 +200,7 @@ public class TestRecord {
     field.setAttribution(new Attribution());
     field.getAttribution().setContributor(new ContributorReference());
     field.getAttribution().getContributor().setHref(URI.create("urn:" + label + "-attribution"));
-    field.setFieldId(label + "-field-id");
+    field.setLabel(label + "-field-id");
     field.setId(label + "-id");
     field.setOriginal(label + "-original");
     field.setInterpreted(label + "-interpreted");
@@ -209,7 +209,7 @@ public class TestRecord {
 
   private void assertField(Field field, String label) {
     assertEquals("urn:" + label + "-attribution", field.getAttribution().getContributor().getHref().toString());
-    assertEquals(label + "-field-id", field.getFieldId());
+    assertEquals(label + "-field-id", field.getLabel());
     assertEquals(label + "-id", field.getId());
     assertEquals(label + "-original", field.getOriginal());
     assertEquals(label + "-interpreted", field.getInterpreted());
