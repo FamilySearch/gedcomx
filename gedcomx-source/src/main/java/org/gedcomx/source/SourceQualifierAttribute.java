@@ -19,12 +19,12 @@ import org.codehaus.enunciate.qname.XmlQNameEnum;
 import org.codehaus.enunciate.qname.XmlUnknownQNameEnumValue;
 
 /**
- * Known list of source qualifier properties.
+ * Known list of source qualifier attributes.
  *
  * @author Ryan Heaton
  */
 @XmlQNameEnum
-public enum SourceQualifierProperty {
+public enum SourceQualifierAttribute {
 
   /**
    * The pixel x-coordinate for a source, such as for specifying the top-left corner of an image bounding box.
@@ -56,16 +56,6 @@ public enum SourceQualifierProperty {
    */
   end_milliseconds,
 
-  /**
-   * The id of the field to which this qualifier applies.
-   */
-  field_id,
-
-  /**
-   * The id of the conclusion to which this qualifier applies.
-   */
-  conclusion_id,
-
-  @XmlUnknownQNameEnumValue
+	@XmlUnknownQNameEnumValue
   other
 }

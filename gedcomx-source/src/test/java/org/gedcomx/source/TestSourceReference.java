@@ -26,13 +26,13 @@ public class TestSourceReference {
     reference.setId("refid");
     reference.setQualifiers(new ArrayList<SourceQualifier>());
     SourceQualifier q = new SourceQualifier();
-    q.setProperty(SourceQualifierProperty.height_pixels, "1234");
+    q.setAttribute(SourceQualifierAttribute.height_pixels, "1234");
     reference.getQualifiers().add(q);
     reference = processThroughXml(reference);
     assertEquals("urn:someid", reference.getHref().toString());
     assertEquals(SourceType.collection, reference.getKnownType());
     assertEquals("refid", reference.getId());
-    assertEquals("1234", reference.getQualifiers().get(0).getProperty(SourceQualifierProperty.height_pixels));
+    assertEquals("1234", reference.getQualifiers().get(0).getAttribute(SourceQualifierAttribute.height_pixels));
   }
 
   /**
@@ -45,13 +45,13 @@ public class TestSourceReference {
     reference.setId("refid");
     reference.setQualifiers(new ArrayList<SourceQualifier>());
     SourceQualifier q = new SourceQualifier();
-    q.setProperty(SourceQualifierProperty.height_pixels, "1234");
+    q.setAttribute(SourceQualifierAttribute.height_pixels, "1234");
     reference.getQualifiers().add(q);
     reference = processThroughJson(reference);
     assertEquals("urn:someid", reference.getHref().toString());
     assertEquals(SourceType.collection, reference.getKnownType());
     assertEquals("refid", reference.getId());
-    assertEquals("1234", reference.getQualifiers().get(0).getProperty(SourceQualifierProperty.height_pixels));
+    assertEquals("1234", reference.getQualifiers().get(0).getAttribute(SourceQualifierAttribute.height_pixels));
   }
 
 }

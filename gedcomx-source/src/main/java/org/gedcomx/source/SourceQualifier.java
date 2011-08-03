@@ -34,71 +34,71 @@ import java.util.Map;
  */
 public final class SourceQualifier {
 
-  private Map<QName, String> properties;
+  private Map<QName, String> attributes;
 
   /**
-   * The qualifier properties.
+   * The qualifier attributes.
    *
-   * @return The qualifier properties.
+   * @return The qualifier attributes.
    */
   @XmlAnyAttribute
-  @XmlQNameEnumRef( SourceQualifierProperty.class )
+  @XmlQNameEnumRef( SourceQualifierAttribute.class )
   @JsonSerialize(using = AnyAttributeSerializer.class)
-  public Map<QName, String> getProperties() {
-    return properties;
+  public Map<QName, String> getAttributes() {
+    return attributes;
   }
 
   /**
-   * The qualifier properties.
+   * The qualifier attributes.
    *
-   * @param properties The qualifier properties.
+   * @param attributes The qualifier attributes.
    */
   @JsonDeserialize(using = AnyAttributeDeserializer.class)
-  public void setProperties(Map<QName, String> properties) {
-    this.properties = properties;
+  public void setAttributes(Map<QName, String> attributes) {
+    this.attributes = attributes;
   }
 
   /**
-   * Get a property by a qname.
+   * Get an attribute by a qname.
    *
-   * @param property The property qname.
-   * @return The property value.
+   * @param attribute The attribute qname.
+   * @return The attribute value.
    */
-  public String getProperty(QName property) {
-    return this.properties == null ? null : this.properties.get(property);
+  public String getAttribute(QName attribute) {
+    return this.attributes == null ? null : this.attributes.get(attribute);
   }
 
   /**
-   * Get a property from an enumeration known qualifier properties.
+   * Get an attribute from an enumeration of known qualifier attributes.
    *
-   * @param property The property.
-   * @return The property value.
+   * @param attribute The attribute.
+   * @return The attribute value.
    */
-  public String getProperty(SourceQualifierProperty property) {
-    return getProperty(XmlQNameEnumUtil.toQName(property));
+  public String getAttribute(SourceQualifierAttribute attribute) {
+    return getAttribute(XmlQNameEnumUtil.toQName(attribute));
   }
 
   /**
-   * Set a property value by qname.
+   * Set an attribute value by qname.
    *
-   * @param property The property qname.
-   * @param value The value of the property.
+   * @param attribute The attribute qname.
+   * @param value The value of the attribute.
    */
-  public void setProperty(QName property, String value) {
-    if (this.properties == null) {
-      this.properties = new HashMap<QName, String>();
+  public void setAttribute(QName attribute, String value) {
+    if (this.attributes == null) {
+      this.attributes = new HashMap<QName, String>();
     }
 
-    this.properties.put(property, value);
+    this.attributes.put(attribute, value);
   }
 
   /**
-   * Set a source qualifier property from an enumeration of known qualifier properties.
+   * Set a source qualifier attribute from an enumeration of known qualifier attributes.
    *
-   * @param property The qualifier property.
-   * @param value The value of the qualifier property.
+   * @param attribute The qualifier attribute.
+   * @param value The value of the qualifier attribute.
    */
-  public void setProperty(SourceQualifierProperty property, String value) {
-    setProperty(XmlQNameEnumUtil.toQName(property), value);
+  public void setAttribute(SourceQualifierAttribute attribute, String value) {
+    setAttribute(XmlQNameEnumUtil.toQName(attribute), value);
   }
 }

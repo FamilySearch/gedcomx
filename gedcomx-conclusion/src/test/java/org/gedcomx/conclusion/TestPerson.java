@@ -5,7 +5,7 @@ import org.gedcomx.attribution.ContributorReference;
 import org.gedcomx.common.AlternateId;
 import org.gedcomx.common.Extension;
 import org.gedcomx.source.SourceQualifier;
-import org.gedcomx.source.SourceQualifierProperty;
+import org.gedcomx.source.SourceQualifierAttribute;
 import org.gedcomx.source.SourceReference;
 import org.gedcomx.types.*;
 import org.testng.annotations.Test;
@@ -131,7 +131,7 @@ public class TestPerson {
     attributedSourceReference.setKnownType(SourceType.collection);
     ArrayList<SourceQualifier> qualifiers = new ArrayList<SourceQualifier>();
     SourceQualifier qualifier = new SourceQualifier();
-    qualifier.setProperty(SourceQualifierProperty.x_pixels, "2");
+    qualifier.setAttribute(SourceQualifierAttribute.x_pixels, "2");
     qualifiers.add(qualifier);
     attributedSourceReference.setQualifiers(qualifiers);
     sources.add(attributedSourceReference);
@@ -197,8 +197,8 @@ public class TestPerson {
     assertEquals("source-reference-id", attributedSourceReference.getId());
     assertEquals(SourceType.collection, attributedSourceReference.getKnownType());
     assertEquals(1, attributedSourceReference.getQualifiers().size());
-    assertEquals(1, attributedSourceReference.getQualifiers().get(0).getProperties().size());
-    assertEquals("2", attributedSourceReference.getQualifiers().get(0).getProperty(SourceQualifierProperty.x_pixels));
+    assertEquals(1, attributedSourceReference.getQualifiers().get(0).getAttributes().size());
+    assertEquals("2", attributedSourceReference.getQualifiers().get(0).getAttribute(SourceQualifierAttribute.x_pixels));
 
     assertEquals("pid", person.getId());
   }

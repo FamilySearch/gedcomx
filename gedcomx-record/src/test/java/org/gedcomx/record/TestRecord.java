@@ -4,7 +4,7 @@ import org.gedcomx.attribution.Attribution;
 import org.gedcomx.attribution.ContributorReference;
 import org.gedcomx.common.AlternateId;
 import org.gedcomx.source.SourceQualifier;
-import org.gedcomx.source.SourceQualifierProperty;
+import org.gedcomx.source.SourceQualifierAttribute;
 import org.gedcomx.source.SourceReference;
 import org.gedcomx.types.*;
 import org.testng.annotations.Test;
@@ -183,7 +183,7 @@ public class TestRecord {
     sourceReference.setKnownType(SourceType.collection);
     ArrayList<SourceQualifier> qualifiers = new ArrayList<SourceQualifier>();
     SourceQualifier qualifier = new SourceQualifier();
-    qualifier.setProperty(SourceQualifierProperty.x_pixels, "2");
+    qualifier.setAttribute(SourceQualifierAttribute.x_pixels, "2");
     qualifiers.add(qualifier);
     sourceReference.setQualifiers(qualifiers);
     sources.add(sourceReference);
@@ -312,7 +312,7 @@ public class TestRecord {
     assertEquals(SourceType.collection, sourceReference.getKnownType());
     assertEquals(1, sourceReference.getQualifiers().size());
     SourceQualifier qualifier = sourceReference.getQualifiers().get(0);
-    assertEquals("2", qualifier.getProperty(SourceQualifierProperty.x_pixels));
+    assertEquals("2", qualifier.getAttribute(SourceQualifierAttribute.x_pixels));
 
     assertEquals(URI.create("urn:collection-ref"), record.getCollection().getHref());
     assertEquals("rid", record.getId());
