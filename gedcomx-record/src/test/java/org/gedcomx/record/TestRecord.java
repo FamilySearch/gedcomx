@@ -13,6 +13,7 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 import static org.gedcomx.rt.SerializationUtil.processThroughJson;
 import static org.gedcomx.rt.SerializationUtil.processThroughXml;
@@ -199,6 +200,7 @@ public class TestRecord {
     record.setBibliographicCitation("bibliographic citation");
 
     record.setId("rid");
+    record.setLang(Locale.ENGLISH.getLanguage());
     return record;
   }
 
@@ -325,6 +327,7 @@ public class TestRecord {
 
     assertEquals(URI.create("urn:collection-ref"), record.getCollection().getHref());
     assertEquals("rid", record.getId());
+    assertEquals(Locale.ENGLISH.getLanguage(), record.getLang());
   }
 
 }

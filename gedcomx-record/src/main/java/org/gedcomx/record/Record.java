@@ -46,6 +46,7 @@ import java.util.*;
 public class Record {
 
   private String id;
+  private String lang;
   private QName type;
   private URI persistentId;
   private List<AlternateId> alternateIds;
@@ -118,6 +119,24 @@ public class Record {
     this.type = XmlQNameEnumUtil.toQName(knownType);
   }
 
+  /**
+   * The language of the record. See <a href="http://www.w3.org/International/articles/language-tags/>http://www.w3.org/International/articles/language-tags/</a>
+   *
+   * @return The language of the record.
+   */
+  @XmlAttribute( namespace = XMLConstants.XML_NS_URI )
+  public String getLang() {
+    return lang;
+  }
+
+  /**
+   * The language of the record. See <a href="http://www.w3.org/International/articles/language-tags/>http://www.w3.org/International/articles/language-tags/</a>
+   *
+   * @param lang The language of the record.
+   */
+  public void setLang(String lang) {
+    this.lang = lang;
+  }
 
   /**
    * A long-term, persistent, globally unique identifier for this record.

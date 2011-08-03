@@ -61,7 +61,7 @@ public final class DublinCoreStringProperty {
   }
 
   /**
-   * The language of the value of the property.
+   * The language of the value of the property. See <a href="http://www.w3.org/International/articles/language-tags/>http://www.w3.org/International/articles/language-tags/</a>
    *
    * @return The language of the value of the property.
    */
@@ -71,7 +71,7 @@ public final class DublinCoreStringProperty {
   }
 
   /**
-   * The language of the value of the property.
+   * The language of the value of the property. See <a href="http://www.w3.org/International/articles/language-tags/>http://www.w3.org/International/articles/language-tags/</a>
    *
    * @param lang The language of the value of the property.
    */
