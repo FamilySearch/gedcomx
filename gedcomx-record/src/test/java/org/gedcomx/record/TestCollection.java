@@ -28,6 +28,7 @@ public class TestCollection {
     collection.getParent().setHref(URI.create("urn:parent"));
     collection.setPublisher("publisher");
     collection.setTitle("title");
+    collection.setBibliographicCitation("bibliographic citation");
     collection = processThroughXml(collection);
     assertEquals("description", collection.getDescription());
     assertEquals("id", collection.getId());
@@ -35,6 +36,7 @@ public class TestCollection {
     assertEquals(URI.create("urn:parent"), collection.getParent().getHref());
     assertEquals("publisher", collection.getPublisher());
     assertEquals("title", collection.getTitle());
+    assertEquals("bibliographic citation", collection.getBibliographicCitation());
   }
 
   /**
@@ -49,6 +51,7 @@ public class TestCollection {
     collection.getParent().setHref(URI.create("urn:parent"));
     collection.setPublisher("publisher");
     collection.setTitle("title");
+    collection.setBibliographicCitation("bibliographic citation");
     collection = processThroughJson(collection);
     assertEquals("description", collection.getDescription());
     assertEquals("id", collection.getId());
@@ -56,6 +59,7 @@ public class TestCollection {
     assertEquals(URI.create("urn:parent"), collection.getParent().getHref());
     assertEquals("publisher", collection.getPublisher());
     assertEquals("title", collection.getTitle());
+    assertEquals("bibliographic citation", collection.getBibliographicCitation());
   }
 
 }

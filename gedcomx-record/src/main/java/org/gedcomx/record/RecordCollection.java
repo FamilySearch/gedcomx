@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.*;
  */
 @XmlRootElement
 @XmlType (
-  propOrder = { "parent", "title", "description", "publisher", "extension" }
+  propOrder = { "parent", "title", "description", "publisher", "bibliographicCitation", "extension" }
 )
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
@@ -38,6 +38,7 @@ public class RecordCollection {
   private String title;
   private String description;
   private String publisher;
+  private String bibliographicCitation;
   private Extension extension;
 
   /**
@@ -130,6 +131,24 @@ public class RecordCollection {
    */
   public void setPublisher(String publisher) {
     this.publisher = publisher;
+  }
+
+  /**
+   * The bibliographic citation for this data.
+   *
+   * @return The bibliographic citation for this data.
+   */
+  public String getBibliographicCitation() {
+    return bibliographicCitation;
+  }
+
+  /**
+   * The bibliographic citation for this data.
+   *
+   * @param bibliographicCitation The bibliographic citation for this data.
+   */
+  public void setBibliographicCitation(String bibliographicCitation) {
+    this.bibliographicCitation = bibliographicCitation;
   }
 
   /**

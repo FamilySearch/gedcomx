@@ -63,6 +63,7 @@ public class TestRelationship {
     SourceReference sourceReference = new SourceReference();
     sourceReference.setId("source-ref");
     relationship.setSources(Arrays.asList(sourceReference));
+    relationship.setBibliographicCitation("relationship bibliographic citation");
     return relationship;
   }
 
@@ -78,6 +79,7 @@ public class TestRelationship {
     assertEquals(URI.create("urn:person1"), relationship.getPerson1().getHref());
     assertEquals(URI.create("urn:person2"), relationship.getPerson2().getHref());
     assertEquals("source-ref", relationship.getSources().get(0).getId());
+    assertEquals("relationship bibliographic citation", relationship.getBibliographicCitation());
   }
 
 }

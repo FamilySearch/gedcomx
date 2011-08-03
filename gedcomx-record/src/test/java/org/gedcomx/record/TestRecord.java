@@ -126,6 +126,8 @@ public class TestRecord {
     eventRole.setPrincipal(false);
     eventRole.setEvent(new EventReference());
     eventRole.getEvent().setHref(URI.create("#" + event.getId()));
+    eventRole.setAttribution(new Attribution());
+    eventRole.getAttribution().setExplanation("event role attribution");
     eventRoles.add(eventRole);
     persona.setEventRoles(eventRoles);
 
@@ -193,6 +195,8 @@ public class TestRecord {
 
     record.setCollection(new RecordCollectionReference());
     record.getCollection().setHref(URI.create("urn:collection-ref"));
+
+    record.setBibliographicCitation("bibliographic citation");
 
     record.setId("rid");
     return record;
@@ -288,6 +292,7 @@ public class TestRecord {
     assertEquals("field-value-normalized", field.getNormalized());
 
     assertEquals("pal", record.getPersistentId().toString());
+    assertEquals("bibliographic citation", record.getBibliographicCitation());
 
     assertEquals(2, record.getRelationships().size());
     Relationship coupleRelationship = record.getRelationships().get(0);

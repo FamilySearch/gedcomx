@@ -138,6 +138,7 @@ public class TestPerson {
     person.setSources(sources);
 
     person.setId("pid");
+    person.setBibliographicCitation("person bibliographic citation");
     return person;
   }
 
@@ -201,6 +202,7 @@ public class TestPerson {
     assertEquals("2", attributedSourceReference.getQualifiers().get(0).getAttribute(SourceQualifierAttribute.x_pixels));
 
     assertEquals("pid", person.getId());
+    assertEquals("person bibliographic citation", person.getBibliographicCitation());
   }
 
 }

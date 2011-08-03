@@ -36,7 +36,7 @@ import java.util.List;
  */
 @XmlRootElement(name = "person")
 @XmlType (
-  propOrder = {"persistentId", "alternateIds", "gender", "names", "events", "characteristics", "sources", "extension"}
+  propOrder = {"persistentId", "alternateIds", "gender", "names", "events", "characteristics", "sources", "bibliographicCitation", "extension"}
 )
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
@@ -49,6 +49,7 @@ public class Person {
   private List<Name> names;
   private List<Event> events;
   private List<Characteristic> characteristics;
+  private String bibliographicCitation;
   private List<SourceReference> sources;
   private Extension extension;
 
@@ -195,6 +196,24 @@ public class Person {
   @JsonProperty("characteristics")
   public void setCharacteristics(List<Characteristic> characteristics) {
     this.characteristics = characteristics;
+  }
+
+  /**
+   * The bibliographic citation for this data.
+   *
+   * @return The bibliographic citation for this data.
+   */
+  public String getBibliographicCitation() {
+    return bibliographicCitation;
+  }
+
+  /**
+   * The bibliographic citation for this data.
+   *
+   * @param bibliographicCitation The bibliographic citation for this data.
+   */
+  public void setBibliographicCitation(String bibliographicCitation) {
+    this.bibliographicCitation = bibliographicCitation;
   }
 
   /**
