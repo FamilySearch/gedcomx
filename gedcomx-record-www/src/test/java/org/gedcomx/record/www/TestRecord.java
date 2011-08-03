@@ -126,6 +126,8 @@ public class TestRecord {
     ArrayList<EventRole> eventRoles = new ArrayList<EventRole>();
     EventRole eventRole = new EventRole();
     eventRole.setDescription("event role description");
+    eventRole.setAttribution(new Attribution());
+    eventRole.getAttribution().setExplanation("event role explanation");
     eventRole.setPrincipal(false);
     eventRole.setEvent(new EventReference());
     eventRole.getEvent().setHref(URI.create("#" + event.getId()));

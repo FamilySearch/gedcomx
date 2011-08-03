@@ -15,13 +15,21 @@
  */
 package org.gedcomx.record;
 
+import org.gedcomx.attribution.Attribution;
+
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElementRef;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  * A role played by a persona in a recorded event.
  */
+@XmlType (
+  propOrder = {"attribution", "event", "description"}
+)
 public final class EventRole {
 
+  private Attribution attribution;
   private String description;
   private EventReference event;
   private Boolean principal;
@@ -65,6 +73,25 @@ public final class EventRole {
    */
   public void setPrincipal(Boolean principal) {
     this.principal = principal;
+  }
+
+  /**
+   * The attribution metadata for this event role.
+   *
+   * @return The attribution metadata for this event role.
+   */
+  @XmlElementRef
+  public Attribution getAttribution() {
+    return attribution;
+  }
+
+  /**
+   * The attribution metadata for this event role.
+   *
+   * @param attribution The attribution metadata for this event role.
+   */
+  public void setAttribution(Attribution attribution) {
+    this.attribution = attribution;
   }
 
   /**

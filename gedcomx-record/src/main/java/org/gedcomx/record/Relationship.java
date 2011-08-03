@@ -21,14 +21,12 @@ import org.codehaus.enunciate.qname.XmlQNameEnumRef;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
+import org.gedcomx.attribution.Attribution;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.common.Extension;
 import org.gedcomx.types.RelationshipType;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.*;
 import javax.xml.namespace.QName;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,10 +36,14 @@ import java.util.List;
  */
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
+@XmlType (
+  propOrder = {"attribution", "persona1", "persona2", "characteristics", "extension"}
+)
 public class Relationship {
 
   private String id;
   private QName type;
+  private Attribution attribution;
   private PersonaReference persona1;
   private PersonaReference persona2;
   private List<Characteristic> characteristics = new ArrayList<Characteristic>();
@@ -104,6 +106,25 @@ public class Relationship {
    */
   public void setKnownType(RelationshipType type) {
     this.type = XmlQNameEnumUtil.toQName(type);
+  }
+
+  /**
+   * The attribution metadata for this relationship.
+   *
+   * @return The attribution metadata for this relationship.
+   */
+  @XmlElementRef
+  public Attribution getAttribution() {
+    return attribution;
+  }
+
+  /**
+   * The attribution metadata for this relationship.
+   *
+   * @param attribution The attribution metadata for this relationship.
+   */
+  public void setAttribution(Attribution attribution) {
+    this.attribution = attribution;
   }
 
   /**

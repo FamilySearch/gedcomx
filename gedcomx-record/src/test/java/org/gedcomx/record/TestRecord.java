@@ -172,6 +172,8 @@ public class TestRecord {
     parentRelationship.getPersona1().setHref(URI.create("#" + persona.getId()));
     parentRelationship.setPersona2(new PersonaReference());
     parentRelationship.getPersona2().setHref(URI.create("#" + persona.getId()));
+    parentRelationship.setAttribution(new Attribution());
+    parentRelationship.getAttribution().setExplanation("relationship explanation");
     relationships.add(parentRelationship);
 
     record.setRelationships(relationships);
@@ -272,6 +274,7 @@ public class TestRecord {
     assertEquals(1, persona.getEventRoles().size());
     EventRole eventRole = persona.getEventRoles().get(0);
     assertEquals("event role description", eventRole.getDescription());
+    assertEquals("event role attribution", eventRole.getAttribution().getExplanation());
     assertFalse(eventRole.getPrincipal());
     assertEquals("#" + event.getId(), eventRole.getEvent().getHref().toString());
 
@@ -304,6 +307,7 @@ public class TestRecord {
     assertEquals("parent-relationship-id", parentRelationship.getId());
     assertEquals("#" + persona.getId(), parentRelationship.getPersona1().getHref().toString());
     assertEquals("#" + persona.getId(), parentRelationship.getPersona2().getHref().toString());
+    assertEquals("relationship explanation", parentRelationship.getAttribution().getExplanation());
 
     assertEquals(1, record.getSources().size());
     SourceReference sourceReference = record.getSources().get(0);
