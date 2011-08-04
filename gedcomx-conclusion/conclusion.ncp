@@ -17,6 +17,7 @@
         <Member type="Field">public Name[] names</Member>
         <Member type="Field">public Event[] events</Member>
         <Member type="Field">public Characteristic[] characteristics</Member>
+        <Member type="Field">public String bibliographicCitation</Member>
         <Member type="Field">public SourceReference[] sources</Member>
         <Member type="Field">public Extension extension</Member>
         <Modifier>None</Modifier>
@@ -25,7 +26,7 @@
         <Name>Relationship</Name>
         <Access>Public</Access>
         <Location left="660" top="256" />
-        <Size width="213" height="264" />
+        <Size width="213" height="281" />
         <Collapsed>False</Collapsed>
         <Member type="Field">public String id</Member>
         <Member type="Field">public RelationshipType type</Member>
@@ -36,6 +37,7 @@
         <Member type="Field">public Attribution attribution</Member>
         <Member type="Field">public Event[] events</Member>
         <Member type="Field">public Characterisic[] characteristics</Member>
+        <Member type="Field">public String bibliographicCitation</Member>
         <Member type="Field">public SourceReference[] sources</Member>
         <Member type="Field">public Extension extension</Member>
         <Modifier>None</Modifier>
@@ -401,7 +403,7 @@
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
           <X>818</X>
-          <Y>569</Y>
+          <Y>586</Y>
         </BendPoint>
         <BendPoint relativeToStartShape="False">
           <X>818</X>
