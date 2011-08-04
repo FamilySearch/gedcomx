@@ -6,7 +6,8 @@ date: 2011-08-04 12:04:00
 GEDCOM X 0.3.0 has been released.
 
 The primary feature of this release is support for the [GEDCOM X File Format](http://www.gedcomx.org/File-Format.html),
-designed to be the replacement for [GEDCOM 5.5](https://devnet.familysearch.org/docs/gedcom/gedcom55.pdf).
+designed to be the replacement for [GEDCOM 5.5](https://devnet.familysearch.org/docs/gedcom/gedcom55.pdf). There is
+also a new project for [reading and writing the file format in Java](https://github.com/FamilySearch/gedcomx-fileformat-java).
 
 Other changes include the following:
 
