@@ -13,52 +13,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.metadata.dc;
+package org.gedcomx.metadata.rdf;
 
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
-import org.gedcomx.metadata.MetadataNamespaces;
 import org.gedcomx.rt.AnyAttributeDeserializer;
 import org.gedcomx.rt.AnyAttributeSerializer;
 
 import javax.xml.XMLConstants;
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlAnyAttribute;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlValue;
 import javax.xml.namespace.QName;
-import java.net.URI;
 import java.util.Map;
 
 /**
- * A Dublin Core property that might have a value in the form of a string.
+ * An element representing an RDF value. For more information, see <a href="http://www.w3.org/TR/rdf-schema/#ch_literal">RDF Schema, Section 2.3</a>
+ * and <a href="http://dublincore.org/documents/profile-guidelines/#appc">Using RDF properties in profiles: a technical primer</a>.
  *
+ * @link http://www.w3.org/TR/rdf-schema/#ch_literal
  * @author Ryan Heaton
  */
-public final class DublinCoreStringProperty {
+public final class RDFLiteral {
 
-  private String id;
   private String lang;
   private String value;
-  private URI valueRef;
   private Map<QName, String> otherAttributes;
-
-  /**
-   * The id of the property. Used so that other properties can refer to it and possibly refine it's value.
-   *
-   * @return The id of the property. Used so that other properties can refer to it and possibly refine it's value.
-   */
-  @XmlAttribute ( name = "ID", namespace = MetadataNamespaces.RDF_NAMESPACE )
-  @XmlID
-  public String getId() {
-    return id;
-  }
-
-  /**
-   * The id of the property. Used so that other properties can refer to it and possibly refine it's value.
-   *
-   * @param id The id of the property. Used so that other properties can refer to it and possibly refine it's value.
-   */
-  public void setId(String id) {
-    this.id = id;
-  }
 
   /**
    * The language of the value of the property. See <a href="http://www.w3.org/International/articles/language-tags/>http://www.w3.org/International/articles/language-tags/</a>
@@ -96,30 +76,6 @@ public final class DublinCoreStringProperty {
    */
   public void setValue(String value) {
     this.value = value;
-  }
-
-  /**
-   * The URI reference to the value. To be used, for example, if the value is structured data.
-   * If a {@link #getValue() value} is assigned as well as a value reference, the value is to
-   * be treated as a string representation of the resource being referenced.
-   *
-   * @return The URI reference to the value. To be used, for example, if the value is structured data.
-   */
-  @XmlAttribute( name = "resource", namespace = MetadataNamespaces.RDF_NAMESPACE )
-  @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
-  public URI getValueRef() {
-    return valueRef;
-  }
-
-  /**
-   * The URI reference to the value. To be used, for example, if the value is structured data.
-   * If a {@link #getValue() value} is assigned as well as a value reference, the value is to
-   * be treated as a string representation of the resource being referenced.
-   *
-   * @param valueRef The URI reference to the value. To be used, for example, if the value is structured data.
-   */
-  public void setValueRef(URI valueRef) {
-    this.valueRef = valueRef;
   }
 
   /**

@@ -20,6 +20,8 @@ import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
+import org.gedcomx.metadata.rdf.RDFLiteral;
+import org.gedcomx.metadata.rdf.RDFValue;
 import org.gedcomx.metadata.rdf.RDFDescription;
 import org.gedcomx.rt.XmlTypeIdResolver;
 
@@ -34,6 +36,7 @@ import java.util.List;
  * Note that this definition is a stricter subset of the looser definition provided by the recommendation. The tightening is intended to improve
  * consumability.
  *
+ * @link http://dublincore.org/documents/2008/01/14/dc-rdf/#app-a
  * @link http://dublincore.org/documents/profile-guidelines/#appc
  * @author Ryan Heaton
  */
@@ -41,61 +44,61 @@ import java.util.List;
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 public class DublinCoreDescription extends RDFDescription {
 
-  private DublinCoreStringProperty abstrct;
-  private List<DublinCoreStringProperty> accessRights;
-  private DublinCoreStringProperty accrualMethod;
-  private DublinCoreStringProperty accrualPeriodicity;
-  private DublinCoreStringProperty accrualPolicy;
-  private List<DublinCoreStringProperty> alternative;
-  private List<DublinCoreStringProperty> audience;
+  private RDFValue abstrct;
+  private List<RDFValue> accessRights;
+  private RDFValue accrualMethod;
+  private RDFValue accrualPeriodicity;
+  private RDFValue accrualPolicy;
+  private List<RDFLiteral> alternative;
+  private List<RDFValue> audience;
   private Date available;
-  private DublinCoreStringProperty bibliographicCitation;
-  private List<DublinCoreStringProperty> conformsTo;
-  private List<DublinCoreStringProperty> contributor;
-  private DublinCoreStringProperty coverage;
+  private RDFLiteral bibliographicCitation;
+  private List<RDFValue> conformsTo;
+  private List<RDFValue> contributor;
+  private RDFValue coverage;
   private Date created;
-  private List<DublinCoreStringProperty> creator;
+  private List<RDFValue> creator;
   private Date date;
   private Date dateAccepted;
   private Date dateCopyrighted;
   private Date dateSubmitted;
-  private DublinCoreStringProperty description;
-  private DublinCoreStringProperty educationLevel;
-  private DublinCoreStringProperty extent;
-  private DublinCoreStringProperty format;
-  private List<DublinCoreStringProperty> hasFormat;
-  private List<DublinCoreStringProperty> hasPart;
-  private List<DublinCoreStringProperty> hasVersion;
-  private DublinCoreStringProperty identifier;
-  private DublinCoreStringProperty instructionalMethod;
-  private List<DublinCoreStringProperty> isFormatOf;
-  private List<DublinCoreStringProperty> isPartOf;
-  private List<DublinCoreStringProperty> isReferencedBy;
-  private List<DublinCoreStringProperty> isReplacedBy;
-  private List<DublinCoreStringProperty> isRequiredBy;
+  private RDFValue description;
+  private RDFValue educationLevel;
+  private RDFValue extent;
+  private RDFValue format;
+  private List<RDFValue> hasFormat;
+  private List<RDFValue> hasPart;
+  private List<RDFValue> hasVersion;
+  private RDFValue identifier;
+  private RDFValue instructionalMethod;
+  private List<RDFValue> isFormatOf;
+  private List<RDFValue> isPartOf;
+  private List<RDFValue> isReferencedBy;
+  private List<RDFValue> isReplacedBy;
+  private List<RDFValue> isRequiredBy;
   private Date issued;
-  private DublinCoreStringProperty isVersionOf;
-  private List<DublinCoreStringProperty> language;
-  private List<DublinCoreStringProperty> license;
-  private List<DublinCoreStringProperty> mediator;
-  private DublinCoreStringProperty medium;
+  private RDFValue isVersionOf;
+  private List<RDFValue> language;
+  private List<RDFValue> license;
+  private List<RDFValue> mediator;
+  private RDFValue medium;
   private Date modified;
-  private DublinCoreStringProperty provenance;
-  private DublinCoreStringProperty publisher;
-  private List<DublinCoreStringProperty> references;
-  private List<DublinCoreStringProperty> relation;
-  private List<DublinCoreStringProperty> replaces;
-  private List<DublinCoreStringProperty> requires;
-  private List<DublinCoreStringProperty> rights;
-  private DublinCoreStringProperty rightsHolder;
-  private List<DublinCoreStringProperty> source;
-  private List<DublinCoreStringProperty> spatial;
-  private List<DublinCoreStringProperty> subject;
-  private DublinCoreStringProperty tableOfContents;
-  private List<DublinCoreStringProperty> temporal;
-  private DublinCoreStringProperty title;
+  private RDFValue provenance;
+  private RDFValue publisher;
+  private List<RDFValue> references;
+  private List<RDFValue> relation;
+  private List<RDFValue> replaces;
+  private List<RDFValue> requires;
+  private List<RDFValue> rights;
+  private RDFValue rightsHolder;
+  private List<RDFValue> source;
+  private List<RDFValue> spatial;
+  private List<RDFValue> subject;
+  private RDFValue tableOfContents;
+  private List<RDFValue> temporal;
+  private RDFLiteral title;
   private QName type;
-  private List<DublinCoreStringProperty> valid;
+  private List<RDFValue> valid;
 
   /**
    * A summary of the resource.
@@ -103,7 +106,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @return A summary of the resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-abstract
    */
-  public DublinCoreStringProperty getAbstract() {
+  public RDFValue getAbstract() {
     return abstrct;
   }
 
@@ -113,7 +116,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @param abstrct A summary of the resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-abstract
    */
-  public void setAbstract(DublinCoreStringProperty abstrct) {
+  public void setAbstract(RDFValue abstrct) {
     this.abstrct = abstrct;
   }
 
@@ -127,7 +130,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @link http://dublincore.org/documents/dcmi-terms/#terms-accessRights
    */
   @SuppressWarnings("gedcomx:plural_xml_name")
-  public List<DublinCoreStringProperty> getAccessRights() {
+  public List<RDFValue> getAccessRights() {
     return accessRights;
   }
 
@@ -140,7 +143,7 @@ public class DublinCoreDescription extends RDFDescription {
    *
    * @link http://dublincore.org/documents/dcmi-terms/#terms-accessRights
    */
-  public void setAccessRights(List<DublinCoreStringProperty> accessRights) {
+  public void setAccessRights(List<RDFValue> accessRights) {
     this.accessRights = accessRights;
   }
 
@@ -150,7 +153,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @return The method by which items are added to a collection.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-accrualMethod
    */
-  public DublinCoreStringProperty getAccrualMethod() {
+  public RDFValue getAccrualMethod() {
     return accrualMethod;
   }
 
@@ -160,7 +163,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @param accrualMethod The method by which items are added to a collection.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-accrualMethod
    */
-  public void setAccrualMethod(DublinCoreStringProperty accrualMethod) {
+  public void setAccrualMethod(RDFValue accrualMethod) {
     this.accrualMethod = accrualMethod;
   }
 
@@ -170,7 +173,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @return The frequency with which items are added to a collection.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-accrualPeriodicity
    */
-  public DublinCoreStringProperty getAccrualPeriodicity() {
+  public RDFValue getAccrualPeriodicity() {
     return accrualPeriodicity;
   }
 
@@ -180,7 +183,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @param accrualPeriodicity The frequency with which items are added to a collection.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-accrualPeriodicity
    */
-  public void setAccrualPeriodicity(DublinCoreStringProperty accrualPeriodicity) {
+  public void setAccrualPeriodicity(RDFValue accrualPeriodicity) {
     this.accrualPeriodicity = accrualPeriodicity;
   }
 
@@ -190,7 +193,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @return The policy governing the addition of items to a collection.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-accrualPolicy
    */
-  public DublinCoreStringProperty getAccrualPolicy() {
+  public RDFValue getAccrualPolicy() {
     return accrualPolicy;
   }
 
@@ -200,7 +203,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @param accrualPolicy The policy governing the addition of items to a collection.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-accrualPolicy
    */
-  public void setAccrualPolicy(DublinCoreStringProperty accrualPolicy) {
+  public void setAccrualPolicy(RDFValue accrualPolicy) {
     this.accrualPolicy = accrualPolicy;
   }
 
@@ -212,7 +215,7 @@ public class DublinCoreDescription extends RDFDescription {
    */
   @JsonName ("alternatives")
   @JsonProperty ("alternatives")
-  public List<DublinCoreStringProperty> getAlternative() {
+  public List<RDFLiteral> getAlternative() {
     return alternative;
   }
 
@@ -223,7 +226,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @link http://dublincore.org/documents/dcmi-terms/#terms-alternative
    */
   @JsonProperty ("alternatives")
-  public void setAlternative(List<DublinCoreStringProperty> alternative) {
+  public void setAlternative(List<RDFLiteral> alternative) {
     this.alternative = alternative;
   }
 
@@ -235,7 +238,7 @@ public class DublinCoreDescription extends RDFDescription {
    */
   @JsonName ("audiences")
   @JsonProperty ("audiences")
-  public List<DublinCoreStringProperty> getAudience() {
+  public List<RDFValue> getAudience() {
     return audience;
   }
 
@@ -246,7 +249,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @link http://dublincore.org/documents/dcmi-terms/#terms-audience
    */
   @JsonProperty ("audiences")
-  public void setAudience(List<DublinCoreStringProperty> audience) {
+  public void setAudience(List<RDFValue> audience) {
     this.audience = audience;
   }
 
@@ -278,7 +281,7 @@ public class DublinCoreDescription extends RDFDescription {
    * bibliographic detail to identify the resource as unambiguously as possible.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-bibliographicCitation
    */
-  public DublinCoreStringProperty getBibliographicCitation() {
+  public RDFLiteral getBibliographicCitation() {
     return bibliographicCitation;
   }
 
@@ -290,7 +293,7 @@ public class DublinCoreDescription extends RDFDescription {
    * bibliographic detail to identify the resource as unambiguously as possible.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-bibliographicCitation
    */
-  public void setBibliographicCitation(DublinCoreStringProperty bibliographicCitation) {
+  public void setBibliographicCitation(RDFLiteral bibliographicCitation) {
     this.bibliographicCitation = bibliographicCitation;
   }
 
@@ -301,7 +304,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @link http://dublincore.org/documents/dcmi-terms/#terms-conformsTo
    */
   @SuppressWarnings("gedcomx:non_plural_json_name")
-  public List<DublinCoreStringProperty> getConformsTo() {
+  public List<RDFValue> getConformsTo() {
     return conformsTo;
   }
 
@@ -311,7 +314,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @param conformsTo Established standards to which the described resource conforms.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-conformsTo
    */
-  public void setConformsTo(List<DublinCoreStringProperty> conformsTo) {
+  public void setConformsTo(List<RDFValue> conformsTo) {
     this.conformsTo = conformsTo;
   }
 
@@ -323,7 +326,7 @@ public class DublinCoreDescription extends RDFDescription {
    */
   @JsonName ("contributors")
   @JsonProperty ("contributors")
-  public List<DublinCoreStringProperty> getContributor() {
+  public List<RDFValue> getContributor() {
     return contributor;
   }
 
@@ -334,7 +337,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @link http://dublincore.org/documents/dcmi-terms/#terms-contributor
    */
   @JsonProperty ("contributors")
-  public void setContributor(List<DublinCoreStringProperty> contributor) {
+  public void setContributor(List<RDFValue> contributor) {
     this.contributor = contributor;
   }
 
@@ -344,7 +347,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @return The spatial or temporal topic of the resource, the spatial applicability of the resource, or the jurisdiction under which the resource is relevant.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-coverage
    */
-  public DublinCoreStringProperty getCoverage() {
+  public RDFValue getCoverage() {
     return coverage;
   }
 
@@ -354,7 +357,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @param coverage The spatial or temporal topic of the resource, the spatial applicability of the resource, or the jurisdiction under which the resource is relevant.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-coverage
    */
-  public void setCoverage(DublinCoreStringProperty coverage) {
+  public void setCoverage(RDFValue coverage) {
     this.coverage = coverage;
   }
 
@@ -386,7 +389,7 @@ public class DublinCoreDescription extends RDFDescription {
    */
   @JsonName ("creators")
   @JsonProperty ("creators")
-  public List<DublinCoreStringProperty> getCreator() {
+  public List<RDFValue> getCreator() {
     return creator;
   }
 
@@ -397,7 +400,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @link http://dublincore.org/documents/dcmi-terms/#terms-creator
    */
   @JsonProperty ("creators")
-  public void setCreator(List<DublinCoreStringProperty> creator) {
+  public void setCreator(List<RDFValue> creator) {
     this.creator = creator;
   }
 
@@ -487,7 +490,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @return An account of the resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-description
    */
-  public DublinCoreStringProperty getDescription() {
+  public RDFValue getDescription() {
     return description;
   }
 
@@ -497,7 +500,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @param description An account of the resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-description
    */
-  public void setDescription(DublinCoreStringProperty description) {
+  public void setDescription(RDFValue description) {
     this.description = description;
   }
 
@@ -507,7 +510,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @return A class of entity, defined in terms of progression through an educational or training context, for which the described resource is intended.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-educationLevel
    */
-  public DublinCoreStringProperty getEducationLevel() {
+  public RDFValue getEducationLevel() {
     return educationLevel;
   }
 
@@ -517,7 +520,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @param educationLevel A class of entity, defined in terms of progression through an educational or training context, for which the described resource is intended.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-educationLevel
    */
-  public void setEducationLevel(DublinCoreStringProperty educationLevel) {
+  public void setEducationLevel(RDFValue educationLevel) {
     this.educationLevel = educationLevel;
   }
 
@@ -527,7 +530,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @return The size or duration of the resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-extent
    */
-  public DublinCoreStringProperty getExtent() {
+  public RDFValue getExtent() {
     return extent;
   }
 
@@ -537,7 +540,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @param extent The size or duration of the resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-extent
    */
-  public void setExtent(DublinCoreStringProperty extent) {
+  public void setExtent(RDFValue extent) {
     this.extent = extent;
   }
 
@@ -550,7 +553,7 @@ public class DublinCoreDescription extends RDFDescription {
    *
    * @link http://dublincore.org/documents/dcmi-terms/#terms-format
    */
-  public DublinCoreStringProperty getFormat() {
+  public RDFValue getFormat() {
     return format;
   }
 
@@ -563,7 +566,7 @@ public class DublinCoreDescription extends RDFDescription {
    *
    * @link http://dublincore.org/documents/dcmi-terms/#terms-format
    */
-  public void setFormat(DublinCoreStringProperty format) {
+  public void setFormat(RDFValue format) {
     this.format = format;
   }
 
@@ -578,7 +581,7 @@ public class DublinCoreDescription extends RDFDescription {
    */
   @JsonName ("hasFormats")
   @JsonProperty ("hasFormats")
-  public List<DublinCoreStringProperty> getHasFormat() {
+  public List<RDFValue> getHasFormat() {
     return hasFormat;
   }
 
@@ -592,7 +595,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @link http://dublincore.org/documents/dcmi-terms/#terms-hasFormat
    */
   @JsonProperty ("hasFormats")
-  public void setHasFormat(List<DublinCoreStringProperty> hasFormat) {
+  public void setHasFormat(List<RDFValue> hasFormat) {
     this.hasFormat = hasFormat;
   }
 
@@ -604,7 +607,7 @@ public class DublinCoreDescription extends RDFDescription {
    */
   @JsonName ("hasParts")
   @JsonProperty ("hasParts")
-  public List<DublinCoreStringProperty> getHasPart() {
+  public List<RDFValue> getHasPart() {
     return hasPart;
   }
 
@@ -615,7 +618,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @link http://dublincore.org/documents/dcmi-terms/#terms-hasPart
    */
   @JsonProperty ("hasParts")
-  public void setHasPart(List<DublinCoreStringProperty> hasPart) {
+  public void setHasPart(List<RDFValue> hasPart) {
     this.hasPart = hasPart;
   }
 
@@ -627,7 +630,7 @@ public class DublinCoreDescription extends RDFDescription {
    */
   @JsonName ("hasVersions")
   @JsonProperty ("hasVersions")
-  public List<DublinCoreStringProperty> getHasVersion() {
+  public List<RDFValue> getHasVersion() {
     return hasVersion;
   }
 
@@ -638,7 +641,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @link http://dublincore.org/documents/dcmi-terms/#terms-hasVersion
    */
   @JsonProperty ("hasVersions")
-  public void setHasVersion(List<DublinCoreStringProperty> hasVersion) {
+  public void setHasVersion(List<RDFValue> hasVersion) {
     this.hasVersion = hasVersion;
   }
 
@@ -648,7 +651,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @return An unambiguous reference to the resource within a given context.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-identifier
    */
-  public DublinCoreStringProperty getIdentifier() {
+  public RDFValue getIdentifier() {
     return identifier;
   }
 
@@ -658,7 +661,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @param identifier An unambiguous reference to the resource within a given context.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-identifier
    */
-  public void setIdentifier(DublinCoreStringProperty identifier) {
+  public void setIdentifier(RDFValue identifier) {
     this.identifier = identifier;
   }
 
@@ -668,7 +671,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @return A process, used to engender knowledge, attitudes and skills, that the described resource is designed to support.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-instructionalMethod
    */
-  public DublinCoreStringProperty getInstructionalMethod() {
+  public RDFValue getInstructionalMethod() {
     return instructionalMethod;
   }
 
@@ -678,7 +681,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @param instructionalMethod A process, used to engender knowledge, attitudes and skills, that the described resource is designed to support.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-instructionalMethod
    */
-  public void setInstructionalMethod(DublinCoreStringProperty instructionalMethod) {
+  public void setInstructionalMethod(RDFValue instructionalMethod) {
     this.instructionalMethod = instructionalMethod;
   }
 
@@ -691,7 +694,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @link http://dublincore.org/documents/dcmi-terms/#terms-isFormatOf
    */
   @SuppressWarnings("gedcomx:non_plural_json_name")
-  public List<DublinCoreStringProperty> getFormatOf() {
+  public List<RDFValue> getFormatOf() {
     return isFormatOf;
   }
 
@@ -703,7 +706,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @param formatOf Related resources that are substantially the same as the described resource, but in another format.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-isFormatOf
    */
-  public void setFormatOf(List<DublinCoreStringProperty> formatOf) {
+  public void setFormatOf(List<RDFValue> formatOf) {
     isFormatOf = formatOf;
   }
 
@@ -714,7 +717,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @link http://dublincore.org/documents/dcmi-terms/#terms-isPartOf
    */
   @SuppressWarnings("gedcomx:non_plural_json_name")
-  public List<DublinCoreStringProperty> getPartOf() {
+  public List<RDFValue> getPartOf() {
     return isPartOf;
   }
 
@@ -724,7 +727,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @param partOf Related resources in which the described resource is physically or logically included.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-isPartOf
    */
-  public void setPartOf(List<DublinCoreStringProperty> partOf) {
+  public void setPartOf(List<RDFValue> partOf) {
     isPartOf = partOf;
   }
 
@@ -735,7 +738,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @link http://dublincore.org/documents/dcmi-terms/#terms-isReferencedBy
    */
   @SuppressWarnings("gedcomx:non_plural_json_name")
-  public List<DublinCoreStringProperty> getReferencedBy() {
+  public List<RDFValue> getReferencedBy() {
     return isReferencedBy;
   }
 
@@ -745,7 +748,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @param referencedBy Related resources that reference, cite, or otherwise point to the described resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-isReferencedBy
    */
-  public void setReferencedBy(List<DublinCoreStringProperty> referencedBy) {
+  public void setReferencedBy(List<RDFValue> referencedBy) {
     isReferencedBy = referencedBy;
   }
 
@@ -756,7 +759,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @link http://dublincore.org/documents/dcmi-terms/#terms-isReplacedBy
    */
   @SuppressWarnings("gedcomx:non_plural_json_name")
-  public List<DublinCoreStringProperty> getReplacedBy() {
+  public List<RDFValue> getReplacedBy() {
     return isReplacedBy;
   }
 
@@ -766,7 +769,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @param replacedBy Related resources that supplant, displace, or supersede the described resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-isReplacedBy
    */
-  public void setReplacedBy(List<DublinCoreStringProperty> replacedBy) {
+  public void setReplacedBy(List<RDFValue> replacedBy) {
     isReplacedBy = replacedBy;
   }
 
@@ -777,7 +780,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @link http://dublincore.org/documents/dcmi-terms/#terms-isRequiredBy
    */
   @SuppressWarnings("gedcomx:non_plural_json_name")
-  public List<DublinCoreStringProperty> getRequiredBy() {
+  public List<RDFValue> getRequiredBy() {
     return isRequiredBy;
   }
 
@@ -787,7 +790,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @param requiredBy Related resources that require the described resource to support its function, delivery, or coherence.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-isRequiredBy
    */
-  public void setRequiredBy(List<DublinCoreStringProperty> requiredBy) {
+  public void setRequiredBy(List<RDFValue> requiredBy) {
     isRequiredBy = requiredBy;
   }
 
@@ -820,7 +823,7 @@ public class DublinCoreDescription extends RDFDescription {
    *
    * @link http://dublincore.org/documents/dcmi-terms/#terms-isVersionOf
    */
-  public DublinCoreStringProperty getVersionOf() {
+  public RDFValue getVersionOf() {
     return isVersionOf;
   }
 
@@ -833,7 +836,7 @@ public class DublinCoreDescription extends RDFDescription {
    *
    * @link http://dublincore.org/documents/dcmi-terms/#terms-isVersionOf
    */
-  public void setVersionOf(DublinCoreStringProperty versionOf) {
+  public void setVersionOf(RDFValue versionOf) {
     isVersionOf = versionOf;
   }
 
@@ -845,7 +848,7 @@ public class DublinCoreDescription extends RDFDescription {
    */
   @JsonName ("languages")
   @JsonProperty ("languages")
-  public List<DublinCoreStringProperty> getLanguage() {
+  public List<RDFValue> getLanguage() {
     return language;
   }
 
@@ -856,7 +859,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @link http://dublincore.org/documents/dcmi-terms/#terms-language
    */
   @JsonProperty ("languages")
-  public void setLanguage(List<DublinCoreStringProperty> language) {
+  public void setLanguage(List<RDFValue> language) {
     this.language = language;
   }
 
@@ -868,7 +871,7 @@ public class DublinCoreDescription extends RDFDescription {
    */
   @JsonName ("licenses")
   @JsonProperty ("licenses")
-  public List<DublinCoreStringProperty> getLicense() {
+  public List<RDFValue> getLicense() {
     return license;
   }
 
@@ -879,7 +882,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @link http://dublincore.org/documents/dcmi-terms/#terms-license
    */
   @JsonProperty ("licenses")
-  public void setLicense(List<DublinCoreStringProperty> license) {
+  public void setLicense(List<RDFValue> license) {
     this.license = license;
   }
 
@@ -891,7 +894,7 @@ public class DublinCoreDescription extends RDFDescription {
    */
   @JsonName ("mediators")
   @JsonProperty ("mediators")
-  public List<DublinCoreStringProperty> getMediator() {
+  public List<RDFValue> getMediator() {
     return mediator;
   }
 
@@ -902,7 +905,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @link http://dublincore.org/documents/dcmi-terms/#terms-mediator
    */
   @JsonProperty ("mediators")
-  public void setMediator(List<DublinCoreStringProperty> mediator) {
+  public void setMediator(List<RDFValue> mediator) {
     this.mediator = mediator;
   }
 
@@ -912,7 +915,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @return The material or physical carrier of the resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-medium
    */
-  public DublinCoreStringProperty getMedium() {
+  public RDFValue getMedium() {
     return medium;
   }
 
@@ -922,7 +925,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @param medium The material or physical carrier of the resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-medium
    */
-  public void setMedium(DublinCoreStringProperty medium) {
+  public void setMedium(RDFValue medium) {
     this.medium = medium;
   }
 
@@ -952,7 +955,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @return A statement of any changes in ownership and custody of the resource since its creation that are significant for its authenticity, integrity, and interpretation.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-provenance
    */
-  public DublinCoreStringProperty getProvenance() {
+  public RDFValue getProvenance() {
     return provenance;
   }
 
@@ -962,7 +965,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @param provenance A statement of any changes in ownership and custody of the resource since its creation that are significant for its authenticity, integrity, and interpretation.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-provenance
    */
-  public void setProvenance(DublinCoreStringProperty provenance) {
+  public void setProvenance(RDFValue provenance) {
     this.provenance = provenance;
   }
 
@@ -972,7 +975,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @return An entity responsible for making the resource available.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-publisher
    */
-  public DublinCoreStringProperty getPublisher() {
+  public RDFValue getPublisher() {
     return publisher;
   }
 
@@ -982,7 +985,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @param publisher An entity responsible for making the resource available.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-publisher
    */
-  public void setPublisher(DublinCoreStringProperty publisher) {
+  public void setPublisher(RDFValue publisher) {
     this.publisher = publisher;
   }
 
@@ -993,7 +996,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @link http://dublincore.org/documents/dcmi-terms/#terms-references
    */
   @SuppressWarnings("gedcomx:plural_xml_name")
-  public List<DublinCoreStringProperty> getReferences() {
+  public List<RDFValue> getReferences() {
     return references;
   }
 
@@ -1003,7 +1006,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @param references Related resources that are referenced, cited, or otherwise pointed to by the described resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-references
    */
-  public void setReferences(List<DublinCoreStringProperty> references) {
+  public void setReferences(List<RDFValue> references) {
     this.references = references;
   }
 
@@ -1015,7 +1018,7 @@ public class DublinCoreDescription extends RDFDescription {
    */
   @JsonName ("relations")
   @JsonProperty ("relations")
-  public List<DublinCoreStringProperty> getRelation() {
+  public List<RDFValue> getRelation() {
     return relation;
   }
 
@@ -1026,7 +1029,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @link http://dublincore.org/documents/dcmi-terms/#terms-relation
    */
   @JsonProperty ("relations")
-  public void setRelation(List<DublinCoreStringProperty> relation) {
+  public void setRelation(List<RDFValue> relation) {
     this.relation = relation;
   }
 
@@ -1037,7 +1040,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @link http://dublincore.org/documents/dcmi-terms/#terms-replaces
    */
   @SuppressWarnings("gedcomx:plural_xml_name")
-  public List<DublinCoreStringProperty> getReplaces() {
+  public List<RDFValue> getReplaces() {
     return replaces;
   }
 
@@ -1047,7 +1050,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @param replaces Related resources that are supplanted, displaced, or superseded by the described resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-replaces
    */
-  public void setReplaces(List<DublinCoreStringProperty> replaces) {
+  public void setReplaces(List<RDFValue> replaces) {
     this.replaces = replaces;
   }
 
@@ -1058,7 +1061,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @link http://dublincore.org/documents/dcmi-terms/#terms-requires
    */
   @SuppressWarnings("gedcomx:plural_xml_name")
-  public List<DublinCoreStringProperty> getRequires() {
+  public List<RDFValue> getRequires() {
     return requires;
   }
 
@@ -1068,7 +1071,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @param requires Related resources that are required by the described resource to support its function, delivery, or coherence.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-requires
    */
-  public void setRequires(List<DublinCoreStringProperty> requires) {
+  public void setRequires(List<RDFValue> requires) {
     this.requires = requires;
   }
 
@@ -1079,7 +1082,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @link http://dublincore.org/documents/dcmi-terms/#terms-rights
    */
   @SuppressWarnings("gedcomx:plural_xml_name")
-  public List<DublinCoreStringProperty> getRights() {
+  public List<RDFValue> getRights() {
     return rights;
   }
 
@@ -1089,7 +1092,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @param rights Information about rights held in and over the resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-rights
    */
-  public void setRights(List<DublinCoreStringProperty> rights) {
+  public void setRights(List<RDFValue> rights) {
     this.rights = rights;
   }
 
@@ -1099,7 +1102,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @return A person or organization owning or managing rights over the resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-rightsHolder
    */
-  public DublinCoreStringProperty getRightsHolder() {
+  public RDFValue getRightsHolder() {
     return rightsHolder;
   }
 
@@ -1109,7 +1112,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @param rightsHolder A person or organization owning or managing rights over the resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-rightsHolder
    */
-  public void setRightsHolder(DublinCoreStringProperty rightsHolder) {
+  public void setRightsHolder(RDFValue rightsHolder) {
     this.rightsHolder = rightsHolder;
   }
 
@@ -1121,7 +1124,7 @@ public class DublinCoreDescription extends RDFDescription {
    */
   @JsonName ("sources")
   @JsonProperty ("sources")
-  public List<DublinCoreStringProperty> getSource() {
+  public List<RDFValue> getSource() {
     return source;
   }
 
@@ -1132,7 +1135,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @link http://dublincore.org/documents/dcmi-terms/#terms-source
    */
   @JsonProperty ("sources")
-  public void setSource(List<DublinCoreStringProperty> source) {
+  public void setSource(List<RDFValue> source) {
     this.source = source;
   }
 
@@ -1145,7 +1148,7 @@ public class DublinCoreDescription extends RDFDescription {
    */
   @JsonName ("spatials")
   @JsonProperty ("spatials")
-  public List<DublinCoreStringProperty> getSpatial() {
+  public List<RDFValue> getSpatial() {
     return spatial;
   }
 
@@ -1157,7 +1160,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @link http://dublincore.org/documents/dcmi-terms/#terms-spatial
    */
   @JsonProperty ("spatials")
-  public void setSpatial(List<DublinCoreStringProperty> spatial) {
+  public void setSpatial(List<RDFValue> spatial) {
     this.spatial = spatial;
   }
 
@@ -1173,7 +1176,7 @@ public class DublinCoreDescription extends RDFDescription {
    */
   @JsonName ("subjects")
   @JsonProperty ("subjects")
-  public List<DublinCoreStringProperty> getSubject() {
+  public List<RDFValue> getSubject() {
     return subject;
   }
 
@@ -1188,7 +1191,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @link http://dublincore.org/documents/dcmi-terms/#terms-subject
    */
   @JsonProperty ("subjects")
-  public void setSubject(List<DublinCoreStringProperty> subject) {
+  public void setSubject(List<RDFValue> subject) {
     this.subject = subject;
   }
 
@@ -1199,7 +1202,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @link http://dublincore.org/documents/dcmi-terms/#terms-tableOfContents
    */
   @SuppressWarnings("gedcomx:plural_xml_name")
-  public DublinCoreStringProperty getTableOfContents() {
+  public RDFValue getTableOfContents() {
     return tableOfContents;
   }
 
@@ -1209,7 +1212,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @param tableOfContents A list of subunits of the resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-tableOfContents
    */
-  public void setTableOfContents(DublinCoreStringProperty tableOfContents) {
+  public void setTableOfContents(RDFValue tableOfContents) {
     this.tableOfContents = tableOfContents;
   }
 
@@ -1221,7 +1224,7 @@ public class DublinCoreDescription extends RDFDescription {
    */
   @JsonName ("temporals")
   @JsonProperty ("temporals")
-  public List<DublinCoreStringProperty> getTemporal() {
+  public List<RDFValue> getTemporal() {
     return temporal;
   }
 
@@ -1232,7 +1235,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @link http://dublincore.org/documents/dcmi-terms/#terms-temporal
    */
   @JsonProperty ("temporals")
-  public void setTemporal(List<DublinCoreStringProperty> temporal) {
+  public void setTemporal(List<RDFValue> temporal) {
     this.temporal = temporal;
   }
 
@@ -1242,7 +1245,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @return A name given to the resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-title
    */
-  public DublinCoreStringProperty getTitle() {
+  public RDFLiteral getTitle() {
     return title;
   }
 
@@ -1252,7 +1255,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @param title A name given to the resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-title
    */
-  public void setTitle(DublinCoreStringProperty title) {
+  public void setTitle(RDFLiteral title) {
     this.title = title;
   }
 
@@ -1306,7 +1309,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @link http://dublincore.org/documents/dcmi-terms/#terms-valid
    */
   @SuppressWarnings("gedcomx:non_plural_json_name")
-  public List<DublinCoreStringProperty> getValid() {
+  public List<RDFValue> getValid() {
     return valid;
   }
 
@@ -1316,7 +1319,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @param valid Date of validity of a resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-valid
    */
-  public void setValid(List<DublinCoreStringProperty> valid) {
+  public void setValid(List<RDFValue> valid) {
     this.valid = valid;
   }
 }

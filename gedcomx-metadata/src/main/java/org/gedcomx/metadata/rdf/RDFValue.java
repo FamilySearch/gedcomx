@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.metadata.dc;
+package org.gedcomx.metadata.rdf;
 
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
@@ -28,37 +28,20 @@ import java.net.URI;
 import java.util.Map;
 
 /**
- * A Dublin Core metadata property in the form of a string.
+ * An element representing an RDF value. For more information, see <a href="http://www.w3.org/TR/rdf-schema/#ch_value">RDF Schema, Section 4.5.3</a>,
+ * <a href="http://www.w3.org/TR/2004/REC-rdf-primer-20040210/#rdfvalue">RDF Primer, Section 4.4</a>
+ * and <a href="http://dublincore.org/documents/profile-guidelines/#appc">Using RDF properties in profiles: a technical primer</a>.
  *
+ * @link http://www.w3.org/TR/rdf-schema/#ch_value
+ * @link http://www.w3.org/TR/2004/REC-rdf-primer-20040210/#rdfvalue
  * @author Ryan Heaton
  */
-public final class DublinCoreDescriptionProperty {
+public final class RDFValue {
 
-  private String id;
   private String lang;
   private String value;
   private URI valueRef;
   private Map<QName, String> otherAttributes;
-
-  /**
-   * The id of the property. Used so that other properties can refer to it and possibly refine it's value.
-   *
-   * @return The id of the property. Used so that other properties can refer to it and possibly refine it's value.
-   */
-  @XmlAttribute ( name = "ID", namespace = MetadataNamespaces.RDF_NAMESPACE )
-  @XmlID
-  public String getId() {
-    return id;
-  }
-
-  /**
-   * The id of the property. Used so that other properties can refer to it and possibly refine it's value.
-   *
-   * @param id The id of the property. Used so that other properties can refer to it and possibly refine it's value.
-   */
-  public void setId(String id) {
-    this.id = id;
-  }
 
   /**
    * The language of the value of the property. See <a href="http://www.w3.org/International/articles/language-tags/>http://www.w3.org/International/articles/language-tags/</a>
@@ -80,17 +63,17 @@ public final class DublinCoreDescriptionProperty {
   }
 
   /**
-   * The value of the property.
+   * The value of the property, if it can be expressed as a string. If the value can't be expressed as a string, use {@link #getValueRef() the value ref}.
    *
    * @return The value of the property.
    */
-  @XmlValue
+  @XmlElement ( name = "value", namespace = MetadataNamespaces.RDF_NAMESPACE )
   public String getValue() {
     return value;
   }
 
   /**
-   * The value of the property.
+   * The value of the property, if it can be expressed as a string. If the value can't be expressed as a string, use {@link #getValueRef() the value ref}.
    *
    * @param value The value of the property.
    */
