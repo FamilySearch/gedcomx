@@ -15,100 +15,101 @@
  */
 package org.gedcomx.metadata.rdf;
 
+import org.codehaus.enunciate.json.JsonName;
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.rt.*;
-import org.gedcomx.metadata.dc.DublinCoreMetadata;
 
-import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.*;
 import javax.xml.namespace.QName;
-import java.net.URI;
 import java.util.List;
 import java.util.Map;
 
 /**
- * A piece of RDF metadata.
+ * A set of RDF descriptions, <a href="http://www.w3.org/TR/2004/REC-rdf-primer-20040210/#rdfxml">according to the RDF spec</a>.
  *
  * @author Ryan Heaton
  */
-@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
-@JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlSeeAlso( DublinCoreMetadata.class )
-public class RDFMetadata {
+@XmlRootElement ( name = "RDF" )
+@JsonTypeInfo ( use = JsonTypeInfo.Id.CUSTOM, property = "@type" )
+@JsonTypeIdResolver ( XmlTypeIdResolver.class )
+public class RDFDescriptionSet {
 
-  private String id; 
-  private URI about;
+  private String id;
+  private List<RDFDescription> contents;
   private Map<QName, String> otherAttributes;
   private List<Object> otherElements;
 
   /**
-   * The id of this piece of metadata.
+   * The id of this bundle.
    *
-   * @return The id of this piece of metadata.
+   * @return The id of this bundle.
    */
-  @XmlAttribute( name = "ID" )
+  @XmlAttribute ( name = "ID" )
   @XmlID
   public String getId() {
     return id;
   }
 
   /**
-   * The id of this piece of metadata.
+   * The id of this bundle.
    *
-   * @param id The id of this piece of metadata.
+   * @param id The id of this bundle.
    */
   public void setId(String id) {
     this.id = id;
   }
 
   /**
-   * URI to the resource that this metadata is describing.
+   * The pieces of metadata contained in this bundle.
    *
-   * @return URI to the resource that this metadata is describing.
+   * @return The pieces of metadata contained in this bundle.
    */
-  @XmlAttribute
-  @XmlSchemaType(name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
-  public URI getAbout() {
-    return about;
+  @XmlElement ( name = "Description" )
+  @JsonProperty ( "Descriptions" )
+  @JsonName ( "Descriptions" )
+  public List<RDFDescription> getContents() {
+    return contents;
   }
 
   /**
-   * URI to the resource that this metadata is describing.
+   * The pieces of metadata contained in this bundle.
    *
-   * @param about URI to the resource that this metadata is describing.
+   * @param contents The pieces of metadata contained in this bundle.
    */
-  public void setAbout(URI about) {
-    this.about = about;
+  @JsonProperty ( "Descriptions" )
+  public void setContents(List<RDFDescription> contents) {
+    this.contents = contents;
   }
 
   /**
-   * Custom attributes applicable as part of this metadata.
+   * Custom attributes for this bundle.
    *
-   * @return Custom attributes applicable as part of this metadata.
+   * @return Custom attributes for this bundle.
    */
   @XmlAnyAttribute
-  @JsonSerialize (using = AnyAttributeSerializer.class)
+  @JsonSerialize ( using = AnyAttributeSerializer.class )
   public Map<QName, String> getOtherAttributes() {
     return otherAttributes;
   }
 
   /**
-   * Custom attributes applicable as part of this metadata.
+   * Custom attributes for this bundle.
    *
-   * @param otherAttributes Custom attributes applicable as part of this metadata.
+   * @param otherAttributes Custom attributes for this bundle.
    */
-  @JsonDeserialize (using = AnyAttributeDeserializer.class)
+  @JsonDeserialize ( using = AnyAttributeDeserializer.class )
   public void setOtherAttributes(Map<QName, String> otherAttributes) {
     this.otherAttributes = otherAttributes;
   }
 
   /**
-   * Custom elements applicable as part of this metadata.
+   * Custom pieces of non-RDF metadata contained in this bundle.
    *
-   * @return Custom elements applicable as part of this metadata.
+   * @return Custom pieces of non-RDF metadata contained in this bundle.
    */
   @XmlAnyElement ( lax = true )
   @JsonSerialize ( using = AnyElementSerializer.class )
@@ -117,9 +118,9 @@ public class RDFMetadata {
   }
 
   /**
-   * Custom elements applicable as part of this metadata.
+   * Custom pieces of non-RDF metadata contained in this bundle.
    *
-   * @param otherElements Custom elements applicable as part of this metadata.
+   * @param otherElements Custom pieces of non-RDF metadata contained in this bundle.
    */
   @JsonDeserialize( using = AnyElementDeserializer.class )
   public void setOtherElements(List<Object> otherElements) {

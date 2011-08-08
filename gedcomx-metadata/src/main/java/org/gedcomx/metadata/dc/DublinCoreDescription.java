@@ -20,7 +20,7 @@ import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.metadata.rdf.RDFMetadata;
+import org.gedcomx.metadata.rdf.RDFDescription;
 import org.gedcomx.rt.XmlTypeIdResolver;
 
 import javax.xml.bind.annotation.XmlTransient;
@@ -29,16 +29,17 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * The model for the <a href="http://dublincore.org/documents/dcmi-terms/">Dublin Core metadata set</a>. Fits into the
- * RDF model <a href="http://dublincore.org/documents/dcq-rdf-xml/">according to the Dublin Core documentation</a>. Note that
- * this model is a stricter subset of the loose model defined by the spec. The tightening is intended to improve consumability.
+ * A model for a generic description of a resource using <a href="http://dublincore.org/documents/dcmi-terms/">Dublin Core Metadata Terms</a>.
+ * Fits into the RDF model <a href="http://dublincore.org/documents/2008/01/14/dc-rdf/">according to recommendation provided by Dublin Core</a>.
+ * Note that this definition is a stricter subset of the looser definition provided by the recommendation. The tightening is intended to improve
+ * consumability.
  *
- *
+ * @link http://dublincore.org/documents/profile-guidelines/#appc
  * @author Ryan Heaton
  */
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-public class DublinCoreMetadata extends RDFMetadata {
+public class DublinCoreDescription extends RDFDescription {
 
   private DublinCoreStringProperty abstrct;
   private List<DublinCoreStringProperty> accessRights;

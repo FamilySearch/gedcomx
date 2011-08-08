@@ -17,13 +17,13 @@ import static org.testng.AssertJUnit.assertEquals;
  * @author Ryan Heaton
  */
 @Test
-public class TestDublinCoreMetadata {
+public class TestDublinCoreDescription {
 
   /**
    * tests alternate id xml
    */
   public void testDublinCoreMetadataXml() throws Exception {
-    DublinCoreMetadata metadata = createMetadata();
+    DublinCoreDescription metadata = createMetadata();
     metadata = processThroughXml(metadata);
     assertMetadata(metadata);
   }
@@ -32,13 +32,13 @@ public class TestDublinCoreMetadata {
    * tests alternate id json
    */
   public void testDublinCoreMetadataJson() throws Exception {
-    DublinCoreMetadata metadata = createMetadata();
+    DublinCoreDescription metadata = createMetadata();
     metadata = processThroughJson(metadata);
     assertMetadata(metadata);
   }
 
-  private DublinCoreMetadata createMetadata() {
-    DublinCoreMetadata metadata = new DublinCoreMetadata();
+  private DublinCoreDescription createMetadata() {
+    DublinCoreDescription metadata = new DublinCoreDescription();
     metadata.setAbstract(new DublinCoreStringProperty());
     metadata.setAccessRights(new ArrayList<DublinCoreStringProperty>());
     metadata.setAccrualMethod(new DublinCoreStringProperty());
@@ -105,7 +105,7 @@ public class TestDublinCoreMetadata {
     return metadata;
   }
 
-  private void assertMetadata(DublinCoreMetadata metadata) {
+  private void assertMetadata(DublinCoreDescription metadata) {
     assertTrue(metadata.getAbstract() != null);
     assertTrue(metadata.getAccessRights() == null || metadata.getAccessRights().isEmpty());
     assertTrue(metadata.getAccrualMethod() != null);

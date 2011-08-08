@@ -28,11 +28,11 @@ import java.net.URI;
 import java.util.Map;
 
 /**
- * A Dublin Core property that might have a value in the form of a string.
+ * A Dublin Core metadata property in the form of a string.
  *
  * @author Ryan Heaton
  */
-public final class DublinCoreStringProperty {
+public final class DublinCoreDescriptionProperty {
 
   private String id;
   private String lang;
