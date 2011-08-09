@@ -16,6 +16,8 @@
 package org.gedcomx.record;
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
+import org.codehaus.jackson.annotate.JsonIgnore
+;
 import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.enunciate.qname.XmlQNameEnumRef;
 import org.codehaus.jackson.annotate.JsonProperty;
@@ -107,6 +109,7 @@ public class Record {
    * @return The enum referencing the known type of the record, or {@link org.gedcomx.types.RecordType#other} if not known.
    */
   @XmlTransient
+  @JsonIgnore
   public RecordType getKnownType() {
     return XmlQNameEnumUtil.fromQName(getType(), RecordType.class);
   }
@@ -116,6 +119,7 @@ public class Record {
    * 
    * @param knownType The enum referencing the known type of the record, or {@link org.gedcomx.types.RecordType#other} if not known.
    */
+  @JsonIgnore
   public void setKnownType(RecordType knownType) {
     this.type = XmlQNameEnumUtil.toQName(knownType);
   }

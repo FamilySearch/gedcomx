@@ -16,6 +16,7 @@
 package org.gedcomx.record;
 
 import org.codehaus.enunciate.qname.XmlQNameEnumRef;
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.rt.XmlTypeIdResolver;
@@ -62,6 +63,7 @@ public class AgePart extends Field {
    * @return The enum referencing the known age unit, or {@link org.gedcomx.types.AgeUnit#other} if not known.
    */
   @XmlTransient
+  @JsonIgnore
   public AgeUnit getKnownUnits() {
     return org.codehaus.enunciate.XmlQNameEnumUtil.fromQName(getUnits(), AgeUnit.class);
   }
@@ -71,6 +73,7 @@ public class AgePart extends Field {
    *
    * @param unit The age unit.
    */
+  @JsonIgnore
   public void setKnownUnits(AgeUnit unit) {
     this.units = org.codehaus.enunciate.XmlQNameEnumUtil.toQName(unit);
   }

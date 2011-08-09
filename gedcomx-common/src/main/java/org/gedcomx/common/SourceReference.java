@@ -16,6 +16,8 @@
 package org.gedcomx.common;
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
+import org.codehaus.jackson.annotate.JsonIgnore
+;
 import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.enunciate.qname.XmlQNameEnumRef;
 import org.codehaus.jackson.annotate.JsonProperty;
@@ -112,6 +114,7 @@ public final class SourceReference {
    * @return The enum referencing the known type of the source reference, or {@link org.gedcomx.types.SourceType#other} if not known.
    */
   @XmlTransient
+  @JsonIgnore
   public SourceType getKnownType() {
     return XmlQNameEnumUtil.fromQName(getType(), SourceType.class);
   }
@@ -121,6 +124,7 @@ public final class SourceReference {
    *
    * @param knownType The source reference type.
    */
+  @JsonIgnore
   public void setKnownType(SourceType knownType) {
     this.type = XmlQNameEnumUtil.toQName(knownType);
   }

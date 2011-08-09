@@ -16,6 +16,8 @@
 package org.gedcomx.record;
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
+import org.codehaus.jackson.annotate.JsonIgnore
+;
 import org.codehaus.enunciate.qname.XmlQNameEnumRef;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
@@ -58,6 +60,7 @@ public class PlacePart extends Field {
    * @return The enum referencing the known type of the place part, or {@link org.gedcomx.types.PlacePartType#other} if not known.
    */
   @XmlTransient
+  @JsonIgnore
   public PlacePartType getKnownType() {
     return XmlQNameEnumUtil.fromQName(getType(), PlacePartType.class);
   }
@@ -67,6 +70,7 @@ public class PlacePart extends Field {
    *
    * @param knownType The place part type.
    */
+  @JsonIgnore
   public void setKnownType(PlacePartType knownType) {
     this.type = XmlQNameEnumUtil.toQName(knownType);
   }

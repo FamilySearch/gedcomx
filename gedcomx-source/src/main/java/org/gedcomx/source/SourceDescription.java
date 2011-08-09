@@ -116,6 +116,7 @@ public class SourceDescription {
    * 
    * @param knownType The source type.
    */
+  @org.codehaus.enunciate.json.JsonIgnore
   public void setKnownType(SourceType knownType) {
     this.type = XmlQNameEnumUtil.toQName(knownType);
   }

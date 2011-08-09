@@ -17,6 +17,8 @@ package org.gedcomx.conclusion;
 
 import org.codehaus.enunciate.ClientName;
 import org.codehaus.enunciate.XmlQNameEnumUtil;
+import org.codehaus.jackson.annotate.JsonIgnore
+;
 import org.codehaus.enunciate.qname.XmlQNameEnumRef;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
@@ -66,6 +68,7 @@ public class Event extends Conclusion {
    * @return The enum referencing the known type of the event, or {@link org.gedcomx.types.EventType#other} if not known.
    */
   @XmlTransient
+  @JsonIgnore
   public org.gedcomx.types.EventType getKnownType() {
     return XmlQNameEnumUtil.fromQName(getType(), org.gedcomx.types.EventType.class);
   }
@@ -75,6 +78,7 @@ public class Event extends Conclusion {
    *
    * @param knownType the event type.
    */
+  @JsonIgnore
   public void setKnownType(org.gedcomx.types.EventType knownType) {
     this.type = XmlQNameEnumUtil.toQName(knownType);
   }

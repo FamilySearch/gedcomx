@@ -16,6 +16,8 @@
 package org.gedcomx.record;
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
+import org.codehaus.jackson.annotate.JsonIgnore
+;
 import org.codehaus.enunciate.qname.XmlQNameEnumRef;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
@@ -61,6 +63,7 @@ public class DatePart extends Field {
    * @return The enum referencing the known type of the date part, or {@link org.gedcomx.types.DatePartType#other} if not known.
    */
   @XmlTransient
+  @JsonIgnore
   public DatePartType getKnownType() {
     return XmlQNameEnumUtil.fromQName(getType(), DatePartType.class);
   }
@@ -70,6 +73,7 @@ public class DatePart extends Field {
    *
    * @param knownType The date part type.
    */
+  @JsonIgnore
   public void setKnownType(DatePartType knownType) {
     this.type = XmlQNameEnumUtil.toQName(knownType);
   }

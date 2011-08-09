@@ -16,6 +16,7 @@
 package org.gedcomx.common;
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.enunciate.qname.XmlQNameEnumRef;
 import org.gedcomx.types.AlternateIdType;
 
@@ -80,6 +81,7 @@ public final class AlternateId {
    * @return The enum referencing a known alternate id type, or {@link AlternateIdType#other} if not known.
    */
   @XmlTransient
+  @JsonIgnore
   public AlternateIdType getKnownType() {
     return XmlQNameEnumUtil.fromQName(getType(), AlternateIdType.class);
   }
@@ -89,6 +91,7 @@ public final class AlternateId {
    *
    * @param knownType The known alternate id type.
    */
+  @JsonIgnore
   public void setKnownType(AlternateIdType knownType) {
     this.type = XmlQNameEnumUtil.toQName(knownType);
   }

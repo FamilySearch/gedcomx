@@ -16,6 +16,8 @@
 package org.gedcomx.conclusion;
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
+import org.codehaus.jackson.annotate.JsonIgnore
+;
 import org.codehaus.enunciate.qname.XmlQNameEnumRef;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
@@ -65,6 +67,7 @@ public class Characteristic extends Conclusion {
    * @return The enum referencing the known type of the characteristic, or {@link org.gedcomx.types.CharacteristicType#other} if not known.
    */
   @XmlTransient
+  @JsonIgnore
   public org.gedcomx.types.CharacteristicType getKnownType() {
     return XmlQNameEnumUtil.fromQName(getType(), org.gedcomx.types.CharacteristicType.class);
   }
@@ -74,6 +77,7 @@ public class Characteristic extends Conclusion {
    *
    * @param knownType The known type.
    */
+  @JsonIgnore
   public void setKnownType(org.gedcomx.types.CharacteristicType knownType) {
     this.type = XmlQNameEnumUtil.toQName(knownType);
   }

@@ -16,6 +16,8 @@
 package org.gedcomx.metadata.dc;
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
+import org.codehaus.jackson.annotate.JsonIgnore
+;
 import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
@@ -1289,6 +1291,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @return The type from an enumeration of known types, or null if unknown.
    */
   @XmlTransient
+  @JsonIgnore
   public DublinCoreType getKnownType() {
     return XmlQNameEnumUtil.fromQName(getType(), DublinCoreType.class);
   }
@@ -1298,6 +1301,7 @@ public class DublinCoreDescription extends RDFDescription {
    *
    * @param knownType The type.
    */
+  @JsonIgnore
   public void setKnownType(DublinCoreType knownType) {
     setType(XmlQNameEnumUtil.toQName(knownType));
   }

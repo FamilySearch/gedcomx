@@ -3,7 +3,7 @@
 [#import "boilerplate.fmt" as libBoilerplate/]
 [#macro writeElementPage element]
   [#assign schema=schemaForNamespace(element)/]
-  [#assign elementLabel=element.name?cap_first + " Entity"/]
+  [#assign elementLabel=element.name?cap_first + " Element"/]
   [@libBoilerplate.writeStartBody label=elementLabel/]
   <div class="container">
     <header>
