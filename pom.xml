@@ -22,16 +22,12 @@
 
     <module>gedcomx-types</module>
     <module>gedcomx-common</module>
+    <module>gedcomx-metadata</module>
     <module>gedcomx-attribution</module>
-
-    <module>gedcomx-source</module>
     <module>gedcomx-record</module>
     <module>gedcomx-conclusion</module>
 
-    <module>gedcomx-metadata</module>
-
     <module>gedcomx-www</module>
-    <module>gedcomx-source-www</module>
     <module>gedcomx-record-www</module>
     <module>gedcomx-conclusion-www</module>
   </modules>
