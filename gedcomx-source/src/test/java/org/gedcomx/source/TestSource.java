@@ -3,6 +3,7 @@ package org.gedcomx.source;
 import org.gedcomx.attribution.Attribution;
 import org.gedcomx.common.AlternateId;
 import org.gedcomx.common.Extension;
+import org.gedcomx.common.SourceReference;
 import org.gedcomx.types.SourceType;
 import org.testng.annotations.Test;
 

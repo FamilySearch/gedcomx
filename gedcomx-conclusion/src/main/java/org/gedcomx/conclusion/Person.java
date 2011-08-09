@@ -21,8 +21,8 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.common.AlternateId;
 import org.gedcomx.common.Extension;
+import org.gedcomx.common.SourceReference;
 import org.gedcomx.rt.XmlTypeIdResolver;
-import org.gedcomx.source.SourceReference;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.*;

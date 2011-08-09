@@ -24,8 +24,9 @@ import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.attribution.Attribution;
 import org.gedcomx.common.AlternateId;
 import org.gedcomx.common.Extension;
+import org.gedcomx.common.ResourceReference;
+import org.gedcomx.common.SourceReference;
 import org.gedcomx.rt.XmlTypeIdResolver;
-import org.gedcomx.source.SourceReference;
 import org.gedcomx.types.RecordType;
 
 import javax.xml.XMLConstants;
@@ -51,7 +52,7 @@ public class Record {
   private URI persistentId;
   private List<AlternateId> alternateIds;
   private Attribution attribution;
-  private RecordCollectionReference collection;
+  private ResourceReference collection;
   private List<Persona> personas;
   private List<Event> events;
   private List<Relationship> relationships;
@@ -203,7 +204,7 @@ public class Record {
    *
    * @return The reference to the collection containing this record.
    */
-  public RecordCollectionReference getCollection() {
+  public ResourceReference getCollection() {
     return collection;
   }
 
@@ -212,7 +213,7 @@ public class Record {
    *
    * @param collection The reference to the collection containing this record.
    */
-  public void setCollection(RecordCollectionReference collection) {
+  public void setCollection(ResourceReference collection) {
     this.collection = collection;
   }
 

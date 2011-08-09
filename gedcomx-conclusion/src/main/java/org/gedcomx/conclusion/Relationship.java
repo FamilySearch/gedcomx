@@ -24,8 +24,9 @@ import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.attribution.Attribution;
 import org.gedcomx.common.AlternateId;
 import org.gedcomx.common.Extension;
+import org.gedcomx.common.ResourceReference;
+import org.gedcomx.common.SourceReference;
 import org.gedcomx.rt.XmlTypeIdResolver;
-import org.gedcomx.source.SourceReference;
 import org.gedcomx.types.RelationshipType;
 
 import javax.xml.XMLConstants;
@@ -51,8 +52,8 @@ public class Relationship {
   private QName type;
   private URI persistentId;
   private List<AlternateId> alternateIds;
-  private PersonReference person1;
-  private PersonReference person2;
+  private ResourceReference person1;
+  private ResourceReference person2;
   private Attribution attribution;
   private List<Event> events;
   private List<Characteristic> characteristics;
@@ -169,7 +170,7 @@ public class Relationship {
    * the other person in this relationship and implies neither order nor role. When the relationship type
    * implies direction, it goes from "person1" to "person2".
    */
-  public PersonReference getPerson1() {
+  public ResourceReference getPerson1() {
     return person1;
   }
 
@@ -182,7 +183,7 @@ public class Relationship {
    * the other person in this relationship and implies neither order nor role. When the relationship type
    * implies direction, it goes from "person1" to "person2".
    */
-  public void setPerson1(PersonReference person1) {
+  public void setPerson1(ResourceReference person1) {
     this.person1 = person1;
   }
 
@@ -195,7 +196,7 @@ public class Relationship {
    * the other person in this relationship and implies neither order nor role. When the relationship type
    * implies direction, it goes from "person1" to "person2".
    */
-  public PersonReference getPerson2() {
+  public ResourceReference getPerson2() {
     return person2;
   }
 
@@ -208,7 +209,7 @@ public class Relationship {
    * the other person in this relationship and implies neither order nor role. When the relationship type
    * implies direction, it goes from "person1" to "person2".
    */
-  public void setPerson2(PersonReference person2) {
+  public void setPerson2(ResourceReference person2) {
     this.person2 = person2;
   }
 

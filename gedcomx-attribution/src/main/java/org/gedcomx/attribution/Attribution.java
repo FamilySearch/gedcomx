@@ -17,6 +17,7 @@ package org.gedcomx.attribution;
 
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
+import org.gedcomx.common.ResourceReference;
 import org.gedcomx.rt.XmlTypeIdResolver;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -33,7 +34,7 @@ import java.util.Date;
 @SuppressWarnings("gedcomx:no_id")
 public class Attribution {
 
-  private ContributorReference contributor;
+  private ResourceReference contributor;
   private Date timestamp;
   private String explanation;
 
@@ -42,7 +43,7 @@ public class Attribution {
    *
    * @return Reference to the contributor of the attributed data.
    */
-  public ContributorReference getContributor() {
+  public ResourceReference getContributor() {
     return contributor;
   }
 
@@ -51,7 +52,7 @@ public class Attribution {
    *
    * @param contributor Reference to the contributor of the attributed data.
    */
-  public void setContributor(ContributorReference contributor) {
+  public void setContributor(ResourceReference contributor) {
     this.contributor = contributor;
   }
 

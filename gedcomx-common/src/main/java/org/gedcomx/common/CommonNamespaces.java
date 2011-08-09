@@ -37,6 +37,6 @@ public class CommonNamespaces {
 
   private CommonNamespaces() {}
 
-  public static final String GEDCOMX_COMMON_NAMESPACE = "http://gedcomx.org/common/v1";
+  public static final String GEDCOMX_COMMON_NAMESPACE = "http://gedcomx.org/v1";
 
 }

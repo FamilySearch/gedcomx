@@ -1,5 +1,6 @@
 package org.gedcomx.attribution;
 
+import org.gedcomx.common.ResourceReference;
 import org.testng.annotations.Test;
 
 import java.net.URI;
@@ -13,14 +14,14 @@ import static org.testng.AssertJUnit.assertEquals;
  * @author Ryan Heaton
  */
 @Test
-public class TestAttributionReference {
+public class TestAttribution {
 
   /**
    * tests attribution reference xml
    */
   public void testAttributionReferenceXml() throws Exception {
     Attribution attribution = new Attribution();
-    attribution.setContributor(new ContributorReference());
+    attribution.setContributor(new ResourceReference());
     attribution.getContributor().setHref(URI.create("urn:someid"));
     attribution.setExplanation("hello, there.");
     Date ts = new Date();
@@ -36,7 +37,7 @@ public class TestAttributionReference {
    */
   public void testAttributionReferenceJson() throws Exception {
     Attribution attribution = new Attribution();
-    attribution.setContributor(new ContributorReference());
+    attribution.setContributor(new ResourceReference());
     attribution.getContributor().setHref(URI.create("urn:someid"));
     attribution.setExplanation("hello, there.");
     Date ts = new Date();

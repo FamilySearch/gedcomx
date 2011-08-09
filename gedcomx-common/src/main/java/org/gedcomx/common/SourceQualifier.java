@@ -13,16 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.source;
+package org.gedcomx.common;
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.enunciate.qname.XmlQNameEnumRef;
+import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.rt.AnyAttributeDeserializer;
 import org.gedcomx.rt.AnyAttributeSerializer;
+import org.gedcomx.rt.XmlTypeIdResolver;
 
 import javax.xml.bind.annotation.XmlAnyAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.namespace.QName;
 import java.util.HashMap;
 import java.util.Map;
@@ -32,6 +36,9 @@ import java.util.Map;
  *
  * @author Ryan Heaton
  */
+@XmlRootElement(name = "qualifier")
+@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
+@JsonTypeIdResolver (XmlTypeIdResolver.class)
 public final class SourceQualifier {
 
   private Map<QName, String> attributes;

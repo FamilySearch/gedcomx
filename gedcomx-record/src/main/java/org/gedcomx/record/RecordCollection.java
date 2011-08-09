@@ -18,6 +18,7 @@ package org.gedcomx.record;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.common.Extension;
+import org.gedcomx.common.ResourceReference;
 import org.gedcomx.rt.XmlTypeIdResolver;
 
 import javax.xml.bind.annotation.*;
@@ -34,7 +35,7 @@ import javax.xml.bind.annotation.*;
 public class RecordCollection {
 
   private String id;
-  private RecordCollectionReference parent;
+  private ResourceReference parent;
   private String title;
   private String description;
   private String publisher;
@@ -66,7 +67,7 @@ public class RecordCollection {
    *
    * @return The reference to the "parent" collection for this collection, i.e. the collection that contains this collection.
    */
-  public RecordCollectionReference getParent() {
+  public ResourceReference getParent() {
     return parent;
   }
 
@@ -75,7 +76,7 @@ public class RecordCollection {
    *
    * @param parent The reference to the "parent" collection for this collection, i.e. the collection that contains this collection.
    */
-  public void setParent(RecordCollectionReference parent) {
+  public void setParent(ResourceReference parent) {
     this.parent = parent;
   }
 

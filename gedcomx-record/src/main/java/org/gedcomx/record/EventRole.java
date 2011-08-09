@@ -16,6 +16,7 @@
 package org.gedcomx.record;
 
 import org.gedcomx.attribution.Attribution;
+import org.gedcomx.common.ResourceReference;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElementRef;
@@ -31,24 +32,26 @@ public final class EventRole {
 
   private Attribution attribution;
   private String description;
-  private EventReference event;
+  private ResourceReference event;
   private Boolean principal;
 
   /**
-   * The reference to the event.
+   * The reference to the event. If the event is local to the record, the URI will be a
+   * relative <a href="http://www.w3.org/TR/webarch/#fragid">fragment identifier</a>
    *
    * @return The reference to the event.
    */
-  public EventReference getEvent() {
+  public ResourceReference getEvent() {
     return event;
   }
 
   /**
-   * The reference to the event.
+   * The reference to the event. If the event is local to the record, the URI will be a
+   * relative <a href="http://www.w3.org/TR/webarch/#fragid">fragment identifier</a>
    *
    * @param event The reference to the event.
    */
-  public void setEvent(EventReference event) {
+  public void setEvent(ResourceReference event) {
     this.event = event;
   }
 

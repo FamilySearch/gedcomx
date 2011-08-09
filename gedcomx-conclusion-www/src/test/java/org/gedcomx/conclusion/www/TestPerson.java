@@ -1,13 +1,11 @@
 package org.gedcomx.conclusion.www;
 
 import org.gedcomx.attribution.Attribution;
-import org.gedcomx.attribution.ContributorReference;
-import org.gedcomx.common.AlternateId;
-import org.gedcomx.common.Extension;
+import org.gedcomx.common.*;
 import org.gedcomx.conclusion.*;
-import org.gedcomx.source.SourceQualifier;
-import org.gedcomx.source.SourceQualifierAttribute;
-import org.gedcomx.source.SourceReference;
+import org.gedcomx.common.SourceQualifier;
+import org.gedcomx.common.SourceQualifierAttribute;
+import org.gedcomx.common.SourceReference;
 import org.gedcomx.types.*;
 import org.gedcomx.www.Link;
 import org.testng.annotations.Test;
@@ -74,7 +72,7 @@ public class TestPerson {
     characteristicLink.setHref(URI.create("urn:characteristic"));
     characteristic.getExtension().addElement(characteristicLink);
     characteristic.setAttribution(new Attribution());
-    characteristic.getAttribution().setContributor(new ContributorReference());
+    characteristic.getAttribution().setContributor(new ResourceReference());
     characteristic.getAttribution().getContributor().setHref(URI.create("urn:characteristic-attribution"));
     characteristic.setDate(new Date());
     characteristic.getDate().setOriginal("original date");
@@ -95,7 +93,7 @@ public class TestPerson {
     eventLink.setHref(URI.create("urn:event"));
     event.getExtension().addElement(eventLink);
     event.setAttribution(new Attribution());
-    event.getAttribution().setContributor(new ContributorReference());
+    event.getAttribution().setContributor(new ResourceReference());
     event.getAttribution().getContributor().setHref(URI.create("urn:event-attribution"));
     event.setDate(new Date());
     event.getDate().setOriginal("original date");
@@ -126,7 +124,7 @@ public class TestPerson {
     alternateForms.add(nameForm);
     name.setAlternateForms(alternateForms);
     name.setAttribution(new Attribution());
-    name.getAttribution().setContributor(new ContributorReference());
+    name.getAttribution().setContributor(new ResourceReference());
     name.getAttribution().getContributor().setHref(URI.create("urn:name-attribution"));
     name.setId("name-id");
     name.setKnownType(NameType.formal);
@@ -148,7 +146,7 @@ public class TestPerson {
     Attribution attribution = new Attribution();
     attributedSourceReference.setExtension(new Extension());
     attributedSourceReference.getExtension().addElement(attribution);
-    attribution.setContributor(new ContributorReference());
+    attribution.setContributor(new ResourceReference());
     attribution.getContributor().setHref(URI.create("urn:source-reference-attribution"));
     attributedSourceReference.setHref(URI.create("urn:source-uri"));
     attributedSourceReference.setId("source-reference-id");

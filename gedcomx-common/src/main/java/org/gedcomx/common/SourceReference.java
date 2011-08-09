@@ -13,20 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.source;
+package org.gedcomx.common;
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.enunciate.qname.XmlQNameEnumRef;
 import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.annotate.JsonTypeInfo;
-import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.common.Extension;
-import org.gedcomx.rt.XmlTypeIdResolver;
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.gedcomx.types.SourceType;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import javax.xml.namespace.QName;
 import java.net.URI;
 import java.util.List;
@@ -36,9 +35,10 @@ import java.util.List;
  *
  * @author Ryan Heaton
  */
-@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
-@JsonTypeIdResolver (XmlTypeIdResolver.class)
-public class SourceReference {
+@XmlJavaTypeAdapter( SourceReferenceAdapter.class )
+@JsonSerialize(using = SourceReferenceSerializer.class)
+@JsonDeserialize(using = SourceReferenceDeserializer.class)
+public final class SourceReference {
 
   private String id;
   private URI href;

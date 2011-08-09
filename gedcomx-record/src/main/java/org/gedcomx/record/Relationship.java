@@ -22,6 +22,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.attribution.Attribution;
+import org.gedcomx.common.ResourceReference;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.common.Extension;
 import org.gedcomx.types.RelationshipType;
@@ -44,8 +45,8 @@ public class Relationship {
   private String id;
   private QName type;
   private Attribution attribution;
-  private PersonaReference persona1;
-  private PersonaReference persona2;
+  private ResourceReference persona1;
+  private ResourceReference persona2;
   private List<Characteristic> characteristics = new ArrayList<Characteristic>();
   private Extension extension;
 
@@ -136,7 +137,7 @@ public class Relationship {
    * the other persona in this relationship. When the relationship type implies direction, it
    * goes from "persona1" to "persona2".
    */
-  public PersonaReference getPersona1() {
+  public ResourceReference getPersona1() {
     return this.persona1;
   }
 
@@ -149,7 +150,7 @@ public class Relationship {
    * the other persona in this relationship. When the relationship type implies direction, it
    * goes from "persona1" to "persona2".
    */
-  public void setPersona1(PersonaReference persona1) {
+  public void setPersona1(ResourceReference persona1) {
     this.persona1 = persona1;
   }
 
@@ -162,7 +163,7 @@ public class Relationship {
    * the other persona in this relationship. When the relationship type implies direction, it
    * goes from "persona1" to "persona2".
    */
-  public PersonaReference getPersona2() {
+  public ResourceReference getPersona2() {
     return this.persona2;
   }
 
@@ -175,7 +176,7 @@ public class Relationship {
    * the other persona in this relationship. When the relationship type implies direction, it
    * goes from "persona1" to "persona2".
    */
-  public void setPersona2(PersonaReference persona2) {
+  public void setPersona2(ResourceReference persona2) {
     this.persona2 = persona2;
   }
 

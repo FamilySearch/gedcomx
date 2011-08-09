@@ -3,7 +3,8 @@ package org.gedcomx.conclusion;
 import org.gedcomx.attribution.Attribution;
 import org.gedcomx.common.AlternateId;
 import org.gedcomx.common.Extension;
-import org.gedcomx.source.SourceReference;
+import org.gedcomx.common.ResourceReference;
+import org.gedcomx.common.SourceReference;
 import org.gedcomx.types.RelationshipType;
 import org.testng.annotations.Test;
 
@@ -56,9 +57,9 @@ public class TestRelationship {
     relationship.setExtension(new Extension());
     relationship.setId("relationship");
     relationship.setPersistentId(URI.create("urn:pid"));
-    relationship.setPerson1(new PersonReference());
+    relationship.setPerson1(new ResourceReference());
     relationship.getPerson1().setHref(URI.create("urn:person1"));
-    relationship.setPerson2(new PersonReference());
+    relationship.setPerson2(new ResourceReference());
     relationship.getPerson2().setHref(URI.create("urn:person2"));
     SourceReference sourceReference = new SourceReference();
     sourceReference.setId("source-ref");

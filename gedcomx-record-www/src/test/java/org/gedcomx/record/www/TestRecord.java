@@ -1,15 +1,13 @@
 package org.gedcomx.record.www;
 
 import org.gedcomx.attribution.Attribution;
-import org.gedcomx.attribution.ContributorReference;
-import org.gedcomx.common.AlternateId;
-import org.gedcomx.common.Extension;
+import org.gedcomx.common.*;
 import org.gedcomx.record.*;
 import org.gedcomx.record.Record;
 import org.gedcomx.record.Relationship;
-import org.gedcomx.source.SourceQualifier;
-import org.gedcomx.source.SourceQualifierAttribute;
-import org.gedcomx.source.SourceReference;
+import org.gedcomx.common.SourceQualifier;
+import org.gedcomx.common.SourceQualifierAttribute;
+import org.gedcomx.common.SourceReference;
 import org.gedcomx.types.*;
 import org.gedcomx.www.Link;
 import org.testng.annotations.Test;
@@ -129,7 +127,7 @@ public class TestRecord {
     eventRole.setAttribution(new Attribution());
     eventRole.getAttribution().setExplanation("event role explanation");
     eventRole.setPrincipal(false);
-    eventRole.setEvent(new EventReference());
+    eventRole.setEvent(new ResourceReference());
     eventRole.getEvent().setHref(URI.create("#" + event.getId()));
     eventRoles.add(eventRole);
     persona.setEventRoles(eventRoles);
@@ -139,7 +137,7 @@ public class TestRecord {
     List<org.gedcomx.record.RecordField> fields = new ArrayList<org.gedcomx.record.RecordField>();
     RecordField field = new RecordField();
     field.setAttribution(new Attribution());
-    field.getAttribution().setContributor(new ContributorReference());
+    field.getAttribution().setContributor(new ResourceReference());
     field.getAttribution().getContributor().setHref(URI.create("urn:field-attribution"));
     field.setId("field-id");
     field.setKnownType(FieldType.batch_number);
@@ -165,16 +163,16 @@ public class TestRecord {
     coupleCharacteristics.add(coupleCharacteristic);
     coupleRelationship.setCharacteristics(coupleCharacteristics);
     coupleRelationship.setId("couple-relationship-id");
-    coupleRelationship.setPersona1(new PersonaReference());
+    coupleRelationship.setPersona1(new ResourceReference());
     coupleRelationship.getPersona1().setHref(URI.create("#" + persona.getId()));
-    coupleRelationship.setPersona2(new PersonaReference());
+    coupleRelationship.setPersona2(new ResourceReference());
     coupleRelationship.getPersona2().setHref(URI.create("#" + persona.getId()));
     relationships.add(coupleRelationship);
     Relationship parentRelationship = new Relationship();
     parentRelationship.setId("parent-relationship-id");
-    parentRelationship.setPersona1(new PersonaReference());
+    parentRelationship.setPersona1(new ResourceReference());
     parentRelationship.getPersona1().setHref(URI.create("#" + persona.getId()));
-    parentRelationship.setPersona2(new PersonaReference());
+    parentRelationship.setPersona2(new ResourceReference());
     parentRelationship.getPersona2().setHref(URI.create("#" + persona.getId()));
     relationships.add(parentRelationship);
 
@@ -199,7 +197,7 @@ public class TestRecord {
 
   private void fillInField(Field field, String label) {
     field.setAttribution(new Attribution());
-    field.getAttribution().setContributor(new ContributorReference());
+    field.getAttribution().setContributor(new ResourceReference());
     field.getAttribution().getContributor().setHref(URI.create("urn:" + label + "-attribution"));
     field.setLabel(label + "-field-id");
     field.setId(label + "-id");
