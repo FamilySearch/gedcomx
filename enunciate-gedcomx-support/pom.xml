@@ -27,6 +27,11 @@
     </dependency>
     <dependency>
       <groupId>org.codehaus.enunciate</groupId>
+      <artifactId>enunciate-docs</artifactId>
+      <version>${enunciate.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.enunciate</groupId>
       <artifactId>enunciate-obj-c</artifactId>
       <version>${enunciate.version}</version>
     </dependency>
