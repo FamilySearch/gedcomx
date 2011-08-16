@@ -16,19 +16,21 @@
 package org.gedcomx.metadata.dc;
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
-import org.codehaus.jackson.annotate.JsonIgnore
-;
 import org.codehaus.enunciate.json.JsonName;
+import org.codehaus.enunciate.qname.XmlQNameEnumRef;
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
+import org.gedcomx.metadata.rdf.RDFDescription;
 import org.gedcomx.metadata.rdf.RDFLiteral;
 import org.gedcomx.metadata.rdf.RDFValue;
-import org.gedcomx.metadata.rdf.RDFDescription;
 import org.gedcomx.rt.XmlTypeIdResolver;
 
+import javax.xml.XMLConstants;
+import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.namespace.QName;
+import java.net.URI;
 import java.util.Date;
 import java.util.List;
 
@@ -99,7 +101,7 @@ public class DublinCoreDescription extends RDFDescription {
   private RDFValue tableOfContents;
   private List<RDFValue> temporal;
   private RDFLiteral title;
-  private QName type;
+  private URI type;
   private List<RDFValue> valid;
 
   /**
@@ -1269,7 +1271,9 @@ public class DublinCoreDescription extends RDFDescription {
    * To describe the file format, physical medium, or dimensions of the resource, use the Format element.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-type
    */
-  public QName getType() {
+  @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
+  @XmlQNameEnumRef(DublinCoreType.class)
+  public URI getType() {
     return type;
   }
 
@@ -1281,7 +1285,7 @@ public class DublinCoreDescription extends RDFDescription {
    * To describe the file format, physical medium, or dimensions of the resource, use the Format element.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-type
    */
-  public void setType(QName type) {
+  public void setType(URI type) {
     this.type = type;
   }
 
@@ -1293,7 +1297,7 @@ public class DublinCoreDescription extends RDFDescription {
   @XmlTransient
   @JsonIgnore
   public DublinCoreType getKnownType() {
-    return XmlQNameEnumUtil.fromQName(getType(), DublinCoreType.class);
+    return XmlQNameEnumUtil.fromURI(getType(), DublinCoreType.class);
   }
 
   /**
@@ -1303,7 +1307,7 @@ public class DublinCoreDescription extends RDFDescription {
    */
   @JsonIgnore
   public void setKnownType(DublinCoreType knownType) {
-    setType(XmlQNameEnumUtil.toQName(knownType));
+    setType(XmlQNameEnumUtil.toURI(knownType));
   }
 
   /**

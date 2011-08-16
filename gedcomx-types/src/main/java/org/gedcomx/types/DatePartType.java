@@ -18,12 +18,14 @@ package org.gedcomx.types;
 import org.codehaus.enunciate.qname.XmlQNameEnum;
 import org.codehaus.enunciate.qname.XmlUnknownQNameEnumValue;
 
-import javax.xml.namespace.QName;
+import java.net.URI;
 
 /**
  * Enumeration of standard date part types.
  */
-@XmlQNameEnum
+@XmlQNameEnum (
+  base = XmlQNameEnum.BaseType.URI
+)
 public enum DatePartType {
 
   year,
@@ -37,8 +39,8 @@ public enum DatePartType {
    *
    * @return The QName value for this enum.
    */
-  public QName toQName() {
-    return org.codehaus.enunciate.XmlQNameEnumUtil.toQName(this);
+  public URI toQNameURI() {
+    return org.codehaus.enunciate.XmlQNameEnumUtil.toURI(this);
   }
 
   /**
@@ -47,8 +49,8 @@ public enum DatePartType {
    * @param qname The qname.
    * @return The enumeration.
    */
-  public static DatePartType fromQName(QName qname) {
-    return org.codehaus.enunciate.XmlQNameEnumUtil.fromQName(qname, DatePartType.class);
+  public static DatePartType fromQName(URI qname) {
+    return org.codehaus.enunciate.XmlQNameEnumUtil.fromURI(qname, DatePartType.class);
   }
 
 }

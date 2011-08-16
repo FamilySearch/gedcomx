@@ -18,14 +18,16 @@ package org.gedcomx.types;
 import org.codehaus.enunciate.qname.XmlQNameEnum;
 import org.codehaus.enunciate.qname.XmlUnknownQNameEnumValue;
 
-import javax.xml.namespace.QName;
+import java.net.URI;
 
 /**
  * Enumeration of standard alternate id types.
  *
  * @author Ryan Heaton
  */
-@XmlQNameEnum
+@XmlQNameEnum (
+  base = XmlQNameEnum.BaseType.URI
+)
 public enum AlternateIdType {
 
   forwarded,
@@ -38,8 +40,8 @@ public enum AlternateIdType {
    *
    * @return The QName value for this enum.
    */
-  public QName toQName() {
-    return org.codehaus.enunciate.XmlQNameEnumUtil.toQName(this);
+  public URI toQNameURI() {
+    return org.codehaus.enunciate.XmlQNameEnumUtil.toURI(this);
   }
 
   /**
@@ -48,8 +50,8 @@ public enum AlternateIdType {
    * @param qname The qname.
    * @return The enumeration.
    */
-  public static AlternateIdType fromQName(QName qname) {
-    return org.codehaus.enunciate.XmlQNameEnumUtil.fromQName(qname, AlternateIdType.class);
+  public static AlternateIdType fromQNameURI(URI qname) {
+    return org.codehaus.enunciate.XmlQNameEnumUtil.fromURI(qname, AlternateIdType.class);
   }
 
 }

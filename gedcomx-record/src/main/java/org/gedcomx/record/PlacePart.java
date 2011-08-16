@@ -16,23 +16,24 @@
 package org.gedcomx.record;
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
-import org.codehaus.jackson.annotate.JsonIgnore
-;
 import org.codehaus.enunciate.qname.XmlQNameEnumRef;
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.PlacePartType;
 
+import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.namespace.QName;
+import java.net.URI;
 
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 public class PlacePart extends Field {
 
-  private QName type;
+  private URI type;
 
   /**
    * The place part type.
@@ -41,7 +42,8 @@ public class PlacePart extends Field {
    */
   @XmlAttribute
   @XmlQNameEnumRef(PlacePartType.class)
-  public QName getType() {
+  @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
+  public URI getType() {
     return type;
   }
 
@@ -50,7 +52,7 @@ public class PlacePart extends Field {
    *
    * @param type The place part type.
    */
-  public void setType(QName type) {
+  public void setType(URI type) {
     this.type = type;
   }
 
@@ -62,7 +64,7 @@ public class PlacePart extends Field {
   @XmlTransient
   @JsonIgnore
   public PlacePartType getKnownType() {
-    return XmlQNameEnumUtil.fromQName(getType(), PlacePartType.class);
+    return XmlQNameEnumUtil.fromURI(getType(), PlacePartType.class);
   }
 
   /**
@@ -72,6 +74,6 @@ public class PlacePart extends Field {
    */
   @JsonIgnore
   public void setKnownType(PlacePartType knownType) {
-    this.type = XmlQNameEnumUtil.toQName(knownType);
+    setType(XmlQNameEnumUtil.toURI(knownType));
   }
 }

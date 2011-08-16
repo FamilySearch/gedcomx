@@ -19,6 +19,7 @@ import org.codehaus.enunciate.qname.XmlQNameEnum;
 import org.codehaus.enunciate.qname.XmlUnknownQNameEnumValue;
 
 import javax.xml.namespace.QName;
+import java.net.URI;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.Set;
@@ -26,7 +27,9 @@ import java.util.Set;
 /**
  * Enumeration of standard event types.
  */
-@XmlQNameEnum
+@XmlQNameEnum (
+  base = XmlQNameEnum.BaseType.URI
+)
 public enum EventType {
 
   adoption,
@@ -90,8 +93,8 @@ public enum EventType {
    *
    * @return The QName value for this enum.
    */
-  public QName toQName() {
-    return org.codehaus.enunciate.XmlQNameEnumUtil.toQName(this);
+  public URI toQNameURI() {
+    return org.codehaus.enunciate.XmlQNameEnumUtil.toURI(this);
   }
 
   /**
@@ -100,8 +103,8 @@ public enum EventType {
    * @param qname The qname.
    * @return The enumeration.
    */
-  public static EventType fromQName(QName qname) {
-    return org.codehaus.enunciate.XmlQNameEnumUtil.fromQName(qname, EventType.class);
+  public static EventType fromQNameURI(URI qname) {
+    return org.codehaus.enunciate.XmlQNameEnumUtil.fromURI(qname, EventType.class);
   }
 
   public boolean isBirthLike() {

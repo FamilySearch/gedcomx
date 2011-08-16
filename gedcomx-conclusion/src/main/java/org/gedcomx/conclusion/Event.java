@@ -24,9 +24,12 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.rt.XmlTypeIdResolver;
 
+import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.namespace.QName;
+import java.net.URI;
 
 /**
  * An event conclusion.
@@ -38,7 +41,7 @@ import javax.xml.namespace.QName;
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 public class Event extends Conclusion {
 
-  private QName type;
+  private URI type;
   private Date date;
   private Place place;
 
@@ -49,7 +52,8 @@ public class Event extends Conclusion {
    */
   @XmlAttribute
   @XmlQNameEnumRef ( org.gedcomx.types.EventType.class)
-  public QName getType() {
+  @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
+  public URI getType() {
     return type;
   }
 
@@ -58,7 +62,7 @@ public class Event extends Conclusion {
    *
    * @param type The type of the event.
    */
-  public void setType(QName type) {
+  public void setType(URI type) {
     this.type = type;
   }
 
@@ -70,7 +74,7 @@ public class Event extends Conclusion {
   @XmlTransient
   @JsonIgnore
   public org.gedcomx.types.EventType getKnownType() {
-    return XmlQNameEnumUtil.fromQName(getType(), org.gedcomx.types.EventType.class);
+    return XmlQNameEnumUtil.fromURI(getType(), org.gedcomx.types.EventType.class);
   }
 
   /**
@@ -80,7 +84,7 @@ public class Event extends Conclusion {
    */
   @JsonIgnore
   public void setKnownType(org.gedcomx.types.EventType knownType) {
-    this.type = XmlQNameEnumUtil.toQName(knownType);
+    setType(XmlQNameEnumUtil.toURI(knownType));
   }
 
   /**

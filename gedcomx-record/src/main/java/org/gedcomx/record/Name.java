@@ -16,19 +16,16 @@
 package org.gedcomx.record;
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
-import org.codehaus.jackson.annotate.JsonIgnore
-;
 import org.codehaus.enunciate.qname.XmlQNameEnumRef;
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.NameType;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.namespace.QName;
+import javax.xml.XMLConstants;
+import javax.xml.bind.annotation.*;
+import java.net.URI;
 import java.util.List;
 
 /**
@@ -38,7 +35,7 @@ import java.util.List;
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 public class Name extends Field {
 
-  private QName type;
+  private URI type;
   private List<NamePart> parts;
 
   /**
@@ -48,7 +45,8 @@ public class Name extends Field {
    */
   @XmlAttribute
   @XmlQNameEnumRef (NameType.class)
-  public QName getType() {
+  @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
+  public URI getType() {
     return type;
   }
 
@@ -57,7 +55,7 @@ public class Name extends Field {
    *
    * @param type The type of the name.
    */
-  public void setType(QName type) {
+  public void setType(URI type) {
     this.type = type;
   }
 
@@ -69,7 +67,7 @@ public class Name extends Field {
   @XmlTransient
   @JsonIgnore
   public NameType getKnownType() {
-    return XmlQNameEnumUtil.fromQName(getType(), NameType.class);
+    return XmlQNameEnumUtil.fromURI(getType(), NameType.class);
   }
 
   /**
@@ -79,7 +77,7 @@ public class Name extends Field {
    */
   @JsonIgnore
   public void setKnownType(NameType knownType) {
-    this.type = XmlQNameEnumUtil.toQName(knownType);
+    setType(XmlQNameEnumUtil.toURI(knownType));
   }
 
   /**

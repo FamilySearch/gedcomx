@@ -18,12 +18,14 @@ package org.gedcomx.types;
 import org.codehaus.enunciate.qname.XmlQNameEnum;
 import org.codehaus.enunciate.qname.XmlUnknownQNameEnumValue;
 
-import javax.xml.namespace.QName;
+import java.net.URI;
 
 /**
  * Enumeration of standard relationship types.
  */
-@XmlQNameEnum
+@XmlQNameEnum (
+  base = XmlQNameEnum.BaseType.URI
+)
 public enum RelationshipType {
 
   couple,
@@ -36,8 +38,8 @@ public enum RelationshipType {
    *
    * @return The QName value for this enum.
    */
-  public QName toQName() {
-    return org.codehaus.enunciate.XmlQNameEnumUtil.toQName(this);
+  public URI toQNameURI() {
+    return org.codehaus.enunciate.XmlQNameEnumUtil.toURI(this);
   }
 
   /**
@@ -46,8 +48,8 @@ public enum RelationshipType {
    * @param qname The qname.
    * @return The enumeration.
    */
-  public static RelationshipType fromQName(QName qname) {
-    return org.codehaus.enunciate.XmlQNameEnumUtil.fromQName(qname, RelationshipType.class);
+  public static RelationshipType fromQNameURI(URI qname) {
+    return org.codehaus.enunciate.XmlQNameEnumUtil.fromURI(qname, RelationshipType.class);
   }
 
 }

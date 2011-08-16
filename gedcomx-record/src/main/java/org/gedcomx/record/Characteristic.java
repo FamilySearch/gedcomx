@@ -17,17 +17,18 @@ package org.gedcomx.record;
 
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
-import org.codehaus.jackson.annotate.JsonIgnore
-;
 import org.codehaus.enunciate.qname.XmlQNameEnumRef;
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.CharacteristicType;
 
+import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.namespace.QName;
+import java.net.URI;
 
 /**
  * A field specifying a characteristic about a record, persona, or relationship.
@@ -36,7 +37,7 @@ import javax.xml.namespace.QName;
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 public class Characteristic extends Field {
 
-  private QName type;
+  private URI type;
   private Date date;
   private Place place;
 
@@ -47,7 +48,8 @@ public class Characteristic extends Field {
    */
   @XmlAttribute
   @XmlQNameEnumRef (CharacteristicType.class)
-  public QName getType() {
+  @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
+  public URI getType() {
     return type;
   }
 
@@ -56,7 +58,7 @@ public class Characteristic extends Field {
    *
    * @param type The type of the characteristic.
    */
-  public void setType(QName type) {
+  public void setType(URI type) {
     this.type = type;
   }
 
@@ -68,7 +70,7 @@ public class Characteristic extends Field {
   @XmlTransient
   @JsonIgnore
   public org.gedcomx.types.CharacteristicType getKnownType() {
-    return XmlQNameEnumUtil.fromQName(getType(), org.gedcomx.types.CharacteristicType.class);
+    return XmlQNameEnumUtil.fromURI(getType(), org.gedcomx.types.CharacteristicType.class);
   }
 
   /**
@@ -78,7 +80,7 @@ public class Characteristic extends Field {
    */
   @JsonIgnore
   public void setKnownType(org.gedcomx.types.CharacteristicType knownType) {
-    this.type = XmlQNameEnumUtil.toQName(knownType);
+    setType(XmlQNameEnumUtil.toURI(knownType));
   }
 
   /**

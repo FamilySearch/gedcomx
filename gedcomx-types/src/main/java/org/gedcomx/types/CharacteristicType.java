@@ -19,13 +19,15 @@ import org.codehaus.enunciate.qname.XmlQNameEnum;
 import org.codehaus.enunciate.qname.XmlUnknownQNameEnumValue;
 
 import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.namespace.QName;
+import java.net.URI;
 import java.util.EnumSet;
 
 /**
  * Enumeration of standard characteristic types.
  */
-@XmlQNameEnum
+@XmlQNameEnum (
+  base = XmlQNameEnum.BaseType.URI
+)
 public enum CharacteristicType {
 
   age,
@@ -78,8 +80,8 @@ public enum CharacteristicType {
    *
    * @return The QName value for this enum.
    */
-  public QName toQName() {
-    return org.codehaus.enunciate.XmlQNameEnumUtil.toQName(this);
+  public URI toQNameURI() {
+    return org.codehaus.enunciate.XmlQNameEnumUtil.toURI(this);
   }
 
   /**
@@ -88,8 +90,8 @@ public enum CharacteristicType {
    * @param qname The qname.
    * @return The enumeration.
    */
-  public static CharacteristicType fromQName(QName qname) {
-    return org.codehaus.enunciate.XmlQNameEnumUtil.fromQName(qname, CharacteristicType.class);
+  public static CharacteristicType fromQNameURI(URI qname) {
+    return org.codehaus.enunciate.XmlQNameEnumUtil.fromURI(qname, CharacteristicType.class);
   }
 
   /**

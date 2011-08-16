@@ -16,10 +16,9 @@
 package org.gedcomx.record;
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
-import org.codehaus.jackson.annotate.JsonIgnore
-;
 import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.enunciate.qname.XmlQNameEnumRef;
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
@@ -33,9 +32,8 @@ import org.gedcomx.types.RecordType;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.*;
-import javax.xml.namespace.QName;
 import java.net.URI;
-import java.util.*;
+import java.util.List;
 
 /**
  * A record.
@@ -50,7 +48,7 @@ public class Record {
 
   private String id;
   private String lang;
-  private QName type;
+  private URI type;
   private URI persistentId;
   private List<AlternateId> alternateIds;
   private Attribution attribution;
@@ -90,7 +88,8 @@ public class Record {
    */
   @XmlAttribute
   @XmlQNameEnumRef(RecordType.class)
-  public QName getType() {
+  @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
+  public URI getType() {
     return type;
   }
 
@@ -99,7 +98,7 @@ public class Record {
    * 
    * @param type The type of the record.
    */
-  public void setType(QName type) {
+  public void setType(URI type) {
     this.type = type;
   }
 
@@ -111,7 +110,7 @@ public class Record {
   @XmlTransient
   @JsonIgnore
   public RecordType getKnownType() {
-    return XmlQNameEnumUtil.fromQName(getType(), RecordType.class);
+    return XmlQNameEnumUtil.fromURI(getType(), RecordType.class);
   }
 
   /**
@@ -121,7 +120,7 @@ public class Record {
    */
   @JsonIgnore
   public void setKnownType(RecordType knownType) {
-    this.type = XmlQNameEnumUtil.toQName(knownType);
+    setType(XmlQNameEnumUtil.toURI(knownType));
   }
 
   /**

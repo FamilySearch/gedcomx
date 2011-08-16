@@ -22,9 +22,11 @@ import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.AgeUnit;
 
+import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.namespace.QName;
+import java.net.URI;
 
 /**
  * A part of an age field.
@@ -35,7 +37,7 @@ import javax.xml.namespace.QName;
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 public class AgePart extends Field {
 
-  private QName units;
+  private URI units;
 
   /**
    * The units in which this age part is defined.
@@ -44,7 +46,8 @@ public class AgePart extends Field {
    */
   @XmlAttribute
   @XmlQNameEnumRef(AgeUnit.class)
-  public QName getUnits() {
+  @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
+  public URI getUnits() {
     return units;
   }
 
@@ -53,7 +56,7 @@ public class AgePart extends Field {
    *
    * @param units The units in which this age part is defined.
    */
-  public void setUnits(QName units) {
+  public void setUnits(URI units) {
     this.units = units;
   }
 
@@ -65,7 +68,7 @@ public class AgePart extends Field {
   @XmlTransient
   @JsonIgnore
   public AgeUnit getKnownUnits() {
-    return org.codehaus.enunciate.XmlQNameEnumUtil.fromQName(getUnits(), AgeUnit.class);
+    return org.codehaus.enunciate.XmlQNameEnumUtil.fromURI(getUnits(), AgeUnit.class);
   }
 
   /**
@@ -75,7 +78,7 @@ public class AgePart extends Field {
    */
   @JsonIgnore
   public void setKnownUnits(AgeUnit unit) {
-    this.units = org.codehaus.enunciate.XmlQNameEnumUtil.toQName(unit);
+    this.units = org.codehaus.enunciate.XmlQNameEnumUtil.toURI(unit);
   }
 
 }

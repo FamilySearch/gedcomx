@@ -16,17 +16,18 @@
 package org.gedcomx.record;
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
-import org.codehaus.jackson.annotate.JsonIgnore
-;
 import org.codehaus.enunciate.qname.XmlQNameEnumRef;
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.DatePartType;
 
+import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.namespace.QName;
+import java.net.URI;
 
 /**
  * A date part field.
@@ -35,7 +36,7 @@ import javax.xml.namespace.QName;
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 public class DatePart extends Field {
 
-  private QName type;
+  private URI type;
 
   /**
    * The date part type.
@@ -44,7 +45,8 @@ public class DatePart extends Field {
    */
   @XmlAttribute
   @XmlQNameEnumRef(DatePartType.class)
-  public QName getType() {
+  @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
+  public URI getType() {
     return type;
   }
 
@@ -53,7 +55,7 @@ public class DatePart extends Field {
    *
    * @param type The date part type.
    */
-  public void setType(QName type) {
+  public void setType(URI type) {
     this.type = type;
   }
 
@@ -65,7 +67,7 @@ public class DatePart extends Field {
   @XmlTransient
   @JsonIgnore
   public DatePartType getKnownType() {
-    return XmlQNameEnumUtil.fromQName(getType(), DatePartType.class);
+    return XmlQNameEnumUtil.fromURI(getType(), DatePartType.class);
   }
 
   /**
@@ -75,6 +77,6 @@ public class DatePart extends Field {
    */
   @JsonIgnore
   public void setKnownType(DatePartType knownType) {
-    this.type = XmlQNameEnumUtil.toQName(knownType);
+    setType(XmlQNameEnumUtil.toURI(knownType));
   }
 }

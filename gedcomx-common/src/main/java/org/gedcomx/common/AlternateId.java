@@ -16,14 +16,16 @@
 package org.gedcomx.common;
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
-import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.enunciate.qname.XmlQNameEnumRef;
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.gedcomx.types.AlternateIdType;
 
+import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlValue;
-import javax.xml.namespace.QName;
+import java.net.URI;
 
 /**
  * An alternate id for an entity, such as the id in another system or
@@ -34,7 +36,7 @@ import javax.xml.namespace.QName;
 public final class AlternateId {
 
   private String value;
-  private QName type;
+  private URI type;
 
   /**
    * The id value.
@@ -61,8 +63,9 @@ public final class AlternateId {
    * @return The type of the id.
    */
   @XmlAttribute
+  @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
   @XmlQNameEnumRef(AlternateIdType.class)
-  public QName getType() {
+  public URI getType() {
     return type;
   }
 
@@ -71,7 +74,7 @@ public final class AlternateId {
    *
    * @param type The type of the id.
    */
-  public void setType(QName type) {
+  public void setType(URI type) {
     this.type = type;
   }
 
@@ -83,7 +86,7 @@ public final class AlternateId {
   @XmlTransient
   @JsonIgnore
   public AlternateIdType getKnownType() {
-    return XmlQNameEnumUtil.fromQName(getType(), AlternateIdType.class);
+    return XmlQNameEnumUtil.fromURI(getType(), AlternateIdType.class);
   }
 
   /**
@@ -93,6 +96,6 @@ public final class AlternateId {
    */
   @JsonIgnore
   public void setKnownType(AlternateIdType knownType) {
-    this.type = XmlQNameEnumUtil.toQName(knownType);
+    this.type = XmlQNameEnumUtil.toURI(knownType);
   }
 }

@@ -18,12 +18,14 @@ package org.gedcomx.types;
 import org.codehaus.enunciate.qname.XmlQNameEnum;
 import org.codehaus.enunciate.qname.XmlUnknownQNameEnumValue;
 
-import javax.xml.namespace.QName;
+import java.net.URI;
 
 /**
  * Enumeration of standard lineage types.
  */
-@XmlQNameEnum
+@XmlQNameEnum (
+  base = XmlQNameEnum.BaseType.URI
+)
 public enum LineageType {
 
   @XmlUnknownQNameEnumValue
@@ -34,8 +36,8 @@ public enum LineageType {
    *
    * @return The QName value for this enum.
    */
-  public QName toQName() {
-    return org.codehaus.enunciate.XmlQNameEnumUtil.toQName(this);
+  public URI toQNameURI() {
+    return org.codehaus.enunciate.XmlQNameEnumUtil.toURI(this);
   }
 
   /**
@@ -44,8 +46,8 @@ public enum LineageType {
    * @param qname The qname.
    * @return The enumeration.
    */
-  public static LineageType fromQName(QName qname) {
-    return org.codehaus.enunciate.XmlQNameEnumUtil.fromQName(qname, LineageType.class);
+  public static LineageType fromQNameURI(URI qname) {
+    return org.codehaus.enunciate.XmlQNameEnumUtil.fromURI(qname, LineageType.class);
   }
 
 }

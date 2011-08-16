@@ -23,7 +23,10 @@ import org.gedcomx.metadata.MetadataNamespaces;
  * 
  * @author Ryan Heaton
  */
-@XmlQNameEnum (namespace = MetadataNamespaces.DUBLIN_CORE_TYPE_NAMESPACE)
+@XmlQNameEnum (
+  namespace = MetadataNamespaces.DUBLIN_CORE_TYPE_NAMESPACE,
+  base = XmlQNameEnum.BaseType.URI
+)
 public enum DublinCoreType {
 
   Collection,

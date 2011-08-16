@@ -19,6 +19,7 @@ import org.codehaus.enunciate.qname.XmlQNameEnum;
 import org.codehaus.enunciate.qname.XmlUnknownQNameEnumValue;
 
 import javax.xml.namespace.QName;
+import java.net.URI;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.Set;
@@ -26,7 +27,9 @@ import java.util.Set;
 /**
  * Enumeration of known record types.
  */
-@XmlQNameEnum
+@XmlQNameEnum (
+  base = XmlQNameEnum.BaseType.URI
+)
 public enum RecordType {
 
   // root level record types
@@ -64,8 +67,8 @@ public enum RecordType {
    *
    * @return The QName value for this enum.
    */
-  public QName toQName() {
-    return org.codehaus.enunciate.XmlQNameEnumUtil.toQName(this);
+  public URI toQNameURI() {
+    return org.codehaus.enunciate.XmlQNameEnumUtil.toURI(this);
   }
 
   /**
@@ -74,8 +77,8 @@ public enum RecordType {
    * @param qname The qname.
    * @return The enumeration.
    */
-  public static RecordType fromQName(QName qname) {
-    return org.codehaus.enunciate.XmlQNameEnumUtil.fromQName(qname, RecordType.class);
+  public static RecordType fromQNameURI(URI qname) {
+    return org.codehaus.enunciate.XmlQNameEnumUtil.fromURI(qname, RecordType.class);
   }
 
   public boolean isVital() {

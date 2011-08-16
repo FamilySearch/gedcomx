@@ -16,10 +16,9 @@
 package org.gedcomx.conclusion;
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
-import org.codehaus.jackson.annotate.JsonIgnore
-;
 import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.enunciate.qname.XmlQNameEnumRef;
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
@@ -33,7 +32,6 @@ import org.gedcomx.types.RelationshipType;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.*;
-import javax.xml.namespace.QName;
 import java.net.URI;
 import java.util.List;
 
@@ -51,7 +49,7 @@ import java.util.List;
 public class Relationship {
 
   private String id;
-  private QName type;
+  private URI type;
   private URI persistentId;
   private List<AlternateId> alternateIds;
   private ResourceReference person1;
@@ -90,7 +88,8 @@ public class Relationship {
    */
   @XmlAttribute
   @XmlQNameEnumRef (RelationshipType.class)
-  public QName getType() {
+  @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
+  public URI getType() {
     return type;
   }
 
@@ -99,7 +98,7 @@ public class Relationship {
    *
    * @param type The type of this relationship.
    */
-  public void setType(QName type) {
+  public void setType(URI type) {
     this.type = type;
   }
 
@@ -111,7 +110,7 @@ public class Relationship {
   @XmlTransient
   @JsonIgnore
   public RelationshipType getKnownType() {
-    return XmlQNameEnumUtil.fromQName(getType(), RelationshipType.class);
+    return XmlQNameEnumUtil.fromURI(getType(), RelationshipType.class);
   }
 
   /**
@@ -121,7 +120,7 @@ public class Relationship {
    */
   @JsonIgnore
   public void setKnownType(RelationshipType type) {
-    this.type = XmlQNameEnumUtil.toQName(type);
+    setType(XmlQNameEnumUtil.toURI(type));
   }
 
   /**

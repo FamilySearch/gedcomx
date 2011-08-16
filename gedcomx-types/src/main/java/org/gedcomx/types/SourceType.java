@@ -19,11 +19,14 @@ import org.codehaus.enunciate.qname.XmlQNameEnum;
 import org.codehaus.enunciate.qname.XmlUnknownQNameEnumValue;
 
 import javax.xml.namespace.QName;
+import java.net.URI;
 
 /**
  * Enumeration of known source types.
  */
-@XmlQNameEnum
+@XmlQNameEnum (
+  base = XmlQNameEnum.BaseType.URI
+)
 public enum SourceType {
 
   record,
@@ -40,8 +43,8 @@ public enum SourceType {
    *
    * @return The QName value for this enum.
    */
-  public QName toQName() {
-    return org.codehaus.enunciate.XmlQNameEnumUtil.toQName(this);
+  public URI toQNameURI() {
+    return org.codehaus.enunciate.XmlQNameEnumUtil.toURI(this);
   }
 
   /**
@@ -50,8 +53,8 @@ public enum SourceType {
    * @param qname The qname.
    * @return The enumeration.
    */
-  public static SourceType fromQName(QName qname) {
-    return org.codehaus.enunciate.XmlQNameEnumUtil.fromQName(qname, SourceType.class);
+  public static SourceType fromQNameURI(URI qname) {
+    return org.codehaus.enunciate.XmlQNameEnumUtil.fromURI(qname, SourceType.class);
   }
 
 }

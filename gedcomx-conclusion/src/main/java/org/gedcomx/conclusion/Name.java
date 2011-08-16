@@ -16,18 +16,18 @@
 package org.gedcomx.conclusion;
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
-import org.codehaus.jackson.annotate.JsonIgnore
-;
 import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.enunciate.qname.XmlQNameEnumRef;
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.NameType;
 
+import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.*;
-import javax.xml.namespace.QName;
+import java.net.URI;
 import java.util.List;
 
 /**
@@ -40,7 +40,7 @@ import java.util.List;
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 public class Name extends Conclusion {
 
-  private QName type;
+  private URI type;
   private NameForm primaryForm;
   private List<NameForm> alternateForms;
 
@@ -51,7 +51,8 @@ public class Name extends Conclusion {
    */
   @XmlAttribute
   @XmlQNameEnumRef (NameType.class)
-  public QName getType() {
+  @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
+  public URI getType() {
     return type;
   }
 
@@ -60,7 +61,7 @@ public class Name extends Conclusion {
    *
    * @param type The type of the name.
    */
-  public void setType(QName type) {
+  public void setType(URI type) {
     this.type = type;
   }
 
@@ -72,7 +73,7 @@ public class Name extends Conclusion {
   @XmlTransient
   @JsonIgnore
   public NameType getKnownType() {
-    return XmlQNameEnumUtil.fromQName(getType(), NameType.class);
+    return XmlQNameEnumUtil.fromURI(getType(), NameType.class);
   }
 
   /**
@@ -82,7 +83,7 @@ public class Name extends Conclusion {
    */
   @JsonIgnore
   public void setKnownType(NameType knownType) {
-    this.type = XmlQNameEnumUtil.toQName(knownType);
+    setType(XmlQNameEnumUtil.toURI(knownType));
   }
 
   /**

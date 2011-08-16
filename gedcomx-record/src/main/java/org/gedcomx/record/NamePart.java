@@ -16,17 +16,18 @@
 package org.gedcomx.record;
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
-import org.codehaus.jackson.annotate.JsonIgnore
-;
 import org.codehaus.enunciate.qname.XmlQNameEnumRef;
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.NamePartType;
 
+import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.namespace.QName;
+import java.net.URI;
 
 /**
  * A part of a name.
@@ -35,7 +36,7 @@ import javax.xml.namespace.QName;
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 public class NamePart extends Field {
 
-  private QName type;
+  private URI type;
 
   /**
    * The type of the name part.
@@ -44,7 +45,8 @@ public class NamePart extends Field {
    */
   @XmlAttribute
   @XmlQNameEnumRef (NamePartType.class)
-  public QName getType() {
+  @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
+  public URI getType() {
     return type;
   }
 
@@ -53,7 +55,7 @@ public class NamePart extends Field {
    *
    * @param type The type of the name part.
    */
-  public void setType(QName type) {
+  public void setType(URI type) {
     this.type = type;
   }
 
@@ -65,7 +67,7 @@ public class NamePart extends Field {
   @XmlTransient
   @JsonIgnore
   public NamePartType getKnownType() {
-    return XmlQNameEnumUtil.fromQName(getType(), NamePartType.class);
+    return XmlQNameEnumUtil.fromURI(getType(), NamePartType.class);
   }
 
   /**
@@ -75,7 +77,7 @@ public class NamePart extends Field {
    */
   @JsonIgnore
   public void setKnownType(NamePartType knownType) {
-    this.type = XmlQNameEnumUtil.toQName(knownType);
+    setType(XmlQNameEnumUtil.toURI(knownType));
   }
 
 }

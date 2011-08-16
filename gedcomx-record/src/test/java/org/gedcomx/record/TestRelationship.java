@@ -7,6 +7,8 @@ import org.w3c.dom.Document;
 
 import javax.xml.namespace.QName;
 
+import java.net.URI;
+
 import static org.gedcomx.rt.SerializationUtil.toJsonNode;
 import static org.gedcomx.rt.SerializationUtil.toXmlDom;
 import static org.testng.AssertJUnit.*;
@@ -30,7 +32,7 @@ public class TestRelationship {
     
     Relationship or = new Relationship();
     or.setId("id");
-    or.setType(new QName("urn:custom", "custom"));
+    or.setType(URI.create("urn:custom#custom"));
     dom = toXmlDom(or);
     assertNotNull(dom.getDocumentElement().getAttributeNode("type"));
     assertEquals(0, dom.getDocumentElement().getElementsByTagName("type").getLength());

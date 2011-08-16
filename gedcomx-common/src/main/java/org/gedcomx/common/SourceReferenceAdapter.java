@@ -18,6 +18,7 @@ package org.gedcomx.common;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 import javax.xml.namespace.QName;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -49,9 +50,7 @@ public class SourceReferenceAdapter extends XmlAdapter<ResourceReference, Source
     }
     if (sourceReference.getType() != null) {
       //use rdf:datatype to identify the type.
-      QName type = sourceReference.getType();
-      String typeUri = String.format("%s#%s", type.getNamespaceURI(), type.getLocalPart()); //todo: verify the QName to URI conversion (see issue #57)
-      otherAttributes.put(DATATYPE_ATTRIBUTE_NAME, typeUri);
+      otherAttributes.put(DATATYPE_ATTRIBUTE_NAME, sourceReference.getType().toString());
     }
     if (sourceReference.getQualifiers() != null) {
       for (SourceQualifier qualifier : sourceReference.getQualifiers()) {
@@ -86,15 +85,7 @@ public class SourceReferenceAdapter extends XmlAdapter<ResourceReference, Source
           sourceReference.setId(attribute.getValue());
         }
         else if (DATATYPE_ATTRIBUTE_NAME.equals(attribute.getKey())) {
-          String typeValue = attribute.getValue();
-          int lastHash = typeValue.lastIndexOf('#');
-          String localPart = typeValue;
-          String namespaceUri = "";
-          if (lastHash >= 0) {
-            localPart = typeValue.substring(lastHash + 1);
-            namespaceUri = typeValue.substring(0, lastHash);
-          }
-          sourceReference.setType(new QName(namespaceUri, localPart));
+          sourceReference.setType(URI.create(attribute.getValue()));
         }
         else {
           //todo: what to do with other custom attributes?

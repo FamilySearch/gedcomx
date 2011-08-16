@@ -16,10 +16,9 @@
 package org.gedcomx.common;
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
-import org.codehaus.jackson.annotate.JsonIgnore
-;
 import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.enunciate.qname.XmlQNameEnumRef;
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
@@ -28,7 +27,6 @@ import org.gedcomx.types.SourceType;
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import javax.xml.namespace.QName;
 import java.net.URI;
 import java.util.List;
 
@@ -44,7 +42,7 @@ public final class SourceReference {
 
   private String id;
   private URI href;
-  private QName type;
+  private URI type;
   private List<SourceQualifier> qualifiers;
   private Extension extension;
 
@@ -95,7 +93,8 @@ public final class SourceReference {
    */
   @XmlAttribute
   @XmlQNameEnumRef (SourceType.class)
-  public QName getType() {
+  @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
+  public URI getType() {
     return type;
   }
 
@@ -104,7 +103,7 @@ public final class SourceReference {
    *
    * @param type The type of the source reference.
    */
-  public void setType(QName type) {
+  public void setType(URI type) {
     this.type = type;
   }
 
@@ -116,7 +115,7 @@ public final class SourceReference {
   @XmlTransient
   @JsonIgnore
   public SourceType getKnownType() {
-    return XmlQNameEnumUtil.fromQName(getType(), SourceType.class);
+    return XmlQNameEnumUtil.fromURI(getType(), SourceType.class);
   }
 
   /**
@@ -126,7 +125,7 @@ public final class SourceReference {
    */
   @JsonIgnore
   public void setKnownType(SourceType knownType) {
-    this.type = XmlQNameEnumUtil.toQName(knownType);
+    setType(XmlQNameEnumUtil.toURI(knownType));
   }
 
   /**
