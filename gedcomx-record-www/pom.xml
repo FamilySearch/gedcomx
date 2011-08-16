@@ -46,9 +46,10 @@
       <artifactId>gedcomx-record</artifactId>
       <version>0.4.0.BUILD-SNAPSHOT</version>
     </dependency>
+
     <dependency>
       <groupId>org.gedcomx</groupId>
-      <artifactId>gedcomx-source-www</artifactId>
+      <artifactId>gedcomx-www</artifactId>
       <version>0.4.0.BUILD-SNAPSHOT</version>
     </dependency>
 
