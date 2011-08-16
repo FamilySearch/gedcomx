@@ -39,7 +39,7 @@ public class ConclusionWWWNamespaces {
 
   private ConclusionWWWNamespaces() {}
 
-  public static final String GEDCOMX_CONCLUSION_WWW_NAMESPACE = "http://gedcomx.org/conclusion/www/v1";
+  public static final String GEDCOMX_CONCLUSION_WWW_NAMESPACE = "http://gedcomx.org/conclusion/www/v1/";
   public static final String GEDCOMX_CONCLUSION_WWW_XML_MEDIA_TYPE = "application/x-gedcom-conclusion-www-v1+xml";
   public static final String GEDCOMX_CONCLUSION_WWW_JSON_MEDIA_TYPE = "application/x-gedcom-conclusion-www-v1+json";
 

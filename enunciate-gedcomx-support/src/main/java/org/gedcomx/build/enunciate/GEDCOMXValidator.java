@@ -140,6 +140,9 @@ public class GEDCOMXValidator extends BaseValidator {
     if ("".equals(typeDef.getNamespace())) {
       result.addError(typeDef, "Type definition should not be in the empty namespace.");
     }
+    else if (!typeDef.getNamespace().endsWith("/") && !typeDef.getNamespace().endsWith("#")) {
+      result.addError(typeDef, "The namespace of type definitions should end with a '/' or a '#' in order to provide for defining them in terms of RDF Schema.");
+    }
 
     if (typeDef.getName().toLowerCase().startsWith("web")) {
       result.addWarning(typeDef, "You probably don't want a type definition that starts with the name 'web'. Consider renaming using the @XmlType annotation.");

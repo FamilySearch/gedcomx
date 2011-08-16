@@ -39,7 +39,7 @@ public class WWWNamespaces {
 
   private WWWNamespaces() {}
 
-  public static final String GEDCOMX_WWW_NAMESPACE = "http://gedcomx.org/www/v1";
+  public static final String GEDCOMX_WWW_NAMESPACE = "http://gedcomx.org/www/v1/";
   public static final String GEDCOMX_WWW_XML_MEDIA_TYPE = "application/gedcomx-www-v1+xml";
   public static final String GEDCOMX_WWW_JSON_MEDIA_TYPE = "application/gedcomx-www-v1+json";
 }

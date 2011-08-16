@@ -39,7 +39,7 @@ public class RecordWWWNamespaces {
 
   private RecordWWWNamespaces() {}
 
-  public static final String GEDCOMX_RECORD_WWW_NAMESPACE = "http://gedcomx.org/record/www/v1";
+  public static final String GEDCOMX_RECORD_WWW_NAMESPACE = "http://gedcomx.org/record/www/v1/";
   public static final String GEDCOMX_RECORD_WWW_XML_MEDIA_TYPE = "application/x-gedcom-record-www-v1+xml";
   public static final String GEDCOMX_RECORD_WWW_JSON_MEDIA_TYPE = "application/x-gedcom-record-www-v1+json";
 

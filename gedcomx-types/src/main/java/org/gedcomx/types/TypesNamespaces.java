@@ -37,6 +37,6 @@ public class TypesNamespaces {
 
   private TypesNamespaces() {}
 
-  public static final String GEDCOMX_TYPES_NAMESPACE = "http://gedcomx.org/types";
+  public static final String GEDCOMX_TYPES_NAMESPACE = "http://gedcomx.org/types/";
 
 }

@@ -41,7 +41,7 @@ public class AttributionNamespaces {
 
   private AttributionNamespaces() {}
 
-  public static final String GEDCOMX_ATTRIBUTION_NAMESPACE = "http://gedcomx.org/attribution/v1";
+  public static final String GEDCOMX_ATTRIBUTION_NAMESPACE = "http://gedcomx.org/attribution/v1/";
   public static final String GEDCOMX_ATTRIBUTION_XML_MEDIA_TYPE = "application/x-gedcom-attribution-v1+xml";
   public static final String GEDCOMX_ATTRIBUTION_JSON_MEDIA_TYPE = "application/x-gedcom-attribution-v1+json";
 

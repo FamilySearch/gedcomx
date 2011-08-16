@@ -41,7 +41,7 @@ public class ConclusionNamespaces {
 
   private ConclusionNamespaces() {}
 
-  public static final String GEDCOMX_CONCLUSION_NAMESPACE = "http://gedcomx.org/conclusion/v1";
+  public static final String GEDCOMX_CONCLUSION_NAMESPACE = "http://gedcomx.org/conclusion/v1/";
   public static final String GEDCOMX_CONCLUSION_XML_MEDIA_TYPE = "application/x-gedcom-conclusion-v1+xml";
   public static final String GEDCOMX_CONCLUSION_JSON_MEDIA_TYPE = "application/x-gedcom-conclusion-v1+json";
 
