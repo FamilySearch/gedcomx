@@ -90,7 +90,7 @@ public class XmlTypeIdResolver implements TypeIdResolver {
       }
     }
 
-    return new QName(ns, name).toString();
+    return new StringBuilder(ns).append(name).toString();
   }
 
 }
