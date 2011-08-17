@@ -178,7 +178,9 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
       info("Found namespaces declaration at %s.", namespacesDeclaration.getQualifiedName());
       Namespaces namespacesInfo = namespacesDeclaration.getAnnotation(Namespaces.class);
       for (Namespace ns : namespacesInfo.value()) {
+        String id = ns.id();
         SchemaInfo schemaInfo = model.getNamespacesToSchemas().get(ns.uri());
+        model.getNamespacesToPrefixes().put(ns.uri(), id);
         if (schemaInfo != null) {
           String version = ns.version();
 
@@ -220,7 +222,6 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
           }
           schemaInfo.setProperty("jsonMediaType", jsonMediaType);
 
-          String id = ns.id();
           schemaInfo.setId(id);
           String previousNamespace = prefix_version_to_ns.put(id + version, schemaInfo.getNamespace());
           if (previousNamespace != null && !previousNamespace.equals(schemaInfo.getNamespace())) {
@@ -229,8 +230,6 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
               String.format("%s: %s version %s is already being used by namespace %s.", namespacesDeclaration.getQualifiedName(), id, version, previousNamespace);
             throw new ValidationException(namespacesDeclaration.getPosition(), message);
           }
-
-          model.getNamespacesToPrefixes().put(schemaInfo.getNamespace(), id);
 
           String label = ns.label();
           if ("".equals(label)) {

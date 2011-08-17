@@ -1,6 +1,6 @@
 package org.gedcomx.common;
 
-import org.gedcomx.types.SourceType;
+import org.gedcomx.types.ResourceType;
 import org.testng.annotations.Test;
 
 import java.net.URI;
@@ -22,7 +22,7 @@ public class TestSourceReference {
   public void testSourceReferenceXml() throws Exception {
     ResourceReference reference = new ResourceReference();
     reference.setHref(URI.create("urn:someid"));
-    reference.setKnownType(SourceType.collection);
+    reference.setKnownType(ResourceType.Collection);
     reference.setId("refid");
     reference.setOtherElements(new ArrayList<Object>());
     reference.getOtherElements().add(new CustomElement("alt"));
@@ -30,7 +30,7 @@ public class TestSourceReference {
     custom.setSource(reference);
     custom = processThroughXml(custom);
     assertEquals("urn:someid", custom.getSource().getHref().toString());
-    assertEquals(SourceType.collection, custom.getSource().getKnownType());
+    assertEquals(ResourceType.Collection, custom.getSource().getKnownType());
     assertEquals("refid", custom.getSource().getId());
     assertEquals("alt", ((CustomElement) custom.getSource().getOtherElements().get(0)).getId());
   }
@@ -41,7 +41,7 @@ public class TestSourceReference {
   public void testSourceReferenceJson() throws Exception {
     ResourceReference reference = new ResourceReference();
     reference.setHref(URI.create("urn:someid"));
-    reference.setKnownType(SourceType.collection);
+    reference.setKnownType(ResourceType.Collection);
     reference.setId("refid");
     reference.setOtherElements(new ArrayList<Object>());
     reference.getOtherElements().add(new CustomElement("alt"));
@@ -49,7 +49,7 @@ public class TestSourceReference {
     custom.setSource(reference);
     custom = processThroughJson(custom);
     assertEquals("urn:someid", custom.getSource().getHref().toString());
-    assertEquals(SourceType.collection, custom.getSource().getKnownType());
+    assertEquals(ResourceType.Collection, custom.getSource().getKnownType());
     assertEquals("refid", custom.getSource().getId());
     assertEquals("alt", ((CustomElement) custom.getSource().getOtherElements().get(0)).getId());
   }

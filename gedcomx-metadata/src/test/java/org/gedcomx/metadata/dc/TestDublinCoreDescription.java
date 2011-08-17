@@ -1,7 +1,9 @@
 package org.gedcomx.metadata.dc;
 
 import org.gedcomx.metadata.rdf.RDFLiteral;
+import org.gedcomx.metadata.rdf.RDFTypeReference;
 import org.gedcomx.metadata.rdf.RDFValue;
+import org.gedcomx.types.ResourceType;
 import org.testng.annotations.Test;
 
 import javax.xml.namespace.QName;
@@ -104,7 +106,8 @@ public class TestDublinCoreDescription {
     titleProperty.setOtherAttributes(new HashMap<QName, String>());
     titleProperty.getOtherAttributes().put(new QName("urn:hi", "hi"), "hello");
     metadata.setTitle(titleProperty);
-    metadata.setKnownType(DublinCoreType.Event);
+    metadata.setType(new RDFTypeReference());
+    metadata.getType().setKnownType(ResourceType.Event);
     metadata.setValid(new ArrayList<RDFValue>());
     metadata.setVersionOf(new RDFValue());
     return metadata;
@@ -170,7 +173,7 @@ public class TestDublinCoreDescription {
     assertEquals("title", titleProperty.getValue());
     assertEquals("en", titleProperty.getLang());
     assertEquals("hello", titleProperty.getOtherAttributes().get(new QName("urn:hi", "hi")));
-    assertEquals(DublinCoreType.Event, metadata.getKnownType());
+    assertEquals(ResourceType.Event, metadata.getType().getKnownType());
     assertTrue(metadata.getValid() == null || metadata.getValid().isEmpty());
     assertTrue(metadata.getVersionOf() != null);
   }

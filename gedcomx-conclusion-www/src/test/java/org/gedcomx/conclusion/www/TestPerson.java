@@ -148,7 +148,7 @@ public class TestPerson {
     attribution.getContributor().setHref(URI.create("urn:source-reference-attribution"));
     attributedSourceReference.setHref(URI.create("urn:source-uri"));
     attributedSourceReference.setId("source-reference-id");
-    attributedSourceReference.setKnownType(SourceType.collection);
+    attributedSourceReference.setKnownType(ResourceType.Collection);
     sources.add(attributedSourceReference);
     person.setSources(sources);
 
@@ -221,7 +221,7 @@ public class TestPerson {
     assertEquals("urn:source-reference-attribution", ((Attribution) attributedSourceReference.getOtherElements().iterator().next()).getContributor().getHref().toString());
     assertEquals("urn:source-uri", attributedSourceReference.getHref().toString());
     assertEquals("source-reference-id", attributedSourceReference.getId());
-    assertEquals(SourceType.collection, attributedSourceReference.getKnownType());
+    assertEquals(ResourceType.Collection, attributedSourceReference.getKnownType());
 
     assertEquals("pid", person.getId());
   }

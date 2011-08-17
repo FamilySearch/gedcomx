@@ -25,7 +25,7 @@ import org.gedcomx.rt.AnyAttributeSerializer;
 import org.gedcomx.rt.AnyElementDeserializer;
 import org.gedcomx.rt.AnyElementSerializer;
 import org.gedcomx.types.ResourceFragmentParameter;
-import org.gedcomx.types.SourceType;
+import org.gedcomx.types.ResourceType;
 import org.gedcomx.types.TypesNamespaces;
 
 import javax.xml.XMLConstants;
@@ -75,7 +75,7 @@ public final class ResourceReference {
    * @return The type of the resource reference.
    */
   @XmlAttribute
-  @XmlQNameEnumRef (SourceType.class)
+  @XmlQNameEnumRef (ResourceType.class)
   @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
   public URI getType() {
     return type;
@@ -157,14 +157,14 @@ public final class ResourceReference {
   }
 
   /**
-   * The enum referencing the known type of the source reference, or {@link org.gedcomx.types.SourceType#other} if not known.
+   * The enum referencing the known type of the resource being referenced, or {@link org.gedcomx.types.ResourceType#other} if not known.
    *
-   * @return The enum referencing the known type of the source reference, or {@link org.gedcomx.types.SourceType#other} if not known.
+   * @return The enum referencing the known type of the source reference, or {@link org.gedcomx.types.ResourceType#other} if not known.
    */
   @XmlTransient
   @JsonIgnore
-  public SourceType getKnownType() {
-    return XmlQNameEnumUtil.fromURI(getType(), SourceType.class);
+  public ResourceType getKnownType() {
+    return XmlQNameEnumUtil.fromURI(getType(), ResourceType.class);
   }
 
   /**
@@ -173,7 +173,7 @@ public final class ResourceReference {
    * @param knownType The source reference type.
    */
   @JsonIgnore
-  public void setKnownType(SourceType knownType) {
+  public void setKnownType(ResourceType knownType) {
     setType(XmlQNameEnumUtil.toURI(knownType));
   }
 }

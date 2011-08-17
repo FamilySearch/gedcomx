@@ -15,22 +15,18 @@
  */
 package org.gedcomx.metadata.dc;
 
-import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.enunciate.json.JsonName;
-import org.codehaus.enunciate.qname.XmlQNameEnumRef;
-import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.metadata.rdf.RDFDescription;
 import org.gedcomx.metadata.rdf.RDFLiteral;
+import org.gedcomx.metadata.rdf.RDFTypeReference;
 import org.gedcomx.metadata.rdf.RDFValue;
 import org.gedcomx.rt.XmlTypeIdResolver;
+import org.gedcomx.types.TypesNamespaces;
 
-import javax.xml.XMLConstants;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlTransient;
-import java.net.URI;
+import javax.xml.bind.annotation.XmlElement;
 import java.util.Date;
 import java.util.List;
 
@@ -101,7 +97,7 @@ public class DublinCoreDescription extends RDFDescription {
   private RDFValue tableOfContents;
   private List<RDFValue> temporal;
   private RDFLiteral title;
-  private URI type;
+  private RDFTypeReference type;
   private List<RDFValue> valid;
 
   /**
@@ -1265,49 +1261,32 @@ public class DublinCoreDescription extends RDFDescription {
 
   /**
    * The nature or genre of the resource. Recommended best practice is to use a controlled vocabulary such as the DCMI Type Vocabulary [DCMITYPE]. To
-   * describe the file format, physical medium, or dimensions of the resource, use the Format element.
+   * describe the file format, physical medium, or dimensions of the resource, use the Format element. Per the recommendation in
+   * <a href="http://dublincore.org/documents/2008/01/14/dc-rdf/#sect-5">Expressing Dublin Core in RDF, Section 5.2</a>, this
+   * element is declared in the 'rdf' namespace.
    *
    * @return The nature or genre of the resource. Recommended best practice is to use a controlled vocabulary such as the DCMI Type Vocabulary [DCMITYPE].
    * To describe the file format, physical medium, or dimensions of the resource, use the Format element.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-type
    */
-  @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
-  @XmlQNameEnumRef(DublinCoreType.class)
-  public URI getType() {
+  @XmlElement(name = "type", namespace = TypesNamespaces.RDF_NAMESPACE )
+  public RDFTypeReference getType() {
     return type;
   }
 
   /**
    * The nature or genre of the resource. Recommended best practice is to use a controlled vocabulary such as the DCMI Type Vocabulary [DCMITYPE]. To
-   * describe the file format, physical medium, or dimensions of the resource, use the Format element.
+   * describe the file format, physical medium, or dimensions of the resource, use the Format element. Per the recommendation in
+   * <a href="http://dublincore.org/documents/2008/01/14/dc-rdf/#sect-5">Expressing Dublin Core in RDF, Section 5.2</a>, this
+   * element is declared in the 'rdf' namespace.
    *
    * @param type The nature or genre of the resource. Recommended best practice is to use a controlled vocabulary such as the DCMI Type Vocabulary [DCMITYPE].
    * To describe the file format, physical medium, or dimensions of the resource, use the Format element.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-type
+   * @link http://dublincore.org/documents/2008/01/14/dc-rdf/#sect-5
    */
-  public void setType(URI type) {
+  public void setType(RDFTypeReference type) {
     this.type = type;
-  }
-
-  /**
-   * Get the type from an enumeration of known types, or null if unknown.
-   *
-   * @return The type from an enumeration of known types, or null if unknown.
-   */
-  @XmlTransient
-  @JsonIgnore
-  public DublinCoreType getKnownType() {
-    return XmlQNameEnumUtil.fromURI(getType(), DublinCoreType.class);
-  }
-
-  /**
-   * Set the type from a known enumeration of Dublin Core types.
-   *
-   * @param knownType The type.
-   */
-  @JsonIgnore
-  public void setKnownType(DublinCoreType knownType) {
-    setType(XmlQNameEnumUtil.toURI(knownType));
   }
 
   /**

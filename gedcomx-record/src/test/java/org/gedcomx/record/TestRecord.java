@@ -1,7 +1,7 @@
 package org.gedcomx.record;
 
 import org.gedcomx.attribution.Attribution;
-import org.gedcomx.common.*;
+import org.gedcomx.common.AlternateId;
 import org.gedcomx.common.ResourceReference;
 import org.gedcomx.types.*;
 import org.testng.annotations.Test;
@@ -182,7 +182,7 @@ public class TestRecord {
     ResourceReference sourceReference = new ResourceReference();
     sourceReference.setHref(URI.create("urn:source-uri"));
     sourceReference.setId("source-reference-id");
-    sourceReference.setKnownType(SourceType.collection);
+    sourceReference.setKnownType(ResourceType.Collection);
     sources.add(sourceReference);
     record.setSources(sources);
 
@@ -312,7 +312,7 @@ public class TestRecord {
     ResourceReference sourceReference = record.getSources().get(0);
     assertEquals("urn:source-uri", sourceReference.getHref().toString());
     assertEquals("source-reference-id", sourceReference.getId());
-    assertEquals(SourceType.collection, sourceReference.getKnownType());
+    assertEquals(ResourceType.Collection, sourceReference.getKnownType());
 
     assertEquals(URI.create("urn:collection-ref"), record.getCollection().getHref());
     assertEquals("rid", record.getId());

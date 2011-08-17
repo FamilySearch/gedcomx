@@ -17,9 +17,9 @@ package org.gedcomx.metadata.rdf;
 
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
-import org.gedcomx.metadata.MetadataNamespaces;
 import org.gedcomx.rt.AnyAttributeDeserializer;
 import org.gedcomx.rt.AnyAttributeSerializer;
+import org.gedcomx.types.TypesNamespaces;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.*;
@@ -67,7 +67,7 @@ public final class RDFValue {
    *
    * @return The value of the property.
    */
-  @XmlElement ( name = "value", namespace = MetadataNamespaces.RDF_NAMESPACE )
+  @XmlElement ( name = "value", namespace = TypesNamespaces.RDF_NAMESPACE )
   public String getValue() {
     return value;
   }
@@ -88,7 +88,7 @@ public final class RDFValue {
    *
    * @return The URI reference to the value. To be used, for example, if the value is structured data.
    */
-  @XmlAttribute( name = "resource", namespace = MetadataNamespaces.RDF_NAMESPACE )
+  @XmlAttribute( name = "resource", namespace = TypesNamespaces.RDF_NAMESPACE )
   @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
   public URI getValueRef() {
     return valueRef;
