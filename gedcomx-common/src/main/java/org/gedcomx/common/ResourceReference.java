@@ -15,12 +15,18 @@
  */
 package org.gedcomx.common;
 
+import org.codehaus.enunciate.XmlQNameEnumUtil;
+import org.codehaus.enunciate.qname.XmlQNameEnumRef;
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.gedcomx.rt.AnyAttributeDeserializer;
 import org.gedcomx.rt.AnyAttributeSerializer;
 import org.gedcomx.rt.AnyElementDeserializer;
 import org.gedcomx.rt.AnyElementSerializer;
+import org.gedcomx.types.ResourceFragmentParameter;
+import org.gedcomx.types.SourceType;
+import org.gedcomx.types.TypesNamespaces;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.*;
@@ -30,16 +36,59 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * A reference to a resource.
+ * A generic RDF-based reference to a resource.
  *
  * @author Ryan Heaton
  */
-@XmlSeeAlso(SourceQualifier.class)
+@XmlSeeAlso(ResourceFragmentParameter.class)
 public final class ResourceReference {
 
+  private String id;
+  private URI type;
   private URI href;
   private Map<QName, String> otherAttributes;
   private List<Object> otherElements;
+
+  /**
+   * The id of this resource reference.
+   *
+   * @return The id of this resource reference.
+   */
+  @XmlID
+  @XmlAttribute( name = "ID", namespace = TypesNamespaces.RDF_NAMESPACE )
+  public String getId() {
+    return id;
+  }
+
+  /**
+   * The id of this resource reference.
+   *
+   * @param id The id of this resource reference.
+   */
+  public void setId(String id) {
+    this.id = id;
+  }
+
+  /**
+   * The type of the resource reference.
+   *
+   * @return The type of the resource reference.
+   */
+  @XmlAttribute
+  @XmlQNameEnumRef (SourceType.class)
+  @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
+  public URI getType() {
+    return type;
+  }
+
+  /**
+   * The type of the source reference.
+   *
+   * @param type The type of the source reference.
+   */
+  public void setType(URI type) {
+    this.type = type;
+  }
 
   /**
    * The URI to the resource. For more information, see <a href="http://www.w3.org/TR/webarch/#identification">Architecture of the World
@@ -105,5 +154,26 @@ public final class ResourceReference {
   @JsonDeserialize( using = AnyElementDeserializer.class )
   public void setOtherElements(List<Object> otherElements) {
     this.otherElements = otherElements;
+  }
+
+  /**
+   * The enum referencing the known type of the source reference, or {@link org.gedcomx.types.SourceType#other} if not known.
+   *
+   * @return The enum referencing the known type of the source reference, or {@link org.gedcomx.types.SourceType#other} if not known.
+   */
+  @XmlTransient
+  @JsonIgnore
+  public SourceType getKnownType() {
+    return XmlQNameEnumUtil.fromURI(getType(), SourceType.class);
+  }
+
+  /**
+   * Set the type of this source reference from an enumeration of known source reference types.
+   *
+   * @param knownType The source reference type.
+   */
+  @JsonIgnore
+  public void setKnownType(SourceType knownType) {
+    setType(XmlQNameEnumUtil.toURI(knownType));
   }
 }

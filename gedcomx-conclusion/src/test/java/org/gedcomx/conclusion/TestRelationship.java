@@ -4,7 +4,6 @@ import org.gedcomx.attribution.Attribution;
 import org.gedcomx.common.AlternateId;
 import org.gedcomx.common.Extension;
 import org.gedcomx.common.ResourceReference;
-import org.gedcomx.common.SourceReference;
 import org.gedcomx.types.RelationshipType;
 import org.testng.annotations.Test;
 
@@ -61,7 +60,7 @@ public class TestRelationship {
     relationship.getPerson1().setHref(URI.create("urn:person1"));
     relationship.setPerson2(new ResourceReference());
     relationship.getPerson2().setHref(URI.create("urn:person2"));
-    SourceReference sourceReference = new SourceReference();
+    ResourceReference sourceReference = new ResourceReference();
     sourceReference.setId("source-ref");
     relationship.setSources(Arrays.asList(sourceReference));
     relationship.setBibliographicCitation("relationship bibliographic citation");

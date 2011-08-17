@@ -5,7 +5,6 @@ import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.rt.XmlTypeIdResolver;
 
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  * @author Ryan Heaton
@@ -16,7 +15,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 public class CustomElement {
 
   private String id;
-  private SourceReference source;
+  private ResourceReference source;
 
   public CustomElement() {
   }
@@ -33,11 +32,11 @@ public class CustomElement {
     this.id = id;
   }
 
-  public SourceReference getSource() {
+  public ResourceReference getSource() {
     return source;
   }
 
-  public void setSource(SourceReference source) {
+  public void setSource(ResourceReference source) {
     this.source = source;
   }
 }

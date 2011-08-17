@@ -2,9 +2,7 @@ package org.gedcomx.record;
 
 import org.gedcomx.attribution.Attribution;
 import org.gedcomx.common.*;
-import org.gedcomx.common.SourceQualifier;
-import org.gedcomx.common.SourceQualifierAttribute;
-import org.gedcomx.common.SourceReference;
+import org.gedcomx.common.ResourceReference;
 import org.gedcomx.types.*;
 import org.testng.annotations.Test;
 
@@ -180,16 +178,11 @@ public class TestRecord {
 
     record.setRelationships(relationships);
 
-    ArrayList<SourceReference> sources = new ArrayList<SourceReference>();
-    SourceReference sourceReference = new SourceReference();
+    ArrayList<ResourceReference> sources = new ArrayList<ResourceReference>();
+    ResourceReference sourceReference = new ResourceReference();
     sourceReference.setHref(URI.create("urn:source-uri"));
     sourceReference.setId("source-reference-id");
     sourceReference.setKnownType(SourceType.collection);
-    ArrayList<SourceQualifier> qualifiers = new ArrayList<SourceQualifier>();
-    SourceQualifier qualifier = new SourceQualifier();
-    qualifier.setAttribute(SourceQualifierAttribute.x_pixels, "2");
-    qualifiers.add(qualifier);
-    sourceReference.setQualifiers(qualifiers);
     sources.add(sourceReference);
     record.setSources(sources);
 
@@ -316,13 +309,10 @@ public class TestRecord {
     assertEquals("relationship explanation", parentRelationship.getAttribution().getExplanation());
 
     assertEquals(1, record.getSources().size());
-    SourceReference sourceReference = record.getSources().get(0);
+    ResourceReference sourceReference = record.getSources().get(0);
     assertEquals("urn:source-uri", sourceReference.getHref().toString());
     assertEquals("source-reference-id", sourceReference.getId());
     assertEquals(SourceType.collection, sourceReference.getKnownType());
-    assertEquals(1, sourceReference.getQualifiers().size());
-    SourceQualifier qualifier = sourceReference.getQualifiers().get(0);
-    assertEquals("2", qualifier.getAttribute(SourceQualifierAttribute.x_pixels));
 
     assertEquals(URI.create("urn:collection-ref"), record.getCollection().getHref());
     assertEquals("rid", record.getId());

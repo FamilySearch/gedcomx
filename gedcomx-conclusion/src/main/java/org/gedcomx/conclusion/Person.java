@@ -21,7 +21,7 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.common.AlternateId;
 import org.gedcomx.common.Extension;
-import org.gedcomx.common.SourceReference;
+import org.gedcomx.common.ResourceReference;
 import org.gedcomx.rt.XmlTypeIdResolver;
 
 import javax.xml.XMLConstants;
@@ -50,7 +50,7 @@ public class Person {
   private List<Event> events;
   private List<Characteristic> characteristics;
   private String bibliographicCitation;
-  private List<SourceReference> sources;
+  private List<ResourceReference> sources;
   private Extension extension;
 
   /**
@@ -224,7 +224,7 @@ public class Person {
   @XmlElement(name="source")
   @JsonProperty("sources")
   @JsonName("sources")
-  public List<SourceReference> getSources() {
+  public List<ResourceReference> getSources() {
     return sources;
   }
 
@@ -234,7 +234,7 @@ public class Person {
    * @param sources The sources for the conclusions about this person.
    */
   @JsonProperty("sources")
-  public void setSources(List<SourceReference> sources) {
+  public void setSources(List<ResourceReference> sources) {
     this.sources = sources;
   }
 

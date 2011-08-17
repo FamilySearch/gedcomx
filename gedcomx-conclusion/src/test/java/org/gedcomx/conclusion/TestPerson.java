@@ -2,9 +2,7 @@ package org.gedcomx.conclusion;
 
 import org.gedcomx.attribution.Attribution;
 import org.gedcomx.common.*;
-import org.gedcomx.common.SourceQualifier;
-import org.gedcomx.common.SourceQualifierAttribute;
-import org.gedcomx.common.SourceReference;
+import org.gedcomx.common.ResourceReference;
 import org.gedcomx.types.*;
 import org.testng.annotations.Test;
 
@@ -117,21 +115,16 @@ public class TestPerson {
 
     person.setPersistentId(URI.create("pal"));
 
-    ArrayList<SourceReference> sources = new ArrayList<SourceReference>();
-    SourceReference attributedSourceReference = new SourceReference();
+    ArrayList<ResourceReference> sources = new ArrayList<ResourceReference>();
+    ResourceReference attributedSourceReference = new ResourceReference();
     Attribution attribution = new Attribution();
     attribution.setContributor(new ResourceReference());
     attribution.getContributor().setHref(URI.create("urn:source-reference-attribution"));
-    attributedSourceReference.setExtension(new Extension());
-    attributedSourceReference.getExtension().addElement(attribution);
+    attributedSourceReference.setOtherElements(new ArrayList<Object>());
+    attributedSourceReference.getOtherElements().add(attribution);
     attributedSourceReference.setHref(URI.create("urn:source-uri"));
     attributedSourceReference.setId("source-reference-id");
     attributedSourceReference.setKnownType(SourceType.collection);
-    ArrayList<SourceQualifier> qualifiers = new ArrayList<SourceQualifier>();
-    SourceQualifier qualifier = new SourceQualifier();
-    qualifier.setAttribute(SourceQualifierAttribute.x_pixels, "2");
-    qualifiers.add(qualifier);
-    attributedSourceReference.setQualifiers(qualifiers);
     sources.add(attributedSourceReference);
     person.setSources(sources);
 
@@ -144,7 +137,7 @@ public class TestPerson {
     Characteristic characteristic;
     Event event;
     Name name;
-    SourceReference attributedSourceReference;
+    ResourceReference attributedSourceReference;
     assertEquals(GenderType.male, person.getGender().getType());
 
     assertEquals(1, person.getAlternateIds().size());
@@ -191,13 +184,10 @@ public class TestPerson {
 
     assertEquals(1, person.getSources().size());
     attributedSourceReference = person.getSources().iterator().next();
-    assertEquals("urn:source-reference-attribution", attributedSourceReference.getExtension().findExtensionOfType(Attribution.class).getContributor().getHref().toString());
+    assertEquals("urn:source-reference-attribution", ((Attribution) attributedSourceReference.getOtherElements().iterator().next()).getContributor().getHref().toString());
     assertEquals("urn:source-uri", attributedSourceReference.getHref().toString());
     assertEquals("source-reference-id", attributedSourceReference.getId());
     assertEquals(SourceType.collection, attributedSourceReference.getKnownType());
-    assertEquals(1, attributedSourceReference.getQualifiers().size());
-    assertEquals(1, attributedSourceReference.getQualifiers().get(0).getAttributes().size());
-    assertEquals("2", attributedSourceReference.getQualifiers().get(0).getAttribute(SourceQualifierAttribute.x_pixels));
 
     assertEquals("pid", person.getId());
     assertEquals("person bibliographic citation", person.getBibliographicCitation());

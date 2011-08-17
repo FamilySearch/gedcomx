@@ -15,8 +15,10 @@
  */
 package org.gedcomx.metadata;
 
+import org.gedcomx.common.CommonNamespaces;
 import org.gedcomx.rt.Namespace;
 import org.gedcomx.rt.Namespaces;
+import org.gedcomx.types.TypesNamespaces;
 
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -53,10 +55,10 @@ public class MetadataNamespaces {
 
   private MetadataNamespaces() {}
 
-  public static final String RDF_NAMESPACE = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
+  public static final String RDF_NAMESPACE = TypesNamespaces.RDF_NAMESPACE;
   public static final String RDF_XML_MEDIA_TYPE = "application/rdf+xml";
   public static final String RDF_JSON_MEDIA_TYPE = "application/rdf+json";
-  public static final String DUBLIN_CORE_NAMESPACE = "http://purl.org/dc/terms/";
-  public static final String DUBLIN_CORE_TYPE_NAMESPACE = "http://purl.org/dc/dcmitype/";
+  public static final String DUBLIN_CORE_NAMESPACE = TypesNamespaces.DUBLIN_CORE_NAMESPACE;
+  public static final String DUBLIN_CORE_TYPE_NAMESPACE = TypesNamespaces.DUBLIN_CORE_TYPE_NAMESPACE;
 
 }

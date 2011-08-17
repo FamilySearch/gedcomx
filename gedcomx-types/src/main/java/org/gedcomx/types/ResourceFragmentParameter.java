@@ -13,18 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.common;
+package org.gedcomx.types;
 
-import org.codehaus.enunciate.qname.XmlQNameEnum;
 import org.codehaus.enunciate.qname.XmlUnknownQNameEnumValue;
 
 /**
- * Known list of source qualifier attributes.
+ * Known list of fragment parameter names. These parameters can be applied to the URI fragment in application/x-www-form-urlencoded
+ * format.
  *
  * @author Ryan Heaton
  */
-@XmlQNameEnum
-public enum SourceQualifierAttribute {
+public enum ResourceFragmentParameter {
 
   /**
    * The pixel x-coordinate for a source, such as for specifying the top-left corner of an image bounding box.

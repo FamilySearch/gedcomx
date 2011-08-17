@@ -38,5 +38,8 @@ public class TypesNamespaces {
   private TypesNamespaces() {}
 
   public static final String GEDCOMX_TYPES_NAMESPACE = "http://gedcomx.org/types/";
+  public static final String RDF_NAMESPACE = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
+  public static final String DUBLIN_CORE_NAMESPACE = "http://purl.org/dc/terms/";
+  public static final String DUBLIN_CORE_TYPE_NAMESPACE = "http://purl.org/dc/dcmitype/";
 
 }
