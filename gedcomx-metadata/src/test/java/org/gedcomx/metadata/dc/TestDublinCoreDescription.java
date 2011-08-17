@@ -48,7 +48,9 @@ public class TestDublinCoreDescription {
     abstrct.setLang("en");
     abstrct.setOtherAttributes(new HashMap<QName, String>());
     abstrct.getOtherAttributes().put(new QName("urn:hi", "hi"), "hello");
-    abstrct.setValueRef(URI.create("urn:abstract"));
+    abstrct.setResource(URI.create("urn:abstract"));
+    abstrct.setType(new RDFTypeReference());
+    abstrct.getType().setKnownType(ResourceType.Text);
     metadata.setAbstract(abstrct);
     metadata.setAccessRights(new ArrayList<RDFValue>());
     metadata.setAccrualMethod(new RDFValue());
@@ -119,7 +121,8 @@ public class TestDublinCoreDescription {
     assertEquals("title", abstrct.getValue());
     assertEquals("en", abstrct.getLang());
     assertEquals("hello", abstrct.getOtherAttributes().get(new QName("urn:hi", "hi")));
-    assertEquals(URI.create("urn:abstract"), abstrct.getValueRef());
+    assertEquals(URI.create("urn:abstract"), abstrct.getResource());
+    assertEquals(ResourceType.Text, abstrct.getType().getKnownType());
     assertTrue(metadata.getAccessRights() == null || metadata.getAccessRights().isEmpty());
     assertTrue(metadata.getAccrualMethod() != null);
     assertTrue(metadata.getAccrualPeriodicity() != null);

@@ -40,7 +40,8 @@ public final class RDFValue {
 
   private String lang;
   private String value;
-  private URI valueRef;
+  private URI resource;
+  private RDFTypeReference type;
   private Map<QName, String> otherAttributes;
 
   /**
@@ -63,7 +64,7 @@ public final class RDFValue {
   }
 
   /**
-   * The value of the property, if it can be expressed as a string. If the value can't be expressed as a string, use {@link #getValueRef() the value ref}.
+   * The value of the property, if it can be expressed as a string. If the value can't be expressed as a string, use {@link #getResource() the resource ref}.
    *
    * @return The value of the property.
    */
@@ -73,12 +74,30 @@ public final class RDFValue {
   }
 
   /**
-   * The value of the property, if it can be expressed as a string. If the value can't be expressed as a string, use {@link #getValueRef() the value ref}.
+   * The value of the property, if it can be expressed as a string. If the value can't be expressed as a string, use {@link #getResource() the resource ref}.
    *
    * @param value The value of the property.
    */
   public void setValue(String value) {
     this.value = value;
+  }
+
+  /**
+   * The type of the value.
+   *
+   * @return The type of the value.
+   */
+  public RDFTypeReference getType() {
+    return type;
+  }
+
+  /**
+   * The type of the value.
+   * 
+   * @param type The type of the value.
+   */
+  public void setType(RDFTypeReference type) {
+    this.type = type;
   }
 
   /**
@@ -90,8 +109,8 @@ public final class RDFValue {
    */
   @XmlAttribute( name = "resource", namespace = TypesNamespaces.RDF_NAMESPACE )
   @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
-  public URI getValueRef() {
-    return valueRef;
+  public URI getResource() {
+    return resource;
   }
 
   /**
@@ -99,10 +118,10 @@ public final class RDFValue {
    * If a {@link #getValue() value} is assigned as well as a value reference, the value is to
    * be treated as a string representation of the resource being referenced.
    *
-   * @param valueRef The URI reference to the value. To be used, for example, if the value is structured data.
+   * @param resource The URI reference to the value. To be used, for example, if the value is structured data.
    */
-  public void setValueRef(URI valueRef) {
-    this.valueRef = valueRef;
+  public void setResource(URI resource) {
+    this.resource = resource;
   }
 
   /**
