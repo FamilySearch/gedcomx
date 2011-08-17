@@ -45,7 +45,7 @@ public final class ResourceReference {
 
   private String id;
   private URI type;
-  private URI href;
+  private URI resource;
   private Map<QName, String> otherAttributes;
   private List<Object> otherElements;
 
@@ -97,10 +97,10 @@ public final class ResourceReference {
    * @link http://www.w3.org/TR/webarch/#identification
    * @return The URI to the resource.
    */
-  @XmlAttribute (namespace="http://www.w3.org/1999/xlink")
+  @XmlAttribute (namespace=TypesNamespaces.RDF_NAMESPACE)
   @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
-  public URI getHref() {
-    return href;
+  public URI getResource() {
+    return resource;
   }
 
   /**
@@ -108,10 +108,10 @@ public final class ResourceReference {
    * Wide Web, Volume One, Section 2</a>
    *
    * @link http://www.w3.org/TR/webarch/#identification
-   * @param href The URI to the resource.
+   * @param resource The URI to the resource.
    */
-  public void setHref(URI href) {
-    this.href = href;
+  public void setResource(URI resource) {
+    this.resource = resource;
   }
 
   /**

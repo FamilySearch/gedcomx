@@ -21,7 +21,7 @@ public class TestSourceReference {
    */
   public void testSourceReferenceXml() throws Exception {
     ResourceReference reference = new ResourceReference();
-    reference.setHref(URI.create("urn:someid"));
+    reference.setResource(URI.create("urn:someid"));
     reference.setKnownType(ResourceType.Collection);
     reference.setId("refid");
     reference.setOtherElements(new ArrayList<Object>());
@@ -29,7 +29,7 @@ public class TestSourceReference {
     CustomElement custom = new CustomElement();
     custom.setSource(reference);
     custom = processThroughXml(custom);
-    assertEquals("urn:someid", custom.getSource().getHref().toString());
+    assertEquals("urn:someid", custom.getSource().getResource().toString());
     assertEquals(ResourceType.Collection, custom.getSource().getKnownType());
     assertEquals("refid", custom.getSource().getId());
     assertEquals("alt", ((CustomElement) custom.getSource().getOtherElements().get(0)).getId());
@@ -40,7 +40,7 @@ public class TestSourceReference {
    */
   public void testSourceReferenceJson() throws Exception {
     ResourceReference reference = new ResourceReference();
-    reference.setHref(URI.create("urn:someid"));
+    reference.setResource(URI.create("urn:someid"));
     reference.setKnownType(ResourceType.Collection);
     reference.setId("refid");
     reference.setOtherElements(new ArrayList<Object>());
@@ -48,7 +48,7 @@ public class TestSourceReference {
     CustomElement custom = new CustomElement();
     custom.setSource(reference);
     custom = processThroughJson(custom);
-    assertEquals("urn:someid", custom.getSource().getHref().toString());
+    assertEquals("urn:someid", custom.getSource().getResource().toString());
     assertEquals(ResourceType.Collection, custom.getSource().getKnownType());
     assertEquals("refid", custom.getSource().getId());
     assertEquals("alt", ((CustomElement) custom.getSource().getOtherElements().get(0)).getId());

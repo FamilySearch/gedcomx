@@ -57,9 +57,9 @@ public class TestRelationship {
     relationship.setId("relationship");
     relationship.setPersistentId(URI.create("urn:pid"));
     relationship.setPerson1(new ResourceReference());
-    relationship.getPerson1().setHref(URI.create("urn:person1"));
+    relationship.getPerson1().setResource(URI.create("urn:person1"));
     relationship.setPerson2(new ResourceReference());
-    relationship.getPerson2().setHref(URI.create("urn:person2"));
+    relationship.getPerson2().setResource(URI.create("urn:person2"));
     ResourceReference sourceReference = new ResourceReference();
     sourceReference.setId("source-ref");
     relationship.setSources(Arrays.asList(sourceReference));
@@ -76,8 +76,8 @@ public class TestRelationship {
     assertNotNull(relationship.getExtension());
     assertEquals("relationship", relationship.getId());
     assertEquals(URI.create("urn:pid"), relationship.getPersistentId());
-    assertEquals(URI.create("urn:person1"), relationship.getPerson1().getHref());
-    assertEquals(URI.create("urn:person2"), relationship.getPerson2().getHref());
+    assertEquals(URI.create("urn:person1"), relationship.getPerson1().getResource());
+    assertEquals(URI.create("urn:person2"), relationship.getPerson2().getResource());
     assertEquals("source-ref", relationship.getSources().get(0).getId());
     assertEquals("relationship bibliographic citation", relationship.getBibliographicCitation());
   }

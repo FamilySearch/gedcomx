@@ -26,7 +26,7 @@ public class TestCollection {
     collection.setExtension(new Extension());
     collection.setId("id");
     collection.setParent(new ResourceReference());
-    collection.getParent().setHref(URI.create("urn:parent"));
+    collection.getParent().setResource(URI.create("urn:parent"));
     collection.setPublisher("publisher");
     collection.setTitle("title");
     collection.setBibliographicCitation("bibliographic citation");
@@ -34,7 +34,7 @@ public class TestCollection {
     assertEquals("description", collection.getDescription());
     assertEquals("id", collection.getId());
     assertNotNull(collection.getExtension());
-    assertEquals(URI.create("urn:parent"), collection.getParent().getHref());
+    assertEquals(URI.create("urn:parent"), collection.getParent().getResource());
     assertEquals("publisher", collection.getPublisher());
     assertEquals("title", collection.getTitle());
     assertEquals("bibliographic citation", collection.getBibliographicCitation());
@@ -49,7 +49,7 @@ public class TestCollection {
     collection.setExtension(new Extension());
     collection.setId("id");
     collection.setParent(new ResourceReference());
-    collection.getParent().setHref(URI.create("urn:parent"));
+    collection.getParent().setResource(URI.create("urn:parent"));
     collection.setPublisher("publisher");
     collection.setTitle("title");
     collection.setBibliographicCitation("bibliographic citation");
@@ -57,7 +57,7 @@ public class TestCollection {
     assertEquals("description", collection.getDescription());
     assertEquals("id", collection.getId());
     assertNotNull(collection.getExtension());
-    assertEquals(URI.create("urn:parent"), collection.getParent().getHref());
+    assertEquals(URI.create("urn:parent"), collection.getParent().getResource());
     assertEquals("publisher", collection.getPublisher());
     assertEquals("title", collection.getTitle());
     assertEquals("bibliographic citation", collection.getBibliographicCitation());

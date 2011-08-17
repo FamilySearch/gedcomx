@@ -22,12 +22,12 @@ public class TestAttribution {
   public void testAttributionReferenceXml() throws Exception {
     Attribution attribution = new Attribution();
     attribution.setContributor(new ResourceReference());
-    attribution.getContributor().setHref(URI.create("urn:someid"));
+    attribution.getContributor().setResource(URI.create("urn:someid"));
     attribution.setExplanation("hello, there.");
     Date ts = new Date();
     attribution.setTimestamp(ts);
     attribution = processThroughXml(attribution);
-    assertEquals("urn:someid", attribution.getContributor().getHref().toString());
+    assertEquals("urn:someid", attribution.getContributor().getResource().toString());
     assertEquals("hello, there.", attribution.getExplanation());
     assertEquals(ts, attribution.getTimestamp());
   }
@@ -38,12 +38,12 @@ public class TestAttribution {
   public void testAttributionReferenceJson() throws Exception {
     Attribution attribution = new Attribution();
     attribution.setContributor(new ResourceReference());
-    attribution.getContributor().setHref(URI.create("urn:someid"));
+    attribution.getContributor().setResource(URI.create("urn:someid"));
     attribution.setExplanation("hello, there.");
     Date ts = new Date();
     attribution.setTimestamp(ts);
     attribution = processThroughJson(attribution);
-    assertEquals("urn:someid", attribution.getContributor().getHref().toString());
+    assertEquals("urn:someid", attribution.getContributor().getResource().toString());
     assertEquals("hello, there.", attribution.getExplanation());
     assertEquals(ts, attribution.getTimestamp());
   }

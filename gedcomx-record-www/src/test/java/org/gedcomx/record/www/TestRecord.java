@@ -125,7 +125,7 @@ public class TestRecord {
     eventRole.getAttribution().setExplanation("event role explanation");
     eventRole.setPrincipal(false);
     eventRole.setEvent(new ResourceReference());
-    eventRole.getEvent().setHref(URI.create("#" + event.getId()));
+    eventRole.getEvent().setResource(URI.create("#" + event.getId()));
     eventRoles.add(eventRole);
     persona.setEventRoles(eventRoles);
 
@@ -135,7 +135,7 @@ public class TestRecord {
     RecordField field = new RecordField();
     field.setAttribution(new Attribution());
     field.getAttribution().setContributor(new ResourceReference());
-    field.getAttribution().getContributor().setHref(URI.create("urn:field-attribution"));
+    field.getAttribution().getContributor().setResource(URI.create("urn:field-attribution"));
     field.setId("field-id");
     field.setKnownType(FieldType.batch_number);
     field.setOriginal("field-value-original");
@@ -161,23 +161,23 @@ public class TestRecord {
     coupleRelationship.setCharacteristics(coupleCharacteristics);
     coupleRelationship.setId("couple-relationship-id");
     coupleRelationship.setPersona1(new ResourceReference());
-    coupleRelationship.getPersona1().setHref(URI.create("#" + persona.getId()));
+    coupleRelationship.getPersona1().setResource(URI.create("#" + persona.getId()));
     coupleRelationship.setPersona2(new ResourceReference());
-    coupleRelationship.getPersona2().setHref(URI.create("#" + persona.getId()));
+    coupleRelationship.getPersona2().setResource(URI.create("#" + persona.getId()));
     relationships.add(coupleRelationship);
     Relationship parentRelationship = new Relationship();
     parentRelationship.setId("parent-relationship-id");
     parentRelationship.setPersona1(new ResourceReference());
-    parentRelationship.getPersona1().setHref(URI.create("#" + persona.getId()));
+    parentRelationship.getPersona1().setResource(URI.create("#" + persona.getId()));
     parentRelationship.setPersona2(new ResourceReference());
-    parentRelationship.getPersona2().setHref(URI.create("#" + persona.getId()));
+    parentRelationship.getPersona2().setResource(URI.create("#" + persona.getId()));
     relationships.add(parentRelationship);
 
     record.setRelationships(relationships);
 
     ArrayList<ResourceReference> sources = new ArrayList<ResourceReference>();
     ResourceReference sourceReference = new ResourceReference();
-    sourceReference.setHref(URI.create("urn:source-uri"));
+    sourceReference.setResource(URI.create("urn:source-uri"));
     sourceReference.setId("source-reference-id");
     sourceReference.setKnownType(ResourceType.Collection);
     sources.add(sourceReference);
@@ -190,7 +190,7 @@ public class TestRecord {
   private void fillInField(Field field, String label) {
     field.setAttribution(new Attribution());
     field.getAttribution().setContributor(new ResourceReference());
-    field.getAttribution().getContributor().setHref(URI.create("urn:" + label + "-attribution"));
+    field.getAttribution().getContributor().setResource(URI.create("urn:" + label + "-attribution"));
     field.setLabel(label + "-field-id");
     field.setId(label + "-id");
     field.setOriginal(label + "-original");
@@ -199,7 +199,7 @@ public class TestRecord {
   }
 
   private void assertField(Field field, String label) {
-    assertEquals("urn:" + label + "-attribution", field.getAttribution().getContributor().getHref().toString());
+    assertEquals("urn:" + label + "-attribution", field.getAttribution().getContributor().getResource().toString());
     assertEquals(label + "-field-id", field.getLabel());
     assertEquals(label + "-id", field.getId());
     assertEquals(label + "-original", field.getOriginal());
@@ -264,11 +264,11 @@ public class TestRecord {
     EventRole eventRole = persona.getEventRoles().get(0);
     assertEquals("event role description", eventRole.getDescription());
     assertFalse(eventRole.getPrincipal());
-    assertEquals("#" + event.getId(), eventRole.getEvent().getHref().toString());
+    assertEquals("#" + event.getId(), eventRole.getEvent().getResource().toString());
 
     assertEquals(1, record.getFields().size());
     RecordField field = record.getFields().get(0);
-    assertEquals("urn:field-attribution", field.getAttribution().getContributor().getHref().toString());
+    assertEquals("urn:field-attribution", field.getAttribution().getContributor().getResource().toString());
     assertEquals("field-id", field.getId());
     assertEquals(FieldType.batch_number, field.getKnownType());
     assertEquals("field-value-original", field.getOriginal());
@@ -287,17 +287,17 @@ public class TestRecord {
     assertField(coupleCharacteristic.getDate(), "couple-characteristic-date");
     assertField(coupleCharacteristic.getPlace(), "couple-characteristic-place");
     assertEquals("couple-relationship-id", coupleRelationship.getId());
-    assertEquals("#" + persona.getId(), coupleRelationship.getPersona1().getHref().toString());
-    assertEquals("#" + persona.getId(), coupleRelationship.getPersona2().getHref().toString());
+    assertEquals("#" + persona.getId(), coupleRelationship.getPersona1().getResource().toString());
+    assertEquals("#" + persona.getId(), coupleRelationship.getPersona2().getResource().toString());
 
     Relationship parentRelationship = record.getRelationships().get(1);
     assertEquals("parent-relationship-id", parentRelationship.getId());
-    assertEquals("#" + persona.getId(), parentRelationship.getPersona1().getHref().toString());
-    assertEquals("#" + persona.getId(), parentRelationship.getPersona2().getHref().toString());
+    assertEquals("#" + persona.getId(), parentRelationship.getPersona1().getResource().toString());
+    assertEquals("#" + persona.getId(), parentRelationship.getPersona2().getResource().toString());
 
     assertEquals(1, record.getSources().size());
     ResourceReference sourceReference = record.getSources().get(0);
-    assertEquals("urn:source-uri", sourceReference.getHref().toString());
+    assertEquals("urn:source-uri", sourceReference.getResource().toString());
     assertEquals("source-reference-id", sourceReference.getId());
     assertEquals(ResourceType.Collection, sourceReference.getKnownType());
 

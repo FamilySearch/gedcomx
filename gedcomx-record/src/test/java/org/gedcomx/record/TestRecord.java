@@ -123,7 +123,7 @@ public class TestRecord {
     eventRole.setDescription("event role description");
     eventRole.setPrincipal(false);
     eventRole.setEvent(new ResourceReference());
-    eventRole.getEvent().setHref(URI.create("#" + event.getId()));
+    eventRole.getEvent().setResource(URI.create("#" + event.getId()));
     eventRole.setAttribution(new Attribution());
     eventRole.getAttribution().setExplanation("event role attribution");
     eventRoles.add(eventRole);
@@ -135,7 +135,7 @@ public class TestRecord {
     RecordField field = new RecordField();
     field.setAttribution(new Attribution());
     field.getAttribution().setContributor(new ResourceReference());
-    field.getAttribution().getContributor().setHref(URI.create("urn:field-attribution"));
+    field.getAttribution().getContributor().setResource(URI.create("urn:field-attribution"));
     field.setId("field-id");
     field.setKnownType(FieldType.batch_number);
     field.setOriginal("field-value-original");
@@ -161,17 +161,17 @@ public class TestRecord {
     coupleRelationship.setCharacteristics(coupleCharacteristics);
     coupleRelationship.setId("couple-relationship-id");
     coupleRelationship.setPersona1(new ResourceReference());
-    coupleRelationship.getPersona1().setHref(URI.create("#" + persona.getId()));
+    coupleRelationship.getPersona1().setResource(URI.create("#" + persona.getId()));
     coupleRelationship.setPersona2(new ResourceReference());
-    coupleRelationship.getPersona2().setHref(URI.create("#" + persona.getId()));
+    coupleRelationship.getPersona2().setResource(URI.create("#" + persona.getId()));
     relationships.add(coupleRelationship);
     Relationship parentRelationship = new Relationship();
     parentRelationship.setKnownType(RelationshipType.parent_child);
     parentRelationship.setId("parent-relationship-id");
     parentRelationship.setPersona1(new ResourceReference());
-    parentRelationship.getPersona1().setHref(URI.create("#" + persona.getId()));
+    parentRelationship.getPersona1().setResource(URI.create("#" + persona.getId()));
     parentRelationship.setPersona2(new ResourceReference());
-    parentRelationship.getPersona2().setHref(URI.create("#" + persona.getId()));
+    parentRelationship.getPersona2().setResource(URI.create("#" + persona.getId()));
     parentRelationship.setAttribution(new Attribution());
     parentRelationship.getAttribution().setExplanation("relationship explanation");
     relationships.add(parentRelationship);
@@ -180,14 +180,14 @@ public class TestRecord {
 
     ArrayList<ResourceReference> sources = new ArrayList<ResourceReference>();
     ResourceReference sourceReference = new ResourceReference();
-    sourceReference.setHref(URI.create("urn:source-uri"));
+    sourceReference.setResource(URI.create("urn:source-uri"));
     sourceReference.setId("source-reference-id");
     sourceReference.setKnownType(ResourceType.Collection);
     sources.add(sourceReference);
     record.setSources(sources);
 
     record.setCollection(new ResourceReference());
-    record.getCollection().setHref(URI.create("urn:collection-ref"));
+    record.getCollection().setResource(URI.create("urn:collection-ref"));
 
     record.setBibliographicCitation("bibliographic citation");
 
@@ -199,7 +199,7 @@ public class TestRecord {
   private void fillInField(Field field, String label) {
     field.setAttribution(new Attribution());
     field.getAttribution().setContributor(new ResourceReference());
-    field.getAttribution().getContributor().setHref(URI.create("urn:" + label + "-attribution"));
+    field.getAttribution().getContributor().setResource(URI.create("urn:" + label + "-attribution"));
     field.setLabel(label + "-field-id");
     field.setId(label + "-id");
     field.setOriginal(label + "-original");
@@ -208,7 +208,7 @@ public class TestRecord {
   }
 
   private void assertField(Field field, String label) {
-    assertEquals("urn:" + label + "-attribution", field.getAttribution().getContributor().getHref().toString());
+    assertEquals("urn:" + label + "-attribution", field.getAttribution().getContributor().getResource().toString());
     assertEquals(label + "-field-id", field.getLabel());
     assertEquals(label + "-id", field.getId());
     assertEquals(label + "-original", field.getOriginal());
@@ -274,11 +274,11 @@ public class TestRecord {
     assertEquals("event role description", eventRole.getDescription());
     assertEquals("event role attribution", eventRole.getAttribution().getExplanation());
     assertFalse(eventRole.getPrincipal());
-    assertEquals("#" + event.getId(), eventRole.getEvent().getHref().toString());
+    assertEquals("#" + event.getId(), eventRole.getEvent().getResource().toString());
 
     assertEquals(1, record.getFields().size());
     RecordField field = record.getFields().get(0);
-    assertEquals("urn:field-attribution", field.getAttribution().getContributor().getHref().toString());
+    assertEquals("urn:field-attribution", field.getAttribution().getContributor().getResource().toString());
     assertEquals("field-id", field.getId());
     assertEquals(FieldType.batch_number, field.getKnownType());
     assertEquals("field-value-original", field.getOriginal());
@@ -298,23 +298,23 @@ public class TestRecord {
     assertField(coupleCharacteristic.getDate(), "couple-characteristic-date");
     assertField(coupleCharacteristic.getPlace(), "couple-characteristic-place");
     assertEquals("couple-relationship-id", coupleRelationship.getId());
-    assertEquals("#" + persona.getId(), coupleRelationship.getPersona1().getHref().toString());
-    assertEquals("#" + persona.getId(), coupleRelationship.getPersona2().getHref().toString());
+    assertEquals("#" + persona.getId(), coupleRelationship.getPersona1().getResource().toString());
+    assertEquals("#" + persona.getId(), coupleRelationship.getPersona2().getResource().toString());
 
     Relationship parentRelationship = record.getRelationships().get(1);
     assertEquals(RelationshipType.parent_child, parentRelationship.getKnownType());
     assertEquals("parent-relationship-id", parentRelationship.getId());
-    assertEquals("#" + persona.getId(), parentRelationship.getPersona1().getHref().toString());
-    assertEquals("#" + persona.getId(), parentRelationship.getPersona2().getHref().toString());
+    assertEquals("#" + persona.getId(), parentRelationship.getPersona1().getResource().toString());
+    assertEquals("#" + persona.getId(), parentRelationship.getPersona2().getResource().toString());
     assertEquals("relationship explanation", parentRelationship.getAttribution().getExplanation());
 
     assertEquals(1, record.getSources().size());
     ResourceReference sourceReference = record.getSources().get(0);
-    assertEquals("urn:source-uri", sourceReference.getHref().toString());
+    assertEquals("urn:source-uri", sourceReference.getResource().toString());
     assertEquals("source-reference-id", sourceReference.getId());
     assertEquals(ResourceType.Collection, sourceReference.getKnownType());
 
-    assertEquals(URI.create("urn:collection-ref"), record.getCollection().getHref());
+    assertEquals(URI.create("urn:collection-ref"), record.getCollection().getResource());
     assertEquals("rid", record.getId());
     assertEquals(Locale.ENGLISH.getLanguage(), record.getLang());
   }
