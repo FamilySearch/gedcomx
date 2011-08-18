@@ -18,7 +18,6 @@ package org.gedcomx.types;
 import org.codehaus.enunciate.qname.XmlQNameEnum;
 import org.codehaus.enunciate.qname.XmlUnknownQNameEnumValue;
 
-import javax.xml.namespace.QName;
 import java.net.URI;
 
 /**

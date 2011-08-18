@@ -22,6 +22,7 @@ import org.codehaus.enunciate.apt.EnunciateFreemarkerModel;
 import org.codehaus.enunciate.apt.EnunciateTypeDeclarationListener;
 import org.codehaus.enunciate.config.SchemaInfo;
 import org.codehaus.enunciate.config.WsdlInfo;
+import org.codehaus.enunciate.contract.jaxb.TypeDefinition;
 import org.codehaus.enunciate.contract.validation.ValidationException;
 import org.codehaus.enunciate.contract.validation.Validator;
 import org.codehaus.enunciate.main.Artifact;
@@ -38,9 +39,7 @@ import org.codehaus.enunciate.modules.objc.ObjCDeploymentModule;
 import org.codehaus.enunciate.template.freemarker.GetGroupsMethod;
 import org.codehaus.enunciate.template.freemarker.IsDefinedGloballyMethod;
 import org.codehaus.enunciate.template.freemarker.UniqueContentTypesMethod;
-import org.gedcomx.rt.GedcomNamespacePrefixMapper;
-import org.gedcomx.rt.Namespace;
-import org.gedcomx.rt.Namespaces;
+import org.gedcomx.rt.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -169,6 +168,8 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
       if (knownPrefix != null) {
         schemaInfo.setId(knownPrefix);
       }
+
+      initRDFSchema(schemaInfo);
     }
 
     Collection<TypeDeclaration> namespaceDeclarations = gatherNamespaceDeclarations();
@@ -247,6 +248,18 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
           schemaInfo.setProperty("filename", id + "-" + version + ".xsd");
           schemaInfo.setProperty("location", id + "-" + version + ".xsd");
         }
+      }
+    }
+  }
+
+  protected void initRDFSchema(SchemaInfo schemaInfo) {
+    Collection<RDFClass> classes = new ArrayList<RDFClass>();
+    Collection<RDFProperty> properties = new ArrayList<RDFProperty>();
+    Collection<TypeDefinition> typeDefinitions = schemaInfo.getTypeDefinitions();
+    for (TypeDefinition typeDefinition : typeDefinitions) {
+      org.gedcomx.rt.RDFClass rdfClassInfo = typeDefinition.getAnnotation(org.gedcomx.rt.RDFClass.class);
+      if (rdfClassInfo != null) {
+
       }
     }
   }
