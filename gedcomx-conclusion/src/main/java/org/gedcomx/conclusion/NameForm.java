@@ -16,7 +16,6 @@
 package org.gedcomx.conclusion;
 
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
 import java.util.List;
 
 /**
@@ -52,7 +51,6 @@ public final class NameForm {
    *
    * @return The different parts of the name form.
    */
-  @XmlElementWrapper (name = "parts")
   @XmlElement (name = "part")
   public List<NamePart> getParts() {
     return parts;

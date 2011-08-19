@@ -151,12 +151,17 @@ public class GEDCOMXValidator extends BaseValidator {
     Collection<Attribute> attributes = typeDef.getAttributes();
     if (attributes != null && !attributes.isEmpty()) {
       for (Attribute attribute : attributes) {
+        String namespace = attribute.getNamespace();
+        if (namespace == null || "".equals(attribute.getNamespace())) {
+          result.addError(attribute, "Attributes should be defined within a namespace so as to be well-defined within RDF. Hint: use attributeFormDefault=\"qualified\".");
+        }
+
         boolean isURI = ((DecoratedTypeMirror) TypeMirrorDecorator.decorate(attribute.getAccessorType())).isInstanceOf(URI.class.getName());
         if (isURI && !KnownXmlType.ANY_URI.getQname().equals(attribute.getBaseType().getQname())) {
           result.addError(attribute, "Accessors of type 'java.net.URI' should of type xs:anyURI. Please annotate the attribute with @XmlSchemaType(name = \"anyURI\", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)");
         }
 
-        if ("href".equals(attribute.getName()) && !"http://www.w3.org/1999/xlink".equals(attribute.getNamespace())) {
+        if ("href".equals(attribute.getName()) && !"http://www.w3.org/1999/xlink".equals(namespace)) {
           result.addError(attribute, "Entity links should be make with an attribute named 'href' in the 'http://www.w3.org/1999/xlink' namespace.");
         }
 

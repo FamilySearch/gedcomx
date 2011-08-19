@@ -22,7 +22,6 @@ import org.codehaus.enunciate.apt.EnunciateFreemarkerModel;
 import org.codehaus.enunciate.apt.EnunciateTypeDeclarationListener;
 import org.codehaus.enunciate.config.SchemaInfo;
 import org.codehaus.enunciate.config.WsdlInfo;
-import org.codehaus.enunciate.contract.jaxb.TypeDefinition;
 import org.codehaus.enunciate.contract.validation.ValidationException;
 import org.codehaus.enunciate.contract.validation.Validator;
 import org.codehaus.enunciate.main.Artifact;
@@ -39,11 +38,16 @@ import org.codehaus.enunciate.modules.objc.ObjCDeploymentModule;
 import org.codehaus.enunciate.template.freemarker.GetGroupsMethod;
 import org.codehaus.enunciate.template.freemarker.IsDefinedGloballyMethod;
 import org.codehaus.enunciate.template.freemarker.UniqueContentTypesMethod;
-import org.gedcomx.rt.*;
+import org.gedcomx.rt.GedcomNamespacePrefixMapper;
+import org.gedcomx.rt.Namespace;
+import org.gedcomx.rt.Namespaces;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.*;
 
 /**
@@ -55,6 +59,7 @@ import java.util.*;
 public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implements DocumentationAwareModule, EnunciateTypeDeclarationListener {
 
   private final Map<String, TypeDeclaration> knownNamespaceDeclarations = new HashMap<String, TypeDeclaration>();
+  private String resourcesDir;
 
   /**
    * @return "gedcomx"
@@ -131,6 +136,24 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
   public void setDocsDir(String docsDir) {
   }
 
+  /**
+   * Directory in which to search for known resources.
+   *
+   * @return Directory in which to search for known resources.
+   */
+  public String getResourcesDir() {
+    return resourcesDir;
+  }
+
+  /**
+   * Directory in which to search for known resources.
+   *
+   * @param resourcesDir Directory in which to search for known resources.
+   */
+  public void setResourcesDir(String resourcesDir) {
+    this.resourcesDir = resourcesDir;
+  }
+
   public void onTypeDeclarationInspected(TypeDeclaration typeDeclaration) {
     if (typeDeclaration.getAnnotation(Namespaces.class) != null) {
       this.knownNamespaceDeclarations.put(typeDeclaration.getQualifiedName(), typeDeclaration);
@@ -168,8 +191,6 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
       if (knownPrefix != null) {
         schemaInfo.setId(knownPrefix);
       }
-
-      initRDFSchema(schemaInfo);
     }
 
     Collection<TypeDeclaration> namespaceDeclarations = gatherNamespaceDeclarations();
@@ -250,18 +271,46 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
         }
       }
     }
-  }
 
-  protected void initRDFSchema(SchemaInfo schemaInfo) {
-    Collection<RDFClass> classes = new ArrayList<RDFClass>();
-    Collection<RDFProperty> properties = new ArrayList<RDFProperty>();
-    Collection<TypeDefinition> typeDefinitions = schemaInfo.getTypeDefinitions();
-    for (TypeDefinition typeDefinition : typeDefinitions) {
-      org.gedcomx.rt.RDFClass rdfClassInfo = typeDefinition.getAnnotation(org.gedcomx.rt.RDFClass.class);
-      if (rdfClassInfo != null) {
-
+    ClassLoader resourcesLoader = createResourcesLoader();
+    for (SchemaInfo schemaInfo : model.getNamespacesToSchemas().values()) {
+      String id = schemaInfo.getId();
+      InputStream stream = resourcesLoader.getResourceAsStream(String.format("META-INF/%s.rdf.xml", id));
+      if (stream != null) {
+        info("Found RDF schema file for namespace %s.", id);
+        //todo: validate that each attribute and element (and wrapper element) for each type definition has a property specified in RDF schema.
       }
     }
+  }
+
+  protected ClassLoader createResourcesLoader() {
+    ArrayList<URL> resourcePaths = new ArrayList<URL>();
+    String runtimeClasspath = getEnunciate().getEnunciateRuntimeClasspath();
+    for (StringTokenizer entryToken = new StringTokenizer(runtimeClasspath, File.pathSeparator); entryToken.hasMoreTokens(); ) {
+      String entry = entryToken.nextToken();
+      try {
+        File entryFile = new File(entry);
+        if (entryFile.exists()) {
+          resourcePaths.add(entryFile.toURI().toURL());
+        }
+      }
+      catch (MalformedURLException e) {
+        warn("Unable to add %s as a resource path (%s)", entry, e.getMessage());
+      }
+    }
+    if (getResourcesDir() != null) {
+      File resourcesDir = new File(getResourcesDir());
+      if (resourcesDir.exists()) {
+        try {
+          resourcePaths.add(resourcesDir.toURI().toURL());
+        }
+        catch (MalformedURLException e) {
+          warn("Unable to add %s as a resource path (%s)", resourcesDir.getAbsolutePath(), e.getMessage());
+        }
+      }
+    }
+
+    return new URLClassLoader(resourcePaths.toArray(new URL[resourcePaths.size()]));
   }
 
   protected Collection<TypeDeclaration> gatherNamespaceDeclarations() {

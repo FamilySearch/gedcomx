@@ -13,6 +13,7 @@
     <java-client generateJsonJar="true"/>
     <csharp disableCompile="true"/>
     <ruby forceEnable="true"/>
+    <gedcomx resourcesDir="${basedir}/src/main/resources"/>
   </modules>
 
 </enunciate>
