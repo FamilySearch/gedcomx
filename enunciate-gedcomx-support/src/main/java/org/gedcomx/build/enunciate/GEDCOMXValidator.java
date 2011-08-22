@@ -51,6 +51,12 @@ import java.util.Collection;
  */
 public class GEDCOMXValidator extends BaseValidator {
 
+  private final RDFSchema rdfSchema;
+
+  public GEDCOMXValidator(RDFSchema rdfSchema) {
+    this.rdfSchema = rdfSchema;
+  }
+
   @Override
   public ValidationResult validateComplexType(ComplexTypeDefinition complexType) {
     ValidationResult result = validateTypeDefinition(complexType);
@@ -183,6 +189,26 @@ public class GEDCOMXValidator extends BaseValidator {
         if (accessorType instanceof EnumType && ((EnumType) accessorType).getDeclaration().getAnnotation(XmlQNameEnum.class) != null) {
           result.addError(attribute, "Accessors should not reference QName enums directly. You probably want to annotate this accessor with @XmlTransient.");
         }
+
+        String rdfDescriptionUri = attribute.getNamespace() + attribute.getName();
+        RDFSchema.RDFDescription rdfDescription = this.rdfSchema.findDescription(rdfDescriptionUri);
+        if (rdfDescription != null) {
+          if (!rdfDescription.isPropertyDescription()) {
+            result.addWarning(attribute, String.format("RDF schema description for property %s isn't specified as a property description.", rdfDescriptionUri));
+
+          }
+
+          if (rdfDescription.isDefinedBy == null || !typeDef.getNamespace().equals(rdfDescription.isDefinedBy.resource)) {
+            result.addWarning(attribute, String.format("RDF schema description for property %s doesn't specify \"is defined by %s\"", rdfDescriptionUri, typeDef.getNamespace()));
+          }
+
+          if (!rdfDescription.isLiteral()) {
+            result.addWarning(attribute, String.format("RDF schema description for property %s doesn't specify a literal range.", rdfDescriptionUri));
+          }
+        }
+        else {
+          result.addWarning(attribute, String.format("No RDF schema description found for property %s", rdfDescriptionUri));
+        }
       }
     }
 
@@ -242,6 +268,50 @@ public class GEDCOMXValidator extends BaseValidator {
           if (ns == null || "".equals(ns)) {
             result.addError(choice, "Choice should not reference the empty namespace.");
           }
+
+          String rdfDescriptionUri = choice.getNamespace() + choice.getName();
+          RDFSchema.RDFDescription rdfDescription = this.rdfSchema.findDescription(rdfDescriptionUri);
+          if (rdfDescription != null) {
+            if (!rdfDescription.isPropertyDescription()) {
+              result.addWarning(choice, String.format("RDF schema description for property %s isn't specified as a property description.", rdfDescriptionUri));
+
+            }
+
+            if (rdfDescription.isDefinedBy == null || !typeDef.getNamespace().equals(rdfDescription.isDefinedBy.resource)) {
+              result.addWarning(choice, String.format("RDF schema description for property %s doesn't specify \"is defined by %s\"", rdfDescriptionUri, typeDef.getNamespace()));
+            }
+
+            if (!choice.isElementRef() && choice.getBaseType().isSimple()) {
+              if (!rdfDescription.isLiteral()) {
+                result.addWarning(choice, String.format("RDF schema description for property %s doesn't specify a literal range.", rdfDescriptionUri));
+              }
+            }
+            else if (rdfDescription.isLiteral()) {
+              result.addWarning(choice, String.format("RDF schema description for property %s specifies a literal range.", rdfDescriptionUri));
+            }
+          }
+          else {
+            result.addWarning(choice, String.format("No RDF schema description found for property %s", rdfDescriptionUri));
+          }
+        }
+
+        if (element.isWrapped()) {
+          String rdfDescriptionUri = element.getWrapperNamespace() + element.getWrapperName();
+          RDFSchema.RDFDescription rdfDescription = this.rdfSchema.findDescription(rdfDescriptionUri);
+          if (rdfDescription != null) {
+            if (!rdfDescription.isPropertyDescription()) {
+              result.addWarning(element, String.format("RDF schema description for property %s isn't specified as a property description.", rdfDescriptionUri));
+
+            }
+
+            if (rdfDescription.isDefinedBy == null || !typeDef.getNamespace().equals(rdfDescription.isDefinedBy.resource)) {
+              result.addWarning(element, String.format("RDF schema description for property %s doesn't specify \"is defined by %s\"", rdfDescriptionUri, typeDef.getNamespace()));
+            }
+          }
+          else {
+            result.addWarning(element, String.format("No RDF schema description found for property %s", rdfDescriptionUri));
+          }
+
         }
 
         if (element.isCollectionType()) {

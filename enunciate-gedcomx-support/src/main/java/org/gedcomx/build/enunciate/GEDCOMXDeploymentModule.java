@@ -42,6 +42,9 @@ import org.gedcomx.rt.GedcomNamespacePrefixMapper;
 import org.gedcomx.rt.Namespace;
 import org.gedcomx.rt.Namespaces;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -60,6 +63,7 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
 
   private final Map<String, TypeDeclaration> knownNamespaceDeclarations = new HashMap<String, TypeDeclaration>();
   private String resourcesDir;
+  private final RDFSchema rdfSchema = new RDFSchema();
 
   /**
    * @return "gedcomx"
@@ -178,6 +182,73 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
         ((ObjCDeploymentModule)module).setTranslateIdTo("objectId");
       }
     }
+
+    Unmarshaller unmarshaller;
+    ClassLoader resourcesLoader = createResourcesLoader();
+    try {
+      unmarshaller = JAXBContext.newInstance(RDFSchema.class).createUnmarshaller();
+    }
+    catch (JAXBException e) {
+      throw new RuntimeException(e);
+    }
+
+    loadKnownRDFSchemaDescriptions(unmarshaller);
+
+    Enumeration<URL> resources;
+    try {
+      resources = resourcesLoader.getResources("META-INF/schema.rdf.xml");
+    }
+    catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+
+    while (resources.hasMoreElements()) {
+      URL schemaUrl = resources.nextElement();
+      debug("Found RDF schema file %s.", schemaUrl);
+      loadRDFSchema(unmarshaller, schemaUrl);
+    }
+  }
+
+  protected void loadRDFSchema(Unmarshaller unmarshaller, URL schemaUrl) {
+    try {
+      InputStream stream = schemaUrl.openStream();
+      RDFSchema schema = (RDFSchema) unmarshaller.unmarshal(stream);
+      this.rdfSchema.addDescriptions(schema);
+    }
+    catch (JAXBException e) {
+      throw new RuntimeException(e);
+    }
+    catch (IOException e) {
+      warn("Unable to read resource %s: %s", schemaUrl, e.getMessage());
+    }
+  }
+
+  protected void loadKnownRDFSchemaDescriptions(Unmarshaller unmarshaller) {
+    URL resource = GEDCOMXDeploymentModule.class.getResource("dcterms.rdf.xml");
+    if (resource != null) {
+      loadRDFSchema(unmarshaller, resource);
+    }
+    addDescription(RDFSchema.RDF_NAMESPACE, "ID", true, true);
+    addDescription(RDFSchema.RDF_NAMESPACE, "resource", true, true);
+    addDescription(RDFSchema.RDF_NAMESPACE, "type", true, true);
+  }
+
+  protected void addDescription(String namespace, String name, boolean property, boolean literal) {
+    if (this.rdfSchema.descriptions == null) {
+      this.rdfSchema.descriptions = new ArrayList<RDFSchema.RDFDescription>();
+    }
+
+    RDFSchema.RDFDescription description = new RDFSchema.RDFDescription();
+    description.about = namespace + name;
+    if (property) {
+      description.type = new RDFSchema.RDFResourceReference();
+      description.type.resource = "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property";
+    }
+    if (literal) {
+      description.range = Arrays.asList(new RDFSchema.RDFResourceReference());
+      description.range.get(0).resource = "http://www.w3.org/2000/01/rdf-schema#Literal";
+    }
+    this.rdfSchema.descriptions.add(description);
   }
 
   @Override
@@ -269,16 +340,6 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
           schemaInfo.setProperty("filename", id + "-" + version + ".xsd");
           schemaInfo.setProperty("location", id + "-" + version + ".xsd");
         }
-      }
-    }
-
-    ClassLoader resourcesLoader = createResourcesLoader();
-    for (SchemaInfo schemaInfo : model.getNamespacesToSchemas().values()) {
-      String id = schemaInfo.getId();
-      InputStream stream = resourcesLoader.getResourceAsStream(String.format("META-INF/%s.rdf.xml", id));
-      if (stream != null) {
-        info("Found RDF schema file for namespace %s.", id);
-        //todo: validate that each attribute and element (and wrapper element) for each type definition has a property specified in RDF schema.
       }
     }
   }
@@ -402,6 +463,6 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
 
   @Override
   public Validator getValidator() {
-    return new GEDCOMXValidator();
+    return new GEDCOMXValidator(this.rdfSchema);
   }
 }
