@@ -138,6 +138,26 @@ public class GEDCOMXValidator extends BaseValidator {
       result.addWarning(rootElementDeclaration, "You probably don't want a root element that starts with the name 'web'. Consider renaming using the @XmlRootElement annotation.");
     }
 
+    JsonTypeInfo jsonTypeInfo = rootElementDeclaration.getAnnotation(JsonTypeInfo.class);
+    if (jsonTypeInfo == null || jsonTypeInfo.include() != JsonTypeInfo.As.PROPERTY || jsonTypeInfo.use() != JsonTypeInfo.Id.CUSTOM || !"@type".equals(jsonTypeInfo.property())) {
+      result.addError(rootElementDeclaration, "Root elements need to be annotated with @JsonTypeInfo(use=JsonTypeInfo.Id.CUSTOM, property=\"@type\")");
+    }
+
+    String idResolverName = "";
+    JsonTypeIdResolver typeIdResolverInfo = rootElementDeclaration.getAnnotation(JsonTypeIdResolver.class);
+    if (typeIdResolverInfo != null) {
+      try {
+        idResolverName = typeIdResolverInfo.value().getName();
+      }
+      catch (MirroredTypeException e) {
+        idResolverName = ((DeclaredType) e.getTypeMirror()).getDeclaration().getQualifiedName();
+      }
+    }
+
+    if (!XmlTypeIdResolver.class.getName().equals(idResolverName)) {
+      result.addError(rootElementDeclaration, "Root elements need to be annotated with @org.codehaus.jackson.map.annotate.JsonTypeIdResolver(org.gedcomx.id.XmlTypeIdResolver.class) to specify their JSON type id.");
+    }
+
     return result;
   }
 
