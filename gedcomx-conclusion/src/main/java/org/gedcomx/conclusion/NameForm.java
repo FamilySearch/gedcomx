@@ -15,6 +15,9 @@
  */
 package org.gedcomx.conclusion;
 
+import org.codehaus.enunciate.json.JsonName;
+import org.codehaus.jackson.annotate.JsonProperty;
+
 import javax.xml.bind.annotation.XmlElement;
 import java.util.List;
 
@@ -52,6 +55,8 @@ public final class NameForm {
    * @return The different parts of the name form.
    */
   @XmlElement (name = "part")
+  @JsonName ("parts")
+  @JsonProperty ("parts")
   public List<NamePart> getParts() {
     return parts;
   }
@@ -61,6 +66,7 @@ public final class NameForm {
    *
    * @param parts The different parts of the name form.
    */
+  @JsonProperty ("parts")
   public void setParts(List<NamePart> parts) {
     this.parts = parts;
   }

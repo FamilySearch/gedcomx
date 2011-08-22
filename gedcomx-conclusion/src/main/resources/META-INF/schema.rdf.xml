@@ -107,7 +107,7 @@
     <rdfs:subPropertyOf rdf:resource="http://gedcomx.org/v1/persistentId"/>
   </rdf:Description>
 
-  <rdf:Description rdf:about="http://gedcomx.org/conclusion/v1/extension">
+  <rdf:Description rdf:about="http://gedcomx.org/conclusion/v1/ext">
     <rdfs:label xml:lang="en-US">Extension</rdfs:label>
     <rdfs:comment xml:lang="en-US">An extension point for custom genealogical conclusion data.</rdfs:comment>
     <rdfs:isDefinedBy rdf:resource="http://gedcomx.org/conclusion/v1/"/>
@@ -265,6 +265,7 @@
     <rdfs:comment xml:lang="en-US">The value of a conclusion.</rdfs:comment>
     <rdfs:isDefinedBy rdf:resource="http://gedcomx.org/conclusion/v1/"/>
     <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
     <rdfs:domain rdf:resource="http://gedcomx.org/conclusion/v1/conclusion"/>
     <rdfs:subPropertyOf rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#value"/>
   </rdf:Description>
@@ -274,6 +275,7 @@
     <rdfs:comment xml:lang="en-US">The original value of a conclusion.</rdfs:comment>
     <rdfs:isDefinedBy rdf:resource="http://gedcomx.org/conclusion/v1/"/>
     <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
     <rdfs:domain rdf:resource="http://gedcomx.org/conclusion/v1/conclusion"/>
     <rdfs:subPropertyOf rdf:resource="http://gedcomx.org/conclusion/v1/value"/>
   </rdf:Description>
@@ -283,6 +285,7 @@
     <rdfs:comment xml:lang="en-US">The normalized value of a conclusion.</rdfs:comment>
     <rdfs:isDefinedBy rdf:resource="http://gedcomx.org/conclusion/v1/"/>
     <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
     <rdfs:domain rdf:resource="http://gedcomx.org/conclusion/v1/conclusion"/>
     <rdfs:subPropertyOf rdf:resource="http://gedcomx.org/conclusion/v1/value"/>
   </rdf:Description>
