@@ -22,7 +22,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.attribution.Attribution;
+import org.gedcomx.common.Attribution;
 import org.gedcomx.common.Extension;
 import org.gedcomx.common.ResourceReference;
 import org.gedcomx.rt.XmlTypeIdResolver;
@@ -120,7 +120,6 @@ public class Relationship {
    *
    * @return The attribution metadata for this relationship.
    */
-  @XmlElementRef
   public Attribution getAttribution() {
     return attribution;
   }

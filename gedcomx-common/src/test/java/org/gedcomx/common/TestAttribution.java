@@ -1,5 +1,6 @@
-package org.gedcomx.attribution;
+package org.gedcomx.common;
 
+import org.gedcomx.common.Attribution;
 import org.gedcomx.common.ResourceReference;
 import org.testng.annotations.Test;
 

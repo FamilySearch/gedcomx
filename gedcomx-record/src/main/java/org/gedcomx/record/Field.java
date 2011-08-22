@@ -15,7 +15,7 @@
  */
 package org.gedcomx.record;
 
-import org.gedcomx.attribution.Attribution;
+import org.gedcomx.common.Attribution;
 import org.gedcomx.common.Extension;
 import org.gedcomx.types.TypesNamespaces;
 
@@ -135,7 +135,6 @@ public abstract class Field {
    *
    * @return The attribution metadata for this field.
    */
-  @XmlElementRef
   public Attribution getAttribution() {
     return attribution;
   }

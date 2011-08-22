@@ -6,7 +6,7 @@
     <rdfs:comment xml:lang="en-US">GEDCOM X Conclusion Vocabulary</rdfs:comment>
   </rdf:Description>
 
-  <rdf:Description rdf:about="http://gedcomx.org/conclusion/v1/conclusionaryResource">
+  <rdf:Description rdf:about="http://gedcomx.org/conclusion/v1/ConclusionaryResource">
     <rdfs:label xml:lang="en-US">Conclusionary Resource</rdfs:label>
     <rdfs:comment xml:lang="en-US">A resource that contains conclusions.</rdfs:comment>
     <rdfs:isDefinedBy rdf:resource="http://gedcomx.org/conclusion/v1/"/>
@@ -14,48 +14,48 @@
     <rdfs:subClassOf rdf:resource="http://purl.org/dc/terms/BibliographicResource"/>
   </rdf:Description>
 
-  <rdf:Description rdf:about="http://gedcomx.org/conclusion/v1/personResource">
+  <rdf:Description rdf:about="http://gedcomx.org/conclusion/v1/PersonResource">
     <rdfs:label xml:lang="en-US">Person</rdfs:label>
     <rdfs:comment xml:lang="en-US">A person.</rdfs:comment>
     <rdfs:isDefinedBy rdf:resource="http://gedcomx.org/conclusion/v1/"/>
     <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
-    <rdfs:subClassOf rdf:resource="http://gedcomx.org/conclusion/v1/conclusionaryResource"/>
+    <rdfs:subClassOf rdf:resource="http://gedcomx.org/conclusion/v1/ConclusionaryResource"/>
   </rdf:Description>
 
-  <rdf:Description rdf:about="http://gedcomx.org/conclusion/v1/relationshipResource">
+  <rdf:Description rdf:about="http://gedcomx.org/conclusion/v1/RelationshipResource">
     <rdfs:label xml:lang="en-US">Relationship</rdfs:label>
     <rdfs:comment xml:lang="en-US">A relationship between two persons.</rdfs:comment>
     <rdfs:isDefinedBy rdf:resource="http://gedcomx.org/conclusion/v1/"/>
     <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
-    <rdfs:subClassOf rdf:resource="http://gedcomx.org/conclusion/v1/conclusionaryResource"/>
-    <rdfs:subClassOf rdf:resource="http://gedcomx.org/attribution/v1/AttributableResource"/>
+    <rdfs:subClassOf rdf:resource="http://gedcomx.org/conclusion/v1/ConclusionaryResource"/>
+    <rdfs:subClassOf rdf:resource="http://gedcomx.org/v1/AttributableResource"/>
   </rdf:Description>
 
-  <rdf:Description rdf:about="http://gedcomx.org/conclusion/v1/conclusionResource">
+  <rdf:Description rdf:about="http://gedcomx.org/conclusion/v1/ConclusionResource">
     <rdfs:label xml:lang="en-US">Conclusion</rdfs:label>
     <rdfs:comment xml:lang="en-US">A genealogical conclusion.</rdfs:comment>
     <rdfs:isDefinedBy rdf:resource="http://gedcomx.org/conclusion/v1/"/>
     <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
-    <rdfs:subClassOf rdf:resource="http://gedcomx.org/attribution/v1/AttributableResource"/>
+    <rdfs:subClassOf rdf:resource="http://gedcomx.org/v1/AttributableResource"/>
   </rdf:Description>
 
-  <rdf:Description rdf:about="http://gedcomx.org/conclusion/v1/characteristicResource">
+  <rdf:Description rdf:about="http://gedcomx.org/conclusion/v1/CharacteristicResource">
     <rdfs:label xml:lang="en-US">Characteristic</rdfs:label>
     <rdfs:comment xml:lang="en-US">A conclusion about a characteristic of a genealogical resource.</rdfs:comment>
     <rdfs:isDefinedBy rdf:resource="http://gedcomx.org/conclusion/v1/"/>
     <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
-    <rdfs:subClassOf rdf:resource="http://gedcomx.org/conclusion/v1/conclusion"/>
+    <rdfs:subClassOf rdf:resource="http://gedcomx.org/conclusion/v1/ConclusionResource"/>
   </rdf:Description>
 
-  <rdf:Description rdf:about="http://gedcomx.org/conclusion/v1/eventResource">
+  <rdf:Description rdf:about="http://gedcomx.org/conclusion/v1/EventResource">
     <rdfs:label xml:lang="en-US">Event</rdfs:label>
     <rdfs:comment xml:lang="en-US">A conclusion about a genealogical event.</rdfs:comment>
     <rdfs:isDefinedBy rdf:resource="http://gedcomx.org/conclusion/v1/"/>
     <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
-    <rdfs:subClassOf rdf:resource="http://gedcomx.org/conclusion/v1/conclusion"/>
+    <rdfs:subClassOf rdf:resource="http://gedcomx.org/conclusion/v1/ConclusionResource"/>
   </rdf:Description>
 
-  <rdf:Description rdf:about="http://gedcomx.org/conclusion/v1/genderResource">
+  <rdf:Description rdf:about="http://gedcomx.org/conclusion/v1/GenderResource">
     <rdfs:label xml:lang="en-US">Gender</rdfs:label>
     <rdfs:comment xml:lang="en-US">A conclusion about the gender of a person.</rdfs:comment>
     <rdfs:isDefinedBy rdf:resource="http://gedcomx.org/conclusion/v1/"/>
@@ -63,7 +63,7 @@
     <rdfs:subClassOf rdf:resource="http://gedcomx.org/conclusion/v1/conclusion"/>
   </rdf:Description>
 
-  <rdf:Description rdf:about="http://gedcomx.org/conclusion/v1/nameResource">
+  <rdf:Description rdf:about="http://gedcomx.org/conclusion/v1/NameResource">
     <rdfs:label xml:lang="en-US">Name</rdfs:label>
     <rdfs:comment xml:lang="en-US">A conclusion about a name of a person.</rdfs:comment>
     <rdfs:isDefinedBy rdf:resource="http://gedcomx.org/conclusion/v1/"/>
@@ -71,14 +71,14 @@
     <rdfs:subClassOf rdf:resource="http://gedcomx.org/conclusion/v1/conclusion"/>
   </rdf:Description>
 
-  <rdf:Description rdf:about="http://gedcomx.org/conclusion/v1/nameFormResource">
+  <rdf:Description rdf:about="http://gedcomx.org/conclusion/v1/NameFormResource">
     <rdfs:label xml:lang="en-US">Name Form</rdfs:label>
     <rdfs:comment xml:lang="en-US">A name form.</rdfs:comment>
     <rdfs:isDefinedBy rdf:resource="http://gedcomx.org/conclusion/v1/"/>
     <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
   </rdf:Description>
 
-  <rdf:Description rdf:about="http://gedcomx.org/conclusion/v1/namePartResource">
+  <rdf:Description rdf:about="http://gedcomx.org/conclusion/v1/NamePartResource">
     <rdfs:label xml:lang="en-US">Name Part</rdfs:label>
     <rdfs:comment xml:lang="en-US">A name part.</rdfs:comment>
     <rdfs:isDefinedBy rdf:resource="http://gedcomx.org/conclusion/v1/"/>
@@ -92,7 +92,7 @@
     <rdfs:isDefinedBy rdf:resource="http://gedcomx.org/conclusion/v1/"/>
     <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
     <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
-    <rdfs:domain rdf:resource="http://gedcomx.org/conclusion/v1/conclusionaryResource"/>
+    <rdfs:domain rdf:resource="http://gedcomx.org/conclusion/v1/ConclusionaryResource"/>
     <rdfs:subPropertyOf rdf:resource="http://gedcomx.org/v1/alternateId"/>
   </rdf:Description>
 
@@ -103,7 +103,7 @@
     <rdfs:isDefinedBy rdf:resource="http://gedcomx.org/conclusion/v1/"/>
     <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
     <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
-    <rdfs:domain rdf:resource="http://gedcomx.org/conclusion/v1/conclusionaryResource"/>
+    <rdfs:domain rdf:resource="http://gedcomx.org/conclusion/v1/ConclusionaryResource"/>
     <rdfs:subPropertyOf rdf:resource="http://gedcomx.org/v1/persistentId"/>
   </rdf:Description>
 
@@ -121,7 +121,7 @@
     <rdfs:isDefinedBy rdf:resource="http://gedcomx.org/conclusion/v1/"/>
     <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
     <rdfs:subPropertyOf rdf:resource="http://purl.org/dc/terms/bibliographicCitation"/>
-    <rdfs:domain rdf:resource="http://gedcomx.org/conclusion/v1/conclusionaryResource"/>
+    <rdfs:domain rdf:resource="http://gedcomx.org/conclusion/v1/ConclusionaryResource"/>
     <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
   </rdf:Description>
 
@@ -131,6 +131,14 @@
     <rdfs:isDefinedBy rdf:resource="http://gedcomx.org/conclusion/v1/"/>
     <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
     <rdfs:subPropertyOf rdf:resource="http://purl.org/dc/terms/source"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://gedcomx.org/conclusion/v1/attribution">
+    <rdfs:label xml:lang="en-US">Attribution</rdfs:label>
+    <rdfs:comment xml:lang="en-US">Attribution for a conclusion.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="http://gedcomx.org/conclusion/v1/"/>
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+    <rdfs:subPropertyOf rdf:resource="http://gedcomx.org/v1/attribution"/>
   </rdf:Description>
 
   <rdf:Description rdf:about="http://gedcomx.org/conclusion/v1/type">
@@ -166,8 +174,8 @@
     <rdfs:comment xml:lang="en-US">A characteristic conclusion.</rdfs:comment>
     <rdfs:isDefinedBy rdf:resource="http://gedcomx.org/conclusion/v1/"/>
     <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
-    <rdfs:range rdf:resource="http://gedcomx.org/conclusion/v1/characteristicResource"/>
-    <rdfs:domain rdf:resource="http://gedcomx.org/conclusion/v1/conclusionaryResource"/>
+    <rdfs:range rdf:resource="http://gedcomx.org/conclusion/v1/CharacteristicResource"/>
+    <rdfs:domain rdf:resource="http://gedcomx.org/conclusion/v1/ConclusionaryResource"/>
   </rdf:Description>
 
   <rdf:Description rdf:about="http://gedcomx.org/conclusion/v1/event">
@@ -175,8 +183,8 @@
     <rdfs:comment xml:lang="en-US">A event conclusion.</rdfs:comment>
     <rdfs:isDefinedBy rdf:resource="http://gedcomx.org/conclusion/v1/"/>
     <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
-    <rdfs:range rdf:resource="http://gedcomx.org/conclusion/v1/eventResource"/>
-    <rdfs:domain rdf:resource="http://gedcomx.org/conclusion/v1/conclusionaryResource"/>
+    <rdfs:range rdf:resource="http://gedcomx.org/conclusion/v1/EventResource"/>
+    <rdfs:domain rdf:resource="http://gedcomx.org/conclusion/v1/ConclusionaryResource"/>
   </rdf:Description>
 
   <rdf:Description rdf:about="http://gedcomx.org/conclusion/v1/name">
@@ -184,8 +192,8 @@
     <rdfs:comment xml:lang="en-US">A name conclusion.</rdfs:comment>
     <rdfs:isDefinedBy rdf:resource="http://gedcomx.org/conclusion/v1/"/>
     <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
-    <rdfs:range rdf:resource="http://gedcomx.org/conclusion/v1/nameResource"/>
-    <rdfs:domain rdf:resource="http://gedcomx.org/conclusion/v1/personResource"/>
+    <rdfs:range rdf:resource="http://gedcomx.org/conclusion/v1/NameResource"/>
+    <rdfs:domain rdf:resource="http://gedcomx.org/conclusion/v1/PersonResource"/>
   </rdf:Description>
 
   <rdf:Description rdf:about="http://gedcomx.org/conclusion/v1/gender">
@@ -193,8 +201,8 @@
     <rdfs:comment xml:lang="en-US">A gender conclusion.</rdfs:comment>
     <rdfs:isDefinedBy rdf:resource="http://gedcomx.org/conclusion/v1/"/>
     <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
-    <rdfs:range rdf:resource="http://gedcomx.org/conclusion/v1/genderResource"/>
-    <rdfs:domain rdf:resource="http://gedcomx.org/conclusion/v1/personResource"/>
+    <rdfs:range rdf:resource="http://gedcomx.org/conclusion/v1/GenderResource"/>
+    <rdfs:domain rdf:resource="http://gedcomx.org/conclusion/v1/PersonResource"/>
   </rdf:Description>
 
   <rdf:Description rdf:about="http://gedcomx.org/conclusion/v1/primaryForm">
@@ -202,8 +210,8 @@
     <rdfs:comment xml:lang="en-US">The primary form of a name.</rdfs:comment>
     <rdfs:isDefinedBy rdf:resource="http://gedcomx.org/conclusion/v1/"/>
     <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
-    <rdfs:range rdf:resource="http://gedcomx.org/conclusion/v1/nameFormResource"/>
-    <rdfs:domain rdf:resource="http://gedcomx.org/conclusion/v1/nameResource"/>
+    <rdfs:range rdf:resource="http://gedcomx.org/conclusion/v1/NameFormResource"/>
+    <rdfs:domain rdf:resource="http://gedcomx.org/conclusion/v1/NameResource"/>
   </rdf:Description>
 
   <rdf:Description rdf:about="http://gedcomx.org/conclusion/v1/alternateForm">
@@ -211,8 +219,8 @@
     <rdfs:comment xml:lang="en-US">The alternate form of a name.</rdfs:comment>
     <rdfs:isDefinedBy rdf:resource="http://gedcomx.org/conclusion/v1/"/>
     <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
-    <rdfs:range rdf:resource="http://gedcomx.org/conclusion/v1/nameFormResource"/>
-    <rdfs:domain rdf:resource="http://gedcomx.org/conclusion/v1/nameResource"/>
+    <rdfs:range rdf:resource="http://gedcomx.org/conclusion/v1/NameFormResource"/>
+    <rdfs:domain rdf:resource="http://gedcomx.org/conclusion/v1/NameResource"/>
   </rdf:Description>
 
   <rdf:Description rdf:about="http://gedcomx.org/conclusion/v1/part">
@@ -220,8 +228,8 @@
     <rdfs:comment xml:lang="en-US">The part of a name form.</rdfs:comment>
     <rdfs:isDefinedBy rdf:resource="http://gedcomx.org/conclusion/v1/"/>
     <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
-    <rdfs:range rdf:resource="http://gedcomx.org/conclusion/v1/namePartResource"/>
-    <rdfs:domain rdf:resource="http://gedcomx.org/conclusion/v1/nameFormResource"/>
+    <rdfs:range rdf:resource="http://gedcomx.org/conclusion/v1/NamePartResource"/>
+    <rdfs:domain rdf:resource="http://gedcomx.org/conclusion/v1/NameFormResource"/>
   </rdf:Description>
 
   <rdf:Description rdf:about="http://gedcomx.org/conclusion/v1/fullText">
@@ -230,7 +238,7 @@
     <rdfs:isDefinedBy rdf:resource="http://gedcomx.org/conclusion/v1/"/>
     <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
     <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
-    <rdfs:domain rdf:resource="http://gedcomx.org/conclusion/v1/nameFormResource"/>
+    <rdfs:domain rdf:resource="http://gedcomx.org/conclusion/v1/NameFormResource"/>
   </rdf:Description>
 
   <rdf:Description rdf:about="http://gedcomx.org/conclusion/v1/text">
@@ -239,7 +247,7 @@
     <rdfs:isDefinedBy rdf:resource="http://gedcomx.org/conclusion/v1/"/>
     <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
     <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
-    <rdfs:domain rdf:resource="http://gedcomx.org/conclusion/v1/namePartResource"/>
+    <rdfs:domain rdf:resource="http://gedcomx.org/conclusion/v1/NamePartResource"/>
   </rdf:Description>
 
   <rdf:Description rdf:about="http://gedcomx.org/conclusion/v1/date">

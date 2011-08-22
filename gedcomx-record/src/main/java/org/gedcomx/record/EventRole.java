@@ -15,7 +15,7 @@
  */
 package org.gedcomx.record;
 
-import org.gedcomx.attribution.Attribution;
+import org.gedcomx.common.Attribution;
 import org.gedcomx.common.ResourceReference;
 
 import javax.xml.bind.annotation.XmlAttribute;
@@ -83,7 +83,6 @@ public final class EventRole {
    *
    * @return The attribution metadata for this event role.
    */
-  @XmlElementRef
   public Attribution getAttribution() {
     return attribution;
   }

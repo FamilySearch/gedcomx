@@ -13,11 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.attribution;
+package org.gedcomx.common;
 
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.common.ResourceReference;
 import org.gedcomx.rt.XmlTypeIdResolver;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -29,10 +28,10 @@ import java.util.Date;
  * @author Ryan Heaton
  */
 @XmlRootElement
-@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
+@JsonTypeInfo ( use = JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @SuppressWarnings("gedcomx:no_id")
-public class Attribution {
+public final class Attribution {
 
   private ResourceReference contributor;
   private Date timestamp;

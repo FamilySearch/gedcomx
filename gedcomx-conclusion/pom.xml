@@ -48,12 +48,6 @@
     
     <dependency>
       <groupId>org.gedcomx</groupId>
-      <artifactId>gedcomx-attribution</artifactId>
-      <version>0.4.0.BUILD-SNAPSHOT</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.gedcomx</groupId>
       <artifactId>gedcomx-rt-support</artifactId>
       <version>0.4.0.BUILD-SNAPSHOT</version>
     </dependency>

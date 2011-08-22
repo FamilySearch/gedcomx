@@ -1,6 +1,6 @@
 package org.gedcomx.conclusion.www;
 
-import org.gedcomx.attribution.Attribution;
+import org.gedcomx.common.Attribution;
 import org.gedcomx.common.*;
 import org.gedcomx.conclusion.*;
 import org.gedcomx.common.ResourceReference;

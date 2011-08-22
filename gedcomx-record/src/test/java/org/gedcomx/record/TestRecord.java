@@ -1,6 +1,6 @@
 package org.gedcomx.record;
 
-import org.gedcomx.attribution.Attribution;
+import org.gedcomx.common.Attribution;
 import org.gedcomx.common.AlternateId;
 import org.gedcomx.common.ResourceReference;
 import org.gedcomx.types.*;

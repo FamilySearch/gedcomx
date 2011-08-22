@@ -17,7 +17,7 @@ package org.gedcomx.conclusion;
 
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.attribution.Attribution;
+import org.gedcomx.common.Attribution;
 import org.gedcomx.common.Extension;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.TypesNamespaces;
@@ -65,7 +65,6 @@ public abstract class Conclusion {
    *
    * @return The attribution metadata for this conclusion.
    */
-  @XmlElementRef
   public Attribution getAttribution() {
     return attribution;
   }
