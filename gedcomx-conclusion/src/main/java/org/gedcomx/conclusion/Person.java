@@ -23,6 +23,7 @@ import org.gedcomx.common.AlternateId;
 import org.gedcomx.common.Extension;
 import org.gedcomx.common.ResourceReference;
 import org.gedcomx.rt.XmlTypeIdResolver;
+import org.gedcomx.types.TypesNamespaces;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.*;
@@ -59,7 +60,7 @@ public class Person {
    * @return The id of the person, unique to the context and not necessarily globally unique.
    */
   @XmlID
-  @XmlAttribute
+  @XmlAttribute(name = "ID", namespace = TypesNamespaces.RDF_NAMESPACE)
   public String getId() {
     return id;
   }

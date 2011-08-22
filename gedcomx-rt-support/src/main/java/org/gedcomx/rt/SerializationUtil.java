@@ -28,6 +28,7 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchema;
 import javax.xml.namespace.QName;
+import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.stream.StreamSource;
 import java.io.ByteArrayInputStream;
@@ -96,7 +97,10 @@ public class SerializationUtil {
   public static Document toXmlDom(Object reference, Class<?> instanceClass) throws JAXBException, UnsupportedEncodingException {
     byte[] out = toXmlStream(reference, instanceClass);
     try {
-      return DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new ByteArrayInputStream(out));
+      DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
+      builderFactory.setNamespaceAware(true);
+      DocumentBuilder builder = builderFactory.newDocumentBuilder();
+      return builder.parse(new ByteArrayInputStream(out));
     }
     catch (Exception e) {
       throw new RuntimeException(e);

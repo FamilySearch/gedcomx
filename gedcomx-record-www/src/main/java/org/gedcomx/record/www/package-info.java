@@ -20,6 +20,7 @@
  */
 @XmlSchema(
   namespace = RecordWWWNamespaces.GEDCOMX_RECORD_WWW_NAMESPACE,
+  attributeFormDefault = XmlNsForm.QUALIFIED,
   elementFormDefault = XmlNsForm.QUALIFIED
 )
 @XmlAccessorOrder ( XmlAccessOrder.ALPHABETICAL )

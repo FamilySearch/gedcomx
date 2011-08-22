@@ -19,6 +19,7 @@
  */
 @XmlSchema(
   namespace = CommonNamespaces.GEDCOMX_COMMON_NAMESPACE,
+  attributeFormDefault = XmlNsForm.QUALIFIED,
   elementFormDefault = XmlNsForm.QUALIFIED
 )
 package org.gedcomx.common;

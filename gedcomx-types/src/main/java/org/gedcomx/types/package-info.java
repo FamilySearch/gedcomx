@@ -19,6 +19,7 @@
  */
 @XmlSchema(
   namespace = TypesNamespaces.GEDCOMX_TYPES_NAMESPACE,
+  attributeFormDefault = XmlNsForm.QUALIFIED,
   elementFormDefault = XmlNsForm.QUALIFIED
 )
 package org.gedcomx.types;

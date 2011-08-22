@@ -28,6 +28,7 @@ import org.gedcomx.common.Extension;
 import org.gedcomx.common.ResourceReference;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.RecordType;
+import org.gedcomx.types.TypesNamespaces;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.*;
@@ -66,7 +67,7 @@ public class Record {
    * @return The id of the record, unique to the context and not necessarily globally unique.
    */
   @XmlID
-  @XmlAttribute
+  @XmlAttribute(name = "ID", namespace = TypesNamespaces.RDF_NAMESPACE)
   public String getId() {
     return id;
   }

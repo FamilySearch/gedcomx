@@ -20,6 +20,7 @@ import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.attribution.Attribution;
 import org.gedcomx.common.Extension;
 import org.gedcomx.rt.XmlTypeIdResolver;
+import org.gedcomx.types.TypesNamespaces;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
@@ -45,7 +46,7 @@ public abstract class Conclusion {
    * @return The id of this conclusion, unique to its person or relationship.
    */
   @XmlID
-  @XmlAttribute
+  @XmlAttribute(name = "ID", namespace = TypesNamespaces.RDF_NAMESPACE)
   public String getId() {
     return id;
   }

@@ -165,8 +165,14 @@ public class GEDCOMXValidator extends BaseValidator {
           result.addError(attribute, "Entity links should be make with an attribute named 'href' in the 'http://www.w3.org/1999/xlink' namespace.");
         }
 
-        if ("id".equalsIgnoreCase(attribute.getName()) && !attribute.isXmlID()) {
-          result.addError(attribute, "Id attributes should be annotated as @XmlID.");
+        if ("id".equalsIgnoreCase(attribute.getName())) {
+          if (!attribute.isXmlID()) {
+            result.addError(attribute, "Id attributes should be annotated as @XmlID.");
+          }
+
+          if (!"http://www.w3.org/1999/02/22-rdf-syntax-ns#".equals(attribute.getNamespace()) && !"ID".equals(attribute.getName())) {
+            result.addError(attribute, "Id attributes should be named rdf:ID.");
+          }
         }
 
         if ("persistentId".equalsIgnoreCase(attribute.getName())) {
@@ -207,7 +213,7 @@ public class GEDCOMXValidator extends BaseValidator {
           }
 
           if ("id".equals(choice.getName()) && !choice.isXmlID()) {
-            result.addError(choice, "Accessors named 'id' should be attributes and annotated with @XmlID.");
+            result.addError(choice, "Accessors named 'id' should be attributes named rdf:ID and annotated with @XmlID.");
           }
 
           if ("persistentId".equals(choice.getName()) && !isURI) {

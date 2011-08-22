@@ -24,8 +24,8 @@ public class TestRelationship {
     cr.setKnownType(RelationshipType.couple);
     cr.setId("id");
     Document dom = toXmlDom(cr);
-    assertNotNull(dom.getDocumentElement().getAttributeNode("type"));
-    assertEquals(0, dom.getDocumentElement().getElementsByTagName("type").getLength());
+    assertNotNull(dom.getDocumentElement().getAttributeNodeNS(RecordNamespaces.GEDCOMX_RECORD_NAMESPACE, "type"));
+    assertEquals(0, dom.getDocumentElement().getElementsByTagNameNS(RecordNamespaces.GEDCOMX_RECORD_NAMESPACE, "type").getLength());
 
     ObjectNode node = toJsonNode(cr);
     assertNotNull(node.get("type"));
@@ -34,8 +34,8 @@ public class TestRelationship {
     or.setId("id");
     or.setType(URI.create("urn:custom#custom"));
     dom = toXmlDom(or);
-    assertNotNull(dom.getDocumentElement().getAttributeNode("type"));
-    assertEquals(0, dom.getDocumentElement().getElementsByTagName("type").getLength());
+    assertNotNull(dom.getDocumentElement().getAttributeNodeNS(RecordNamespaces.GEDCOMX_RECORD_NAMESPACE, "type"));
+    assertEquals(0, dom.getDocumentElement().getElementsByTagNameNS(RecordNamespaces.GEDCOMX_RECORD_NAMESPACE, "type").getLength());
 
     node = toJsonNode(or);
     assertNotNull(node.get("type"));

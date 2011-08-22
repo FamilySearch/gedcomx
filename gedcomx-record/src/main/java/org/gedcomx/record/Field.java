@@ -17,6 +17,7 @@ package org.gedcomx.record;
 
 import org.gedcomx.attribution.Attribution;
 import org.gedcomx.common.Extension;
+import org.gedcomx.types.TypesNamespaces;
 
 import javax.xml.bind.annotation.*;
 
@@ -40,7 +41,7 @@ public abstract class Field {
    * @return The id of this field data, unique to its record.
    */
   @XmlID
-  @XmlAttribute
+  @XmlAttribute(name = "ID", namespace = TypesNamespaces.RDF_NAMESPACE)
   public String getId() {
     return id;
   }

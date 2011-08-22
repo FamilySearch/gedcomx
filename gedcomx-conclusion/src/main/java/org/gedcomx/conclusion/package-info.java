@@ -19,6 +19,7 @@
  */
 @XmlSchema(
   namespace = ConclusionNamespaces.GEDCOMX_CONCLUSION_NAMESPACE,
+  attributeFormDefault = XmlNsForm.QUALIFIED,
   elementFormDefault = XmlNsForm.QUALIFIED
 )
 @XmlAccessorOrder ( XmlAccessOrder.ALPHABETICAL )
