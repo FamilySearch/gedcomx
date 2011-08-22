@@ -42,6 +42,7 @@ import org.gedcomx.rt.GedcomNamespacePrefixMapper;
 import org.gedcomx.rt.Namespace;
 import org.gedcomx.rt.Namespaces;
 
+import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
@@ -229,8 +230,12 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
       loadRDFSchema(unmarshaller, resource);
     }
     addDescription(RDFSchema.RDF_NAMESPACE, "ID", true, true);
+    addDescription(RDFSchema.RDF_NAMESPACE, "about", true, true);
     addDescription(RDFSchema.RDF_NAMESPACE, "resource", true, true);
-    addDescription(RDFSchema.RDF_NAMESPACE, "type", true, true);
+    addDescription(RDFSchema.RDF_NAMESPACE, "value", true, true);
+    addDescription(RDFSchema.RDF_NAMESPACE, "type", true, false);
+    addDescription(RDFSchema.RDF_NAMESPACE, "Description", true, false);
+    addDescription(XMLConstants.XML_NS_URI, "lang", true, true);
   }
 
   protected void addDescription(String namespace, String name, boolean property, boolean literal) {
@@ -248,6 +253,8 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
       description.range = Arrays.asList(new RDFSchema.RDFResourceReference());
       description.range.get(0).resource = "http://www.w3.org/2000/01/rdf-schema#Literal";
     }
+    description.isDefinedBy = new RDFSchema.RDFResourceReference();
+    description.isDefinedBy.resource = namespace;
     this.rdfSchema.descriptions.add(description);
   }
 

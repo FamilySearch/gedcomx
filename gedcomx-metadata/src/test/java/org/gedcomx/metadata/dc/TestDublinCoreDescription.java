@@ -74,11 +74,11 @@ public class TestDublinCoreDescription {
     metadata.setEducationLevel(new RDFValue());
     metadata.setExtent(new RDFValue());
     metadata.setFormat(new RDFValue());
-    metadata.setFormatOf(new ArrayList<RDFValue>());
+    metadata.setIsFormatOf(new ArrayList<RDFValue>());
     metadata.setHasFormat(new ArrayList<RDFValue>());
     metadata.setHasPart(new ArrayList<RDFValue>());
     metadata.setHasVersion(new ArrayList<RDFValue>());
-    metadata.setIdentifier(new RDFValue());
+    metadata.setIdentifier(new RDFLiteral());
     metadata.setInstructionalMethod(new RDFValue());
     metadata.setIssued(new Date());
     metadata.setLanguage(new ArrayList<RDFValue>());
@@ -86,15 +86,15 @@ public class TestDublinCoreDescription {
     metadata.setMediator(new ArrayList<RDFValue>());
     metadata.setMedium(new RDFValue());
     metadata.setModified(new Date());
-    metadata.setPartOf(new ArrayList<RDFValue>());
+    metadata.setIsPartOf(new ArrayList<RDFValue>());
     metadata.setProvenance(new RDFValue());
     metadata.setPublisher(new RDFValue());
-    metadata.setReferencedBy(new ArrayList<RDFValue>());
+    metadata.setIsReferencedBy(new ArrayList<RDFValue>());
     metadata.setReferences(new ArrayList<RDFValue>());
     metadata.setRelation(new ArrayList<RDFValue>());
-    metadata.setReplacedBy(new ArrayList<RDFValue>());
+    metadata.setIsReplacedBy(new ArrayList<RDFValue>());
     metadata.setReplaces(new ArrayList<RDFValue>());
-    metadata.setRequiredBy(new ArrayList<RDFValue>());
+    metadata.setIsRequiredBy(new ArrayList<RDFValue>());
     metadata.setRequires(new ArrayList<RDFValue>());
     metadata.setRights(new ArrayList<RDFValue>());
     metadata.setRightsHolder(new RDFValue());
@@ -110,8 +110,8 @@ public class TestDublinCoreDescription {
     metadata.setTitle(titleProperty);
     metadata.setType(new RDFTypeReference());
     metadata.getType().setKnownType(ResourceType.Event);
-    metadata.setValid(new ArrayList<RDFValue>());
-    metadata.setVersionOf(new RDFValue());
+    metadata.setValid(new Date());
+    metadata.setIsVersionOf(new RDFValue());
     return metadata;
   }
 
@@ -144,7 +144,7 @@ public class TestDublinCoreDescription {
     assertTrue(metadata.getEducationLevel() != null);
     assertTrue(metadata.getExtent() != null);
     assertTrue(metadata.getFormat() != null);
-    assertTrue(metadata.getFormatOf() == null || metadata.getFormatOf().isEmpty());
+    assertTrue(metadata.getIsFormatOf() == null || metadata.getIsFormatOf().isEmpty());
     assertTrue(metadata.getHasFormat() == null || metadata.getHasFormat().isEmpty());
     assertTrue(metadata.getHasPart() == null || metadata.getHasPart().isEmpty());
     assertTrue(metadata.getHasVersion() == null || metadata.getHasVersion().isEmpty());
@@ -156,15 +156,15 @@ public class TestDublinCoreDescription {
     assertTrue(metadata.getMediator() == null || metadata.getMediator().isEmpty());
     assertTrue(metadata.getMedium() != null);
     assertTrue(metadata.getModified() != null);
-    assertTrue(metadata.getPartOf() == null || metadata.getPartOf().isEmpty());
+    assertTrue(metadata.getIsPartOf() == null || metadata.getIsPartOf().isEmpty());
     assertTrue(metadata.getProvenance() != null);
     assertTrue(metadata.getPublisher() != null);
-    assertTrue(metadata.getReferencedBy() == null || metadata.getReferencedBy().isEmpty());
+    assertTrue(metadata.getIsReferencedBy() == null || metadata.getIsReferencedBy().isEmpty());
     assertTrue(metadata.getReferences() == null || metadata.getReferences().isEmpty());
     assertTrue(metadata.getRelation() == null || metadata.getRelation().isEmpty());
-    assertTrue(metadata.getReplacedBy() == null || metadata.getReplacedBy().isEmpty());
+    assertTrue(metadata.getIsReplacedBy() == null || metadata.getIsReplacedBy().isEmpty());
     assertTrue(metadata.getReplaces() == null || metadata.getReplaces().isEmpty());
-    assertTrue(metadata.getRequiredBy() == null || metadata.getRequiredBy().isEmpty());
+    assertTrue(metadata.getIsRequiredBy() == null || metadata.getIsRequiredBy().isEmpty());
     assertTrue(metadata.getRequires() == null || metadata.getRequires().isEmpty());
     assertTrue(metadata.getRights() == null || metadata.getRights().isEmpty());
     assertTrue(metadata.getRightsHolder() != null);
@@ -177,8 +177,8 @@ public class TestDublinCoreDescription {
     assertEquals("en", titleProperty.getLang());
     assertEquals("hello", titleProperty.getOtherAttributes().get(new QName("urn:hi", "hi")));
     assertEquals(ResourceType.Event, metadata.getType().getKnownType());
-    assertTrue(metadata.getValid() == null || metadata.getValid().isEmpty());
-    assertTrue(metadata.getVersionOf() != null);
+    assertTrue(metadata.getValid() != null);
+    assertTrue(metadata.getIsVersionOf() != null);
   }
 
 }

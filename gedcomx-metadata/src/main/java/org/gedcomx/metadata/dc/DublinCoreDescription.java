@@ -69,7 +69,7 @@ public class DublinCoreDescription extends RDFDescription {
   private List<RDFValue> hasFormat;
   private List<RDFValue> hasPart;
   private List<RDFValue> hasVersion;
-  private RDFValue identifier;
+  private RDFLiteral identifier;
   private RDFValue instructionalMethod;
   private List<RDFValue> isFormatOf;
   private List<RDFValue> isPartOf;
@@ -98,7 +98,7 @@ public class DublinCoreDescription extends RDFDescription {
   private List<RDFValue> temporal;
   private RDFLiteral title;
   private RDFTypeReference type;
-  private List<RDFValue> valid;
+  private Date valid;
 
   /**
    * A summary of the resource.
@@ -651,7 +651,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @return An unambiguous reference to the resource within a given context.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-identifier
    */
-  public RDFValue getIdentifier() {
+  public RDFLiteral getIdentifier() {
     return identifier;
   }
 
@@ -661,7 +661,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @param identifier An unambiguous reference to the resource within a given context.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-identifier
    */
-  public void setIdentifier(RDFValue identifier) {
+  public void setIdentifier(RDFLiteral identifier) {
     this.identifier = identifier;
   }
 
@@ -694,7 +694,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @link http://dublincore.org/documents/dcmi-terms/#terms-isFormatOf
    */
   @SuppressWarnings("gedcomx:non_plural_json_name")
-  public List<RDFValue> getFormatOf() {
+  public List<RDFValue> getIsFormatOf() {
     return isFormatOf;
   }
 
@@ -706,7 +706,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @param formatOf Related resources that are substantially the same as the described resource, but in another format.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-isFormatOf
    */
-  public void setFormatOf(List<RDFValue> formatOf) {
+  public void setIsFormatOf(List<RDFValue> formatOf) {
     isFormatOf = formatOf;
   }
 
@@ -717,7 +717,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @link http://dublincore.org/documents/dcmi-terms/#terms-isPartOf
    */
   @SuppressWarnings("gedcomx:non_plural_json_name")
-  public List<RDFValue> getPartOf() {
+  public List<RDFValue> getIsPartOf() {
     return isPartOf;
   }
 
@@ -727,7 +727,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @param partOf Related resources in which the described resource is physically or logically included.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-isPartOf
    */
-  public void setPartOf(List<RDFValue> partOf) {
+  public void setIsPartOf(List<RDFValue> partOf) {
     isPartOf = partOf;
   }
 
@@ -738,7 +738,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @link http://dublincore.org/documents/dcmi-terms/#terms-isReferencedBy
    */
   @SuppressWarnings("gedcomx:non_plural_json_name")
-  public List<RDFValue> getReferencedBy() {
+  public List<RDFValue> getIsReferencedBy() {
     return isReferencedBy;
   }
 
@@ -748,7 +748,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @param referencedBy Related resources that reference, cite, or otherwise point to the described resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-isReferencedBy
    */
-  public void setReferencedBy(List<RDFValue> referencedBy) {
+  public void setIsReferencedBy(List<RDFValue> referencedBy) {
     isReferencedBy = referencedBy;
   }
 
@@ -759,7 +759,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @link http://dublincore.org/documents/dcmi-terms/#terms-isReplacedBy
    */
   @SuppressWarnings("gedcomx:non_plural_json_name")
-  public List<RDFValue> getReplacedBy() {
+  public List<RDFValue> getIsReplacedBy() {
     return isReplacedBy;
   }
 
@@ -769,7 +769,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @param replacedBy Related resources that supplant, displace, or supersede the described resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-isReplacedBy
    */
-  public void setReplacedBy(List<RDFValue> replacedBy) {
+  public void setIsReplacedBy(List<RDFValue> replacedBy) {
     isReplacedBy = replacedBy;
   }
 
@@ -780,7 +780,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @link http://dublincore.org/documents/dcmi-terms/#terms-isRequiredBy
    */
   @SuppressWarnings("gedcomx:non_plural_json_name")
-  public List<RDFValue> getRequiredBy() {
+  public List<RDFValue> getIsRequiredBy() {
     return isRequiredBy;
   }
 
@@ -790,7 +790,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @param requiredBy Related resources that require the described resource to support its function, delivery, or coherence.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-isRequiredBy
    */
-  public void setRequiredBy(List<RDFValue> requiredBy) {
+  public void setIsRequiredBy(List<RDFValue> requiredBy) {
     isRequiredBy = requiredBy;
   }
 
@@ -823,7 +823,7 @@ public class DublinCoreDescription extends RDFDescription {
    *
    * @link http://dublincore.org/documents/dcmi-terms/#terms-isVersionOf
    */
-  public RDFValue getVersionOf() {
+  public RDFValue getIsVersionOf() {
     return isVersionOf;
   }
 
@@ -836,7 +836,7 @@ public class DublinCoreDescription extends RDFDescription {
    *
    * @link http://dublincore.org/documents/dcmi-terms/#terms-isVersionOf
    */
-  public void setVersionOf(RDFValue versionOf) {
+  public void setIsVersionOf(RDFValue versionOf) {
     isVersionOf = versionOf;
   }
 
@@ -1296,7 +1296,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @link http://dublincore.org/documents/dcmi-terms/#terms-valid
    */
   @SuppressWarnings("gedcomx:non_plural_json_name")
-  public List<RDFValue> getValid() {
+  public Date getValid() {
     return valid;
   }
 
@@ -1306,7 +1306,7 @@ public class DublinCoreDescription extends RDFDescription {
    * @param valid Date of validity of a resource.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-valid
    */
-  public void setValid(List<RDFValue> valid) {
+  public void setValid(Date valid) {
     this.valid = valid;
   }
 }
