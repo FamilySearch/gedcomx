@@ -15,7 +15,6 @@
  */
 package org.gedcomx.build.enunciate;
 
-import com.sun.mirror.declaration.ClassDeclaration;
 import com.sun.mirror.declaration.Declaration;
 import com.sun.mirror.declaration.FieldDeclaration;
 import com.sun.mirror.declaration.MemberDeclaration;
@@ -23,13 +22,10 @@ import com.sun.mirror.type.DeclaredType;
 import com.sun.mirror.type.EnumType;
 import com.sun.mirror.type.MirroredTypeException;
 import com.sun.mirror.type.TypeMirror;
-import net.sf.jelly.apt.Context;
 import net.sf.jelly.apt.decorations.TypeMirrorDecorator;
 import net.sf.jelly.apt.decorations.declaration.DecoratedMethodDeclaration;
 import net.sf.jelly.apt.decorations.declaration.PropertyDeclaration;
 import net.sf.jelly.apt.decorations.type.DecoratedTypeMirror;
-import net.sf.jelly.apt.freemarker.FreemarkerModel;
-import org.codehaus.enunciate.apt.EnunciateFreemarkerModel;
 import org.codehaus.enunciate.contract.jaxb.*;
 import org.codehaus.enunciate.contract.jaxb.types.KnownXmlType;
 import org.codehaus.enunciate.contract.jaxb.types.XmlClassType;
@@ -54,12 +50,6 @@ import java.util.Collection;
  * @author Ryan Heaton
  */
 public class GEDCOMXValidator extends BaseValidator {
-
-  private final RDFSchema rdfSchema;
-
-  public GEDCOMXValidator(RDFSchema rdfSchema) {
-    this.rdfSchema = rdfSchema;
-  }
 
   @Override
   public ValidationResult validateComplexType(ComplexTypeDefinition complexType) {
@@ -213,26 +203,6 @@ public class GEDCOMXValidator extends BaseValidator {
         if (accessorType instanceof EnumType && ((EnumType) accessorType).getDeclaration().getAnnotation(XmlQNameEnum.class) != null) {
           result.addError(attribute, "Accessors should not reference QName enums directly. You probably want to annotate this accessor with @XmlTransient.");
         }
-
-        String rdfDescriptionUri = attribute.getNamespace() + attribute.getName();
-        RDFSchema.RDFDescription rdfDescription = this.rdfSchema.findDescription(rdfDescriptionUri);
-        if (rdfDescription != null) {
-          if (!rdfDescription.isPropertyDescription()) {
-            result.addWarning(attribute, String.format("RDF schema description for property %s isn't specified as a property description.", rdfDescriptionUri));
-
-          }
-
-          if (rdfDescription.isDefinedBy == null) {
-            result.addWarning(attribute, String.format("RDF schema description for property %s doesn't specify \"is defined by\"", rdfDescriptionUri));
-          }
-
-          if (!rdfDescription.isLiteral()) {
-            result.addWarning(attribute, String.format("RDF schema description for property %s doesn't specify a literal range.", rdfDescriptionUri));
-          }
-        }
-        else {
-          result.addWarning(attribute, String.format("No RDF schema description found for property %s", rdfDescriptionUri));
-        }
       }
     }
 
@@ -292,56 +262,6 @@ public class GEDCOMXValidator extends BaseValidator {
           if (ns == null || "".equals(ns)) {
             result.addError(choice, "Choice should not reference the empty namespace.");
           }
-
-          String rdfDescriptionUri = choice.getNamespace() + choice.getName();
-          RDFSchema.RDFDescription rdfDescription = this.rdfSchema.findDescription(rdfDescriptionUri);
-          if (rdfDescription != null) {
-            if (!rdfDescription.isPropertyDescription()) {
-              result.addWarning(choice, String.format("RDF schema description for property %s isn't specified as a property description.", rdfDescriptionUri));
-
-            }
-
-            if (rdfDescription.isDefinedBy == null) {
-              result.addWarning(choice, String.format("RDF schema description for property %s doesn't specify \"is defined by\"", rdfDescriptionUri));
-            }
-
-            if (!choice.isElementRef() && choice.getBaseType().isSimple()) {
-              if (!rdfDescription.isLiteral()) {
-                result.addWarning(choice, String.format("RDF schema description for property %s doesn't specify a literal range.", rdfDescriptionUri));
-              }
-            }
-            else if (rdfDescription.isLiteral()) {
-              //if it's a literal value, make sure there's an @XmlValue...
-              if (accessorType instanceof DeclaredType) {
-                String typefqn = ((DeclaredType) accessorType).getDeclaration().getQualifiedName();
-                if (((EnunciateFreemarkerModel) FreemarkerModel.get()).findTypeDefinition((ClassDeclaration) Context.getCurrentEnvironment().getTypeDeclaration(typefqn)).getValue() == null) {
-                  result.addWarning(choice, String.format("RDF schema description for property %s specifies a literal range.", rdfDescriptionUri));
-                }
-              }
-            }
-          }
-          else {
-            result.addWarning(choice, String.format("No RDF schema description found for property %s", rdfDescriptionUri));
-          }
-        }
-
-        if (element.isWrapped()) {
-          String rdfDescriptionUri = element.getWrapperNamespace() + element.getWrapperName();
-          RDFSchema.RDFDescription rdfDescription = this.rdfSchema.findDescription(rdfDescriptionUri);
-          if (rdfDescription != null) {
-            if (!rdfDescription.isPropertyDescription()) {
-              result.addWarning(element, String.format("RDF schema description for property %s isn't specified as a property description.", rdfDescriptionUri));
-
-            }
-
-            if (rdfDescription.isDefinedBy == null) {
-              result.addWarning(element, String.format("RDF schema description for property %s doesn't specify \"is defined by\"", rdfDescriptionUri));
-            }
-          }
-          else {
-            result.addWarning(element, String.format("No RDF schema description found for property %s", rdfDescriptionUri));
-          }
-
         }
 
         if (element.isCollectionType()) {

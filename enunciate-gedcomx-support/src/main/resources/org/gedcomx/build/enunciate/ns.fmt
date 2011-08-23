@@ -40,6 +40,12 @@
           <td align="right">XML Schema:</td>
           <td><a href="${schema.properties.filename!"#"}">${schema.properties.filename!"n/a"}</a></td>
         </tr>
+        [#if schema.properties.rdfSchemaLocation??]
+        <tr>
+          <td align="right">RDF Schema:</td>
+          <td><a href="${schema.properties.rdfSchemaLocation}">${schema.properties.rdfSchemaLocation}</a></td>
+        </tr>
+        [/#if]
         [#if schema.properties.xmlMediaType??]
         <tr>
           <td align="right">XML Media Type:</td>

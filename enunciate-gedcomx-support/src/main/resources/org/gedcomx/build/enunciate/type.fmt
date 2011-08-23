@@ -34,8 +34,8 @@
           <td>${type.namespace}</td>
         </tr>
         <tr>
-          <td align="right">QName:</td>
-          <td>{${type.namespace}}${type.name}</td>
+          <td align="right">URI:</td>
+          <td>${type.namespace}${type.name}</td>
         </tr>
         [#if !type.baseObject]
         <tr>
@@ -60,7 +60,11 @@
       [#list type.enumConstants as constant]
         [#if enumValueMap[constant.simpleName]??]
         <tr>
+          [#if type.QNameEnum!false]
+          <td>${enumValueMap[constant.simpleName].namespaceURI}${enumValueMap[constant.simpleName].localPart}</td>
+          [#else]
           <td>${enumValueMap[constant.simpleName]}</td>
+          [/#if]
           <td>${constant.docComment!""}</td>
         </tr>
         [/#if]

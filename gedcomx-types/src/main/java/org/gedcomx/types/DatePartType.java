@@ -28,9 +28,9 @@ import java.net.URI;
 )
 public enum DatePartType {
 
-  year,
-  month,
-  day,
+  years,
+  months,
+  days,
   @XmlUnknownQNameEnumValue
   other;
 

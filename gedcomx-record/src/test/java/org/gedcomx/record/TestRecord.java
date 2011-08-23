@@ -57,7 +57,7 @@ public class TestRecord {
     event.getDate().setParts(new ArrayList<DatePart>());
     DatePart datePart = new DatePart();
     fillInField(datePart, "event-date-part");
-    datePart.setKnownType(DatePartType.month);
+    datePart.setKnownType(DatePartType.months);
     event.getDate().getParts().add(datePart);
     event.setId("event-id");
     event.setKnownType(EventType.adoption);
@@ -230,7 +230,7 @@ public class TestRecord {
     assertTrue(event.getPrimary());
     assertEquals(1, event.getDate().getParts().size());
     assertField(event.getDate().getParts().get(0), "event-date-part");
-    assertEquals(DatePartType.month, event.getDate().getParts().get(0).getKnownType());
+    assertEquals(DatePartType.months, event.getDate().getParts().get(0).getKnownType());
     assertEquals(1, event.getPlace().getParts().size());
     assertField(event.getPlace().getParts().get(0), "event-place-part");
     assertEquals(PlacePartType.cemetery, event.getPlace().getParts().get(0).getKnownType());
