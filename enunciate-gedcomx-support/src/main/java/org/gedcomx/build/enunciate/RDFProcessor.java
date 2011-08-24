@@ -74,17 +74,19 @@ public class RDFProcessor {
   public ValidationResult processModel(EnunciateFreemarkerModel model) {
     ValidationResult result = new ValidationResult();
     for (SchemaInfo schemaInfo : model.getNamespacesToSchemas().values()) {
-      describeSchema(schemaInfo, result);
-      for (TypeDefinition typeDefinition : schemaInfo.getTypeDefinitions()) {
-        if (typeDefinition instanceof QNameEnumTypeDefinition) {
-          QNameEnumTypeDefinition qNameEnumDef = (QNameEnumTypeDefinition) typeDefinition;
-          describeRDFClassesAndProperties(qNameEnumDef, result);
+      if (!isKnownRDFNamespace(schemaInfo.getNamespace())) {
+        describeSchema(schemaInfo, result);
+        for (TypeDefinition typeDefinition : schemaInfo.getTypeDefinitions()) {
+          if (typeDefinition instanceof QNameEnumTypeDefinition) {
+            QNameEnumTypeDefinition qNameEnumDef = (QNameEnumTypeDefinition) typeDefinition;
+            describeRDFClassesAndProperties(qNameEnumDef, result);
+          }
+          else if (typeDefinition instanceof ComplexTypeDefinition) {
+            ComplexTypeDefinition complexTypeDefinition = (ComplexTypeDefinition) typeDefinition;
+            describeRDFClassesAndProperties(complexTypeDefinition, result);
+          }
+          //simple types and enum types aren't described by RDF schema except as RDF literals.
         }
-        else if (typeDefinition instanceof ComplexTypeDefinition) {
-          ComplexTypeDefinition complexTypeDefinition = (ComplexTypeDefinition) typeDefinition;
-          describeRDFClassesAndProperties(complexTypeDefinition, result);
-        }
-        //simple types and enum types aren't described by RDF schema except as RDF literals.
       }
     }
     return result;
