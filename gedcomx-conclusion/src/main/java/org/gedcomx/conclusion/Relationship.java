@@ -22,10 +22,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.common.Attribution;
-import org.gedcomx.common.AlternateId;
-import org.gedcomx.common.Extension;
-import org.gedcomx.common.ResourceReference;
+import org.gedcomx.common.*;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.RelationshipType;
 import org.gedcomx.types.TypesNamespaces;
@@ -46,7 +43,7 @@ import java.util.List;
 )
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-public class Relationship {
+public class Relationship implements Attributable {
 
   private String id;
   private URI type;

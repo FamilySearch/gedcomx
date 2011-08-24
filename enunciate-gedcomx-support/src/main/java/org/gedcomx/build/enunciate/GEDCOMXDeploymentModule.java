@@ -16,22 +16,14 @@
 package org.gedcomx.build.enunciate;
 
 import com.sun.mirror.apt.Messager;
-import com.sun.mirror.declaration.*;
-import com.sun.mirror.type.DeclaredType;
-import com.sun.mirror.type.TypeMirror;
+import com.sun.mirror.declaration.TypeDeclaration;
 import freemarker.template.TemplateException;
 import net.sf.jelly.apt.Context;
-import net.sf.jelly.apt.freemarker.FreemarkerModel;
 import org.codehaus.enunciate.EnunciateException;
 import org.codehaus.enunciate.apt.EnunciateFreemarkerModel;
 import org.codehaus.enunciate.apt.EnunciateTypeDeclarationListener;
-import org.codehaus.enunciate.apt.ModelValidationException;
 import org.codehaus.enunciate.config.SchemaInfo;
 import org.codehaus.enunciate.config.WsdlInfo;
-import org.codehaus.enunciate.contract.jaxb.Attribute;
-import org.codehaus.enunciate.contract.jaxb.Element;
-import org.codehaus.enunciate.contract.jaxb.QNameEnumTypeDefinition;
-import org.codehaus.enunciate.contract.jaxb.TypeDefinition;
 import org.codehaus.enunciate.contract.validation.ValidationException;
 import org.codehaus.enunciate.contract.validation.ValidationMessage;
 import org.codehaus.enunciate.contract.validation.ValidationResult;
@@ -53,17 +45,9 @@ import org.gedcomx.rt.GedcomNamespacePrefixMapper;
 import org.gedcomx.rt.Namespace;
 import org.gedcomx.rt.Namespaces;
 
-import javax.xml.XMLConstants;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.namespace.QName;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLClassLoader;
 import java.util.*;
 
 /**
@@ -75,8 +59,7 @@ import java.util.*;
 public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implements DocumentationAwareModule, EnunciateTypeDeclarationListener {
 
   private final Map<String, TypeDeclaration> knownNamespaceDeclarations = new HashMap<String, TypeDeclaration>();
-  private String resourcesDir;
-  private final RDFSchema rdfSchema = new RDFSchema();
+  private RDFProcessor rdfProcessor;
 
   /**
    * @return "gedcomx"
@@ -153,24 +136,6 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
   public void setDocsDir(String docsDir) {
   }
 
-  /**
-   * Directory in which to search for known resources.
-   *
-   * @return Directory in which to search for known resources.
-   */
-  public String getResourcesDir() {
-    return resourcesDir;
-  }
-
-  /**
-   * Directory in which to search for known resources.
-   *
-   * @param resourcesDir Directory in which to search for known resources.
-   */
-  public void setResourcesDir(String resourcesDir) {
-    this.resourcesDir = resourcesDir;
-  }
-
   public void onTypeDeclarationInspected(TypeDeclaration typeDeclaration) {
     if (typeDeclaration.getAnnotation(Namespaces.class) != null) {
       this.knownNamespaceDeclarations.put(typeDeclaration.getQualifiedName(), typeDeclaration);
@@ -200,78 +165,7 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
       }
     }
 
-    Unmarshaller unmarshaller;
-    ClassLoader resourcesLoader = createResourcesLoader();
-    try {
-      unmarshaller = JAXBContext.newInstance(RDFSchema.class).createUnmarshaller();
-    }
-    catch (JAXBException e) {
-      throw new RuntimeException(e);
-    }
-
-    loadKnownRDFSchemaDescriptions(unmarshaller);
-
-    Enumeration<URL> resources;
-    try {
-      resources = resourcesLoader.getResources("META-INF/schema.rdf.xml");
-    }
-    catch (IOException e) {
-      throw new RuntimeException(e);
-    }
-
-    while (resources.hasMoreElements()) {
-      URL schemaUrl = resources.nextElement();
-      debug("Found RDF schema file %s.", schemaUrl);
-      loadRDFSchema(unmarshaller, schemaUrl);
-    }
-  }
-
-  protected void loadRDFSchema(Unmarshaller unmarshaller, URL schemaUrl) {
-    try {
-      InputStream stream = schemaUrl.openStream();
-      RDFSchema schema = (RDFSchema) unmarshaller.unmarshal(stream);
-      this.rdfSchema.addDescriptions(schema);
-    }
-    catch (JAXBException e) {
-      throw new RuntimeException(e);
-    }
-    catch (IOException e) {
-      warn("Unable to read resource %s: %s", schemaUrl, e.getMessage());
-    }
-  }
-
-  protected void loadKnownRDFSchemaDescriptions(Unmarshaller unmarshaller) {
-    URL resource = GEDCOMXDeploymentModule.class.getResource("dcterms.rdf.xml");
-    if (resource != null) {
-      loadRDFSchema(unmarshaller, resource);
-    }
-    addDescription(RDFSchema.RDF_NAMESPACE, "ID", true, true);
-    addDescription(RDFSchema.RDF_NAMESPACE, "about", true, true);
-    addDescription(RDFSchema.RDF_NAMESPACE, "resource", true, true);
-    addDescription(RDFSchema.RDF_NAMESPACE, "value", true, true);
-    addDescription(RDFSchema.RDF_NAMESPACE, "type", true, false);
-    addDescription(RDFSchema.RDF_NAMESPACE, "Description", true, false);
-    addDescription(XMLConstants.XML_NS_URI, "lang", true, true);
-  }
-
-  protected void addDescription(String namespace, String name, boolean property, boolean literal) {
-    if (this.rdfSchema.descriptions == null) {
-      this.rdfSchema.descriptions = new ArrayList<RDFSchema.RDFDescription>();
-    }
-
-    RDFSchema.RDFDescription description = new RDFSchema.RDFDescription();
-    description.about = namespace + name;
-    if (property) {
-      description.type = new RDFSchema.RDFResourceReference();
-      description.type.resource = "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property";
-    }
-    if (literal) {
-      description.range = Arrays.asList(new RDFSchema.RDFResourceReference());
-      description.range.get(0).resource = "http://www.w3.org/2000/01/rdf-schema#Literal";
-    }
-    description.isDefinedBy = new RDFSchema.RDFResourceReference();
-    description.isDefinedBy.resource = namespace;
-    this.rdfSchema.descriptions.add(description);
+    this.rdfProcessor = new RDFProcessor();
   }
 
   @Override
@@ -366,7 +260,7 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
       }
     }
 
-    ValidationResult validationResult = processRDF(model);
+    ValidationResult validationResult = this.rdfProcessor.processModel(model);
     Messager messager = Context.getCurrentEnvironment().getMessager();
     if (validationResult.hasWarnings()) {
       warn("Warnings while processing RDF.");
@@ -406,192 +300,6 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
     }
   }
 
-  private boolean isKnownRDFNamespace(String namespace) {
-    return RDFSchema.RDF_NAMESPACE.equals(namespace) || RDFSchema.RDFS_NAMESPACE.equals(namespace) || XMLConstants.XML_NS_URI.equals(namespace) || "http://purl.org/dc/dcmitype/".equals(namespace) || "http://purl.org/dc/terms/".equals(namespace);
-  }
-
-  private ValidationResult processRDF(EnunciateFreemarkerModel model) {
-    ValidationResult result = new ValidationResult();
-    for (SchemaInfo schemaInfo : model.getNamespacesToSchemas().values()) {
-      for (TypeDefinition typeDefinition : schemaInfo.getTypeDefinitions()) {
-        if (typeDefinition instanceof QNameEnumTypeDefinition) {
-          QNameEnumTypeDefinition qNameEnumDef = (QNameEnumTypeDefinition) typeDefinition;
-          Map<String, Object> enumValues = qNameEnumDef.getEnumValues();
-          for (EnumConstantDeclaration constant : qNameEnumDef.getEnumConstants()) {
-            QName qname = (QName) enumValues.get(constant.getSimpleName());
-            if (qname != null) {
-              String about = qname.getNamespaceURI() + qname.getLocalPart();
-              RDFSchema.RDFDescription typeDescription = this.rdfSchema.findDescription(about);
-              if (typeDescription == null) {
-                typeDescription = new RDFSchema.RDFDescription();
-                typeDescription.about = about;
-                typeDescription.isDefinedBy = new RDFSchema.RDFResourceReference();
-                typeDescription.isDefinedBy.resource = qname.getNamespaceURI();
-                typeDescription.type = new RDFSchema.RDFResourceReference();
-                typeDescription.type.resource = RDFSchema.RDFS_CLASS_TYPE;
-                typeDescription.label = constant.getSimpleName();
-                typeDescription.associatedDeclaration = constant;
-                if (this.rdfSchema.descriptions == null) {
-                  this.rdfSchema.descriptions = new ArrayList<RDFSchema.RDFDescription>();
-                }
-
-                this.rdfSchema.descriptions.add(typeDescription);
-              }
-              else {
-                if (typeDescription.isDefinedBy == null || !qname.getNamespaceURI().equals(typeDescription.isDefinedBy.resource)) {
-                  StringBuilder message = new StringBuilder("Unable to describe class ").append(about).append(" because it's already described");
-                  appendPosition(message, typeDescription.associatedDeclaration);
-                  message.append('.');
-                  result.addError(constant, message.toString());
-                }
-
-                if (typeDescription.type == null || !RDFSchema.RDFS_CLASS_TYPE.equals(typeDescription.type.resource)) {
-                  StringBuilder message = new StringBuilder("Unable to describe class ").append(about).append(" because it's already described as not a class");
-                  appendPosition(message, typeDescription.associatedDeclaration);
-                  message.append('.');
-                  result.addError(constant, message.toString());
-                }
-              }
-
-              String docComment = constant.getDocComment();
-              docComment = docComment == null ? "" : docComment.trim();
-              if (!docComment.isEmpty()) {
-                if (typeDescription.comments == null) {
-                  typeDescription.comments = new ArrayList<String>();
-                }
-
-                typeDescription.comments.add(docComment);
-              }
-            }
-          }
-        }
-        else {
-          for (Attribute attribute : typeDefinition.getAttributes()) {
-            String rdfDescriptionUri = attribute.getNamespace() + attribute.getName();
-            RDFSchema.RDFDescription rdfDescription = this.rdfSchema.findDescription(rdfDescriptionUri);
-            if (rdfDescription != null) {
-              if (!rdfDescription.isPropertyDescription()) {
-                result.addWarning(attribute, String.format("RDF schema description for property %s isn't specified as a property description.", rdfDescriptionUri));
-
-              }
-
-              if (rdfDescription.isDefinedBy == null) {
-                result.addWarning(attribute, String.format("RDF schema description for property %s doesn't specify \"is defined by\"", rdfDescriptionUri));
-              }
-
-              if (!rdfDescription.isLiteral()) {
-                result.addWarning(attribute, String.format("RDF schema description for property %s doesn't specify a literal range.", rdfDescriptionUri));
-              }
-            }
-            else {
-              result.addWarning(attribute, String.format("No RDF schema description found for property %s", rdfDescriptionUri));
-            }
-          }
-
-          for (Element element : typeDefinition.getElements()) {
-            for (Element choice : element.getChoices()) {
-              String rdfDescriptionUri = choice.getNamespace() + choice.getName();
-              RDFSchema.RDFDescription rdfDescription = this.rdfSchema.findDescription(rdfDescriptionUri);
-              if (rdfDescription != null) {
-                if (!rdfDescription.isPropertyDescription()) {
-                  result.addWarning(choice, String.format("RDF schema description for property %s isn't specified as a property description.", rdfDescriptionUri));
-
-                }
-
-                if (rdfDescription.isDefinedBy == null) {
-                  result.addWarning(choice, String.format("RDF schema description for property %s doesn't specify \"is defined by\"", rdfDescriptionUri));
-                }
-
-                if (!choice.isElementRef() && choice.getBaseType().isSimple()) {
-                  if (!rdfDescription.isLiteral()) {
-                    result.addWarning(choice, String.format("RDF schema description for property %s doesn't specify a literal range.", rdfDescriptionUri));
-                  }
-                }
-                else if (rdfDescription.isLiteral()) {
-                  //if it's a literal value, make sure there's an @XmlValue...
-                  TypeMirror accessorType = choice.getBareAccessorType();
-                  if (accessorType instanceof DeclaredType) {
-                    String typefqn = ((DeclaredType) accessorType).getDeclaration().getQualifiedName();
-                    if (((EnunciateFreemarkerModel) FreemarkerModel.get()).findTypeDefinition((ClassDeclaration) Context.getCurrentEnvironment().getTypeDeclaration(typefqn)).getValue() == null) {
-                      result.addWarning(choice, String.format("RDF schema description for property %s specifies a literal range.", rdfDescriptionUri));
-                    }
-                  }
-                }
-              }
-              else {
-                result.addWarning(choice, String.format("No RDF schema description found for property %s", rdfDescriptionUri));
-              }
-            }
-
-            if (element.isWrapped()) {
-              String rdfDescriptionUri = element.getWrapperNamespace() + element.getWrapperName();
-              RDFSchema.RDFDescription rdfDescription = this.rdfSchema.findDescription(rdfDescriptionUri);
-              if (rdfDescription != null) {
-                if (!rdfDescription.isPropertyDescription()) {
-                  result.addWarning(element, String.format("RDF schema description for property %s isn't specified as a property description.", rdfDescriptionUri));
-
-                }
-
-                if (rdfDescription.isDefinedBy == null) {
-                  result.addWarning(element, String.format("RDF schema description for property %s doesn't specify \"is defined by\"", rdfDescriptionUri));
-                }
-              }
-              else {
-                result.addWarning(element, String.format("No RDF schema description found for property %s", rdfDescriptionUri));
-              }
-            }
-          }
-        }
-      }
-    }
-    return result;
-  }
-
-  private void appendPosition(StringBuilder message, Declaration associatedDeclaration) {
-    if (associatedDeclaration != null) {
-      message.append(" at ");
-      if (associatedDeclaration.getPosition() != null) {
-        message.append(associatedDeclaration.getPosition());
-      }
-      else {
-        if (associatedDeclaration instanceof MemberDeclaration) {
-          message.append(((MemberDeclaration) associatedDeclaration).getDeclaringType().getQualifiedName()).append('#');
-        }
-        message.append(associatedDeclaration.getSimpleName());
-      }
-    }
-  }
-
-  protected ClassLoader createResourcesLoader() {
-    ArrayList<URL> resourcePaths = new ArrayList<URL>();
-    String runtimeClasspath = getEnunciate().getEnunciateRuntimeClasspath();
-    for (StringTokenizer entryToken = new StringTokenizer(runtimeClasspath, File.pathSeparator); entryToken.hasMoreTokens(); ) {
-      String entry = entryToken.nextToken();
-      try {
-        File entryFile = new File(entry);
-        if (entryFile.exists()) {
-          resourcePaths.add(entryFile.toURI().toURL());
-        }
-      }
-      catch (MalformedURLException e) {
-        warn("Unable to add %s as a resource path (%s)", entry, e.getMessage());
-      }
-    }
-    if (getResourcesDir() != null) {
-      File resourcesDir = new File(getResourcesDir());
-      if (resourcesDir.exists()) {
-        try {
-          resourcePaths.add(resourcesDir.toURI().toURL());
-        }
-        catch (MalformedURLException e) {
-          warn("Unable to add %s as a resource path (%s)", resourcesDir.getAbsolutePath(), e.getMessage());
-        }
-      }
-    }
-
-    return new URLClassLoader(resourcePaths.toArray(new URL[resourcePaths.size()]));
-  }
-
   protected Collection<TypeDeclaration> gatherNamespaceDeclarations() {
     return this.knownNamespaceDeclarations.values();
   }
@@ -615,11 +323,11 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
       model.setVariable("generateExampleJson", new GenerateExampleJsonMethod(model));
       model.setVariable("generateExampleXml", new GenerateExampleXmlMethod(null, model));
       model.setVariable("typeName", new TypeNameMethod(model.getNamespacesToPrefixes()));
-      model.put("rdfschema", this.rdfSchema);
+      model.put("rdfschema", this.rdfProcessor.getRdfSchema());
       try {
         for (SchemaInfo schemaInfo : model.getNamespacesToSchemas().values()) {
           String namespace = schemaInfo.getNamespace();
-          if (!isKnownRDFNamespace(namespace)) {
+          if (!this.rdfProcessor.isKnownRDFNamespace(namespace)) {
             model.put("schema", schemaInfo);
             processTemplate(getRDFSchemaTemplateURL(), model);
             schemaInfo.setProperty("rdfSchemaLocation", schemaInfo.getId() + ".rdf.xml");

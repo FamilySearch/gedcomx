@@ -16,16 +16,21 @@
 package org.gedcomx.build.enunciate;
 
 import com.sun.mirror.declaration.Declaration;
-import net.sf.jelly.apt.decorations.declaration.DecoratedDeclaration;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.adapters.XmlAdapter;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
+ * Basic XML model for an RDF schema document.
+ *
  * @author Ryan Heaton
  */
 @XmlRootElement(namespace = RDFSchema.RDF_NAMESPACE, name = "RDF")
@@ -35,21 +40,9 @@ public class RDFSchema {
   public static final String RDF_PROPERTY_TYPE = "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property";
   public static final String RDFS_NAMESPACE    = "http://www.w3.org/2000/01/rdf-schema#";
   public static final String RDFS_CLASS_TYPE   = "http://www.w3.org/2000/01/rdf-schema#Class";
+  public static final String RDFS_LITERAL_RANGE = "http://www.w3.org/2000/01/rdf-schema#Literal";
 
-  List<RDFDescription> descriptions;
-
-  public RDFDescription findDescription(String about) {
-    RDFDescription description = null;
-    if (this.descriptions != null) {
-      for (RDFDescription candidate : descriptions) {
-        if (about.equals(candidate.about)) {
-          description = candidate;
-          break;
-        }
-      }
-    }
-    return description;
-  }
+  private List<RDFDescription> descriptions;
 
   @XmlElement(namespace = RDFSchema.RDF_NAMESPACE, name = "Description")
   public List<RDFDescription> getDescriptions() {
@@ -60,26 +53,49 @@ public class RDFSchema {
     this.descriptions = descriptions;
   }
 
+  public void addDescription(RDFDescription description) {
+    if (description != null) {
+      if (this.descriptions == null) {
+        this.descriptions = new ArrayList<RDFDescription>();
+      }
+
+      this.descriptions.add(description);
+    }
+  }
+
+  public RDFDescription findDescription(String about) {
+    RDFDescription description = null;
+    if (this.getDescriptions() != null) {
+      for (RDFDescription candidate : this.descriptions) {
+        if (about.equals(candidate.getAbout())) {
+          description = candidate;
+          break;
+        }
+      }
+    }
+    return description;
+  }
+
   public void addDescriptions(RDFSchema schema) {
-    if (this.descriptions == null) {
+    if (this.getDescriptions() == null) {
       this.descriptions = new ArrayList<RDFDescription>();
     }
 
-    this.descriptions.addAll(schema.descriptions);
+    this.descriptions.addAll(schema.getDescriptions());
   }
 
   public static class RDFDescription {
 
-    String about;
-    String label;
-    List<String> comments;
-    RDFResourceReference isDefinedBy;
-    RDFResourceReference type;
-    List<RDFResourceReference> subClassOf;
-    List<RDFResourceReference> subPropertyOf;
-    List<RDFResourceReference> range;
-    List<RDFResourceReference> domain;
-    Declaration associatedDeclaration;
+    private String about;
+    private String label;
+    private List<String> comments;
+    private String isDefinedBy;
+    private String type;
+    private Set<String> subClassOf;
+    private Set<String> subPropertyOf;
+    private Set<String> range;
+    private Set<String> domain;
+    private Declaration associatedDeclaration;
 
     @XmlAttribute (namespace = RDF_NAMESPACE)
     public String getAbout() {
@@ -108,57 +124,83 @@ public class RDFSchema {
       this.comments = comments;
     }
 
-    @XmlElement (namespace = RDFS_NAMESPACE)
-    public RDFResourceReference getIsDefinedBy() {
-      return isDefinedBy;
+    public void addComment(String comment) {
+      if (comment != null) {
+        if (this.comments == null) {
+          this.comments = new ArrayList<String>();
+        }
+
+        this.comments.add(comment);
+      }
     }
 
-    public void setIsDefinedBy(RDFResourceReference definedBy) {
-      isDefinedBy = definedBy;
+    @XmlElement (namespace = RDFS_NAMESPACE)
+    @XmlJavaTypeAdapter(StringToResourceAdapter.class)
+    public String getIsDefinedBy() {
+      return this.isDefinedBy;
+    }
+
+    public void setIsDefinedBy(String definedBy) {
+      this.isDefinedBy = definedBy;
     }
 
     @XmlElement (namespace = RDF_NAMESPACE)
-    public RDFResourceReference getType() {
+    @XmlJavaTypeAdapter(StringToResourceAdapter.class)
+    public String getType() {
       return type;
     }
 
-    public void setType(RDFResourceReference type) {
+    public void setType(String type) {
       this.type = type;
     }
 
     @XmlElement (namespace = RDFS_NAMESPACE)
-    public List<RDFResourceReference> getSubClassOf() {
+    @XmlJavaTypeAdapter(StringToResourceAdapter.class)
+    public Set<String> getSubClassOf() {
       return subClassOf;
     }
 
-    public void setSubClassOf(List<RDFResourceReference> subClassOf) {
+    public void setSubClassOf(Set<String> subClassOf) {
       this.subClassOf = subClassOf;
     }
 
+    public void addSubClassOf(String resource) {
+      if (resource != null) {
+        if (this.subClassOf == null) {
+          this.subClassOf = new TreeSet<String>();
+        }
+
+        this.subClassOf.add(resource);
+      }
+    }
+
     @XmlElement (namespace = RDFS_NAMESPACE)
-    public List<RDFResourceReference> getSubPropertyOf() {
+    @XmlJavaTypeAdapter(StringToResourceAdapter.class)
+    public Set<String> getSubPropertyOf() {
       return subPropertyOf;
     }
 
-    public void setSubPropertyOf(List<RDFResourceReference> subPropertyOf) {
+    public void setSubPropertyOf(Set<String> subPropertyOf) {
       this.subPropertyOf = subPropertyOf;
     }
 
     @XmlElement (namespace = RDFS_NAMESPACE)
-    public List<RDFResourceReference> getRange() {
+    @XmlJavaTypeAdapter(StringToResourceAdapter.class)
+    public Set<String> getRange() {
       return range;
     }
 
-    public void setRange(List<RDFResourceReference> range) {
+    public void setRange(Set<String> range) {
       this.range = range;
     }
 
     @XmlElement (namespace = RDFS_NAMESPACE)
-    public List<RDFResourceReference> getDomain() {
+    @XmlJavaTypeAdapter(StringToResourceAdapter.class)
+    public Set<String> getDomain() {
       return domain;
     }
 
-    public void setDomain(List<RDFResourceReference> domain) {
+    public void setDomain(Set<String> domain) {
       this.domain = domain;
     }
 
@@ -172,32 +214,28 @@ public class RDFSchema {
     }
 
     public boolean isClassDescription() {
-      return this.type != null && RDFS_CLASS_TYPE.equals(this.type.resource);
+      return RDFS_CLASS_TYPE.equals(this.type);
     }
 
     public boolean isPropertyDescription() {
-      return this.type != null && RDF_PROPERTY_TYPE.equals(this.type.resource);
+      return RDF_PROPERTY_TYPE.equals(this.type);
     }
 
     public boolean isLiteral() {
-      boolean literal = false;
-      if (this.range != null) {
-        for (RDFResourceReference range : this.range) {
-          if ("http://www.w3.org/2000/01/rdf-schema#Literal".equals(range.resource)) {
-            literal = true;
-            break;
-          }
-        }
-      }
-      return literal;
+      return this.range != null && this.range.size() == 1 && this.range.contains(RDFS_LITERAL_RANGE);
     }
-
-
   }
 
   public static class RDFResourceReference {
 
-    String resource;
+    private String resource;
+
+    public RDFResourceReference() {
+    }
+
+    public RDFResourceReference(String resource) {
+      this.resource = resource;
+    }
 
     @XmlAttribute (namespace = RDF_NAMESPACE)
     public String getResource() {
@@ -206,6 +244,18 @@ public class RDFSchema {
 
     public void setResource(String resource) {
       this.resource = resource;
+    }
+  }
+
+  public static class StringToResourceAdapter extends XmlAdapter<RDFResourceReference, String> {
+    @Override
+    public String unmarshal(RDFResourceReference v) throws Exception {
+      return v == null ? null : v.getResource();
+    }
+
+    @Override
+    public RDFResourceReference marshal(String v) throws Exception {
+      return v == null ? null : new RDFResourceReference(v);
     }
   }
 }

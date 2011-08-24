@@ -31,7 +31,7 @@
               <goal>assemble</goal>
             </goals>
             <configuration>
-              <stepTo>generate</stepTo>
+              <stepTo>build</stepTo>
               <forceWarPackaging>false</forceWarPackaging>
             </configuration>
           </execution>
