@@ -30,7 +30,9 @@ import javax.xml.bind.annotation.XmlTransient;
     uri = CommonNamespaces.GEDCOMX_COMMON_NAMESPACE,
     label = "Common Namespace",
     description = "The common namespace contains the objects that are common to all profiles and namespaces.",
-    version = "v1"
+    version = "v1",
+    xmlMediaType = CommonNamespaces.GEDCOMX_COMMON_XML_MEDIA_TYPE,
+    jsonMediaType = CommonNamespaces.GEDCOMX_COMMON_JSON_MEDIA_TYPE
   )
 } )
 public class CommonNamespaces {
@@ -38,5 +40,7 @@ public class CommonNamespaces {
   private CommonNamespaces() {}
 
   public static final String GEDCOMX_COMMON_NAMESPACE = "http://gedcomx.org/v1/";
+  public static final String GEDCOMX_COMMON_XML_MEDIA_TYPE = "application/x-gedcom-v1+xml";
+  public static final String GEDCOMX_COMMON_JSON_MEDIA_TYPE = "application/x-gedcom-v1+json";
 
 }
