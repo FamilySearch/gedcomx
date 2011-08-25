@@ -47,7 +47,7 @@
 
       <h3>Description</h3>
 
-      ${type.docValue!""}
+      <p>${type.docValue!""}</p>
 
     [#if type.enum!false]
       <h3>Enumerated Values</h3>

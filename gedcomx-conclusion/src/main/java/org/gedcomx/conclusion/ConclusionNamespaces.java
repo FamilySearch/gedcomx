@@ -34,7 +34,8 @@ import javax.xml.bind.annotation.XmlTransient;
     description = "The conclusion namespace contains the objects necessary for modeling genealogical conclusion data.",
     version = "v1",
     xmlMediaType = ConclusionNamespaces.GEDCOMX_CONCLUSION_XML_MEDIA_TYPE,
-    jsonMediaType = ConclusionNamespaces.GEDCOMX_CONCLUSION_JSON_MEDIA_TYPE
+    jsonMediaType = ConclusionNamespaces.GEDCOMX_CONCLUSION_JSON_MEDIA_TYPE,
+    definesRDFSchema = true
   )
 } )
 public class ConclusionNamespaces {

@@ -124,8 +124,7 @@ public class TestRecord {
     eventRole.setAttribution(new Attribution());
     eventRole.getAttribution().setExplanation("event role explanation");
     eventRole.setPrincipal(false);
-    eventRole.setEvent(new ResourceReference());
-    eventRole.getEvent().setResource(URI.create("#" + event.getId()));
+    eventRole.setEvent(URI.create("#" + event.getId()));
     eventRoles.add(eventRole);
     persona.setEventRoles(eventRoles);
 
@@ -264,7 +263,7 @@ public class TestRecord {
     EventRole eventRole = persona.getEventRoles().get(0);
     assertEquals("event role description", eventRole.getDescription());
     assertFalse(eventRole.getPrincipal());
-    assertEquals("#" + event.getId(), eventRole.getEvent().getResource().toString());
+    assertEquals("#" + event.getId(), eventRole.getEvent().toString());
 
     assertEquals(1, record.getFields().size());
     RecordField field = record.getFields().get(0);

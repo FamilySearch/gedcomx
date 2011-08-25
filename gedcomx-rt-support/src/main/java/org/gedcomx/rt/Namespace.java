@@ -76,4 +76,11 @@ public @interface Namespace {
    * @return The JSON media type for representations of data in this namespace.
    */
   String jsonMediaType() default "";
+
+  /**
+   * Whether the namespace defines an RDF schema.
+   *
+   * @return Whether the namespace defines an RDF schema.
+   */
+  boolean definesRDFSchema() default false;
 }

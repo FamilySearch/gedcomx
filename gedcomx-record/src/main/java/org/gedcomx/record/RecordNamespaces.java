@@ -32,7 +32,8 @@ import javax.xml.bind.annotation.XmlTransient;
     description = "The record namespace contains the objects necessary for modeling genealogical record data.",
     version = "v1",
     xmlMediaType = RecordNamespaces.GEDCOMX_RECORD_XML_MEDIA_TYPE,
-    jsonMediaType = RecordNamespaces.GEDCOMX_RECORD_JSON_MEDIA_TYPE
+    jsonMediaType = RecordNamespaces.GEDCOMX_RECORD_JSON_MEDIA_TYPE,
+    definesRDFSchema = true
   )
 } )
 public class RecordNamespaces {

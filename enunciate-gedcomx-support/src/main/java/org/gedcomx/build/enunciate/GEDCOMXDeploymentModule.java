@@ -253,6 +253,8 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
           }
           schemaInfo.setProperty("description", description);
 
+          schemaInfo.setProperty("definesRDFSchema", ns.definesRDFSchema());
+
           //ensure the correct filenames are used for the schemas.
           schemaInfo.setProperty("filename", id + "-" + version + ".xsd");
           schemaInfo.setProperty("location", id + "-" + version + ".xsd");
@@ -327,13 +329,15 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
       try {
         for (SchemaInfo schemaInfo : model.getNamespacesToSchemas().values()) {
           String namespace = schemaInfo.getNamespace();
-          if (!this.rdfProcessor.isKnownRDFNamespace(namespace)) {
-            model.put("schema", schemaInfo);
-            processTemplate(getRDFSchemaTemplateURL(), model);
-            schemaInfo.setProperty("rdfSchemaLocation", schemaInfo.getId() + ".rdf.xml");
-          }
-          else {
-            schemaInfo.setProperty("rdfSchemaLocation", namespace);
+          if (Boolean.TRUE.equals(schemaInfo.getProperty("definesRDFSchema"))) {
+            if (!this.rdfProcessor.isKnownRDFNamespace(namespace)) {
+              model.put("schema", schemaInfo);
+              processTemplate(getRDFSchemaTemplateURL(), model);
+              schemaInfo.setProperty("rdfSchemaLocation", schemaInfo.getId() + ".rdf.xml");
+            }
+            else {
+              schemaInfo.setProperty("rdfSchemaLocation", namespace);
+            }
           }
         }
         processTemplate(getDocsTemplateURL(), model);

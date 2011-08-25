@@ -78,7 +78,7 @@ public class RDFProcessor {
   public ValidationResult processModel(EnunciateFreemarkerModel model) {
     ValidationResult result = new ValidationResult();
     for (SchemaInfo schemaInfo : model.getNamespacesToSchemas().values()) {
-      if (!isKnownRDFNamespace(schemaInfo.getNamespace())) {
+      if (!isKnownRDFNamespace(schemaInfo.getNamespace()) && Boolean.TRUE.equals(schemaInfo.getProperty("definesRDFSchema"))) {
         describeSchema(schemaInfo, result);
         for (TypeDefinition typeDefinition : schemaInfo.getTypeDefinitions()) {
           if (typeDefinition instanceof QNameEnumTypeDefinition) {

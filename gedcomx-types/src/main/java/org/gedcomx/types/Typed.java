@@ -29,9 +29,10 @@ import java.net.URI;
 public interface Typed {
 
   /**
-   * The type.
+   * Reference to the resource type. Note that this differs from rdf:type and dcterms:type because
+   * it's a <em>reference</em> to the type as opposed to the actual type.
    *
-   * @return The type.
+   * @return Reference to the resource type.
    */
   URI getType();
 }

@@ -26,7 +26,7 @@
       <table>
         <tr>
           <td align="right">Type:</td>
-          <td><a href="${schemaForNamespace(element.typeDefinition).id}_${element.typeDefinition.name}.html">${element.typeDefinition.name}</a></td>
+          <td><a href="${schemaForNamespace(element.typeDefinition).id}_${element.typeDefinition.name}.html">${element.typeDefinition.namespace}${element.typeDefinition.name}</a></td>
         </tr>
         <tr>
           <td align="right">Name:</td>
@@ -40,7 +40,7 @@
 
       <h3>Description</h3>
 
-      ${element.docValue!""}
+      <p>${element.docValue!""}</p>
 
       <div id="accordion">
         <h3><a href="#">XML</a></h3>
@@ -59,6 +59,34 @@ ${generateExampleJson(element)}
           </pre>
         </div>
     </div>
+  [#if schema.properties.definesRDFSchema!false]
+
+    <h3>RDF Integration</h3>
+
+    <p>The <tt>${element.name}</tt> element is declared as an <a href="http://www.w3.org/TR/rdf-syntax-grammar/#section-Syntax">RDF description element</a>.
+      The following two description sets are semantically equivalent:</p>
+
+    <pre class="prettyprint lang-xml">
+&lt;rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+            xmlns:${schema.id}="${element.namespace}"&gt;
+  &lt;rdf:Description rdf:ID="12345"&gt;
+    &lt;rdf:type rdf:resource="${element.typeDefinition.namespace}${element.typeDefinition.name}"/&gt;
+    ...
+  &lt;/rdf:Description&gt;
+&lt;/rdf:RDF&gt;
+    </pre>
+
+    <br/>
+
+    <pre class="prettyprint lang-xml">
+&lt;rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+            xmlns:${schema.id}="${element.namespace}"&gt;
+  &lt;${schema.id}:${element.name} rdf:ID="12345"&gt;
+    ...
+  &lt;/${schema.id}:${element.name}&gt;
+&lt;/rdf:RDF&gt;
+    </pre>
+  [/#if]
 
     <div class="clear" />
     [@libBoilerplate.writeFooter/]

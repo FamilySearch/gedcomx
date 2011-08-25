@@ -32,7 +32,8 @@ import javax.xml.bind.annotation.XmlTransient;
     description = "The common namespace contains the objects that are common to all profiles and namespaces.",
     version = "v1",
     xmlMediaType = CommonNamespaces.GEDCOMX_COMMON_XML_MEDIA_TYPE,
-    jsonMediaType = CommonNamespaces.GEDCOMX_COMMON_JSON_MEDIA_TYPE
+    jsonMediaType = CommonNamespaces.GEDCOMX_COMMON_JSON_MEDIA_TYPE,
+    definesRDFSchema = true
   )
 } )
 public class CommonNamespaces {
