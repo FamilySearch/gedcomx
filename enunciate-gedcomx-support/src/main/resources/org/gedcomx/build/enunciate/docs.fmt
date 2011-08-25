@@ -42,7 +42,15 @@
       <ul>
     [#list ns2schema?values?sort_by("id") as schema]
       [#if (schema.typeDefinitions?size > 0) || (schema.globalElements?size > 0)]
-        <li><a href="${schema.id}.html">${schema.properties.label!("\"" + schema.id + "\" Namespace")}</a>[#if schema.properties.description??]<br/><p>${schema.properties.description}</p>[/#if]</li>
+        <li>
+          <a href="${schema.id}.html">${schema.properties.label!("\"" + schema.id + "\" Namespace")}</a><br/>
+          <p>
+          [#if schema.properties.description??]${schema.properties.description}[/#if]
+          [#if schema.globalElements?size > 0]
+          Resources:[#list schema.globalElements as element] [#if !element_has_next && (element_index > 0)]and [/#if]<a href="${schema.id}_el_${element.name}.html">${element.name}</a>[#if element_has_next && schema.globalElements?size > 2],[/#if][/#list].
+          [/#if]
+          </p>
+        </li>
       [/#if]
     [/#list]
       </ul>
