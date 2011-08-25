@@ -17,8 +17,8 @@ package org.gedcomx.record;
 
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.common.Extension;
-import org.gedcomx.common.ResourceReference;
+import org.gedcomx.common.*;
+import org.gedcomx.rt.RDFRange;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.TypesNamespaces;
 
@@ -28,12 +28,10 @@ import javax.xml.bind.annotation.*;
  * A collection of records.
  */
 @XmlRootElement
-@XmlType (
-  propOrder = { "parent", "title", "description", "publisher", "bibliographicCitation", "extension" }
-)
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-public class RecordCollection {
+@XmlType ( name = "RecordCollection", propOrder = { "bibliographicCitation", "parent", "title", "description", "publisher", "attribution", "extension" } )
+public class RecordCollection implements Attributable, Extensible, BibliographicResource, Describable {
 
   private String id;
   private ResourceReference parent;
@@ -41,6 +39,7 @@ public class RecordCollection {
   private String description;
   private String publisher;
   private String bibliographicCitation;
+  private Attribution attribution;
   private Extension extension;
 
   /**
@@ -68,6 +67,7 @@ public class RecordCollection {
    *
    * @return The reference to the "parent" collection for this collection, i.e. the collection that contains this collection.
    */
+  @RDFRange(RecordCollection.class)
   public ResourceReference getParent() {
     return parent;
   }
@@ -151,6 +151,24 @@ public class RecordCollection {
    */
   public void setBibliographicCitation(String bibliographicCitation) {
     this.bibliographicCitation = bibliographicCitation;
+  }
+
+  /**
+   * The attribution metadata for this collection.
+   *
+   * @return The attribution metadata for this collection.
+   */
+  public Attribution getAttribution() {
+    return attribution;
+  }
+
+  /**
+   * The attribution metadata for this collection.
+   *
+   * @param attribution The attribution metadata for this collection.
+   */
+  public void setAttribution(Attribution attribution) {
+    this.attribution = attribution;
   }
 
   /**

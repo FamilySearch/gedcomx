@@ -20,6 +20,7 @@ import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.rt.XmlTypeIdResolver;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 import java.util.Date;
 
 /**
@@ -30,6 +31,7 @@ import java.util.Date;
 @XmlRootElement
 @JsonTypeInfo ( use = JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
+@XmlType ( name = "Attribution", propOrder = { "timestamp", "explanation", "contributor" } )
 @SuppressWarnings("gedcomx:no_id")
 public final class Attribution {
 

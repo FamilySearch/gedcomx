@@ -24,6 +24,8 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.NameType;
+import org.gedcomx.types.Typed;
+import org.gedcomx.types.TypesNamespaces;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.*;
@@ -38,7 +40,7 @@ import java.util.List;
 @XmlType (propOrder = { "primaryForm", "alternateForms" })
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-public class Name extends Conclusion {
+public class Name extends Conclusion implements Typed {
 
   private URI type;
   private NameForm primaryForm;
@@ -49,7 +51,7 @@ public class Name extends Conclusion {
    *
    * @return The type of the name.
    */
-  @XmlAttribute
+  @XmlAttribute (namespace = TypesNamespaces.GEDCOMX_TYPES_NAMESPACE)
   @XmlQNameEnumRef (NameType.class)
   @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
   public URI getType() {

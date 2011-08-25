@@ -13,22 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.common;
+package org.gedcomx.record;
 
 import javax.xml.bind.annotation.XmlType;
 
 /**
- * Something that is attributable.
+ * A resource that can be weighted based on its context.
  *
  * @author Ryan Heaton
  */
-@XmlType ( name = "Attributable" )
-public interface Attributable {
+@XmlType ( name = "Weighted" )
+public interface Weighted {
 
   /**
-   * The attribution.
+   * Whether this is the principal resource within its context.
    *
-   * @return The attribution.
+   * @return Whether this is the principal resource within its context.
    */
-  Attribution getAttribution();
+  Boolean getPrincipal();
+
 }

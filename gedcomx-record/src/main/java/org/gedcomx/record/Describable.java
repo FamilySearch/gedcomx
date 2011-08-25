@@ -13,22 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.common;
+package org.gedcomx.record;
+
+import org.gedcomx.rt.RDFSubPropertyOf;
+import org.gedcomx.types.TypesNamespaces;
 
 import javax.xml.bind.annotation.XmlType;
 
 /**
- * Something that is attributable.
+ * Record data that has a description.
  *
  * @author Ryan Heaton
  */
-@XmlType ( name = "Attributable" )
-public interface Attributable {
+@XmlType ( name = "Describable" )
+public interface Describable {
 
   /**
-   * The attribution.
+   * The description.
    *
-   * @return The attribution.
+   * @return The description.
    */
-  Attribution getAttribution();
+  @RDFSubPropertyOf (
+    TypesNamespaces.DUBLIN_CORE_NAMESPACE + "description"
+  )
+  String getDescription();
+
 }

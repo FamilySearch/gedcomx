@@ -17,19 +17,20 @@ package org.gedcomx.record;
 
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
-import org.codehaus.jackson.annotate.JsonIgnore
-;
 import org.codehaus.enunciate.qname.XmlQNameEnumRef;
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.FieldType;
+import org.gedcomx.types.Typed;
+import org.gedcomx.types.TypesNamespaces;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.namespace.QName;
+import javax.xml.bind.annotation.XmlType;
 import java.net.URI;
 
 /**
@@ -37,7 +38,8 @@ import java.net.URI;
  */
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-public class RecordField extends Field {
+@XmlType ( name = "RecordField" )
+public class RecordField extends Field implements Typed {
 
   private URI type;
 
@@ -46,7 +48,7 @@ public class RecordField extends Field {
    *
    * @return The type of the field.
    */
-  @XmlAttribute
+  @XmlAttribute (namespace = TypesNamespaces.GEDCOMX_TYPES_NAMESPACE)
   @XmlQNameEnumRef (FieldType.class)
   @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
   public URI getType() {

@@ -27,7 +27,7 @@
     <rdfs:label>${schema.id}</rdfs:label>
   </rdf:Description>
   [/#if]
-  [#list rdfschema.descriptions as description]
+  [#list rdfschema.descriptions?sort_by("about") as description]
     [#if description.isDefinedBy?? && description.isDefinedBy = schema.namespace]
 
   <rdf:Description rdf:about="${description.about}">

@@ -18,17 +18,12 @@ package org.gedcomx.common;
 import javax.xml.bind.annotation.XmlType;
 
 /**
- * Something that is attributable.
+ * Something that is extensible.
  *
  * @author Ryan Heaton
  */
-@XmlType ( name = "Attributable" )
-public interface Attributable {
+@XmlType ( name = "Extensible" )
+public interface Extensible {
 
-  /**
-   * The attribution.
-   *
-   * @return The attribution.
-   */
-  Attribution getAttribution();
+  Extension getExtension();
 }

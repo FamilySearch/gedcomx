@@ -88,7 +88,7 @@ public class RDFSchema {
 
     private String about;
     private String label;
-    private List<String> comments;
+    private Set<String> comments;
     private String isDefinedBy;
     private String type;
     private Set<String> subClassOf;
@@ -116,18 +116,18 @@ public class RDFSchema {
     }
 
     @XmlElement (name = "comment", namespace = RDFS_NAMESPACE)
-    public List<String> getComments() {
+    public Set<String> getComments() {
       return comments;
     }
 
-    public void setComments(List<String> comments) {
+    public void setComments(Set<String> comments) {
       this.comments = comments;
     }
 
     public void addComment(String comment) {
       if (comment != null) {
         if (this.comments == null) {
-          this.comments = new ArrayList<String>();
+          this.comments = new TreeSet<String>();
         }
 
         this.comments.add(comment);

@@ -16,12 +16,14 @@
 package org.gedcomx.record;
 
 import org.codehaus.enunciate.ClientName;
+import org.codehaus.enunciate.json.JsonName;
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.rt.XmlTypeIdResolver;
 
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlType;
 import java.util.List;
 
 /**
@@ -30,7 +32,8 @@ import java.util.List;
 @ClientName("DateInfo")
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-public class Date extends Field {
+@XmlType ( name = "Date" )
+public class Date extends Field implements Partitionable<DatePart> {
 
   private List<DatePart> parts;
 
@@ -39,8 +42,9 @@ public class Date extends Field {
    *
    * @return The parts of the date.
    */
-  @XmlElementWrapper(name = "parts")
   @XmlElement(name = "part")
+  @JsonName ("parts")
+  @JsonProperty ("parts")
   public List<DatePart> getParts() {
     return parts;
   }
@@ -50,6 +54,7 @@ public class Date extends Field {
    *
    * @param parts The parts of the date.
    */
+  @JsonProperty ("parts")
   public void setParts(List<DatePart> parts) {
     this.parts = parts;
   }

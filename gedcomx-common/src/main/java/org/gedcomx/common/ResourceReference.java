@@ -26,6 +26,7 @@ import org.gedcomx.rt.AnyElementDeserializer;
 import org.gedcomx.rt.AnyElementSerializer;
 import org.gedcomx.types.ResourceFragmentParameter;
 import org.gedcomx.types.ResourceType;
+import org.gedcomx.types.Typed;
 import org.gedcomx.types.TypesNamespaces;
 
 import javax.xml.XMLConstants;
@@ -40,8 +41,9 @@ import java.util.Map;
  *
  * @author Ryan Heaton
  */
+@XmlType ( name = "ResourceReference" )
 @XmlSeeAlso(ResourceFragmentParameter.class)
-public final class ResourceReference {
+public final class ResourceReference implements Typed {
 
   private String id;
   private URI type;
@@ -74,7 +76,7 @@ public final class ResourceReference {
    *
    * @return The type of the resource reference.
    */
-  @XmlAttribute
+  @XmlAttribute (namespace = TypesNamespaces.GEDCOMX_TYPES_NAMESPACE)
   @XmlQNameEnumRef (ResourceType.class)
   @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
   public URI getType() {

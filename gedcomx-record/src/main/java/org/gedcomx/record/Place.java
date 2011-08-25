@@ -15,17 +15,20 @@
  */
 package org.gedcomx.record;
 
+import org.codehaus.enunciate.json.JsonName;
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.rt.XmlTypeIdResolver;
 
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlType;
 import java.util.List;
 
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-public class Place extends Field {
+@XmlType ( name = "Place" )
+public class Place extends Field implements Partitionable<PlacePart> {
 
   private List<PlacePart> parts;
 
@@ -34,8 +37,9 @@ public class Place extends Field {
    *
    * @return The parts of the place.
    */
-  @XmlElementWrapper(name = "parts")
   @XmlElement(name = "part")
+  @JsonName ("parts")
+  @JsonProperty ("parts")
   public List<PlacePart> getParts() {
     return parts;
   }
@@ -45,6 +49,7 @@ public class Place extends Field {
    *
    * @param parts The parts of the place.
    */
+  @JsonProperty ("parts")
   public void setParts(List<PlacePart> parts) {
     this.parts = parts;
   }

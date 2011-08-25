@@ -16,12 +16,16 @@
 package org.gedcomx.record;
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
+import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.enunciate.qname.XmlQNameEnumRef;
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.NameType;
+import org.gedcomx.types.Typed;
+import org.gedcomx.types.TypesNamespaces;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.*;
@@ -33,7 +37,8 @@ import java.util.List;
  */
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-public class Name extends Field {
+@XmlType ( name = "Name" )
+public class Name extends Field implements Partitionable<NamePart>, Typed {
 
   private URI type;
   private List<NamePart> parts;
@@ -43,7 +48,7 @@ public class Name extends Field {
    *
    * @return The type of the name.
    */
-  @XmlAttribute
+  @XmlAttribute (namespace = TypesNamespaces.GEDCOMX_TYPES_NAMESPACE)
   @XmlQNameEnumRef (NameType.class)
   @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
   public URI getType() {
@@ -85,8 +90,9 @@ public class Name extends Field {
    *
    * @return The different parts of the name field.
    */
-  @XmlElementWrapper (name = "parts")
   @XmlElement (name = "part")
+  @JsonName ("parts")
+  @JsonProperty ("parts")
   public List<NamePart> getParts() {
     return parts;
   }
@@ -96,6 +102,7 @@ public class Name extends Field {
    *
    * @param parts The different parts of the name field.
    */
+  @JsonProperty ("parts")
   public void setParts(List<NamePart> parts) {
     this.parts = parts;
   }

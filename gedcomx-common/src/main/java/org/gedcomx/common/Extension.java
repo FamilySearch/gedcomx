@@ -21,16 +21,18 @@ import org.gedcomx.rt.AnyElementDeserializer;
 import org.gedcomx.rt.AnyElementSerializer;
 
 import javax.xml.bind.annotation.XmlAnyElement;
+import javax.xml.bind.annotation.XmlType;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
 /**
- * An extension point to the model.
+ * An extension point.
  *
  * @author Ryan Heaton
  */
+@XmlType ( name = "Extension" )
 public final class Extension implements Iterable<Object> {
 
   private List<Object> elements;

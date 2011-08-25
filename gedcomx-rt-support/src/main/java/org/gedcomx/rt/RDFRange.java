@@ -29,6 +29,8 @@ import java.lang.annotation.Target;
 @Target ( { ElementType.FIELD, ElementType.METHOD } )
 public @interface RDFRange {
 
-  String[] value() default {};
+  Class[] value() default {};
+
+  String[] external() default {};
 
 }

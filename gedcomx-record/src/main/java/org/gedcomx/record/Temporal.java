@@ -13,22 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.common;
+package org.gedcomx.record;
+
+import org.gedcomx.rt.RDFSubClassOf;
+import org.gedcomx.rt.RDFSubPropertyOf;
+import org.gedcomx.types.TypesNamespaces;
 
 import javax.xml.bind.annotation.XmlType;
 
 /**
- * Something that is attributable.
+ * A resource that has a temporal component.
  *
  * @author Ryan Heaton
  */
-@XmlType ( name = "Attributable" )
-public interface Attributable {
+@XmlType ( name = "Temporal" )
+@RDFSubClassOf ( TypesNamespaces.DUBLIN_CORE_NAMESPACE + "PeriodOfTime" )
+public interface Temporal {
 
   /**
-   * The attribution.
+   * The date.
    *
-   * @return The attribution.
+   * @return The date.
    */
-  Attribution getAttribution();
+  @RDFSubPropertyOf ( TypesNamespaces.DUBLIN_CORE_NAMESPACE + "temporal" )
+  Date getDate();
+
 }

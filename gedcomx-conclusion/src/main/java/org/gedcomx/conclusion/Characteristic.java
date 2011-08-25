@@ -22,6 +22,8 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.CharacteristicType;
+import org.gedcomx.types.Typed;
+import org.gedcomx.types.TypesNamespaces;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -34,7 +36,7 @@ import java.net.URI;
  */
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-public class Characteristic extends Conclusion {
+public class Characteristic extends Conclusion implements Typed {
 
   private URI type;
   private Date date;
@@ -47,7 +49,7 @@ public class Characteristic extends Conclusion {
    *
    * @return The type of the characteristic.
    */
-  @XmlAttribute
+  @XmlAttribute (namespace = TypesNamespaces.GEDCOMX_TYPES_NAMESPACE)
   @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
   @XmlQNameEnumRef (CharacteristicType.class)
   public URI getType() {

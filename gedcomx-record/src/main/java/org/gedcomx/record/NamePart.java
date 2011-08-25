@@ -22,19 +22,23 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.NamePartType;
+import org.gedcomx.types.Typed;
+import org.gedcomx.types.TypesNamespaces;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 import java.net.URI;
 
 /**
  * A part of a name.
  */
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
-@JsonTypeIdResolver (XmlTypeIdResolver.class)
-public class NamePart extends Field {
+@JsonTypeIdResolver ( XmlTypeIdResolver.class )
+@XmlType ( name = "NamePart" )
+public class NamePart extends Field implements Typed {
 
   private URI type;
 
@@ -43,7 +47,7 @@ public class NamePart extends Field {
    *
    * @return The type of the name part.
    */
-  @XmlAttribute
+  @XmlAttribute (namespace = TypesNamespaces.GEDCOMX_TYPES_NAMESPACE)
   @XmlQNameEnumRef (NamePartType.class)
   @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
   public URI getType() {

@@ -15,20 +15,26 @@
  */
 package org.gedcomx.common;
 
+import org.gedcomx.rt.RDFSubClassOf;
+import org.gedcomx.rt.RDFSubPropertyOf;
+import org.gedcomx.types.TypesNamespaces;
+
 import javax.xml.bind.annotation.XmlType;
 
 /**
- * Something that is attributable.
+ * A bibliographic resource.
  *
  * @author Ryan Heaton
  */
-@XmlType ( name = "Attributable" )
-public interface Attributable {
+@XmlType ( name = "BibliographicResource" )
+@RDFSubClassOf ( TypesNamespaces.DUBLIN_CORE_NAMESPACE + "BibliographicResource" )
+public interface BibliographicResource {
 
   /**
-   * The attribution.
+   * The bibliographic citation of a bibliographic resource.
    *
-   * @return The attribution.
+   * @return The bibliographic citation of a bibliographic resource.
    */
-  Attribution getAttribution();
+  @RDFSubPropertyOf ( TypesNamespaces.DUBLIN_CORE_NAMESPACE + "bibliographicCitation" )
+  String getBibliographicCitation();
 }

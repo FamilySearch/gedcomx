@@ -13,22 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.common;
+package org.gedcomx.types;
 
 import javax.xml.bind.annotation.XmlType;
+import java.net.URI;
 
 /**
- * Something that is attributable.
+ * A resource that is typed.
  *
  * @author Ryan Heaton
  */
-@XmlType ( name = "Attributable" )
-public interface Attributable {
+@XmlType (
+  name = "Typed"
+)
+public interface Typed {
 
   /**
-   * The attribution.
+   * The type.
    *
-   * @return The attribution.
+   * @return The type.
    */
-  Attribution getAttribution();
+  URI getType();
 }

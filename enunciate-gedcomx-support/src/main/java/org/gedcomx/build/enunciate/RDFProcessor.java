@@ -16,7 +16,10 @@
 package org.gedcomx.build.enunciate;
 
 import com.sun.mirror.declaration.*;
+import com.sun.mirror.type.DeclaredType;
 import com.sun.mirror.type.InterfaceType;
+import com.sun.mirror.type.MirroredTypesException;
+import com.sun.mirror.type.TypeMirror;
 import com.sun.mirror.util.Declarations;
 import net.sf.jelly.apt.Context;
 import net.sf.jelly.apt.decorations.JavaDoc;
@@ -29,6 +32,7 @@ import org.codehaus.enunciate.contract.jaxb.types.XmlClassType;
 import org.codehaus.enunciate.contract.jaxb.types.XmlTypeException;
 import org.codehaus.enunciate.contract.jaxb.types.XmlTypeFactory;
 import org.codehaus.enunciate.contract.validation.ValidationResult;
+import org.gedcomx.rt.RDFDomain;
 import org.gedcomx.rt.RDFRange;
 import org.gedcomx.rt.RDFSubClassOf;
 import org.gedcomx.rt.RDFSubPropertyOf;
@@ -78,12 +82,10 @@ public class RDFProcessor {
         describeSchema(schemaInfo, result);
         for (TypeDefinition typeDefinition : schemaInfo.getTypeDefinitions()) {
           if (typeDefinition instanceof QNameEnumTypeDefinition) {
-            QNameEnumTypeDefinition qNameEnumDef = (QNameEnumTypeDefinition) typeDefinition;
-            describeRDFClassesAndProperties(qNameEnumDef, result);
+            describeRDFClassesAndProperties((QNameEnumTypeDefinition) typeDefinition, result);
           }
           else if (typeDefinition instanceof ComplexTypeDefinition) {
-            ComplexTypeDefinition complexTypeDefinition = (ComplexTypeDefinition) typeDefinition;
-            describeRDFClassesAndProperties(complexTypeDefinition, result);
+            describeRDFClassesAndProperties((ComplexTypeDefinition) typeDefinition, result);
           }
           //simple types and enum types aren't described by RDF schema except as RDF literals.
         }
@@ -121,13 +123,13 @@ public class RDFProcessor {
   /**
    * Describe the RDF classes and properties defined by the specified QName type definition and add them to the RDF schema.
    *
-   * @param qNameEnumTypeDefinition The type definition to describe.
+   * @param typeDefinition The type definition to describe.
    * @param result The validation result to which to add any warnings or errors.
    */
-  private void describeRDFClassesAndProperties(QNameEnumTypeDefinition qNameEnumTypeDefinition, ValidationResult result) {
-    describeRDFClasses(qNameEnumTypeDefinition, result);
-    Map<String, Object> enumValues = qNameEnumTypeDefinition.getEnumValues();
-    for (EnumConstantDeclaration constant : qNameEnumTypeDefinition.getEnumConstants()) {
+  private void describeRDFClassesAndProperties(QNameEnumTypeDefinition typeDefinition, ValidationResult result) {
+    //describeRDFClasses(typeDefinition, result);
+    Map<String, Object> enumValues = typeDefinition.getEnumValues();
+    for (EnumConstantDeclaration constant : typeDefinition.getEnumConstants()) {
       QName qname = (QName) enumValues.get(constant.getSimpleName());
       if (qname != null) {
         String about = qname.getNamespaceURI() + qname.getLocalPart();
@@ -174,11 +176,17 @@ public class RDFProcessor {
    */
   private void describeRDFProperty(Accessor accessor, ValidationResult result) {
     String namespace = accessor.getNamespace();
+    if (isKnownRDFNamespace(namespace)) {
+      //nothing to describe; the property is already known.
+      return;
+    }
+
     String name = accessor.getName();
     String about = namespace + name;
-    Set<String> domain = determineRDFDomain(accessor, result);
-    Set<String> range = determineRDFRange(accessor, result);
-    Set<String> superProperties = determineRDFSuperProperties(accessor, result);
+    MemberDeclaration declaringMember = findDeclaringMember(accessor);
+    Set<String> domain = determineRDFDomain(accessor, declaringMember, result);
+    Set<String> range = determineRDFRange(accessor, declaringMember, result);
+    Set<String> superProperties = determineRDFSuperProperties(accessor, declaringMember, result);
     RDFSchema.RDFDescription description = this.rdfSchema.findDescription(about);
     if (description == null) {
       description = new RDFSchema.RDFDescription();
@@ -206,34 +214,43 @@ public class RDFProcessor {
         message.append('.');
         result.addError(accessor, message.toString());
       }
+      else {
+        if (!range.equals(description.getRange())) {
+          description.getRange().retainAll(range);
+        }
 
-      if (!range.equals(description.getRange())) {
-        StringBuilder message = new StringBuilder("Unable to describe property ").append(about).append(" because it's range is already described as ");
-        message.append(getSetComparisonMessage(description.getRange(), range));
-        appendPosition(message, description.getAssociatedDeclaration());
-        message.append('.');
-        result.addError(accessor, message.toString());
-      }
+        if (description.getRange().isEmpty()) {
+          //if the range isn't equal, we need to determine
+          StringBuilder message = new StringBuilder("Unable to determine range for property ").append(about).append(" because the intersection between the range ");
+          appendPosition(message, description.getAssociatedDeclaration());
+          message.append(" is empty.");
+          result.addWarning(accessor, message.toString());
+        }
 
-      if (!domain.equals(description.getDomain())) {
-        StringBuilder message = new StringBuilder("Unable to describe property ").append(about).append(" because it's domain is already described as ");
-        message.append(getSetComparisonMessage(description.getDomain(), domain));
-        appendPosition(message, description.getAssociatedDeclaration());
-        message.append('.');
-        result.addError(accessor, message.toString());
-      }
+        if (!domain.equals(description.getDomain())) {
+          StringBuilder message = new StringBuilder("Unable to describe property ").append(about).append(" because it's domain is described as ");
+          message.append(getSetComparisonMessage(domain, description.getDomain()));
+          appendPosition(message, description.getAssociatedDeclaration());
+          message.append('.');
+          result.addError(accessor, message.toString());
+        }
 
-      if (!superProperties.equals(description.getSubPropertyOf())) {
-        StringBuilder message = new StringBuilder("Unable to describe property ").append(about).append(" because it's 'subPropertyOf' is already described as ");
-        message.append(getSetComparisonMessage(description.getSubPropertyOf(), superProperties));
-        appendPosition(message, description.getAssociatedDeclaration());
-        message.append('.');
-        result.addError(accessor, message.toString());
+        if (!superProperties.equals(description.getSubPropertyOf())) {
+          StringBuilder message = new StringBuilder("Unable to describe property ").append(about).append(" because it's 'subPropertyOf' is described as ");
+          message.append(getSetComparisonMessage(superProperties, description.getSubPropertyOf()));
+          appendPosition(message, description.getAssociatedDeclaration());
+          message.append('.');
+          result.addError(accessor, message.toString());
+        }
       }
     }
 
-    if (accessor.getJavaDoc() != null) {
-      String comment = accessor.getJavaDoc().toString();
+    JavaDoc javaDoc = accessor.getJavaDoc();
+    if (declaringMember != null) {
+      javaDoc = new JavaDoc(declaringMember.getDocComment());
+    }
+    if (javaDoc != null) {
+      String comment = javaDoc.toString();
       if (!comment.isEmpty()) {
         description.addComment(comment);
       }
@@ -286,33 +303,45 @@ public class RDFProcessor {
    * Determine the RDF properties for which the specified accessor is a subproperty.
    *
    * @param accessor The accessor.
+   * @param declaringMember The member actually declaring the accessor.
    * @param result The validation result to which to add any warnings or errors.
    * @return The set of RDF Class URIs that define the properties for which the specified accessor is a subproperty.
    */
-  private Set<String> determineRDFSuperProperties(Accessor accessor, ValidationResult result) {
+  private Set<String> determineRDFSuperProperties(Accessor accessor, MemberDeclaration declaringMember, ValidationResult result) {
     //since there's no such thing as "subproperties" in java, we have to determine subproperties completely via annotations.
     TreeSet<String> superProperties = new TreeSet<String>();
     RDFSubPropertyOf rdfSubPropertyOf = accessor.getAnnotation(RDFSubPropertyOf.class);
+    if (rdfSubPropertyOf == null) {
+      if (declaringMember != null) {
+        rdfSubPropertyOf = declaringMember.getAnnotation(RDFSubPropertyOf.class);
+      }
+    }
     if (rdfSubPropertyOf != null) {
       superProperties.addAll(Arrays.asList(rdfSubPropertyOf.value()));
     }
+
     return superProperties;
   }
 
   /**
    * Determine the RDF range for the specified accessor.
    *
+   *
    * @param accessor The accessor.
+   * @param declaringMember The member actually declaring the accessor.
    * @param result The validation result to which to add any warnings or errors.
    * @return The set of RDF Class URIs that define the range of the specified accessor.
    */
-  private Set<String> determineRDFRange(Accessor accessor, ValidationResult result) {
-    TreeSet<String> range = new TreeSet<String>();
-    Set<String> explicitRange = getExplicitRange(accessor);
-    if (explicitRange != null) {
-      range.addAll(explicitRange);
+  private Set<String> determineRDFRange(Accessor accessor, MemberDeclaration declaringMember, ValidationResult result) {
+    Set<String> range = getExplicitRange(accessor);
+
+    if (range == null) {
+      if (declaringMember != null) {
+        range = getExplicitRange(declaringMember);
+      }
     }
-    else {
+    
+    if (range == null) {
       org.codehaus.enunciate.contract.jaxb.types.XmlType xmlType = null;
       if (accessor.isElementRef()) {
         try {
@@ -326,20 +355,55 @@ public class RDFProcessor {
         xmlType = accessor.getBaseType();
       }
 
-      if (xmlType != null) {
-        if (isResourceRef(xmlType)) {
-          result.addWarning(accessor, "Unable to determine range because the accessor type appears to be a resource reference because it declares an rdf:resource attribute. Please consider explicitly declaring the range of this accessor.");
+      range = determineRDFRange(xmlType, result);
+      if (range == null) {
+        range = new TreeSet<String>();
+        SuppressWarnings suppressWarnings = accessor.getAnnotation(SuppressWarnings.class);
+        if (suppressWarnings != null && !Arrays.asList(suppressWarnings.value()).contains("rdf:no_range")) {
+          result.addWarning(accessor, "Unable to determine range because the accessor type appears to be a resource reference (it declares an rdf:resource attribute). Please consider explicitly declaring the range of this accessor.");
         }
-        else if (xmlType.isSimple()) {
-          //if the accessor type is a simple type, return literal.
-          range.add(RDFSchema.RDFS_LITERAL_RANGE);
-        }
-        else {
-          range.add(xmlType.getNamespace() + xmlType.getName());
-        }
+      }
+      else if (range.size() > 1 && range.contains(RDFSchema.RDFS_LITERAL_RANGE)) {
+        result.addWarning(accessor, "This accessor specifies a range that is both literal and non-literal, implying that there is an @XmlValue with @XmlAttribute. This causes an ambiguous RDF schema definition.");
       }
     }
 
+    return range;
+  }
+
+  /**
+   * Determine the RDF range for the specified accessor.
+   *
+   *
+   * @param xmlType The xml type of the accessor.
+   * @param result The validation result to which to add any warnings or errors.
+   * @return The set of RDF Class URIs that define the range of the specified accessor, or null if the xml appears to be a resource reference.
+   */
+  private Set<String> determineRDFRange(org.codehaus.enunciate.contract.jaxb.types.XmlType xmlType, ValidationResult result) {
+    TreeSet<String> range = new TreeSet<String>();
+    if (xmlType != null) {
+      if (isResourceRef(xmlType)) {
+        return null;
+      }
+      else if (xmlType.isSimple()) {
+        //if the accessor type is a simple type, return literal.
+        range.add(RDFSchema.RDFS_LITERAL_RANGE);
+      }
+      else {
+        range.add(xmlType.getNamespace() + xmlType.getName());
+
+        if (xmlType instanceof XmlClassType) {
+          TypeDefinition typeDefinition = ((XmlClassType) xmlType).getTypeDefinition();
+          if (!typeDefinition.isBaseObject()) {
+            Set<String> baseRange = determineRDFRange(typeDefinition.getBaseType(), result);
+            if (baseRange == null) {
+              return null;
+            }
+            range.addAll(baseRange);
+          }
+        }
+      }
+    }
     return range;
   }
 
@@ -370,17 +434,38 @@ public class RDFProcessor {
   }
 
   /**
-   * Get the explicit range for the specified accessor.
+   * Get the explicit range for the specified member.
    *
-   * @param accessor The accessor.
+   * @param member The member.
    * @return The range, or null of no explicit range was provided.
    */
-  private Set<String> getExplicitRange(Accessor accessor) {
+  private Set<String> getExplicitRange(MemberDeclaration member) {
     Set<String> range = null;
-    RDFRange rangeInfo = accessor.getAnnotation(RDFRange.class);
+    RDFRange rangeInfo = member.getAnnotation(RDFRange.class);
     if (rangeInfo != null) {
       range = new TreeSet<String>();
-      range.addAll(Arrays.asList(rangeInfo.value()));
+      List<TypeDeclaration> explicitTypes = new ArrayList<TypeDeclaration>();
+      try {
+        for (Class clazz : rangeInfo.value()) {
+          explicitTypes.add(Context.getCurrentEnvironment().getTypeDeclaration(clazz.getName()));
+        }
+      }
+      catch (MirroredTypesException e) {
+        for (TypeMirror typeMirror : e.getTypeMirrors()) {
+          if (typeMirror instanceof DeclaredType) {
+            explicitTypes.add(((DeclaredType) typeMirror).getDeclaration());
+          }
+        }
+      }
+
+      for (TypeDeclaration explicitType : explicitTypes) {
+        QName about = findRDFUri(explicitType);
+        if (about != null) {
+          range.add(about.getNamespaceURI() + about.getLocalPart());
+        }
+      }
+
+      range.addAll(Arrays.asList(rangeInfo.external()));
     }
     return range;
   }
@@ -389,21 +474,24 @@ public class RDFProcessor {
    * Determine the RDF domain of the given accessor.
    *
    * @param accessor The accessor.
+   * @param declaringMember The member actually declaring the accessor.
    * @param result The validation result against which to log any warnings or errors.
    * @return The set of RDF Class URIs that define the domain for the specified accessor.
    */
-  private Set<String> determineRDFDomain(Accessor accessor, ValidationResult result) {
+  private Set<String> determineRDFDomain(Accessor accessor, MemberDeclaration declaringMember, ValidationResult result) {
+    Set<String> explicitDomain = findExplicitDomain(accessor);
+    if (explicitDomain != null) {
+      return explicitDomain;
+    }
+
     TypeDeclaration declaringType = accessor.getDeclaringType();
-    if (accessor.getDelegate() instanceof PropertyDeclaration) {
-      //only property declarations can be declared in an inherited type
-      DecoratedMethodDeclaration getter = ((PropertyDeclaration) accessor.getDelegate()).getGetter();
-      if (getter != null) {
-        //only the getter; we won't worry about the setter.
-        MethodDeclaration method = (MethodDeclaration) getter.getDelegate();
-        TypeDeclaration candidate = findDeclaringType(method.getDeclaringType(), method);
-        if (candidate != null) {
-          declaringType = candidate;
-        }
+    if (declaringMember != null) {
+      explicitDomain = findExplicitDomain(declaringMember);
+      if (explicitDomain != null) {
+        return explicitDomain;
+      }
+      else {
+        declaringType = declaringMember.getDeclaringType();
       }
     }
 
@@ -414,13 +502,48 @@ public class RDFProcessor {
   }
 
   /**
-   * Find the declaring type of the given method starting from a specified type.
+   * Find the declaring member for the specified accessor.
+   *
+   * @param accessor The accessor.
+   * @return The declaring member.
+   */
+  private MemberDeclaration findDeclaringMember(Accessor accessor) {
+    MethodDeclaration declaringMethod = null;
+    if (accessor.getDelegate() instanceof PropertyDeclaration) {
+      //only property declarations can be declared in an inherited type
+      DecoratedMethodDeclaration getter = ((PropertyDeclaration) accessor.getDelegate()).getGetter();
+      if (getter != null) {
+        //only the getter; we won't worry about the setter.
+        MethodDeclaration method = (MethodDeclaration) getter.getDelegate();
+        declaringMethod = findDeclaringMethod(method.getDeclaringType(), method);
+      }
+    }
+    return declaringMethod;
+  }
+
+  /**
+   * Find the explicit domain of the specified member declaration.
+   *
+   * @param member The member declaration.
+   * @return The explicit domain, or null if no explicit domain was found.
+   */
+  private Set<String> findExplicitDomain(MemberDeclaration member) {
+    Set<String> explicitDomain = null;
+    RDFDomain rdfDomain = member.getAnnotation(RDFDomain.class);
+    if (rdfDomain != null) {
+      explicitDomain = new TreeSet<String>(Arrays.asList(rdfDomain.value()));
+    }
+    return explicitDomain;
+  }
+
+  /**
+   * Find the declaring method of the given method starting from a specified type.
    *
    * @param type The type.
    * @param method The method.
-   * @return The type that declares the specified method from the inheritance tree of the specified type.
+   * @return The root method that declares the specified method from the inheritance tree of the specified type.
    */
-  private TypeDeclaration findDeclaringType(TypeDeclaration type, MethodDeclaration method) {
+  private MethodDeclaration findDeclaringMethod(TypeDeclaration type, MethodDeclaration method) {
     if (type == null || Object.class.getName().equals(type.getQualifiedName())) {
       return null;
     }
@@ -430,31 +553,31 @@ public class RDFProcessor {
     }
 
     Declarations declarationUtils = Context.getCurrentEnvironment().getDeclarationUtils();
+    Collection<InterfaceType> superinterfaces = type.getSuperinterfaces();
+    if (superinterfaces != null) {
+      for (InterfaceType superinterface : superinterfaces) {
+        MethodDeclaration declaringMethod = findDeclaringMethod(superinterface.getDeclaration(), method);
+        if (declaringMethod != null) {
+          return declaringMethod;
+        }
+      }
+    }
+
+    if (type instanceof ClassDeclaration) {
+      MethodDeclaration declaringMethod = findDeclaringMethod(((ClassDeclaration) type).getSuperclass().getDeclaration(), method);
+      if (declaringMethod != null) {
+        return declaringMethod;
+      }
+    }
+
     Collection<? extends MethodDeclaration> methods = type.getMethods();
     for (MethodDeclaration candidate : methods) {
       while (candidate instanceof DecoratedMethodDeclaration) {
         candidate = (MethodDeclaration) ((DecoratedMethodDeclaration) candidate).getDelegate();
       }
 
-      if (declarationUtils.overrides(candidate, method)) {
-        return type;
-      }
-    }
-
-    Collection<InterfaceType> superinterfaces = type.getSuperinterfaces();
-    if (superinterfaces != null) {
-      for (InterfaceType superinterface : superinterfaces) {
-        TypeDeclaration declaringType = findDeclaringType(superinterface.getDeclaration(), method);
-        if (declaringType != null) {
-          return declaringType;
-        }
-      }
-    }
-
-    if (type instanceof ClassDeclaration) {
-      TypeDeclaration declaringType = findDeclaringType(((ClassDeclaration) type).getSuperclass().getDeclaration(), method);
-      if (declaringType != null) {
-        return declaringType;
+      if (declarationUtils.overrides(method, candidate)) {
+        return candidate;
       }
     }
 
@@ -526,7 +649,12 @@ public class RDFProcessor {
    */
   private void describeRDFClasses(TypeDefinition typeDefinition, ValidationResult result) {
     String namespace = typeDefinition.getNamespace();
-    String about = typeDefinition.getName();
+    String name = typeDefinition.getName();
+    if (name.length() > 0 && !Character.isUpperCase(name.charAt(0))) {
+      result.addWarning(typeDefinition, "RDF style conventions recommend upper-case names for class definitions. Consider annotating this class with @XmlType(name=\"...\")");
+    }
+
+    String about = namespace + name;
     RDFSchema.RDFDescription description = this.rdfSchema.findDescription(about);
     if (description == null) {
       description = new RDFSchema.RDFDescription();

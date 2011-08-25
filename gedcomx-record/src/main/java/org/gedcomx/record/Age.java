@@ -15,12 +15,14 @@
  */
 package org.gedcomx.record;
 
+import org.codehaus.enunciate.json.JsonName;
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.rt.XmlTypeIdResolver;
 
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlType;
 import java.util.List;
 
 /**
@@ -30,7 +32,8 @@ import java.util.List;
  */
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-public class Age extends Field {
+@XmlType ( name = "Age" )
+public class Age extends Field implements Partitionable<AgePart> {
 
   private List<AgePart> parts;
 
@@ -39,8 +42,9 @@ public class Age extends Field {
    *
    * @return The parts of the age.
    */
-  @XmlElementWrapper (name = "parts")
   @XmlElement (name = "part")
+  @JsonName ("parts")
+  @JsonProperty ("parts")
   public List<AgePart> getParts() {
     return parts;
   }
@@ -50,6 +54,7 @@ public class Age extends Field {
    *
    * @param parts The parts of the age.
    */
+  @JsonProperty ("parts")
   public void setParts(List<AgePart> parts) {
     this.parts = parts;
   }

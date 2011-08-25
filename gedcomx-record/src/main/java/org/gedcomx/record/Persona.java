@@ -20,7 +20,9 @@ import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.common.AlternateId;
+import org.gedcomx.common.Extensible;
 import org.gedcomx.common.Extension;
+import org.gedcomx.common.PersistentIdentifiable;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.TypesNamespaces;
 
@@ -33,14 +35,13 @@ import java.util.List;
 /**
  * A persona is the set of data about a person bounded by a single record.
  */
-@XmlType (
-  propOrder = {"persistentId", "alternateIds", "gender", "age", "names", "eventRoles", "characteristics", "extension"}
-)
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-public class Persona {
+@XmlType ( name = "Persona", propOrder = { "persistentId", "alternateIds", "gender", "age", "names", "eventRoles", "characteristics", "extension" } )
+public class Persona implements Extensible, PersistentIdentifiable, HasCharacteristics, Weighted {
 
   private String id;
+  private Boolean principal;
   private URI persistentId;
   private List<AlternateId> alternateIds;
   private Gender gender;
@@ -48,7 +49,6 @@ public class Persona {
   private java.util.List<Name> names;
   private java.util.List<EventRole> eventRoles = new ArrayList<EventRole>();
   private java.util.List<Characteristic> characteristics = new ArrayList<Characteristic>();
-  private Boolean principal;
   private Extension extension;
 
   /**

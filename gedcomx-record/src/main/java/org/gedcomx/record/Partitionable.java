@@ -13,22 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.common;
+package org.gedcomx.record;
 
 import javax.xml.bind.annotation.XmlType;
+import java.util.List;
 
 /**
- * Something that is attributable.
+ * Basic interface for record data that is able to be partitioned.
  *
  * @author Ryan Heaton
  */
-@XmlType ( name = "Attributable" )
-public interface Attributable {
+@XmlType ( name = "Partitionable" )
+public interface Partitionable<T> {
 
   /**
-   * The attribution.
+   * The parts of a record resource.
    *
-   * @return The attribution.
+   * @return The parts of a record resource.
    */
-  Attribution getAttribution();
+  List<T> getParts();
+
 }

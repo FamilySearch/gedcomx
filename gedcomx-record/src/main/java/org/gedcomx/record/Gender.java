@@ -21,12 +21,14 @@ import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.GenderType;
 
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  * A gender field.
  */
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
+@XmlType ( name = "Gender" )
 public class Gender extends Field {
 
   private GenderType type;

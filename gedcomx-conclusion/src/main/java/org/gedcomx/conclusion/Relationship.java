@@ -25,6 +25,7 @@ import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.common.*;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.RelationshipType;
+import org.gedcomx.types.Typed;
 import org.gedcomx.types.TypesNamespaces;
 
 import javax.xml.XMLConstants;
@@ -43,7 +44,7 @@ import java.util.List;
 )
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-public class Relationship implements Attributable {
+public class Relationship implements Attributable, Typed {
 
   private String id;
   private URI type;
@@ -83,7 +84,7 @@ public class Relationship implements Attributable {
    *
    * @return The type of this relationship.
    */
-  @XmlAttribute
+  @XmlAttribute (namespace = TypesNamespaces.GEDCOMX_TYPES_NAMESPACE)
   @XmlQNameEnumRef (RelationshipType.class)
   @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
   public URI getType() {

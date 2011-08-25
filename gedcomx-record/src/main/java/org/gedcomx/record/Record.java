@@ -22,12 +22,11 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.common.Attribution;
-import org.gedcomx.common.AlternateId;
-import org.gedcomx.common.Extension;
-import org.gedcomx.common.ResourceReference;
+import org.gedcomx.common.*;
+import org.gedcomx.rt.RDFRange;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.RecordType;
+import org.gedcomx.types.Typed;
 import org.gedcomx.types.TypesNamespaces;
 
 import javax.xml.XMLConstants;
@@ -39,12 +38,10 @@ import java.util.List;
  * A record.
  */
 @XmlRootElement
-@XmlType (
-  propOrder = {"persistentId", "alternateIds", "attribution", "collection", "personas", "events", "relationships", "fields", "bibliographicCitation", "sources", "extension"}
-)
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-public class Record {
+@XmlType ( name = "Record", propOrder = { "persistentId", "alternateIds", "bibliographicCitation", "collection", "personas", "events", "relationships", "fields", "attribution", "sources", "extension" } )
+public class Record implements Typed, Extensible, Attributable, BibliographicResource, PersistentIdentifiable {
 
   private String id;
   private String lang;
@@ -86,7 +83,7 @@ public class Record {
    * 
    * @return The type of the record.
    */
-  @XmlAttribute
+  @XmlAttribute (namespace = TypesNamespaces.GEDCOMX_TYPES_NAMESPACE)
   @XmlQNameEnumRef(RecordType.class)
   @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
   public URI getType() {
@@ -206,6 +203,7 @@ public class Record {
    *
    * @return The reference to the collection containing this record.
    */
+  @RDFRange( RecordCollection.class )
   public ResourceReference getCollection() {
     return collection;
   }
@@ -333,6 +331,7 @@ public class Record {
   @XmlElement(name = "source")
   @JsonProperty("sources")
   @JsonName("sources")
+  @SuppressWarnings("rdf:no_range")
   public List<ResourceReference> getSources() {
     return sources;
   }

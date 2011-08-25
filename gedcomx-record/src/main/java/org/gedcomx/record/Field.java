@@ -15,7 +15,9 @@
  */
 package org.gedcomx.record;
 
+import org.gedcomx.common.Attributable;
 import org.gedcomx.common.Attribution;
+import org.gedcomx.common.Extensible;
 import org.gedcomx.common.Extension;
 import org.gedcomx.types.TypesNamespaces;
 
@@ -24,8 +26,8 @@ import javax.xml.bind.annotation.*;
 /**
  * A field on a record.
  */
-@XmlType ( propOrder = { "attribution", "original", "interpreted", "normalized", "extension"})
-public abstract class Field {
+@XmlType ( name = "Field", propOrder = { "original", "interpreted", "normalized", "attribution", "extension" } )
+public abstract class Field implements Attributable, Extensible {
 
   private String id;
   private String label;

@@ -185,6 +185,10 @@ public class GEDCOMXValidator extends BaseValidator {
           result.addError(attribute, "Entity links should be make with an attribute named 'href' in the 'http://www.w3.org/1999/xlink' namespace.");
         }
 
+        if ("type".equals(attribute.getName()) && isURI && !"http://gedcomx.org/types/".equals(namespace)) {
+          result.addError(attribute, "The 'type' attribute should be defined in the 'http://gedcomx.org/types/' namespace.");
+        }
+
         if ("id".equalsIgnoreCase(attribute.getName())) {
           if (!attribute.isXmlID()) {
             result.addError(attribute, "Id attributes should be annotated as @XmlID.");
@@ -230,6 +234,10 @@ public class GEDCOMXValidator extends BaseValidator {
 
           if ("href".equals(choice.getName()) && !"http://www.w3.org/1999/xlink".equals(choice.getNamespace())) {
             result.addError(choice, "Entity links should be make with an attribute named 'href' in the 'http://www.w3.org/1999/xlink' namespace. You probably need to apply @XmlAttribute(namespace='http://www.w3.org/1999/xlink')");
+          }
+
+          if ("type".equals(choice.getName()) && isURI) {
+            result.addError(choice, "Types should be specified with a 'gxt:type' attribute. You probably need to apply @XmlAttribute(namespace='http://gedcomx.org/types/')");
           }
 
           if ("id".equals(choice.getName()) && !choice.isXmlID()) {
