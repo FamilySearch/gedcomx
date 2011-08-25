@@ -122,7 +122,7 @@ public class Record implements Typed, Extensible, Attributable, BibliographicRes
   }
 
   /**
-   * The language of the record. See <a href="http://www.w3.org/International/articles/language-tags/>http://www.w3.org/International/articles/language-tags/</a>
+   * The language of the record. See <a href="http://www.w3.org/International/articles/language-tags/">http://www.w3.org/International/articles/language-tags/</a>
    *
    * @return The language of the record.
    */
@@ -132,7 +132,7 @@ public class Record implements Typed, Extensible, Attributable, BibliographicRes
   }
 
   /**
-   * The language of the record. See <a href="http://www.w3.org/International/articles/language-tags/>http://www.w3.org/International/articles/language-tags/</a>
+   * The language of the record. See <a href="http://www.w3.org/International/articles/language-tags/">http://www.w3.org/International/articles/language-tags/</a>
    *
    * @param lang The language of the record.
    */
