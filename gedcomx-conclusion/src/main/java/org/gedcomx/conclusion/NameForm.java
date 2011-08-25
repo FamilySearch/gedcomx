@@ -19,6 +19,7 @@ import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
 import java.util.List;
 
 /**
@@ -26,6 +27,7 @@ import java.util.List;
  *
  * @author Ryan Heaton
  */
+@XmlType ( name = "NameForm" )
 public final class NameForm {
 
   private String fullText;

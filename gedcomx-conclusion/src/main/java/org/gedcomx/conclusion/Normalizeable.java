@@ -15,43 +15,28 @@
  */
 package org.gedcomx.conclusion;
 
-import org.codehaus.jackson.annotate.JsonTypeInfo;
-import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.rt.XmlTypeIdResolver;
-import org.gedcomx.types.GenderType;
-
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
 /**
- * A gender conclusion.
+ * A conclusion resource that has a value that is able to be normalized.
  *
  * @author Ryan Heaton
  */
-@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
-@JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType ( name = "Gender" )
-public class Gender extends Conclusion {
-
-  private GenderType type;
+@XmlType ( name = "Normalizeable" )
+public interface Normalizeable {
 
   /**
-   * The type of the gender.
+   * The original value.
    *
-   * @return The type of the gender.
+   * @return The original value.
    */
-  @XmlAttribute
-  public GenderType getType() {
-    return type;
-  }
+  String getOriginal();
 
   /**
-   * The type of the gender.
+   * The original value.
    *
-   * @param type The type of the gender.
+   * @return The original value.
    */
-  public void setType(GenderType type) {
-    this.type = type;
-  }
+  String getNormalized();
 
 }

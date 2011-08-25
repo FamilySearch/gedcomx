@@ -23,6 +23,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.common.*;
+import org.gedcomx.rt.RDFRange;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.RelationshipType;
 import org.gedcomx.types.Typed;
@@ -39,12 +40,10 @@ import java.util.List;
  * @author Ryan Heaton
  */
 @XmlRootElement
-@XmlType (
-  propOrder = {"persistentId", "alternateIds", "person1", "person2", "attribution", "events", "characteristics", "bibliographicCitation", "sources", "extension"}
-)
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-public class Relationship implements Attributable, Typed {
+@XmlType ( name = "Relationship", propOrder = {"persistentId", "alternateIds", "bibliographicCitation", "person1", "person2", "events", "characteristics", "sources", "attribution", "extension"} )
+public class Relationship implements Typed, Attributable, Extensible, PersistentIdentifiable, BibliographicResource, HasEvents, HasCharacteristics, SourceSupported {
 
   private String id;
   private URI type;
@@ -171,6 +170,7 @@ public class Relationship implements Attributable, Typed {
    * the other person in this relationship and implies neither order nor role. When the relationship type
    * implies direction, it goes from "person1" to "person2".
    */
+  @RDFRange (Person.class)
   public ResourceReference getPerson1() {
     return person1;
   }
@@ -197,6 +197,7 @@ public class Relationship implements Attributable, Typed {
    * the other person in this relationship and implies neither order nor role. When the relationship type
    * implies direction, it goes from "person1" to "person2".
    */
+  @RDFRange (Person.class)
   public ResourceReference getPerson2() {
     return person2;
   }

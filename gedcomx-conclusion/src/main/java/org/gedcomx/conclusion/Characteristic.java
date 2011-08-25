@@ -29,6 +29,7 @@ import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 import java.net.URI;
 
 /**
@@ -36,7 +37,8 @@ import java.net.URI;
  */
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-public class Characteristic extends Conclusion implements Typed {
+@XmlType ( name = "Characteristic" )
+public class Characteristic extends Conclusion implements Typed, Spatial, Temporal {
 
   private URI type;
   private Date date;

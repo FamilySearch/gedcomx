@@ -17,24 +17,24 @@ package org.gedcomx.conclusion;
 
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
+import org.gedcomx.common.Attributable;
 import org.gedcomx.common.Attribution;
+import org.gedcomx.common.Extensible;
 import org.gedcomx.common.Extension;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.TypesNamespaces;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.*;
 
 /**
- * A conclusion about a person.
+ * A genealogical conclusion.
  *
  * @author Ryan Heaton
  */
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-public abstract class Conclusion {
+@XmlType ( name = "Conclusion" )
+public abstract class Conclusion implements Attributable, Extensible {
 
   private String id;
   private Attribution attribution;

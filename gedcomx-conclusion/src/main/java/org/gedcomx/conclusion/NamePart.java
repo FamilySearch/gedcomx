@@ -26,6 +26,7 @@ import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 import java.net.URI;
 
 /**
@@ -33,6 +34,7 @@ import java.net.URI;
  *
  * @author Ryan Heaton
  */
+@XmlType ( name = "NamePart" )
 public final class NamePart implements Typed {
 
   private URI type;

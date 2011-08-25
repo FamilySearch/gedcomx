@@ -41,7 +41,7 @@ import java.util.List;
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "Record", propOrder = { "persistentId", "alternateIds", "bibliographicCitation", "collection", "personas", "events", "relationships", "fields", "attribution", "sources", "extension" } )
-public class Record implements Typed, Extensible, Attributable, BibliographicResource, PersistentIdentifiable {
+public class Record implements Typed, Extensible, Attributable, BibliographicResource, PersistentIdentifiable, SourceSupported {
 
   private String id;
   private String lang;
@@ -331,7 +331,6 @@ public class Record implements Typed, Extensible, Attributable, BibliographicRes
   @XmlElement(name = "source")
   @JsonProperty("sources")
   @JsonName("sources")
-  @SuppressWarnings("rdf:no_range")
   public List<ResourceReference> getSources() {
     return sources;
   }

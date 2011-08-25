@@ -19,9 +19,7 @@ import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.common.AlternateId;
-import org.gedcomx.common.Extension;
-import org.gedcomx.common.ResourceReference;
+import org.gedcomx.common.*;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.TypesNamespaces;
 
@@ -36,12 +34,10 @@ import java.util.List;
  * @author Ryan Heaton
  */
 @XmlRootElement(name = "person")
-@XmlType (
-  propOrder = {"persistentId", "alternateIds", "gender", "names", "events", "characteristics", "sources", "bibliographicCitation", "extension"}
-)
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-public class Person {
+@XmlType ( name = "Person", propOrder = {"persistentId", "alternateIds", "bibliographicCitation", "gender", "names", "events", "characteristics", "sources", "extension"} )
+public class Person implements Extensible, PersistentIdentifiable, BibliographicResource, HasEvents, HasCharacteristics, SourceSupported {
 
   private String id;
   private List<AlternateId> alternateIds;

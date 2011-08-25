@@ -37,9 +37,9 @@ import java.util.List;
  *
  * @author Ryan Heaton
  */
-@XmlType (propOrder = { "primaryForm", "alternateForms" })
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
+@XmlType ( name = "Name", propOrder = { "primaryForm", "alternateForms" } )
 public class Name extends Conclusion implements Typed {
 
   private URI type;

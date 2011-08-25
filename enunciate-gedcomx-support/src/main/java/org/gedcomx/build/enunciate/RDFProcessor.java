@@ -215,16 +215,16 @@ public class RDFProcessor {
         result.addError(accessor, message.toString());
       }
       else {
-        if (!range.equals(description.getRange())) {
+        if (!range.equals(description.getRange()) && !description.getRange().isEmpty()) {
           description.getRange().retainAll(range);
-        }
 
-        if (description.getRange().isEmpty()) {
-          //if the range isn't equal, we need to determine
-          StringBuilder message = new StringBuilder("Unable to determine range for property ").append(about).append(" because the intersection between the range ");
-          appendPosition(message, description.getAssociatedDeclaration());
-          message.append(" is empty.");
-          result.addWarning(accessor, message.toString());
+          if (description.getRange().isEmpty()) {
+            //if the range isn't equal, we need to determine
+            StringBuilder message = new StringBuilder("Unable to determine range for property ").append(about).append(" because the intersection between the range ");
+            appendPosition(message, description.getAssociatedDeclaration());
+            message.append(" is empty.");
+            result.addWarning(accessor, message.toString());
+          }
         }
 
         if (!domain.equals(description.getDomain())) {
@@ -358,8 +358,7 @@ public class RDFProcessor {
       range = determineRDFRange(xmlType, result);
       if (range == null) {
         range = new TreeSet<String>();
-        SuppressWarnings suppressWarnings = accessor.getAnnotation(SuppressWarnings.class);
-        if (suppressWarnings != null && !Arrays.asList(suppressWarnings.value()).contains("rdf:no_range")) {
+        if (!isWarningSuppressed(accessor, declaringMember, "rdf:no_range")) {
           result.addWarning(accessor, "Unable to determine range because the accessor type appears to be a resource reference (it declares an rdf:resource attribute). Please consider explicitly declaring the range of this accessor.");
         }
       }
@@ -369,6 +368,19 @@ public class RDFProcessor {
     }
 
     return range;
+  }
+
+  /**
+   * Whether a warning is suppressed for a given accessor.
+   *
+   * @param accessor The accessor.
+   * @param declaringMember The accessor's declaring member.
+   * @param warning The warning.
+   * @return Whether the warning is suppressed.
+   */
+  private boolean isWarningSuppressed(Accessor accessor, MemberDeclaration declaringMember, String warning) {
+    return (accessor.getAnnotation(SuppressWarnings.class) == null || Arrays.asList(accessor.getAnnotation(SuppressWarnings.class).value()).contains(warning))
+        && (declaringMember == null || declaringMember.getAnnotation(SuppressWarnings.class) == null || Arrays.asList(declaringMember.getAnnotation(SuppressWarnings.class).value()).contains(warning));
   }
 
   /**

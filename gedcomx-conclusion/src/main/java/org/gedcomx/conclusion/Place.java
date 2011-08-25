@@ -22,8 +22,8 @@ import javax.xml.bind.annotation.XmlType;
  *
  * @author Ryan Heaton
  */
-@XmlType (propOrder = {"original", "normalized"})
-public final class Place {
+@XmlType ( name = "Place", propOrder = {"original", "normalized"} )
+public final class Place implements Normalizeable {
 
   private String original;
   private String normalized;

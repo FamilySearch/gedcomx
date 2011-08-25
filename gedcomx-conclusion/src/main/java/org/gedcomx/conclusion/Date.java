@@ -17,11 +17,14 @@ package org.gedcomx.conclusion;
 
 import org.codehaus.enunciate.ClientName;
 
+import javax.xml.bind.annotation.XmlType;
+
 /**
  * A concluded genealogical date.
  */
 @ClientName ("DateInfo")
-public final class Date {
+@XmlType ( name = "Date" )
+public final class Date implements Normalizeable {
 
   private String original;
   private String normalized;
