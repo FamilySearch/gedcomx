@@ -19,6 +19,7 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.common.*;
 import org.gedcomx.rt.RDFRange;
+import org.gedcomx.rt.RDFSubPropertyOf;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.TypesNamespaces;
 
@@ -68,6 +69,7 @@ public class RecordCollection implements Attributable, Extensible, Bibliographic
    * @return The reference to the "parent" collection for this collection, i.e. the collection that contains this collection.
    */
   @RDFRange(RecordCollection.class)
+  @RDFSubPropertyOf ( TypesNamespaces.DUBLIN_CORE_NAMESPACE + "isPartOf" )
   public ResourceReference getParent() {
     return parent;
   }

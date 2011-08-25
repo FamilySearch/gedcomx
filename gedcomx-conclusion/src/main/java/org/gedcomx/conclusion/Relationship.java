@@ -24,6 +24,7 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.common.*;
 import org.gedcomx.rt.RDFRange;
+import org.gedcomx.rt.RDFSubPropertyOf;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.RelationshipType;
 import org.gedcomx.types.Typed;
@@ -171,6 +172,7 @@ public class Relationship implements Typed, Attributable, Extensible, Persistent
    * implies direction, it goes from "person1" to "person2".
    */
   @RDFRange (Person.class)
+  @RDFSubPropertyOf ( TypesNamespaces.DUBLIN_CORE_NAMESPACE + "hasPart")
   public ResourceReference getPerson1() {
     return person1;
   }
@@ -198,6 +200,7 @@ public class Relationship implements Typed, Attributable, Extensible, Persistent
    * implies direction, it goes from "person1" to "person2".
    */
   @RDFRange (Person.class)
+  @RDFSubPropertyOf ( TypesNamespaces.DUBLIN_CORE_NAMESPACE + "hasPart")
   public ResourceReference getPerson2() {
     return person2;
   }

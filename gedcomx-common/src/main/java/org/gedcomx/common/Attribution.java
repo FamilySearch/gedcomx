@@ -17,7 +17,10 @@ package org.gedcomx.common;
 
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
+import org.gedcomx.rt.RDFRange;
+import org.gedcomx.rt.RDFSubPropertyOf;
 import org.gedcomx.rt.XmlTypeIdResolver;
+import org.gedcomx.types.TypesNamespaces;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
@@ -44,6 +47,8 @@ public final class Attribution {
    *
    * @return Reference to the contributor of the attributed data.
    */
+  @RDFRange({})
+  @RDFSubPropertyOf( TypesNamespaces.DUBLIN_CORE_NAMESPACE + "contributor")
   public ResourceReference getContributor() {
     return contributor;
   }
@@ -62,6 +67,7 @@ public final class Attribution {
    *
    * @return The timestamp for the attributed data.
    */
+  @RDFSubPropertyOf( TypesNamespaces.DUBLIN_CORE_NAMESPACE + "modified")
   public Date getTimestamp() {
     return timestamp;
   }
@@ -80,6 +86,7 @@ public final class Attribution {
    *
    * @return The explanation for the attributed data (likely provided by the contributor).
    */
+  @RDFSubPropertyOf( TypesNamespaces.DUBLIN_CORE_NAMESPACE + "description")
   public String getExplanation() {
     return explanation;
   }

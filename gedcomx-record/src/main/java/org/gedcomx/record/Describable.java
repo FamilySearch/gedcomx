@@ -33,9 +33,7 @@ public interface Describable {
    *
    * @return The description.
    */
-  @RDFSubPropertyOf (
-    TypesNamespaces.DUBLIN_CORE_NAMESPACE + "description"
-  )
+  @RDFSubPropertyOf ( TypesNamespaces.DUBLIN_CORE_NAMESPACE + "description" )
   String getDescription();
 
 }

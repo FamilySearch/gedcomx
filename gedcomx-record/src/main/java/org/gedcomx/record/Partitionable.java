@@ -15,6 +15,9 @@
  */
 package org.gedcomx.record;
 
+import org.gedcomx.rt.RDFSubPropertyOf;
+import org.gedcomx.types.TypesNamespaces;
+
 import javax.xml.bind.annotation.XmlType;
 import java.util.List;
 
@@ -31,6 +34,7 @@ public interface Partitionable<T> {
    *
    * @return The parts of a record resource.
    */
+  @RDFSubPropertyOf ( TypesNamespaces.DUBLIN_CORE_NAMESPACE + "hasPart" )
   List<T> getParts();
 
 }
