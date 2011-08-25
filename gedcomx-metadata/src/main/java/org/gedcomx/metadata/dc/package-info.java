@@ -17,7 +17,7 @@
 /**
  * The Dublin Core metadata model.
  *
- * @see http://dublincore.org/
+ * @see <a href="http://dublincore.org/">Dublin Core Metadata Initiative</a>
  */
 @XmlSchema(
   namespace = TypesNamespaces.DUBLIN_CORE_NAMESPACE,

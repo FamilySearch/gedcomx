@@ -17,7 +17,7 @@
 /**
  * The RDF-based metadata model.
  *
- * @see http://www.w3.org/TR/2004/REC-rdf-primer-20040210/
+ * @see <a href="http://www.w3.org/TR/2004/REC-rdf-primer-20040210/">RDF Primer</a>
  */
 @XmlSchema (
   namespace = TypesNamespaces.RDF_NAMESPACE,
