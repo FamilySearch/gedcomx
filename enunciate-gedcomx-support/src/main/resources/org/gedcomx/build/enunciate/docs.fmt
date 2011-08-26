@@ -39,21 +39,56 @@
 
       <hr/>
 
-      <ul>
     [#list ns2schema?values?sort_by("id") as schema]
       [#if (schema.typeDefinitions?size > 0) || (schema.globalElements?size > 0)]
-        <li>
-          <a href="${schema.id}.html">${schema.properties.label!("\"" + schema.id + "\" Namespace")}</a><br/>
-          <p>
-          [#if schema.properties.description??]${schema.properties.description}[/#if]
-          [#if schema.globalElements?size > 0]
-          Resources:[#list schema.globalElements as element] [#if !element_has_next && (element_index > 0)]and [/#if]<a href="${schema.id}_el_${element.name}.html">${element.name}</a>[#if element_has_next && schema.globalElements?size > 2],[/#if][/#list].
-          [/#if]
-          </p>
-        </li>
+      <h3><a href="${schema.id}.html">${schema.properties.label!("\"" + schema.id + "\" Namespace")}</a></h3>
+      [#if schema.properties.description??]<p>${schema.properties.description}</p>[/#if]
+      <table>
+        <tr>
+          <td align="right">Namespace ID:</td>
+          <td>${schema.id}</td>
+        </tr>
+        <tr>
+          <td align="right">Namespace URI:</td>
+          <td>${schema.namespace}</td>
+        </tr>
+        [#if schema.properties.version??]
+        <tr>
+          <td align="right">Version:</td>
+          <td>${schema.properties.version}</td>
+        </tr>
+        [/#if]
+        <tr>
+          <td align="right">XML Schema:</td>
+          <td><a href="${schema.properties.filename!"#"}">${schema.properties.filename!"n/a"}</a></td>
+        </tr>
+        [#if schema.properties.rdfSchemaLocation??]
+        <tr>
+          <td align="right">RDF Schema:</td>
+          <td><a href="${schema.properties.rdfSchemaLocation}">${schema.properties.rdfSchemaLocation}</a></td>
+        </tr>
+        [/#if]
+        [#if schema.properties.xmlMediaType??]
+        <tr>
+          <td align="right">XML Media Type:</td>
+          <td>${schema.properties.xmlMediaType}</td>
+        </tr>
+        [/#if]
+        [#if schema.properties.jsonMediaType??]
+        <tr>
+          <td align="right">JSON Media Type:</td>
+          <td>${schema.properties.jsonMediaType}</td>
+        </tr>
+        [/#if]
+        [#if schema.globalElements?size > 0]
+        <tr>
+          <td align="right">Resources:</td>
+          <td>[#list schema.globalElements as element] [#if !element_has_next && (element_index > 0)]and [/#if]<a href="${schema.id}_el_${element.name}.html">${element.name}</a>[#if element_has_next && schema.globalElements?size > 2],[/#if][/#list]</td>
+        </tr>
+        [/#if]
+      </table>
       [/#if]
     [/#list]
-      </ul>
 
       <div class="clear" />
     </div>
