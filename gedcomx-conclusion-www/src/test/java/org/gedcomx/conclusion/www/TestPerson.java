@@ -48,7 +48,7 @@ public class TestPerson {
     Link genderLink = new Link();
     genderLink.setHref(URI.create("urn:gender"));
     gender.getExtension().addElement(genderLink);
-    gender.setType(GenderType.male);
+    gender.setKnownType(GenderType.male);
     person.setGender(gender);
 
     person.setExtension(new Extension());
@@ -161,7 +161,7 @@ public class TestPerson {
     Event event;
     Name name;
     ResourceReference attributedSourceReference;
-    assertEquals(GenderType.male, person.getGender().getType());
+    assertEquals(GenderType.male, person.getGender().getKnownType());
     assertEquals("urn:gender", person.getGender().getExtension().findExtensionsOfType(Link.class).get(0).getHref().toString());
 
     assertEquals(1, person.getExtension().findExtensionsOfType(Link.class).size());

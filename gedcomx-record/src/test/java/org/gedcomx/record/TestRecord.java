@@ -112,7 +112,7 @@ public class TestRecord {
 
     Gender gender = new Gender();
     fillInField(gender, "gender");
-    gender.setType(GenderType.female);
+    gender.setKnownType(GenderType.female);
     persona.setGender(gender);
 
     persona.setId("persona-id");
@@ -263,7 +263,7 @@ public class TestRecord {
     assertEquals("forward-value", persona.getAlternateIds().get(0).getValue());
 
     assertField(persona.getGender(), "gender");
-    assertEquals(GenderType.female, persona.getGender().getType());
+    assertEquals(GenderType.female, persona.getGender().getKnownType());
 
     assertEquals("persona-id", persona.getId());
     assertEquals("urn:persona-id-value", persona.getPersistentId().toString());

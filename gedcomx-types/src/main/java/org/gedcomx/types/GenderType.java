@@ -15,11 +15,19 @@
  */
 package org.gedcomx.types;
 
+import org.codehaus.enunciate.qname.XmlQNameEnum;
+import org.codehaus.enunciate.qname.XmlUnknownQNameEnumValue;
+
+import java.net.URI;
+
 /**
- * Enumeration of gender types.
+ * Enumeration of known gender types.
  *
  * @author Ryan Heaton
  */
+@XmlQNameEnum (
+  base = XmlQNameEnum.BaseType.URI
+)
 public enum GenderType {
 
   /**
@@ -35,6 +43,31 @@ public enum GenderType {
   /**
    * Unknown.
    */
-  unknown
+  unknown,
+
+  /**
+   * Custom
+   */
+  @XmlUnknownQNameEnumValue
+  other;
+
+  /**
+   * Return the QName value for this enum.
+   *
+   * @return The QName value for this enum.
+   */
+  public URI toQNameURI() {
+    return org.codehaus.enunciate.XmlQNameEnumUtil.toURI(this);
+  }
+
+  /**
+   * Get the enumeration from the QName.
+   *
+   * @param qname The qname.
+   * @return The enumeration.
+   */
+  public static GenderType fromQNameURI(URI qname) {
+    return org.codehaus.enunciate.XmlQNameEnumUtil.fromURI(qname, GenderType.class);
+  }
 
 }

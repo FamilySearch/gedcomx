@@ -41,7 +41,7 @@ public class TestPerson {
   private Person createTestPerson() {
     Person person = new Person();
     Gender gender = new Gender();
-    gender.setType(GenderType.male);
+    gender.setKnownType(GenderType.male);
     person.setGender(gender);
 
     ArrayList<AlternateId> alternateIds = new ArrayList<AlternateId>();
@@ -138,7 +138,7 @@ public class TestPerson {
     Event event;
     Name name;
     ResourceReference attributedSourceReference;
-    assertEquals(GenderType.male, person.getGender().getType());
+    assertEquals(GenderType.male, person.getGender().getKnownType());
 
     assertEquals(1, person.getAlternateIds().size());
     assertEquals(AlternateIdType.forwarded, person.getAlternateIds().get(0).getKnownType());

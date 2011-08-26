@@ -24,14 +24,14 @@ public class TestGender {
    */
   public void testWWWGenderXml() throws Exception {
     Gender gender = new Gender();
-    gender.setType(GenderType.male);
+    gender.setKnownType(GenderType.male);
     Link link = new Link();
     link.setHref(URI.create("urn:gender"));
     gender.setExtension(new Extension());
     gender.getExtension().addElement(link);
 
     gender = processThroughXml(gender, Gender.class, JAXBContext.newInstance(Gender.class, Link.class));
-    assertEquals(GenderType.male, gender.getType());
+    assertEquals(GenderType.male, gender.getKnownType());
     assertEquals("urn:gender", gender.getExtension().findExtensionsOfType(Link.class).get(0).getHref().toString());
   }
 
@@ -40,14 +40,14 @@ public class TestGender {
    */
   public void testWWWGenderJson() throws Exception {
     Gender gender = new Gender();
-    gender.setType(GenderType.male);
+    gender.setKnownType(GenderType.male);
     Link link = new Link();
     link.setHref(URI.create("urn:gender"));
     gender.setExtension(new Extension());
     gender.getExtension().addElement(link);
 
     gender = processThroughJson(gender);
-    assertEquals(GenderType.male, gender.getType());
+    assertEquals(GenderType.male, gender.getKnownType());
     assertEquals("urn:gender", gender.getExtension().findExtensionsOfType(Link.class).get(0).getHref().toString());
   }
   

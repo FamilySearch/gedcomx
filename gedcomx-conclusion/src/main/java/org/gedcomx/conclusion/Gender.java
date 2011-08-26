@@ -15,13 +15,22 @@
  */
 package org.gedcomx.conclusion;
 
+import org.codehaus.enunciate.qname.XmlQNameEnumRef;
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.GenderType;
+import org.gedcomx.types.NameType;
+import org.gedcomx.types.Typed;
+import org.gedcomx.types.TypesNamespaces;
 
+import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
+import java.net.URI;
 
 /**
  * A gender conclusion.
@@ -31,17 +40,19 @@ import javax.xml.bind.annotation.XmlType;
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "Gender" )
-public class Gender extends Conclusion {
+public class Gender extends Conclusion implements Typed {
 
-  private GenderType type;
+  private URI type;
 
   /**
    * The type of the gender.
    *
    * @return The type of the gender.
    */
-  @XmlAttribute
-  public GenderType getType() {
+  @XmlAttribute (namespace = TypesNamespaces.GEDCOMX_TYPES_NAMESPACE)
+  @XmlQNameEnumRef (NameType.class)
+  @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
+  public URI getType() {
     return type;
   }
 
@@ -50,8 +61,29 @@ public class Gender extends Conclusion {
    *
    * @param type The type of the gender.
    */
-  public void setType(GenderType type) {
+  public void setType(URI type) {
     this.type = type;
+  }
+
+  /**
+   * The known type of the gender.
+   *
+   * @return The type of the gender.
+   */
+  @XmlTransient
+  @JsonIgnore
+  public GenderType getKnownType() {
+    return org.codehaus.enunciate.XmlQNameEnumUtil.fromURI(getType(), GenderType.class);
+  }
+
+  /**
+   * The type of the gender.
+   *
+   * @param type The type of the gender.
+   */
+  @JsonIgnore
+  public void setKnownType(GenderType type) {
+    this.type = org.codehaus.enunciate.XmlQNameEnumUtil.toURI(type);
   }
 
 }
