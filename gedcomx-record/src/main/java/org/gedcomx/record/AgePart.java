@@ -20,7 +20,9 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.rt.XmlTypeIdResolver;
-import org.gedcomx.types.AgeUnit;
+import org.gedcomx.types.AgePartType;
+import org.gedcomx.types.Typed;
+import org.gedcomx.types.TypesNamespaces;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -37,50 +39,50 @@ import java.net.URI;
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "AgePart" )
-public class AgePart extends Field {
+public class AgePart extends Field implements Typed {
 
-  private URI units;
+  private URI type;
 
   /**
-   * The units in which this age part is defined.
+   * The age part type.
    *
-   * @return The units in which this age part is defined.
+   * @return The age part type.
    */
-  @XmlAttribute
-  @XmlQNameEnumRef(AgeUnit.class)
+  @XmlAttribute (namespace = TypesNamespaces.GEDCOMX_TYPES_NAMESPACE)
+  @XmlQNameEnumRef(AgePartType.class)
   @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
-  public URI getUnits() {
-    return units;
+  public URI getType() {
+    return type;
   }
 
   /**
-   * The units in which this age part is defined.
+   * The age part type.
    *
-   * @param units The units in which this age part is defined.
+   * @param type The age part type.
    */
-  public void setUnits(URI units) {
-    this.units = units;
+  public void setType(URI type) {
+    this.type = type;
   }
 
   /**
-   * The enum referencing the known age unit, or {@link org.gedcomx.types.AgeUnit#other} if not known.
+   * The enum referencing the known age part type, or {@link org.gedcomx.types.AgePartType#other} if not known.
    *
-   * @return The enum referencing the known age unit, or {@link org.gedcomx.types.AgeUnit#other} if not known.
+   * @return The enum referencing the known age part type, or {@link org.gedcomx.types.AgePartType#other} if not known.
    */
   @XmlTransient
   @JsonIgnore
-  public AgeUnit getKnownUnits() {
-    return org.codehaus.enunciate.XmlQNameEnumUtil.fromURI(getUnits(), AgeUnit.class);
+  public AgePartType getKnownType() {
+    return org.codehaus.enunciate.XmlQNameEnumUtil.fromURI(getType(), AgePartType.class);
   }
 
   /**
-   * Set the age unit from a known enumeration of age units.
+   * Set the age unit from a known enumeration of age part types.
    *
-   * @param unit The age unit.
+   * @param type The age part type.
    */
   @JsonIgnore
-  public void setKnownUnits(AgeUnit unit) {
-    this.units = org.codehaus.enunciate.XmlQNameEnumUtil.toURI(unit);
+  public void setKnownType(AgePartType type) {
+    setType(org.codehaus.enunciate.XmlQNameEnumUtil.toURI(type));
   }
 
 }

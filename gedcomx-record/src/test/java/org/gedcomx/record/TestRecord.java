@@ -103,7 +103,7 @@ public class TestRecord {
     ArrayList<AgePart> ageParts = new ArrayList<AgePart>();
     AgePart agePart = new AgePart();
     fillInField(agePart, "age-part");
-    agePart.setKnownUnits(AgeUnit.days);
+    agePart.setKnownType(AgePartType.days);
     ageParts.add(agePart);
     age.setParts(ageParts);
     persona.setAge(age);
@@ -258,7 +258,7 @@ public class TestRecord {
     assertEquals(1, persona.getAge().getParts().size());
     AgePart agePart = persona.getAge().getParts().get(0);
     assertField(agePart, "age-part");
-    assertEquals(AgeUnit.days, agePart.getKnownUnits());
+    assertEquals(AgePartType.days, agePart.getKnownType());
 
     assertEquals(1, persona.getAlternateIds().size());
     assertEquals(AlternateIdType.forwarded, persona.getAlternateIds().get(0).getKnownType());

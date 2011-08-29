@@ -21,14 +21,14 @@ import org.codehaus.enunciate.qname.XmlUnknownQNameEnumValue;
 import java.net.URI;
 
 /**
- * Enumeration of standard age units.
+ * Enumeration of standard age part types.
  *
  * @author Ryan Heaton
  */
 @XmlQNameEnum (
   base = XmlQNameEnum.BaseType.URI
 )
-public enum AgeUnit {
+public enum AgePartType {
 
   years,
 
@@ -58,8 +58,8 @@ public enum AgeUnit {
    * @param qname The qname.
    * @return The enumeration.
    */
-  public static AgeUnit fromQNameURI(URI qname) {
-    return org.codehaus.enunciate.XmlQNameEnumUtil.fromURI(qname, AgeUnit.class);
+  public static AgePartType fromQNameURI(URI qname) {
+    return org.codehaus.enunciate.XmlQNameEnumUtil.fromURI(qname, AgePartType.class);
   }
 
 }
