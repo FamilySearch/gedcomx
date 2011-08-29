@@ -41,7 +41,8 @@ public enum GenderType {
   female,
 
   /**
-   * Unknown.
+   * Unknown. Note that this should be used strictly as "unknown" and not to
+   * indicate a type that is not set or not understood.
    */
   unknown,
 
