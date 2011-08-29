@@ -36,8 +36,8 @@ import java.util.List;
 @XmlRootElement(name = "person")
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType ( name = "Person", propOrder = {"persistentId", "alternateIds", "bibliographicCitation", "gender", "names", "events", "characteristics", "sources", "extension"} )
-public class Person implements Extensible, PersistentIdentifiable, BibliographicResource, HasEvents, HasCharacteristics, SourceSupported {
+@XmlType ( name = "Person", propOrder = {"persistentId", "alternateIds", "bibliographicCitation", "gender", "names", "events", "characteristics", "sources", "attribution", "extension"} )
+public class Person implements Extensible, Attributable, PersistentIdentifiable, BibliographicResource, HasEvents, HasCharacteristics, SourceSupported {
 
   private String id;
   private List<AlternateId> alternateIds;
@@ -49,6 +49,7 @@ public class Person implements Extensible, PersistentIdentifiable, Bibliographic
   private String bibliographicCitation;
   private List<ResourceReference> sources;
   private Extension extension;
+  private Attribution attribution;
 
   /**
    * The id of the person, unique to the context and not necessarily globally unique.
@@ -233,6 +234,24 @@ public class Person implements Extensible, PersistentIdentifiable, Bibliographic
   @JsonProperty("sources")
   public void setSources(List<ResourceReference> sources) {
     this.sources = sources;
+  }
+
+  /**
+   * The attribution metadata for this person.
+   *
+   * @return The attribution metadata for this person.
+   */
+  public Attribution getAttribution() {
+    return attribution;
+  }
+
+  /**
+   * The attribution metadata for this person.
+   *
+   * @param attribution The attribution metadata for this person.
+   */
+  public void setAttribution(Attribution attribution) {
+    this.attribution = attribution;
   }
 
   /**

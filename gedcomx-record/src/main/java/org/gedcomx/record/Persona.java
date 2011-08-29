@@ -19,10 +19,7 @@ import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.common.AlternateId;
-import org.gedcomx.common.Extensible;
-import org.gedcomx.common.Extension;
-import org.gedcomx.common.PersistentIdentifiable;
+import org.gedcomx.common.*;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.TypesNamespaces;
 
@@ -37,8 +34,8 @@ import java.util.List;
  */
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType ( name = "Persona", propOrder = { "persistentId", "alternateIds", "gender", "age", "names", "eventRoles", "characteristics", "extension" } )
-public class Persona implements Extensible, PersistentIdentifiable, HasCharacteristics, Weighted {
+@XmlType ( name = "Persona", propOrder = { "persistentId", "alternateIds", "gender", "age", "names", "eventRoles", "characteristics", "attribution", "extension" } )
+public class Persona implements Extensible, Attributable, PersistentIdentifiable, HasCharacteristics, Weighted {
 
   private String id;
   private Boolean principal;
@@ -49,6 +46,7 @@ public class Persona implements Extensible, PersistentIdentifiable, HasCharacter
   private java.util.List<Name> names;
   private java.util.List<EventRole> eventRoles = new ArrayList<EventRole>();
   private java.util.List<Characteristic> characteristics = new ArrayList<Characteristic>();
+  private Attribution attribution;
   private Extension extension;
 
   /**
@@ -235,6 +233,24 @@ public class Persona implements Extensible, PersistentIdentifiable, HasCharacter
    */
   public void setPrincipal(Boolean isPrincipal) {
     this.principal = isPrincipal;
+  }
+
+  /**
+   * The attribution metadata for this persona.
+   *
+   * @return The attribution metadata for this persona.
+   */
+  public Attribution getAttribution() {
+    return attribution;
+  }
+
+  /**
+   * The attribution metadata for this persona.
+   *
+   * @param attribution The attribution metadata for this persona.
+   */
+  public void setAttribution(Attribution attribution) {
+    this.attribution = attribution;
   }
 
   /**

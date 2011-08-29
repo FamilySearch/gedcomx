@@ -109,6 +109,8 @@ public class TestRecord {
     persona.setAge(age);
 
     persona.setAlternateIds(alternateIds);
+    persona.setAttribution(new Attribution());
+    persona.getAttribution().setExplanation("this persona exists.");
 
     Gender gender = new Gender();
     fillInField(gender, "gender");
@@ -261,6 +263,8 @@ public class TestRecord {
     assertEquals(1, persona.getAlternateIds().size());
     assertEquals(AlternateIdType.forwarded, persona.getAlternateIds().get(0).getKnownType());
     assertEquals("forward-value", persona.getAlternateIds().get(0).getValue());
+
+    assertEquals("this persona exists.", persona.getAttribution().getExplanation());
 
     assertField(persona.getGender(), "gender");
     assertEquals(GenderType.female, persona.getGender().getKnownType());
