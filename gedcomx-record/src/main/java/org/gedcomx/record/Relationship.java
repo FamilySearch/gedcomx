@@ -41,36 +41,13 @@ import java.util.List;
  */
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType ( name = "Relationship", propOrder = { "persona1", "persona2", "characteristics", "attribution", "extension" } )
-public class Relationship implements Typed, Extensible, Attributable, HasCharacteristics {
+@XmlType ( name = "Relationship", propOrder = { "persona1", "persona2", "characteristics" } )
+public class Relationship extends GenealogicalResource implements Typed, HasCharacteristics {
 
-  private String id;
   private URI type;
-  private Attribution attribution;
   private ResourceReference persona1;
   private ResourceReference persona2;
   private List<Characteristic> characteristics = new ArrayList<Characteristic>();
-  private Extension extension;
-
-  /**
-   * The id of the relationship, unique to the context and not necessarily globally unique.
-   *
-   * @return The id of the relationship, unique to the context and not necessarily globally unique.
-   */
-  @XmlID
-  @XmlAttribute(name = "ID", namespace = TypesNamespaces.RDF_NAMESPACE)
-  public String getId() {
-    return id;
-  }
-
-  /**
-   * The id of the relationship, unique to the context and not necessarily globally unique.
-   *
-   * @param id The id of the relationship, unique to the context and not necessarily globally unique.
-   */
-  public void setId(String id) {
-    this.id = id;
-  }
 
   /**
    * The type of this relationship.
@@ -112,24 +89,6 @@ public class Relationship implements Typed, Extensible, Attributable, HasCharact
   @JsonIgnore
   public void setKnownType(RelationshipType type) {
     setType(XmlQNameEnumUtil.toURI(type));
-  }
-
-  /**
-   * The attribution metadata for this relationship.
-   *
-   * @return The attribution metadata for this relationship.
-   */
-  public Attribution getAttribution() {
-    return attribution;
-  }
-
-  /**
-   * The attribution metadata for this relationship.
-   *
-   * @param attribution The attribution metadata for this relationship.
-   */
-  public void setAttribution(Attribution attribution) {
-    this.attribution = attribution;
   }
 
   /**
@@ -210,22 +169,4 @@ public class Relationship implements Typed, Extensible, Attributable, HasCharact
     this.characteristics = characteristics;
   }
 
-  /**
-   * The extension point for the relationship.
-   *
-   * @return The extension point for the relationship.
-   */
-  @XmlElement( name = "ext" )
-  public Extension getExtension() {
-    return extension;
-  }
-
-  /**
-   * The extension point for the relationship.
-   *
-   * @param extension The extension point for the relationship.
-   */
-  public void setExtension(Extension extension) {
-    this.extension = extension;
-  }
 }

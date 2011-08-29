@@ -259,10 +259,6 @@ public class GEDCOMXValidator extends BaseValidator {
               (!"alternateId".equals(element.getName()) || element.isWrapped())) {
               result.addWarning(element, "Element name for AlternateId should probably be named 'alternateId' to be consistent.");
             }
-            if ("extension".equals(((DeclaredType)accessorType).getDeclaration().getSimpleName().toLowerCase()) &&
-              (!"ext".equals(element.getName()) || element.isWrapped())) {
-              result.addWarning(element, "Element name for Extension should probably be named 'ext' to be consistent.");
-            }
           }
 
           QName ref = choice.getRef();
@@ -310,12 +306,18 @@ public class GEDCOMXValidator extends BaseValidator {
 
     AnyElement anyElement = typeDef.getAnyElement();
     if (anyElement != null) {
+      if (!"extensionElements".equals(anyElement.getSimpleName())) {
+        if (!suppressWarning(anyElement, "gedcomx:unconventional_any_element_name")) {
+          result.addWarning(anyElement, "The 'any' element might be better named 'extensionElements' to conform to convention.");
+        }
+      }
+
       if (!anyElement.isCollectionType()) {
         result.addError(anyElement, "Properties that are @XmlAnyElement should be collections.");
       }
 
-      JsonSerialize jsonSerialize = anyElement.getDelegate() instanceof PropertyDeclaration ? 
-        ((PropertyDeclaration)anyElement.getDelegate()).getGetter().getAnnotation(JsonSerialize.class) : 
+      JsonSerialize jsonSerialize = anyElement.getDelegate() instanceof PropertyDeclaration ?
+        ((PropertyDeclaration) anyElement.getDelegate()).getGetter().getAnnotation(JsonSerialize.class) :
         anyElement.getAnnotation(JsonSerialize.class);
       if (jsonSerialize == null) {
         String message = "Properties annotated with @XmlAnyElement should be annotated with @JsonSerialize(using = AnyElementSerializer.class).";
@@ -329,7 +331,7 @@ public class GEDCOMXValidator extends BaseValidator {
       }
 
       JsonDeserialize jsonDeserialize = anyElement.getDelegate() instanceof PropertyDeclaration ?
-        ((PropertyDeclaration)anyElement.getDelegate()).getSetter().getAnnotation(JsonDeserialize.class) :
+        ((PropertyDeclaration) anyElement.getDelegate()).getSetter().getAnnotation(JsonDeserialize.class) :
         anyElement.getAnnotation(JsonDeserialize.class);
       if (jsonDeserialize == null) {
         String message = "Properties annotated with @XmlAnyElement should be annotated with @JsonDeserialize(using = AnyElementDeserializer.class).";

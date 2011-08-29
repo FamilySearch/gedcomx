@@ -48,13 +48,15 @@ public final class ResourceReference implements Typed {
   private String id;
   private URI type;
   private URI resource;
-  private Map<QName, String> otherAttributes;
-  private List<Object> otherElements;
+  private Map<QName, String> extensionAttributes;
+  private List<Object> extensionElements;
 
   /**
-   * The id of this resource reference.
+   * The id of this resource reference. Note the distinction between this id and the id of the
+   * resource being referenced.
    *
-   * @return The id of this resource reference.
+   * @return The id of this resource reference. Note the distinction between this id and the id of the
+   * resource being referenced.
    */
   @XmlID
   @XmlAttribute( name = "ID", namespace = TypesNamespaces.RDF_NAMESPACE )
@@ -63,18 +65,20 @@ public final class ResourceReference implements Typed {
   }
 
   /**
-   * The id of this resource reference.
+   * The id of this resource reference. Note the distinction between this id and the id of the
+   * resource being referenced.
    *
-   * @param id The id of this resource reference.
+   * @param id The id of this resource reference. Note the distinction between this id and the id of the
+   * resource being referenced.
    */
   public void setId(String id) {
     this.id = id;
   }
 
   /**
-   * The type of the resource reference.
+   * The type of the resource being referenced.
    *
-   * @return The type of the resource reference.
+   * @return The type of the resource being referenced.
    */
   @XmlAttribute (namespace = TypesNamespaces.GEDCOMX_TYPES_NAMESPACE)
   @XmlQNameEnumRef (ResourceType.class)
@@ -84,9 +88,9 @@ public final class ResourceReference implements Typed {
   }
 
   /**
-   * The type of the source reference.
+   * The type of the resource being referenced.
    *
-   * @param type The type of the source reference.
+   * @param type The type of the resource being referenced.
    */
   public void setType(URI type) {
     this.type = type;
@@ -123,18 +127,18 @@ public final class ResourceReference implements Typed {
    */
   @XmlAnyAttribute
   @JsonSerialize (using = AnyAttributeSerializer.class)
-  public Map<QName, String> getOtherAttributes() {
-    return otherAttributes;
+  public Map<QName, String> getExtensionAttributes() {
+    return extensionAttributes;
   }
 
   /**
    * Custom attributes applicable to this resource reference.
    *
-   * @param otherAttributes Custom attributes applicable to this resource reference.
+   * @param extensionAttributes Custom attributes applicable to this resource reference.
    */
   @JsonDeserialize (using = AnyAttributeDeserializer.class)
-  public void setOtherAttributes(Map<QName, String> otherAttributes) {
-    this.otherAttributes = otherAttributes;
+  public void setExtensionAttributes(Map<QName, String> extensionAttributes) {
+    this.extensionAttributes = extensionAttributes;
   }
 
   /**
@@ -144,18 +148,18 @@ public final class ResourceReference implements Typed {
    */
   @XmlAnyElement ( lax = true )
   @JsonSerialize ( using = AnyElementSerializer.class )
-  public List<Object> getOtherElements() {
-    return otherElements;
+  public List<Object> getExtensionElements() {
+    return extensionElements;
   }
 
   /**
    * Custom attributes applicable to this resource reference.
    *
-   * @param otherElements Custom attributes applicable to this resource reference.
+   * @param extensionElements Custom attributes applicable to this resource reference.
    */
   @JsonDeserialize( using = AnyElementDeserializer.class )
-  public void setOtherElements(List<Object> otherElements) {
-    this.otherElements = otherElements;
+  public void setExtensionElements(List<Object> extensionElements) {
+    this.extensionElements = extensionElements;
   }
 
   /**

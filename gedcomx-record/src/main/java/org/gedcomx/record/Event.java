@@ -21,10 +21,7 @@ import org.codehaus.enunciate.qname.XmlQNameEnumRef;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.common.Attributable;
-import org.gedcomx.common.Attribution;
-import org.gedcomx.common.Extensible;
-import org.gedcomx.common.Extension;
+import org.gedcomx.common.GenealogicalResource;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.Typed;
 import org.gedcomx.types.TypesNamespaces;
@@ -39,36 +36,13 @@ import java.net.URI;
 @ClientName("EventInfo")
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType( name = "Event", propOrder = { "date", "place", "attribution", "extension" } )
-public class Event implements Typed, Extensible, Attributable, Temporal, Spatial {
+@XmlType( name = "Event", propOrder = { "date", "place" } )
+public class Event extends GenealogicalResource implements Typed, Temporal, Spatial {
 
-  private String id;
   private URI type;
   private Boolean primary;
-  private Attribution attribution;
   private Date date;
   private Place place;
-  private Extension extension;
-
-  /**
-   * The id of the event, unique to the context and not necessarily globally unique.
-   *
-   * @return The id of the event, unique to the context and not necessarily globally unique.
-   */
-  @XmlID
-  @XmlAttribute(name = "ID", namespace = TypesNamespaces.RDF_NAMESPACE)
-  public String getId() {
-    return id;
-  }
-
-  /**
-   * The id of the event, unique to the context and not necessarily globally unique.
-   *
-   * @param id The id of the event, unique to the context and not necessarily globally unique.
-   */
-  public void setId(String id) {
-    this.id = id;
-  }
 
   /**
    * The type of the event.
@@ -167,40 +141,4 @@ public class Event implements Typed, Extensible, Attributable, Temporal, Spatial
     this.place = place;
   }
 
-  /**
-   * The attribution metadata for this event.
-   *
-   * @return The attribution metadata for this event.
-   */
-  public Attribution getAttribution() {
-    return attribution;
-  }
-
-  /**
-   * The attribution metadata for this event.
-   *
-   * @param attribution The attribution metadata for this event.
-   */
-  public void setAttribution(Attribution attribution) {
-    this.attribution = attribution;
-  }
-
-  /**
-   * The extension point for the event.
-   *
-   * @return The extension point for the event.
-   */
-  @XmlElement ( name = "ext" )
-  public Extension getExtension() {
-    return extension;
-  }
-
-  /**
-   * The extension point for the event.
-   *
-   * @param extension The extension point for the event.
-   */
-  public void setExtension(Extension extension) {
-    this.extension = extension;
-  }
 }

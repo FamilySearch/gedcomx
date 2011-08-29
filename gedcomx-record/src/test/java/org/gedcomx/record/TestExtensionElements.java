@@ -1,6 +1,5 @@
 package org.gedcomx.record;
 
-import org.gedcomx.common.Extension;
 import org.testng.annotations.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -31,19 +30,18 @@ public class TestExtensionElements {
     extensions.add(el1);
     extensions.add(el2);
     extensions.add(el3);
-    ch.setExtension(new Extension());
-    ch.getExtension().setElements(extensions);
+    ch.setExtensionElements(extensions);
 
     ch = processThroughXml(ch);
     assertEquals("id", ch.getId());
-    assertEquals(3, ch.getExtension().getElements().size());
-    assertTrue(ch.getExtension().getElements().get(0) instanceof Element);
-    assertEquals("urn:test", ((Element) ch.getExtension().getElements().get(0)).getNamespaceURI());
-    assertEquals("test1", ((Element) ch.getExtension().getElements().get(0)).getLocalName());
-    assertEquals("urn:test", ((Element) ch.getExtension().getElements().get(1)).getNamespaceURI());
-    assertEquals("test2", ((Element) ch.getExtension().getElements().get(1)).getLocalName());
-    assertEquals("urn:test2", ((Element) ch.getExtension().getElements().get(2)).getNamespaceURI());
-    assertEquals("test3", ((Element) ch.getExtension().getElements().get(2)).getLocalName());
+    assertEquals(3, ch.getExtensionElements().size());
+    assertTrue(ch.getExtensionElements().get(0) instanceof Element);
+    assertEquals("urn:test", ((Element) ch.getExtensionElements().get(0)).getNamespaceURI());
+    assertEquals("test1", ((Element) ch.getExtensionElements().get(0)).getLocalName());
+    assertEquals("urn:test", ((Element) ch.getExtensionElements().get(1)).getNamespaceURI());
+    assertEquals("test2", ((Element) ch.getExtensionElements().get(1)).getLocalName());
+    assertEquals("urn:test2", ((Element) ch.getExtensionElements().get(2)).getNamespaceURI());
+    assertEquals("test3", ((Element) ch.getExtensionElements().get(2)).getLocalName());
 
   }
 }

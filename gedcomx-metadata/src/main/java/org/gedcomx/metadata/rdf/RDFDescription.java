@@ -41,8 +41,8 @@ public class RDFDescription {
 
   private String id; 
   private URI about;
-  private Map<QName, String> otherAttributes;
-  private List<Object> otherElements;
+  private Map<QName, String> extensionAttributes;
+  private List<Object> extensionElements;
 
   /**
    * The id of this piece of metadata.
@@ -91,18 +91,18 @@ public class RDFDescription {
    */
   @XmlAnyAttribute
   @JsonSerialize (using = AnyAttributeSerializer.class)
-  public Map<QName, String> getOtherAttributes() {
-    return otherAttributes;
+  public Map<QName, String> getExtensionAttributes() {
+    return extensionAttributes;
   }
 
   /**
    * Custom attributes applicable as part of this metadata.
    *
-   * @param otherAttributes Custom attributes applicable as part of this metadata.
+   * @param extensionAttributes Custom attributes applicable as part of this metadata.
    */
   @JsonDeserialize (using = AnyAttributeDeserializer.class)
-  public void setOtherAttributes(Map<QName, String> otherAttributes) {
-    this.otherAttributes = otherAttributes;
+  public void setExtensionAttributes(Map<QName, String> extensionAttributes) {
+    this.extensionAttributes = extensionAttributes;
   }
 
   /**
@@ -112,17 +112,17 @@ public class RDFDescription {
    */
   @XmlAnyElement ( lax = true )
   @JsonSerialize ( using = AnyElementSerializer.class )
-  public List<Object> getOtherElements() {
-    return otherElements;
+  public List<Object> getExtensionElements() {
+    return extensionElements;
   }
 
   /**
    * Custom elements applicable as part of this metadata.
    *
-   * @param otherElements Custom elements applicable as part of this metadata.
+   * @param extensionElements Custom elements applicable as part of this metadata.
    */
   @JsonDeserialize( using = AnyElementDeserializer.class )
-  public void setOtherElements(List<Object> otherElements) {
-    this.otherElements = otherElements;
+  public void setExtensionElements(List<Object> extensionElements) {
+    this.extensionElements = extensionElements;
   }
 }

@@ -44,17 +44,15 @@ public class TestPerson {
   private Person createTestWWWPerson() {
     Person person = new Person();
     Gender gender = new Gender();
-    gender.setExtension(new Extension());
     Link genderLink = new Link();
     genderLink.setHref(URI.create("urn:gender"));
-    gender.getExtension().addElement(genderLink);
+    gender.addExtensionElement(genderLink);
     gender.setKnownType(GenderType.male);
     person.setGender(gender);
 
-    person.setExtension(new Extension());
     Link personLink = new Link();
     personLink.setHref(URI.create("urn:person"));
-    person.getExtension().addElement(personLink);
+    person.addExtensionElement(personLink);
 
     ArrayList<AlternateId> alternateIds = new ArrayList<AlternateId>();
     AlternateId alternateId = new AlternateId();
@@ -65,10 +63,9 @@ public class TestPerson {
 
     List<org.gedcomx.conclusion.Characteristic> characteristics = new ArrayList<org.gedcomx.conclusion.Characteristic>();
     Characteristic characteristic = new Characteristic();
-    characteristic.setExtension(new Extension());
     Link characteristicLink = new Link();
     characteristicLink.setHref(URI.create("urn:characteristic"));
-    characteristic.getExtension().addElement(characteristicLink);
+    characteristic.addExtensionElement(characteristicLink);
     characteristic.setAttribution(new Attribution());
     characteristic.getAttribution().setContributor(new ResourceReference());
     characteristic.getAttribution().getContributor().setResource(URI.create("urn:characteristic-attribution"));
@@ -86,10 +83,9 @@ public class TestPerson {
 
     List<org.gedcomx.conclusion.Event> events = new ArrayList<org.gedcomx.conclusion.Event>();
     Event event = new Event();
-    event.setExtension(new Extension());
     Link eventLink = new Link();
     eventLink.setHref(URI.create("urn:event"));
-    event.getExtension().addElement(eventLink);
+    event.addExtensionElement(eventLink);
     event.setAttribution(new Attribution());
     event.getAttribution().setContributor(new ResourceReference());
     event.getAttribution().getContributor().setResource(URI.create("urn:event-attribution"));
@@ -106,10 +102,9 @@ public class TestPerson {
 
     List<org.gedcomx.conclusion.Name> names = new ArrayList<org.gedcomx.conclusion.Name>();
     Name name = new Name();
-    name.setExtension(new Extension());
     Link nameLink = new Link();
     nameLink.setHref(URI.create("urn:name"));
-    name.getExtension().addElement(nameLink);
+    name.addExtensionElement(nameLink);
     ArrayList<NameForm> alternateForms = new ArrayList<NameForm>();
     NameForm nameForm = new NameForm();
     nameForm.setFullText("alternate name form");
@@ -142,8 +137,8 @@ public class TestPerson {
     ArrayList<ResourceReference> sources = new ArrayList<ResourceReference>();
     ResourceReference attributedSourceReference = new ResourceReference();
     Attribution attribution = new Attribution();
-    attributedSourceReference.setOtherElements(new ArrayList<Object>());
-    attributedSourceReference.getOtherElements().add(attribution);
+    attributedSourceReference.setExtensionElements(new ArrayList<Object>());
+    attributedSourceReference.getExtensionElements().add(attribution);
     attribution.setContributor(new ResourceReference());
     attribution.getContributor().setResource(URI.create("urn:source-reference-attribution"));
     attributedSourceReference.setResource(URI.create("urn:source-uri"));
@@ -162,19 +157,19 @@ public class TestPerson {
     Name name;
     ResourceReference attributedSourceReference;
     assertEquals(GenderType.male, person.getGender().getKnownType());
-    assertEquals("urn:gender", person.getGender().getExtension().findExtensionsOfType(Link.class).get(0).getHref().toString());
+    assertEquals("urn:gender", person.getGender().findExtensionsOfType(Link.class).get(0).getHref().toString());
 
-    assertEquals(1, person.getExtension().findExtensionsOfType(Link.class).size());
-    assertEquals("urn:person", person.getExtension().findExtensionsOfType(Link.class).get(0).getHref().toString());
+    assertEquals(1, person.findExtensionsOfType(Link.class).size());
+    assertEquals("urn:person", person.findExtensionsOfType(Link.class).get(0).getHref().toString());
 
     assertEquals(1, person.getAlternateIds().size());
     assertEquals(AlternateIdType.forwarded, person.getAlternateIds().get(0).getKnownType());
     assertEquals("forward-value", person.getAlternateIds().get(0).getValue());
 
     assertEquals(1, person.getCharacteristics().size());
-    assertEquals(1, person.getCharacteristics().iterator().next().getExtension().findExtensionsOfType(Link.class).size());
+    assertEquals(1, person.getCharacteristics().iterator().next().findExtensionsOfType(Link.class).size());
     characteristic = person.getCharacteristics().iterator().next();
-    assertEquals("urn:characteristic", characteristic.getExtension().findExtensionsOfType(Link.class).get(0).getHref().toString());
+    assertEquals("urn:characteristic", characteristic.findExtensionsOfType(Link.class).get(0).getHref().toString());
     assertEquals("urn:characteristic-attribution", characteristic.getAttribution().getContributor().getResource().toString());
     assertEquals("original date", characteristic.getDate().getOriginal());
     assertEquals("normalized date", characteristic.getDate().getNormalized());
@@ -185,9 +180,9 @@ public class TestPerson {
     assertEquals("characteristic-value", characteristic.getValue());
 
     assertEquals(1, person.getEvents().size());
-    assertEquals(1, person.getEvents().iterator().next().getExtension().findExtensionsOfType(Link.class).size());
+    assertEquals(1, person.getEvents().iterator().next().findExtensionsOfType(Link.class).size());
     event = person.getEvents().iterator().next();
-    assertEquals("urn:event", event.getExtension().findExtensionsOfType(Link.class).get(0).getHref().toString());
+    assertEquals("urn:event", event.findExtensionsOfType(Link.class).get(0).getHref().toString());
     assertEquals("urn:event-attribution", event.getAttribution().getContributor().getResource().toString());
     assertEquals("original date", event.getDate().getOriginal());
     assertEquals("normalized date", event.getDate().getNormalized());
@@ -197,9 +192,9 @@ public class TestPerson {
     assertEquals("normalized place", event.getPlace().getNormalized());
 
     assertEquals(1, person.getNames().size());
-    assertEquals(1, person.getNames().iterator().next().getExtension().findExtensionsOfType(Link.class).size());
+    assertEquals(1, person.getNames().iterator().next().findExtensionsOfType(Link.class).size());
     name = person.getNames().iterator().next();
-    assertEquals("urn:name", name.getExtension().findExtensionsOfType(Link.class).get(0).getHref().toString());
+    assertEquals("urn:name", name.findExtensionsOfType(Link.class).get(0).getHref().toString());
     name = person.getNames().iterator().next();
     assertEquals(1, name.getAlternateForms().size());
     assertEquals("alternate name form", name.getAlternateForms().get(0).getFullText());
@@ -218,7 +213,7 @@ public class TestPerson {
 
     assertEquals(1, person.getSources().size());
     attributedSourceReference = person.getSources().iterator().next();
-    assertEquals("urn:source-reference-attribution", ((Attribution) attributedSourceReference.getOtherElements().iterator().next()).getContributor().getResource().toString());
+    assertEquals("urn:source-reference-attribution", ((Attribution) attributedSourceReference.getExtensionElements().iterator().next()).getContributor().getResource().toString());
     assertEquals("urn:source-uri", attributedSourceReference.getResource().toString());
     assertEquals("source-reference-id", attributedSourceReference.getId());
     assertEquals(ResourceType.Collection, attributedSourceReference.getKnownType());

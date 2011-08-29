@@ -43,41 +43,18 @@ import java.util.List;
 @XmlRootElement
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType ( name = "Relationship", propOrder = {"persistentId", "alternateIds", "bibliographicCitation", "person1", "person2", "events", "characteristics", "sources", "attribution", "extension"} )
-public class Relationship implements Typed, Attributable, Extensible, PersistentIdentifiable, BibliographicResource, HasEvents, HasCharacteristics, SourceSupported {
+@XmlType ( name = "Relationship", propOrder = {"persistentId", "alternateIds", "bibliographicCitation", "person1", "person2", "events", "characteristics", "sources" } )
+public class Relationship extends GenealogicalResource implements Typed, PersistentIdentifiable, BibliographicResource, HasEvents, HasCharacteristics, SourceSupported {
 
-  private String id;
   private URI type;
   private URI persistentId;
   private List<AlternateId> alternateIds;
   private ResourceReference person1;
   private ResourceReference person2;
-  private Attribution attribution;
   private List<Event> events;
   private List<Characteristic> characteristics;
   private String bibliographicCitation;
   private List<ResourceReference> sources;
-  private Extension extension;
-
-  /**
-   * The id of the relationship, unique to the context and not necessarily globally unique.
-   *
-   * @return The id of the relationship, unique to the context and not necessarily globally unique.
-   */
-  @XmlID
-  @XmlAttribute(name = "ID", namespace = TypesNamespaces.RDF_NAMESPACE)
-  public String getId() {
-    return id;
-  }
-
-  /**
-   * The id of the relationship, unique to the context and not necessarily globally unique.
-   *
-   * @param id The id of the relationship, unique to the context and not necessarily globally unique.
-   */
-  public void setId(String id) {
-    this.id = id;
-  }
 
   /**
    * The type of this relationship.
@@ -219,24 +196,6 @@ public class Relationship implements Typed, Attributable, Extensible, Persistent
   }
 
   /**
-   * The attribution metadata for this relationship.
-   *
-   * @return The attribution metadata for this relationship.
-   */
-  public Attribution getAttribution() {
-    return attribution;
-  }
-
-  /**
-   * The attribution metadata for this relationship.
-   *
-   * @param attribution The attribution metadata for this relationship.
-   */
-  public void setAttribution(Attribution attribution) {
-    this.attribution = attribution;
-  }
-
-  /**
    * The event conclusions for the relationship.
    *
    * @return The event conclusions for the relationship.
@@ -320,22 +279,4 @@ public class Relationship implements Typed, Attributable, Extensible, Persistent
     this.sources = sources;
   }
 
-  /**
-   * The extension point for the relationship.
-   *
-   * @return The extension point for the relationship.
-   */
-  @XmlElement( name = "ext" )
-  public Extension getExtension() {
-    return extension;
-  }
-
-  /**
-   * The extension point for the relationship.
-   *
-   * @param extension The extension point for the relationship.
-   */
-  public void setExtension(Extension extension) {
-    this.extension = extension;
-  }
 }

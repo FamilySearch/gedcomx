@@ -1,6 +1,6 @@
 package org.gedcomx.record;
 
-import org.gedcomx.common.Extension;
+import org.gedcomx.common.GenealogicalResource;
 import org.gedcomx.common.ResourceReference;
 import org.testng.annotations.Test;
 
@@ -23,7 +23,6 @@ public class TestCollection {
   public void testCollectionXml() throws Exception {
     RecordCollection collection = new RecordCollection();
     collection.setDescription("description");
-    collection.setExtension(new Extension());
     collection.setId("id");
     collection.setParent(new ResourceReference());
     collection.getParent().setResource(URI.create("urn:parent"));
@@ -33,7 +32,6 @@ public class TestCollection {
     collection = processThroughXml(collection);
     assertEquals("description", collection.getDescription());
     assertEquals("id", collection.getId());
-    assertNotNull(collection.getExtension());
     assertEquals(URI.create("urn:parent"), collection.getParent().getResource());
     assertEquals("publisher", collection.getPublisher());
     assertEquals("title", collection.getTitle());
@@ -46,7 +44,6 @@ public class TestCollection {
   public void testCollectionJson() throws Exception {
     RecordCollection collection = new RecordCollection();
     collection.setDescription("description");
-    collection.setExtension(new Extension());
     collection.setId("id");
     collection.setParent(new ResourceReference());
     collection.getParent().setResource(URI.create("urn:parent"));
@@ -56,7 +53,6 @@ public class TestCollection {
     collection = processThroughJson(collection);
     assertEquals("description", collection.getDescription());
     assertEquals("id", collection.getId());
-    assertNotNull(collection.getExtension());
     assertEquals(URI.create("urn:parent"), collection.getParent().getResource());
     assertEquals("publisher", collection.getPublisher());
     assertEquals("title", collection.getTitle());

@@ -1,12 +1,10 @@
 package org.gedcomx.conclusion;
 
-import org.gedcomx.common.Extension;
 import org.testng.annotations.Test;
 
 import static org.gedcomx.rt.SerializationUtil.processThroughJson;
 import static org.gedcomx.rt.SerializationUtil.processThroughXml;
 import static org.testng.AssertJUnit.assertEquals;
-import static org.testng.AssertJUnit.assertNotNull;
 
 /**
  * @author Ryan Heaton
@@ -43,7 +41,6 @@ public class TestPersonVitals {
     personvitals.setName(new Name());
     personvitals.getName().setId("name");
     personvitals.setId("vitals");
-    personvitals.setExtension(new Extension());
     return personvitals;
   }
 
@@ -53,7 +50,6 @@ public class TestPersonVitals {
     assertEquals("gender", personvitals.getGender().getId());
     assertEquals("name", personvitals.getName().getId());
     assertEquals("vitals", personvitals.getId());
-    assertNotNull(personvitals.getExtension());
   }
 
 }

@@ -1,6 +1,5 @@
 package org.gedcomx.conclusion.www;
 
-import org.gedcomx.common.Extension;
 import org.gedcomx.conclusion.Gender;
 import org.gedcomx.types.GenderType;
 import org.gedcomx.www.Link;
@@ -27,12 +26,11 @@ public class TestGender {
     gender.setKnownType(GenderType.male);
     Link link = new Link();
     link.setHref(URI.create("urn:gender"));
-    gender.setExtension(new Extension());
-    gender.getExtension().addElement(link);
+    gender.addExtensionElement(link);
 
     gender = processThroughXml(gender, Gender.class, JAXBContext.newInstance(Gender.class, Link.class));
     assertEquals(GenderType.male, gender.getKnownType());
-    assertEquals("urn:gender", gender.getExtension().findExtensionsOfType(Link.class).get(0).getHref().toString());
+    assertEquals("urn:gender", gender.findExtensionsOfType(Link.class).get(0).getHref().toString());
   }
 
   /**
@@ -43,12 +41,11 @@ public class TestGender {
     gender.setKnownType(GenderType.male);
     Link link = new Link();
     link.setHref(URI.create("urn:gender"));
-    gender.setExtension(new Extension());
-    gender.getExtension().addElement(link);
+    gender.addExtensionElement(link);
 
     gender = processThroughJson(gender);
     assertEquals(GenderType.male, gender.getKnownType());
-    assertEquals("urn:gender", gender.getExtension().findExtensionsOfType(Link.class).get(0).getHref().toString());
+    assertEquals("urn:gender", gender.findExtensionsOfType(Link.class).get(0).getHref().toString());
   }
   
 }

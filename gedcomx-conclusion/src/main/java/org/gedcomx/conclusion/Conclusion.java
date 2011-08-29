@@ -17,14 +17,10 @@ package org.gedcomx.conclusion;
 
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.common.Attributable;
-import org.gedcomx.common.Attribution;
-import org.gedcomx.common.Extensible;
-import org.gedcomx.common.Extension;
+import org.gedcomx.common.GenealogicalResource;
 import org.gedcomx.rt.XmlTypeIdResolver;
-import org.gedcomx.types.TypesNamespaces;
 
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  * A genealogical conclusion.
@@ -34,66 +30,6 @@ import javax.xml.bind.annotation.*;
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "Conclusion" )
-public abstract class Conclusion implements Attributable, Extensible {
+public abstract class Conclusion extends GenealogicalResource {
 
-  private String id;
-  private Attribution attribution;
-  private Extension extension;
-
-  /**
-   * The id of this conclusion, unique to its person or relationship.
-   *
-   * @return The id of this conclusion, unique to its person or relationship.
-   */
-  @XmlID
-  @XmlAttribute(name = "ID", namespace = TypesNamespaces.RDF_NAMESPACE)
-  public String getId() {
-    return id;
-  }
-
-  /**
-   * The id of this conclusion, unique to its person or relationship.
-   *
-   * @param id The id of this conclusion, unique to its person or relationship.
-   */
-  public void setId(String id) {
-    this.id = id;
-  }
-
-  /**
-   * The attribution metadata for this conclusion.
-   *
-   * @return The attribution metadata for this conclusion.
-   */
-  public Attribution getAttribution() {
-    return attribution;
-  }
-
-  /**
-   * The attribution metadata for this conclusion.
-   *
-   * @param attribution The attribution metadata for this conclusion.
-   */
-  public void setAttribution(Attribution attribution) {
-    this.attribution = attribution;
-  }
-
-  /**
-   * The extension point for the field.
-   *
-   * @return The extension point for the field.
-   */
-  @XmlElement ( name = "ext" )
-  public Extension getExtension() {
-    return extension;
-  }
-
-  /**
-   * The extension point for the field.
-   *
-   * @param extension The extension point for the field.
-   */
-  public void setExtension(Extension extension) {
-    this.extension = extension;
-  }
 }

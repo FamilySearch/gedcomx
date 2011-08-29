@@ -24,9 +24,7 @@ import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.rt.*;
 
 import javax.xml.bind.annotation.*;
-import javax.xml.namespace.QName;
 import java.util.List;
-import java.util.Map;
 
 /**
  * A set of RDF descriptions, <a href="http://www.w3.org/TR/2004/REC-rdf-primer-20040210/#rdfxml">according to the RDF spec</a>.
@@ -39,9 +37,8 @@ import java.util.Map;
 public class RDFDescriptionSet {
 
   private String id;
-  private List<RDFDescription> contents;
-  private Map<QName, String> otherAttributes;
-  private List<Object> otherElements;
+  private List<RDFDescription> rdfDescriptions;
+  private List<Object> otherDescriptions;
 
   /**
    * The id of this bundle.
@@ -64,66 +61,46 @@ public class RDFDescriptionSet {
   }
 
   /**
-   * The pieces of metadata contained in this bundle.
+   * The RDF descriptions contained in this bundle.
    *
-   * @return The pieces of metadata contained in this bundle.
+   * @return The RDF descriptions contained in this bundle.
    */
   @XmlElement ( name = "Description" )
-  @JsonProperty ( "Descriptions" )
-  @JsonName ( "Descriptions" )
-  public List<RDFDescription> getContents() {
-    return contents;
+  @JsonProperty ( "rdfDescriptions" )
+  @JsonName ( "rdfDescriptions" )
+  public List<RDFDescription> getRdfDescriptions() {
+    return rdfDescriptions;
   }
 
   /**
-   * The pieces of metadata contained in this bundle.
+   * The RDF descriptions contained in this bundle.
    *
-   * @param contents The pieces of metadata contained in this bundle.
+   * @param rdfDescriptions The RDF descriptions contained in this bundle.
    */
-  @JsonProperty ( "Descriptions" )
-  public void setContents(List<RDFDescription> contents) {
-    this.contents = contents;
+  @JsonProperty ( "rdfDescriptions" )
+  public void setRdfDescriptions(List<RDFDescription> rdfDescriptions) {
+    this.rdfDescriptions = rdfDescriptions;
   }
 
   /**
-   * Custom attributes for this bundle.
+   * The other (non-RDF) descriptions in this bundle.
    *
-   * @return Custom attributes for this bundle.
-   */
-  @XmlAnyAttribute
-  @JsonSerialize ( using = AnyAttributeSerializer.class )
-  public Map<QName, String> getOtherAttributes() {
-    return otherAttributes;
-  }
-
-  /**
-   * Custom attributes for this bundle.
-   *
-   * @param otherAttributes Custom attributes for this bundle.
-   */
-  @JsonDeserialize ( using = AnyAttributeDeserializer.class )
-  public void setOtherAttributes(Map<QName, String> otherAttributes) {
-    this.otherAttributes = otherAttributes;
-  }
-
-  /**
-   * Custom pieces of non-RDF metadata contained in this bundle.
-   *
-   * @return Custom pieces of non-RDF metadata contained in this bundle.
+   * @return The other (non-RDF) descriptions in this bundle.
    */
   @XmlAnyElement ( lax = true )
   @JsonSerialize ( using = AnyElementSerializer.class )
-  public List<Object> getOtherElements() {
-    return otherElements;
+  @SuppressWarnings("gedcomx:unconventional_any_element_name")
+  public List<Object> getOtherDescriptions() {
+    return otherDescriptions;
   }
 
   /**
-   * Custom pieces of non-RDF metadata contained in this bundle.
+   * The other (non-RDF) descriptions in this bundle.
    *
-   * @param otherElements Custom pieces of non-RDF metadata contained in this bundle.
+   * @param otherDescriptions The other (non-RDF) descriptions in this bundle.
    */
   @JsonDeserialize( using = AnyElementDeserializer.class )
-  public void setOtherElements(List<Object> otherElements) {
-    this.otherElements = otherElements;
+  public void setOtherDescriptions(List<Object> otherDescriptions) {
+    this.otherDescriptions = otherDescriptions;
   }
 }

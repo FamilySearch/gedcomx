@@ -1,8 +1,7 @@
 package org.gedcomx.conclusion;
 
-import org.gedcomx.common.Attribution;
 import org.gedcomx.common.AlternateId;
-import org.gedcomx.common.Extension;
+import org.gedcomx.common.Attribution;
 import org.gedcomx.common.ResourceReference;
 import org.gedcomx.types.RelationshipType;
 import org.testng.annotations.Test;
@@ -13,7 +12,6 @@ import java.util.Arrays;
 import static org.gedcomx.rt.SerializationUtil.processThroughJson;
 import static org.gedcomx.rt.SerializationUtil.processThroughXml;
 import static org.testng.AssertJUnit.assertEquals;
-import static org.testng.AssertJUnit.assertNotNull;
 
 /**
  * @author Ryan Heaton
@@ -53,7 +51,6 @@ public class TestRelationship {
     Event event = new Event();
     event.setId("event");
     relationship.setEvents(Arrays.asList(event));
-    relationship.setExtension(new Extension());
     relationship.setId("relationship");
     relationship.setPersistentId(URI.create("urn:pid"));
     relationship.setPerson1(new ResourceReference());
@@ -73,7 +70,6 @@ public class TestRelationship {
     assertEquals("explanation", relationship.getAttribution().getExplanation());
     assertEquals("characteristic", relationship.getCharacteristics().get(0).getId());
     assertEquals("event", relationship.getEvents().get(0).getId());
-    assertNotNull(relationship.getExtension());
     assertEquals("relationship", relationship.getId());
     assertEquals(URI.create("urn:pid"), relationship.getPersistentId());
     assertEquals(URI.create("urn:person1"), relationship.getPerson1().getResource());

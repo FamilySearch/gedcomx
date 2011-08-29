@@ -15,15 +15,11 @@
  */
 package org.gedcomx.record;
 
-import org.gedcomx.common.Attributable;
-import org.gedcomx.common.Attribution;
-import org.gedcomx.common.Extensible;
-import org.gedcomx.common.Extension;
+import org.gedcomx.common.GenealogicalResource;
 import org.gedcomx.types.TypesNamespaces;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import java.net.URI;
@@ -31,14 +27,12 @@ import java.net.URI;
 /**
  * Description of a role played by a persona in an event.
  */
-@XmlType ( name = "EventRole", propOrder = { "description", "attribution", "extension"} )
-public final class EventRole implements Attributable, Extensible, Describable, Weighted {
+@XmlType ( name = "EventRole" )
+public final class EventRole extends GenealogicalResource implements Describable, Weighted {
 
   private URI event;
   private String description;
   private Boolean principal;
-  private Attribution attribution;
-  private Extension extension;
 
   /**
    * The reference to the event. If the event is local to the record, the URI will be a
@@ -86,24 +80,6 @@ public final class EventRole implements Attributable, Extensible, Describable, W
   }
 
   /**
-   * The attribution metadata for this event role.
-   *
-   * @return The attribution metadata for this event role.
-   */
-  public Attribution getAttribution() {
-    return attribution;
-  }
-
-  /**
-   * The attribution metadata for this event role.
-   *
-   * @param attribution The attribution metadata for this event role.
-   */
-  public void setAttribution(Attribution attribution) {
-    this.attribution = attribution;
-  }
-
-  /**
    * The description of the role found on the record.
    *
    * @return The description of the role found on the record.
@@ -121,22 +97,4 @@ public final class EventRole implements Attributable, Extensible, Describable, W
     this.description = description;
   }
 
-  /**
-   * The extension point for the event role.
-   *
-   * @return The extension point for the event role.
-   */
-  @XmlElement ( name = "ext" )
-  public Extension getExtension() {
-    return extension;
-  }
-
-  /**
-   * The extension point for the event role.
-   *
-   * @param extension The extension point for the event role.
-   */
-  public void setExtension(Extension extension) {
-    this.extension = extension;
-  }
 }

@@ -17,7 +17,6 @@ package org.gedcomx.conclusion;
 
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.common.Extension;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.TypesNamespaces;
 
@@ -30,7 +29,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType ( name = "PersonVitals", propOrder = {"name", "gender", "birth", "death", "extension"} )
+@XmlType ( name = "PersonVitals", propOrder = {"name", "gender", "birth", "death" } )
 public final class PersonVitals {
 
   private String id;
@@ -38,7 +37,6 @@ public final class PersonVitals {
   private Gender gender;
   private Event birth;
   private Event death;
-  private Extension extension;
 
   /**
    * The id of the person, unique to the context and not necessarily globally unique.
@@ -132,21 +130,4 @@ public final class PersonVitals {
     this.death = death;
   }
 
-  /**
-   * The extension point for the person vitals.
-   *
-   * @return The extension point for the person vitals.
-   */
-  public Extension getExtension() {
-    return extension;
-  }
-
-  /**
-   * The extension point for the person vitals.
-   *
-   * @param extension The extension point for the person vitals.
-   */
-  public void setExtension(Extension extension) {
-    this.extension = extension;
-  }
 }

@@ -34,10 +34,9 @@ import java.util.List;
  */
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType ( name = "Persona", propOrder = { "persistentId", "alternateIds", "gender", "age", "names", "eventRoles", "characteristics", "attribution", "extension" } )
-public class Persona implements Extensible, Attributable, PersistentIdentifiable, HasCharacteristics, Weighted {
+@XmlType ( name = "Persona", propOrder = { "persistentId", "alternateIds", "gender", "age", "names", "eventRoles", "characteristics" } )
+public class Persona extends GenealogicalResource implements PersistentIdentifiable, HasCharacteristics, Weighted {
 
-  private String id;
   private Boolean principal;
   private URI persistentId;
   private List<AlternateId> alternateIds;
@@ -46,28 +45,6 @@ public class Persona implements Extensible, Attributable, PersistentIdentifiable
   private java.util.List<Name> names;
   private java.util.List<EventRole> eventRoles = new ArrayList<EventRole>();
   private java.util.List<Characteristic> characteristics = new ArrayList<Characteristic>();
-  private Attribution attribution;
-  private Extension extension;
-
-  /**
-   * The id of the persona, unique to the context and not necessarily globally unique.
-   *
-   * @return The id of the persona, unique to the context and not necessarily globally unique.
-   */
-  @XmlID
-  @XmlAttribute(name = "ID", namespace = TypesNamespaces.RDF_NAMESPACE)
-  public String getId() {
-    return id;
-  }
-
-  /**
-   * The id of the persona, unique to the context and not necessarily globally unique.
-   *
-   * @param id The id of the persona, unique to the context and not necessarily globally unique.
-   */
-  public void setId(String id) {
-    this.id = id;
-  }
 
   /**
    * A long-term, persistent, globally unique identifier for this persona.
@@ -235,40 +212,4 @@ public class Persona implements Extensible, Attributable, PersistentIdentifiable
     this.principal = isPrincipal;
   }
 
-  /**
-   * The attribution metadata for this persona.
-   *
-   * @return The attribution metadata for this persona.
-   */
-  public Attribution getAttribution() {
-    return attribution;
-  }
-
-  /**
-   * The attribution metadata for this persona.
-   *
-   * @param attribution The attribution metadata for this persona.
-   */
-  public void setAttribution(Attribution attribution) {
-    this.attribution = attribution;
-  }
-
-  /**
-   * The extension point for the persona.
-   *
-   * @return The extension point for the persona.
-   */
-  @XmlElement( name = "ext" )
-  public Extension getExtension() {
-    return extension;
-  }
-
-  /**
-   * The extension point for the persona.
-   *
-   * @param extension The extension point for the persona.
-   */
-  public void setExtension(Extension extension) {
-    this.extension = extension;
-  }
 }

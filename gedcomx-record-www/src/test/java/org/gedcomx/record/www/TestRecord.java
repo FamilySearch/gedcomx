@@ -1,8 +1,7 @@
 package org.gedcomx.record.www;
 
-import org.gedcomx.common.Attribution;
 import org.gedcomx.common.AlternateId;
-import org.gedcomx.common.Extension;
+import org.gedcomx.common.Attribution;
 import org.gedcomx.common.ResourceReference;
 import org.gedcomx.record.*;
 import org.gedcomx.types.*;
@@ -55,10 +54,9 @@ public class TestRecord {
 
     List<Event> events = new ArrayList<Event>();
     Event event = new Event();
-    event.setExtension(new Extension());
     Link eventLink = new Link();
     eventLink.setHref(URI.create("urn:event-link"));
-    event.getExtension().addElement(eventLink);
+    event.addExtensionElement(eventLink);
     event.setDate(new Date());
     fillInField(event.getDate(), "event-date");
     event.setId("event-id");
@@ -72,8 +70,7 @@ public class TestRecord {
     Persona persona = new Persona();
     Link personaLink = new Link();
     personaLink.setHref(URI.create("urn:persona-link"));
-    persona.setExtension(new Extension());
-    persona.getExtension().addElement(personaLink);
+    persona.addExtensionElement(personaLink);
     List<org.gedcomx.record.Characteristic> characteristics = new ArrayList<org.gedcomx.record.Characteristic>();
     Characteristic characteristic = new Characteristic();
     fillInField(characteristic, "characteristic");
@@ -218,13 +215,13 @@ public class TestRecord {
     assertEquals(EventType.adoption, event.getKnownType());
     assertField(event.getPlace(), "event-place");
     assertTrue(event.getPrimary());
-    List<Link> links = event.getExtension().findExtensionsOfType(Link.class);
+    List<Link> links = event.findExtensionsOfType(Link.class);
     assertEquals(1, links.size());
     assertEquals("urn:event-link", links.get(0).getHref().toString());
 
     assertEquals(1, record.getPersonas().size());
     Persona persona = record.getPersonas().get(0);
-    links = persona.getExtension().findExtensionsOfType(Link.class);
+    links = persona.findExtensionsOfType(Link.class);
     assertEquals(1, links.size());
     assertEquals("urn:persona-link", links.get(0).getHref().toString());
 

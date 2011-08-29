@@ -41,15 +41,13 @@ import java.util.List;
 @XmlRootElement
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType ( name = "Record", propOrder = { "persistentId", "alternateIds", "bibliographicCitation", "collection", "personas", "events", "relationships", "fields", "attribution", "sources", "extension" } )
-public class Record implements Typed, Extensible, Attributable, BibliographicResource, PersistentIdentifiable, SourceSupported {
+@XmlType ( name = "Record", propOrder = { "persistentId", "alternateIds", "bibliographicCitation", "collection", "personas", "events", "relationships", "fields", "sources" } )
+public class Record extends GenealogicalResource implements Typed, BibliographicResource, PersistentIdentifiable, SourceSupported {
 
-  private String id;
   private String lang;
   private URI type;
   private URI persistentId;
   private List<AlternateId> alternateIds;
-  private Attribution attribution;
   private ResourceReference collection;
   private List<Persona> personas;
   private List<Event> events;
@@ -57,27 +55,6 @@ public class Record implements Typed, Extensible, Attributable, BibliographicRes
   private List<RecordField> fields;
   private String bibliographicCitation;
   private List<ResourceReference> sources;
-  private Extension extension;
-
-  /**
-   * The id of the record, unique to the context and not necessarily globally unique.
-   *
-   * @return The id of the record, unique to the context and not necessarily globally unique.
-   */
-  @XmlID
-  @XmlAttribute(name = "ID", namespace = TypesNamespaces.RDF_NAMESPACE)
-  public String getId() {
-    return id;
-  }
-
-  /**
-   * The id of the record, unique to the context and not necessarily globally unique.
-   *
-   * @param id The id of the record, unique to the context and not necessarily globally unique.
-   */
-  public void setId(String id) {
-    this.id = id;
-  }
 
   /**
    * The type of the record.
@@ -179,24 +156,6 @@ public class Record implements Typed, Extensible, Attributable, BibliographicRes
   @JsonProperty("alternateIds")
   public void setAlternateIds(List<AlternateId> alternateIds) {
     this.alternateIds = alternateIds;
-  }
-
-  /**
-   * The attribution metadata for this record.
-   *
-   * @return The attribution metadata for this record.
-   */
-  public Attribution getAttribution() {
-    return attribution;
-  }
-
-  /**
-   * The attribution metadata for this record.
-   *
-   * @param attribution The attribution metadata for this record.
-   */
-  public void setAttribution(Attribution attribution) {
-    this.attribution = attribution;
   }
 
   /**
@@ -347,22 +306,4 @@ public class Record implements Typed, Extensible, Attributable, BibliographicRes
     this.sources = sources;
   }
 
-  /**
-   * The extension point for the record.
-   *
-   * @return The extension point for the record.
-   */
-  @XmlElement( name = "ext" )
-  public Extension getExtension() {
-    return extension;
-  }
-
-  /**
-   * The extension point for the record.
-   *
-   * @param extension The extension point for the record.
-   */
-  public void setExtension(Extension extension) {
-    this.extension = extension;
-  }
 }

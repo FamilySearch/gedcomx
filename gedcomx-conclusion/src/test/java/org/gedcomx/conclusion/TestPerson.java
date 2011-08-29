@@ -120,8 +120,8 @@ public class TestPerson {
     Attribution attribution = new Attribution();
     attribution.setContributor(new ResourceReference());
     attribution.getContributor().setResource(URI.create("urn:source-reference-attribution"));
-    attributedSourceReference.setOtherElements(new ArrayList<Object>());
-    attributedSourceReference.getOtherElements().add(attribution);
+    attributedSourceReference.setExtensionElements(new ArrayList<Object>());
+    attributedSourceReference.getExtensionElements().add(attribution);
     attributedSourceReference.setResource(URI.create("urn:source-uri"));
     attributedSourceReference.setId("source-reference-id");
     attributedSourceReference.setKnownType(ResourceType.Collection);
@@ -186,7 +186,7 @@ public class TestPerson {
 
     assertEquals(1, person.getSources().size());
     attributedSourceReference = person.getSources().iterator().next();
-    assertEquals("urn:source-reference-attribution", ((Attribution) attributedSourceReference.getOtherElements().iterator().next()).getContributor().getResource().toString());
+    assertEquals("urn:source-reference-attribution", ((Attribution) attributedSourceReference.getExtensionElements().iterator().next()).getContributor().getResource().toString());
     assertEquals("urn:source-uri", attributedSourceReference.getResource().toString());
     assertEquals("source-reference-id", attributedSourceReference.getId());
     assertEquals(ResourceType.Collection, attributedSourceReference.getKnownType());

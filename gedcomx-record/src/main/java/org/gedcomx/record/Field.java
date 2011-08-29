@@ -15,47 +15,21 @@
  */
 package org.gedcomx.record;
 
-import org.gedcomx.common.Attributable;
-import org.gedcomx.common.Attribution;
-import org.gedcomx.common.Extensible;
-import org.gedcomx.common.Extension;
-import org.gedcomx.types.TypesNamespaces;
+import org.gedcomx.common.GenealogicalResource;
 
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  * A field on a record.
  */
-@XmlType ( name = "Field", propOrder = { "original", "interpreted", "normalized", "attribution", "extension" } )
-public abstract class Field implements Attributable, Extensible {
+@XmlType ( name = "Field", propOrder = { "original", "interpreted", "normalized" } )
+public abstract class Field extends GenealogicalResource {
 
-  private String id;
   private String label;
   private String original;
   private String interpreted;
   private String normalized;
-  private Attribution attribution;
-  private Extension extension;
-
-  /**
-   * The id of this field data, unique to its record.
-   *
-   * @return The id of this field data, unique to its record.
-   */
-  @XmlID
-  @XmlAttribute(name = "ID", namespace = TypesNamespaces.RDF_NAMESPACE)
-  public String getId() {
-    return id;
-  }
-
-  /**
-   * The id of this field data, unique to its record.
-   *
-   * @param id The id of this field data, unique to its record.
-   */
-  public void setId(String id) {
-    this.id = id;
-  }
 
   /**
    * A label for the field. The label can be used to associate fields that were taken from the same section of
@@ -132,40 +106,4 @@ public abstract class Field implements Attributable, Extensible {
     this.normalized = normalized;
   }
 
-  /**
-   * The attribution metadata for this field.
-   *
-   * @return The attribution metadata for this field.
-   */
-  public Attribution getAttribution() {
-    return attribution;
-  }
-
-  /**
-   * The attribution metadata for this field.
-   *
-   * @param attribution The attribution metadata for this field.
-   */
-  public void setAttribution(Attribution attribution) {
-    this.attribution = attribution;
-  }
-
-  /**
-   * The extension point for the field.
-   *
-   * @return The extension point for the field.
-   */
-  @XmlElement( name = "ext" )
-  public Extension getExtension() {
-    return extension;
-  }
-
-  /**
-   * The extension point for the field.
-   *
-   * @param extension The extension point for the field.
-   */
-  public void setExtension(Extension extension) {
-    this.extension = extension;
-  }
 }

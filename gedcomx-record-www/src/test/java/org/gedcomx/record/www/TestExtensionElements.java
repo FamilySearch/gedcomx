@@ -1,6 +1,5 @@
 package org.gedcomx.record.www;
 
-import org.gedcomx.common.Extension;
 import org.gedcomx.record.Characteristic;
 import org.gedcomx.www.Link;
 import org.testng.annotations.Test;
@@ -36,27 +35,26 @@ public class TestExtensionElements {
     extensions.add(el2);
     extensions.add(el3);
     extensions.add(link);
-    ch.setExtension(new Extension());
-    ch.getExtension().setElements(extensions);
+    ch.setExtensionElements(extensions);
 
     JAXBContext context = JAXBContext.newInstance(Characteristic.class, Link.class);
     ch = processThroughXml(ch, Characteristic.class, context);
     assertEquals("id", ch.getId());
-    assertEquals(4, ch.getExtension().getElements().size());
-    assertTrue(ch.getExtension().getElements().get(0) instanceof Element);
-    assertEquals("urn:test", ((Element) ch.getExtension().getElements().get(0)).getNamespaceURI());
-    assertEquals("test1", ((Element) ch.getExtension().getElements().get(0)).getLocalName());
-    assertEquals("urn:test", ((Element) ch.getExtension().getElements().get(1)).getNamespaceURI());
-    assertEquals("test2", ((Element) ch.getExtension().getElements().get(1)).getLocalName());
-    assertEquals("urn:test2", ((Element) ch.getExtension().getElements().get(2)).getNamespaceURI());
-    assertEquals("test3", ((Element) ch.getExtension().getElements().get(2)).getLocalName());
-    assertTrue(ch.getExtension().getElements().get(3) instanceof Link);
-    assertEquals("urn:somehref", ((Link)ch.getExtension().getElements().get(3)).getHref().toString());
+    assertEquals(4, ch.getExtensionElements().size());
+    assertTrue(ch.getExtensionElements().get(0) instanceof Element);
+    assertEquals("urn:test", ((Element) ch.getExtensionElements().get(0)).getNamespaceURI());
+    assertEquals("test1", ((Element) ch.getExtensionElements().get(0)).getLocalName());
+    assertEquals("urn:test", ((Element) ch.getExtensionElements().get(1)).getNamespaceURI());
+    assertEquals("test2", ((Element) ch.getExtensionElements().get(1)).getLocalName());
+    assertEquals("urn:test2", ((Element) ch.getExtensionElements().get(2)).getNamespaceURI());
+    assertEquals("test3", ((Element) ch.getExtensionElements().get(2)).getLocalName());
+    assertTrue(ch.getExtensionElements().get(3) instanceof Link);
+    assertEquals("urn:somehref", ((Link)ch.getExtensionElements().get(3)).getHref().toString());
 
-    link = ch.getExtension().findExtensionOfType(Link.class);
+    link = ch.findExtensionOfType(Link.class);
     assertNotNull(link);
 
-    assertEquals(1, ch.getExtension().findExtensionsOfType(Link.class).size());
+    assertEquals(1, ch.findExtensionsOfType(Link.class).size());
 
   }
 }

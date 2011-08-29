@@ -21,10 +21,12 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.common.*;
 import org.gedcomx.rt.XmlTypeIdResolver;
-import org.gedcomx.types.TypesNamespaces;
 
 import javax.xml.XMLConstants;
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlType;
 import java.net.URI;
 import java.util.List;
 
@@ -36,10 +38,9 @@ import java.util.List;
 @XmlRootElement(name = "person")
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType ( name = "Person", propOrder = {"persistentId", "alternateIds", "bibliographicCitation", "gender", "names", "events", "characteristics", "sources", "attribution", "extension"} )
-public class Person implements Extensible, Attributable, PersistentIdentifiable, BibliographicResource, HasEvents, HasCharacteristics, SourceSupported {
+@XmlType ( name = "Person", propOrder = {"persistentId", "alternateIds", "bibliographicCitation", "gender", "names", "events", "characteristics", "sources" } )
+public class Person extends GenealogicalResource implements PersistentIdentifiable, BibliographicResource, HasEvents, HasCharacteristics, SourceSupported {
 
-  private String id;
   private List<AlternateId> alternateIds;
   private URI persistentId;
   private Gender gender;
@@ -48,28 +49,6 @@ public class Person implements Extensible, Attributable, PersistentIdentifiable,
   private List<Characteristic> characteristics;
   private String bibliographicCitation;
   private List<ResourceReference> sources;
-  private Extension extension;
-  private Attribution attribution;
-
-  /**
-   * The id of the person, unique to the context and not necessarily globally unique.
-   *
-   * @return The id of the person, unique to the context and not necessarily globally unique.
-   */
-  @XmlID
-  @XmlAttribute(name = "ID", namespace = TypesNamespaces.RDF_NAMESPACE)
-  public String getId() {
-    return id;
-  }
-
-  /**
-   * The id of the person, unique to the context and not necessarily globally unique.
-   *
-   * @param id The id of the person, unique to the context and not necessarily globally unique.
-   */
-  public void setId(String id) {
-    this.id = id;
-  }
 
   /**
    * A long-term, persistent, globally unique identifier for this person.
@@ -236,40 +215,4 @@ public class Person implements Extensible, Attributable, PersistentIdentifiable,
     this.sources = sources;
   }
 
-  /**
-   * The attribution metadata for this person.
-   *
-   * @return The attribution metadata for this person.
-   */
-  public Attribution getAttribution() {
-    return attribution;
-  }
-
-  /**
-   * The attribution metadata for this person.
-   *
-   * @param attribution The attribution metadata for this person.
-   */
-  public void setAttribution(Attribution attribution) {
-    this.attribution = attribution;
-  }
-
-  /**
-   * The extension point for the person.
-   *
-   * @return The extension point for the person.
-   */
-  @XmlElement( name = "ext" )
-  public Extension getExtension() {
-    return extension;
-  }
-
-  /**
-   * The extension point for the person.
-   *
-   * @param extension The extension point for the person.
-   */
-  public void setExtension(Extension extension) {
-    this.extension = extension;
-  }
 }

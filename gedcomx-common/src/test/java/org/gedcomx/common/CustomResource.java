@@ -12,24 +12,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-public class CustomElement {
+public class CustomResource extends GenealogicalResource {
 
-  private String id;
   private ResourceReference source;
 
-  public CustomElement() {
+  public CustomResource() {
   }
 
-  public CustomElement(String id) {
-    this.id = id;
-  }
-
-  public String getId() {
-    return id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
+  public CustomResource(String id) {
+    setId(id);
   }
 
   public ResourceReference getSource() {

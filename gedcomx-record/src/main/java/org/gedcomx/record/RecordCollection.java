@@ -31,37 +31,14 @@ import javax.xml.bind.annotation.*;
 @XmlRootElement
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType ( name = "RecordCollection", propOrder = { "bibliographicCitation", "parent", "title", "description", "publisher", "attribution", "extension" } )
-public class RecordCollection implements Attributable, Extensible, BibliographicResource, Describable {
+@XmlType ( name = "RecordCollection", propOrder = { "bibliographicCitation", "parent", "title", "description", "publisher" } )
+public class RecordCollection extends GenealogicalResource implements BibliographicResource, Describable {
 
-  private String id;
   private ResourceReference parent;
   private String title;
   private String description;
   private String publisher;
   private String bibliographicCitation;
-  private Attribution attribution;
-  private Extension extension;
-
-  /**
-   * The id of the collection, unique to the context and not necessarily globally unique.
-   *
-   * @return The id of the collection, unique to the context and not necessarily globally unique.
-   */
-  @XmlID
-  @XmlAttribute(name = "ID", namespace = TypesNamespaces.RDF_NAMESPACE)
-  public String getId() {
-    return id;
-  }
-
-  /**
-   * The id of the collection, unique to the context and not necessarily globally unique.
-   *
-   * @param id The id of the collection, unique to the context and not necessarily globally unique.
-   */
-  public void setId(String id) {
-    this.id = id;
-  }
 
   /**
    * The reference to the "parent" collection for this collection, i.e. the collection that contains this collection.
@@ -155,40 +132,4 @@ public class RecordCollection implements Attributable, Extensible, Bibliographic
     this.bibliographicCitation = bibliographicCitation;
   }
 
-  /**
-   * The attribution metadata for this collection.
-   *
-   * @return The attribution metadata for this collection.
-   */
-  public Attribution getAttribution() {
-    return attribution;
-  }
-
-  /**
-   * The attribution metadata for this collection.
-   *
-   * @param attribution The attribution metadata for this collection.
-   */
-  public void setAttribution(Attribution attribution) {
-    this.attribution = attribution;
-  }
-
-  /**
-   * The extension point for the collection.
-   *
-   * @return The extension point for the collection.
-   */
-  @XmlElement ( name = "ext" )
-  public Extension getExtension() {
-    return extension;
-  }
-
-  /**
-   * The extension point for the collection.
-   *
-   * @param extension The extension point for the collection.
-   */
-  public void setExtension(Extension extension) {
-    this.extension = extension;
-  }
 }
