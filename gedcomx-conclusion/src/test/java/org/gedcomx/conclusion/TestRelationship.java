@@ -44,7 +44,7 @@ public class TestRelationship {
     alternateId.setValue("alt-id");
     relationship.setAlternateIds(Arrays.asList(alternateId));
     relationship.setAttribution(new Attribution());
-    relationship.getAttribution().setExplanation("explanation");
+    relationship.getAttribution().setStatement("explanation");
     Characteristic characteristic = new Characteristic();
     characteristic.setId("characteristic");
     relationship.setCharacteristics(Arrays.asList(characteristic));
@@ -67,7 +67,7 @@ public class TestRelationship {
   private void assertTestRelationship(Relationship relationship) {
     assertEquals(RelationshipType.couple, relationship.getKnownType());
     assertEquals("alt-id", relationship.getAlternateIds().get(0).getValue());
-    assertEquals("explanation", relationship.getAttribution().getExplanation());
+    assertEquals("explanation", relationship.getAttribution().getStatement());
     assertEquals("characteristic", relationship.getCharacteristics().get(0).getId());
     assertEquals("event", relationship.getEvents().get(0).getId());
     assertEquals("relationship", relationship.getId());

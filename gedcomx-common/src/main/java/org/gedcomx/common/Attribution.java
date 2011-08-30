@@ -34,13 +34,13 @@ import java.util.Date;
 @XmlRootElement
 @JsonTypeInfo ( use = JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType ( name = "Attribution", propOrder = { "timestamp", "explanation", "contributor" } )
+@XmlType ( name = "Attribution", propOrder = { "timestamp", "statement", "contributor" } )
 @SuppressWarnings("gedcomx:no_id")
 public final class Attribution {
 
   private ResourceReference contributor;
   private Date timestamp;
-  private String explanation;
+  private String statement;
 
   /**
    * Reference to the contributor of the attributed data.
@@ -82,21 +82,21 @@ public final class Attribution {
   }
 
   /**
-   * The explanation for the attributed data (likely provided by the contributor).
+   * The "proof statement" for the attributed data provided by the contributor.
    *
-   * @return The explanation for the attributed data (likely provided by the contributor).
+   * @return The "proof statement" for the attributed data provided by the contributor.
    */
   @RDFSubPropertyOf( TypesNamespaces.DUBLIN_CORE_NAMESPACE + "description")
-  public String getExplanation() {
-    return explanation;
+  public String getStatement() {
+    return statement;
   }
 
   /**
-   * The explanation for the attributed data (likely provided by the contributor).
+   * The "proof statement" for the attributed data provided by the contributor.
    *
-   * @param explanation The explanation for the attributed data (likely provided by the contributor).
+   * @param statement The "proof statement" for the attributed data provided by the contributor.
    */
-  public void setExplanation(String explanation) {
-    this.explanation = explanation;
+  public void setStatement(String statement) {
+    this.statement = statement;
   }
 }

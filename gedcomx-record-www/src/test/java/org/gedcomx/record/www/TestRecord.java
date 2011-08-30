@@ -115,7 +115,7 @@ public class TestRecord {
     EventRole eventRole = new EventRole();
     eventRole.setDescription("event role description");
     eventRole.setAttribution(new Attribution());
-    eventRole.getAttribution().setExplanation("event role explanation");
+    eventRole.getAttribution().setStatement("event role explanation");
     eventRole.setPrincipal(false);
     eventRole.setEvent(URI.create("#" + event.getId()));
     eventRoles.add(eventRole);
