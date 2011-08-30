@@ -19,6 +19,7 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.common.*;
 import org.gedcomx.rt.RDFRange;
+import org.gedcomx.rt.RDFSubClassOf;
 import org.gedcomx.rt.RDFSubPropertyOf;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.TypesNamespaces;
@@ -32,6 +33,7 @@ import javax.xml.bind.annotation.*;
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "RecordCollection", propOrder = { "bibliographicCitation", "parent", "title", "description", "publisher" } )
+@RDFSubClassOf ( TypesNamespaces.DUBLIN_CORE_TYPE_NAMESPACE + "Collection" )
 public class RecordCollection extends GenealogicalResource implements BibliographicResource, Describable {
 
   private ResourceReference parent;
@@ -65,6 +67,7 @@ public class RecordCollection extends GenealogicalResource implements Bibliograp
    *
    * @return The title for the collection.
    */
+  @RDFSubPropertyOf ( TypesNamespaces.DUBLIN_CORE_NAMESPACE + "title" )
   public String getTitle() {
     return title;
   }
@@ -83,6 +86,7 @@ public class RecordCollection extends GenealogicalResource implements Bibliograp
    *
    * @return A description of the collection.
    */
+  @RDFSubPropertyOf ( TypesNamespaces.DUBLIN_CORE_NAMESPACE + "description" )
   public String getDescription() {
     return description;
   }
@@ -101,6 +105,7 @@ public class RecordCollection extends GenealogicalResource implements Bibliograp
    *
    * @return The publisher for the collection.
    */
+  @RDFSubPropertyOf ( TypesNamespaces.DUBLIN_CORE_NAMESPACE + "publisher" )
   public String getPublisher() {
     return publisher;
   }
