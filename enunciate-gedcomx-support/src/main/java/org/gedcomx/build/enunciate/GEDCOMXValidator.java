@@ -181,10 +181,6 @@ public class GEDCOMXValidator extends BaseValidator {
           result.addError(attribute, "Accessors of type 'java.net.URI' should of type xs:anyURI. Please annotate the attribute with @XmlSchemaType(name = \"anyURI\", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)");
         }
 
-        if ("href".equals(attribute.getName()) && !"http://www.w3.org/1999/xlink".equals(namespace)) {
-          result.addError(attribute, "Entity links should be make with an attribute named 'href' in the 'http://www.w3.org/1999/xlink' namespace.");
-        }
-
         if ("type".equals(attribute.getName()) && isURI && !"http://gedcomx.org/types/".equals(namespace)) {
           result.addError(attribute, "The 'type' attribute should be defined in the 'http://gedcomx.org/types/' namespace.");
         }
@@ -232,8 +228,8 @@ public class GEDCOMXValidator extends BaseValidator {
             result.addError(choice, "Accessors of type 'java.net.URI' should of type xs:anyURI. Please annotate the element with @XmlSchemaType(name = \"anyURI\", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)");
           }
 
-          if ("href".equals(choice.getName()) && !"http://www.w3.org/1999/xlink".equals(choice.getNamespace())) {
-            result.addError(choice, "Entity links should be make with an attribute named 'href' in the 'http://www.w3.org/1999/xlink' namespace. You probably need to apply @XmlAttribute(namespace='http://www.w3.org/1999/xlink')");
+          if ("href".equals(choice.getName())) {
+            result.addError(choice, "Entity links should be make with an attribute named 'href'. You probably need to apply @XmlAttribute.");
           }
 
           if ("type".equals(choice.getName()) && isURI) {

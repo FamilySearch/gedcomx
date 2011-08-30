@@ -573,7 +573,7 @@ public class DublinCoreDescription extends RDFDescription {
   /**
    * List of alternate formats of the pre-existing described resource. In REST terms, a list of the alternate "representations" that are available
    * for the described resource, probably in terms of the MIME type. If the alternate representations of the resource are accessed at
-   * a different URI (bad practice, but an accepted reality), use a custom {http://www.w3.org/1999/xlink}href attribute instead of the
+   * a different URI (bad practice, but an accepted reality), use a custom "href" attribute instead of the
    * {http://www.w3.org/1999/02/22-rdf-syntax-ns#}resource attribute.
    *
    * @return Alternate formats of the described resource.
@@ -588,7 +588,7 @@ public class DublinCoreDescription extends RDFDescription {
   /**
    * List of alternate formats of the pre-existing described resource. In REST terms, a list of the alternate "representations" that are available
    * for the described resource, probably in terms of the MIME type. If the alternate representations of the resource are accessed at
-   * a different URI (bad practice, but an accepted reality), use a custom {http://www.w3.org/1999/xlink}href attribute instead of the
+   * a different URI (bad practice, but an accepted reality), use a custom "href" attribute instead of the
    * {http://www.w3.org/1999/02/22-rdf-syntax-ns#}resource attribute.
    *
    * @param hasFormat Alternate formats of the described resource.

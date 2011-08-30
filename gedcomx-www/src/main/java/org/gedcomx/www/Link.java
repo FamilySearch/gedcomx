@@ -63,7 +63,6 @@ public final class Link {
    *
    * @return The link URI.
    */
-  @XmlAttribute(namespace="http://www.w3.org/1999/xlink")
   @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
   public URI getHref() {
     return href;
