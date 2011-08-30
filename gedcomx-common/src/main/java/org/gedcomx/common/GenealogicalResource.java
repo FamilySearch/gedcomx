@@ -15,29 +15,29 @@
  */
 package org.gedcomx.common;
 
+import org.codehaus.enunciate.json.JsonName;
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.gedcomx.rt.AnyElementDeserializer;
 import org.gedcomx.rt.AnyElementSerializer;
 import org.gedcomx.types.TypesNamespaces;
 
-import javax.xml.bind.annotation.XmlAnyElement;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A generic genealogical resource.
+ * A genealogical resource.
  *
  * @author Ryan Heaton
  */
-@XmlType ( name = "GenealogicalResource" )
-public abstract class GenealogicalResource {
+@XmlType ( name = "GenealogicalResource", propOrder = { "attribution", "sources", "extensionElements" } )
+public abstract class GenealogicalResource implements SourceSupported {
 
   private String id;
   private Attribution attribution;
+  private List<ResourceReference> sources;
   private List<Object> extensionElements;
 
   /**
@@ -84,6 +84,28 @@ public abstract class GenealogicalResource {
    */
   public void setAttribution(Attribution attribution) {
     this.attribution = attribution;
+  }
+
+  /**
+   * The sources for the conclusions about this person.
+   *
+   * @return The sources for the conclusions about this person.
+   */
+  @XmlElement (name="source")
+  @JsonProperty ("sources")
+  @JsonName ("sources")
+  public List<ResourceReference> getSources() {
+    return sources;
+  }
+
+  /**
+   * The sources for the conclusions about this person.
+   *
+   * @param sources The sources for the conclusions about this person.
+   */
+  @JsonProperty("sources")
+  public void setSources(List<ResourceReference> sources) {
+    this.sources = sources;
   }
 
   /**

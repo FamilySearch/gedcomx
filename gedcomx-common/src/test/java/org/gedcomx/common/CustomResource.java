@@ -1,10 +1,13 @@
 package org.gedcomx.common;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.rt.XmlTypeIdResolver;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import java.util.Arrays;
 
 /**
  * @author Ryan Heaton
@@ -14,8 +17,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 public class CustomResource extends GenealogicalResource {
 
-  private ResourceReference source;
-
   public CustomResource() {
   }
 
@@ -23,11 +24,14 @@ public class CustomResource extends GenealogicalResource {
     setId(id);
   }
 
+  @XmlTransient
+  @JsonIgnore
   public ResourceReference getSource() {
-    return source;
+    return getSources().get(0);
   }
 
+  @JsonIgnore
   public void setSource(ResourceReference source) {
-    this.source = source;
+    setSources(Arrays.asList(source));
   }
 }

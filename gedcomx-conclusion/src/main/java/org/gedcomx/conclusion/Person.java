@@ -38,17 +38,16 @@ import java.util.List;
 @XmlRootElement(name = "person")
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType ( name = "Person", propOrder = {"persistentId", "alternateIds", "bibliographicCitation", "gender", "names", "events", "characteristics", "sources" } )
-public class Person extends GenealogicalResource implements PersistentIdentifiable, BibliographicResource, HasEvents, HasCharacteristics, SourceSupported {
+@XmlType ( name = "Person", propOrder = {"persistentId", "alternateIds", "bibliographicCitation", "gender", "names", "events", "characteristics" } )
+public class Person extends GenealogicalResource implements PersistentIdentifiable, BibliographicResource, HasEvents, HasCharacteristics {
 
-  private List<AlternateId> alternateIds;
   private URI persistentId;
+  private List<AlternateId> alternateIds;
+  private String bibliographicCitation;
   private Gender gender;
   private List<Name> names;
   private List<Event> events;
   private List<Characteristic> characteristics;
-  private String bibliographicCitation;
-  private List<ResourceReference> sources;
 
   /**
    * A long-term, persistent, globally unique identifier for this person.
@@ -89,6 +88,24 @@ public class Person extends GenealogicalResource implements PersistentIdentifiab
   @JsonProperty ("alternateIds")
   public void setAlternateIds(List<AlternateId> alternateIds) {
     this.alternateIds = alternateIds;
+  }
+
+  /**
+   * The bibliographic citation for this data.
+   *
+   * @return The bibliographic citation for this data.
+   */
+  public String getBibliographicCitation() {
+    return bibliographicCitation;
+  }
+
+  /**
+   * The bibliographic citation for this data.
+   *
+   * @param bibliographicCitation The bibliographic citation for this data.
+   */
+  public void setBibliographicCitation(String bibliographicCitation) {
+    this.bibliographicCitation = bibliographicCitation;
   }
 
   /**
@@ -173,46 +190,6 @@ public class Person extends GenealogicalResource implements PersistentIdentifiab
   @JsonProperty("characteristics")
   public void setCharacteristics(List<Characteristic> characteristics) {
     this.characteristics = characteristics;
-  }
-
-  /**
-   * The bibliographic citation for this data.
-   *
-   * @return The bibliographic citation for this data.
-   */
-  public String getBibliographicCitation() {
-    return bibliographicCitation;
-  }
-
-  /**
-   * The bibliographic citation for this data.
-   *
-   * @param bibliographicCitation The bibliographic citation for this data.
-   */
-  public void setBibliographicCitation(String bibliographicCitation) {
-    this.bibliographicCitation = bibliographicCitation;
-  }
-
-  /**
-   * The sources for the conclusions about this person.
-   *
-   * @return The sources for the conclusions about this person.
-   */
-  @XmlElement(name="source")
-  @JsonProperty("sources")
-  @JsonName("sources")
-  public List<ResourceReference> getSources() {
-    return sources;
-  }
-
-  /**
-   * The sources for the conclusions about this person.
-   *
-   * @param sources The sources for the conclusions about this person.
-   */
-  @JsonProperty("sources")
-  public void setSources(List<ResourceReference> sources) {
-    this.sources = sources;
   }
 
 }

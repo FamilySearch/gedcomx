@@ -41,20 +41,19 @@ import java.util.List;
 @XmlRootElement
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType ( name = "Record", propOrder = { "persistentId", "alternateIds", "bibliographicCitation", "collection", "personas", "events", "relationships", "fields", "sources" } )
-public class Record extends GenealogicalResource implements Typed, BibliographicResource, PersistentIdentifiable, SourceSupported {
+@XmlType ( name = "Record", propOrder = { "persistentId", "alternateIds", "bibliographicCitation", "collection", "personas", "events", "relationships", "fields" } )
+public class Record extends GenealogicalResource implements Typed, BibliographicResource, PersistentIdentifiable {
 
   private String lang;
   private URI type;
   private URI persistentId;
   private List<AlternateId> alternateIds;
+  private String bibliographicCitation;
   private ResourceReference collection;
   private List<Persona> personas;
   private List<Event> events;
   private List<Relationship> relationships;
   private List<RecordField> fields;
-  private String bibliographicCitation;
-  private List<ResourceReference> sources;
 
   /**
    * The type of the record.
@@ -158,6 +157,23 @@ public class Record extends GenealogicalResource implements Typed, Bibliographic
     this.alternateIds = alternateIds;
   }
 
+  /**
+   * The bibliographic citation for this record.
+   *
+   * @return The bibliographic citation for this record.
+   */
+  public String getBibliographicCitation() {
+    return bibliographicCitation;
+  }
+
+  /**
+   * The bibliographic citation for this record.
+   *
+   * @param bibliographicCitation The bibliographic citation for this record.
+   */
+  public void setBibliographicCitation(String bibliographicCitation) {
+    this.bibliographicCitation = bibliographicCitation;
+  }
   /**
    * The reference to the collection containing this record.
    *
@@ -264,46 +280,6 @@ public class Record extends GenealogicalResource implements Typed, Bibliographic
   @JsonProperty("fields")
   public void setFields(List<RecordField> fields) {
     this.fields = fields;
-  }
-
-  /**
-   * The bibliographic citation for this record.
-   *
-   * @return The bibliographic citation for this record.
-   */
-  public String getBibliographicCitation() {
-    return bibliographicCitation;
-  }
-
-  /**
-   * The bibliographic citation for this record.
-   *
-   * @param bibliographicCitation The bibliographic citation for this record.
-   */
-  public void setBibliographicCitation(String bibliographicCitation) {
-    this.bibliographicCitation = bibliographicCitation;
-  }
-
-  /**
-   * The references to the sources of the record.
-   *
-   * @return The references to the sources of the record.
-   */
-  @XmlElement(name = "source")
-  @JsonProperty("sources")
-  @JsonName("sources")
-  public List<ResourceReference> getSources() {
-    return sources;
-  }
-
-  /**
-   * The references to the sources of the record.
-   *
-   * @param sources The references to the sources of the record.
-   */
-  @JsonProperty("sources")
-  public void setSources(List<ResourceReference> sources) {
-    this.sources = sources;
   }
 
 }

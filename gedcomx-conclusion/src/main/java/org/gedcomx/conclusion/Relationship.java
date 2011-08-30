@@ -43,8 +43,8 @@ import java.util.List;
 @XmlRootElement
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType ( name = "Relationship", propOrder = {"persistentId", "alternateIds", "bibliographicCitation", "person1", "person2", "events", "characteristics", "sources" } )
-public class Relationship extends GenealogicalResource implements Typed, PersistentIdentifiable, BibliographicResource, HasEvents, HasCharacteristics, SourceSupported {
+@XmlType ( name = "Relationship", propOrder = {"persistentId", "alternateIds", "bibliographicCitation", "person1", "person2", "events", "characteristics" } )
+public class Relationship extends GenealogicalResource implements Typed, PersistentIdentifiable, BibliographicResource, HasEvents, HasCharacteristics {
 
   private URI type;
   private URI persistentId;
@@ -54,7 +54,6 @@ public class Relationship extends GenealogicalResource implements Typed, Persist
   private List<Event> events;
   private List<Characteristic> characteristics;
   private String bibliographicCitation;
-  private List<ResourceReference> sources;
 
   /**
    * The type of this relationship.
@@ -137,6 +136,24 @@ public class Relationship extends GenealogicalResource implements Typed, Persist
   @JsonProperty("alternateIds")
   public void setAlternateIds(List<AlternateId> alternateIds) {
     this.alternateIds = alternateIds;
+  }
+
+  /**
+   * The bibliographic citation for this data.
+   *
+   * @return The bibliographic citation for this data.
+   */
+  public String getBibliographicCitation() {
+    return bibliographicCitation;
+  }
+
+  /**
+   * The bibliographic citation for this data.
+   *
+   * @param bibliographicCitation The bibliographic citation for this data.
+   */
+  public void setBibliographicCitation(String bibliographicCitation) {
+    this.bibliographicCitation = bibliographicCitation;
   }
 
   /**
@@ -237,46 +254,6 @@ public class Relationship extends GenealogicalResource implements Typed, Persist
   @JsonProperty("characteristics")
   public void setCharacteristics(List<Characteristic> characteristics) {
     this.characteristics = characteristics;
-  }
-
-  /**
-   * The bibliographic citation for this data.
-   *
-   * @return The bibliographic citation for this data.
-   */
-  public String getBibliographicCitation() {
-    return bibliographicCitation;
-  }
-
-  /**
-   * The bibliographic citation for this data.
-   *
-   * @param bibliographicCitation The bibliographic citation for this data.
-   */
-  public void setBibliographicCitation(String bibliographicCitation) {
-    this.bibliographicCitation = bibliographicCitation;
-  }
-
-  /**
-   * The sources for the conclusions about this relationship.
-   *
-   * @return The sources for the conclusions about this relationship.
-   */
-  @XmlElement(name="source")
-  @JsonProperty ("sources")
-  @JsonName ("sources")
-  public List<ResourceReference> getSources() {
-    return sources;
-  }
-
-  /**
-   * The sources for the conclusions about this relationship.
-   *
-   * @param sources The sources for the conclusions about this relationship.
-   */
-  @JsonProperty ("sources")
-  public void setSources(List<ResourceReference> sources) {
-    this.sources = sources;
   }
 
 }
