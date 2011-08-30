@@ -15,16 +15,27 @@
  */
 package org.gedcomx.record;
 
+import org.codehaus.enunciate.XmlQNameEnumUtil;
+import org.codehaus.enunciate.qname.XmlQNameEnumRef;
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.common.*;
+import org.gedcomx.common.BibliographicResource;
+import org.gedcomx.common.GenealogicalResource;
+import org.gedcomx.common.ResourceReference;
 import org.gedcomx.rt.RDFRange;
 import org.gedcomx.rt.RDFSubClassOf;
 import org.gedcomx.rt.RDFSubPropertyOf;
 import org.gedcomx.rt.XmlTypeIdResolver;
+import org.gedcomx.types.RecordType;
 import org.gedcomx.types.TypesNamespaces;
 
-import javax.xml.bind.annotation.*;
+import javax.xml.XMLConstants;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
+import java.net.URI;
 
 /**
  * A collection of records.
@@ -32,15 +43,36 @@ import javax.xml.bind.annotation.*;
 @XmlRootElement
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType ( name = "RecordCollection", propOrder = { "bibliographicCitation", "parent", "title", "description", "publisher" } )
+@XmlType ( name = "RecordCollection", propOrder = { "bibliographicCitation", "parent", "title", "description", "publisher", "recordType", "spatial", "temporal" } )
 @RDFSubClassOf ( TypesNamespaces.DUBLIN_CORE_TYPE_NAMESPACE + "Collection" )
 public class RecordCollection extends GenealogicalResource implements BibliographicResource, Describable {
 
+  private String bibliographicCitation;
   private ResourceReference parent;
   private String title;
   private String description;
   private String publisher;
-  private String bibliographicCitation;
+  private URI recordType;
+  private String spatial;
+  private String temporal;
+
+  /**
+   * The bibliographic citation for this data.
+   *
+   * @return The bibliographic citation for this data.
+   */
+  public String getBibliographicCitation() {
+    return bibliographicCitation;
+  }
+
+  /**
+   * The bibliographic citation for this data.
+   *
+   * @param bibliographicCitation The bibliographic citation for this data.
+   */
+  public void setBibliographicCitation(String bibliographicCitation) {
+    this.bibliographicCitation = bibliographicCitation;
+  }
 
   /**
    * The reference to the "parent" collection for this collection, i.e. the collection that contains this collection.
@@ -120,21 +152,81 @@ public class RecordCollection extends GenealogicalResource implements Bibliograp
   }
 
   /**
-   * The bibliographic citation for this data.
+   * Reference to the type of record contained in a collection.
    *
-   * @return The bibliographic citation for this data.
+   * @return Reference to the type of record contained in a collection.
    */
-  public String getBibliographicCitation() {
-    return bibliographicCitation;
+  @XmlQNameEnumRef(RecordType.class)
+  @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
+  public URI getRecordType() {
+    return recordType;
   }
 
   /**
-   * The bibliographic citation for this data.
+   * Reference to the type of record contained in a collection.
    *
-   * @param bibliographicCitation The bibliographic citation for this data.
+   * @param recordType Reference to the type of record contained in a collection.
    */
-  public void setBibliographicCitation(String bibliographicCitation) {
-    this.bibliographicCitation = bibliographicCitation;
+  public void setRecordType(URI recordType) {
+    this.recordType = recordType;
   }
 
+  /**
+   * Get the record type from a known enumeration of record types.
+   *
+   * @return The known record type, or {@link org.gedcomx.types.RecordType#other} if unknown type.
+   */
+  @XmlTransient
+  @JsonIgnore
+  public RecordType getKnownRecordType() {
+    return XmlQNameEnumUtil.fromURI(getRecordType(), RecordType.class);
+  }
+
+  /**
+   * Set the record type from a known enumeration of record types.
+   *
+   * @param type The record type.
+   */
+  @JsonIgnore
+  public void setKnownRecordType(RecordType type) {
+    setRecordType(XmlQNameEnumUtil.toURI(type));
+  }
+
+  /**
+   * The spatial coverage.
+   *
+   * @return The spatial coverage.
+   */
+  @RDFSubPropertyOf ( TypesNamespaces.DUBLIN_CORE_NAMESPACE + "spatial" )
+  public String getSpatial() {
+    return spatial;
+  }
+
+  /**
+   * The spatial coverage.
+   *
+   * @param spatial The spatial coverage.
+   */
+  public void setSpatial(String spatial) {
+    this.spatial = spatial;
+  }
+
+  /**
+   * The temporal coverage.
+   *
+   * @return The temporal coverage.
+   */
+  @RDFSubPropertyOf ( TypesNamespaces.DUBLIN_CORE_NAMESPACE + "temporal" )
+  public String getTemporal() {
+    return temporal;
+  }
+
+  /**
+   * The temporal coverage.
+   *
+   * @param temporal The temporal coverage.
+   */
+  public void setTemporal(String temporal) {
+    this.temporal = temporal;
+  }
 }
