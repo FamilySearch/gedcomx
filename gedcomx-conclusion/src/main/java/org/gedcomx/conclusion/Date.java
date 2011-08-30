@@ -16,6 +16,8 @@
 package org.gedcomx.conclusion;
 
 import org.codehaus.enunciate.ClientName;
+import org.gedcomx.rt.RDFSubClassOf;
+import org.gedcomx.types.TypesNamespaces;
 
 import javax.xml.bind.annotation.XmlType;
 
@@ -24,6 +26,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @ClientName ("DateInfo")
 @XmlType ( name = "Date" )
+@RDFSubClassOf ( TypesNamespaces.DUBLIN_CORE_NAMESPACE + "PeriodOfTime" )
 public final class Date implements Normalizeable {
 
   private String original;

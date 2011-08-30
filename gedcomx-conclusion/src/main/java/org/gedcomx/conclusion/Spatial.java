@@ -15,7 +15,6 @@
  */
 package org.gedcomx.conclusion;
 
-import org.gedcomx.rt.RDFSubClassOf;
 import org.gedcomx.rt.RDFSubPropertyOf;
 import org.gedcomx.types.TypesNamespaces;
 
@@ -27,7 +26,6 @@ import javax.xml.bind.annotation.XmlType;
  * @author Ryan Heaton
  */
 @XmlType ( name = "Spatial" )
-@RDFSubClassOf ( TypesNamespaces.DUBLIN_CORE_NAMESPACE + "Location" )
 public interface Spatial {
 
   /**

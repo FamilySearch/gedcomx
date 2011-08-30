@@ -20,7 +20,9 @@ import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
+import org.gedcomx.rt.RDFSubClassOf;
 import org.gedcomx.rt.XmlTypeIdResolver;
+import org.gedcomx.types.TypesNamespaces;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
@@ -33,6 +35,7 @@ import java.util.List;
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "Date" )
+@RDFSubClassOf ( TypesNamespaces.DUBLIN_CORE_NAMESPACE + "PeriodOfTime" )
 public class Date extends Field implements Partitionable<DatePart> {
 
   private List<DatePart> parts;

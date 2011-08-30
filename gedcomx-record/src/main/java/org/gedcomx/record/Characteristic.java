@@ -34,16 +34,14 @@ import javax.xml.bind.annotation.XmlType;
 import java.net.URI;
 
 /**
- * A field specifying a characteristic about a record, persona, or relationship.
+ * A field specifying a characteristic about a persona or relationship.
  */
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "Characteristic" )
-public class Characteristic extends Field implements Typed, Temporal, Spatial {
+public class Characteristic extends Field implements Typed {
 
   private URI type;
-  private Date date;
-  private Place place;
 
   /**
    * The type of the characteristic.
@@ -85,42 +83,6 @@ public class Characteristic extends Field implements Typed, Temporal, Spatial {
   @JsonIgnore
   public void setKnownType(org.gedcomx.types.CharacteristicType knownType) {
     setType(XmlQNameEnumUtil.toURI(knownType));
-  }
-
-  /**
-   * The date of applicability of this characteristic.
-   *
-   * @return The date of applicability of this characteristic.
-   */
-  public Date getDate() {
-    return date;
-  }
-
-  /**
-   * The date of applicability of this characteristic.
-   *
-   * @param date The date of applicability of this characteristic.
-   */
-  public void setDate(Date date) {
-    this.date = date;
-  }
-
-  /**
-   * The place of applicability of this characteristic.
-   *
-   * @return The place of applicability of this characteristic.
-   */
-  public Place getPlace() {
-    return place;
-  }
-
-  /**
-   * The place of applicability of this characteristic.
-   *
-   * @param place The place of applicability of this characteristic.
-   */
-  public void setPlace(Place place) {
-    this.place = place;
   }
 
 }

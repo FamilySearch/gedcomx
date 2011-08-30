@@ -20,6 +20,7 @@ import org.codehaus.enunciate.qname.XmlQNameEnumRef;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
+import org.gedcomx.rt.RDFSubClassOf;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.CharacteristicType;
 import org.gedcomx.types.Typed;
@@ -38,6 +39,7 @@ import java.net.URI;
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "Characteristic" )
+@RDFSubClassOf ( TypesNamespaces.DUBLIN_CORE_TYPE_NAMESPACE + "Event" )
 public class Characteristic extends Conclusion implements Typed, Spatial, Temporal {
 
   private URI type;

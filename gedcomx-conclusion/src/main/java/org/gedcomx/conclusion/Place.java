@@ -15,6 +15,9 @@
  */
 package org.gedcomx.conclusion;
 
+import org.gedcomx.rt.RDFSubClassOf;
+import org.gedcomx.types.TypesNamespaces;
+
 import javax.xml.bind.annotation.XmlType;
 
 /**
@@ -23,6 +26,7 @@ import javax.xml.bind.annotation.XmlType;
  * @author Ryan Heaton
  */
 @XmlType ( name = "Place", propOrder = {"original", "normalized"} )
+@RDFSubClassOf ( TypesNamespaces.DUBLIN_CORE_NAMESPACE + "Location" )
 public final class Place implements Normalizeable {
 
   private String original;

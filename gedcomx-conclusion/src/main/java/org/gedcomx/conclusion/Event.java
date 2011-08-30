@@ -22,6 +22,7 @@ import org.codehaus.jackson.annotate.JsonIgnore
 import org.codehaus.enunciate.qname.XmlQNameEnumRef;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
+import org.gedcomx.rt.RDFSubClassOf;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.Typed;
 import org.gedcomx.types.TypesNamespaces;
@@ -43,6 +44,7 @@ import java.net.URI;
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "Event" )
+@RDFSubClassOf ( TypesNamespaces.DUBLIN_CORE_TYPE_NAMESPACE + "Event" )
 public class Event extends Conclusion implements Typed, Spatial, Temporal {
 
   private URI type;
