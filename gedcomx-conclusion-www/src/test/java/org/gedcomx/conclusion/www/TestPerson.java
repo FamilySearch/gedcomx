@@ -1,14 +1,14 @@
 package org.gedcomx.conclusion.www;
 
+import org.gedcomx.common.AlternateId;
 import org.gedcomx.common.Attribution;
-import org.gedcomx.common.*;
-import org.gedcomx.conclusion.*;
 import org.gedcomx.common.ResourceReference;
+import org.gedcomx.conclusion.*;
+import org.gedcomx.metadata.rdf.RDFDescriptionSet;
 import org.gedcomx.types.*;
 import org.gedcomx.www.Link;
 import org.testng.annotations.Test;
 
-import javax.xml.bind.JAXBContext;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +16,7 @@ import java.util.List;
 import static org.gedcomx.rt.SerializationUtil.processThroughJson;
 import static org.gedcomx.rt.SerializationUtil.processThroughXml;
 import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertNotNull;
 
 /**
  * @author Ryan Heaton
@@ -27,8 +28,8 @@ public class TestPerson {
    * tests processing a WWW person through xml...
    */
   public void testWWWPersonXml() throws Exception {
-    Person person = createTestWWWPerson();
-    person = processThroughXml(person, Person.class, JAXBContext.newInstance(Person.class, Link.class));
+    PersonWWW person = createTestWWWPerson();
+    person = processThroughXml(person);
     assertTestWWWPerson(person);
   }
 
@@ -36,12 +37,19 @@ public class TestPerson {
    * tests processing a WWW person through json...
    */
   public void testWWWPersonJson() throws Exception {
-    Person person = createTestWWWPerson();
+    PersonWWW person = createTestWWWPerson();
     person = processThroughJson(person);
     assertTestWWWPerson(person);
   }
 
-  private Person createTestWWWPerson() {
+  private PersonWWW createTestWWWPerson() {
+    PersonWWW personWWW = new PersonWWW();
+    personWWW.setPerson(createTestPerson());
+    personWWW.setMetadata(new RDFDescriptionSet());
+    return personWWW;
+  }
+
+  private Person createTestPerson() {
     Person person = new Person();
     Gender gender = new Gender();
     Link genderLink = new Link();
@@ -151,7 +159,12 @@ public class TestPerson {
     return person;
   }
 
-  private void assertTestWWWPerson(Person person) {
+  private void assertTestWWWPerson(PersonWWW person) {
+    assertTestPerson(person.getPerson());
+    assertNotNull(person.getMetadata());
+  }
+
+  private void assertTestPerson(Person person) {
     Characteristic characteristic;
     Event event;
     Name name;

@@ -3,12 +3,15 @@ package org.gedcomx.record.www;
 import org.gedcomx.common.AlternateId;
 import org.gedcomx.common.Attribution;
 import org.gedcomx.common.ResourceReference;
+import org.gedcomx.metadata.dc.DublinCoreDescription;
+import org.gedcomx.metadata.rdf.RDFDescription;
+import org.gedcomx.metadata.rdf.RDFDescriptionSet;
+import org.gedcomx.metadata.rdf.RDFLiteral;
 import org.gedcomx.record.*;
 import org.gedcomx.types.*;
 import org.gedcomx.www.Link;
 import org.testng.annotations.Test;
 
-import javax.xml.bind.JAXBContext;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,18 +31,29 @@ public class TestRecord {
    * tests processing a WWW record through xml...
    */
   public void testRecordXml() throws Exception {
-    Record record = createTestRecord();
-    record = processThroughXml(record, Record.class, JAXBContext.newInstance(Record.class, Link.class));
-    assertTestRecord(record);
+    RecordWWW record = createTestRecordWWW();
+    record = processThroughXml(record);
+    assertTestRecordWWW(record);
   }
 
   /**
    * tests processing a WWW record through json...
    */
   public void testRecordJson() throws Exception {
-    Record record = createTestRecord();
+    RecordWWW record = createTestRecordWWW();
     record = processThroughJson(record);
-    assertTestRecord(record);
+    assertTestRecordWWW(record);
+  }
+
+  private RecordWWW createTestRecordWWW() {
+    RecordWWW recordWWW = new RecordWWW();
+    recordWWW.setRecord(createTestRecord());
+    recordWWW.setMetadata(new RDFDescriptionSet());
+    DublinCoreDescription dcDescription = new DublinCoreDescription();
+    dcDescription.setBibliographicCitation(new RDFLiteral());
+    dcDescription.getBibliographicCitation().setValue("bibliographic citation");
+    recordWWW.getMetadata().setRdfDescriptions(Arrays.asList((RDFDescription) dcDescription));
+    return recordWWW;
   }
 
   private Record createTestRecord() {
@@ -193,6 +207,13 @@ public class TestRecord {
     assertEquals(label + "-original", field.getOriginal());
     assertEquals(label + "-interpreted", field.getInterpreted());
     assertEquals(label + "-normalized", field.getNormalized());
+  }
+
+  private void assertTestRecordWWW(RecordWWW record) {
+    assertTestRecord(record.getRecord());
+    RDFDescriptionSet metadata = record.getMetadata();
+    assertEquals(1, metadata.getRdfDescriptions().size());
+    assertEquals("bibliographic citation", ((DublinCoreDescription)metadata.getRdfDescriptions().get(0)).getBibliographicCitation().getValue());
   }
 
   private void assertTestRecord(Record record) {
