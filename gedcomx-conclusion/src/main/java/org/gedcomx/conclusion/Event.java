@@ -32,7 +32,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.namespace.QName;
 import java.net.URI;
 
 /**
@@ -73,9 +72,9 @@ public class Event extends Conclusion implements Typed, Spatial, Temporal {
   }
 
   /**
-   * The enum referencing the known type of the event, or {@link org.gedcomx.types.EventType#other} if not known.
+   * The enum referencing the known type of the event, or {@link org.gedcomx.types.EventType#OTHER} if not known.
    *
-   * @return The enum referencing the known type of the event, or {@link org.gedcomx.types.EventType#other} if not known.
+   * @return The enum referencing the known type of the event, or {@link org.gedcomx.types.EventType#OTHER} if not known.
    */
   @XmlTransient
   @JsonIgnore

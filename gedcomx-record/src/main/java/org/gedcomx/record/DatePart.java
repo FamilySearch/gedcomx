@@ -64,9 +64,9 @@ public class DatePart extends Field implements Typed {
   }
 
   /**
-   * The enum referencing the known type of the date part, or {@link org.gedcomx.types.DatePartType#other} if not known.
+   * The enum referencing the known type of the date part, or {@link org.gedcomx.types.DatePartType#OTHER} if not known.
    *
-   * @return The enum referencing the known type of the date part, or {@link org.gedcomx.types.DatePartType#other} if not known.
+   * @return The enum referencing the known type of the date part, or {@link org.gedcomx.types.DatePartType#OTHER} if not known.
    */
   @XmlTransient
   @JsonIgnore

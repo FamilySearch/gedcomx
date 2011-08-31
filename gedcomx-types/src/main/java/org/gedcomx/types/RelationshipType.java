@@ -28,10 +28,10 @@ import java.net.URI;
 )
 public enum RelationshipType {
 
-  couple,
-  parent_child,
+  Couple,
+  ParentChild,
   @XmlUnknownQNameEnumValue
-  other;
+  OTHER;
 
   /**
    * Return the QName value for this enum.

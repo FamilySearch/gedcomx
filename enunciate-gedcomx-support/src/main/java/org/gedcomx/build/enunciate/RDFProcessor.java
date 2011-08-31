@@ -132,6 +132,10 @@ public class RDFProcessor {
     for (EnumConstantDeclaration constant : typeDefinition.getEnumConstants()) {
       QName qname = (QName) enumValues.get(constant.getSimpleName());
       if (qname != null) {
+        if (!Character.isUpperCase(qname.getLocalPart().charAt(0))) {
+          result.addWarning(constant, "RDF style conventions imply that the local part of this QName should be capitalized.");
+        }
+
         String about = qname.getNamespaceURI() + qname.getLocalPart();
         RDFSchema.RDFDescription description = this.rdfSchema.findDescription(about);
         if (description == null) {
@@ -707,10 +711,12 @@ public class RDFProcessor {
       this.rdfSchema.addDescription(description);
     }
     else if (!(description.getAssociatedDeclaration() instanceof TypeDeclaration) || !((TypeDeclaration) description.getAssociatedDeclaration()).getQualifiedName().equals(typeDefinition.getQualifiedName())) {
-      StringBuilder message = new StringBuilder("Unable to describe class ").append(about).append(" because it's already described");
-      appendPosition(message, description.getAssociatedDeclaration());
-      message.append('.');
-      result.addError(typeDefinition, message.toString());
+      if (!(description.getAssociatedDeclaration() instanceof EnumConstantDeclaration)) { //we'll allow enum constants to reference classes.
+        StringBuilder message = new StringBuilder("Unable to describe class ").append(about).append(" because it's already described");
+        appendPosition(message, description.getAssociatedDeclaration());
+        message.append('.');
+        result.addError(typeDefinition, message.toString());
+      }
     }
   }
 

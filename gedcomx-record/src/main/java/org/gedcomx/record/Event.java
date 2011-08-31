@@ -69,9 +69,9 @@ public class Event extends GenealogicalResource implements Typed {
   }
 
   /**
-   * The enum referencing the known type of the event, or {@link org.gedcomx.types.EventType#other} if not known.
+   * The enum referencing the known type of the event, or {@link org.gedcomx.types.EventType#OTHER} if not known.
    *
-   * @return The enum referencing the known type of the event, or {@link org.gedcomx.types.EventType#other} if not known.
+   * @return The enum referencing the known type of the event, or {@link org.gedcomx.types.EventType#OTHER} if not known.
    */
   @XmlTransient
   @JsonIgnore

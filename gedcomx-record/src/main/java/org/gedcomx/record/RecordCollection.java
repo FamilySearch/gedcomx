@@ -174,7 +174,7 @@ public class RecordCollection extends GenealogicalResource implements Bibliograp
   /**
    * Get the record type from a known enumeration of record types.
    *
-   * @return The known record type, or {@link org.gedcomx.types.RecordType#other} if unknown type.
+   * @return The known record type, or {@link org.gedcomx.types.RecordType#OTHER} if unknown type.
    */
   @XmlTransient
   @JsonIgnore

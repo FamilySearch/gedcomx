@@ -45,7 +45,7 @@ public class TestRecord {
 
     ArrayList<AlternateId> alternateIds = new ArrayList<AlternateId>();
     AlternateId alternateId = new AlternateId();
-    alternateId.setKnownType(AlternateIdType.forwarded);
+    alternateId.setKnownType(AlternateIdType.Forwarded);
     alternateId.setValue("forward-value");
     alternateIds.add(alternateId);
     record.setAlternateIds(alternateIds);
@@ -57,16 +57,16 @@ public class TestRecord {
     event.getDate().setParts(new ArrayList<DatePart>());
     DatePart datePart = new DatePart();
     fillInField(datePart, "event-date-part");
-    datePart.setKnownType(DatePartType.months);
+    datePart.setKnownType(DatePartType.Months);
     event.getDate().getParts().add(datePart);
     event.setId("event-id");
-    event.setKnownType(EventType.adoption);
+    event.setKnownType(EventType.Adoption);
     event.setPlace(new Place());
     fillInField(event.getPlace(), "event-place");
     event.getPlace().setParts(new ArrayList<PlacePart>());
     PlacePart placePart = new PlacePart();
     fillInField(placePart, "event-place-part");
-    placePart.setKnownType(PlacePartType.cemetery);
+    placePart.setKnownType(PlacePartType.Cemetery);
     event.getPlace().getParts().add(placePart);
     event.setPrimary(true);
     events.add(event);
@@ -76,18 +76,18 @@ public class TestRecord {
     List<Characteristic> characteristics = new ArrayList<Characteristic>();
     Characteristic characteristic = new Characteristic();
     fillInField(characteristic, "characteristic");
-    characteristic.setKnownType(CharacteristicType.occupation);
+    characteristic.setKnownType(CharacteristicType.Occupation);
     characteristics.add(characteristic);
     persona.setCharacteristics(characteristics);
 
     List<Name> names = new ArrayList<Name>();
     Name name = new Name();
     fillInField(name, "name");
-    name.setKnownType(NameType.formal);
+    name.setKnownType(NameType.Formal);
 
     ArrayList<NamePart> nameParts = new ArrayList<NamePart>();
     NamePart namePart = new NamePart();
-    namePart.setKnownType(NamePartType.surname);
+    namePart.setKnownType(NamePartType.Surname);
     fillInField(namePart, "name-part");
     nameParts.add(namePart);
     name.setParts(nameParts);
@@ -99,7 +99,7 @@ public class TestRecord {
     ArrayList<AgePart> ageParts = new ArrayList<AgePart>();
     AgePart agePart = new AgePart();
     fillInField(agePart, "age-part");
-    agePart.setKnownType(AgePartType.days);
+    agePart.setKnownType(AgePartType.Days);
     ageParts.add(agePart);
     age.setParts(ageParts);
     persona.setAge(age);
@@ -110,7 +110,7 @@ public class TestRecord {
 
     Gender gender = new Gender();
     fillInField(gender, "gender");
-    gender.setKnownType(GenderType.female);
+    gender.setKnownType(GenderType.Female);
     persona.setGender(gender);
 
     persona.setId("persona-id");
@@ -134,7 +134,7 @@ public class TestRecord {
     field.getAttribution().setContributor(new ResourceReference());
     field.getAttribution().getContributor().setResource(URI.create("urn:field-attribution"));
     field.setId("field-id");
-    field.setKnownType(FieldType.batch_number);
+    field.setKnownType(FieldType.BatchNumber);
     field.setOriginal("field-value-original");
     field.setInterpreted("field-value-interpreted");
     field.setNormalized("field-value-normalized");
@@ -145,11 +145,11 @@ public class TestRecord {
 
     ArrayList<Relationship> relationships = new ArrayList<Relationship>();
     Relationship coupleRelationship = new Relationship();
-    coupleRelationship.setKnownType(RelationshipType.couple);
+    coupleRelationship.setKnownType(RelationshipType.Couple);
     ArrayList<Characteristic> coupleCharacteristics = new ArrayList<Characteristic>();
     Characteristic coupleCharacteristic = new Characteristic();
     fillInField(coupleCharacteristic, "couple-characteristic");
-    coupleCharacteristic.setKnownType(CharacteristicType.Couple.common_law_marriage);
+    coupleCharacteristic.setKnownType(CharacteristicType.Couple.CommonLawMarriage);
     coupleCharacteristics.add(coupleCharacteristic);
     coupleRelationship.setCharacteristics(coupleCharacteristics);
     coupleRelationship.setId("couple-relationship-id");
@@ -159,7 +159,7 @@ public class TestRecord {
     coupleRelationship.getPersona2().setResource(URI.create("#" + persona.getId()));
     relationships.add(coupleRelationship);
     Relationship parentRelationship = new Relationship();
-    parentRelationship.setKnownType(RelationshipType.parent_child);
+    parentRelationship.setKnownType(RelationshipType.ParentChild);
     parentRelationship.setId("parent-relationship-id");
     parentRelationship.setPersona1(new ResourceReference());
     parentRelationship.getPersona1().setResource(URI.create("#" + persona.getId()));
@@ -211,53 +211,53 @@ public class TestRecord {
 
   private void assertTestRecord(Record record) {
     assertEquals(1, record.getAlternateIds().size());
-    assertEquals(AlternateIdType.forwarded, record.getAlternateIds().get(0).getKnownType());
+    assertEquals(AlternateIdType.Forwarded, record.getAlternateIds().get(0).getKnownType());
     assertEquals("forward-value", record.getAlternateIds().get(0).getValue());
 
     assertEquals(1, record.getEvents().size());
     Event event = record.getEvents().get(0);
     assertField(event.getDate(), "event-date");
     assertEquals("event-id", event.getId());
-    assertEquals(EventType.adoption, event.getKnownType());
+    assertEquals(EventType.Adoption, event.getKnownType());
     assertField(event.getPlace(), "event-place");
     assertTrue(event.getPrimary());
     assertEquals(1, event.getDate().getParts().size());
     assertField(event.getDate().getParts().get(0), "event-date-part");
-    assertEquals(DatePartType.months, event.getDate().getParts().get(0).getKnownType());
+    assertEquals(DatePartType.Months, event.getDate().getParts().get(0).getKnownType());
     assertEquals(1, event.getPlace().getParts().size());
     assertField(event.getPlace().getParts().get(0), "event-place-part");
-    assertEquals(PlacePartType.cemetery, event.getPlace().getParts().get(0).getKnownType());
+    assertEquals(PlacePartType.Cemetery, event.getPlace().getParts().get(0).getKnownType());
 
     assertEquals(1, record.getPersonas().size());
     Persona persona = record.getPersonas().get(0);
     assertEquals(1, persona.getCharacteristics().size());
     assertField(persona.getCharacteristics().get(0), "characteristic");
-    assertEquals(CharacteristicType.occupation, persona.getCharacteristics().get(0).getKnownType());
+    assertEquals(CharacteristicType.Occupation, persona.getCharacteristics().get(0).getKnownType());
 
     assertEquals(1, persona.getNames().size());
     Name name = persona.getNames().get(0);
     assertField(name, "name");
-    assertEquals(NameType.formal, name.getKnownType());
+    assertEquals(NameType.Formal, name.getKnownType());
 
     assertEquals(1, name.getParts().size());
     NamePart namePart = name.getParts().get(0);
-    namePart.setKnownType(NamePartType.surname);
+    namePart.setKnownType(NamePartType.Surname);
     assertField(namePart, "name-part");
 
     assertField(persona.getAge(), "age");
     assertEquals(1, persona.getAge().getParts().size());
     AgePart agePart = persona.getAge().getParts().get(0);
     assertField(agePart, "age-part");
-    assertEquals(AgePartType.days, agePart.getKnownType());
+    assertEquals(AgePartType.Days, agePart.getKnownType());
 
     assertEquals(1, persona.getAlternateIds().size());
-    assertEquals(AlternateIdType.forwarded, persona.getAlternateIds().get(0).getKnownType());
+    assertEquals(AlternateIdType.Forwarded, persona.getAlternateIds().get(0).getKnownType());
     assertEquals("forward-value", persona.getAlternateIds().get(0).getValue());
 
     assertEquals("this persona exists.", persona.getAttribution().getStatement());
 
     assertField(persona.getGender(), "gender");
-    assertEquals(GenderType.female, persona.getGender().getKnownType());
+    assertEquals(GenderType.Female, persona.getGender().getKnownType());
 
     assertEquals("persona-id", persona.getId());
     assertEquals("urn:persona-id-value", persona.getPersistentId().toString());
@@ -273,7 +273,7 @@ public class TestRecord {
     RecordField field = record.getFields().get(0);
     assertEquals("urn:field-attribution", field.getAttribution().getContributor().getResource().toString());
     assertEquals("field-id", field.getId());
-    assertEquals(FieldType.batch_number, field.getKnownType());
+    assertEquals(FieldType.BatchNumber, field.getKnownType());
     assertEquals("field-value-original", field.getOriginal());
     assertEquals("field-value-interpreted", field.getInterpreted());
     assertEquals("field-value-normalized", field.getNormalized());
@@ -283,17 +283,17 @@ public class TestRecord {
 
     assertEquals(2, record.getRelationships().size());
     Relationship coupleRelationship = record.getRelationships().get(0);
-    assertEquals(RelationshipType.couple, coupleRelationship.getKnownType());
+    assertEquals(RelationshipType.Couple, coupleRelationship.getKnownType());
     assertEquals(1, coupleRelationship.getCharacteristics().size());
     Characteristic coupleCharacteristic = coupleRelationship.getCharacteristics().get(0);
     assertField(coupleCharacteristic, "couple-characteristic");
-    assertEquals(CharacteristicType.Couple.common_law_marriage, coupleCharacteristic.getKnownType());
+    assertEquals(CharacteristicType.Couple.CommonLawMarriage, coupleCharacteristic.getKnownType());
     assertEquals("couple-relationship-id", coupleRelationship.getId());
     assertEquals("#" + persona.getId(), coupleRelationship.getPersona1().getResource().toString());
     assertEquals("#" + persona.getId(), coupleRelationship.getPersona2().getResource().toString());
 
     Relationship parentRelationship = record.getRelationships().get(1);
-    assertEquals(RelationshipType.parent_child, parentRelationship.getKnownType());
+    assertEquals(RelationshipType.ParentChild, parentRelationship.getKnownType());
     assertEquals("parent-relationship-id", parentRelationship.getId());
     assertEquals("#" + persona.getId(), parentRelationship.getPersona1().getResource().toString());
     assertEquals("#" + persona.getId(), parentRelationship.getPersona2().getResource().toString());

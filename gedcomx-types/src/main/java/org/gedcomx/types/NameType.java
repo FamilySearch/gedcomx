@@ -28,16 +28,16 @@ import java.net.URI;
 )
 public enum NameType {
 
-  name,
-  also_known_as,
-  maiden_name,
-  married_name,
-  nickname,
-  adoptive,
-  formal,
-  religious,
+  Name,
+  AlsoKnownAs,
+  MaidenName,
+  MarriedName,
+  Nickname,
+  Adoptive,
+  Formal,
+  Religious,
   @XmlUnknownQNameEnumValue
-  other;
+  OTHER;
 
   /**
    * Return the QName value for this enum.

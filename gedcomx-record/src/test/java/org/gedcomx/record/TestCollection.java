@@ -1,6 +1,5 @@
 package org.gedcomx.record;
 
-import org.gedcomx.common.GenealogicalResource;
 import org.gedcomx.common.ResourceReference;
 import org.gedcomx.types.RecordType;
 import org.testng.annotations.Test;
@@ -47,7 +46,7 @@ public class TestCollection {
     collection.setBibliographicCitation("bibliographic citation");
     collection.setSpatial("spatial coverage");
     collection.setTemporal("temporal coverage");
-    collection.setKnownRecordType(RecordType.census);
+    collection.setKnownRecordType(RecordType.Census);
     return collection;
   }
 
@@ -60,7 +59,7 @@ public class TestCollection {
     assertEquals("bibliographic citation", collection.getBibliographicCitation());
     assertEquals("spatial coverage", collection.getSpatial());
     assertEquals("temporal coverage", collection.getTemporal());
-    assertEquals(RecordType.census, collection.getKnownRecordType());
+    assertEquals(RecordType.Census, collection.getKnownRecordType());
   }
 
 }

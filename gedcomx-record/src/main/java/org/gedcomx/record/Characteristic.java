@@ -65,9 +65,9 @@ public class Characteristic extends Field implements Typed {
   }
 
   /**
-   * The enum referencing the known type of the characteristic, or {@link org.gedcomx.types.CharacteristicType#other} if not known.
+   * The enum referencing the known type of the characteristic, or {@link org.gedcomx.types.CharacteristicType#OTHER} if not known.
    *
-   * @return The enum referencing the known type of the characteristic, or {@link org.gedcomx.types.CharacteristicType#other} if not known.
+   * @return The enum referencing the known type of the characteristic, or {@link org.gedcomx.types.CharacteristicType#OTHER} if not known.
    */
   @XmlTransient
   @JsonIgnore

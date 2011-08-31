@@ -30,18 +30,18 @@ import java.net.URI;
 )
 public enum AgePartType {
 
-  years,
+  Years,
 
-  months,
+  Months,
 
-  days,
+  Days,
 
-  hours,
+  Hours,
 
-  minutes,
+  Minutes,
 
   @XmlUnknownQNameEnumValue
-  other;
+  OTHER;
 
   /**
    * Return the QName value for this enum.

@@ -61,9 +61,9 @@ public class PlacePart extends Field implements Typed {
   }
 
   /**
-   * The enum referencing the known type of the place part, or {@link org.gedcomx.types.PlacePartType#other} if not known.
+   * The enum referencing the known type of the place part, or {@link org.gedcomx.types.PlacePartType#OTHER} if not known.
    *
-   * @return The enum referencing the known type of the place part, or {@link org.gedcomx.types.PlacePartType#other} if not known.
+   * @return The enum referencing the known type of the place part, or {@link org.gedcomx.types.PlacePartType#OTHER} if not known.
    */
   @XmlTransient
   @JsonIgnore

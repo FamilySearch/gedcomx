@@ -39,7 +39,7 @@ public class TestRelationship {
 
   private Relationship createTestRelationship() {
     Relationship relationship = new Relationship();
-    relationship.setKnownType(RelationshipType.couple);
+    relationship.setKnownType(RelationshipType.Couple);
     AlternateId alternateId = new AlternateId();
     alternateId.setValue("alt-id");
     relationship.setAlternateIds(Arrays.asList(alternateId));
@@ -65,7 +65,7 @@ public class TestRelationship {
   }
 
   private void assertTestRelationship(Relationship relationship) {
-    assertEquals(RelationshipType.couple, relationship.getKnownType());
+    assertEquals(RelationshipType.Couple, relationship.getKnownType());
     assertEquals("alt-id", relationship.getAlternateIds().get(0).getValue());
     assertEquals("explanation", relationship.getAttribution().getStatement());
     assertEquals("characteristic", relationship.getCharacteristics().get(0).getId());

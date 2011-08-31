@@ -28,17 +28,17 @@ import java.net.URI;
 )
 public enum RelationshipRole {
 
-  spouse,
-  parent,
-  child,
-  grandparent,
-  grandchild,
-  ancestor,
-  descendant,
-  cousin,
-  in_law,
+  Spouse,
+  Parent,
+  Child,
+  Grandparent,
+  Grandchild,
+  Ancestor,
+  Descendant,
+  Cousin,
+  InLaw,
   @XmlUnknownQNameEnumValue
-  other;
+  OTHER;
 
   /**
    * Return the QName value for this enum.
