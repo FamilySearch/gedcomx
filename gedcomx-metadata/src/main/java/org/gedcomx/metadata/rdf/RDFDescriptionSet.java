@@ -34,6 +34,7 @@ import java.util.List;
 @XmlRootElement ( name = "RDF" )
 @JsonTypeInfo ( use = JsonTypeInfo.Id.CUSTOM, property = "@type" )
 @JsonTypeIdResolver ( XmlTypeIdResolver.class )
+@XmlType (name = "RDF")
 public class RDFDescriptionSet {
 
   private String id;

@@ -37,6 +37,7 @@ import java.util.Map;
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlSeeAlso( DublinCoreDescription.class )
+@XmlType (name = "Description")
 public class RDFDescription {
 
   private String id; 
