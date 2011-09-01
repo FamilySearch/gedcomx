@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
     id = "gx",
     uri = CommonNamespaces.GEDCOMX_COMMON_NAMESPACE,
     label = "Common Namespace",
-    description = "The common namespace contains the objects that are common to all profiles and namespaces.",
+    description = "The common namespace defines the types that are common to each model.",
     version = "v1",
     xmlMediaType = CommonNamespaces.GEDCOMX_COMMON_XML_MEDIA_TYPE,
     jsonMediaType = CommonNamespaces.GEDCOMX_COMMON_JSON_MEDIA_TYPE,
