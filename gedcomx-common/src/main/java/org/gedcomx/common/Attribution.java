@@ -34,12 +34,12 @@ import java.util.Date;
 @XmlRootElement
 @JsonTypeInfo ( use = JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType ( name = "Attribution", propOrder = { "timestamp", "statement", "contributor" } )
+@XmlType ( name = "Attribution", propOrder = {"modified", "statement", "contributor" } )
 @SuppressWarnings("gedcomx:no_id")
 public final class Attribution {
 
   private ResourceReference contributor;
-  private Date timestamp;
+  private Date modified;
   private String statement;
 
   /**
@@ -63,22 +63,22 @@ public final class Attribution {
   }
 
   /**
-   * The timestamp for the attributed data.
+   * The modified timestamp for the attributed data.
    *
-   * @return The timestamp for the attributed data.
+   * @return The modified timestamp for the attributed data.
    */
   @RDFSubPropertyOf( TypesNamespaces.DUBLIN_CORE_NAMESPACE + "modified")
-  public Date getTimestamp() {
-    return timestamp;
+  public Date getModified() {
+    return modified;
   }
 
   /**
-   * The timestamp for the attributed data.
+   * The modified timestamp for the attributed data.
    *
-   * @param timestamp The timestamp for the attributed data.
+   * @param modified The modified timestamp for the attributed data.
    */
-  public void setTimestamp(Date timestamp) {
-    this.timestamp = timestamp;
+  public void setModified(Date modified) {
+    this.modified = modified;
   }
 
   /**

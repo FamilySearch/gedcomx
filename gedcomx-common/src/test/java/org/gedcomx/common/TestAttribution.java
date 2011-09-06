@@ -24,11 +24,11 @@ public class TestAttribution {
     attribution.getContributor().setResource(URI.create("urn:someid"));
     attribution.setStatement("hello, there.");
     Date ts = new Date();
-    attribution.setTimestamp(ts);
+    attribution.setModified(ts);
     attribution = processThroughXml(attribution);
     assertEquals("urn:someid", attribution.getContributor().getResource().toString());
     assertEquals("hello, there.", attribution.getStatement());
-    assertEquals(ts, attribution.getTimestamp());
+    assertEquals(ts, attribution.getModified());
   }
 
   /**
@@ -40,11 +40,11 @@ public class TestAttribution {
     attribution.getContributor().setResource(URI.create("urn:someid"));
     attribution.setStatement("hello, there.");
     Date ts = new Date();
-    attribution.setTimestamp(ts);
+    attribution.setModified(ts);
     attribution = processThroughJson(attribution);
     assertEquals("urn:someid", attribution.getContributor().getResource().toString());
     assertEquals("hello, there.", attribution.getStatement());
-    assertEquals(ts, attribution.getTimestamp());
+    assertEquals(ts, attribution.getModified());
   }
 
 }
