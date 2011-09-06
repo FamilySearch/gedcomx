@@ -65,9 +65,9 @@ public class AgePart extends Field implements Typed {
   }
 
   /**
-   * The enum referencing the known age part type, or {@link org.gedcomx.types.AgePartType#other} if not known.
+   * The enum referencing the known age part type, or {@link org.gedcomx.types.AgePartType#OTHER} if not known.
    *
-   * @return The enum referencing the known age part type, or {@link org.gedcomx.types.AgePartType#other} if not known.
+   * @return The enum referencing the known age part type, or {@link org.gedcomx.types.AgePartType#OTHER} if not known.
    */
   @XmlTransient
   @JsonIgnore

@@ -81,7 +81,7 @@ public final class AlternateId implements Typed {
   /**
    * The enum referencing a known alternate id type.
    *
-   * @return The enum referencing a known alternate id type, or {@link AlternateIdType#other} if not known.
+   * @return The enum referencing a known alternate id type, or {@link AlternateIdType#OTHER} if not known.
    */
   @XmlTransient
   @JsonIgnore

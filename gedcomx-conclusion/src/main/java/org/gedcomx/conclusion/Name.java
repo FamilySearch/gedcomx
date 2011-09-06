@@ -68,9 +68,9 @@ public class Name extends Conclusion implements Typed {
   }
 
   /**
-   * The enum referencing the known name type, or {@link org.gedcomx.types.NameType#other} if not known.
+   * The enum referencing the known name type, or {@link org.gedcomx.types.NameType#OTHER} if not known.
    *
-   * @return The enum referencing the known name type, or {@link org.gedcomx.types.NameType#other} if not known.
+   * @return The enum referencing the known name type, or {@link org.gedcomx.types.NameType#OTHER} if not known.
    */
   @XmlTransient
   @JsonIgnore

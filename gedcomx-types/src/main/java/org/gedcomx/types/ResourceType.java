@@ -144,24 +144,33 @@ public enum ResourceType {
    * A GEDCOM X Record. Instances of the type record must also be describable as instances of
    * the broader type Dataset.
    */
-  record,
+  @XmlQNameEnumValue(
+    namespace = "http://gedcomx.org/record/v1/"
+  )
+  Record,
 
   /**
    * A GEDCOM X Persona. Instances of the type persona must also be describable as instances of
    * the broader type Dataset.
    */
-  persona,
+  @XmlQNameEnumValue(
+    namespace = "http://gedcomx.org/record/v1/"
+  )
+  Persona,
 
   /**
-   * A GEDCOM X Person. Instances of the type pesron must also be describable as instances of
+   * A GEDCOM X Person. Instances of the type person must also be describable as instances of
    * the broader type Dataset.
    */
-  person,
+  @XmlQNameEnumValue(
+    namespace = "http://gedcomx.org/conclusion/v1/"
+  )
+  Person,
 
   /**
    * Something else.
    */
   @XmlUnknownQNameEnumValue
-  other
+  OTHER
 
 }

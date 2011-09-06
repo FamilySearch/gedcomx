@@ -6,8 +6,6 @@ import org.gedcomx.types.TypesNamespaces;
 import org.testng.annotations.Test;
 import org.w3c.dom.Document;
 
-import javax.xml.namespace.QName;
-
 import java.net.URI;
 
 import static org.gedcomx.rt.SerializationUtil.toJsonNode;
@@ -22,7 +20,7 @@ public class TestRelationship {
 
   public void testSerializationOfRelationshipType() throws Exception {
     Relationship cr = new Relationship();
-    cr.setKnownType(RelationshipType.couple);
+    cr.setKnownType(RelationshipType.Couple);
     cr.setId("id");
     Document dom = toXmlDom(cr);
     assertNotNull(dom.getDocumentElement().getAttributeNodeNS(TypesNamespaces.GEDCOMX_TYPES_NAMESPACE, "type"));

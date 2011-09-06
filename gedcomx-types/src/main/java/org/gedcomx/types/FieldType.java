@@ -28,8 +28,8 @@ import java.net.URI;
 )
 public enum FieldType {
 
-  household,
-  batch_number,
+  Household,
+  BatchNumber,
   @XmlUnknownQNameEnumValue
   other;
 

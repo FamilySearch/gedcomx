@@ -30,10 +30,10 @@ import java.net.URI;
 )
 public enum AlternateIdType {
 
-  forwarded,
+  Forwarded,
 
   @XmlUnknownQNameEnumValue
-  other;
+  OTHER;
 
   /**
    * Return the QName value for this enum.

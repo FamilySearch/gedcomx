@@ -28,11 +28,11 @@ import java.net.URI;
 )
 public enum DatePartType {
 
-  years,
-  months,
-  days,
+  Years,
+  Months,
+  Days,
   @XmlUnknownQNameEnumValue
-  other;
+  OTHER;
 
   /**
    * Return the QName value for this enum.

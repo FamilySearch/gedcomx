@@ -163,9 +163,9 @@ public final class ResourceReference implements Typed {
   }
 
   /**
-   * The enum referencing the known type of the resource being referenced, or {@link org.gedcomx.types.ResourceType#other} if not known.
+   * The enum referencing the known type of the resource being referenced, or {@link org.gedcomx.types.ResourceType#OTHER} if not known.
    *
-   * @return The enum referencing the known type of the source reference, or {@link org.gedcomx.types.ResourceType#other} if not known.
+   * @return The enum referencing the known type of the source reference, or {@link org.gedcomx.types.ResourceType#OTHER} if not known.
    */
   @XmlTransient
   @JsonIgnore

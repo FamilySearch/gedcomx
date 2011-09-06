@@ -17,7 +17,7 @@ public class TestGenealogicalResource {
   public void testProperties() throws Exception {
     GenealogicalResource ext = new CustomResource();
     AlternateId id = new AlternateId();
-    id.setKnownType(AlternateIdType.forwarded);
+    id.setKnownType(AlternateIdType.Forwarded);
     id.setValue("value");
     ext.addExtensionElement(id);
     ext.addExtensionElement(new Object());

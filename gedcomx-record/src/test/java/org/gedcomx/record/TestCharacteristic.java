@@ -14,7 +14,7 @@ public class TestCharacteristic {
   public void testCharacteristicTypes() throws Exception {
 
     Characteristic ch = new Characteristic();
-    ch.setKnownType(CharacteristicType.Person.age);
+    ch.setKnownType(CharacteristicType.Person.Age);
     ch.setInterpreted("int");
     Persona persona = new Persona();
     persona.setCharacteristics(Arrays.asList(ch));

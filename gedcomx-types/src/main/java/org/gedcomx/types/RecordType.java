@@ -32,34 +32,34 @@ import java.util.Set;
 public enum RecordType {
 
   // root level record types
-  census,
-  legal,
-  migration,
-  military,
-  vital,
+  Census,
+  Legal,
+  Migration,
+  Military,
+  Vital,
 
   // "VITAL" types
-  birth,
-  death,
-  marriage,
+  Birth,
+  Death,
+  Marriage,
 
   // "LEGAL" types
-  bank,
-  land,
-  probate,
-  tax,
+  Bank,
+  Land,
+  Probate,
+  Tax,
 
   // "MILITARY" types
-  draft,
-  roll,
-  pension,
+  Draft,
+  Roll,
+  Pension,
 
   @XmlUnknownQNameEnumValue
-  other;
+  OTHER;
 
-  public static final Set<RecordType> VITAL_TYPES = Collections.unmodifiableSet(EnumSet.of(birth, death, marriage));
-  public static final Set<RecordType> MILITARY_TYPES = Collections.unmodifiableSet(EnumSet.of(draft, pension, roll));
-  public static final Set<RecordType> LEGAL_TYPES = Collections.unmodifiableSet(EnumSet.of(bank, land, probate, tax));
+  public static final Set<RecordType> VITAL_TYPES = Collections.unmodifiableSet(EnumSet.of(Birth, Death, Marriage));
+  public static final Set<RecordType> MILITARY_TYPES = Collections.unmodifiableSet(EnumSet.of(Draft, Pension, Roll));
+  public static final Set<RecordType> LEGAL_TYPES = Collections.unmodifiableSet(EnumSet.of(Bank, Land, Probate, Tax));
 
   /**
    * Return the QName value for this enum.
@@ -81,18 +81,18 @@ public enum RecordType {
   }
 
   public boolean isVital() {
-    return this == vital || VITAL_TYPES.contains(this);
+    return this == Vital || VITAL_TYPES.contains(this);
   }
   
   public RecordType getBaseType() {
     if (VITAL_TYPES.contains(this)) {
-      return vital;
+      return Vital;
     }
     else if (MILITARY_TYPES.contains(this)) {
-      return military;
+      return Military;
     }
     else if (LEGAL_TYPES.contains(this)) {
-      return legal;
+      return Legal;
     }
     else {
       return this;

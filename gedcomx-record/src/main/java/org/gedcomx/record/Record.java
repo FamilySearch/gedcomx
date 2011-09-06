@@ -77,9 +77,9 @@ public class Record extends GenealogicalResource implements Typed, Bibliographic
   }
 
   /**
-   * The enum referencing the known type of the record, or {@link org.gedcomx.types.RecordType#other} if not known.
+   * The enum referencing the known type of the record, or {@link org.gedcomx.types.RecordType#OTHER} if not known.
    * 
-   * @return The enum referencing the known type of the record, or {@link org.gedcomx.types.RecordType#other} if not known.
+   * @return The enum referencing the known type of the record, or {@link org.gedcomx.types.RecordType#OTHER} if not known.
    */
   @XmlTransient
   @JsonIgnore
@@ -88,9 +88,9 @@ public class Record extends GenealogicalResource implements Typed, Bibliographic
   }
 
   /**
-   * The enum referencing the known type of the record, or {@link org.gedcomx.types.RecordType#other} if not known.
+   * The enum referencing the known type of the record, or {@link org.gedcomx.types.RecordType#OTHER} if not known.
    * 
-   * @param knownType The enum referencing the known type of the record, or {@link org.gedcomx.types.RecordType#other} if not known.
+   * @param knownType The enum referencing the known type of the record, or {@link org.gedcomx.types.RecordType#OTHER} if not known.
    */
   @JsonIgnore
   public void setKnownType(RecordType knownType) {

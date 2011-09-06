@@ -33,24 +33,24 @@ public enum GenderType {
   /**
    * Male.
    */
-  male,
+  Male,
 
   /**
    * Female.
    */
-  female,
+  Female,
 
   /**
    * Unknown. Note that this should be used strictly as "unknown" and not to
    * indicate a type that is not set or not understood.
    */
-  unknown,
+  Unknown,
 
   /**
    * Custom
    */
   @XmlUnknownQNameEnumValue
-  other;
+  OTHER;
 
   /**
    * Return the QName value for this enum.

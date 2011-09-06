@@ -18,10 +18,10 @@ public class TestAlternateId {
    */
   public void testAlternateIdXml() throws Exception {
     AlternateId id = new AlternateId();
-    id.setKnownType(AlternateIdType.forwarded);
+    id.setKnownType(AlternateIdType.Forwarded);
     id.setValue("value");
     id = processThroughXml(id);
-    assertEquals(AlternateIdType.forwarded, id.getKnownType());
+    assertEquals(AlternateIdType.Forwarded, id.getKnownType());
     assertEquals("value", id.getValue());
   }
 
@@ -30,10 +30,10 @@ public class TestAlternateId {
    */
   public void testAlternateIdJson() throws Exception {
     AlternateId id = new AlternateId();
-    id.setKnownType(AlternateIdType.forwarded);
+    id.setKnownType(AlternateIdType.Forwarded);
     id.setValue("value");
     id = processThroughJson(id);
-    assertEquals(AlternateIdType.forwarded, id.getKnownType());
+    assertEquals(AlternateIdType.Forwarded, id.getKnownType());
     assertEquals("value", id.getValue());
   }
 

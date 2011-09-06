@@ -64,9 +64,9 @@ public class NamePart extends Field implements Typed {
   }
 
   /**
-   * The enum referencing the known name part type, or {@link org.gedcomx.types.NamePartType#other} if not known.
+   * The enum referencing the known name part type, or {@link org.gedcomx.types.NamePartType#OTHER} if not known.
    *
-   * @return The enum referencing the known name part type, or {@link org.gedcomx.types.NamePartType#other} if not known.
+   * @return The enum referencing the known name part type, or {@link org.gedcomx.types.NamePartType#OTHER} if not known.
    */
   @XmlTransient
   @JsonIgnore
