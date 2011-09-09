@@ -78,14 +78,20 @@ public class RDFProcessor {
     for (SchemaInfo schemaInfo : model.getNamespacesToSchemas().values()) {
       if (!isKnownRDFNamespace(schemaInfo.getNamespace()) && Boolean.TRUE.equals(schemaInfo.getProperty("definesRDFSchema"))) {
         describeSchema(schemaInfo, result);
+        List<QNameEnumTypeDefinition> enums = new ArrayList<QNameEnumTypeDefinition>();
         for (TypeDefinition typeDefinition : schemaInfo.getTypeDefinitions()) {
           if (typeDefinition instanceof QNameEnumTypeDefinition) {
-            describeRDFClassesAndProperties((QNameEnumTypeDefinition) typeDefinition, result);
+            enums.add((QNameEnumTypeDefinition) typeDefinition);
           }
           else if (typeDefinition instanceof ComplexTypeDefinition) {
             describeRDFClassesAndProperties((ComplexTypeDefinition) typeDefinition, result);
           }
           //simple types and enum types aren't described by RDF schema except as RDF literals.
+        }
+
+        for (QNameEnumTypeDefinition typeDefinition : enums) {
+          //enum descriptions are saved for last in case the enum references one of the classes.
+          describeRDFClassesAndProperties(typeDefinition, result);
         }
       }
     }
@@ -147,7 +153,7 @@ public class RDFProcessor {
         }
         else {
           if (!qname.getNamespaceURI().equals(description.getIsDefinedBy())) {
-            StringBuilder message = new StringBuilder("Unable to describe class ").append(about).append(" because it's already described");
+            StringBuilder message = new StringBuilder("Unable to describe class ").append(about).append(" because it's already described in a different definition (").append(description.getIsDefinedBy()).append(")");
             appendPosition(message, description.getAssociatedDeclaration());
             message.append('.');
             result.addError(constant, message.toString());
@@ -709,12 +715,10 @@ public class RDFProcessor {
       this.rdfSchema.addDescription(description);
     }
     else if (!(description.getAssociatedDeclaration() instanceof TypeDeclaration) || !((TypeDeclaration) description.getAssociatedDeclaration()).getQualifiedName().equals(typeDefinition.getQualifiedName())) {
-      if (!(description.getAssociatedDeclaration() instanceof EnumConstantDeclaration)) { //we'll allow enum constants to reference classes.
-        StringBuilder message = new StringBuilder("Unable to describe class ").append(about).append(" because it's already described");
-        appendPosition(message, description.getAssociatedDeclaration());
-        message.append('.');
-        result.addError(typeDefinition, message.toString());
-      }
+      StringBuilder message = new StringBuilder("Unable to describe class ").append(about).append(" because it's already described");
+      appendPosition(message, description.getAssociatedDeclaration());
+      message.append('.');
+      result.addError(typeDefinition, message.toString());
     }
   }
 
