@@ -34,7 +34,7 @@ import java.util.List;
  * @author Ryan Heaton
  */
 @XmlType ( name = "GenealogicalResource", propOrder = { "attribution", "sources", "extensionElements" } )
-public abstract class GenealogicalResource implements SourceSupported {
+public abstract class GenealogicalResource implements SourceSupported, Attributable, Extensible {
 
   private String id;
   private Attribution attribution;
@@ -88,9 +88,9 @@ public abstract class GenealogicalResource implements SourceSupported {
   }
 
   /**
-   * The sources for the conclusions about this person.
+   * The source references for a resource.
    *
-   * @return The sources for the conclusions about this person.
+   * @return The source references for a resource.
    */
   @XmlElement (name="source")
   @JsonProperty ("sources")
@@ -101,9 +101,9 @@ public abstract class GenealogicalResource implements SourceSupported {
   }
 
   /**
-   * The sources for the conclusions about this person.
+   * The source references for a resource.
    *
-   * @param sources The sources for the conclusions about this person.
+   * @param sources The source references for a resource.
    */
   @JsonProperty("sources")
   public void setSources(List<ResourceReference> sources) {

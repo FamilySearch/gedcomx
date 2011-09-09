@@ -15,21 +15,59 @@
  */
 package org.gedcomx.record;
 
-import org.gedcomx.common.GenealogicalResource;
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.gedcomx.common.Attribution;
+import org.gedcomx.common.ResourceReference;
+import org.gedcomx.rt.AnyElementDeserializer;
+import org.gedcomx.rt.AnyElementSerializer;
+import org.gedcomx.rt.CommonNamespaces;
+import org.gedcomx.rt.RDFSubPropertyOf;
 
+import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlType;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A field on a record.
  */
-@XmlType ( name = "Field", propOrder = { "original", "interpreted", "normalized" } )
-public abstract class Field extends GenealogicalResource {
+@XmlType ( name = "Field", propOrder = { "original", "interpreted", "normalized", "attribution", "source", "extensionElements" } )
+public abstract class Field {
 
+  private String id;
   private String label;
   private String original;
   private String interpreted;
   private String normalized;
+  private Attribution attribution;
+  private ResourceReference source;
+  private List<Object> extensionElements;
+
+  /**
+   * The resource id of this field.
+   *
+   * @return The resource id of this field.
+   */
+  @XmlID
+  @XmlAttribute ( name = "ID", namespace = CommonNamespaces.RDF_NAMESPACE )
+  public String getId() {
+    return id;
+  }
+
+  /**
+   * The id of this genealogical resource. As defined by RDF, the nature of this id
+   * is local to a specific context and not necessarily globally unique.
+   *
+   * @param id The id of this genealogical resource. As defined by RDF, the nature of this id
+   * is local to a specific context and not necessarily globally unique.
+   */
+  public void setId(String id) {
+    this.id = id;
+  }
+
 
   /**
    * A label for the field. The label can be used to associate fields that were taken from the same section of
@@ -104,6 +142,120 @@ public abstract class Field extends GenealogicalResource {
    */
   public void setNormalized(String normalized) {
     this.normalized = normalized;
+  }
+
+  /**
+   * Attribution metadata for a genealogical resource. Attribution data is necessary to support
+   * a sound <a href="https://wiki.familysearch.org/en/Genealogical_Proof_Standard">genealogical proof statement</a>.
+   *
+   * @return Attribution metadata for a genealogical resource. Attribution data is necessary to support
+   * a sound <a href="https://wiki.familysearch.org/en/Genealogical_Proof_Standard">genealogical proof statement</a>.
+   */
+  public Attribution getAttribution() {
+    return attribution;
+  }
+
+  /**
+   * Attribution metadata for a genealogical resource. Attribution data is necessary to support
+   * a sound <a href="https://wiki.familysearch.org/en/Genealogical_Proof_Standard">genealogical proof statement</a>.
+   *
+   * @param attribution Attribution metadata for a genealogical resource. Attribution data is necessary to support
+   * a sound <a href="https://wiki.familysearch.org/en/Genealogical_Proof_Standard">genealogical proof statement</a>.
+   */
+  public void setAttribution(Attribution attribution) {
+    this.attribution = attribution;
+  }
+
+  /**
+   * The source for the field.
+   *
+   * @return The source for the field.
+   */
+  @RDFSubPropertyOf ( CommonNamespaces.DUBLIN_CORE_NAMESPACE + "source")
+  public ResourceReference getSource() {
+    return source;
+  }
+
+  /**
+   * The source for the field.
+   *
+   * @param source The source for the field.
+   */
+  public void setSource(ResourceReference source) {
+    this.source = source;
+  }
+
+  /**
+   * Custom extension elements for a genealogical resource.
+   *
+   * @return Custom extension elements for a genealogical resource.
+   */
+  @XmlAnyElement (lax = true)
+  @JsonSerialize (using = AnyElementSerializer.class)
+  public List<Object> getExtensionElements() {
+    return extensionElements;
+  }
+
+  /**
+   * Custom extension elements for a genealogical resource.
+   *
+   * @param extensionElements Custom extension elements for a genealogical resource.
+   */
+  @JsonDeserialize (using = AnyElementDeserializer.class)
+  public void setExtensionElements(List<Object> extensionElements) {
+    this.extensionElements = extensionElements;
+  }
+
+  /**
+   * Add an extension element.
+   *
+   * @param element The extension element to add.
+   */
+  public void addExtensionElement(Object element) {
+    if (this.extensionElements == null) {
+      this.extensionElements = new ArrayList<Object>();
+    }
+
+    this.extensionElements.add(element);
+  }
+
+  /**
+   * Finds the first extension of a specified type.
+   *
+   * @param clazz The type.
+   * @return The extension, or null if none found.
+   */
+  @SuppressWarnings ( {"unchecked"} )
+  public <E> E findExtensionOfType(Class<E> clazz) {
+    if (this.extensionElements != null) {
+      for (Object extension : extensionElements) {
+        if (clazz.isInstance(extension)) {
+          return (E) extension;
+        }
+      }
+    }
+
+    return null;
+  }
+
+  /**
+   * Find the extensions of a specified type.
+   *
+   * @param clazz The type.
+   * @return The extensions, possibly empty but not null.
+   */
+  @SuppressWarnings ( {"unchecked"} )
+  public <E> List<E> findExtensionsOfType(Class<E> clazz) {
+    List<E> ext = new ArrayList<E>();
+    if (this.extensionElements != null) {
+      for (Object extension : extensionElements) {
+        if (clazz.isInstance(extension)) {
+          ext.add((E) extension);
+        }
+      }
+    }
+
+    return ext;
   }
 
 }
