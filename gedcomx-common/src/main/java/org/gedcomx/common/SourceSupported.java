@@ -15,10 +15,10 @@
  */
 package org.gedcomx.common;
 
+import org.gedcomx.rt.CommonNamespaces;
 import org.gedcomx.rt.RDFDomain;
 import org.gedcomx.rt.RDFRange;
 import org.gedcomx.rt.RDFSubPropertyOf;
-import org.gedcomx.types.TypesNamespaces;
 
 import javax.xml.bind.annotation.XmlType;
 import java.util.List;
@@ -38,7 +38,7 @@ public interface SourceSupported {
    */
   @RDFDomain ({}) //any resource can be identified persistently.
   @RDFRange ({}) //any resource can be identified as a source.
-  @RDFSubPropertyOf ( TypesNamespaces.DUBLIN_CORE_NAMESPACE + "source" )
+  @RDFSubPropertyOf ( CommonNamespaces.DUBLIN_CORE_NAMESPACE + "source" )
   @SuppressWarnings("rdf:no_range")
   List<ResourceReference> getSources();
 }

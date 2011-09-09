@@ -32,10 +32,7 @@ import org.codehaus.enunciate.contract.jaxb.types.XmlClassType;
 import org.codehaus.enunciate.contract.jaxb.types.XmlTypeException;
 import org.codehaus.enunciate.contract.jaxb.types.XmlTypeFactory;
 import org.codehaus.enunciate.contract.validation.ValidationResult;
-import org.gedcomx.rt.RDFDomain;
-import org.gedcomx.rt.RDFRange;
-import org.gedcomx.rt.RDFSubClassOf;
-import org.gedcomx.rt.RDFSubPropertyOf;
+import org.gedcomx.rt.*;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
@@ -71,8 +68,9 @@ public class RDFProcessor {
     return RDFSchema.RDF_NAMESPACE.equals(namespace) ||
       RDFSchema.RDFS_NAMESPACE.equals(namespace) ||
       XMLConstants.XML_NS_URI.equals(namespace) ||
-      "http://purl.org/dc/dcmitype/".equals(namespace) ||
-      "http://purl.org/dc/terms/".equals(namespace);
+      CommonNamespaces.DUBLIN_CORE_TYPE_NAMESPACE.equals(namespace) ||
+      CommonNamespaces.DUBLIN_CORE_NAMESPACE.equals(namespace) ||
+      CommonNamespaces.FOAF_NAMESPACE.equals(namespace);
   }
 
   public ValidationResult processModel(EnunciateFreemarkerModel model) {

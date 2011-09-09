@@ -20,14 +20,10 @@ import org.codehaus.enunciate.qname.XmlQNameEnumRef;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
-import org.gedcomx.rt.AnyAttributeDeserializer;
-import org.gedcomx.rt.AnyAttributeSerializer;
-import org.gedcomx.rt.AnyElementDeserializer;
-import org.gedcomx.rt.AnyElementSerializer;
+import org.gedcomx.rt.*;
 import org.gedcomx.types.ResourceFragmentParameter;
 import org.gedcomx.types.ResourceType;
 import org.gedcomx.types.Typed;
-import org.gedcomx.types.TypesNamespaces;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.*;
@@ -59,7 +55,7 @@ public final class ResourceReference implements Typed {
    * resource being referenced.
    */
   @XmlID
-  @XmlAttribute( name = "ID", namespace = TypesNamespaces.RDF_NAMESPACE )
+  @XmlAttribute( name = "ID", namespace = CommonNamespaces.RDF_NAMESPACE )
   public String getId() {
     return id;
   }
@@ -80,7 +76,7 @@ public final class ResourceReference implements Typed {
    *
    * @return The type of the resource being referenced.
    */
-  @XmlAttribute (namespace = TypesNamespaces.GEDCOMX_TYPES_NAMESPACE)
+  @XmlAttribute (namespace = CommonNamespaces.GEDCOMX_COMMON_NAMESPACE)
   @XmlQNameEnumRef (ResourceType.class)
   @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
   public URI getType() {
@@ -103,7 +99,7 @@ public final class ResourceReference implements Typed {
    * @link http://www.w3.org/TR/webarch/#identification
    * @return The URI to the resource.
    */
-  @XmlAttribute (namespace=TypesNamespaces.RDF_NAMESPACE)
+  @XmlAttribute (namespace= CommonNamespaces.RDF_NAMESPACE)
   @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
   public URI getResource() {
     return resource;

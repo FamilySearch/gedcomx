@@ -15,9 +15,9 @@
  */
 package org.gedcomx.common;
 
+import org.gedcomx.rt.CommonNamespaces;
 import org.gedcomx.rt.RDFDomain;
 import org.gedcomx.rt.RDFSubPropertyOf;
-import org.gedcomx.types.TypesNamespaces;
 
 import javax.xml.bind.annotation.XmlType;
 import java.net.URI;
@@ -37,7 +37,7 @@ public interface PersistentIdentifiable {
    * @return The long-term persistent identifier for a resource.
    */
   @RDFDomain({}) //any resource can be identified persistently.
-  @RDFSubPropertyOf( TypesNamespaces.DUBLIN_CORE_NAMESPACE + "identifier" )
+  @RDFSubPropertyOf( CommonNamespaces.DUBLIN_CORE_NAMESPACE + "identifier" )
   URI getPersistentId();
 
   /**
@@ -46,6 +46,6 @@ public interface PersistentIdentifiable {
    * @return List of alternate identifiers for a resource.
    */
   @RDFDomain({}) //any resource can have alternate ids.
-  @RDFSubPropertyOf( TypesNamespaces.DUBLIN_CORE_NAMESPACE + "identifier" )
+  @RDFSubPropertyOf( CommonNamespaces.DUBLIN_CORE_NAMESPACE + "identifier" )
   List<AlternateId> getAlternateIds();
 }

@@ -15,9 +15,9 @@
  */
 package org.gedcomx.common;
 
+import org.gedcomx.rt.CommonNamespaces;
 import org.gedcomx.rt.RDFSubClassOf;
 import org.gedcomx.rt.RDFSubPropertyOf;
-import org.gedcomx.types.TypesNamespaces;
 
 import javax.xml.bind.annotation.XmlType;
 
@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlType;
  * @author Ryan Heaton
  */
 @XmlType ( name = "BibliographicResource" )
-@RDFSubClassOf ( TypesNamespaces.DUBLIN_CORE_NAMESPACE + "BibliographicResource" )
+@RDFSubClassOf ( CommonNamespaces.DUBLIN_CORE_NAMESPACE + "BibliographicResource" )
 public interface BibliographicResource {
 
   /**
@@ -35,6 +35,6 @@ public interface BibliographicResource {
    *
    * @return The bibliographic citation of a bibliographic resource.
    */
-  @RDFSubPropertyOf ( TypesNamespaces.DUBLIN_CORE_NAMESPACE + "bibliographicCitation" )
+  @RDFSubPropertyOf ( CommonNamespaces.DUBLIN_CORE_NAMESPACE + "bibliographicCitation" )
   String getBibliographicCitation();
 }

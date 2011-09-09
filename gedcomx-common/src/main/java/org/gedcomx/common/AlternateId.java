@@ -18,9 +18,9 @@ package org.gedcomx.common;
 import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.enunciate.qname.XmlQNameEnumRef;
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.gedcomx.rt.CommonNamespaces;
 import org.gedcomx.types.AlternateIdType;
 import org.gedcomx.types.Typed;
-import org.gedcomx.types.TypesNamespaces;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.*;
@@ -62,7 +62,7 @@ public final class AlternateId implements Typed {
    *
    * @return The type of the id.
    */
-  @XmlAttribute (namespace = TypesNamespaces.GEDCOMX_TYPES_NAMESPACE)
+  @XmlAttribute (namespace = CommonNamespaces.GEDCOMX_COMMON_NAMESPACE)
   @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
   @XmlQNameEnumRef(AlternateIdType.class)
   public URI getType() {

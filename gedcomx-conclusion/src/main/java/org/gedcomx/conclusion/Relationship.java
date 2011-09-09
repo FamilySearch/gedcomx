@@ -28,7 +28,7 @@ import org.gedcomx.rt.RDFSubPropertyOf;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.RelationshipType;
 import org.gedcomx.types.Typed;
-import org.gedcomx.types.TypesNamespaces;
+import org.gedcomx.rt.CommonNamespaces;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.*;
@@ -60,7 +60,7 @@ public class Relationship extends GenealogicalResource implements Typed, Persist
    *
    * @return The type of this relationship.
    */
-  @XmlAttribute (namespace = TypesNamespaces.GEDCOMX_TYPES_NAMESPACE)
+  @XmlAttribute (namespace = CommonNamespaces.GEDCOMX_COMMON_NAMESPACE)
   @XmlQNameEnumRef (RelationshipType.class)
   @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
   public URI getType() {
@@ -166,7 +166,7 @@ public class Relationship extends GenealogicalResource implements Typed, Persist
    * implies direction, it goes from "person1" to "person2".
    */
   @RDFRange (Person.class)
-  @RDFSubPropertyOf ( TypesNamespaces.DUBLIN_CORE_NAMESPACE + "hasPart")
+  @RDFSubPropertyOf ( CommonNamespaces.DUBLIN_CORE_NAMESPACE + "hasPart")
   public ResourceReference getPerson1() {
     return person1;
   }
@@ -194,7 +194,7 @@ public class Relationship extends GenealogicalResource implements Typed, Persist
    * implies direction, it goes from "person1" to "person2".
    */
   @RDFRange (Person.class)
-  @RDFSubPropertyOf ( TypesNamespaces.DUBLIN_CORE_NAMESPACE + "hasPart")
+  @RDFSubPropertyOf ( CommonNamespaces.DUBLIN_CORE_NAMESPACE + "hasPart")
   public ResourceReference getPerson2() {
     return person2;
   }

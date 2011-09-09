@@ -118,6 +118,9 @@ public class GedcomNamespacePrefixMapper extends NamespacePrefixMapper {
 
   protected static Map<String, String> loadNamespacePrefixes(ClassLoader loader) {
     Map<String, String> namespacePrefixes = new HashMap<String, String>();
+    Set<Class<?>> namespacesClasses = new HashSet<Class<?>>();
+    namespacesClasses.add(CommonNamespaces.class);
+
     try {
       Enumeration<URL> resources = loader.getResources("META-INF/gedcomx.namespaces");
       while (resources.hasMoreElements()) {
@@ -126,10 +129,7 @@ public class GedcomNamespacePrefixMapper extends NamespacePrefixMapper {
           BufferedReader reader = new BufferedReader(new InputStreamReader(resource.openStream()));
           String classname = reader.readLine();
           while (classname != null) {
-            Namespaces namespacesInfo = Class.forName(classname, true, loader).getAnnotation(Namespaces.class);
-            for (Namespace ns : namespacesInfo.value()) {
-              namespacePrefixes.put(ns.uri(), ns.id());
-            }
+            namespacesClasses.add(Class.forName(classname, true, loader));
             classname = reader.readLine();
           }
         }
@@ -141,6 +141,14 @@ public class GedcomNamespacePrefixMapper extends NamespacePrefixMapper {
     catch (IOException e) {
       //no-op.
     }
+
+    for (Class<?> namespacesClass : namespacesClasses) {
+      Namespaces namespacesInfo = namespacesClass.getAnnotation(Namespaces.class);
+      for (Namespace ns : namespacesInfo.value()) {
+        namespacePrefixes.put(ns.uri(), ns.id());
+      }
+    }
+
     return namespacePrefixes;
   }
 

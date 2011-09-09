@@ -18,13 +18,14 @@
  * The types model defines the standard set of types of genealogical data.
  */
 @XmlSchema(
-  namespace = TypesNamespaces.GEDCOMX_TYPES_NAMESPACE,
+  namespace = CommonNamespaces.GEDCOMX_COMMON_NAMESPACE,
   attributeFormDefault = XmlNsForm.QUALIFIED,
   elementFormDefault = XmlNsForm.QUALIFIED
 )
 package org.gedcomx.types;
+
 //todo: figure out all the valid types
-//todo: figure out user-defined types: come up with conventions for extending known types (e.g. qname ns/localpart should resolve to a description of the type)
+import org.gedcomx.rt.CommonNamespaces;
 
 import javax.xml.bind.annotation.XmlNsForm;
 import javax.xml.bind.annotation.XmlSchema;

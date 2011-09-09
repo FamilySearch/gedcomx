@@ -22,11 +22,11 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.common.GenealogicalResource;
+import org.gedcomx.rt.CommonNamespaces;
 import org.gedcomx.rt.RDFSubClassOf;
 import org.gedcomx.rt.RDFSubPropertyOf;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.Typed;
-import org.gedcomx.types.TypesNamespaces;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.*;
@@ -39,7 +39,7 @@ import java.net.URI;
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType( name = "Event", propOrder = { "date", "place" } )
-@RDFSubClassOf ( TypesNamespaces.DUBLIN_CORE_TYPE_NAMESPACE + "Event" )
+@RDFSubClassOf ( CommonNamespaces.DUBLIN_CORE_TYPE_NAMESPACE + "Event" )
 public class Event extends GenealogicalResource implements Typed {
 
   private URI type;
@@ -52,7 +52,7 @@ public class Event extends GenealogicalResource implements Typed {
    *
    * @return The type of the event.
    */
-  @XmlAttribute (namespace = TypesNamespaces.GEDCOMX_TYPES_NAMESPACE)
+  @XmlAttribute (namespace = CommonNamespaces.GEDCOMX_COMMON_NAMESPACE)
   @XmlQNameEnumRef ( org.gedcomx.types.EventType.class)
   @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
   public URI getType() {
@@ -113,7 +113,7 @@ public class Event extends GenealogicalResource implements Typed {
    *
    * @return The date of this event.
    */
-  @RDFSubPropertyOf ( TypesNamespaces.DUBLIN_CORE_NAMESPACE + "temporal" )
+  @RDFSubPropertyOf ( CommonNamespaces.DUBLIN_CORE_NAMESPACE + "temporal" )
   public Date getDate() {
     return date;
   }
@@ -132,7 +132,7 @@ public class Event extends GenealogicalResource implements Typed {
    *
    * @return The place of this event.
    */
-  @RDFSubPropertyOf ( TypesNamespaces.DUBLIN_CORE_NAMESPACE + "spatial" )
+  @RDFSubPropertyOf ( CommonNamespaces.DUBLIN_CORE_NAMESPACE + "spatial" )
   public Place getPlace() {
     return place;
   }

@@ -24,5 +24,7 @@
 )
 package org.gedcomx.common;
 
+import org.gedcomx.rt.CommonNamespaces;
+
 import javax.xml.bind.annotation.XmlNsForm;
 import javax.xml.bind.annotation.XmlSchema;

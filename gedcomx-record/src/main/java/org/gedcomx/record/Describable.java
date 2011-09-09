@@ -15,8 +15,8 @@
  */
 package org.gedcomx.record;
 
+import org.gedcomx.rt.CommonNamespaces;
 import org.gedcomx.rt.RDFSubPropertyOf;
-import org.gedcomx.types.TypesNamespaces;
 
 import javax.xml.bind.annotation.XmlType;
 
@@ -33,7 +33,7 @@ public interface Describable {
    *
    * @return The description.
    */
-  @RDFSubPropertyOf ( TypesNamespaces.DUBLIN_CORE_NAMESPACE + "description" )
+  @RDFSubPropertyOf ( CommonNamespaces.DUBLIN_CORE_NAMESPACE + "description" )
   String getDescription();
 
 }

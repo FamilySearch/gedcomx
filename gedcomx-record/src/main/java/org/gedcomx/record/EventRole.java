@@ -16,7 +16,7 @@
 package org.gedcomx.record;
 
 import org.gedcomx.common.GenealogicalResource;
-import org.gedcomx.types.TypesNamespaces;
+import org.gedcomx.rt.CommonNamespaces;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -40,7 +40,7 @@ public final class EventRole extends GenealogicalResource implements Describable
    *
    * @return The reference to the event.
    */
-  @XmlAttribute(namespace = TypesNamespaces.RDF_NAMESPACE, name = "about" )
+  @XmlAttribute(namespace = CommonNamespaces.RDF_NAMESPACE, name = "about" )
   @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
   public URI getEvent() {
     return event;

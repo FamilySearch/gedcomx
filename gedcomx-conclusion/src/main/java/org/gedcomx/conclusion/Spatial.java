@@ -15,8 +15,8 @@
  */
 package org.gedcomx.conclusion;
 
+import org.gedcomx.rt.CommonNamespaces;
 import org.gedcomx.rt.RDFSubPropertyOf;
-import org.gedcomx.types.TypesNamespaces;
 
 import javax.xml.bind.annotation.XmlType;
 
@@ -33,7 +33,7 @@ public interface Spatial {
    *
    * @return The place.
    */
-  @RDFSubPropertyOf ( TypesNamespaces.DUBLIN_CORE_NAMESPACE + "spatial" )
+  @RDFSubPropertyOf ( CommonNamespaces.DUBLIN_CORE_NAMESPACE + "spatial" )
   Place getPlace();
 
 }

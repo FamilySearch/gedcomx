@@ -23,12 +23,9 @@ import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.common.BibliographicResource;
 import org.gedcomx.common.GenealogicalResource;
 import org.gedcomx.common.ResourceReference;
-import org.gedcomx.rt.RDFRange;
-import org.gedcomx.rt.RDFSubClassOf;
-import org.gedcomx.rt.RDFSubPropertyOf;
-import org.gedcomx.rt.XmlTypeIdResolver;
+import org.gedcomx.rt.CommonNamespaces;
+import org.gedcomx.rt.*;
 import org.gedcomx.types.RecordType;
-import org.gedcomx.types.TypesNamespaces;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -44,7 +41,7 @@ import java.net.URI;
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "RecordCollection", propOrder = { "bibliographicCitation", "parent", "title", "description", "publisher", "recordType", "spatial", "temporal" } )
-@RDFSubClassOf ( TypesNamespaces.DUBLIN_CORE_TYPE_NAMESPACE + "Collection" )
+@RDFSubClassOf ( CommonNamespaces.DUBLIN_CORE_TYPE_NAMESPACE + "Collection" )
 public class RecordCollection extends GenealogicalResource implements BibliographicResource, Describable {
 
   private String bibliographicCitation;
@@ -80,7 +77,7 @@ public class RecordCollection extends GenealogicalResource implements Bibliograp
    * @return The reference to the "parent" collection for this collection, i.e. the collection that contains this collection.
    */
   @RDFRange(RecordCollection.class)
-  @RDFSubPropertyOf ( TypesNamespaces.DUBLIN_CORE_NAMESPACE + "isPartOf" )
+  @RDFSubPropertyOf ( CommonNamespaces.DUBLIN_CORE_NAMESPACE + "isPartOf" )
   public ResourceReference getParent() {
     return parent;
   }
@@ -99,7 +96,7 @@ public class RecordCollection extends GenealogicalResource implements Bibliograp
    *
    * @return The title for the collection.
    */
-  @RDFSubPropertyOf ( TypesNamespaces.DUBLIN_CORE_NAMESPACE + "title" )
+  @RDFSubPropertyOf ( CommonNamespaces.DUBLIN_CORE_NAMESPACE + "title" )
   public String getTitle() {
     return title;
   }
@@ -118,7 +115,7 @@ public class RecordCollection extends GenealogicalResource implements Bibliograp
    *
    * @return A description of the collection.
    */
-  @RDFSubPropertyOf ( TypesNamespaces.DUBLIN_CORE_NAMESPACE + "description" )
+  @RDFSubPropertyOf ( CommonNamespaces.DUBLIN_CORE_NAMESPACE + "description" )
   public String getDescription() {
     return description;
   }
@@ -137,7 +134,7 @@ public class RecordCollection extends GenealogicalResource implements Bibliograp
    *
    * @return The publisher for the collection.
    */
-  @RDFSubPropertyOf ( TypesNamespaces.DUBLIN_CORE_NAMESPACE + "publisher" )
+  @RDFSubPropertyOf ( CommonNamespaces.DUBLIN_CORE_NAMESPACE + "publisher" )
   public String getPublisher() {
     return publisher;
   }
@@ -197,7 +194,7 @@ public class RecordCollection extends GenealogicalResource implements Bibliograp
    *
    * @return The spatial coverage.
    */
-  @RDFSubPropertyOf ( TypesNamespaces.DUBLIN_CORE_NAMESPACE + "spatial" )
+  @RDFSubPropertyOf ( CommonNamespaces.DUBLIN_CORE_NAMESPACE + "spatial" )
   public String getSpatial() {
     return spatial;
   }
@@ -216,7 +213,7 @@ public class RecordCollection extends GenealogicalResource implements Bibliograp
    *
    * @return The temporal coverage.
    */
-  @RDFSubPropertyOf ( TypesNamespaces.DUBLIN_CORE_NAMESPACE + "temporal" )
+  @RDFSubPropertyOf ( CommonNamespaces.DUBLIN_CORE_NAMESPACE + "temporal" )
   public String getTemporal() {
     return temporal;
   }

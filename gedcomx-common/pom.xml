@@ -42,12 +42,6 @@
   <dependencies>
     <dependency>
       <groupId>org.gedcomx</groupId>
-      <artifactId>gedcomx-types</artifactId>
-      <version>0.5.0.BUILD-SNAPSHOT</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.gedcomx</groupId>
       <artifactId>gedcomx-rt-support</artifactId>
       <version>0.5.0.BUILD-SNAPSHOT</version>
     </dependency>

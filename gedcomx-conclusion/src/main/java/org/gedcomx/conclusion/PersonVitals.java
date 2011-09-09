@@ -17,8 +17,8 @@ package org.gedcomx.conclusion;
 
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
+import org.gedcomx.rt.CommonNamespaces;
 import org.gedcomx.rt.XmlTypeIdResolver;
-import org.gedcomx.types.TypesNamespaces;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlID;
@@ -44,7 +44,7 @@ public final class PersonVitals {
    * @return The id of the person, unique to the context and not necessarily globally unique.
    */
   @XmlID
-  @XmlAttribute(name = "ID", namespace = TypesNamespaces.RDF_NAMESPACE)
+  @XmlAttribute(name = "ID", namespace = CommonNamespaces.RDF_NAMESPACE)
   public String getId() {
     return id;
   }

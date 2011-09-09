@@ -23,12 +23,12 @@ import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.common.*;
+import org.gedcomx.rt.CommonNamespaces;
 import org.gedcomx.rt.RDFRange;
 import org.gedcomx.rt.RDFSubPropertyOf;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.RecordType;
 import org.gedcomx.types.Typed;
-import org.gedcomx.types.TypesNamespaces;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.*;
@@ -60,7 +60,7 @@ public class Record extends GenealogicalResource implements Typed, Bibliographic
    * 
    * @return The type of the record.
    */
-  @XmlAttribute (namespace = TypesNamespaces.GEDCOMX_TYPES_NAMESPACE)
+  @XmlAttribute (namespace = CommonNamespaces.GEDCOMX_COMMON_NAMESPACE)
   @XmlQNameEnumRef(RecordType.class)
   @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
   public URI getType() {
@@ -180,7 +180,7 @@ public class Record extends GenealogicalResource implements Typed, Bibliographic
    * @return The reference to the collection containing this record.
    */
   @RDFRange( RecordCollection.class )
-  @RDFSubPropertyOf ( TypesNamespaces.DUBLIN_CORE_NAMESPACE + "isPartOf" )
+  @RDFSubPropertyOf ( CommonNamespaces.DUBLIN_CORE_NAMESPACE + "isPartOf" )
   public ResourceReference getCollection() {
     return collection;
   }

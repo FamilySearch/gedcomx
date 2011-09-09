@@ -13,10 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.types;
-
-import org.gedcomx.rt.Namespace;
-import org.gedcomx.rt.Namespaces;
+package org.gedcomx.rt;
 
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -26,26 +23,28 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlTransient
 @Namespaces ( {
   @Namespace (
-    id = "gxt",
-    uri = TypesNamespaces.GEDCOMX_TYPES_NAMESPACE,
-    label = "Types Namespace",
-    description = "The types namespace contains the definitions of the standard set of genealogical types.",
+    id = "gx",
+    uri = CommonNamespaces.GEDCOMX_COMMON_NAMESPACE,
+    label = "Common Namespace",
+    description = "The common namespace defines the types that are common to each model.",
     version = "v1",
+    xmlMediaType = CommonNamespaces.GEDCOMX_COMMON_XML_MEDIA_TYPE,
+    jsonMediaType = CommonNamespaces.GEDCOMX_COMMON_JSON_MEDIA_TYPE,
     definesRDFSchema = true
   ),
   @Namespace (
     id = "rdf",
-    uri = TypesNamespaces.RDF_NAMESPACE,
+    uri = CommonNamespaces.RDF_NAMESPACE,
     label = "RDF Namespace",
     description = "The RDF namespace defines the model used to represent metadata in RDF format.",
     version = "1999-02-22",
-    xmlMediaType = TypesNamespaces.RDF_XML_MEDIA_TYPE,
-    jsonMediaType = TypesNamespaces.RDF_JSON_MEDIA_TYPE,
+    xmlMediaType = CommonNamespaces.RDF_XML_MEDIA_TYPE,
+    jsonMediaType = CommonNamespaces.RDF_JSON_MEDIA_TYPE,
     definesRDFSchema = true
   ),
   @Namespace (
     id = "dcterms",
-    uri = TypesNamespaces.DUBLIN_CORE_NAMESPACE,
+    uri = CommonNamespaces.DUBLIN_CORE_NAMESPACE,
     label = "Dublin Core Terms Namespace",
     description = "The Dublin Core Terms namespace defines the model used to represent metadata using Dublin Core Terms.",
     version = "2010-10-11",
@@ -53,7 +52,7 @@ import javax.xml.bind.annotation.XmlTransient;
   ),
   @Namespace (
     id = "dctypes",
-    uri = TypesNamespaces.DUBLIN_CORE_TYPE_NAMESPACE,
+    uri = CommonNamespaces.DUBLIN_CORE_TYPE_NAMESPACE,
     label = "Dublin Core Types Namespace",
     description = "The Dublin Core Types namespace defines the types of Dublin Core metadata.",
     version = "2010-10-11",
@@ -61,24 +60,26 @@ import javax.xml.bind.annotation.XmlTransient;
   ),
   @Namespace(
     id = "foaf",
-    uri = TypesNamespaces.FOAF_NAMESPACE,
+    uri = CommonNamespaces.FOAF_NAMESPACE,
     label = "FOAF Namespace",
     description = "The FOAF namespaces defines the model and types used to represent metadata about users, organizations, and projects.",
     version = "0.1",
     definesRDFSchema = true
   )
-
 } )
-public class TypesNamespaces {
+public class CommonNamespaces {
 
-  private TypesNamespaces() {}
+  private CommonNamespaces() {}
 
-  public static final String GEDCOMX_TYPES_NAMESPACE = "http://gedcomx.org/types/";
+  public static final String GEDCOMX_COMMON_NAMESPACE = "http://gedcomx.org/";
+  public static final String GEDCOMX_COMMON_XML_MEDIA_TYPE = "application/x-gedcom+xml";
+  public static final String GEDCOMX_COMMON_JSON_MEDIA_TYPE = "application/x-gedcom+json";
+
   public static final String RDF_NAMESPACE = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
-  public static final String DUBLIN_CORE_NAMESPACE = "http://purl.org/dc/terms/";
-  public static final String DUBLIN_CORE_TYPE_NAMESPACE = "http://purl.org/dc/dcmitype/";
-  public static final String FOAF_NAMESPACE = "http://xmlns.com/foaf/0.1/";
   public static final String RDF_XML_MEDIA_TYPE = "application/rdf+xml";
   public static final String RDF_JSON_MEDIA_TYPE = "application/rdf+json";
 
+  public static final String DUBLIN_CORE_NAMESPACE = "http://purl.org/dc/terms/";
+  public static final String DUBLIN_CORE_TYPE_NAMESPACE = "http://purl.org/dc/dcmitype/";
+  public static final String FOAF_NAMESPACE = "http://xmlns.com/foaf/0.1/";
 }

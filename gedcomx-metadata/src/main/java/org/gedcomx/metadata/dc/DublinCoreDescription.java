@@ -19,12 +19,12 @@ import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
+import org.gedcomx.rt.CommonNamespaces;
 import org.gedcomx.metadata.rdf.RDFDescription;
 import org.gedcomx.metadata.rdf.RDFLiteral;
 import org.gedcomx.metadata.rdf.RDFTypeReference;
 import org.gedcomx.metadata.rdf.RDFValue;
 import org.gedcomx.rt.XmlTypeIdResolver;
-import org.gedcomx.types.TypesNamespaces;
 
 import javax.xml.bind.annotation.XmlElement;
 import java.util.Date;
@@ -1269,7 +1269,7 @@ public class DublinCoreDescription extends RDFDescription {
    * To describe the file format, physical medium, or dimensions of the resource, use the Format element.
    * @link http://dublincore.org/documents/dcmi-terms/#terms-type
    */
-  @XmlElement(name = "type", namespace = TypesNamespaces.RDF_NAMESPACE )
+  @XmlElement(name = "type", namespace = CommonNamespaces.RDF_NAMESPACE )
   public RDFTypeReference getType() {
     return type;
   }

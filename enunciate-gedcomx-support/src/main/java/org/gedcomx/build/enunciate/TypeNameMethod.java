@@ -23,6 +23,7 @@ import org.codehaus.enunciate.contract.jaxb.Accessor;
 import org.codehaus.enunciate.contract.jaxb.RootElementDeclaration;
 import org.codehaus.enunciate.contract.jaxb.types.XmlType;
 
+import javax.xml.XMLConstants;
 import javax.xml.namespace.QName;
 import java.util.List;
 import java.util.Map;
@@ -76,7 +77,7 @@ public class TypeNameMethod implements TemplateMethodModelEx {
     }
 
     StringBuilder builder = new StringBuilder();
-    if (!defaultNs.equals(namespace) && !"http://www.w3.org/2001/XMLSchema".equals(namespace)) {
+    if (!defaultNs.equals(namespace) && !XMLConstants.W3C_XML_SCHEMA_NS_URI.equals(namespace)) {
       String prefix = namespaces2Prefixes.get(namespace);
       builder.append(prefix).append(':');
     }

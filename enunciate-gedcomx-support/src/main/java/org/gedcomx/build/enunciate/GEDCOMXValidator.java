@@ -181,8 +181,8 @@ public class GEDCOMXValidator extends BaseValidator {
           result.addError(attribute, "Accessors of type 'java.net.URI' should of type xs:anyURI. Please annotate the attribute with @XmlSchemaType(name = \"anyURI\", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)");
         }
 
-        if ("type".equals(attribute.getName()) && isURI && !"http://gedcomx.org/types/".equals(namespace)) {
-          result.addError(attribute, "The 'type' attribute should be defined in the 'http://gedcomx.org/types/' namespace.");
+        if ("type".equals(attribute.getName()) && isURI && !CommonNamespaces.GEDCOMX_COMMON_NAMESPACE.equals(namespace)) {
+          result.addError(attribute, "The 'type' attribute should be defined in the '" + CommonNamespaces.GEDCOMX_COMMON_NAMESPACE + "' namespace.");
         }
 
         if ("id".equalsIgnoreCase(attribute.getName())) {
@@ -190,7 +190,7 @@ public class GEDCOMXValidator extends BaseValidator {
             result.addError(attribute, "Id attributes should be annotated as @XmlID.");
           }
 
-          if (!"http://www.w3.org/1999/02/22-rdf-syntax-ns#".equals(attribute.getNamespace()) && !"ID".equals(attribute.getName())) {
+          if (!CommonNamespaces.RDF_NAMESPACE.equals(attribute.getNamespace()) && !"ID".equals(attribute.getName())) {
             result.addError(attribute, "Id attributes should be named rdf:ID.");
           }
         }
@@ -233,7 +233,7 @@ public class GEDCOMXValidator extends BaseValidator {
           }
 
           if ("type".equals(choice.getName()) && isURI) {
-            result.addError(choice, "Types should be specified with a 'gxt:type' attribute. You probably need to apply @XmlAttribute(namespace='http://gedcomx.org/types/')");
+            result.addError(choice, "Types should be specified with a 'gx:type' attribute. You probably need to apply @XmlAttribute(namespace='" + CommonNamespaces.GEDCOMX_COMMON_NAMESPACE + "')");
           }
 
           if ("id".equals(choice.getName()) && !choice.isXmlID()) {

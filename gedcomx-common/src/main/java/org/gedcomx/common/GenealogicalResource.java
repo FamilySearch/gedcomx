@@ -21,8 +21,8 @@ import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.gedcomx.rt.AnyElementDeserializer;
 import org.gedcomx.rt.AnyElementSerializer;
+import org.gedcomx.rt.CommonNamespaces;
 import org.gedcomx.rt.RDFSubPropertyOf;
-import org.gedcomx.types.TypesNamespaces;
 
 import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
@@ -49,7 +49,7 @@ public abstract class GenealogicalResource implements SourceSupported {
    * is local to a specific context and not necessarily globally unique.
    */
   @XmlID
-  @XmlAttribute ( name = "ID", namespace = TypesNamespaces.RDF_NAMESPACE )
+  @XmlAttribute ( name = "ID", namespace = CommonNamespaces.RDF_NAMESPACE )
   public String getId() {
     return id;
   }
@@ -95,7 +95,7 @@ public abstract class GenealogicalResource implements SourceSupported {
   @XmlElement (name="source")
   @JsonProperty ("sources")
   @JsonName ("sources")
-  @RDFSubPropertyOf ( TypesNamespaces.DUBLIN_CORE_NAMESPACE + "source")
+  @RDFSubPropertyOf ( CommonNamespaces.DUBLIN_CORE_NAMESPACE + "source")
   public List<ResourceReference> getSources() {
     return sources;
   }

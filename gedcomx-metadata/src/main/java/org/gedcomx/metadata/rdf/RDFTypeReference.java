@@ -17,8 +17,8 @@ package org.gedcomx.metadata.rdf;
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.gedcomx.rt.CommonNamespaces;
 import org.gedcomx.types.ResourceType;
-import org.gedcomx.types.TypesNamespaces;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -43,7 +43,7 @@ public final class RDFTypeReference {
    *
    * @return The type.
    */
-  @XmlAttribute(namespace = TypesNamespaces.RDF_NAMESPACE, name = "resource")
+  @XmlAttribute(namespace = CommonNamespaces.RDF_NAMESPACE, name = "resource")
   @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
   public URI getType() {
     return type;

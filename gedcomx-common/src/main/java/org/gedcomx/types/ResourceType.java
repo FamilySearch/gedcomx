@@ -18,6 +18,7 @@ package org.gedcomx.types;
 import org.codehaus.enunciate.qname.XmlQNameEnum;
 import org.codehaus.enunciate.qname.XmlQNameEnumValue;
 import org.codehaus.enunciate.qname.XmlUnknownQNameEnumValue;
+import org.gedcomx.rt.CommonNamespaces;
 
 /**
  * An enumeration of known resource types. Many are defined by the
@@ -35,7 +36,7 @@ public enum ResourceType {
    * An aggregation of resources. A collection is described as a group; its parts may also be separately described.
    */
   @XmlQNameEnumValue(
-    namespace = TypesNamespaces.DUBLIN_CORE_TYPE_NAMESPACE
+    namespace = CommonNamespaces.DUBLIN_CORE_TYPE_NAMESPACE
   )
   Collection,
 
@@ -43,7 +44,7 @@ public enum ResourceType {
    * Data encoded in a defined structure. Examples include lists, tables, and databases. A dataset may be useful for direct machine processing.
    */
   @XmlQNameEnumValue(
-    namespace = TypesNamespaces.DUBLIN_CORE_TYPE_NAMESPACE
+    namespace = CommonNamespaces.DUBLIN_CORE_TYPE_NAMESPACE
   )
   Dataset,
 
@@ -53,7 +54,7 @@ public enum ResourceType {
    * conference, workshop, open day, performance, battle, trial, wedding, tea party, conflagration.
    */
   @XmlQNameEnumValue(
-    namespace = TypesNamespaces.DUBLIN_CORE_TYPE_NAMESPACE
+    namespace = CommonNamespaces.DUBLIN_CORE_TYPE_NAMESPACE
   )
   Event,
 
@@ -63,7 +64,7 @@ public enum ResourceType {
    * electronic and physical representations.
    */
   @XmlQNameEnumValue(
-    namespace = TypesNamespaces.DUBLIN_CORE_TYPE_NAMESPACE
+    namespace = CommonNamespaces.DUBLIN_CORE_TYPE_NAMESPACE
   )
   Image,
 
@@ -72,7 +73,7 @@ public enum ResourceType {
    * Web pages, applets, multimedia learning objects, chat services, or virtual reality environments.
    */
   @XmlQNameEnumValue(
-    namespace = TypesNamespaces.DUBLIN_CORE_TYPE_NAMESPACE
+    namespace = CommonNamespaces.DUBLIN_CORE_TYPE_NAMESPACE
   )
   InteractiveResource,
 
@@ -82,7 +83,7 @@ public enum ResourceType {
    * as instances of the broader type Image.
    */
   @XmlQNameEnumValue(
-    namespace = TypesNamespaces.DUBLIN_CORE_TYPE_NAMESPACE
+    namespace = CommonNamespaces.DUBLIN_CORE_TYPE_NAMESPACE
   )
   MovingImage,
 
@@ -91,7 +92,7 @@ public enum ResourceType {
    * Image, Text or one of the other types.
    */
   @XmlQNameEnumValue(
-    namespace = TypesNamespaces.DUBLIN_CORE_TYPE_NAMESPACE
+    namespace = CommonNamespaces.DUBLIN_CORE_TYPE_NAMESPACE
   )
   PhysicalObject,
 
@@ -100,7 +101,7 @@ public enum ResourceType {
    * interlibrary loans, a Z39.50 or Web server.
    */
   @XmlQNameEnumValue(
-    namespace = TypesNamespaces.DUBLIN_CORE_TYPE_NAMESPACE
+    namespace = CommonNamespaces.DUBLIN_CORE_TYPE_NAMESPACE
   )
   Service,
 
@@ -108,7 +109,7 @@ public enum ResourceType {
    * A computer program in source or compiled form. Examples include a C source file, MS-Windows .exe executable, or Perl script.
    */
   @XmlQNameEnumValue(
-    namespace = TypesNamespaces.DUBLIN_CORE_TYPE_NAMESPACE
+    namespace = CommonNamespaces.DUBLIN_CORE_TYPE_NAMESPACE
   )
   Software,
 
@@ -117,7 +118,7 @@ public enum ResourceType {
    * recorded speech or sounds.
    */
   @XmlQNameEnumValue(
-    namespace = TypesNamespaces.DUBLIN_CORE_TYPE_NAMESPACE
+    namespace = CommonNamespaces.DUBLIN_CORE_TYPE_NAMESPACE
   )
   Sound,
 
@@ -127,7 +128,7 @@ public enum ResourceType {
    * the broader type Image.
    */
   @XmlQNameEnumValue(
-    namespace = TypesNamespaces.DUBLIN_CORE_TYPE_NAMESPACE
+    namespace = CommonNamespaces.DUBLIN_CORE_TYPE_NAMESPACE
   )
   StillImage,
 
@@ -136,7 +137,7 @@ public enum ResourceType {
    * archives of mailing lists. Note that facsimiles or images of texts are still of the genre Text.
    */
   @XmlQNameEnumValue(
-    namespace = TypesNamespaces.DUBLIN_CORE_TYPE_NAMESPACE
+    namespace = CommonNamespaces.DUBLIN_CORE_TYPE_NAMESPACE
   )
   Text,
 

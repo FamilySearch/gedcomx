@@ -16,6 +16,7 @@
 package org.gedcomx.build.enunciate;
 
 import com.sun.mirror.declaration.Declaration;
+import org.gedcomx.rt.CommonNamespaces;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
@@ -36,11 +37,11 @@ import java.util.TreeSet;
 @XmlRootElement(namespace = RDFSchema.RDF_NAMESPACE, name = "RDF")
 public class RDFSchema {
 
-  public static final String RDF_NAMESPACE     = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
-  public static final String RDF_PROPERTY_TYPE = "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property";
+  public static final String RDF_NAMESPACE     = CommonNamespaces.RDF_NAMESPACE;
+  public static final String RDF_PROPERTY_TYPE = RDF_NAMESPACE + "Property";
   public static final String RDFS_NAMESPACE    = "http://www.w3.org/2000/01/rdf-schema#";
-  public static final String RDFS_CLASS_TYPE   = "http://www.w3.org/2000/01/rdf-schema#Class";
-  public static final String RDFS_LITERAL_RANGE = "http://www.w3.org/2000/01/rdf-schema#Literal";
+  public static final String RDFS_CLASS_TYPE   = RDFS_NAMESPACE + "Class";
+  public static final String RDFS_LITERAL_RANGE = RDFS_NAMESPACE + "Literal";
 
   private List<RDFDescription> descriptions;
 
