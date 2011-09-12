@@ -18,8 +18,10 @@ package org.gedcomx.common;
 import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.enunciate.qname.XmlQNameEnumRef;
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.rt.*;
 import org.gedcomx.types.ResourceFragmentParameter;
 import org.gedcomx.types.ResourceType;
@@ -38,8 +40,10 @@ import java.util.Map;
  * @author Ryan Heaton
  */
 @XmlType ( name = "ResourceReference" )
+@JsonTypeInfo ( use = JsonTypeInfo.Id.CUSTOM, property = "@type")
+@JsonTypeIdResolver ( XmlTypeIdResolver.class )
 @XmlSeeAlso(ResourceFragmentParameter.class)
-public final class ResourceReference implements Typed {
+public class ResourceReference implements Typed {
 
   private String id;
   private URI type;

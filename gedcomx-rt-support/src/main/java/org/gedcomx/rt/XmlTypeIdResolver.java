@@ -23,7 +23,6 @@ import org.codehaus.jackson.type.JavaType;
 import javax.xml.bind.annotation.XmlSchema;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.namespace.QName;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 

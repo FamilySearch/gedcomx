@@ -56,6 +56,13 @@ public class GEDCOMXValidator extends BaseValidator {
     ValidationResult result = validateTypeDefinition(complexType);
     if (!complexType.isFinal() && !complexType.isAbstract()) {
       //validate the json type info.
+      // (heatonra, 9/12/2011) for the record, I looked into lifting the requirement to annotate all non-abstract, non-final
+      // classes with @JsonTypeInfo, @JsonTypeIdResolver and limiting its application to all classes that _extend_ non-abstract, non-final
+      // classes. Everything seemed to work fine until you came across lists/collections that could possibly be mixed. When
+      // Jackson deserializes a list of, e.g. RDFDescription that contains an instance of e.g. DublinCoreDescription then it pukes
+      // with a message like "unrecognized property" because it's attempting to deserialize a DublinCoreDescription into an instance
+      // of RDFDescription. Sigh. So it was decided that we'll continue with the policy of always writing out the type of non-final classes,
+      // at least until Jackson provides some more runtime flexibility.
       JsonTypeInfo jsonTypeInfo = complexType.getAnnotation(JsonTypeInfo.class);
       if (jsonTypeInfo == null || jsonTypeInfo.include() != JsonTypeInfo.As.PROPERTY || jsonTypeInfo.use() != JsonTypeInfo.Id.CUSTOM || !"@type".equals(jsonTypeInfo.property())) {
         result.addError(complexType, "Non-final, non-abstract complex types need to be annotated with @JsonTypeInfo(use=JsonTypeInfo.Id.CUSTOM, property=\"@type\")");
