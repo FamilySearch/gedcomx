@@ -128,7 +128,7 @@ public final class Note implements Attributable, Extensible {
    * @return Custom extension elements for the note.
    */
   @XmlAnyElement (lax = true)
-  @JsonSerialize (using = AnyElementSerializer.class)
+  @JsonSerialize (using = AnyElementSerializer.class, include = JsonSerialize.Inclusion.NON_NULL )
   public List<Object> getExtensionElements() {
     return extensionElements;
   }

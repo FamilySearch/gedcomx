@@ -89,7 +89,7 @@ public class RDFDescriptionSet {
    * @return The other (non-RDF) descriptions in this bundle.
    */
   @XmlAnyElement ( lax = true )
-  @JsonSerialize ( using = AnyElementSerializer.class )
+  @JsonSerialize ( using = AnyElementSerializer.class, include = JsonSerialize.Inclusion.NON_NULL )
   @SuppressWarnings("gedcomx:unconventional_any_element_name")
   public List<Object> getOtherDescriptions() {
     return otherDescriptions;

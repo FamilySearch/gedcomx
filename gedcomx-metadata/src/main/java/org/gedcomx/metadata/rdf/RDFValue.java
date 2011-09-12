@@ -130,7 +130,7 @@ public final class RDFValue {
    * @return Attribute extensions to the property.
    */
   @XmlAnyAttribute
-  @JsonSerialize (using = AnyAttributeSerializer.class)
+  @JsonSerialize (using = AnyAttributeSerializer.class, include = JsonSerialize.Inclusion.NON_NULL)
   public Map<QName, String> getOtherAttributes() {
     return otherAttributes;
   }

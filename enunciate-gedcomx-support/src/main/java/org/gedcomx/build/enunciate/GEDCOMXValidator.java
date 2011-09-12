@@ -332,6 +332,9 @@ public class GEDCOMXValidator extends BaseValidator {
       else if (!AnyElementSerializer.class.isAssignableFrom(jsonSerialize.using())) {
         result.addError(anyElement, "Properties annotated with @XmlAnyElement should be annotated with @JsonSerialize(using = AnyElementSerializer.class).");
       }
+      else if (!JsonSerialize.Inclusion.NON_NULL.equals(jsonSerialize.include())) {
+        result.addWarning(anyElement, "@XmlAnyElement not annotated with @JsonSerialize(include = NON_NULL).");
+      }
 
       JsonDeserialize jsonDeserialize = anyElement.getDelegate() instanceof PropertyDeclaration ?
         ((PropertyDeclaration) anyElement.getDelegate()).getSetter().getAnnotation(JsonDeserialize.class) :
@@ -346,6 +349,7 @@ public class GEDCOMXValidator extends BaseValidator {
       else if (!AnyElementDeserializer.class.isAssignableFrom(jsonDeserialize.using())) {
         result.addError(anyElement, "Properties annotated with @XmlAnyElement should be annotated with @JsonDeserialize(using = AnyElementDeserializer.class).");
       }
+
     }
 
     if (typeDef.isHasAnyAttribute()) {
@@ -378,6 +382,9 @@ public class GEDCOMXValidator extends BaseValidator {
         }
         else if (!AnyAttributeSerializer.class.isAssignableFrom(jsonSerialize.using())) {
           result.addError(anyAttribute, "Properties annotated with @XmlAnyAttribute should be annotated with @JsonSerialize(using = AnyAttributeSerializer.class).");
+        }
+        else if (!JsonSerialize.Inclusion.NON_NULL.equals(jsonSerialize.include())) {
+          result.addWarning(anyAttribute, "@XmlAnyAttribute not annotated with @JsonSerialize(include = NON_NULL).");
         }
 
         JsonDeserialize jsonDeserialize = anyAttribute instanceof PropertyDeclaration ?

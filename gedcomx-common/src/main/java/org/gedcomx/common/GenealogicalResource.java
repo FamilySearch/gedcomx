@@ -116,7 +116,7 @@ public abstract class GenealogicalResource implements SourceSupported, Attributa
    * @return Custom extension elements for a genealogical resource.
    */
   @XmlAnyElement (lax = true)
-  @JsonSerialize(using = AnyElementSerializer.class)
+  @JsonSerialize(using = AnyElementSerializer.class, include = JsonSerialize.Inclusion.NON_NULL)
   public List<Object> getExtensionElements() {
     return extensionElements;
   }

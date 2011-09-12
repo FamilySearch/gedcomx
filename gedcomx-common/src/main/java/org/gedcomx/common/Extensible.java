@@ -15,10 +15,6 @@
  */
 package org.gedcomx.common;
 
-import org.codehaus.jackson.map.annotate.JsonSerialize;
-import org.gedcomx.rt.AnyElementSerializer;
-
-import javax.xml.bind.annotation.XmlAnyElement;
 import java.util.List;
 
 /**
@@ -31,8 +27,6 @@ public interface Extensible {
    *
    * @return Custom extension elements for a resource.
    */
-  @XmlAnyElement (lax = true)
-  @JsonSerialize (using = AnyElementSerializer.class)
   List<Object> getExtensionElements();
 
   /**
