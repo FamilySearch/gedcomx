@@ -161,8 +161,4 @@ public class GedcomNamespacePrefixMapper extends NamespacePrefixMapper {
     return choice;
   }
 
-  @Override
-  public String[] getPreDeclaredNamespaceUris() {
-    return new String[] {"http://gedcomx.org/types"}; //just make sure the 'types' namespace gets predeclared.
-  }
 }
