@@ -5,11 +5,11 @@ import org.gedcomx.types.RecordType;
 import org.testng.annotations.Test;
 
 import java.net.URI;
+import java.util.ArrayList;
 
 import static org.gedcomx.rt.SerializationUtil.processThroughJson;
 import static org.gedcomx.rt.SerializationUtil.processThroughXml;
 import static org.testng.AssertJUnit.assertEquals;
-import static org.testng.AssertJUnit.assertNotNull;
 
 /**
  * @author Ryan Heaton
@@ -39,26 +39,28 @@ public class TestCollection {
     RecordCollection collection = new RecordCollection();
     collection.setDescription("description");
     collection.setId("id");
-    collection.setParent(new ResourceReference());
-    collection.getParent().setResource(URI.create("urn:parent"));
     collection.setPublisher("publisher");
     collection.setTitle("title");
     collection.setBibliographicCitation("bibliographic citation");
     collection.setSpatial("spatial coverage");
     collection.setTemporal("temporal coverage");
     collection.setKnownRecordType(RecordType.Census);
+    collection.setItems(new ArrayList<ResourceReference>());
+    ResourceReference resourceReference = new ResourceReference();
+    resourceReference.setResource(URI.create("urn:item"));
+    collection.getItems().add(resourceReference);
     return collection;
   }
 
   private void assertCollection(RecordCollection collection) {
     assertEquals("description", collection.getDescription());
     assertEquals("id", collection.getId());
-    assertEquals(URI.create("urn:parent"), collection.getParent().getResource());
     assertEquals("publisher", collection.getPublisher());
     assertEquals("title", collection.getTitle());
     assertEquals("bibliographic citation", collection.getBibliographicCitation());
     assertEquals("spatial coverage", collection.getSpatial());
     assertEquals("temporal coverage", collection.getTemporal());
+    assertEquals("urn:item", collection.getItems().get(0).getResource().toString());
     assertEquals(RecordType.Census, collection.getKnownRecordType());
   }
 

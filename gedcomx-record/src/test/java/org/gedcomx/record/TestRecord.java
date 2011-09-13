@@ -179,9 +179,6 @@ public class TestRecord {
     sources.add(sourceReference);
     record.setSources(sources);
 
-    record.setCollection(new ResourceReference());
-    record.getCollection().setResource(URI.create("urn:collection-ref"));
-
     record.setBibliographicCitation("bibliographic citation");
 
     record.setId("rid");
@@ -305,7 +302,6 @@ public class TestRecord {
     assertEquals("source-reference-id", sourceReference.getId());
     assertEquals(ResourceType.Collection, sourceReference.getKnownType());
 
-    assertEquals(URI.create("urn:collection-ref"), record.getCollection().getResource());
     assertEquals("rid", record.getId());
     assertEquals(Locale.ENGLISH.getLanguage(), record.getLang());
   }

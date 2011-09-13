@@ -41,7 +41,7 @@ import java.util.List;
 @XmlRootElement
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType ( name = "Record", propOrder = { "persistentId", "alternateIds", "bibliographicCitation", "collection", "personas", "events", "relationships", "fields" } )
+@XmlType ( name = "Record", propOrder = { "persistentId", "alternateIds", "bibliographicCitation", "personas", "events", "relationships", "fields" } )
 public class Record extends GenealogicalResource implements Typed, BibliographicResource, PersistentIdentifiable {
 
   private String lang;
@@ -49,7 +49,6 @@ public class Record extends GenealogicalResource implements Typed, Bibliographic
   private URI persistentId;
   private List<AlternateId> alternateIds;
   private String bibliographicCitation;
-  private ResourceReference collection;
   private List<Persona> personas;
   private List<Event> events;
   private List<Relationship> relationships;
@@ -173,25 +172,6 @@ public class Record extends GenealogicalResource implements Typed, Bibliographic
    */
   public void setBibliographicCitation(String bibliographicCitation) {
     this.bibliographicCitation = bibliographicCitation;
-  }
-  /**
-   * The reference to the collection containing this record.
-   *
-   * @return The reference to the collection containing this record.
-   */
-  @RDFRange( RecordCollection.class )
-  @RDFSubPropertyOf ( CommonNamespaces.DUBLIN_CORE_NAMESPACE + "isPartOf" )
-  public ResourceReference getCollection() {
-    return collection;
-  }
-
-  /**
-   * The reference to the collection containing this record.
-   *
-   * @param collection The reference to the collection containing this record.
-   */
-  public void setCollection(ResourceReference collection) {
-    this.collection = collection;
   }
 
   /**

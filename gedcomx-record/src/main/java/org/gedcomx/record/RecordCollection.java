@@ -16,23 +16,22 @@
 package org.gedcomx.record;
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
+import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.enunciate.qname.XmlQNameEnumRef;
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.common.BibliographicResource;
 import org.gedcomx.common.GenealogicalResource;
 import org.gedcomx.common.ResourceReference;
-import org.gedcomx.rt.CommonNamespaces;
 import org.gedcomx.rt.*;
 import org.gedcomx.types.RecordType;
 
 import javax.xml.XMLConstants;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import java.net.URI;
+import java.util.List;
 
 /**
  * A collection of records.
@@ -40,18 +39,19 @@ import java.net.URI;
 @XmlRootElement
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType ( name = "RecordCollection", propOrder = { "bibliographicCitation", "parent", "title", "description", "publisher", "recordType", "spatial", "temporal" } )
+@XmlType ( name = "RecordCollection", propOrder = { "bibliographicCitation", "title", "description", "publisher", "recordType", "spatial", "temporal", "items" } )
 @RDFSubClassOf ( CommonNamespaces.DUBLIN_CORE_TYPE_NAMESPACE + "Collection" )
 public class RecordCollection extends GenealogicalResource implements BibliographicResource, Describable {
 
   private String bibliographicCitation;
-  private ResourceReference parent;
   private String title;
   private String description;
   private String publisher;
   private URI recordType;
   private String spatial;
   private String temporal;
+  private List<ResourceReference> items;
+
 
   /**
    * The bibliographic citation for this data.
@@ -69,26 +69,6 @@ public class RecordCollection extends GenealogicalResource implements Bibliograp
    */
   public void setBibliographicCitation(String bibliographicCitation) {
     this.bibliographicCitation = bibliographicCitation;
-  }
-
-  /**
-   * The reference to the "parent" collection for this collection, i.e. the collection that contains this collection.
-   *
-   * @return The reference to the "parent" collection for this collection, i.e. the collection that contains this collection.
-   */
-  @RDFRange(RecordCollection.class)
-  @RDFSubPropertyOf ( CommonNamespaces.DUBLIN_CORE_NAMESPACE + "isPartOf" )
-  public ResourceReference getParent() {
-    return parent;
-  }
-
-  /**
-   * The reference to the "parent" collection for this collection, i.e. the collection that contains this collection.
-   *
-   * @param parent The reference to the "parent" collection for this collection, i.e. the collection that contains this collection.
-   */
-  public void setParent(ResourceReference parent) {
-    this.parent = parent;
   }
 
   /**
@@ -225,5 +205,29 @@ public class RecordCollection extends GenealogicalResource implements Bibliograp
    */
   public void setTemporal(String temporal) {
     this.temporal = temporal;
+  }
+
+  /**
+   * The items in this collection.
+   *
+   * @return The items in this collection.
+   */
+  @XmlElement(name = "item")
+  @JsonProperty ("items")
+  @JsonName ("items")
+  @RDFRange ({})
+  @RDFSubPropertyOf ( CommonNamespaces.DUBLIN_CORE_NAMESPACE + "hasPart")
+  public List<ResourceReference> getItems() {
+    return items;
+  }
+
+  /**
+   * The items in this collection.
+   *
+   * @param items The items in this collection.
+   */
+  @JsonProperty ("items")
+  public void setItems(List<ResourceReference> items) {
+    this.items = items;
   }
 }
