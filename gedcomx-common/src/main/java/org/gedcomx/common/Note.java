@@ -26,7 +26,6 @@ import org.gedcomx.rt.XmlTypeIdResolver;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.*;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,11 +35,12 @@ import java.util.List;
 @XmlRootElement
 @JsonTypeInfo ( use = JsonTypeInfo.Id.CUSTOM, property = "@type")
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType ( name = "Note", propOrder = {"text", "attribution", "extensionElements" } )
+@XmlType ( name = "Note", propOrder = {"mediaType", "text", "attribution", "extensionElements" } )
 public final class Note implements Attributable, Extensible {
 
   private String id;
-  private URI about;
+  private String lang;
+  private String mediaType;
   private String text;
   private Attribution attribution;
   private List<Object> extensionElements;
@@ -65,25 +65,41 @@ public final class Note implements Attributable, Extensible {
     this.id = id;
   }
 
-
   /**
-   * URI to the resource that the note is attached to.
+   * The language of the note. See <a href="http://www.w3.org/International/articles/language-tags/>http://www.w3.org/International/articles/language-tags/</a>
    *
-   * @return URI to the resource that the note is attached to.
+   * @return The language of note.
    */
-  @XmlAttribute ( namespace = CommonNamespaces.RDF_NAMESPACE )
-  @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
-  public URI getAbout() {
-    return about;
+  @XmlAttribute( namespace = XMLConstants.XML_NS_URI )
+  public String getLang() {
+    return lang;
   }
 
   /**
-   * URI to the resource that the note is attached to.
+   * The language of the note. See <a href="http://www.w3.org/International/articles/language-tags/>http://www.w3.org/International/articles/language-tags/</a>
    *
-   * @param about URI to the resource that the note is attached to.
+   * @param lang The language of the note.
    */
-  public void setAbout(URI about) {
-    this.about = about;
+  public void setLang(String lang) {
+    this.lang = lang;
+  }
+
+  /**
+   * Media type (i.e. MIME type) of the text of the note.
+   *
+   * @return Media type (i.e. MIME type) of the text of the note.
+   */
+  public String getMediaType() {
+    return mediaType;
+  }
+
+  /**
+   * Media type (i.e. MIME type) of the text of the note.
+   *
+   * @param mediaType Media type (i.e. MIME type) of the text of the note.
+   */
+  public void setMediaType(String mediaType) {
+    this.mediaType = mediaType;
   }
 
   /**

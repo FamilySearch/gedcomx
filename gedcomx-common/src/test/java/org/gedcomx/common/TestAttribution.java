@@ -16,9 +16,9 @@ import static org.testng.AssertJUnit.assertEquals;
 public class TestAttribution {
 
   /**
-   * tests attribution reference xml
+   * tests attribution xml
    */
-  public void testAttributionReferenceXml() throws Exception {
+  public void testAttributionXml() throws Exception {
     Attribution attribution = new Attribution();
     attribution.setContributor(new ResourceReference());
     attribution.getContributor().setResource(URI.create("urn:someid"));
@@ -32,9 +32,9 @@ public class TestAttribution {
   }
 
   /**
-   * tests attribution reference json
+   * tests attribution json
    */
-  public void testAttributionReferenceJson() throws Exception {
+  public void testAttributionJson() throws Exception {
     Attribution attribution = new Attribution();
     attribution.setContributor(new ResourceReference());
     attribution.getContributor().setResource(URI.create("urn:someid"));

@@ -33,12 +33,13 @@ import java.util.List;
  *
  * @author Ryan Heaton
  */
-@XmlType ( name = "GenealogicalResource", propOrder = { "attribution", "sources", "extensionElements" } )
+@XmlType ( name = "GenealogicalResource", propOrder = { "attribution", "sources", "notes", "extensionElements" } )
 public abstract class GenealogicalResource implements SourceSupported, Attributable, Extensible {
 
   private String id;
   private Attribution attribution;
   private List<ResourceReference> sources;
+  private List<Note> notes;
   private List<Object> extensionElements;
 
   /**
@@ -108,6 +109,28 @@ public abstract class GenealogicalResource implements SourceSupported, Attributa
   @JsonProperty("sources")
   public void setSources(List<ResourceReference> sources) {
     this.sources = sources;
+  }
+
+  /**
+   * Notes about a resource.
+   *
+   * @return Notes about a resource.
+   */
+  @XmlElement (name = "note")
+  @JsonProperty ("notes")
+  @JsonName ("notes")
+  public List<Note> getNotes() {
+    return notes;
+  }
+
+  /**
+   * Notes about a resource.
+   *
+   * @param notes Notes about a resource.
+   */
+  @JsonProperty ("notes")
+  public void setNotes(List<Note> notes) {
+    this.notes = notes;
   }
 
   /**
