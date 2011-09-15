@@ -39,7 +39,7 @@ import java.util.List;
  * A record.
  */
 @XmlRootElement
-@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
+@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "Record", propOrder = { "persistentId", "alternateIds", "bibliographicCitation", "personas", "events", "relationships", "fields" } )
 public class Record extends GenealogicalResource implements Typed, BibliographicResource, PersistentIdentifiable {

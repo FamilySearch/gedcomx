@@ -36,7 +36,7 @@ import java.net.URI;
 /**
  * A conclusion about a characteristic of a person or relationship.
  */
-@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
+@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "Characteristic" )
 @RDFSubClassOf ( CommonNamespaces.DUBLIN_CORE_TYPE_NAMESPACE + "Event" )

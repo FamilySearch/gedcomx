@@ -36,7 +36,7 @@ import java.net.URI;
 /**
  * A field specifying a characteristic about a persona or relationship.
  */
-@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
+@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "Characteristic" )
 public class Characteristic extends Field implements Typed {

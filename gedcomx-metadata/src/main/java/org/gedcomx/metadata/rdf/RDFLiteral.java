@@ -15,16 +15,15 @@
  */
 package org.gedcomx.metadata.rdf;
 
-import org.codehaus.jackson.map.annotate.JsonDeserialize;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
-import org.gedcomx.rt.AnyAttributeDeserializer;
-import org.gedcomx.rt.AnyAttributeSerializer;
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.gedcomx.rt.SupportsExtensionAttributes;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlAnyAttribute;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlValue;
 import javax.xml.namespace.QName;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -34,11 +33,11 @@ import java.util.Map;
  * @link http://www.w3.org/TR/rdf-schema/#ch_literal
  * @author Ryan Heaton
  */
-public final class RDFLiteral {
+public final class RDFLiteral implements SupportsExtensionAttributes {
 
   private String lang;
   private String value;
-  private Map<QName, String> otherAttributes;
+  private Map<QName, String> extensionAttributes;
 
   /**
    * The language of the value of the property. See <a href="http://www.w3.org/International/articles/language-tags/>http://www.w3.org/International/articles/language-tags/</a>
@@ -84,18 +83,32 @@ public final class RDFLiteral {
    * @return Attribute extensions to the property.
    */
   @XmlAnyAttribute
-  @JsonSerialize (using = AnyAttributeSerializer.class, include = JsonSerialize.Inclusion.NON_NULL )
-  public Map<QName, String> getOtherAttributes() {
-    return otherAttributes;
+  @JsonIgnore
+  public Map<QName, String> getExtensionAttributes() {
+    return extensionAttributes;
   }
 
   /**
    * Attribute extensions to the property.
    *
-   * @param otherAttributes Attribute extensions to the property.
+   * @param extensionAttributes Attribute extensions to the property.
    */
-  @JsonDeserialize (using = AnyAttributeDeserializer.class)
-  public void setOtherAttributes(Map<QName, String> otherAttributes) {
-    this.otherAttributes = otherAttributes;
+  @JsonIgnore
+  public void setExtensionAttributes(Map<QName, String> extensionAttributes) {
+    this.extensionAttributes = extensionAttributes;
+  }
+
+  /**
+   * Add a custom extension attribute.
+   *
+   * @param qname The qname of the attribute.
+   * @param value The value of the attribute.
+   */
+  public void addExtensionAttribute(QName qname, String value) {
+    if (this.extensionAttributes == null) {
+      this.extensionAttributes = new HashMap<QName, String>();
+    }
+
+    this.extensionAttributes.put(qname, value);
   }
 }

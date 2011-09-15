@@ -82,7 +82,7 @@ public class SerializationUtil {
       }
       el = new JAXBElement(new QName(ns, instanceClass.getSimpleName()), instanceClass, reference);
     }
-    marshaller.setProperty("com.sun.xml.bind.namespacePrefixMapper", new GedcomNamespacePrefixMapper(instanceClass));
+    marshaller.setProperty("com.sun.xml.bind.namespacePrefixMapper", new GedcomNamespaceManager(instanceClass));
     marshaller.marshal(el, out);
     if ("true".equals(System.getProperty("show.output"))) {
       System.out.println(new String(out.toByteArray(), "utf-8"));

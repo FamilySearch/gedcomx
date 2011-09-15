@@ -56,6 +56,7 @@ public class GedcomJsonProvider extends JacksonJaxbJsonProvider {
     AnnotationIntrospector introspector = AnnotationIntrospector.pair(new JacksonAnnotationIntrospector(), new JaxbAnnotationIntrospector());
     mapper.getSerializationConfig().withAnnotationIntrospector(introspector);
     mapper.getDeserializationConfig().withAnnotationIntrospector(introspector);
+    mapper.registerModule(new GedcomJacksonModule());
     for (Class<?> contextClass : classes) {
       XmlTypeIdResolver.initContextClass(SimpleType.construct(contextClass));
     }

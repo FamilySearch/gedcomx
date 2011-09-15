@@ -31,7 +31,7 @@ import java.util.List;
 /**
  * A persona is the set of data about a person bounded by a single record.
  */
-@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
+@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "Persona", propOrder = { "persistentId", "alternateIds", "gender", "age", "names", "eventRoles", "characteristics" } )
 public class Persona extends GenealogicalResource implements PersistentIdentifiable, HasCharacteristics, Weighted {

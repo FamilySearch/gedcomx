@@ -41,7 +41,7 @@ import org.codehaus.enunciate.modules.objc.ObjCDeploymentModule;
 import org.codehaus.enunciate.template.freemarker.GetGroupsMethod;
 import org.codehaus.enunciate.template.freemarker.IsDefinedGloballyMethod;
 import org.codehaus.enunciate.template.freemarker.UniqueContentTypesMethod;
-import org.gedcomx.rt.GedcomNamespacePrefixMapper;
+import org.gedcomx.rt.GedcomNamespaceManager;
 import org.gedcomx.rt.Namespace;
 import org.gedcomx.rt.Namespaces;
 
@@ -172,7 +172,7 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
   public void initModel(EnunciateFreemarkerModel model) {
     super.initModel(model);
 
-    Map<String,String> knownPrefixes = GedcomNamespacePrefixMapper.getKnownPrefixes();
+    Map<String,String> knownPrefixes = GedcomNamespaceManager.getKnownPrefixes();
     model.getNamespacesToPrefixes().putAll(knownPrefixes);
     for (SchemaInfo schemaInfo : model.getNamespacesToSchemas().values()) {
       String knownPrefix = knownPrefixes.get(schemaInfo.getNamespace());

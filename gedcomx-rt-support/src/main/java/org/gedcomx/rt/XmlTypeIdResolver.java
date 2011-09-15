@@ -34,6 +34,8 @@ import java.util.concurrent.ConcurrentHashMap;
 @XmlTransient
 public class XmlTypeIdResolver implements TypeIdResolver {
 
+  public static final String TYPE_PROPERTY_NAME = "@type";
+
   private static final Map<String, JavaType> ID_TO_TYPE = new ConcurrentHashMap<String, JavaType>();
   private static final Map<Class<?>, String> TYPE_TO_ID = new ConcurrentHashMap<Class<?>, String>();
 

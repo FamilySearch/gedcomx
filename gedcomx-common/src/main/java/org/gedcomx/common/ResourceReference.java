@@ -19,10 +19,11 @@ import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.enunciate.qname.XmlQNameEnumRef;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
-import org.codehaus.jackson.map.annotate.JsonDeserialize;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.rt.*;
+import org.gedcomx.rt.CommonNamespaces;
+import org.gedcomx.rt.SupportsExtensionAttributes;
+import org.gedcomx.rt.SupportsExtensionElements;
+import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.ResourceFragmentParameter;
 import org.gedcomx.types.ResourceType;
 import org.gedcomx.types.Typed;
@@ -31,6 +32,8 @@ import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.*;
 import javax.xml.namespace.QName;
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -40,10 +43,10 @@ import java.util.Map;
  * @author Ryan Heaton
  */
 @XmlType ( name = "ResourceReference" )
-@JsonTypeInfo ( use = JsonTypeInfo.Id.CUSTOM, property = "@type")
+@JsonTypeInfo ( use = JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver ( XmlTypeIdResolver.class )
 @XmlSeeAlso(ResourceFragmentParameter.class)
-public class ResourceReference implements Typed {
+public class ResourceReference implements Typed, SupportsExtensionAttributes, SupportsExtensionElements {
 
   private String id;
   private URI type;
@@ -126,7 +129,7 @@ public class ResourceReference implements Typed {
    * @return Custom attributes applicable to this resource reference.
    */
   @XmlAnyAttribute
-  @JsonSerialize (using = AnyAttributeSerializer.class, include = JsonSerialize.Inclusion.NON_NULL)
+  @JsonIgnore
   public Map<QName, String> getExtensionAttributes() {
     return extensionAttributes;
   }
@@ -136,9 +139,23 @@ public class ResourceReference implements Typed {
    *
    * @param extensionAttributes Custom attributes applicable to this resource reference.
    */
-  @JsonDeserialize (using = AnyAttributeDeserializer.class)
+  @JsonIgnore
   public void setExtensionAttributes(Map<QName, String> extensionAttributes) {
     this.extensionAttributes = extensionAttributes;
+  }
+
+  /**
+   * Add a custom extension attribute.
+   *
+   * @param qname The qname of the attribute.
+   * @param value The value of the attribute.
+   */
+  public void addExtensionAttribute(QName qname, String value) {
+    if (this.extensionAttributes == null) {
+      this.extensionAttributes = new HashMap<QName, String>();
+    }
+
+    this.extensionAttributes.put(qname, value);
   }
 
   /**
@@ -147,7 +164,7 @@ public class ResourceReference implements Typed {
    * @return Custom attributes applicable to this resource reference.
    */
   @XmlAnyElement ( lax = true )
-  @JsonSerialize ( using = AnyElementSerializer.class, include = JsonSerialize.Inclusion.NON_NULL )
+  @JsonIgnore
   public List<Object> getExtensionElements() {
     return extensionElements;
   }
@@ -157,9 +174,61 @@ public class ResourceReference implements Typed {
    *
    * @param extensionElements Custom attributes applicable to this resource reference.
    */
-  @JsonDeserialize( using = AnyElementDeserializer.class )
+  @JsonIgnore
   public void setExtensionElements(List<Object> extensionElements) {
     this.extensionElements = extensionElements;
+  }
+
+  /**
+   * Add an extension element.
+   *
+   * @param element The extension element to add.
+   */
+  public void addExtensionElement(Object element) {
+    if (this.extensionElements == null) {
+      this.extensionElements = new ArrayList<Object>();
+    }
+
+    this.extensionElements.add(element);
+  }
+
+  /**
+   * Finds the first extension of a specified type.
+   *
+   * @param clazz The type.
+   * @return The extension, or null if none found.
+   */
+  @SuppressWarnings ( {"unchecked"} )
+  public <E> E findExtensionOfType(Class<E> clazz) {
+    if (this.extensionElements != null) {
+      for (Object extension : extensionElements) {
+        if (clazz.isInstance(extension)) {
+          return (E) extension;
+        }
+      }
+    }
+
+    return null;
+  }
+
+  /**
+   * Find the extensions of a specified type.
+   *
+   * @param clazz The type.
+   * @return The extensions, possibly empty but not null.
+   */
+  @SuppressWarnings ( {"unchecked"} )
+  public <E> List<E> findExtensionsOfType(Class<E> clazz) {
+    List<E> ext = new ArrayList<E>();
+    if (this.extensionElements != null) {
+      for (Object extension : extensionElements) {
+        if (clazz.isInstance(extension)) {
+          ext.add((E) extension);
+        }
+      }
+    }
+
+    return ext;
   }
 
   /**

@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.common;
+package org.gedcomx.rt;
 
 import java.util.List;
 
 /**
  * @author Ryan Heaton
  */
-public interface Extensible {
+public interface SupportsExtensionElements {
 
   /**
    * Custom extension elements for a resource.
@@ -46,4 +46,11 @@ public interface Extensible {
    */
   @SuppressWarnings ( {"unchecked"} )
   <E> List<E> findExtensionsOfType(Class<E> clazz);
+
+  /**
+   * Add an extension element.
+   *
+   * @param element The extension element to add.
+   */
+  void addExtensionElement(Object element);
 }

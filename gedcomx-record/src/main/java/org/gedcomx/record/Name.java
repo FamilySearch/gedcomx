@@ -35,7 +35,7 @@ import java.util.List;
 /**
  * A name field.
  */
-@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
+@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "Name" )
 public class Name extends Field implements Partitionable<NamePart>, Typed {

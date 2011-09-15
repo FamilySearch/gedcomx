@@ -13,7 +13,7 @@ import java.util.Arrays;
  * @author Ryan Heaton
  */
 @XmlRootElement
-@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
+@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 public class CustomResource extends GenealogicalResource {
 

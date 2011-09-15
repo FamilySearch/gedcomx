@@ -36,7 +36,7 @@ import java.util.List;
  * @author Ryan Heaton
  */
 @XmlRootElement(name = "person")
-@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
+@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "Person", propOrder = {"persistentId", "alternateIds", "bibliographicCitation", "gender", "names", "events", "characteristics" } )
 public class Person extends GenealogicalResource implements PersistentIdentifiable, BibliographicResource, HasEvents, HasCharacteristics {

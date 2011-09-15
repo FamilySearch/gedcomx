@@ -40,7 +40,7 @@ import java.util.List;
  * @link http://dublincore.org/documents/profile-guidelines/#appc
  * @author Ryan Heaton
  */
-@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
+@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 public class DublinCoreDescription extends RDFDescription {
 

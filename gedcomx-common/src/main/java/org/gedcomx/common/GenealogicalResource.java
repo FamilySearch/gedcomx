@@ -16,13 +16,11 @@
 package org.gedcomx.common;
 
 import org.codehaus.enunciate.json.JsonName;
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.map.annotate.JsonDeserialize;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
-import org.gedcomx.rt.AnyElementDeserializer;
-import org.gedcomx.rt.AnyElementSerializer;
 import org.gedcomx.rt.CommonNamespaces;
 import org.gedcomx.rt.RDFSubPropertyOf;
+import org.gedcomx.rt.SupportsExtensionElements;
 
 import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
@@ -34,7 +32,7 @@ import java.util.List;
  * @author Ryan Heaton
  */
 @XmlType ( name = "GenealogicalResource", propOrder = { "attribution", "sources", "notes", "extensionElements" } )
-public abstract class GenealogicalResource implements SourceSupported, Attributable, Extensible {
+public abstract class GenealogicalResource implements SourceSupported, Attributable, SupportsExtensionElements {
 
   private String id;
   private Attribution attribution;
@@ -139,7 +137,7 @@ public abstract class GenealogicalResource implements SourceSupported, Attributa
    * @return Custom extension elements for a genealogical resource.
    */
   @XmlAnyElement (lax = true)
-  @JsonSerialize(using = AnyElementSerializer.class, include = JsonSerialize.Inclusion.NON_NULL)
+  @JsonIgnore
   public List<Object> getExtensionElements() {
     return extensionElements;
   }
@@ -149,7 +147,7 @@ public abstract class GenealogicalResource implements SourceSupported, Attributa
    *
    * @param extensionElements Custom extension elements for a genealogical resource.
    */
-  @JsonDeserialize(using = AnyElementDeserializer.class)
+  @JsonIgnore
   public void setExtensionElements(List<Object> extensionElements) {
     this.extensionElements = extensionElements;
   }

@@ -13,16 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-/**
- * Runtime-only support for GEDCOM X.
- */
-@XmlSchema (
-  namespace = CommonNamespaces.GEDCOMX_COMMON_NAMESPACE,
-  attributeFormDefault = XmlNsForm.QUALIFIED,
-  elementFormDefault = XmlNsForm.QUALIFIED
-)
 package org.gedcomx.rt;
 
-import javax.xml.bind.annotation.XmlNsForm;
-import javax.xml.bind.annotation.XmlSchema;
+import javax.xml.namespace.QName;
+import java.util.Map;
+
+/**
+ * @author Ryan Heaton
+ */
+public interface SupportsExtensionAttributes {
+
+  /**
+   * Custom extension attributes for a resource.
+   *
+   * @return Custom extension attributes for a resource.
+   */
+  Map<QName, String> getExtensionAttributes();
+
+  /**
+   * Add a custom extension attribute.
+   *
+   * @param qname The qname of the attribute.
+   * @param value The value of the attribute.
+   */
+  void addExtensionAttribute(QName qname, String value);
+
+}

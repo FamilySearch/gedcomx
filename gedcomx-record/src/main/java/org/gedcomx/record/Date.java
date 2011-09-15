@@ -32,7 +32,7 @@ import java.util.List;
  * A date field.
  */
 @ClientName("DateInfo")
-@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
+@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "Date" )
 @RDFSubClassOf ( CommonNamespaces.DUBLIN_CORE_NAMESPACE + "PeriodOfTime" )

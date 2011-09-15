@@ -20,6 +20,7 @@ import org.codehaus.enunciate.contract.jaxb.TypeDefinition;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.node.JsonNodeFactory;
 import org.codehaus.jackson.node.ObjectNode;
+import org.gedcomx.rt.XmlTypeIdResolver;
 
 /**
  * @author Ryan Heaton
@@ -32,8 +33,8 @@ public class GenerateExampleJsonMethod extends org.codehaus.enunciate.modules.do
 
   protected void generateExampleJson(TypeDefinition type, ObjectNode jsonNode, int maxDepth) {
     if (type != null) {
-      if (!jsonNode.has("@type") && type.getAnnotation(JsonTypeInfo.class) != null) {
-        jsonNode.put("@type", JsonNodeFactory.instance.textNode(type.getNamespace() + type.getName()));
+      if (!jsonNode.has(XmlTypeIdResolver.TYPE_PROPERTY_NAME) && type.getAnnotation(JsonTypeInfo.class) != null) {
+        jsonNode.put(XmlTypeIdResolver.TYPE_PROPERTY_NAME, JsonNodeFactory.instance.textNode(type.getNamespace() + type.getName()));
       }
 
       super.generateExampleJson(type, jsonNode, maxDepth);

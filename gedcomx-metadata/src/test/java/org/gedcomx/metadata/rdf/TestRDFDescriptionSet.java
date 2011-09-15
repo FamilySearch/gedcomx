@@ -23,11 +23,11 @@ public class TestRDFDescriptionSet {
     RDFDescriptionSet meta = new RDFDescriptionSet();
     meta.setId("id");
     meta.setRdfDescriptions(Arrays.asList((RDFDescription) new DublinCoreDescription()));
-    meta.setOtherDescriptions(new ArrayList<Object>());
-    meta.getOtherDescriptions().add(new RDFDescriptionSet());
+    meta.setExtensionElements(new ArrayList<Object>());
+    meta.getExtensionElements().add(new RDFDescriptionSet());
     meta = processThroughXml(meta);
     assertEquals("id", meta.getId());
-    assertEquals(1, meta.getOtherDescriptions().size());
+    assertEquals(1, meta.getExtensionElements().size());
     assertEquals(1, meta.getRdfDescriptions().size());
   }
 
@@ -38,11 +38,11 @@ public class TestRDFDescriptionSet {
     RDFDescriptionSet meta = new RDFDescriptionSet();
     meta.setId("id");
     meta.setRdfDescriptions(Arrays.asList((RDFDescription) new DublinCoreDescription()));
-    meta.setOtherDescriptions(new ArrayList<Object>());
-    meta.getOtherDescriptions().add(new RDFDescriptionSet());
+    meta.setExtensionElements(new ArrayList<Object>());
+    meta.getExtensionElements().add(new RDFDescriptionSet());
     meta = processThroughJson(meta);
     assertEquals("id", meta.getId());
-    assertEquals(1, meta.getOtherDescriptions().size());
+    assertEquals(1, meta.getExtensionElements().size());
     assertEquals(1, meta.getRdfDescriptions().size());
   }
 

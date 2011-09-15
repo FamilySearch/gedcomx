@@ -16,14 +16,14 @@
 package org.gedcomx.metadata.rdf;
 
 import org.codehaus.enunciate.json.JsonName;
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
-import org.codehaus.jackson.map.annotate.JsonDeserialize;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.rt.*;
 
 import javax.xml.bind.annotation.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,14 +32,14 @@ import java.util.List;
  * @author Ryan Heaton
  */
 @XmlRootElement ( name = "RDF" )
-@JsonTypeInfo ( use = JsonTypeInfo.Id.CUSTOM, property = "@type" )
+@JsonTypeInfo ( use = JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME )
 @JsonTypeIdResolver ( XmlTypeIdResolver.class )
 @XmlType (name = "RDF")
-public class RDFDescriptionSet {
+public class RDFDescriptionSet implements SupportsExtensionElements {
 
   private String id;
   private List<RDFDescription> rdfDescriptions;
-  private List<Object> otherDescriptions;
+  private List<Object> extensionElements;
 
   /**
    * The id of this bundle.
@@ -89,19 +89,70 @@ public class RDFDescriptionSet {
    * @return The other (non-RDF) descriptions in this bundle.
    */
   @XmlAnyElement ( lax = true )
-  @JsonSerialize ( using = AnyElementSerializer.class, include = JsonSerialize.Inclusion.NON_NULL )
-  @SuppressWarnings("gedcomx:unconventional_any_element_name")
-  public List<Object> getOtherDescriptions() {
-    return otherDescriptions;
+  @JsonIgnore
+  public List<Object> getExtensionElements() {
+    return extensionElements;
   }
 
   /**
    * The other (non-RDF) descriptions in this bundle.
    *
-   * @param otherDescriptions The other (non-RDF) descriptions in this bundle.
+   * @param extensionElements The other (non-RDF) descriptions in this bundle.
    */
-  @JsonDeserialize( using = AnyElementDeserializer.class )
-  public void setOtherDescriptions(List<Object> otherDescriptions) {
-    this.otherDescriptions = otherDescriptions;
+  @JsonIgnore
+  public void setExtensionElements(List<Object> extensionElements) {
+    this.extensionElements = extensionElements;
+  }
+
+  /**
+   * Add an extension element.
+   *
+   * @param element The extension element to add.
+   */
+  public void addExtensionElement(Object element) {
+    if (this.extensionElements == null) {
+      this.extensionElements = new ArrayList<Object>();
+    }
+
+    this.extensionElements.add(element);
+  }
+
+  /**
+   * Finds the first extension of a specified type.
+   *
+   * @param clazz The type.
+   * @return The extension, or null if none found.
+   */
+  @SuppressWarnings ( {"unchecked"} )
+  public <E> E findExtensionOfType(Class<E> clazz) {
+    if (this.extensionElements != null) {
+      for (Object extension : extensionElements) {
+        if (clazz.isInstance(extension)) {
+          return (E) extension;
+        }
+      }
+    }
+
+    return null;
+  }
+
+  /**
+   * Find the extensions of a specified type.
+   *
+   * @param clazz The type.
+   * @return The extensions, possibly empty but not null.
+   */
+  @SuppressWarnings ( {"unchecked"} )
+  public <E> List<E> findExtensionsOfType(Class<E> clazz) {
+    List<E> ext = new ArrayList<E>();
+    if (this.extensionElements != null) {
+      for (Object extension : extensionElements) {
+        if (clazz.isInstance(extension)) {
+          ext.add((E) extension);
+        }
+      }
+    }
+
+    return ext;
   }
 }

@@ -35,7 +35,7 @@ import java.net.URI;
 /**
  * A part of a name.
  */
-@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
+@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver ( XmlTypeIdResolver.class )
 @XmlType ( name = "NamePart" )
 public class NamePart extends Field implements Typed {

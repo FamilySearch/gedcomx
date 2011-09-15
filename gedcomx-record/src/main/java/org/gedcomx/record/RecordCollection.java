@@ -37,7 +37,7 @@ import java.util.List;
  * A collection of records.
  */
 @XmlRootElement
-@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
+@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "RecordCollection", propOrder = { "bibliographicCitation", "title", "description", "publisher", "recordType", "spatial", "temporal", "items" } )
 @RDFSubClassOf ( CommonNamespaces.DUBLIN_CORE_TYPE_NAMESPACE + "Collection" )

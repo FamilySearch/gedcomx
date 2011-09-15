@@ -15,13 +15,11 @@
  */
 package org.gedcomx.common;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
-import org.codehaus.jackson.map.annotate.JsonDeserialize;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.rt.AnyElementDeserializer;
-import org.gedcomx.rt.AnyElementSerializer;
 import org.gedcomx.rt.CommonNamespaces;
+import org.gedcomx.rt.SupportsExtensionElements;
 import org.gedcomx.rt.XmlTypeIdResolver;
 
 import javax.xml.XMLConstants;
@@ -33,10 +31,10 @@ import java.util.List;
  * @author Ryan Heaton
  */
 @XmlRootElement
-@JsonTypeInfo ( use = JsonTypeInfo.Id.CUSTOM, property = "@type")
+@JsonTypeInfo ( use = JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "Note", propOrder = {"mediaType", "text", "attribution", "extensionElements" } )
-public final class Note implements Attributable, Extensible {
+public final class Note implements Attributable, SupportsExtensionElements {
 
   private String id;
   private String lang;
@@ -144,7 +142,7 @@ public final class Note implements Attributable, Extensible {
    * @return Custom extension elements for the note.
    */
   @XmlAnyElement (lax = true)
-  @JsonSerialize (using = AnyElementSerializer.class, include = JsonSerialize.Inclusion.NON_NULL )
+  @JsonIgnore
   public List<Object> getExtensionElements() {
     return extensionElements;
   }
@@ -154,7 +152,7 @@ public final class Note implements Attributable, Extensible {
    *
    * @param extensionElements Custom extension elements for the note.
    */
-  @JsonDeserialize (using = AnyElementDeserializer.class)
+  @JsonIgnore
   public void setExtensionElements(List<Object> extensionElements) {
     this.extensionElements = extensionElements;
   }

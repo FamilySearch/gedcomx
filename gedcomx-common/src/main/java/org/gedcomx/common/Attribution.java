@@ -32,7 +32,7 @@ import java.util.Date;
  * @author Ryan Heaton
  */
 @XmlRootElement
-@JsonTypeInfo ( use = JsonTypeInfo.Id.CUSTOM, property = "@type")
+@JsonTypeInfo ( use = JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "Attribution", propOrder = {"modified", "statement", "contributor" } )
 @SuppressWarnings("gedcomx:no_id")

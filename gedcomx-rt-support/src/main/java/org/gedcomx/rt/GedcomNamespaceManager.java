@@ -30,14 +30,14 @@ import java.util.*;
  *
  * @author Ryan Heaton
  */
-public class GedcomNamespacePrefixMapper extends NamespacePrefixMapper {
+public class GedcomNamespaceManager extends NamespacePrefixMapper {
 
   private final String defaultns;
   private final Map<String, String> ns2prefix;
 
   private static Map<String, String> KNOWN_PREFIXES = null;
 
-  public GedcomNamespacePrefixMapper(Class<?> rootClass) {
+  public GedcomNamespaceManager(Class<?> rootClass) {
     this(getDefaultNamespace(rootClass));
   }
 
@@ -71,7 +71,7 @@ public class GedcomNamespacePrefixMapper extends NamespacePrefixMapper {
     return defaultNamespace;
   }
 
-  public GedcomNamespacePrefixMapper(Map<String, String> overrides, String defaultns) {
+  public GedcomNamespaceManager(Map<String, String> overrides, String defaultns) {
     Map<String, String> ns2prefix = getKnownPrefixes();
     if (overrides != null) {
       ns2prefix.putAll(overrides);
@@ -83,15 +83,15 @@ public class GedcomNamespacePrefixMapper extends NamespacePrefixMapper {
     this.defaultns = defaultns;
   }
 
-  public GedcomNamespacePrefixMapper(String defaultns) {
+  public GedcomNamespaceManager(String defaultns) {
     this(null, defaultns);
   }
 
-  public GedcomNamespacePrefixMapper(Map<String, String> overrides) {
+  public GedcomNamespaceManager(Map<String, String> overrides) {
     this(overrides, null);
   }
 
-  public GedcomNamespacePrefixMapper() {
+  public GedcomNamespaceManager() {
     this(null, null);
   }
 

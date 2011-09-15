@@ -18,13 +18,12 @@ package org.gedcomx.build.enunciate;
 import com.sun.mirror.declaration.Declaration;
 import com.sun.mirror.declaration.FieldDeclaration;
 import com.sun.mirror.declaration.MemberDeclaration;
-import com.sun.mirror.type.DeclaredType;
-import com.sun.mirror.type.EnumType;
-import com.sun.mirror.type.MirroredTypeException;
-import com.sun.mirror.type.TypeMirror;
+import com.sun.mirror.type.*;
 import net.sf.jelly.apt.decorations.TypeMirrorDecorator;
 import net.sf.jelly.apt.decorations.declaration.DecoratedMethodDeclaration;
 import net.sf.jelly.apt.decorations.declaration.PropertyDeclaration;
+import net.sf.jelly.apt.decorations.type.DecoratedClassType;
+import net.sf.jelly.apt.decorations.type.DecoratedInterfaceType;
 import net.sf.jelly.apt.decorations.type.DecoratedTypeMirror;
 import org.codehaus.enunciate.contract.jaxb.*;
 import org.codehaus.enunciate.contract.jaxb.types.KnownXmlType;
@@ -33,12 +32,14 @@ import org.codehaus.enunciate.contract.jaxb.types.XmlType;
 import org.codehaus.enunciate.contract.validation.BaseValidator;
 import org.codehaus.enunciate.contract.validation.ValidationResult;
 import org.codehaus.enunciate.qname.XmlQNameEnum;
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
-import org.codehaus.jackson.map.annotate.JsonDeserialize;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.rt.*;
+import org.gedcomx.rt.CommonNamespaces;
+import org.gedcomx.rt.SupportsExtensionAttributes;
+import org.gedcomx.rt.SupportsExtensionElements;
+import org.gedcomx.rt.XmlTypeIdResolver;
 
 import javax.xml.bind.annotation.XmlAnyAttribute;
 import javax.xml.namespace.QName;
@@ -64,7 +65,7 @@ public class GEDCOMXValidator extends BaseValidator {
       // of RDFDescription. Sigh. So it was decided that we'll continue with the policy of always writing out the type of non-final classes,
       // at least until Jackson provides some more runtime flexibility.
       JsonTypeInfo jsonTypeInfo = complexType.getAnnotation(JsonTypeInfo.class);
-      if (jsonTypeInfo == null || jsonTypeInfo.include() != JsonTypeInfo.As.PROPERTY || jsonTypeInfo.use() != JsonTypeInfo.Id.CUSTOM || !"@type".equals(jsonTypeInfo.property())) {
+      if (jsonTypeInfo == null || jsonTypeInfo.include() != JsonTypeInfo.As.PROPERTY || jsonTypeInfo.use() != JsonTypeInfo.Id.CUSTOM || !XmlTypeIdResolver.TYPE_PROPERTY_NAME.equals(jsonTypeInfo.property())) {
         result.addError(complexType, "Non-final, non-abstract complex types need to be annotated with @JsonTypeInfo(use=JsonTypeInfo.Id.CUSTOM, property=\"@type\")");
       }
 
@@ -136,7 +137,7 @@ public class GEDCOMXValidator extends BaseValidator {
     }
 
     JsonTypeInfo jsonTypeInfo = rootElementDeclaration.getAnnotation(JsonTypeInfo.class);
-    if (jsonTypeInfo == null || jsonTypeInfo.include() != JsonTypeInfo.As.PROPERTY || jsonTypeInfo.use() != JsonTypeInfo.Id.CUSTOM || !"@type".equals(jsonTypeInfo.property())) {
+    if (jsonTypeInfo == null || jsonTypeInfo.include() != JsonTypeInfo.As.PROPERTY || jsonTypeInfo.use() != JsonTypeInfo.Id.CUSTOM || !XmlTypeIdResolver.TYPE_PROPERTY_NAME.equals(jsonTypeInfo.property())) {
       result.addError(rootElementDeclaration, "Root elements need to be annotated with @JsonTypeInfo(use=JsonTypeInfo.Id.CUSTOM, property=\"@type\")");
     }
 
@@ -309,50 +310,38 @@ public class GEDCOMXValidator extends BaseValidator {
 
     AnyElement anyElement = typeDef.getAnyElement();
     if (anyElement != null) {
+      if (!isInstanceOf(typeDef, SupportsExtensionElements.class.getName())) {
+        result.addError(anyElement, "Type definitions that supply the 'any' element must implement " +
+          SupportsExtensionElements.class.getName() + " so the 'any' elements can be serialized to/from JSON.");
+      }
+
       if (!"extensionElements".equals(anyElement.getSimpleName())) {
         if (!suppressWarning(anyElement, "gedcomx:unconventional_any_element_name")) {
           result.addWarning(anyElement, "The 'any' element might be better named 'extensionElements' to conform to convention.");
         }
       }
 
-      if (!anyElement.isCollectionType()) {
-        result.addError(anyElement, "Properties that are @XmlAnyElement should be collections.");
-      }
-
-      JsonSerialize jsonSerialize = anyElement.getDelegate() instanceof PropertyDeclaration ?
-        ((PropertyDeclaration) anyElement.getDelegate()).getGetter().getAnnotation(JsonSerialize.class) :
-        anyElement.getAnnotation(JsonSerialize.class);
-      if (jsonSerialize == null) {
-        String message = "Properties annotated with @XmlAnyElement should be annotated with @JsonSerialize(using = AnyElementSerializer.class).";
+      JsonIgnore getterIgnore = anyElement.getDelegate() instanceof PropertyDeclaration ?
+        ((PropertyDeclaration) anyElement.getDelegate()).getGetter().getAnnotation(JsonIgnore.class) :
+        anyElement.getAnnotation(JsonIgnore.class);
+      JsonIgnore setterIgnore = anyElement.getDelegate() instanceof PropertyDeclaration ?
+        ((PropertyDeclaration) anyElement.getDelegate()).getGetter().getAnnotation(JsonIgnore.class) :
+        getterIgnore;
+      if (getterIgnore == null || setterIgnore == null) {
+        String message = "Properties annotated with @XmlAnyElement should be annotated with @JsonIgnore.";
         if (anyElement.getDelegate() instanceof PropertyDeclaration) {
-          message += " (And the annotation should be on the getter.)";
+          message += " (On both the getter and the setter.)";
         }
         result.addError(anyElement, message);
       }
-      else if (!AnyElementSerializer.class.isAssignableFrom(jsonSerialize.using())) {
-        result.addError(anyElement, "Properties annotated with @XmlAnyElement should be annotated with @JsonSerialize(using = AnyElementSerializer.class).");
-      }
-      else if (!JsonSerialize.Inclusion.NON_NULL.equals(jsonSerialize.include())) {
-        result.addWarning(anyElement, "@XmlAnyElement not annotated with @JsonSerialize(include = NON_NULL).");
-      }
-
-      JsonDeserialize jsonDeserialize = anyElement.getDelegate() instanceof PropertyDeclaration ?
-        ((PropertyDeclaration) anyElement.getDelegate()).getSetter().getAnnotation(JsonDeserialize.class) :
-        anyElement.getAnnotation(JsonDeserialize.class);
-      if (jsonDeserialize == null) {
-        String message = "Properties annotated with @XmlAnyElement should be annotated with @JsonDeserialize(using = AnyElementDeserializer.class).";
-        if (anyElement.getDelegate() instanceof PropertyDeclaration) {
-          message += " (And the annotation should be on the setter.)";
-        }
-        result.addError(anyElement, message);
-      }
-      else if (!AnyElementDeserializer.class.isAssignableFrom(jsonDeserialize.using())) {
-        result.addError(anyElement, "Properties annotated with @XmlAnyElement should be annotated with @JsonDeserialize(using = AnyElementDeserializer.class).");
-      }
-
     }
 
     if (typeDef.isHasAnyAttribute()) {
+      if (!isInstanceOf(typeDef, SupportsExtensionAttributes.class.getName())) {
+        result.addError(anyElement, "Type definitions that supply the 'any' attribute must implement " +
+          SupportsExtensionAttributes.class.getName() + " so the 'any' attributes can be serialized to/from JSON.");
+      }
+
       MemberDeclaration anyAttribute = null;
       for (PropertyDeclaration prop : typeDef.getProperties()) {
         if (prop.getAnnotation(XmlAnyAttribute.class) != null) {
@@ -370,39 +359,43 @@ public class GEDCOMXValidator extends BaseValidator {
       }
 
       if (anyAttribute != null) {
-        JsonSerialize jsonSerialize = anyAttribute instanceof PropertyDeclaration ?
-          ((PropertyDeclaration)anyAttribute).getGetter().getAnnotation(JsonSerialize.class) :
-          anyAttribute.getAnnotation(JsonSerialize.class);
-        if (jsonSerialize == null) {
-          String message = "Properties annotated with @XmlAnyAttribute should be annotated with @JsonSerialize(using = AnyAttributeSerializer.class).";
-          if (anyAttribute instanceof PropertyDeclaration) {
-            message += " (And the annotation should be on the getter.)";
+        if (!"extensionAttributes".equals(anyAttribute.getSimpleName())) {
+          if (!suppressWarning(anyElement, "gedcomx:unconventional_any_attribute_name")) {
+            result.addWarning(anyElement, "The 'any' attribute might be better named 'extensionAttributes' to conform to convention.");
           }
-          result.addError(anyAttribute, message);
-        }
-        else if (!AnyAttributeSerializer.class.isAssignableFrom(jsonSerialize.using())) {
-          result.addError(anyAttribute, "Properties annotated with @XmlAnyAttribute should be annotated with @JsonSerialize(using = AnyAttributeSerializer.class).");
-        }
-        else if (!JsonSerialize.Inclusion.NON_NULL.equals(jsonSerialize.include())) {
-          result.addWarning(anyAttribute, "@XmlAnyAttribute not annotated with @JsonSerialize(include = NON_NULL).");
         }
 
-        JsonDeserialize jsonDeserialize = anyAttribute instanceof PropertyDeclaration ?
-          ((PropertyDeclaration)anyAttribute).getSetter().getAnnotation(JsonDeserialize.class) :
-          anyAttribute.getAnnotation(JsonDeserialize.class);
-        if (jsonDeserialize == null) {
-          String message = "Properties annotated with @XmlAnyAttribute should be annotated with @JsonDeserialize(using = AnyAttributeDeserializer.class).";
+        JsonIgnore getterIgnore = anyAttribute instanceof PropertyDeclaration ?
+          ((PropertyDeclaration) anyAttribute).getGetter().getAnnotation(JsonIgnore.class) :
+          anyAttribute.getAnnotation(JsonIgnore.class);
+        JsonIgnore setterIgnore = anyAttribute instanceof PropertyDeclaration ?
+          ((PropertyDeclaration) anyAttribute).getGetter().getAnnotation(JsonIgnore.class) :
+          getterIgnore;
+        if (getterIgnore == null || setterIgnore == null) {
+          String message = "Properties annotated with @XmlAnyAttribute should be annotated with @JsonIgnore.";
           if (anyAttribute instanceof PropertyDeclaration) {
-            message += " (And the annotation should be on the setter.)";
+            message += " (On both the getter and the setter.)";
           }
           result.addError(anyAttribute, message);
-        }
-        else if (!AnyAttributeDeserializer.class.isAssignableFrom(jsonDeserialize.using())) {
-          result.addError(anyAttribute, "Properties annotated with @XmlAnyAttribute should be annotated with @JsonDeserialize(using = AnyAttributeDeserializer.class).");
         }
       }
     }
 
     return result;
+  }
+
+  private boolean isInstanceOf(TypeDefinition typeDef, String name) {
+    for (InterfaceType interfaceType : typeDef.getSuperinterfaces()) {
+      if (((DecoratedInterfaceType)TypeMirrorDecorator.decorate(interfaceType)).isInstanceOf(name)) {
+        return true;
+      }
+    }
+
+    ClassType superclass = typeDef.getSuperclass();
+    if (superclass != null && ((DecoratedClassType) TypeMirrorDecorator.decorate(superclass)).isInstanceOf(name)) {
+      return true;
+    }
+
+    return false;
   }
 }

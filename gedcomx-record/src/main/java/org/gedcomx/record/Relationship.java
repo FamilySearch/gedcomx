@@ -39,7 +39,7 @@ import java.util.List;
 /**
  * A recorded relationship.
  */
-@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = "@type")
+@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "Relationship", propOrder = { "persona1", "persona2", "characteristics" } )
 public class Relationship extends GenealogicalResource implements Typed, HasCharacteristics {

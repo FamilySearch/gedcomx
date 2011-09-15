@@ -1,5 +1,6 @@
 package org.gedcomx.metadata.rdf;
 
+import org.gedcomx.rt.CommonNamespaces;
 import org.testng.annotations.Test;
 
 import javax.xml.bind.JAXBContext;
@@ -26,13 +27,13 @@ public class TestRDFDescription {
     meta.setId("id");
     meta.setAbout(URI.create("urn:dataref"));
     meta.setExtensionAttributes(new HashMap<QName, String>());
-    meta.getExtensionAttributes().put(new QName("urn:data", "data"), "custom");
+    meta.getExtensionAttributes().put(new QName(CommonNamespaces.GEDCOMX_COMMON_NAMESPACE, "data"), "custom");
     meta.setExtensionElements(new ArrayList<Object>());
     meta.getExtensionElements().add(new RDFDescriptionSet());
     meta = processThroughXml(meta, RDFDescription.class, JAXBContext.newInstance(RDFDescription.class, RDFDescriptionSet.class));
     assertEquals("id", meta.getId());
     assertEquals(URI.create("urn:dataref"), meta.getAbout());
-    assertEquals("custom", meta.getExtensionAttributes().get(new QName("urn:data", "data")));
+    assertEquals("custom", meta.getExtensionAttributes().get(new QName(CommonNamespaces.GEDCOMX_COMMON_NAMESPACE, "data")));
     assertEquals(1, meta.getExtensionElements().size());
   }
 
@@ -44,13 +45,13 @@ public class TestRDFDescription {
     meta.setId("id");
     meta.setAbout(URI.create("urn:dataref"));
     meta.setExtensionAttributes(new HashMap<QName, String>());
-    meta.getExtensionAttributes().put(new QName("urn:data", "data"), "custom");
+    meta.getExtensionAttributes().put(new QName(CommonNamespaces.GEDCOMX_COMMON_NAMESPACE, "data"), "custom");
     meta.setExtensionElements(new ArrayList<Object>());
     meta.getExtensionElements().add(new RDFDescriptionSet());
     meta = processThroughJson(meta);
     assertEquals("id", meta.getId());
     assertEquals(URI.create("urn:dataref"), meta.getAbout());
-    assertEquals("custom", meta.getExtensionAttributes().get(new QName("urn:data", "data")));
+    assertEquals("custom", meta.getExtensionAttributes().get(new QName(CommonNamespaces.GEDCOMX_COMMON_NAMESPACE, "data")));
     assertEquals(1, meta.getExtensionElements().size());
   }
 
