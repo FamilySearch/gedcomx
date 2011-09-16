@@ -36,10 +36,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.rt.CommonNamespaces;
-import org.gedcomx.rt.SupportsExtensionAttributes;
-import org.gedcomx.rt.SupportsExtensionElements;
-import org.gedcomx.rt.XmlTypeIdResolver;
+import org.gedcomx.rt.*;
 
 import javax.xml.bind.annotation.XmlAnyAttribute;
 import javax.xml.namespace.QName;
@@ -154,6 +151,10 @@ public class GEDCOMXValidator extends BaseValidator {
 
     if (!XmlTypeIdResolver.class.getName().equals(idResolverName)) {
       result.addError(rootElementDeclaration, "Root elements need to be annotated with @org.codehaus.jackson.map.annotate.JsonTypeIdResolver(org.gedcomx.id.XmlTypeIdResolver.class) to specify their JSON type id.");
+    }
+
+    if (namespace.startsWith(CommonNamespaces.GEDCOMX_DOMAIN) && rootElementDeclaration.getAnnotation(JsonExtensionElement.class) == null) {
+      result.addWarning(rootElementDeclaration, "Root elements in the '" + CommonNamespaces.GEDCOMX_DOMAIN + "' namespace should probably be annotated with @JsonExtensionElement.");
     }
 
     return result;

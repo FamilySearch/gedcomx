@@ -20,10 +20,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.common.*;
-import org.gedcomx.rt.CommonNamespaces;
-import org.gedcomx.rt.RDFRange;
-import org.gedcomx.rt.RDFSubPropertyOf;
-import org.gedcomx.rt.XmlTypeIdResolver;
+import org.gedcomx.rt.*;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlElement;
@@ -38,7 +35,8 @@ import java.util.List;
  *
  * @author Ryan Heaton
  */
-@XmlRootElement (name = "family")
+@XmlRootElement
+@JsonExtensionElement
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "Family", propOrder = {"persistentId", "alternateIds", "bibliographicCitation", "parent1", "parent2", "children" } )

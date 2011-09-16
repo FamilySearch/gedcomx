@@ -24,7 +24,9 @@ public class TestNote {
     note.getAttribution().setStatement("note statement");
     Note otherNote = new Note();
     otherNote.setText("note of a note");
-    note.setExtensionElements(Arrays.asList((Object) otherNote));
+    Note otherNote2 = new Note();
+    otherNote2.setText("note2 of a note");
+    note.setExtensionElements(Arrays.asList((Object) otherNote, otherNote2));
     note.setId("id");
     note.setLang("en");
     note.setMediaType("text/plain");
@@ -34,6 +36,7 @@ public class TestNote {
     assertEquals("hello, there", note.getText());
     assertEquals("note statement", note.getAttribution().getStatement());
     assertEquals("note of a note", ((Note) note.getExtensionElements().get(0)).getText());
+    assertEquals("note2 of a note", ((Note) note.getExtensionElements().get(1)).getText());
     assertEquals("id", note.getId());
     assertEquals("en", note.getLang());
     assertEquals("text/plain", note.getMediaType());
@@ -49,7 +52,9 @@ public class TestNote {
     note.getAttribution().setStatement("note statement");
     Note otherNote = new Note();
     otherNote.setText("note of a note");
-    note.setExtensionElements(Arrays.asList((Object) otherNote));
+    Note otherNote2 = new Note();
+    otherNote2.setText("note2 of a note");
+    note.setExtensionElements(Arrays.asList((Object) otherNote, otherNote2));
     note.setId("id");
     note.setLang("en");
     note.setMediaType("text/plain");
@@ -59,6 +64,7 @@ public class TestNote {
     assertEquals("hello, there", note.getText());
     assertEquals("note statement", note.getAttribution().getStatement());
     assertEquals("note of a note", ((Note) note.getExtensionElements().get(0)).getText());
+    assertEquals("note2 of a note", ((Note) note.getExtensionElements().get(1)).getText());
     assertEquals("id", note.getId());
     assertEquals("en", note.getLang());
     assertEquals("text/plain", note.getMediaType());

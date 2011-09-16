@@ -36,6 +36,10 @@
           <td align="right">Namespace:</td>
           <td>${element.namespace}</td>
         </tr>
+        <tr>
+          <td align="right">JSON Name:</td>
+          <td>${jsonExtensionElementName(element)}</td>
+        </tr>
       </table>
 
       <h3>Description</h3>

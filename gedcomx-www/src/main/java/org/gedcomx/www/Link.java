@@ -17,6 +17,7 @@ package org.gedcomx.www;
 
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
+import org.gedcomx.rt.JsonExtensionElement;
 import org.gedcomx.rt.XmlTypeIdResolver;
 
 import javax.xml.XMLConstants;
@@ -32,6 +33,7 @@ import java.net.URI;
  * @author Ryan Heaton
  */
 @XmlRootElement
+@JsonExtensionElement
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 public final class Link {

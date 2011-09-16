@@ -19,6 +19,7 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.conclusion.Person;
 import org.gedcomx.metadata.rdf.RDFDescriptionSet;
+import org.gedcomx.rt.JsonExtensionElement;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.www.Link;
 
@@ -33,6 +34,7 @@ import javax.xml.bind.annotation.XmlType;
  * @author Ryan Heaton
  */
 @XmlRootElement(name = "person")
+@JsonExtensionElement
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "PersonWWW", propOrder = {"person", "metadata"})

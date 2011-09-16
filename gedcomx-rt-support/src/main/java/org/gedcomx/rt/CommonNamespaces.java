@@ -71,6 +71,8 @@ public class CommonNamespaces {
 
   private CommonNamespaces() {}
 
+  public static final String GEDCOMX_DOMAIN = "http://gedcomx.org";
+
   public static final String GEDCOMX_COMMON_NAMESPACE = "http://gedcomx.org/";
   public static final String GEDCOMX_COMMON_XML_MEDIA_TYPE = "application/x-gedcom+xml";
   public static final String GEDCOMX_COMMON_JSON_MEDIA_TYPE = "application/x-gedcom+json";

@@ -32,6 +32,7 @@ import java.util.List;
  * @author Ryan Heaton
  */
 @XmlRootElement ( name = "RDF" )
+@JsonExtensionElement
 @JsonTypeInfo ( use = JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME )
 @JsonTypeIdResolver ( XmlTypeIdResolver.class )
 @XmlType (name = "RDF")

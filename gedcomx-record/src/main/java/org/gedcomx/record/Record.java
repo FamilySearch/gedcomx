@@ -23,10 +23,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.common.*;
-import org.gedcomx.rt.CommonNamespaces;
-import org.gedcomx.rt.RDFRange;
-import org.gedcomx.rt.RDFSubPropertyOf;
-import org.gedcomx.rt.XmlTypeIdResolver;
+import org.gedcomx.rt.*;
 import org.gedcomx.types.RecordType;
 import org.gedcomx.types.Typed;
 
@@ -39,6 +36,7 @@ import java.util.List;
  * A record.
  */
 @XmlRootElement
+@JsonExtensionElement
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "Record", propOrder = { "persistentId", "alternateIds", "bibliographicCitation", "personas", "events", "relationships", "fields" } )

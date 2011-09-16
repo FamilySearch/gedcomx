@@ -15,11 +15,20 @@
  */
 package org.gedcomx.build.enunciate;
 
+import com.sun.mirror.type.ClassType;
+import com.sun.mirror.type.InterfaceType;
+import net.sf.jelly.apt.decorations.TypeMirrorDecorator;
+import net.sf.jelly.apt.decorations.type.DecoratedClassType;
+import net.sf.jelly.apt.decorations.type.DecoratedInterfaceType;
 import org.codehaus.enunciate.apt.EnunciateFreemarkerModel;
 import org.codehaus.enunciate.contract.jaxb.TypeDefinition;
+import org.codehaus.enunciate.modules.docs.WhateverNode;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
+import org.codehaus.jackson.node.ArrayNode;
 import org.codehaus.jackson.node.JsonNodeFactory;
 import org.codehaus.jackson.node.ObjectNode;
+import org.gedcomx.rt.SupportsExtensionAttributes;
+import org.gedcomx.rt.SupportsExtensionElements;
 import org.gedcomx.rt.XmlTypeIdResolver;
 
 /**
@@ -38,7 +47,36 @@ public class GenerateExampleJsonMethod extends org.codehaus.enunciate.modules.do
       }
 
       super.generateExampleJson(type, jsonNode, maxDepth);
+
+      if (isInstanceOf(type, SupportsExtensionAttributes.class.getName())) {
+        jsonNode.put("http://extension/attribute", JsonNodeFactory.instance.textNode("..."));
+      }
+
+      if (isInstanceOf(type, SupportsExtensionElements.class.getName())) {
+        ArrayNode exampleValues = JsonNodeFactory.instance.arrayNode();
+        exampleValues.add(WhateverNode.instance);
+        exampleValues.add(WhateverNode.instance);
+        jsonNode.put("http://extension/element", exampleValues);
+        exampleValues = JsonNodeFactory.instance.arrayNode();
+        exampleValues.add(WhateverNode.instance);
+        exampleValues.add(WhateverNode.instance);
+        jsonNode.put("extension", exampleValues);
+      }
     }
   }
 
+  private boolean isInstanceOf(TypeDefinition typeDef, String name) {
+    for (InterfaceType interfaceType : typeDef.getSuperinterfaces()) {
+      if (((DecoratedInterfaceType) TypeMirrorDecorator.decorate(interfaceType)).isInstanceOf(name)) {
+        return true;
+      }
+    }
+
+    ClassType superclass = typeDef.getSuperclass();
+    if (superclass != null && ((DecoratedClassType) TypeMirrorDecorator.decorate(superclass)).isInstanceOf(name)) {
+      return true;
+    }
+
+    return false;
+  }
 }

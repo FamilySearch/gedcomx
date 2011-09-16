@@ -325,6 +325,7 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
       model.setVariable("generateExampleJson", new GenerateExampleJsonMethod(model));
       model.setVariable("generateExampleXml", new GenerateExampleXmlMethod(null, model));
       model.setVariable("typeName", new TypeNameMethod(model.getNamespacesToPrefixes()));
+      model.setVariable("jsonExtensionElementName", new JsonExtensionElementNameMethod());
       model.put("rdfschema", this.rdfProcessor.getRdfSchema());
       try {
         for (SchemaInfo schemaInfo : model.getNamespacesToSchemas().values()) {

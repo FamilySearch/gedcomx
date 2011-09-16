@@ -17,6 +17,7 @@ package org.gedcomx.rt;
 
 import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.JsonProcessingException;
+import org.codehaus.jackson.JsonToken;
 import org.codehaus.jackson.map.DeserializationContext;
 import org.codehaus.jackson.map.deser.BeanDeserializer;
 import org.codehaus.jackson.map.jsontype.impl.AsPropertyTypeDeserializer;
@@ -67,9 +68,29 @@ public class ExtensibleObjectDeserializer extends BeanDeserializer {
           break;
         }
       }
+
+      if (qname == null && propName.indexOf('#') > 0) {
+        //well, it wasn't a known namespace; let's try separating ns from local part with a #
+        int hashIndex = propName.indexOf('#');
+        String nsURI = propName.substring(0, hashIndex);
+        String localPart = propName.substring(hashIndex + 1);
+        if (!"".equals(localPart)) {
+          qname = new QName(nsURI, localPart);
+        }
+      }
+
+      if (qname == null && propName.lastIndexOf('/') > 0) {
+        //still haven't found it; let's try separating ns from local part with the last '/'
+        int hashIndex = propName.lastIndexOf('/');
+        String nsURI = propName.substring(0, hashIndex);
+        String localPart = propName.substring(hashIndex + 1);
+        if (!"".equals(localPart)) {
+          qname = new QName(nsURI, localPart);
+        }
+      }
     }
 
-    if (qname == null && jp.getCurrentToken().isScalarValue()) {
+    if (qname == null) {
       qname = new QName("", propName);
     }
 
@@ -77,11 +98,24 @@ public class ExtensibleObjectDeserializer extends BeanDeserializer {
       ((SupportsExtensionAttributes) beanOrClass).addExtensionAttribute(qname, jp.getText());
     }
     else if (beanOrClass instanceof SupportsExtensionElements) {
-      Object element = this.typeDeserializer.deserializeTypedFromAny(jp, ctxt);
-      if (element != null && !element.getClass().isAnnotationPresent(XmlRootElement.class)) {
-        element = new JAXBElement(qname, element.getClass(), element);
+      if (jp.getCurrentToken() == JsonToken.START_ARRAY) {
+        jp.nextToken();
+        while (jp.getCurrentToken() != JsonToken.END_ARRAY) {
+          Object element = this.typeDeserializer.deserializeTypedFromAny(jp, ctxt);
+          if (element != null && !element.getClass().isAnnotationPresent(XmlRootElement.class)) {
+            element = new JAXBElement(qname, element.getClass(), element);
+          }
+          ((SupportsExtensionElements) beanOrClass).addExtensionElement(element);
+          jp.nextToken();
+        }
       }
-      ((SupportsExtensionElements) beanOrClass).addExtensionElement(element);
+      else {
+        Object element = this.typeDeserializer.deserializeTypedFromAny(jp, ctxt);
+        if (element != null && !element.getClass().isAnnotationPresent(XmlRootElement.class)) {
+          element = new JAXBElement(qname, element.getClass(), element);
+        }
+        ((SupportsExtensionElements) beanOrClass).addExtensionElement(element);
+      }
     }
     else {
       super.handleUnknownProperty(jp, ctxt, beanOrClass, propName);

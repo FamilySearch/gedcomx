@@ -23,12 +23,9 @@ import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.common.*;
-import org.gedcomx.rt.RDFRange;
-import org.gedcomx.rt.RDFSubPropertyOf;
-import org.gedcomx.rt.XmlTypeIdResolver;
+import org.gedcomx.rt.*;
 import org.gedcomx.types.RelationshipType;
 import org.gedcomx.types.Typed;
-import org.gedcomx.rt.CommonNamespaces;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.*;
@@ -41,6 +38,7 @@ import java.util.List;
  * @author Ryan Heaton
  */
 @XmlRootElement
+@JsonExtensionElement
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "Relationship", propOrder = {"persistentId", "alternateIds", "bibliographicCitation", "person1", "person2", "events", "characteristics" } )

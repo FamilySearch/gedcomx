@@ -31,6 +31,8 @@ import javax.xml.bind.annotation.XmlSchema;
 import javax.xml.namespace.QName;
 import java.beans.Introspector;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -83,6 +85,7 @@ public class ExtensibleObjectSerializer extends BeanSerializer {
   public void serializeExtensionElements(SupportsExtensionElements value, JsonGenerator jgen, SerializerProvider provider) throws IOException, JsonProcessingException {
     List<Object> extensionElements = value.getExtensionElements();
     if (extensionElements != null) {
+      Map<String, List<Object>> extensionProperties = new HashMap<String, List<Object>>();
       for (Object element : extensionElements) {
         if (element != null) {
           QName name;
@@ -93,6 +96,18 @@ public class ExtensibleObjectSerializer extends BeanSerializer {
           else if (element instanceof JAXBElement) {
             name = ((JAXBElement) element).getName();
             element = ((JAXBElement) element).getValue();
+          }
+          else if (element.getClass().isAnnotationPresent(JsonExtensionElement.class)) {
+            //support custom json element name
+            JsonExtensionElement ext = element.getClass().getAnnotation(JsonExtensionElement.class);
+            String extName = ext.name();
+            if ("##default".equals(extName) && element.getClass().isAnnotationPresent(XmlRootElement.class)) {
+              extName = element.getClass().getAnnotation(XmlRootElement.class).name();
+            }
+            if ("##default".equals(extName)) {
+              extName = Introspector.decapitalize(element.getClass().getSimpleName());
+            }
+            name = new QName(ext.namespace(), extName);
           }
           else {
             XmlRootElement rootElement = element.getClass().getAnnotation(XmlRootElement.class);
@@ -120,13 +135,25 @@ public class ExtensibleObjectSerializer extends BeanSerializer {
             }
           }
 
-          StringBuilder builder = new StringBuilder(name.getNamespaceURI());
+          String fullname = name.getNamespaceURI();
           if (XMLConstants.XML_NS_URI.equals(name.getNamespaceURI())) {
-            builder.append("#");
+            fullname += "#";
           }
-          builder.append(name.getLocalPart());
+          fullname += name.getLocalPart();
 
-          jgen.writeFieldName(builder.toString());
+          List<Object> propList = extensionProperties.get(fullname);
+          if (propList == null) {
+            propList = new ArrayList<Object>();
+            extensionProperties.put(fullname, propList);
+          }
+
+          propList.add(element);
+        }
+      }
+
+      for (Map.Entry<String, List<Object>> prop : extensionProperties.entrySet()) {
+        jgen.writeArrayFieldStart(prop.getKey());
+        for (Object element : prop.getValue()) {
           if (element instanceof Element) {
             serializeElement((Element) element, jgen);
           }
@@ -134,6 +161,7 @@ public class ExtensibleObjectSerializer extends BeanSerializer {
             provider.findTypedValueSerializer(element.getClass(), true, null).serialize(element, jgen, provider);
           }
         }
+        jgen.writeEndArray();
       }
     }
   }

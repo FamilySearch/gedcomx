@@ -15,30 +15,22 @@
  */
 package org.gedcomx.rt;
 
-import org.codehaus.jackson.Version;
-import org.codehaus.jackson.map.*;
+import org.codehaus.jackson.map.JsonSerializer;
+import org.codehaus.jackson.map.SerializationConfig;
+import org.codehaus.jackson.map.introspect.BasicBeanDescription;
+import org.codehaus.jackson.map.ser.BeanSerializer;
+import org.codehaus.jackson.map.ser.BeanSerializerModifier;
 
 /**
- * GEDCOM Jackson module for Jackson customizations.
+ * Modifications for GEDCOM bean serializers.
  *
  * @author Ryan Heaton
  */
-public class GedcomJacksonModule extends Module {
+public class GedcomBeanSerializerModifier extends BeanSerializerModifier {
 
   @Override
-  public String getModuleName() {
-    return "gedcomx";
-  }
-
-  @Override
-  public Version version() {
-    return new Version(1,0,0,null);
-  }
-
-  @Override
-  public void setupModule(SetupContext context) {
-    context.addBeanSerializerModifier(new GedcomBeanSerializerModifier());
-    context.addBeanDeserializerModifier(new GedcomBeanDeserializerModifier());
+  public JsonSerializer<?> modifySerializer(SerializationConfig config, BasicBeanDescription beanDesc, JsonSerializer<?> serializer) {
+    return (serializer instanceof BeanSerializer) ? new ExtensibleObjectSerializer((BeanSerializer) serializer) : serializer;
   }
 
 }
