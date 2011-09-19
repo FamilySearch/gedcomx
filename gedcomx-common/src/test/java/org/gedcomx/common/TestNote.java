@@ -29,7 +29,6 @@ public class TestNote {
     note.setExtensionElements(Arrays.asList((Object) otherNote, otherNote2));
     note.setId("id");
     note.setLang("en");
-    note.setMediaType("text/plain");
 
     note = processThroughXml(note);
 
@@ -39,7 +38,6 @@ public class TestNote {
     assertEquals("note2 of a note", ((Note) note.getExtensionElements().get(1)).getText());
     assertEquals("id", note.getId());
     assertEquals("en", note.getLang());
-    assertEquals("text/plain", note.getMediaType());
   }
 
   /**
@@ -57,7 +55,6 @@ public class TestNote {
     note.setExtensionElements(Arrays.asList((Object) otherNote, otherNote2));
     note.setId("id");
     note.setLang("en");
-    note.setMediaType("text/plain");
 
     note = processThroughJson(note);
 
@@ -67,7 +64,6 @@ public class TestNote {
     assertEquals("note2 of a note", ((Note) note.getExtensionElements().get(1)).getText());
     assertEquals("id", note.getId());
     assertEquals("en", note.getLang());
-    assertEquals("text/plain", note.getMediaType());
   }
 
 }

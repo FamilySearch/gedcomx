@@ -35,12 +35,11 @@ import java.util.List;
 @JsonExtensionElement
 @JsonTypeInfo ( use = JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType ( name = "Note", propOrder = {"mediaType", "text", "attribution", "extensionElements" } )
+@XmlType ( name = "Note", propOrder = { "text", "attribution", "extensionElements" } )
 public final class Note implements Attributable, SupportsExtensionElements {
 
   private String id;
   private String lang;
-  private String mediaType;
   private String text;
   private Attribution attribution;
   private List<Object> extensionElements;
@@ -82,24 +81,6 @@ public final class Note implements Attributable, SupportsExtensionElements {
    */
   public void setLang(String lang) {
     this.lang = lang;
-  }
-
-  /**
-   * Media type (i.e. MIME type) of the text of the note.
-   *
-   * @return Media type (i.e. MIME type) of the text of the note.
-   */
-  public String getMediaType() {
-    return mediaType;
-  }
-
-  /**
-   * Media type (i.e. MIME type) of the text of the note.
-   *
-   * @param mediaType Media type (i.e. MIME type) of the text of the note.
-   */
-  public void setMediaType(String mediaType) {
-    this.mediaType = mediaType;
   }
 
   /**
