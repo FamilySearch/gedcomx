@@ -127,7 +127,7 @@ public class TestRecord {
     persona.setPrincipal(true);
     ArrayList<EventRole> eventRoles = new ArrayList<EventRole>();
     EventRole eventRole = new EventRole();
-    eventRole.setDescription("event role description");
+    eventRole.setOriginal("event role description");
     eventRole.setAttribution(new Attribution());
     eventRole.getAttribution().setStatement("event role explanation");
     eventRole.setPrincipal(false);
@@ -269,7 +269,7 @@ public class TestRecord {
     assertTrue(persona.getPrincipal());
     assertEquals(1, persona.getEventRoles().size());
     EventRole eventRole = persona.getEventRoles().get(0);
-    assertEquals("event role description", eventRole.getDescription());
+    assertEquals("event role description", eventRole.getOriginal());
     assertFalse(eventRole.getPrincipal());
     assertEquals("#" + event.getId(), eventRole.getEvent().toString());
 
