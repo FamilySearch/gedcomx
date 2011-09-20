@@ -17,22 +17,19 @@ package org.gedcomx.conclusion;
 
 import org.codehaus.enunciate.ClientName;
 import org.codehaus.enunciate.XmlQNameEnumUtil;
-import org.codehaus.jackson.annotate.JsonIgnore
-;
-import org.codehaus.enunciate.qname.XmlQNameEnumRef;
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.rt.CommonNamespaces;
 import org.gedcomx.rt.RDFSubClassOf;
 import org.gedcomx.rt.XmlTypeIdResolver;
+import org.gedcomx.types.EventType;
+import org.gedcomx.types.TypeReference;
 import org.gedcomx.types.Typed;
 
-import javax.xml.XMLConstants;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
-import java.net.URI;
 
 /**
  * An event conclusion.
@@ -42,11 +39,11 @@ import java.net.URI;
 @ClientName ("EventInfo")
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType ( name = "Event" )
+@XmlType ( name = "Event", propOrder = {"type", "date", "place"} )
 @RDFSubClassOf ( CommonNamespaces.DUBLIN_CORE_TYPE_NAMESPACE + "Event" )
-public class Event extends Conclusion implements Typed, Spatial, Temporal {
+public class Event extends Conclusion implements Typed<EventType>, Spatial, Temporal {
 
-  private URI type;
+  private TypeReference<EventType> type;
   private Date date;
   private Place place;
 
@@ -55,10 +52,8 @@ public class Event extends Conclusion implements Typed, Spatial, Temporal {
    *
    * @return The type of the event.
    */
-  @XmlAttribute (namespace = CommonNamespaces.GEDCOMX_COMMON_NAMESPACE)
-  @XmlQNameEnumRef ( org.gedcomx.types.EventType.class)
-  @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
-  public URI getType() {
+  @XmlElement (namespace = CommonNamespaces.RDF_NAMESPACE)
+  public TypeReference<EventType> getType() {
     return type;
   }
 
@@ -67,7 +62,7 @@ public class Event extends Conclusion implements Typed, Spatial, Temporal {
    *
    * @param type The type of the event.
    */
-  public void setType(URI type) {
+  public void setType(TypeReference<EventType> type) {
     this.type = type;
   }
 
@@ -79,7 +74,7 @@ public class Event extends Conclusion implements Typed, Spatial, Temporal {
   @XmlTransient
   @JsonIgnore
   public org.gedcomx.types.EventType getKnownType() {
-    return XmlQNameEnumUtil.fromURI(getType(), org.gedcomx.types.EventType.class);
+    return getType() == null ? null : XmlQNameEnumUtil.fromURI(getType().getType(), org.gedcomx.types.EventType.class);
   }
 
   /**
@@ -89,7 +84,7 @@ public class Event extends Conclusion implements Typed, Spatial, Temporal {
    */
   @JsonIgnore
   public void setKnownType(org.gedcomx.types.EventType knownType) {
-    setType(XmlQNameEnumUtil.toURI(knownType));
+    setType(knownType == null ? null : new TypeReference<EventType>(knownType));
   }
 
   /**

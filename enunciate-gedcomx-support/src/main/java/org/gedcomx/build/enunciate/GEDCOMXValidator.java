@@ -190,8 +190,8 @@ public class GEDCOMXValidator extends BaseValidator {
           result.addError(attribute, "Accessors of type 'java.net.URI' should of type xs:anyURI. Please annotate the attribute with @XmlSchemaType(name = \"anyURI\", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)");
         }
 
-        if ("type".equals(attribute.getName()) && isURI && !CommonNamespaces.GEDCOMX_COMMON_NAMESPACE.equals(namespace)) {
-          result.addError(attribute, "The 'type' attribute should be defined in the '" + CommonNamespaces.GEDCOMX_COMMON_NAMESPACE + "' namespace.");
+        if ("type".equals(attribute.getName())) {
+          result.addError(attribute, "Types should be specified with as an rdf:type reference, which is an element named 'type' in the rdf namespace with an rdf:resource attribute.");
         }
 
         if ("id".equalsIgnoreCase(attribute.getName())) {
@@ -241,8 +241,8 @@ public class GEDCOMXValidator extends BaseValidator {
             result.addError(choice, "Entity links should be make with an attribute named 'href'. You probably need to apply @XmlAttribute.");
           }
 
-          if ("type".equals(choice.getName()) && isURI) {
-            result.addError(choice, "Types should be specified with a 'gx:type' attribute. You probably need to apply @XmlAttribute(namespace='" + CommonNamespaces.GEDCOMX_COMMON_NAMESPACE + "')");
+          if ("type".equals(choice.getName()) && !isTypeReference(choice)) {
+            result.addError(choice, "Types should be specified with as an rdf:type reference, which is an element named 'type' in the rdf namespace with an rdf:resource attribute.");
           }
 
           if ("id".equals(choice.getName()) && !choice.isXmlID()) {
@@ -383,6 +383,22 @@ public class GEDCOMXValidator extends BaseValidator {
     }
 
     return result;
+  }
+
+  private boolean isTypeReference(Element choice) {
+    if (CommonNamespaces.RDF_NAMESPACE.equals(choice.getNamespace())) {
+      XmlType baseType = choice.getBaseType();
+      if (baseType instanceof XmlClassType) {
+        TypeDefinition typeDefinition = ((XmlClassType) baseType).getTypeDefinition();
+        for (Attribute attribute : typeDefinition.getAttributes()) {
+          if ("resource".equals(attribute.getName()) && CommonNamespaces.RDF_NAMESPACE.equals(attribute.getNamespace())) {
+            return true;
+          }
+        }
+      }
+    }
+
+    return false;
   }
 
   private boolean isInstanceOf(TypeDefinition typeDef, String name) {

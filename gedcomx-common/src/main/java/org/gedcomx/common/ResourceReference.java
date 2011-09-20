@@ -17,7 +17,6 @@ package org.gedcomx.common;
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.enunciate.doc.DocumentationExample;
-import org.codehaus.enunciate.qname.XmlQNameEnumRef;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
@@ -27,6 +26,7 @@ import org.gedcomx.rt.SupportsExtensionElements;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.ResourceFragmentParameter;
 import org.gedcomx.types.ResourceType;
+import org.gedcomx.types.TypeReference;
 import org.gedcomx.types.Typed;
 
 import javax.xml.XMLConstants;
@@ -47,10 +47,10 @@ import java.util.Map;
 @JsonTypeInfo ( use = JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver ( XmlTypeIdResolver.class )
 @XmlSeeAlso(ResourceFragmentParameter.class)
-public class ResourceReference implements Typed, SupportsExtensionAttributes, SupportsExtensionElements {
+public class ResourceReference implements Typed<ResourceType>, SupportsExtensionAttributes, SupportsExtensionElements {
 
   private String id;
-  private URI type;
+  private TypeReference<ResourceType> type;
   private URI resource;
   private Map<QName, String> extensionAttributes;
   private List<Object> extensionElements;
@@ -85,10 +85,8 @@ public class ResourceReference implements Typed, SupportsExtensionAttributes, Su
    *
    * @return The type of the resource being referenced.
    */
-  @XmlAttribute (namespace = CommonNamespaces.GEDCOMX_COMMON_NAMESPACE)
-  @XmlQNameEnumRef (ResourceType.class)
-  @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
-  public URI getType() {
+  @XmlElement (namespace = CommonNamespaces.RDF_NAMESPACE)
+  public TypeReference<ResourceType> getType() {
     return type;
   }
 
@@ -97,8 +95,29 @@ public class ResourceReference implements Typed, SupportsExtensionAttributes, Su
    *
    * @param type The type of the resource being referenced.
    */
-  public void setType(URI type) {
+  public void setType(TypeReference<ResourceType> type) {
     this.type = type;
+  }
+
+  /**
+   * The enum referencing the known type of the resource being referenced, or {@link org.gedcomx.types.ResourceType#OTHER} if not known.
+   *
+   * @return The enum referencing the known type of the source reference, or {@link org.gedcomx.types.ResourceType#OTHER} if not known.
+   */
+  @XmlTransient
+  @JsonIgnore
+  public ResourceType getKnownType() {
+    return getType() == null ? null : XmlQNameEnumUtil.fromURI(getType().getType(), ResourceType.class);
+  }
+
+  /**
+   * Set the type of this source reference from an enumeration of known source reference types.
+   *
+   * @param knownType The source reference type.
+   */
+  @JsonIgnore
+  public void setKnownType(ResourceType knownType) {
+    setType(knownType == null ? null : new TypeReference<ResourceType>(knownType));
   }
 
   /**
@@ -233,24 +252,4 @@ public class ResourceReference implements Typed, SupportsExtensionAttributes, Su
     return ext;
   }
 
-  /**
-   * The enum referencing the known type of the resource being referenced, or {@link org.gedcomx.types.ResourceType#OTHER} if not known.
-   *
-   * @return The enum referencing the known type of the source reference, or {@link org.gedcomx.types.ResourceType#OTHER} if not known.
-   */
-  @XmlTransient
-  @JsonIgnore
-  public ResourceType getKnownType() {
-    return XmlQNameEnumUtil.fromURI(getType(), ResourceType.class);
-  }
-
-  /**
-   * Set the type of this source reference from an enumeration of known source reference types.
-   *
-   * @param knownType The source reference type.
-   */
-  @JsonIgnore
-  public void setKnownType(ResourceType knownType) {
-    setType(XmlQNameEnumUtil.toURI(knownType));
-  }
 }

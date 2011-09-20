@@ -17,19 +17,19 @@ package org.gedcomx.conclusion;
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.enunciate.json.JsonName;
-import org.codehaus.enunciate.qname.XmlQNameEnumRef;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
+import org.gedcomx.rt.CommonNamespaces;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.NameType;
+import org.gedcomx.types.TypeReference;
 import org.gedcomx.types.Typed;
-import org.gedcomx.rt.CommonNamespaces;
 
-import javax.xml.XMLConstants;
-import javax.xml.bind.annotation.*;
-import java.net.URI;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 import java.util.List;
 
 /**
@@ -39,10 +39,10 @@ import java.util.List;
  */
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType ( name = "Name", propOrder = { "primaryForm", "alternateForms" } )
-public class Name extends Conclusion implements Typed {
+@XmlType ( name = "Name", propOrder = { "type", "primaryForm", "alternateForms" } )
+public class Name extends Conclusion implements Typed<NameType> {
 
-  private URI type;
+  private TypeReference<NameType> type;
   private NameForm primaryForm;
   private List<NameForm> alternateForms;
 
@@ -51,10 +51,8 @@ public class Name extends Conclusion implements Typed {
    *
    * @return The type of the name.
    */
-  @XmlAttribute (namespace = CommonNamespaces.GEDCOMX_COMMON_NAMESPACE)
-  @XmlQNameEnumRef (NameType.class)
-  @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
-  public URI getType() {
+  @XmlElement (namespace = CommonNamespaces.RDF_NAMESPACE)
+  public TypeReference<NameType> getType() {
     return type;
   }
 
@@ -63,7 +61,7 @@ public class Name extends Conclusion implements Typed {
    *
    * @param type The type of the name.
    */
-  public void setType(URI type) {
+  public void setType(TypeReference<NameType> type) {
     this.type = type;
   }
 
@@ -75,7 +73,7 @@ public class Name extends Conclusion implements Typed {
   @XmlTransient
   @JsonIgnore
   public NameType getKnownType() {
-    return XmlQNameEnumUtil.fromURI(getType(), NameType.class);
+    return getType() == null ? null : XmlQNameEnumUtil.fromURI(getType().getType(), NameType.class);
   }
 
   /**
@@ -85,7 +83,7 @@ public class Name extends Conclusion implements Typed {
    */
   @JsonIgnore
   public void setKnownType(NameType knownType) {
-    setType(XmlQNameEnumUtil.toURI(knownType));
+    setType(knownType == null ? null : new TypeReference<NameType>(knownType));
   }
 
   /**

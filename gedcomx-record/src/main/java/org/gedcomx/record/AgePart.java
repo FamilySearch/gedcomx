@@ -15,21 +15,18 @@
  */
 package org.gedcomx.record;
 
-import org.codehaus.enunciate.qname.XmlQNameEnumRef;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.rt.CommonNamespaces;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.AgePartType;
+import org.gedcomx.types.TypeReference;
 import org.gedcomx.types.Typed;
 
-import javax.xml.XMLConstants;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
-import java.net.URI;
 
 /**
  * A part of an age field.
@@ -39,19 +36,17 @@ import java.net.URI;
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "AgePart" )
-public class AgePart extends Field implements Typed {
+public class AgePart extends Field implements Typed<AgePartType> {
 
-  private URI type;
+  private TypeReference<AgePartType> type;
 
   /**
    * The age part type.
    *
    * @return The age part type.
    */
-  @XmlAttribute (namespace = CommonNamespaces.GEDCOMX_COMMON_NAMESPACE)
-  @XmlQNameEnumRef(AgePartType.class)
-  @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
-  public URI getType() {
+  @XmlElement (namespace = CommonNamespaces.RDF_NAMESPACE)
+  public TypeReference<AgePartType> getType() {
     return type;
   }
 
@@ -60,7 +55,7 @@ public class AgePart extends Field implements Typed {
    *
    * @param type The age part type.
    */
-  public void setType(URI type) {
+  public void setType(TypeReference<AgePartType> type) {
     this.type = type;
   }
 
@@ -72,7 +67,7 @@ public class AgePart extends Field implements Typed {
   @XmlTransient
   @JsonIgnore
   public AgePartType getKnownType() {
-    return org.codehaus.enunciate.XmlQNameEnumUtil.fromURI(getType(), AgePartType.class);
+    return getType() == null ? null : org.codehaus.enunciate.XmlQNameEnumUtil.fromURI(getType().getType(), AgePartType.class);
   }
 
   /**
@@ -82,7 +77,7 @@ public class AgePart extends Field implements Typed {
    */
   @JsonIgnore
   public void setKnownType(AgePartType type) {
-    setType(org.codehaus.enunciate.XmlQNameEnumUtil.toURI(type));
+    setType(type == null ? null : new TypeReference<AgePartType>(type));
   }
 
 }

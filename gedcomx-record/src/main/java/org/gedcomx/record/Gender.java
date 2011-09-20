@@ -15,22 +15,18 @@
  */
 package org.gedcomx.record;
 
-import org.codehaus.enunciate.qname.XmlQNameEnumRef;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.rt.CommonNamespaces;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.GenderType;
-import org.gedcomx.types.NameType;
+import org.gedcomx.types.TypeReference;
 import org.gedcomx.types.Typed;
 
-import javax.xml.XMLConstants;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
-import java.net.URI;
 
 /**
  * A gender field.
@@ -38,19 +34,17 @@ import java.net.URI;
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "Gender" )
-public class Gender extends Field implements Typed {
+public class Gender extends Field implements Typed<GenderType> {
 
-  private URI type;
+  private TypeReference<GenderType> type;
 
   /**
    * The type of the gender.
    *
    * @return The type of the gender.
    */
-  @XmlAttribute (namespace = CommonNamespaces.GEDCOMX_COMMON_NAMESPACE)
-  @XmlQNameEnumRef (NameType.class)
-  @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
-  public URI getType() {
+  @XmlElement (namespace = CommonNamespaces.RDF_NAMESPACE)
+  public TypeReference<GenderType> getType() {
     return type;
   }
 
@@ -59,7 +53,7 @@ public class Gender extends Field implements Typed {
    *
    * @param type The type of the gender.
    */
-  public void setType(URI type) {
+  public void setType(TypeReference<GenderType> type) {
     this.type = type;
   }
 
@@ -71,7 +65,7 @@ public class Gender extends Field implements Typed {
   @XmlTransient
   @JsonIgnore
   public GenderType getKnownType() {
-    return org.codehaus.enunciate.XmlQNameEnumUtil.fromURI(getType(), GenderType.class);
+    return getType() == null ? null : org.codehaus.enunciate.XmlQNameEnumUtil.fromURI(getType().getType(), GenderType.class);
   }
 
   /**
@@ -81,6 +75,6 @@ public class Gender extends Field implements Typed {
    */
   @JsonIgnore
   public void setKnownType(GenderType type) {
-    this.type = org.codehaus.enunciate.XmlQNameEnumUtil.toURI(type);
+    setType(type == null ? null : new TypeReference<GenderType>(type));
   }
 }

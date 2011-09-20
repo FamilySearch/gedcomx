@@ -16,21 +16,18 @@
 package org.gedcomx.record;
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
-import org.codehaus.enunciate.qname.XmlQNameEnumRef;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.rt.CommonNamespaces;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.DatePartType;
+import org.gedcomx.types.TypeReference;
 import org.gedcomx.types.Typed;
 
-import javax.xml.XMLConstants;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
-import java.net.URI;
 
 /**
  * A date part field.
@@ -38,19 +35,17 @@ import java.net.URI;
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "DatePart" )
-public class DatePart extends Field implements Typed {
+public class DatePart extends Field implements Typed<DatePartType> {
 
-  private URI type;
+  private TypeReference<DatePartType> type;
 
   /**
    * The date part type.
    *
    * @return The date part type.
    */
-  @XmlAttribute (namespace = CommonNamespaces.GEDCOMX_COMMON_NAMESPACE)
-  @XmlQNameEnumRef(DatePartType.class)
-  @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
-  public URI getType() {
+  @XmlElement (namespace = CommonNamespaces.RDF_NAMESPACE)
+  public TypeReference<DatePartType> getType() {
     return type;
   }
 
@@ -59,7 +54,7 @@ public class DatePart extends Field implements Typed {
    *
    * @param type The date part type.
    */
-  public void setType(URI type) {
+  public void setType(TypeReference<DatePartType> type) {
     this.type = type;
   }
 
@@ -71,7 +66,7 @@ public class DatePart extends Field implements Typed {
   @XmlTransient
   @JsonIgnore
   public DatePartType getKnownType() {
-    return XmlQNameEnumUtil.fromURI(getType(), DatePartType.class);
+    return getType() == null ? null : XmlQNameEnumUtil.fromURI(getType().getType(), DatePartType.class);
   }
 
   /**
@@ -81,6 +76,6 @@ public class DatePart extends Field implements Typed {
    */
   @JsonIgnore
   public void setKnownType(DatePartType knownType) {
-    setType(XmlQNameEnumUtil.toURI(knownType));
+    setType(knownType == null ? null : new TypeReference<DatePartType>(knownType));
   }
 }

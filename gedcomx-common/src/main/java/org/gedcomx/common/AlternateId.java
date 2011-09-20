@@ -16,15 +16,16 @@
 package org.gedcomx.common;
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
-import org.codehaus.enunciate.qname.XmlQNameEnumRef;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.gedcomx.rt.CommonNamespaces;
 import org.gedcomx.types.AlternateIdType;
+import org.gedcomx.types.TypeReference;
 import org.gedcomx.types.Typed;
 
-import javax.xml.XMLConstants;
-import javax.xml.bind.annotation.*;
-import java.net.URI;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.XmlValue;
 
 /**
  * An alternate id for an entity, such as the id in another system or
@@ -32,18 +33,18 @@ import java.net.URI;
  *
  * @author Ryan Heaton
  */
-@XmlType ( name = "AlternateId" )
-public final class AlternateId implements Typed {
+@XmlType ( name = "AlternateId", propOrder = {"type", "value"})
+public final class AlternateId implements Typed<AlternateIdType> {
 
   private String value;
-  private URI type;
+  private TypeReference<AlternateIdType> type;
 
   /**
    * The id value.
    *
    * @return The id value.
    */
-  @XmlValue
+  @XmlElement ( name = "value", namespace = CommonNamespaces.RDF_NAMESPACE )
   public String getValue() {
     return value;
   }
@@ -62,10 +63,8 @@ public final class AlternateId implements Typed {
    *
    * @return The type of the id.
    */
-  @XmlAttribute (namespace = CommonNamespaces.GEDCOMX_COMMON_NAMESPACE)
-  @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
-  @XmlQNameEnumRef(AlternateIdType.class)
-  public URI getType() {
+  @XmlElement (namespace = CommonNamespaces.RDF_NAMESPACE)
+  public TypeReference<AlternateIdType> getType() {
     return type;
   }
 
@@ -74,7 +73,7 @@ public final class AlternateId implements Typed {
    *
    * @param type The type of the id.
    */
-  public void setType(URI type) {
+  public void setType(TypeReference<AlternateIdType> type) {
     this.type = type;
   }
 
@@ -86,7 +85,7 @@ public final class AlternateId implements Typed {
   @XmlTransient
   @JsonIgnore
   public AlternateIdType getKnownType() {
-    return XmlQNameEnumUtil.fromURI(getType(), AlternateIdType.class);
+    return getType() == null ? null : XmlQNameEnumUtil.fromURI(getType().getType(), AlternateIdType.class);
   }
 
   /**
@@ -96,6 +95,6 @@ public final class AlternateId implements Typed {
    */
   @JsonIgnore
   public void setKnownType(AlternateIdType knownType) {
-    this.type = XmlQNameEnumUtil.toURI(knownType);
+    setType(knownType == null ? null : new TypeReference<AlternateIdType>(knownType));
   }
 }

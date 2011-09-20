@@ -16,28 +16,25 @@
 package org.gedcomx.conclusion;
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
-import org.codehaus.enunciate.qname.XmlQNameEnumRef;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.gedcomx.rt.CommonNamespaces;
 import org.gedcomx.types.NamePartType;
+import org.gedcomx.types.TypeReference;
 import org.gedcomx.types.Typed;
 
-import javax.xml.XMLConstants;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
-import java.net.URI;
 
 /**
  * A part of a name.
  *
  * @author Ryan Heaton
  */
-@XmlType ( name = "NamePart" )
-public final class NamePart implements Typed {
+@XmlType ( name = "NamePart", propOrder = {"type", "text"})
+public final class NamePart implements Typed<NamePartType> {
 
-  private URI type;
+  private TypeReference<NamePartType> type;
   private String text;
 
   /**
@@ -45,10 +42,8 @@ public final class NamePart implements Typed {
    *
    * @return The type of the name part.
    */
-  @XmlAttribute (namespace = CommonNamespaces.GEDCOMX_COMMON_NAMESPACE)
-  @XmlQNameEnumRef (NamePartType.class)
-  @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
-  public URI getType() {
+  @XmlElement (namespace = CommonNamespaces.RDF_NAMESPACE)
+  public TypeReference<NamePartType> getType() {
     return type;
   }
 
@@ -57,7 +52,7 @@ public final class NamePart implements Typed {
    *
    * @param type The type of the name part.
    */
-  public void setType(URI type) {
+  public void setType(TypeReference<NamePartType> type) {
     this.type = type;
   }
 
@@ -69,7 +64,7 @@ public final class NamePart implements Typed {
   @XmlTransient
   @JsonIgnore
   public NamePartType getKnownType() {
-    return XmlQNameEnumUtil.fromURI(getType(), NamePartType.class);
+    return getType() == null ? null : XmlQNameEnumUtil.fromURI(getType().getType(), NamePartType.class);
   }
 
   /**
@@ -79,7 +74,7 @@ public final class NamePart implements Typed {
    */
   @JsonIgnore
   public void setKnownType(NamePartType knownType) {
-    setType(XmlQNameEnumUtil.toURI(knownType));
+    setType(knownType == null ? null : new TypeReference<NamePartType>(knownType));
   }
 
   /**

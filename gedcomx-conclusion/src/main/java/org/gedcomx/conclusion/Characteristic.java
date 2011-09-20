@@ -16,7 +16,6 @@
 package org.gedcomx.conclusion;
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
-import org.codehaus.enunciate.qname.XmlQNameEnumRef;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
@@ -24,25 +23,23 @@ import org.gedcomx.rt.CommonNamespaces;
 import org.gedcomx.rt.RDFSubClassOf;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.CharacteristicType;
+import org.gedcomx.types.TypeReference;
 import org.gedcomx.types.Typed;
 
-import javax.xml.XMLConstants;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
-import java.net.URI;
 
 /**
  * A conclusion about a characteristic of a person or relationship.
  */
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType ( name = "Characteristic" )
+@XmlType ( name = "Characteristic", propOrder = {"type", "date", "place", "value"})
 @RDFSubClassOf ( CommonNamespaces.DUBLIN_CORE_TYPE_NAMESPACE + "Event" )
-public class Characteristic extends Conclusion implements Typed, Spatial, Temporal {
+public class Characteristic extends Conclusion implements Typed<CharacteristicType>, Spatial, Temporal {
 
-  private URI type;
+  private TypeReference<CharacteristicType> type;
   private Date date;
   private Place place;
   private String value;
@@ -53,10 +50,8 @@ public class Characteristic extends Conclusion implements Typed, Spatial, Tempor
    *
    * @return The type of the characteristic.
    */
-  @XmlAttribute (namespace = CommonNamespaces.GEDCOMX_COMMON_NAMESPACE)
-  @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
-  @XmlQNameEnumRef (CharacteristicType.class)
-  public URI getType() {
+  @XmlElement (namespace = CommonNamespaces.RDF_NAMESPACE)
+  public TypeReference<CharacteristicType> getType() {
     return type;
   }
 
@@ -65,7 +60,7 @@ public class Characteristic extends Conclusion implements Typed, Spatial, Tempor
    *
    * @param type The type of the characteristic.
    */
-  public void setType(URI type) {
+  public void setType(TypeReference<CharacteristicType> type) {
     this.type = type;
   }
 
@@ -77,7 +72,7 @@ public class Characteristic extends Conclusion implements Typed, Spatial, Tempor
   @XmlTransient
   @JsonIgnore
   public org.gedcomx.types.CharacteristicType getKnownType() {
-    return XmlQNameEnumUtil.fromURI(getType(), org.gedcomx.types.CharacteristicType.class);
+    return getType() == null ? null : XmlQNameEnumUtil.fromURI(getType().getType(), CharacteristicType.class);
   }
 
   /**
@@ -86,8 +81,8 @@ public class Characteristic extends Conclusion implements Typed, Spatial, Tempor
    * @param knownType The known type.
    */
   @JsonIgnore
-  public void setKnownType(org.gedcomx.types.CharacteristicType knownType) {
-    setType(XmlQNameEnumUtil.toURI(knownType));
+  public void setKnownType(CharacteristicType knownType) {
+    setType(knownType == null ? null : new TypeReference<CharacteristicType>(knownType));
   }
 
   /**

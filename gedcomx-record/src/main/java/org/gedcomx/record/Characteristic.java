@@ -17,21 +17,18 @@ package org.gedcomx.record;
 
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
-import org.codehaus.enunciate.qname.XmlQNameEnumRef;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.rt.CommonNamespaces;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.CharacteristicType;
+import org.gedcomx.types.TypeReference;
 import org.gedcomx.types.Typed;
 
-import javax.xml.XMLConstants;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
-import java.net.URI;
 
 /**
  * A field specifying a characteristic about a persona or relationship.
@@ -39,19 +36,17 @@ import java.net.URI;
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "Characteristic" )
-public class Characteristic extends Field implements Typed {
+public class Characteristic extends Field implements Typed<CharacteristicType> {
 
-  private URI type;
+  private TypeReference<CharacteristicType> type;
 
   /**
    * The type of the characteristic.
    *
    * @return The type of the characteristic.
    */
-  @XmlAttribute (namespace = CommonNamespaces.GEDCOMX_COMMON_NAMESPACE)
-  @XmlQNameEnumRef (CharacteristicType.class)
-  @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
-  public URI getType() {
+  @XmlElement (namespace = CommonNamespaces.RDF_NAMESPACE)
+  public TypeReference<CharacteristicType> getType() {
     return type;
   }
 
@@ -60,7 +55,7 @@ public class Characteristic extends Field implements Typed {
    *
    * @param type The type of the characteristic.
    */
-  public void setType(URI type) {
+  public void setType(TypeReference<CharacteristicType> type) {
     this.type = type;
   }
 
@@ -71,8 +66,8 @@ public class Characteristic extends Field implements Typed {
    */
   @XmlTransient
   @JsonIgnore
-  public org.gedcomx.types.CharacteristicType getKnownType() {
-    return XmlQNameEnumUtil.fromURI(getType(), org.gedcomx.types.CharacteristicType.class);
+  public CharacteristicType getKnownType() {
+    return getType() == null ? null : XmlQNameEnumUtil.fromURI(getType().getType(), CharacteristicType.class);
   }
 
   /**
@@ -81,8 +76,8 @@ public class Characteristic extends Field implements Typed {
    * @param knownType The known type.
    */
   @JsonIgnore
-  public void setKnownType(org.gedcomx.types.CharacteristicType knownType) {
-    setType(XmlQNameEnumUtil.toURI(knownType));
+  public void setKnownType(CharacteristicType knownType) {
+    setType(knownType == null ? null : new TypeReference<CharacteristicType>(knownType));
   }
 
 }

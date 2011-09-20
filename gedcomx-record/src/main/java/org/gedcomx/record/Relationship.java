@@ -17,22 +17,23 @@ package org.gedcomx.record;
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.enunciate.json.JsonName;
-import org.codehaus.enunciate.qname.XmlQNameEnumRef;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.common.*;
+import org.gedcomx.common.GenealogicalResource;
+import org.gedcomx.common.ResourceReference;
 import org.gedcomx.rt.CommonNamespaces;
 import org.gedcomx.rt.RDFRange;
 import org.gedcomx.rt.RDFSubPropertyOf;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.RelationshipType;
+import org.gedcomx.types.TypeReference;
 import org.gedcomx.types.Typed;
 
-import javax.xml.XMLConstants;
-import javax.xml.bind.annotation.*;
-import java.net.URI;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,10 +42,10 @@ import java.util.List;
  */
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType ( name = "Relationship", propOrder = { "persona1", "persona2", "characteristics" } )
-public class Relationship extends GenealogicalResource implements Typed, HasCharacteristics {
+@XmlType ( name = "Relationship", propOrder = { "type", "persona1", "persona2", "characteristics" } )
+public class Relationship extends GenealogicalResource implements Typed<RelationshipType>, HasCharacteristics {
 
-  private URI type;
+  private TypeReference<RelationshipType> type;
   private ResourceReference persona1;
   private ResourceReference persona2;
   private List<Characteristic> characteristics = new ArrayList<Characteristic>();
@@ -54,10 +55,8 @@ public class Relationship extends GenealogicalResource implements Typed, HasChar
    *
    * @return The type of this relationship.
    */
-  @XmlAttribute (namespace = CommonNamespaces.GEDCOMX_COMMON_NAMESPACE)
-  @XmlQNameEnumRef (RelationshipType.class)
-  @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
-  public URI getType() {
+  @XmlElement (namespace = CommonNamespaces.RDF_NAMESPACE)
+  public TypeReference<RelationshipType> getType() {
     return type;
   }
 
@@ -66,7 +65,7 @@ public class Relationship extends GenealogicalResource implements Typed, HasChar
    *
    * @param type The type of this relationship.
    */
-  public void setType(URI type) {
+  public void setType(TypeReference<RelationshipType> type) {
     this.type = type;
   }
 
@@ -78,7 +77,7 @@ public class Relationship extends GenealogicalResource implements Typed, HasChar
   @XmlTransient
   @JsonIgnore
   public RelationshipType getKnownType() {
-    return XmlQNameEnumUtil.fromURI(getType(), RelationshipType.class);
+    return getType() == null ? null : XmlQNameEnumUtil.fromURI(getType().getType(), RelationshipType.class);
   }
 
   /**
@@ -88,7 +87,7 @@ public class Relationship extends GenealogicalResource implements Typed, HasChar
    */
   @JsonIgnore
   public void setKnownType(RelationshipType type) {
-    setType(XmlQNameEnumUtil.toURI(type));
+    setType(type == null ? null : new TypeReference<RelationshipType>(type));
   }
 
   /**

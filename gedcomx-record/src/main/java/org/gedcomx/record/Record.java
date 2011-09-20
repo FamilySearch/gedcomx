@@ -22,9 +22,14 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.common.*;
-import org.gedcomx.rt.*;
+import org.gedcomx.common.AlternateId;
+import org.gedcomx.common.GenealogicalEntity;
+import org.gedcomx.common.PersistentIdentifiable;
+import org.gedcomx.rt.CommonNamespaces;
+import org.gedcomx.rt.JsonExtensionElement;
+import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.RecordType;
+import org.gedcomx.types.TypeReference;
 import org.gedcomx.types.Typed;
 
 import javax.xml.XMLConstants;
@@ -39,11 +44,11 @@ import java.util.List;
 @JsonExtensionElement
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType ( name = "Record", propOrder = { "persistentId", "alternateIds", "personas", "events", "relationships", "fields" } )
-public class Record extends GenealogicalEntity implements Typed, PersistentIdentifiable {
+@XmlType ( name = "Record", propOrder = { "type", "persistentId", "alternateIds", "personas", "events", "relationships", "fields" } )
+public class Record extends GenealogicalEntity implements Typed<RecordType>, PersistentIdentifiable {
 
   private String lang;
-  private URI type;
+  private TypeReference<RecordType> type;
   private URI persistentId;
   private List<AlternateId> alternateIds;
   private List<Persona> personas;
@@ -56,10 +61,8 @@ public class Record extends GenealogicalEntity implements Typed, PersistentIdent
    * 
    * @return The type of the record.
    */
-  @XmlAttribute (namespace = CommonNamespaces.GEDCOMX_COMMON_NAMESPACE)
-  @XmlQNameEnumRef(RecordType.class)
-  @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
-  public URI getType() {
+  @XmlElement (namespace = CommonNamespaces.RDF_NAMESPACE)
+  public TypeReference<RecordType> getType() {
     return type;
   }
 
@@ -68,7 +71,7 @@ public class Record extends GenealogicalEntity implements Typed, PersistentIdent
    * 
    * @param type The type of the record.
    */
-  public void setType(URI type) {
+  public void setType(TypeReference<RecordType> type) {
     this.type = type;
   }
 
@@ -80,7 +83,7 @@ public class Record extends GenealogicalEntity implements Typed, PersistentIdent
   @XmlTransient
   @JsonIgnore
   public RecordType getKnownType() {
-    return XmlQNameEnumUtil.fromURI(getType(), RecordType.class);
+    return getType() == null ? null : XmlQNameEnumUtil.fromURI(getType().getType(), RecordType.class);
   }
 
   /**
@@ -90,7 +93,7 @@ public class Record extends GenealogicalEntity implements Typed, PersistentIdent
    */
   @JsonIgnore
   public void setKnownType(RecordType knownType) {
-    setType(XmlQNameEnumUtil.toURI(knownType));
+    setType(knownType == null ? null : new TypeReference<RecordType>(knownType));
   }
 
   /**

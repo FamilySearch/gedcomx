@@ -16,38 +16,33 @@
 package org.gedcomx.record;
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
-import org.codehaus.enunciate.qname.XmlQNameEnumRef;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.rt.CommonNamespaces;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.PlacePartType;
+import org.gedcomx.types.TypeReference;
 import org.gedcomx.types.Typed;
 
-import javax.xml.XMLConstants;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
-import java.net.URI;
 
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "PlacePart" )
-public class PlacePart extends Field implements Typed {
+public class PlacePart extends Field implements Typed<PlacePartType> {
 
-  private URI type;
+  private TypeReference<PlacePartType> type;
 
   /**
    * The place part type.
    *
    * @return The place part type.
    */
-  @XmlAttribute (namespace = CommonNamespaces.GEDCOMX_COMMON_NAMESPACE)
-  @XmlQNameEnumRef(PlacePartType.class)
-  @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
-  public URI getType() {
+  @XmlElement (namespace = CommonNamespaces.RDF_NAMESPACE)
+  public TypeReference<PlacePartType> getType() {
     return type;
   }
 
@@ -56,7 +51,7 @@ public class PlacePart extends Field implements Typed {
    *
    * @param type The place part type.
    */
-  public void setType(URI type) {
+  public void setType(TypeReference<PlacePartType> type) {
     this.type = type;
   }
 
@@ -68,7 +63,7 @@ public class PlacePart extends Field implements Typed {
   @XmlTransient
   @JsonIgnore
   public PlacePartType getKnownType() {
-    return XmlQNameEnumUtil.fromURI(getType(), PlacePartType.class);
+    return getType() == null ? null : XmlQNameEnumUtil.fromURI(getType().getType(), PlacePartType.class);
   }
 
   /**
@@ -78,6 +73,6 @@ public class PlacePart extends Field implements Typed {
    */
   @JsonIgnore
   public void setKnownType(PlacePartType knownType) {
-    setType(XmlQNameEnumUtil.toURI(knownType));
+    setType(knownType == null ? null : new TypeReference<PlacePartType>(knownType));
   }
 }

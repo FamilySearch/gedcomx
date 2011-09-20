@@ -17,19 +17,21 @@ package org.gedcomx.conclusion;
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.enunciate.json.JsonName;
-import org.codehaus.enunciate.qname.XmlQNameEnumRef;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.common.*;
+import org.gedcomx.common.GenealogicalEntity;
+import org.gedcomx.common.ResourceReference;
 import org.gedcomx.rt.*;
 import org.gedcomx.types.RelationshipType;
+import org.gedcomx.types.TypeReference;
 import org.gedcomx.types.Typed;
 
-import javax.xml.XMLConstants;
-import javax.xml.bind.annotation.*;
-import java.net.URI;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 import java.util.List;
 
 /**
@@ -41,12 +43,10 @@ import java.util.List;
 @JsonExtensionElement
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType ( name = "Relationship", propOrder = {"persistentId", "alternateIds", "person1", "person2", "events", "characteristics" } )
-public class Relationship extends GenealogicalEntity implements Typed, PersistentIdentifiable, HasEvents, HasCharacteristics {
+@XmlType ( name = "Relationship", propOrder = { "type", "person1", "person2", "events", "characteristics" } )
+public class Relationship extends GenealogicalEntity implements Typed<RelationshipType>, HasEvents, HasCharacteristics {
 
-  private URI type;
-  private URI persistentId;
-  private List<AlternateId> alternateIds;
+  private TypeReference<RelationshipType> type;
   private ResourceReference person1;
   private ResourceReference person2;
   private List<Event> events;
@@ -57,10 +57,8 @@ public class Relationship extends GenealogicalEntity implements Typed, Persisten
    *
    * @return The type of this relationship.
    */
-  @XmlAttribute (namespace = CommonNamespaces.GEDCOMX_COMMON_NAMESPACE)
-  @XmlQNameEnumRef (RelationshipType.class)
-  @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
-  public URI getType() {
+  @XmlElement (namespace = CommonNamespaces.RDF_NAMESPACE)
+  public TypeReference<RelationshipType> getType() {
     return type;
   }
 
@@ -69,7 +67,7 @@ public class Relationship extends GenealogicalEntity implements Typed, Persisten
    *
    * @param type The type of this relationship.
    */
-  public void setType(URI type) {
+  public void setType(TypeReference<RelationshipType> type) {
     this.type = type;
   }
 
@@ -81,7 +79,7 @@ public class Relationship extends GenealogicalEntity implements Typed, Persisten
   @XmlTransient
   @JsonIgnore
   public RelationshipType getKnownType() {
-    return XmlQNameEnumUtil.fromURI(getType(), RelationshipType.class);
+    return getType() == null ? null : XmlQNameEnumUtil.fromURI(getType().getType(), RelationshipType.class);
   }
 
   /**
@@ -91,48 +89,7 @@ public class Relationship extends GenealogicalEntity implements Typed, Persisten
    */
   @JsonIgnore
   public void setKnownType(RelationshipType type) {
-    setType(XmlQNameEnumUtil.toURI(type));
-  }
-
-  /**
-   * A long-term, persistent, globally unique identifier for this relationship.
-   *
-   * @return A long-term, persistent, globally unique identifier for this relationship.
-   */
-  @XmlSchemaType(name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
-  public URI getPersistentId() {
-    return persistentId;
-  }
-
-  /**
-   * A long-term, persistent, globally unique identifier for this relationship.
-   *
-   * @param persistentId A long-term, persistent, globally unique identifier for this relationship.
-   */
-  public void setPersistentId(URI persistentId) {
-    this.persistentId = persistentId;
-  }
-
-  /**
-   * The list of alternate ids of the relationship.
-   *
-   * @return The list of alternate ids of the relationship.
-   */
-  @XmlElement (name="alternateId")
-  @JsonProperty("alternateIds")
-  @JsonName("alternateIds")
-  public List<AlternateId> getAlternateIds() {
-    return alternateIds;
-  }
-
-  /**
-   * The list of alternate ids of the relationship.
-   *
-   * @param alternateIds The list of alternate ids of the relationship.
-   */
-  @JsonProperty("alternateIds")
-  public void setAlternateIds(List<AlternateId> alternateIds) {
-    this.alternateIds = alternateIds;
+    setType(type == null ? null : new TypeReference<RelationshipType>(type));
   }
 
   /**

@@ -16,7 +16,6 @@
 package org.gedcomx.types;
 
 import javax.xml.bind.annotation.XmlType;
-import java.net.URI;
 
 /**
  * A resource that is typed.
@@ -26,13 +25,12 @@ import java.net.URI;
 @XmlType (
   name = "Typed"
 )
-public interface Typed {
+public interface Typed<T extends Enum> {
 
   /**
-   * Reference to the resource type. Note that this differs from rdf:type and dcterms:type because
-   * it's a <em>reference</em> to the type as opposed to the actual type.
+   * Reference to the resource type.
    *
    * @return Reference to the resource type.
    */
-  URI getType();
+  TypeReference<T> getType();
 }
