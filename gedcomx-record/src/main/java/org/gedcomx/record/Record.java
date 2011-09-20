@@ -39,14 +39,13 @@ import java.util.List;
 @JsonExtensionElement
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType ( name = "Record", propOrder = { "persistentId", "alternateIds", "bibliographicCitation", "personas", "events", "relationships", "fields" } )
-public class Record extends GenealogicalResource implements Typed, BibliographicResource, PersistentIdentifiable {
+@XmlType ( name = "Record", propOrder = { "persistentId", "alternateIds", "personas", "events", "relationships", "fields" } )
+public class Record extends GenealogicalEntity implements Typed, PersistentIdentifiable {
 
   private String lang;
   private URI type;
   private URI persistentId;
   private List<AlternateId> alternateIds;
-  private String bibliographicCitation;
   private List<Persona> personas;
   private List<Event> events;
   private List<Relationship> relationships;
@@ -152,24 +151,6 @@ public class Record extends GenealogicalResource implements Typed, Bibliographic
   @JsonProperty("alternateIds")
   public void setAlternateIds(List<AlternateId> alternateIds) {
     this.alternateIds = alternateIds;
-  }
-
-  /**
-   * The bibliographic citation for this record.
-   *
-   * @return The bibliographic citation for this record.
-   */
-  public String getBibliographicCitation() {
-    return bibliographicCitation;
-  }
-
-  /**
-   * The bibliographic citation for this record.
-   *
-   * @param bibliographicCitation The bibliographic citation for this record.
-   */
-  public void setBibliographicCitation(String bibliographicCitation) {
-    this.bibliographicCitation = bibliographicCitation;
   }
 
   /**

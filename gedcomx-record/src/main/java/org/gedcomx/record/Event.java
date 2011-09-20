@@ -29,7 +29,10 @@ import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.Typed;
 
 import javax.xml.XMLConstants;
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 import java.net.URI;
 
 /**

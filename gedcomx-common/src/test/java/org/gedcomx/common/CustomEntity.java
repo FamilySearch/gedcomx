@@ -17,12 +17,12 @@ import java.util.Arrays;
 @JsonExtensionElement
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-public class CustomResource extends GenealogicalResource {
+public class CustomEntity extends GenealogicalEntity {
 
-  public CustomResource() {
+  public CustomEntity() {
   }
 
-  public CustomResource(String id) {
+  public CustomEntity(String id) {
     setId(id);
   }
 

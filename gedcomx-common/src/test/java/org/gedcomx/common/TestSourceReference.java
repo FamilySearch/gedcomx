@@ -25,14 +25,14 @@ public class TestSourceReference {
     reference.setKnownType(ResourceType.Collection);
     reference.setId("refid");
     reference.setExtensionElements(new ArrayList<Object>());
-    reference.getExtensionElements().add(new CustomResource("alt"));
-    CustomResource custom = new CustomResource();
+    reference.getExtensionElements().add(new CustomEntity("alt"));
+    CustomEntity custom = new CustomEntity();
     custom.setSource(reference);
     custom = processThroughXml(custom);
     assertEquals("urn:someid", custom.getSource().getResource().toString());
     assertEquals(ResourceType.Collection, custom.getSource().getKnownType());
     assertEquals("refid", custom.getSource().getId());
-    assertEquals("alt", ((CustomResource) custom.getSource().getExtensionElements().get(0)).getId());
+    assertEquals("alt", ((CustomEntity) custom.getSource().getExtensionElements().get(0)).getId());
   }
 
   /**
@@ -44,14 +44,14 @@ public class TestSourceReference {
     reference.setKnownType(ResourceType.Collection);
     reference.setId("refid");
     reference.setExtensionElements(new ArrayList<Object>());
-    reference.getExtensionElements().add(new CustomResource("alt"));
-    CustomResource custom = new CustomResource();
+    reference.getExtensionElements().add(new CustomEntity("alt"));
+    CustomEntity custom = new CustomEntity();
     custom.setSource(reference);
     custom = processThroughJson(custom);
     assertEquals("urn:someid", custom.getSource().getResource().toString());
     assertEquals(ResourceType.Collection, custom.getSource().getKnownType());
     assertEquals("refid", custom.getSource().getId());
-    assertEquals("alt", ((CustomResource) custom.getSource().getExtensionElements().get(0)).getId());
+    assertEquals("alt", ((CustomEntity) custom.getSource().getExtensionElements().get(0)).getId());
   }
 
 }

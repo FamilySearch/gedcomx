@@ -15,14 +15,14 @@
  */
 package org.gedcomx.common;
 
-import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.annotate.JsonProperty;
 import org.gedcomx.rt.CommonNamespaces;
-import org.gedcomx.rt.RDFSubPropertyOf;
 import org.gedcomx.rt.SupportsExtensionElements;
 
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlAnyElement;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlType;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,14 +31,12 @@ import java.util.List;
  *
  * @author Ryan Heaton
  */
-@XmlType ( name = "GenealogicalResource", propOrder = { "attribution", "sources", "notes", "extensionElements" } )
-public abstract class GenealogicalResource implements SourceSupported, Attributable, SupportsExtensionElements {
+@XmlType ( name = "GenealogicalResource", propOrder = { "attribution", "extensionElements" } )
+public abstract class GenealogicalResource implements SupportsExtensionElements {
 
   private String id;
   private Attribution attribution;
-  private List<ResourceReference> sources;
-  private List<Note> notes;
-  private List<Object> extensionElements;
+  protected List<Object> extensionElements;
 
   /**
    * The id of this genealogical resource. As defined by RDF, the nature of this id
@@ -84,51 +82,6 @@ public abstract class GenealogicalResource implements SourceSupported, Attributa
    */
   public void setAttribution(Attribution attribution) {
     this.attribution = attribution;
-  }
-
-  /**
-   * The source references for a resource.
-   *
-   * @return The source references for a resource.
-   */
-  @XmlElement (name="source")
-  @JsonProperty ("sources")
-  @JsonName ("sources")
-  @RDFSubPropertyOf ( CommonNamespaces.DUBLIN_CORE_NAMESPACE + "source")
-  public List<ResourceReference> getSources() {
-    return sources;
-  }
-
-  /**
-   * The source references for a resource.
-   *
-   * @param sources The source references for a resource.
-   */
-  @JsonProperty("sources")
-  public void setSources(List<ResourceReference> sources) {
-    this.sources = sources;
-  }
-
-  /**
-   * Notes about a resource.
-   *
-   * @return Notes about a resource.
-   */
-  @XmlElement (name = "note")
-  @JsonProperty ("notes")
-  @JsonName ("notes")
-  public List<Note> getNotes() {
-    return notes;
-  }
-
-  /**
-   * Notes about a resource.
-   *
-   * @param notes Notes about a resource.
-   */
-  @JsonProperty ("notes")
-  public void setNotes(List<Note> notes) {
-    this.notes = notes;
   }
 
   /**

@@ -11,13 +11,13 @@ import static org.testng.AssertJUnit.*;
  * @author Ryan Heaton
  */
 @Test
-public class TestGenealogicalResource {
+public class TestGenealogicalEntity {
 
   /**
    * tests alternate id xml
    */
   public void testProperties() throws Exception {
-    GenealogicalResource ext = new CustomResource();
+    GenealogicalEntity ext = new CustomEntity();
     AlternateId id = new AlternateId();
     id.setKnownType(AlternateIdType.Forwarded);
     id.setValue("value");

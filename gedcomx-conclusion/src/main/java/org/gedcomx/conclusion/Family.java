@@ -39,74 +39,12 @@ import java.util.List;
 @JsonExtensionElement
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType ( name = "Family", propOrder = {"persistentId", "alternateIds", "bibliographicCitation", "parent1", "parent2", "children" } )
-public class Family extends GenealogicalResource implements PersistentIdentifiable, BibliographicResource {
+@XmlType ( name = "Family", propOrder = { "parent1", "parent2", "children" } )
+public class Family extends GenealogicalEntity {
 
-  private URI persistentId;
-  private List<AlternateId> alternateIds;
-  private String bibliographicCitation;
   private ResourceReference parent1;
   private ResourceReference parent2;
   private List<ResourceReference> children;
-
-  /**
-   * A long-term, persistent, globally unique identifier for this family.
-   *
-   * @return A long-term, persistent, globally unique identifier for this family.
-   */
-  @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
-  public URI getPersistentId() {
-    return persistentId;
-  }
-
-  /**
-   * A long-term, persistent, globally unique identifier for this family.
-   *
-   * @param persistentId A long-term, persistent, globally unique identifier for this family.
-   */
-  public void setPersistentId(URI persistentId) {
-    this.persistentId = persistentId;
-  }
-
-  /**
-   * The list of alternate ids of the family.
-   *
-   * @return The list of alternate ids of the family.
-   */
-  @XmlElement (name="alternateId")
-  @JsonProperty ("alternateIds")
-  @JsonName ("alternateIds")
-  public List<AlternateId> getAlternateIds() {
-    return alternateIds;
-  }
-
-  /**
-   * The list of alternate ids of the family.
-   *
-   * @param alternateIds The list of alternate ids of the family.
-   */
-  @JsonProperty ("alternateIds")
-  public void setAlternateIds(List<AlternateId> alternateIds) {
-    this.alternateIds = alternateIds;
-  }
-
-  /**
-   * The bibliographic citation for this data.
-   *
-   * @return The bibliographic citation for this data.
-   */
-  public String getBibliographicCitation() {
-    return bibliographicCitation;
-  }
-
-  /**
-   * The bibliographic citation for this data.
-   *
-   * @param bibliographicCitation The bibliographic citation for this data.
-   */
-  public void setBibliographicCitation(String bibliographicCitation) {
-    this.bibliographicCitation = bibliographicCitation;
-  }
 
   /**
    * A reference to a parent in the family. The name "parent1" is used only to distinguish it from

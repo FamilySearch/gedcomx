@@ -22,8 +22,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.common.BibliographicResource;
-import org.gedcomx.common.GenealogicalResource;
+import org.gedcomx.common.GenealogicalEntity;
 import org.gedcomx.common.ResourceReference;
 import org.gedcomx.rt.*;
 import org.gedcomx.types.RecordType;
@@ -40,11 +39,10 @@ import java.util.List;
 @JsonExtensionElement
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType ( name = "RecordCollection", propOrder = { "bibliographicCitation", "title", "description", "publisher", "recordType", "spatial", "temporal", "items" } )
+@XmlType ( name = "RecordCollection", propOrder = { "title", "description", "publisher", "recordType", "spatial", "temporal", "items" } )
 @RDFSubClassOf ( CommonNamespaces.DUBLIN_CORE_TYPE_NAMESPACE + "Collection" )
-public class RecordCollection extends GenealogicalResource implements BibliographicResource, Describable {
+public class RecordCollection extends GenealogicalEntity implements Describable {
 
-  private String bibliographicCitation;
   private String title;
   private String description;
   private String publisher;
@@ -52,25 +50,6 @@ public class RecordCollection extends GenealogicalResource implements Bibliograp
   private String spatial;
   private String temporal;
   private List<ResourceReference> items;
-
-
-  /**
-   * The bibliographic citation for this data.
-   *
-   * @return The bibliographic citation for this data.
-   */
-  public String getBibliographicCitation() {
-    return bibliographicCitation;
-  }
-
-  /**
-   * The bibliographic citation for this data.
-   *
-   * @param bibliographicCitation The bibliographic citation for this data.
-   */
-  public void setBibliographicCitation(String bibliographicCitation) {
-    this.bibliographicCitation = bibliographicCitation;
-  }
 
   /**
    * The title for the collection.

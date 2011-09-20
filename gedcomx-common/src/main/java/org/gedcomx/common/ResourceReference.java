@@ -16,6 +16,7 @@
 package org.gedcomx.common;
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
+import org.codehaus.enunciate.doc.DocumentationExample;
 import org.codehaus.enunciate.qname.XmlQNameEnumRef;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
@@ -63,6 +64,7 @@ public class ResourceReference implements Typed, SupportsExtensionAttributes, Su
    */
   @XmlID
   @XmlAttribute( name = "ID", namespace = CommonNamespaces.RDF_NAMESPACE )
+  @DocumentationExample(exclude = true)
   public String getId() {
     return id;
   }

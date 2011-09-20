@@ -15,54 +15,30 @@
  */
 package org.gedcomx.common;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.rt.CommonNamespaces;
 import org.gedcomx.rt.JsonExtensionElement;
-import org.gedcomx.rt.SupportsExtensionElements;
 import org.gedcomx.rt.XmlTypeIdResolver;
 
 import javax.xml.XMLConstants;
-import javax.xml.bind.annotation.*;
-import java.util.ArrayList;
-import java.util.List;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 /**
+ * A note about a genealogical resource.
+ *
  * @author Ryan Heaton
  */
 @XmlRootElement
 @JsonExtensionElement
 @JsonTypeInfo ( use = JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType ( name = "Note", propOrder = { "text", "attribution", "extensionElements" } )
-public final class Note implements Attributable, SupportsExtensionElements {
+@XmlType ( name = "Note", propOrder = { "text" } )
+public final class Note extends GenealogicalResource {
 
-  private String id;
   private String lang;
   private String text;
-  private Attribution attribution;
-  private List<Object> extensionElements;
-
-  /**
-   * The id of the note.
-   *
-   * @return The id of the note.
-   */
-  @XmlID
-  @XmlAttribute ( name = "ID", namespace = CommonNamespaces.RDF_NAMESPACE )
-  public String getId() {
-    return id;
-  }
-
-  /**
-   * The id of the note.
-   *
-   * @param id The id of the note.
-   */
-  public void setId(String id) {
-    this.id = id;
-  }
 
   /**
    * The language of the note. See <a href="http://www.w3.org/International/articles/language-tags/>http://www.w3.org/International/articles/language-tags/</a>
@@ -101,94 +77,4 @@ public final class Note implements Attributable, SupportsExtensionElements {
     this.text = text;
   }
 
-  /**
-   * Attribution metadata for the note.
-   *
-   * @return Attribution metadata for the note.
-   */
-  public Attribution getAttribution() {
-    return attribution;
-  }
-
-  /**
-   * Attribution metadata for the note.
-   *
-   * @param attribution Attribution metadata for the note.
-   */
-  public void setAttribution(Attribution attribution) {
-    this.attribution = attribution;
-  }
-
-  /**
-   * Custom extension elements for the note.
-   *
-   * @return Custom extension elements for the note.
-   */
-  @XmlAnyElement (lax = true)
-  @JsonIgnore
-  public List<Object> getExtensionElements() {
-    return extensionElements;
-  }
-
-  /**
-   * Custom extension elements for the note.
-   *
-   * @param extensionElements Custom extension elements for the note.
-   */
-  @JsonIgnore
-  public void setExtensionElements(List<Object> extensionElements) {
-    this.extensionElements = extensionElements;
-  }
-
-  /**
-   * Add an extension element.
-   *
-   * @param element The extension element to add.
-   */
-  public void addExtensionElement(Object element) {
-    if (this.extensionElements == null) {
-      this.extensionElements = new ArrayList<Object>();
-    }
-
-    this.extensionElements.add(element);
-  }
-
-  /**
-   * Finds the first extension of a specified type.
-   *
-   * @param clazz The type.
-   * @return The extension, or null if none found.
-   */
-  @SuppressWarnings ( {"unchecked"} )
-  public <E> E findExtensionOfType(Class<E> clazz) {
-    if (this.extensionElements != null) {
-      for (Object extension : extensionElements) {
-        if (clazz.isInstance(extension)) {
-          return (E) extension;
-        }
-      }
-    }
-
-    return null;
-  }
-
-  /**
-   * Find the extensions of a specified type.
-   *
-   * @param clazz The type.
-   * @return The extensions, possibly empty but not null.
-   */
-  @SuppressWarnings ( {"unchecked"} )
-  public <E> List<E> findExtensionsOfType(Class<E> clazz) {
-    List<E> ext = new ArrayList<E>();
-    if (this.extensionElements != null) {
-      for (Object extension : extensionElements) {
-        if (clazz.isInstance(extension)) {
-          ext.add((E) extension);
-        }
-      }
-    }
-
-    return ext;
-  }
 }
