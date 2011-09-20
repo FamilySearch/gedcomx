@@ -15,6 +15,7 @@
  */
 package org.gedcomx.record;
 
+import org.gedcomx.common.GenealogicalResource;
 import org.gedcomx.rt.CommonNamespaces;
 
 import javax.xml.XMLConstants;
@@ -27,9 +28,10 @@ import java.net.URI;
  * Description of a role played by a persona in an event.
  */
 @XmlType ( name = "EventRole" )
-public final class EventRole extends Field implements Weighted {
+public final class EventRole extends GenealogicalResource implements Describable, Weighted {
 
   private URI event;
+  private String description;
   private Boolean principal;
 
   /**
@@ -75,6 +77,24 @@ public final class EventRole extends Field implements Weighted {
    */
   public void setPrincipal(Boolean principal) {
     this.principal = principal;
+  }
+
+  /**
+   * The description of the role found on the record.
+   *
+   * @return The description of the role found on the record.
+   */
+  public String getDescription() {
+    return description;
+  }
+
+  /**
+   * The description of the role found on the record.
+   *
+   * @param description The description of the role found on the record.
+   */
+  public void setDescription(String description) {
+    this.description = description;
   }
 
 }
