@@ -74,7 +74,7 @@ public class SerializationUtil {
     ByteArrayOutputStream out = new ByteArrayOutputStream();
     Marshaller marshaller = context.createMarshaller();
     marshaller.setProperty("jaxb.formatted.output", Boolean.TRUE);
-    Object el = instanceClass.isAnnotationPresent(XmlRootElement.class) ? reference : null;
+    Object el = isRootElement(instanceClass) ? reference : null;
     if (el == null) {
       String ns = "";
       if (instanceClass.getPackage() != null && instanceClass.getPackage().getAnnotation(XmlSchema.class) != null) {
@@ -88,6 +88,10 @@ public class SerializationUtil {
       System.out.println(new String(out.toByteArray(), "utf-8"));
     }
     return out.toByteArray();
+  }
+
+  private static <C> boolean isRootElement(Class<? extends C> instanceClass) {
+    return instanceClass.isAnnotationPresent(XmlRootElement.class);
   }
 
   public static Document toXmlDom(Object reference) throws JAXBException, UnsupportedEncodingException {

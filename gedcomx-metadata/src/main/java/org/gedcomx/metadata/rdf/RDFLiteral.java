@@ -39,6 +39,13 @@ public final class RDFLiteral implements SupportsExtensionAttributes {
   private String value;
   private Map<QName, String> extensionAttributes;
 
+  public RDFLiteral() {
+  }
+
+  public RDFLiteral(String value) {
+    this.value = value;
+  }
+
   /**
    * The language of the value of the property. See <a href="http://www.w3.org/International/articles/language-tags/>http://www.w3.org/International/articles/language-tags/</a>
    *

@@ -62,8 +62,18 @@ import javax.xml.bind.annotation.XmlTransient;
     id = "foaf",
     uri = CommonNamespaces.FOAF_NAMESPACE,
     label = "FOAF Namespace",
-    description = "The FOAF namespaces defines the model and types used to represent metadata about users, organizations, and projects.",
+    description = "The FOAF namespace defines the model and types used to represent metadata about users, organizations, and projects.",
     version = "0.1",
+    xmlMediaType = CommonNamespaces.RDF_XML_MEDIA_TYPE,
+    jsonMediaType = CommonNamespaces.RDF_JSON_MEDIA_TYPE,
+    definesRDFSchema = true
+  ),
+  @Namespace(
+    id = "contact",
+    uri = CommonNamespaces.CONTACT_NAMESPACE,
+    label = "Contact Namespace",
+    description = "The contact namespace defines the vocabulary for contact information, e.g. for users or organizations.",
+    version = "2000-10",
     definesRDFSchema = true
   )
 } )
@@ -84,4 +94,5 @@ public class CommonNamespaces {
   public static final String DUBLIN_CORE_NAMESPACE = "http://purl.org/dc/terms/";
   public static final String DUBLIN_CORE_TYPE_NAMESPACE = "http://purl.org/dc/dcmitype/";
   public static final String FOAF_NAMESPACE = "http://xmlns.com/foaf/0.1/";
+  public static final String CONTACT_NAMESPACE = "http://www.w3.org/2000/10/swap/pim/contact#";
 }

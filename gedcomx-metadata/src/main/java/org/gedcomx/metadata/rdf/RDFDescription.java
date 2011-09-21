@@ -40,7 +40,8 @@ import java.util.Map;
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlSeeAlso( DublinCoreDescription.class )
-@XmlType (name = "Description")
+@XmlType ( name = "Description" )
+@XmlRootElement( name = "Description" )
 public class RDFDescription implements SupportsExtensionAttributes, SupportsExtensionElements {
 
   private String id; 
