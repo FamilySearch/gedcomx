@@ -91,7 +91,7 @@ public class SerializationUtil {
   }
 
   private static <C> boolean isRootElement(Class<? extends C> instanceClass) {
-    return instanceClass.isAnnotationPresent(XmlRootElement.class);
+    return instanceClass.isAnnotationPresent(XmlRootElement.class) || JAXBElement.class.isAssignableFrom(instanceClass);
   }
 
   public static Document toXmlDom(Object reference) throws JAXBException, UnsupportedEncodingException {

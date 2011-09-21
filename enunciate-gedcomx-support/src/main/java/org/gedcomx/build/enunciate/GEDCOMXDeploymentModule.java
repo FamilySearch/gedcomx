@@ -24,6 +24,7 @@ import org.codehaus.enunciate.apt.EnunciateFreemarkerModel;
 import org.codehaus.enunciate.apt.EnunciateTypeDeclarationListener;
 import org.codehaus.enunciate.config.SchemaInfo;
 import org.codehaus.enunciate.config.WsdlInfo;
+import org.codehaus.enunciate.contract.jaxb.RootElementDeclaration;
 import org.codehaus.enunciate.contract.validation.ValidationException;
 import org.codehaus.enunciate.contract.validation.ValidationMessage;
 import org.codehaus.enunciate.contract.validation.ValidationResult;
@@ -41,6 +42,7 @@ import org.codehaus.enunciate.modules.objc.ObjCDeploymentModule;
 import org.codehaus.enunciate.template.freemarker.GetGroupsMethod;
 import org.codehaus.enunciate.template.freemarker.IsDefinedGloballyMethod;
 import org.codehaus.enunciate.template.freemarker.UniqueContentTypesMethod;
+import org.gedcomx.rt.DocIgnoreXmlRootElement;
 import org.gedcomx.rt.GedcomNamespaceManager;
 import org.gedcomx.rt.Namespace;
 import org.gedcomx.rt.Namespaces;
@@ -172,6 +174,14 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
   public void initModel(EnunciateFreemarkerModel model) {
     super.initModel(model);
 
+    Iterator<RootElementDeclaration> it = model.getRootElementDeclarations().iterator();
+    while (it.hasNext()) {
+      if (it.next().getAnnotation(DocIgnoreXmlRootElement.class) != null) {
+        //remove any root elements that are requested to be kept separate from the docs.
+        it.remove();
+      }
+    }
+
     Map<String,String> knownPrefixes = GedcomNamespaceManager.getKnownPrefixes();
     model.getNamespacesToPrefixes().putAll(knownPrefixes);
     for (SchemaInfo schemaInfo : model.getNamespacesToSchemas().values()) {
@@ -179,11 +189,18 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
       if (knownPrefix != null) {
         schemaInfo.setId(knownPrefix);
       }
+
+      it = schemaInfo.getGlobalElements().iterator();
+      while (it.hasNext()) {
+        if (it.next().getAnnotation(DocIgnoreXmlRootElement.class) != null) {
+          //remove any root elements that are requested to be kept separate from the docs.
+          it.remove();
+        }
+      }
     }
 
     Collection<TypeDeclaration> namespaceDeclarations = gatherNamespaceDeclarations();
     Map<String, String> prefix_version_to_ns = new HashMap<String, String>();
-    Map<String, String> media_type_to_ns = new HashMap<String, String>();
     for (TypeDeclaration namespacesDeclaration : namespaceDeclarations) {
       info("Found namespaces declaration at %s.", namespacesDeclaration.getQualifiedName());
       Namespaces namespacesInfo = namespacesDeclaration.getAnnotation(Namespaces.class);
@@ -203,15 +220,6 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
           if (!schemaInfo.getGlobalElements().isEmpty() && xmlMediaType == null) {
             warn("Namespace %s is missing an xml media type for its root elements.", schemaInfo.getNamespace());
           }
-          if (xmlMediaType != null) {
-            String previousNamespace = media_type_to_ns.put(xmlMediaType, schemaInfo.getNamespace());
-            if (previousNamespace != null && !previousNamespace.equals(schemaInfo.getNamespace())) {
-              String message = namespacesDeclaration.getPosition() == null ?
-                String.format("Media type %s is already being used by namespace %s.", xmlMediaType, previousNamespace) :
-                String.format("%s: Media type %s is already being used by namespace %s.", namespacesDeclaration.getQualifiedName(), xmlMediaType, previousNamespace);
-              throw new ValidationException(namespacesDeclaration.getPosition(), message);
-            }
-          }
           schemaInfo.setProperty("xmlMediaType", xmlMediaType);
 
           String jsonMediaType = ns.jsonMediaType();
@@ -220,15 +228,6 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
           }
           if (!schemaInfo.getGlobalElements().isEmpty() && jsonMediaType == null) {
             warn("Metadata for namespace %s is missing an json media type for its root elements.", schemaInfo.getNamespace());
-          }
-          if (jsonMediaType != null) {
-            String previousNamespace = media_type_to_ns.put(jsonMediaType, schemaInfo.getNamespace());
-            if (previousNamespace != null && !previousNamespace.equals(schemaInfo.getNamespace())) {
-              String message = namespacesDeclaration.getPosition() == null ?
-                String.format("Media type %s is already being used by namespace %s.", jsonMediaType, previousNamespace) :
-                String.format("%s: Media type %s is already being used by namespace %s.", namespacesDeclaration.getQualifiedName(), jsonMediaType, previousNamespace);
-              throw new ValidationException(namespacesDeclaration.getPosition(), message);
-            }
           }
           schemaInfo.setProperty("jsonMediaType", jsonMediaType);
 

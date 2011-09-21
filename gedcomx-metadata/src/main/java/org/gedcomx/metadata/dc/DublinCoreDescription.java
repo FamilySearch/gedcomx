@@ -24,9 +24,12 @@ import org.gedcomx.metadata.rdf.RDFDescription;
 import org.gedcomx.metadata.rdf.RDFLiteral;
 import org.gedcomx.metadata.rdf.RDFTypeReference;
 import org.gedcomx.metadata.rdf.RDFValue;
+import org.gedcomx.rt.DocIgnoreXmlRootElement;
 import org.gedcomx.rt.XmlTypeIdResolver;
 
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 import java.util.Date;
 import java.util.List;
 
@@ -42,6 +45,9 @@ import java.util.List;
  */
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
+@XmlType (name = "Description")
+@XmlRootElement (name = "Description", namespace = CommonNamespaces.RDF_NAMESPACE )
+@DocIgnoreXmlRootElement
 public class DublinCoreDescription extends RDFDescription {
 
   private RDFValue abstrct;
