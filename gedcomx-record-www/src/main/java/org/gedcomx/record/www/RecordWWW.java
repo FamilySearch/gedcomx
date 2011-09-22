@@ -17,7 +17,7 @@ package org.gedcomx.record.www;
 
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.metadata.rdf.RDFDescriptionSet;
+import org.gedcomx.common.ResourceSet;
 import org.gedcomx.record.Record;
 import org.gedcomx.rt.JsonExtensionElement;
 import org.gedcomx.rt.XmlTypeIdResolver;
@@ -38,11 +38,11 @@ import javax.xml.bind.annotation.XmlType;
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType( name = "RecordWWW", propOrder = {"record", "metadata"})
-@XmlSeeAlso(Link.class)
+@XmlSeeAlso({Link.class})
 public final class RecordWWW {
 
   private Record record;
-  private RDFDescriptionSet metadata;
+  private ResourceSet metadata;
 
   /**
    * The record.
@@ -68,7 +68,7 @@ public final class RecordWWW {
    *
    * @return Metadata associated with the record.
    */
-  public RDFDescriptionSet getMetadata() {
+  public ResourceSet getMetadata() {
     return metadata;
   }
 
@@ -77,7 +77,7 @@ public final class RecordWWW {
    *
    * @param metadata Metadata associated with the record.
    */
-  public void setMetadata(RDFDescriptionSet metadata) {
+  public void setMetadata(ResourceSet metadata) {
     this.metadata = metadata;
   }
 }

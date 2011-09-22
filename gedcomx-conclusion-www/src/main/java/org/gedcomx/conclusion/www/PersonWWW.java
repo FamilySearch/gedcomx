@@ -17,8 +17,8 @@ package org.gedcomx.conclusion.www;
 
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
+import org.gedcomx.common.ResourceSet;
 import org.gedcomx.conclusion.Person;
-import org.gedcomx.metadata.rdf.RDFDescriptionSet;
 import org.gedcomx.rt.JsonExtensionElement;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.www.Link;
@@ -38,11 +38,11 @@ import javax.xml.bind.annotation.XmlType;
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "PersonWWW", propOrder = {"person", "metadata"})
-@XmlSeeAlso (Link.class)
+@XmlSeeAlso({Link.class})
 public final class PersonWWW {
 
   private Person person;
-  private RDFDescriptionSet metadata;
+  private ResourceSet metadata;
 
   /**
    * The person.
@@ -68,7 +68,7 @@ public final class PersonWWW {
    *
    * @return Metadata associated with the person.
    */
-  public RDFDescriptionSet getMetadata() {
+  public ResourceSet getMetadata() {
     return metadata;
   }
 
@@ -77,7 +77,7 @@ public final class PersonWWW {
    *
    * @param metadata Metadata associated with the person.
    */
-  public void setMetadata(RDFDescriptionSet metadata) {
+  public void setMetadata(ResourceSet metadata) {
     this.metadata = metadata;
   }
 }

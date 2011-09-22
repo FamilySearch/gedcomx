@@ -1,5 +1,6 @@
 package org.gedcomx.metadata.rdf;
 
+import org.gedcomx.common.ResourceSet;
 import org.gedcomx.rt.CommonNamespaces;
 import org.testng.annotations.Test;
 
@@ -29,8 +30,8 @@ public class TestRDFDescription {
     meta.setExtensionAttributes(new HashMap<QName, String>());
     meta.getExtensionAttributes().put(new QName(CommonNamespaces.GEDCOMX_COMMON_NAMESPACE, "data"), "custom");
     meta.setExtensionElements(new ArrayList<Object>());
-    meta.getExtensionElements().add(new RDFDescriptionSet());
-    meta = processThroughXml(meta, RDFDescription.class, JAXBContext.newInstance(RDFDescription.class, RDFDescriptionSet.class));
+    meta.getExtensionElements().add(new ResourceSet());
+    meta = processThroughXml(meta, RDFDescription.class, JAXBContext.newInstance(RDFDescription.class, ResourceSet.class));
     assertEquals("id", meta.getId());
     assertEquals(URI.create("urn:dataref"), meta.getAbout());
     assertEquals("custom", meta.getExtensionAttributes().get(new QName(CommonNamespaces.GEDCOMX_COMMON_NAMESPACE, "data")));
@@ -47,7 +48,7 @@ public class TestRDFDescription {
     meta.setExtensionAttributes(new HashMap<QName, String>());
     meta.getExtensionAttributes().put(new QName(CommonNamespaces.GEDCOMX_COMMON_NAMESPACE, "data"), "custom");
     meta.setExtensionElements(new ArrayList<Object>());
-    meta.getExtensionElements().add(new RDFDescriptionSet());
+    meta.getExtensionElements().add(new ResourceSet());
     meta = processThroughJson(meta);
     assertEquals("id", meta.getId());
     assertEquals(URI.create("urn:dataref"), meta.getAbout());

@@ -19,15 +19,15 @@ import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.rt.CommonNamespaces;
 import org.gedcomx.metadata.rdf.RDFDescription;
 import org.gedcomx.metadata.rdf.RDFLiteral;
-import org.gedcomx.metadata.rdf.RDFTypeReference;
 import org.gedcomx.metadata.rdf.RDFValue;
+import org.gedcomx.rt.CommonNamespaces;
 import org.gedcomx.rt.DocIgnoreXmlRootElement;
 import org.gedcomx.rt.XmlTypeIdResolver;
+import org.gedcomx.types.ResourceType;
+import org.gedcomx.types.Typed;
 
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import java.util.Date;
@@ -46,9 +46,8 @@ import java.util.List;
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType (name = "Description")
-@XmlRootElement (name = "Description", namespace = CommonNamespaces.RDF_NAMESPACE )
-@DocIgnoreXmlRootElement
-public class DublinCoreDescription extends RDFDescription {
+@XmlRootElement (name = "Description", namespace = CommonNamespaces.RDF_NAMESPACE ) // (heatonra) see big comment in RDFDescription
+public class DublinCoreDescription extends RDFDescription implements Typed<ResourceType> {
 
   private RDFValue abstrct;
   private List<RDFValue> accessRights;
@@ -103,7 +102,6 @@ public class DublinCoreDescription extends RDFDescription {
   private RDFValue tableOfContents;
   private List<RDFValue> temporal;
   private RDFLiteral title;
-  private RDFTypeReference type;
   private Date valid;
 
   /**
@@ -1263,36 +1261,6 @@ public class DublinCoreDescription extends RDFDescription {
    */
   public void setTitle(RDFLiteral title) {
     this.title = title;
-  }
-
-  /**
-   * The nature or genre of the resource. Recommended best practice is to use a controlled vocabulary such as the DCMI Type Vocabulary [DCMITYPE]. To
-   * describe the file format, physical medium, or dimensions of the resource, use the Format element. Per the recommendation in
-   * <a href="http://dublincore.org/documents/2008/01/14/dc-rdf/#sect-5">Expressing Dublin Core in RDF, Section 5.2</a>, this
-   * element is declared in the 'rdf' namespace.
-   *
-   * @return The nature or genre of the resource. Recommended best practice is to use a controlled vocabulary such as the DCMI Type Vocabulary [DCMITYPE].
-   * To describe the file format, physical medium, or dimensions of the resource, use the Format element.
-   * @link http://dublincore.org/documents/dcmi-terms/#terms-type
-   */
-  @XmlElement(name = "type", namespace = CommonNamespaces.RDF_NAMESPACE )
-  public RDFTypeReference getType() {
-    return type;
-  }
-
-  /**
-   * The nature or genre of the resource. Recommended best practice is to use a controlled vocabulary such as the DCMI Type Vocabulary [DCMITYPE]. To
-   * describe the file format, physical medium, or dimensions of the resource, use the Format element. Per the recommendation in
-   * <a href="http://dublincore.org/documents/2008/01/14/dc-rdf/#sect-5">Expressing Dublin Core in RDF, Section 5.2</a>, this
-   * element is declared in the 'rdf' namespace.
-   *
-   * @param type The nature or genre of the resource. Recommended best practice is to use a controlled vocabulary such as the DCMI Type Vocabulary [DCMITYPE].
-   * To describe the file format, physical medium, or dimensions of the resource, use the Format element.
-   * @link http://dublincore.org/documents/dcmi-terms/#terms-type
-   * @link http://dublincore.org/documents/2008/01/14/dc-rdf/#sect-5
-   */
-  public void setType(RDFTypeReference type) {
-    this.type = type;
   }
 
   /**

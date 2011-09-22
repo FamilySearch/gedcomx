@@ -2,13 +2,15 @@ package org.gedcomx.conclusion.www;
 
 import org.gedcomx.common.AlternateId;
 import org.gedcomx.common.Attribution;
+import org.gedcomx.common.ResourceSet;
 import org.gedcomx.common.ResourceReference;
 import org.gedcomx.conclusion.*;
-import org.gedcomx.metadata.rdf.RDFDescriptionSet;
+import org.gedcomx.metadata.dc.DublinCoreDescription;
 import org.gedcomx.types.*;
 import org.gedcomx.www.Link;
 import org.testng.annotations.Test;
 
+import javax.xml.bind.JAXBContext;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +31,7 @@ public class TestPerson {
    */
   public void testWWWPersonXml() throws Exception {
     PersonWWW person = createTestWWWPerson();
-    person = processThroughXml(person);
+    person = processThroughXml(person, PersonWWW.class, JAXBContext.newInstance(PersonWWW.class, DublinCoreDescription.class));
     assertTestWWWPerson(person);
   }
 
@@ -45,7 +47,7 @@ public class TestPerson {
   private PersonWWW createTestWWWPerson() {
     PersonWWW personWWW = new PersonWWW();
     personWWW.setPerson(createTestPerson());
-    personWWW.setMetadata(new RDFDescriptionSet());
+    personWWW.setMetadata(new ResourceSet());
     return personWWW;
   }
 

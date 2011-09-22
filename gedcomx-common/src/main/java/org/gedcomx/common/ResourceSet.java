@@ -13,21 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.metadata.rdf;
+package org.gedcomx.common;
 
-import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.rt.*;
+import org.gedcomx.rt.JsonExtensionElement;
+import org.gedcomx.rt.SupportsExtensionElements;
+import org.gedcomx.rt.XmlTypeIdResolver;
 
 import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A set of RDF descriptions, <a href="http://www.w3.org/TR/2004/REC-rdf-primer-20040210/#rdfxml">according to the RDF spec</a>.
+ * Generic holder/container/collection for a set of resources. The <a href="http://www.w3.org/TR/2004/REC-rdf-primer-20040210/#rdfxml">RDF spec</a>
+ * calls this an RDF "description set".
  *
  * @author Ryan Heaton
  */
@@ -35,11 +36,10 @@ import java.util.List;
 @JsonExtensionElement
 @JsonTypeInfo ( use = JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME )
 @JsonTypeIdResolver ( XmlTypeIdResolver.class )
-@XmlType (name = "RDF")
-public class RDFDescriptionSet implements SupportsExtensionElements {
+@XmlType ( name = "RDF" )
+public class ResourceSet implements SupportsExtensionElements {
 
   private String id;
-  private List<RDFDescription> rdfDescriptions;
   private List<Object> extensionElements;
 
   /**
@@ -60,28 +60,6 @@ public class RDFDescriptionSet implements SupportsExtensionElements {
    */
   public void setId(String id) {
     this.id = id;
-  }
-
-  /**
-   * The RDF descriptions contained in this bundle.
-   *
-   * @return The RDF descriptions contained in this bundle.
-   */
-  @XmlElement ( name = "Description" )
-  @JsonProperty ( "rdfDescriptions" )
-  @JsonName ( "rdfDescriptions" )
-  public List<RDFDescription> getRdfDescriptions() {
-    return rdfDescriptions;
-  }
-
-  /**
-   * The RDF descriptions contained in this bundle.
-   *
-   * @param rdfDescriptions The RDF descriptions contained in this bundle.
-   */
-  @JsonProperty ( "rdfDescriptions" )
-  public void setRdfDescriptions(List<RDFDescription> rdfDescriptions) {
-    this.rdfDescriptions = rdfDescriptions;
   }
 
   /**

@@ -2,16 +2,16 @@ package org.gedcomx.record.www;
 
 import org.gedcomx.common.AlternateId;
 import org.gedcomx.common.Attribution;
+import org.gedcomx.common.ResourceSet;
 import org.gedcomx.common.ResourceReference;
 import org.gedcomx.metadata.dc.DublinCoreDescription;
-import org.gedcomx.metadata.rdf.RDFDescription;
-import org.gedcomx.metadata.rdf.RDFDescriptionSet;
 import org.gedcomx.metadata.rdf.RDFLiteral;
 import org.gedcomx.record.*;
 import org.gedcomx.types.*;
 import org.gedcomx.www.Link;
 import org.testng.annotations.Test;
 
+import javax.xml.bind.JAXBContext;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,7 +32,7 @@ public class TestRecord {
    */
   public void testRecordXml() throws Exception {
     RecordWWW record = createTestRecordWWW();
-    record = processThroughXml(record);
+    record = processThroughXml(record, RecordWWW.class, JAXBContext.newInstance(RecordWWW.class, DublinCoreDescription.class));
     assertTestRecordWWW(record);
   }
 
@@ -48,11 +48,11 @@ public class TestRecord {
   private RecordWWW createTestRecordWWW() {
     RecordWWW recordWWW = new RecordWWW();
     recordWWW.setRecord(createTestRecord());
-    recordWWW.setMetadata(new RDFDescriptionSet());
+    recordWWW.setMetadata(new ResourceSet());
     DublinCoreDescription dcDescription = new DublinCoreDescription();
     dcDescription.setBibliographicCitation(new RDFLiteral());
     dcDescription.getBibliographicCitation().setValue("bibliographic citation");
-    recordWWW.getMetadata().setRdfDescriptions(Arrays.asList((RDFDescription) dcDescription));
+    recordWWW.getMetadata().setExtensionElements(Arrays.asList((Object) dcDescription));
     return recordWWW;
   }
 
@@ -211,9 +211,9 @@ public class TestRecord {
 
   private void assertTestRecordWWW(RecordWWW record) {
     assertTestRecord(record.getRecord());
-    RDFDescriptionSet metadata = record.getMetadata();
-    assertEquals(1, metadata.getRdfDescriptions().size());
-    assertEquals("bibliographic citation", ((DublinCoreDescription)metadata.getRdfDescriptions().get(0)).getBibliographicCitation().getValue());
+    ResourceSet metadata = record.getMetadata();
+    assertEquals(1, metadata.getExtensionElements().size());
+    assertEquals("bibliographic citation", metadata.findExtensionOfType(DublinCoreDescription.class).getBibliographicCitation().getValue());
   }
 
   private void assertTestRecord(Record record) {

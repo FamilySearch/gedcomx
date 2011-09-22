@@ -15,13 +15,17 @@
  */
 package org.gedcomx.metadata.rdf;
 
+import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.metadata.dc.DublinCoreDescription;
+import org.gedcomx.rt.CommonNamespaces;
 import org.gedcomx.rt.SupportsExtensionAttributes;
 import org.gedcomx.rt.SupportsExtensionElements;
 import org.gedcomx.rt.XmlTypeIdResolver;
+import org.gedcomx.types.ResourceType;
+import org.gedcomx.types.TypeReference;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.*;
@@ -41,11 +45,41 @@ import java.util.Map;
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlSeeAlso( DublinCoreDescription.class )
 @XmlType ( name = "Description" )
-@XmlRootElement( name = "Description" )
 public class RDFDescription implements SupportsExtensionAttributes, SupportsExtensionElements {
 
-  private String id; 
+  // @XmlRootElement( name = "Description" )
+  // (09/2011, heatonra) To model RDF+Dublin Core most accurately in XML schema, this class would be annotated
+  // with @XmlRootElement( name = "Description" ) and would define a property of type List<JAXBElement> that is
+  // annotated according to "XML Schema substitution group support" in the JavaDocs of @XmlElementRef at
+  // http://jaxb.java.net/nonav/2.1.9/docs/api/javax/xml/bind/annotation/XmlElementRef.html.
+  // Then we'd turn DublinCoreDescription into a helper for RDFDescription that would add/get elements from
+  // this list.
+  //
+  // Yuck.
+  //
+  // In order to avoid this nastiness, we're defining DublinCoreDescription with standard accessors and having
+  // it be the definition of the rdf:Description element, despite the inaccurate dependency from RDF to Dublin Core.
+  // The thing is, at this time, it's not anticipated that there will be other subclasses of RDFDescription. If at any
+  // time in the future other subclasses of RDFDescription are needed, we'll have to leverage the "XML Schema
+  // substitution group support". Then, DublinCoreDescription would be refactored as a helper/builder for RDFDescription
+  // and add/get/remove elements from the List<JAXBElement>.
+  //
+  // Here's kinda how the getter for that property would look:
+  //
+  // @XmlElementRefs ( {
+  //   ...
+  //   @XmlElementRef(name="bibliographicCitation", namespace=CommonNamespaces.DUBLIN_CORE_NAMESPACE, type=JAXBElement.class),
+  //   ...
+  //   @XmlElementRef(name="coverage", namespace=CommonNamespaces.DUBLIN_CORE_NAMESPACE, type=JAXBElement.class),
+  //   ...continue for all dublin core terms...
+  // } )
+  // public List<JAXBElement> getDublinCoreTerms() { ... }
+  //
+  // ...and then you'd have to create the @XmlElementDecl in the @XmlRegistry for every dublin core term, too.
+
+  private String id;
   private URI about;
+  private TypeReference<ResourceType> type;
   private Map<QName, String> extensionAttributes;
   private List<Object> extensionElements;
 
@@ -87,6 +121,46 @@ public class RDFDescription implements SupportsExtensionAttributes, SupportsExte
    */
   public void setAbout(URI about) {
     this.about = about;
+  }
+
+  /**
+   * The type of the resource being described.
+   *
+   * @return The type of the resource being described.
+   */
+  @XmlElement(name = "type", namespace = CommonNamespaces.RDF_NAMESPACE )
+  public TypeReference<ResourceType> getType() {
+    return type;
+  }
+
+  /**
+   * The type of the resource being described.
+   *
+   * @param type The type of the resource being described.
+   */
+  public void setType(TypeReference<ResourceType> type) {
+    this.type = type;
+  }
+
+  /**
+   * The enum referencing the known type of the resource being referenced, or {@link org.gedcomx.types.ResourceType#OTHER} if not known.
+   *
+   * @return The enum referencing the known type of the source reference, or {@link org.gedcomx.types.ResourceType#OTHER} if not known.
+   */
+  @XmlTransient
+  @JsonIgnore
+  public ResourceType getKnownType() {
+    return getType() == null ? null : XmlQNameEnumUtil.fromURI(getType().getType(), ResourceType.class);
+  }
+
+  /**
+   * Set the type of this source reference from an enumeration of known source reference types.
+   *
+   * @param knownType The source reference type.
+   */
+  @JsonIgnore
+  public void setKnownType(ResourceType knownType) {
+    setType(knownType == null ? null : new TypeReference<ResourceType>(knownType));
   }
 
   /**

@@ -43,7 +43,7 @@ import java.util.Map;
  *
  * @author Ryan Heaton
  */
-@XmlType ( name = "ResourceReference" )
+@XmlType ( name = "ResourceReference", namespace = CommonNamespaces.RDF_NAMESPACE )
 @JsonTypeInfo ( use = JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver ( XmlTypeIdResolver.class )
 @XmlSeeAlso(ResourceFragmentParameter.class)

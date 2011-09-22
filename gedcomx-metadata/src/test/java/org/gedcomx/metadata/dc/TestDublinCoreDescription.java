@@ -1,10 +1,10 @@
 package org.gedcomx.metadata.dc;
 
 import org.gedcomx.metadata.rdf.RDFLiteral;
-import org.gedcomx.metadata.rdf.RDFTypeReference;
 import org.gedcomx.metadata.rdf.RDFValue;
 import org.gedcomx.rt.CommonNamespaces;
 import org.gedcomx.types.ResourceType;
+import org.gedcomx.types.TypeReference;
 import org.testng.annotations.Test;
 
 import javax.xml.namespace.QName;
@@ -50,7 +50,7 @@ public class TestDublinCoreDescription {
     abstrct.setExtensionAttributes(new HashMap<QName, String>());
     abstrct.getExtensionAttributes().put(new QName(CommonNamespaces.GEDCOMX_COMMON_NAMESPACE, "hi"), "hello");
     abstrct.setResource(URI.create("urn:abstract"));
-    abstrct.setType(new RDFTypeReference());
+    abstrct.setType(new TypeReference<ResourceType>());
     abstrct.getType().setKnownType(ResourceType.Text);
     metadata.setAbstract(abstrct);
     metadata.setAccessRights(new ArrayList<RDFValue>());
@@ -109,7 +109,7 @@ public class TestDublinCoreDescription {
     titleProperty.setExtensionAttributes(new HashMap<QName, String>());
     titleProperty.getExtensionAttributes().put(new QName(CommonNamespaces.GEDCOMX_COMMON_NAMESPACE, "hi"), "hello");
     metadata.setTitle(titleProperty);
-    metadata.setType(new RDFTypeReference());
+    metadata.setType(new TypeReference<ResourceType>());
     metadata.getType().setKnownType(ResourceType.Event);
     metadata.setValid(new Date());
     metadata.setIsVersionOf(new RDFValue());
@@ -123,7 +123,7 @@ public class TestDublinCoreDescription {
     assertEquals("en", abstrct.getLang());
     assertEquals("hello", abstrct.getExtensionAttributes().get(new QName(CommonNamespaces.GEDCOMX_COMMON_NAMESPACE, "hi")));
     assertEquals(URI.create("urn:abstract"), abstrct.getResource());
-    assertEquals(ResourceType.Text, abstrct.getType().getKnownType());
+    assertEquals(ResourceType.Text, abstrct.getKnownType());
     assertTrue(metadata.getAccessRights() == null || metadata.getAccessRights().isEmpty());
     assertTrue(metadata.getAccrualMethod() != null);
     assertTrue(metadata.getAccrualPeriodicity() != null);
@@ -177,7 +177,7 @@ public class TestDublinCoreDescription {
     assertEquals("title", titleProperty.getValue());
     assertEquals("en", titleProperty.getLang());
     assertEquals("hello", titleProperty.getExtensionAttributes().get(new QName(CommonNamespaces.GEDCOMX_COMMON_NAMESPACE, "hi")));
-    assertEquals(ResourceType.Event, metadata.getType().getKnownType());
+    assertEquals(ResourceType.Event, metadata.getKnownType());
     assertTrue(metadata.getValid() != null);
     assertTrue(metadata.getIsVersionOf() != null);
   }

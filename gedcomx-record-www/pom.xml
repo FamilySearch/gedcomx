@@ -55,14 +55,16 @@
 
     <dependency>
       <groupId>org.gedcomx</groupId>
-      <artifactId>gedcomx-metadata</artifactId>
+      <artifactId>gedcomx-rt-support</artifactId>
       <version>0.6.0.BUILD-SNAPSHOT</version>
     </dependency>
 
     <dependency>
       <groupId>org.gedcomx</groupId>
-      <artifactId>gedcomx-rt-support</artifactId>
+      <artifactId>gedcomx-metadata</artifactId>
       <version>0.6.0.BUILD-SNAPSHOT</version>
+
+      <scope>test</scope>
     </dependency>
   </dependencies>
 
