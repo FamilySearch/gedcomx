@@ -15,11 +15,16 @@
  */
 package org.gedcomx.common;
 
+import org.codehaus.enunciate.XmlQNameEnumUtil;
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.rt.*;
+import org.gedcomx.types.ConfidenceLevel;
+import org.gedcomx.types.TypeReference;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 import java.util.Date;
 
@@ -32,11 +37,12 @@ import java.util.Date;
 @JsonExtensionElement
 @JsonTypeInfo ( use = JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType ( name = "Attribution", propOrder = {"modified", "statement", "contributor" } )
+@XmlType ( name = "Attribution", propOrder = {"modified", "statement", "confidence", "contributor" } )
 @SuppressWarnings("gedcomx:no_id")
 public final class Attribution {
 
   private ResourceReference contributor;
+  private TypeReference<ConfidenceLevel> confidence;
   private Date modified;
   private String statement;
 
@@ -58,6 +64,45 @@ public final class Attribution {
    */
   public void setContributor(ResourceReference contributor) {
     this.contributor = contributor;
+  }
+
+  /**
+   * The level of confidence the contributor has about the data.
+   *
+   * @return The level of confidence the contributor has about the data.
+   */
+  public TypeReference<ConfidenceLevel> getConfidence() {
+    return confidence;
+  }
+
+  /**
+   * The level of confidence the contributor has about the data.
+   *
+   * @param confidence The level of confidence the contributor has about the data.
+   */
+  public void setConfidence(TypeReference<ConfidenceLevel> confidence) {
+    this.confidence = confidence;
+  }
+
+  /**
+   * The enum referencing the known confidence level, or {@link org.gedcomx.types.ConfidenceLevel#OTHER} if not known.
+   *
+   * @return The enum referencing the known confidence level, or {@link org.gedcomx.types.ConfidenceLevel#OTHER} if not known.
+   */
+  @XmlTransient
+  @JsonIgnore
+  public ConfidenceLevel getKnownConfidenceLevel() {
+    return getConfidence() == null ? null : XmlQNameEnumUtil.fromURI(getConfidence().getType(), ConfidenceLevel.class);
+  }
+
+  /**
+   * Set the confidence level from a known enumeration of confidence levels.
+   *
+   * @param level The known level.
+   */
+  @JsonIgnore
+  public void setKnownConfidenceLevel(ConfidenceLevel level) {
+    setConfidence(level == null ? null : new TypeReference<ConfidenceLevel>(level));
   }
 
   /**

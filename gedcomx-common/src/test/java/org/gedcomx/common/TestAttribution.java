@@ -1,5 +1,6 @@
 package org.gedcomx.common;
 
+import org.gedcomx.types.ConfidenceLevel;
 import org.testng.annotations.Test;
 
 import java.net.URI;
@@ -23,12 +24,14 @@ public class TestAttribution {
     attribution.setContributor(new ResourceReference());
     attribution.getContributor().setResource(URI.create("urn:someid"));
     attribution.setStatement("hello, there.");
+    attribution.setKnownConfidenceLevel(ConfidenceLevel.Possibly);
     Date ts = new Date();
     attribution.setModified(ts);
     attribution = processThroughXml(attribution);
     assertEquals("urn:someid", attribution.getContributor().getResource().toString());
     assertEquals("hello, there.", attribution.getStatement());
     assertEquals(ts, attribution.getModified());
+    assertEquals(ConfidenceLevel.Possibly, attribution.getKnownConfidenceLevel());
   }
 
   /**
@@ -39,12 +42,14 @@ public class TestAttribution {
     attribution.setContributor(new ResourceReference());
     attribution.getContributor().setResource(URI.create("urn:someid"));
     attribution.setStatement("hello, there.");
+    attribution.setKnownConfidenceLevel(ConfidenceLevel.Possibly);
     Date ts = new Date();
     attribution.setModified(ts);
     attribution = processThroughJson(attribution);
     assertEquals("urn:someid", attribution.getContributor().getResource().toString());
     assertEquals("hello, there.", attribution.getStatement());
     assertEquals(ts, attribution.getModified());
+    assertEquals(ConfidenceLevel.Possibly, attribution.getKnownConfidenceLevel());
   }
 
 }
