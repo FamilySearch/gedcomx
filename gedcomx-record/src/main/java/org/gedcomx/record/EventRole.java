@@ -28,7 +28,7 @@ import java.net.URI;
  * Description of a role played by a persona in an event.
  */
 @XmlType ( name = "EventRole" )
-public final class EventRole extends GenealogicalResource implements Describable, Weighted {
+public final class EventRole extends GenealogicalResource implements Weighted {
 
   private URI event;
   private String description;

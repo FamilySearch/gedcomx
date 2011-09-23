@@ -1,7 +1,10 @@
-package org.gedcomx.record;
+package org.gedcomx.common;
 
+import org.codehaus.enunciate.XmlQNameEnumUtil;
+import org.gedcomx.common.Collection;
 import org.gedcomx.common.ResourceReference;
 import org.gedcomx.types.RecordType;
+import org.gedcomx.types.TypeReference;
 import org.testng.annotations.Test;
 
 import java.net.URI;
@@ -21,7 +24,7 @@ public class TestCollection {
    * tests collection xml
    */
   public void testCollectionXml() throws Exception {
-    RecordCollection collection = createTestCollection();
+    Collection collection = createTestCollection();
     collection = processThroughXml(collection);
     assertCollection(collection);
   }
@@ -30,13 +33,13 @@ public class TestCollection {
    * tests collection json
    */
   public void testCollectionJson() throws Exception {
-    RecordCollection collection = createTestCollection();
+    Collection collection = createTestCollection();
     collection = processThroughJson(collection);
     assertCollection(collection);
   }
 
-  private RecordCollection createTestCollection() {
-    RecordCollection collection = new RecordCollection();
+  private Collection createTestCollection() {
+    Collection collection = new Collection();
     collection.setDescription("description");
     collection.setId("id");
     collection.setPublisher("publisher");
@@ -44,7 +47,8 @@ public class TestCollection {
     collection.setBibliographicCitation("bibliographic citation");
     collection.setSpatial("spatial coverage");
     collection.setTemporal("temporal coverage");
-    collection.setKnownRecordType(RecordType.Census);
+    collection.setTypes(new ArrayList<TypeReference>());
+    collection.getTypes().add(new TypeReference(RecordType.Birth));
     collection.setItems(new ArrayList<ResourceReference>());
     ResourceReference resourceReference = new ResourceReference();
     resourceReference.setResource(URI.create("urn:item"));
@@ -52,7 +56,7 @@ public class TestCollection {
     return collection;
   }
 
-  private void assertCollection(RecordCollection collection) {
+  private void assertCollection(Collection collection) {
     assertEquals("description", collection.getDescription());
     assertEquals("id", collection.getId());
     assertEquals("publisher", collection.getPublisher());
@@ -61,7 +65,8 @@ public class TestCollection {
     assertEquals("spatial coverage", collection.getSpatial());
     assertEquals("temporal coverage", collection.getTemporal());
     assertEquals("urn:item", collection.getItems().get(0).getResource().toString());
-    assertEquals(RecordType.Census, collection.getKnownRecordType());
+    assertEquals(1, collection.getTypes().size());
+    assertEquals(XmlQNameEnumUtil.toURI(RecordType.Birth), collection.getTypes().get(0).getType());
   }
 
 }

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.record;
+package org.gedcomx.common;
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.enunciate.json.JsonName;
@@ -22,10 +22,9 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.common.GenealogicalEntity;
-import org.gedcomx.common.ResourceReference;
 import org.gedcomx.rt.*;
 import org.gedcomx.types.RecordType;
+import org.gedcomx.types.TypeReference;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.*;
@@ -33,22 +32,22 @@ import java.net.URI;
 import java.util.List;
 
 /**
- * A collection of records.
+ * A formal collection of genealogical entities.
  */
 @XmlRootElement
 @JsonExtensionElement
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType ( name = "RecordCollection", propOrder = { "title", "description", "publisher", "recordType", "spatial", "temporal", "items" } )
+@XmlType ( name = "Collection", propOrder = { "title", "description", "publisher", "types", "spatial", "temporal", "items" } )
 @RDFSubClassOf ( CommonNamespaces.DUBLIN_CORE_TYPE_NAMESPACE + "Collection" )
-public class RecordCollection extends GenealogicalEntity implements Describable {
+public class Collection extends GenealogicalEntity {
 
   private String title;
   private String description;
   private String publisher;
-  private URI recordType;
   private String spatial;
   private String temporal;
+  private List<TypeReference> types;
   private List<ResourceReference> items;
 
   /**
@@ -109,44 +108,25 @@ public class RecordCollection extends GenealogicalEntity implements Describable 
   }
 
   /**
-   * Reference to the type of record contained in a collection.
+   * The "types" of this collection, i.e. the types of items this collection holds.
    *
-   * @return Reference to the type of record contained in a collection.
+   * @return The "types" of this collection, i.e. the types of items this collection holds.
    */
-  @XmlQNameEnumRef(RecordType.class)
-  @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
-  public URI getRecordType() {
-    return recordType;
+  @XmlElement( name = "type", namespace = CommonNamespaces.RDF_NAMESPACE )
+  @JsonName ("types")
+  @JsonProperty ("types")
+  public List<TypeReference> getTypes() {
+    return types;
   }
 
   /**
-   * Reference to the type of record contained in a collection.
+   * The "types" of this collection, i.e. the types of items this collection holds.
    *
-   * @param recordType Reference to the type of record contained in a collection.
+   * @param types The "types" of this collection, i.e. the types of items this collection holds.
    */
-  public void setRecordType(URI recordType) {
-    this.recordType = recordType;
-  }
-
-  /**
-   * Get the record type from a known enumeration of record types.
-   *
-   * @return The known record type, or {@link org.gedcomx.types.RecordType#OTHER} if unknown type.
-   */
-  @XmlTransient
-  @JsonIgnore
-  public RecordType getKnownRecordType() {
-    return XmlQNameEnumUtil.fromURI(getRecordType(), RecordType.class);
-  }
-
-  /**
-   * Set the record type from a known enumeration of record types.
-   *
-   * @param type The record type.
-   */
-  @JsonIgnore
-  public void setKnownRecordType(RecordType type) {
-    setRecordType(XmlQNameEnumUtil.toURI(type));
+  @JsonProperty ("types")
+  public void setTypes(List<TypeReference> types) {
+    this.types = types;
   }
 
   /**
