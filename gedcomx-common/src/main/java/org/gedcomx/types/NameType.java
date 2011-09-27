@@ -29,9 +29,11 @@ import java.net.URI;
 public enum NameType {
 
   Name,
+  BirthName,
+  DeathName,
+  MarriedName,
   AlsoKnownAs,
   MaidenName,
-  MarriedName,
   Nickname,
   Adoptive,
   Formal,
