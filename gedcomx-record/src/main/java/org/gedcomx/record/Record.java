@@ -17,12 +17,10 @@ package org.gedcomx.record;
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.enunciate.json.JsonName;
-import org.codehaus.enunciate.qname.XmlQNameEnumRef;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.common.AlternateId;
 import org.gedcomx.common.GenealogicalEntity;
 import org.gedcomx.common.PersistentIdentifiable;
 import org.gedcomx.rt.CommonNamespaces;
@@ -34,7 +32,6 @@ import org.gedcomx.types.Typed;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.*;
-import java.net.URI;
 import java.util.List;
 
 /**
@@ -44,13 +41,11 @@ import java.util.List;
 @JsonExtensionElement
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType ( name = "Record", propOrder = { "type", "persistentId", "alternateIds", "personas", "events", "relationships", "fields" } )
+@XmlType ( name = "Record", propOrder = { "type", "personas", "events", "relationships", "fields" } )
 public class Record extends GenealogicalEntity implements Typed<RecordType>, PersistentIdentifiable {
 
   private String lang;
   private TypeReference<RecordType> type;
-  private URI persistentId;
-  private List<AlternateId> alternateIds;
   private List<Persona> personas;
   private List<Event> events;
   private List<Relationship> relationships;
@@ -113,47 +108,6 @@ public class Record extends GenealogicalEntity implements Typed<RecordType>, Per
    */
   public void setLang(String lang) {
     this.lang = lang;
-  }
-
-  /**
-   * A long-term, persistent, globally unique identifier for this record.
-   *
-   * @return A long-term, persistent, globally unique identifier for this record.
-   */
-  @XmlSchemaType(name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
-  public URI getPersistentId() {
-    return persistentId;
-  }
-
-  /**
-   * A long-term, persistent, globally unique identifier for this record.
-   *
-   * @param persistentId A long-term, persistent, globally unique identifier for this record.
-   */
-  public void setPersistentId(URI persistentId) {
-    this.persistentId = persistentId;
-  }
-
-  /**
-   * The list of alternate ids of the record.
-   *
-   * @return The list of alternate ids of the record.
-   */
-  @XmlElement (name="alternateId")
-  @JsonProperty("alternateIds")
-  @JsonName("alternateIds")
-  public List<AlternateId> getAlternateIds() {
-    return alternateIds;
-  }
-
-  /**
-   * The list of alternate ids of the record.
-   *
-   * @param alternateIds The list of alternate ids of the record.
-   */
-  @JsonProperty("alternateIds")
-  public void setAlternateIds(List<AlternateId> alternateIds) {
-    this.alternateIds = alternateIds;
   }
 
   /**
