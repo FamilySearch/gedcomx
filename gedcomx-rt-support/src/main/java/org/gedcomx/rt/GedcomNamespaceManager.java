@@ -21,6 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchema;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.*;
@@ -36,6 +37,7 @@ public class GedcomNamespaceManager extends NamespacePrefixMapper {
   private final Map<String, String> ns2prefix;
 
   private static Map<String, String> KNOWN_PREFIXES = null;
+  private static final Map<String, String> RUNTIME_VERSIONS = new HashMap<String, String>();
 
   public GedcomNamespaceManager(Class<?> rootClass) {
     this(getDefaultNamespace(rootClass));
@@ -159,6 +161,37 @@ public class GedcomNamespaceManager extends NamespacePrefixMapper {
       return "";
     }
     return choice;
+  }
+
+  /**
+   * Get the version of the runtime java library that defines the model for the given namespace.
+   *
+   * @param namespace The model namespace.
+   * @return The runtime version.
+   */
+  public synchronized static String getRuntimeVersion(String namespace) {
+    String prefix = getKnownPrefixes().get(namespace);
+    String version = RUNTIME_VERSIONS.get(prefix);
+    if (version == null) {
+      InputStream in = GedcomNamespaceManager.class.getClassLoader().getResourceAsStream("META-INF/" + prefix + ".rt.properties");
+      if (in != null) {
+        Properties properties = new Properties();
+        try {
+          properties.load(in);
+          version = properties.getProperty("version");
+        }
+        catch (IOException e) {
+          version = null;
+        }
+      }
+
+      if (version == null) {
+        version = "(unknown)";
+      }
+
+      RUNTIME_VERSIONS.put(prefix, version);
+    }
+    return version;
   }
 
 }
