@@ -115,7 +115,7 @@ public class PersonVitals extends GenealogicalResource {
    *
    * @return Reference to the primary birth event for a person.
    */
-  @RDFRange (Event.class)
+  @RDFRange (Fact.class)
   public ResourceReference getBirth() {
     return birth;
   }
@@ -134,7 +134,7 @@ public class PersonVitals extends GenealogicalResource {
    *
    * @return Reference to the primary death event for a person.
    */
-  @RDFRange (Event.class)
+  @RDFRange (Fact.class)
   public ResourceReference getDeath() {
     return death;
   }
