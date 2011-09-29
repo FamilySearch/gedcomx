@@ -29,18 +29,18 @@ import javax.xml.bind.annotation.XmlType;
 import java.net.URI;
 
 /**
- * Definition of the vital information for a person. The "vital" information is useful to applications
+ * Definition of the summary information for a person. The "summary" information is useful to applications
  * that want to specify which conclusions are identified as the "primary" conclusions about a person.
  *
  * @author Ryan Heaton
  */
-@XmlRootElement ( name = "vitals" )
+@XmlRootElement ( name = "personSummary" )
 @JsonExtensionElement
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType ( name = "PersonVitals", propOrder = { "gender", "name", "birth", "death" } )
+@XmlType ( name = "PersonSummary", propOrder = { "gender", "name", "birth", "death" } )
 @RDFSubClassOf( ConclusionNamespaces.GEDCOMX_CONCLUSION_NAMESPACE + "Person" )
-public class PersonVitals extends GenealogicalResource {
+public class PersonSummary extends GenealogicalResource {
 
   private URI personReference;
   private ResourceReference gender;
@@ -49,10 +49,10 @@ public class PersonVitals extends GenealogicalResource {
   private ResourceReference death;
 
   /**
-   * Reference to the person to which this vital information is being applied. The reference can be via persistent id,
+   * Reference to the person to which this summary information is being applied. The reference can be via persistent id,
    * if exists, or via local reference, e.g. "#personId".
    *
-   * @return Reference to the person to which this vital information is being applied.
+   * @return Reference to the person to which this summary information is being applied.
    */
   @XmlAttribute ( name = "about", namespace = CommonNamespaces.RDF_NAMESPACE )
   @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
@@ -61,10 +61,10 @@ public class PersonVitals extends GenealogicalResource {
   }
 
   /**
-   * Reference to the person to which this vital information is being applied. The reference can be via persistent id,
+   * Reference to the person to which this summary information is being applied. The reference can be via persistent id,
    * if exists, or via local reference, e.g. "#personId".
    *
-   * @param personReference Reference to the person to which this vital information is being applied.
+   * @param personReference Reference to the person to which this summary information is being applied.
    */
   public void setPersonReference(URI personReference) {
     this.personReference = personReference;
