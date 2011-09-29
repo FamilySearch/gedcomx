@@ -38,30 +38,34 @@ import java.util.List;
 @JsonExtensionElement
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType ( name = "Person", propOrder = { "gender", "names", "events", "characteristics" } )
+@XmlType ( name = "Person", propOrder = { "genders", "names", "events", "characteristics" } )
 public class Person extends GenealogicalEntity implements PersistentIdentifiable, HasEvents, HasCharacteristics {
 
-  private Gender gender;
+  private List<Gender> genders;
   private List<Name> names;
   private List<Event> events;
   private List<Characteristic> characteristics;
 
   /**
-   * The gender of the person.
+   * The gender conclusions for the person.
    *
-   * @return The gender of the person.
+   * @return The gender conclusions for the person.
    */
-  public Gender getGender() {
-    return gender;
+  @XmlElement(name="gender")
+  @JsonProperty("genders")
+  @JsonName("genders")
+  public List<Gender> getGenders() {
+    return genders;
   }
 
   /**
-   * The gender conclusion for the person.
+   * The gender conclusions for the person.
    *
-   * @param gender The gender conclusion for the person.
+   * @param genders The gender conclusions for the person.
    */
-  public void setGender(Gender gender) {
-    this.gender = gender;
+  @JsonProperty("genders")
+  public void setGenders(List<Gender> genders) {
+    this.genders = genders;
   }
 
   /**

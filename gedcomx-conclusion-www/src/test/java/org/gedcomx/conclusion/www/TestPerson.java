@@ -13,6 +13,7 @@ import org.testng.annotations.Test;
 import javax.xml.bind.JAXBContext;
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.gedcomx.rt.SerializationUtil.processThroughJson;
@@ -58,7 +59,7 @@ public class TestPerson {
     genderLink.setHref(URI.create("urn:gender"));
     gender.addExtensionElement(genderLink);
     gender.setKnownType(GenderType.Male);
-    person.setGender(gender);
+    person.setGenders(Arrays.asList(gender));
 
     Link personLink = new Link();
     personLink.setHref(URI.create("urn:person"));
@@ -171,8 +172,8 @@ public class TestPerson {
     Event event;
     Name name;
     ResourceReference attributedSourceReference;
-    assertEquals(GenderType.Male, person.getGender().getKnownType());
-    assertEquals("urn:gender", person.getGender().findExtensionsOfType(Link.class).get(0).getHref().toString());
+    assertEquals(GenderType.Male, person.getGenders().get(0).getKnownType());
+    assertEquals("urn:gender", person.getGenders().get(0).findExtensionsOfType(Link.class).get(0).getHref().toString());
 
     assertEquals(1, person.findExtensionsOfType(Link.class).size());
     assertEquals("urn:person", person.findExtensionsOfType(Link.class).get(0).getHref().toString());

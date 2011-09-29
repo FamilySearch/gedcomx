@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.gedcomx.rt.SerializationUtil.processThroughJson;
@@ -42,7 +43,7 @@ public class TestPerson {
     Person person = new Person();
     Gender gender = new Gender();
     gender.setKnownType(GenderType.Male);
-    person.setGender(gender);
+    person.setGenders(Arrays.asList(gender));
 
     ArrayList<AlternateId> alternateIds = new ArrayList<AlternateId>();
     AlternateId alternateId = new AlternateId();
@@ -144,7 +145,7 @@ public class TestPerson {
     Event event;
     Name name;
     ResourceReference attributedSourceReference;
-    assertEquals(GenderType.Male, person.getGender().getKnownType());
+    assertEquals(GenderType.Male, person.getGenders().get(0).getKnownType());
 
     assertEquals(1, person.getAlternateIds().size());
     assertEquals(AlternateIdType.Forwarded, person.getAlternateIds().get(0).getKnownType());

@@ -1,12 +1,10 @@
 package org.gedcomx.conclusion;
 
-import org.gedcomx.common.AlternateId;
 import org.gedcomx.common.Attribution;
 import org.gedcomx.common.ResourceReference;
 import org.testng.annotations.Test;
 
 import java.net.URI;
-import java.util.Arrays;
 
 import static org.gedcomx.rt.SerializationUtil.processThroughJson;
 import static org.gedcomx.rt.SerializationUtil.processThroughXml;
@@ -38,13 +36,12 @@ public class TestPersonVitals {
 
   private PersonVitals createTestVitals() {
     PersonVitals vitals = new PersonVitals();
-    AlternateId alternateId = new AlternateId();
-    alternateId.setValue("alt-id");
-    vitals.setAlternateIds(Arrays.asList(alternateId));
     vitals.setAttribution(new Attribution());
     vitals.getAttribution().setStatement("explanation");
-    vitals.setId("family");
-    vitals.setPersistentId(URI.create("urn:pid"));
+    vitals.setId("vitalId");
+    vitals.setPersonReference(URI.create("urn:pid"));
+    vitals.setGender(new ResourceReference());
+    vitals.getGender().setResource(URI.create("#gender"));
     vitals.setBirth(new ResourceReference());
     vitals.getBirth().setResource(URI.create("#birth"));
     vitals.setDeath(new ResourceReference());
@@ -55,10 +52,10 @@ public class TestPersonVitals {
   }
 
   private void assertTestFamily(PersonVitals vitals) {
-    assertEquals("alt-id", vitals.getAlternateIds().get(0).getValue());
     assertEquals("explanation", vitals.getAttribution().getStatement());
-    assertEquals("family", vitals.getId());
-    assertEquals(URI.create("urn:pid"), vitals.getPersistentId());
+    assertEquals("vitalId", vitals.getId());
+    assertEquals(URI.create("urn:pid"), vitals.getPersonReference());
+    assertEquals(URI.create("#gender"), vitals.getGender().getResource());
     assertEquals(URI.create("#birth"), vitals.getBirth().getResource());
     assertEquals(URI.create("#death"), vitals.getDeath().getResource());
     assertEquals(URI.create("#name"), vitals.getName().getResource());

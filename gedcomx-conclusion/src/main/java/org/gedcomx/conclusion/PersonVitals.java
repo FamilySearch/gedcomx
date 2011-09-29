@@ -1,81 +1,93 @@
+/**
+ * Copyright 2011 Intellectual Reserve, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.gedcomx.conclusion;
 
-import org.codehaus.enunciate.json.JsonName;
-import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.common.AlternateId;
 import org.gedcomx.common.GenealogicalResource;
-import org.gedcomx.common.PersistentIdentifiable;
 import org.gedcomx.common.ResourceReference;
-import org.gedcomx.rt.JsonExtensionElement;
-import org.gedcomx.rt.XmlTypeIdResolver;
+import org.gedcomx.rt.*;
 
 import javax.xml.XMLConstants;
-import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import java.net.URI;
-import java.util.List;
 
 /**
- * Definition of the vital information for a person.
+ * Definition of the vital information for a person. The "vital" information is useful to applications
+ * that want to specify which conclusions are identified as the "primary" conclusions about a person.
  *
  * @author Ryan Heaton
  */
-@XmlRootElement
+@XmlRootElement ( name = "vitals" )
 @JsonExtensionElement
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType ( name = "PersonVitals", propOrder = { "persistentId", "alternateIds", "name", "birth", "death" } )
-public class PersonVitals extends GenealogicalResource implements PersistentIdentifiable {
+@XmlType ( name = "PersonVitals", propOrder = { "gender", "name", "birth", "death" } )
+@RDFSubClassOf( ConclusionNamespaces.GEDCOMX_CONCLUSION_NAMESPACE + "Person" )
+public class PersonVitals extends GenealogicalResource {
 
-  private URI persistentId;
-  private List<AlternateId> alternateIds;
+  private URI personReference;
+  private ResourceReference gender;
   private ResourceReference name;
   private ResourceReference birth;
   private ResourceReference death;
 
   /**
-   * The persistent id of the person.
+   * Reference to the person to which this vital information is being applied. The reference can be via persistent id,
+   * if exists, or via local reference, e.g. "#personId".
    *
-   * @return The persistent id of the person.
+   * @return Reference to the person to which this vital information is being applied.
    */
+  @XmlAttribute ( name = "about", namespace = CommonNamespaces.RDF_NAMESPACE )
   @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
-  public URI getPersistentId() {
-    return persistentId;
+  public URI getPersonReference() {
+    return personReference;
   }
 
   /**
-   * The persistent id of the person.
+   * Reference to the person to which this vital information is being applied. The reference can be via persistent id,
+   * if exists, or via local reference, e.g. "#personId".
    *
-   * @param persistentId The persistent id of the person.
+   * @param personReference Reference to the person to which this vital information is being applied.
    */
-  public void setPersistentId(URI persistentId) {
-    this.persistentId = persistentId;
+  public void setPersonReference(URI personReference) {
+    this.personReference = personReference;
   }
 
   /**
-   * The list of alternate ids of the person.
+   * Reference to the primary gender conclusion of the person.
    *
-   * @return The list of alternate ids of the person.
+   * @return Reference to the primary gender conclusion of the person.
    */
-  @XmlElement (name="alternateId")
-  @JsonProperty ("alternateIds")
-  @JsonName ("alternateIds")
-  public List<AlternateId> getAlternateIds() {
-    return alternateIds;
+  @RDFRange (Gender.class)
+  @RDFDomain ( ConclusionNamespaces.GEDCOMX_CONCLUSION_NAMESPACE + "Person" )
+  public ResourceReference getGender() {
+    return gender;
   }
 
   /**
-   * The list of alternate ids of the entity.
+   * Reference to the primary gender conclusion of the person.
    *
-   * @param alternateIds The list of alternate ids of the entity.
+   * @param gender Reference to the primary gender conclusion of the person.
    */
-  @JsonProperty ("alternateIds")
-  public void setAlternateIds(List<AlternateId> alternateIds) {
-    this.alternateIds = alternateIds;
+  public void setGender(ResourceReference gender) {
+    this.gender = gender;
   }
 
   /**
@@ -83,6 +95,8 @@ public class PersonVitals extends GenealogicalResource implements PersistentIden
    *
    * @return Reference to the primary name for a person.
    */
+  @RDFRange (Name.class)
+  @RDFDomain ( ConclusionNamespaces.GEDCOMX_CONCLUSION_NAMESPACE + "Person" )
   public ResourceReference getName() {
     return name;
   }
@@ -101,6 +115,7 @@ public class PersonVitals extends GenealogicalResource implements PersistentIden
    *
    * @return Reference to the primary birth event for a person.
    */
+  @RDFRange (Event.class)
   public ResourceReference getBirth() {
     return birth;
   }
@@ -119,6 +134,7 @@ public class PersonVitals extends GenealogicalResource implements PersistentIden
    *
    * @return Reference to the primary death event for a person.
    */
+  @RDFRange (Event.class)
   public ResourceReference getDeath() {
     return death;
   }
