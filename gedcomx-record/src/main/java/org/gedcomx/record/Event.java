@@ -25,7 +25,7 @@ import org.gedcomx.rt.CommonNamespaces;
 import org.gedcomx.rt.RDFSubClassOf;
 import org.gedcomx.rt.RDFSubPropertyOf;
 import org.gedcomx.rt.XmlTypeIdResolver;
-import org.gedcomx.types.EventType;
+import org.gedcomx.types.FactType;
 import org.gedcomx.types.TypeReference;
 import org.gedcomx.types.Typed;
 
@@ -42,9 +42,9 @@ import javax.xml.bind.annotation.XmlType;
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType( name = "Event", propOrder = { "type", "date", "place" } )
 @RDFSubClassOf ( CommonNamespaces.DUBLIN_CORE_TYPE_NAMESPACE + "Event" )
-public class Event extends GenealogicalResource implements Typed<EventType> {
+public class Event extends GenealogicalResource implements Typed<FactType> {
 
-  private TypeReference<EventType> type;
+  private TypeReference<FactType> type;
   private Boolean primary;
   private Date date;
   private Place place;
@@ -55,7 +55,7 @@ public class Event extends GenealogicalResource implements Typed<EventType> {
    * @return The type of the event.
    */
   @XmlElement (namespace = CommonNamespaces.RDF_NAMESPACE)
-  public TypeReference<EventType> getType() {
+  public TypeReference<FactType> getType() {
     return type;
   }
 
@@ -64,19 +64,19 @@ public class Event extends GenealogicalResource implements Typed<EventType> {
    *
    * @param type The type of the event.
    */
-  public void setType(TypeReference<EventType> type) {
+  public void setType(TypeReference<FactType> type) {
     this.type = type;
   }
 
   /**
-   * The enum referencing the known type of the event, or {@link org.gedcomx.types.EventType#OTHER} if not known.
+   * The enum referencing the known type of the event, or {@link org.gedcomx.types.FactType#OTHER} if not known.
    *
-   * @return The enum referencing the known type of the event, or {@link org.gedcomx.types.EventType#OTHER} if not known.
+   * @return The enum referencing the known type of the event, or {@link org.gedcomx.types.FactType#OTHER} if not known.
    */
   @XmlTransient
   @JsonIgnore
-  public org.gedcomx.types.EventType getKnownType() {
-    return getType() == null ? null : XmlQNameEnumUtil.fromURI(getType().getType(), org.gedcomx.types.EventType.class);
+  public org.gedcomx.types.FactType getKnownType() {
+    return getType() == null ? null : XmlQNameEnumUtil.fromURI(getType().getType(), org.gedcomx.types.FactType.class);
   }
 
   /**
@@ -85,8 +85,8 @@ public class Event extends GenealogicalResource implements Typed<EventType> {
    * @param knownType the event type.
    */
   @JsonIgnore
-  public void setKnownType(org.gedcomx.types.EventType knownType) {
-    setType(knownType == null ? null : new TypeReference<EventType>(knownType));
+  public void setKnownType(org.gedcomx.types.FactType knownType) {
+    setType(knownType == null ? null : new TypeReference<FactType>(knownType));
   }
 
   /**

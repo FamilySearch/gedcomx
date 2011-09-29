@@ -61,7 +61,7 @@ public class TestPerson {
     characteristic.getDate().setOriginal("original date");
     characteristic.getDate().setNormalized("normalized date");
     characteristic.setId("characteristic-id");
-    characteristic.setKnownType(CharacteristicType.Occupation);
+    characteristic.setKnownType(FactType.Occupation);
     characteristic.setPlace(new Place());
     characteristic.getPlace().setOriginal("original place");
     characteristic.getPlace().setNormalized("normalized place");
@@ -78,7 +78,7 @@ public class TestPerson {
     event.getDate().setOriginal("original date");
     event.getDate().setNormalized("normalized date");
     event.setId("event-id");
-    event.setKnownType(EventType.Adoption);
+    event.setKnownType(FactType.Adoption);
     event.setPlace(new Place());
     event.getPlace().setOriginal("original place");
     event.getPlace().setNormalized("normalized place");
@@ -157,7 +157,7 @@ public class TestPerson {
     assertEquals("original date", characteristic.getDate().getOriginal());
     assertEquals("normalized date", characteristic.getDate().getNormalized());
     assertEquals("characteristic-id", characteristic.getId());
-    assertEquals(CharacteristicType.Occupation, characteristic.getKnownType());
+    assertEquals(FactType.Occupation, characteristic.getKnownType());
     assertEquals("original place", characteristic.getPlace().getOriginal());
     assertEquals("normalized place", characteristic.getPlace().getNormalized());
     assertEquals("characteristic-value", characteristic.getValue());
@@ -168,7 +168,7 @@ public class TestPerson {
     assertEquals("original date", event.getDate().getOriginal());
     assertEquals("normalized date", event.getDate().getNormalized());
     assertEquals("event-id", event.getId());
-    assertEquals(EventType.Adoption, event.getKnownType());
+    assertEquals(FactType.Adoption, event.getKnownType());
     assertEquals("original place", event.getPlace().getOriginal());
     assertEquals("normalized place", event.getPlace().getNormalized());
     assertEquals("event-source", event.getSources().get(0).getId());
