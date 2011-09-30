@@ -23,7 +23,6 @@ import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.common.GenealogicalResource;
 import org.gedcomx.rt.CommonNamespaces;
 import org.gedcomx.rt.RDFSubClassOf;
-import org.gedcomx.rt.RDFSubPropertyOf;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.FactType;
 import org.gedcomx.types.TypeReference;
@@ -42,7 +41,7 @@ import javax.xml.bind.annotation.XmlType;
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType( name = "Event", propOrder = { "type", "date", "place" } )
 @RDFSubClassOf ( CommonNamespaces.DUBLIN_CORE_TYPE_NAMESPACE + "Event" )
-public class Event extends GenealogicalResource implements Typed<FactType> {
+public class Event extends GenealogicalResource implements Typed<FactType>, Temporal, Spatial {
 
   private TypeReference<FactType> type;
   private Boolean primary;
@@ -113,7 +112,6 @@ public class Event extends GenealogicalResource implements Typed<FactType> {
    *
    * @return The date of this event.
    */
-  @RDFSubPropertyOf ( CommonNamespaces.DUBLIN_CORE_NAMESPACE + "temporal" )
   public Date getDate() {
     return date;
   }
@@ -132,7 +130,6 @@ public class Event extends GenealogicalResource implements Typed<FactType> {
    *
    * @return The place of this event.
    */
-  @RDFSubPropertyOf ( CommonNamespaces.DUBLIN_CORE_NAMESPACE + "spatial" )
   public Place getPlace() {
     return place;
   }

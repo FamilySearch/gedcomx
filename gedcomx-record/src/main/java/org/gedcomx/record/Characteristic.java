@@ -21,6 +21,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.rt.CommonNamespaces;
+import org.gedcomx.rt.RDFSubClassOf;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.FactType;
 import org.gedcomx.types.TypeReference;
@@ -31,14 +32,17 @@ import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 /**
- * A field specifying a characteristic about a persona or relationship.
+ * A field specifying a characteristic about a record, persona, or relationship.
  */
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "Characteristic" )
-public class Characteristic extends Field implements Typed<FactType> {
+@RDFSubClassOf ( CommonNamespaces.DUBLIN_CORE_TYPE_NAMESPACE + "Event" )
+public class Characteristic extends Field implements Typed<FactType>, Temporal, Spatial {
 
   private TypeReference<FactType> type;
+  private Date date;
+  private Place place;
 
   /**
    * The type of the characteristic.
@@ -78,6 +82,42 @@ public class Characteristic extends Field implements Typed<FactType> {
   @JsonIgnore
   public void setKnownType(FactType knownType) {
     setType(knownType == null ? null : new TypeReference<FactType>(knownType));
+  }
+
+  /**
+   * The date of applicability of this characteristic.
+   *
+   * @return The date of applicability of this characteristic.
+   */
+  public Date getDate() {
+    return date;
+  }
+
+  /**
+   * The date of applicability of this characteristic.
+   *
+   * @param date The date of applicability of this characteristic.
+   */
+  public void setDate(Date date) {
+    this.date = date;
+  }
+
+  /**
+   * The place of applicability of this characteristic.
+   *
+   * @return The place of applicability of this characteristic.
+   */
+  public Place getPlace() {
+    return place;
+  }
+
+  /**
+   * The place of applicability of this characteristic.
+   *
+   * @param place The place of applicability of this characteristic.
+   */
+  public void setPlace(Place place) {
+    this.place = place;
   }
 
 }
