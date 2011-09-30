@@ -43,14 +43,13 @@ import java.util.List;
 @JsonExtensionElement
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType ( name = "Relationship", propOrder = { "type", "person1", "person2", "events", "characteristics" } )
-public class Relationship extends GenealogicalEntity implements Typed<RelationshipType>, HasEvents, HasCharacteristics {
+@XmlType ( name = "Relationship", propOrder = { "type", "person1", "person2", "facts"} )
+public class Relationship extends GenealogicalEntity implements Typed<RelationshipType>, HasFacts {
 
   private TypeReference<RelationshipType> type;
   private ResourceReference person1;
   private ResourceReference person2;
-  private List<Event> events;
-  private List<Characteristic> characteristics;
+  private List<Fact> facts;
 
   /**
    * The type of this relationship.
@@ -149,47 +148,25 @@ public class Relationship extends GenealogicalEntity implements Typed<Relationsh
   }
 
   /**
-   * The event conclusions for the relationship.
+   * The fact conclusions for the relationship.
    *
-   * @return The event conclusions for the relationship.
+   * @return The fact conclusions for the relationship.
    */
-  @XmlElement(name="event")
-  @JsonProperty("events")
-  @JsonName("events")
-  public List<Event> getEvents() {
-    return events;
+  @XmlElement(name="fact")
+  @JsonProperty("facts")
+  @JsonName("facts")
+  public List<Fact> getFacts() {
+    return facts;
   }
 
   /**
-   * The event conclusions for the relationship.
+   * The fact conclusions for the relationship.
    *
-   * @param events The event conclusions for the relationship.
+   * @param facts The fact conclusions for the relationship.
    */
-  @JsonProperty("events")
-  public void setEvents(List<Event> events) {
-    this.events = events;
-  }
-
-  /**
-   * The characteristic conclusions for the relationship.
-   *
-   * @return The characteristic conclusions for the relationship.
-   */
-  @XmlElement(name="characteristic")
-  @JsonProperty("characteristics")
-  @JsonName("characteristics")
-  public List<Characteristic> getCharacteristics() {
-    return characteristics;
-  }
-
-  /**
-   * The characteristic conclusions for the relationship.
-   *
-   * @param characteristics The characteristic conclusions for the relationship.
-   */
-  @JsonProperty("characteristics")
-  public void setCharacteristics(List<Characteristic> characteristics) {
-    this.characteristics = characteristics;
+  @JsonProperty("facts")
+  public void setFacts(List<Fact> facts) {
+    this.facts = facts;
   }
 
 }
