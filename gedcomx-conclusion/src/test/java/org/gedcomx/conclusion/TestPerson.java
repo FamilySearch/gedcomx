@@ -52,25 +52,24 @@ public class TestPerson {
     alternateIds.add(alternateId);
     person.setAlternateIds(alternateIds);
 
-    List<Characteristic> characteristics = new ArrayList<Characteristic>();
-    Characteristic characteristic = new Characteristic();
-    characteristic.setAttribution(new Attribution());
-    characteristic.getAttribution().setContributor(new ResourceReference());
-    characteristic.getAttribution().getContributor().setResource(URI.create("urn:characteristic-attribution"));
-    characteristic.setDate(new Date());
-    characteristic.getDate().setOriginal("original date");
-    characteristic.getDate().setNormalized("normalized date");
-    characteristic.setId("characteristic-id");
-    characteristic.setKnownType(FactType.Occupation);
-    characteristic.setPlace(new Place());
-    characteristic.getPlace().setOriginal("original place");
-    characteristic.getPlace().setNormalized("normalized place");
-    characteristic.setValue("characteristic-value");
-    characteristics.add(characteristic);
-    person.setCharacteristics(characteristics);
+    List<Fact> facts = new ArrayList<Fact>();
 
-    List<Event> events = new ArrayList<Event>();
-    Event event = new Event();
+    Fact fact = new Fact();
+    fact.setAttribution(new Attribution());
+    fact.getAttribution().setContributor(new ResourceReference());
+    fact.getAttribution().getContributor().setResource(URI.create("urn:characteristic-attribution"));
+    fact.setDate(new Date());
+    fact.getDate().setOriginal("original date");
+    fact.getDate().setNormalized("normalized date");
+    fact.setId("characteristic-id");
+    fact.setKnownType(FactType.Occupation);
+    fact.setPlace(new Place());
+    fact.getPlace().setOriginal("original place");
+    fact.getPlace().setNormalized("normalized place");
+    fact.setValue("characteristic-value");
+    facts.add(fact);
+
+    Fact event = new Fact();
     event.setAttribution(new Attribution());
     event.getAttribution().setContributor(new ResourceReference());
     event.getAttribution().getContributor().setResource(URI.create("urn:event-attribution"));
@@ -82,12 +81,13 @@ public class TestPerson {
     event.setPlace(new Place());
     event.getPlace().setOriginal("original place");
     event.getPlace().setNormalized("normalized place");
-    events.add(event);
     event.setSources(new ArrayList<ResourceReference>());
     ResourceReference eventSource = new ResourceReference();
     eventSource.setId("event-source");
     event.getSources().add(eventSource);
-    person.setEvents(events);
+    facts.add(event);
+
+    person.setFacts(facts);
 
     List<Name> names = new ArrayList<Name>();
     Name name = new Name();
@@ -141,8 +141,8 @@ public class TestPerson {
   }
 
   private void assertTestPerson(Person person) {
-    Characteristic characteristic;
-    Event event;
+    Fact fact;
+    Fact event;
     Name name;
     ResourceReference attributedSourceReference;
     assertEquals(GenderType.Male, person.getGenders().get(0).getKnownType());
@@ -151,19 +151,18 @@ public class TestPerson {
     assertEquals(AlternateIdType.Forwarded, person.getAlternateIds().get(0).getKnownType());
     assertEquals("forward-value", person.getAlternateIds().get(0).getValue());
 
-    assertEquals(1, person.getCharacteristics().size());
-    characteristic = person.getCharacteristics().iterator().next();
-    assertEquals("urn:characteristic-attribution", characteristic.getAttribution().getContributor().getResource().toString());
-    assertEquals("original date", characteristic.getDate().getOriginal());
-    assertEquals("normalized date", characteristic.getDate().getNormalized());
-    assertEquals("characteristic-id", characteristic.getId());
-    assertEquals(FactType.Occupation, characteristic.getKnownType());
-    assertEquals("original place", characteristic.getPlace().getOriginal());
-    assertEquals("normalized place", characteristic.getPlace().getNormalized());
-    assertEquals("characteristic-value", characteristic.getValue());
+    assertEquals(2, person.getFacts().size());
+    fact = person.getFacts().get(0);
+    assertEquals("urn:characteristic-attribution", fact.getAttribution().getContributor().getResource().toString());
+    assertEquals("original date", fact.getDate().getOriginal());
+    assertEquals("normalized date", fact.getDate().getNormalized());
+    assertEquals("characteristic-id", fact.getId());
+    assertEquals(FactType.Occupation, fact.getKnownType());
+    assertEquals("original place", fact.getPlace().getOriginal());
+    assertEquals("normalized place", fact.getPlace().getNormalized());
+    assertEquals("characteristic-value", fact.getValue());
 
-    assertEquals(1, person.getEvents().size());
-    event = person.getEvents().iterator().next();
+    event = person.getFacts().get(1);
     assertEquals("urn:event-attribution", event.getAttribution().getContributor().getResource().toString());
     assertEquals("original date", event.getDate().getOriginal());
     assertEquals("normalized date", event.getDate().getNormalized());

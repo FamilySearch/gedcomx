@@ -45,12 +45,11 @@ public class TestRelationship {
     relationship.setAlternateIds(Arrays.asList(alternateId));
     relationship.setAttribution(new Attribution());
     relationship.getAttribution().setStatement("explanation");
-    Characteristic characteristic = new Characteristic();
-    characteristic.setId("characteristic");
-    relationship.setCharacteristics(Arrays.asList(characteristic));
-    Event event = new Event();
+    Fact fact = new Fact();
+    fact.setId("characteristic");
+    Fact event = new Fact();
     event.setId("event");
-    relationship.setEvents(Arrays.asList(event));
+    relationship.setFacts(Arrays.asList(event, fact));
     relationship.setId("relationship");
     relationship.setPersistentId(URI.create("urn:pid"));
     relationship.setPerson1(new ResourceReference());
@@ -68,8 +67,8 @@ public class TestRelationship {
     assertEquals(RelationshipType.Couple, relationship.getKnownType());
     assertEquals("alt-id", relationship.getAlternateIds().get(0).getValue());
     assertEquals("explanation", relationship.getAttribution().getStatement());
-    assertEquals("characteristic", relationship.getCharacteristics().get(0).getId());
-    assertEquals("event", relationship.getEvents().get(0).getId());
+    assertEquals("characteristic", relationship.getFacts().get(1).getId());
+    assertEquals("event", relationship.getFacts().get(0).getId());
     assertEquals("relationship", relationship.getId());
     assertEquals(URI.create("urn:pid"), relationship.getPersistentId());
     assertEquals(URI.create("urn:person1"), relationship.getPerson1().getResource());

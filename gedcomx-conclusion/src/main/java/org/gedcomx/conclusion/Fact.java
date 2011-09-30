@@ -15,7 +15,6 @@
  */
 package org.gedcomx.conclusion;
 
-import org.codehaus.enunciate.ClientName;
 import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
@@ -32,25 +31,23 @@ import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 /**
- * An event conclusion.
- *
- * @author Ryan Heaton
+ * A conclusion about a fact applicable to a person or relationship.
  */
-@ClientName ("EventInfo")
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType ( name = "Event", propOrder = {"type", "date", "place"} )
+@XmlType ( name = "Fact", propOrder = {"type", "date", "place", "value"})
 @RDFSubClassOf ( CommonNamespaces.DUBLIN_CORE_TYPE_NAMESPACE + "Event" )
-public class Event extends Conclusion implements Typed<FactType>, Spatial, Temporal {
+public class Fact extends Conclusion implements Typed<FactType> {
 
   private TypeReference<FactType> type;
   private Date date;
   private Place place;
+  private String value;
 
   /**
-   * The type of the event.
+   * The type of the fact.
    *
-   * @return The type of the event.
+   * @return The type of the fact.
    */
   @XmlElement (namespace = CommonNamespaces.RDF_NAMESPACE)
   public TypeReference<FactType> getType() {
@@ -58,68 +55,86 @@ public class Event extends Conclusion implements Typed<FactType>, Spatial, Tempo
   }
 
   /**
-   * The type of the event.
+   * The type of the fact.
    *
-   * @param type The type of the event.
+   * @param type The type of the fact.
    */
   public void setType(TypeReference<FactType> type) {
     this.type = type;
   }
 
   /**
-   * The enum referencing the known type of the event, or {@link org.gedcomx.types.FactType#OTHER} if not known.
+   * The enum referencing the known type of the fact, or {@link org.gedcomx.types.FactType#OTHER} if not known.
    *
-   * @return The enum referencing the known type of the event, or {@link org.gedcomx.types.FactType#OTHER} if not known.
+   * @return The enum referencing the known type of the fact, or {@link org.gedcomx.types.FactType#OTHER} if not known.
    */
   @XmlTransient
   @JsonIgnore
-  public org.gedcomx.types.FactType getKnownType() {
-    return getType() == null ? null : XmlQNameEnumUtil.fromURI(getType().getType(), org.gedcomx.types.FactType.class);
+  public FactType getKnownType() {
+    return getType() == null ? null : XmlQNameEnumUtil.fromURI(getType().getType(), FactType.class);
   }
 
   /**
-   * Set the type of this event from a known enumeration of event types.
+   * Set the type of this fact from a known enumeration of types.
    *
-   * @param knownType the event type.
+   * @param knownType The known type.
    */
   @JsonIgnore
-  public void setKnownType(org.gedcomx.types.FactType knownType) {
+  public void setKnownType(FactType knownType) {
     setType(knownType == null ? null : new TypeReference<FactType>(knownType));
   }
 
   /**
-   * The date of this event.
+   * The date of applicability of this fact.
    *
-   * @return The date of this event.
+   * @return The date of applicability of this fact.
    */
   public Date getDate() {
     return date;
   }
 
   /**
-   * The date of this event.
+   * The date of applicability of this fact.
    *
-   * @param date The date of this event.
+   * @param date The date of applicability of this fact.
    */
   public void setDate(Date date) {
     this.date = date;
   }
 
   /**
-   * The place of this event.
+   * The place of applicability of this fact.
    *
-   * @return The place of this event.
+   * @return The place of applicability of this fact.
    */
   public Place getPlace() {
     return place;
   }
 
   /**
-   * The place of this event.
+   * The place of applicability of this fact.
    *
-   * @param place The place of this event.
+   * @param place The place of applicability of this fact.
    */
   public void setPlace(Place place) {
     this.place = place;
+  }
+
+  /**
+   * The value of this fact, if applicable.
+   *
+   * @return The value of this fact, if applicable.
+   */
+  public String getValue() {
+    return value;
+  }
+
+  /**
+   * The value of this fact, if applicable.
+   *
+   * @param value The value of this fact, if applicable.
+   */
+  public void setValue(String value) {
+    this.value = value;
   }
 }
