@@ -38,13 +38,12 @@ import java.util.List;
 @JsonExtensionElement
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType ( name = "Person", propOrder = { "gender", "names", "events", "characteristics" } )
-public class Person extends GenealogicalEntity implements PersistentIdentifiable, HasEvents, HasCharacteristics {
+@XmlType ( name = "Person", propOrder = { "gender", "names", "facts"} )
+public class Person extends GenealogicalEntity implements PersistentIdentifiable, HasFacts {
 
   private Gender gender;
   private List<Name> names;
-  private List<Event> events;
-  private List<Characteristic> characteristics;
+  private List<Fact> facts;
 
   /**
    * The gender of the person.
@@ -87,47 +86,25 @@ public class Person extends GenealogicalEntity implements PersistentIdentifiable
   }
 
   /**
-   * The event conclusions for the person.
+   * The fact conclusions for the person.
    *
-   * @return The event conclusions for the person.
+   * @return The fact conclusions for the person.
    */
-  @XmlElement(name="event")
-  @JsonProperty("events")
-  @JsonName("events")
-  public List<Event> getEvents() {
-    return events;
+  @XmlElement(name="fact")
+  @JsonProperty("facts")
+  @JsonName("facts")
+  public List<Fact> getFacts() {
+    return facts;
   }
 
   /**
-   * The event conclusions for the person.
+   * The fact conclusions for the person.
    *
-   * @param events The event conclusions for the person.
+   * @param facts The fact conclusions for the person.
    */
-  @JsonProperty("events")
-  public void setEvents(List<Event> events) {
-    this.events = events;
-  }
-
-  /**
-   * The characteristic conclusions for the person.
-   *
-   * @return The characteristic conclusions for the person.
-   */
-  @XmlElement(name="characteristic")
-  @JsonProperty("characteristics")
-  @JsonName("characteristics")
-  public List<Characteristic> getCharacteristics() {
-    return characteristics;
-  }
-
-  /**
-   * The characteristic conclusions for the person.
-   *
-   * @param characteristics The characteristic conclusions for the person.
-   */
-  @JsonProperty("characteristics")
-  public void setCharacteristics(List<Characteristic> characteristics) {
-    this.characteristics = characteristics;
+  @JsonProperty("facts")
+  public void setFacts(List<Fact> facts) {
+    this.facts = facts;
   }
 
 }

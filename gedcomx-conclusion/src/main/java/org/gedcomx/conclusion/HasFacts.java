@@ -15,25 +15,22 @@
  */
 package org.gedcomx.conclusion;
 
-import org.gedcomx.rt.CommonNamespaces;
-import org.gedcomx.rt.RDFSubPropertyOf;
-
 import javax.xml.bind.annotation.XmlType;
+import java.util.List;
 
 /**
- * A resource that has a spatial component.
+ * Conclusion data that has facts.
  *
  * @author Ryan Heaton
  */
-@XmlType ( name = "Spatial" )
-public interface Spatial {
+@XmlType ( name = "HasFacts" )
+public interface HasFacts {
 
   /**
-   * The place.
+   * The conclusions about the facts of a conclusion resource.
    *
-   * @return The place.
+   * @return The conclusions about the facts of a conclusion resource.
    */
-  @RDFSubPropertyOf ( CommonNamespaces.DUBLIN_CORE_NAMESPACE + "spatial" )
-  Place getPlace();
+  List<Fact> getFacts();
 
 }
