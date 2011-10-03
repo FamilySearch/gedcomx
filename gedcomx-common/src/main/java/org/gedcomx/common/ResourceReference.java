@@ -181,28 +181,16 @@ public class ResourceReference implements Typed<ResourceType>, SupportsExtension
    *
    * @return The attribution for this resource reference.
    */
-  @XmlTransient
-  @JsonIgnore
-  public Attribution getAttribution() {
+  public Attribution findAttribution() {
     return findExtensionOfType(Attribution.class);
   }
 
   /**
-   * Convenience method for setting the attribution for this resource reference.
+   * Convenience method for adding the attribution for this resource reference.
    *
    * @param attribution The attribution.
    */
-  @JsonIgnore
-  public void setAttribution(Attribution attribution) {
-    if (this.extensionElements != null) {
-      Iterator<Object> eit = this.extensionElements.iterator();
-      while (eit.hasNext()) {
-        if (eit.next() instanceof Attribution) {
-          eit.remove();
-        }
-      }
-    }
-
+  public void addAttribution(Attribution attribution) {
     addExtensionElement(attribution);
   }
 
