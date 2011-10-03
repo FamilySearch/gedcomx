@@ -22,12 +22,9 @@ import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.common.*;
 import org.gedcomx.rt.*;
 
-import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
-import java.net.URI;
 import java.util.List;
 
 /**

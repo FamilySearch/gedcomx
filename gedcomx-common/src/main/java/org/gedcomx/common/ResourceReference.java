@@ -33,10 +33,7 @@ import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.*;
 import javax.xml.namespace.QName;
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * A generic RDF-based reference to a resource.
@@ -177,6 +174,36 @@ public class ResourceReference implements Typed<ResourceType>, SupportsExtension
     }
 
     this.extensionAttributes.put(qname, value);
+  }
+
+  /**
+   * Convenience method for getting the attribution for this resource reference.
+   *
+   * @return The attribution for this resource reference.
+   */
+  @XmlTransient
+  @JsonIgnore
+  public Attribution getAttribution() {
+    return findExtensionOfType(Attribution.class);
+  }
+
+  /**
+   * Convenience method for setting the attribution for this resource reference.
+   *
+   * @param attribution The attribution.
+   */
+  @JsonIgnore
+  public void setAttribution(Attribution attribution) {
+    if (this.extensionElements != null) {
+      Iterator<Object> eit = this.extensionElements.iterator();
+      while (eit.hasNext()) {
+        if (eit.next() instanceof Attribution) {
+          eit.remove();
+        }
+      }
+    }
+
+    addExtensionElement(attribution);
   }
 
   /**
