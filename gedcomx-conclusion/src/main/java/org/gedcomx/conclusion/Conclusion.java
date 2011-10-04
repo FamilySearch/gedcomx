@@ -15,12 +15,17 @@
  */
 package org.gedcomx.conclusion;
 
+import org.codehaus.enunciate.json.JsonName;
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.common.GenealogicalResource;
-import org.gedcomx.rt.XmlTypeIdResolver;
+import org.gedcomx.common.ResourceReference;
+import org.gedcomx.rt.*;
 
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.util.List;
 
 /**
  * A genealogical conclusion.
@@ -31,5 +36,32 @@ import javax.xml.bind.annotation.XmlType;
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "Conclusion" )
 public abstract class Conclusion extends GenealogicalResource {
+
+  private List<ResourceReference> sources;
+
+  /**
+   * The source references for a conclusion.
+   *
+   * @return The source references for a conclusion.
+   */
+  @XmlElement (name="source")
+  @JsonProperty ("sources")
+  @JsonName ("sources")
+  @RDFSubPropertyOf ( CommonNamespaces.GEDCOMX_COMMON_NAMESPACE + "source")
+  @RDFRange ({}) //any resource can be identified as a source.
+  @SuppressWarnings("rdf:no_range")
+  public List<ResourceReference> getSources() {
+    return sources;
+  }
+
+  /**
+   * The source references for a conclusion.
+   *
+   * @param sources The source references for a conclusion.
+   */
+  @JsonProperty("sources")
+  public void setSources(List<ResourceReference> sources) {
+    this.sources = sources;
+  }
 
 }

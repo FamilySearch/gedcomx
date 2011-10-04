@@ -82,6 +82,10 @@ public class TestPerson {
     event.getPlace().setOriginal("original place");
     event.getPlace().setNormalized("normalized place");
     events.add(event);
+    event.setSources(new ArrayList<ResourceReference>());
+    ResourceReference eventSource = new ResourceReference();
+    eventSource.setId("event-source");
+    event.getSources().add(eventSource);
     person.setEvents(events);
 
     List<Name> names = new ArrayList<Name>();
@@ -166,6 +170,7 @@ public class TestPerson {
     assertEquals(FactType.Adoption, event.getKnownType());
     assertEquals("original place", event.getPlace().getOriginal());
     assertEquals("normalized place", event.getPlace().getNormalized());
+    assertEquals("event-source", event.getSources().get(0).getId());
 
     assertEquals(1, person.getNames().size());
     name = person.getNames().iterator().next();
