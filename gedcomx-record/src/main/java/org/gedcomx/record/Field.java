@@ -16,6 +16,7 @@
 package org.gedcomx.record;
 
 import org.gedcomx.common.GenealogicalResource;
+import org.gedcomx.common.NormalizedValue;
 import org.gedcomx.common.ResourceReference;
 import org.gedcomx.rt.CommonNamespaces;
 import org.gedcomx.rt.RDFSubPropertyOf;
@@ -32,7 +33,7 @@ public abstract class Field extends GenealogicalResource {
   private String label;
   private String original;
   private String interpreted;
-  private String processed;
+  private NormalizedValue processed;
   private ResourceReference source;
 
   /**
@@ -105,7 +106,7 @@ public abstract class Field extends GenealogicalResource {
    * 
    * @return Programmatic interpretation of the value based on an algorithm that considers the original and interpreted values.
    */
-  public String getProcessed() {
+  public NormalizedValue getProcessed() {
     return processed;
   }
 
@@ -114,7 +115,7 @@ public abstract class Field extends GenealogicalResource {
    * 
    * @param processed Programmatic interpretation of the value based on an algorithm that considers the original and interpreted values.
    */
-  public void setProcessed(String processed) {
+  public void setProcessed(NormalizedValue processed) {
     this.processed = processed;
   }
 

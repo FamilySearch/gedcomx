@@ -15,10 +15,12 @@
  */
 package org.gedcomx.conclusion;
 
+import org.gedcomx.common.NormalizedValue;
+
 import javax.xml.bind.annotation.XmlType;
 
 /**
- * A conclusion resource that has a value that is able to be normalized.
+ * A resource that has a value that is able to be normalized.
  *
  * @author Ryan Heaton
  */
@@ -33,27 +35,23 @@ public interface Normalizeable {
   String getOriginal();
 
   /**
-   * The original value of the date that was concluded as supplied by the user.
+   * The original value.
    *
-   * @param original The original value of the date that was concluded as supplied by the user.
+   * @param original The original value.
    */
   void setOriginal(String original);
 
   /**
-   * The original value.
+   * The normalized value.
    *
-   * @return The original value.
+   * @return The normalized value.
    */
-  String getNormalized();
+  NormalizedValue getNormalized();
 
   /**
-   * The normalized representation of the original value of the date. Intended for convenience
-   * to the user in interpreting the date. The normalized representation is optional and is
-   * often supplied by an automated standardization process.
+   * The normalized value.
    *
-   * @param normalized The normalized representation of the original value of the date. Intended for convenience
-   * to the user in interpreting the date. The normalized representation is optional and is
-   * often supplied by an automated standardization process.
+   * @param normalized The normalized value.
    */
-  void setNormalized(String normalized);
+  void setNormalized(NormalizedValue normalized);
 }

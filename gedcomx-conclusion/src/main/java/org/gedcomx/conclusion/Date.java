@@ -16,6 +16,7 @@
 package org.gedcomx.conclusion;
 
 import org.codehaus.enunciate.ClientName;
+import org.gedcomx.common.NormalizedValue;
 import org.gedcomx.rt.RDFSubClassOf;
 import org.gedcomx.rt.CommonNamespaces;
 
@@ -30,7 +31,7 @@ import javax.xml.bind.annotation.XmlType;
 public final class Date implements Normalizeable {
 
   private String original;
-  private String normalized;
+  private NormalizedValue normalized;
 
   /**
    * The original value of the date that was concluded as supplied by the user.
@@ -51,28 +52,20 @@ public final class Date implements Normalizeable {
   }
 
   /**
-   * The normalized representation of the original value of the date. Intended for convenience
-   * to the user in interpreting the date. The normalized representation is optional and is
-   * often supplied by an automated standardization process.
+   * The normalized value of the date.
    *
-   * @return The normalized representation of the original value of the date. Intended for convenience
-   * to the user in interpreting the date. The normalized representation is optional and is
-   * often supplied by an automated standardization process.
+   * @return The normalized value of the date.
    */
-  public String getNormalized() {
+  public NormalizedValue getNormalized() {
     return normalized;
   }
 
   /**
-   * The normalized representation of the original value of the date. Intended for convenience
-   * to the user in interpreting the date. The normalized representation is optional and is
-   * often supplied by an automated standardization process.
+   * The normalized value of the date.
    *
-   * @param normalized The normalized representation of the original value of the date. Intended for convenience
-   * to the user in interpreting the date. The normalized representation is optional and is
-   * often supplied by an automated standardization process.
+   * @param normalized The normalized value of the date.
    */
-  public void setNormalized(String normalized) {
+  public void setNormalized(NormalizedValue normalized) {
     this.normalized = normalized;
   }
 
