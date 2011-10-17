@@ -37,14 +37,14 @@ import java.util.Date;
 @JsonExtensionElement
 @JsonTypeInfo ( use = JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType ( name = "Attribution", propOrder = {"modified", "statement", "confidence", "contributor" } )
+@XmlType ( name = "Attribution", propOrder = {"modified", "proofStatement", "confidence", "contributor" } )
 @SuppressWarnings("gedcomx:no_id")
 public final class Attribution {
 
   private ResourceReference contributor;
   private TypeReference<ConfidenceLevel> confidence;
   private Date modified;
-  private String statement;
+  private String proofStatement;
 
   /**
    * Reference to the contributor of the attributed data.
@@ -130,16 +130,16 @@ public final class Attribution {
    * @return The "proof statement" for the attributed data provided by the contributor.
    */
   @RDFSubPropertyOf( CommonNamespaces.DUBLIN_CORE_NAMESPACE + "description")
-  public String getStatement() {
-    return statement;
+  public String getProofStatement() {
+    return proofStatement;
   }
 
   /**
    * The "proof statement" for the attributed data provided by the contributor.
    *
-   * @param statement The "proof statement" for the attributed data provided by the contributor.
+   * @param proofStatement The "proof statement" for the attributed data provided by the contributor.
    */
-  public void setStatement(String statement) {
-    this.statement = statement;
+  public void setProofStatement(String proofStatement) {
+    this.proofStatement = proofStatement;
   }
 }

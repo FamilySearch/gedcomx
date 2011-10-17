@@ -23,13 +23,13 @@ public class TestAttribution {
     Attribution attribution = new Attribution();
     attribution.setContributor(new ResourceReference());
     attribution.getContributor().setResource(URI.create("urn:someid"));
-    attribution.setStatement("hello, there.");
+    attribution.setProofStatement("hello, there.");
     attribution.setKnownConfidenceLevel(ConfidenceLevel.Possibly);
     Date ts = new Date();
     attribution.setModified(ts);
     attribution = processThroughXml(attribution);
     assertEquals("urn:someid", attribution.getContributor().getResource().toString());
-    assertEquals("hello, there.", attribution.getStatement());
+    assertEquals("hello, there.", attribution.getProofStatement());
     assertEquals(ts, attribution.getModified());
     assertEquals(ConfidenceLevel.Possibly, attribution.getKnownConfidenceLevel());
   }
@@ -41,13 +41,13 @@ public class TestAttribution {
     Attribution attribution = new Attribution();
     attribution.setContributor(new ResourceReference());
     attribution.getContributor().setResource(URI.create("urn:someid"));
-    attribution.setStatement("hello, there.");
+    attribution.setProofStatement("hello, there.");
     attribution.setKnownConfidenceLevel(ConfidenceLevel.Possibly);
     Date ts = new Date();
     attribution.setModified(ts);
     attribution = processThroughJson(attribution);
     assertEquals("urn:someid", attribution.getContributor().getResource().toString());
-    assertEquals("hello, there.", attribution.getStatement());
+    assertEquals("hello, there.", attribution.getProofStatement());
     assertEquals(ts, attribution.getModified());
     assertEquals(ConfidenceLevel.Possibly, attribution.getKnownConfidenceLevel());
   }

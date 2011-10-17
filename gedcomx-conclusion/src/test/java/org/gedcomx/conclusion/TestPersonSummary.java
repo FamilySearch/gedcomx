@@ -37,7 +37,7 @@ public class TestPersonSummary {
   private PersonSummary createTestVitals() {
     PersonSummary summary = new PersonSummary();
     summary.setAttribution(new Attribution());
-    summary.getAttribution().setStatement("explanation");
+    summary.getAttribution().setProofStatement("explanation");
     summary.setId("vitalId");
     summary.setPersonReference(URI.create("urn:pid"));
     summary.setGender(new ResourceReference());
@@ -52,7 +52,7 @@ public class TestPersonSummary {
   }
 
   private void assertTestFamily(PersonSummary summary) {
-    assertEquals("explanation", summary.getAttribution().getStatement());
+    assertEquals("explanation", summary.getAttribution().getProofStatement());
     assertEquals("vitalId", summary.getId());
     assertEquals(URI.create("urn:pid"), summary.getPersonReference());
     assertEquals(URI.create("#gender"), summary.getGender().getResource());

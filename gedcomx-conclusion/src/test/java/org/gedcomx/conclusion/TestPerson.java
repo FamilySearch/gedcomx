@@ -136,7 +136,7 @@ public class TestPerson {
     person.setId("pid");
     person.setBibliographicCitation("person bibliographic citation");
     person.setAttribution(new Attribution());
-    person.getAttribution().setStatement("this person existed.");
+    person.getAttribution().setProofStatement("this person existed.");
     return person;
   }
 
@@ -198,7 +198,7 @@ public class TestPerson {
 
     assertEquals("pid", person.getId());
     assertEquals("person bibliographic citation", person.getBibliographicCitation());
-    assertEquals("this person existed.", person.getAttribution().getStatement());
+    assertEquals("this person existed.", person.getAttribution().getProofStatement());
   }
 
 }

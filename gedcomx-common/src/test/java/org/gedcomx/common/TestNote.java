@@ -21,7 +21,7 @@ public class TestNote {
     Note note = new Note();
     note.setText("hello, there");
     note.setAttribution(new Attribution());
-    note.getAttribution().setStatement("note statement");
+    note.getAttribution().setProofStatement("note statement");
     Note otherNote = new Note();
     otherNote.setText("note of a note");
     Note otherNote2 = new Note();
@@ -33,7 +33,7 @@ public class TestNote {
     note = processThroughXml(note);
 
     assertEquals("hello, there", note.getText());
-    assertEquals("note statement", note.getAttribution().getStatement());
+    assertEquals("note statement", note.getAttribution().getProofStatement());
     assertEquals("note of a note", ((Note) note.getExtensionElements().get(0)).getText());
     assertEquals("note2 of a note", ((Note) note.getExtensionElements().get(1)).getText());
     assertEquals("id", note.getId());
@@ -47,7 +47,7 @@ public class TestNote {
     Note note = new Note();
     note.setText("hello, there");
     note.setAttribution(new Attribution());
-    note.getAttribution().setStatement("note statement");
+    note.getAttribution().setProofStatement("note statement");
     Note otherNote = new Note();
     otherNote.setText("note of a note");
     Note otherNote2 = new Note();
@@ -59,7 +59,7 @@ public class TestNote {
     note = processThroughJson(note);
 
     assertEquals("hello, there", note.getText());
-    assertEquals("note statement", note.getAttribution().getStatement());
+    assertEquals("note statement", note.getAttribution().getProofStatement());
     assertEquals("note of a note", ((Note) note.getExtensionElements().get(0)).getText());
     assertEquals("note2 of a note", ((Note) note.getExtensionElements().get(1)).getText());
     assertEquals("id", note.getId());

@@ -42,7 +42,7 @@ public class TestFamily {
     alternateId.setValue("alt-id");
     family.setAlternateIds(Arrays.asList(alternateId));
     family.setAttribution(new Attribution());
-    family.getAttribution().setStatement("explanation");
+    family.getAttribution().setProofStatement("explanation");
     family.setId("family");
     family.setPersistentId(URI.create("urn:pid"));
     family.setParent1(new ResourceReference());
@@ -60,7 +60,7 @@ public class TestFamily {
 
   private void assertTestFamily(Family family) {
     assertEquals("alt-id", family.getAlternateIds().get(0).getValue());
-    assertEquals("explanation", family.getAttribution().getStatement());
+    assertEquals("explanation", family.getAttribution().getProofStatement());
     assertEquals("family", family.getId());
     assertEquals(URI.create("urn:pid"), family.getPersistentId());
     assertEquals(URI.create("urn:person1"), family.getParent1().getResource());

@@ -106,7 +106,7 @@ public class TestRecord {
 
     persona.setAlternateIds(alternateIds);
     persona.setAttribution(new Attribution());
-    persona.getAttribution().setStatement("this persona exists.");
+    persona.getAttribution().setProofStatement("this persona exists.");
 
     Gender gender = new Gender();
     fillInField(gender, "gender");
@@ -122,7 +122,7 @@ public class TestRecord {
     eventRole.setPrincipal(false);
     eventRole.setEvent(URI.create("#" + event.getId()));
     eventRole.setAttribution(new Attribution());
-    eventRole.getAttribution().setStatement("event role attribution");
+    eventRole.getAttribution().setProofStatement("event role attribution");
     eventRoles.add(eventRole);
     persona.setEventRoles(eventRoles);
 
@@ -166,7 +166,7 @@ public class TestRecord {
     parentRelationship.setPersona2(new ResourceReference());
     parentRelationship.getPersona2().setResource(URI.create("#" + persona.getId()));
     parentRelationship.setAttribution(new Attribution());
-    parentRelationship.getAttribution().setStatement("relationship explanation");
+    parentRelationship.getAttribution().setProofStatement("relationship explanation");
     relationships.add(parentRelationship);
 
     record.setRelationships(relationships);
@@ -251,7 +251,7 @@ public class TestRecord {
     assertEquals(AlternateIdType.Forwarded, persona.getAlternateIds().get(0).getKnownType());
     assertEquals("forward-value", persona.getAlternateIds().get(0).getValue());
 
-    assertEquals("this persona exists.", persona.getAttribution().getStatement());
+    assertEquals("this persona exists.", persona.getAttribution().getProofStatement());
 
     assertField(persona.getGender(), "gender");
     assertEquals(GenderType.Female, persona.getGender().getKnownType());
@@ -262,7 +262,7 @@ public class TestRecord {
     assertEquals(1, persona.getEventRoles().size());
     EventRole eventRole = persona.getEventRoles().get(0);
     assertEquals("event role description", eventRole.getDescription());
-    assertEquals("event role attribution", eventRole.getAttribution().getStatement());
+    assertEquals("event role attribution", eventRole.getAttribution().getProofStatement());
     assertFalse(eventRole.getPrincipal());
     assertEquals("#" + event.getId(), eventRole.getEvent().toString());
 
@@ -294,7 +294,7 @@ public class TestRecord {
     assertEquals("parent-relationship-id", parentRelationship.getId());
     assertEquals("#" + persona.getId(), parentRelationship.getPersona1().getResource().toString());
     assertEquals("#" + persona.getId(), parentRelationship.getPersona2().getResource().toString());
-    assertEquals("relationship explanation", parentRelationship.getAttribution().getStatement());
+    assertEquals("relationship explanation", parentRelationship.getAttribution().getProofStatement());
 
     assertEquals(1, record.getSources().size());
     ResourceReference sourceReference = record.getSources().get(0);
