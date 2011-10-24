@@ -68,6 +68,7 @@ public enum FactType {
   Immigration,
   Interment,
   Household,
+  Living,
   MaritalStatus,
   MilitaryAward,
   MilitaryCompany,
@@ -225,6 +226,7 @@ public enum FactType {
     public static final FactType Immigration = include(FactType.Immigration);
     public static final FactType Interment = include(FactType.Interment);
     public static final FactType Household = include(FactType.Household);
+    public static final FactType Living = include(FactType.Living);
     public static final FactType MaritalStatus = include(FactType.MaritalStatus);
     public static final FactType MilitaryAward = include(FactType.MilitaryAward);
     public static final FactType MilitaryCompany = include(FactType.MilitaryCompany);

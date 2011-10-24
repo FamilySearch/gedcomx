@@ -14,6 +14,7 @@ import java.util.List;
 import static org.gedcomx.rt.SerializationUtil.processThroughJson;
 import static org.gedcomx.rt.SerializationUtil.processThroughXml;
 import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertTrue;
 
 /**
  * @author Ryan Heaton
@@ -137,6 +138,9 @@ public class TestPerson {
     person.setBibliographicCitation("person bibliographic citation");
     person.setAttribution(new Attribution());
     person.getAttribution().setProofStatement("this person existed.");
+
+    person.setLiving(true);
+
     return person;
   }
 
@@ -199,6 +203,8 @@ public class TestPerson {
     assertEquals("pid", person.getId());
     assertEquals("person bibliographic citation", person.getBibliographicCitation());
     assertEquals("this person existed.", person.getAttribution().getProofStatement());
+
+    assertTrue(person.getLiving());
   }
 
 }

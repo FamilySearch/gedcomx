@@ -38,12 +38,35 @@ import java.util.List;
 @JsonExtensionElement
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType ( name = "Person", propOrder = { "genders", "names", "facts"} )
+@XmlType ( name = "Person", propOrder = { "living", "genders", "names", "facts" } )
 public class Person extends GenealogicalEntity implements PersistentIdentifiable, HasFacts {
 
+  private Boolean living;
   private List<Gender> genders;
   private List<Name> names;
   private List<Fact> facts;
+
+  /**
+   * Living status of the person as treated by the system. The value of this property is intended
+   * to be based on a system-specific calculation and therefore has limited portability. Conclusions
+   * about the living status of a person can be modeled with a fact.
+   *
+   * @return Living status of the person as treated by the system.
+   */
+  public Boolean getLiving() {
+    return living;
+  }
+
+  /**
+   * Living status of the person as treated by the system. The value of this property is intended
+   * to be based on a system-specific calculation and therefore has limited portability. Conclusions
+   * about the living status of a person can be modeled with a fact.
+   *
+   * @param living Living status of the person as treated by the system.
+   */
+  public void setLiving(Boolean living) {
+    this.living = living;
+  }
 
   /**
    * The gender conclusions for the person.
