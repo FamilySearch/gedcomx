@@ -18,7 +18,7 @@ package org.gedcomx.conclusion.www;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.common.ResourceSet;
-import org.gedcomx.conclusion.Family;
+import org.gedcomx.conclusion.PedigreeNode;
 import org.gedcomx.rt.JsonExtensionElement;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.www.Link;
@@ -29,53 +29,53 @@ import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
 
 /**
- * A representation of a family for the WWW.
+ * A representation of a pedigree node for the WWW.
  * 
  * @author Ryan Heaton
  */
-@XmlRootElement(name = "family")
+@XmlRootElement(name = "pedigreeNode")
 @JsonExtensionElement
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType ( name = "FamilyWWW", propOrder = {"family", "metadata"})
+@XmlType ( name = "PedigreeNodeWWW", propOrder = {"pedigreeNode", "metadata"})
 @XmlSeeAlso({Link.class})
-public final class FamilyWWW {
+public final class PedigreeNodeWWW {
 
-  private Family family;
+  private PedigreeNode pedigreeNode;
   private ResourceSet metadata;
 
   /**
-   * The family.
+   * The pedigree node.
    *
-   * @return The family.
+   * @return The pedigree node.
    */
   @XmlElementRef
-  public Family getFamily() {
-    return family;
+  public PedigreeNode getPedigreeNode() {
+    return pedigreeNode;
   }
 
   /**
-   * The family.
+   * The pedigree node.
    *
-   * @param family The family.
+   * @param pedigreeNode The pedigree node.
    */
-  public void setFamily(Family family) {
-    this.family = family;
+  public void setPedigreeNode(PedigreeNode pedigreeNode) {
+    this.pedigreeNode = pedigreeNode;
   }
 
   /**
-   * Metadata associated with the family.
+   * Metadata associated with the pedigree node.
    *
-   * @return Metadata associated with the family.
+   * @return Metadata associated with the pedigree node.
    */
   public ResourceSet getMetadata() {
     return metadata;
   }
 
   /**
-   * Metadata associated with the family.
+   * Metadata associated with the pedigree node.
    *
-   * @param metadata Metadata associated with the family.
+   * @param metadata Metadata associated with the pedigree node.
    */
   public void setMetadata(ResourceSet metadata) {
     this.metadata = metadata;
