@@ -27,20 +27,20 @@ import javax.xml.bind.annotation.XmlTransient;
 @Namespaces ( {
   @Namespace (
     id = "gxrw",
-    uri = RecordWWWNamespaces.GEDCOMX_RECORD_WWW_NAMESPACE,
+    uri = RecordWWWNamespaces.GEDCOMX_RECORD_WWW_V1_NAMESPACE,
     label = "Record WWW Namespace",
     description = "The record www namespace contains the objects necessary for modeling record data exposed via the World Wide Web.",
     version = "v1",
-    xmlMediaType = RecordWWWNamespaces.GEDCOMX_RECORD_WWW_XML_MEDIA_TYPE,
-    jsonMediaType = RecordWWWNamespaces.GEDCOMX_RECORD_WWW_JSON_MEDIA_TYPE
+    xmlMediaType = RecordWWWNamespaces.GEDCOMX_RECORD_WWW_V1_XML_MEDIA_TYPE,
+    jsonMediaType = RecordWWWNamespaces.GEDCOMX_RECORD_WWW_V1_JSON_MEDIA_TYPE
   )
 } )
 public class RecordWWWNamespaces {
 
   private RecordWWWNamespaces() {}
 
-  public static final String GEDCOMX_RECORD_WWW_NAMESPACE = "http://gedcomx.org/record/www/v1/";
-  public static final String GEDCOMX_RECORD_WWW_XML_MEDIA_TYPE = "application/x-gedcom-record-www-v1+xml";
-  public static final String GEDCOMX_RECORD_WWW_JSON_MEDIA_TYPE = "application/x-gedcom-record-www-v1+json";
+  public static final String GEDCOMX_RECORD_WWW_V1_NAMESPACE = "http://gedcomx.org/record/www/v1/";
+  public static final String GEDCOMX_RECORD_WWW_V1_XML_MEDIA_TYPE = "application/x-gedcom-record-www-v1+xml";
+  public static final String GEDCOMX_RECORD_WWW_V1_JSON_MEDIA_TYPE = "application/x-gedcom-record-www-v1+json";
 
 }

@@ -27,19 +27,19 @@ import javax.xml.bind.annotation.XmlTransient;
 @Namespaces ( {
   @Namespace (
     id = "gxwww",
-    uri = WWWNamespaces.GEDCOMX_WWW_NAMESPACE,
+    uri = WWWNamespaces.GEDCOMX_WWW_V1_NAMESPACE,
     label = "WWW Namespace",
     description = "The www namespace contains the objects necessary exposing genealogical data to the World Wide Web.",
     version = "v1",
-    xmlMediaType = WWWNamespaces.GEDCOMX_WWW_XML_MEDIA_TYPE,
-    jsonMediaType = WWWNamespaces.GEDCOMX_WWW_JSON_MEDIA_TYPE
+    xmlMediaType = WWWNamespaces.GEDCOMX_WWW_V1_XML_MEDIA_TYPE,
+    jsonMediaType = WWWNamespaces.GEDCOMX_WWW_V1_JSON_MEDIA_TYPE
   )
 } )
 public class WWWNamespaces {
 
   private WWWNamespaces() {}
 
-  public static final String GEDCOMX_WWW_NAMESPACE = "http://gedcomx.org/www/v1/";
-  public static final String GEDCOMX_WWW_XML_MEDIA_TYPE = "application/gedcomx-www-v1+xml";
-  public static final String GEDCOMX_WWW_JSON_MEDIA_TYPE = "application/gedcomx-www-v1+json";
+  public static final String GEDCOMX_WWW_V1_NAMESPACE = "http://gedcomx.org/www/v1/";
+  public static final String GEDCOMX_WWW_V1_XML_MEDIA_TYPE = "application/gedcomx-www-v1+xml";
+  public static final String GEDCOMX_WWW_V1_JSON_MEDIA_TYPE = "application/gedcomx-www-v1+json";
 }

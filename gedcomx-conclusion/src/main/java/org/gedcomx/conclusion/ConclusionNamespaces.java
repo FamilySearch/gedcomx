@@ -29,12 +29,12 @@ import javax.xml.bind.annotation.XmlTransient;
 @Namespaces ( {
   @Namespace (
     id = "gxc",
-    uri = ConclusionNamespaces.GEDCOMX_CONCLUSION_NAMESPACE,
+    uri = ConclusionNamespaces.GEDCOMX_CONCLUSION_V1_NAMESPACE,
     label = "Conclusion Namespace",
     description = "The conclusion namespace contains the objects necessary for modeling genealogical conclusion data.",
     version = "v1",
-    xmlMediaType = ConclusionNamespaces.GEDCOMX_CONCLUSION_XML_MEDIA_TYPE,
-    jsonMediaType = ConclusionNamespaces.GEDCOMX_CONCLUSION_JSON_MEDIA_TYPE,
+    xmlMediaType = ConclusionNamespaces.GEDCOMX_CONCLUSION_V1_XML_MEDIA_TYPE,
+    jsonMediaType = ConclusionNamespaces.GEDCOMX_CONCLUSION_V1_JSON_MEDIA_TYPE,
     definesRDFSchema = true
   )
 } )
@@ -42,8 +42,8 @@ public class ConclusionNamespaces {
 
   private ConclusionNamespaces() {}
 
-  public static final String GEDCOMX_CONCLUSION_NAMESPACE = "http://gedcomx.org/conclusion/v1/";
-  public static final String GEDCOMX_CONCLUSION_XML_MEDIA_TYPE = "application/x-gedcom-conclusion-v1+xml";
-  public static final String GEDCOMX_CONCLUSION_JSON_MEDIA_TYPE = "application/x-gedcom-conclusion-v1+json";
+  public static final String GEDCOMX_CONCLUSION_V1_NAMESPACE = "http://gedcomx.org/conclusion/v1/";
+  public static final String GEDCOMX_CONCLUSION_V1_XML_MEDIA_TYPE = "application/x-gedcom-conclusion-v1+xml";
+  public static final String GEDCOMX_CONCLUSION_V1_JSON_MEDIA_TYPE = "application/x-gedcom-conclusion-v1+json";
 
 }

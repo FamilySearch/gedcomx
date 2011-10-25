@@ -12,6 +12,6 @@ import static org.testng.AssertJUnit.assertNotNull;
 public class TestRecordNamespaces {
 
   public void testRuntimeVersion() throws Exception {
-    assertNotNull(GedcomNamespaceManager.getRuntimeVersion(RecordNamespaces.GEDCOMX_RECORD_NAMESPACE));
+    assertNotNull(GedcomNamespaceManager.getRuntimeVersion(RecordNamespaces.GEDCOMX_RECORD_V1_NAMESPACE));
   }
 }

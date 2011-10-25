@@ -27,20 +27,20 @@ import javax.xml.bind.annotation.XmlTransient;
 @Namespaces ( {
   @Namespace (
     id = "gxcw",
-    uri = ConclusionWWWNamespaces.GEDCOMX_CONCLUSION_WWW_NAMESPACE,
+    uri = ConclusionWWWNamespaces.GEDCOMX_CONCLUSION_WWW_V1_NAMESPACE,
     label = "Conclusion WWW Namespace",
     description = "The conclusion www namespace contains the objects necessary for modeling conclusion data exposed via the World Wide Web.",
     version = "v1",
-    xmlMediaType = ConclusionWWWNamespaces.GEDCOMX_CONCLUSION_WWW_XML_MEDIA_TYPE,
-    jsonMediaType = ConclusionWWWNamespaces.GEDCOMX_CONCLUSION_WWW_JSON_MEDIA_TYPE
+    xmlMediaType = ConclusionWWWNamespaces.GEDCOMX_CONCLUSION_WWW_V1_XML_MEDIA_TYPE,
+    jsonMediaType = ConclusionWWWNamespaces.GEDCOMX_CONCLUSION_WWW_V1_JSON_MEDIA_TYPE
   )
 } )
 public class ConclusionWWWNamespaces {
 
   private ConclusionWWWNamespaces() {}
 
-  public static final String GEDCOMX_CONCLUSION_WWW_NAMESPACE = "http://gedcomx.org/conclusion/www/v1/";
-  public static final String GEDCOMX_CONCLUSION_WWW_XML_MEDIA_TYPE = "application/x-gedcom-conclusion-www-v1+xml";
-  public static final String GEDCOMX_CONCLUSION_WWW_JSON_MEDIA_TYPE = "application/x-gedcom-conclusion-www-v1+json";
+  public static final String GEDCOMX_CONCLUSION_WWW_V1_NAMESPACE = "http://gedcomx.org/conclusion/www/v1/";
+  public static final String GEDCOMX_CONCLUSION_WWW_V1_XML_MEDIA_TYPE = "application/x-gedcom-conclusion-www-v1+xml";
+  public static final String GEDCOMX_CONCLUSION_WWW_V1_JSON_MEDIA_TYPE = "application/x-gedcom-conclusion-www-v1+json";
 
 }

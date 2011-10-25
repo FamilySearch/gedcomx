@@ -39,7 +39,7 @@ import java.net.URI;
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "PersonSummary", propOrder = { "gender", "name", "birth", "death" } )
-@RDFSubClassOf( ConclusionNamespaces.GEDCOMX_CONCLUSION_NAMESPACE + "Person" )
+@RDFSubClassOf( ConclusionNamespaces.GEDCOMX_CONCLUSION_V1_NAMESPACE + "Person" )
 public class PersonSummary extends GenealogicalResource {
 
   private URI personReference;
@@ -76,7 +76,7 @@ public class PersonSummary extends GenealogicalResource {
    * @return Reference to the primary gender conclusion of the person.
    */
   @RDFRange (Gender.class)
-  @RDFDomain ( ConclusionNamespaces.GEDCOMX_CONCLUSION_NAMESPACE + "Person" )
+  @RDFDomain ( ConclusionNamespaces.GEDCOMX_CONCLUSION_V1_NAMESPACE + "Person" )
   public ResourceReference getGender() {
     return gender;
   }
@@ -96,7 +96,7 @@ public class PersonSummary extends GenealogicalResource {
    * @return Reference to the primary name for a person.
    */
   @RDFRange (Name.class)
-  @RDFDomain ( ConclusionNamespaces.GEDCOMX_CONCLUSION_NAMESPACE + "Person" )
+  @RDFDomain ( ConclusionNamespaces.GEDCOMX_CONCLUSION_V1_NAMESPACE + "Person" )
   public ResourceReference getName() {
     return name;
   }

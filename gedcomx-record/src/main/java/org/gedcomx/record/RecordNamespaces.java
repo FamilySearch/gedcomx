@@ -27,12 +27,12 @@ import javax.xml.bind.annotation.XmlTransient;
 @Namespaces ( {
   @Namespace (
     id = "gxr",
-    uri = RecordNamespaces.GEDCOMX_RECORD_NAMESPACE,
+    uri = RecordNamespaces.GEDCOMX_RECORD_V1_NAMESPACE,
     label = "Record Namespace",
     description = "The record namespace contains the objects necessary for modeling genealogical record data.",
     version = "v1",
-    xmlMediaType = RecordNamespaces.GEDCOMX_RECORD_XML_MEDIA_TYPE,
-    jsonMediaType = RecordNamespaces.GEDCOMX_RECORD_JSON_MEDIA_TYPE,
+    xmlMediaType = RecordNamespaces.GEDCOMX_RECORD_V1_XML_MEDIA_TYPE,
+    jsonMediaType = RecordNamespaces.GEDCOMX_RECORD_V1_JSON_MEDIA_TYPE,
     definesRDFSchema = true
   )
 } )
@@ -40,8 +40,8 @@ public class RecordNamespaces {
 
   private RecordNamespaces() {}
 
-  public static final String GEDCOMX_RECORD_NAMESPACE = "http://gedcomx.org/record/v1/";
-  public static final String GEDCOMX_RECORD_XML_MEDIA_TYPE = "application/x-gedcom-record-v1+xml";
-  public static final String GEDCOMX_RECORD_JSON_MEDIA_TYPE = "application/x-gedcom-record-v1+json";
+  public static final String GEDCOMX_RECORD_V1_NAMESPACE = "http://gedcomx.org/record/v1/";
+  public static final String GEDCOMX_RECORD_V1_XML_MEDIA_TYPE = "application/x-gedcom-record-v1+xml";
+  public static final String GEDCOMX_RECORD_V1_JSON_MEDIA_TYPE = "application/x-gedcom-record-v1+json";
 
 }

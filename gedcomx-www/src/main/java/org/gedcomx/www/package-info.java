@@ -18,7 +18,7 @@
  * The www model defines the necessary extensions to provide genealogical data via the World Wide Web.
  */
 @XmlSchema (
-  namespace = WWWNamespaces.GEDCOMX_WWW_NAMESPACE,
+  namespace = WWWNamespaces.GEDCOMX_WWW_V1_NAMESPACE,
   attributeFormDefault = XmlNsForm.QUALIFIED,
   elementFormDefault = XmlNsForm.QUALIFIED
 )

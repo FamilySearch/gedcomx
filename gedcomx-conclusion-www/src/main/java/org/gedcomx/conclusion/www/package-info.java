@@ -19,12 +19,12 @@
  * providing conclusion data via the World Wide Web.
  */
 @XmlSchema(
-  namespace = ConclusionWWWNamespaces.GEDCOMX_CONCLUSION_WWW_NAMESPACE,
+  namespace = ConclusionWWWNamespaces.GEDCOMX_CONCLUSION_WWW_V1_NAMESPACE,
   attributeFormDefault = XmlNsForm.QUALIFIED,
   elementFormDefault = XmlNsForm.QUALIFIED
 )
 @XmlAccessorOrder ( XmlAccessOrder.ALPHABETICAL )
-@DefaultNamespace ( ConclusionNamespaces.GEDCOMX_CONCLUSION_NAMESPACE )
+@DefaultNamespace ( ConclusionNamespaces.GEDCOMX_CONCLUSION_V1_NAMESPACE )
 package org.gedcomx.conclusion.www;
 
 import org.gedcomx.conclusion.ConclusionNamespaces;

@@ -19,12 +19,12 @@
  * providing record data via the World Wide Web.
  */
 @XmlSchema(
-  namespace = RecordWWWNamespaces.GEDCOMX_RECORD_WWW_NAMESPACE,
+  namespace = RecordWWWNamespaces.GEDCOMX_RECORD_WWW_V1_NAMESPACE,
   attributeFormDefault = XmlNsForm.QUALIFIED,
   elementFormDefault = XmlNsForm.QUALIFIED
 )
 @XmlAccessorOrder ( XmlAccessOrder.ALPHABETICAL )
-@DefaultNamespace ( RecordNamespaces.GEDCOMX_RECORD_NAMESPACE )
+@DefaultNamespace ( RecordNamespaces.GEDCOMX_RECORD_V1_NAMESPACE )
 package org.gedcomx.record.www;
 
 import org.gedcomx.record.RecordNamespaces;
