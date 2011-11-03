@@ -21,8 +21,9 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.rt.CommonNamespaces;
+import org.gedcomx.rt.RDFSubClassOf;
 import org.gedcomx.rt.XmlTypeIdResolver;
-import org.gedcomx.types.CharacteristicType;
+import org.gedcomx.types.FactType;
 import org.gedcomx.types.TypeReference;
 import org.gedcomx.types.Typed;
 
@@ -31,14 +32,17 @@ import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 /**
- * A field specifying a characteristic about a persona or relationship.
+ * A field specifying a characteristic about a record, persona, or relationship.
  */
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "Characteristic" )
-public class Characteristic extends Field implements Typed<CharacteristicType> {
+@RDFSubClassOf ( CommonNamespaces.DUBLIN_CORE_TYPE_NAMESPACE + "Event" )
+public class Characteristic extends Field implements Typed<FactType>, Temporal, Spatial {
 
-  private TypeReference<CharacteristicType> type;
+  private TypeReference<FactType> type;
+  private Date date;
+  private Place place;
 
   /**
    * The type of the characteristic.
@@ -46,7 +50,7 @@ public class Characteristic extends Field implements Typed<CharacteristicType> {
    * @return The type of the characteristic.
    */
   @XmlElement (namespace = CommonNamespaces.RDF_NAMESPACE)
-  public TypeReference<CharacteristicType> getType() {
+  public TypeReference<FactType> getType() {
     return type;
   }
 
@@ -55,19 +59,19 @@ public class Characteristic extends Field implements Typed<CharacteristicType> {
    *
    * @param type The type of the characteristic.
    */
-  public void setType(TypeReference<CharacteristicType> type) {
+  public void setType(TypeReference<FactType> type) {
     this.type = type;
   }
 
   /**
-   * The enum referencing the known type of the characteristic, or {@link org.gedcomx.types.CharacteristicType#OTHER} if not known.
+   * The enum referencing the known type of the characteristic, or {@link org.gedcomx.types.FactType#OTHER} if not known.
    *
-   * @return The enum referencing the known type of the characteristic, or {@link org.gedcomx.types.CharacteristicType#OTHER} if not known.
+   * @return The enum referencing the known type of the characteristic, or {@link org.gedcomx.types.FactType#OTHER} if not known.
    */
   @XmlTransient
   @JsonIgnore
-  public CharacteristicType getKnownType() {
-    return getType() == null ? null : XmlQNameEnumUtil.fromURI(getType().getType(), CharacteristicType.class);
+  public FactType getKnownType() {
+    return getType() == null ? null : XmlQNameEnumUtil.fromURI(getType().getType(), FactType.class);
   }
 
   /**
@@ -76,8 +80,44 @@ public class Characteristic extends Field implements Typed<CharacteristicType> {
    * @param knownType The known type.
    */
   @JsonIgnore
-  public void setKnownType(CharacteristicType knownType) {
-    setType(knownType == null ? null : new TypeReference<CharacteristicType>(knownType));
+  public void setKnownType(FactType knownType) {
+    setType(knownType == null ? null : new TypeReference<FactType>(knownType));
+  }
+
+  /**
+   * The date of applicability of this characteristic.
+   *
+   * @return The date of applicability of this characteristic.
+   */
+  public Date getDate() {
+    return date;
+  }
+
+  /**
+   * The date of applicability of this characteristic.
+   *
+   * @param date The date of applicability of this characteristic.
+   */
+  public void setDate(Date date) {
+    this.date = date;
+  }
+
+  /**
+   * The place of applicability of this characteristic.
+   *
+   * @return The place of applicability of this characteristic.
+   */
+  public Place getPlace() {
+    return place;
+  }
+
+  /**
+   * The place of applicability of this characteristic.
+   *
+   * @param place The place of applicability of this characteristic.
+   */
+  public void setPlace(Place place) {
+    this.place = place;
   }
 
 }
