@@ -42,7 +42,7 @@
   <dependencies>
     <dependency>
       <groupId>org.gedcomx</groupId>
-      <artifactId>gedcomx-conclusion-www</artifactId>
+      <artifactId>gedcomx-conclusion</artifactId>
       <version>${gedcomx.version}</version>
     </dependency>
   </dependencies>
