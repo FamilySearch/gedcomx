@@ -24,7 +24,6 @@ import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.namespace.QName;
 import java.net.URI;
 
 /**
@@ -38,7 +37,7 @@ import java.net.URI;
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 public final class Link {
 
-  private QName rel;
+  private String rel;
   private URI href;
 
   /**
@@ -47,7 +46,7 @@ public final class Link {
    * @return The link relationship.
    */
   @XmlAttribute
-  public QName getRel() {
+  public String getRel() {
     return rel;
   }
 
@@ -56,7 +55,7 @@ public final class Link {
    *
    * @param rel The link relationship.
    */
-  public void setRel(QName rel) {
+  public void setRel(String rel) {
     this.rel = rel;
   }
 

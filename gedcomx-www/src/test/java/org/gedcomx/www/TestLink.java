@@ -21,10 +21,10 @@ public class TestLink {
   public void testLinkXml() throws Exception {
     Link link = new Link();
     link.setHref(URI.create("urn:link"));
-    link.setRel(new QName("urn:rel", "rel"));
+    link.setRel("rel");
     link = processThroughXml(link);
     assertEquals(URI.create("urn:link"), link.getHref());
-    assertEquals(new QName("urn:rel", "rel"), link.getRel());
+    assertEquals("rel", link.getRel());
   }
 
   /**
@@ -33,10 +33,10 @@ public class TestLink {
   public void testLinkJson() throws Exception {
     Link link = new Link();
     link.setHref(URI.create("urn:link"));
-    link.setRel(new QName("urn:rel", "rel"));
+    link.setRel("rel");
     link = processThroughJson(link);
     assertEquals(URI.create("urn:link"), link.getHref());
-    assertEquals(new QName("urn:rel", "rel"), link.getRel());
+    assertEquals("rel", link.getRel());
   }
 
 }
