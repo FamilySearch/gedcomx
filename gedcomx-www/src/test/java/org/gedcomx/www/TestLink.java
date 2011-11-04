@@ -2,7 +2,6 @@ package org.gedcomx.www;
 
 import org.testng.annotations.Test;
 
-import javax.xml.namespace.QName;
 import java.net.URI;
 
 import static org.gedcomx.rt.SerializationUtil.processThroughJson;
