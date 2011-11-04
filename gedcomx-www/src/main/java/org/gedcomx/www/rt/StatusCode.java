@@ -15,7 +15,6 @@
  */
 package org.gedcomx.www.rt;
 
-import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
@@ -23,12 +22,12 @@ import java.lang.annotation.Target;
 /**
  * @author Ryan Heaton
  */
-@Retention ( RetentionPolicy.RUNTIME )
-@Target ({ ElementType.TYPE })
-public @interface APIDefinition {
+@Retention( RetentionPolicy.RUNTIME )
+@Target( {} )
+public @interface StatusCode {
 
-  String name() default "##default";
+  int code();
 
-  StatusCode[] statusCodes() default {};
+  String condition();
 
 }

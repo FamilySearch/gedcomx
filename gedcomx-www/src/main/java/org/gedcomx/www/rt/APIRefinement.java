@@ -29,4 +29,5 @@ public @interface APIRefinement {
 
   Class<?>[] value();
 
+  StatusCode[] statusCodes() default {};
 }

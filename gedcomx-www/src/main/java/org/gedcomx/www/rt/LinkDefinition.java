@@ -29,4 +29,5 @@ public @interface LinkDefinition {
 
   String value();
 
+  StatusCode[] statusCodes() default {};
 }

@@ -29,4 +29,5 @@ public @interface LinkRefinement {
 
   String value();
 
+  StatusCode[] statusCodes() default {};
 }

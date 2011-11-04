@@ -30,7 +30,14 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Ryan Heaton
  */
 @XmlTransient
-@APIDefinition ( name = "Person" )
+@APIDefinition (
+  name = "Person",
+  statusCodes = {
+    @StatusCode( code = 401, condition = "If authentication is needed, or if the supplied authentication is expired or otherwise invalid."),
+    @StatusCode( code = 403, condition = "If the link is forbidden even after considering a possibly valid authentication."),
+    @StatusCode( code = 501, condition = "If the link is not supported by the implementation.")
+  }
+)
 public abstract class PersonAPI {
 
   public static final String LINK_CREATE = "person-create";
@@ -54,11 +61,15 @@ public abstract class PersonAPI {
    *
    * @param uriInfo Information on the URI that was used to identify the person to read.
    * @return The person.
-   * @throws WebApplicationException 301 If the requested person has been merged to another person.
-   * @throws WebApplicationException 404 If the requested person was not found.
-   * @throws WebApplicationException 410 If the requested person has been deleted.
    */
-  @LinkDefinition ( LINK_READ )
+  @LinkDefinition (
+    value = LINK_READ,
+    statusCodes = {
+      @StatusCode( code = 301, condition = "If the requested person has been merged to another person."),
+      @StatusCode( code = 404, condition = "If the requested person is not found."),
+      @StatusCode( code = 410, condition = "If the requested person has been deleted.")
+    }
+  )
   public Person readPerson(@Context UriInfo uriInfo) {
     throw new WebApplicationException(501);
   }
@@ -70,11 +81,15 @@ public abstract class PersonAPI {
    *
    * @param uriInfo Information on the URI that was used to identify the person to read.
    * @return The person.
-   * @throws WebApplicationException 301 If the requested person has been merged to another person.
-   * @throws WebApplicationException 404 If the requested person was not found.
-   * @throws WebApplicationException 410 If the requested person has been deleted.
    */
-  @LinkDefinition ( LINK_READ )
+  @LinkDefinition (
+    value = LINK_READ,
+    statusCodes = {
+      @StatusCode( code = 301, condition = "If the requested person has been merged to another person."),
+      @StatusCode( code = 404, condition = "If the requested person is not found."),
+      @StatusCode( code = 410, condition = "If the requested person has been deleted.")
+    }
+  )
   public PersonWWW readPersonWWW(@Context UriInfo uriInfo) {
     throw new WebApplicationException(501);
   }
@@ -89,7 +104,14 @@ public abstract class PersonAPI {
    * @throws WebApplicationException 404 If the person to be updated was not found.
    * @throws WebApplicationException 410 If the person to be updated has been deleted.
    */
-  @LinkDefinition ( LINK_UPDATE )
+  @LinkDefinition (
+    value = LINK_UPDATE,
+    statusCodes = {
+      @StatusCode( code = 301, condition = "If the person to be updated has been merged to another person."),
+      @StatusCode( code = 404, condition = "If the person to be updated is not found."),
+      @StatusCode( code = 410, condition = "If the person to be updated has been deleted.")
+    }
+  )
   public Updated<Person> updatePerson(@Context UriInfo uriInfo, Person person) {
     throw new WebApplicationException(501);
   }
@@ -99,11 +121,15 @@ public abstract class PersonAPI {
    *
    * @param uriInfo Information on the URI that was used to identify the person to delete.
    * @return The delete response.
-   * @throws WebApplicationException 301 If the requested person has been merged to another person.
-   * @throws WebApplicationException 404 If the requested person was not found.
-   * @throws WebApplicationException 410 If the requested person has been deleted.
    */
-  @LinkDefinition ( LINK_DELETE )
+  @LinkDefinition (
+    value = LINK_DELETE,
+    statusCodes = {
+      @StatusCode( code = 301, condition = "If the person to be deleted has been merged to another person."),
+      @StatusCode( code = 404, condition = "If the person to be deleted is not found."),
+      @StatusCode( code = 410, condition = "If the person to be deleted has already been deleted.")
+    }
+  )
   public Deleted<Person> deletePerson(@Context UriInfo uriInfo) {
     throw new WebApplicationException(501);
   }
