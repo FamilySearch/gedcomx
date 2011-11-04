@@ -1,6 +1,5 @@
 package org.familysearch.ct.www;
 
-import com.sun.jersey.api.core.InjectParam;
 import org.gedcomx.conclusion.Person;
 import org.gedcomx.conclusion.www.PersonAPI;
 import org.gedcomx.www.Link;
@@ -13,7 +12,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-import javax.xml.namespace.QName;
 
 /**
  * @author Ryan Heaton
@@ -32,7 +30,7 @@ public class PersonEndpoints extends PersonAPI {
     String pid = uriInfo.getPathParameters().getFirst("pid");
     Person person = personService.readPerson(pid);
     Link updateLink = new Link();
-    updateLink.setRel(new QName(PersonAPI.LINK_DELETE));
+    updateLink.setRel(PersonAPI.LINK_DELETE);
     updateLink.setHref(uriInfo.getBaseUriBuilder().path(PersonEndpoints.class).path(PersonEndpoints.class, "deletePerson").build(pid));
     person.addExtensionElement(updateLink);
     return person;
