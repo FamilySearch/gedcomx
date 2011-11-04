@@ -19,6 +19,7 @@
   <modules>
     <module>conclusion-tree-model</module>
     <module>conclusion-tree-www</module>
+    <module>conclusion-tree-tests</module>
   </modules>
 
   <dependencies>

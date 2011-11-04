@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<enunciate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://enunciate.codehaus.org/schemas/enunciate-1.22.xsd">
+
+  <api-import pattern="org.gedcomx.**"/>
+  <api-import pattern="org.familysearch.ct.**"/>
+
+  <services>
+    <rest defaultRestSubcontext="/"/>
+  </services>
+
+  <modules>
+    <!--disable the standard docs module, we're using the gedcomx-support module to generate docs.-->
+    <docs disabled="true"/>
+
+    <c forceEnable="true"/>
+    <obj-c forceEnable="true"/>
+    <java-client generateJsonJar="true"/>
+    <jersey usePathBasedConneg="false"/>
+    <csharp disableCompile="true"/>
+    <ruby forceEnable="true"/>
+  </modules>
+
+</enunciate>

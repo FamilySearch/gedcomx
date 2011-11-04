@@ -50,6 +50,11 @@
       <artifactId>gedcomx-conclusion-www</artifactId>
       <version>${gedcomx.version}</version>
     </dependency>
+    <dependency>
+      <groupId>com.sun.jersey</groupId>
+      <artifactId>jersey-server</artifactId>
+      <version>1.5</version>
+    </dependency>
   </dependencies>
 
   <profiles>
