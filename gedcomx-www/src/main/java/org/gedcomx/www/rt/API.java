@@ -27,6 +27,8 @@ import java.lang.annotation.Target;
 @Target ({ ElementType.TYPE })
 public @interface API {
 
-  String name();
+  String name() default "##default";
+
+  Class refines() default Object.class;
 
 }
