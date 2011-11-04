@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Ryan Heaton
  */
 @XmlTransient
-@API ( name = "Person" )
+@APIDefinition ( name = "Person" )
 public abstract class PersonAPI {
 
   public static final String LINK_CREATE = "person-create";

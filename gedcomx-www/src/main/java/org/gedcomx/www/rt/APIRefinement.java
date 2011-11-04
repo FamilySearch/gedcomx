@@ -25,10 +25,8 @@ import java.lang.annotation.Target;
  */
 @Retention ( RetentionPolicy.RUNTIME )
 @Target ({ ElementType.TYPE })
-public @interface API {
+public @interface APIRefinement {
 
-  String name() default "##default";
-
-  Class refines() default Object.class;
+  Class<?>[] value();
 
 }
