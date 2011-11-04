@@ -4,6 +4,7 @@ import com.sun.jersey.api.core.InjectParam;
 import org.gedcomx.conclusion.Person;
 import org.gedcomx.conclusion.www.PersonAPI;
 import org.gedcomx.www.Link;
+import org.gedcomx.www.rt.APIBinding;
 import org.gedcomx.www.rt.Deleted;
 
 import javax.ws.rs.DELETE;
@@ -17,6 +18,7 @@ import javax.xml.namespace.QName;
 /**
  * @author Ryan Heaton
  */
+@APIBinding
 @Path("/person")
 public class PersonEndpoints extends PersonAPI {
 
