@@ -1,16 +1,17 @@
-package org.familysearch.ct.www;
+package org.familysearch.ct.www.binding;
 
+import org.familysearch.ct.www.api.PersonService;
 import org.gedcomx.conclusion.Person;
 import org.gedcomx.conclusion.www.PersonAPI;
 import org.gedcomx.www.Link;
 import org.gedcomx.www.rt.APIBinding;
-import org.gedcomx.www.rt.Deleted;
+import org.gedcomx.www.rt.LinkBinding;
+import org.gedcomx.www.rt.StatusCode;
 
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 /**
@@ -26,12 +27,13 @@ public class PersonEndpoints extends PersonAPI {
   @GET
   @Path("/{pid}")
   @Override
+  @LinkBinding
   public Person readPerson(@Context UriInfo uriInfo) {
     String pid = uriInfo.getPathParameters().getFirst("pid");
     Person person = personService.readPerson(pid);
     Link updateLink = new Link();
-    updateLink.setRel(PersonAPI.LINK_DELETE);
-    updateLink.setHref(uriInfo.getBaseUriBuilder().path(PersonEndpoints.class).path(PersonEndpoints.class, "deletePerson").build(pid));
+    updateLink.setRel("self");
+    updateLink.setHref(uriInfo.getBaseUriBuilder().path(PersonEndpoints.class).path(PersonEndpoints.class, "readPerson").build(pid));
     person.addExtensionElement(updateLink);
     return person;
   }
@@ -39,10 +41,14 @@ public class PersonEndpoints extends PersonAPI {
   @DELETE
   @Path("/{pid}")
   @Override
-  public Deleted<Person> deletePerson(@Context UriInfo uriInfo) {
+  @LinkBinding (
+    statusCodes = {
+      @StatusCode(code = 400, condition = "The proof statement was not provided." )
+    }
+  )
+  public void deletePerson(@Context UriInfo uriInfo) {
     String pid = uriInfo.getPathParameters().getFirst("pid");
     this.personService.deletePerson(pid, "proof statement");
-    return new Deleted<Person>(Response.status(Response.Status.NO_CONTENT).build());
   }
 
 }

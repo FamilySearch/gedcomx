@@ -1,31 +1,27 @@
-package org.familysearch.ct.www;
+package org.familysearch.ct.www.api;
 
+import org.gedcomx.conclusion.Fact;
+import org.gedcomx.conclusion.Gender;
+import org.gedcomx.conclusion.Name;
 import org.gedcomx.conclusion.Person;
-import org.gedcomx.conclusion.www.PersonAPI;
-import org.gedcomx.www.rt.APIRefinement;
-import org.gedcomx.www.rt.LinkRefinement;
-import org.gedcomx.www.rt.StatusCode;
 
 /**
  * @author Ryan Heaton
  */
-@APIRefinement ( PersonAPI.class )
 public interface PersonService {
 
   /**
    * Create a person.
    *
    * @param living Whether the person is living.
+   * @param name The name of the person.
+   * @param gender The gender of the person.
+   * @param death The death event of the person.
    * @param proofStatement The proof statement that was given by the user when the person was created.
    * @return The person that was created.
+   * @throws IllegalArgumentException If...
    */
-  @LinkRefinement(
-    value = PersonAPI.LINK_CREATE,
-    statusCodes = {
-      @StatusCode( code = 400, condition = "If the proof statement is null or empty")
-    }
-  )
-  Person createPerson(boolean living, String proofStatement);
+  Person createPerson(boolean living, Name name, Gender gender, Fact death, String proofStatement);
 
   /**
    * Read a person.
@@ -33,7 +29,6 @@ public interface PersonService {
    * @param id The id of the person to be read.
    * @return The person.
    */
-  @LinkRefinement( PersonAPI.LINK_READ )
   Person readPerson(String id);
 
   /**
@@ -42,12 +37,6 @@ public interface PersonService {
    * @param id The id of the person to delete.
    * @param proofStatement The proof statement that was given by the user for the person to be deleted.
    */
-  @LinkRefinement(
-    value = PersonAPI.LINK_DELETE,
-    statusCodes = {
-      @StatusCode( code = 400, condition = "If the proof statement is null or empty")
-    }
-  )
   void deletePerson(String id, String proofStatement);
 
 }
