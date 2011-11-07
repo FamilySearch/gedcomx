@@ -30,4 +30,6 @@ public @interface StatusCode {
 
   String condition();
 
+  boolean success() default false;
+
 }

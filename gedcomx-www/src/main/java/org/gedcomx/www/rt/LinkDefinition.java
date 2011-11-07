@@ -27,7 +27,9 @@ import java.lang.annotation.Target;
 @Target ({ ElementType.METHOD })
 public @interface LinkDefinition {
 
-  String value();
+  String label();
+
+  String[] operation();
 
   StatusCode[] statusCodes() default {};
 }

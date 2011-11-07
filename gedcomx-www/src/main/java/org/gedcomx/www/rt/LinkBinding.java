@@ -15,38 +15,18 @@
  */
 package org.gedcomx.www.rt;
 
-import javax.ws.rs.core.MultivaluedMap;
-import javax.ws.rs.core.Response;
-import javax.xml.bind.annotation.XmlTransient;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * @author Ryan Heaton
  */
-@XmlTransient
-public class Deleted<T> extends Response {
+@Retention ( RetentionPolicy.RUNTIME )
+@Target ({ ElementType.METHOD })
+public @interface LinkBinding {
 
-  private final Response response;
+  StatusCode[] statusCodes() default {};
 
-  public Deleted(Response response) {
-    if (response.getStatus() != Status.NO_CONTENT.getStatusCode()) {
-      throw new IllegalArgumentException();
-    }
-
-    this.response = response;
-  }
-
-  @Override
-  public Object getEntity() {
-    return response.getEntity();
-  }
-
-  @Override
-  public int getStatus() {
-    return response.getStatus();
-  }
-
-  @Override
-  public MultivaluedMap<String, Object> getMetadata() {
-    return response.getMetadata();
-  }
 }

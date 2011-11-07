@@ -16,10 +16,13 @@
 package org.gedcomx.conclusion.www;
 
 import org.gedcomx.conclusion.Person;
-import org.gedcomx.www.rt.*;
+import org.gedcomx.www.rt.APIDefinition;
+import org.gedcomx.www.rt.LinkDefinition;
+import org.gedcomx.www.rt.StatusCode;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -40,19 +43,22 @@ import javax.xml.bind.annotation.XmlTransient;
 )
 public abstract class PersonAPI {
 
-  public static final String LINK_CREATE = "person-create";
-  public static final String LINK_READ = "person-read";
-  public static final String LINK_UPDATE = "person-update";
-  public static final String LINK_DELETE = "person-delete";
+  public static final String LINK_PERSON_LABEL = "person";
 
   /**
    * Create a person.
    *
    * @param person The person to be created.
-   * @return The location of the person created.
+   * @return The appropriate response.
    */
-  @LinkDefinition ( LINK_CREATE )
-  public Created<Person> createPerson(Person person) {
+  @LinkDefinition (
+    label = LINK_PERSON_LABEL,
+    operation = "POST",
+    statusCodes = {
+      @StatusCode( code = 201, condition = "The creation of the person was successful. Expect a location header specifying the link to the created person.")
+    }
+  )
+  public Response createPerson(Person person) {
     throw new WebApplicationException(501);
   }
 
@@ -63,8 +69,10 @@ public abstract class PersonAPI {
    * @return The person.
    */
   @LinkDefinition (
-    value = LINK_READ,
+    label = LINK_PERSON_LABEL,
+    operation = "GET",
     statusCodes = {
+      @StatusCode( code = 200, condition = "Upon a successful read."),
       @StatusCode( code = 301, condition = "If the requested person has been merged to another person."),
       @StatusCode( code = 404, condition = "If the requested person is not found."),
       @StatusCode( code = 410, condition = "If the requested person has been deleted.")
@@ -83,8 +91,10 @@ public abstract class PersonAPI {
    * @return The person.
    */
   @LinkDefinition (
-    value = LINK_READ,
+    label = LINK_PERSON_LABEL,
+    operation = "GET",
     statusCodes = {
+      @StatusCode( code = 200, condition = "Upon a successful read."),
       @StatusCode( code = 301, condition = "If the requested person has been merged to another person."),
       @StatusCode( code = 404, condition = "If the requested person is not found."),
       @StatusCode( code = 410, condition = "If the requested person has been deleted.")
@@ -99,20 +109,15 @@ public abstract class PersonAPI {
    *
    * @param person The person to be used for the update.
    * @param uriInfo Information on the URI that was used to identify the person to update.
-   * @return The update response.
-   * @throws WebApplicationException 301 If the person to be updated has been merged to another person.
-   * @throws WebApplicationException 404 If the person to be updated was not found.
-   * @throws WebApplicationException 410 If the person to be updated has been deleted.
    */
   @LinkDefinition (
-    value = LINK_UPDATE,
+    label = LINK_PERSON_LABEL,
+    operation = "PUT",
     statusCodes = {
-      @StatusCode( code = 301, condition = "If the person to be updated has been merged to another person."),
-      @StatusCode( code = 404, condition = "If the person to be updated is not found."),
-      @StatusCode( code = 410, condition = "If the person to be updated has been deleted.")
+      @StatusCode( code = 204, condition = "The update was successful.")
     }
   )
-  public Updated<Person> updatePerson(@Context UriInfo uriInfo, Person person) {
+  public void updatePerson(@Context UriInfo uriInfo, Person person) {
     throw new WebApplicationException(501);
   }
 
@@ -120,17 +125,15 @@ public abstract class PersonAPI {
    * Read a person.
    *
    * @param uriInfo Information on the URI that was used to identify the person to delete.
-   * @return The delete response.
    */
   @LinkDefinition (
-    value = LINK_DELETE,
+    label = LINK_PERSON_LABEL,
+    operation = "DELETE",
     statusCodes = {
-      @StatusCode( code = 301, condition = "If the person to be deleted has been merged to another person."),
-      @StatusCode( code = 404, condition = "If the person to be deleted is not found."),
-      @StatusCode( code = 410, condition = "If the person to be deleted has already been deleted.")
+      @StatusCode( code = 204, condition = "The delete was successful.")
     }
   )
-  public Deleted<Person> deletePerson(@Context UriInfo uriInfo) {
+  public void deletePerson(@Context UriInfo uriInfo) {
     throw new WebApplicationException(501);
   }
 
