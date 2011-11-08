@@ -25,7 +25,7 @@ import org.gedcomx.rt.CommonNamespaces;
 import org.gedcomx.rt.RDFSubClassOf;
 import org.gedcomx.rt.RDFSubPropertyOf;
 import org.gedcomx.rt.XmlTypeIdResolver;
-import org.gedcomx.types.FactType;
+import org.gedcomx.types.EventType;
 import org.gedcomx.types.TypeReference;
 import org.gedcomx.types.Typed;
 
@@ -42,9 +42,9 @@ import javax.xml.bind.annotation.XmlType;
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType( name = "Event", propOrder = { "type", "date", "place" } )
 @RDFSubClassOf ( CommonNamespaces.DUBLIN_CORE_TYPE_NAMESPACE + "Event" )
-public class Event extends GenealogicalResource implements Typed<FactType> {
+public class Event extends GenealogicalResource implements Typed<EventType> {
 
-  private TypeReference<FactType> type;
+  private TypeReference<EventType> type;
   private Boolean primary;
   private Date date;
   private Place place;
@@ -55,7 +55,7 @@ public class Event extends GenealogicalResource implements Typed<FactType> {
    * @return The type of the event.
    */
   @XmlElement (namespace = CommonNamespaces.RDF_NAMESPACE)
-  public TypeReference<FactType> getType() {
+  public TypeReference<EventType> getType() {
     return type;
   }
 
@@ -64,7 +64,7 @@ public class Event extends GenealogicalResource implements Typed<FactType> {
    *
    * @param type The type of the event.
    */
-  public void setType(TypeReference<FactType> type) {
+  public void setType(TypeReference<EventType> type) {
     this.type = type;
   }
 
@@ -75,8 +75,8 @@ public class Event extends GenealogicalResource implements Typed<FactType> {
    */
   @XmlTransient
   @JsonIgnore
-  public org.gedcomx.types.FactType getKnownType() {
-    return getType() == null ? null : XmlQNameEnumUtil.fromURI(getType().getType(), org.gedcomx.types.FactType.class);
+  public org.gedcomx.types.EventType getKnownType() {
+    return getType() == null ? null : XmlQNameEnumUtil.fromURI(getType().getType(), org.gedcomx.types.EventType.class);
   }
 
   /**
@@ -85,8 +85,8 @@ public class Event extends GenealogicalResource implements Typed<FactType> {
    * @param knownType the event type.
    */
   @JsonIgnore
-  public void setKnownType(org.gedcomx.types.FactType knownType) {
-    setType(knownType == null ? null : new TypeReference<FactType>(knownType));
+  public void setKnownType(org.gedcomx.types.EventType knownType) {
+    setType(knownType == null ? null : new TypeReference<EventType>(knownType));
   }
 
   /**

@@ -22,6 +22,7 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.rt.CommonNamespaces;
 import org.gedcomx.rt.XmlTypeIdResolver;
+import org.gedcomx.types.CharacteristicType;
 import org.gedcomx.types.FactType;
 import org.gedcomx.types.TypeReference;
 import org.gedcomx.types.Typed;
@@ -36,9 +37,9 @@ import javax.xml.bind.annotation.XmlType;
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "Characteristic" )
-public class Characteristic extends Field implements Typed<FactType> {
+public class Characteristic extends Field implements Typed<CharacteristicType> {
 
-  private TypeReference<FactType> type;
+  private TypeReference<CharacteristicType> type;
 
   /**
    * The type of the characteristic.
@@ -46,7 +47,7 @@ public class Characteristic extends Field implements Typed<FactType> {
    * @return The type of the characteristic.
    */
   @XmlElement (namespace = CommonNamespaces.RDF_NAMESPACE)
-  public TypeReference<FactType> getType() {
+  public TypeReference<CharacteristicType> getType() {
     return type;
   }
 
@@ -55,7 +56,7 @@ public class Characteristic extends Field implements Typed<FactType> {
    *
    * @param type The type of the characteristic.
    */
-  public void setType(TypeReference<FactType> type) {
+  public void setType(TypeReference<CharacteristicType> type) {
     this.type = type;
   }
 
@@ -66,8 +67,8 @@ public class Characteristic extends Field implements Typed<FactType> {
    */
   @XmlTransient
   @JsonIgnore
-  public FactType getKnownType() {
-    return getType() == null ? null : XmlQNameEnumUtil.fromURI(getType().getType(), FactType.class);
+  public CharacteristicType getKnownType() {
+    return getType() == null ? null : XmlQNameEnumUtil.fromURI(getType().getType(), CharacteristicType.class);
   }
 
   /**
@@ -76,8 +77,8 @@ public class Characteristic extends Field implements Typed<FactType> {
    * @param knownType The known type.
    */
   @JsonIgnore
-  public void setKnownType(FactType knownType) {
-    setType(knownType == null ? null : new TypeReference<FactType>(knownType));
+  public void setKnownType(CharacteristicType knownType) {
+    setType(knownType == null ? null : new TypeReference<CharacteristicType>(knownType));
   }
 
 }
