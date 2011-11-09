@@ -46,6 +46,8 @@ import org.gedcomx.rt.DocIgnoreXmlRootElement;
 import org.gedcomx.rt.GedcomNamespaceManager;
 import org.gedcomx.rt.Namespace;
 import org.gedcomx.rt.Namespaces;
+import org.gedcomx.rt.www.ResourceServiceBinding;
+import org.gedcomx.rt.www.ResourceServiceDefinition;
 
 import java.io.File;
 import java.io.IOException;
@@ -61,7 +63,9 @@ import java.util.*;
 public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implements DocumentationAwareModule, EnunciateTypeDeclarationListener {
 
   private final Map<String, TypeDeclaration> knownNamespaceDeclarations = new HashMap<String, TypeDeclaration>();
+  private final Map<String, TypeDeclaration> knownRsdDeclarations = new HashMap<String, TypeDeclaration>();
   private RDFProcessor rdfProcessor;
+  private ResourceServiceProcessor resourceServiceProcessor;
 
   /**
    * @return "gedcomx"
@@ -142,6 +146,9 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
     if (typeDeclaration.getAnnotation(Namespaces.class) != null) {
       this.knownNamespaceDeclarations.put(typeDeclaration.getQualifiedName(), typeDeclaration);
     }
+    if (typeDeclaration.getAnnotation(ResourceServiceDefinition.class) != null) {
+      this.knownRsdDeclarations.put(typeDeclaration.getQualifiedName(), typeDeclaration);
+    }
   }
 
   protected URL getDocsTemplateURL() {
@@ -168,6 +175,7 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
     }
 
     this.rdfProcessor = new RDFProcessor();
+    this.resourceServiceProcessor = new ResourceServiceProcessor();
   }
 
   @Override
@@ -262,9 +270,10 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
     }
 
     ValidationResult validationResult = this.rdfProcessor.processModel(model);
+    validationResult.aggregate(this.resourceServiceProcessor.processModel(model, this.knownRsdDeclarations.values()));
     Messager messager = Context.getCurrentEnvironment().getMessager();
     if (validationResult.hasWarnings()) {
-      warn("Warnings while processing RDF.");
+      warn("Warnings while processing RDF and resource services.");
       for (ValidationMessage warning : validationResult.getWarnings()) {
         StringBuilder text = new StringBuilder();
         if (warning.getLabel() != null) {
@@ -297,7 +306,7 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
         }
       }
 
-      throw new RuntimeException("Errors while processing RDF.");
+      throw new RuntimeException("Errors while processing RDF and resource services.");
     }
   }
 
@@ -326,6 +335,8 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
       model.setVariable("typeName", new TypeNameMethod(model.getNamespacesToPrefixes()));
       model.setVariable("jsonExtensionElementName", new JsonExtensionElementNameMethod());
       model.put("rdfschema", this.rdfProcessor.getRdfSchema());
+      model.put("resourceServiceDefinitions", this.resourceServiceProcessor.getResourceServiceDefinitions());
+      model.put("resourceServiceBindings", this.resourceServiceProcessor.getResourceServiceBindings());
       try {
         for (SchemaInfo schemaInfo : model.getNamespacesToSchemas().values()) {
           String namespace = schemaInfo.getNamespace();

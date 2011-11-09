@@ -13,22 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.www.rt;
-
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+package org.gedcomx.build.enunciate;
 
 /**
  * @author Ryan Heaton
  */
-@Retention ( RetentionPolicy.RUNTIME )
-@Target ({ ElementType.TYPE })
-public @interface APIDefinition {
+public class StatusCode {
 
-  String name() default "##default";
+  private final int code;
+  private final String condition;
 
-  StatusCode[] statusCodes() default {};
+  public StatusCode(int code, String condition) {
+    this.code = code;
+    this.condition = condition;
+  }
+
+  public int getCode() {
+    return code;
+  }
+
+  public String getCondition() {
+    return condition;
+  }
 
 }

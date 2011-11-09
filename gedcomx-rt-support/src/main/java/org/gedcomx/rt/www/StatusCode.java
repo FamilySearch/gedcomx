@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.www.rt;
+package org.gedcomx.rt.www;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -29,7 +29,5 @@ public @interface StatusCode {
   int code();
 
   String condition();
-
-  boolean success() default false;
 
 }

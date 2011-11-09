@@ -13,23 +13,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.www.rt;
-
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+package org.gedcomx.build.enunciate;
 
 /**
  * @author Ryan Heaton
  */
-@Retention ( RetentionPolicy.RUNTIME )
-@Target ({ ElementType.METHOD })
-public @interface LinkDefinition {
+public class LinkRelationship {
 
-  String label();
+  private final String name;
+  private final String description;
+  private final String definedBy;
 
-  String[] operation();
+  public LinkRelationship(String name, String description, String definedBy) {
+    this.name = name;
+    this.description = description;
+    this.definedBy = definedBy;
+  }
 
-  StatusCode[] statusCodes() default {};
+  public String getName() {
+    return name;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public String getDefinedBy() {
+    return definedBy;
+  }
 }

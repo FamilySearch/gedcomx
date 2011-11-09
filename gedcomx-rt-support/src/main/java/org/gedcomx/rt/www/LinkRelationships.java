@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.www.rt;
+package org.gedcomx.rt.www;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -24,9 +24,9 @@ import java.lang.annotation.Target;
  * @author Ryan Heaton
  */
 @Retention ( RetentionPolicy.RUNTIME )
-@Target ({ ElementType.METHOD })
-public @interface LinkBinding {
+@Target ({ ElementType.TYPE, ElementType.METHOD })
+public @interface LinkRelationships {
 
-  StatusCode[] statusCodes() default {};
+  LinkRelationship[] value() default {};
 
 }

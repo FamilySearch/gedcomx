@@ -14,7 +14,7 @@ import static org.testng.AssertJUnit.assertEquals;
 public class TestPersonAPI {
 
   public void test501Responses() throws Exception {
-    PersonAPI api = new PersonAPI() {};
+    PersonRsd api = new PersonRsd() {};
     try {
       api.createPerson(new Person());
     }
