@@ -42,15 +42,17 @@ import javax.xml.bind.annotation.XmlTransient;
   @StatusCode( code = 403, condition = "If the link is forbidden even after considering a possibly valid authentication."),
   @StatusCode( code = 501, condition = "If the link is not supported by the implementation.")
 } )
-public abstract class PersonRsd {
+public interface PersonRSDefinition {
 
   public static final String PERSON_LINK = "person";
 
   /**
-   * The proof statement given by the user to support changes to genealogical data.
+   * Set the proof statement given by the user to support changes to genealogical data.
+   *
+   * @param proofStatement The proof statement.
    */
   @HeaderParam( "X-Proof-Statement" )
-  protected String proofStatement;
+  void setProofStatement(String proofStatement);
 
   /**
    * Create a person.
@@ -63,9 +65,7 @@ public abstract class PersonRsd {
   @StatusCodes({
     @StatusCode( code = 201, condition = "The creation of the person was successful. Expect a location header specifying the link to the created person.")
   })
-  public Response createPerson(Person person) {
-    throw new WebApplicationException(501);
-  }
+  Response createPerson(Person person);
 
   /**
    * Read a person.
@@ -81,9 +81,7 @@ public abstract class PersonRsd {
     @StatusCode( code = 404, condition = "If the requested person is not found."),
     @StatusCode( code = 410, condition = "If the requested person has been deleted.")
   })
-  public Person readPerson(@Context UriInfo uriInfo) {
-    throw new WebApplicationException(501);
-  }
+  Person readPerson(@Context UriInfo uriInfo);
 
   /**
    * Read a person and some of its relevant metadata.
@@ -101,9 +99,7 @@ public abstract class PersonRsd {
     @StatusCode( code = 404, condition = "If the requested person is not found."),
     @StatusCode( code = 410, condition = "If the requested person has been deleted.")
   })
-  public PersonWWW readPersonWWW(@Context UriInfo uriInfo) {
-    throw new WebApplicationException(501);
-  }
+  PersonWWW readPersonWWW(@Context UriInfo uriInfo);
 
   /**
    * Update a person.
@@ -116,9 +112,7 @@ public abstract class PersonRsd {
   @StatusCodes({
     @StatusCode( code = 204, condition = "The update was successful.")
   })
-  public void updatePerson(@Context UriInfo uriInfo, Person person) {
-    throw new WebApplicationException(501);
-  }
+  void updatePerson(@Context UriInfo uriInfo, Person person);
 
   /**
    * Read a person.
@@ -130,8 +124,6 @@ public abstract class PersonRsd {
   @StatusCodes({
     @StatusCode ( code = 204, condition = "The delete was successful.")
   })
-  public void deletePerson(@Context UriInfo uriInfo) {
-    throw new WebApplicationException(501);
-  }
+  void deletePerson(@Context UriInfo uriInfo);
 
 }

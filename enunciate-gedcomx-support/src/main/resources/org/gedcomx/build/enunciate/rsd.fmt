@@ -1,0 +1,83 @@
+[#ftl]
+[#--macro for writing a element page--]
+[#import "boilerplate.fmt" as libBoilerplate/]
+[#macro writeResourceServiceDefinitionPage rsd]
+  [#assign rsdName=rsd.name?cap_first + " Service"/]
+  [@libBoilerplate.writeStartBody label=rsdName/]
+  <div class="container">
+    <header>
+      <div id="header" class="column first last span-20">
+        [@libBoilerplate.writePrimaryNav/]
+        <div id="secondary" class="column span-18 append-1 prepend-1 first last">
+          <ul class="navigation">
+            <li><a href="index.html">Resource Services</a> &gt;</li>
+            <li><a href="#">${rsdName}</a></li>
+          </ul>
+        </div>
+      </div>
+    </header>
+    <div id="main" class="column first last span-20">
+      <h1>${rsdName}</h1>
+
+      <hr/>
+
+      <table>
+        <tr>
+          <td align="right">Name:</td>
+          <td>${rsd.name}</td>
+        </tr>
+        <tr>
+          <td align="right">Namespace:</td>
+          <td>${rsd.namespace}</td>
+        </tr>
+      </table>
+
+      <h3>Description</h3>
+
+      <p>${rsd.docValue!""}</p>
+
+      <h3>Status Codes</h3>
+
+      <table>
+        <tr>
+          <th align="center">code</th>
+          <th align="center">condition</th>
+        </tr>
+  [#list rsd.statusCodes as statusCode]
+        <tr>
+          <td>${statusCode.code}</td>
+          <td>${statusCode.condition}</td>
+        </tr>
+  [/#list]
+      </table>
+
+  [#list rsd.linkDefinitions?keys as link]
+    <h3>"${link}" Link</h3>
+
+    [#list rsd.linkDefinitions[link] as op]
+      <b>${op.httpMethods[0]}</b>
+
+      <p>${op.docValue!""}</p>
+
+      <table>
+        <tr>
+          <th align="center">code</th>
+          <th align="center">condition</th>
+        </tr>
+  [#list op.metaData.statusCodes as statusCode]
+        <tr>
+          <td>${statusCode.code}</td>
+          <td>${statusCode.condition}</td>
+        </tr>
+  [/#list]
+      </table>
+    [/#list]
+  [/#list]
+
+
+    <div class="clear" />
+    [@libBoilerplate.writeFooter/]
+  </div> <!--! end of #container -->
+
+  [@libBoilerplate.writeEndBody/]
+[/#macro]
