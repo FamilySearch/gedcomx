@@ -16,12 +16,12 @@
 package org.familysearch.ct.rsd;
 
 import org.familysearch.ct.shema.*;
-import org.gedcomx.www.rt.APIDefinition;
-import org.gedcomx.www.rt.LinkDefinition;
-import org.gedcomx.www.rt.StatusCode;
+import org.gedcomx.rt.www.LinkDefinition;
+import org.gedcomx.rt.www.ResourceServiceDefinition;
+import org.gedcomx.rt.www.StatusCode;
+import org.gedcomx.rt.www.StatusCodes;
 
 import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -29,14 +29,14 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Randy Bliss
  */
 @XmlTransient
-@APIDefinition(
-    name = "Relationship",
-    statusCodes = {
+@ResourceServiceDefinition(
+    name = "Relationship"
+)
+@StatusCodes({
         @StatusCode(code = 401, condition = "If authentication is needed, or if the supplied authentication is expired or otherwise invalid."),
         @StatusCode(code = 403, condition = "If the link is forbidden even after considering a possibly valid authentication."),
         @StatusCode(code = 501, condition = "If the link is not supported by the implementation.")
-    }
-)
+    })
 public abstract class RelationshipRsd {
 
 
@@ -64,13 +64,11 @@ public abstract class RelationshipRsd {
    * @param parentChildRelationship ParentChildRelationship POJO which supports FsParentChildRelationship interface
    * @return The response.
    */
-  @LinkDefinition(
-      label = LINK_RELATIONSHIP_LABEL,
-      operation = "POST",
-      statusCodes = {
-          @StatusCode(code = 201, condition = "The creation of the person was successful. Expect a location header specifying the link to the created person.")
-      }
-  )
+  @LinkDefinition(LINK_RELATIONSHIP_LABEL)
+  @POST
+  @StatusCodes({
+    @StatusCode(code = 201, condition = "The creation of the person was successful. Expect a location header specifying the link to the created person.")
+  })
   public Response createParentChildRelationship(TernaryRelationship parentChildRelationship) {
     throw new WebApplicationException(501);
   }
@@ -82,16 +80,14 @@ public abstract class RelationshipRsd {
    * @param conclusionScope           How much conclusion data is desired
    * @return The desired parentChildRelationship object.
    */
-  @LinkDefinition(
-      label = LINK_RELATIONSHIP_LABEL,
-      operation = "GET",
-      statusCodes = {
+  @LinkDefinition( LINK_RELATIONSHIP_LABEL )
+  @StatusCodes({
           @StatusCode(code = 200, condition = "Upon a successful read."),
           @StatusCode(code = 301, condition = "If the requested relationship has been merged to another relationship."),
           @StatusCode(code = 404, condition = "If the requested relationship is not found."),
           @StatusCode(code = 410, condition = "If the requested relationship has been deleted.")
-      }
-  )
+      })
+  @GET
   public TernaryRelationship getParentChildRelationship(String parentChildRelationshipId, ConclusionScope conclusionScope) {
     throw new WebApplicationException(501);
   }
@@ -104,15 +100,13 @@ public abstract class RelationshipRsd {
    *                                  father in parentChildRelationship with the specified identifier.
    * @return The response.
    */
-  @LinkDefinition(
-      label = LINK_RELATIONSHIP_LABEL,
-      operation = "PUT",
-      statusCodes = {
+  @LinkDefinition( LINK_RELATIONSHIP_LABEL )
+  @StatusCodes({
           @StatusCode(code = 200, condition = "Upon a successful edit"),
           @StatusCode(code = 404, condition = "If the requested relationship is not found"),
           @StatusCode(code = 410, condition = "If the requested relationship has been deleted")
-      }
-  )
+      })
+  @PUT
   public Response editFather(String parentChildRelationshipId, ContributionTrackedId fatherId) {
     throw new WebApplicationException(501);
   }
@@ -125,15 +119,13 @@ public abstract class RelationshipRsd {
    *                                  mother in parentChildRelationship with the specified identifier.
    * @return The response.
    */
-  @LinkDefinition(
-      label = LINK_RELATIONSHIP_LABEL,
-      operation = "PUT",
-      statusCodes = {
+  @LinkDefinition( LINK_RELATIONSHIP_LABEL )
+  @StatusCodes({
           @StatusCode(code = 200, condition = "Upon a successful edit"),
           @StatusCode(code = 404, condition = "If the requested relationship is not found"),
           @StatusCode(code = 410, condition = "If the requested relationship has been deleted")
-      }
-  )
+      })
+  @PUT
   public Response editMother(String parentChildRelationshipId, ContributionTrackedId motherId) {
     throw new WebApplicationException(501);
   }
@@ -146,15 +138,13 @@ public abstract class RelationshipRsd {
    *                                  child in parentChildRelationship with the specified identifier.
    * @return The response.
    */
-  @LinkDefinition(
-      label = LINK_RELATIONSHIP_LABEL,
-      operation = "PUT",
-      statusCodes = {
+  @LinkDefinition( LINK_RELATIONSHIP_LABEL )
+  @StatusCodes({
           @StatusCode(code = 200, condition = "Upon a successful edit"),
           @StatusCode(code = 404, condition = "If the requested relationship is not found"),
           @StatusCode(code = 410, condition = "If the requested relationship has been deleted")
-      }
-  )
+      })
+  @PUT
   public Response editChild(String parentChildRelationshipId, ContributionTrackedId childId) {
     throw new WebApplicationException(501);
   }
@@ -167,15 +157,13 @@ public abstract class RelationshipRsd {
    *                                  parent-child relationship with the specified identifier.
    * @return The response.
    */
-  @LinkDefinition(
-      label = LINK_RELATIONSHIP_LABEL,
-      operation = "PUT",
-      statusCodes = {
+  @LinkDefinition( LINK_RELATIONSHIP_LABEL )
+  @StatusCodes({
           @StatusCode(code = 200, condition = "Upon a successful edit of father child lineage"),
           @StatusCode(code = 404, condition = "If the requested relationship is not found"),
           @StatusCode(code = 410, condition = "If the requested relationship has been deleted")
-      }
-  )
+      })
+  @PUT
   public Response editFatherChildLineage(String parentChildRelationshipId, LineageDeclaration lineageDeclaration) {
     throw new WebApplicationException(501);
   }
@@ -188,15 +176,13 @@ public abstract class RelationshipRsd {
    *                                  parent-child relationship with the specified identifier.
    * @return The response.
    */
-  @LinkDefinition(
-      label = LINK_RELATIONSHIP_LABEL,
-      operation = "PUT",
-      statusCodes = {
+  @LinkDefinition( LINK_RELATIONSHIP_LABEL )
+  @PUT
+  @StatusCodes({
           @StatusCode(code = 200, condition = "Upon a successful edit"),
           @StatusCode(code = 404, condition = "If the requested relationship is not found"),
           @StatusCode(code = 410, condition = "If the requested relationship has been deleted")
-      }
-  )
+      })
   public Response editMotherChildLineage(String parentChildRelationshipId, LineageDeclaration lineageDeclaration) {
     throw new WebApplicationException(501);
   }
@@ -207,15 +193,13 @@ public abstract class RelationshipRsd {
    * @param parentChildRelationshipId The parentChildRelationshipId of the parentChildRelationship to be deleted.
    * @return The HTTP response including the appropriate header information.
    */
-  @LinkDefinition(
-      label = LINK_RELATIONSHIP_LABEL,
-      operation = "DELETE",
-      statusCodes = {
+  @LinkDefinition( LINK_RELATIONSHIP_LABEL )
+  @DELETE
+  @StatusCodes({
           @StatusCode(code = 200, condition = "Upon a successful edit"),
           @StatusCode(code = 404, condition = "If the requested relationship is not found"),
           @StatusCode(code = 410, condition = "If the requested relationship has been deleted")
-      }
-  )
+      })
   public Response deleteParentChildRelationship(String parentChildRelationshipId) {
     throw new WebApplicationException(501);
   }
@@ -229,15 +213,13 @@ public abstract class RelationshipRsd {
    * @param spec                      is the specification of how the relationship merge is to proceed
    * @return The HTTP response OK
    */
-  @LinkDefinition(
-      label = LINK_RELATIONSHIP_LABEL,
-      operation = "POST",
-      statusCodes = {
+  @LinkDefinition( LINK_RELATIONSHIP_LABEL )
+  @POST
+  @StatusCodes({
           @StatusCode(code = 201, condition = "Upon a successful relationship merge"),
           @StatusCode(code = 404, condition = "If the requested relationship is not found"),
           @StatusCode(code = 410, condition = "If the requested relationship has been deleted")
-      }
-  )
+      })
   public Response mergeParentChildRelationships(String parentChildRelationshipId, String duplicateParentChildRelationshipId, RelationshipMergeSpecification spec) {
     throw new WebApplicationException(501);
   }

@@ -4,7 +4,7 @@ import com.sun.jersey.core.spi.component.ComponentContext;
 import com.sun.jersey.core.spi.component.ComponentScope;
 import com.sun.jersey.spi.inject.Injectable;
 import com.sun.jersey.spi.inject.InjectableProvider;
-import org.familysearch.ct.www.api.PersonService;
+import org.familysearch.ct.www.binding.PersonService;
 import org.gedcomx.common.Attribution;
 import org.gedcomx.conclusion.Fact;
 import org.gedcomx.conclusion.Gender;
@@ -43,6 +43,17 @@ public class InMemoryPersonService implements PersonService, InjectableProvider<
     person.getAttribution().setProofStatement(proofStatement);
     person.setLiving(living);
     return person;
+  }
+
+  /**
+   * Create a person.
+   *
+   * @param person         Person object containing the data for the conclusion tree person that is to be created
+   * @param proofStatement The proof statement that was given by the user when the person was created.
+   * @return id of the person that was created
+   */
+  public String createPerson(Person person, String proofStatement) throws IllegalArgumentException {
+    return null;
   }
 
   public Person readPerson(String id) {

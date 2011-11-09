@@ -2,7 +2,7 @@ package org.familysearch.ct.www.binding;
 
 import org.familysearch.ct.www.impl.ConclusionCategory;
 import org.familysearch.ct.www.impl.ConclusionWrapper;
-import org.gedcomx.www.rt.LinkBinding;
+import org.gedcomx.rt.www.ResourceServiceBinding;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
@@ -14,6 +14,7 @@ import javax.ws.rs.core.Response;
  * @author Randy Bliss
  */
 @Path("persons/{personId}/conclusions")
+@ResourceServiceBinding
 public interface ConclusionRsb {
   /**
    * A Conclusion resource is used to create a new conclusion.
@@ -32,7 +33,7 @@ public interface ConclusionRsb {
   @POST
   @Path("conclusion")
   @Consumes( { MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-  @LinkBinding
+  
   Response addConclusion(
       @PathParam("personId") String personId,
       ConclusionWrapper conclusionWrapper);
@@ -56,7 +57,7 @@ public interface ConclusionRsb {
    */
   @GET
   @Produces( { MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-  @LinkBinding
+  
   Response getConclusions(
       @PathParam("personId") String personId,
       @QueryParam("category") @DefaultValue("ALL") ConclusionCategory category,
@@ -81,7 +82,7 @@ public interface ConclusionRsb {
   @GET
   @Path("{conclusionId}")
   @Produces( { MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-  @LinkBinding
+  
   ConclusionWrapper getConclusion(@PathParam("personId") String personId, @PathParam("conclusionId") String conclusionId);
 
   /**
@@ -104,7 +105,7 @@ public interface ConclusionRsb {
   @PUT
   @Path("{conclusionId}")
   @Consumes( { MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-  @LinkBinding
+  
   Response editConclusion(
       @PathParam("personId") String personId,
       @PathParam("conclusionId") String conclusionId,
@@ -124,7 +125,7 @@ public interface ConclusionRsb {
   @DELETE
   @Path("{conclusionId}")
   @Consumes( { MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-  @LinkBinding
+  
   Response deleteConclusion(
       @PathParam("personId") String personId,
       @PathParam("conclusionId") String conclusionId,
