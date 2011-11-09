@@ -1,6 +1,7 @@
 package org.familysearch.ct.www;
 
 import org.familysearch.ct.TernaryRelationship;
+import org.familysearch.ct.www.impl.TernaryRelationshipWrapper;
 import org.testng.annotations.Test;
 
 import static org.gedcomx.rt.SerializationUtil.processThroughJson;

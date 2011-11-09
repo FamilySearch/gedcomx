@@ -5,6 +5,7 @@ import org.gedcomx.conclusion.Person;
 /**
  * @author Ryan Heaton
  */
+@Deprecated
 public interface PersonService {
 
   /**

@@ -45,6 +45,11 @@
       <artifactId>gedcomx-conclusion</artifactId>
       <version>${gedcomx.version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.gedcomx</groupId>
+      <artifactId>gedcomx-conclusion-www</artifactId>
+      <version>${gedcomx.version}</version>
+    </dependency>
   </dependencies>
 
   <profiles>

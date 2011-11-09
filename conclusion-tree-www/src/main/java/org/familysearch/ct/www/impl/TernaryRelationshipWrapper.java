@@ -1,4 +1,4 @@
-package org.familysearch.ct.www;
+package org.familysearch.ct.www.impl;
 
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
