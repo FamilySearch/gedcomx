@@ -1,8 +1,5 @@
-package org.familysearch.ct.www.api;
+package org.familysearch.ct.www.binding;
 
-import org.gedcomx.conclusion.Fact;
-import org.gedcomx.conclusion.Gender;
-import org.gedcomx.conclusion.Name;
 import org.gedcomx.conclusion.Person;
 
 /**
@@ -13,15 +10,11 @@ public interface PersonService {
   /**
    * Create a person.
    *
-   * @param living Whether the person is living.
-   * @param name The name of the person.
-   * @param gender The gender of the person.
-   * @param death The death event of the person.
+   * @param person Person object containing the data for the conclusion tree person that is to be created
    * @param proofStatement The proof statement that was given by the user when the person was created.
-   * @return The person that was created.
-   * @throws IllegalArgumentException If...
+   * @return id of the person that was created
    */
-  Person createPerson(boolean living, Name name, Gender gender, Fact death, String proofStatement);
+  String createPerson(Person person, String proofStatement) throws IllegalArgumentException;
 
   /**
    * Read a person.
@@ -29,7 +22,7 @@ public interface PersonService {
    * @param id The id of the person to be read.
    * @return The person.
    */
-  Person readPerson(String id);
+  Person readPerson(String id) throws NotFoundException;
 
   /**
    * Delete a person.
