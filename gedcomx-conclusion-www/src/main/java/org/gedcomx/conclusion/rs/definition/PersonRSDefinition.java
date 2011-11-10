@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.conclusion.www;
+package org.gedcomx.conclusion.rs.definition;
 
 import org.gedcomx.conclusion.Person;
-import org.gedcomx.rt.www.ResourceServiceDefinition;
 import org.gedcomx.rt.www.LinkDefinition;
+import org.gedcomx.rt.www.ResourceServiceDefinition;
 import org.gedcomx.rt.www.StatusCode;
 import org.gedcomx.rt.www.StatusCodes;
 
@@ -82,24 +82,6 @@ public interface PersonRSDefinition {
     @StatusCode( code = 410, condition = "If the requested person has been deleted.")
   })
   Person readPerson(@Context UriInfo uriInfo);
-
-  /**
-   * Read a person and some of its relevant metadata.
-   *
-   * todo: define standard query parameters to specify which metadata to return.
-   *
-   * @param uriInfo Information on the URI that was used to identify the person to read.
-   * @return The person.
-   */
-  @LinkDefinition ( PERSON_LINK )
-  @GET
-  @StatusCodes({
-    @StatusCode( code = 200, condition = "Upon a successful read."),
-    @StatusCode( code = 301, condition = "If the requested person has been merged to another person."),
-    @StatusCode( code = 404, condition = "If the requested person is not found."),
-    @StatusCode( code = 410, condition = "If the requested person has been deleted.")
-  })
-  PersonWWW readPersonWWW(@Context UriInfo uriInfo);
 
   /**
    * Update a person.
