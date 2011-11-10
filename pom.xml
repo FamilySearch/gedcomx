@@ -26,7 +26,6 @@
     <module>gedcomx-conclusion</module>
 
     <module>gedcomx-www</module>
-    <module>gedcomx-record-www</module>
     <module>gedcomx-conclusion-www</module>
   </modules>
 
