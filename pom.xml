@@ -26,7 +26,7 @@
     <module>gedcomx-conclusion</module>
 
     <module>gedcomx-www</module>
-    <module>gedcomx-conclusion-www</module>
+    <module>gedcomx-conclusion-rs</module>
   </modules>
 
   <dependencies>
