@@ -42,12 +42,12 @@
   <dependencies>
     <dependency>
       <groupId>org.familysearch.ct</groupId>
-      <artifactId>conclusion-tree-model</artifactId>
+      <artifactId>conclusion-tree-ws</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.gedcomx</groupId>
-      <artifactId>gedcomx-conclusion-www</artifactId>
+      <artifactId>gedcomx-conclusion-rs</artifactId>
       <version>${gedcomx.version}</version>
     </dependency>
     <dependency>

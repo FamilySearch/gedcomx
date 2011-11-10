@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <artifactId>conclusion-tree-model</artifactId>
+  <artifactId>conclusion-tree-ws</artifactId>
   <version>0.1.0.BUILD-SNAPSHOT</version>
-  <name>FamilySearch Conclusion Tree - Model</name>
+  <name>FamilySearch Conclusion Tree Platform Model</name>
 
   <parent>
     <groupId>org.familysearch.ct</groupId>
@@ -43,11 +43,6 @@
     <dependency>
       <groupId>org.gedcomx</groupId>
       <artifactId>gedcomx-conclusion</artifactId>
-      <version>${gedcomx.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.gedcomx</groupId>
-      <artifactId>gedcomx-conclusion-www</artifactId>
       <version>${gedcomx.version}</version>
     </dependency>
   </dependencies>

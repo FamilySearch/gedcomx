@@ -2,8 +2,7 @@ package org.familysearch.ct.www.impl;
 
 import org.familysearch.ct.www.binding.PersonRSBinding;
 import org.gedcomx.conclusion.Person;
-import org.gedcomx.conclusion.www.PersonWWW;
-import org.gedcomx.www.Link;
+import org.gedcomx.rs.Link;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
@@ -65,20 +64,6 @@ public class PersonRSImpl implements PersonRSBinding {
     updateLink.setHref(uriInfo.getBaseUriBuilder().path(PersonRSImpl.class).path(PersonRSImpl.class, "readPerson").build(pid));
     person.addExtensionElement(updateLink);
     return person;
-  }
-
-  /**
-   * Read a person and some of its relevant metadata.
-   * <p/>
-   * todo: define standard query parameters to specify which metadata to return.
-   *
-   * @param uriInfo Information on the URI that was used to identify the person to read.
-   * @return The person.
-   */
-  public PersonWWW readPersonWWW(@Context UriInfo uriInfo) {
-    PersonWWW www = new PersonWWW();
-    www.setPerson(readPerson(uriInfo));
-    return www;
   }
 
   /**

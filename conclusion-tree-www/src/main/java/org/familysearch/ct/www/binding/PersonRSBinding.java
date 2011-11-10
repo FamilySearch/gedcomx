@@ -1,7 +1,7 @@
 package org.familysearch.ct.www.binding;
 
 import org.gedcomx.conclusion.Person;
-import org.gedcomx.conclusion.www.PersonRSDefinition;
+import org.gedcomx.conclusion.rs.definition.PersonRSDefinition;
 import org.gedcomx.rt.www.ResourceServiceBinding;
 import org.gedcomx.rt.www.StatusCode;
 import org.gedcomx.rt.www.StatusCodes;
