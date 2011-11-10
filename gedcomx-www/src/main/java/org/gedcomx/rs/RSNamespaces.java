@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.www;
+package org.gedcomx.rs;
 
 import org.gedcomx.rt.Namespace;
 import org.gedcomx.rt.Namespaces;
@@ -27,17 +27,17 @@ import javax.xml.bind.annotation.XmlTransient;
 @Namespaces ( {
   @Namespace (
     id = "gxwww",
-    uri = WWWNamespaces.GEDCOMX_WWW_V1_NAMESPACE,
+    uri = RSNamespaces.GEDCOMX_WWW_V1_NAMESPACE,
     label = "WWW Namespace",
     description = "The www namespace contains the objects necessary exposing genealogical data to the World Wide Web.",
     version = "v1",
-    xmlMediaType = WWWNamespaces.GEDCOMX_WWW_V1_XML_MEDIA_TYPE,
-    jsonMediaType = WWWNamespaces.GEDCOMX_WWW_V1_JSON_MEDIA_TYPE
+    xmlMediaType = RSNamespaces.GEDCOMX_WWW_V1_XML_MEDIA_TYPE,
+    jsonMediaType = RSNamespaces.GEDCOMX_WWW_V1_JSON_MEDIA_TYPE
   )
 } )
-public class WWWNamespaces {
+public class RSNamespaces {
 
-  private WWWNamespaces() {}
+  private RSNamespaces() {}
 
   public static final String GEDCOMX_WWW_V1_NAMESPACE = "http://gedcomx.org/www/v1/";
   public static final String GEDCOMX_WWW_V1_XML_MEDIA_TYPE = "application/gedcomx-www-v1+xml";

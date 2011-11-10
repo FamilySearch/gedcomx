@@ -7,7 +7,7 @@ import org.gedcomx.common.ResourceReference;
 import org.gedcomx.conclusion.*;
 import org.gedcomx.metadata.dc.DublinCoreDescription;
 import org.gedcomx.types.*;
-import org.gedcomx.www.Link;
+import org.gedcomx.rs.Link;
 import org.testng.annotations.Test;
 
 import javax.xml.bind.JAXBContext;

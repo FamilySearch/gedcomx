@@ -1,4 +1,4 @@
-package org.gedcomx.www;
+package org.gedcomx.rs;
 
 import org.testng.annotations.Test;
 

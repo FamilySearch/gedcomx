@@ -21,7 +21,7 @@ import org.gedcomx.common.ResourceSet;
 import org.gedcomx.record.Record;
 import org.gedcomx.rt.JsonExtensionElement;
 import org.gedcomx.rt.XmlTypeIdResolver;
-import org.gedcomx.www.Link;
+import org.gedcomx.rs.Link;
 
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlRootElement;

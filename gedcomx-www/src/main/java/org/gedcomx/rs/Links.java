@@ -13,21 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.www;
+package org.gedcomx.rs;
 
+import org.codehaus.enunciate.ClientName;
+import org.codehaus.enunciate.json.JsonName;
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.rt.JsonExtensionElement;
 import org.gedcomx.rt.XmlTypeIdResolver;
 
-import javax.xml.XMLConstants;
-import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import java.net.URI;
+import java.util.List;
 
 /**
- * A WWW link.
+ * A set of links driving current application state.
  *
  * @author Ryan Heaton
  */
@@ -35,47 +36,30 @@ import java.net.URI;
 @JsonExtensionElement
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-public final class Link {
+public final class Links {
 
-  private String rel;
-  private URI href;
+  private List<Link> links;
 
   /**
-   * The link relationship.
+   * The links driving the state of the current application.
    *
-   * @return The link relationship.
+   * @return The links driving the state of the current application.
    */
-  @XmlAttribute
-  public String getRel() {
-    return rel;
+  @XmlElement (name="link")
+  @JsonProperty ("links")
+  @JsonName ("links")
+  @ClientName("linkSet")
+  public List<Link> getLinks() {
+    return links;
   }
 
   /**
-   * The link relationship.
+   * The links driving the state of the current application.
    *
-   * @param rel The link relationship.
+   * @param links The links driving the state of the current application.
    */
-  public void setRel(String rel) {
-    this.rel = rel;
-  }
-
-  /**
-   * The link URI.
-   *
-   * @return The link URI.
-   */
-  @XmlAttribute
-  @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
-  public URI getHref() {
-    return href;
-  }
-
-  /**
-   * The link URI.
-   *
-   * @param href The link URI.
-   */
-  public void setHref(URI href) {
-    this.href = href;
+  @JsonProperty ("links")
+  public void setLinks(List<Link> links) {
+    this.links = links;
   }
 }

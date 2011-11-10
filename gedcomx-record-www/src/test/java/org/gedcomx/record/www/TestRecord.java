@@ -8,7 +8,7 @@ import org.gedcomx.metadata.dc.DublinCoreDescription;
 import org.gedcomx.metadata.rdf.RDFLiteral;
 import org.gedcomx.record.*;
 import org.gedcomx.types.*;
-import org.gedcomx.www.Link;
+import org.gedcomx.rs.Link;
 import org.testng.annotations.Test;
 
 import javax.xml.bind.JAXBContext;

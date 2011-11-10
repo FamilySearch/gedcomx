@@ -2,7 +2,7 @@ package org.gedcomx.conclusion.www;
 
 import org.gedcomx.conclusion.Gender;
 import org.gedcomx.types.GenderType;
-import org.gedcomx.www.Link;
+import org.gedcomx.rs.Link;
 import org.testng.annotations.Test;
 
 import javax.xml.bind.JAXBContext;

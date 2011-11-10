@@ -1,7 +1,7 @@
 package org.gedcomx.record.www;
 
 import org.gedcomx.record.Characteristic;
-import org.gedcomx.www.Link;
+import org.gedcomx.rs.Link;
 import org.testng.annotations.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;

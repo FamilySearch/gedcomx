@@ -18,12 +18,12 @@
  * The www model defines the necessary extensions to provide genealogical data via the World Wide Web.
  */
 @XmlSchema (
-  namespace = WWWNamespaces.GEDCOMX_WWW_V1_NAMESPACE,
+  namespace = RSNamespaces.GEDCOMX_WWW_V1_NAMESPACE,
   attributeFormDefault = XmlNsForm.QUALIFIED,
   elementFormDefault = XmlNsForm.QUALIFIED
 )
 @XmlAccessorOrder ( XmlAccessOrder.ALPHABETICAL )
-package org.gedcomx.www;
+package org.gedcomx.rs;
 
 import javax.xml.bind.annotation.XmlAccessOrder;
 import javax.xml.bind.annotation.XmlAccessorOrder;
