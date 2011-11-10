@@ -15,7 +15,7 @@
  */
 package org.familysearch.ct.rsd;
 
-import org.familysearch.ct.shema.*;
+import org.familysearch.ct.ws.*;
 import org.gedcomx.rt.www.LinkDefinition;
 import org.gedcomx.rt.www.ResourceServiceDefinition;
 import org.gedcomx.rt.www.StatusCode;
@@ -26,7 +26,6 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.core.Response;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * @author Randy Bliss

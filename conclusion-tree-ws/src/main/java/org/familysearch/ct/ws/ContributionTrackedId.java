@@ -1,4 +1,4 @@
-package org.familysearch.ct.shema;
+package org.familysearch.ct.ws;
 
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;

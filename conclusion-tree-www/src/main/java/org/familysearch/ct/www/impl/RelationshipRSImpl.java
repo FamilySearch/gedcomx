@@ -1,6 +1,6 @@
 package org.familysearch.ct.www.impl;
 
-import org.familysearch.ct.shema.*;
+import org.familysearch.ct.ws.*;
 import org.familysearch.ct.www.binding.RelationshipRSBinding;
 
 import javax.ws.rs.WebApplicationException;

@@ -1,4 +1,4 @@
-package org.familysearch.ct;
+package org.familysearch.ct.ws;
 
 import org.gedcomx.rt.Namespace;
 import org.gedcomx.rt.Namespaces;

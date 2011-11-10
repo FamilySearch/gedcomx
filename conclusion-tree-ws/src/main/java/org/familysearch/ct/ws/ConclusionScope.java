@@ -1,4 +1,4 @@
-package org.familysearch.ct.shema;
+package org.familysearch.ct.ws;
 
 import javax.xml.bind.annotation.XmlTransient;
 

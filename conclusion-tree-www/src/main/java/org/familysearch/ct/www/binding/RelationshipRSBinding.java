@@ -1,7 +1,7 @@
 package org.familysearch.ct.www.binding;
 
 import org.familysearch.ct.rsd.RelationshipRSDefinition;
-import org.familysearch.ct.shema.*;
+import org.familysearch.ct.ws.*;
 import org.gedcomx.rt.www.ResourceServiceBinding;
 
 import javax.ws.rs.*;
