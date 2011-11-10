@@ -21,14 +21,16 @@ import org.gedcomx.rt.www.ResourceServiceDefinition;
 import org.gedcomx.rt.www.StatusCode;
 import org.gedcomx.rt.www.StatusCodes;
 
-import javax.ws.rs.*;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.core.Response;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * @author Randy Bliss
  */
-@XmlTransient
 @ResourceServiceDefinition(
     name = "Relationship"
 )
@@ -37,8 +39,7 @@ import javax.xml.bind.annotation.XmlTransient;
         @StatusCode(code = 403, condition = "If the link is forbidden even after considering a possibly valid authentication."),
         @StatusCode(code = 501, condition = "If the link is not supported by the implementation.")
     })
-public abstract class RelationshipRsd {
-
+public interface RelationshipRSDefinition {
 
   public static final String LINK_RELATIONSHIP_LABEL = "relationship";
 
@@ -69,9 +70,7 @@ public abstract class RelationshipRsd {
   @StatusCodes({
     @StatusCode(code = 201, condition = "The creation of the person was successful. Expect a location header specifying the link to the created person.")
   })
-  public Response createParentChildRelationship(TernaryRelationship parentChildRelationship) {
-    throw new WebApplicationException(501);
-  }
+  public Response createParentChildRelationship(TernaryRelationship parentChildRelationship);
 
   /**
    * Get parentChildRelationship specified by parentChildRelationshipId
@@ -82,15 +81,13 @@ public abstract class RelationshipRsd {
    */
   @LinkDefinition( LINK_RELATIONSHIP_LABEL )
   @StatusCodes({
-          @StatusCode(code = 200, condition = "Upon a successful read."),
-          @StatusCode(code = 301, condition = "If the requested relationship has been merged to another relationship."),
-          @StatusCode(code = 404, condition = "If the requested relationship is not found."),
-          @StatusCode(code = 410, condition = "If the requested relationship has been deleted.")
-      })
+    @StatusCode(code = 200, condition = "Upon a successful read."),
+    @StatusCode(code = 301, condition = "If the requested relationship has been merged to another relationship."),
+    @StatusCode(code = 404, condition = "If the requested relationship is not found."),
+    @StatusCode(code = 410, condition = "If the requested relationship has been deleted.")
+  })
   @GET
-  public TernaryRelationship getParentChildRelationship(String parentChildRelationshipId, ConclusionScope conclusionScope) {
-    throw new WebApplicationException(501);
-  }
+  TernaryRelationship getParentChildRelationship(String parentChildRelationshipId, ConclusionScope conclusionScope);
 
   /**
    * Edit the contribution tracked id of the father in the parentChildRelationship with the specified identifier.
@@ -102,14 +99,12 @@ public abstract class RelationshipRsd {
    */
   @LinkDefinition( LINK_RELATIONSHIP_LABEL )
   @StatusCodes({
-          @StatusCode(code = 200, condition = "Upon a successful edit"),
-          @StatusCode(code = 404, condition = "If the requested relationship is not found"),
-          @StatusCode(code = 410, condition = "If the requested relationship has been deleted")
-      })
+    @StatusCode(code = 200, condition = "Upon a successful edit"),
+    @StatusCode(code = 404, condition = "If the requested relationship is not found"),
+    @StatusCode(code = 410, condition = "If the requested relationship has been deleted")
+  })
   @PUT
-  public Response editFather(String parentChildRelationshipId, ContributionTrackedId fatherId) {
-    throw new WebApplicationException(501);
-  }
+  Response editFather(String parentChildRelationshipId, ContributionTrackedId fatherId);
 
   /**
    * Edit the contribution tracked id of the mother in the parentChildRelationship with the specified identifier.
@@ -121,14 +116,12 @@ public abstract class RelationshipRsd {
    */
   @LinkDefinition( LINK_RELATIONSHIP_LABEL )
   @StatusCodes({
-          @StatusCode(code = 200, condition = "Upon a successful edit"),
-          @StatusCode(code = 404, condition = "If the requested relationship is not found"),
-          @StatusCode(code = 410, condition = "If the requested relationship has been deleted")
-      })
+    @StatusCode(code = 200, condition = "Upon a successful edit"),
+    @StatusCode(code = 404, condition = "If the requested relationship is not found"),
+    @StatusCode(code = 410, condition = "If the requested relationship has been deleted")
+  })
   @PUT
-  public Response editMother(String parentChildRelationshipId, ContributionTrackedId motherId) {
-    throw new WebApplicationException(501);
-  }
+  Response editMother(String parentChildRelationshipId, ContributionTrackedId motherId);
 
   /**
    * Edit the contribution tracked id of the child in the parentChildRelationship with the specified identifier.
@@ -140,14 +133,12 @@ public abstract class RelationshipRsd {
    */
   @LinkDefinition( LINK_RELATIONSHIP_LABEL )
   @StatusCodes({
-          @StatusCode(code = 200, condition = "Upon a successful edit"),
-          @StatusCode(code = 404, condition = "If the requested relationship is not found"),
-          @StatusCode(code = 410, condition = "If the requested relationship has been deleted")
-      })
+    @StatusCode(code = 200, condition = "Upon a successful edit"),
+    @StatusCode(code = 404, condition = "If the requested relationship is not found"),
+    @StatusCode(code = 410, condition = "If the requested relationship has been deleted")
+  })
   @PUT
-  public Response editChild(String parentChildRelationshipId, ContributionTrackedId childId) {
-    throw new WebApplicationException(501);
-  }
+  Response editChild(String parentChildRelationshipId, ContributionTrackedId childId);
 
   /**
    * Edit the father-child lineage declaration of the parent-child relationship with the specified identifier.
@@ -159,14 +150,12 @@ public abstract class RelationshipRsd {
    */
   @LinkDefinition( LINK_RELATIONSHIP_LABEL )
   @StatusCodes({
-          @StatusCode(code = 200, condition = "Upon a successful edit of father child lineage"),
-          @StatusCode(code = 404, condition = "If the requested relationship is not found"),
-          @StatusCode(code = 410, condition = "If the requested relationship has been deleted")
-      })
+    @StatusCode(code = 200, condition = "Upon a successful edit of father child lineage"),
+    @StatusCode(code = 404, condition = "If the requested relationship is not found"),
+    @StatusCode(code = 410, condition = "If the requested relationship has been deleted")
+  })
   @PUT
-  public Response editFatherChildLineage(String parentChildRelationshipId, LineageDeclaration lineageDeclaration) {
-    throw new WebApplicationException(501);
-  }
+  Response editFatherChildLineage(String parentChildRelationshipId, LineageDeclaration lineageDeclaration);
 
   /**
    * Edit the mother-child lineage declaration of the parent-child relationship with the specified identifier.
@@ -179,14 +168,11 @@ public abstract class RelationshipRsd {
   @LinkDefinition( LINK_RELATIONSHIP_LABEL )
   @PUT
   @StatusCodes({
-          @StatusCode(code = 200, condition = "Upon a successful edit"),
-          @StatusCode(code = 404, condition = "If the requested relationship is not found"),
-          @StatusCode(code = 410, condition = "If the requested relationship has been deleted")
-      })
-  public Response editMotherChildLineage(String parentChildRelationshipId, LineageDeclaration lineageDeclaration) {
-    throw new WebApplicationException(501);
-  }
-
+    @StatusCode(code = 200, condition = "Upon a successful edit"),
+    @StatusCode(code = 404, condition = "If the requested relationship is not found"),
+    @StatusCode(code = 410, condition = "If the requested relationship has been deleted")
+  })
+  Response editMotherChildLineage(String parentChildRelationshipId, LineageDeclaration lineageDeclaration);
   /**
    * Delete the specified parentChildRelationship.
    *
@@ -196,13 +182,11 @@ public abstract class RelationshipRsd {
   @LinkDefinition( LINK_RELATIONSHIP_LABEL )
   @DELETE
   @StatusCodes({
-          @StatusCode(code = 200, condition = "Upon a successful edit"),
-          @StatusCode(code = 404, condition = "If the requested relationship is not found"),
-          @StatusCode(code = 410, condition = "If the requested relationship has been deleted")
-      })
-  public Response deleteParentChildRelationship(String parentChildRelationshipId) {
-    throw new WebApplicationException(501);
-  }
+    @StatusCode(code = 200, condition = "Upon a successful edit"),
+    @StatusCode(code = 404, condition = "If the requested relationship is not found"),
+    @StatusCode(code = 410, condition = "If the requested relationship has been deleted")
+  })
+  Response deleteParentChildRelationship(String parentChildRelationshipId);
 
   /**
    * Merge parent-child relationships according to the specified merge specification
@@ -216,11 +200,9 @@ public abstract class RelationshipRsd {
   @LinkDefinition( LINK_RELATIONSHIP_LABEL )
   @POST
   @StatusCodes({
-          @StatusCode(code = 201, condition = "Upon a successful relationship merge"),
-          @StatusCode(code = 404, condition = "If the requested relationship is not found"),
-          @StatusCode(code = 410, condition = "If the requested relationship has been deleted")
-      })
-  public Response mergeParentChildRelationships(String parentChildRelationshipId, String duplicateParentChildRelationshipId, RelationshipMergeSpecification spec) {
-    throw new WebApplicationException(501);
-  }
+    @StatusCode(code = 201, condition = "Upon a successful relationship merge"),
+    @StatusCode(code = 404, condition = "If the requested relationship is not found"),
+    @StatusCode(code = 410, condition = "If the requested relationship has been deleted")
+  })
+  Response mergeParentChildRelationships(String parentChildRelationshipId, String duplicateParentChildRelationshipId, RelationshipMergeSpecification spec);
 }

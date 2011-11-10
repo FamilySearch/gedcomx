@@ -1,15 +1,15 @@
 package org.familysearch.ct.www.impl;
 
-import org.familysearch.ct.rsd.RelationshipRsd;
 import org.familysearch.ct.shema.*;
-import org.familysearch.ct.www.binding.RelationshipRsb;
+import org.familysearch.ct.www.binding.RelationshipRSBinding;
 
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 
 /**
  * @author Randy Bliss
  */
-public class RelationshipRsi extends RelationshipRsd implements RelationshipRsb {
+public class RelationshipRSImpl implements RelationshipRSBinding {
   /**
    * A ParentChildRelationship resource is "POST"ed to the ct/parent-child endpoint to create a new
    * parent-child relationship containing the conclusions supplied.
@@ -32,9 +32,8 @@ public class RelationshipRsi extends RelationshipRsd implements RelationshipRsb 
    * @param parentChildRelationship ParentChildRelationship POJO which supports FsParentChildRelationship interface
    * @return The response.
    */
-  @Override
   public Response createParentChildRelationship(TernaryRelationship parentChildRelationship) {
-    return super.createParentChildRelationship(parentChildRelationship);    //To change body of overridden methods use File | Settings | File Templates.
+    throw new WebApplicationException(501);
   }
 
   /**
@@ -44,9 +43,8 @@ public class RelationshipRsi extends RelationshipRsd implements RelationshipRsb 
    * @param conclusionScope           How much conclusion data is desired
    * @return The desired parentChildRelationship object.
    */
-  @Override
   public TernaryRelationship getParentChildRelationship(String parentChildRelationshipId, ConclusionScope conclusionScope) {
-    return super.getParentChildRelationship(parentChildRelationshipId, conclusionScope);    //To change body of overridden methods use File | Settings | File Templates.
+    throw new WebApplicationException(501);
   }
 
   /**
@@ -57,9 +55,8 @@ public class RelationshipRsi extends RelationshipRsd implements RelationshipRsb 
    *                                  father in parentChildRelationship with the specified identifier.
    * @return The response.
    */
-  @Override
   public Response editFather(String parentChildRelationshipId, ContributionTrackedId fatherId) {
-    return super.editFather(parentChildRelationshipId, fatherId);    //To change body of overridden methods use File | Settings | File Templates.
+    throw new WebApplicationException(501);
   }
 
   /**
@@ -70,9 +67,8 @@ public class RelationshipRsi extends RelationshipRsd implements RelationshipRsb 
    *                                  mother in parentChildRelationship with the specified identifier.
    * @return The response.
    */
-  @Override
   public Response editMother(String parentChildRelationshipId, ContributionTrackedId motherId) {
-    return super.editMother(parentChildRelationshipId, motherId);    //To change body of overridden methods use File | Settings | File Templates.
+    throw new WebApplicationException(501);
   }
 
   /**
@@ -83,9 +79,8 @@ public class RelationshipRsi extends RelationshipRsd implements RelationshipRsb 
    *                                  child in parentChildRelationship with the specified identifier.
    * @return The response.
    */
-  @Override
   public Response editChild(String parentChildRelationshipId, ContributionTrackedId childId) {
-    return super.editChild(parentChildRelationshipId, childId);    //To change body of overridden methods use File | Settings | File Templates.
+    throw new WebApplicationException(501);
   }
 
   /**
@@ -96,9 +91,8 @@ public class RelationshipRsi extends RelationshipRsd implements RelationshipRsb 
    *                                  parent-child relationship with the specified identifier.
    * @return The response.
    */
-  @Override
   public Response editFatherChildLineage(String parentChildRelationshipId, LineageDeclaration lineageDeclaration) {
-    return super.editFatherChildLineage(parentChildRelationshipId, lineageDeclaration);    //To change body of overridden methods use File | Settings | File Templates.
+    throw new WebApplicationException(501);
   }
 
   /**
@@ -109,9 +103,8 @@ public class RelationshipRsi extends RelationshipRsd implements RelationshipRsb 
    *                                  parent-child relationship with the specified identifier.
    * @return The response.
    */
-  @Override
   public Response editMotherChildLineage(String parentChildRelationshipId, LineageDeclaration lineageDeclaration) {
-    return super.editMotherChildLineage(parentChildRelationshipId, lineageDeclaration);    //To change body of overridden methods use File | Settings | File Templates.
+    throw new WebApplicationException(501);
   }
 
   /**
@@ -120,9 +113,8 @@ public class RelationshipRsi extends RelationshipRsd implements RelationshipRsb 
    * @param parentChildRelationshipId The parentChildRelationshipId of the parentChildRelationship to be deleted.
    * @return The HTTP response including the appropriate header information.
    */
-  @Override
   public Response deleteParentChildRelationship(String parentChildRelationshipId) {
-    return super.deleteParentChildRelationship(parentChildRelationshipId);    //To change body of overridden methods use File | Settings | File Templates.
+    throw new WebApplicationException(501);
   }
 
   /**
@@ -134,8 +126,7 @@ public class RelationshipRsi extends RelationshipRsd implements RelationshipRsb 
    * @param spec                      is the specification of how the relationship merge is to proceed
    * @return The HTTP response OK
    */
-  @Override
   public Response mergeParentChildRelationships(String parentChildRelationshipId, String duplicateParentChildRelationshipId, RelationshipMergeSpecification spec) {
-    return super.mergeParentChildRelationships(parentChildRelationshipId, duplicateParentChildRelationshipId, spec);    //To change body of overridden methods use File | Settings | File Templates.
+    throw new WebApplicationException(501);
   }
 }

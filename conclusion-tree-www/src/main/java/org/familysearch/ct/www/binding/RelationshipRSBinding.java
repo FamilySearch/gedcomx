@@ -1,6 +1,6 @@
 package org.familysearch.ct.www.binding;
 
-import org.familysearch.ct.rsd.RelationshipRsd;
+import org.familysearch.ct.rsd.RelationshipRSDefinition;
 import org.familysearch.ct.shema.*;
 import org.gedcomx.rt.www.ResourceServiceBinding;
 
@@ -12,7 +12,8 @@ import javax.ws.rs.core.Response;
  * @author Randy Bliss
  */
 @ResourceServiceBinding
-public interface RelationshipRsb {
+public interface RelationshipRSBinding extends RelationshipRSDefinition {
+
   /**
    * A ParentChildRelationship resource is "POST"ed to the ct/parent-child endpoint to create a new
    * parent-child relationship containing the conclusions supplied.
@@ -37,8 +38,7 @@ public interface RelationshipRsb {
    */
   @POST
   @Consumes( { "application/xml", "application/json", "application/familysearch-ct-v1+xml" })
-  
-  public Response createParentChildRelationship(TernaryRelationship parentChildRelationship);
+  Response createParentChildRelationship(TernaryRelationship parentChildRelationship);
 
   /**
    * Get parentChildRelationship specified by parentChildRelationshipId
@@ -50,11 +50,7 @@ public interface RelationshipRsb {
   @GET
   @Path("{parentChildRelationshipId}")
   @Produces( { "application/xml", "application/json", "application/familysearch-ct-v1+xml" })
-  
-  public TernaryRelationship getParentChildRelationship(
-    @PathParam("parentChildRelationshipId") String parentChildRelationshipId,
-    @QueryParam("conclusionScope") @DefaultValue("SUMMARY") ConclusionScope conclusionScope
-  );
+  TernaryRelationship getParentChildRelationship(@PathParam("parentChildRelationshipId") String parentChildRelationshipId, @QueryParam("conclusionScope") @DefaultValue("SUMMARY") ConclusionScope conclusionScope);
 
   /**
    * Edit the contribution tracked id of the father in the parentChildRelationship with the specified identifier.
@@ -67,10 +63,7 @@ public interface RelationshipRsb {
   @PUT
   @Path("{parentChildRelationshipId}/father")
   @Consumes( { "application/xml", "application/json", "application/familysearch-ct-v1+xml" })
-  
-  public Response editFather(
-      @PathParam("parentChildRelationshipId") String parentChildRelationshipId,
-      ContributionTrackedId fatherId);
+  public Response editFather(@PathParam("parentChildRelationshipId") String parentChildRelationshipId, ContributionTrackedId fatherId);
 
   /**
    * Edit the contribution tracked id of the mother in the parentChildRelationship with the specified identifier.
@@ -83,10 +76,7 @@ public interface RelationshipRsb {
   @PUT
   @Path("{parentChildRelationshipId}/mother")
   @Consumes( { "application/xml", "application/json", "application/familysearch-ct-v1+xml" })
-  
-  public Response editMother(
-      @PathParam("parentChildRelationshipId") String parentChildRelationshipId,
-      ContributionTrackedId motherId);
+  public Response editMother(@PathParam("parentChildRelationshipId") String parentChildRelationshipId, ContributionTrackedId motherId);
 
   /**
    * Edit the contribution tracked id of the child in the parentChildRelationship with the specified identifier.
@@ -99,10 +89,7 @@ public interface RelationshipRsb {
   @PUT
   @Path("{parentChildRelationshipId}/child")
   @Consumes( { "application/xml", "application/json", "application/familysearch-ct-v1+xml" })
-  
-  public Response editChild(
-      @PathParam("parentChildRelationshipId") String parentChildRelationshipId,
-      ContributionTrackedId childId);
+  public Response editChild(@PathParam("parentChildRelationshipId") String parentChildRelationshipId, ContributionTrackedId childId);
 
   /**
    * Edit the father-child lineage declaration of the parent-child relationship with the specified identifier.
@@ -115,10 +102,7 @@ public interface RelationshipRsb {
   @PUT
   @Path("{parentChildRelationshipId}/father-child-lineage")
   @Consumes( { "application/xml", "application/json", "application/familysearch-ct-v1+xml" })
-  
-  public Response editFatherChildLineage(
-      @PathParam("parentChildRelationshipId") String parentChildRelationshipId,
-      LineageDeclaration lineageDeclaration);
+  public Response editFatherChildLineage(@PathParam("parentChildRelationshipId") String parentChildRelationshipId, LineageDeclaration lineageDeclaration);
 
   /**
    * Edit the mother-child lineage declaration of the parent-child relationship with the specified identifier.
@@ -131,10 +115,7 @@ public interface RelationshipRsb {
   @PUT
   @Path("{parentChildRelationshipId}/mother-child-lineage")
   @Consumes( { "application/xml", "application/json", "application/familysearch-ct-v1+xml" })
-  
-  public Response editMotherChildLineage(
-      @PathParam("parentChildRelationshipId") String parentChildRelationshipId,
-      LineageDeclaration lineageDeclaration);
+  public Response editMotherChildLineage(@PathParam("parentChildRelationshipId") String parentChildRelationshipId, LineageDeclaration lineageDeclaration);
 
   /**
    * Delete the specified parentChildRelationship.
@@ -144,7 +125,6 @@ public interface RelationshipRsb {
    */
   @DELETE
   @Path("{parentChildRelationshipId}")
-  
   public Response deleteParentChildRelationship(@PathParam("parentChildRelationshipId") String parentChildRelationshipId);
 
   /**
@@ -158,8 +138,5 @@ public interface RelationshipRsb {
   @POST
   @Path("{parentChildRelationshipId}/merge/{duplicateParentChildRelationshipId}")
   @Consumes( { MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON, "application/familysearch-ct-v1+xml" })
-  
-  public Response mergeParentChildRelationships(@PathParam("parentChildRelationshipId") String parentChildRelationshipId,
-                                           @PathParam("duplicateParentChildRelationshipId") String duplicateParentChildRelationshipId,
-                                           RelationshipMergeSpecification spec);
+  public Response mergeParentChildRelationships(@PathParam("parentChildRelationshipId") String parentChildRelationshipId, @PathParam("duplicateParentChildRelationshipId") String duplicateParentChildRelationshipId, RelationshipMergeSpecification spec);
 }

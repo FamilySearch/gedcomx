@@ -1,13 +1,13 @@
 package org.familysearch.ct.www.impl;
 
-import org.familysearch.ct.www.binding.ConclusionRsb;
+import org.familysearch.ct.www.binding.ConclusionRSBinding;
 import javax.ws.rs.core.Request;
 import javax.ws.rs.core.Response;
 
 /**
  * @author Randy Bliss
  */
-public class ConclusionRsi implements ConclusionRsb {
+public class ConclusionRsi implements ConclusionRSBinding {
 
 
     /**

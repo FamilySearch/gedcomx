@@ -15,7 +15,7 @@ import javax.ws.rs.core.Response;
  */
 @Path("persons/{personId}/conclusions")
 @ResourceServiceBinding
-public interface ConclusionRsb {
+public interface ConclusionRSBinding {
   /**
    * A Conclusion resource is used to create a new conclusion.
    * The successful "created" response will contain the following relevant headers:
@@ -33,10 +33,7 @@ public interface ConclusionRsb {
   @POST
   @Path("conclusion")
   @Consumes( { MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-  
-  Response addConclusion(
-      @PathParam("personId") String personId,
-      ConclusionWrapper conclusionWrapper);
+  Response addConclusion(@PathParam("personId") String personId, ConclusionWrapper conclusionWrapper);
 
   /**
    * Get a list of conclusions from a person given the person id.
@@ -57,11 +54,7 @@ public interface ConclusionRsb {
    */
   @GET
   @Produces( { MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-  
-  Response getConclusions(
-      @PathParam("personId") String personId,
-      @QueryParam("category") @DefaultValue("ALL") ConclusionCategory category,
-      @Context Request request);
+  Response getConclusions(@PathParam("personId") String personId, @QueryParam("category") @DefaultValue("ALL") ConclusionCategory category, @Context Request request);
 
   /**
    * Get a conclusion from a person given the conclusion id.
@@ -82,7 +75,6 @@ public interface ConclusionRsb {
   @GET
   @Path("{conclusionId}")
   @Produces( { MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-  
   ConclusionWrapper getConclusion(@PathParam("personId") String personId, @PathParam("conclusionId") String conclusionId);
 
   /**
@@ -105,11 +97,7 @@ public interface ConclusionRsb {
   @PUT
   @Path("{conclusionId}")
   @Consumes( { MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-  
-  Response editConclusion(
-      @PathParam("personId") String personId,
-      @PathParam("conclusionId") String conclusionId,
-      ConclusionWrapper conclusionWrapper);
+  Response editConclusion(@PathParam("personId") String personId, @PathParam("conclusionId") String conclusionId, ConclusionWrapper conclusionWrapper);
 
   /**
    * Delete a conclusion from a person given the conclusion id.
@@ -125,9 +113,5 @@ public interface ConclusionRsb {
   @DELETE
   @Path("{conclusionId}")
   @Consumes( { MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-  
-  Response deleteConclusion(
-      @PathParam("personId") String personId,
-      @PathParam("conclusionId") String conclusionId,
-      @QueryParam("reason") String reason);
+  Response deleteConclusion(@PathParam("personId") String personId, @PathParam("conclusionId") String conclusionId, @QueryParam("reason") String reason);
 }

@@ -1,25 +1,19 @@
 package org.familysearch.ct.www.impl;
 
 import org.familysearch.ct.www.binding.PersonRSBinding;
-import org.familysearch.ct.www.binding.PersonService;
 import org.gedcomx.conclusion.Person;
 import org.gedcomx.conclusion.www.PersonWWW;
 import org.gedcomx.www.Link;
 
-import javax.ws.rs.*;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 
 /**
  * @author Ryan Heaton
  */
-public class PersonRsi implements PersonRSBinding {
-
-  @Context
-  private PersonService personService;
-  private UriBuilder baseUriBuilder;
+public class PersonRSImpl implements PersonRSBinding {
 
   /**
    * Set the proof statement given by the user to support changes to genealogical data.
@@ -27,7 +21,6 @@ public class PersonRsi implements PersonRSBinding {
    * @param proofStatement The proof statement.
    */
   public void setProofStatement(String proofStatement) {
-    //To change body of implemented methods use File | Settings | File Templates.
   }
 
   /**
@@ -65,10 +58,11 @@ public class PersonRsi implements PersonRSBinding {
 
   public Person readPerson(@Context UriInfo uriInfo) {
     String pid = uriInfo.getPathParameters().getFirst("pid");
-    Person person = personService.readPerson(pid);
+    Person person = new Person();
+    person.setId(pid);
     Link updateLink = new Link();
     updateLink.setRel("self");
-    updateLink.setHref(uriInfo.getBaseUriBuilder().path(PersonRsi.class).path(PersonRsi.class, "readPerson").build(pid));
+    updateLink.setHref(uriInfo.getBaseUriBuilder().path(PersonRSImpl.class).path(PersonRSImpl.class, "readPerson").build(pid));
     person.addExtensionElement(updateLink);
     return person;
   }
@@ -82,7 +76,9 @@ public class PersonRsi implements PersonRSBinding {
    * @return The person.
    */
   public PersonWWW readPersonWWW(@Context UriInfo uriInfo) {
-    return null;  //To change body of implemented methods use File | Settings | File Templates.
+    PersonWWW www = new PersonWWW();
+    www.setPerson(readPerson(uriInfo));
+    return www;
   }
 
   /**
@@ -92,12 +88,9 @@ public class PersonRsi implements PersonRSBinding {
    * @param uriInfo Information on the URI that was used to identify the person to update.
    */
   public void updatePerson(@Context UriInfo uriInfo, Person person) {
-    //To change body of implemented methods use File | Settings | File Templates.
   }
 
   public void deletePerson(@Context UriInfo uriInfo) {
-    String pid = uriInfo.getPathParameters().getFirst("pid");
-    this.personService.deletePerson(pid, "proof statement");
   }
 
 }
