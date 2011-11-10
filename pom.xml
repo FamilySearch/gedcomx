@@ -18,7 +18,9 @@
 
   <modules>
     <module>conclusion-tree-ws</module>
-    <module>conclusion-tree-www</module>
+    <module>conclusion-tree-rs</module>
+    <module>conclusion-tree-rs-binding</module>
+    <module>conclusion-tree-rs-impl</module>
   </modules>
 
   <dependencies>
