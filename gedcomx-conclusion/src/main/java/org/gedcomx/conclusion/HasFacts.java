@@ -33,4 +33,10 @@ public interface HasFacts {
    */
   List<Fact> getFacts();
 
+  /**
+   * The fact conclusions for the person.
+   *
+   * @param facts The fact conclusions for the person.
+   */
+  void setFacts(List<Fact> facts);
 }

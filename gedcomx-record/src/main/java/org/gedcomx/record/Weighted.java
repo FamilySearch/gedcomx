@@ -32,4 +32,12 @@ public interface Weighted {
    */
   Boolean getPrincipal();
 
+  /**
+   * Whether this is the principal event for the persona in the record. For example, the principal event for a persona recorded in a birth certificate is
+   * the birth event.
+   *
+   * @param principal Whether this is the principal event for the persona in the record. For example, the principal event for a persona recorded in a birth certificate is
+   * the birth event.
+   */
+  void setPrincipal(Boolean principal);
 }

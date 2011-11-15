@@ -33,10 +33,27 @@ public interface Normalizeable {
   String getOriginal();
 
   /**
+   * The original value of the date that was concluded as supplied by the user.
+   *
+   * @param original The original value of the date that was concluded as supplied by the user.
+   */
+  void setOriginal(String original);
+
+  /**
    * The original value.
    *
    * @return The original value.
    */
   String getNormalized();
 
+  /**
+   * The normalized representation of the original value of the date. Intended for convenience
+   * to the user in interpreting the date. The normalized representation is optional and is
+   * often supplied by an automated standardization process.
+   *
+   * @param normalized The normalized representation of the original value of the date. Intended for convenience
+   * to the user in interpreting the date. The normalized representation is optional and is
+   * often supplied by an automated standardization process.
+   */
+  void setNormalized(String normalized);
 }

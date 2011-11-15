@@ -41,6 +41,13 @@ public interface PersistentIdentifiable {
   URI getPersistentId();
 
   /**
+   * A long-term, persistent, globally unique identifier for this entity.
+   *
+   * @param persistentId A long-term, persistent, globally unique identifier for this entity.
+   */
+  void setPersistentId(URI persistentId);
+
+  /**
    * List of alternate identifiers for a resource.
    *
    * @return List of alternate identifiers for a resource.
@@ -48,4 +55,11 @@ public interface PersistentIdentifiable {
   @RDFDomain({}) //any resource can have alternate ids.
   @RDFSubPropertyOf( CommonNamespaces.DUBLIN_CORE_NAMESPACE + "identifier" )
   List<AlternateId> getAlternateIds();
+
+  /**
+   * The list of alternate ids of the entity.
+   *
+   * @param alternateIds The list of alternate ids of the entity.
+   */
+  void setAlternateIds(List<AlternateId> alternateIds);
 }

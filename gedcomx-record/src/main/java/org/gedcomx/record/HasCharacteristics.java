@@ -33,4 +33,10 @@ public interface HasCharacteristics {
    */
   List<Characteristic> getCharacteristics();
 
+  /**
+   * The characteristic fields on this persona.
+   *
+   * @param characteristics The characteristic fields on this persona.
+   */
+  void setCharacteristics(List<Characteristic> characteristics);
 }

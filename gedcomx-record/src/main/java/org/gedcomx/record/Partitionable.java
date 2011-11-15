@@ -37,4 +37,10 @@ public interface Partitionable<T> {
   @RDFSubPropertyOf ( CommonNamespaces.DUBLIN_CORE_NAMESPACE + "hasPart" )
   List<T> getParts();
 
+  /**
+   * The parts of the age.
+   *
+   * @param parts The parts of the age.
+   */
+  void setParts(List<T> parts);
 }
