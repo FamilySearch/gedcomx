@@ -15,7 +15,7 @@
  */
 package org.gedcomx.conclusion.rs.definition;
 
-import org.gedcomx.conclusion.Conclusion;
+import org.gedcomx.conclusion.Relationship;
 import org.gedcomx.rt.www.ResourceServiceDefinition;
 import org.gedcomx.rt.www.StatusCode;
 import org.gedcomx.rt.www.StatusCodes;
@@ -24,53 +24,55 @@ import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 /**
- * The conclusion resource service is used to manage a conclusion.
+ * The relationship resource service is used to manage a conclusion relationship.
  *
  * @author Ryan Heaton
  */
 @ResourceServiceDefinition (
-  name = "Conclusion"
+  name = "Relationship"
 )
-public interface ConclusionRSDefinition extends CommonRSDefinition {
+public interface RelationshipRSDefinition extends CommonRSDefinition {
 
   /**
-   * Read a conclusion.
+   * Read a relationship.
    *
-   * @param uriInfo Information on the URI that was used to identify the conclusion to read.
-   * @return The conclusion.
+   * @param uriInfo Information on the URI that was used to identify the relationship to read.
+   * @return The relationship.
    */
   @GET
   @StatusCodes({
-    @StatusCode( code = 200, condition = "A successful read."),
-    @StatusCode( code = 404, condition = "If the requested conclusion is not found."),
-    @StatusCode( code = 410, condition = "If the requested conclusion has been deleted.")
+    @StatusCode( code = 200, condition = "Upon a successful read."),
+    @StatusCode( code = 301, condition = "If the requested relationship has been merged to another relationship."),
+    @StatusCode( code = 404, condition = "If the requested relationship is not found."),
+    @StatusCode( code = 410, condition = "If the requested relationship has been deleted.")
   })
-  Conclusion readConclusion(@Context UriInfo uriInfo);
+  Response readRelationship(@Context UriInfo uriInfo);
 
   /**
-   * Update a conclusion.
+   * Update a relationship.
    *
-   * @param conclusion The conclusion to be used for the update.
-   * @param uriInfo Information on the URI that was used to identify the conclusion to update.
+   * @param relationship The relationship to be used for the update.
+   * @param uriInfo Information on the URI that was used to identify the relationship to update.
    */
   @PUT
   @StatusCodes({
     @StatusCode( code = 204, condition = "The update was successful.")
   })
-  void updateConclusion(@Context UriInfo uriInfo, Conclusion conclusion);
+  void updateRelationship(@Context UriInfo uriInfo, Relationship relationship);
 
   /**
-   * Delete a conclusion.
+   * Delete a relationship.
    *
-   * @param uriInfo Information on the URI that was used to identify the conclusion to delete.
+   * @param uriInfo Information on the URI that was used to identify the relationship to delete.
    */
   @DELETE
   @StatusCodes({
     @StatusCode ( code = 204, condition = "The delete was successful.")
   })
-  void deleteConclusion(@Context UriInfo uriInfo);
+  void deleteRelationship(@Context UriInfo uriInfo);
 
 }
