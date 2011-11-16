@@ -19,6 +19,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.rt.CommonNamespaces;
+import org.gedcomx.rt.JsonElementWrapper;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.GenderType;
 import org.gedcomx.types.TypeReference;
@@ -38,6 +39,7 @@ import javax.xml.bind.annotation.XmlType;
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "Gender" )
 @XmlRootElement
+@JsonElementWrapper ( name = "genders" )
 public class Gender extends Conclusion implements Typed<GenderType> {
 
   private TypeReference<GenderType> type;

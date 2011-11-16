@@ -20,6 +20,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.rt.CommonNamespaces;
+import org.gedcomx.rt.JsonElementWrapper;
 import org.gedcomx.rt.RDFSubClassOf;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.FactType;
@@ -39,6 +40,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType ( name = "Fact", propOrder = {"type", "date", "place", "value"})
 @RDFSubClassOf ( CommonNamespaces.DUBLIN_CORE_TYPE_NAMESPACE + "Event" )
 @XmlRootElement
+@JsonElementWrapper ( name = "facts" )
 public class Fact extends Conclusion implements Typed<FactType> {
 
   private TypeReference<FactType> type;

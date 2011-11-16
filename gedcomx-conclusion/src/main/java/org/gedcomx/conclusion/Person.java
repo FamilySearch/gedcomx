@@ -21,7 +21,7 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.common.GenealogicalEntity;
 import org.gedcomx.common.PersistentIdentifiable;
-import org.gedcomx.rt.JsonExtensionElement;
+import org.gedcomx.rt.JsonElementWrapper;
 import org.gedcomx.rt.XmlTypeIdResolver;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -35,7 +35,7 @@ import java.util.List;
  * @author Ryan Heaton
  */
 @XmlRootElement
-@JsonExtensionElement
+@JsonElementWrapper (name = "persons")
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "Person", propOrder = { "living", "genders", "names", "facts" } )

@@ -31,7 +31,7 @@ import java.util.List;
  * A formal collection of genealogical entities.
  */
 @XmlRootElement
-@JsonExtensionElement
+@JsonElementWrapper ( name = "collections" )
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "Collection", propOrder = { "title", "description", "publisher", "types", "spatial", "temporal", "items" } )

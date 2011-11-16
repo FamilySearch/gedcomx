@@ -22,6 +22,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.rt.CommonNamespaces;
+import org.gedcomx.rt.JsonElementWrapper;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.NameType;
 import org.gedcomx.types.TypeReference;
@@ -42,6 +43,7 @@ import java.util.List;
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "Name", propOrder = { "type", "primaryForm", "alternateForms" } )
 @XmlRootElement
+@JsonElementWrapper ( name = "names" )
 public class Name extends Conclusion implements Typed<NameType> {
 
   private TypeReference<NameType> type;

@@ -97,17 +97,10 @@ public class ExtensibleObjectSerializer extends BeanSerializer {
             name = ((JAXBElement) element).getName();
             element = ((JAXBElement) element).getValue();
           }
-          else if (element.getClass().isAnnotationPresent(JsonExtensionElement.class)) {
+          else if (element.getClass().isAnnotationPresent(JsonElementWrapper.class)) {
             //support custom json element name
-            JsonExtensionElement ext = element.getClass().getAnnotation(JsonExtensionElement.class);
-            String extName = ext.name();
-            if ("##default".equals(extName) && element.getClass().isAnnotationPresent(XmlRootElement.class)) {
-              extName = element.getClass().getAnnotation(XmlRootElement.class).name();
-            }
-            if ("##default".equals(extName)) {
-              extName = Introspector.decapitalize(element.getClass().getSimpleName());
-            }
-            name = new QName(ext.namespace(), extName);
+            JsonElementWrapper ext = element.getClass().getAnnotation(JsonElementWrapper.class);
+            name = new QName(ext.namespace(), ext.name());
           }
           else {
             XmlRootElement rootElement = element.getClass().getAnnotation(XmlRootElement.class);

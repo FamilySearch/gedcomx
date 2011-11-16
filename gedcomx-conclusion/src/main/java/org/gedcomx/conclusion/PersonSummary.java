@@ -35,7 +35,7 @@ import java.net.URI;
  * @author Ryan Heaton
  */
 @XmlRootElement ( name = "personSummary" )
-@JsonExtensionElement
+@JsonElementWrapper ( name = "personSummaries" )
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "PersonSummary", propOrder = { "gender", "name", "birth", "death" } )

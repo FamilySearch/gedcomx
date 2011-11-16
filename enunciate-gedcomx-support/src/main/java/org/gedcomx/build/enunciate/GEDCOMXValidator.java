@@ -153,8 +153,8 @@ public class GEDCOMXValidator extends BaseValidator {
       result.addError(rootElementDeclaration, "Root elements need to be annotated with @org.codehaus.jackson.map.annotate.JsonTypeIdResolver(org.gedcomx.id.XmlTypeIdResolver.class) to specify their JSON type id.");
     }
 
-    if (namespace.startsWith(CommonNamespaces.GEDCOMX_DOMAIN) && rootElementDeclaration.getAnnotation(JsonExtensionElement.class) == null) {
-      result.addWarning(rootElementDeclaration, "Root elements in the '" + CommonNamespaces.GEDCOMX_DOMAIN + "' namespace should probably be annotated with @JsonExtensionElement.");
+    if (namespace.startsWith(CommonNamespaces.GEDCOMX_DOMAIN) && rootElementDeclaration.getAnnotation(JsonElementWrapper.class) == null) {
+      result.addWarning(rootElementDeclaration, "Root elements in the '" + CommonNamespaces.GEDCOMX_DOMAIN + "' namespace should probably be annotated with @" + JsonElementWrapper.class.getSimpleName() + ".");
     }
 
     return result;

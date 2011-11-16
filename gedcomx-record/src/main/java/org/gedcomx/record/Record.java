@@ -24,7 +24,7 @@ import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.common.GenealogicalEntity;
 import org.gedcomx.common.PersistentIdentifiable;
 import org.gedcomx.rt.CommonNamespaces;
-import org.gedcomx.rt.JsonExtensionElement;
+import org.gedcomx.rt.JsonElementWrapper;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.RecordType;
 import org.gedcomx.types.TypeReference;
@@ -38,7 +38,7 @@ import java.util.List;
  * A record.
  */
 @XmlRootElement
-@JsonExtensionElement
+@JsonElementWrapper ( name = "records" )
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "Record", propOrder = { "type", "personas", "events", "relationships", "fields" } )

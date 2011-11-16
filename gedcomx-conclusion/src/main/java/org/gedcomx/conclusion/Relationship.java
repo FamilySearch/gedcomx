@@ -40,7 +40,7 @@ import java.util.List;
  * @author Ryan Heaton
  */
 @XmlRootElement
-@JsonExtensionElement
+@JsonElementWrapper ( name = "relationships" )
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "Relationship", propOrder = { "type", "person1", "person2", "facts"} )

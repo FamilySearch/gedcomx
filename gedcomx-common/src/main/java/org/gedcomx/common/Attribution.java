@@ -34,7 +34,7 @@ import java.util.Date;
  * @author Ryan Heaton
  */
 @XmlRootElement
-@JsonExtensionElement
+@JsonElementWrapper ( name = "attribution" )
 @JsonTypeInfo ( use = JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "Attribution", propOrder = {"modified", "proofStatement", "confidence", "contributor" } )

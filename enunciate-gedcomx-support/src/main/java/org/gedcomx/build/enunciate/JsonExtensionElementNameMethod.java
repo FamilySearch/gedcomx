@@ -20,7 +20,7 @@ import freemarker.template.TemplateMethodModelEx;
 import freemarker.template.TemplateModel;
 import freemarker.template.TemplateModelException;
 import org.codehaus.enunciate.contract.jaxb.RootElementDeclaration;
-import org.gedcomx.rt.JsonExtensionElement;
+import org.gedcomx.rt.JsonElementWrapper;
 
 import java.util.List;
 
@@ -40,9 +40,9 @@ public class JsonExtensionElementNameMethod implements TemplateMethodModelEx {
       RootElementDeclaration rootEl = (RootElementDeclaration) object;
       String name = rootEl.getName();
       String namespace = rootEl.getNamespace();
-      JsonExtensionElement ext = rootEl.getAnnotation(JsonExtensionElement.class);
+      JsonElementWrapper ext = rootEl.getAnnotation(JsonElementWrapper.class);
       if (ext != null) {
-        name = "##default".equals(ext.name()) ? name : ext.name();
+        name = ext.name();
         namespace = ext.namespace();
       }
 

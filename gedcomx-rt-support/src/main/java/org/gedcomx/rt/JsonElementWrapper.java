@@ -21,21 +21,20 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Annotates a class as a known GEDCOM X extension element.
+ * Provides a custom name for a wrapper element for JSON serialization.
  *
  * @author Ryan Heaton
  */
 @Retention ( RetentionPolicy.RUNTIME )
 @Target ( { ElementType.TYPE } )
-public @interface JsonExtensionElement {
+public @interface JsonElementWrapper {
 
   /**
-   * The name of the JSON property if this element is added as an extension element. Default
-   * value is the simple name of the class.
+   * The name of the JSON property for arrays of this element.
    *
-   * @return The name of the JSON property if this element is added as an extension element.
+   * @return The name of the JSON property for arrays of this element.
    */
-  String name() default "##default";
+  String name();
 
   /**
    * The namespace of the JSON property if this element is added as an extension element. The
