@@ -26,20 +26,20 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlTransient
 @Namespaces ( {
   @Namespace (
-    id = "gxwww",
-    uri = RSNamespaces.GEDCOMX_WWW_V1_NAMESPACE,
-    label = "WWW Namespace",
-    description = "The www namespace contains the objects necessary exposing genealogical data to the World Wide Web.",
+    id = "gxrs",
+    uri = RSNamespaces.GEDCOMX_RS_V1_NAMESPACE,
+    label = "RS Namespace",
+    description = "The rs namespace contains the objects necessary exposing genealogical data through a REST interface.",
     version = "v1",
-    xmlMediaType = RSNamespaces.GEDCOMX_WWW_V1_XML_MEDIA_TYPE,
-    jsonMediaType = RSNamespaces.GEDCOMX_WWW_V1_JSON_MEDIA_TYPE
+    xmlMediaType = RSNamespaces.GEDCOMX_RS_V1_XML_MEDIA_TYPE,
+    jsonMediaType = RSNamespaces.GEDCOMX_RS_V1_JSON_MEDIA_TYPE
   )
 } )
 public class RSNamespaces {
 
   private RSNamespaces() {}
 
-  public static final String GEDCOMX_WWW_V1_NAMESPACE = "http://gedcomx.org/www/v1/";
-  public static final String GEDCOMX_WWW_V1_XML_MEDIA_TYPE = "application/gedcomx-www-v1+xml";
-  public static final String GEDCOMX_WWW_V1_JSON_MEDIA_TYPE = "application/gedcomx-www-v1+json";
+  public static final String GEDCOMX_RS_V1_NAMESPACE = "http://gedcomx.org/rs/v1/";
+  public static final String GEDCOMX_RS_V1_XML_MEDIA_TYPE = "application/gedcomx-rs-v1+xml";
+  public static final String GEDCOMX_RS_V1_JSON_MEDIA_TYPE = "application/gedcomx-rs-v1+json";
 }
