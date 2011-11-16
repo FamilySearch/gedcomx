@@ -28,6 +28,7 @@ import org.gedcomx.types.TypeReference;
 import org.gedcomx.types.Typed;
 
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 import java.util.List;
@@ -40,6 +41,7 @@ import java.util.List;
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "Name", propOrder = { "type", "primaryForm", "alternateForms" } )
+@XmlRootElement
 public class Name extends Conclusion implements Typed<NameType> {
 
   private TypeReference<NameType> type;

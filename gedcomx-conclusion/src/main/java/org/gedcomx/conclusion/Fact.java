@@ -27,6 +27,7 @@ import org.gedcomx.types.TypeReference;
 import org.gedcomx.types.Typed;
 
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
@@ -37,6 +38,7 @@ import javax.xml.bind.annotation.XmlType;
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "Fact", propOrder = {"type", "date", "place", "value"})
 @RDFSubClassOf ( CommonNamespaces.DUBLIN_CORE_TYPE_NAMESPACE + "Event" )
+@XmlRootElement
 public class Fact extends Conclusion implements Typed<FactType> {
 
   private TypeReference<FactType> type;

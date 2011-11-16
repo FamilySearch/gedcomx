@@ -51,10 +51,7 @@
   [/#list]
       </table>
 
-  [#list rsd.linkDefinitions?keys as link]
-    <h3>"${link}" Link</h3>
-
-    [#list rsd.linkDefinitions[link] as op]
+  [#list rsd.resourceMethods as op]
       <b>${op.httpMethods[0]}</b>
 
       <p>${op.docValue!""}</p>
@@ -64,14 +61,13 @@
           <th align="center">code</th>
           <th align="center">condition</th>
         </tr>
-  [#list op.metaData.statusCodes as statusCode]
+    [#list op.metaData.statusCodes as statusCode]
         <tr>
           <td>${statusCode.code}</td>
           <td>${statusCode.condition}</td>
         </tr>
-  [/#list]
-      </table>
     [/#list]
+      </table>
   [/#list]
 
 

@@ -35,7 +35,6 @@ public class ResourceServiceDefinitionDeclaration extends Resource {
   private final String namespace;
   private final List<StatusCode> statusCodes;
   private final List<LinkRelationship> linkRelationships;
-  private final Map<String, List<ResourceMethod>> linkDefinitions;
 
   public ResourceServiceDefinitionDeclaration(TypeDeclaration delegate) {
     super(delegate);
@@ -58,23 +57,10 @@ public class ResourceServiceDefinitionDeclaration extends Resource {
 
     this.linkRelationships = ResourceServiceProcessor.extractLinkRelationships(delegate);
 
-    Map<String, List<ResourceMethod>> linkDefinitions = new HashMap<String, List<ResourceMethod>>();
     for (ResourceMethod resourceMethod : getResourceMethods()) {
-      LinkDefinition linkDef = resourceMethod.getAnnotation(LinkDefinition.class);
-      if (linkDef != null) {
-        String linkName = linkDef.value();
-        List<ResourceMethod> linkDefMethods = linkDefinitions.get(linkName);
-        if (linkDefMethods == null) {
-          linkDefMethods = new ArrayList<ResourceMethod>();
-          linkDefinitions.put(linkName, linkDefMethods);
-        }
-        linkDefMethods.add(resourceMethod);
-      }
-
       resourceMethod.putMetaData("statusCodes", ResourceServiceProcessor.extractStatusCodes(resourceMethod));
       resourceMethod.putMetaData("linkRelationships", ResourceServiceProcessor.extractLinkRelationships(resourceMethod));
     }
-    this.linkDefinitions = linkDefinitions;
   }
 
   @Override
@@ -103,7 +89,4 @@ public class ResourceServiceDefinitionDeclaration extends Resource {
     return linkRelationships;
   }
 
-  public Map<String, List<ResourceMethod>> getLinkDefinitions() {
-    return linkDefinitions;
-  }
 }

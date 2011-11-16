@@ -30,4 +30,6 @@ public @interface StatusCode {
 
   String condition();
 
+  int warningCode() default -1;
+
 }

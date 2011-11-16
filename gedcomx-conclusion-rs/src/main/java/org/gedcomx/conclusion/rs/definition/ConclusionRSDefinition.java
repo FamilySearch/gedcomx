@@ -15,7 +15,7 @@
  */
 package org.gedcomx.conclusion.rs.definition;
 
-import org.gedcomx.conclusion.Person;
+import org.gedcomx.conclusion.Conclusion;
 import org.gedcomx.rt.www.ResourceServiceDefinition;
 import org.gedcomx.rt.www.StatusCode;
 import org.gedcomx.rt.www.StatusCodes;
@@ -24,55 +24,54 @@ import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 /**
- * The person resource service is used to manage a conclusion person.
+ * The conclusion resource service is used to manage a conclusion.
  *
  * @author Ryan Heaton
  */
 @ResourceServiceDefinition (
-  name = "Person"
+  name = "Conclusion"
 )
-public interface PersonRSDefinition extends CommonRSDefinition {
+public interface ConclusionRSDefinition extends CommonRSDefinition {
 
   /**
-   * Read a person.
+   * Read a conclusion.
    *
-   * @param uriInfo Information on the URI that was used to identify the person to read.
-   * @return The person.
+   * @param uriInfo Information on the URI that was used to identify the conclusion to read.
+   * @return The conclusion.
    */
   @GET
   @StatusCodes({
-    @StatusCode( code = 200, condition = "Upon a successful read."),
-    @StatusCode( code = 301, condition = "If the requested person has been merged to another person."),
-    @StatusCode( code = 404, condition = "If the requested person is not found."),
-    @StatusCode( code = 410, condition = "If the requested person has been deleted.")
+    @StatusCode( code = 200, condition = "A successful read."),
+    @StatusCode( code = 301, condition = "If the requested conclusion has been merged to another conclusion."),
+    @StatusCode( code = 404, condition = "If the requested conclusion is not found."),
+    @StatusCode( code = 410, condition = "If the requested conclusion has been deleted.")
   })
-  Response readPerson(@Context UriInfo uriInfo);
+  Conclusion readConclusion(@Context UriInfo uriInfo);
 
   /**
-   * Update a person.
+   * Update a conclusion.
    *
-   * @param person The person to be used for the update.
-   * @param uriInfo Information on the URI that was used to identify the person to update.
+   * @param conclusion The conclusion to be used for the update.
+   * @param uriInfo Information on the URI that was used to identify the conclusion to update.
    */
   @PUT
   @StatusCodes({
     @StatusCode( code = 204, condition = "The update was successful.")
   })
-  void updatePerson(@Context UriInfo uriInfo, Person person);
+  void updateConclusion(@Context UriInfo uriInfo, Conclusion conclusion);
 
   /**
-   * Delete a person.
+   * Delete a conclusion.
    *
-   * @param uriInfo Information on the URI that was used to identify the person to delete.
+   * @param uriInfo Information on the URI that was used to identify the conclusion to delete.
    */
   @DELETE
   @StatusCodes({
     @StatusCode ( code = 204, condition = "The delete was successful.")
   })
-  void deletePerson(@Context UriInfo uriInfo);
+  void deleteConclusion(@Context UriInfo uriInfo);
 
 }

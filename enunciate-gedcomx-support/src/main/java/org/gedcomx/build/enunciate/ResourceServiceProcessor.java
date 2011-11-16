@@ -139,7 +139,9 @@ public class ResourceServiceProcessor {
       linkRelationshipInfo = linkRelationshipsInfo.value();
     }
     for (org.gedcomx.rt.www.LinkRelationship linkRelationship : linkRelationshipInfo) {
-      linkRelationships.add(new LinkRelationship(linkRelationship.name(), linkRelationship.description(), "##default".equals(linkRelationship.definedBy()) ? null : linkRelationship.definedBy()));
+      ResourceServiceDefinitionDeclaration definedBy = null;
+      //todo: find the resource service def decl.
+      linkRelationships.add(new LinkRelationship(linkRelationship.name(), linkRelationship.description(), definedBy));
     }
     return linkRelationships;
   }

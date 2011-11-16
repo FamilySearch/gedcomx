@@ -22,9 +22,9 @@ public class LinkRelationship {
 
   private final String name;
   private final String description;
-  private final String definedBy;
+  private final ResourceServiceDefinitionDeclaration definedBy;
 
-  public LinkRelationship(String name, String description, String definedBy) {
+  public LinkRelationship(String name, String description, ResourceServiceDefinitionDeclaration definedBy) {
     this.name = name;
     this.description = description;
     this.definedBy = definedBy;
@@ -38,7 +38,7 @@ public class LinkRelationship {
     return description;
   }
 
-  public String getDefinedBy() {
+  public ResourceServiceDefinitionDeclaration getDefinedBy() {
     return definedBy;
   }
 }

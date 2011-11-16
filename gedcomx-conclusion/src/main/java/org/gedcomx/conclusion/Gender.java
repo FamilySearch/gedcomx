@@ -25,6 +25,7 @@ import org.gedcomx.types.TypeReference;
 import org.gedcomx.types.Typed;
 
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
@@ -36,6 +37,7 @@ import javax.xml.bind.annotation.XmlType;
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "Gender" )
+@XmlRootElement
 public class Gender extends Conclusion implements Typed<GenderType> {
 
   private TypeReference<GenderType> type;

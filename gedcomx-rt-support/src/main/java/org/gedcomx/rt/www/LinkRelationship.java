@@ -29,7 +29,7 @@ public @interface LinkRelationship {
 
   String name();
 
-  String definedBy() default "##default";
+  Class<?> definedBy();
 
   String description();
 
