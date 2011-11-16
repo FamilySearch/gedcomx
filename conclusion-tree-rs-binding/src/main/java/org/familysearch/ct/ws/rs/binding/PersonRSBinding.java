@@ -8,7 +8,7 @@ import org.gedcomx.rt.www.StatusCodes;
 
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
@@ -18,24 +18,28 @@ import javax.ws.rs.core.UriInfo;
  * @author Ryan Heaton
  */
 @ResourceServiceBinding
-@Path("/person")
+@Path("/persons/{pid}")
 public interface PersonRSBinding extends PersonRSDefinition {
 
-  @POST
-  @StatusCodes({
-    @StatusCode(code = 400, condition = "If the proof statement is not provided.")
-  })
-  Response createPerson(Person person);
-
   @GET
-  @Path("/{pid}")
-  public Person readPerson(@Context UriInfo uriInfo);
+  @Override
+  Response readPerson(@Context UriInfo uriInfo);
+
+  @PUT
+  @Override
+  void updatePerson(@Context UriInfo uriInfo, Person person);
 
   @DELETE
-  @Path("/{pid}")
   @StatusCodes ({
     @StatusCode (code = 400, condition = "The proof statement is not provided." )
   })
-  public void deletePerson(@Context UriInfo uriInfo);
+  @Override
+  void deletePerson(@Context UriInfo uriInfo);
+
+  @Path("/conclusions")
+  ConclusionsRSBinding getConclusionsResource();
+
+  @Path("/conclusions/{cid}")
+  ConclusionRSBinding getConclusionResource();
 
 }

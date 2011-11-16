@@ -4,7 +4,7 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.common.GenealogicalEntity;
 import org.gedcomx.conclusion.Relationship;
-import org.gedcomx.rt.JsonExtensionElement;
+import org.gedcomx.rt.JsonElementWrapper;
 import org.gedcomx.rt.XmlTypeIdResolver;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -18,7 +18,7 @@ import javax.xml.bind.annotation.XmlType;
  * @author NOT Ryan Heaton
  */
 @XmlRootElement
-@JsonExtensionElement
+@JsonElementWrapper( name = "relationships" )
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "TernaryRelationship", propOrder = { "childToFatherRelationship", "childToMotherRelationship" } )
