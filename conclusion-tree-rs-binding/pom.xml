@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <artifactId>conclusion-tree-rs-binding</artifactId>
   <version>0.1.0.BUILD-SNAPSHOT</version>
-  <name>FamilySearch Conclusion Tree Platform - Resource Service Bindings</name>
+  <name>FamilySearch Conclusion Tree - Resource Service Bindings</name>
 
   <parent>
     <groupId>org.familysearch.ct</groupId>
