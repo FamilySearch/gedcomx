@@ -19,6 +19,34 @@
     <root.basedir>${basedir}/..</root.basedir>
   </properties>
 
+  <build>
+    <plugins>
+      <plugin>
+        <!--
+        we need to zip up the skin, so we'll use ant to do it.
+        -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <executions>
+          <execution>
+            <!--the docs module uses a default base.-->
+            <phase>process-classes</phase>
+            <configuration>
+              <tasks>
+                <mkdir dir="${project.build.outputDirectory}" />
+
+                <zip destfile="${project.build.outputDirectory}/docs.base.zip" basedir="${basedir}/skin"/>
+              </tasks>
+            </configuration>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
   <dependencies>
     <dependency>
       <groupId>org.codehaus.enunciate</groupId>

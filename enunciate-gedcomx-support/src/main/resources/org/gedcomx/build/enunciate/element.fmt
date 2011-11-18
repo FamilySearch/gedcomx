@@ -6,18 +6,7 @@
   [#assign elementLabel=element.name?cap_first + " Element"/]
   [@libBoilerplate.writeStartBody label=elementLabel/]
   <div class="container">
-    <header>
-      <div id="header" class="column first last span-20">
-        [@libBoilerplate.writePrimaryNav/]
-        <div id="secondary" class="column span-18 append-1 prepend-1 first last">
-          <ul class="navigation">
-            <li><a href="index.html">Namespaces</a> &gt;</li>
-            <li><a href="${schema.id}.html">${schema.properties.label!("\"" + schema.id + "\" Namespace")}</a> &gt;</li>
-            <li><a href="#">${elementLabel}</a></li>
-          </ul>
-        </div>
-      </div>
-    </header>
+    [@libBoilerplate.writeHeader subnav={"Model" : "index.html", (schema.properties.label!("\"" + schema.id + "\" Model")) : schema.id + ".html", elementLabel : "#"}/]
     <div id="main" class="column first last span-20">
       <h1>${elementLabel}</h1>
 

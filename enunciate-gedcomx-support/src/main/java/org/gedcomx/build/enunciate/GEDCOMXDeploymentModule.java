@@ -19,6 +19,7 @@ import com.sun.mirror.apt.Messager;
 import com.sun.mirror.declaration.TypeDeclaration;
 import freemarker.template.TemplateException;
 import net.sf.jelly.apt.Context;
+import org.apache.commons.digester.RuleSet;
 import org.codehaus.enunciate.EnunciateException;
 import org.codehaus.enunciate.apt.EnunciateFreemarkerModel;
 import org.codehaus.enunciate.apt.EnunciateTypeDeclarationListener;
@@ -46,7 +47,6 @@ import org.gedcomx.rt.DocIgnoreXmlRootElement;
 import org.gedcomx.rt.GedcomNamespaceManager;
 import org.gedcomx.rt.Namespace;
 import org.gedcomx.rt.Namespaces;
-import org.gedcomx.rt.www.ResourceServiceBinding;
 import org.gedcomx.rt.www.ResourceServiceDefinition;
 
 import java.io.File;
@@ -66,6 +66,7 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
   private final Map<String, TypeDeclaration> knownRsdDeclarations = new HashMap<String, TypeDeclaration>();
   private RDFProcessor rdfProcessor;
   private ResourceServiceProcessor resourceServiceProcessor;
+  private final Map<String, String> primaryNav = new HashMap<String, String>();
 
   /**
    * @return "gedcomx"
@@ -140,6 +141,16 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
    * @param docsDir The subdirectory in the web application where the documentation will be put.
    */
   public void setDocsDir(String docsDir) {
+  }
+
+  /**
+   * Add a primary nav element.
+   *
+   * @param label The label for the nav.
+   * @param href The href.
+   */
+  public void addPrimaryNav(String label, String href) {
+    this.primaryNav.put(label, href);
   }
 
   public void onTypeDeclarationInspected(TypeDeclaration typeDeclaration) {
@@ -337,6 +348,7 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
       model.put("rdfschema", this.rdfProcessor.getRdfSchema());
       model.put("resourceServiceDefinitions", this.resourceServiceProcessor.getResourceServiceDefinitions());
       model.put("resourceServiceBindings", this.resourceServiceProcessor.getResourceServiceBindings());
+      model.put("primaryNav", this.primaryNav);
       try {
         for (SchemaInfo schemaInfo : model.getNamespacesToSchemas().values()) {
           String namespace = schemaInfo.getNamespace();
@@ -375,12 +387,18 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
     Enunciate enunciate = getEnunciate();
     File buildDir = getBuildDir();
     buildDir.mkdirs();
+    File modelDir = new File(buildDir, "model");
+    modelDir.mkdirs();
+    File rsDir = new File(buildDir, "rs");
+    rsDir.mkdirs();
+
+    enunciate.extractBase(GEDCOMXDeploymentModule.class.getResourceAsStream("/docs.base.zip"), buildDir);
 
     for (SchemaInfo schemaInfo : getModel().getNamespacesToSchemas().values()) {
       if (schemaInfo.getProperty("file") != null) {
         File from = (File) schemaInfo.getProperty("file");
         String filename = schemaInfo.getProperty("filename") != null ? (String) schemaInfo.getProperty("filename") : from.getName();
-        File to = new File(getBuildDir(), filename);
+        File to = new File(modelDir, filename);
         enunciate.copyFile(from, to);
       }
     }
@@ -389,14 +407,14 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
       if (wsdlInfo.getProperty("file") != null) {
         File from = (File) wsdlInfo.getProperty("file");
         String filename = wsdlInfo.getProperty("filename") != null ? (String) wsdlInfo.getProperty("filename") : from.getName();
-        File to = new File(getBuildDir(), filename);
+        File to = new File(rsDir, filename);
         enunciate.copyFile(from, to);
       }
     }
 
     File wadlFile = getModelInternal().getWadlFile();
     if (wadlFile != null) {
-      enunciate.copyFile(wadlFile, new File(getBuildDir(), wadlFile.getName()));
+      enunciate.copyFile(wadlFile, new File(rsDir, wadlFile.getName()));
     }
 
     Set<Artifact> downloads = new TreeSet<Artifact>();
@@ -407,8 +425,8 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
     }
 
     for (Artifact download : downloads) {
-      debug("Exporting %s to directory %s.", download.getId(), buildDir);
-      download.exportTo(buildDir, enunciate);
+      debug("Exporting %s to directory %s.", download.getId(), modelDir);
+      download.exportTo(modelDir, enunciate);
     }
 
     return downloads;
@@ -417,5 +435,10 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
   @Override
   public Validator getValidator() {
     return new GEDCOMXValidator();
+  }
+
+  @Override
+  public RuleSet getConfigurationRules() {
+    return new GEDCOMXRuleSet();
   }
 }

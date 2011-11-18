@@ -1,20 +1,10 @@
 [#ftl]
 [#-- @ftlvariable name="schema" type="org.codehaus.enunciate.config.SchemaInfo" --]
 [#import "boilerplate.fmt" as libBoilerplate/]
-[@file name="code.html" charset="utf-8"]
+[@file name="model/code.html" charset="utf-8"]
   [@libBoilerplate.writeStartBody label="Code"/]
   <div class="container">
-    <header>
-      <div id="header" class="column first last span-20">
-        [@libBoilerplate.writePrimaryNav/]
-        <div id="secondary" class="column span-18 append-1 prepend-1 first last">
-          <ul class="navigation">
-            <li><a href="index.html">Namespaces</a> &gt;</li>
-            <li><a href="#">Code</a></li>
-          </ul>
-        </div>
-      </div>
-    </header>
+    [@libBoilerplate.writeHeader subnav={"Model" : "index.html", "Code" : "#"}/]
     <div id="main" class="column first last span-20">
       <h1>GEDCOM X Code</h1>
 

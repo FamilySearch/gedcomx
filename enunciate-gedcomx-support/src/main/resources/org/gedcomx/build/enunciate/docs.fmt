@@ -1,57 +1,48 @@
 [#ftl]
 [#-- @ftlvariable name="schema" type="org.codehaus.enunciate.config.SchemaInfo" --]
-[#import "ns.fmt" as libNamespace/]
+[#import "model.fmt" as libModel/]
 [#import "element.fmt" as libElement/]
 [#import "type.fmt" as libType/]
 [#import "boilerplate.fmt" as libBoilerplate/]
 [#import "rsd.fmt" as libRsd/]
 [@forEachSchema]
   [#if (schema.typeDefinitions?size > 0) || (schema.globalElements?size > 0)]
-    [@file name=(schema.id + ".html") charset="utf-8"]
-      [@libNamespace.writeNamespacePage schema=schema/]
+    [@file name=("model/" + schema.id + ".html") charset="utf-8"]
+      [@libModel.writeNamespacePage schema=schema/]
     [/@file]
     [#list schema.globalElements as element]
-      [@file name=(schema.id + "_el_" + element.name + ".html") charset="utf-8"]
+      [@file name=("model/" + schema.id + "_el_" + element.name + ".html") charset="utf-8"]
         [@libElement.writeElementPage element=element/]
       [/@file]
     [/#list]
     [#list schema.typeDefinitions as type]
-      [@file name=(schema.id + "_" + type.name + ".html") charset="utf-8"]
+      [@file name=("model/" + schema.id + "_" + type.name + ".html") charset="utf-8"]
         [@libType.writeTypePage type=type/]
       [/@file]
     [/#list]
   [/#if]
 [/@forEachSchema]
 [#list resourceServiceDefinitions as rsd]
-  [@file name=(rsd.name + "_service.html")]
+  [@file name=("rs/" + rsd.name + "_service.html")]
     [@libRsd.writeResourceServiceDefinitionPage rsd=rsd/]
   [/@file]
 [/#list]
-[@file name="index.html" charset="utf-8"]
-  [@libBoilerplate.writeStartBody label="Namespaces"/]
+[@file name="model/index.html" charset="utf-8"]
+  [@libBoilerplate.writeStartBody label="Models"/]
   <div class="container">
-    <header>
-      <div id="header" class="column first last span-20">
-        [@libBoilerplate.writePrimaryNav/]
-        <div id="secondary" class="column span-18 append-1 prepend-1 first last">
-          <ul class="navigation">
-            <li><a href="#">Namespaces</a></li>
-          </ul>
-        </div>
-      </div>
-    </header>
+    [@libBoilerplate.writeHeader subnav={"Model" : "#"}/]
     <div id="main" class="column first last span-20">
-      <h1>GEDCOM X Namespaces</h1>
+      <h1>GEDCOM X Models</h1>
 
       <hr/>
 
     [#list ns2schema?values?sort_by("id") as schema]
       [#if (schema.typeDefinitions?size > 0) || (schema.globalElements?size > 0)]
-      <h3><a href="${schema.id}.html">${schema.properties.label!("\"" + schema.id + "\" Namespace")}</a></h3>
+      <h3><a href="${schema.id}.html">${schema.properties.label!("\"" + schema.id + "\" Model")}</a></h3>
       [#if schema.properties.description??]<p>${schema.properties.description}</p>[/#if]
       <table>
         <tr>
-          <td align="right">Namespace ID:</td>
+          <td align="right">Model ID:</td>
           <td>${schema.id}</td>
         </tr>
         <tr>
@@ -88,7 +79,7 @@
         [/#if]
         [#if schema.globalElements?size > 0]
         <tr>
-          <td align="right">Resources:</td>
+          <td align="right">Elements:</td>
           <td>[#list schema.globalElements as element] [#if !element_has_next && (element_index > 0)]and [/#if]<a href="${schema.id}_el_${element.name}.html">${element.name}</a>[#if element_has_next && schema.globalElements?size > 2],[/#if][/#list]</td>
         </tr>
         [/#if]

@@ -5,17 +5,7 @@
   [#assign rsdName=rsd.name?cap_first + " Service"/]
   [@libBoilerplate.writeStartBody label=rsdName/]
   <div class="container">
-    <header>
-      <div id="header" class="column first last span-20">
-        [@libBoilerplate.writePrimaryNav/]
-        <div id="secondary" class="column span-18 append-1 prepend-1 first last">
-          <ul class="navigation">
-            <li><a href="index.html">Resource Services</a> &gt;</li>
-            <li><a href="#">${rsdName}</a></li>
-          </ul>
-        </div>
-      </div>
-    </header>
+    [@libBoilerplate.writeHeader subnav={"Resources" : "index.html", rsdName : "#"}/]
     <div id="main" class="column first last span-20">
       <h1>${rsdName}</h1>
 

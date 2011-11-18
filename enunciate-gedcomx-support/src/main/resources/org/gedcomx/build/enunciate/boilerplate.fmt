@@ -32,16 +32,27 @@
 
 <body class="home">
 [/#macro]
+[#macro writeHeader subnav={ "Home" : "../Home.html" }]
+    <header>
+      <div id="header" class="column first last span-20">
+        [@writePrimaryNav/]
+        <div id="secondary" class="column span-18 append-1 prepend-1 first last">
+          <ul class="navigation">
+  [#list subnav?keys as nav]
+            <li><a href="${subnav[nav]}">${nav}</a>[#if nav_has_next] &gt;[/#if]</li>
+  [/#list]
+          </ul>
+        </div>
+      </div>
+    </header>
+[/#macro]
 [#macro writePrimaryNav]
         <div id="site-name" class="column first span-5 prepend-1 append-1"><a href="../Home.html">Gedcom<strong>X</strong></a></div>
         <div id="primary" class="column span-13 last">
           <ul class="navigation">
-            <li id="nav-about"><a href="../About.html">About</a></li>
-            <li id="nav-code"><a href="../Developers-Guide.html">Dev</a></li>
-            <li id="nav-models"><a href="../Data-Models.html">Models</a></li>
-            <li id="nav-profiles"><a href="../Application-Profiles.html">API Profiles</a></li>
-            <li id="nav-community"><a href="../Community.html">Community</a></li>
-            <li id="nav-faq"><a href="../FAQ.html">FAQ</a></li>
+  [#list primaryNav?keys as nav]
+            <li id="nav-${nav?lower_case}"><a href="${primaryNav[nav]}">${nav}</a></li>
+  [/#list]
           </ul>
         </div>
 [/#macro]
