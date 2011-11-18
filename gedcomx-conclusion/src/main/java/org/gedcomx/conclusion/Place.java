@@ -15,7 +15,7 @@
  */
 package org.gedcomx.conclusion;
 
-import org.gedcomx.common.NormalizedValue;
+import org.gedcomx.common.FormalizedValue;
 import org.gedcomx.rt.CommonNamespaces;
 import org.gedcomx.rt.RDFSubClassOf;
 
@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlType;
 public final class Place implements Normalizeable {
 
   private String original;
-  private NormalizedValue normalized;
+  private FormalizedValue normalized;
 
   /**
    * The original value of the place that was concluded as supplied by the user.
@@ -56,7 +56,7 @@ public final class Place implements Normalizeable {
    *
    * @return The normalized value of the place.
    */
-  public NormalizedValue getNormalized() {
+  public FormalizedValue getNormalized() {
     return normalized;
   }
 
@@ -65,7 +65,7 @@ public final class Place implements Normalizeable {
    *
    * @param normalized The normalized value of the place.
    */
-  public void setNormalized(NormalizedValue normalized) {
+  public void setNormalized(FormalizedValue normalized) {
     this.normalized = normalized;
   }
 

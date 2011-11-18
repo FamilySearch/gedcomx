@@ -15,7 +15,7 @@
  */
 package org.gedcomx.conclusion;
 
-import org.gedcomx.common.NormalizedValue;
+import org.gedcomx.common.FormalizedValue;
 
 import javax.xml.bind.annotation.XmlType;
 
@@ -46,12 +46,12 @@ public interface Normalizeable {
    *
    * @return The normalized value.
    */
-  NormalizedValue getNormalized();
+  FormalizedValue getNormalized();
 
   /**
    * The normalized value.
    *
    * @param normalized The normalized value.
    */
-  void setNormalized(NormalizedValue normalized);
+  void setNormalized(FormalizedValue normalized);
 }

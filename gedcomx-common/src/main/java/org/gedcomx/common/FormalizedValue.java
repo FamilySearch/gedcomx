@@ -21,31 +21,36 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.rt.CommonNamespaces;
 import org.gedcomx.rt.XmlTypeIdResolver;
-import org.gedcomx.types.LiteralDataType;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.*;
 import java.net.URI;
 
 /**
- * A normalized value.
+ * A value that has been formalized via normalization, standardization, or both.
  *
- * A normalized value can be an <a href="http://www.w3.org/TR/rdf-primer/#typedliterals">RDF Typed Literal</a> or it can be
- * a reference to a resource that defines its value in a structured form, or it can be both.
+ * A normalized value is a value whose text has been formatted for the purpose of easier processing (perhaps for display
+ * purposes). Normalization might be based on a known standard.
+ *
+ * A standardized value is a value that has been resolved to a discreet, machine-identifiable value based on a specific standard.
+ * A value that has been standardized will either refer to a specific item of a constrained vocabulary (via resource references)
+ * OR constrain the value to a standard using the datatype, creating an
+ * <a href="http://www.w3.org/TR/rdf-primer/#typedliterals">RDF Typed Literal</a>.
  *
  * @author Ryan Heaton
  */
 @JsonTypeInfo ( use = JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType ( name = "NormalizedValue" )
-public final class NormalizedValue {
+@XmlType ( name = "FormalizedValue" )
+public final class FormalizedValue {
 
   private URI datatype;
   private URI resource;
   private String text;
 
   /**
-   * The datatype of the the normalized value. For more information, start with the explanation of an
+   * The datatype of the the normalized value. This is used to identify the mapping between the normalized value
+   * and the standard value. For more information, start with the explanation of an
    * <a href="http://www.w3.org/TR/rdf-primer/#typedliterals">RDF Typed Literal</a> in the RDF primer.
    *
    * @return The datatype of the the normalized value.
@@ -57,34 +62,14 @@ public final class NormalizedValue {
   }
 
   /**
-   * The datatype of the the normalized value. For more information, start with the explanation of an
+   * The datatype of the the normalized value. This is used to identify the mapping between the normalized value
+   * and the standard value. For more information, start with the explanation of an
    * <a href="http://www.w3.org/TR/rdf-primer/#typedliterals">RDF Typed Literal</a> in the RDF primer.
    *
    * @param datatype The datatype of the the normalized value.
    */
   public void setDatatype(URI datatype) {
     this.datatype = datatype;
-  }
-
-  /**
-   * Get the known data type from a list of well-known data types.
-   *
-   * @return The known data type.
-   */
-  @XmlTransient
-  @JsonIgnore
-  public LiteralDataType getKnownDataType() {
-    return LiteralDataType.fromQNameURI(getDatatype());
-  }
-
-  /**
-   * Set the known data type from a list of well-known data types.
-   *
-   * @param dataType The known data type.
-   */
-  @JsonIgnore
-  public void setKnownDataType(LiteralDataType dataType) {
-    setDatatype(XmlQNameEnumUtil.toURI(dataType));
   }
 
   /**

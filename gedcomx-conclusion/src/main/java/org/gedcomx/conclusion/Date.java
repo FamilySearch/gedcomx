@@ -16,7 +16,7 @@
 package org.gedcomx.conclusion;
 
 import org.codehaus.enunciate.ClientName;
-import org.gedcomx.common.NormalizedValue;
+import org.gedcomx.common.FormalizedValue;
 import org.gedcomx.rt.RDFSubClassOf;
 import org.gedcomx.rt.CommonNamespaces;
 
@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlType;
 public final class Date implements Normalizeable {
 
   private String original;
-  private NormalizedValue normalized;
+  private FormalizedValue normalized;
 
   /**
    * The original value of the date that was concluded as supplied by the user.
@@ -56,7 +56,7 @@ public final class Date implements Normalizeable {
    *
    * @return The normalized value of the date.
    */
-  public NormalizedValue getNormalized() {
+  public FormalizedValue getNormalized() {
     return normalized;
   }
 
@@ -65,7 +65,7 @@ public final class Date implements Normalizeable {
    *
    * @param normalized The normalized value of the date.
    */
-  public void setNormalized(NormalizedValue normalized) {
+  public void setNormalized(FormalizedValue normalized) {
     this.normalized = normalized;
   }
 
