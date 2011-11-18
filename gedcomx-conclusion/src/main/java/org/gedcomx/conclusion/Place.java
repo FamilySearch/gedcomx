@@ -15,6 +15,7 @@
  */
 package org.gedcomx.conclusion;
 
+import org.gedcomx.common.FormalizedValue;
 import org.gedcomx.rt.CommonNamespaces;
 import org.gedcomx.rt.RDFSubClassOf;
 
@@ -30,7 +31,7 @@ import javax.xml.bind.annotation.XmlType;
 public final class Place implements Normalizeable {
 
   private String original;
-  private String normalized;
+  private FormalizedValue normalized;
 
   /**
    * The original value of the place that was concluded as supplied by the user.
@@ -51,28 +52,20 @@ public final class Place implements Normalizeable {
   }
 
   /**
-   * The normalized representation of the original value of the place. Intended for convenience
-   * to the user in interpreting the place. The normalized representation is optional and is
-   * often supplied by an automated standardization process.
+   * The normalized value of the place, which may refer to a standardized form of the place.
    *
-   * @return The normalized representation of the original value of the place. Intended for convenience
-   * to the user in interpreting the place. The normalized representation is optional and is
-   * often supplied by an automated standardization process.
+   * @return The normalized value of the place.
    */
-  public String getNormalized() {
+  public FormalizedValue getNormalized() {
     return normalized;
   }
 
   /**
-   * The normalized representation of the original value of the place. Intended for convenience
-   * to the user in interpreting the place. The normalized representation is optional and is
-   * often supplied by an automated standardization process.
+   * The normalized value of the place, which may refer to a standardized form of the place.
    *
-   * @param normalized The normalized representation of the original value of the place. Intended for convenience
-   * to the user in interpreting the place. The normalized representation is optional and is
-   * often supplied by an automated standardization process.
+   * @param normalized The normalized value of the place.
    */
-  public void setNormalized(String normalized) {
+  public void setNormalized(FormalizedValue normalized) {
     this.normalized = normalized;
   }
 
