@@ -137,7 +137,7 @@ public class TestRecord {
     field.setKnownType(FieldType.BatchNumber);
     field.setOriginal("field-value-original");
     field.setInterpreted("field-value-interpreted");
-    field.setNormalized("field-value-normalized");
+    field.setProcessed("field-value-normalized");
     fields.add(field);
     record.setFields(fields);
 
@@ -194,7 +194,7 @@ public class TestRecord {
     field.setId(label + "-id");
     field.setOriginal(label + "-original");
     field.setInterpreted(label + "-interpreted");
-    field.setNormalized(label + "-normalized");
+    field.setProcessed(label + "-normalized");
   }
 
   private void assertField(Field field, String label) {
@@ -203,7 +203,7 @@ public class TestRecord {
     assertEquals(label + "-id", field.getId());
     assertEquals(label + "-original", field.getOriginal());
     assertEquals(label + "-interpreted", field.getInterpreted());
-    assertEquals(label + "-normalized", field.getNormalized());
+    assertEquals(label + "-normalized", field.getProcessed());
   }
 
   private void assertTestRecord(Record record) {
@@ -273,7 +273,7 @@ public class TestRecord {
     assertEquals(FieldType.BatchNumber, field.getKnownType());
     assertEquals("field-value-original", field.getOriginal());
     assertEquals("field-value-interpreted", field.getInterpreted());
-    assertEquals("field-value-normalized", field.getNormalized());
+    assertEquals("field-value-normalized", field.getProcessed());
 
     assertEquals("pal", record.getPersistentId().toString());
     assertEquals("bibliographic citation", record.getBibliographicCitation());

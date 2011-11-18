@@ -26,13 +26,13 @@ import javax.xml.bind.annotation.XmlType;
 /**
  * A field on a record.
  */
-@XmlType ( name = "Field", propOrder = { "original", "interpreted", "normalized", "source" } )
+@XmlType ( name = "Field", propOrder = { "original", "interpreted", "processed", "source" } )
 public abstract class Field extends GenealogicalResource {
 
   private String label;
   private String original;
   private String interpreted;
-  private String normalized;
+  private String processed;
   private ResourceReference source;
 
   /**
@@ -57,57 +57,65 @@ public abstract class Field extends GenealogicalResource {
   }
 
   /**
-   * The original value of the field, meant to record exactly what is displayed.
+   * Text directly extracted from the record field. What you see is what you get, including misspellings and other errors.
    *
-   * @return The original value of the field, meant to record exactly what is displayed.
+   * @return Text directly extracted from the record field. What you see is what you get, including misspellings and other errors.
    */
   public String getOriginal() {
     return original;
   }
 
   /**
-   * The original value of the field, meant to record exactly what is displayed.
+   * Text directly extracted from the record field. What you see is what you get, including misspellings and other errors.
    *
-   * @param original The original value of the field, meant to record exactly what is displayed.
+   * @param original Text directly extracted from the record field. What you see is what you get, including misspellings and other errors.
    */
   public void setOriginal(String original) {
     this.original = original;
   }
 
   /**
-   * The value of the field as interpreted by the user. For example, if the original value were 'MN', the user-interpreted value could be "Minnesota".
+   * User interpretation of what the {@link #getOriginal() original} value <i>means</i>, used optionally as needed to enhance the original
+   * value by correcting misspellings and other ambiguities. The interpretation is different from a conclusion because it should be made
+   * only within the context of the record and not be based on knowledge obtained from other sources.
    *
-   * @return the interpreted The value of the field as interpreted by the user. For example, if the original value were 'MN', the user-interpreted value could be "Minnesota".
+   * @return User interpretation of what the {@link #getOriginal() original} value <i>means</i>, used optionally as needed to enhance the original
+   * value by correcting misspellings and other ambiguities. The interpretation is different from a conclusion because it should be made
+   * only within the context of the record and not be based on knowledge obtained from other sources.
    */
   public String getInterpreted() {
     return interpreted;
   }
 
   /**
-   * The value of the field as interpreted by the user. For example, if the original value were 'MN', the user-interpreted value could be "Minnesota".
+   * User interpretation of what the {@link #getOriginal() original} value <i>means</i>, used optionally as needed to enhance the original
+   * value by correcting misspellings and other ambiguities. The interpretation is different from a conclusion because it should be made
+   * only within the context of the record and not be based on knowledge obtained from other sources.
    * 
-   * @param interpreted The value of the field as interpreted by the user. For example, if the original value were 'MN', the user-interpreted value could be "Minnesota".
+   * @param interpreted User interpretation of what the {@link #getOriginal() original} value <i>means</i>, used optionally as needed to enhance the original
+   * value by correcting misspellings and other ambiguities. The interpretation is different from a conclusion because it should be made
+   * only within the context of the record and not be based on knowledge obtained from other sources.
    */
   public void setInterpreted(String interpreted) {
     this.interpreted = interpreted;
   }
 
   /**
-   * The normalized value of the field as interpreted by an automated process.
+   * Programmatic interpretation of the value based on an algorithm that considers the original and interpreted values.
    * 
-   * @return The normalized value of the field as interpreted by an automated process.
+   * @return Programmatic interpretation of the value based on an algorithm that considers the original and interpreted values.
    */
-  public String getNormalized() {
-    return normalized;
+  public String getProcessed() {
+    return processed;
   }
 
   /**
-   * The normalized value of the field as interpreted by an automated process.
+   * Programmatic interpretation of the value based on an algorithm that considers the original and interpreted values.
    * 
-   * @param normalized The normalized value of the field as interpreted by an automated process.
+   * @param processed Programmatic interpretation of the value based on an algorithm that considers the original and interpreted values.
    */
-  public void setNormalized(String normalized) {
-    this.normalized = normalized;
+  public void setProcessed(String processed) {
+    this.processed = processed;
   }
 
   /**
