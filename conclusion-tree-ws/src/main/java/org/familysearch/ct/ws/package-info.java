@@ -1,5 +1,5 @@
 @XmlSchema (
-  namespace = ConclusionTreeNamespaces.CONCLUSION_TREE_V1_NAMESPACE,
+  namespace = ConclusionTreeModel.CONCLUSION_TREE_V1_NAMESPACE,
   attributeFormDefault = XmlNsForm.QUALIFIED,
   elementFormDefault = XmlNsForm.QUALIFIED
 )
