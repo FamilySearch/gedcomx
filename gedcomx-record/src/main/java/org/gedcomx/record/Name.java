@@ -21,7 +21,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.rt.CommonNamespaces;
+import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.NameType;
 import org.gedcomx.types.TypeReference;
@@ -48,7 +48,7 @@ public class Name extends Field implements Partitionable<NamePart>, Typed<NameTy
    *
    * @return The type of the name.
    */
-  @XmlElement (namespace = CommonNamespaces.RDF_NAMESPACE)
+  @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
   public TypeReference<NameType> getType() {
     return type;
   }

@@ -39,7 +39,7 @@ import java.net.URI;
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "PersonSummary", propOrder = { "gender", "name", "birth", "death" } )
-@RDFSubClassOf( ConclusionNamespaces.GEDCOMX_CONCLUSION_V1_NAMESPACE + "Person" )
+@RDFSubClassOf( ConclusionModel.GEDCOMX_CONCLUSION_V1_NAMESPACE + "Person" )
 public class PersonSummary extends GenealogicalResource {
 
   private URI personReference;
@@ -54,7 +54,7 @@ public class PersonSummary extends GenealogicalResource {
    *
    * @return Reference to the person to which this summary information is being applied.
    */
-  @XmlAttribute ( name = "about", namespace = CommonNamespaces.RDF_NAMESPACE )
+  @XmlAttribute ( name = "about", namespace = CommonModels.RDF_NAMESPACE )
   @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
   public URI getPersonReference() {
     return personReference;
@@ -76,7 +76,7 @@ public class PersonSummary extends GenealogicalResource {
    * @return Reference to the primary gender conclusion of the person.
    */
   @RDFRange (Gender.class)
-  @RDFDomain ( ConclusionNamespaces.GEDCOMX_CONCLUSION_V1_NAMESPACE + "Person" )
+  @RDFDomain ( ConclusionModel.GEDCOMX_CONCLUSION_V1_NAMESPACE + "Person" )
   public ResourceReference getGender() {
     return gender;
   }
@@ -96,7 +96,7 @@ public class PersonSummary extends GenealogicalResource {
    * @return Reference to the primary name for a person.
    */
   @RDFRange (Name.class)
-  @RDFDomain ( ConclusionNamespaces.GEDCOMX_CONCLUSION_V1_NAMESPACE + "Person" )
+  @RDFDomain ( ConclusionModel.GEDCOMX_CONCLUSION_V1_NAMESPACE + "Person" )
   public ResourceReference getName() {
     return name;
   }

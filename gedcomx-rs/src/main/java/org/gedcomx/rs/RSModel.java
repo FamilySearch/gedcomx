@@ -15,8 +15,8 @@
  */
 package org.gedcomx.rs;
 
-import org.gedcomx.rt.Namespace;
-import org.gedcomx.rt.Namespaces;
+import org.gedcomx.rt.Model;
+import org.gedcomx.rt.Models;
 
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -24,20 +24,20 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Ryan Heaton
  */
 @XmlTransient
-@Namespaces ( {
-  @Namespace (
+@Models ( {
+  @Model (
     id = "gxrs",
-    uri = RSNamespaces.GEDCOMX_RS_V1_NAMESPACE,
-    label = "RS Namespace",
-    description = "The rs namespace contains the objects necessary exposing genealogical data through a REST interface.",
+    namespace = RSModel.GEDCOMX_RS_V1_NAMESPACE,
+    label = "RS Model",
+    description = "The rs model defines the types and elements used to expose genealogical data through a REST interface.",
     version = "v1",
-    xmlMediaType = RSNamespaces.GEDCOMX_RS_V1_XML_MEDIA_TYPE,
-    jsonMediaType = RSNamespaces.GEDCOMX_RS_V1_JSON_MEDIA_TYPE
+    xmlMediaType = RSModel.GEDCOMX_RS_V1_XML_MEDIA_TYPE,
+    jsonMediaType = RSModel.GEDCOMX_RS_V1_JSON_MEDIA_TYPE
   )
 } )
-public class RSNamespaces {
+public class RSModel {
 
-  private RSNamespaces() {}
+  private RSModel() {}
 
   public static final String GEDCOMX_RS_V1_NAMESPACE = "http://gedcomx.org/rs/v1/";
   public static final String GEDCOMX_RS_V1_XML_MEDIA_TYPE = "application/gedcomx-rs-v1+xml";

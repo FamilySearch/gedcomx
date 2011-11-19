@@ -23,7 +23,7 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.common.GenealogicalEntity;
 import org.gedcomx.common.PersistentIdentifiable;
-import org.gedcomx.rt.CommonNamespaces;
+import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.JsonElementWrapper;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.RecordType;
@@ -56,7 +56,7 @@ public class Record extends GenealogicalEntity implements Typed<RecordType>, Per
    * 
    * @return The type of the record.
    */
-  @XmlElement (namespace = CommonNamespaces.RDF_NAMESPACE)
+  @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
   public TypeReference<RecordType> getType() {
     return type;
   }

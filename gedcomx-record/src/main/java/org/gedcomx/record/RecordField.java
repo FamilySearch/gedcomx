@@ -20,7 +20,7 @@ import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.rt.CommonNamespaces;
+import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.FieldType;
 import org.gedcomx.types.TypeReference;
@@ -45,7 +45,7 @@ public class RecordField extends Field implements Typed<FieldType> {
    *
    * @return The type of the field.
    */
-  @XmlElement (namespace = CommonNamespaces.RDF_NAMESPACE)
+  @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
   public TypeReference<FieldType> getType() {
     return type;
   }

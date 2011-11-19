@@ -25,8 +25,8 @@ import java.lang.annotation.Target;
  */
 @Retention( RetentionPolicy.RUNTIME )
 @Target( ElementType.TYPE )
-public @interface Namespaces {
+public @interface Models {
 
-  Namespace[] value();
+  Model[] value();
 
 }

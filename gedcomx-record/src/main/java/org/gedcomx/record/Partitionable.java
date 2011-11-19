@@ -15,7 +15,7 @@
  */
 package org.gedcomx.record;
 
-import org.gedcomx.rt.CommonNamespaces;
+import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.RDFSubPropertyOf;
 
 import javax.xml.bind.annotation.XmlType;
@@ -34,7 +34,7 @@ public interface Partitionable<T> {
    *
    * @return The parts of a record resource.
    */
-  @RDFSubPropertyOf ( CommonNamespaces.DUBLIN_CORE_NAMESPACE + "hasPart" )
+  @RDFSubPropertyOf ( CommonModels.DUBLIN_CORE_NAMESPACE + "hasPart" )
   List<T> getParts();
 
   /**

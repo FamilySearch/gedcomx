@@ -15,32 +15,32 @@
  */
 package org.gedcomx.conclusion;
 
-import org.gedcomx.rt.Namespace;
-import org.gedcomx.rt.Namespaces;
+import org.gedcomx.rt.Model;
+import org.gedcomx.rt.Models;
 
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- * Definition of the GEDCOM X conclusion namespaces.
+ * Definition of the GEDCOM X conclusion model.
  *
  * @author Ryan Heaton
  */
 @XmlTransient
-@Namespaces ( {
-  @Namespace (
+@Models ( {
+  @Model (
     id = "gxc",
-    uri = ConclusionNamespaces.GEDCOMX_CONCLUSION_V1_NAMESPACE,
-    label = "Conclusion Namespace",
-    description = "The conclusion namespace contains the objects necessary for modeling genealogical conclusion data.",
+    namespace = ConclusionModel.GEDCOMX_CONCLUSION_V1_NAMESPACE,
+    label = "Conclusion Model",
+    description = "The conclusion model defines the types and elements of genealogical conclusion data.",
     version = "v1",
-    xmlMediaType = ConclusionNamespaces.GEDCOMX_CONCLUSION_V1_XML_MEDIA_TYPE,
-    jsonMediaType = ConclusionNamespaces.GEDCOMX_CONCLUSION_V1_JSON_MEDIA_TYPE,
+    xmlMediaType = ConclusionModel.GEDCOMX_CONCLUSION_V1_XML_MEDIA_TYPE,
+    jsonMediaType = ConclusionModel.GEDCOMX_CONCLUSION_V1_JSON_MEDIA_TYPE,
     definesRDFSchema = true
   )
 } )
-public class ConclusionNamespaces {
+public class ConclusionModel {
 
-  private ConclusionNamespaces() {}
+  private ConclusionModel() {}
 
   public static final String GEDCOMX_CONCLUSION_V1_NAMESPACE = "http://gedcomx.org/conclusion/v1/";
   public static final String GEDCOMX_CONCLUSION_V1_XML_MEDIA_TYPE = "application/x-gedcom-conclusion-v1+xml";

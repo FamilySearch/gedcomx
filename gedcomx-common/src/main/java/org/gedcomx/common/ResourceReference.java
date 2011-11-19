@@ -20,7 +20,7 @@ import org.codehaus.enunciate.doc.DocumentationExample;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.rt.CommonNamespaces;
+import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.SupportsExtensionAttributes;
 import org.gedcomx.rt.SupportsExtensionElements;
 import org.gedcomx.rt.XmlTypeIdResolver;
@@ -40,7 +40,7 @@ import java.util.*;
  *
  * @author Ryan Heaton
  */
-@XmlType ( name = "ResourceReference", namespace = CommonNamespaces.RDF_NAMESPACE )
+@XmlType ( name = "ResourceReference", namespace = CommonModels.RDF_NAMESPACE )
 @JsonTypeInfo ( use = JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver ( XmlTypeIdResolver.class )
 @XmlSeeAlso(ResourceFragmentParameter.class)
@@ -60,7 +60,7 @@ public class ResourceReference implements Typed<ResourceType>, SupportsExtension
    * resource being referenced.
    */
   @XmlID
-  @XmlAttribute( name = "ID", namespace = CommonNamespaces.RDF_NAMESPACE )
+  @XmlAttribute( name = "ID", namespace = CommonModels.RDF_NAMESPACE )
   @DocumentationExample(exclude = true)
   public String getId() {
     return id;
@@ -82,7 +82,7 @@ public class ResourceReference implements Typed<ResourceType>, SupportsExtension
    *
    * @return The type of the resource being referenced.
    */
-  @XmlElement (namespace = CommonNamespaces.RDF_NAMESPACE)
+  @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
   public TypeReference<ResourceType> getType() {
     return type;
   }
@@ -124,7 +124,7 @@ public class ResourceReference implements Typed<ResourceType>, SupportsExtension
    * @link http://www.w3.org/TR/webarch/#identification
    * @return The URI to the resource.
    */
-  @XmlAttribute (namespace= CommonNamespaces.RDF_NAMESPACE)
+  @XmlAttribute (namespace= CommonModels.RDF_NAMESPACE)
   @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
   public URI getResource() {
     return resource;

@@ -16,7 +16,7 @@
 package org.gedcomx.common;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
-import org.gedcomx.rt.CommonNamespaces;
+import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.SupportsExtensionElements;
 
 import javax.xml.bind.annotation.XmlAnyElement;
@@ -46,7 +46,7 @@ public abstract class GenealogicalResource implements SupportsExtensionElements 
    * is local to a specific context and not necessarily globally unique.
    */
   @XmlID
-  @XmlAttribute ( name = "ID", namespace = CommonNamespaces.RDF_NAMESPACE )
+  @XmlAttribute ( name = "ID", namespace = CommonModels.RDF_NAMESPACE )
   public String getId() {
     return id;
   }

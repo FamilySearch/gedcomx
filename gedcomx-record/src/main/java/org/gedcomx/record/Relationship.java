@@ -23,7 +23,7 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.common.GenealogicalResource;
 import org.gedcomx.common.ResourceReference;
-import org.gedcomx.rt.CommonNamespaces;
+import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.RDFRange;
 import org.gedcomx.rt.RDFSubPropertyOf;
 import org.gedcomx.rt.XmlTypeIdResolver;
@@ -55,7 +55,7 @@ public class Relationship extends GenealogicalResource implements Typed<Relation
    *
    * @return The type of this relationship.
    */
-  @XmlElement (namespace = CommonNamespaces.RDF_NAMESPACE)
+  @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
   public TypeReference<RelationshipType> getType() {
     return type;
   }
@@ -100,7 +100,7 @@ public class Relationship extends GenealogicalResource implements Typed<Relation
    * goes from "persona1" to "persona2".
    */
   @RDFRange(Persona.class)
-  @RDFSubPropertyOf ( CommonNamespaces.DUBLIN_CORE_NAMESPACE + "hasPart")
+  @RDFSubPropertyOf ( CommonModels.DUBLIN_CORE_NAMESPACE + "hasPart")
   public ResourceReference getPersona1() {
     return this.persona1;
   }
@@ -128,7 +128,7 @@ public class Relationship extends GenealogicalResource implements Typed<Relation
    * goes from "persona1" to "persona2".
    */
   @RDFRange(Persona.class)
-  @RDFSubPropertyOf ( CommonNamespaces.DUBLIN_CORE_NAMESPACE + "hasPart")
+  @RDFSubPropertyOf ( CommonModels.DUBLIN_CORE_NAMESPACE + "hasPart")
   public ResourceReference getPersona2() {
     return this.persona2;
   }

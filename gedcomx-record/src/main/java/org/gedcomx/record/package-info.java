@@ -18,7 +18,7 @@
  * The record model defines genealogical data as is transcribed from a record.
  */
 @XmlSchema(
-  namespace = RecordNamespaces.GEDCOMX_RECORD_V1_NAMESPACE,
+  namespace = RecordModel.GEDCOMX_RECORD_V1_NAMESPACE,
   attributeFormDefault = XmlNsForm.QUALIFIED,
   elementFormDefault = XmlNsForm.QUALIFIED
 )

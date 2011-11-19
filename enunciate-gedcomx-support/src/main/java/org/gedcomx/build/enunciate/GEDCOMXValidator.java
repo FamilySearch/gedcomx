@@ -153,8 +153,8 @@ public class GEDCOMXValidator extends BaseValidator {
       result.addError(rootElementDeclaration, "Root elements need to be annotated with @org.codehaus.jackson.map.annotate.JsonTypeIdResolver(org.gedcomx.id.XmlTypeIdResolver.class) to specify their JSON type id.");
     }
 
-    if (namespace.startsWith(CommonNamespaces.GEDCOMX_DOMAIN) && rootElementDeclaration.getAnnotation(JsonElementWrapper.class) == null) {
-      result.addWarning(rootElementDeclaration, "Root elements in the '" + CommonNamespaces.GEDCOMX_DOMAIN + "' namespace should probably be annotated with @" + JsonElementWrapper.class.getSimpleName() + ".");
+    if (namespace.startsWith(CommonModels.GEDCOMX_DOMAIN) && rootElementDeclaration.getAnnotation(JsonElementWrapper.class) == null) {
+      result.addWarning(rootElementDeclaration, "Root elements in the '" + CommonModels.GEDCOMX_DOMAIN + "' namespace should probably be annotated with @" + JsonElementWrapper.class.getSimpleName() + ".");
     }
 
     return result;
@@ -199,7 +199,7 @@ public class GEDCOMXValidator extends BaseValidator {
             result.addError(attribute, "Id attributes should be annotated as @XmlID.");
           }
 
-          if (!CommonNamespaces.RDF_NAMESPACE.equals(attribute.getNamespace()) && !"ID".equals(attribute.getName())) {
+          if (!CommonModels.RDF_NAMESPACE.equals(attribute.getNamespace()) && !"ID".equals(attribute.getName())) {
             result.addError(attribute, "Id attributes should be named rdf:ID.");
           }
         }
@@ -386,12 +386,12 @@ public class GEDCOMXValidator extends BaseValidator {
   }
 
   private boolean isTypeReference(Element choice) {
-    if (CommonNamespaces.RDF_NAMESPACE.equals(choice.getNamespace())) {
+    if (CommonModels.RDF_NAMESPACE.equals(choice.getNamespace())) {
       XmlType baseType = choice.getBaseType();
       if (baseType instanceof XmlClassType) {
         TypeDefinition typeDefinition = ((XmlClassType) baseType).getTypeDefinition();
         for (Attribute attribute : typeDefinition.getAttributes()) {
-          if ("resource".equals(attribute.getName()) && CommonNamespaces.RDF_NAMESPACE.equals(attribute.getNamespace())) {
+          if ("resource".equals(attribute.getName()) && CommonModels.RDF_NAMESPACE.equals(attribute.getNamespace())) {
             return true;
           }
         }

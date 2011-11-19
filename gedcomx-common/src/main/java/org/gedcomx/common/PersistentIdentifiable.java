@@ -15,7 +15,7 @@
  */
 package org.gedcomx.common;
 
-import org.gedcomx.rt.CommonNamespaces;
+import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.RDFDomain;
 import org.gedcomx.rt.RDFSubPropertyOf;
 
@@ -37,7 +37,7 @@ public interface PersistentIdentifiable {
    * @return The long-term persistent identifier for a resource.
    */
   @RDFDomain({}) //any resource can be identified persistently.
-  @RDFSubPropertyOf( CommonNamespaces.DUBLIN_CORE_NAMESPACE + "identifier" )
+  @RDFSubPropertyOf( CommonModels.DUBLIN_CORE_NAMESPACE + "identifier" )
   URI getPersistentId();
 
   /**
@@ -53,7 +53,7 @@ public interface PersistentIdentifiable {
    * @return List of alternate identifiers for a resource.
    */
   @RDFDomain({}) //any resource can have alternate ids.
-  @RDFSubPropertyOf( CommonNamespaces.DUBLIN_CORE_NAMESPACE + "identifier" )
+  @RDFSubPropertyOf( CommonModels.DUBLIN_CORE_NAMESPACE + "identifier" )
   List<AlternateId> getAlternateIds();
 
   /**

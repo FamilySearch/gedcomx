@@ -20,67 +20,67 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Metadata about specific namespace.
+ * Metadata about a specific object model.
  *
  * @author Ryan Heaton
  */
 @Retention( RetentionPolicy.RUNTIME )
 @Target( {} )
-public @interface Namespace {
+public @interface Model {
 
   /**
-   * The id of the namespace. Used to for things like naming the schema file and assigning an xml prefix.
+   * The id of the model. Used to for things like naming the schema file and assigning an xml prefix.
    *
-   * @return The id of the namespace.
+   * @return The id of the model.
    */
   String id();
 
   /**
-   * The namespace uri.
+   * The namespace of the model.
    *
-   * @return The namespace uri.
+   * @return The namespace of the model.
    */
-  String uri();
+  String namespace();
 
   /**
-   * A label associated with the namespace, used to identify the namespace in the user documentation.
+   * A label associated with the model, used to identify the model in the user documentation.
    *
-   * @return A label associated with the namespace.
+   * @return A label associated with the model.
    */
   String label() default "";
 
   /**
-   * An identifier for the version of the namespace.
+   * An identifier for the version of the model.
    *
-   * @return An identifier for the version of the namespace.
+   * @return An identifier for the version of the model.
    */
   String version();
 
   /**
-   * A description of the namespace, used for user documentation.
+   * A description of the model, used for user documentation.
    *
-   * @return A description of the namespace, used for user documentation.
+   * @return A description of the model, used for user documentation.
    */
   String description() default "";
 
   /**
-   * The XML media type for representations of data in this namespace.
+   * The XML media type for representations that use this model.
    *
-   * @return The XML media type for representations of data in this namespace.
+   * @return The XML media type for representations that use this model.
    */
   String xmlMediaType() default "";
 
   /**
-   * The JSON media type for representations of data in this namespace.
+   * The JSON media type for representations that use this model.
    *
-   * @return The JSON media type for representations of data in this namespace.
+   * @return The JSON media type for representations that use this model.
    */
   String jsonMediaType() default "";
 
   /**
-   * Whether the namespace defines an RDF schema.
+   * Whether the model defines an RDF schema.
    *
-   * @return Whether the namespace defines an RDF schema.
+   * @return Whether the model defines an RDF schema.
    */
   boolean definesRDFSchema() default false;
 }

@@ -21,7 +21,7 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.common.ResourceReference;
 import org.gedcomx.metadata.rdf.RDFLiteral;
-import org.gedcomx.rt.CommonNamespaces;
+import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.XmlTypeIdResolver;
 
 import javax.xml.bind.annotation.XmlAttribute;
@@ -50,7 +50,7 @@ public class OnlineAccount {
    *
    * @return The id of this online account.
    */
-  @XmlAttribute ( name = "ID", namespace = CommonNamespaces.RDF_NAMESPACE  )
+  @XmlAttribute ( name = "ID", namespace = CommonModels.RDF_NAMESPACE  )
   @XmlID
   public String getId() {
     return id;

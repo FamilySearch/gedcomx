@@ -56,7 +56,7 @@ public class Relationship extends GenealogicalEntity implements Typed<Relationsh
    *
    * @return The type of this relationship.
    */
-  @XmlElement (namespace = CommonNamespaces.RDF_NAMESPACE)
+  @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
   public TypeReference<RelationshipType> getType() {
     return type;
   }
@@ -101,7 +101,7 @@ public class Relationship extends GenealogicalEntity implements Typed<Relationsh
    * implies direction, it goes from "person1" to "person2".
    */
   @RDFRange (Person.class)
-  @RDFSubPropertyOf ( CommonNamespaces.DUBLIN_CORE_NAMESPACE + "hasPart")
+  @RDFSubPropertyOf ( CommonModels.DUBLIN_CORE_NAMESPACE + "hasPart")
   public ResourceReference getPerson1() {
     return person1;
   }
@@ -129,7 +129,7 @@ public class Relationship extends GenealogicalEntity implements Typed<Relationsh
    * implies direction, it goes from "person1" to "person2".
    */
   @RDFRange (Person.class)
-  @RDFSubPropertyOf ( CommonNamespaces.DUBLIN_CORE_NAMESPACE + "hasPart")
+  @RDFSubPropertyOf ( CommonModels.DUBLIN_CORE_NAMESPACE + "hasPart")
   public ResourceReference getPerson2() {
     return person2;
   }

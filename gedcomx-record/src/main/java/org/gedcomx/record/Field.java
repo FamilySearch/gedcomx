@@ -18,7 +18,7 @@ package org.gedcomx.record;
 import org.gedcomx.common.GenealogicalResource;
 import org.gedcomx.common.FormalizedValue;
 import org.gedcomx.common.ResourceReference;
-import org.gedcomx.rt.CommonNamespaces;
+import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.RDFSubPropertyOf;
 
 import javax.xml.bind.annotation.XmlAttribute;
@@ -124,7 +124,7 @@ public abstract class Field extends GenealogicalResource {
    *
    * @return The source for the field.
    */
-  @RDFSubPropertyOf ( CommonNamespaces.DUBLIN_CORE_NAMESPACE + "source")
+  @RDFSubPropertyOf ( CommonModels.DUBLIN_CORE_NAMESPACE + "source")
   public ResourceReference getSource() {
     return source;
   }

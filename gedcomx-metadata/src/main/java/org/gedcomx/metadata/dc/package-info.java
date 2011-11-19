@@ -20,14 +20,14 @@
  * @see <a href="http://dublincore.org/">Dublin Core Metadata Initiative</a>
  */
 @XmlSchema(
-  namespace = CommonNamespaces.DUBLIN_CORE_NAMESPACE,
+  namespace = CommonModels.DUBLIN_CORE_NAMESPACE,
   elementFormDefault = XmlNsForm.QUALIFIED,
   attributeFormDefault = XmlNsForm.QUALIFIED
 )
 @XmlAccessorOrder( XmlAccessOrder.ALPHABETICAL )
 package org.gedcomx.metadata.dc;
 
-import org.gedcomx.rt.CommonNamespaces;
+import org.gedcomx.rt.CommonModels;
 
 import javax.xml.bind.annotation.XmlAccessOrder;
 import javax.xml.bind.annotation.XmlAccessorOrder;

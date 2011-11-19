@@ -20,7 +20,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.metadata.dc.DublinCoreDescription;
-import org.gedcomx.rt.CommonNamespaces;
+import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.SupportsExtensionAttributes;
 import org.gedcomx.rt.SupportsExtensionElements;
 import org.gedcomx.rt.XmlTypeIdResolver;
@@ -128,7 +128,7 @@ public class RDFDescription implements SupportsExtensionAttributes, SupportsExte
    *
    * @return The type of the resource being described.
    */
-  @XmlElement(name = "type", namespace = CommonNamespaces.RDF_NAMESPACE )
+  @XmlElement(name = "type", namespace = CommonModels.RDF_NAMESPACE )
   public TypeReference<ResourceType> getType() {
     return type;
   }

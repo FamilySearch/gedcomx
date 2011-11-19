@@ -17,7 +17,7 @@ package org.gedcomx.common;
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.jackson.annotate.JsonIgnore;
-import org.gedcomx.rt.CommonNamespaces;
+import org.gedcomx.rt.CommonModels;
 import org.gedcomx.types.AlternateIdType;
 import org.gedcomx.types.TypeReference;
 import org.gedcomx.types.Typed;
@@ -25,7 +25,6 @@ import org.gedcomx.types.Typed;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.XmlValue;
 
 /**
  * An alternate id for an entity, such as the id in another system or
@@ -44,7 +43,7 @@ public final class AlternateId implements Typed<AlternateIdType> {
    *
    * @return The id value.
    */
-  @XmlElement ( name = "value", namespace = CommonNamespaces.RDF_NAMESPACE )
+  @XmlElement ( name = "value", namespace = CommonModels.RDF_NAMESPACE )
   public String getValue() {
     return value;
   }
@@ -63,7 +62,7 @@ public final class AlternateId implements Typed<AlternateIdType> {
    *
    * @return The type of the id.
    */
-  @XmlElement (namespace = CommonNamespaces.RDF_NAMESPACE)
+  @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
   public TypeReference<AlternateIdType> getType() {
     return type;
   }

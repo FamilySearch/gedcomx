@@ -20,7 +20,7 @@
  * @see <a href="http://www.w3.org/TR/2004/REC-rdf-primer-20040210/">RDF Primer</a>
  */
 @XmlSchema (
-  namespace = CommonNamespaces.RDF_NAMESPACE,
+  namespace = CommonModels.RDF_NAMESPACE,
   elementFormDefault = XmlNsForm.QUALIFIED,
   attributeFormDefault = XmlNsForm.QUALIFIED
 )
@@ -28,7 +28,7 @@
 package org.gedcomx.metadata.rdf;
 //todo: document how metadata refers to data and how metadata refers to other metadata.
 
-import org.gedcomx.rt.CommonNamespaces;
+import org.gedcomx.rt.CommonModels;
 
 import javax.xml.bind.annotation.XmlAccessOrder;
 import javax.xml.bind.annotation.XmlAccessorOrder;

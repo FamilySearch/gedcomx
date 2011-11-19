@@ -21,7 +21,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.common.GenealogicalResource;
-import org.gedcomx.rt.CommonNamespaces;
+import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.RDFSubClassOf;
 import org.gedcomx.rt.RDFSubPropertyOf;
 import org.gedcomx.rt.XmlTypeIdResolver;
@@ -41,7 +41,7 @@ import javax.xml.bind.annotation.XmlType;
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType( name = "Event", propOrder = { "type", "date", "place" } )
-@RDFSubClassOf ( CommonNamespaces.DUBLIN_CORE_TYPE_NAMESPACE + "Event" )
+@RDFSubClassOf ( CommonModels.DUBLIN_CORE_TYPE_NAMESPACE + "Event" )
 public class Event extends GenealogicalResource implements Typed<EventType> {
 
   private TypeReference<EventType> type;
@@ -54,7 +54,7 @@ public class Event extends GenealogicalResource implements Typed<EventType> {
    *
    * @return The type of the event.
    */
-  @XmlElement (namespace = CommonNamespaces.RDF_NAMESPACE)
+  @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
   public TypeReference<EventType> getType() {
     return type;
   }
@@ -113,7 +113,7 @@ public class Event extends GenealogicalResource implements Typed<EventType> {
    *
    * @return The date of this event.
    */
-  @RDFSubPropertyOf ( CommonNamespaces.DUBLIN_CORE_NAMESPACE + "temporal" )
+  @RDFSubPropertyOf ( CommonModels.DUBLIN_CORE_NAMESPACE + "temporal" )
   public Date getDate() {
     return date;
   }
@@ -132,7 +132,7 @@ public class Event extends GenealogicalResource implements Typed<EventType> {
    *
    * @return The place of this event.
    */
-  @RDFSubPropertyOf ( CommonNamespaces.DUBLIN_CORE_NAMESPACE + "spatial" )
+  @RDFSubPropertyOf ( CommonModels.DUBLIN_CORE_NAMESPACE + "spatial" )
   public Place getPlace() {
     return place;
   }

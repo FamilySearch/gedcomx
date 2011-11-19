@@ -16,17 +16,15 @@
 package org.gedcomx.record;
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
-import org.codehaus.enunciate.qname.XmlQNameEnumRef;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.rt.CommonNamespaces;
+import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.NamePartType;
 import org.gedcomx.types.TypeReference;
 import org.gedcomx.types.Typed;
 
-import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.*;
 
 /**
@@ -44,7 +42,7 @@ public class NamePart extends Field implements Typed<NamePartType> {
    *
    * @return The type of the name part.
    */
-  @XmlElement (namespace = CommonNamespaces.RDF_NAMESPACE)
+  @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
   public TypeReference<NamePartType> getType() {
     return type;
   }

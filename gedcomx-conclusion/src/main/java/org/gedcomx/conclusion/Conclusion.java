@@ -47,7 +47,7 @@ public abstract class Conclusion extends GenealogicalResource {
   @XmlElement (name="source")
   @JsonProperty ("sources")
   @JsonName ("sources")
-  @RDFSubPropertyOf ( CommonNamespaces.GEDCOMX_COMMON_NAMESPACE + "source")
+  @RDFSubPropertyOf ( CommonModels.GEDCOMX_COMMON_NAMESPACE + "source")
   @RDFRange ({}) //any resource can be identified as a source.
   @SuppressWarnings("rdf:no_range")
   public List<ResourceReference> getSources() {

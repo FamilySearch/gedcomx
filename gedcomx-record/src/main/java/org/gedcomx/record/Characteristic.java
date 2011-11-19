@@ -20,7 +20,7 @@ import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.rt.CommonNamespaces;
+import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.RDFSubClassOf;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.CharacteristicType;
@@ -37,7 +37,7 @@ import javax.xml.bind.annotation.XmlType;
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "Characteristic" )
-@RDFSubClassOf ( CommonNamespaces.DUBLIN_CORE_TYPE_NAMESPACE + "Event" )
+@RDFSubClassOf ( CommonModels.DUBLIN_CORE_TYPE_NAMESPACE + "Event" )
 public class Characteristic extends Field implements Typed<CharacteristicType> {
 
   private TypeReference<CharacteristicType> type;
@@ -47,7 +47,7 @@ public class Characteristic extends Field implements Typed<CharacteristicType> {
    *
    * @return The type of the characteristic.
    */
-  @XmlElement (namespace = CommonNamespaces.RDF_NAMESPACE)
+  @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
   public TypeReference<CharacteristicType> getType() {
     return type;
   }

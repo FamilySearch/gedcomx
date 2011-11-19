@@ -18,7 +18,7 @@ package org.gedcomx.metadata.foaf;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.metadata.rdf.RDFLiteral;
-import org.gedcomx.rt.CommonNamespaces;
+import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.XmlTypeIdResolver;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -82,7 +82,7 @@ public class Person extends Agent {
    *
    * @return The language of the person.
    */
-  @XmlElement ( namespace = CommonNamespaces.DUBLIN_CORE_NAMESPACE )
+  @XmlElement ( namespace = CommonModels.DUBLIN_CORE_NAMESPACE )
   public RDFLiteral getLanguage() {
     return language;
   }

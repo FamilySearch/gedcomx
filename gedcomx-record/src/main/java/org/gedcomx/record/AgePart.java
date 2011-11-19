@@ -18,7 +18,7 @@ package org.gedcomx.record;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.rt.CommonNamespaces;
+import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.AgePartType;
 import org.gedcomx.types.TypeReference;
@@ -45,7 +45,7 @@ public class AgePart extends Field implements Typed<AgePartType> {
    *
    * @return The age part type.
    */
-  @XmlElement (namespace = CommonNamespaces.RDF_NAMESPACE)
+  @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
   public TypeReference<AgePartType> getType() {
     return type;
   }

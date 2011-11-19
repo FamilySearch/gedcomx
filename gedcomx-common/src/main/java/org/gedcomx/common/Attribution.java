@@ -52,7 +52,7 @@ public final class Attribution {
    * @return Reference to the contributor of the attributed data.
    */
   @RDFRange({})
-  @RDFSubPropertyOf( CommonNamespaces.DUBLIN_CORE_NAMESPACE + "contributor")
+  @RDFSubPropertyOf( CommonModels.DUBLIN_CORE_NAMESPACE + "contributor")
   public ResourceReference getContributor() {
     return contributor;
   }
@@ -110,7 +110,7 @@ public final class Attribution {
    *
    * @return The modified timestamp for the attributed data.
    */
-  @RDFSubPropertyOf( CommonNamespaces.DUBLIN_CORE_NAMESPACE + "modified")
+  @RDFSubPropertyOf( CommonModels.DUBLIN_CORE_NAMESPACE + "modified")
   public Date getModified() {
     return modified;
   }
@@ -129,7 +129,7 @@ public final class Attribution {
    *
    * @return The "proof statement" for the attributed data provided by the contributor.
    */
-  @RDFSubPropertyOf( CommonNamespaces.DUBLIN_CORE_NAMESPACE + "description")
+  @RDFSubPropertyOf( CommonModels.DUBLIN_CORE_NAMESPACE + "description")
   public String getProofStatement() {
     return proofStatement;
   }

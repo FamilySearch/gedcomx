@@ -120,18 +120,18 @@ public class GedcomNamespaceManager extends NamespacePrefixMapper {
 
   protected static Map<String, String> loadNamespacePrefixes(ClassLoader loader) {
     Map<String, String> namespacePrefixes = new HashMap<String, String>();
-    Set<Class<?>> namespacesClasses = new HashSet<Class<?>>();
-    namespacesClasses.add(CommonNamespaces.class);
+    Set<Class<?>> modelClasses = new HashSet<Class<?>>();
+    modelClasses.add(CommonModels.class);
 
     try {
-      Enumeration<URL> resources = loader.getResources("META-INF/gedcomx.namespaces");
+      Enumeration<URL> resources = loader.getResources("META-INF/gedcomx.models");
       while (resources.hasMoreElements()) {
         try {
           URL resource = resources.nextElement();
           BufferedReader reader = new BufferedReader(new InputStreamReader(resource.openStream()));
           String classname = reader.readLine();
           while (classname != null) {
-            namespacesClasses.add(Class.forName(classname, true, loader));
+            modelClasses.add(Class.forName(classname, true, loader));
             classname = reader.readLine();
           }
         }
@@ -144,10 +144,10 @@ public class GedcomNamespaceManager extends NamespacePrefixMapper {
       //no-op.
     }
 
-    for (Class<?> namespacesClass : namespacesClasses) {
-      Namespaces namespacesInfo = namespacesClass.getAnnotation(Namespaces.class);
-      for (Namespace ns : namespacesInfo.value()) {
-        namespacePrefixes.put(ns.uri(), ns.id());
+    for (Class<?> modelClass : modelClasses) {
+      Models modelsInfo = modelClass.getAnnotation(Models.class);
+      for (Model model : modelsInfo.value()) {
+        namespacePrefixes.put(model.namespace(), model.id());
       }
     }
 

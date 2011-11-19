@@ -24,7 +24,7 @@ import org.apache.commons.digester.RuleSetBase;
 public class GEDCOMXRuleSet extends RuleSetBase {
 
   public void addRuleInstances(Digester digester) {
-    digester.addCallMethod("enunciate/modules/gedcomx/nav/a", "putNamespace", 2);
+    digester.addCallMethod("enunciate/modules/gedcomx/nav/a", "addPrimaryNav", 2);
     digester.addCallParam("enunciate/modules/gedcomx/nav/a", 0);
     digester.addCallParam("enunciate/modules/gedcomx/nav/a", 1, "href");
 

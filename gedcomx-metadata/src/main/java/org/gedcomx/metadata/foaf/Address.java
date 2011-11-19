@@ -17,7 +17,7 @@ package org.gedcomx.metadata.foaf;
 
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.rt.CommonNamespaces;
+import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.XmlTypeIdResolver;
 
 import javax.xml.bind.annotation.XmlAttribute;
@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlType;
  * @see <a href="http://www.w3.org/2000/10/swap/pim/contact">Contact RDF Schema</a>
  * @author Ryan Heaton
  */
-@XmlType (name = "Address", namespace = CommonNamespaces.CONTACT_NAMESPACE)
+@XmlType (name = "Address", namespace = CommonModels.CONTACT_NAMESPACE)
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 public class Address {
@@ -49,7 +49,7 @@ public class Address {
    *
    * @return The id of this address.
    */
-  @XmlAttribute ( name = "ID", namespace = CommonNamespaces.RDF_NAMESPACE )
+  @XmlAttribute ( name = "ID", namespace = CommonModels.RDF_NAMESPACE )
   @XmlID
   public String getId() {
     return id;

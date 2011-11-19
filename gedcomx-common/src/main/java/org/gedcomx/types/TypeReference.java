@@ -23,7 +23,7 @@ import org.codehaus.jackson.map.DeserializationContext;
 import org.codehaus.jackson.map.SerializerProvider;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
-import org.gedcomx.rt.CommonNamespaces;
+import org.gedcomx.rt.CommonModels;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -38,7 +38,7 @@ import java.net.URI;
  *
  * @author Ryan Heaton
  */
-@XmlType ( namespace = CommonNamespaces.RDF_NAMESPACE, name = "type" )
+@XmlType ( namespace = CommonModels.RDF_NAMESPACE, name = "type" )
 @JsonSerialize (using = TypeReference.JsonSerializer.class)
 @JsonDeserialize (using = TypeReference.JsonDeserializer.class)
 public final class TypeReference<T extends Enum> {
@@ -61,7 +61,7 @@ public final class TypeReference<T extends Enum> {
    *
    * @return The identifier of the type being referenced.
    */
-  @XmlAttribute ( namespace= CommonNamespaces.RDF_NAMESPACE, name = "resource" )
+  @XmlAttribute ( namespace= CommonModels.RDF_NAMESPACE, name = "resource" )
   @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
   public URI getType() {
     return type;

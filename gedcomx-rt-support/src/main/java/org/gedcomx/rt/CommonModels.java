@@ -21,65 +21,65 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Ryan Heaton
  */
 @XmlTransient
-@Namespaces ( {
-  @Namespace (
+@Models ( {
+  @Model (
     id = "gx",
-    uri = CommonNamespaces.GEDCOMX_COMMON_NAMESPACE,
-    label = "Common Namespace",
-    description = "The common namespace defines the types that are common to each model.",
+    namespace = CommonModels.GEDCOMX_COMMON_NAMESPACE,
+    label = "Common Model",
+    description = "The common model defines the types and elements that are common to all model.",
     version = "v1",
-    xmlMediaType = CommonNamespaces.GEDCOMX_COMMON_XML_MEDIA_TYPE,
-    jsonMediaType = CommonNamespaces.GEDCOMX_COMMON_JSON_MEDIA_TYPE,
+    xmlMediaType = CommonModels.GEDCOMX_COMMON_XML_MEDIA_TYPE,
+    jsonMediaType = CommonModels.GEDCOMX_COMMON_JSON_MEDIA_TYPE,
     definesRDFSchema = true
   ),
-  @Namespace (
+  @Model (
     id = "rdf",
-    uri = CommonNamespaces.RDF_NAMESPACE,
-    label = "RDF Namespace",
-    description = "The RDF namespace defines the model used to represent metadata in RDF format.",
+    namespace = CommonModels.RDF_NAMESPACE,
+    label = "RDF Model",
+    description = "The RDF model defines metadata in RDF format.",
     version = "1999-02-22",
-    xmlMediaType = CommonNamespaces.RDF_XML_MEDIA_TYPE,
-    jsonMediaType = CommonNamespaces.RDF_JSON_MEDIA_TYPE,
+    xmlMediaType = CommonModels.RDF_XML_MEDIA_TYPE,
+    jsonMediaType = CommonModels.RDF_JSON_MEDIA_TYPE,
     definesRDFSchema = true
   ),
-  @Namespace (
+  @Model (
     id = "dcterms",
-    uri = CommonNamespaces.DUBLIN_CORE_NAMESPACE,
-    label = "Dublin Core Terms Namespace",
-    description = "The Dublin Core Terms namespace defines the model used to represent metadata using Dublin Core Terms.",
+    namespace = CommonModels.DUBLIN_CORE_NAMESPACE,
+    label = "Dublin Core Terms Model",
+    description = "The Dublin Core Terms model defines metadata using Dublin Core Terms.",
     version = "2010-10-11",
     definesRDFSchema = true
   ),
-  @Namespace (
+  @Model (
     id = "dctypes",
-    uri = CommonNamespaces.DUBLIN_CORE_TYPE_NAMESPACE,
-    label = "Dublin Core Types Namespace",
-    description = "The Dublin Core Types namespace defines the types of Dublin Core metadata.",
+    namespace = CommonModels.DUBLIN_CORE_TYPE_NAMESPACE,
+    label = "Dublin Core Types Model",
+    description = "The Dublin Core Types model defines the types of Dublin Core metadata.",
     version = "2010-10-11",
     definesRDFSchema = true
   ),
-  @Namespace(
+  @Model (
     id = "foaf",
-    uri = CommonNamespaces.FOAF_NAMESPACE,
-    label = "FOAF Namespace",
-    description = "The FOAF namespace defines the model and types used to represent metadata about users, organizations, and projects.",
+    namespace = CommonModels.FOAF_NAMESPACE,
+    label = "FOAF Model",
+    description = "The FOAF model defines the types and elements used to represent metadata about users, organizations, and projects.",
     version = "0.1",
-    xmlMediaType = CommonNamespaces.RDF_XML_MEDIA_TYPE,
-    jsonMediaType = CommonNamespaces.RDF_JSON_MEDIA_TYPE,
+    xmlMediaType = CommonModels.RDF_XML_MEDIA_TYPE,
+    jsonMediaType = CommonModels.RDF_JSON_MEDIA_TYPE,
     definesRDFSchema = true
   ),
-  @Namespace(
+  @Model (
     id = "contact",
-    uri = CommonNamespaces.CONTACT_NAMESPACE,
-    label = "Contact Namespace",
-    description = "The contact namespace defines the vocabulary for contact information, e.g. for users or organizations.",
+    namespace = CommonModels.CONTACT_NAMESPACE,
+    label = "Contact Model",
+    description = "The contact model defines the vocabulary for contact information, e.g. for users or organizations.",
     version = "2000-10",
     definesRDFSchema = true
   )
 } )
-public class CommonNamespaces {
+public class CommonModels {
 
-  private CommonNamespaces() {}
+  private CommonModels() {}
 
   public static final String GEDCOMX_DOMAIN = "http://gedcomx.org";
 

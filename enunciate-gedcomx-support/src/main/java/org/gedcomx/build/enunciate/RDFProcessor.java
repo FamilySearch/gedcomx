@@ -68,9 +68,9 @@ public class RDFProcessor {
     return RDFSchema.RDF_NAMESPACE.equals(namespace) ||
       RDFSchema.RDFS_NAMESPACE.equals(namespace) ||
       XMLConstants.XML_NS_URI.equals(namespace) ||
-      CommonNamespaces.DUBLIN_CORE_TYPE_NAMESPACE.equals(namespace) ||
-      CommonNamespaces.DUBLIN_CORE_NAMESPACE.equals(namespace) ||
-      CommonNamespaces.FOAF_NAMESPACE.equals(namespace);
+      CommonModels.DUBLIN_CORE_TYPE_NAMESPACE.equals(namespace) ||
+      CommonModels.DUBLIN_CORE_NAMESPACE.equals(namespace) ||
+      CommonModels.FOAF_NAMESPACE.equals(namespace);
   }
 
   public ValidationResult processModel(EnunciateFreemarkerModel model) {

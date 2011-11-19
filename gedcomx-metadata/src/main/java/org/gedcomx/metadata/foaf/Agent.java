@@ -20,7 +20,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
 import org.gedcomx.common.ResourceReference;
 import org.gedcomx.metadata.rdf.RDFDescription;
 import org.gedcomx.metadata.rdf.RDFLiteral;
-import org.gedcomx.rt.CommonNamespaces;
+import org.gedcomx.rt.CommonModels;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
@@ -170,7 +170,7 @@ public abstract class Agent extends RDFDescription {
    *
    * @return The addresses that belong to this person or organization.
    */
-  @XmlElement(name = "address", namespace = CommonNamespaces.CONTACT_NAMESPACE)
+  @XmlElement(name = "address", namespace = CommonModels.CONTACT_NAMESPACE)
   @JsonName ("addresses")
   @JsonProperty ("addresses")
   @SuppressWarnings("gedcomx:plural_xml_name")

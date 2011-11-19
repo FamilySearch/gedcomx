@@ -22,8 +22,7 @@ import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.metadata.rdf.RDFDescription;
 import org.gedcomx.metadata.rdf.RDFLiteral;
 import org.gedcomx.metadata.rdf.RDFValue;
-import org.gedcomx.rt.CommonNamespaces;
-import org.gedcomx.rt.DocIgnoreXmlRootElement;
+import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.ResourceType;
 import org.gedcomx.types.Typed;
@@ -46,7 +45,7 @@ import java.util.List;
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType (name = "Description")
-@XmlRootElement (name = "Description", namespace = CommonNamespaces.RDF_NAMESPACE ) // (heatonra) see big comment in RDFDescription
+@XmlRootElement (name = "Description", namespace = CommonModels.RDF_NAMESPACE ) // (heatonra) see big comment in RDFDescription
 public class DublinCoreDescription extends RDFDescription implements Typed<ResourceType> {
 
   private RDFValue abstrct;

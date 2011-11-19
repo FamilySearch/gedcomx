@@ -17,7 +17,7 @@ package org.gedcomx.conclusion;
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.jackson.annotate.JsonIgnore;
-import org.gedcomx.rt.CommonNamespaces;
+import org.gedcomx.rt.CommonModels;
 import org.gedcomx.types.NamePartType;
 import org.gedcomx.types.TypeReference;
 import org.gedcomx.types.Typed;
@@ -42,7 +42,7 @@ public final class NamePart implements Typed<NamePartType> {
    *
    * @return The type of the name part.
    */
-  @XmlElement (namespace = CommonNamespaces.RDF_NAMESPACE)
+  @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
   public TypeReference<NamePartType> getType() {
     return type;
   }

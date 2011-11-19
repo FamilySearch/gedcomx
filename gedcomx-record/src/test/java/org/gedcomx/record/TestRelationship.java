@@ -1,7 +1,7 @@
 package org.gedcomx.record;
 
 import org.codehaus.jackson.node.ObjectNode;
-import org.gedcomx.rt.CommonNamespaces;
+import org.gedcomx.rt.CommonModels;
 import org.gedcomx.types.RelationshipType;
 import org.gedcomx.types.TypeReference;
 import org.testng.annotations.Test;
@@ -24,8 +24,8 @@ public class TestRelationship {
     cr.setKnownType(RelationshipType.Couple);
     cr.setId("id");
     Document dom = toXmlDom(cr);
-    assertNotNull(dom.getDocumentElement().getElementsByTagNameNS(CommonNamespaces.RDF_NAMESPACE, "type"));
-    assertEquals(1, dom.getDocumentElement().getElementsByTagNameNS(CommonNamespaces.RDF_NAMESPACE, "type").getLength());
+    assertNotNull(dom.getDocumentElement().getElementsByTagNameNS(CommonModels.RDF_NAMESPACE, "type"));
+    assertEquals(1, dom.getDocumentElement().getElementsByTagNameNS(CommonModels.RDF_NAMESPACE, "type").getLength());
 
     ObjectNode node = toJsonNode(cr);
     assertNotNull(node.get("type"));
@@ -34,8 +34,8 @@ public class TestRelationship {
     or.setId("id");
     or.setType(new TypeReference<RelationshipType>(URI.create("urn:custom#custom")));
     dom = toXmlDom(or);
-    assertNotNull(dom.getDocumentElement().getElementsByTagNameNS(CommonNamespaces.RDF_NAMESPACE, "type"));
-    assertEquals(1, dom.getDocumentElement().getElementsByTagNameNS(CommonNamespaces.RDF_NAMESPACE, "type").getLength());
+    assertNotNull(dom.getDocumentElement().getElementsByTagNameNS(CommonModels.RDF_NAMESPACE, "type"));
+    assertEquals(1, dom.getDocumentElement().getElementsByTagNameNS(CommonModels.RDF_NAMESPACE, "type").getLength());
 
     node = toJsonNode(or);
     assertNotNull(node.get("type"));

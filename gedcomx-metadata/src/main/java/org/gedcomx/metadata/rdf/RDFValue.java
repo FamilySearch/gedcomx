@@ -16,7 +16,7 @@
 package org.gedcomx.metadata.rdf;
 
 import org.gedcomx.common.ResourceReference;
-import org.gedcomx.rt.CommonNamespaces;
+import org.gedcomx.rt.CommonModels;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -60,7 +60,7 @@ public final class RDFValue extends ResourceReference {
    *
    * @return The value of the property.
    */
-  @XmlElement ( name = "value", namespace = CommonNamespaces.RDF_NAMESPACE )
+  @XmlElement ( name = "value", namespace = CommonModels.RDF_NAMESPACE )
   public String getValue() {
     return value;
   }

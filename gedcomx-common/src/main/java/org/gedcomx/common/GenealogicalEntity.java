@@ -33,7 +33,7 @@ import java.util.List;
  * @author Ryan Heaton
  */
 @XmlType ( name = "GenealogicalEntity", propOrder = { "persistentId", "alternateIds", "bibliographicCitation", "sources", "notes" } )
-@RDFSubClassOf ( CommonNamespaces.DUBLIN_CORE_NAMESPACE + "BibliographicResource" )
+@RDFSubClassOf ( CommonModels.DUBLIN_CORE_NAMESPACE + "BibliographicResource" )
 public abstract class GenealogicalEntity extends GenealogicalResource implements PersistentIdentifiable {
 
   private URI persistentId;
@@ -88,7 +88,7 @@ public abstract class GenealogicalEntity extends GenealogicalResource implements
    *
    * @return The bibliographic citation for this entity.
    */
-  @RDFSubPropertyOf ( CommonNamespaces.DUBLIN_CORE_NAMESPACE + "bibliographicCitation" )
+  @RDFSubPropertyOf ( CommonModels.DUBLIN_CORE_NAMESPACE + "bibliographicCitation" )
   public String getBibliographicCitation() {
     return bibliographicCitation;
   }
@@ -110,7 +110,7 @@ public abstract class GenealogicalEntity extends GenealogicalResource implements
   @XmlElement (name="source")
   @JsonProperty ("sources")
   @JsonName ("sources")
-  @RDFSubPropertyOf ( CommonNamespaces.DUBLIN_CORE_NAMESPACE + "source")
+  @RDFSubPropertyOf ( CommonModels.DUBLIN_CORE_NAMESPACE + "source")
   @RDFDomain ({}) //any resource can be identified persistently.
   @RDFRange ({}) //any resource can be identified as a source.
   @SuppressWarnings("rdf:no_range")

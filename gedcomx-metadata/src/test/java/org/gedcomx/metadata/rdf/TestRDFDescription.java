@@ -1,7 +1,7 @@
 package org.gedcomx.metadata.rdf;
 
 import org.gedcomx.common.ResourceSet;
-import org.gedcomx.rt.CommonNamespaces;
+import org.gedcomx.rt.CommonModels;
 import org.testng.annotations.Test;
 
 import javax.xml.bind.JAXBContext;
@@ -28,13 +28,13 @@ public class TestRDFDescription {
     meta.setId("id");
     meta.setAbout(URI.create("urn:dataref"));
     meta.setExtensionAttributes(new HashMap<QName, String>());
-    meta.getExtensionAttributes().put(new QName(CommonNamespaces.GEDCOMX_COMMON_NAMESPACE, "data"), "custom");
+    meta.getExtensionAttributes().put(new QName(CommonModels.GEDCOMX_COMMON_NAMESPACE, "data"), "custom");
     meta.setExtensionElements(new ArrayList<Object>());
     meta.getExtensionElements().add(new ResourceSet());
     meta = processThroughXml(meta, RDFDescription.class, JAXBContext.newInstance(RDFDescription.class, ResourceSet.class));
     assertEquals("id", meta.getId());
     assertEquals(URI.create("urn:dataref"), meta.getAbout());
-    assertEquals("custom", meta.getExtensionAttributes().get(new QName(CommonNamespaces.GEDCOMX_COMMON_NAMESPACE, "data")));
+    assertEquals("custom", meta.getExtensionAttributes().get(new QName(CommonModels.GEDCOMX_COMMON_NAMESPACE, "data")));
     assertEquals(1, meta.getExtensionElements().size());
   }
 
@@ -46,13 +46,13 @@ public class TestRDFDescription {
     meta.setId("id");
     meta.setAbout(URI.create("urn:dataref"));
     meta.setExtensionAttributes(new HashMap<QName, String>());
-    meta.getExtensionAttributes().put(new QName(CommonNamespaces.GEDCOMX_COMMON_NAMESPACE, "data"), "custom");
+    meta.getExtensionAttributes().put(new QName(CommonModels.GEDCOMX_COMMON_NAMESPACE, "data"), "custom");
     meta.setExtensionElements(new ArrayList<Object>());
     meta.getExtensionElements().add(new ResourceSet());
     meta = processThroughJson(meta);
     assertEquals("id", meta.getId());
     assertEquals(URI.create("urn:dataref"), meta.getAbout());
-    assertEquals("custom", meta.getExtensionAttributes().get(new QName(CommonNamespaces.GEDCOMX_COMMON_NAMESPACE, "data")));
+    assertEquals("custom", meta.getExtensionAttributes().get(new QName(CommonModels.GEDCOMX_COMMON_NAMESPACE, "data")));
     assertEquals(1, meta.getExtensionElements().size());
   }
 

@@ -2,7 +2,7 @@
 [#--macro for writing a namespace page--]
 [#-- @ftlvariable name="schema" type="org.codehaus.enunciate.config.SchemaInfo" --]
 [#import "boilerplate.fmt" as libBoilerplate/]
-[#macro writeNamespacePage schema]
+[#macro writeModelPage schema]
   [@libBoilerplate.writeStartBody label=schema.properties.label!("\"" + schema.id + "\" Model")/]
   <div class="container">
     [@libBoilerplate.writeHeader subnav={"Model" : "index.html", (schema.properties.label!("\"" + schema.id + "\" Model")) : "#"}/]

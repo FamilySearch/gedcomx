@@ -35,7 +35,7 @@ import java.util.List;
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "Collection", propOrder = { "title", "description", "publisher", "types", "spatial", "temporal", "items" } )
-@RDFSubClassOf ( CommonNamespaces.DUBLIN_CORE_TYPE_NAMESPACE + "Collection" )
+@RDFSubClassOf ( CommonModels.DUBLIN_CORE_TYPE_NAMESPACE + "Collection" )
 public class Collection extends GenealogicalEntity {
 
   private String title;
@@ -51,7 +51,7 @@ public class Collection extends GenealogicalEntity {
    *
    * @return The title for the collection.
    */
-  @RDFSubPropertyOf ( CommonNamespaces.DUBLIN_CORE_NAMESPACE + "title" )
+  @RDFSubPropertyOf ( CommonModels.DUBLIN_CORE_NAMESPACE + "title" )
   public String getTitle() {
     return title;
   }
@@ -70,7 +70,7 @@ public class Collection extends GenealogicalEntity {
    *
    * @return A description of the collection.
    */
-  @RDFSubPropertyOf ( CommonNamespaces.DUBLIN_CORE_NAMESPACE + "description" )
+  @RDFSubPropertyOf ( CommonModels.DUBLIN_CORE_NAMESPACE + "description" )
   public String getDescription() {
     return description;
   }
@@ -89,7 +89,7 @@ public class Collection extends GenealogicalEntity {
    *
    * @return The publisher for the collection.
    */
-  @RDFSubPropertyOf ( CommonNamespaces.DUBLIN_CORE_NAMESPACE + "publisher" )
+  @RDFSubPropertyOf ( CommonModels.DUBLIN_CORE_NAMESPACE + "publisher" )
   public String getPublisher() {
     return publisher;
   }
@@ -108,7 +108,7 @@ public class Collection extends GenealogicalEntity {
    *
    * @return The "types" of this collection, i.e. the types of items this collection holds.
    */
-  @XmlElement( name = "type", namespace = CommonNamespaces.RDF_NAMESPACE )
+  @XmlElement( name = "type", namespace = CommonModels.RDF_NAMESPACE )
   @JsonName ("types")
   @JsonProperty ("types")
   public List<TypeReference> getTypes() {
@@ -130,7 +130,7 @@ public class Collection extends GenealogicalEntity {
    *
    * @return The spatial coverage.
    */
-  @RDFSubPropertyOf ( CommonNamespaces.DUBLIN_CORE_NAMESPACE + "spatial" )
+  @RDFSubPropertyOf ( CommonModels.DUBLIN_CORE_NAMESPACE + "spatial" )
   public String getSpatial() {
     return spatial;
   }
@@ -149,7 +149,7 @@ public class Collection extends GenealogicalEntity {
    *
    * @return The temporal coverage.
    */
-  @RDFSubPropertyOf ( CommonNamespaces.DUBLIN_CORE_NAMESPACE + "temporal" )
+  @RDFSubPropertyOf ( CommonModels.DUBLIN_CORE_NAMESPACE + "temporal" )
   public String getTemporal() {
     return temporal;
   }
@@ -172,7 +172,7 @@ public class Collection extends GenealogicalEntity {
   @JsonProperty ("items")
   @JsonName ("items")
   @RDFRange ({})
-  @RDFSubPropertyOf ( CommonNamespaces.DUBLIN_CORE_NAMESPACE + "hasPart")
+  @RDFSubPropertyOf ( CommonModels.DUBLIN_CORE_NAMESPACE + "hasPart")
   public List<ResourceReference> getItems() {
     return items;
   }

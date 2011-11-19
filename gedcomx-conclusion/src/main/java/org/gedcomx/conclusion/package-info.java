@@ -18,7 +18,7 @@
  * The conclusion model defines genealogical conclusion data.
  */
 @XmlSchema(
-  namespace = ConclusionNamespaces.GEDCOMX_CONCLUSION_V1_NAMESPACE,
+  namespace = ConclusionModel.GEDCOMX_CONCLUSION_V1_NAMESPACE,
   attributeFormDefault = XmlNsForm.QUALIFIED,
   elementFormDefault = XmlNsForm.QUALIFIED
 )

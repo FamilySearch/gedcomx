@@ -45,8 +45,8 @@ import org.codehaus.enunciate.template.freemarker.IsDefinedGloballyMethod;
 import org.codehaus.enunciate.template.freemarker.UniqueContentTypesMethod;
 import org.gedcomx.rt.DocIgnoreXmlRootElement;
 import org.gedcomx.rt.GedcomNamespaceManager;
-import org.gedcomx.rt.Namespace;
-import org.gedcomx.rt.Namespaces;
+import org.gedcomx.rt.Model;
+import org.gedcomx.rt.Models;
 import org.gedcomx.rt.www.ResourceServiceDefinition;
 
 import java.io.File;
@@ -62,7 +62,7 @@ import java.util.*;
  */
 public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implements DocumentationAwareModule, EnunciateTypeDeclarationListener {
 
-  private final Map<String, TypeDeclaration> knownNamespaceDeclarations = new HashMap<String, TypeDeclaration>();
+  private final Map<String, TypeDeclaration> knownModelDeclarations = new HashMap<String, TypeDeclaration>();
   private final Map<String, TypeDeclaration> knownRsdDeclarations = new HashMap<String, TypeDeclaration>();
   private RDFProcessor rdfProcessor;
   private ResourceServiceProcessor resourceServiceProcessor;
@@ -154,8 +154,8 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
   }
 
   public void onTypeDeclarationInspected(TypeDeclaration typeDeclaration) {
-    if (typeDeclaration.getAnnotation(Namespaces.class) != null) {
-      this.knownNamespaceDeclarations.put(typeDeclaration.getQualifiedName(), typeDeclaration);
+    if (typeDeclaration.getAnnotation(Models.class) != null) {
+      this.knownModelDeclarations.put(typeDeclaration.getQualifiedName(), typeDeclaration);
     }
     if (typeDeclaration.getAnnotation(ResourceServiceDefinition.class) != null) {
       this.knownRsdDeclarations.put(typeDeclaration.getQualifiedName(), typeDeclaration);
@@ -218,60 +218,60 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
       }
     }
 
-    Collection<TypeDeclaration> namespaceDeclarations = gatherNamespaceDeclarations();
+    Collection<TypeDeclaration> modelDeclarations = gatherModelDeclarations();
     Map<String, String> prefix_version_to_ns = new HashMap<String, String>();
-    for (TypeDeclaration namespacesDeclaration : namespaceDeclarations) {
-      info("Found namespaces declaration at %s.", namespacesDeclaration.getQualifiedName());
-      Namespaces namespacesInfo = namespacesDeclaration.getAnnotation(Namespaces.class);
-      for (Namespace ns : namespacesInfo.value()) {
-        String id = ns.id();
-        SchemaInfo schemaInfo = model.getNamespacesToSchemas().get(ns.uri());
-        model.getNamespacesToPrefixes().put(ns.uri(), id);
+    for (TypeDeclaration modelDeclaration : modelDeclarations) {
+      info("Found model declaration at %s.", modelDeclaration.getQualifiedName());
+      Models modelsInfo = modelDeclaration.getAnnotation(Models.class);
+      for (Model m : modelsInfo.value()) {
+        String id = m.id();
+        SchemaInfo schemaInfo = model.getNamespacesToSchemas().get(m.namespace());
+        model.getNamespacesToPrefixes().put(m.namespace(), id);
         if (schemaInfo != null) {
-          String version = ns.version();
+          String version = m.version();
 
           schemaInfo.setProperty("version", version);
 
-          String xmlMediaType = ns.xmlMediaType();
+          String xmlMediaType = m.xmlMediaType();
           if ("".equals(xmlMediaType)) {
             xmlMediaType = null;
           }
           if (!schemaInfo.getGlobalElements().isEmpty() && xmlMediaType == null) {
-            warn("Namespace %s is missing an xml media type for its root elements.", schemaInfo.getNamespace());
+            warn("Model %s is missing an xml media type for its root elements.", schemaInfo.getNamespace());
           }
           schemaInfo.setProperty("xmlMediaType", xmlMediaType);
 
-          String jsonMediaType = ns.jsonMediaType();
+          String jsonMediaType = m.jsonMediaType();
           if ("".equals(jsonMediaType)) {
             jsonMediaType = null;
           }
           if (!schemaInfo.getGlobalElements().isEmpty() && jsonMediaType == null) {
-            warn("Metadata for namespace %s is missing an json media type for its root elements.", schemaInfo.getNamespace());
+            warn("Metadata for model %s is missing an json media type for its root elements.", schemaInfo.getNamespace());
           }
           schemaInfo.setProperty("jsonMediaType", jsonMediaType);
 
           schemaInfo.setId(id);
           String previousNamespace = prefix_version_to_ns.put(id + version, schemaInfo.getNamespace());
           if (previousNamespace != null && !previousNamespace.equals(schemaInfo.getNamespace())) {
-            String message = namespacesDeclaration.getPosition() == null ?
-              String.format("%s version %s is already being used by namespace %s.", id, version, previousNamespace) :
-              String.format("%s: %s version %s is already being used by namespace %s.", namespacesDeclaration.getQualifiedName(), id, version, previousNamespace);
-            throw new ValidationException(namespacesDeclaration.getPosition(), message);
+            String message = modelDeclaration.getPosition() == null ?
+              String.format("%s version %s is already being used by model %s.", id, version, previousNamespace) :
+              String.format("%s: %s version %s is already being used by model %s.", modelDeclaration.getQualifiedName(), id, version, previousNamespace);
+            throw new ValidationException(modelDeclaration.getPosition(), message);
           }
 
-          String label = ns.label();
+          String label = m.label();
           if ("".equals(label)) {
-            label = "\"" + id + "\" Namespace";
+            label = "\"" + id + "\" Model";
           }
           schemaInfo.setProperty("label", label);
 
-          String description = ns.description();
+          String description = m.description();
           if ("".equals(description)) {
             description = null;
           }
           schemaInfo.setProperty("description", description);
 
-          schemaInfo.setProperty("definesRDFSchema", ns.definesRDFSchema());
+          schemaInfo.setProperty("definesRDFSchema", m.definesRDFSchema());
 
           //ensure the correct filenames are used for the schemas.
           schemaInfo.setProperty("filename", id + "-" + version + ".xsd");
@@ -321,8 +321,8 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
     }
   }
 
-  protected Collection<TypeDeclaration> gatherNamespaceDeclarations() {
-    return this.knownNamespaceDeclarations.values();
+  protected Collection<TypeDeclaration> gatherModelDeclarations() {
+    return this.knownModelDeclarations.values();
   }
 
   public void doFreemarkerGenerate() throws EnunciateException, IOException, TemplateException {

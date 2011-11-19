@@ -18,13 +18,13 @@
  * The id model defines the standard mechanisms for identifying genealogical entities.
  */
 @XmlSchema(
-  namespace = CommonNamespaces.GEDCOMX_COMMON_NAMESPACE,
+  namespace = CommonModels.GEDCOMX_COMMON_NAMESPACE,
   attributeFormDefault = XmlNsForm.QUALIFIED,
   elementFormDefault = XmlNsForm.QUALIFIED
 )
 package org.gedcomx.common;
 
-import org.gedcomx.rt.CommonNamespaces;
+import org.gedcomx.rt.CommonModels;
 
 import javax.xml.bind.annotation.XmlNsForm;
 import javax.xml.bind.annotation.XmlSchema;

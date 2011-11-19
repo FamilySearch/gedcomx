@@ -8,7 +8,7 @@
 [@forEachSchema]
   [#if (schema.typeDefinitions?size > 0) || (schema.globalElements?size > 0)]
     [@file name=("model/" + schema.id + ".html") charset="utf-8"]
-      [@libModel.writeNamespacePage schema=schema/]
+      [@libModel.writeModelPage schema=schema/]
     [/@file]
     [#list schema.globalElements as element]
       [@file name=("model/" + schema.id + "_el_" + element.name + ".html") charset="utf-8"]

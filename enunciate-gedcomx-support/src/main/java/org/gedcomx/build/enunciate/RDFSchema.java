@@ -16,7 +16,7 @@
 package org.gedcomx.build.enunciate;
 
 import com.sun.mirror.declaration.Declaration;
-import org.gedcomx.rt.CommonNamespaces;
+import org.gedcomx.rt.CommonModels;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
@@ -37,7 +37,7 @@ import java.util.TreeSet;
 @XmlRootElement(namespace = RDFSchema.RDF_NAMESPACE, name = "RDF")
 public class RDFSchema {
 
-  public static final String RDF_NAMESPACE     = CommonNamespaces.RDF_NAMESPACE;
+  public static final String RDF_NAMESPACE     = CommonModels.RDF_NAMESPACE;
   public static final String RDF_PROPERTY_TYPE = RDF_NAMESPACE + "Property";
   public static final String RDFS_NAMESPACE    = "http://www.w3.org/2000/01/rdf-schema#";
   public static final String RDFS_CLASS_TYPE   = RDFS_NAMESPACE + "Class";

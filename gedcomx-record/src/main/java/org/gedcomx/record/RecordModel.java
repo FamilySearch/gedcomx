@@ -15,8 +15,8 @@
  */
 package org.gedcomx.record;
 
-import org.gedcomx.rt.Namespace;
-import org.gedcomx.rt.Namespaces;
+import org.gedcomx.rt.Model;
+import org.gedcomx.rt.Models;
 
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -24,21 +24,21 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Ryan Heaton
  */
 @XmlTransient
-@Namespaces ( {
-  @Namespace (
+@Models ( {
+  @Model (
     id = "gxr",
-    uri = RecordNamespaces.GEDCOMX_RECORD_V1_NAMESPACE,
-    label = "Record Namespace",
-    description = "The record namespace contains the objects necessary for modeling genealogical record data.",
+    namespace = RecordModel.GEDCOMX_RECORD_V1_NAMESPACE,
+    label = "Record Model",
+    description = "The record model contains the objects necessary for modeling genealogical record data.",
     version = "v1",
-    xmlMediaType = RecordNamespaces.GEDCOMX_RECORD_V1_XML_MEDIA_TYPE,
-    jsonMediaType = RecordNamespaces.GEDCOMX_RECORD_V1_JSON_MEDIA_TYPE,
+    xmlMediaType = RecordModel.GEDCOMX_RECORD_V1_XML_MEDIA_TYPE,
+    jsonMediaType = RecordModel.GEDCOMX_RECORD_V1_JSON_MEDIA_TYPE,
     definesRDFSchema = true
   )
 } )
-public class RecordNamespaces {
+public class RecordModel {
 
-  private RecordNamespaces() {}
+  private RecordModel() {}
 
   public static final String GEDCOMX_RECORD_V1_NAMESPACE = "http://gedcomx.org/record/v1/";
   public static final String GEDCOMX_RECORD_V1_XML_MEDIA_TYPE = "application/x-gedcom-record-v1+xml";
