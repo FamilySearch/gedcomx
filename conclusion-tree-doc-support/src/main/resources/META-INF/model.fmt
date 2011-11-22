@@ -1,0 +1,77 @@
+[#ftl]
+[#--macro for writing a namespace page--]
+[#import "boilerplate.fmt" as libBoilerplate/]
+[#macro writeModelPage schema]
+  [@libBoilerplate.writeStartBody label=schema.properties.label!("\"" + schema.id + "\" Model")/]
+  [@libBoilerplate.writeHeader subnav={"Model" : "index.html", (schema.properties.label!("\"" + schema.id + "\" Model")) : "#"}/]
+<div class="wrap">
+  <article id="subject" class="clearfix">
+    <div id="main" class="column first last span-20">
+      <h1>${schema.properties.label!("\"" + schema.id + "\" Model")}</h1>
+
+      <hr/>
+
+      <table>
+        <tr>
+          <td align="right">Model ID:</td>
+          <td>${schema.id}</td>
+        </tr>
+        <tr>
+          <td align="right">Namespace URI:</td>
+          <td>${schema.namespace}</td>
+        </tr>
+        [#if schema.properties.version??]
+        <tr>
+          <td align="right">Version:</td>
+          <td>${schema.properties.version}</td>
+        </tr>
+        [/#if]
+        <tr>
+          <td align="right">XML Schema:</td>
+          <td><a href="${gedcomxExtensionRoot(schema.namespace)}${schema.properties.filename!"#"}">${schema.properties.filename!"n/a"}</a></td>
+        </tr>
+        [#if schema.properties.rdfSchemaLocation??]
+        <tr>
+          <td align="right">RDF Schema:</td>
+          <td><a href="${gedcomxExtensionRoot(schema.namespace)}${schema.properties.rdfSchemaLocation}">${schema.properties.rdfSchemaLocation}</a></td>
+        </tr>
+        [/#if]
+        [#if schema.properties.xmlMediaType??]
+        <tr>
+          <td align="right">XML Media Type:</td>
+          <td>${schema.properties.xmlMediaType}</td>
+        </tr>
+        [/#if]
+        [#if schema.properties.jsonMediaType??]
+        <tr>
+          <td align="right">JSON Media Type:</td>
+          <td>${schema.properties.jsonMediaType}</td>
+        </tr>
+        [/#if]
+      </table>
+
+      <p>${schema.properties.description!""}</p>
+
+      [#if schema.globalElements?size > 0]
+      <h3>Elements</h3>
+
+      <ul>
+        [#list schema.globalElements as element]
+        <li><a href="${gedcomxExtensionRoot(schema)}${schema.id}_el_${element.name}.html">${element.name}</a></li>
+        [/#list]
+      </ul>
+
+      [/#if]
+      <h3>Data Types</h3>
+
+      <ul>
+        [#list schema.typeDefinitions as type]
+        <li><a href="${gedcomxExtensionRoot(schema)}${schema.id}_${type.name}.html">${type.name}</a></li>
+        [/#list]
+      </ul>
+
+  </article>
+</div>
+  [@libBoilerplate.writeFooter/]
+  [@libBoilerplate.writeEndBody/]
+[/#macro]

@@ -1,0 +1,63 @@
+[#ftl]
+[#import "boilerplate.fmt" as libBoilerplate/]
+[#macro writeCodePage]
+  [@file name="code.html" charset="utf-8"]
+    [@libBoilerplate.writeStartBody label="Code"/]
+    [@libBoilerplate.writeHeader subnav={"Model" : "index.html", "Code" : "#"}/]
+    <div class="wrap">
+      <article id="subject" class="clearfix">
+        <h1>GEDCOM X Code</h1>
+
+        <hr/>
+
+        <p>The following libraries are available for use in consuming and producing Conclusion Tree API. For information on how to use these libraries, refer
+        to the <a href="#">wiki</a>.</p>
+
+        <div id="accordion">
+        [#list downloads as download]
+          <h3><a href="#">${download.name!"unknown"}</a></h3>
+          <div>
+            ${(download.description!"")?replace("h1", "h4")}
+
+          [#if download.artifacts??]
+
+            <h4>files</h4>
+
+            <table>
+              <tr>
+                <th>name</th>
+                <th>size</th>
+                <th>description</th>
+              </tr>
+                [#list download.artifacts as artifact]
+                  [#if artifact.name??]
+              <tr>
+                <td><a href="${artifact.name}">${artifact.name}</a></td>
+                <td>${artifact.size}</td>
+                <td>${artifact.description!("")}</td>
+              </tr>
+                  [/#if]
+                [/#list]
+            </table>
+              [#elseif download.name??]
+            <table>
+              <tr>
+                <td align="right">File:</td>
+                <td><a href="${download.name}">${download.name}</a></td>
+              </tr>
+              <tr>
+                <td align="right">Size:</td>
+                <td>${download.size}</td>
+              </tr>
+            </table>
+          [/#if]
+          </div>
+        [/#list]
+        </div>
+
+      </article>
+    </div>
+    [@libBoilerplate.writeFooter/]
+    [@libBoilerplate.writeEndBody active=false/]
+  [/@file]
+[/#macro]

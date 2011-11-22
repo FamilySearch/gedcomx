@@ -1,0 +1,60 @@
+[#ftl]
+[#--macro for writing a element page--]
+[#import "boilerplate.fmt" as libBoilerplate/]
+[#macro writeElementPage element]
+  [#assign schema=schemaForNamespace(element)/]
+  [#assign elementLabel=element.name?cap_first + " Element"/]
+  [@libBoilerplate.writeStartBody label=elementLabel/]
+  [@libBoilerplate.writeHeader subnav={"Model" : "index.html", (schema.properties.label!("\"" + schema.id + "\" Model")) : schema.id + ".html", elementLabel : "#"}/]
+<div class="wrap">
+  <article id="subject" class="clearfix">
+    <div id="main" class="column first last span-20">
+      <h1>${elementLabel}</h1>
+
+      <hr/>
+
+      <table>
+        <tr>
+          <td align="right">Type:</td>
+          <td><a href="${gedcomxExtensionRoot(element.typeDefinition)}${schemaForNamespace(element.typeDefinition).id}_${element.typeDefinition.name}.html">${element.typeDefinition.namespace}${element.typeDefinition.name}</a></td>
+        </tr>
+        <tr>
+          <td align="right">Name:</td>
+          <td>${element.name}</td>
+        </tr>
+        <tr>
+          <td align="right">Namespace:</td>
+          <td>${element.namespace}</td>
+        </tr>
+        <tr>
+          <td align="right">JSON Name:</td>
+          <td>${jsonExtensionElementName(element)}</td>
+        </tr>
+      </table>
+
+      <h3>Description</h3>
+
+      <p>${element.docValue!""}</p>
+
+      <div id="accordion">
+        <h3><a href="#">XML</a></h3>
+        <div>
+          <b style="font-weight: bold">Example</b>
+          <pre class="prettyprint lang-xml">
+${generateExampleXml(element)?html}
+          </pre>
+        </div>
+
+        <h3><a href="#">JSON</a></h3>
+        <div>
+          <b style="font-weight: bold">Example</b>
+          <pre class="prettyprint lang-js">
+${generateExampleJson(element)}
+          </pre>
+        </div>
+    </div>
+  </article>
+</div>
+  [@libBoilerplate.writeFooter/]
+  [@libBoilerplate.writeEndBody/]
+[/#macro]

@@ -1,4 +1,99 @@
 [#ftl]
+[#import "model.fmt" as libModel/]
+[#import "element.fmt" as libElement/]
+[#import "type.fmt" as libType/]
+[#import "boilerplate.fmt" as libBoilerplate/]
+[#import "rsd.fmt" as libRsd/]
+[#import "code.fmt" as libCode/]
+[@forEachSchema]
+  [#if (!isGedcomxNamespace(schema) && ((schema.typeDefinitions?size > 0) || (schema.globalElements?size > 0)))]
+    [@file name=(schema.id + ".html") charset="utf-8"]
+      [@libModel.writeModelPage schema=schema/]
+    [/@file]
+    [#list schema.globalElements as element]
+      [@file name=(schema.id + "_el_" + element.name + ".html") charset="utf-8"]
+        [@libElement.writeElementPage element=element/]
+      [/@file]
+    [/#list]
+    [#list schema.typeDefinitions as type]
+      [@file name=(schema.id + "_" + type.name + ".html") charset="utf-8"]
+        [@libType.writeTypePage type=type/]
+      [/@file]
+    [/#list]
+  [/#if]
+[/@forEachSchema]
+[#list resourceServiceDefinitions as rsd]
+  [#if !isGedcomxNamespace(rsd)]
+    [@file name=(rsd.name + "_service.html")]
+      [@libRsd.writeResourceServiceDefinitionPage rsd=rsd/]
+    [/@file]
+  [/#if]
+[/#list]
+[@libCode.writeCodePage/]
 [@file name="index.html" charset="utf-8"]
-Hello world at ${gedcomxRoot!"nowhere"}!
+  [@libBoilerplate.writeStartBody label="Models"/]
+  <div class="container">
+    [@libBoilerplate.writeHeader subnav={"Model" : "#"}/]
+    <div id="main" class="column first last span-20">
+      <h1>Conclusion Tree Models</h1>
+
+      <hr/>
+
+    [#list ns2schema?values?sort_by("id") as schema]
+      [#if (schema.typeDefinitions?size > 0) || (schema.globalElements?size > 0)]
+      <h3><a href="${gedcomxExtensionRoot(schema)}${schema.id}.html">${schema.properties.label!("\"" + schema.id + "\" Model")}</a></h3>
+      [#if schema.properties.description??]<p>${schema.properties.description}</p>[/#if]
+      <table>
+        <tr>
+          <td align="right">Model ID:</td>
+          <td>${schema.id}</td>
+        </tr>
+        <tr>
+          <td align="right">Namespace URI:</td>
+          <td>${schema.namespace}</td>
+        </tr>
+        [#if schema.properties.version??]
+        <tr>
+          <td align="right">Version:</td>
+          <td>${schema.properties.version}</td>
+        </tr>
+        [/#if]
+        <tr>
+          <td align="right">XML Schema:</td>
+          <td><a href="${gedcomxExtensionRoot(schema.namespace)}${schema.properties.filename!"#"}">${schema.properties.filename!"n/a"}</a></td>
+        </tr>
+        [#if schema.properties.rdfSchemaLocation??]
+        <tr>
+          <td align="right">RDF Schema:</td>
+          <td><a href="${gedcomxExtensionRoot(schema.namespace)}${schema.properties.rdfSchemaLocation}">${schema.properties.rdfSchemaLocation}</a></td>
+        </tr>
+        [/#if]
+        [#if schema.properties.xmlMediaType??]
+        <tr>
+          <td align="right">XML Media Type:</td>
+          <td>${schema.properties.xmlMediaType}</td>
+        </tr>
+        [/#if]
+        [#if schema.properties.jsonMediaType??]
+        <tr>
+          <td align="right">JSON Media Type:</td>
+          <td>${schema.properties.jsonMediaType}</td>
+        </tr>
+        [/#if]
+        [#if schema.globalElements?size > 0]
+        <tr>
+          <td align="right">Elements:</td>
+          <td>[#list schema.globalElements as element] [#if !element_has_next && (element_index > 0)]and [/#if]<a href="${gedcomxExtensionRoot(schema)}${schema.id}_el_${element.name}.html">${element.name}</a>[#if element_has_next && schema.globalElements?size > 2],[/#if][/#list]</td>
+        </tr>
+        [/#if]
+      </table>
+      [/#if]
+    [/#list]
+
+      <div class="clear" />
+    </div>
+    [@libBoilerplate.writeFooter/]
+  </div> <!--! end of #container -->
+
+  [@libBoilerplate.writeEndBody/]
 [/@file]

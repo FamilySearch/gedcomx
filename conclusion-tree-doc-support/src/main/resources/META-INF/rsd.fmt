@@ -1,0 +1,66 @@
+[#ftl]
+[#--macro for writing a element page--]
+[#import "boilerplate.fmt" as libBoilerplate/]
+[#macro writeResourceServiceDefinitionPage rsd]
+  [#assign rsdName=rsd.name?cap_first + " Service"/]
+  [@libBoilerplate.writeStartBody label=rsdName/]
+  [@libBoilerplate.writeHeader subnav={"Resources" : "index.html", rsdName : "#"}/]
+  <div class="wrap">
+    <article id="subject" class="clearfix">
+      <h1>${rsdName}</h1>
+
+      <hr/>
+
+      <table>
+        <tr>
+          <td align="right">Name:</td>
+          <td>${rsd.name}</td>
+        </tr>
+        <tr>
+          <td align="right">Namespace:</td>
+          <td>${rsd.namespace}</td>
+        </tr>
+      </table>
+
+      <h3>Description</h3>
+
+      <p>${rsd.docValue!""}</p>
+
+      <h3>Status Codes</h3>
+
+      <table>
+        <tr>
+          <th align="center">code</th>
+          <th align="center">condition</th>
+        </tr>
+  [#list rsd.statusCodes as statusCode]
+        <tr>
+          <td>${statusCode.code}</td>
+          <td>${statusCode.condition}</td>
+        </tr>
+  [/#list]
+      </table>
+
+  [#list rsd.resourceMethods as op]
+      <b>${op.httpMethods[0]}</b>
+
+      <p>${op.docValue!""}</p>
+
+      <table>
+        <tr>
+          <th align="center">code</th>
+          <th align="center">condition</th>
+        </tr>
+    [#list op.metaData.statusCodes as statusCode]
+        <tr>
+          <td>${statusCode.code}</td>
+          <td>${statusCode.condition}</td>
+        </tr>
+    [/#list]
+      </table>
+  [/#list]
+    </article>
+  </div>
+  [@libBoilerplate.writeFooter/]
+  [@libBoilerplate.writeEndBody/]
+[/#macro]
