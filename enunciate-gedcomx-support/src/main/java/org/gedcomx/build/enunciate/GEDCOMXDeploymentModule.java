@@ -66,7 +66,7 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
   private final Map<String, TypeDeclaration> knownRsdDeclarations = new HashMap<String, TypeDeclaration>();
   private RDFProcessor rdfProcessor;
   private ResourceServiceProcessor resourceServiceProcessor;
-  private final Map<String, String> primaryNav = new HashMap<String, String>();
+  private final Map<String, String> primaryNav = new LinkedHashMap<String, String>();
 
   /**
    * @return "gedcomx"
