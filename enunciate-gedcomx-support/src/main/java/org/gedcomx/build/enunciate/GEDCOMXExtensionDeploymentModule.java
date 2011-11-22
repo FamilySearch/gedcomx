@@ -84,6 +84,8 @@ public class GEDCOMXExtensionDeploymentModule extends FreemarkerDeploymentModule
       }
       try {
         model.put("gedcomxRoot", getGedcomxRoot());
+        model.put("isGedcomxNamespace", new IsGedcomxNamespaceMethod());
+        model.put("gedcomxExtensionRoot", new GedcomxExtensionRootMethod(getGedcomxRoot()));
         processTemplate(getDocsTemplateURL(), model);
       }
       catch (TemplateException e) {
