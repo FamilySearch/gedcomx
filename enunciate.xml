@@ -7,6 +7,12 @@
     <!--disable the standard docs module, we're using the gedcomx-support module to generate docs.-->
     <docs disabled="true"/>
 
+    <!--disable the template processing for the gedcomx module; we'll just link to the real docs-->
+    <gedcomx disableProcessing="true"/>
+
+    <!--enable the gedcomx extension module to generate the docs for our extensions-->
+    <gedcomx-ext disabled="false"/>
+
     <c forceEnable="true"/>
     <obj-c forceEnable="true"/>
     <java-client generateJsonJar="true"/>

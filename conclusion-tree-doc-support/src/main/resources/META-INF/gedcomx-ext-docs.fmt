@@ -1,0 +1,4 @@
+[#ftl]
+[@file name="index.html" charset="utf-8"]
+Hello world at ${gedcomxRoot!"nowhere"}!
+[/@file]

@@ -17,6 +17,7 @@
   </properties>
 
   <modules>
+    <module>conclusion-tree-doc-support</module>
     <module>conclusion-tree-ws</module>
     <module>conclusion-tree-rs</module>
     <module>conclusion-tree-rs-binding</module>
@@ -103,6 +104,11 @@
               <groupId>org.gedcomx</groupId>
               <artifactId>enunciate-gedcomx-support</artifactId>
               <version>${gedcomx.version}</version>
+            </dependency>
+            <dependency>
+              <groupId>org.familysearch.ct</groupId>
+              <artifactId>conclusion-tree-doc-support</artifactId>
+              <version>${project.version}</version>
             </dependency>
           </dependencies>
         </plugin>

@@ -1,0 +1,3 @@
+[@file name="ct/index.html" charset="utf-8"]
+Hello world at ${gedcomxRoot!"nowhere"}!
+[/@file]
