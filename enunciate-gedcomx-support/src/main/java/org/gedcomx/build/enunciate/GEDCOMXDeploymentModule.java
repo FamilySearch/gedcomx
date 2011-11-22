@@ -67,6 +67,7 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
   private RDFProcessor rdfProcessor;
   private ResourceServiceProcessor resourceServiceProcessor;
   private final Map<String, String> primaryNav = new LinkedHashMap<String, String>();
+  private boolean disableProcessing = false;
 
   /**
    * @return "gedcomx"
@@ -141,6 +142,24 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
    * @param docsDir The subdirectory in the web application where the documentation will be put.
    */
   public void setDocsDir(String docsDir) {
+  }
+
+  /**
+   * Whether to disable processing.
+   *
+   * @return Whether to disable processing.
+   */
+  public boolean isDisableProcessing() {
+    return disableProcessing;
+  }
+
+  /**
+   * Whether to disable processing.
+   *
+   * @param disableProcessing Whether to disable processing.
+   */
+  public void setDisableProcessing(boolean disableProcessing) {
+    this.disableProcessing = disableProcessing;
   }
 
   /**
@@ -355,7 +374,9 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
           if (Boolean.TRUE.equals(schemaInfo.getProperty("definesRDFSchema"))) {
             if (!this.rdfProcessor.isKnownRDFNamespace(namespace)) {
               model.put("schema", schemaInfo);
-              processTemplate(getRDFSchemaTemplateURL(), model);
+              if (!isDisableProcessing()) {
+                processTemplate(getRDFSchemaTemplateURL(), model);
+              }
               schemaInfo.setProperty("rdfSchemaLocation", schemaInfo.getId() + ".rdf.xml");
             }
             else {
@@ -363,8 +384,10 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
             }
           }
         }
-        processTemplate(getDocsTemplateURL(), model);
-        processTemplate(getCodeTemplateURL(), model);
+        if (!isDisableProcessing()) {
+          processTemplate(getDocsTemplateURL(), model);
+          processTemplate(getCodeTemplateURL(), model);
+        }
       }
       catch (TemplateException e) {
         throw new EnunciateException(e);
