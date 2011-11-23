@@ -29,10 +29,10 @@ import java.net.URI;
 /**
  * A value that has been formalized via normalization, standardization, or both.
  *
- * A normalized value is a value whose text has been formatted for the purpose of easier processing (perhaps for display
- * purposes). Normalization might be based on a known standard.
+ * A <i>normalized</i> value is a value whose text has been formatted for the purpose of easier processing (perhaps for display
+ * purposes). Normalization <i>might</i> be based on a known standard.
  *
- * A standardized value is a value that has been resolved to a discreet, machine-identifiable value based on a specific standard.
+ * A <i>standardized</i> value is a value that has been resolved to a discrete, machine-identifiable value based on a specific standard.
  * A value that has been standardized will either refer to a specific item of a constrained vocabulary (via resource references)
  * OR constrain the value to a standard using the datatype, creating an
  * <a href="http://www.w3.org/TR/rdf-primer/#typedliterals">RDF Typed Literal</a>.
@@ -41,8 +41,8 @@ import java.net.URI;
  */
 @JsonTypeInfo ( use = JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType ( name = "FormalizedValue" )
-public final class FormalizedValue {
+@XmlType ( name = "FormalValue" )
+public final class FormalValue {
 
   private URI datatype;
   private URI resource;

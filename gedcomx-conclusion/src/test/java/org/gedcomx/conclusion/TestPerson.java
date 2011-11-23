@@ -2,7 +2,7 @@ package org.gedcomx.conclusion;
 
 import org.gedcomx.common.Attribution;
 import org.gedcomx.common.AlternateId;
-import org.gedcomx.common.FormalizedValue;
+import org.gedcomx.common.FormalValue;
 import org.gedcomx.common.ResourceReference;
 import org.gedcomx.types.*;
 import org.testng.annotations.Test;
@@ -62,7 +62,7 @@ public class TestPerson {
     fact.getAttribution().getContributor().setResource(URI.create("urn:characteristic-attribution"));
     fact.setDate(new Date());
     fact.getDate().setOriginal("original date");
-    FormalizedValue normalized = new FormalizedValue();
+    FormalValue normalized = new FormalValue();
     normalized.setText("normalized date");
     normalized.setDatatype(URI.create("urn:date"));
     normalized.setKnownValue(DatePartType.Years);
@@ -71,7 +71,7 @@ public class TestPerson {
     fact.setKnownType(FactType.Occupation);
     fact.setPlace(new Place());
     fact.getPlace().setOriginal("original place");
-    normalized = new FormalizedValue();
+    normalized = new FormalValue();
     normalized.setText("normalized place");
     normalized.setDatatype(URI.create("urn:place"));
     normalized.setKnownValue(PlacePartType.Cemetery);
@@ -85,7 +85,7 @@ public class TestPerson {
     event.getAttribution().getContributor().setResource(URI.create("urn:event-attribution"));
     event.setDate(new Date());
     event.getDate().setOriginal("original date");
-    normalized = new FormalizedValue();
+    normalized = new FormalValue();
     normalized.setText("normalized date");
     normalized.setDatatype(URI.create("urn:date"));
     normalized.setKnownValue(DatePartType.Years);
@@ -94,7 +94,7 @@ public class TestPerson {
     event.setKnownType(FactType.Adoption);
     event.setPlace(new Place());
     event.getPlace().setOriginal("original place");
-    normalized = new FormalizedValue();
+    normalized = new FormalValue();
     normalized.setText("normalized place");
     normalized.setDatatype(URI.create("urn:place"));
     normalized.setKnownValue(PlacePartType.Cemetery);

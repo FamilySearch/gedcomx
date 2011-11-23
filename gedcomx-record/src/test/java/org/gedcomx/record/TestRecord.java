@@ -2,7 +2,7 @@ package org.gedcomx.record;
 
 import org.gedcomx.common.Attribution;
 import org.gedcomx.common.AlternateId;
-import org.gedcomx.common.FormalizedValue;
+import org.gedcomx.common.FormalValue;
 import org.gedcomx.common.ResourceReference;
 import org.gedcomx.types.*;
 import org.testng.annotations.Test;
@@ -138,7 +138,7 @@ public class TestRecord {
     field.setKnownType(FieldType.BatchNumber);
     field.setOriginal("field-value-original");
     field.setInterpreted("field-value-interpreted");
-    field.setProcessed(new FormalizedValue());
+    field.setProcessed(new FormalValue());
     field.getProcessed().setText("field-value-normalized");
     fields.add(field);
     record.setFields(fields);
@@ -196,7 +196,7 @@ public class TestRecord {
     field.setId(label + "-id");
     field.setOriginal(label + "-original");
     field.setInterpreted(label + "-interpreted");
-    field.setProcessed(new FormalizedValue());
+    field.setProcessed(new FormalValue());
     field.getProcessed().setText(label + "-normalized");
   }
 
