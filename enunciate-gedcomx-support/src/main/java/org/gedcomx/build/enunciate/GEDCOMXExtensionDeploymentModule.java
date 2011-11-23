@@ -106,7 +106,7 @@ public class GEDCOMXExtensionDeploymentModule extends FreemarkerDeploymentModule
       return true;
     }
     else if (getDocsTemplateURL() == null) {
-      info("Module %s is disabled because nothing's at /META-INF/gedcomx-ext-docs.fmt is null", getName());
+      debug("Module %s is disabled because nothing's at /META-INF/gedcomx-ext-docs.fmt.", getName());
       return true;
     }
     return false;
