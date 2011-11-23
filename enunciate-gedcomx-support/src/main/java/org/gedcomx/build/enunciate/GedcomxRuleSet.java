@@ -13,24 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.rt.rs;
+package org.gedcomx.build.enunciate;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import org.apache.commons.digester.Digester;
+import org.apache.commons.digester.RuleSetBase;
 
 /**
  * @author Ryan Heaton
  */
-@Retention ( RetentionPolicy.RUNTIME )
-@Target ({ ElementType.METHOD })
-public @interface LinkRelationship {
+public class GedcomxRuleSet extends RuleSetBase {
 
-  String name();
+  public void addRuleInstances(Digester digester) {
+    digester.addCallMethod("enunciate/modules/gedcomx/nav/a", "addPrimaryNav", 2);
+    digester.addCallParam("enunciate/modules/gedcomx/nav/a", 0);
+    digester.addCallParam("enunciate/modules/gedcomx/nav/a", 1, "href");
 
-  Class<?> definedBy();
-
-  String description();
-
+  }
 }

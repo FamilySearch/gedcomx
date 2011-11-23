@@ -43,6 +43,8 @@ import org.codehaus.enunciate.modules.objc.ObjCDeploymentModule;
 import org.codehaus.enunciate.template.freemarker.GetGroupsMethod;
 import org.codehaus.enunciate.template.freemarker.IsDefinedGloballyMethod;
 import org.codehaus.enunciate.template.freemarker.UniqueContentTypesMethod;
+import org.gedcomx.build.enunciate.rdf.RDFProcessor;
+import org.gedcomx.build.enunciate.rs.ResourceServiceProcessor;
 import org.gedcomx.rt.DocIgnoreXmlRootElement;
 import org.gedcomx.rt.GedcomNamespaceManager;
 import org.gedcomx.rt.Model;
@@ -60,7 +62,7 @@ import java.util.*;
  *
  * @author Ryan Heaton
  */
-public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implements DocumentationAwareModule, EnunciateTypeDeclarationListener {
+public class GedcomxDeploymentModule extends FreemarkerDeploymentModule implements DocumentationAwareModule, EnunciateTypeDeclarationListener {
 
   private final Map<String, TypeDeclaration> knownModelDeclarations = new HashMap<String, TypeDeclaration>();
   private final Map<String, TypeDeclaration> knownRsdDeclarations = new HashMap<String, TypeDeclaration>();
@@ -182,15 +184,15 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
   }
 
   protected URL getDocsTemplateURL() {
-    return GEDCOMXDeploymentModule.class.getResource("docs.fmt");
+    return GedcomxDeploymentModule.class.getResource("docs.fmt");
   }
 
   protected URL getCodeTemplateURL() {
-    return GEDCOMXDeploymentModule.class.getResource("code.fmt");
+    return GedcomxDeploymentModule.class.getResource("code.fmt");
   }
 
   protected URL getRDFSchemaTemplateURL() {
-    return GEDCOMXDeploymentModule.class.getResource("rdfschema.fmt");
+    return GedcomxDeploymentModule.class.getResource("rdfschema.fmt");
   }
 
   @Override
@@ -415,7 +417,7 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
     File rsDir = new File(buildDir, "rs");
     rsDir.mkdirs();
 
-    enunciate.extractBase(GEDCOMXDeploymentModule.class.getResourceAsStream("/docs.base.zip"), buildDir);
+    enunciate.extractBase(GedcomxDeploymentModule.class.getResourceAsStream("/docs.base.zip"), buildDir);
 
     for (SchemaInfo schemaInfo : getModel().getNamespacesToSchemas().values()) {
       if (schemaInfo.getProperty("file") != null) {
@@ -457,11 +459,11 @@ public class GEDCOMXDeploymentModule extends FreemarkerDeploymentModule implemen
 
   @Override
   public Validator getValidator() {
-    return new GEDCOMXValidator();
+    return new GedcomxValidator();
   }
 
   @Override
   public RuleSet getConfigurationRules() {
-    return new GEDCOMXRuleSet();
+    return new GedcomxRuleSet();
   }
 }

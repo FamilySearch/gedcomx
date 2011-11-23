@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.build.enunciate;
+package org.gedcomx.build.enunciate.rdf;
 
 import com.sun.mirror.declaration.Declaration;
 import org.gedcomx.rt.CommonModels;

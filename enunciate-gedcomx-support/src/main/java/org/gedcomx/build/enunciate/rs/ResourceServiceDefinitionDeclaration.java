@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.build.enunciate;
+package org.gedcomx.build.enunciate.rs;
 
 import com.sun.mirror.declaration.TypeDeclaration;
 import org.codehaus.enunciate.contract.jaxrs.Resource;

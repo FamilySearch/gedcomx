@@ -13,15 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.build.enunciate;
+package org.gedcomx.build.enunciate.rs;
 
 import org.codehaus.enunciate.contract.jaxrs.RootResource;
 
 import java.util.List;
 import java.util.Set;
-
-import static org.gedcomx.build.enunciate.ResourceServiceProcessor.extractLinkRelationships;
-import static org.gedcomx.build.enunciate.ResourceServiceProcessor.extractStatusCodes;
 
 /**
  * @author Ryan Heaton
@@ -40,8 +37,8 @@ public class ResourceServiceBindingMetadata {
     this.namespace = namespace;
     this.rootResource = rootResource;
     this.definitions = definitions;
-    this.statusCodes = extractStatusCodes(rootResource);
-    this.linkRelationships = extractLinkRelationships(rootResource);
+    this.statusCodes = ResourceServiceProcessor.extractStatusCodes(rootResource);
+    this.linkRelationships = ResourceServiceProcessor.extractLinkRelationships(rootResource);
   }
 
   public String getName() {

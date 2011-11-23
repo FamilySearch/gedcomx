@@ -13,20 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.rt.rs;
+package org.gedcomx.build.enunciate.rs;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import com.sun.mirror.declaration.MethodDeclaration;
+import net.sf.jelly.apt.decorations.declaration.DecoratedMethodDeclaration;
 
 /**
  * @author Ryan Heaton
  */
-@Retention ( RetentionPolicy.RUNTIME )
-@Target ({ ElementType.METHOD })
-public @interface LinkDefinition {
+public class LinkDefinitionDeclaration extends DecoratedMethodDeclaration {
 
-  String value();
+  private final ResourceServiceDefinitionDeclaration declaringDefinition;
+
+  public LinkDefinitionDeclaration(MethodDeclaration delegate, ResourceServiceDefinitionDeclaration declaringDefinition) {
+    super(delegate);
+    this.declaringDefinition = declaringDefinition;
+  }
 
 }

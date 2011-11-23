@@ -24,6 +24,7 @@ import org.codehaus.enunciate.contract.jaxb.Accessor;
 import org.codehaus.enunciate.contract.jaxb.RootElementDeclaration;
 import org.codehaus.enunciate.contract.jaxb.TypeDefinition;
 import org.codehaus.enunciate.contract.jaxb.types.XmlType;
+import org.gedcomx.build.enunciate.rs.ResourceServiceDefinitionDeclaration;
 import org.gedcomx.rt.CommonModels;
 
 import java.util.List;

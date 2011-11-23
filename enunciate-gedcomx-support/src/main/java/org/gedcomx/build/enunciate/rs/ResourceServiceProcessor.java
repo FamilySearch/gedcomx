@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.build.enunciate;
+package org.gedcomx.build.enunciate.rs;
 
 import com.sun.mirror.declaration.ClassDeclaration;
 import com.sun.mirror.declaration.Declaration;
@@ -23,7 +23,8 @@ import org.codehaus.enunciate.apt.EnunciateFreemarkerModel;
 import org.codehaus.enunciate.contract.jaxrs.ResourceMethod;
 import org.codehaus.enunciate.contract.jaxrs.RootResource;
 import org.codehaus.enunciate.contract.validation.ValidationResult;
-import org.gedcomx.rt.rs.LinkRelationships;
+import org.gedcomx.rt.rs.ResourceRelationship;
+import org.gedcomx.rt.rs.ResourceRelationships;
 import org.gedcomx.rt.rs.ResourceServiceBinding;
 import org.gedcomx.rt.rs.StatusCodes;
 
@@ -133,15 +134,15 @@ public class ResourceServiceProcessor {
 
   public static List<LinkRelationship> extractLinkRelationships(Declaration delegate) {
     List<LinkRelationship> linkRelationships = new ArrayList<LinkRelationship>();
-    org.gedcomx.rt.rs.LinkRelationship[] linkRelationshipInfo = {};
-    LinkRelationships linkRelationshipsInfo = delegate.getAnnotation(LinkRelationships.class);
-    if (linkRelationshipsInfo != null) {
-      linkRelationshipInfo = linkRelationshipsInfo.value();
+    ResourceRelationship[] resourceRelationshipInfo = {};
+    ResourceRelationships resourceRelationships = delegate.getAnnotation(ResourceRelationships.class);
+    if (resourceRelationships != null) {
+      resourceRelationshipInfo = resourceRelationships.value();
     }
-    for (org.gedcomx.rt.rs.LinkRelationship linkRelationship : linkRelationshipInfo) {
+    for (ResourceRelationship resourceRelationship : resourceRelationshipInfo) {
       ResourceServiceDefinitionDeclaration definedBy = null;
       //todo: find the resource service def decl.
-      linkRelationships.add(new LinkRelationship(linkRelationship.name(), linkRelationship.description(), definedBy));
+      linkRelationships.add(new LinkRelationship(resourceRelationship.name(), resourceRelationship.description(), definedBy));
     }
     return linkRelationships;
   }

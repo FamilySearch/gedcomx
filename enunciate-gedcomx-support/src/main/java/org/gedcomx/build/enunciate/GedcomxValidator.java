@@ -47,7 +47,7 @@ import java.util.Collection;
 /**
  * @author Ryan Heaton
  */
-public class GEDCOMXValidator extends BaseValidator {
+public class GedcomxValidator extends BaseValidator {
 
   @Override
   public ValidationResult validateComplexType(ComplexTypeDefinition complexType) {

@@ -30,7 +30,7 @@ import java.net.URL;
 /**
  * @author Ryan Heaton
  */
-public class GEDCOMXExtensionDeploymentModule extends FreemarkerDeploymentModule {
+public class GedcomxExtensionDeploymentModule extends FreemarkerDeploymentModule {
 
   private String gedcomxRoot = "http://www.gedcomx.org/";
 
@@ -64,7 +64,7 @@ public class GEDCOMXExtensionDeploymentModule extends FreemarkerDeploymentModule
   }
 
   protected URL getDocsTemplateURL() {
-    return GEDCOMXExtensionDeploymentModule.class.getResource("/META-INF/gedcomx-ext-docs.fmt");
+    return GedcomxExtensionDeploymentModule.class.getResource("/META-INF/gedcomx-ext-docs.fmt");
   }
 
   @Override
@@ -78,7 +78,7 @@ public class GEDCOMXExtensionDeploymentModule extends FreemarkerDeploymentModule
     if (!getEnunciate().isUpToDateWithSources(buildDir)) {
       EnunciateFreemarkerModel model = getModel();
       model.setFileOutputDirectory(buildDir);
-      InputStream base = GEDCOMXExtensionDeploymentModule.class.getResourceAsStream("/gedcomx.ext.docs.base.zip");
+      InputStream base = GedcomxExtensionDeploymentModule.class.getResourceAsStream("/gedcomx.ext.docs.base.zip");
       if (base != null) {
         getEnunciate().extractBase(base, buildDir);
       }

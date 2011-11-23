@@ -13,20 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.build.enunciate;
-
-import org.apache.commons.digester.Digester;
-import org.apache.commons.digester.RuleSetBase;
+package org.gedcomx.build.enunciate.rs;
 
 /**
  * @author Ryan Heaton
  */
-public class GEDCOMXRuleSet extends RuleSetBase {
+public class StatusCode {
 
-  public void addRuleInstances(Digester digester) {
-    digester.addCallMethod("enunciate/modules/gedcomx/nav/a", "addPrimaryNav", 2);
-    digester.addCallParam("enunciate/modules/gedcomx/nav/a", 0);
-    digester.addCallParam("enunciate/modules/gedcomx/nav/a", 1, "href");
+  private final int code;
+  private final String condition;
 
+  public StatusCode(int code, String condition) {
+    this.code = code;
+    this.condition = condition;
   }
+
+  public int getCode() {
+    return code;
+  }
+
+  public String getCondition() {
+    return condition;
+  }
+
 }

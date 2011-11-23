@@ -31,4 +31,7 @@ public @interface ResourceServiceDefinition {
 
   String namespace() default "##default";
 
+  Class<?> resource() default Object.class;
+
+  Class<?>[] subresources() default {};
 }
