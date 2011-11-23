@@ -4,7 +4,7 @@ import org.familysearch.ct.ws.TernaryRelationship;
 import org.familysearch.ct.ws.rs.definition.TernaryRelationshipRSDefinition;
 import org.gedcomx.conclusion.Relationship;
 import org.gedcomx.conclusion.rs.definition.RelationshipRSDefinition;
-import org.gedcomx.rt.www.ResourceServiceBinding;
+import org.gedcomx.rt.rs.ResourceServiceBinding;
 
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;

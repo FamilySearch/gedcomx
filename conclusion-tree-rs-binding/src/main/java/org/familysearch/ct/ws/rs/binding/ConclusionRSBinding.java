@@ -2,7 +2,7 @@ package org.familysearch.ct.ws.rs.binding;
 
 import org.gedcomx.conclusion.Conclusion;
 import org.gedcomx.conclusion.rs.definition.ConclusionRSDefinition;
-import org.gedcomx.rt.www.ResourceServiceBinding;
+import org.gedcomx.rt.rs.ResourceServiceBinding;
 
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;

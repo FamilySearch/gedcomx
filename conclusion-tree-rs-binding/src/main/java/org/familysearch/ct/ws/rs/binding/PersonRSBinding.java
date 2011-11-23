@@ -2,9 +2,9 @@ package org.familysearch.ct.ws.rs.binding;
 
 import org.gedcomx.conclusion.Person;
 import org.gedcomx.conclusion.rs.definition.PersonRSDefinition;
-import org.gedcomx.rt.www.ResourceServiceBinding;
-import org.gedcomx.rt.www.StatusCode;
-import org.gedcomx.rt.www.StatusCodes;
+import org.gedcomx.rt.rs.ResourceServiceBinding;
+import org.gedcomx.rt.rs.StatusCode;
+import org.gedcomx.rt.rs.StatusCodes;
 
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;

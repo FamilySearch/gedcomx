@@ -17,9 +17,9 @@ package org.familysearch.ct.ws.rs.definition;
 
 import org.familysearch.ct.ws.TernaryRelationship;
 import org.gedcomx.conclusion.rs.definition.RelationshipRSDefinition;
-import org.gedcomx.rt.www.ResourceServiceDefinition;
-import org.gedcomx.rt.www.StatusCode;
-import org.gedcomx.rt.www.StatusCodes;
+import org.gedcomx.rt.rs.ResourceServiceDefinition;
+import org.gedcomx.rt.rs.StatusCode;
+import org.gedcomx.rt.rs.StatusCodes;
 
 import javax.ws.rs.PUT;
 import javax.ws.rs.core.Context;
