@@ -23,9 +23,9 @@ import org.codehaus.enunciate.apt.EnunciateFreemarkerModel;
 import org.codehaus.enunciate.contract.jaxrs.ResourceMethod;
 import org.codehaus.enunciate.contract.jaxrs.RootResource;
 import org.codehaus.enunciate.contract.validation.ValidationResult;
-import org.gedcomx.rt.www.LinkRelationships;
-import org.gedcomx.rt.www.ResourceServiceBinding;
-import org.gedcomx.rt.www.StatusCodes;
+import org.gedcomx.rt.rs.LinkRelationships;
+import org.gedcomx.rt.rs.ResourceServiceBinding;
+import org.gedcomx.rt.rs.StatusCodes;
 
 import java.util.*;
 
@@ -133,12 +133,12 @@ public class ResourceServiceProcessor {
 
   public static List<LinkRelationship> extractLinkRelationships(Declaration delegate) {
     List<LinkRelationship> linkRelationships = new ArrayList<LinkRelationship>();
-    org.gedcomx.rt.www.LinkRelationship[] linkRelationshipInfo = {};
+    org.gedcomx.rt.rs.LinkRelationship[] linkRelationshipInfo = {};
     LinkRelationships linkRelationshipsInfo = delegate.getAnnotation(LinkRelationships.class);
     if (linkRelationshipsInfo != null) {
       linkRelationshipInfo = linkRelationshipsInfo.value();
     }
-    for (org.gedcomx.rt.www.LinkRelationship linkRelationship : linkRelationshipInfo) {
+    for (org.gedcomx.rt.rs.LinkRelationship linkRelationship : linkRelationshipInfo) {
       ResourceServiceDefinitionDeclaration definedBy = null;
       //todo: find the resource service def decl.
       linkRelationships.add(new LinkRelationship(linkRelationship.name(), linkRelationship.description(), definedBy));
@@ -148,12 +148,12 @@ public class ResourceServiceProcessor {
 
   public static List<StatusCode> extractStatusCodes(Declaration delegate) {
     List<StatusCode> statusCodes = new ArrayList<StatusCode>();
-    org.gedcomx.rt.www.StatusCode[] statusCodeInfo = {};
+    org.gedcomx.rt.rs.StatusCode[] statusCodeInfo = {};
     StatusCodes statusCodesInfo = delegate.getAnnotation(StatusCodes.class);
     if (statusCodesInfo != null) {
       statusCodeInfo = statusCodesInfo.value();
     }
-    for (org.gedcomx.rt.www.StatusCode statusCode : statusCodeInfo) {
+    for (org.gedcomx.rt.rs.StatusCode statusCode : statusCodeInfo) {
       statusCodes.add(new StatusCode(statusCode.code(), statusCode.condition()));
     }
     return statusCodes;

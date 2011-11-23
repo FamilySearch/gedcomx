@@ -18,13 +18,9 @@ package org.gedcomx.build.enunciate;
 import com.sun.mirror.declaration.TypeDeclaration;
 import org.codehaus.enunciate.contract.jaxrs.Resource;
 import org.codehaus.enunciate.contract.jaxrs.ResourceMethod;
-import org.gedcomx.rt.www.LinkDefinition;
-import org.gedcomx.rt.www.ResourceServiceDefinition;
+import org.gedcomx.rt.rs.ResourceServiceDefinition;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author Ryan Heaton

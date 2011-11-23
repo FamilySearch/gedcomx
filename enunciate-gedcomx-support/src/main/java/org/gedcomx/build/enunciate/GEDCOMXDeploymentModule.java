@@ -47,7 +47,7 @@ import org.gedcomx.rt.DocIgnoreXmlRootElement;
 import org.gedcomx.rt.GedcomNamespaceManager;
 import org.gedcomx.rt.Model;
 import org.gedcomx.rt.Models;
-import org.gedcomx.rt.www.ResourceServiceDefinition;
+import org.gedcomx.rt.rs.ResourceServiceDefinition;
 
 import java.io.File;
 import java.io.IOException;

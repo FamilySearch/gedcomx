@@ -16,9 +16,9 @@
 package org.gedcomx.conclusion.rs.definition;
 
 import org.gedcomx.conclusion.Relationship;
-import org.gedcomx.rt.www.ResourceServiceDefinition;
-import org.gedcomx.rt.www.StatusCode;
-import org.gedcomx.rt.www.StatusCodes;
+import org.gedcomx.rt.rs.ResourceServiceDefinition;
+import org.gedcomx.rt.rs.StatusCode;
+import org.gedcomx.rt.rs.StatusCodes;
 
 import javax.ws.rs.POST;
 import javax.ws.rs.core.Context;

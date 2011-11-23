@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.rt.www;
+package org.gedcomx.rt.rs;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
