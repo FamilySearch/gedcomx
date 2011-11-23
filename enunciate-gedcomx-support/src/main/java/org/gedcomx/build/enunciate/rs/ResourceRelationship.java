@@ -15,19 +15,30 @@
  */
 package org.gedcomx.build.enunciate.rs;
 
+import com.sun.mirror.type.MirroredTypeException;
+
 /**
  * @author Ryan Heaton
  */
-public class LinkRelationship {
+public class ResourceRelationship {
 
   private final String name;
   private final String description;
-  private final ResourceServiceDefinitionDeclaration definedBy;
+  private final String resourceDefQualifiedName;
+  private final ResourceServiceProcessor processor;
 
-  public LinkRelationship(String name, String description, ResourceServiceDefinitionDeclaration definedBy) {
-    this.name = name;
-    this.description = description;
-    this.definedBy = definedBy;
+  public ResourceRelationship(org.gedcomx.rt.rs.ResourceRelationship meta, ResourceServiceProcessor processor) {
+    this.name = meta.name();
+    this.description = meta.description();
+    this.processor = processor;
+    String fqn;
+    try {
+      fqn = meta.definedBy().getName();
+    }
+    catch (MirroredTypeException e) {
+      fqn = e.getQualifiedName();
+    }
+    this.resourceDefQualifiedName = fqn;
   }
 
   public String getName() {
@@ -39,6 +50,6 @@ public class LinkRelationship {
   }
 
   public ResourceServiceDefinitionDeclaration getDefinedBy() {
-    return definedBy;
+    return this.processor.findResourceService(this.resourceDefQualifiedName);
   }
 }

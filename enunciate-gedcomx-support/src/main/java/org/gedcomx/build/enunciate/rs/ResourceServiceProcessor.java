@@ -17,18 +17,23 @@ package org.gedcomx.build.enunciate.rs;
 
 import com.sun.mirror.declaration.ClassDeclaration;
 import com.sun.mirror.declaration.Declaration;
+import com.sun.mirror.declaration.InterfaceDeclaration;
 import com.sun.mirror.declaration.TypeDeclaration;
 import com.sun.mirror.type.InterfaceType;
+import com.sun.mirror.type.MirroredTypeException;
 import org.codehaus.enunciate.apt.EnunciateFreemarkerModel;
-import org.codehaus.enunciate.contract.jaxrs.ResourceMethod;
+import org.codehaus.enunciate.contract.jaxb.RootElementDeclaration;
 import org.codehaus.enunciate.contract.jaxrs.RootResource;
+import org.codehaus.enunciate.contract.jaxrs.SubResourceLocator;
 import org.codehaus.enunciate.contract.validation.ValidationResult;
-import org.gedcomx.rt.rs.ResourceRelationship;
 import org.gedcomx.rt.rs.ResourceRelationships;
 import org.gedcomx.rt.rs.ResourceServiceBinding;
+import org.gedcomx.rt.rs.ResourceServiceDefinition;
 import org.gedcomx.rt.rs.StatusCodes;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * Basic processor for validating integration the model with RDF.
@@ -56,108 +61,115 @@ public class ResourceServiceProcessor {
   public ValidationResult processModel(EnunciateFreemarkerModel model, Collection<TypeDeclaration> resourceServiceDefinitions) {
     ValidationResult result = new ValidationResult();
 
-    //todo: warn if links are defined across multiple resource service definitions
     //todo: error if setter-based resource parameters in the implementation don't carry the annotations defined in the definition, binding...
 
     for (TypeDeclaration resourceServiceDefinition : resourceServiceDefinitions) {
-      this.resourceServiceDefinitions.add(new ResourceServiceDefinitionDeclaration(resourceServiceDefinition));
+      ResourceServiceDefinition rsdInfo = resourceServiceDefinition.getAnnotation(ResourceServiceDefinition.class);
+      if (rsdInfo != null) {
+        String resourceElementFqn;
+
+        try {
+          resourceElementFqn = rsdInfo.resourceElement().getName();
+        }
+        catch (MirroredTypeException e) {
+          resourceElementFqn = e.getQualifiedName();
+        }
+
+        List<RootElementDeclaration> rootElementDeclarations = model.getRootElementDeclarations();
+        RootElementDeclaration resourceElement = null;
+        if (!Object.class.getName().equals(resourceElementFqn)) {
+          for (RootElementDeclaration rootElementDeclaration : rootElementDeclarations) {
+            if (resourceElementFqn.equals(rootElementDeclaration.getQualifiedName())) {
+              resourceElement = rootElementDeclaration;
+              break;
+            }
+          }
+
+          if (resourceElement == null) {
+            result.addWarning(resourceServiceDefinition, "Unable to find element declaration for " + resourceElementFqn + ".");
+          }
+        }
+        else {
+          result.addWarning(resourceServiceDefinition, "No resource element specified.");
+        }
+
+        this.resourceServiceDefinitions.add(new ResourceServiceDefinitionDeclaration(resourceServiceDefinition, resourceElement, this));
+      }
+      else {
+        result.addWarning(resourceServiceDefinition, "No @ResourceServiceDefinition found.");
+      }
     }
 
     for (RootResource rootResource : model.getRootResources()) {
-      ResourceServiceBinding bindingInfo = rootResource.getAnnotation(ResourceServiceBinding.class);
-      if (bindingInfo != null) {
-
-        String name = rootResource.getSimpleName();
-        if (!"##default".equals(bindingInfo.name())) {
-          name = bindingInfo.name();
-        }
-
-        String namespace = "";
-        if (!"##default".equals(bindingInfo.namespace())) {
-          //todo: use xml schema namespace?
-          namespace = bindingInfo.namespace();
-        }
-
-        Set<ResourceServiceDefinitionDeclaration> defs = new HashSet<ResourceServiceDefinitionDeclaration>();
-        gatherDefinitions(rootResource.getDelegate(), defs);
-        ResourceServiceBindingMetadata bindingMetadata = new ResourceServiceBindingMetadata(name, namespace, rootResource, defs);
-
-        List<ResourceMethod> resourceMethods = rootResource.getResourceMethods();
-        for (ResourceMethod resourceMethod : resourceMethods) {
-          resourceMethod.putMetaData("serviceBinding", bindingMetadata);
-        }
-
+      ResourceServiceBindingMetadata bindingMetadata = ResourceServiceBindingMetadata.decorate(rootResource, this);
+      if (bindingMetadata != null) {
         this.resourceServiceBindings.add(bindingMetadata);
       }
 
-      List<ResourceMethod> resourceMethods = rootResource.getResourceMethods();
-      for (ResourceMethod resourceMethod : resourceMethods) {
-        resourceMethod.putMetaData("statusCodes", extractStatusCodes(resourceMethod));
-        resourceMethod.putMetaData("linkRelationships", extractLinkRelationships(resourceMethod));
+      List<SubResourceLocator> resourceLocators = rootResource.getResourceLocators();
+      for (SubResourceLocator resourceLocator : resourceLocators) {
+        bindingMetadata = ResourceServiceBindingMetadata.decorate(resourceLocator.getResource(), this);
+        if (bindingMetadata != null) {
+          this.resourceServiceBindings.add(bindingMetadata);
+        }
       }
     }
 
     return result;
   }
 
-  private void gatherDefinitions(Declaration delegate, Set<ResourceServiceDefinitionDeclaration> defs) {
-    if (delegate instanceof TypeDeclaration) {
-      TypeDeclaration typeDeclaration = (TypeDeclaration) delegate;
-      if (!Object.class.getName().equals(typeDeclaration.getQualifiedName())) {
-        for (ResourceServiceDefinitionDeclaration resourceServiceDefinition : resourceServiceDefinitions) {
-          if (typeDeclaration.getQualifiedName().equals(resourceServiceDefinition.getQualifiedName())) {
-            defs.add(resourceServiceDefinition);
-          }
-        }
-
-        Collection<InterfaceType> supers = typeDeclaration.getSuperinterfaces();
-        for (InterfaceType superif : supers) {
-          if (superif.getDeclaration() != null) {
-            String fqn = superif.getDeclaration().getQualifiedName();
-            for (ResourceServiceDefinitionDeclaration resourceServiceDefinition : resourceServiceDefinitions) {
-              if (fqn.equals(resourceServiceDefinition.getQualifiedName())) {
-                defs.add(resourceServiceDefinition);
-              }
-            }
-          }
-        }
-
-        if (typeDeclaration instanceof ClassDeclaration) {
-          ClassDeclaration superDecl = ((ClassDeclaration) typeDeclaration).getSuperclass().getDeclaration();
-          if (superDecl != null) {
-            gatherDefinitions(superDecl, defs);
-          }
-        }
-      }
-    }
-  }
-
-  public static List<LinkRelationship> extractLinkRelationships(Declaration delegate) {
-    List<LinkRelationship> linkRelationships = new ArrayList<LinkRelationship>();
-    ResourceRelationship[] resourceRelationshipInfo = {};
+  public List<ResourceRelationship> extractResourceRelationships(TypeDeclaration delegate) {
+    List<ResourceRelationship> rels = new ArrayList<ResourceRelationship>();
+    org.gedcomx.rt.rs.ResourceRelationship[] resourceRelationshipInfo = {};
     ResourceRelationships resourceRelationships = delegate.getAnnotation(ResourceRelationships.class);
     if (resourceRelationships != null) {
       resourceRelationshipInfo = resourceRelationships.value();
     }
-    for (ResourceRelationship resourceRelationship : resourceRelationshipInfo) {
-      ResourceServiceDefinitionDeclaration definedBy = null;
-      //todo: find the resource service def decl.
-      linkRelationships.add(new LinkRelationship(resourceRelationship.name(), resourceRelationship.description(), definedBy));
+    for (org.gedcomx.rt.rs.ResourceRelationship rel : resourceRelationshipInfo) {
+      rels.add(new ResourceRelationship(rel, this));
     }
-    return linkRelationships;
+
+    Collection<InterfaceType> supers = delegate.getSuperinterfaces();
+    for (InterfaceType iface : supers) {
+      InterfaceDeclaration decl = iface.getDeclaration();
+      if (decl != null && decl.getAnnotation(ResourceServiceDefinition.class) == null && decl.getAnnotation(ResourceServiceBinding.class) == null) {
+        rels.addAll(extractResourceRelationships(decl));
+      }
+    }
+
+    return rels;
   }
 
-  public static List<StatusCode> extractStatusCodes(Declaration delegate) {
-    List<StatusCode> statusCodes = new ArrayList<StatusCode>();
-    org.gedcomx.rt.rs.StatusCode[] statusCodeInfo = {};
-    StatusCodes statusCodesInfo = delegate.getAnnotation(StatusCodes.class);
-    if (statusCodesInfo != null) {
-      statusCodeInfo = statusCodesInfo.value();
+  public List<StatusCode> extractStatusCodes(Declaration delegate) {
+    List<StatusCode> codes = new ArrayList<StatusCode>();
+    org.gedcomx.rt.rs.StatusCode[] statusCodes = {};
+    StatusCodes statusCodesContainer = delegate.getAnnotation(StatusCodes.class);
+    if (statusCodesContainer != null) {
+      statusCodes = statusCodesContainer.value();
     }
-    for (org.gedcomx.rt.rs.StatusCode statusCode : statusCodeInfo) {
-      statusCodes.add(new StatusCode(statusCode.code(), statusCode.condition()));
+    for (org.gedcomx.rt.rs.StatusCode statusCode : statusCodes) {
+      codes.add(new StatusCode(statusCode.code(), statusCode.condition()));
     }
-    return statusCodes;
+
+    if (delegate instanceof TypeDeclaration) {
+      Collection<InterfaceType> supers = ((TypeDeclaration) delegate).getSuperinterfaces();
+      for (InterfaceType iface : supers) {
+        InterfaceDeclaration decl = iface.getDeclaration();
+        if (decl != null && decl.getAnnotation(ResourceServiceDefinition.class) == null && decl.getAnnotation(ResourceServiceBinding.class) == null) {
+          codes.addAll(extractStatusCodes(decl));
+        }
+      }
+    }
+
+    return codes;
   }
 
+  public ResourceServiceDefinitionDeclaration findResourceService(String fqn) {
+    for (ResourceServiceDefinitionDeclaration definition : resourceServiceDefinitions) {
+      if (fqn.equals(definition.getQualifiedName())) {
+        return definition;
+      }
+    }
+    return null;
+  }
 }

@@ -15,25 +15,38 @@
  */
 package org.gedcomx.build.enunciate.rs;
 
+import com.sun.mirror.declaration.InterfaceDeclaration;
 import com.sun.mirror.declaration.TypeDeclaration;
+import com.sun.mirror.type.InterfaceType;
+import com.sun.mirror.type.MirroredTypesException;
+import org.codehaus.enunciate.contract.jaxb.ElementDeclaration;
 import org.codehaus.enunciate.contract.jaxrs.Resource;
 import org.codehaus.enunciate.contract.jaxrs.ResourceMethod;
+import org.codehaus.enunciate.contract.jaxrs.ResourceParameter;
+import org.gedcomx.rt.rs.ResourceServiceBinding;
 import org.gedcomx.rt.rs.ResourceServiceDefinition;
 
-import java.util.List;
+import java.util.*;
 
 /**
  * @author Ryan Heaton
  */
 public class ResourceServiceDefinitionDeclaration extends Resource {
 
+  private final ResourceServiceProcessor processor;
   private final String name;
   private final String namespace;
   private final List<StatusCode> statusCodes;
-  private final List<LinkRelationship> linkRelationships;
+  private final List<ResourceRelationship> resourceRelationships;
+  private final ElementDeclaration resourceElement;
+  private final Set<String> subresourceQualfiedNames = new TreeSet<String>();
 
-  public ResourceServiceDefinitionDeclaration(TypeDeclaration delegate) {
+  public ResourceServiceDefinitionDeclaration(TypeDeclaration delegate, ElementDeclaration resourceElement, ResourceServiceProcessor processor) {
     super(delegate);
+
+    this.resourceElement = resourceElement;
+
+    this.processor = processor;
 
     ResourceServiceDefinition rsdInfo = delegate.getAnnotation(ResourceServiceDefinition.class);
     String name = rsdInfo.name();
@@ -49,14 +62,37 @@ public class ResourceServiceDefinitionDeclaration extends Resource {
     }
     this.namespace = namespace;
 
-    this.statusCodes = ResourceServiceProcessor.extractStatusCodes(delegate);
+    this.statusCodes = processor.extractStatusCodes(delegate);
 
-    this.linkRelationships = ResourceServiceProcessor.extractLinkRelationships(delegate);
+    this.resourceRelationships = processor.extractResourceRelationships(delegate);
 
     for (ResourceMethod resourceMethod : getResourceMethods()) {
-      resourceMethod.putMetaData("statusCodes", ResourceServiceProcessor.extractStatusCodes(resourceMethod));
-      resourceMethod.putMetaData("linkRelationships", ResourceServiceProcessor.extractLinkRelationships(resourceMethod));
+      resourceMethod.putMetaData("statusCodes", processor.extractStatusCodes(resourceMethod));
     }
+
+    try {
+      Class<?>[] subresources = rsdInfo.subresources();
+      for (Class<?> subresource : subresources) {
+        this.subresourceQualfiedNames.add(subresource.getName());
+      }
+    }
+    catch (MirroredTypesException e) {
+      this.subresourceQualfiedNames.addAll(e.getQualifiedNames());
+    }
+  }
+
+  @Override
+  protected List<ResourceParameter> getResourceParameters(TypeDeclaration delegate) {
+    ArrayList<ResourceParameter> params = new ArrayList<ResourceParameter>(super.getResourceParameters(delegate));
+    //in this case, we're going to consider the params on superinterfaces, too.
+    Collection<InterfaceType> supers = delegate.getSuperinterfaces();
+    for (InterfaceType iface : supers) {
+      InterfaceDeclaration decl = iface.getDeclaration();
+      if (decl != null && decl.getAnnotation(ResourceServiceDefinition.class) == null && decl.getAnnotation(ResourceServiceBinding.class) == null) {
+        params.addAll(super.getResourceParameters(decl));
+      }
+    }
+    return params;
   }
 
   @Override
@@ -77,12 +113,24 @@ public class ResourceServiceDefinitionDeclaration extends Resource {
     return namespace;
   }
 
+  public ElementDeclaration getResourceElement() {
+    return resourceElement;
+  }
+
+  public List<ResourceServiceDefinitionDeclaration> getSubresources() {
+    ArrayList<ResourceServiceDefinitionDeclaration> subresources = new ArrayList<ResourceServiceDefinitionDeclaration>();
+    for (String fqn : this.subresourceQualfiedNames) {
+      subresources.add(this.processor.findResourceService(fqn));
+    }
+    return subresources;
+  }
+
   public List<StatusCode> getStatusCodes() {
     return statusCodes;
   }
 
-  public List<LinkRelationship> getLinkRelationships() {
-    return linkRelationships;
+  public List<ResourceRelationship> getResourceRelationships() {
+    return resourceRelationships;
   }
 
 }
