@@ -17,9 +17,9 @@ import static org.testng.AssertJUnit.assertTrue;
 @Test
 public class TestExtensionElements {
 
-  public void testCharacteristicTypes() throws Exception {
+  public void testFactTypes() throws Exception {
 
-    Characteristic ch = new Characteristic();
+    Fact ch = new Fact();
     ch.setId("id");
 
     Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();

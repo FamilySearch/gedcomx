@@ -74,12 +74,21 @@ public class TestRecord {
     record.setEvents(events);
 
     Persona persona = new Persona();
-    List<Characteristic> characteristics = new ArrayList<Characteristic>();
-    Characteristic characteristic = new Characteristic();
-    fillInField(characteristic, "characteristic");
-    characteristic.setKnownType(CharacteristicType.Occupation);
-    characteristics.add(characteristic);
-    persona.setCharacteristics(characteristics);
+    List<Fact> facts = new ArrayList<Fact>();
+    Fact fact = new Fact();
+    fillInField(fact, "fact");
+    fact.setKnownType(FactType.Occupation);
+    facts.add(fact);
+
+    Fact eventRole = new Fact();
+    eventRole.setOriginal("event role description");
+    eventRole.setPrincipal(false);
+    eventRole.setEvent(new ResourceReference(URI.create("#" + event.getId())));
+    eventRole.setAttribution(new Attribution());
+    eventRole.getAttribution().setProofStatement("event role attribution");
+    facts.add(eventRole);
+
+    persona.setFacts(facts);
 
     List<Name> names = new ArrayList<Name>();
     Name name = new Name();
@@ -117,15 +126,6 @@ public class TestRecord {
     persona.setId("persona-id");
     persona.setPersistentId(URI.create("urn:persona-id-value"));
     persona.setPrincipal(true);
-    ArrayList<EventRole> eventRoles = new ArrayList<EventRole>();
-    EventRole eventRole = new EventRole();
-    eventRole.setDescription("event role description");
-    eventRole.setPrincipal(false);
-    eventRole.setEvent(URI.create("#" + event.getId()));
-    eventRole.setAttribution(new Attribution());
-    eventRole.getAttribution().setProofStatement("event role attribution");
-    eventRoles.add(eventRole);
-    persona.setEventRoles(eventRoles);
 
     record.setPersonas(Arrays.asList(persona));
 
@@ -148,12 +148,12 @@ public class TestRecord {
     ArrayList<Relationship> relationships = new ArrayList<Relationship>();
     Relationship coupleRelationship = new Relationship();
     coupleRelationship.setKnownType(RelationshipType.Couple);
-    ArrayList<Characteristic> coupleCharacteristics = new ArrayList<Characteristic>();
-    Characteristic coupleCharacteristic = new Characteristic();
-    fillInField(coupleCharacteristic, "couple-characteristic");
-    coupleCharacteristic.setKnownType(CharacteristicType.Couple.CommonLawMarriage);
-    coupleCharacteristics.add(coupleCharacteristic);
-    coupleRelationship.setCharacteristics(coupleCharacteristics);
+    ArrayList<Fact> coupleFacts = new ArrayList<Fact>();
+    Fact coupleFact = new Fact();
+    fillInField(coupleFact, "couple-fact");
+    coupleFact.setKnownType(FactType.Couple.CommonLawMarriage);
+    coupleFacts.add(coupleFact);
+    coupleRelationship.setFacts(coupleFacts);
     coupleRelationship.setId("couple-relationship-id");
     coupleRelationship.setPersona1(new ResourceReference());
     coupleRelationship.getPersona1().setResource(URI.create("#" + persona.getId()));
@@ -230,9 +230,13 @@ public class TestRecord {
 
     assertEquals(1, record.getPersonas().size());
     Persona persona = record.getPersonas().get(0);
-    assertEquals(1, persona.getCharacteristics().size());
-    assertField(persona.getCharacteristics().get(0), "characteristic");
-    assertEquals(CharacteristicType.Occupation, persona.getCharacteristics().get(0).getKnownType());
+    assertEquals(2, persona.getFacts().size());
+    assertField(persona.getFacts().get(0), "fact");
+    assertEquals(FactType.Occupation, persona.getFacts().get(0).getKnownType());
+    assertEquals("event role description", persona.getFacts().get(1).getOriginal());
+    assertEquals("event role attribution", persona.getFacts().get(1).getAttribution().getProofStatement());
+    assertFalse(persona.getFacts().get(1).getPrincipal());
+    assertEquals("#" + event.getId(), persona.getFacts().get(1).getEvent().getResource().toString());
 
     assertEquals(1, persona.getNames().size());
     Name name = persona.getNames().get(0);
@@ -262,12 +266,6 @@ public class TestRecord {
     assertEquals("persona-id", persona.getId());
     assertEquals("urn:persona-id-value", persona.getPersistentId().toString());
     assertTrue(persona.getPrincipal());
-    assertEquals(1, persona.getEventRoles().size());
-    EventRole eventRole = persona.getEventRoles().get(0);
-    assertEquals("event role description", eventRole.getDescription());
-    assertEquals("event role attribution", eventRole.getAttribution().getProofStatement());
-    assertFalse(eventRole.getPrincipal());
-    assertEquals("#" + event.getId(), eventRole.getEvent().toString());
 
     assertEquals(1, record.getFields().size());
     RecordField field = record.getFields().get(0);
@@ -284,10 +282,10 @@ public class TestRecord {
     assertEquals(2, record.getRelationships().size());
     Relationship coupleRelationship = record.getRelationships().get(0);
     assertEquals(RelationshipType.Couple, coupleRelationship.getKnownType());
-    assertEquals(1, coupleRelationship.getCharacteristics().size());
-    Characteristic coupleCharacteristic = coupleRelationship.getCharacteristics().get(0);
-    assertField(coupleCharacteristic, "couple-characteristic");
-    assertEquals(CharacteristicType.Couple.CommonLawMarriage, coupleCharacteristic.getKnownType());
+    assertEquals(1, coupleRelationship.getFacts().size());
+    Fact coupleFact = coupleRelationship.getFacts().get(0);
+    assertField(coupleFact, "couple-fact");
+    assertEquals(FactType.Couple.CommonLawMarriage, coupleFact.getKnownType());
     assertEquals("couple-relationship-id", coupleRelationship.getId());
     assertEquals("#" + persona.getId(), coupleRelationship.getPersona1().getResource().toString());
     assertEquals("#" + persona.getId(), coupleRelationship.getPersona2().getResource().toString());

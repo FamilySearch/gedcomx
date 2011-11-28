@@ -22,9 +22,11 @@ import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.common.GenealogicalEntity;
+import org.gedcomx.common.GenealogicalResource;
 import org.gedcomx.common.PersistentIdentifiable;
 import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.JsonElementWrapper;
+import org.gedcomx.rt.RDFDomain;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.RecordType;
 import org.gedcomx.types.TypeReference;
@@ -140,6 +142,7 @@ public class Record extends GenealogicalEntity implements Typed<RecordType>, Per
   @XmlElement(name = "event")
   @JsonProperty("events")
   @JsonName("events")
+  @RDFDomain ( CommonModels.GEDCOMX_COMMON_NAMESPACE + "GenealogicalResource" )
   public List<Event> getEvents() {
     return events;
   }
