@@ -33,12 +33,6 @@ import java.util.Map;
  */
 public class TypeNameMethod implements TemplateMethodModelEx {
 
-  private final Map<String, String> namespaces2Prefixes;
-
-  public TypeNameMethod(Map<String, String> namespaces2Prefixes) {
-    this.namespaces2Prefixes = namespaces2Prefixes;
-  }
-
   public Object exec(List list) throws TemplateModelException {
     if (list.size() < 1) {
       throw new TemplateModelException("The typeName method must have an accessor and a default ns as a parameter.");
@@ -78,8 +72,7 @@ public class TypeNameMethod implements TemplateMethodModelEx {
 
     StringBuilder builder = new StringBuilder();
     if (!defaultNs.equals(namespace) && !XMLConstants.W3C_XML_SCHEMA_NS_URI.equals(namespace)) {
-      String prefix = namespaces2Prefixes.get(namespace);
-      builder.append(prefix).append(':');
+      builder.append(namespace);
     }
     builder.append(name);
 

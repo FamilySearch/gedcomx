@@ -62,7 +62,7 @@ public class GedcomxExtensionRootMethod implements TemplateMethodModelEx {
       }
     }
     else if (object instanceof Accessor) {
-      if (IsGedcomxNamespaceMethod.isGedcomxNamepace(((Accessor) object).getNamespace())) {
+      if (IsGedcomxNamespaceMethod.isGedcomxNamepace(((Accessor) object).getBaseType().getNamespace())) {
         return this.gedcomxRoot + "model/";
       }
     }
