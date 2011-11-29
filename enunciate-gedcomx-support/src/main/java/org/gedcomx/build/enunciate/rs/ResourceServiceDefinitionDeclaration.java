@@ -38,13 +38,13 @@ public class ResourceServiceDefinitionDeclaration extends Resource {
   private final String namespace;
   private final List<StatusCode> statusCodes;
   private final List<ResourceRelationship> resourceRelationships;
-  private final ElementDeclaration resourceElement;
+  private final List<ElementDeclaration> resourceElements;
   private final Set<String> subresourceQualfiedNames = new TreeSet<String>();
 
-  public ResourceServiceDefinitionDeclaration(TypeDeclaration delegate, ElementDeclaration resourceElement, ResourceServiceProcessor processor) {
+  public ResourceServiceDefinitionDeclaration(TypeDeclaration delegate, List<ElementDeclaration> resourceElements, ResourceServiceProcessor processor) {
     super(delegate);
 
-    this.resourceElement = resourceElement;
+    this.resourceElements = resourceElements;
 
     this.processor = processor;
 
@@ -113,14 +113,17 @@ public class ResourceServiceDefinitionDeclaration extends Resource {
     return namespace;
   }
 
-  public ElementDeclaration getResourceElement() {
-    return resourceElement;
+  public List<ElementDeclaration> getResourceElements() {
+    return resourceElements;
   }
 
   public List<ResourceServiceDefinitionDeclaration> getSubresources() {
     ArrayList<ResourceServiceDefinitionDeclaration> subresources = new ArrayList<ResourceServiceDefinitionDeclaration>();
     for (String fqn : this.subresourceQualfiedNames) {
-      subresources.add(this.processor.findResourceService(fqn));
+      ResourceServiceDefinitionDeclaration rs = this.processor.findResourceService(fqn);
+      if (rs != null) {
+        subresources.add(rs);
+      }
     }
     return subresources;
   }

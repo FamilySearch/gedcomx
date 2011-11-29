@@ -15,7 +15,9 @@
  */
 package org.gedcomx.conclusion.rs.definition;
 
+import org.gedcomx.common.ResourceSet;
 import org.gedcomx.conclusion.Conclusion;
+import org.gedcomx.conclusion.ConclusionModel;
 import org.gedcomx.rt.rs.ResourceServiceDefinition;
 import org.gedcomx.rt.rs.StatusCode;
 import org.gedcomx.rt.rs.StatusCodes;
@@ -31,9 +33,12 @@ import javax.ws.rs.core.UriInfo;
  * @author Ryan Heaton
  */
 @ResourceServiceDefinition (
-  name = "Conclusions"
+  name = "Conclusions",
+  namespace = ConclusionModel.GEDCOMX_CONCLUSION_V1_NAMESPACE,
+  resourceElement = ResourceSet.class,
+  subresources = { ConclusionRSDefinition.class }
 )
-public interface ConclusionsRSDefinition extends CommonRSDefinition {
+public interface ConclusionsRSDefinition extends CommonRSParameters {
 
   /**
    * Get a set of conclusions.

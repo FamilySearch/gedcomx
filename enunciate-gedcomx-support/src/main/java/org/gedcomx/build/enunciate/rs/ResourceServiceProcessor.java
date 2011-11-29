@@ -19,9 +19,12 @@ import com.sun.mirror.declaration.ClassDeclaration;
 import com.sun.mirror.declaration.Declaration;
 import com.sun.mirror.declaration.InterfaceDeclaration;
 import com.sun.mirror.declaration.TypeDeclaration;
+import com.sun.mirror.type.DeclaredType;
 import com.sun.mirror.type.InterfaceType;
-import com.sun.mirror.type.MirroredTypeException;
+import com.sun.mirror.type.MirroredTypesException;
+import com.sun.mirror.type.TypeMirror;
 import org.codehaus.enunciate.apt.EnunciateFreemarkerModel;
+import org.codehaus.enunciate.contract.jaxb.ElementDeclaration;
 import org.codehaus.enunciate.contract.jaxb.RootElementDeclaration;
 import org.codehaus.enunciate.contract.jaxrs.RootResource;
 import org.codehaus.enunciate.contract.jaxrs.SubResourceLocator;
@@ -66,18 +69,27 @@ public class ResourceServiceProcessor {
     for (TypeDeclaration resourceServiceDefinition : resourceServiceDefinitions) {
       ResourceServiceDefinition rsdInfo = resourceServiceDefinition.getAnnotation(ResourceServiceDefinition.class);
       if (rsdInfo != null) {
-        String resourceElementFqn;
+        List<String> resourceElementsFqn = new ArrayList<String>();
 
         try {
-          resourceElementFqn = rsdInfo.resourceElement().getName();
+          Class<?>[] classes = rsdInfo.resourceElement();
+          for (Class<?> clazz : classes) {
+            resourceElementsFqn.add(clazz.getName());
+          }
         }
-        catch (MirroredTypeException e) {
-          resourceElementFqn = e.getQualifiedName();
+        catch (MirroredTypesException e) {
+          Collection<TypeMirror> typeMirrors = e.getTypeMirrors();
+          for (TypeMirror typeMirror : typeMirrors) {
+            if (typeMirror instanceof DeclaredType && ((DeclaredType) typeMirror).getDeclaration() != null) {
+              resourceElementsFqn.add(((DeclaredType) typeMirror).getDeclaration().getQualifiedName());
+            }
+          }
         }
 
         List<RootElementDeclaration> rootElementDeclarations = model.getRootElementDeclarations();
-        RootElementDeclaration resourceElement = null;
-        if (!Object.class.getName().equals(resourceElementFqn)) {
+        ArrayList<ElementDeclaration> resourceElements = new ArrayList<ElementDeclaration>();
+        for (String resourceElementFqn : resourceElementsFqn) {
+          ElementDeclaration resourceElement = null;
           for (RootElementDeclaration rootElementDeclaration : rootElementDeclarations) {
             if (resourceElementFqn.equals(rootElementDeclaration.getQualifiedName())) {
               resourceElement = rootElementDeclaration;
@@ -88,12 +100,15 @@ public class ResourceServiceProcessor {
           if (resourceElement == null) {
             result.addWarning(resourceServiceDefinition, "Unable to find element declaration for " + resourceElementFqn + ".");
           }
-        }
-        else {
-          result.addWarning(resourceServiceDefinition, "No resource element specified.");
+
+          else {
+            resourceElements.add(resourceElement);
+          }
         }
 
-        this.resourceServiceDefinitions.add(new ResourceServiceDefinitionDeclaration(resourceServiceDefinition, resourceElement, this));
+        ResourceServiceDefinitionDeclaration rsd = new ResourceServiceDefinitionDeclaration(resourceServiceDefinition, resourceElements, this);
+        //todo: validate the rsd.
+        this.resourceServiceDefinitions.add(rsd);
       }
       else {
         result.addWarning(resourceServiceDefinition, "No @ResourceServiceDefinition found.");
@@ -148,7 +163,7 @@ public class ResourceServiceProcessor {
       statusCodes = statusCodesContainer.value();
     }
     for (org.gedcomx.rt.rs.StatusCode statusCode : statusCodes) {
-      codes.add(new StatusCode(statusCode.code(), statusCode.condition()));
+      codes.add(new StatusCode(statusCode.code(), statusCode.condition(), statusCode.warningCode() >= 0 ? statusCode.warningCode() : null));
     }
 
     if (delegate instanceof TypeDeclaration) {

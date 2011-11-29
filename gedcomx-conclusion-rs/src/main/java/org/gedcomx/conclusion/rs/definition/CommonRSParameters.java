@@ -31,11 +31,7 @@ import javax.ws.rs.HeaderParam;
   @StatusCode( code = 403, condition = "If the resource is forbidden even after considering a possibly valid authentication."),
   @StatusCode( code = 501, condition = "If the resource is not supported by the implementation.")
 } )
-@ResourceServiceDefinition (
-  name = "Common",
-  namespace = "http://gedcomx.org/rs/conclusion/v1/"
-)
-public interface CommonRSDefinition {
+public interface CommonRSParameters {
 
   /**
    * Set the proof statement given by the user to support changes to genealogical data.

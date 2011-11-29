@@ -15,10 +15,8 @@
  */
 package org.gedcomx.conclusion.rs.definition;
 
-import org.gedcomx.conclusion.Conclusion;
-import org.gedcomx.rt.rs.ResourceServiceDefinition;
-import org.gedcomx.rt.rs.StatusCode;
-import org.gedcomx.rt.rs.StatusCodes;
+import org.gedcomx.conclusion.*;
+import org.gedcomx.rt.rs.*;
 
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -32,9 +30,14 @@ import javax.ws.rs.core.UriInfo;
  * @author Ryan Heaton
  */
 @ResourceServiceDefinition (
-  name = "Conclusion"
+  name = "Conclusion",
+  namespace = ConclusionModel.GEDCOMX_CONCLUSION_V1_NAMESPACE,
+  resourceElement = { Name.class, Gender.class, Fact.class }
 )
-public interface ConclusionRSDefinition extends CommonRSDefinition {
+@ResourceRelationships ({
+  @ResourceRelationship ( name = "self", definedBy = ConclusionRSDefinition.class, description = "The conclusion itself." )
+})
+public interface ConclusionRSDefinition extends CommonRSParameters {
 
   /**
    * Read a conclusion.

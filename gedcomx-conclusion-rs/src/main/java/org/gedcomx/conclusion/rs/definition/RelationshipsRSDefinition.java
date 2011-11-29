@@ -15,6 +15,8 @@
  */
 package org.gedcomx.conclusion.rs.definition;
 
+import org.gedcomx.common.ResourceSet;
+import org.gedcomx.conclusion.ConclusionModel;
 import org.gedcomx.conclusion.Relationship;
 import org.gedcomx.rt.rs.ResourceServiceDefinition;
 import org.gedcomx.rt.rs.StatusCode;
@@ -31,9 +33,12 @@ import javax.ws.rs.core.UriInfo;
  * @author Ryan Heaton
  */
 @ResourceServiceDefinition (
-  name = "Relationships"
+  name = "Relationships",
+  namespace = ConclusionModel.GEDCOMX_CONCLUSION_V1_NAMESPACE,
+  resourceElement = ResourceSet.class,
+  subresources = RelationshipRSDefinition.class
 )
-public interface RelationshipsRSDefinition extends CommonRSDefinition {
+public interface RelationshipsRSDefinition extends CommonRSParameters {
 
   /**
    * Create a relationship.

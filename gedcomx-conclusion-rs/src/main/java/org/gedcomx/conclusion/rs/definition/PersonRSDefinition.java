@@ -15,10 +15,9 @@
  */
 package org.gedcomx.conclusion.rs.definition;
 
+import org.gedcomx.conclusion.ConclusionModel;
 import org.gedcomx.conclusion.Person;
-import org.gedcomx.rt.rs.ResourceServiceDefinition;
-import org.gedcomx.rt.rs.StatusCode;
-import org.gedcomx.rt.rs.StatusCodes;
+import org.gedcomx.rt.rs.*;
 
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -33,9 +32,15 @@ import javax.ws.rs.core.UriInfo;
  * @author Ryan Heaton
  */
 @ResourceServiceDefinition (
-  name = "Person"
+  name = "Person",
+  resourceElement = Person.class,
+  namespace = ConclusionModel.GEDCOMX_CONCLUSION_V1_NAMESPACE,
+  subresources = { ConclusionRSDefinition.class, ConclusionsRSDefinition.class }
 )
-public interface PersonRSDefinition extends CommonRSDefinition {
+@ResourceRelationships({
+  @ResourceRelationship ( name = "self", definedBy = PersonRSDefinition.class, description = "The person itself." )
+})
+public interface PersonRSDefinition extends CommonRSParameters {
 
   /**
    * Read a person.

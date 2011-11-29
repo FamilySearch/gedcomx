@@ -21,11 +21,13 @@ package org.gedcomx.build.enunciate.rs;
 public class StatusCode {
 
   private final int code;
+  private final Integer warningCode;
   private final String condition;
 
-  public StatusCode(int code, String condition) {
+  public StatusCode(int code, String condition, Integer warningCode) {
     this.code = code;
     this.condition = condition;
+    this.warningCode = warningCode;
   }
 
   public int getCode() {
@@ -36,4 +38,7 @@ public class StatusCode {
     return condition;
   }
 
+  public Integer getWarningCode() {
+    return warningCode;
+  }
 }
