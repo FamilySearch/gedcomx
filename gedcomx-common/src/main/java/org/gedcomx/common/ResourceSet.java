@@ -18,6 +18,7 @@ package org.gedcomx.common;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
+import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.JsonElementWrapper;
 import org.gedcomx.rt.SupportsExtensionElements;
 import org.gedcomx.rt.XmlTypeIdResolver;
@@ -32,7 +33,7 @@ import java.util.List;
  *
  * @author Ryan Heaton
  */
-@XmlRootElement ( name = "RDF" )
+@XmlRootElement ( name = "RDF", namespace = CommonModels.RDF_NAMESPACE )
 @JsonElementWrapper (name = "resourceSets")
 @JsonTypeInfo ( use = JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME )
 @JsonTypeIdResolver ( XmlTypeIdResolver.class )

@@ -35,31 +35,33 @@
 
       <p>${element.docValue!""}</p>
 
-      <div id="accordion">
-        <h3><a href="#">XML</a></h3>
-        <div>
+      <div id="tabs">
+        <ul>
+          <li><a href="#xml">XML</a></li>
+          <li><a href="#json">JSON</a></li>
+        </ul>
+        <div id="xml">
           <b style="font-weight: bold">Example</b>
           <pre class="prettyprint lang-xml">
 ${generateExampleXml(element)?html}
           </pre>
         </div>
 
-        <h3><a href="#">JSON</a></h3>
-        <div>
+        <div id="json">
           <b style="font-weight: bold">Example</b>
           <pre class="prettyprint lang-js">
 ${generateExampleJson(element)}
           </pre>
         </div>
-    </div>
+      </div>
   [#if schema.properties.definesRDFSchema!false]
 
-    <h3>RDF Integration</h3>
+      <h3>RDF Integration</h3>
 
-    <p>The <tt>${element.name}</tt> element is declared as an <a href="http://www.w3.org/TR/rdf-syntax-grammar/#section-Syntax">RDF description element</a>.
-      The following two description sets are semantically equivalent:</p>
+      <p>The <tt>${element.name}</tt> element is declared as an <a href="http://www.w3.org/TR/rdf-syntax-grammar/#section-Syntax">RDF description element</a>.
+        The following two description sets are semantically equivalent:</p>
 
-    <pre class="prettyprint lang-xml">
+      <pre class="prettyprint lang-xml">
 &lt;rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
             xmlns:${schema.id}="${element.namespace}"&gt;
   &lt;rdf:Description rdf:ID="12345"&gt;
@@ -67,23 +69,23 @@ ${generateExampleJson(element)}
     ...
   &lt;/rdf:Description&gt;
 &lt;/rdf:RDF&gt;
-    </pre>
+      </pre>
 
-    <br/>
+      <br/>
 
-    <pre class="prettyprint lang-xml">
+      <pre class="prettyprint lang-xml">
 &lt;rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
             xmlns:${schema.id}="${element.namespace}"&gt;
   &lt;${schema.id}:${element.name} rdf:ID="12345"&gt;
     ...
   &lt;/${schema.id}:${element.name}&gt;
 &lt;/rdf:RDF&gt;
-    </pre>
+      </pre>
   [/#if]
 
-    <div class="clear" />
+      <div class="clear" />
     [@libBoilerplate.writeFooter/]
-  </div> <!--! end of #container -->
+    </div> <!--! end of #container -->
 
   [@libBoilerplate.writeEndBody/]
 [/#macro]

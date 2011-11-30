@@ -23,12 +23,16 @@
           <td>${rsd.namespace}</td>
         </tr>
         [#if rsd.resourceElements?size > 0]
+          [#local exampleResourceElement=rsd.resourceElements[0]/]
         <tr>
           <td align="right">Representation(s):</td>
           <td>[#list rsd.resourceElements as resourceElement]<a href="../model/${schemaForNamespace(resourceElement).id}_el_${resourceElement.name}.html">${resourceElement.name}</a>[#if resourceElement_has_next] or [/#if][/#list]</td>
         </tr>
         [/#if]
         [#if rsd.subresources?size > 0]
+          [#if rsd.subresources[0].resourceElements?size > 0]
+            [#local exampleSubresourceElement=rsd.subresources[0].resourceElements[0]/]
+          [/#if]
         <tr>
           <td align="right">Subresources:</td>
           <td>[#list rsd.subresources as subresource]<a href="${subresource.name}.html">${subresource.name}</a>[#if subresource_has_next], [/#if][/#list]</td>
@@ -94,29 +98,113 @@
       </table>
 
       [/#if]
+      <h3>Operations</h3>
+      <div id="tabs">
+        <ul>
       [#list rsd.resourceMethods as op]
-      <h3>${op.httpMethods[0]}</h3>
+          <li><a href="#${op.httpMethods[0]?upper_case}">${op.httpMethods[0]?upper_case}</a></li>
+      [/#list]
+        </ul>
+      [#list rsd.resourceMethods as op]
+        [#assign method=op.httpMethods[0]?upper_case/]
+        [#assign isGet=("GET" = method)/]
+        [#assign isPut=("PUT" = method)/]
+        [#assign isPost=("POST" = method)/]
+        [#assign isDelete=("DELETE" = method)/]
+        <div id="${method}">
+        <p>${op.docValue!""}</p>
 
-      <p>${op.docValue!""}</p>
+        <h4>Status Codes</h4>
 
-      <h4>Status Codes</h4>
+        <table>
+          <tr>
+            <th align="center">code</th>
+            <th align="center">warning code</th>
+            <th align="center">condition</th>
+          </tr>
+      [#list op.metaData.statusCodes?sort_by("code") as statusCode]
+          <tr>
+            <td>${statusCode.code}</td>
+            <td>${statusCode.warningCode!"-"}</td>
+            <td>${statusCode.condition}</td>
+          </tr>
+      [/#list]
+        </table>
 
-      <table>
-        <tr>
-          <th align="center">code</th>
-          <th align="center">warning code</th>
-          <th align="center">condition</th>
-        </tr>
-    [#list op.metaData.statusCodes?sort_by("code") as statusCode]
-        <tr>
-          <td>${statusCode.code}</td>
-          <td>${statusCode.warningCode!"-"}</td>
-          <td>${statusCode.condition}</td>
-        </tr>
+      [#if exampleResourceElement??]
+        <h4>Example Request</h4>
+
+        <pre>
+${method} /path/to/${rsd.name?lower_case}
+Accept: ${schemaForNamespace(exampleResourceElement).properties.xmlMediaType}
+        [#list rsd.resourceParameters as param]
+          [#if param.headerParam!false]
+${param.parameterName}: ...
+          [/#if]
+        [/#list]
+        [#if isPost && rsd.resourceBundle && exampleSubresourceElement??]
+Content-Type: ${schemaForNamespace(exampleResourceElement).properties.xmlMediaType}
+
+          <code class="prettyprint lang-xml">
+&lt;${exampleSubresourceElement.name} xmlns="${exampleSubresourceElement.namespace}"&gt;
+  ...
+&lt;/${exampleResourceElement.name}&gt;
+          </code>
+        [#elseif isPut]
+Content-Type: ${schemaForNamespace(exampleResourceElement).properties.xmlMediaType}
+
+          <code class="prettyprint lang-xml">
+&lt;${exampleResourceElement.name} xmlns="${exampleResourceElement.namespace}"&gt;
+  ...
+&lt;/${exampleResourceElement.name}&gt;
+          </code>
+        [/#if]
+        </pre>
+
+        <h4>Example Response</h4>
+        <pre>
+        [#if isPost]
+HTTP/1.1 201 Created
+Location: /path/to/${rsd.name?lower_case}
+        [#elseif isPut || isDelete]
+HTTP/1.1 204 No Content
+        [#else]
+HTTP/1.1 200 OK
+Content-Type: ${schemaForNamespace(exampleResourceElement).properties.xmlMediaType}
+
+          <code class="prettyprint lang-xml">
+&lt;${exampleResourceElement.name} xmlns="${exampleResourceElement.namespace}" xmlns:rs="http://gedcomx.org/rs/v1/"&gt;
+  ...
+  [#if rsd.resourceRelationships?size > 0]
+    [#list rsd.resourceRelationships as resourceRelationship]
+  &lt;rs:link rel="${resourceRelationship.name}" href="..."/&gt;
     [/#list]
-      </table>
-
-  [/#list]
+  ...
+  [/#if]
+  [#if rsd.subresources?size > 0]
+    [#list rsd.subresources as subresource]
+      [#if !subresource.resourceBundle]
+        [#list subresource.resourceElements as subresourceElement]
+  &lt;${subresourceElement.name}[#if subresourceElement.namespace != exampleResourceElement.namespace] xmlns="${subresourceElement.namespace}"[/#if]&gt;
+    ...
+          [#if subresource.resourceRelationships?size > 0]
+            [#list subresource.resourceRelationships as resourceRelationship]
+    &lt;rs:link rel="${resourceRelationship.name}" href="..."/&gt;
+            [/#list]
+    ...
+          [/#if]
+  &lt;/${subresourceElement.name}&gt;
+        [/#list]
+      [/#if]
+    [/#list]
+  [/#if]
+&lt;/${exampleResourceElement.name}&gt;
+          </code>
+        [/#if]
+        </pre>
+      [/#if]
+    </div>
+    [/#list]
 
 
     <div class="clear" />

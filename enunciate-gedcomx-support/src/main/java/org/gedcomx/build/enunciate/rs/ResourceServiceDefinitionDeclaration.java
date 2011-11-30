@@ -23,6 +23,7 @@ import org.codehaus.enunciate.contract.jaxb.ElementDeclaration;
 import org.codehaus.enunciate.contract.jaxrs.Resource;
 import org.codehaus.enunciate.contract.jaxrs.ResourceMethod;
 import org.codehaus.enunciate.contract.jaxrs.ResourceParameter;
+import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.rs.ResourceServiceBinding;
 import org.gedcomx.rt.rs.ResourceServiceDefinition;
 
@@ -134,6 +135,15 @@ public class ResourceServiceDefinitionDeclaration extends Resource {
 
   public List<ResourceRelationship> getResourceRelationships() {
     return resourceRelationships;
+  }
+
+  public boolean isResourceBundle() {
+    for (ElementDeclaration resourceElement : this.resourceElements) {
+      if (CommonModels.RDF_NAMESPACE.equals(resourceElement.getNamespace()) && "RDF".equals(resourceElement.getName())) {
+        return true;
+      }
+    }
+    return false;
   }
 
 }

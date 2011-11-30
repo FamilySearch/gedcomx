@@ -60,9 +60,12 @@
       [/#list]
       </table>
     [#else]
-    <div id="accordion">
-      <h3><a href="#">XML</a></h3>
-      <div>
+    <div id="tabs">
+      <ul>
+        <li><a href="#xml">XML</a></li>
+        <li><a href="#json">JSON</a></li>
+      </ul>
+      <div id="xml">
       [#if type.value??]
         [#assign hasSchema=schemaForNamespace(type.value)??/]
         <b style="font-weight: bold">Value</b>
@@ -139,8 +142,7 @@ ${generateExampleXml(type)?html}
         </pre>
       </div>
 
-      <h3><a href="#">JSON</a></h3>
-      <div>
+      <div id="json">
         <b style="font-weight: bold">Properties</b>
         <table>
           <tr>
