@@ -6,7 +6,7 @@
   [@libBoilerplate.writeHeader subnav={"Model" : "index.html", (schema.properties.label!("\"" + schema.id + "\" Model")) : "#"}/]
 <div class="wrap">
   <article id="subject" class="clearfix">
-    <div id="main" class="column first last span-20">
+    <div class="feature-content clearfix">
       <h1>${schema.properties.label!("\"" + schema.id + "\" Model")}</h1>
 
       <hr/>
@@ -69,7 +69,7 @@
         <li><a href="${gedcomxExtensionRoot(schema)}${schema.id}_${type.name}.html">${type.name}</a></li>
         [/#list]
       </ul>
-
+    </div>
   </article>
 </div>
   [@libBoilerplate.writeFooter/]

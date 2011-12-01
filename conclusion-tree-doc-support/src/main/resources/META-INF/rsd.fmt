@@ -2,63 +2,211 @@
 [#--macro for writing a element page--]
 [#import "boilerplate.fmt" as libBoilerplate/]
 [#macro writeResourceServiceDefinitionPage rsd]
-  [#assign rsdName=rsd.name?cap_first + " Service"/]
+  [#assign rsdName=rsd.name?cap_first + " Resource"/]
   [@libBoilerplate.writeStartBody label=rsdName/]
   [@libBoilerplate.writeHeader subnav={"Resources" : "index.html", rsdName : "#"}/]
   <div class="wrap">
     <article id="subject" class="clearfix">
-      <h1>${rsdName}</h1>
+        <div class="feature-content clearfix">
+        <h1>${rsdName}</h1>
 
-      <hr/>
+        <hr/>
 
-      <table>
-        <tr>
-          <td align="right">Name:</td>
-          <td>${rsd.name}</td>
-        </tr>
-        <tr>
-          <td align="right">Namespace:</td>
-          <td>${rsd.namespace}</td>
-        </tr>
-      </table>
+        <p>${rsd.docValue!""}</p>
 
-      <h3>Description</h3>
+        <table>
+          <tr>
+            <td align="right">Name:</td>
+            <td>${rsd.name}</td>
+          </tr>
+          <tr>
+            <td align="right">Namespace:</td>
+            <td>${rsd.namespace}</td>
+          </tr>
+          [#if rsd.resourceElements?size > 0]
+            [#local exampleResourceElement=rsd.resourceElements[0]/]
+          <tr>
+            <td align="right">Representation(s):</td>
+            <td>[#list rsd.resourceElements as resourceElement]<a href="${gedcomxExtensionRoot(resourceElement)}${schemaForNamespace(resourceElement).id}_el_${resourceElement.name}.html">${resourceElement.name}</a>[#if resourceElement_has_next] or [/#if][/#list]</td>
+          </tr>
+          [/#if]
+          [#if rsd.subresources?size > 0]
+            [#if rsd.subresources[0].resourceElements?size > 0]
+              [#local exampleSubresourceElement=rsd.subresources[0].resourceElements[0]/]
+            [/#if]
+          <tr>
+            <td align="right">Subresources:</td>
+            <td>[#list rsd.subresources as subresource]<a href="${gedcomxExtensionRoot(subresource)}${subresource.name}_resource.html">${subresource.name}</a>[#if subresource_has_next], [/#if][/#list]</td>
+          </tr>
+          [/#if]
 
-      <p>${rsd.docValue!""}</p>
+        </table>
 
-      <h3>Status Codes</h3>
+        [#if rsd.resourceRelationships?size > 0]
+        <h3>Resource Relationships</h3>
 
-      <table>
-        <tr>
-          <th align="center">code</th>
-          <th align="center">condition</th>
-        </tr>
-  [#list rsd.statusCodes as statusCode]
-        <tr>
-          <td>${statusCode.code}</td>
-          <td>${statusCode.condition}</td>
-        </tr>
-  [/#list]
-      </table>
+        <table>
+          <tr>
+            <th>Name</th>
+            <th>Resource</th>
+            <th>Description</th>
+          </tr>
+          [#list rsd.resourceRelationships as resourceRelationship]
+            <tr>
+              <td>${resourceRelationship.name}</td>
+              <td>[#if resourceRelationship.definedBy??]<a href="${gedcomxExtensionRoot(resourceRelationship.definedBy)}${resourceRelationship.definedBy.name}_resource.html">${resourceRelationship.definedBy.name}</a>[#else](unknown)[/#if]</td>
+              <td>${resourceRelationship.description}</td>
+            </tr>
+          [/#list]
+        </table>
 
-  [#list rsd.resourceMethods as op]
-      <b>${op.httpMethods[0]}</b>
+        [/#if]
+        [#if rsd.statusCodes?size > 0]
+        <h3>Common Status Codes</h3>
 
-      <p>${op.docValue!""}</p>
+        <table>
+          <tr>
+            <th align="center">code</th>
+            <th align="center">warning code</th>
+            <th align="center">condition</th>
+          </tr>
+          [#list rsd.statusCodes?sort_by("code") as statusCode]
+          <tr>
+            <td>${statusCode.code}</td>
+            <td>${statusCode.warningCode!"-"}</td>
+            <td>${statusCode.condition}</td>
+          </tr>
+          [/#list]
+        </table>
 
-      <table>
-        <tr>
-          <th align="center">code</th>
-          <th align="center">condition</th>
-        </tr>
-    [#list op.metaData.statusCodes as statusCode]
-        <tr>
-          <td>${statusCode.code}</td>
-          <td>${statusCode.condition}</td>
-        </tr>
-    [/#list]
-      </table>
-  [/#list]
+        [/#if]
+        [#if rsd.resourceParameters?size > 0]
+        <h3>Common Parameters</h3>
+
+        <table>
+          <tr>
+            <th align="center">name</th>
+            <th align="center">type</th>
+            <th align="center">description</th>
+          </tr>
+          [#list rsd.resourceParameters?sort_by("typeName") as param]
+          <tr>
+            <td>${param.parameterName}</td>
+            <td>${param.typeName}</td>
+            <td>${param.docValue!""}</td>
+          </tr>
+          [/#list]
+        </table>
+
+        [/#if]
+        <h3>Operations</h3>
+        <div id="tabs">
+          <ul>
+        [#list rsd.resourceMethods as op]
+            <li><a href="#${op.httpMethods[0]?upper_case}">${op.httpMethods[0]?upper_case}</a></li>
+        [/#list]
+          </ul>
+        [#list rsd.resourceMethods as op]
+          [#assign method=op.httpMethods[0]?upper_case/]
+          [#assign isGet=("GET" = method)/]
+          [#assign isPut=("PUT" = method)/]
+          [#assign isPost=("POST" = method)/]
+          [#assign isDelete=("DELETE" = method)/]
+          <div id="${method}">
+          <p>${op.docValue!""}</p>
+
+          <h4>Status Codes</h4>
+
+          <table>
+            <tr>
+              <th align="center">code</th>
+              <th align="center">warning code</th>
+              <th align="center">condition</th>
+            </tr>
+        [#list op.metaData.statusCodes?sort_by("code") as statusCode]
+            <tr>
+              <td>${statusCode.code}</td>
+              <td>${statusCode.warningCode!"-"}</td>
+              <td>${statusCode.condition}</td>
+            </tr>
+        [/#list]
+          </table>
+
+        [#if exampleResourceElement??]
+          <h4>Example Request</h4>
+
+          <pre>
+  ${method} /path/to/${rsd.name?lower_case}
+  Accept: ${schemaForNamespace(exampleResourceElement).properties.xmlMediaType}
+          [#list rsd.resourceParameters as param]
+            [#if param.headerParam!false]
+  ${param.parameterName}: ...
+            [/#if]
+          [/#list]
+          [#if isPost && rsd.resourceBundle && exampleSubresourceElement??]
+  Content-Type: ${schemaForNamespace(exampleResourceElement).properties.xmlMediaType}
+
+            <code class="prettyprint lang-xml">
+  &lt;${exampleSubresourceElement.name} xmlns="${exampleSubresourceElement.namespace}"&gt;
+    ...
+  &lt;/${exampleResourceElement.name}&gt;
+            </code>
+          [#elseif isPut]
+  Content-Type: ${schemaForNamespace(exampleResourceElement).properties.xmlMediaType}
+
+            <code class="prettyprint lang-xml">
+  &lt;${exampleResourceElement.name} xmlns="${exampleResourceElement.namespace}"&gt;
+    ...
+  &lt;/${exampleResourceElement.name}&gt;
+            </code>
+          [/#if]
+          </pre>
+
+          <h4>Example Response</h4>
+          <pre>
+          [#if isPost]
+  HTTP/1.1 201 Created
+  Location: /path/to/${rsd.name?lower_case}
+          [#elseif isPut || isDelete]
+  HTTP/1.1 204 No Content
+          [#else]
+  HTTP/1.1 200 OK
+  Content-Type: ${schemaForNamespace(exampleResourceElement).properties.xmlMediaType}
+
+            <code class="prettyprint lang-xml">
+  &lt;${exampleResourceElement.name} xmlns="${exampleResourceElement.namespace}" xmlns:rs="http://gedcomx.org/rs/v1/"&gt;
+    ...
+    [#if rsd.resourceRelationships?size > 0]
+      [#list rsd.resourceRelationships as resourceRelationship]
+    &lt;rs:link rel="${resourceRelationship.name}" href="..."/&gt;
+      [/#list]
+    ...
+    [/#if]
+    [#if rsd.subresources?size > 0]
+      [#list rsd.subresources as subresource]
+        [#if !subresource.resourceBundle]
+          [#list subresource.resourceElements as subresourceElement]
+    &lt;${subresourceElement.name}[#if subresourceElement.namespace != exampleResourceElement.namespace] xmlns="${subresourceElement.namespace}"[/#if]&gt;
+      ...
+            [#if subresource.resourceRelationships?size > 0]
+              [#list subresource.resourceRelationships as resourceRelationship]
+      &lt;rs:link rel="${resourceRelationship.name}" href="..."/&gt;
+              [/#list]
+      ...
+            [/#if]
+    &lt;/${subresourceElement.name}&gt;
+          [/#list]
+        [/#if]
+      [/#list]
+    [/#if]
+  &lt;/${exampleResourceElement.name}&gt;
+            </code>
+          [/#if]
+          </pre>
+        [/#if]
+      </div>
+      [/#list]
+      </div>
     </article>
   </div>
   [@libBoilerplate.writeFooter/]

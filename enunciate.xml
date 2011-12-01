@@ -2,6 +2,7 @@
 <enunciate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://enunciate.codehaus.org/schemas/enunciate-1.22.xsd">
 
   <api-import pattern="org.gedcomx.**"/>
+  <api-import pattern="org.familysearch.ct.ws.**"/>
 
   <modules>
     <!--disable the standard docs module, we're using the gedcomx-support module to generate docs.-->

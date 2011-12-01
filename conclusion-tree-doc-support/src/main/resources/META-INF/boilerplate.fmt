@@ -16,6 +16,12 @@
   <script type="text/javascript" src="js/libs/jquery-1.5.1.min.js"></script>
   <script type="text/javascript" src="js/libs/oquirrh_header_footer.js"></script>
   <link rel="stylesheet" href="css/prettify.css" media="screen"/>
+  <script src="js/libs/jquery-ui.min.js"></script>
+  <script>
+    jQuery(function() {
+      jQuery( "#tabs" ).tabs();
+    });
+  </script>
   <script src="js/libs/prettify/prettify.js"></script>
   <script>
     jQuery(function() {
@@ -30,6 +36,8 @@
   <link rel="stylesheet" href="http://cdn.familysearch.org/www-web-common/css/oquirrh-theme-ie6.css" media="screen"><![endif]-->
 
   <link rel="stylesheet" href="http://cdn.familysearch.org/www-web-common/css/oquirrh-theme-print.css" media="print">
+
+  <link rel="stylesheet" href="css/custom-theme/jquery-ui-1.8.16.custom.css" media="screen">
 
   <style>
     h1,h2,h3,h4,h5,h6 {
@@ -67,23 +75,13 @@
     }
 
     pre {
+      font: normal 1.2em Monaco, "Courier New", monospace;
       margin-bottom: 9px;
       background: #edece8;
       border: 1px solid #ccc8c4;
       padding: 8px;
-    }
-
-    code {
-      background: #edece8;
-      border: 1px solid #ccc8c4;
-      color: #3c3b36;
-      display: block;
-      font: normal 1.1em "Lucida Sans Unicode", serif;
-      margin-bottom: 12px;
-      padding: 4px 5px;
-      white-space: pre;
+      max-height: 600px;
       overflow: auto;
-      max-height: 300px;
     }
 
     #subject h2 {
@@ -126,6 +124,7 @@
         <li><a href="#">Services</a></li>
         <li><a href="code.html">Files and Libraries</a></li>
       </ul>
+    </nav>
   </header>
 </div>
 [/#macro]
@@ -137,7 +136,7 @@
       </div>
     </footer>
 [/#macro]
-[#macro writeEndBody active=true]
+[#macro writeEndBody]
 </body>
 </html>
 [/#macro]

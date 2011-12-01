@@ -15,14 +15,16 @@
  */
 package org.familysearch.ct.ws.rs.definition;
 
+import org.familysearch.ct.ws.ConclusionTreeModel;
 import org.familysearch.ct.ws.TernaryRelationship;
 import org.gedcomx.conclusion.rs.definition.RelationshipRSDefinition;
-import org.gedcomx.rt.rs.ResourceServiceDefinition;
-import org.gedcomx.rt.rs.StatusCode;
-import org.gedcomx.rt.rs.StatusCodes;
+import org.gedcomx.rt.rs.*;
 
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 /**
@@ -34,9 +36,30 @@ import javax.ws.rs.core.UriInfo;
  * @author Ryan Heaton
  */
 @ResourceServiceDefinition (
-  name = "TernaryRelationship"
+  name = "TernaryRelationship",
+  namespace = ConclusionTreeModel.CONCLUSION_TREE_V1_NAMESPACE,
+  resourceElement = TernaryRelationship.class,
+  subresources = RelationshipRSDefinition.class
 )
-public interface TernaryRelationshipRSDefinition extends RelationshipRSDefinition {
+@ResourceRelationships ({
+  @ResourceRelationship ( name = "self", definedBy = RelationshipRSDefinition.class, description = "The relationship itself." )
+})
+public interface TernaryRelationshipRSDefinition {
+
+  /**
+   * Read a relationship.
+   *
+   * @param uriInfo Information on the URI that was used to identify the relationship to read.
+   * @return The relationship.
+   */
+  @GET
+  @StatusCodes({
+    @StatusCode( code = 200, condition = "Upon a successful read."),
+    @StatusCode( code = 301, condition = "If the requested relationship has been merged to another relationship."),
+    @StatusCode( code = 404, condition = "If the requested relationship is not found."),
+    @StatusCode( code = 410, condition = "If the requested relationship has been deleted.")
+  })
+  Response readRelationship(@Context UriInfo uriInfo);
 
   /**
    * Update a relationship.
@@ -49,5 +72,16 @@ public interface TernaryRelationshipRSDefinition extends RelationshipRSDefinitio
     @StatusCode( code = 204, condition = "The update was successful.")
   })
   void updateRelationship(@Context UriInfo uriInfo, TernaryRelationship relationship);
+
+  /**
+   * Delete a relationship.
+   *
+   * @param uriInfo Information on the URI that was used to identify the relationship to delete.
+   */
+  @DELETE
+  @StatusCodes({
+    @StatusCode ( code = 204, condition = "The delete was successful.")
+  })
+  void deleteRelationship(@Context UriInfo uriInfo);
 
 }

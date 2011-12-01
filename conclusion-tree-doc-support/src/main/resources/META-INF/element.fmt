@@ -8,7 +8,7 @@
   [@libBoilerplate.writeHeader subnav={"Model" : "index.html", (schema.properties.label!("\"" + schema.id + "\" Model")) : schema.id + ".html", elementLabel : "#"}/]
 <div class="wrap">
   <article id="subject" class="clearfix">
-    <div id="main" class="column first last span-20">
+    <div class="feature-content clearfix">
       <h1>${elementLabel}</h1>
 
       <hr/>
@@ -36,22 +36,25 @@
 
       <p>${element.docValue!""}</p>
 
-      <div id="accordion">
-        <h3><a href="#">XML</a></h3>
-        <div>
+      <div id="tabs">
+        <ul>
+          <li><a href="#xml">XML</a></li>
+          <li><a href="#json">JSON</a></li>
+        </ul>
+        <div id="xml">
           <b style="font-weight: bold">Example</b>
           <pre class="prettyprint lang-xml">
 ${generateExampleXml(element)?html}
           </pre>
         </div>
 
-        <h3><a href="#">JSON</a></h3>
-        <div>
+        <div id="json">
           <b style="font-weight: bold">Example</b>
           <pre class="prettyprint lang-js">
 ${generateExampleJson(element)}
           </pre>
         </div>
+      </div>
     </div>
   </article>
 </div>
