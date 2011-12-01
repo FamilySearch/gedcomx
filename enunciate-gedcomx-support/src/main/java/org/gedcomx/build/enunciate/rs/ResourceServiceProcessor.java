@@ -19,10 +19,8 @@ import com.sun.mirror.declaration.ClassDeclaration;
 import com.sun.mirror.declaration.Declaration;
 import com.sun.mirror.declaration.InterfaceDeclaration;
 import com.sun.mirror.declaration.TypeDeclaration;
-import com.sun.mirror.type.DeclaredType;
 import com.sun.mirror.type.InterfaceType;
 import com.sun.mirror.type.MirroredTypesException;
-import com.sun.mirror.type.TypeMirror;
 import org.codehaus.enunciate.apt.EnunciateFreemarkerModel;
 import org.codehaus.enunciate.contract.jaxb.ElementDeclaration;
 import org.codehaus.enunciate.contract.jaxb.RootElementDeclaration;
@@ -78,12 +76,7 @@ public class ResourceServiceProcessor {
           }
         }
         catch (MirroredTypesException e) {
-          Collection<TypeMirror> typeMirrors = e.getTypeMirrors();
-          for (TypeMirror typeMirror : typeMirrors) {
-            if (typeMirror instanceof DeclaredType && ((DeclaredType) typeMirror).getDeclaration() != null) {
-              resourceElementsFqn.add(((DeclaredType) typeMirror).getDeclaration().getQualifiedName());
-            }
-          }
+          resourceElementsFqn.addAll(e.getQualifiedNames());
         }
 
         List<RootElementDeclaration> rootElementDeclarations = model.getRootElementDeclarations();
@@ -107,7 +100,8 @@ public class ResourceServiceProcessor {
         }
 
         ResourceServiceDefinitionDeclaration rsd = new ResourceServiceDefinitionDeclaration(resourceServiceDefinition, resourceElements, this);
-        //todo: validate the rsd.
+        //todo: validate the rsd:
+        //todo: iterate through the subresource qualified names to make sure each one is annotated with @ResourceServiceDefinition
         this.resourceServiceDefinitions.add(rsd);
       }
       else {

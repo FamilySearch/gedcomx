@@ -40,7 +40,7 @@ public class ResourceServiceDefinitionDeclaration extends Resource {
   private final List<StatusCode> statusCodes;
   private final List<ResourceRelationship> resourceRelationships;
   private final List<ElementDeclaration> resourceElements;
-  private final Set<String> subresourceQualfiedNames = new TreeSet<String>();
+  final Set<String> subresourceQualfiedNames = new TreeSet<String>();
 
   public ResourceServiceDefinitionDeclaration(TypeDeclaration delegate, List<ElementDeclaration> resourceElements, ResourceServiceProcessor processor) {
     super(delegate);

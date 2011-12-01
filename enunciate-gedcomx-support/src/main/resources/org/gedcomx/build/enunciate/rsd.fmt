@@ -35,7 +35,7 @@
           [/#if]
         <tr>
           <td align="right">Subresources:</td>
-          <td>[#list rsd.subresources as subresource]<a href="${subresource.name}.html">${subresource.name}</a>[#if subresource_has_next], [/#if][/#list]</td>
+          <td>[#list rsd.subresources as subresource]<a href="${subresource.name}_resource.html">${subresource.name}</a>[#if subresource_has_next], [/#if][/#list]</td>
         </tr>
         [/#if]
 
@@ -53,7 +53,7 @@
         [#list rsd.resourceRelationships as resourceRelationship]
           <tr>
             <td>${resourceRelationship.name}</td>
-            <td>[#if resourceRelationship.definedBy??]<a href="${resourceRelationship.definedBy.name}.html">${resourceRelationship.definedBy.name}</a>[#else](unknown)[/#if]</td>
+            <td>[#if resourceRelationship.definedBy??]<a href="${resourceRelationship.definedBy.name}_resource.html">${resourceRelationship.definedBy.name}</a>[#else](unknown)[/#if]</td>
             <td>${resourceRelationship.description}</td>
           </tr>
         [/#list]
