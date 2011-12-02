@@ -104,7 +104,7 @@
       <hr/>
 
     [#list resourceServiceDefinitions as rsd]
-      <h3><a href="${rsd.name}.html">${rsd.name} Resource</a></h3>
+      <h3><a href="${rsd.name}_resource.html">${rsd.name} Resource</a></h3>
       <table>
         <tr>
           <td align="right">Name:</td>

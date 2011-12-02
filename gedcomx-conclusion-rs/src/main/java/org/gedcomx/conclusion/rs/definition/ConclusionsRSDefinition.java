@@ -22,6 +22,7 @@ import org.gedcomx.rt.rs.ResourceServiceDefinition;
 import org.gedcomx.rt.rs.StatusCode;
 import org.gedcomx.rt.rs.StatusCodes;
 
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
@@ -46,7 +47,7 @@ public interface ConclusionsRSDefinition extends CommonRSParameters {
    * @param uriInfo Information on the URI that was used to identify the conclusions.
    * @return The set of conclusions.
    */
-  @POST
+  @GET
   @StatusCodes({
     @StatusCode( code = 200, condition = "Upon a successful read.")
   })

@@ -102,6 +102,8 @@ public class ResourceServiceProcessor {
         ResourceServiceDefinitionDeclaration rsd = new ResourceServiceDefinitionDeclaration(resourceServiceDefinition, resourceElements, this);
         //todo: validate the rsd:
         //todo: iterate through the subresource qualified names to make sure each one is annotated with @ResourceServiceDefinition
+        //todo: make sure there's only one http method per resource method.
+        //todo: verify no more than one operation of the same method.
         this.resourceServiceDefinitions.add(rsd);
       }
       else {
@@ -114,6 +116,12 @@ public class ResourceServiceProcessor {
       if (bindingMetadata != null) {
         this.resourceServiceBindings.add(bindingMetadata);
       }
+
+      if (bindingMetadata.getDefinition() == null) {
+        result.addError(rootResource, "Unable to find the definition being bound. Perhaps the binding isn't extending a definition or perhaps its extending multiple definitions?");
+      }
+
+      //todo: verify no more than one operation of the same method.
 
       List<SubResourceLocator> resourceLocators = rootResource.getResourceLocators();
       for (SubResourceLocator resourceLocator : resourceLocators) {

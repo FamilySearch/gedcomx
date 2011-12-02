@@ -15,8 +15,6 @@
  */
 package org.gedcomx.build.enunciate.rs;
 
-import com.sun.mirror.declaration.ClassDeclaration;
-import com.sun.mirror.declaration.Declaration;
 import com.sun.mirror.declaration.TypeDeclaration;
 import com.sun.mirror.type.InterfaceType;
 import org.codehaus.enunciate.contract.jaxrs.Resource;
@@ -36,15 +34,15 @@ public class ResourceServiceBindingMetadata {
   private final String name;
   private final String namespace;
   private final Resource rawResource;
-  private final Set<ResourceServiceDefinitionDeclaration> definitions;
+  private final ResourceServiceDefinitionDeclaration definition;
   private final List<StatusCode> statusCodes;
   private final List<ResourceRelationship> resourceRelationships;
 
-  public ResourceServiceBindingMetadata(String name, String namespace, Resource rawResource, Set<ResourceServiceDefinitionDeclaration> definitions, List<StatusCode> statusCodes, List<ResourceRelationship> resourceRelationships) {
+  public ResourceServiceBindingMetadata(String name, String namespace, Resource rawResource, ResourceServiceDefinitionDeclaration definition, List<StatusCode> statusCodes, List<ResourceRelationship> resourceRelationships) {
     this.name = name;
     this.namespace = namespace;
     this.rawResource = rawResource;
-    this.definitions = definitions;
+    this.definition = definition;
     this.statusCodes = statusCodes;
     this.resourceRelationships = resourceRelationships;
   }
@@ -61,8 +59,8 @@ public class ResourceServiceBindingMetadata {
     return rawResource;
   }
 
-  public Set<ResourceServiceDefinitionDeclaration> getDefinitions() {
-    return definitions;
+  public ResourceServiceDefinitionDeclaration getDefinition() {
+    return definition;
   }
 
   public List<StatusCode> getStatusCodes() {
@@ -89,9 +87,8 @@ public class ResourceServiceBindingMetadata {
         namespace = bindingInfo.namespace();
       }
 
-      Set<ResourceServiceDefinitionDeclaration> defs = new HashSet<ResourceServiceDefinitionDeclaration>();
-      gatherDefinitions(rawResource.getDelegate(), defs, processor);
-      bindingMetadata = new ResourceServiceBindingMetadata(name, namespace, rawResource, defs, processor.extractStatusCodes(rawResource), processor.extractResourceRelationships(rawResource));
+      Set<ResourceServiceDefinitionDeclaration> defs = findDefinitions((TypeDeclaration) rawResource.getDelegate(), processor);
+      bindingMetadata = new ResourceServiceBindingMetadata(name, namespace, rawResource, defs.size() == 1 ? defs.iterator().next() : null, processor.extractStatusCodes(rawResource), processor.extractResourceRelationships(rawResource));
 
       List<ResourceMethod> resourceMethods = rawResource.getResourceMethods();
       for (ResourceMethod resourceMethod : resourceMethods) {
@@ -107,34 +104,24 @@ public class ResourceServiceBindingMetadata {
     return bindingMetadata;
   }
 
-  private static void gatherDefinitions(Declaration delegate, Set<ResourceServiceDefinitionDeclaration> defs, ResourceServiceProcessor processor) {
-    if (delegate instanceof TypeDeclaration) {
-      TypeDeclaration typeDeclaration = (TypeDeclaration) delegate;
-      if (!Object.class.getName().equals(typeDeclaration.getQualifiedName())) {
-        ResourceServiceDefinitionDeclaration rs = processor.findResourceService(typeDeclaration.getQualifiedName());
+  private static Set<ResourceServiceDefinitionDeclaration> findDefinitions(TypeDeclaration delegate, ResourceServiceProcessor processor) {
+    Set<ResourceServiceDefinitionDeclaration> defs = new HashSet<ResourceServiceDefinitionDeclaration>();
+    ResourceServiceDefinitionDeclaration rs = processor.findResourceService(delegate.getQualifiedName());
+    if (rs != null) {
+      defs.add(rs);
+    }
+
+    Collection<InterfaceType> supers = delegate.getSuperinterfaces();
+    for (InterfaceType superif : supers) {
+      if (superif.getDeclaration() != null) {
+        String fqn = superif.getDeclaration().getQualifiedName();
+        rs = processor.findResourceService(fqn);
         if (rs != null) {
           defs.add(rs);
         }
-
-        Collection<InterfaceType> supers = typeDeclaration.getSuperinterfaces();
-        for (InterfaceType superif : supers) {
-          if (superif.getDeclaration() != null) {
-            String fqn = superif.getDeclaration().getQualifiedName();
-            rs = processor.findResourceService(fqn);
-            if (rs != null) {
-              defs.add(rs);
-            }
-          }
-        }
-
-        if (typeDeclaration instanceof ClassDeclaration) {
-          ClassDeclaration superDecl = ((ClassDeclaration) typeDeclaration).getSuperclass().getDeclaration();
-          if (superDecl != null) {
-            gatherDefinitions(superDecl, defs, processor);
-          }
-        }
       }
     }
+    return defs;
   }
 
 }
