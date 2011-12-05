@@ -118,15 +118,6 @@ public class TestRecord {
     persona.setId("persona-id");
     persona.setPersistentId(URI.create("urn:persona-id-value"));
     persona.setPrincipal(true);
-    ArrayList<EventRole> eventRoles = new ArrayList<EventRole>();
-    EventRole eventRole = new EventRole();
-    eventRole.setDescription("event role description");
-    eventRole.setPrincipal(false);
-    eventRole.setEvent(URI.create("#" + fact.getId()));
-    eventRole.setAttribution(new Attribution());
-    eventRole.getAttribution().setProofStatement("event role attribution");
-    eventRoles.add(eventRole);
-    persona.setEventRoles(eventRoles);
 
     record.setPersonas(Arrays.asList(persona));
 
@@ -250,11 +241,6 @@ public class TestRecord {
     assertEquals("persona-id", persona.getId());
     assertEquals("urn:persona-id-value", persona.getPersistentId().toString());
     assertTrue(persona.getPrincipal());
-    assertEquals(1, persona.getEventRoles().size());
-    EventRole eventRole = persona.getEventRoles().get(0);
-    assertEquals("event role description", eventRole.getDescription());
-    assertEquals("event role attribution", eventRole.getAttribution().getProofStatement());
-    assertFalse(eventRole.getPrincipal());
 
     assertEquals("pal", record.getPersistentId().toString());
     assertEquals("bibliographic citation", record.getBibliographicCitation());

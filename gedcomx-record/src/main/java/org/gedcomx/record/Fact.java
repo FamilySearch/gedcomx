@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 /**
- * A recorded event.
+ * A recorded fact.
  */
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
@@ -49,9 +49,9 @@ public class Fact extends GenealogicalResource implements Typed<FactType> {
   private Field value;
 
   /**
-   * The type of the event.
+   * The type of the fact.
    *
-   * @return The type of the event.
+   * @return The type of the fact.
    */
   @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
   public TypeReference<FactType> getType() {
@@ -59,18 +59,18 @@ public class Fact extends GenealogicalResource implements Typed<FactType> {
   }
 
   /**
-   * The type of the event.
+   * The type of the fact.
    *
-   * @param type The type of the event.
+   * @param type The type of the fact.
    */
   public void setType(TypeReference<FactType> type) {
     this.type = type;
   }
 
   /**
-   * The enum referencing the known type of the event, or {@link org.gedcomx.types.FactType#OTHER} if not known.
+   * The enum referencing the known type of the fact, or {@link org.gedcomx.types.FactType#OTHER} if not known.
    *
-   * @return The enum referencing the known type of the event, or {@link org.gedcomx.types.FactType#OTHER} if not known.
+   * @return The enum referencing the known type of the fact, or {@link org.gedcomx.types.FactType#OTHER} if not known.
    */
   @XmlTransient
   @JsonIgnore
@@ -79,9 +79,9 @@ public class Fact extends GenealogicalResource implements Typed<FactType> {
   }
 
   /**
-   * Set the type of this event from a known enumeration of event types.
+   * Set the type of this fact from a known enumeration of fact types.
    *
-   * @param knownType the event type.
+   * @param knownType the fact type.
    */
   @JsonIgnore
   public void setKnownType(org.gedcomx.types.FactType knownType) {
@@ -89,9 +89,9 @@ public class Fact extends GenealogicalResource implements Typed<FactType> {
   }
 
   /**
-   * Indicator for whether this is the primary event for this record. For example, the primary event for a birth certificate would be the birth event.
+   * Indicator for whether this is a primary fact for this record. For example, the primary fact for a birth certificate would be the birth fact.
    *
-   * @return Indicator for whether this is the primary event for this record. For example, the primary event for a birth certificate would be the birth event.
+   * @return Indicator for whether this is a primary fact for this record. For example, the primary fact for a birth certificate would be the birth fact.
    */
   @XmlAttribute
   public Boolean getPrimary() {
@@ -99,18 +99,18 @@ public class Fact extends GenealogicalResource implements Typed<FactType> {
   }
 
   /**
-   * Indicator for whether this is the primary event for this record. For example, the primary event for a birth certificate would be the birth event.
+   * Indicator for whether this is the primary fact for this record. For example, the primary fact for a birth certificate would be the birth fact.
    *
-   * @param primary Indicator for whether this is the primary event for this record. For example, the primary event for a birth certificate would be the birth event.
+   * @param primary Indicator for whether this is the primary fact for this record. For example, the primary fact for a birth certificate would be the birth fact.
    */
   public void setPrimary(Boolean primary) {
     this.primary = primary;
   }
 
   /**
-   * The date of this event.
+   * The applicable date of this fact, if any.
    *
-   * @return The date of this event.
+   * @return The applicable date of this fact, if any.
    */
   @RDFSubPropertyOf ( CommonModels.DUBLIN_CORE_NAMESPACE + "temporal" )
   public Date getDate() {
@@ -118,18 +118,18 @@ public class Fact extends GenealogicalResource implements Typed<FactType> {
   }
 
   /**
-   * The date of this event.
+   * The applicable date of this fact, if any.
    *
-   * @param date The date of this event.
+   * @param date The applicable date of this fact, if any.
    */
   public void setDate(Date date) {
     this.date = date;
   }
 
   /**
-   * The place of this event.
+   * The applicable place of this fact, if any.
    *
-   * @return The place of this event.
+   * @return The applicable place of this fact, if any.
    */
   @RDFSubPropertyOf ( CommonModels.DUBLIN_CORE_NAMESPACE + "spatial" )
   public Place getPlace() {
@@ -137,9 +137,9 @@ public class Fact extends GenealogicalResource implements Typed<FactType> {
   }
 
   /**
-   * The place of this event.
+   * The applicable place of this fact, if any.
    *
-   * @param place The place of this event.
+   * @param place The applicable place of this fact, if any.
    */
   public void setPlace(Place place) {
     this.place = place;
