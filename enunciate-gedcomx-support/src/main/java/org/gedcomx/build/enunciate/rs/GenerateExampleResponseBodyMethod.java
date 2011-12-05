@@ -46,15 +46,15 @@ public class GenerateExampleResponseBodyMethod extends GenerateResourceExampleHt
     if (HttpMethod.GET.equals(method)) {
       if (json) {
         writer.printf("{\n");
-        writer.printf("  @type : \"%s%s\",\n", element.getTypeDefinition().getName(), element.getTypeDefinition().getNamespace());
+        writer.printf("  \"@type\" : \"%s%s\",\n", element.getTypeDefinition().getNamespace(), element.getTypeDefinition().getName());
         writer.printf("  ...\n");
         Iterator<ResourceRelationship> relIt = def.getResourceRelationships().iterator();
         if (relIt.hasNext()) {
-          writer.printf("  links : [\n");
+          writer.printf("  \"links\" : [\n");
         }
         while (relIt.hasNext()) {
           ResourceRelationship rel = relIt.next();
-          writer.printf("    { rel : \"%s\", href=\"...\" }", rel.getName());
+          writer.printf("    { \"rel\" : \"%s\", \"href\" : \"...\" }", rel.getName());
           if (!relIt.hasNext()) {
             writer.printf("\n  ],\n");
           }
@@ -66,15 +66,15 @@ public class GenerateExampleResponseBodyMethod extends GenerateResourceExampleHt
         for (Element childElement : element.getTypeDefinition().getElements()) {
           ResourceServiceDefinitionDeclaration subresource = subresourcesByType.get(childElement.getBaseType().getQname());
           if (subresource != null) {
-            writer.printf("  %s : {\n", childElement.getJsonMemberName());
+            writer.printf("  \"%s\" :%s{\n", childElement.getJsonMemberName(), childElement.isCollectionType() ? " [ " : " ");
             writer.printf("    ...\n");
             relIt = subresource.getResourceRelationships().iterator();
             if (relIt.hasNext()) {
-              writer.printf("    links : [\n");
+              writer.printf("    \"links\" : [\n");
             }
             while (relIt.hasNext()) {
               ResourceRelationship rel = relIt.next();
-              writer.printf("      { rel : \"%s\", href=\"...\" }", rel.getName());
+              writer.printf("      { \"rel\" : \"%s\", \"href\" : \"...\" }", rel.getName());
               if (!relIt.hasNext()) {
                 writer.printf("\n    ],\n");
               }
@@ -82,7 +82,7 @@ public class GenerateExampleResponseBodyMethod extends GenerateResourceExampleHt
                 writer.printf(",\n");
               }
             }
-            writer.printf("  }\n");
+            writer.printf("  }%s,\n", childElement.isCollectionType() ? " ]" : "");
             writer.printf("  ...\n");
           }
         }

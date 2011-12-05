@@ -79,7 +79,17 @@
   <script src="../js/libs/jquery-ui.js"></script>
   <script>
     $(function() {
+      $( "#mediatype-selection" ).buttonset();
       $( "#tabs" ).tabs();
+      $( ".json-docs" ).hide();
+      $( "#select-xml" ).click( function() {
+        $( ".json-docs" ).hide();
+        $( ".xml-docs" ).show();
+      })
+      $( "#select-json" ).click( function() {
+        $( ".xml-docs" ).hide();
+        $( ".json-docs" ).show();
+      })
     });
   </script>
 

@@ -95,6 +95,14 @@
 
       [/#if]
       <h3>Operations</h3>
+
+      <p>Pick your favorite representation format.</p>
+
+      <div id="mediatype-selection">
+        <input type="radio" id="select-xml" name="mediatype" checked="checked"/><label for="select-xml">XML</label>
+        <input type="radio" id="select-json" name="mediatype" /><label for="select-json">JSON</label>
+      </div>
+
       <div id="tabs">
         <ul>
       [#list rsd.resourceMethods as op]
@@ -123,15 +131,29 @@
       [/#list]
         </table>
 
+        <div class="xml-docs">
       [#assign requestBody=generateExampleRequestBody(op)?html?trim/]
       [#assign responseBody=generateExampleResponseBody(op)?html?trim/]
-        <h4>Example Request</h4>
-        <pre>${generateExampleRequestHeaders(op)}[#if requestBody?length > 0]
+          <h4>Example Request</h4>
+          <pre>${generateExampleRequestHeaders(op)}[#if requestBody?length > 0]
 <code class="prettyprint lang-xml">${requestBody}</code>[/#if]</pre>
 
-        <h4>Example Response</h4>
-        <pre>${generateExampleResponseHeaders(op)}[#if responseBody?length > 0]
+          <h4>Example Response</h4>
+          <pre>${generateExampleResponseHeaders(op)}[#if responseBody?length > 0]
 <code class="prettyprint lang-xml">${responseBody}</code>[/#if]</pre>
+        </div>
+
+        <div class="json-docs">
+      [#assign requestBody=generateExampleRequestBody(op, true)?html?trim/]
+      [#assign responseBody=generateExampleResponseBody(op, true)?html?trim/]
+          <h4>Example Request</h4>
+          <pre>${generateExampleRequestHeaders(op, true)}[#if requestBody?length > 0]
+<code class="prettyprint lang-js">${requestBody}</code>[/#if]</pre>
+
+          <h4>Example Response</h4>
+          <pre>${generateExampleResponseHeaders(op, true)}[#if responseBody?length > 0]
+<code class="prettyprint lang-js">${responseBody}</code>[/#if]</pre>
+        </div>
     </div>
     [/#list]
 

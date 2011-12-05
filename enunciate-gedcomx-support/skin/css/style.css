@@ -532,6 +532,10 @@ body.advisories #nav-advisories,body.community #nav-community,body.blog #nav-blo
     max-height: 600px;
 	overflow: auto;
 }
+#mediatype-selection {
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
 
 /* @end */
 /* @group Footer */

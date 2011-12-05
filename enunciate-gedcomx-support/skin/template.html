@@ -79,77 +79,122 @@
 
       <p>Here is the description of the Type Name type.</p>
 
+      <h3>Media Types</h3>
+
+      <p>Pick your favorite representation format.</p>
+
+      <div id="mediatype-selection">
+        <input type="radio" id="select-xml" name="mediatype" checked="checked"/><label for="select-xml">XML</label>
+        <input type="radio" id="select-json" name="mediatype" /><label for="select-json">JSON</label>
+      </div>
+
+      <div class="xml-docs">
+        <h3>Properties</h3>
+        <table>
+          <tr>
+            <th align="center">name</th>
+            <th align="center">type</th>
+            <th align="center">occurs</th>
+            <th align="center">description</th>
+          </tr>
+          <tr>
+            <td>somenamethatissomewhatlong</td>
+            <td>list of <a href="#">xmlns:xmltype</a></td>
+            <td>0..1 (attribute)</td>
+            <td>Some descriptive text that will be long enough to figure out how to best format it in the table. Some descriptive text that will be long enough to figure out how to best format it in the table. Some descriptive text that will be long enough to figure out how to best format it in the table. </td>
+          </tr>
+          <tr>
+            <td>somename</td>
+            <td>list of <a href="#">xmlns:xmltype</a></td>
+            <td>0..*</td>
+            <td>Some descriptive text that will be long enough to figure out how to best format it in the table. Some descriptive text that will be long enough to figure out how to best format it in the table. Some descriptive text that will be long enough to figure out how to best format it in the table. </td>
+          </tr>
+          <tr>
+            <td>somename</td>
+            <td>list of <a href="#">xmlns:xmltype</a></td>
+            <td>n/a (value)</td>
+            <td>Some descriptive text that will be long enough to figure out how to best format it in the table. Some descriptive text that will be long enough to figure out how to best format it in the table. Some descriptive text that will be long enough to figure out how to best format it in the table. </td>
+          </tr>
+        </table>
+
+        <h3>Example</h3>
+        <pre class="prettyprint lang-xml">
+&lt;hello&gt;
+&lt;how are="you"&gt;
+&lt;doing/&gt;
+&lt;today&gt;...&lt;/today&gt;
+&lt;what_happens_if_there_is_an_element_that_wraps_off_the_edge_of_the_screen&gt;...&lt;/what_happens_if_there_is_an_element_that_wraps_off_the_edge_of_the_screen&gt;
+&lt;/hello&gt;
+        </pre>
+      </div>
+      <div class="json-docs">
+        <h3>Properties</h3>
+        <table>
+          <tr>
+            <th align="center">name</th>
+            <th align="center">type</th>
+            <th align="center">description</th>
+          </tr>
+          <tr>
+            <td>somenamethatissomewhatlong</td>
+            <td>array of <a href="#">xmlns:xmltype</a></td>
+            <td>Some descriptive text that will be long enough to figure out how to best format it in the table. Some descriptive text that will be long enough to figure out how to best format it in the table. Some descriptive text that will be long enough to figure out how to best format it in the table. </td>
+          </tr>
+          <tr>
+            <td>somename</td>
+            <td>array of <a href="#">xmlns:xmltype</a></td>
+            <td>Some descriptive text that will be long enough to figure out how to best format it in the table. Some descriptive text that will be long enough to figure out how to best format it in the table. Some descriptive text that will be long enough to figure out how to best format it in the table. </td>
+          </tr>
+          <tr>
+            <td>somename</td>
+            <td>array of <a href="#">xmlns:xmltype</a></td>
+            <td>Some descriptive text that will be long enough to figure out how to best format it in the table. Some descriptive text that will be long enough to figure out how to best format it in the table. Some descriptive text that will be long enough to figure out how to best format it in the table. </td>
+          </tr>
+        </table>
+
+        <h3>Example</h3>
+        <pre class="prettyprint lang-js">
+{
+hello : {
+  how : {
+    are : "you"
+  },
+  doing = {},
+  today : "...",
+  what_happens_if_there_is_an_element_that_wraps_off_the_edge_of_the_screen : "..."
+}
+}
+        </pre>
+      </div>
+
+      <h3>API</h3>
       <div id="tabs">
         <ul>
-          <li><a href="#xml">XML</a></li>
-          <li><a href="#json">JSON</a></li>
+          <li><a href="#GET">GET</a></li>
+          <li><a href="#POST">POST</a></li>
         </ul>
-        <div id="xml">
-          <b style="font-weight: bold">Properties</b>
-          <table>
-            <tr>
-              <th align="center">name</th>
-              <th align="center">type</th>
-              <th align="center">occurs</th>
-              <th align="center">description</th>
-            </tr>
-            <tr>
-              <td>somenamethatissomewhatlong</td>
-              <td>list of <a href="#">xmlns:xmltype</a></td>
-              <td>0..1 (attribute)</td>
-              <td>Some descriptive text that will be long enough to figure out how to best format it in the table. Some descriptive text that will be long enough to figure out how to best format it in the table. Some descriptive text that will be long enough to figure out how to best format it in the table. </td>
-            </tr>
-            <tr>
-              <td>somename</td>
-              <td>list of <a href="#">xmlns:xmltype</a></td>
-              <td>0..*</td>
-              <td>Some descriptive text that will be long enough to figure out how to best format it in the table. Some descriptive text that will be long enough to figure out how to best format it in the table. Some descriptive text that will be long enough to figure out how to best format it in the table. </td>
-            </tr>
-            <tr>
-              <td>somename</td>
-              <td>list of <a href="#">xmlns:xmltype</a></td>
-              <td>n/a (value)</td>
-              <td>Some descriptive text that will be long enough to figure out how to best format it in the table. Some descriptive text that will be long enough to figure out how to best format it in the table. Some descriptive text that will be long enough to figure out how to best format it in the table. </td>
-            </tr>
-          </table>
-
-          <b style="font-weight: bold">Example</b>
-          <pre class="prettyprint lang-xml">
+        <div id="GET">
+          <div class="xml-docs">
+            <b style="font-weight: bold">Example Request</b>
+            <pre>
+GET /path/to/resource
+Accept: application/xml
+              <code class="prettyprint lang-xml">
 &lt;hello&gt;
-  &lt;how are="you"&gt;
-  &lt;doing/&gt;
-  &lt;today&gt;...&lt;/today&gt;
-  &lt;what_happens_if_there_is_an_element_that_wraps_off_the_edge_of_the_screen&gt;...&lt;/what_happens_if_there_is_an_element_that_wraps_off_the_edge_of_the_screen&gt;
+&lt;how are="you"&gt;
+&lt;doing/&gt;
+&lt;today&gt;...&lt;/today&gt;
+&lt;what_happens_if_there_is_an_element_that_wraps_off_the_edge_of_the_screen&gt;...&lt;/what_happens_if_there_is_an_element_that_wraps_off_the_edge_of_the_screen&gt;
 &lt;/hello&gt;
-          </pre>
-        </div>
-        <div id="json">
-          <b style="font-weight: bold">Properties</b>
-          <table>
-            <tr>
-              <th align="center">name</th>
-              <th align="center">type</th>
-              <th align="center">description</th>
-            </tr>
-            <tr>
-              <td>somenamethatissomewhatlong</td>
-              <td>array of <a href="#">xmlns:xmltype</a></td>
-              <td>Some descriptive text that will be long enough to figure out how to best format it in the table. Some descriptive text that will be long enough to figure out how to best format it in the table. Some descriptive text that will be long enough to figure out how to best format it in the table. </td>
-            </tr>
-            <tr>
-              <td>somename</td>
-              <td>array of <a href="#">xmlns:xmltype</a></td>
-              <td>Some descriptive text that will be long enough to figure out how to best format it in the table. Some descriptive text that will be long enough to figure out how to best format it in the table. Some descriptive text that will be long enough to figure out how to best format it in the table. </td>
-            </tr>
-            <tr>
-              <td>somename</td>
-              <td>array of <a href="#">xmlns:xmltype</a></td>
-              <td>Some descriptive text that will be long enough to figure out how to best format it in the table. Some descriptive text that will be long enough to figure out how to best format it in the table. Some descriptive text that will be long enough to figure out how to best format it in the table. </td>
-            </tr>
-          </table>
-
-          <b style="font-weight: bold">Example</b>
-          <pre class="prettyprint lang-js">
+              </code>
+            </pre>
+          </div>
+          <div class="json-docs">
+            <b style="font-weight: bold">Example Request</b>
+            <pre>
+GET /path/to/resource
+Accept: application/xml
+              <code class="prettyprint lang-js">
 {
   hello : {
     how : {
@@ -160,26 +205,48 @@
     what_happens_if_there_is_an_element_that_wraps_off_the_edge_of_the_screen : "..."
   }
 }
-          </pre>
+              </code>
+            </pre>
+          </div>
         </div>
-      </div>
-
-      <h3>API</h3>
-
-      <b style="font-weight: bold">Example Request</b>
-      <pre>
-GET /path/to/resource
-Accept: application/xml
+        <div id="POST">
+          <div class="xml-docs">
+            <b style="font-weight: bold">Example Request</b>
+            <pre>
+POST /path/to/resource
 Content-Type: application/xml
-        <code class="prettyprint lang-xml">
+              <code class="prettyprint lang-xml">
 &lt;hello&gt;
 &lt;how are="you"&gt;
 &lt;doing/&gt;
 &lt;today&gt;...&lt;/today&gt;
 &lt;what_happens_if_there_is_an_element_that_wraps_off_the_edge_of_the_screen&gt;...&lt;/what_happens_if_there_is_an_element_that_wraps_off_the_edge_of_the_screen&gt;
 &lt;/hello&gt;
-        </code>
-      </pre>
+              </code>
+            </pre>
+          </div>
+          <div class="json-docs">
+            <b style="font-weight: bold">Example Request</b>
+            <pre>
+POST /path/to/resource
+Content-Type: application/json
+              <code class="prettyprint lang-js">
+{
+  hello : {
+    how : {
+      are : "you"
+    },
+    doing = {},
+    today : "...",
+    what_happens_if_there_is_an_element_that_wraps_off_the_edge_of_the_screen : "..."
+  }
+}
+              </code>
+            </pre>
+          </div>
+        </div>
+      </div>
+    </div>
 
 
       <div class="clear" />
@@ -209,7 +276,17 @@ Content-Type: application/xml
   <script src="js/libs/jquery-ui.js"></script>
   <script>
     $(function() {
+      $( "#mediatype-selection" ).buttonset();
       $( "#tabs" ).tabs();
+      $( ".json-docs" ).hide();
+      $( "#select-xml" ).click( function() {
+        $( ".json-docs" ).hide();
+        $( ".xml-docs" ).show();
+      })
+      $( "#select-json" ).click( function() {
+        $( ".xml-docs" ).hide();
+        $( ".json-docs" ).show();
+      })
     });
   </script>
 

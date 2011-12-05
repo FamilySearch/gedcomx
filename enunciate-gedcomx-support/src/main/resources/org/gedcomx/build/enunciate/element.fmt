@@ -35,25 +35,29 @@
 
       <p>${element.docValue!""}</p>
 
-      <div id="tabs">
-        <ul>
-          <li><a href="#xml">XML</a></li>
-          <li><a href="#json">JSON</a></li>
-        </ul>
-        <div id="xml">
-          <b style="font-weight: bold">Example</b>
-          <pre class="prettyprint lang-xml">
-${generateExampleXml(element)?html}
-          </pre>
-        </div>
+      <h3>Media Types</h3>
 
-        <div id="json">
-          <b style="font-weight: bold">Example</b>
-          <pre class="prettyprint lang-js">
-${generateExampleJson(element)}
-          </pre>
-        </div>
+      <p>Pick your favorite representation format.</p>
+
+      <div id="mediatype-selection">
+        <input type="radio" id="select-xml" name="mediatype" checked="checked"/><label for="select-xml">XML</label>
+        <input type="radio" id="select-json" name="mediatype" /><label for="select-json">JSON</label>
       </div>
+
+      <div class="xml-docs">
+        <h3>Example</h3>
+        <pre class="prettyprint lang-xml">
+${generateExampleXml(element)?html}
+        </pre>
+      </div>
+
+      <div id="json-docs">
+        <h3>Example</h3>
+        <pre class="prettyprint lang-js">
+${generateExampleJson(element)}
+        </pre>
+      </div>
+    </div>
 
       <div class="clear" />
     [@libBoilerplate.writeFooter/]

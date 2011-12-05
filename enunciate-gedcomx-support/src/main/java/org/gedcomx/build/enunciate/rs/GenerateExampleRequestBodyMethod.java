@@ -51,22 +51,22 @@ public class GenerateExampleRequestBodyMethod extends GenerateResourceExampleHtt
     if (HttpMethod.PUT.equals(method) || HttpMethod.POST.equals(method)) {
       if (json) {
         writer.printf("{\n");
-        writer.printf("  @type : \"%s%s\",\n", element.getTypeDefinition().getName(), element.getTypeDefinition().getNamespace());
+        writer.printf("  \"@type\" : \"%s%s\",\n", element.getTypeDefinition().getNamespace(), element.getTypeDefinition().getName());
         writer.printf("  ...\n");
 
         for (Element childElement : element.getTypeDefinition().getElements()) {
           ResourceServiceDefinitionDeclaration subresource = subresourcesByType.get(childElement.getBaseType().getQname());
           if (subresource != null) {
-            writer.printf("  %s : {\n", childElement.getJsonMemberName());
+            writer.printf("  \"%s\" :%s{\n", childElement.getJsonMemberName(), childElement.isCollectionType() ? " [ " : " ");
             writer.printf("    ...\n");
-            writer.printf("  }\n");
+            writer.printf("  }%s,\n", childElement.isCollectionType() ? " ]" : "");
             writer.printf("  ...\n");
           }
         }
         writer.printf("}");
       }
       else {
-        writer.printf("<%s xmlns=\"%s\" xmlns:rs=\"...\">\n", element.getName(), element.getNamespace());
+        writer.printf("<%s xmlns=\"%s\">\n", element.getName(), element.getNamespace());
         writer.printf("  ...\n");
 
         for (Element childElement : element.getTypeDefinition().getElements()) {

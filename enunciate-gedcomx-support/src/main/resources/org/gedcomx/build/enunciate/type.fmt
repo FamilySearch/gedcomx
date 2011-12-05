@@ -60,15 +60,19 @@
       [/#list]
       </table>
     [#else]
-    <div id="tabs">
-      <ul>
-        <li><a href="#xml">XML</a></li>
-        <li><a href="#json">JSON</a></li>
-      </ul>
-      <div id="xml">
+      <h3>Media Types</h3>
+
+      <p>Pick your favorite representation format.</p>
+
+      <div id="mediatype-selection">
+        <input type="radio" id="select-xml" name="mediatype" checked="checked"/><label for="select-xml">XML</label>
+        <input type="radio" id="select-json" name="mediatype" /><label for="select-json">JSON</label>
+      </div>
+
+      <div id="xml-docs">
       [#if type.value??]
         [#assign hasSchema=schemaForNamespace(type.value)??/]
-        <b style="font-weight: bold">Value</b>
+        <h3>Value</h3>
         <table>
           <tr>
             <th align="center">type</th>
@@ -82,7 +86,7 @@
       [/#if]
       [#if type.attributes?size > 0 || type.hasAnyAttribute!false]
 
-        <b style="font-weight: bold">Attributes</b>
+        <h3>Attributes</h3>
         <table>
           <tr>
             <th align="center">name</th>
@@ -108,7 +112,7 @@
       [/#if]
       [#if type.elements?size > 0 || type.anyElement??]
 
-        <b style="font-weight: bold">Elements</b>
+        <h3>Elements</h3>
         <table>
           <tr>
             <th align="center">name</th>
@@ -136,14 +140,14 @@
         </table>
       [/#if]
 
-        <b style="font-weight: bold">Example</b>
+        <h3>Example</h3>
         <pre class="prettyprint lang-xml">
 ${generateExampleXml(type)?html}
         </pre>
       </div>
 
-      <div id="json">
-        <b style="font-weight: bold">Properties</b>
+      <div class="json-docs">
+        <h3>Properties</h3>
         <table>
           <tr>
             <th align="center">name</th>
@@ -176,12 +180,11 @@ ${generateExampleXml(type)?html}
         [/#if]
         </table>
 
-        <b style="font-weight: bold">Example</b>
+        <h3>Example</h3>
         <pre class="prettyprint lang-js">
 ${generateExampleJson(type)}
         </pre>
       </div>
-    </div>
     [/#if]
 
     <div class="clear" />
