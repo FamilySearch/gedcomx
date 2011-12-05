@@ -19,7 +19,7 @@ import org.gedcomx.common.ResourceSet;
 import org.gedcomx.conclusion.ConclusionModel;
 import org.gedcomx.conclusion.Person;
 import org.gedcomx.rt.rs.ResourceServiceDefinition;
-import org.gedcomx.rt.rs.StatusCode;
+import org.gedcomx.rt.rs.ResponseCode;
 import org.gedcomx.rt.rs.StatusCodes;
 
 import javax.ws.rs.POST;
@@ -49,7 +49,7 @@ public interface PersonsRSDefinition extends CommonRSParameters {
    */
   @POST
   @StatusCodes({
-    @StatusCode( code = 201, condition = "The creation of the person was successful. Expect a location header specifying the link to the created person.")
+    @ResponseCode ( code = 201, condition = "The creation of the person was successful. Expect a location header specifying the link to the created person.")
   })
   Response createPerson(@Context UriInfo uriInfo, Person person);
 

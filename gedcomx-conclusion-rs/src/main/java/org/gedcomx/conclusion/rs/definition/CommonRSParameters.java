@@ -15,8 +15,7 @@
  */
 package org.gedcomx.conclusion.rs.definition;
 
-import org.gedcomx.rt.rs.ResourceServiceDefinition;
-import org.gedcomx.rt.rs.StatusCode;
+import org.gedcomx.rt.rs.ResponseCode;
 import org.gedcomx.rt.rs.StatusCodes;
 
 import javax.ws.rs.HeaderParam;
@@ -27,9 +26,9 @@ import javax.ws.rs.HeaderParam;
  * @author Ryan Heaton
  */
 @StatusCodes ( {
-  @StatusCode( code = 401, condition = "If authentication is needed, or if the supplied authentication is expired or otherwise invalid."),
-  @StatusCode( code = 403, condition = "If the resource is forbidden even after considering a possibly valid authentication."),
-  @StatusCode( code = 501, condition = "If the resource is not supported by the implementation.")
+  @ResponseCode ( code = 401, condition = "If authentication is needed, or if the supplied authentication is expired or otherwise invalid."),
+  @ResponseCode ( code = 403, condition = "If the resource is forbidden even after considering a possibly valid authentication."),
+  @ResponseCode ( code = 501, condition = "If the resource is not supported by the implementation.")
 } )
 public interface CommonRSParameters {
 

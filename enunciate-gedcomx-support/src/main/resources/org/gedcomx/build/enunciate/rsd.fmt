@@ -62,14 +62,29 @@
       <table>
         <tr>
           <th align="center">code</th>
-          <th align="center">warning code</th>
           <th align="center">condition</th>
         </tr>
         [#list rsd.statusCodes?sort_by("code") as statusCode]
         <tr>
           <td>${statusCode.code}</td>
-          <td>${statusCode.warningCode!"-"}</td>
           <td>${statusCode.condition}</td>
+        </tr>
+        [/#list]
+      </table>
+
+      [/#if]
+      [#if rsd.warnings?size > 0]
+      <h3>Common Warnings</h3>
+
+      <table>
+        <tr>
+          <th align="center">code</th>
+          <th align="center">condition</th>
+        </tr>
+        [#list rsd.warnings?sort_by("code") as warning]
+        <tr>
+          <td>${statusCode.warning}</td>
+          <td>${statusCode.warning}</td>
         </tr>
         [/#list]
       </table>
@@ -113,23 +128,40 @@
         [#assign method=op.httpMethods[0]?upper_case/]
         <div id="${method}">
         <p>${op.docValue!""}</p>
+      [#if op.metaData.statusCodes?size > 0]
 
         <h4>Status Codes</h4>
 
         <table>
           <tr>
             <th align="center">code</th>
-            <th align="center">warning code</th>
             <th align="center">condition</th>
           </tr>
-      [#list op.metaData.statusCodes?sort_by("code") as statusCode]
+        [#list op.metaData.statusCodes?sort_by("code") as statusCode]
           <tr>
             <td>${statusCode.code}</td>
-            <td>${statusCode.warningCode!"-"}</td>
             <td>${statusCode.condition}</td>
           </tr>
-      [/#list]
+        [/#list]
         </table>
+      [/#if]
+      [#if op.metaData.warnings?size > 0]
+
+        <h4>Warnings</h4>
+
+        <table>
+          <tr>
+            <th align="center">code</th>
+            <th align="center">condition</th>
+          </tr>
+        [#list op.metaData.warnings?sort_by("code") as warning]
+          <tr>
+            <td>${warning.code}</td>
+            <td>${warning.condition}</td>
+          </tr>
+        [/#list]
+        </table>
+      [/#if]
 
         <div class="xml-docs">
       [#assign requestBody=generateExampleRequestBody(op)?html?trim/]

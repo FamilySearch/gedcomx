@@ -37,7 +37,8 @@ public class ResourceServiceDefinitionDeclaration extends Resource {
   private final ResourceServiceProcessor processor;
   private final String name;
   private final String namespace;
-  private final List<StatusCode> statusCodes;
+  private final List<ResponseCode> statusCodes;
+  private final List<ResponseCode> warnings;
   private final List<ResourceRelationship> resourceRelationships;
   private final List<ElementDeclaration> resourceElements;
   final Set<String> subresourceQualfiedNames = new TreeSet<String>();
@@ -65,10 +66,13 @@ public class ResourceServiceDefinitionDeclaration extends Resource {
 
     this.statusCodes = processor.extractStatusCodes(delegate);
 
+    this.warnings = processor.extractWarnings(delegate);
+
     this.resourceRelationships = processor.extractResourceRelationships(delegate);
 
     for (ResourceMethod resourceMethod : getResourceMethods()) {
       resourceMethod.putMetaData("statusCodes", processor.extractStatusCodes(resourceMethod));
+      resourceMethod.putMetaData("warnings", processor.extractWarnings(resourceMethod));
     }
 
     try {
@@ -129,8 +133,12 @@ public class ResourceServiceDefinitionDeclaration extends Resource {
     return subresources;
   }
 
-  public List<StatusCode> getStatusCodes() {
+  public List<ResponseCode> getStatusCodes() {
     return statusCodes;
+  }
+
+  public List<ResponseCode> getWarnings() {
+    return warnings;
   }
 
   public List<ResourceRelationship> getResourceRelationships() {

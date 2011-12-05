@@ -24,7 +24,7 @@ import java.lang.annotation.Target;
  */
 @Retention( RetentionPolicy.RUNTIME )
 @Target( {} )
-public @interface StatusCode {
+public @interface ResponseCode {
 
   int code();
 

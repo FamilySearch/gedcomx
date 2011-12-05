@@ -51,10 +51,10 @@ public interface PersonRSDefinition extends CommonRSParameters {
    */
   @GET
   @StatusCodes({
-    @StatusCode( code = 200, condition = "Upon a successful read."),
-    @StatusCode( code = 301, condition = "If the requested person has been merged to another person."),
-    @StatusCode( code = 404, condition = "If the requested person is not found."),
-    @StatusCode( code = 410, condition = "If the requested person has been deleted.")
+    @ResponseCode ( code = 200, condition = "Upon a successful read."),
+    @ResponseCode ( code = 301, condition = "If the requested person has been merged to another person."),
+    @ResponseCode ( code = 404, condition = "If the requested person is not found."),
+    @ResponseCode ( code = 410, condition = "If the requested person has been deleted.")
   })
   Response readPerson(@Context UriInfo uriInfo);
 
@@ -66,7 +66,7 @@ public interface PersonRSDefinition extends CommonRSParameters {
    */
   @PUT
   @StatusCodes({
-    @StatusCode( code = 204, condition = "The update was successful.")
+    @ResponseCode ( code = 204, condition = "The update was successful.")
   })
   void updatePerson(@Context UriInfo uriInfo, Person person);
 
@@ -77,7 +77,7 @@ public interface PersonRSDefinition extends CommonRSParameters {
    */
   @DELETE
   @StatusCodes({
-    @StatusCode ( code = 204, condition = "The delete was successful.")
+    @ResponseCode ( code = 204, condition = "The delete was successful.")
   })
   void deletePerson(@Context UriInfo uriInfo);
 

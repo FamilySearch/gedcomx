@@ -19,7 +19,7 @@ import org.gedcomx.common.ResourceSet;
 import org.gedcomx.conclusion.Conclusion;
 import org.gedcomx.conclusion.ConclusionModel;
 import org.gedcomx.rt.rs.ResourceServiceDefinition;
-import org.gedcomx.rt.rs.StatusCode;
+import org.gedcomx.rt.rs.ResponseCode;
 import org.gedcomx.rt.rs.StatusCodes;
 
 import javax.ws.rs.GET;
@@ -49,7 +49,7 @@ public interface ConclusionsRSDefinition extends CommonRSParameters {
    */
   @GET
   @StatusCodes({
-    @StatusCode( code = 200, condition = "Upon a successful read.")
+    @ResponseCode ( code = 200, condition = "Upon a successful read.")
   })
   Response readConclusions(@Context UriInfo uriInfo);
 
@@ -62,7 +62,7 @@ public interface ConclusionsRSDefinition extends CommonRSParameters {
    */
   @POST
   @StatusCodes({
-    @StatusCode( code = 201, condition = "The creation of the conclusion was successful. Expect a location header specifying the link to the created conclusion.")
+    @ResponseCode ( code = 201, condition = "The creation of the conclusion was successful. Expect a location header specifying the link to the created conclusion.")
   })
   Response createConclusion(@Context UriInfo uriInfo, Conclusion conclusion);
 

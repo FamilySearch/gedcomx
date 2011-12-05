@@ -69,7 +69,7 @@
         <input type="radio" id="select-json" name="mediatype" /><label for="select-json">JSON</label>
       </div>
 
-      <div id="xml-docs">
+      <div class="xml-docs">
       [#if type.value??]
         [#assign hasSchema=schemaForNamespace(type.value)??/]
         <h3>Value</h3>

@@ -50,10 +50,10 @@ public interface RelationshipRSDefinition extends CommonRSParameters {
    */
   @GET
   @StatusCodes({
-    @StatusCode( code = 200, condition = "Upon a successful read."),
-    @StatusCode( code = 301, condition = "If the requested relationship has been merged to another relationship."),
-    @StatusCode( code = 404, condition = "If the requested relationship is not found."),
-    @StatusCode( code = 410, condition = "If the requested relationship has been deleted.")
+    @ResponseCode ( code = 200, condition = "Upon a successful read."),
+    @ResponseCode ( code = 301, condition = "If the requested relationship has been merged to another relationship."),
+    @ResponseCode ( code = 404, condition = "If the requested relationship is not found."),
+    @ResponseCode ( code = 410, condition = "If the requested relationship has been deleted.")
   })
   Response readRelationship(@Context UriInfo uriInfo);
 
@@ -65,7 +65,7 @@ public interface RelationshipRSDefinition extends CommonRSParameters {
    */
   @PUT
   @StatusCodes({
-    @StatusCode( code = 204, condition = "The update was successful.")
+    @ResponseCode ( code = 204, condition = "The update was successful.")
   })
   void updateRelationship(@Context UriInfo uriInfo, Relationship relationship);
 
@@ -76,7 +76,7 @@ public interface RelationshipRSDefinition extends CommonRSParameters {
    */
   @DELETE
   @StatusCodes({
-    @StatusCode ( code = 204, condition = "The delete was successful.")
+    @ResponseCode ( code = 204, condition = "The delete was successful.")
   })
   void deleteRelationship(@Context UriInfo uriInfo);
 

@@ -51,7 +51,7 @@ ${generateExampleXml(element)?html}
         </pre>
       </div>
 
-      <div id="json-docs">
+      <div class="json-docs">
         <h3>Example</h3>
         <pre class="prettyprint lang-js">
 ${generateExampleJson(element)}

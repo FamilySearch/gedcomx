@@ -19,7 +19,7 @@ import org.gedcomx.common.ResourceSet;
 import org.gedcomx.conclusion.ConclusionModel;
 import org.gedcomx.conclusion.Relationship;
 import org.gedcomx.rt.rs.ResourceServiceDefinition;
-import org.gedcomx.rt.rs.StatusCode;
+import org.gedcomx.rt.rs.ResponseCode;
 import org.gedcomx.rt.rs.StatusCodes;
 
 import javax.ws.rs.POST;
@@ -49,7 +49,7 @@ public interface RelationshipsRSDefinition extends CommonRSParameters {
    */
   @POST
   @StatusCodes({
-    @StatusCode( code = 201, condition = "The creation of the relationship was successful. Expect a location header specifying the link to the created relationship.")
+    @ResponseCode ( code = 201, condition = "The creation of the relationship was successful. Expect a location header specifying the link to the created relationship.")
   })
   Response createRelationship(@Context UriInfo uriInfo, Relationship relationship);
 

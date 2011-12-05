@@ -35,15 +35,17 @@ public class ResourceServiceBindingMetadata {
   private final String namespace;
   private final Resource rawResource;
   private final ResourceServiceDefinitionDeclaration definition;
-  private final List<StatusCode> statusCodes;
+  private final List<ResponseCode> statusCodes;
+  private final List<ResponseCode> warnings;
   private final List<ResourceRelationship> resourceRelationships;
 
-  public ResourceServiceBindingMetadata(String name, String namespace, Resource rawResource, ResourceServiceDefinitionDeclaration definition, List<StatusCode> statusCodes, List<ResourceRelationship> resourceRelationships) {
+  public ResourceServiceBindingMetadata(String name, String namespace, Resource rawResource, ResourceServiceDefinitionDeclaration definition, List<ResponseCode> statusCodes, List<ResponseCode> warnings, List<ResourceRelationship> resourceRelationships) {
     this.name = name;
     this.namespace = namespace;
     this.rawResource = rawResource;
     this.definition = definition;
     this.statusCodes = statusCodes;
+    this.warnings = warnings;
     this.resourceRelationships = resourceRelationships;
   }
 
@@ -63,8 +65,12 @@ public class ResourceServiceBindingMetadata {
     return definition;
   }
 
-  public List<StatusCode> getStatusCodes() {
+  public List<ResponseCode> getStatusCodes() {
     return statusCodes;
+  }
+
+  public List<ResponseCode> getWarnings() {
+    return warnings;
   }
 
   public List<ResourceRelationship> getResourceRelationships() {
@@ -88,7 +94,7 @@ public class ResourceServiceBindingMetadata {
       }
 
       Set<ResourceServiceDefinitionDeclaration> defs = findDefinitions((TypeDeclaration) rawResource.getDelegate(), processor);
-      bindingMetadata = new ResourceServiceBindingMetadata(name, namespace, rawResource, defs.size() == 1 ? defs.iterator().next() : null, processor.extractStatusCodes(rawResource), processor.extractResourceRelationships(rawResource));
+      bindingMetadata = new ResourceServiceBindingMetadata(name, namespace, rawResource, defs.size() == 1 ? defs.iterator().next() : null, processor.extractStatusCodes(rawResource), processor.extractWarnings(rawResource), processor.extractResourceRelationships(rawResource));
 
       List<ResourceMethod> resourceMethods = rawResource.getResourceMethods();
       for (ResourceMethod resourceMethod : resourceMethods) {
@@ -99,6 +105,7 @@ public class ResourceServiceBindingMetadata {
     List<ResourceMethod> resourceMethods = rawResource.getResourceMethods();
     for (ResourceMethod resourceMethod : resourceMethods) {
       resourceMethod.putMetaData("statusCodes", processor.extractStatusCodes(resourceMethod));
+      resourceMethod.putMetaData("warnings", processor.extractWarnings(resourceMethod));
     }
 
     return bindingMetadata;

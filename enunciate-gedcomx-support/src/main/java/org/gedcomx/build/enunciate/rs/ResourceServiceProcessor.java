@@ -27,10 +27,7 @@ import org.codehaus.enunciate.contract.jaxb.RootElementDeclaration;
 import org.codehaus.enunciate.contract.jaxrs.RootResource;
 import org.codehaus.enunciate.contract.jaxrs.SubResourceLocator;
 import org.codehaus.enunciate.contract.validation.ValidationResult;
-import org.gedcomx.rt.rs.ResourceRelationships;
-import org.gedcomx.rt.rs.ResourceServiceBinding;
-import org.gedcomx.rt.rs.ResourceServiceDefinition;
-import org.gedcomx.rt.rs.StatusCodes;
+import org.gedcomx.rt.rs.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -104,6 +101,7 @@ public class ResourceServiceProcessor {
         //todo: iterate through the subresource qualified names to make sure each one is annotated with @ResourceServiceDefinition
         //todo: make sure there's only one http method per resource method.
         //todo: verify no more than one operation of the same method.
+        //todo: make sure relationship names are uris, unless one of the known registered ones
         this.resourceServiceDefinitions.add(rsd);
       }
       else {
@@ -122,6 +120,7 @@ public class ResourceServiceProcessor {
       }
 
       //todo: verify no more than one operation of the same method.
+      //todo: make sure relationship names are uris, unless one of the known registered ones
 
       List<SubResourceLocator> resourceLocators = rootResource.getResourceLocators();
       for (SubResourceLocator resourceLocator : resourceLocators) {
@@ -157,15 +156,15 @@ public class ResourceServiceProcessor {
     return rels;
   }
 
-  public List<StatusCode> extractStatusCodes(Declaration delegate) {
-    List<StatusCode> codes = new ArrayList<StatusCode>();
-    org.gedcomx.rt.rs.StatusCode[] statusCodes = {};
+  public List<ResponseCode> extractStatusCodes(Declaration delegate) {
+    List<ResponseCode> codes = new ArrayList<ResponseCode>();
+    org.gedcomx.rt.rs.ResponseCode[] responseCodes = {};
     StatusCodes statusCodesContainer = delegate.getAnnotation(StatusCodes.class);
     if (statusCodesContainer != null) {
-      statusCodes = statusCodesContainer.value();
+      responseCodes = statusCodesContainer.value();
     }
-    for (org.gedcomx.rt.rs.StatusCode statusCode : statusCodes) {
-      codes.add(new StatusCode(statusCode.code(), statusCode.condition(), statusCode.warningCode() >= 0 ? statusCode.warningCode() : null));
+    for (org.gedcomx.rt.rs.ResponseCode responseCode : responseCodes) {
+      codes.add(new ResponseCode(responseCode.code(), responseCode.condition()));
     }
 
     if (delegate instanceof TypeDeclaration) {
@@ -174,6 +173,30 @@ public class ResourceServiceProcessor {
         InterfaceDeclaration decl = iface.getDeclaration();
         if (decl != null && decl.getAnnotation(ResourceServiceDefinition.class) == null && decl.getAnnotation(ResourceServiceBinding.class) == null) {
           codes.addAll(extractStatusCodes(decl));
+        }
+      }
+    }
+
+    return codes;
+  }
+
+  public List<ResponseCode> extractWarnings(Declaration delegate) {
+    List<ResponseCode> codes = new ArrayList<ResponseCode>();
+    org.gedcomx.rt.rs.ResponseCode[] responseCodes = {};
+    Warnings warningsContainer = delegate.getAnnotation(Warnings.class);
+    if (warningsContainer != null) {
+      responseCodes = warningsContainer.value();
+    }
+    for (org.gedcomx.rt.rs.ResponseCode responseCode : responseCodes) {
+      codes.add(new ResponseCode(responseCode.code(), responseCode.condition()));
+    }
+
+    if (delegate instanceof TypeDeclaration) {
+      Collection<InterfaceType> supers = ((TypeDeclaration) delegate).getSuperinterfaces();
+      for (InterfaceType iface : supers) {
+        InterfaceDeclaration decl = iface.getDeclaration();
+        if (decl != null && decl.getAnnotation(ResourceServiceDefinition.class) == null && decl.getAnnotation(ResourceServiceBinding.class) == null) {
+          codes.addAll(extractWarnings(decl));
         }
       }
     }

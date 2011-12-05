@@ -18,16 +18,14 @@ package org.gedcomx.build.enunciate.rs;
 /**
  * @author Ryan Heaton
  */
-public class StatusCode {
+public class ResponseCode {
 
   private final int code;
-  private final Integer warningCode;
   private final String condition;
 
-  public StatusCode(int code, String condition, Integer warningCode) {
+  public ResponseCode(int code, String condition) {
     this.code = code;
     this.condition = condition;
-    this.warningCode = warningCode;
   }
 
   public int getCode() {
@@ -38,7 +36,4 @@ public class StatusCode {
     return condition;
   }
 
-  public Integer getWarningCode() {
-    return warningCode;
-  }
 }
