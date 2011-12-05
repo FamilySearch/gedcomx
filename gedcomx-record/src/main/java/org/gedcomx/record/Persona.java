@@ -33,8 +33,8 @@ import java.util.List;
  */
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType ( name = "Persona", propOrder = { "persistentId", "alternateIds", "gender", "age", "names", "eventRoles", "facts" } )
-public class Persona extends GenealogicalResource implements PersistentIdentifiable, HasFacts, Weighted {
+@XmlType ( name = "Persona", propOrder = { "persistentId", "alternateIds", "gender", "age", "names", "facts" } )
+public class Persona extends GenealogicalResource implements PersistentIdentifiable, HasFacts {
 
   private Boolean principal;
   private URI persistentId;
@@ -42,7 +42,6 @@ public class Persona extends GenealogicalResource implements PersistentIdentifia
   private Gender gender;
   private Age age;
   private java.util.List<Name> names;
-  private java.util.List<EventRole> eventRoles = new ArrayList<EventRole>();
   private java.util.List<Fact> facts = new ArrayList<Fact>();
 
   /**
@@ -145,9 +144,9 @@ public class Persona extends GenealogicalResource implements PersistentIdentifia
   }
 
   /**
-   * The fact fields on this persona.
+   * The facts (e.g. events and characteristics) about this persona.
    *
-   * @return The fact fields on this persona.
+   * @return The facts (e.g. events and characteristics) about this persona.
    */
   @XmlElement(name="fact")
   @JsonProperty("facts")
@@ -157,35 +156,13 @@ public class Persona extends GenealogicalResource implements PersistentIdentifia
   }
 
   /**
-   * The fact fields on this persona.
+   * The facts (e.g. events and characteristics) about this persona.
    *
-   * @param facts The fact fields on this persona.
+   * @param facts The facts (e.g. events and characteristics) about this persona.
    */
   @JsonProperty("facts")
   public void setFacts(List<Fact> facts) {
     this.facts = facts;
-  }
-
-  /**
-   * The roles this persona plays in the events of the record.
-   *
-   * @return The roles this persona plays in the events of the record.
-   */
-  @XmlElement(name = "eventRole")
-  @JsonProperty("eventRoles")
-  @JsonName("eventRoles")
-  public List<EventRole> getEventRoles() {
-    return eventRoles;
-  }
-
-  /**
-   * The roles this persona plays in the events of the record.
-   *
-   * @param eventRoles The roles this persona plays in the events of the record.
-   */
-  @JsonProperty("eventRoles")
-  public void setEventRoles(List<EventRole> eventRoles) {
-    this.eventRoles = eventRoles;
   }
 
   /**
