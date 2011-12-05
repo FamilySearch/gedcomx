@@ -15,7 +15,6 @@
  */
 package org.gedcomx.record;
 
-import org.codehaus.enunciate.ClientName;
 import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
@@ -25,7 +24,7 @@ import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.RDFSubClassOf;
 import org.gedcomx.rt.RDFSubPropertyOf;
 import org.gedcomx.rt.XmlTypeIdResolver;
-import org.gedcomx.types.EventType;
+import org.gedcomx.types.FactType;
 import org.gedcomx.types.TypeReference;
 import org.gedcomx.types.Typed;
 
@@ -37,17 +36,17 @@ import javax.xml.bind.annotation.XmlType;
 /**
  * A recorded event.
  */
-@ClientName("EventInfo")
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType( name = "Event", propOrder = { "type", "date", "place" } )
+@XmlType( name = "Fact", propOrder = { "type", "date", "place", "value" } )
 @RDFSubClassOf ( CommonModels.DUBLIN_CORE_TYPE_NAMESPACE + "Event" )
-public class Event extends GenealogicalResource implements Typed<EventType> {
+public class Fact extends GenealogicalResource implements Typed<FactType> {
 
-  private TypeReference<EventType> type;
+  private TypeReference<FactType> type;
   private Boolean primary;
   private Date date;
   private Place place;
+  private Field value;
 
   /**
    * The type of the event.
@@ -55,7 +54,7 @@ public class Event extends GenealogicalResource implements Typed<EventType> {
    * @return The type of the event.
    */
   @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
-  public TypeReference<EventType> getType() {
+  public TypeReference<FactType> getType() {
     return type;
   }
 
@@ -64,7 +63,7 @@ public class Event extends GenealogicalResource implements Typed<EventType> {
    *
    * @param type The type of the event.
    */
-  public void setType(TypeReference<EventType> type) {
+  public void setType(TypeReference<FactType> type) {
     this.type = type;
   }
 
@@ -75,8 +74,8 @@ public class Event extends GenealogicalResource implements Typed<EventType> {
    */
   @XmlTransient
   @JsonIgnore
-  public org.gedcomx.types.EventType getKnownType() {
-    return getType() == null ? null : XmlQNameEnumUtil.fromURI(getType().getType(), org.gedcomx.types.EventType.class);
+  public org.gedcomx.types.FactType getKnownType() {
+    return getType() == null ? null : XmlQNameEnumUtil.fromURI(getType().getType(), org.gedcomx.types.FactType.class);
   }
 
   /**
@@ -85,8 +84,8 @@ public class Event extends GenealogicalResource implements Typed<EventType> {
    * @param knownType the event type.
    */
   @JsonIgnore
-  public void setKnownType(org.gedcomx.types.EventType knownType) {
-    setType(knownType == null ? null : new TypeReference<EventType>(knownType));
+  public void setKnownType(org.gedcomx.types.FactType knownType) {
+    setType(knownType == null ? null : new TypeReference<FactType>(knownType));
   }
 
   /**
@@ -146,4 +145,21 @@ public class Event extends GenealogicalResource implements Typed<EventType> {
     this.place = place;
   }
 
+  /**
+   * The value of a fact, if applicable.
+   *
+   * @return The value of a fact.
+   */
+  public Field getValue() {
+    return value;
+  }
+
+  /**
+   * The value of a fact, if applicable.
+   *
+   * @param value The value of a fact, if applicable.
+   */
+  public void setValue(Field value) {
+    this.value = value;
+  }
 }

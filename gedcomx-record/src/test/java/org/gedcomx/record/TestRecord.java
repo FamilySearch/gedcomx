@@ -51,27 +51,27 @@ public class TestRecord {
     alternateIds.add(alternateId);
     record.setAlternateIds(alternateIds);
 
-    List<Event> events = new ArrayList<Event>();
-    Event event = new Event();
-    event.setDate(new Date());
-    fillInField(event.getDate(), "event-date");
-    event.getDate().setParts(new ArrayList<DatePart>());
+    List<Fact> facts = new ArrayList<Fact>();
+    Fact fact = new Fact();
+    fact.setDate(new Date());
+    fillInField(fact.getDate(), "event-date");
+    fact.getDate().setParts(new ArrayList<DatePart>());
     DatePart datePart = new DatePart();
     fillInField(datePart, "event-date-part");
     datePart.setKnownType(DatePartType.Months);
-    event.getDate().getParts().add(datePart);
-    event.setId("event-id");
-    event.setKnownType(EventType.Adoption);
-    event.setPlace(new Place());
-    fillInField(event.getPlace(), "event-place");
-    event.getPlace().setParts(new ArrayList<PlacePart>());
+    fact.getDate().getParts().add(datePart);
+    fact.setId("event-id");
+    fact.setKnownType(FactType.Adoption);
+    fact.setPlace(new Place());
+    fillInField(fact.getPlace(), "event-place");
+    fact.getPlace().setParts(new ArrayList<PlacePart>());
     PlacePart placePart = new PlacePart();
     fillInField(placePart, "event-place-part");
     placePart.setKnownType(PlacePartType.Cemetery);
-    event.getPlace().getParts().add(placePart);
-    event.setPrimary(true);
-    events.add(event);
-    record.setEvents(events);
+    fact.getPlace().getParts().add(placePart);
+    fact.setPrimary(true);
+    facts.add(fact);
+    record.setFacts(facts);
 
     Persona persona = new Persona();
     List<Characteristic> characteristics = new ArrayList<Characteristic>();
@@ -121,27 +121,13 @@ public class TestRecord {
     EventRole eventRole = new EventRole();
     eventRole.setDescription("event role description");
     eventRole.setPrincipal(false);
-    eventRole.setEvent(URI.create("#" + event.getId()));
+    eventRole.setEvent(URI.create("#" + fact.getId()));
     eventRole.setAttribution(new Attribution());
     eventRole.getAttribution().setProofStatement("event role attribution");
     eventRoles.add(eventRole);
     persona.setEventRoles(eventRoles);
 
     record.setPersonas(Arrays.asList(persona));
-
-    List<RecordField> fields = new ArrayList<RecordField>();
-    RecordField field = new RecordField();
-    field.setAttribution(new Attribution());
-    field.getAttribution().setContributor(new ResourceReference());
-    field.getAttribution().getContributor().setResource(URI.create("urn:field-attribution"));
-    field.setId("field-id");
-    field.setKnownType(FieldType.BatchNumber);
-    field.setOriginal("field-value-original");
-    field.setInterpreted("field-value-interpreted");
-    field.setProcessed(new FormalValue());
-    field.getProcessed().setText("field-value-normalized");
-    fields.add(field);
-    record.setFields(fields);
 
     record.setPersistentId(URI.create("pal"));
 
@@ -214,19 +200,19 @@ public class TestRecord {
     assertEquals(AlternateIdType.Forwarded, record.getAlternateIds().get(0).getKnownType());
     assertEquals("forward-value", record.getAlternateIds().get(0).getValue());
 
-    assertEquals(1, record.getEvents().size());
-    Event event = record.getEvents().get(0);
-    assertField(event.getDate(), "event-date");
-    assertEquals("event-id", event.getId());
-    assertEquals(EventType.Adoption, event.getKnownType());
-    assertField(event.getPlace(), "event-place");
-    assertTrue(event.getPrimary());
-    assertEquals(1, event.getDate().getParts().size());
-    assertField(event.getDate().getParts().get(0), "event-date-part");
-    assertEquals(DatePartType.Months, event.getDate().getParts().get(0).getKnownType());
-    assertEquals(1, event.getPlace().getParts().size());
-    assertField(event.getPlace().getParts().get(0), "event-place-part");
-    assertEquals(PlacePartType.Cemetery, event.getPlace().getParts().get(0).getKnownType());
+    assertEquals(1, record.getFacts().size());
+    Fact fact = record.getFacts().get(0);
+    assertField(fact.getDate(), "event-date");
+    assertEquals("event-id", fact.getId());
+    assertEquals(FactType.Adoption, fact.getKnownType());
+    assertField(fact.getPlace(), "event-place");
+    assertTrue(fact.getPrimary());
+    assertEquals(1, fact.getDate().getParts().size());
+    assertField(fact.getDate().getParts().get(0), "event-date-part");
+    assertEquals(DatePartType.Months, fact.getDate().getParts().get(0).getKnownType());
+    assertEquals(1, fact.getPlace().getParts().size());
+    assertField(fact.getPlace().getParts().get(0), "event-place-part");
+    assertEquals(PlacePartType.Cemetery, fact.getPlace().getParts().get(0).getKnownType());
 
     assertEquals(1, record.getPersonas().size());
     Persona persona = record.getPersonas().get(0);
@@ -267,16 +253,7 @@ public class TestRecord {
     assertEquals("event role description", eventRole.getDescription());
     assertEquals("event role attribution", eventRole.getAttribution().getProofStatement());
     assertFalse(eventRole.getPrincipal());
-    assertEquals("#" + event.getId(), eventRole.getEvent().toString());
-
-    assertEquals(1, record.getFields().size());
-    RecordField field = record.getFields().get(0);
-    assertEquals("urn:field-attribution", field.getAttribution().getContributor().getResource().toString());
-    assertEquals("field-id", field.getId());
-    assertEquals(FieldType.BatchNumber, field.getKnownType());
-    assertEquals("field-value-original", field.getOriginal());
-    assertEquals("field-value-interpreted", field.getInterpreted());
-    assertEquals("field-value-normalized", field.getProcessed().getText());
+    assertEquals("#" + fact.getId(), eventRole.getEvent().toString());
 
     assertEquals("pal", record.getPersistentId().toString());
     assertEquals("bibliographic citation", record.getBibliographicCitation());

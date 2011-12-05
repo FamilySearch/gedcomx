@@ -41,15 +41,14 @@ import java.util.List;
 @JsonElementWrapper ( name = "records" )
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType ( name = "Record", propOrder = { "type", "personas", "events", "relationships", "fields" } )
+@XmlType ( name = "Record", propOrder = { "type", "personas", "relationships", "facts" } )
 public class Record extends GenealogicalEntity implements Typed<RecordType>, PersistentIdentifiable {
 
   private String lang;
   private TypeReference<RecordType> type;
   private List<Persona> personas;
-  private List<Event> events;
+  private List<Fact> facts;
   private List<Relationship> relationships;
-  private List<RecordField> fields;
 
   /**
    * The type of the record.
@@ -133,25 +132,25 @@ public class Record extends GenealogicalEntity implements Typed<RecordType>, Per
   }
 
   /**
-   * The events of the record.
+   * Facts described by the record outside the scope of a persona or relationship.
    *
-   * @return The events of the record.
+   * @return Facts described by the record outside the scope of a persona or relationship.
    */
-  @XmlElement(name = "event")
-  @JsonProperty("events")
-  @JsonName("events")
-  public List<Event> getEvents() {
-    return events;
+  @XmlElement(name = "fact")
+  @JsonProperty("facts")
+  @JsonName("facts")
+  public List<Fact> getFacts() {
+    return facts;
   }
 
   /**
-   * The events of the record.
+   * Facts described by the record outside the scope of a persona or relationship.
    *
-   * @param events The events of the record.
+   * @param facts Facts described by the record outside the scope of a persona or relationship.
    */
-  @JsonProperty("events")
-  public void setEvents(List<Event> events) {
-    this.events = events;
+  @JsonProperty("facts")
+  public void setFacts(List<Fact> facts) {
+    this.facts = facts;
   }
 
   /**
@@ -174,28 +173,6 @@ public class Record extends GenealogicalEntity implements Typed<RecordType>, Per
   @JsonProperty("relationships")
   public void setRelationships(List<Relationship> relationships) {
     this.relationships = relationships;
-  }
-
-  /**
-   * Any generic fields that are on the record (not belonging to a persona or relationship).
-   *
-   * @return Any generic fields that are on the record (not belonging to a persona or relationship).
-   */
-  @XmlElement(name = "field")
-  @JsonProperty("fields")
-  @JsonName("fields")
-  public List<RecordField> getFields() {
-    return fields;
-  }
-
-  /**
-   * Any generic fields that are on the record (not belonging to a persona or relationship).
-   *
-   * @param fields Any generic fields that are on the record (not belonging to a persona or relationship).
-   */
-  @JsonProperty("fields")
-  public void setFields(List<RecordField> fields) {
-    this.fields = fields;
   }
 
 }

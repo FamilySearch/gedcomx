@@ -67,7 +67,6 @@ public enum FactType {
   Illness,
   Immigration,
   Interment,
-  Household,
   Living,
   MaritalStatus,
   MilitaryAward,
@@ -131,6 +130,11 @@ public enum FactType {
   Foster,
   Guardianship,
 
+  //facts generally applicable within the scope of a record.
+
+  Household,
+  BatchNumber,
+
   @XmlUnknownQNameEnumValue
   OTHER;
 
@@ -186,9 +190,9 @@ public enum FactType {
   public static final class Person {
     private Person(){}
 
-    private static final EnumSet<FactType> PERSON_CHARACTERISTIC_TYPES = EnumSet.noneOf(FactType.class);
+    private static final EnumSet<FactType> PERSON_FACT_TYPES = EnumSet.noneOf(FactType.class);
     private static FactType include(FactType type) {
-      PERSON_CHARACTERISTIC_TYPES.add(type);
+      PERSON_FACT_TYPES.add(type);
       return type;
     }
     
@@ -269,7 +273,7 @@ public enum FactType {
      * @return Whether the given fact type is applicable to a person.
      */
     public static boolean isApplicable(FactType type) {
-      return PERSON_CHARACTERISTIC_TYPES.contains(type);
+      return PERSON_FACT_TYPES.contains(type);
     }
   }
 
@@ -277,9 +281,9 @@ public enum FactType {
   public static final class Couple {
     private Couple() {}
 
-    private static final EnumSet<FactType> COUPLE_CHARACTERISTIC_TYPES = EnumSet.noneOf(FactType.class);
+    private static final EnumSet<FactType> COUPLE_FACT_TYPES = EnumSet.noneOf(FactType.class);
     private static FactType include(FactType type) {
-      COUPLE_CHARACTERISTIC_TYPES.add(type);
+      COUPLE_FACT_TYPES.add(type);
       return type;
     }
     
@@ -307,7 +311,7 @@ public enum FactType {
      * @return Whether the given fact type is applicable to a couple.
      */
     public static boolean isApplicable(FactType type) {
-      return COUPLE_CHARACTERISTIC_TYPES.contains(type);
+      return COUPLE_FACT_TYPES.contains(type);
     }
   }
 
@@ -315,9 +319,9 @@ public enum FactType {
   public static final class ParentChild {
     private ParentChild() {}
 
-    private static final EnumSet<FactType> PARENT_CHILD_CHARACTERISTIC_TYPES = EnumSet.noneOf(FactType.class);
+    private static final EnumSet<FactType> PARENT_CHILD_FACT_TYPES = EnumSet.noneOf(FactType.class);
     private static FactType include(FactType type) {
-      PARENT_CHILD_CHARACTERISTIC_TYPES.add(type);
+      PARENT_CHILD_FACT_TYPES.add(type);
       return type;
     }
     
@@ -334,7 +338,31 @@ public enum FactType {
      * @return Whether the given fact type is applicable to a parent-child relationship.
      */
     public static boolean isApplicable(FactType type) {
-      return PARENT_CHILD_CHARACTERISTIC_TYPES.contains(type);
+      return PARENT_CHILD_FACT_TYPES.contains(type);
+    }
+  }
+
+  @XmlTransient
+  public static final class Record {
+    private Record() {}
+
+    private static final EnumSet<FactType> RECORD_FACT_TYPES = EnumSet.noneOf(FactType.class);
+    private static FactType include(FactType type) {
+      RECORD_FACT_TYPES.add(type);
+      return type;
+    }
+
+    public static final FactType Household = include(FactType.Household);
+    public static final FactType BatchNumber = include(FactType.BatchNumber);
+
+    /**
+     * Whether the given fact type is applicable to a record.
+     *
+     * @param type The fact type.
+     * @return Whether the given fact type is applicable to a record.
+     */
+    public static boolean isApplicable(FactType type) {
+      return RECORD_FACT_TYPES.contains(type);
     }
   }
 
