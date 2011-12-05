@@ -22,13 +22,13 @@ import com.sun.mirror.type.MirroredTypeException;
  */
 public class ResourceRelationship {
 
-  final String name;
+  final String identifier;
   final String description;
   final String resourceDefQualifiedName;
   final ResourceServiceProcessor processor;
 
   public ResourceRelationship(org.gedcomx.rt.rs.ResourceRelationship meta, ResourceServiceProcessor processor) {
-    this.name = meta.name();
+    this.identifier = meta.identifier();
     this.description = meta.description();
     this.processor = processor;
     String fqn;
@@ -41,8 +41,8 @@ public class ResourceRelationship {
     this.resourceDefQualifiedName = fqn;
   }
 
-  public String getName() {
-    return name;
+  public String getIdentifier() {
+    return identifier;
   }
 
   public String getDescription() {

@@ -38,8 +38,8 @@ import javax.ws.rs.core.UriInfo;
   subresources = { ConclusionRSDefinition.class, ConclusionsRSDefinition.class }
 )
 @ResourceRelationships({
-  @ResourceRelationship ( name = "self", definedBy = PersonRSDefinition.class, description = "The person itself." ),
-  @ResourceRelationship ( name = "parent-child-relationship", definedBy = RelationshipRSDefinition.class, description = "The parent-child relationships for a person." )
+  @ResourceRelationship ( identifier = "self", definedBy = PersonRSDefinition.class, description = "The person itself." ),
+  @ResourceRelationship ( identifier = "parent-child-relationship", definedBy = RelationshipRSDefinition.class, description = "The parent-child relationships for a person." )
 })
 public interface PersonRSDefinition extends CommonRSParameters {
 

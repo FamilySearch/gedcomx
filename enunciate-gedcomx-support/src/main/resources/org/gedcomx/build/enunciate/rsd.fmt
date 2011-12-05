@@ -42,13 +42,13 @@
 
       <table>
         <tr>
-          <th>Name</th>
+          <th>Identifier</th>
           <th>Resource</th>
           <th>Description</th>
         </tr>
         [#list rsd.resourceRelationships as resourceRelationship]
           <tr>
-            <td>${resourceRelationship.name}</td>
+            <td>${resourceRelationship.identifier}</td>
             <td>[#if resourceRelationship.definedBy??]<a href="${resourceRelationship.definedBy.name}_resource.html">${resourceRelationship.definedBy.name}</a>[#else](unknown)[/#if]</td>
             <td>${resourceRelationship.description}</td>
           </tr>

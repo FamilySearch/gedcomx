@@ -35,7 +35,7 @@ import javax.ws.rs.core.UriInfo;
   resourceElement = { Name.class, Gender.class, Fact.class }
 )
 @ResourceRelationships ({
-  @ResourceRelationship ( name = "self", definedBy = ConclusionRSDefinition.class, description = "The conclusion itself." )
+  @ResourceRelationship ( identifier = "self", definedBy = ConclusionRSDefinition.class, description = "The conclusion itself." )
 })
 public interface ConclusionRSDefinition extends CommonRSParameters {
 

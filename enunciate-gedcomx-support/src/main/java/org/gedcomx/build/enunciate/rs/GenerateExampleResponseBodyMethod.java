@@ -54,7 +54,7 @@ public class GenerateExampleResponseBodyMethod extends GenerateResourceExampleHt
         }
         while (relIt.hasNext()) {
           ResourceRelationship rel = relIt.next();
-          writer.printf("    { \"rel\" : \"%s\", \"href\" : \"...\" }", rel.getName());
+          writer.printf("    { \"rel\" : \"%s\", \"href\" : \"...\" }", rel.getIdentifier());
           if (!relIt.hasNext()) {
             writer.printf("\n  ],\n");
           }
@@ -74,7 +74,7 @@ public class GenerateExampleResponseBodyMethod extends GenerateResourceExampleHt
             }
             while (relIt.hasNext()) {
               ResourceRelationship rel = relIt.next();
-              writer.printf("      { \"rel\" : \"%s\", \"href\" : \"...\" }", rel.getName());
+              writer.printf("      { \"rel\" : \"%s\", \"href\" : \"...\" }", rel.getIdentifier());
               if (!relIt.hasNext()) {
                 writer.printf("\n    ],\n");
               }
@@ -94,7 +94,7 @@ public class GenerateExampleResponseBodyMethod extends GenerateResourceExampleHt
         Iterator<ResourceRelationship> relIt = def.getResourceRelationships().iterator();
         while (relIt.hasNext()) {
           ResourceRelationship rel = relIt.next();
-          writer.printf("  <rs:link rel=\"%s\" href=\"...\"/>\n", rel.getName());
+          writer.printf("  <rs:link rel=\"%s\" href=\"...\"/>\n", rel.getIdentifier());
           if (!relIt.hasNext()) {
             writer.printf("  ...\n");
           }
@@ -127,7 +127,7 @@ public class GenerateExampleResponseBodyMethod extends GenerateResourceExampleHt
           relIt = entry.getValue().getResourceRelationships().iterator();
           while (relIt.hasNext()) {
             ResourceRelationship rel = relIt.next();
-            writer.printf("    <rs:link rel=\"%s\" href=\"...\"/>\n", rel.getName());
+            writer.printf("    <rs:link rel=\"%s\" href=\"...\"/>\n", rel.getIdentifier());
             if (!relIt.hasNext()) {
               writer.printf("    ...\n");
             }

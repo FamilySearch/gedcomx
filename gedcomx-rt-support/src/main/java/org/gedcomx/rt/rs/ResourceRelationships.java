@@ -21,10 +21,12 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * Wrapper annotation for a set of {@link ResourceRelationship}s.
+ *
  * @author Ryan Heaton
  */
 @Retention ( RetentionPolicy.RUNTIME )
-@Target ({ ElementType.TYPE, ElementType.METHOD })
+@Target ({ ElementType.TYPE })
 public @interface ResourceRelationships {
 
   ResourceRelationship[] value() default {};

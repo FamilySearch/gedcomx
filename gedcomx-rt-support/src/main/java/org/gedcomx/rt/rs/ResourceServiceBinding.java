@@ -21,14 +21,31 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * Metadata used to describe the way a {@link ResourceServiceDefinition resource service definition} is bound
+ * to a specific system. Since a {@link ResourceServiceDefinition resource service definition} is defined in a way
+ * so as to not dictate the paths of specific resources, a binding describes what paths the resources are <i>bound</i>
+ * to in a specific system, using JAX-RS annotations. A binding also includes any additional refinements that are specific
+ * to the system, such as {@link StatusCodes status codes}, {@link Warnings warnings}, and
+ * {@link ResourceRelationship resource relationship}s.
+ *
  * @author Ryan Heaton
  */
 @Retention ( RetentionPolicy.RUNTIME )
 @Target ({ ElementType.TYPE })
 public @interface ResourceServiceBinding {
 
+  /**
+   * A name for the binding.
+   *
+   * @return A name for the binding.
+   */
   String name() default "##default";
 
+  /**
+   * A namespace for the binding.
+   *
+   * @return A namespace for the binding.
+   */
   String namespace() default "##default";
 
 }
