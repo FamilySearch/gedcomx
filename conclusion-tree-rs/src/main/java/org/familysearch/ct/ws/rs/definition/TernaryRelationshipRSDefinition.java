@@ -42,7 +42,7 @@ import javax.ws.rs.core.UriInfo;
   subresources = RelationshipRSDefinition.class
 )
 @ResourceRelationships ({
-  @ResourceRelationship ( name = "self", definedBy = RelationshipRSDefinition.class, description = "The relationship itself." )
+  @ResourceRelationship ( identifier = "self", definedBy = RelationshipRSDefinition.class, description = "The relationship itself." )
 })
 public interface TernaryRelationshipRSDefinition {
 
@@ -54,10 +54,10 @@ public interface TernaryRelationshipRSDefinition {
    */
   @GET
   @StatusCodes({
-    @StatusCode( code = 200, condition = "Upon a successful read."),
-    @StatusCode( code = 301, condition = "If the requested relationship has been merged to another relationship."),
-    @StatusCode( code = 404, condition = "If the requested relationship is not found."),
-    @StatusCode( code = 410, condition = "If the requested relationship has been deleted.")
+    @ResponseCode( code = 200, condition = "Upon a successful read."),
+    @ResponseCode( code = 301, condition = "If the requested relationship has been merged to another relationship."),
+    @ResponseCode( code = 404, condition = "If the requested relationship is not found."),
+    @ResponseCode( code = 410, condition = "If the requested relationship has been deleted.")
   })
   Response readRelationship(@Context UriInfo uriInfo);
 
@@ -69,7 +69,7 @@ public interface TernaryRelationshipRSDefinition {
    */
   @PUT
   @StatusCodes({
-    @StatusCode( code = 204, condition = "The update was successful.")
+    @ResponseCode( code = 204, condition = "The update was successful.")
   })
   void updateRelationship(@Context UriInfo uriInfo, TernaryRelationship relationship);
 
@@ -80,7 +80,7 @@ public interface TernaryRelationshipRSDefinition {
    */
   @DELETE
   @StatusCodes({
-    @StatusCode ( code = 204, condition = "The delete was successful.")
+    @ResponseCode ( code = 204, condition = "The delete was successful.")
   })
   void deleteRelationship(@Context UriInfo uriInfo);
 

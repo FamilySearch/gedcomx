@@ -19,7 +19,7 @@ import javax.ws.rs.core.UriInfo;
  */
 @ResourceServiceBinding
 @Path ("/relationships/{rid}")
-public interface RelationshipRSBinding extends RelationshipRSDefinition, TernaryRelationshipRSDefinition {
+public interface RelationshipRSBinding extends RelationshipRSDefinition {
 
   @GET
   @Override
@@ -28,10 +28,6 @@ public interface RelationshipRSBinding extends RelationshipRSDefinition, Ternary
   @PUT
   @Override
   void updateRelationship(@Context UriInfo uriInfo, Relationship relationship);
-
-  @PUT
-  @Override
-  void updateRelationship(@Context UriInfo uriInfo, TernaryRelationship relationship);
 
   @DELETE
   @Override

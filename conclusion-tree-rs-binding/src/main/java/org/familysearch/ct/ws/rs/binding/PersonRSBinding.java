@@ -3,7 +3,7 @@ package org.familysearch.ct.ws.rs.binding;
 import org.gedcomx.conclusion.Person;
 import org.gedcomx.conclusion.rs.definition.PersonRSDefinition;
 import org.gedcomx.rt.rs.ResourceServiceBinding;
-import org.gedcomx.rt.rs.StatusCode;
+import org.gedcomx.rt.rs.ResponseCode;
 import org.gedcomx.rt.rs.StatusCodes;
 
 import javax.ws.rs.DELETE;
@@ -31,7 +31,7 @@ public interface PersonRSBinding extends PersonRSDefinition {
 
   @DELETE
   @StatusCodes ({
-    @StatusCode (code = 400, condition = "The proof statement is not provided." )
+    @ResponseCode (code = 400, condition = "The proof statement is not provided." )
   })
   @Override
   void deletePerson(@Context UriInfo uriInfo);

@@ -53,7 +53,7 @@
           </tr>
           [#list rsd.resourceRelationships as resourceRelationship]
             <tr>
-              <td>${resourceRelationship.name}</td>
+              <td>${resourceRelationship.identifier}</td>
               <td>[#if resourceRelationship.definedBy??]<a href="${gedcomxExtensionRoot(resourceRelationship.definedBy)}${resourceRelationship.definedBy.name}_resource.html">${resourceRelationship.definedBy.name}</a>[#else](unknown)[/#if]</td>
               <td>${resourceRelationship.description}</td>
             </tr>
@@ -178,7 +178,7 @@
     ...
     [#if rsd.resourceRelationships?size > 0]
       [#list rsd.resourceRelationships as resourceRelationship]
-    &lt;rs:link rel="${resourceRelationship.name}" href="..."/&gt;
+    &lt;rs:link rel="${resourceRelationship.identifier}" href="..."/&gt;
       [/#list]
     ...
     [/#if]
@@ -190,7 +190,7 @@
       ...
             [#if subresource.resourceRelationships?size > 0]
               [#list subresource.resourceRelationships as resourceRelationship]
-      &lt;rs:link rel="${resourceRelationship.name}" href="..."/&gt;
+      &lt;rs:link rel="${resourceRelationship.identifier}" href="..."/&gt;
               [/#list]
       ...
             [/#if]
