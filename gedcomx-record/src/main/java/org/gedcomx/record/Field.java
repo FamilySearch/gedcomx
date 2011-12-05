@@ -15,11 +15,14 @@
  */
 package org.gedcomx.record;
 
+import org.codehaus.jackson.annotate.JsonTypeInfo;
+import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.common.GenealogicalResource;
 import org.gedcomx.common.FormalValue;
 import org.gedcomx.common.ResourceReference;
 import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.RDFSubPropertyOf;
+import org.gedcomx.rt.XmlTypeIdResolver;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
@@ -27,8 +30,10 @@ import javax.xml.bind.annotation.XmlType;
 /**
  * A field on a record.
  */
+@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
+@JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "Field", propOrder = { "original", "interpreted", "processed", "source" } )
-public abstract class Field extends GenealogicalResource {
+public class Field extends GenealogicalResource {
 
   private String label;
   private String original;
