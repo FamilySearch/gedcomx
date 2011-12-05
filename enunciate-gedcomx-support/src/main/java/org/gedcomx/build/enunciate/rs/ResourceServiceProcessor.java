@@ -113,20 +113,20 @@ public class ResourceServiceProcessor {
       ResourceServiceBindingMetadata bindingMetadata = ResourceServiceBindingMetadata.decorate(rootResource, this);
       if (bindingMetadata != null) {
         this.resourceServiceBindings.add(bindingMetadata);
-      }
 
-      if (bindingMetadata.getDefinition() == null) {
-        result.addError(rootResource, "Unable to find the definition being bound. Perhaps the binding isn't extending a definition or perhaps its extending multiple definitions?");
-      }
+        if (bindingMetadata.getDefinition() == null) {
+          result.addError(rootResource, "Unable to find the definition being bound. Perhaps the binding isn't extending a definition or perhaps its extending multiple definitions?");
+        }
 
-      //todo: verify no more than one operation of the same method.
-      //todo: make sure relationship names are uris, unless one of the known registered ones
+        //todo: verify no more than one operation of the same method.
+        //todo: make sure relationship names are uris, unless one of the known registered ones
 
-      List<SubResourceLocator> resourceLocators = rootResource.getResourceLocators();
-      for (SubResourceLocator resourceLocator : resourceLocators) {
-        bindingMetadata = ResourceServiceBindingMetadata.decorate(resourceLocator.getResource(), this);
-        if (bindingMetadata != null) {
-          this.resourceServiceBindings.add(bindingMetadata);
+        List<SubResourceLocator> resourceLocators = rootResource.getResourceLocators();
+        for (SubResourceLocator resourceLocator : resourceLocators) {
+          bindingMetadata = ResourceServiceBindingMetadata.decorate(resourceLocator.getResource(), this);
+          if (bindingMetadata != null) {
+            this.resourceServiceBindings.add(bindingMetadata);
+          }
         }
       }
     }
