@@ -33,8 +33,8 @@ import java.util.List;
  */
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType ( name = "Persona", propOrder = { "persistentId", "alternateIds", "gender", "age", "names", "eventRoles", "characteristics" } )
-public class Persona extends GenealogicalResource implements PersistentIdentifiable, HasCharacteristics, Weighted {
+@XmlType ( name = "Persona", propOrder = { "persistentId", "alternateIds", "gender", "age", "names", "eventRoles", "facts" } )
+public class Persona extends GenealogicalResource implements PersistentIdentifiable, HasFacts, Weighted {
 
   private Boolean principal;
   private URI persistentId;
@@ -43,7 +43,7 @@ public class Persona extends GenealogicalResource implements PersistentIdentifia
   private Age age;
   private java.util.List<Name> names;
   private java.util.List<EventRole> eventRoles = new ArrayList<EventRole>();
-  private java.util.List<Characteristic> characteristics = new ArrayList<Characteristic>();
+  private java.util.List<Fact> facts = new ArrayList<Fact>();
 
   /**
    * A long-term, persistent, globally unique identifier for this persona.
@@ -145,25 +145,25 @@ public class Persona extends GenealogicalResource implements PersistentIdentifia
   }
 
   /**
-   * The characteristic fields on this persona.
+   * The fact fields on this persona.
    *
-   * @return The characteristic fields on this persona.
+   * @return The fact fields on this persona.
    */
-  @XmlElement(name="characteristic")
-  @JsonProperty("characteristics")
-  @JsonName("characteristics")
-  public List<Characteristic> getCharacteristics() {
-    return characteristics;
+  @XmlElement(name="fact")
+  @JsonProperty("facts")
+  @JsonName("facts")
+  public List<Fact> getFacts() {
+    return facts;
   }
 
   /**
-   * The characteristic fields on this persona.
+   * The fact fields on this persona.
    *
-   * @param characteristics The characteristic fields on this persona.
+   * @param facts The fact fields on this persona.
    */
-  @JsonProperty("characteristics")
-  public void setCharacteristics(List<Characteristic> characteristics) {
-    this.characteristics = characteristics;
+  @JsonProperty("facts")
+  public void setFacts(List<Fact> facts) {
+    this.facts = facts;
   }
 
   /**

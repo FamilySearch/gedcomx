@@ -74,12 +74,13 @@ public class TestRecord {
     record.setFacts(facts);
 
     Persona persona = new Persona();
-    List<Characteristic> characteristics = new ArrayList<Characteristic>();
-    Characteristic characteristic = new Characteristic();
-    fillInField(characteristic, "characteristic");
-    characteristic.setKnownType(CharacteristicType.Occupation);
-    characteristics.add(characteristic);
-    persona.setCharacteristics(characteristics);
+    facts = new ArrayList<Fact>();
+    fact = new Fact();
+    fact.setValue(new Field());
+    fillInField(fact.getValue(), "fact");
+    fact.setKnownType(FactType.Occupation);
+    facts.add(fact);
+    persona.setFacts(facts);
 
     List<Name> names = new ArrayList<Name>();
     Name name = new Name();
@@ -134,12 +135,13 @@ public class TestRecord {
     ArrayList<Relationship> relationships = new ArrayList<Relationship>();
     Relationship coupleRelationship = new Relationship();
     coupleRelationship.setKnownType(RelationshipType.Couple);
-    ArrayList<Characteristic> coupleCharacteristics = new ArrayList<Characteristic>();
-    Characteristic coupleCharacteristic = new Characteristic();
-    fillInField(coupleCharacteristic, "couple-characteristic");
-    coupleCharacteristic.setKnownType(CharacteristicType.Couple.CommonLawMarriage);
-    coupleCharacteristics.add(coupleCharacteristic);
-    coupleRelationship.setCharacteristics(coupleCharacteristics);
+    ArrayList<Fact> coupleFacts = new ArrayList<Fact>();
+    Fact coupleFact = new Fact();
+    coupleFact.setValue(new Field());
+    fillInField(coupleFact.getValue(), "couple-fact");
+    coupleFact.setKnownType(FactType.Couple.CommonLawMarriage);
+    coupleFacts.add(coupleFact);
+    coupleRelationship.setFacts(coupleFacts);
     coupleRelationship.setId("couple-relationship-id");
     coupleRelationship.setPersona1(new ResourceReference());
     coupleRelationship.getPersona1().setResource(URI.create("#" + persona.getId()));
@@ -216,9 +218,9 @@ public class TestRecord {
 
     assertEquals(1, record.getPersonas().size());
     Persona persona = record.getPersonas().get(0);
-    assertEquals(1, persona.getCharacteristics().size());
-    assertField(persona.getCharacteristics().get(0), "characteristic");
-    assertEquals(CharacteristicType.Occupation, persona.getCharacteristics().get(0).getKnownType());
+    assertEquals(1, persona.getFacts().size());
+    assertField(persona.getFacts().get(0).getValue(), "fact");
+    assertEquals(FactType.Occupation, persona.getFacts().get(0).getKnownType());
 
     assertEquals(1, persona.getNames().size());
     Name name = persona.getNames().get(0);
@@ -253,7 +255,6 @@ public class TestRecord {
     assertEquals("event role description", eventRole.getDescription());
     assertEquals("event role attribution", eventRole.getAttribution().getProofStatement());
     assertFalse(eventRole.getPrincipal());
-    assertEquals("#" + fact.getId(), eventRole.getEvent().toString());
 
     assertEquals("pal", record.getPersistentId().toString());
     assertEquals("bibliographic citation", record.getBibliographicCitation());
@@ -261,10 +262,10 @@ public class TestRecord {
     assertEquals(2, record.getRelationships().size());
     Relationship coupleRelationship = record.getRelationships().get(0);
     assertEquals(RelationshipType.Couple, coupleRelationship.getKnownType());
-    assertEquals(1, coupleRelationship.getCharacteristics().size());
-    Characteristic coupleCharacteristic = coupleRelationship.getCharacteristics().get(0);
-    assertField(coupleCharacteristic, "couple-characteristic");
-    assertEquals(CharacteristicType.Couple.CommonLawMarriage, coupleCharacteristic.getKnownType());
+    assertEquals(1, coupleRelationship.getFacts().size());
+    Fact coupleFact = coupleRelationship.getFacts().get(0);
+    assertField(coupleFact.getValue(), "couple-fact");
+    assertEquals(FactType.Couple.CommonLawMarriage, coupleFact.getKnownType());
     assertEquals("couple-relationship-id", coupleRelationship.getId());
     assertEquals("#" + persona.getId(), coupleRelationship.getPersona1().getResource().toString());
     assertEquals("#" + persona.getId(), coupleRelationship.getPersona2().getResource().toString());
