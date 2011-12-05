@@ -59,7 +59,7 @@ public class TestPerson {
     Fact fact = new Fact();
     fact.setAttribution(new Attribution());
     fact.getAttribution().setContributor(new ResourceReference());
-    fact.getAttribution().getContributor().setResource(URI.create("urn:characteristic-attribution"));
+    fact.getAttribution().getContributor().setResource(URI.create("urn:fact-attribution"));
     fact.setDate(new Date());
     fact.getDate().setOriginal("original date");
     FormalValue normalized = new FormalValue();
@@ -67,7 +67,7 @@ public class TestPerson {
     normalized.setDatatype(URI.create("urn:date"));
     normalized.setKnownValue(DatePartType.Years);
     fact.getDate().setNormalized(normalized);
-    fact.setId("characteristic-id");
+    fact.setId("fact-id");
     fact.setKnownType(FactType.Occupation);
     fact.setPlace(new Place());
     fact.getPlace().setOriginal("original place");
@@ -76,7 +76,7 @@ public class TestPerson {
     normalized.setDatatype(URI.create("urn:place"));
     normalized.setKnownValue(PlacePartType.Cemetery);
     fact.getPlace().setNormalized(normalized);
-    fact.setValue("characteristic-value");
+    fact.setValue("fact-value");
     facts.add(fact);
 
     Fact event = new Fact();
@@ -174,18 +174,18 @@ public class TestPerson {
 
     assertEquals(2, person.getFacts().size());
     fact = person.getFacts().get(0);
-    assertEquals("urn:characteristic-attribution", fact.getAttribution().getContributor().getResource().toString());
+    assertEquals("urn:fact-attribution", fact.getAttribution().getContributor().getResource().toString());
     assertEquals("original date", fact.getDate().getOriginal());
     assertEquals("normalized date", fact.getDate().getNormalized().getText());
     assertEquals(DatePartType.Years, fact.getDate().getNormalized().getKnownValue(DatePartType.class));
     assertEquals("urn:date", fact.getDate().getNormalized().getDatatype().toString());
-    assertEquals("characteristic-id", fact.getId());
+    assertEquals("fact-id", fact.getId());
     assertEquals(FactType.Occupation, fact.getKnownType());
     assertEquals("original place", fact.getPlace().getOriginal());
     assertEquals("normalized place", fact.getPlace().getNormalized().getText());
     assertEquals(PlacePartType.Cemetery, fact.getPlace().getNormalized().getKnownValue(PlacePartType.class));
     assertEquals("urn:date", fact.getDate().getNormalized().getDatatype().toString());
-    assertEquals("characteristic-value", fact.getValue());
+    assertEquals("fact-value", fact.getValue());
 
     event = person.getFacts().get(1);
     assertEquals("urn:event-attribution", event.getAttribution().getContributor().getResource().toString());

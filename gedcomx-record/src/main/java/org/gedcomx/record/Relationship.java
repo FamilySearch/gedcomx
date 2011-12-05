@@ -42,13 +42,13 @@ import java.util.List;
  */
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType ( name = "Relationship", propOrder = { "type", "persona1", "persona2", "characteristics" } )
-public class Relationship extends GenealogicalResource implements Typed<RelationshipType>, HasCharacteristics {
+@XmlType ( name = "Relationship", propOrder = { "type", "persona1", "persona2", "facts" } )
+public class Relationship extends GenealogicalResource implements Typed<RelationshipType>, HasFacts {
 
   private TypeReference<RelationshipType> type;
   private ResourceReference persona1;
   private ResourceReference persona2;
-  private List<Characteristic> characteristics = new ArrayList<Characteristic>();
+  private List<Fact> facts = new ArrayList<Fact>();
 
   /**
    * The type of this relationship.
@@ -147,25 +147,25 @@ public class Relationship extends GenealogicalResource implements Typed<Relation
   }
 
   /**
-   * The characteristic fields of the relationship.
+   * The fact fields of the relationship.
    *
-   * @return The characteristic fields of the relationship.
+   * @return The fact fields of the relationship.
    */
-  @XmlElement(name = "characteristic")
-  @JsonProperty ("characteristics")
-  @JsonName ("characteristics")
-  public List<Characteristic> getCharacteristics() {
-    return characteristics;
+  @XmlElement(name = "fact")
+  @JsonProperty ("facts")
+  @JsonName ("facts")
+  public List<Fact> getFacts() {
+    return facts;
   }
 
   /**
-   * The characteristic fields of the relationship.
+   * The fact fields of the relationship.
    *
-   * @param characteristics The characteristic fields of the relationship.
+   * @param facts The fact fields of the relationship.
    */
-  @JsonProperty ("characteristics")
-  public void setCharacteristics(List<Characteristic> characteristics) {
-    this.characteristics = characteristics;
+  @JsonProperty ("facts")
+  public void setFacts(List<Fact> facts) {
+    this.facts = facts;
   }
 
 }

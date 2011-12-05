@@ -19,24 +19,24 @@ import javax.xml.bind.annotation.XmlType;
 import java.util.List;
 
 /**
- * Record data that has characteristics.
+ * Record data that has facts.
  *
  * @author Ryan Heaton
  */
-@XmlType ( name = "HasCharacteristics" )
-public interface HasCharacteristics {
+@XmlType ( name = "HasFacts" )
+public interface HasFacts {
 
   /**
-   * The characteristics of a record resource.
+   * The facts of a record resource.
    *
-   * @return The characteristics of a record resource.
+   * @return The facts of a record resource.
    */
-  List<Characteristic> getCharacteristics();
+  List<Fact> getFacts();
 
   /**
-   * The characteristic fields on this persona.
+   * The fact fields on this persona.
    *
-   * @param characteristics The characteristic fields on this persona.
+   * @param facts The fact fields on this persona.
    */
-  void setCharacteristics(List<Characteristic> characteristics);
+  void setFacts(List<Fact> facts);
 }

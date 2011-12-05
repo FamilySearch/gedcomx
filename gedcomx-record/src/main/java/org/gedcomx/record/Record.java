@@ -42,7 +42,7 @@ import java.util.List;
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "Record", propOrder = { "type", "personas", "relationships", "facts" } )
-public class Record extends GenealogicalEntity implements Typed<RecordType>, PersistentIdentifiable {
+public class Record extends GenealogicalEntity implements Typed<RecordType>, PersistentIdentifiable, HasFacts {
 
   private String lang;
   private TypeReference<RecordType> type;
