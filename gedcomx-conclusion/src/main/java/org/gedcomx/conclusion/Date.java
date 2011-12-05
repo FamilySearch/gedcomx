@@ -16,9 +16,8 @@
 package org.gedcomx.conclusion;
 
 import org.codehaus.enunciate.ClientName;
-import org.gedcomx.common.FormalValue;
-import org.gedcomx.rt.RDFSubClassOf;
 import org.gedcomx.rt.CommonModels;
+import org.gedcomx.rt.RDFSubClassOf;
 
 import javax.xml.bind.annotation.XmlType;
 
@@ -28,45 +27,6 @@ import javax.xml.bind.annotation.XmlType;
 @ClientName ("DateInfo")
 @XmlType ( name = "Date" )
 @RDFSubClassOf ( CommonModels.DUBLIN_CORE_NAMESPACE + "PeriodOfTime" )
-public final class Date implements Normalizeable {
-
-  private String original;
-  private FormalValue normalized;
-
-  /**
-   * The original value of the date that was concluded as supplied by the user.
-   *
-   * @return The original value of the date that was concluded as supplied by the user.
-   */
-  public String getOriginal() {
-    return original;
-  }
-
-  /**
-   * The original value of the date that was concluded as supplied by the user.
-   *
-   * @param original The original value of the date that was concluded as supplied by the user.
-   */
-  public void setOriginal(String original) {
-    this.original = original;
-  }
-
-  /**
-   * The normalized value of the date.
-   *
-   * @return The normalized value of the date.
-   */
-  public FormalValue getNormalized() {
-    return normalized;
-  }
-
-  /**
-   * The normalized value of the date.
-   *
-   * @param normalized The normalized value of the date.
-   */
-  public void setNormalized(FormalValue normalized) {
-    this.normalized = normalized;
-  }
+public final class Date extends FormalizeableValue {
 
 }

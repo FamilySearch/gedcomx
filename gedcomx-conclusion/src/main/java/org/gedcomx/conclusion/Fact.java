@@ -46,7 +46,7 @@ public class Fact extends Conclusion implements Typed<FactType> {
   private TypeReference<FactType> type;
   private Date date;
   private Place place;
-  private String value;
+  private FormalizeableValue value;
 
   /**
    * The type of the fact.
@@ -129,7 +129,7 @@ public class Fact extends Conclusion implements Typed<FactType> {
    *
    * @return The value of this fact, if applicable.
    */
-  public String getValue() {
+  public FormalizeableValue getValue() {
     return value;
   }
 
@@ -138,7 +138,7 @@ public class Fact extends Conclusion implements Typed<FactType> {
    *
    * @param value The value of this fact, if applicable.
    */
-  public void setValue(String value) {
+  public void setValue(FormalizeableValue value) {
     this.value = value;
   }
 }
