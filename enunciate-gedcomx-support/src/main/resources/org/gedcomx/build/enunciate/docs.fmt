@@ -103,7 +103,7 @@
 
       <hr/>
 
-    [#list resourceServiceDefinitions as rsd]
+    [#list resourceServiceDefinitions?sort_by("name") as rsd]
       <h3><a href="${rsd.name}_resource.html">${rsd.name} Resource</a></h3>
       <table>
         <tr>
