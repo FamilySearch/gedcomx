@@ -19,6 +19,7 @@ import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
+import org.gedcomx.common.FormalValue;
 import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.JsonElementWrapper;
 import org.gedcomx.rt.RDFSubClassOf;
@@ -37,16 +38,17 @@ import javax.xml.bind.annotation.XmlType;
  */
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType ( name = "Fact", propOrder = {"type", "date", "place", "value"})
+@XmlType ( name = "Fact", propOrder = {"type", "date", "place", "original", "formal" })
 @RDFSubClassOf ( CommonModels.DUBLIN_CORE_TYPE_NAMESPACE + "Event" )
 @XmlRootElement
 @JsonElementWrapper ( name = "facts" )
-public class Fact extends Conclusion implements Typed<FactType> {
+public class Fact extends Conclusion implements Typed<FactType>, Formalizeable {
 
   private TypeReference<FactType> type;
   private Date date;
   private Place place;
-  private FormalizeableValue value;
+  private String original;
+  private FormalValue formal;
 
   /**
    * The type of the fact.
@@ -125,20 +127,42 @@ public class Fact extends Conclusion implements Typed<FactType> {
   }
 
   /**
-   * The value of this fact, if applicable.
+   * The original text as supplied by the user.
    *
-   * @return The value of this fact, if applicable.
+   * @return The original text as supplied by the user.
    */
-  public FormalizeableValue getValue() {
-    return value;
+  @Override
+  public String getOriginal() {
+    return original;
   }
 
   /**
-   * The value of this fact, if applicable.
+   * The original value as supplied by the user.
    *
-   * @param value The value of this fact, if applicable.
+   * @param original The original value as supplied by the user.
    */
-  public void setValue(FormalizeableValue value) {
-    this.value = value;
+  @Override
+  public void setOriginal(String original) {
+    this.original = original;
+  }
+
+  /**
+   * The formal value.
+   *
+   * @return The formal value.
+   */
+  @Override
+  public FormalValue getFormal() {
+    return formal;
+  }
+
+  /**
+   * The formal value.
+   *
+   * @param formal The formal value.
+   */
+  @Override
+  public void setFormal(FormalValue formal) {
+    this.formal = formal;
   }
 }

@@ -76,8 +76,7 @@ public class TestRecord {
     Persona persona = new Persona();
     facts = new ArrayList<Fact>();
     fact = new Fact();
-    fact.setValue(new Field());
-    fillInField(fact.getValue(), "fact");
+    fillInField(fact, "fact");
     fact.setKnownType(FactType.Occupation);
     facts.add(fact);
     persona.setFacts(facts);
@@ -128,8 +127,7 @@ public class TestRecord {
     coupleRelationship.setKnownType(RelationshipType.Couple);
     ArrayList<Fact> coupleFacts = new ArrayList<Fact>();
     Fact coupleFact = new Fact();
-    coupleFact.setValue(new Field());
-    fillInField(coupleFact.getValue(), "couple-fact");
+    fillInField(coupleFact, "couple-fact");
     coupleFact.setKnownType(FactType.Couple.CommonLawMarriage);
     coupleFacts.add(coupleFact);
     coupleRelationship.setFacts(coupleFacts);
@@ -210,7 +208,7 @@ public class TestRecord {
     assertEquals(1, record.getPersonas().size());
     Persona persona = record.getPersonas().get(0);
     assertEquals(1, persona.getFacts().size());
-    assertField(persona.getFacts().get(0).getValue(), "fact");
+    assertField(persona.getFacts().get(0), "fact");
     assertEquals(FactType.Occupation, persona.getFacts().get(0).getKnownType());
 
     assertEquals(1, persona.getNames().size());
@@ -250,7 +248,7 @@ public class TestRecord {
     assertEquals(RelationshipType.Couple, coupleRelationship.getKnownType());
     assertEquals(1, coupleRelationship.getFacts().size());
     Fact coupleFact = coupleRelationship.getFacts().get(0);
-    assertField(coupleFact.getValue(), "couple-fact");
+    assertField(coupleFact, "couple-fact");
     assertEquals(FactType.Couple.CommonLawMarriage, coupleFact.getKnownType());
     assertEquals("couple-relationship-id", coupleRelationship.getId());
     assertEquals("#" + persona.getId(), coupleRelationship.getPersona1().getResource().toString());

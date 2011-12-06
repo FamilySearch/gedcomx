@@ -15,6 +15,7 @@
  */
 package org.gedcomx.conclusion;
 
+import org.gedcomx.common.FormalValue;
 import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.RDFSubClassOf;
 
@@ -25,8 +26,50 @@ import javax.xml.bind.annotation.XmlType;
  *
  * @author Ryan Heaton
  */
-@XmlType ( name = "Place" )
+@XmlType ( name = "Place", propOrder = { "original", "formal" } )
 @RDFSubClassOf ( CommonModels.DUBLIN_CORE_NAMESPACE + "Location" )
-public final class Place extends FormalizeableValue {
+public final class Place implements Formalizeable {
 
+  private String original;
+  private FormalValue formal;
+
+  /**
+   * The original text as supplied by the user.
+   *
+   * @return The original text as supplied by the user.
+   */
+  @Override
+  public String getOriginal() {
+    return original;
+  }
+
+  /**
+   * The original value as supplied by the user.
+   *
+   * @param original The original value as supplied by the user.
+   */
+  @Override
+  public void setOriginal(String original) {
+    this.original = original;
+  }
+
+  /**
+   * The formal value.
+   *
+   * @return The formal value.
+   */
+  @Override
+  public FormalValue getFormal() {
+    return formal;
+  }
+
+  /**
+   * The formal value.
+   *
+   * @param formal The formal value.
+   */
+  @Override
+  public void setFormal(FormalValue formal) {
+    this.formal = formal;
+  }
 }

@@ -15,60 +15,39 @@
  */
 package org.gedcomx.conclusion;
 
-import org.codehaus.jackson.annotate.JsonTypeInfo;
-import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.common.FormalValue;
-import org.gedcomx.rt.XmlTypeIdResolver;
-
-import javax.xml.bind.annotation.XmlType;
 
 /**
- * A value that is able to be formalized, possibly from some original text.
- *
- * @see FormalValue
  * @author Ryan Heaton
  */
-@XmlType ( name = "FormalizeableValue", propOrder = {"original", "formal"} )
-@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
-@JsonTypeIdResolver (XmlTypeIdResolver.class)
-public class FormalizeableValue {
-
-  private String original;
-  private FormalValue formal;
+public interface Formalizeable {
 
   /**
    * The original text as supplied by the user.
    *
    * @return The original text as supplied by the user.
    */
-  public String getOriginal() {
-    return original;
-  }
+  String getOriginal();
 
   /**
    * The original value as supplied by the user.
    *
    * @param original The original value as supplied by the user.
    */
-  public void setOriginal(String original) {
-    this.original = original;
-  }
+  void setOriginal(String original);
 
   /**
    * The formal value.
    *
    * @return The formal value.
    */
-  public FormalValue getFormal() {
-    return formal;
-  }
+  FormalValue getFormal();
 
   /**
    * The formal value.
    *
    * @param formal The formal value.
    */
-  public void setFormal(FormalValue formal) {
-    this.formal = formal;
-  }
+  void setFormal(FormalValue formal);
+  
 }
