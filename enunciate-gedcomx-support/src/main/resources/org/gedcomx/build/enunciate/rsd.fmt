@@ -5,7 +5,26 @@
   [#assign rsdName=rsd.name?cap_first + " Resource"/]
   [@libBoilerplate.writeStartBody label=rsdName/]
   <div class="container">
-    [@libBoilerplate.writeHeader subnav={"Resources" : "index.html", rsdName : "#"}/]
+    [@libBoilerplate.writeHeader]
+      <ul class="xbreadcrumbs" id="breadcrumbs">
+        <li><a href="../Home.html" class="home">Home</a></li>
+        <li>
+          <a href="index.html">Resources</a>
+          <ul>
+            <li><a href="../model/index.html">Models</a></li>
+            <li><a href="index.html">Resources</a></li>
+          </ul>
+        </li>
+        <li class="current">
+          <a href="${rsd.name}_resource.html">${rsdName}</a>
+          <ul>
+      [#list resourceServiceDefinitions as rs]
+            <li><a href="${rs.name}_resource.html">${rs.name?cap_first} Resource</a></li>
+      [/#list]
+          </ul>
+        </li>
+      </ul>
+    [/@libBoilerplate.writeHeader]
     <div id="main" class="column first last span-20">
       <h1>${rsdName}</h1>
 

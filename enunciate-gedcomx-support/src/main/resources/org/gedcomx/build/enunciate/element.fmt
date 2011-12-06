@@ -6,7 +6,34 @@
   [#assign elementLabel=element.name?cap_first + " Element"/]
   [@libBoilerplate.writeStartBody label=elementLabel/]
   <div class="container">
-    [@libBoilerplate.writeHeader subnav={"Model" : "index.html", (schema.properties.label!("\"" + schema.id + "\" Model")) : schema.id + ".html", elementLabel : "#"}/]
+    [@libBoilerplate.writeHeader]
+      <ul class="xbreadcrumbs" id="breadcrumbs">
+        <li><a href="../Home.html" class="home">Home</a></li>
+        <li>
+          <a href="index.html">Models</a>
+          <ul>
+            <li><a href="index.html">Models</a></li>
+            <li><a href="../rs/index.html">Resources</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="${schema.id}.html">${schema.properties.label!("\"" + schema.id + "\" Model")}</a>
+          <ul>
+      [@forEachSchema var="sch"]
+            <li><a href="${sch.id}.html">${sch.properties.label!("\"" + sch.id + "\" Model")}</a></li>
+      [/@forEachSchema]
+          </ul>
+        </li>
+        <li class="current">
+          <a href="#">${elementLabel}</a>
+          <ul>
+      [#list schema.globalElements as el]
+            <li><a href="${schema.id}_el_${el.name}.html">${el.name?cap_first} Element</a></li>
+      [/#list]
+          </ul>
+        </li>
+      </ul>
+    [/@libBoilerplate.writeHeader]
     <div id="main" class="column first last span-20">
       <h1>${elementLabel}</h1>
 

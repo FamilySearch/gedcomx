@@ -7,7 +7,34 @@
   [#assign typeLabel=type.javaDoc["label"]!type.name!"Anonymous"/]
   [@libBoilerplate.writeStartBody label=typeLabel/]
   <div class="container">
-    [@libBoilerplate.writeHeader subnav={"Model" : "index.html", (schema.properties.label!("\"" + schema.id + "\" Model")) : (schema.id + ".html"), typeLabel : "#"}/]
+    [@libBoilerplate.writeHeader]
+      <ul class="xbreadcrumbs" id="breadcrumbs">
+        <li><a href="../Home.html" class="home">Home</a></li>
+        <li>
+          <a href="index.html">Models</a>
+          <ul>
+            <li><a href="index.html">Models</a></li>
+            <li><a href="../rs/index.html">Resources</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="${schema.id}.html">${schema.properties.label!("\"" + schema.id + "\" Model")}</a>
+          <ul>
+      [@forEachSchema var="sch"]
+            <li><a href="${sch.id}.html">${sch.properties.label!("\"" + sch.id + "\" Model")}</a></li>
+      [/@forEachSchema]
+          </ul>
+        </li>
+        <li class="current">
+          <a href="#">${typeLabel}</a>
+          <ul>
+      [#list schema.typeDefinitions as td]
+            <li><a href="${schema.id}_${td.name}.html">${td.javaDoc["label"]!td.name!"Anonymous"}</a></li>
+      [/#list]
+          </ul>
+        </li>
+      </ul>
+    [/@libBoilerplate.writeHeader]
     <div id="main" class="column first last span-20">
       <h1>${typeLabel}</h1>
 
