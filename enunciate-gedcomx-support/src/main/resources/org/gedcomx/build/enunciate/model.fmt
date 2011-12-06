@@ -19,7 +19,9 @@
           <a href="${schema.id}.html">${schema.properties.label!("\"" + schema.id + "\" Model")}</a>
           <ul>
       [@forEachSchema var="sch"]
+        [#if (sch.typeDefinitions?size > 0) || (sch.globalElements?size > 0)]
             <li><a href="${sch.id}.html">${sch.properties.label!("\"" + sch.id + "\" Model")}</a></li>
+        [/#if]
       [/@forEachSchema]
           </ul>
         </li>
