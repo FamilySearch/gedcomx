@@ -16,6 +16,7 @@
 package org.gedcomx.conclusion;
 
 import org.codehaus.enunciate.ClientName;
+import org.gedcomx.common.FormalValue;
 import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.RDFSubClassOf;
 
@@ -25,8 +26,50 @@ import javax.xml.bind.annotation.XmlType;
  * A concluded genealogical date.
  */
 @ClientName ("DateInfo")
-@XmlType ( name = "Date" )
+@XmlType ( name = "Date", propOrder = { "original", "formal" })
 @RDFSubClassOf ( CommonModels.DUBLIN_CORE_NAMESPACE + "PeriodOfTime" )
-public final class Date extends FormalizeableValue {
+public final class Date implements Formalizeable {
 
+  private String original;
+  private FormalValue formal;
+
+  /**
+   * The original text as supplied by the user.
+   *
+   * @return The original text as supplied by the user.
+   */
+  @Override
+  public String getOriginal() {
+    return original;
+  }
+
+  /**
+   * The original value as supplied by the user.
+   *
+   * @param original The original value as supplied by the user.
+   */
+  @Override
+  public void setOriginal(String original) {
+    this.original = original;
+  }
+
+  /**
+   * The formal value.
+   *
+   * @return The formal value.
+   */
+  @Override
+  public FormalValue getFormal() {
+    return formal;
+  }
+
+  /**
+   * The formal value.
+   *
+   * @param formal The formal value.
+   */
+  @Override
+  public void setFormal(FormalValue formal) {
+    this.formal = formal;
+  }
 }

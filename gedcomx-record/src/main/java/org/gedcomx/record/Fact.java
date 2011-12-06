@@ -38,15 +38,14 @@ import javax.xml.bind.annotation.XmlType;
  */
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType( name = "Fact", propOrder = { "type", "date", "place", "value" } )
+@XmlType( name = "Fact", propOrder = { "type", "date", "place" } )
 @RDFSubClassOf ( CommonModels.DUBLIN_CORE_TYPE_NAMESPACE + "Event" )
-public class Fact extends GenealogicalResource implements Typed<FactType> {
+public class Fact extends Field implements Typed<FactType> {
 
   private TypeReference<FactType> type;
   private Boolean primary;
   private Date date;
   private Place place;
-  private Field value;
 
   /**
    * The type of the fact.
@@ -145,21 +144,4 @@ public class Fact extends GenealogicalResource implements Typed<FactType> {
     this.place = place;
   }
 
-  /**
-   * The value of a fact, if applicable.
-   *
-   * @return The value of a fact.
-   */
-  public Field getValue() {
-    return value;
-  }
-
-  /**
-   * The value of a fact, if applicable.
-   *
-   * @param value The value of a fact, if applicable.
-   */
-  public void setValue(Field value) {
-    this.value = value;
-  }
 }

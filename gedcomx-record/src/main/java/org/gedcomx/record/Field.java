@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlType;
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "Field", propOrder = { "original", "interpreted", "processed", "source" } )
-public class Field extends GenealogicalResource {
+public abstract class Field extends GenealogicalResource {
 
   private String label;
   private String original;

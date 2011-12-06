@@ -76,8 +76,7 @@ public class TestPerson {
     normalized.setDatatype(URI.create("urn:place"));
     normalized.setKnownValue(PlacePartType.Cemetery);
     fact.getPlace().setFormal(normalized);
-    fact.setValue(new FormalizeableValue());
-    fact.getValue().setOriginal("fact-value");
+    fact.setOriginal("fact-value");
     facts.add(fact);
 
     Fact event = new Fact();
@@ -186,7 +185,7 @@ public class TestPerson {
     assertEquals("normalized place", fact.getPlace().getFormal().getText());
     assertEquals(PlacePartType.Cemetery, fact.getPlace().getFormal().getKnownValue(PlacePartType.class));
     assertEquals("urn:date", fact.getDate().getFormal().getDatatype().toString());
-    assertEquals("fact-value", fact.getValue().getOriginal());
+    assertEquals("fact-value", fact.getOriginal());
 
     event = person.getFacts().get(1);
     assertEquals("urn:event-attribution", event.getAttribution().getContributor().getResource().toString());
