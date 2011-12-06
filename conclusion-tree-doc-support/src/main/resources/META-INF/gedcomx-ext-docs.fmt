@@ -30,9 +30,20 @@
   [/#if]
 [/#list]
 [@libCode.writeCodePage/]
-[@file name="index.html" charset="utf-8"]
+[@file name="models.html" charset="utf-8"]
   [@libBoilerplate.writeStartBody label="Models"/]
-  [@libBoilerplate.writeHeader subnav={"Model" : "#"}/]
+  [@libBoilerplate.writeHeader]
+    <ul class="clearfix" id="jsddm">
+      <li><a id="brand" href="Home.html">FamilySearch APIs - Home</a></li>
+      <li class="current">
+        <a href="models.html">Models</a>
+        <ul>
+          <li><a href="models.html">Models</a></li>
+          <li><a href="resources.html">Resources</a></li>
+        </ul>
+      </li>
+    </ul>
+  [/@libBoilerplate.writeHeader]
 <div class="wrap">
   <article id="subject" class="clearfix">
     <div class="feature-content clearfix">
@@ -90,7 +101,29 @@
       </table>
       [/#if]
     [/#list]
-
+    </div>
+  </article>
+</div>
+  [@libBoilerplate.writeFooter/]
+  [@libBoilerplate.writeEndBody/]
+[/@file]
+[@file name="resources.html" charset="utf-8"]
+  [@libBoilerplate.writeStartBody label="Models"/]
+  [@libBoilerplate.writeHeader]
+    <ul class="clearfix" id="jsddm">
+      <li><a id="brand" href="Home.html">FamilySearch APIs - Home</a></li>
+      <li class="current">
+        <a href="resources.html">Resources</a>
+        <ul>
+          <li><a href="models.html">Models</a></li>
+          <li><a href="resources.html">Resources</a></li>
+        </ul>
+      </li>
+    </ul>
+  [/@libBoilerplate.writeHeader]
+<div class="wrap">
+  <article id="subject" class="clearfix">
+    <div class="feature-content clearfix">
       <h1>Conclusion Tree Resources</h1>
 
       <hr/>

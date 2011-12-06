@@ -3,7 +3,26 @@
 [#import "boilerplate.fmt" as libBoilerplate/]
 [#macro writeModelPage schema]
   [@libBoilerplate.writeStartBody label=schema.properties.label!("\"" + schema.id + "\" Model")/]
-  [@libBoilerplate.writeHeader subnav={"Model" : "index.html", (schema.properties.label!("\"" + schema.id + "\" Model")) : "#"}/]
+  [@libBoilerplate.writeHeader]
+    <ul class="clearfix" id="jsddm">
+      <li><a id="brand" href="Home.html">FamilySearch APIs - Home</a></li>
+      <li>
+        <a href="models.html">Models &nbsp;&nbsp;&nbsp;&nbsp;&gt;</a>
+        <ul>
+          <li><a href="models.html">Models</a></li>
+          <li><a href="resources.html">Resources</a></li>
+        </ul>
+      </li>
+      <li class="current">
+        <a href="${gedcomxExtensionRoot(schema.namespace)}${schema.id}.html">${schema.properties.label!("\"" + schema.id + "\" Model")}</a>
+        <ul>
+    [@forEachSchema var="sch"]
+          <li><a href="${gedcomxExtensionRoot(sch.namespace)}${sch.id}.html">${sch.properties.label!("\"" + sch.id + "\" Model")}</a></li>
+    [/@forEachSchema]
+        </ul>
+      </li>
+    </ul>
+  [/@libBoilerplate.writeHeader]
 <div class="wrap">
   <article id="subject" class="clearfix">
     <div class="feature-content clearfix">

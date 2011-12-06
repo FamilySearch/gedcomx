@@ -3,7 +3,19 @@
 [#macro writeCodePage]
   [@file name="code.html" charset="utf-8"]
     [@libBoilerplate.writeStartBody label="Code"/]
-    [@libBoilerplate.writeHeader subnav={"Model" : "index.html", "Code" : "#"}/]
+    [@libBoilerplate.writeHeader]
+      <ul class="clearfix" id="jsddm">
+        <li><a id="brand" href="Home.html">FamilySearch APIs - Home</a></li>
+        <li>
+          <a href="index.html">Models &nbsp;&nbsp;&nbsp;&nbsp;&gt;</a>
+          <ul>
+            <li><a href="models.html">Models</a></li>
+            <li><a href="resources.html">Resources</a></li>
+          </ul>
+        </li>
+        <li class="current"><a href="#">Code</a></li>
+      </ul>
+    [/@libBoilerplate.writeHeader]
     <div class="wrap">
       <article id="subject" class="clearfix">
         <div class="feature-content clearfix">

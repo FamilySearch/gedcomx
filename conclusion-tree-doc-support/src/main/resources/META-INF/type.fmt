@@ -5,184 +5,214 @@
   [#assign schema=schemaForNamespace(type)/]
   [#assign typeLabel=type.javaDoc["label"]!type.name!"Anonymous"/]
   [@libBoilerplate.writeStartBody label=typeLabel/]
-  [@libBoilerplate.writeHeader subnav={"Model" : "index.html", (schema.properties.label!("\"" + schema.id + "\" Model")) : (schema.id + ".html"), typeLabel : "#"}/]
+  [@libBoilerplate.writeHeader]
+    <ul class="clearfix" id="jsddm">
+      <li><a id="brand" href="Home.html">FamilySearch APIs - Home</a></li>
+      <li>
+        <a href="models.html">Models &nbsp;&nbsp;&nbsp;&nbsp;&gt;</a>
+        <ul>
+          <li><a href="models.html">Models</a></li>
+          <li><a href="resources.html">Resources</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="${gedcomxExtensionRoot(schema.namespace)}${schema.id}.html">${schema.properties.label!("\"" + schema.id + "\" Model")} &nbsp;&nbsp;&nbsp;&nbsp;&gt;</a>
+        <ul>
+    [@forEachSchema var="sch"]
+          <li><a href="${gedcomxExtensionRoot(sch.namespace)}${sch.id}.html">${sch.properties.label!("\"" + sch.id + "\" Model")}</a></li>
+    [/@forEachSchema]
+        </ul>
+      </li>
+      <li class="current">
+        <a href="#">${typeLabel}</a>
+        <ul>
+    [#list schema.typeDefinitions as td]
+          <li><a href="${gedcomxExtensionRoot(td)}${schema.id}_${td.name}.html">${td.javaDoc["label"]!td.name!"Anonymous"}</a></li>
+    [/#list]
+        </ul>
+      </li>
+    </ul>
+  [/@libBoilerplate.writeHeader]
   <div class="wrap">
     <article id="subject" class="clearfix">
       <div class="feature-content clearfix">
-        <h1>${typeLabel}</h1>
+      <h1>${typeLabel}</h1>
 
-        <hr/>
+      <hr/>
 
-        <table>
-          <tr>
-            <td align="right">Name:</td>
-            <td>${type.name}</td>
-          </tr>
-          <tr>
-            <td align="right">Namespace:</td>
-            <td>${type.namespace}</td>
-          </tr>
-          <tr>
-            <td align="right">URI:</td>
-            <td>${type.namespace}${type.name}</td>
-          </tr>
-          [#if !type.baseObject]
-          <tr>
-            <td align="right">Extends:</td>
-            <td><a href="${gedcomxExtensionRoot(type.baseType)}${schemaForNamespace(type.baseType).id}_${type.baseType.name}.html">${typeName(type.baseType, type.namespace)}</a></td>
-          </tr>
+      <table>
+        <tr>
+          <td align="right">Name:</td>
+          <td>${type.name}</td>
+        </tr>
+        <tr>
+          <td align="right">Namespace:</td>
+          <td>${type.namespace}</td>
+        </tr>
+        <tr>
+          <td align="right">URI:</td>
+          <td>${type.namespace}${type.name}</td>
+        </tr>
+        [#if !type.baseObject]
+        <tr>
+          <td align="right">Extends:</td>
+          <td><a href="${gedcomxExtensionRoot(type.baseType)}${schemaForNamespace(type.baseType).id}_${type.baseType.name}.html">${typeName(type.baseType, type.namespace)}</a></td>
+        </tr>
+        [/#if]
+      </table>
+
+      <h3>Description</h3>
+
+      <p>${type.docValue!""}</p>
+
+    [#if type.enum!false]
+      <h3>Enumerated Values</h3>
+      <table>
+        <tr>
+          <th align="center">[#if type.QNameEnum!false]qname[#else]value[/#if]</th>
+          <th align="center">description</th>
+        </tr>
+      [#assign enumValueMap=type.enumValues/]
+      [#list type.enumConstants as constant]
+        [#if enumValueMap[constant.simpleName]??]
+        <tr>
+          [#if type.QNameEnum!false]
+          <td>${enumValueMap[constant.simpleName].namespaceURI}${enumValueMap[constant.simpleName].localPart}</td>
+          [#else]
+          <td>${enumValueMap[constant.simpleName]}</td>
           [/#if]
-        </table>
+          <td>${constant.docComment!""}</td>
+        </tr>
+        [/#if]
+      [/#list]
+      </table>
+    [#else]
+      <h3>Media Types</h3>
 
-        <h3>Description</h3>
+      <p>Pick your favorite representation format.</p>
 
-        <p>${type.docValue!""}</p>
+      <div id="mediatype-selection">
+        <input type="radio" id="select-xml" name="mediatype" checked="checked"/><label for="select-xml">XML</label>
+        <input type="radio" id="select-json" name="mediatype" /><label for="select-json">JSON</label>
+      </div>
 
-      [#if type.enum!false]
-        <h3>Enumerated Values</h3>
+      <div class="xml-docs">
+      [#if type.value??]
+        [#assign hasSchema=schemaForNamespace(type.value)??/]
+        <h3>Value</h3>
         <table>
           <tr>
-            <th align="center">[#if type.QNameEnum!false]qname[#else]value[/#if]</th>
+            <th align="center">type</th>
             <th align="center">description</th>
           </tr>
-        [#assign enumValueMap=type.enumValues/]
-        [#list type.enumConstants as constant]
-          [#if enumValueMap[constant.simpleName]??]
           <tr>
-            [#if type.QNameEnum!false]
-            <td>${enumValueMap[constant.simpleName].namespaceURI}${enumValueMap[constant.simpleName].localPart}</td>
-            [#else]
-            <td>${enumValueMap[constant.simpleName]}</td>
-            [/#if]
-            <td>${constant.docComment!""}</td>
+            <td>[#if hasSchema]<a href="${gedcomxExtensionRoot(type.value)}${schemaForNamespace(type.value).id}_${type.value.baseType.qname.localPart}.html">[/#if]${typeName(type.value, type.namespace)}[#if hasSchema]</a>[/#if]</td>
+            <td>${type.value.docValue!""}</td>
           </tr>
-          [/#if]
-        [/#list]
         </table>
-      [#else]
-      <div id="tabs">
-        <ul>
-          <li><a href="#xml">XML</a></li>
-          <li><a href="#json">JSON</a></li>
-        </ul>
-        <div id="xml">
+      [/#if]
+      [#if type.attributes?size > 0 || type.hasAnyAttribute!false]
+
+        <h3>Attributes</h3>
+        <table>
+          <tr>
+            <th align="center">name</th>
+            <th align="center">type</th>
+            <th align="center">description</th>
+          </tr>
+        [#list type.attributes as attribute]
+          [#assign hasSchema=schemaForNamespace(attribute)??/]
+          <tr>
+            <td>${attribute.name}</td>
+            <td>[#if hasSchema]<a href="${gedcomxExtensionRoot(attribute)}${schemaForNamespace(attribute).id}_${attribute.baseType.qname.localPart}.html">[/#if]${typeName(attribute, type.namespace)}[#if hasSchema]</a>[/#if]</td>
+            <td>${attribute.docValue!""}</td>
+          </tr>
+        [/#list]
+        [#if type.hasAnyAttribute!false]
+          <tr>
+            <td>(custom)</td>
+            <td>string</td>
+            <td>A set of custom attributes.</td>
+          </tr>
+        [/#if]
+        </table>
+      [/#if]
+      [#if type.elements?size > 0 || type.anyElement??]
+
+        <h3>Elements</h3>
+        <table>
+          <tr>
+            <th align="center">name</th>
+            <th align="center">type</th>
+            <th align="center">occurs</th>
+            <th align="center">description</th>
+          </tr>
+        [#list type.elements as element]
+          [#assign hasSchema=schemaForNamespace(element)??/]
+          <tr>
+            <td>${element.name}[#if element.wrapped!false] (wrapped in "${element.wrapperName}" element)[/#if]</td>
+            <td>[#if hasSchema]<a href="${gedcomxExtensionRoot(element)}${schemaForNamespace(element).id}_[#if element.ref??]${element.ref.localPart}[#else]${element.baseType.qname.localPart}[/#if].html">[/#if]${typeName(element, type.namespace)}[#if hasSchema]</a>[/#if]</td>
+            <td>${element.minOccurs}..[#if "unbounded" = element.maxOccurs]*[#else]${element.maxOccurs}[/#if]</td>
+            <td>${element.docValue!""}</td>
+          </tr>
+        [/#list]
+        [#if type.anyElement??]
+          <tr>
+            <td>(custom)</td>
+            <td>(custom)</td>
+            <td>0..*</td>
+            <td>${type.anyElement.docValue!""}</td>
+          </tr>
+        [/#if]
+        </table>
+      [/#if]
+
+        <h3>Example</h3>
+        <pre class="prettyprint lang-xml">
+${generateExampleXml(type)?html}
+        </pre>
+      </div>
+
+      <div class="json-docs">
+        <h3>Properties</h3>
+        <table>
+          <tr>
+            <th align="center">name</th>
+            <th align="center">type</th>
+            <th align="center">description</th>
+          </tr>
+        [#list type.attributes as attribute]
+          [#assign hasSchema=schemaForNamespace(attribute)??/]
+          <tr>
+            <td>${attribute.jsonMemberName}</td>
+            <td>[#if hasSchema]<a href="${gedcomxExtensionRoot(attribute)}${schemaForNamespace(attribute).id}_${attribute.baseType.qname.localPart}.html">[/#if]${typeName(attribute, type.namespace)}[#if hasSchema]</a>[/#if]</td>
+            <td>${attribute.docValue!""}</td>
+          </tr>
+        [/#list]
+        [#list type.elements as element]
+          [#assign hasSchema=schemaForNamespace(element)??/]
+          <tr>
+            <td>${element.jsonMemberName}</td>
+            <td>[#if element.collectionType!false]array of [/#if][#if hasSchema]<a href="${gedcomxExtensionRoot(element)}${schemaForNamespace(element).id}_[#if element.ref??]${element.ref.localPart}[#else]${element.baseType.qname.localPart}[/#if].html">[/#if]${typeName(element, type.namespace)}[#if hasSchema]</a>[/#if]</td>
+            <td>${element.docValue!""}</td>
+          </tr>
+        [/#list]
         [#if type.value??]
           [#assign hasSchema=schemaForNamespace(type.value)??/]
-          <b style="font-weight: bold">Value</b>
-          <table>
-            <tr>
-              <th align="center">type</th>
-              <th align="center">description</th>
-            </tr>
-            <tr>
-              <td>[#if hasSchema]<a href="${gedcomxExtensionRoot(type.value)}${schemaForNamespace(type.value).id}_${type.value.baseType.qname.localPart}.html">[/#if]${typeName(type.value, type.namespace)}[#if hasSchema]</a>[/#if]</td>
-              <td>${type.value.docValue!""}</td>
-            </tr>
-          </table>
+          <tr>
+            <td>${type.value.jsonMemberName}</td>
+            <td>[#if hasSchema]<a href="${gedcomxExtensionRoot(type.value)}${schemaForNamespace(type.value).id}_${type.value.baseType.qname.localPart}.html">[/#if]${typeName(type.value, type.namespace)}[#if hasSchema]</a>[/#if]</td>
+            <td>${type.value.docValue!""}</td>
+          </tr>
         [/#if]
-        [#if type.attributes?size > 0 || type.hasAnyAttribute!false]
+        </table>
 
-          <b style="font-weight: bold">Attributes</b>
-          <table>
-            <tr>
-              <th align="center">name</th>
-              <th align="center">type</th>
-              <th align="center">description</th>
-            </tr>
-          [#list type.attributes as attribute]
-            [#assign hasSchema=schemaForNamespace(attribute)??/]
-            <tr>
-              <td>${attribute.name}</td>
-              <td>[#if hasSchema]<a href="${gedcomxExtensionRoot(attribute)}${schemaForNamespace(attribute).id}_${attribute.baseType.qname.localPart}.html">[/#if]${typeName(attribute, type.namespace)}[#if hasSchema]</a>[/#if]</td>
-              <td>${attribute.docValue!""}</td>
-            </tr>
-          [/#list]
-          [#if type.hasAnyAttribute!false]
-            <tr>
-              <td>(custom)</td>
-              <td>string</td>
-              <td>A set of custom attributes.</td>
-            </tr>
-          [/#if]
-          </table>
-        [/#if]
-        [#if type.elements?size > 0 || type.anyElement??]
-
-          <b style="font-weight: bold">Elements</b>
-          <table>
-            <tr>
-              <th align="center">name</th>
-              <th align="center">type</th>
-              <th align="center">occurs</th>
-              <th align="center">description</th>
-            </tr>
-          [#list type.elements as element]
-            [#assign hasSchema=schemaForNamespace(element)??/]
-            <tr>
-              <td>${element.name}[#if element.wrapped!false] (wrapped in "${element.wrapperName}" element)[/#if]</td>
-              <td>[#if hasSchema]<a href="${gedcomxExtensionRoot(element)}${schemaForNamespace(element).id}_[#if element.ref??]${element.ref.localPart}[#else]${element.baseType.qname.localPart}[/#if].html">[/#if]${typeName(element, type.namespace)}[#if hasSchema]</a>[/#if]</td>
-              <td>${element.minOccurs}..[#if "unbounded" = element.maxOccurs]*[#else]${element.maxOccurs}[/#if]</td>
-              <td>${element.docValue!""}</td>
-            </tr>
-          [/#list]
-          [#if type.anyElement??]
-            <tr>
-              <td>(custom)</td>
-              <td>(custom)</td>
-              <td>0..*</td>
-              <td>${type.anyElement.docValue!""}</td>
-            </tr>
-          [/#if]
-          </table>
-        [/#if]
-
-          <b style="font-weight: bold">Example</b>
-          <pre class="prettyprint lang-xml">
-  ${generateExampleXml(type)?html}
-          </pre>
-        </div>
-
-        <div id="json">
-          <b style="font-weight: bold">Properties</b>
-          <table>
-            <tr>
-              <th align="center">name</th>
-              <th align="center">type</th>
-              <th align="center">description</th>
-            </tr>
-          [#list type.attributes as attribute]
-            [#assign hasSchema=schemaForNamespace(attribute)??/]
-            <tr>
-              <td>${attribute.jsonMemberName}</td>
-              <td>[#if hasSchema]<a href="${gedcomxExtensionRoot(attribute)}${schemaForNamespace(attribute).id}_${attribute.baseType.qname.localPart}.html">[/#if]${typeName(attribute, type.namespace)}[#if hasSchema]</a>[/#if]</td>
-              <td>${attribute.docValue!""}</td>
-            </tr>
-          [/#list]
-          [#list type.elements as element]
-            [#assign hasSchema=schemaForNamespace(element)??/]
-            <tr>
-              <td>${element.jsonMemberName}</td>
-              <td>[#if element.collectionType!false]array of [/#if][#if hasSchema]<a href="${gedcomxExtensionRoot(element)}${schemaForNamespace(element).id}_[#if element.ref??]${element.ref.localPart}[#else]${element.baseType.qname.localPart}[/#if].html">[/#if]${typeName(element, type.namespace)}[#if hasSchema]</a>[/#if]</td>
-              <td>${element.docValue!""}</td>
-            </tr>
-          [/#list]
-          [#if type.value??]
-            [#assign hasSchema=schemaForNamespace(type.value)??/]
-            <tr>
-              <td>${type.value.jsonMemberName}</td>
-              <td>[#if hasSchema]<a href="${gedcomxExtensionRoot(type.value)}${schemaForNamespace(type.value).id}_${type.value.baseType.qname.localPart}.html">[/#if]${typeName(type.value, type.namespace)}[#if hasSchema]</a>[/#if]</td>
-              <td>${type.value.docValue!""}</td>
-            </tr>
-          [/#if]
-          </table>
-
-          <b style="font-weight: bold">Example</b>
-          <pre class="prettyprint lang-js">
-  ${generateExampleJson(type)}
-          </pre>
-        </div>
+        <h3>Example</h3>
+        <pre class="prettyprint lang-js">
+${generateExampleJson(type)}
+        </pre>
       </div>
-      [/#if]
+    [/#if]
     </div>
   </article>
 </div>

@@ -5,7 +5,34 @@
   [#assign schema=schemaForNamespace(element)/]
   [#assign elementLabel=element.name?cap_first + " Element"/]
   [@libBoilerplate.writeStartBody label=elementLabel/]
-  [@libBoilerplate.writeHeader subnav={"Model" : "index.html", (schema.properties.label!("\"" + schema.id + "\" Model")) : schema.id + ".html", elementLabel : "#"}/]
+  [@libBoilerplate.writeHeader]
+    <ul class="clearfix" id="jsddm">
+      <li><a id="brand" href="Home.html">FamilySearch APIs - Home</a></li>
+      <li>
+        <a href="models.html">Models &nbsp;&nbsp;&nbsp;&nbsp;&gt;</a>
+        <ul>
+          <li><a href="models.html">Models</a></li>
+          <li><a href="resources.html">Resources</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="${gedcomxExtensionRoot(schema.namespace)}${schema.id}.html">${schema.properties.label!("\"" + schema.id + "\" Model")} &nbsp;&nbsp;&nbsp;&nbsp;&gt;</a>
+        <ul>
+    [@forEachSchema var="sch"]
+          <li><a href="${gedcomxExtensionRoot(sch.namespace)}${sch.id}.html">${sch.properties.label!("\"" + sch.id + "\" Model")}</a></li>
+    [/@forEachSchema]
+        </ul>
+      </li>
+      <li class="current">
+        <a href="#">${elementLabel}</a>
+        <ul>
+    [#list schema.globalElements?sort_by("name") as el]
+          <li><a href="${gedcomxExtensionRoot(el)}${schema.id}_el_${el.name}.html">${el.name?cap_first} Element</a></li>
+    [/#list]
+        </ul>
+      </li>
+    </ul>
+  [/@libBoilerplate.writeHeader]
 <div class="wrap">
   <article id="subject" class="clearfix">
     <div class="feature-content clearfix">
@@ -36,24 +63,27 @@
 
       <p>${element.docValue!""}</p>
 
-      <div id="tabs">
-        <ul>
-          <li><a href="#xml">XML</a></li>
-          <li><a href="#json">JSON</a></li>
-        </ul>
-        <div id="xml">
-          <b style="font-weight: bold">Example</b>
-          <pre class="prettyprint lang-xml">
-${generateExampleXml(element)?html}
-          </pre>
-        </div>
+      <h3>Media Types</h3>
 
-        <div id="json">
-          <b style="font-weight: bold">Example</b>
-          <pre class="prettyprint lang-js">
+      <p>Pick your favorite representation format.</p>
+
+      <div id="mediatype-selection">
+        <input type="radio" id="select-xml" name="mediatype" checked="checked"/><label for="select-xml">XML</label>
+        <input type="radio" id="select-json" name="mediatype" /><label for="select-json">JSON</label>
+      </div>
+
+      <div class="xml-docs">
+        <h3>Example</h3>
+        <pre class="prettyprint lang-xml">
+${generateExampleXml(element)?html}
+        </pre>
+      </div>
+
+      <div class="json-docs">
+        <h3>Example</h3>
+        <pre class="prettyprint lang-js">
 ${generateExampleJson(element)}
-          </pre>
-        </div>
+        </pre>
       </div>
     </div>
   </article>

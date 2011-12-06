@@ -15,15 +15,54 @@
   <link rel="stylesheet" href="css/prettify.css" media="screen"/>
   <script src="js/libs/jquery-ui.min.js"></script>
   <script>
-    jQuery(function() {
-      jQuery( "#tabs" ).tabs();
+    $(function() {
+      $( "#mediatype-selection" ).buttonset();
+      $( "#tabs" ).tabs();
+      $( ".json-docs" ).hide();
+      $( "#select-xml" ).click( function() {
+        $( ".json-docs" ).hide();
+        $( ".xml-docs" ).show();
+      })
+      $( "#select-json" ).click( function() {
+        $( ".xml-docs" ).hide();
+        $( ".json-docs" ).show();
+      })
     });
   </script>
   <script src="js/libs/prettify/prettify.js"></script>
   <script>
+    var timeout         = 500;
+    var closetimer		  = 0;
+    var ddmenuitem      = 0;
+
+    function jsddm_open() {
+      jsddm_canceltimer();
+      jsddm_close();
+      ddmenuitem = $(this).find('ul').eq(0).css('visibility', 'visible');
+    }
+
+    function jsddm_close() {
+      if (ddmenuitem) ddmenuitem.css('visibility', 'hidden');
+    }
+
+    function jsddm_timer() {
+      closetimer = window.setTimeout(jsddm_close, timeout);
+    }
+
+    function jsddm_canceltimer() {
+      if (closetimer) {
+        window.clearTimeout(closetimer);
+        closetimer = null;
+      }
+    }
+
     jQuery(function() {
       prettyPrint();
+      jQuery('#jsddm > li').bind('mouseover', jsddm_open);
+      jQuery('#jsddm > li').bind('mouseout',  jsddm_timer);
     });
+
+    document.onclick = jsddm_close;
   </script>
 
   <link rel="stylesheet" href="http://cdn.familysearch.org/www-web-common/css/oquirrh-theme.css" media="screen">
@@ -99,6 +138,38 @@
       margin-bottom: 0.4em;
     }
 
+    #jsddm li ul {
+      margin: 65px 0 0 0;
+      padding: 0;
+      position: absolute;
+      visibility: hidden;
+    }
+
+    #jsddm li ul li {
+      float: none;
+      display: inline;
+      padding: 0;
+      margin: 0;
+    }
+
+    #jsddm li ul li a {
+      width: auto;
+      height: auto;
+      padding: 5px 5px;
+      margin: 0;
+      background: #59524c;
+      color: #ffffff;
+      border-bottom: 1px dotted white
+    }
+
+    #jsddm li ul li a:hover {
+      background: #edece8
+    }
+
+    #mediatype-selection {
+      margin-bottom: 2em
+    }
+
   </style>
 </head>
 
@@ -107,10 +178,25 @@
   <div id="header-override" class="wrap">
     <header id="site-nav" class="clearfix">
       <nav id="primary-nav">
-        <ul class="clearfix">
-          <li><a id="brand" href="https://www.familysearch.org" title="FamilySearch - Home">FamilySearch - Home</a></li>
-          <li><a href="#">One &nbsp;&nbsp;&nbsp;&nbsp;&gt;</a></li>
-          <li><a href="#">Two</a></li>
+        <ul class="clearfix" id="jsddm">
+          <li><a id="brand" href="Home.html">FamilySearch - Home</a></li>
+          <li>
+            <a href="#" class="home">Namespace &nbsp;&nbsp;&nbsp;&nbsp;&gt;</a>
+            <ul>
+              <li><a href="#">namespace 1</a></li>
+              <li><a href="#">yet another namespace</a></li>
+              <li><a href="#">hello another namespace</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#">Elements &nbsp;&nbsp;&nbsp;&nbsp;&gt;</a>
+            <ul>
+              <li><a href="#">el2</a></li>
+              <li><a href="#">el3</a></li>
+              <li><a href="#">el4</a></li>
+            </ul>
+          </li>
+          <li><a href="#">Element</a></li>
         </ul>
       </nav>
       <nav id="secondary-nav">
@@ -152,77 +238,81 @@
 
       <p>Here is the description of the Type Name type.</p>
 
-      <div id="tabs">
-        <ul>
-          <li><a href="#xml">XML</a></li>
-          <li><a href="#json">JSON</a></li>
-        </ul>
-        <div id="xml">
-          <b style="font-weight: bold">Properties</b>
-          <table>
-            <tr>
-              <th align="center">name</th>
-              <th align="center">type</th>
-              <th align="center">occurs</th>
-              <th align="center">description</th>
-            </tr>
-            <tr>
-              <td>somenamethatissomewhatlong</td>
-              <td>list of <a href="#">xmlns:xmltype</a></td>
-              <td>0..1 (attribute)</td>
-              <td>Some descriptive text that will be long enough to figure out how to best format it in the table. Some descriptive text that will be long enough to figure out how to best format it in the table. Some descriptive text that will be long enough to figure out how to best format it in the table. </td>
-            </tr>
-            <tr>
-              <td>somename</td>
-              <td>list of <a href="#">xmlns:xmltype</a></td>
-              <td>0..*</td>
-              <td>Some descriptive text that will be long enough to figure out how to best format it in the table. Some descriptive text that will be long enough to figure out how to best format it in the table. Some descriptive text that will be long enough to figure out how to best format it in the table. </td>
-            </tr>
-            <tr>
-              <td>somename</td>
-              <td>list of <a href="#">xmlns:xmltype</a></td>
-              <td>n/a (value)</td>
-              <td>Some descriptive text that will be long enough to figure out how to best format it in the table. Some descriptive text that will be long enough to figure out how to best format it in the table. Some descriptive text that will be long enough to figure out how to best format it in the table. </td>
-            </tr>
-          </table>
+      <h3>Media Types</h3>
 
-          <b style="font-weight: bold">Example</b>
-          <pre class="prettyprint lang-xml">
+      <p>Pick your favorite representation format.</p>
+
+      <div id="mediatype-selection">
+        <input type="radio" id="select-xml" name="mediatype" checked="checked"/><label for="select-xml">XML</label>
+        <input type="radio" id="select-json" name="mediatype" /><label for="select-json">JSON</label>
+      </div>
+
+      <div class="xml-docs">
+        <h3>Properties</h3>
+        <table>
+          <tr>
+            <th align="center">name</th>
+            <th align="center">type</th>
+            <th align="center">occurs</th>
+            <th align="center">description</th>
+          </tr>
+          <tr>
+            <td>somenamethatissomewhatlong</td>
+            <td>list of <a href="#">xmlns:xmltype</a></td>
+            <td>0..1 (attribute)</td>
+            <td>Some descriptive text that will be long enough to figure out how to best format it in the table. Some descriptive text that will be long enough to figure out how to best format it in the table. Some descriptive text that will be long enough to figure out how to best format it in the table. </td>
+          </tr>
+          <tr>
+            <td>somename</td>
+            <td>list of <a href="#">xmlns:xmltype</a></td>
+            <td>0..*</td>
+            <td>Some descriptive text that will be long enough to figure out how to best format it in the table. Some descriptive text that will be long enough to figure out how to best format it in the table. Some descriptive text that will be long enough to figure out how to best format it in the table. </td>
+          </tr>
+          <tr>
+            <td>somename</td>
+            <td>list of <a href="#">xmlns:xmltype</a></td>
+            <td>n/a (value)</td>
+            <td>Some descriptive text that will be long enough to figure out how to best format it in the table. Some descriptive text that will be long enough to figure out how to best format it in the table. Some descriptive text that will be long enough to figure out how to best format it in the table. </td>
+          </tr>
+        </table>
+
+        <h3>Example</h3>
+        <pre class="prettyprint lang-xml">
 &lt;hello&gt;
   &lt;how are="you"&gt;
   &lt;doing/&gt;
   &lt;today&gt;...&lt;/today&gt;
   &lt;what_happens_if_there_is_an_element_that_wraps_off_the_edge_of_the_screen&gt;...&lt;/what_happens_if_there_is_an_element_that_wraps_off_the_edge_of_the_screen&gt;
 &lt;/hello&gt;
-          </pre>
-        </div>
-        <div id="json">
-          <b style="font-weight: bold">Properties</b>
-          <table>
-            <tr>
-              <th align="center">name</th>
-              <th align="center">type</th>
-              <th align="center">description</th>
-            </tr>
-            <tr>
-              <td>somenamethatissomewhatlong</td>
-              <td>array of <a href="#">xmlns:xmltype</a></td>
-              <td>Some descriptive text that will be long enough to figure out how to best format it in the table. Some descriptive text that will be long enough to figure out how to best format it in the table. Some descriptive text that will be long enough to figure out how to best format it in the table. </td>
-            </tr>
-            <tr>
-              <td>somename</td>
-              <td>array of <a href="#">xmlns:xmltype</a></td>
-              <td>Some descriptive text that will be long enough to figure out how to best format it in the table. Some descriptive text that will be long enough to figure out how to best format it in the table. Some descriptive text that will be long enough to figure out how to best format it in the table. </td>
-            </tr>
-            <tr>
-              <td>somename</td>
-              <td>array of <a href="#">xmlns:xmltype</a></td>
-              <td>Some descriptive text that will be long enough to figure out how to best format it in the table. Some descriptive text that will be long enough to figure out how to best format it in the table. Some descriptive text that will be long enough to figure out how to best format it in the table. </td>
-            </tr>
-          </table>
+        </pre>
+      </div>
+      <div class="json-docs">
+        <h3>Properties</h3>
+        <table>
+          <tr>
+            <th align="center">name</th>
+            <th align="center">type</th>
+            <th align="center">description</th>
+          </tr>
+          <tr>
+            <td>somenamethatissomewhatlong</td>
+            <td>array of <a href="#">xmlns:xmltype</a></td>
+            <td>Some descriptive text that will be long enough to figure out how to best format it in the table. Some descriptive text that will be long enough to figure out how to best format it in the table. Some descriptive text that will be long enough to figure out how to best format it in the table. </td>
+          </tr>
+          <tr>
+            <td>somename</td>
+            <td>array of <a href="#">xmlns:xmltype</a></td>
+            <td>Some descriptive text that will be long enough to figure out how to best format it in the table. Some descriptive text that will be long enough to figure out how to best format it in the table. Some descriptive text that will be long enough to figure out how to best format it in the table. </td>
+          </tr>
+          <tr>
+            <td>somename</td>
+            <td>array of <a href="#">xmlns:xmltype</a></td>
+            <td>Some descriptive text that will be long enough to figure out how to best format it in the table. Some descriptive text that will be long enough to figure out how to best format it in the table. Some descriptive text that will be long enough to figure out how to best format it in the table. </td>
+          </tr>
+        </table>
 
-          <b style="font-weight: bold">Example</b>
-          <pre class="prettyprint lang-js">
+        <h3>Example</h3>
+        <pre class="prettyprint lang-js">
 {
   hello : {
     how : {
@@ -233,28 +323,88 @@
     what_happens_if_there_is_an_element_that_wraps_off_the_edge_of_the_screen : "..."
   }
 }
-          </pre>
-        </div>
+        </pre>
       </div>
 
       <h3>API</h3>
-
-      <b style="font-weight: bold">Example Request</b>
-      <pre>
+      <div id="tabs">
+        <ul>
+          <li><a href="#GET">GET</a></li>
+          <li><a href="#POST">POST</a></li>
+        </ul>
+        <div id="GET">
+          <div class="xml-docs">
+            <b style="font-weight: bold">Example Request</b>
+            <pre>
 GET /path/to/resource
 Accept: application/xml
-Content-Type: application/xml
-        <code class="prettyprint lang-xml">
+              <code class="prettyprint lang-xml">
 &lt;hello&gt;
 &lt;how are="you"&gt;
 &lt;doing/&gt;
 &lt;today&gt;...&lt;/today&gt;
 &lt;what_happens_if_there_is_an_element_that_wraps_off_the_edge_of_the_screen&gt;...&lt;/what_happens_if_there_is_an_element_that_wraps_off_the_edge_of_the_screen&gt;
 &lt;/hello&gt;
-        </code>
-      </pre>
-
-
+              </code>
+            </pre>
+          </div>
+          <div class="json-docs">
+            <b style="font-weight: bold">Example Request</b>
+            <pre>
+GET /path/to/resource
+Accept: application/xml
+              <code class="prettyprint lang-js">
+{
+  hello : {
+    how : {
+      are : "you"
+    },
+    doing = {},
+    today : "...",
+    what_happens_if_there_is_an_element_that_wraps_off_the_edge_of_the_screen : "..."
+  }
+}
+              </code>
+            </pre>
+          </div>
+        </div>
+        <div id="POST">
+          <div class="xml-docs">
+            <b style="font-weight: bold">Example Request</b>
+            <pre>
+POST /path/to/resource
+Content-Type: application/xml
+              <code class="prettyprint lang-xml">
+&lt;hello&gt;
+&lt;how are="you"&gt;
+&lt;doing/&gt;
+&lt;today&gt;...&lt;/today&gt;
+&lt;what_happens_if_there_is_an_element_that_wraps_off_the_edge_of_the_screen&gt;...&lt;/what_happens_if_there_is_an_element_that_wraps_off_the_edge_of_the_screen&gt;
+&lt;/hello&gt;
+              </code>
+            </pre>
+          </div>
+          <div class="json-docs">
+            <b style="font-weight: bold">Example Request</b>
+            <pre>
+POST /path/to/resource
+Content-Type: application/json
+              <code class="prettyprint lang-js">
+{
+  hello : {
+    how : {
+      are : "you"
+    },
+    doing = {},
+    today : "...",
+    what_happens_if_there_is_an_element_that_wraps_off_the_edge_of_the_screen : "..."
+  }
+}
+              </code>
+            </pre>
+          </div>
+        </div>
+      </div>
       </div>
     </article>
   </div>

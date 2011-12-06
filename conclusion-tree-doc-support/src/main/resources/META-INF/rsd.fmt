@@ -4,208 +4,211 @@
 [#macro writeResourceServiceDefinitionPage rsd]
   [#assign rsdName=rsd.name?cap_first + " Resource"/]
   [@libBoilerplate.writeStartBody label=rsdName/]
-  [@libBoilerplate.writeHeader subnav={"Resources" : "index.html", rsdName : "#"}/]
+  [@libBoilerplate.writeHeader]
+    <ul class="clearfix" id="jsddm">
+      <li><a id="brand" href="Home.html">FamilySearch APIs - Home</a></li>
+      <li>
+        <a href="resources.html">Resources &nbsp;&nbsp;&nbsp;&nbsp;&gt;</a>
+        <ul>
+          <li><a href="models.html">Models</a></li>
+          <li><a href="resources.html">Resources</a></li>
+        </ul>
+      </li>
+      <li class="current">
+        <a href="${gedcomxExtensionRoot(rsd)}${rsd.name}_resource.html">${rsdName}</a>
+        <ul>
+    [#list resourceServiceDefinitions?sort_by("name") as rs]
+          <li><a href="${gedcomxExtensionRoot(rs)}${rs.name}_resource.html">${rs.name?cap_first} Resource</a></li>
+    [/#list]
+        </ul>
+      </li>
+    </ul>
+  [/@libBoilerplate.writeHeader]
   <div class="wrap">
     <article id="subject" class="clearfix">
         <div class="feature-content clearfix">
-        <h1>${rsdName}</h1>
+      <h1>${rsdName}</h1>
 
-        <hr/>
+      <hr/>
 
-        <p>${rsd.docValue!""}</p>
+      <p>${rsd.docValue!""}</p>
 
-        <table>
-          <tr>
-            <td align="right">Name:</td>
-            <td>${rsd.name}</td>
-          </tr>
-          <tr>
-            <td align="right">Namespace:</td>
-            <td>${rsd.namespace}</td>
-          </tr>
-          [#if rsd.resourceElements?size > 0]
-            [#local exampleResourceElement=rsd.resourceElements[0]/]
-          <tr>
-            <td align="right">Representation(s):</td>
-            <td>[#list rsd.resourceElements as resourceElement]<a href="${gedcomxExtensionRoot(resourceElement)}${schemaForNamespace(resourceElement).id}_el_${resourceElement.name}.html">${resourceElement.name}</a>[#if resourceElement_has_next] or [/#if][/#list]</td>
-          </tr>
-          [/#if]
-          [#if rsd.subresources?size > 0]
-            [#if rsd.subresources[0].resourceElements?size > 0]
-              [#local exampleSubresourceElement=rsd.subresources[0].resourceElements[0]/]
-            [/#if]
-          <tr>
-            <td align="right">Subresources:</td>
-            <td>[#list rsd.subresources as subresource]<a href="${gedcomxExtensionRoot(subresource)}${subresource.name}_resource.html">${subresource.name}</a>[#if subresource_has_next], [/#if][/#list]</td>
-          </tr>
-          [/#if]
-
-        </table>
-
-        [#if rsd.resourceRelationships?size > 0]
-        <h3>Resource Relationships</h3>
-
-        <table>
-          <tr>
-            <th>Name</th>
-            <th>Resource</th>
-            <th>Description</th>
-          </tr>
-          [#list rsd.resourceRelationships as resourceRelationship]
-            <tr>
-              <td>${resourceRelationship.identifier}</td>
-              <td>[#if resourceRelationship.definedBy??]<a href="${gedcomxExtensionRoot(resourceRelationship.definedBy)}${resourceRelationship.definedBy.name}_resource.html">${resourceRelationship.definedBy.name}</a>[#else](unknown)[/#if]</td>
-              <td>${resourceRelationship.description}</td>
-            </tr>
-          [/#list]
-        </table>
-
+      <table>
+        <tr>
+          <td align="right">Name:</td>
+          <td>${rsd.name}</td>
+        </tr>
+        <tr>
+          <td align="right">Namespace:</td>
+          <td>${rsd.namespace}</td>
+        </tr>
+        [#if rsd.resourceElements?size > 0]
+        <tr>
+          <td align="right">Representation(s):</td>
+          <td>[#list rsd.resourceElements as resourceElement]<a href="${gedcomxExtensionRoot(resourceElement)}${schemaForNamespace(resourceElement).id}_el_${resourceElement.name}.html">[#if rsd.resourceBundle!false]resource bundle[#else]${resourceElement.name}[/#if]</a>[#if resourceElement_has_next] or [/#if][/#list]</td>
+        </tr>
         [/#if]
-        [#if rsd.statusCodes?size > 0]
-        <h3>Common Status Codes</h3>
+        [#if rsd.subresources?size > 0]
+        <tr>
+          <td align="right">Subresources:</td>
+          <td>[#list rsd.subresources as subresource]<a href="${gedcomxExtensionRoot(subresource)}${subresource.name}_resource.html">${subresource.name}</a>[#if subresource_has_next], [/#if][/#list]</td>
+        </tr>
+        [/#if]
+
+      </table>
+
+      [#if rsd.resourceRelationships?size > 0]
+      <h3>Resource Relationships</h3>
+
+      <table>
+        <tr>
+          <th>Identifier</th>
+          <th>Resource</th>
+          <th>Description</th>
+        </tr>
+        [#list rsd.resourceRelationships as resourceRelationship]
+          <tr>
+            <td>${resourceRelationship.identifier}</td>
+            <td>[#if resourceRelationship.definedBy??]<a href="${gedcomxExtensionRoot(resourceRelationship.definedBy)}${resourceRelationship.definedBy.name}_resource.html">${resourceRelationship.definedBy.name}</a>[#else](unknown)[/#if]</td>
+            <td>${resourceRelationship.description}</td>
+          </tr>
+        [/#list]
+      </table>
+
+      [/#if]
+      [#if rsd.statusCodes?size > 0]
+      <h3>Common Status Codes</h3>
+
+      <table>
+        <tr>
+          <th align="center">code</th>
+          <th align="center">condition</th>
+        </tr>
+        [#list rsd.statusCodes?sort_by("code") as statusCode]
+        <tr>
+          <td>${statusCode.code}</td>
+          <td>${statusCode.condition}</td>
+        </tr>
+        [/#list]
+      </table>
+
+      [/#if]
+      [#if rsd.warnings?size > 0]
+      <h3>Common Warnings</h3>
+
+      <table>
+        <tr>
+          <th align="center">code</th>
+          <th align="center">condition</th>
+        </tr>
+        [#list rsd.warnings?sort_by("code") as warning]
+        <tr>
+          <td>${statusCode.warning}</td>
+          <td>${statusCode.warning}</td>
+        </tr>
+        [/#list]
+      </table>
+
+      [/#if]
+      [#if rsd.resourceParameters?size > 0]
+      <h3>Common Parameters</h3>
+
+      <table>
+        <tr>
+          <th align="center">name</th>
+          <th align="center">type</th>
+          <th align="center">description</th>
+        </tr>
+        [#list rsd.resourceParameters?sort_by("typeName") as param]
+        <tr>
+          <td>${param.parameterName}</td>
+          <td>${param.typeName}</td>
+          <td>${param.docValue!""}</td>
+        </tr>
+        [/#list]
+      </table>
+
+      [/#if]
+      <h3>Operations</h3>
+
+      <p>Pick your favorite representation format.</p>
+
+      <div id="mediatype-selection">
+        <input type="radio" id="select-xml" name="mediatype" checked="checked"/><label for="select-xml">XML</label>
+        <input type="radio" id="select-json" name="mediatype" /><label for="select-json">JSON</label>
+      </div>
+
+      <div id="tabs">
+        <ul>
+      [#list rsd.resourceMethods as op]
+          <li><a href="#${op.httpMethods[0]?upper_case}">${op.httpMethods[0]?upper_case}</a></li>
+      [/#list]
+        </ul>
+      [#list rsd.resourceMethods as op]
+        [#assign method=op.httpMethods[0]?upper_case/]
+        <div id="${method}">
+        <p>${op.docValue!""}</p>
+      [#if op.metaData.statusCodes?size > 0]
+
+        <h4>Status Codes</h4>
 
         <table>
           <tr>
             <th align="center">code</th>
-            <th align="center">warning code</th>
             <th align="center">condition</th>
           </tr>
-          [#list rsd.statusCodes?sort_by("code") as statusCode]
+        [#list op.metaData.statusCodes?sort_by("code") as statusCode]
           <tr>
             <td>${statusCode.code}</td>
-            <td>${statusCode.warningCode!"-"}</td>
             <td>${statusCode.condition}</td>
           </tr>
-          [/#list]
+        [/#list]
         </table>
+      [/#if]
+      [#if op.metaData.warnings?size > 0]
 
-        [/#if]
-        [#if rsd.resourceParameters?size > 0]
-        <h3>Common Parameters</h3>
+        <h4>Warnings</h4>
 
         <table>
           <tr>
-            <th align="center">name</th>
-            <th align="center">type</th>
-            <th align="center">description</th>
+            <th align="center">code</th>
+            <th align="center">condition</th>
           </tr>
-          [#list rsd.resourceParameters?sort_by("typeName") as param]
+        [#list op.metaData.warnings?sort_by("code") as warning]
           <tr>
-            <td>${param.parameterName}</td>
-            <td>${param.typeName}</td>
-            <td>${param.docValue!""}</td>
+            <td>${warning.code}</td>
+            <td>${warning.condition}</td>
           </tr>
-          [/#list]
+        [/#list]
         </table>
+      [/#if]
 
-        [/#if]
-        <h3>Operations</h3>
-        <div id="tabs">
-          <ul>
-        [#list rsd.resourceMethods as op]
-            <li><a href="#${op.httpMethods[0]?upper_case}">${op.httpMethods[0]?upper_case}</a></li>
-        [/#list]
-          </ul>
-        [#list rsd.resourceMethods as op]
-          [#assign method=op.httpMethods[0]?upper_case/]
-          [#assign isGet=("GET" = method)/]
-          [#assign isPut=("PUT" = method)/]
-          [#assign isPost=("POST" = method)/]
-          [#assign isDelete=("DELETE" = method)/]
-          <div id="${method}">
-          <p>${op.docValue!""}</p>
-
-          <h4>Status Codes</h4>
-
-          <table>
-            <tr>
-              <th align="center">code</th>
-              <th align="center">warning code</th>
-              <th align="center">condition</th>
-            </tr>
-        [#list op.metaData.statusCodes?sort_by("code") as statusCode]
-            <tr>
-              <td>${statusCode.code}</td>
-              <td>${statusCode.warningCode!"-"}</td>
-              <td>${statusCode.condition}</td>
-            </tr>
-        [/#list]
-          </table>
-
-        [#if exampleResourceElement??]
+        <div class="xml-docs">
+      [#assign requestBody=generateExampleRequestBody(op)?html?trim/]
+      [#assign responseBody=generateExampleResponseBody(op)?html?trim/]
           <h4>Example Request</h4>
-
-          <pre>
-  ${method} /path/to/${rsd.name?lower_case}
-  Accept: ${schemaForNamespace(exampleResourceElement).properties.xmlMediaType}
-          [#list rsd.resourceParameters as param]
-            [#if param.headerParam!false]
-  ${param.parameterName}: ...
-            [/#if]
-          [/#list]
-          [#if isPost && rsd.resourceBundle && exampleSubresourceElement??]
-  Content-Type: ${schemaForNamespace(exampleResourceElement).properties.xmlMediaType}
-
-            <code class="prettyprint lang-xml">
-  &lt;${exampleSubresourceElement.name} xmlns="${exampleSubresourceElement.namespace}"&gt;
-    ...
-  &lt;/${exampleResourceElement.name}&gt;
-            </code>
-          [#elseif isPut]
-  Content-Type: ${schemaForNamespace(exampleResourceElement).properties.xmlMediaType}
-
-            <code class="prettyprint lang-xml">
-  &lt;${exampleResourceElement.name} xmlns="${exampleResourceElement.namespace}"&gt;
-    ...
-  &lt;/${exampleResourceElement.name}&gt;
-            </code>
-          [/#if]
-          </pre>
+          <pre>${generateExampleRequestHeaders(op)}[#if requestBody?length > 0]
+<code class="prettyprint lang-xml">${requestBody}</code>[/#if]</pre>
 
           <h4>Example Response</h4>
-          <pre>
-          [#if isPost]
-  HTTP/1.1 201 Created
-  Location: /path/to/${rsd.name?lower_case}
-          [#elseif isPut || isDelete]
-  HTTP/1.1 204 No Content
-          [#else]
-  HTTP/1.1 200 OK
-  Content-Type: ${schemaForNamespace(exampleResourceElement).properties.xmlMediaType}
+          <pre>${generateExampleResponseHeaders(op)}[#if responseBody?length > 0]
+<code class="prettyprint lang-xml">${responseBody}</code>[/#if]</pre>
+        </div>
 
-            <code class="prettyprint lang-xml">
-  &lt;${exampleResourceElement.name} xmlns="${exampleResourceElement.namespace}" xmlns:rs="http://gedcomx.org/rs/v1/"&gt;
-    ...
-    [#if rsd.resourceRelationships?size > 0]
-      [#list rsd.resourceRelationships as resourceRelationship]
-    &lt;rs:link rel="${resourceRelationship.identifier}" href="..."/&gt;
-      [/#list]
-    ...
-    [/#if]
-    [#if rsd.subresources?size > 0]
-      [#list rsd.subresources as subresource]
-        [#if !subresource.resourceBundle]
-          [#list subresource.resourceElements as subresourceElement]
-    &lt;${subresourceElement.name}[#if subresourceElement.namespace != exampleResourceElement.namespace] xmlns="${subresourceElement.namespace}"[/#if]&gt;
-      ...
-            [#if subresource.resourceRelationships?size > 0]
-              [#list subresource.resourceRelationships as resourceRelationship]
-      &lt;rs:link rel="${resourceRelationship.identifier}" href="..."/&gt;
-              [/#list]
-      ...
-            [/#if]
-    &lt;/${subresourceElement.name}&gt;
-          [/#list]
-        [/#if]
-      [/#list]
-    [/#if]
-  &lt;/${exampleResourceElement.name}&gt;
-            </code>
-          [/#if]
-          </pre>
-        [/#if]
-      </div>
-      [/#list]
+        <div class="json-docs">
+      [#assign requestBody=generateExampleRequestBody(op, true)?html?trim/]
+      [#assign responseBody=generateExampleResponseBody(op, true)?html?trim/]
+          <h4>Example Request</h4>
+          <pre>${generateExampleRequestHeaders(op, true)}[#if requestBody?length > 0]
+<code class="prettyprint lang-js">${requestBody}</code>[/#if]</pre>
+
+          <h4>Example Response</h4>
+          <pre>${generateExampleResponseHeaders(op, true)}[#if responseBody?length > 0]
+<code class="prettyprint lang-js">${responseBody}</code>[/#if]</pre>
+        </div>
+    </div>
+    [/#list]
+
       </div>
     </article>
   </div>
