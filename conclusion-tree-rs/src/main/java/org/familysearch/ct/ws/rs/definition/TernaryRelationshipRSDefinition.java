@@ -35,7 +35,7 @@ import javax.ws.rs.core.UriInfo;
  *
  * @author Ryan Heaton
  */
-@ResourceServiceDefinition (
+@ResourceDefinition (
   name = "TernaryRelationship",
   namespace = ConclusionTreeModel.CONCLUSION_TREE_V1_NAMESPACE,
   resourceElement = TernaryRelationship.class,

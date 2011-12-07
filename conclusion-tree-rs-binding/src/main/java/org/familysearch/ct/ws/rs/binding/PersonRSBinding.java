@@ -2,7 +2,6 @@ package org.familysearch.ct.ws.rs.binding;
 
 import org.gedcomx.conclusion.Person;
 import org.gedcomx.conclusion.rs.definition.PersonRSDefinition;
-import org.gedcomx.rt.rs.ResourceServiceBinding;
 import org.gedcomx.rt.rs.ResponseCode;
 import org.gedcomx.rt.rs.StatusCodes;
 
@@ -17,7 +16,6 @@ import javax.ws.rs.core.UriInfo;
 /**
  * @author Ryan Heaton
  */
-@ResourceServiceBinding
 @Path("/persons/{pid}")
 public interface PersonRSBinding extends PersonRSDefinition {
 
