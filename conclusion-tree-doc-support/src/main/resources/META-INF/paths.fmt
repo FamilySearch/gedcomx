@@ -1,0 +1,272 @@
+[#ftl]
+[#--macro for writing a element page--]
+[#import "boilerplate.fmt" as libBoilerplate/]
+[#import "rsd.fmt" as libRsd/]
+[#function scrubPathToFilename path]
+  [#return path?string?replace("/", ".")?replace(":","-")?replace("{", "-")?replace("}", "-")/]
+[/#function]
+[#macro writePathBindingsPage methods]
+  [#assign fullpath=(methods?first).fullpath/]
+  [@libBoilerplate.writeStartBody label=fullpath/]
+  [@libBoilerplate.writeHeader]
+    <ul class="clearfix" id="jsddm">
+      <li><a id="brand" href="Home.html">FamilySearch APIs - Home</a></li>
+      <li>
+        <a href="bindings.html">Path Bindings &nbsp;&nbsp;&nbsp;&nbsp;&gt;</a>
+        <ul>
+          <li><a href="models.html">Models</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="bindings.html">Path Bindings</a></li>
+        </ul>
+      </li>
+      <li class="current">
+        <a href="path_${scrubPathToFilename(fullpath)}.html">${fullpath}</a>
+        <ul>
+    [@forEachResourceMethodListByPath]
+          <li><a href="path_${scrubPathToFilename((resources?first).fullpath)}.html">${(resources?first).fullpath}</a></li>
+    [/@forEachResourceMethodListByPath]
+        </ul>
+      </li>
+    </ul>
+  [/@libBoilerplate.writeHeader]
+  <div class="wrap">
+    <article id="subject" class="clearfix">
+        <div class="feature-content clearfix">
+      <h1>${fullpath}</h1>
+
+      <hr/>
+
+  [#if resourceBindingsByPath[(methods?first).fullpath]??]
+    [#assign binding=resourceBindingsByPath[(methods?first).fullpath]/]
+    [#assign rsd=binding.definition/]
+    [#if rsd.resourceElements?size > 0]
+      <h3>Representation Model</h3>
+
+      <p>This path binds the <a href="${gedcomxExtensionRoot(rsd)}${rsd.name}_resource.html">${rsd.name} Resource</a>,
+        which uses the [#list rsd.resourceElements as resourceElement]<a href="${gedcomxExtensionRoot(resourceElement)}${schemaForNamespace(resourceElement).id}_el_${resourceElement.name}.html">[#if rsd.resourceBundle!false]resource bundle[#else]${resourceElement.name}[/#if]</a>[#if resourceElement_has_next] or [/#if][/#list]
+        element(s) to define its model.[#if rsd.subresources?size > 0]Subresources include [#list rsd.subresources as subresource]<a href="${gedcomxExtensionRoot(subresource)}${subresource.name}_resource.html">${subresource.name}</a>[#if subresource_has_next], [/#if][/#list][/#if].</p>
+    [/#if]
+    [#if binding.resourceRelationships?size > 0 || rsd.resourceRelationships?size > 0]
+
+      <h3>Resource Relationships</h3>
+
+      <table>
+        <tr>
+          <th>Identifier</th>
+          <th>Resource</th>
+          <th>Description</th>
+          <th>Specified By</th>
+        </tr>
+      [#list binding.resourceRelationships as resourceRelationship]
+        <tr>
+          <td>${resourceRelationship.identifier}</td>
+          <td>[#if resourceRelationship.definedBy??]<a href="${gedcomxExtensionRoot(resourceRelationship.definedBy)}${resourceRelationship.definedBy.name}_resource.html">${resourceRelationship.definedBy.name}</a>[#else](unknown)[/#if]</td>
+          <td>${resourceRelationship.description}</td>
+          <td>this system</td>
+        </tr>
+      [/#list]
+      [#list rsd.resourceRelationships as resourceRelationship]
+        <tr>
+          <td>${resourceRelationship.identifier}</td>
+          <td>[#if resourceRelationship.definedBy??]<a href="${gedcomxExtensionRoot(resourceRelationship.definedBy)}${resourceRelationship.definedBy.name}_resource.html">${resourceRelationship.definedBy.name}</a>[#else](unknown)[/#if]</td>
+          <td>${resourceRelationship.description}</td>
+          <td><a href="${gedcomxExtensionRoot(rsd)}${rsd.name}_resource.html">${rsd.name} Resource</a></td>
+        </tr>
+      [/#list]
+      </table>
+    [/#if]
+    [#if binding.statusCodes?size > 0 || rsd.statusCodes?size > 0]
+
+      <h3>Common Status Codes</h3>
+
+      <table>
+        <tr>
+          <th align="center">Code</th>
+          <th align="center">Condition</th>
+          <th align="center">Specified By</th>
+        </tr>
+      [#list binding.statusCodes?sort_by("code") as statusCode]
+        <tr>
+          <td>${statusCode.code}</td>
+          <td>${statusCode.condition}</td>
+          <td>this system</td>
+        </tr>
+      [/#list]
+      [#list rsd.statusCodes?sort_by("code") as statusCode]
+        <tr>
+          <td>${statusCode.code}</td>
+          <td>${statusCode.condition}</td>
+          <td><a href="${gedcomxExtensionRoot(rsd)}${rsd.name}_resource.html">${rsd.name} Resource</a></td>
+        </tr>
+      [/#list]
+      </table>
+    [/#if]
+    [#if binding.warnings?size > 0 || rsd.warnings?size > 0]
+
+      <h3>Common Warnings</h3>
+
+      <table>
+        <tr>
+          <th align="center">Code</th>
+          <th align="center">Condition</th>
+          <th align="center">Specified By</th>
+        </tr>
+      [#list binding.warnings?sort_by("code") as warning]
+          <tr>
+            <td>${statusCode.warning}</td>
+            <td>${statusCode.warning}</td>
+            <td>this system</td>
+          </tr>
+      [/#list]
+      [#list rsd.warnings?sort_by("code") as warning]
+          <tr>
+            <td>${statusCode.warning}</td>
+            <td>${statusCode.warning}</td>
+            <td><a href="${gedcomxExtensionRoot(rsd)}${rsd.name}_resource.html">${rsd.name} Resource</a></td>
+          </tr>
+      [/#list]
+        </table>
+    [/#if]
+    [#if binding.resourceParameters?size > 0]
+
+      <h3>Common Parameters</h3>
+
+      <table>
+        <tr>
+          <th align="center">Name</th>
+          <th align="center">Type</th>
+          <th align="center">Description</th>
+          <th align="center">Specified By</th>
+        </tr>
+      [#list binding.resourceParameters?sort_by("typeName") as param]
+        <tr>
+          <td>${param.parameterName}</td>
+          <td>${param.typeName}</td>
+          <td>${param.docValue!""}</td>
+          <td>this system</td>
+        </tr>
+      [/#list]
+      [#list rsd.resourceParameters?sort_by("typeName") as param]
+        <tr>
+          <td>${param.parameterName}</td>
+          <td>${param.typeName}</td>
+          <td>${param.docValue!""}</td>
+          <td><a href="${gedcomxExtensionRoot(rsd)}${rsd.name}_resource.html">${rsd.name} Resource</a></td>
+        </tr>
+      [/#list]
+      </table>
+    [/#if]
+  [/#if]
+
+      <h3>Operations</h3>
+
+      <p>Pick your favorite representation format.</p>
+
+      <div id="mediatype-selection">
+        <input type="radio" id="select-xml" name="mediatype" checked="checked"/><label for="select-xml">XML</label>
+        <input type="radio" id="select-json" name="mediatype" /><label for="select-json">JSON</label>
+      </div>
+
+      <div id="tabs">
+        <ul>
+      [#list methods as method]
+        [#list method.httpMethods as op]
+          <li><a href="#${op?upper_case}${method_index}${op_index}">${op?upper_case}</a></li>
+        [/#list]
+      [/#list]
+        </ul>
+      [#list methods as method]
+        [#list method.httpMethods as op]
+          [#assign definingMetadata = { "statusCodes" : [], "warnings" : []}/]
+          [#if method.metaData.definedBy??]
+            [#list method.metaData.definedBy.resourceMethods as candidate]
+              [#if candidate.httpMethods[0] = op]
+                [#assign definingMetadata=candidate.metaData/]
+                [#break/]
+              [/#if]
+            [/#list]
+          [/#if]
+
+        <div id="${op?upper_case}${method_index}${op_index}">
+
+        <p>${method.docValue!""}</p>
+          [#if method.metaData.statusCodes?size > 0 || definingMetadata.statusCodes?size > 0]
+
+        <h4>Status Codes</h4>
+
+        <table>
+          <tr>
+            <th align="center">code</th>
+            <th align="center">condition</th>
+          </tr>
+        [#list method.metaData.statusCodes?sort_by("code") as statusCode]
+          <tr>
+            <td>${statusCode.code}</td>
+            <td>${statusCode.condition}</td>
+          </tr>
+        [/#list]
+        [#list definingMetadata.statusCodes?sort_by("code") as statusCode]
+          <tr>
+            <td>${statusCode.code}</td>
+            <td>${statusCode.condition}</td>
+          </tr>
+        [/#list]
+        </table>
+      [/#if]
+      [#if method.metaData.warnings?size > 0 || definingMetadata.warnings?size > 0]
+
+        <h4>Warnings</h4>
+
+        <table>
+          <tr>
+            <th align="center">code</th>
+            <th align="center">condition</th>
+          </tr>
+        [#list method.metaData.warnings?sort_by("code") as warning]
+          <tr>
+            <td>${warning.code}</td>
+            <td>${warning.condition}</td>
+          </tr>
+        [/#list]
+        [#list definingMetadata.warnings?sort_by("code") as warning]
+          <tr>
+            <td>${warning.code}</td>
+            <td>${warning.condition}</td>
+          </tr>
+        [/#list]
+        </table>
+      [/#if]
+
+        <div class="xml-docs">
+      [#assign requestBody=generateExampleRequestBody(method)?html?trim/]
+      [#assign responseBody=generateExampleResponseBody(method)?html?trim/]
+          <h4>Example Request</h4>
+          <pre>${generateExampleRequestHeaders(method)}[#if requestBody?length > 0]
+<code class="prettyprint lang-xml">${requestBody}</code>[/#if]</pre>
+
+          <h4>Example Response</h4>
+          <pre>${generateExampleResponseHeaders(method)}[#if responseBody?length > 0]
+<code class="prettyprint lang-xml">${responseBody}</code>[/#if]</pre>
+        </div>
+
+        <div class="json-docs">
+      [#assign requestBody=generateExampleRequestBody(method, true)?html?trim/]
+      [#assign responseBody=generateExampleResponseBody(method, true)?html?trim/]
+          <h4>Example Request</h4>
+          <pre>${generateExampleRequestHeaders(method, true)}[#if requestBody?length > 0]
+<code class="prettyprint lang-js">${requestBody}</code>[/#if]</pre>
+
+          <h4>Example Response</h4>
+          <pre>${generateExampleResponseHeaders(method, true)}[#if responseBody?length > 0]
+<code class="prettyprint lang-js">${responseBody}</code>[/#if]</pre>
+        </div>
+        [/#list]
+    </div>
+    [/#list]
+
+      </div>
+    </article>
+  </div>
+  [@libBoilerplate.writeFooter/]
+  [@libBoilerplate.writeEndBody/]
+[/#macro]

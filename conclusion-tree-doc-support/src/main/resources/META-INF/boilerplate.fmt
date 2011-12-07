@@ -187,6 +187,7 @@
       <ul class="clearfix">
         <li><a href="models.html">Model</a></li>
         <li><a href="resources.html">Resources</a></li>
+        <li><a href="bindings.html">Path Bindings</a></li>
         <li><a href="code.html">Code</a></li>
       </ul>
     </nav>

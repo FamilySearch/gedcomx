@@ -11,6 +11,7 @@
           <ul>
             <li><a href="models.html">Models</a></li>
             <li><a href="resources.html">Resources</a></li>
+            <li><a href="bindings.html">Path Bindings</a></li>
           </ul>
         </li>
         <li class="current"><a href="#">Code</a></li>

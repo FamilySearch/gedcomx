@@ -5,6 +5,7 @@
 [#import "boilerplate.fmt" as libBoilerplate/]
 [#import "rsd.fmt" as libRsd/]
 [#import "code.fmt" as libCode/]
+[#import "paths.fmt" as libPaths/]
 [@forEachSchema]
   [#if (!isGedcomxNamespace(schema) && ((schema.typeDefinitions?size > 0) || (schema.globalElements?size > 0)))]
     [@file name=(schema.id + ".html") charset="utf-8"]
@@ -22,13 +23,18 @@
     [/#list]
   [/#if]
 [/@forEachSchema]
-[#list resourceServiceDefinitions as rsd]
+[#list resourceDefinitions as rsd]
   [#if !isGedcomxNamespace(rsd)]
     [@file name=(rsd.name + "_resource.html")]
       [@libRsd.writeResourceServiceDefinitionPage rsd=rsd/]
     [/@file]
   [/#if]
 [/#list]
+[@forEachResourceMethodListByPath]
+  [@file name=("path_" + libPaths.scrubPathToFilename((resources?first).fullpath) + ".html")]
+    [@libPaths.writePathBindingsPage methods=resources/]
+  [/@file]
+[/@forEachResourceMethodListByPath]
 [@libCode.writeCodePage/]
 [@file name="models.html" charset="utf-8"]
   [@libBoilerplate.writeStartBody label="Models"/]
@@ -40,6 +46,7 @@
         <ul>
           <li><a href="models.html">Models</a></li>
           <li><a href="resources.html">Resources</a></li>
+          <li><a href="bindings.html">Path Bindings</a></li>
         </ul>
       </li>
     </ul>
@@ -108,7 +115,7 @@
   [@libBoilerplate.writeEndBody/]
 [/@file]
 [@file name="resources.html" charset="utf-8"]
-  [@libBoilerplate.writeStartBody label="Models"/]
+  [@libBoilerplate.writeStartBody label="Resources"/]
   [@libBoilerplate.writeHeader]
     <ul class="clearfix" id="jsddm">
       <li><a id="brand" href="Home.html">FamilySearch APIs - Home</a></li>
@@ -117,6 +124,7 @@
         <ul>
           <li><a href="models.html">Models</a></li>
           <li><a href="resources.html">Resources</a></li>
+          <li><a href="bindings.html">Path Bindings</a></li>
         </ul>
       </li>
     </ul>
@@ -128,7 +136,7 @@
 
       <hr/>
 
-    [#list resourceServiceDefinitions as rsd]
+    [#list resourceDefinitions as rsd]
       <h3><a href="${gedcomxExtensionRoot(rsd)}${rsd.name}_resource.html">${rsd.name} Resource</a></h3>
       <table>
         <tr>
@@ -155,6 +163,53 @@
       </table>
     [/#list]
 
+    </div>
+  </article>
+</div>
+  [@libBoilerplate.writeFooter/]
+  [@libBoilerplate.writeEndBody/]
+[/@file]
+[@file name="bindings.html" charset="utf-8"]
+  [@libBoilerplate.writeStartBody label="Path Bindings"/]
+  [@libBoilerplate.writeHeader]
+    <ul class="clearfix" id="jsddm">
+      <li><a id="brand" href="Home.html">FamilySearch APIs - Home</a></li>
+      <li class="current">
+        <a href="bindings.html">Path Bindings</a>
+        <ul>
+          <li><a href="models.html">Models</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="bindings.html">Path Bindings</a></li>
+        </ul>
+      </li>
+    </ul>
+  [/@libBoilerplate.writeHeader]
+<div class="wrap">
+  <article id="subject" class="clearfix">
+    <div class="feature-content clearfix">
+      <h1>Conclusion Tree Path Bindings</h1>
+
+      <hr/>
+
+      <p>The conclusion tree binds <a href="resources.html">resources</a> to specific paths.</p>
+
+  [@forEachResourceMethodListByPath]
+
+    <h3><a href="path_${libPaths.scrubPathToFilename((resources?first).fullpath)}.html">${(resources?first).fullpath}</a></h3>
+    <table>
+      [#if resourceBindingsByPath[(resources?first).fullpath]??]
+        [#assign binding=resourceBindingsByPath[(resources?first).fullpath]/]
+      <tr>
+        <td align="right">Resource:</td>
+        <td><a href="${gedcomxExtensionRoot(binding.definition)}${binding.definition.name}_resource.html">${binding.definition.name} Resource</a></td>
+      </tr>
+      [/#if]
+      <tr>
+        <td align="right">Methods:</td>
+        <td>[#list resources as method][#list method.httpMethods as op]${op?capitalize}[#if op_has_next], [/#if][/#list][#if method_has_next], [/#if][/#list]</td>
+      </tr>
+    </table>
+  [/@forEachResourceMethodListByPath]
     </div>
   </article>
 </div>
