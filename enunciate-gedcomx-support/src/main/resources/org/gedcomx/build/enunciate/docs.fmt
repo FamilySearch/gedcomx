@@ -100,7 +100,7 @@
 
   [@libBoilerplate.writeEndBody/]
 [/@file]
-[#list resourceServiceDefinitions as rsd]
+[#list resourceDefinitions as rsd]
   [@file name=("rs/" + rsd.name + "_resource.html")]
     [@libRsd.writeResourceServiceDefinitionPage rsd=rsd/]
   [/@file]
@@ -125,7 +125,7 @@
 
       <hr/>
 
-    [#list resourceServiceDefinitions?sort_by("name") as rsd]
+    [#list resourceDefinitions?sort_by("name") as rsd]
       <h3><a href="${rsd.name}_resource.html">${rsd.name} Resource</a></h3>
       <table>
         <tr>

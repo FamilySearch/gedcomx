@@ -18,7 +18,7 @@
         <li class="current">
           <a href="${rsd.name}_resource.html">${rsdName}</a>
           <ul>
-      [#list resourceServiceDefinitions as rs]
+      [#list resourceDefinitions?sort_by("name") as rs]
             <li><a href="${rs.name}_resource.html">${rs.name?cap_first} Resource</a></li>
       [/#list]
           </ul>

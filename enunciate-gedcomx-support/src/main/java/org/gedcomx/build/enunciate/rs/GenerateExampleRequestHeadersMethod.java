@@ -38,20 +38,24 @@ public class GenerateExampleRequestHeadersMethod extends GenerateResourceExample
   }
 
   protected Object generateExample(ResourceDefinitionDeclaration def, ResourceMethod resourceMethod, RootElementDeclaration element, Map<QName, ResourceDefinitionDeclaration> subresourcesByType, boolean json) {
-    String label = def.getName().toLowerCase();
+    String label = def != null ? def.getName().toLowerCase() : element != null ? element.getName() : "resource";
     String method = resourceMethod.getHttpMethods().iterator().next().toUpperCase();
     StringWriter out = new StringWriter();
     PrintWriter writer = new PrintWriter(out);
-    writer.printf("%s /path/to/%s\n", method, label);
+    String path = resourceMethod.getFullpath();
+    if (path == null || path.isEmpty()) {
+      path = "/path/to/" + label;
+    }
+    writer.printf("%s %s\n", method, path);
 
-    List<ResourceParameter> resourceParameters = def.getResourceParameters();
+    List<ResourceParameter> resourceParameters = def != null ? def.getResourceParameters() : resourceMethod.getResourceParameters();
     for (ResourceParameter parameter : resourceParameters) {
       if (parameter.isHeaderParam()) {
         writer.printf("%s: ...\n", parameter.getParameterName());
       }
     }
 
-    if (HttpMethod.POST.equals(method) && def.isResourceBundle()) {
+    if (HttpMethod.POST.equals(method) && def != null && def.isResourceBundle()) {
       for (ResourceDefinitionDeclaration subresource : subresourcesByType.values()) {
         if (!subresource.getResourceElements().isEmpty()) {
           element = (RootElementDeclaration) subresource.getResourceElements().get(0);
@@ -60,9 +64,13 @@ public class GenerateExampleRequestHeadersMethod extends GenerateResourceExample
     }
 
     String mediaType = null;
-    SchemaInfo schemaInfo = model.getNamespacesToSchemas().get(element.getNamespace());
+    SchemaInfo schemaInfo = element != null ? model.getNamespacesToSchemas().get(element.getNamespace()) : null;
     if (schemaInfo != null) {
       mediaType = json ? (String) schemaInfo.getProperty("jsonMediaType") : (String) schemaInfo.getProperty("xmlMediaType");
+    }
+
+    if (mediaType == null) {
+      mediaType = json ? "application/json" : "application/xml";
     }
 
     if (HttpMethod.POST.equals(method) || HttpMethod.PUT.equals(method)) {

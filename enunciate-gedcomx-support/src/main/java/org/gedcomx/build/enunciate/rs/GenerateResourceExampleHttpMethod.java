@@ -22,7 +22,9 @@ import freemarker.template.TemplateModelException;
 import org.codehaus.enunciate.apt.EnunciateFreemarkerModel;
 import org.codehaus.enunciate.contract.jaxb.ElementDeclaration;
 import org.codehaus.enunciate.contract.jaxb.RootElementDeclaration;
+import org.codehaus.enunciate.contract.jaxrs.ResourceEntityParameter;
 import org.codehaus.enunciate.contract.jaxrs.ResourceMethod;
+import org.codehaus.enunciate.contract.jaxrs.ResourceRepresentationMetadata;
 
 import javax.xml.namespace.QName;
 import java.util.HashMap;
@@ -55,33 +57,46 @@ public abstract class GenerateResourceExampleHttpMethod implements TemplateMetho
       throw new TemplateModelException("The generateExampleRequestHeaders method must have a resource method as a parameter.");
     }
 
-    ResourceDefinitionDeclaration def;
+    ResourceDefinitionDeclaration def = null;
     if (resourceMethod.getParent() instanceof ResourceDefinitionDeclaration) {
       def = (ResourceDefinitionDeclaration) resourceMethod.getParent();
     }
-    else if (resourceMethod.getMetaData().get("serviceBinding") instanceof ResourceBinding) {
-      ResourceBinding binding = (ResourceBinding) resourceMethod.getMetaData().get("serviceBinding");
-      def = binding.getDefinition();
-    }
-    else {
-      throw new TemplateModelException("Unable to find a resource definition for " + resourceMethod.toString());
+    else if (resourceMethod.getMetaData().get("definedBy") instanceof ResourceDefinitionDeclaration) {
+      def = (ResourceDefinitionDeclaration) resourceMethod.getMetaData().get("definedBy");
     }
 
-    List<ElementDeclaration> elements = def.getResourceElements();
     RootElementDeclaration element = null;
-    if (elements.size() > 0) {
-      element = (RootElementDeclaration) elements.get(0);
+    if (def != null) {
+      List<ElementDeclaration> elements = def.getResourceElements();
+      if (elements.size() > 0) {
+        element = (RootElementDeclaration) elements.get(0);
+      }
+    }
+    else {
+      ResourceRepresentationMetadata representationMetadata = resourceMethod.getRepresentationMetadata();
+      if (representationMetadata != null) {
+        element = (RootElementDeclaration) representationMetadata.getXmlElement();
+      }
+      else {
+        ResourceEntityParameter entityParam = resourceMethod.getEntityParameter();
+        if (entityParam != null) {
+          element = (RootElementDeclaration) entityParam.getXmlElement();
+        }
+      }
     }
 
     Map<QName, ResourceDefinitionDeclaration> subresourcesByType = new HashMap<QName, ResourceDefinitionDeclaration>();
-    List<ResourceDefinitionDeclaration> subresourceDeclarations = def.getSubresources();
-    for (ResourceDefinitionDeclaration subresourceDeclaration : subresourceDeclarations) {
-      for (ElementDeclaration subresource : subresourceDeclaration.getResourceElements()) {
-        subresourcesByType.put(((RootElementDeclaration) subresource).getTypeDefinition().getQname(), subresourceDeclaration);
+    if (def != null) {
+      List<ResourceDefinitionDeclaration> subresourceDeclarations = def.getSubresources();
+      for (ResourceDefinitionDeclaration subresourceDeclaration : subresourceDeclarations) {
+        for (ElementDeclaration subresource : subresourceDeclaration.getResourceElements()) {
+          subresourcesByType.put(((RootElementDeclaration) subresource).getTypeDefinition().getQname(), subresourceDeclaration);
+        }
       }
     }
 
     boolean json = list.size() > 1 && Boolean.TRUE.equals(BeansWrapper.getDefaultInstance().unwrap((TemplateModel) list.get(1)));
+    //todo: validate that the method actually produces,consumes json?
     return generateExample(def, resourceMethod, element, subresourcesByType, json);
   }
 

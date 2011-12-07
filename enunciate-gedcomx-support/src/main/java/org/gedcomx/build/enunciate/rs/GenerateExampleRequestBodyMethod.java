@@ -36,11 +36,15 @@ public class GenerateExampleRequestBodyMethod extends GenerateResourceExampleHtt
   }
 
   protected Object generateExample(ResourceDefinitionDeclaration def, ResourceMethod resourceMethod, RootElementDeclaration element, Map<QName, ResourceDefinitionDeclaration> subresourcesByType, boolean json) {
+    if (element == null) {
+      return "...";
+    }
+    
     String method = resourceMethod.getHttpMethods().iterator().next().toUpperCase();
     StringWriter out = new StringWriter();
     PrintWriter writer = new PrintWriter(out);
 
-    if (HttpMethod.POST.equals(method) && def.isResourceBundle()) {
+    if (HttpMethod.POST.equals(method) && def != null && def.isResourceBundle()) {
       for (ResourceDefinitionDeclaration subresource : subresourcesByType.values()) {
         if (!subresource.getResourceElements().isEmpty()) {
           element = (RootElementDeclaration) subresource.getResourceElements().get(0);

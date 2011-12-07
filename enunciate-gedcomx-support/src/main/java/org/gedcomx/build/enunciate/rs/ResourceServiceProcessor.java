@@ -46,20 +46,25 @@ import java.util.*;
  */
 public class ResourceServiceProcessor {
 
-  private final Map<QName, ResourceDefinitionDeclaration> resourceServiceDefinitions = new HashMap<QName, ResourceDefinitionDeclaration>();
-  private final List<ClassDeclaration> resourceServiceImplementations = new ArrayList<ClassDeclaration>();
+  private final Map<QName, ResourceDefinitionDeclaration> resourceDefinitions = new HashMap<QName, ResourceDefinitionDeclaration>();
+  private Map<String, ResourceBinding> bindingsByPath;
+  private final List<ClassDeclaration> resourceImplementations = new ArrayList<ClassDeclaration>();
 
   /**
    * @see <a href="http://tools.ietf.org/html/draft-nottingham-http-link-header">Web Linking</a>
    */
   private static final Set<String> REGISTERED_LINK_RELATIONS = new TreeSet<String>(Arrays.asList("alternate", "appendix", "bookmark", "chapter", "contents", "copyright", "current", "describedby", "edit", "edit-media", "enclosure", "first", "glossary", "help", "hub", "index", "last", "latest-version", "license", "next", "next-archive", "payment", "prev", "predecessor-version", "previous", "prev-archive", "related", "replies", "section", "self", "service", "start", "stylesheet", "subsection", "successor-version", "up", "version-history", "via", "working-copy", "working-copy-of"));
 
-  public Collection<ResourceDefinitionDeclaration> getResourceServiceDefinitions() {
-    return resourceServiceDefinitions.values();
+  public Collection<ResourceDefinitionDeclaration> getResourceDefinitions() {
+    return resourceDefinitions.values();
   }
 
-  public List<ClassDeclaration> getResourceServiceImplementations() {
-    return resourceServiceImplementations;
+  public Map<String, ResourceBinding> getBindingsByPath() {
+    return bindingsByPath;
+  }
+
+  public List<ClassDeclaration> getResourceImplementations() {
+    return resourceImplementations;
   }
 
   public ValidationResult processModel(EnunciateFreemarkerModel model, Collection<TypeDeclaration> resourceServiceDefinitions) {
@@ -151,16 +156,16 @@ public class ResourceServiceProcessor {
           if (!REGISTERED_LINK_RELATIONS.contains(identifier)) {
             try {
               if (!new URI(identifier).isAbsolute()) {
-                result.addWarning(rsd, "Relationship identifier %s should be either a registered link type or a valid absolute URI. For more information, see http://tools.ietf.org/html/draft-nottingham-http-link-header.");
+                result.addWarning(rsd, String.format("Relationship identifier %s should be either a registered link type or a valid absolute URI. For more information, see http://tools.ietf.org/html/draft-nottingham-http-link-header.", identifier));
               }
             }
             catch (URISyntaxException e) {
-              result.addWarning(rsd, "Relationship identifier %s should be either a registered link type or a valid absolute URI. For more information, see http://tools.ietf.org/html/draft-nottingham-http-link-header.");
+              result.addWarning(rsd, String.format("Relationship identifier %s should be either a registered link type or a valid absolute URI. For more information, see http://tools.ietf.org/html/draft-nottingham-http-link-header.", identifier));
             }
           }
         }
 
-        this.resourceServiceDefinitions.put(new QName(rsd.getNamespace(), rsd.getName()), rsd);
+        this.resourceDefinitions.put(new QName(rsd.getNamespace(), rsd.getName()), rsd);
       }
       else {
         result.addWarning(resourceServiceDefinition, String.format("No @%s annotation found.", ResourceDefinition.class.getName()));
@@ -198,12 +203,15 @@ public class ResourceServiceProcessor {
                 binding.getStatusCodes().addAll(extractStatusCodes(declaringResource));
                 binding.getWarnings().addAll(extractWarnings(declaringResource));
                 binding.getResourceRelationships().addAll(extractResourceRelationships(declaringResource));
+                binding.getResourceParameters().addAll(declaringResource.getResourceParameters());
               }
             }
           }
         }
       }
     }
+
+    this.bindingsByPath = bindingsByPath;
 
     //todo: warn if a definition method isn't bound?
 
@@ -285,7 +293,7 @@ public class ResourceServiceProcessor {
   }
 
   public ResourceDefinitionDeclaration findResourceDefinition(QName qname) {
-    return this.resourceServiceDefinitions.get(qname);
+    return this.resourceDefinitions.get(qname);
   }
 
   public ResourceDefinitionDeclaration findDefiningResourceDefinition(ResourceMethod method) {

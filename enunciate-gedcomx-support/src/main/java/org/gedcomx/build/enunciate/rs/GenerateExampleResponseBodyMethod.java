@@ -20,14 +20,13 @@ import org.codehaus.enunciate.contract.jaxb.Element;
 import org.codehaus.enunciate.contract.jaxb.ElementDeclaration;
 import org.codehaus.enunciate.contract.jaxb.RootElementDeclaration;
 import org.codehaus.enunciate.contract.jaxrs.ResourceMethod;
+import org.gedcomx.rt.JsonElementWrapper;
 
 import javax.ws.rs.HttpMethod;
 import javax.xml.namespace.QName;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author Ryan Heaton
@@ -39,6 +38,10 @@ public class GenerateExampleResponseBodyMethod extends GenerateResourceExampleHt
   }
 
   protected Object generateExample(ResourceDefinitionDeclaration def, ResourceMethod resourceMethod, RootElementDeclaration element, Map<QName, ResourceDefinitionDeclaration> subresourcesByType, boolean json) {
+    if (element == null) {
+      return "...";
+    }
+
     String method = resourceMethod.getHttpMethods().iterator().next().toUpperCase();
     StringWriter out = new StringWriter();
     PrintWriter writer = new PrintWriter(out);
@@ -48,7 +51,7 @@ public class GenerateExampleResponseBodyMethod extends GenerateResourceExampleHt
         writer.printf("{\n");
         writer.printf("  \"@type\" : \"%s%s\",\n", element.getTypeDefinition().getNamespace(), element.getTypeDefinition().getName());
         writer.printf("  ...\n");
-        Iterator<ResourceRelationship> relIt = def.getResourceRelationships().iterator();
+        Iterator<ResourceRelationship> relIt = def != null ? def.getResourceRelationships().iterator() : Collections.<ResourceRelationship>emptyList().iterator();
         if (relIt.hasNext()) {
           writer.printf("  \"links\" : [\n");
         }
@@ -63,35 +66,55 @@ public class GenerateExampleResponseBodyMethod extends GenerateResourceExampleHt
           }
         }
 
-        for (Element childElement : element.getTypeDefinition().getElements()) {
-          ResourceDefinitionDeclaration subresource = subresourcesByType.get(childElement.getBaseType().getQname());
-          if (subresource != null) {
-            writer.printf("  \"%s\" :%s{\n", childElement.getJsonMemberName(), childElement.isCollectionType() ? " [ " : " ");
-            writer.printf("    ...\n");
-            relIt = subresource.getResourceRelationships().iterator();
-            if (relIt.hasNext()) {
-              writer.printf("    \"links\" : [\n");
+        Map<String, ResourceDefinitionDeclaration> subresources = new LinkedHashMap<String, ResourceDefinitionDeclaration>();
+        Map<String, Boolean> collectionTypes = new HashMap<String, Boolean>();
+        if (def != null && def.isResourceBundle()) {
+          for (ResourceDefinitionDeclaration subresource : subresourcesByType.values()) {
+            for (ElementDeclaration el : subresource.getResourceElements()) {
+              JsonElementWrapper elementWrapper = el.getAnnotation(JsonElementWrapper.class);
+              String key = elementWrapper != null ? (elementWrapper.namespace() + elementWrapper.name()) : (el.getNamespace() + el.getName());
+              subresources.put(key, subresource);
+              collectionTypes.put(key, true);
             }
-            while (relIt.hasNext()) {
-              ResourceRelationship rel = relIt.next();
-              writer.printf("      { \"rel\" : \"%s\", \"href\" : \"...\" }", rel.getIdentifier());
-              if (!relIt.hasNext()) {
-                writer.printf("\n    ],\n");
-              }
-              else {
-                writer.printf(",\n");
-              }
-            }
-            writer.printf("  }%s,\n", childElement.isCollectionType() ? " ]" : "");
-            writer.printf("  ...\n");
           }
+        }
+        else {
+          for (Element childElement : element.getTypeDefinition().getElements()) {
+            ResourceDefinitionDeclaration subresource = subresourcesByType.get(childElement.getBaseType().getQname());
+            if (subresource != null) {
+              String key = childElement.getJsonMemberName();
+              subresources.put(key, subresource);
+              collectionTypes.put(key, childElement.isCollectionType());
+            }
+          }
+        }
+
+        for (Map.Entry<String, ResourceDefinitionDeclaration> entry : subresources.entrySet()) {
+          writer.printf("  \"%s\" :%s{\n", entry.getKey(), collectionTypes.get(entry.getKey()) ? " [ " : " ");
+          writer.printf("    ...\n");
+          relIt = entry.getValue().getResourceRelationships().iterator();
+          if (relIt.hasNext()) {
+            writer.printf("    \"links\" : [\n");
+          }
+          while (relIt.hasNext()) {
+            ResourceRelationship rel = relIt.next();
+            writer.printf("      { \"rel\" : \"%s\", \"href\" : \"...\" }", rel.getIdentifier());
+            if (!relIt.hasNext()) {
+              writer.printf("\n    ],\n");
+            }
+            else {
+              writer.printf(",\n");
+            }
+          }
+          writer.printf("  }%s,\n", collectionTypes.get(entry.getKey()) ? " ]" : "");
+          writer.printf("  ...\n");
         }
         writer.printf("}");
       }
       else {
         writer.printf("<%s xmlns=\"%s\" xmlns:rs=\"...\">\n", element.getName(), element.getNamespace());
         writer.printf("  ...\n");
-        Iterator<ResourceRelationship> relIt = def.getResourceRelationships().iterator();
+        Iterator<ResourceRelationship> relIt = def != null ? def.getResourceRelationships().iterator() : Collections.<ResourceRelationship>emptyList().iterator();
         while (relIt.hasNext()) {
           ResourceRelationship rel = relIt.next();
           writer.printf("  <rs:link rel=\"%s\" href=\"...\"/>\n", rel.getIdentifier());
@@ -101,7 +124,7 @@ public class GenerateExampleResponseBodyMethod extends GenerateResourceExampleHt
         }
 
         Map<QName, ResourceDefinitionDeclaration> subresources = new LinkedHashMap<QName, ResourceDefinitionDeclaration>();
-        if (def.isResourceBundle()) {
+        if (def != null && def.isResourceBundle()) {
           for (ResourceDefinitionDeclaration subresource : subresourcesByType.values()) {
             for (ElementDeclaration el : subresource.getResourceElements()) {
               subresources.put(el.getQname(), subresource);

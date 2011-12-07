@@ -36,14 +36,18 @@ public class GenerateExampleResponseHeadersMethod extends GenerateResourceExampl
   }
 
   protected Object generateExample(ResourceDefinitionDeclaration def, ResourceMethod resourceMethod, RootElementDeclaration element, Map<QName, ResourceDefinitionDeclaration> subresourcesByType, boolean json) {
-    String label = def.getName().toLowerCase();
+    String label = def != null ? def.getName().toLowerCase() : element != null ? element.getName() : "resource";
     String method = resourceMethod.getHttpMethods().iterator().next().toUpperCase();
     StringWriter out = new StringWriter();
     PrintWriter writer = new PrintWriter(out);
 
     if (HttpMethod.POST.equals(method)) {
       writer.printf("HTTP/1.1 201 Created\n");
-      writer.printf("Location: /path/to/%s\n", label);
+      String path = resourceMethod.getFullpath();
+      if (path == null || path.isEmpty()) {
+        path = "/path/to/" + label;
+      }
+      writer.printf("Location: %s\n", path);
     }
     else if (HttpMethod.PUT.equals(method) || HttpMethod.DELETE.equals(method)) {
       writer.printf("HTTP/1.1 204 No Content\n");
@@ -52,10 +56,12 @@ public class GenerateExampleResponseHeadersMethod extends GenerateResourceExampl
       writer.printf("HTTP/1.1 200 OK\n");
       //todo: HEAD?
       if (HttpMethod.GET.equals(method)) {
-        String mediaType = null;
-        SchemaInfo schemaInfo = model.getNamespacesToSchemas().get(element.getNamespace());
+        SchemaInfo schemaInfo = element != null ? model.getNamespacesToSchemas().get(element.getNamespace()) : null;
         if (schemaInfo != null) {
-          mediaType = json ? (String) schemaInfo.getProperty("jsonMediaType") : (String) schemaInfo.getProperty("xmlMediaType");
+          String mediaType = json ? (String) schemaInfo.getProperty("jsonMediaType") : (String) schemaInfo.getProperty("xmlMediaType");
+          if (mediaType == null) {
+            mediaType = json ? "application/json" : "application/xml";
+          }
           writer.printf("Content-Type: %s\n", mediaType);
         }
       }

@@ -371,7 +371,8 @@ public class GedcomxDeploymentModule extends FreemarkerDeploymentModule implemen
       model.setVariable("typeName", new TypeNameMethod());
       model.setVariable("jsonExtensionElementName", new JsonExtensionElementNameMethod());
       model.put("rdfschema", this.rdfProcessor.getRdfSchema());
-      model.put("resourceServiceDefinitions", this.resourceServiceProcessor.getResourceServiceDefinitions());
+      model.put("resourceDefinitions", this.resourceServiceProcessor.getResourceDefinitions());
+      model.put("resourceBindingsByPath", this.resourceServiceProcessor.getBindingsByPath());
       model.put("primaryNav", this.primaryNav);
       try {
         for (SchemaInfo schemaInfo : model.getNamespacesToSchemas().values()) {

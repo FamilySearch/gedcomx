@@ -16,11 +16,9 @@
 package org.gedcomx.build.enunciate.rs;
 
 import org.codehaus.enunciate.contract.jaxrs.ResourceMethod;
+import org.codehaus.enunciate.contract.jaxrs.ResourceParameter;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author Ryan Heaton
@@ -33,6 +31,16 @@ public class ResourceBinding {
   private final Set<ResponseCode> statusCodes = new HashSet<ResponseCode>();
   private final Set<ResponseCode> warnings = new HashSet<ResponseCode>();
   private final Set<ResourceRelationship> resourceRelationships = new HashSet<ResourceRelationship>();
+  private final Set<ResourceParameter> resourceParameters = new TreeSet<ResourceParameter>(new Comparator<ResourceParameter>() {
+    @Override
+    public int compare(ResourceParameter param1, ResourceParameter param2) {
+      int comparison = param1.getParameterName().compareTo(param2.getParameterName());
+      if (comparison == 0) {
+        comparison = param1.getTypeName().compareTo(param2.getTypeName());
+      }
+      return comparison;
+    }
+  });
 
   public ResourceBinding(String path, ResourceDefinitionDeclaration definition) {
     this.path = path;
@@ -61,5 +69,9 @@ public class ResourceBinding {
 
   public List<ResourceMethod> getMethods() {
     return methods;
+  }
+
+  public Set<ResourceParameter> getResourceParameters() {
+    return resourceParameters;
   }
 }

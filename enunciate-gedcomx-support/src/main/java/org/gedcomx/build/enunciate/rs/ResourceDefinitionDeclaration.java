@@ -81,7 +81,7 @@ public class ResourceDefinitionDeclaration extends Resource {
 
   @Override
   public String getPath() {
-    return null;
+    return "";
   }
 
   @Override
