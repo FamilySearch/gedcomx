@@ -15,30 +15,39 @@
  */
 package org.gedcomx.build.enunciate.rs;
 
+import com.sun.mirror.type.DeclaredType;
 import com.sun.mirror.type.MirroredTypeException;
+import com.sun.mirror.type.TypeMirror;
+import org.gedcomx.rt.rs.ResourceDefinition;
+
+import javax.xml.namespace.QName;
 
 /**
  * @author Ryan Heaton
  */
-public class ResourceRelationship {
+public final class ResourceRelationship {
 
-  final String identifier;
-  final String description;
-  final String resourceDefQualifiedName;
-  final ResourceServiceProcessor processor;
+  private final String identifier;
+  private final String description;
+  private final QName resource;
+  private final ResourceServiceProcessor processor;
 
   public ResourceRelationship(org.gedcomx.rt.rs.ResourceRelationship meta, ResourceServiceProcessor processor) {
     this.identifier = meta.identifier();
     this.description = meta.description();
     this.processor = processor;
     String fqn;
+    ResourceDefinition def = null;
     try {
-      fqn = meta.definedBy().getName();
+      def = meta.definedBy().getAnnotation(ResourceDefinition.class);
     }
     catch (MirroredTypeException e) {
-      fqn = e.getQualifiedName();
+      TypeMirror typeMirror = e.getTypeMirror();
+      if (typeMirror instanceof DeclaredType && ((DeclaredType) typeMirror).getDeclaration() != null) {
+        def = ((DeclaredType) typeMirror).getDeclaration().getAnnotation(ResourceDefinition.class);
+      }
     }
-    this.resourceDefQualifiedName = fqn;
+    this.resource = new QName(def.namespace(), def.name());
   }
 
   public String getIdentifier() {
@@ -49,7 +58,9 @@ public class ResourceRelationship {
     return description;
   }
 
-  public ResourceServiceDefinitionDeclaration getDefinedBy() {
-    return this.processor.findResourceService(this.resourceDefQualifiedName);
+  public ResourceDefinitionDeclaration getDefinedBy() {
+    return this.processor.findResourceDefinition(this.resource);
   }
+
+
 }

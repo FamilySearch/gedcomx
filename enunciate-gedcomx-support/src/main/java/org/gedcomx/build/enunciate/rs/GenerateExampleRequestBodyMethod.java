@@ -35,13 +35,13 @@ public class GenerateExampleRequestBodyMethod extends GenerateResourceExampleHtt
     super(model);
   }
 
-  protected Object generateExample(ResourceServiceDefinitionDeclaration def, ResourceMethod resourceMethod, RootElementDeclaration element, Map<QName, ResourceServiceDefinitionDeclaration> subresourcesByType, boolean json) {
+  protected Object generateExample(ResourceDefinitionDeclaration def, ResourceMethod resourceMethod, RootElementDeclaration element, Map<QName, ResourceDefinitionDeclaration> subresourcesByType, boolean json) {
     String method = resourceMethod.getHttpMethods().iterator().next().toUpperCase();
     StringWriter out = new StringWriter();
     PrintWriter writer = new PrintWriter(out);
 
     if (HttpMethod.POST.equals(method) && def.isResourceBundle()) {
-      for (ResourceServiceDefinitionDeclaration subresource : subresourcesByType.values()) {
+      for (ResourceDefinitionDeclaration subresource : subresourcesByType.values()) {
         if (!subresource.getResourceElements().isEmpty()) {
           element = (RootElementDeclaration) subresource.getResourceElements().get(0);
         }
@@ -55,7 +55,7 @@ public class GenerateExampleRequestBodyMethod extends GenerateResourceExampleHtt
         writer.printf("  ...\n");
 
         for (Element childElement : element.getTypeDefinition().getElements()) {
-          ResourceServiceDefinitionDeclaration subresource = subresourcesByType.get(childElement.getBaseType().getQname());
+          ResourceDefinitionDeclaration subresource = subresourcesByType.get(childElement.getBaseType().getQname());
           if (subresource != null) {
             writer.printf("  \"%s\" :%s{\n", childElement.getJsonMemberName(), childElement.isCollectionType() ? " [ " : " ");
             writer.printf("    ...\n");
@@ -70,7 +70,7 @@ public class GenerateExampleRequestBodyMethod extends GenerateResourceExampleHtt
         writer.printf("  ...\n");
 
         for (Element childElement : element.getTypeDefinition().getElements()) {
-          ResourceServiceDefinitionDeclaration subresource = subresourcesByType.get(childElement.getBaseType().getQname());
+          ResourceDefinitionDeclaration subresource = subresourcesByType.get(childElement.getBaseType().getQname());
           if (subresource != null) {
             writer.printf("  <%s", childElement.getName());
             if (childElement.getNamespace() != null && !element.getNamespace().equals(childElement.getNamespace())) {

@@ -49,7 +49,7 @@ import org.gedcomx.rt.DocIgnoreXmlRootElement;
 import org.gedcomx.rt.GedcomNamespaceManager;
 import org.gedcomx.rt.Model;
 import org.gedcomx.rt.Models;
-import org.gedcomx.rt.rs.ResourceServiceDefinition;
+import org.gedcomx.rt.rs.ResourceDefinition;
 
 import java.io.File;
 import java.io.IOException;
@@ -178,7 +178,7 @@ public class GedcomxDeploymentModule extends FreemarkerDeploymentModule implemen
     if (typeDeclaration.getAnnotation(Models.class) != null) {
       this.knownModelDeclarations.put(typeDeclaration.getQualifiedName(), typeDeclaration);
     }
-    if (typeDeclaration.getAnnotation(ResourceServiceDefinition.class) != null) {
+    if (typeDeclaration.getAnnotation(ResourceDefinition.class) != null) {
       this.knownRsdDeclarations.put(typeDeclaration.getQualifiedName(), typeDeclaration);
     }
   }
@@ -372,7 +372,6 @@ public class GedcomxDeploymentModule extends FreemarkerDeploymentModule implemen
       model.setVariable("jsonExtensionElementName", new JsonExtensionElementNameMethod());
       model.put("rdfschema", this.rdfProcessor.getRdfSchema());
       model.put("resourceServiceDefinitions", this.resourceServiceProcessor.getResourceServiceDefinitions());
-      model.put("resourceServiceBindings", this.resourceServiceProcessor.getResourceServiceBindings());
       model.put("primaryNav", this.primaryNav);
       try {
         for (SchemaInfo schemaInfo : model.getNamespacesToSchemas().values()) {

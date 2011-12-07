@@ -18,7 +18,7 @@ package org.gedcomx.conclusion.rs.definition;
 import org.gedcomx.common.ResourceSet;
 import org.gedcomx.conclusion.ConclusionModel;
 import org.gedcomx.conclusion.Relationship;
-import org.gedcomx.rt.rs.ResourceServiceDefinition;
+import org.gedcomx.rt.rs.ResourceDefinition;
 import org.gedcomx.rt.rs.ResponseCode;
 import org.gedcomx.rt.rs.StatusCodes;
 
@@ -32,7 +32,7 @@ import javax.ws.rs.core.UriInfo;
  *
  * @author Ryan Heaton
  */
-@ResourceServiceDefinition (
+@ResourceDefinition (
   name = "Relationships",
   namespace = ConclusionModel.GEDCOMX_CONCLUSION_V1_NAMESPACE,
   resourceElement = ResourceSet.class,

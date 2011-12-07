@@ -31,7 +31,7 @@ import javax.ws.rs.core.UriInfo;
  *
  * @author Ryan Heaton
  */
-@ResourceServiceDefinition (
+@ResourceDefinition (
   name = "Relationship",
   resourceElement = Relationship.class,
   namespace = ConclusionModel.GEDCOMX_CONCLUSION_V1_NAMESPACE,

@@ -21,7 +21,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Metadata used to describe a resource and the way the HTTP operations apply to the resource. A resource service
+ * Metadata used to describe a resource and the way the HTTP operations apply to the resource. A resource
  * definition does not dictate the paths at which the resources are bound, but describes the resource in generic
  * terms such as the representation model, {@link StatusCodes status codes}, {@link Warnings warnings}, and
  * {@link ResourceRelationship resource relationship}s.
@@ -30,21 +30,21 @@ import java.lang.annotation.Target;
  */
 @Retention ( RetentionPolicy.RUNTIME )
 @Target ({ ElementType.TYPE })
-public @interface ResourceServiceDefinition {
+public @interface ResourceDefinition {
 
   /**
    * The name of the resource being defined. Default is the name of the annotated class.
    *
    * @return The name of the resource being defined.
    */
-  String name() default "##default";
+  String name();
 
   /**
    * A namespace for the resource. Default is the empty namespace.
    *
    * @return A namespace for the resource.
    */
-  String namespace() default "##default";
+  String namespace() default "";
 
   /**
    * The class defining the element used as the representation model for the resource. The

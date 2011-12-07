@@ -18,7 +18,7 @@ package org.gedcomx.build.enunciate.rs;
 /**
  * @author Ryan Heaton
  */
-public class ResponseCode {
+public final class ResponseCode {
 
   private final int code;
   private final String condition;
@@ -36,4 +36,31 @@ public class ResponseCode {
     return condition;
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+
+    ResponseCode that = (ResponseCode) o;
+
+    if (code != that.code) {
+      return false;
+    }
+    if (condition != null ? !condition.equals(that.condition) : that.condition != null) {
+      return false;
+    }
+
+    return true;
+  }
+
+  @Override
+  public int hashCode() {
+    int result = code;
+    result = 31 * result + (condition != null ? condition.hashCode() : 0);
+    return result;
+  }
 }

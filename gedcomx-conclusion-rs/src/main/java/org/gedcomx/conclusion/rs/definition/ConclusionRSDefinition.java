@@ -29,7 +29,7 @@ import javax.ws.rs.core.UriInfo;
  *
  * @author Ryan Heaton
  */
-@ResourceServiceDefinition (
+@ResourceDefinition (
   name = "Conclusion",
   namespace = ConclusionModel.GEDCOMX_CONCLUSION_V1_NAMESPACE,
   resourceElement = { Name.class, Gender.class, Fact.class }

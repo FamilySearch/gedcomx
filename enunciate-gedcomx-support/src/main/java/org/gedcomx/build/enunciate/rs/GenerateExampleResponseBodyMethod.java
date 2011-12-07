@@ -38,7 +38,7 @@ public class GenerateExampleResponseBodyMethod extends GenerateResourceExampleHt
     super(model);
   }
 
-  protected Object generateExample(ResourceServiceDefinitionDeclaration def, ResourceMethod resourceMethod, RootElementDeclaration element, Map<QName, ResourceServiceDefinitionDeclaration> subresourcesByType, boolean json) {
+  protected Object generateExample(ResourceDefinitionDeclaration def, ResourceMethod resourceMethod, RootElementDeclaration element, Map<QName, ResourceDefinitionDeclaration> subresourcesByType, boolean json) {
     String method = resourceMethod.getHttpMethods().iterator().next().toUpperCase();
     StringWriter out = new StringWriter();
     PrintWriter writer = new PrintWriter(out);
@@ -64,7 +64,7 @@ public class GenerateExampleResponseBodyMethod extends GenerateResourceExampleHt
         }
 
         for (Element childElement : element.getTypeDefinition().getElements()) {
-          ResourceServiceDefinitionDeclaration subresource = subresourcesByType.get(childElement.getBaseType().getQname());
+          ResourceDefinitionDeclaration subresource = subresourcesByType.get(childElement.getBaseType().getQname());
           if (subresource != null) {
             writer.printf("  \"%s\" :%s{\n", childElement.getJsonMemberName(), childElement.isCollectionType() ? " [ " : " ");
             writer.printf("    ...\n");
@@ -100,9 +100,9 @@ public class GenerateExampleResponseBodyMethod extends GenerateResourceExampleHt
           }
         }
 
-        Map<QName, ResourceServiceDefinitionDeclaration> subresources = new LinkedHashMap<QName, ResourceServiceDefinitionDeclaration>();
+        Map<QName, ResourceDefinitionDeclaration> subresources = new LinkedHashMap<QName, ResourceDefinitionDeclaration>();
         if (def.isResourceBundle()) {
-          for (ResourceServiceDefinitionDeclaration subresource : subresourcesByType.values()) {
+          for (ResourceDefinitionDeclaration subresource : subresourcesByType.values()) {
             for (ElementDeclaration el : subresource.getResourceElements()) {
               subresources.put(el.getQname(), subresource);
             }
@@ -110,14 +110,14 @@ public class GenerateExampleResponseBodyMethod extends GenerateResourceExampleHt
         }
         else {
           for (Element childElement : element.getTypeDefinition().getElements()) {
-            ResourceServiceDefinitionDeclaration subresource = subresourcesByType.get(childElement.getBaseType().getQname());
+            ResourceDefinitionDeclaration subresource = subresourcesByType.get(childElement.getBaseType().getQname());
             if (subresource != null) {
               subresources.put(new QName(childElement.getNamespace(), childElement.getName()), subresource);
             }
           }
         }
 
-        for (Map.Entry<QName, ResourceServiceDefinitionDeclaration> entry : subresources.entrySet()) {
+        for (Map.Entry<QName, ResourceDefinitionDeclaration> entry : subresources.entrySet()) {
           writer.printf("  <%s", entry.getKey().getLocalPart());
           if (!"".equals(entry.getKey().getNamespaceURI()) && !element.getNamespace().equals(entry.getKey().getNamespaceURI())) {
             writer.printf(" xmlns=\"%s\"", entry.getKey().getNamespaceURI());

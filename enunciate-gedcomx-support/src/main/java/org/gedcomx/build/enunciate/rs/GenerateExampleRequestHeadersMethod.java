@@ -20,7 +20,6 @@ import org.codehaus.enunciate.config.SchemaInfo;
 import org.codehaus.enunciate.contract.jaxb.RootElementDeclaration;
 import org.codehaus.enunciate.contract.jaxrs.ResourceMethod;
 import org.codehaus.enunciate.contract.jaxrs.ResourceParameter;
-import org.gedcomx.rt.CommonModels;
 
 import javax.ws.rs.HttpMethod;
 import javax.xml.namespace.QName;
@@ -38,7 +37,7 @@ public class GenerateExampleRequestHeadersMethod extends GenerateResourceExample
     super(model);
   }
 
-  protected Object generateExample(ResourceServiceDefinitionDeclaration def, ResourceMethod resourceMethod, RootElementDeclaration element, Map<QName, ResourceServiceDefinitionDeclaration> subresourcesByType, boolean json) {
+  protected Object generateExample(ResourceDefinitionDeclaration def, ResourceMethod resourceMethod, RootElementDeclaration element, Map<QName, ResourceDefinitionDeclaration> subresourcesByType, boolean json) {
     String label = def.getName().toLowerCase();
     String method = resourceMethod.getHttpMethods().iterator().next().toUpperCase();
     StringWriter out = new StringWriter();
@@ -53,7 +52,7 @@ public class GenerateExampleRequestHeadersMethod extends GenerateResourceExample
     }
 
     if (HttpMethod.POST.equals(method) && def.isResourceBundle()) {
-      for (ResourceServiceDefinitionDeclaration subresource : subresourcesByType.values()) {
+      for (ResourceDefinitionDeclaration subresource : subresourcesByType.values()) {
         if (!subresource.getResourceElements().isEmpty()) {
           element = (RootElementDeclaration) subresource.getResourceElements().get(0);
         }

@@ -15,23 +15,29 @@
  */
 package org.gedcomx.build.enunciate.rs;
 
-import com.sun.mirror.declaration.ClassDeclaration;
-import com.sun.mirror.declaration.Declaration;
-import com.sun.mirror.declaration.InterfaceDeclaration;
-import com.sun.mirror.declaration.TypeDeclaration;
+import com.sun.mirror.declaration.*;
+import com.sun.mirror.type.DeclaredType;
 import com.sun.mirror.type.InterfaceType;
 import com.sun.mirror.type.MirroredTypesException;
+import com.sun.mirror.type.TypeMirror;
+import com.sun.mirror.util.Declarations;
+import net.sf.jelly.apt.Context;
+import net.sf.jelly.apt.decorations.declaration.DecoratedMethodDeclaration;
 import org.codehaus.enunciate.apt.EnunciateFreemarkerModel;
 import org.codehaus.enunciate.contract.jaxb.ElementDeclaration;
 import org.codehaus.enunciate.contract.jaxb.RootElementDeclaration;
+import org.codehaus.enunciate.contract.jaxrs.Resource;
+import org.codehaus.enunciate.contract.jaxrs.ResourceMethod;
 import org.codehaus.enunciate.contract.jaxrs.RootResource;
-import org.codehaus.enunciate.contract.jaxrs.SubResourceLocator;
 import org.codehaus.enunciate.contract.validation.ValidationResult;
+import org.codehaus.enunciate.util.ResourceMethodPathComparator;
 import org.gedcomx.rt.rs.*;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import javax.ws.rs.Path;
+import javax.xml.namespace.QName;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.*;
 
 /**
  * Basic processor for validating integration the model with RDF.
@@ -40,16 +46,16 @@ import java.util.List;
  */
 public class ResourceServiceProcessor {
 
-  private final List<ResourceServiceDefinitionDeclaration> resourceServiceDefinitions = new ArrayList<ResourceServiceDefinitionDeclaration>();
-  private final List<ResourceServiceBindingMetadata> resourceServiceBindings = new ArrayList<ResourceServiceBindingMetadata>();
+  private final Map<QName, ResourceDefinitionDeclaration> resourceServiceDefinitions = new HashMap<QName, ResourceDefinitionDeclaration>();
   private final List<ClassDeclaration> resourceServiceImplementations = new ArrayList<ClassDeclaration>();
 
-  public List<ResourceServiceDefinitionDeclaration> getResourceServiceDefinitions() {
-    return resourceServiceDefinitions;
-  }
+  /**
+   * @see <a href="http://tools.ietf.org/html/draft-nottingham-http-link-header">Web Linking</a>
+   */
+  private static final Set<String> REGISTERED_LINK_RELATIONS = new TreeSet<String>(Arrays.asList("alternate", "appendix", "bookmark", "chapter", "contents", "copyright", "current", "describedby", "edit", "edit-media", "enclosure", "first", "glossary", "help", "hub", "index", "last", "latest-version", "license", "next", "next-archive", "payment", "prev", "predecessor-version", "previous", "prev-archive", "related", "replies", "section", "self", "service", "start", "stylesheet", "subsection", "successor-version", "up", "version-history", "via", "working-copy", "working-copy-of"));
 
-  public List<ResourceServiceBindingMetadata> getResourceServiceBindings() {
-    return resourceServiceBindings;
+  public Collection<ResourceDefinitionDeclaration> getResourceServiceDefinitions() {
+    return resourceServiceDefinitions.values();
   }
 
   public List<ClassDeclaration> getResourceServiceImplementations() {
@@ -62,13 +68,12 @@ public class ResourceServiceProcessor {
     //todo: error if setter-based resource parameters in the implementation don't carry the annotations defined in the definition, binding...
 
     for (TypeDeclaration resourceServiceDefinition : resourceServiceDefinitions) {
-      ResourceServiceDefinition rsdInfo = resourceServiceDefinition.getAnnotation(ResourceServiceDefinition.class);
+      ResourceDefinition rsdInfo = resourceServiceDefinition.getAnnotation(ResourceDefinition.class);
       if (rsdInfo != null) {
         List<String> resourceElementsFqn = new ArrayList<String>();
 
         try {
-          Class<?>[] classes = rsdInfo.resourceElement();
-          for (Class<?> clazz : classes) {
+          for (Class<?> clazz : rsdInfo.resourceElement()) {
             resourceElementsFqn.add(clazz.getName());
           }
         }
@@ -90,52 +95,123 @@ public class ResourceServiceProcessor {
           if (resourceElement == null) {
             result.addWarning(resourceServiceDefinition, "Unable to find element declaration for " + resourceElementFqn + ".");
           }
-
           else {
             resourceElements.add(resourceElement);
           }
         }
 
-        ResourceServiceDefinitionDeclaration rsd = new ResourceServiceDefinitionDeclaration(resourceServiceDefinition, resourceElements, this);
-        //todo: validate the rsd:
-        //todo: iterate through the subresource qualified names to make sure each one is annotated with @ResourceServiceDefinition
-        //todo: make sure there's only one http method per resource method.
-        //todo: verify no more than one operation of the same method.
-        //todo: make sure relationship names are uris, unless one of the known registered ones
-        this.resourceServiceDefinitions.add(rsd);
+        Set<QName> subresources = new HashSet<QName>();
+        try {
+          Class<?>[] subs = rsdInfo.subresources();
+          for (Class<?> sub : subs) {
+            ResourceDefinition subresourceInfo = sub.getAnnotation(ResourceDefinition.class);
+            if (subresourceInfo == null) {
+              result.addError(resourceServiceDefinition, String.format("Subresource %s is not annotated with @%s.", sub.getName(), ResourceDefinition.class.getName()));
+            }
+            else {
+              subresources.add(new QName(subresourceInfo.namespace(), subresourceInfo.name()));
+            }
+          }
+        }
+        catch (MirroredTypesException e) {
+          Collection<TypeMirror> subresourceTypes = e.getTypeMirrors();
+          for (TypeMirror subresourceType : subresourceTypes) {
+            if (subresourceType instanceof DeclaredType && ((DeclaredType) subresourceType).getDeclaration() != null) {
+              ResourceDefinition subresourceInfo = ((DeclaredType) subresourceType).getDeclaration().getAnnotation(ResourceDefinition.class);
+              if (subresourceInfo == null) {
+                result.addError(resourceServiceDefinition, String.format("Subresource %s is not annotated with @%s.", ((DeclaredType) subresourceType).getDeclaration().getQualifiedName(), ResourceDefinition.class.getName()));
+              }
+              else {
+                subresources.add(new QName(subresourceInfo.namespace(), subresourceInfo.name()));
+              }
+            }
+            else {
+              result.addError(resourceServiceDefinition, String.format("Unable to find @%s on subresource %s.", ResourceDefinition.class.getName(), subresourceType));
+            }
+          }
+        }
+
+        ResourceDefinitionDeclaration rsd = new ResourceDefinitionDeclaration(resourceServiceDefinition, resourceElements, subresources, this);
+        Map<String, ResourceMethod> methodsByOp = new HashMap<String, ResourceMethod>();
+        for (ResourceMethod method : rsd.getResourceMethods()) {
+          if (method.getHttpMethods().size() > 1) {
+            result.addError(method, "Resource definition methods may only apply to one HTTP operation.");
+          }
+          else {
+            String op = method.getHttpMethods().iterator().next();
+            ResourceMethod conflict = methodsByOp.put(op, method);
+            if (conflict != null) {
+              result.addError(method, String.format("HTTP operation %s is already defined by method %s.", op, conflict.getSimpleName()));
+            }
+          }
+        }
+
+        for (ResourceRelationship resourceRelationship : rsd.getResourceRelationships()) {
+          String identifier = resourceRelationship.getIdentifier();
+          if (!REGISTERED_LINK_RELATIONS.contains(identifier)) {
+            try {
+              if (!new URI(identifier).isAbsolute()) {
+                result.addWarning(rsd, "Relationship identifier %s should be either a registered link type or a valid absolute URI. For more information, see http://tools.ietf.org/html/draft-nottingham-http-link-header.");
+              }
+            }
+            catch (URISyntaxException e) {
+              result.addWarning(rsd, "Relationship identifier %s should be either a registered link type or a valid absolute URI. For more information, see http://tools.ietf.org/html/draft-nottingham-http-link-header.");
+            }
+          }
+        }
+
+        this.resourceServiceDefinitions.put(new QName(rsd.getNamespace(), rsd.getName()), rsd);
       }
       else {
-        result.addWarning(resourceServiceDefinition, "No @ResourceServiceDefinition found.");
+        result.addWarning(resourceServiceDefinition, String.format("No @%s annotation found.", ResourceDefinition.class.getName()));
       }
     }
 
+    TreeMap<String, ResourceBinding> bindingsByPath = new TreeMap<String, ResourceBinding>(new ResourceMethodPathComparator());
     for (RootResource rootResource : model.getRootResources()) {
-      ResourceServiceBindingMetadata bindingMetadata = ResourceServiceBindingMetadata.decorate(rootResource, this);
-      if (bindingMetadata != null) {
-        this.resourceServiceBindings.add(bindingMetadata);
+      List<ResourceMethod> resourceMethods = rootResource.getResourceMethods(true);
+      for (ResourceMethod resourceMethod : resourceMethods) {
+        resourceMethod.putMetaData("statusCodes", extractStatusCodes(resourceMethod));
+        resourceMethod.putMetaData("warnings", extractWarnings(resourceMethod));
 
-        if (bindingMetadata.getDefinition() == null) {
-          result.addError(rootResource, "Unable to find the definition being bound. Perhaps the binding isn't extending a definition or perhaps its extending multiple definitions?");
-        }
+        Resource declaringResource = resourceMethod.getParent();
+        ResourceDefinitionDeclaration rsd = findDefiningResourceDefinition(resourceMethod);
+        if (rsd != null) {
+          resourceMethod.putMetaData("definedBy", rsd);
+          String path = resourceMethod.getFullpath();
+          ResourceBinding binding = bindingsByPath.get(path);
+          if (binding == null) {
+            binding = new ResourceBinding(path, rsd);
+            bindingsByPath.put(path, binding);
+          }
+          else {
+            String fqn = binding.getDefinition().getQualifiedName();
+            if (!fqn.equals(rsd.getQualifiedName())) {
+              result.addError(resourceMethod, String.format("Cannot bind resource %s defined by %s to path %s because that path is already binding resource %s defined by %s.", rsd.getName(), rsd.getQualifiedName(), path, binding.getDefinition().getName(), binding.getDefinition().getQualifiedName()));
+            }
+            else {
+              binding.getMethods().add(resourceMethod);
+              if (declaringResource.getAnnotation(ResourceDefinition.class) == null) {
+                //as long as the parent resource class isn't a resource definition itself,
+                //we'll consider it's metadata as binding refinements.
 
-        //todo: verify no more than one operation of the same method.
-        //todo: make sure relationship names are uris, unless one of the known registered ones
-
-        List<SubResourceLocator> resourceLocators = rootResource.getResourceLocators();
-        for (SubResourceLocator resourceLocator : resourceLocators) {
-          bindingMetadata = ResourceServiceBindingMetadata.decorate(resourceLocator.getResource(), this);
-          if (bindingMetadata != null) {
-            this.resourceServiceBindings.add(bindingMetadata);
+                binding.getStatusCodes().addAll(extractStatusCodes(declaringResource));
+                binding.getWarnings().addAll(extractWarnings(declaringResource));
+                binding.getResourceRelationships().addAll(extractResourceRelationships(declaringResource));
+              }
+            }
           }
         }
       }
     }
 
+    //todo: warn if a definition method isn't bound?
+
     return result;
   }
 
-  public List<ResourceRelationship> extractResourceRelationships(TypeDeclaration delegate) {
-    List<ResourceRelationship> rels = new ArrayList<ResourceRelationship>();
+  public Set<ResourceRelationship> extractResourceRelationships(TypeDeclaration delegate) {
+    Set<ResourceRelationship> rels = new HashSet<ResourceRelationship>();
     org.gedcomx.rt.rs.ResourceRelationship[] resourceRelationshipInfo = {};
     ResourceRelationships resourceRelationships = delegate.getAnnotation(ResourceRelationships.class);
     if (resourceRelationships != null) {
@@ -148,7 +224,7 @@ public class ResourceServiceProcessor {
     Collection<InterfaceType> supers = delegate.getSuperinterfaces();
     for (InterfaceType iface : supers) {
       InterfaceDeclaration decl = iface.getDeclaration();
-      if (decl != null && decl.getAnnotation(ResourceServiceDefinition.class) == null && decl.getAnnotation(ResourceServiceBinding.class) == null) {
+      if (decl != null && decl.getAnnotation(ResourceDefinition.class) == null && decl.getAnnotation(Path.class) == null) {
         rels.addAll(extractResourceRelationships(decl));
       }
     }
@@ -156,23 +232,51 @@ public class ResourceServiceProcessor {
     return rels;
   }
 
-  public List<ResponseCode> extractStatusCodes(Declaration delegate) {
-    List<ResponseCode> codes = new ArrayList<ResponseCode>();
-    org.gedcomx.rt.rs.ResponseCode[] responseCodes = {};
-    StatusCodes statusCodesContainer = delegate.getAnnotation(StatusCodes.class);
-    if (statusCodesContainer != null) {
-      responseCodes = statusCodesContainer.value();
-    }
-    for (org.gedcomx.rt.rs.ResponseCode responseCode : responseCodes) {
-      codes.add(new ResponseCode(responseCode.code(), responseCode.condition()));
-    }
+  public Set<ResponseCode> extractStatusCodes(Declaration delegate) {
+    Set<ResponseCode> codes = new HashSet<ResponseCode>();
+    if (delegate != null) {
+      org.gedcomx.rt.rs.ResponseCode[] responseCodes = {};
+      StatusCodes statusCodesContainer = delegate.getAnnotation(StatusCodes.class);
+      if (statusCodesContainer != null) {
+        responseCodes = statusCodesContainer.value();
+      }
+      for (org.gedcomx.rt.rs.ResponseCode responseCode : responseCodes) {
+        codes.add(new ResponseCode(responseCode.code(), responseCode.condition()));
+      }
 
-    if (delegate instanceof TypeDeclaration) {
-      Collection<InterfaceType> supers = ((TypeDeclaration) delegate).getSuperinterfaces();
-      for (InterfaceType iface : supers) {
-        InterfaceDeclaration decl = iface.getDeclaration();
-        if (decl != null && decl.getAnnotation(ResourceServiceDefinition.class) == null && decl.getAnnotation(ResourceServiceBinding.class) == null) {
-          codes.addAll(extractStatusCodes(decl));
+      if (delegate instanceof TypeDeclaration) {
+        Collection<InterfaceType> supers = ((TypeDeclaration) delegate).getSuperinterfaces();
+        for (InterfaceType iface : supers) {
+          InterfaceDeclaration decl = iface.getDeclaration();
+          if (decl != null && decl.getAnnotation(ResourceDefinition.class) == null && decl.getAnnotation(Path.class) == null) {
+            codes.addAll(extractStatusCodes(decl));
+          }
+        }
+      }
+    }
+    return codes;
+  }
+
+  public Set<ResponseCode> extractWarnings(Declaration delegate) {
+    Set<ResponseCode> codes = new HashSet<ResponseCode>();
+
+    if (delegate != null) {
+      org.gedcomx.rt.rs.ResponseCode[] responseCodes = {};
+      Warnings warningsContainer = delegate.getAnnotation(Warnings.class);
+      if (warningsContainer != null) {
+        responseCodes = warningsContainer.value();
+      }
+      for (org.gedcomx.rt.rs.ResponseCode responseCode : responseCodes) {
+        codes.add(new ResponseCode(responseCode.code(), responseCode.condition()));
+      }
+
+      if (delegate instanceof TypeDeclaration) {
+        Collection<InterfaceType> supers = ((TypeDeclaration) delegate).getSuperinterfaces();
+        for (InterfaceType iface : supers) {
+          InterfaceDeclaration decl = iface.getDeclaration();
+          if (decl != null && decl.getAnnotation(ResourceDefinition.class) == null && decl.getAnnotation(Path.class) == null) {
+            codes.addAll(extractWarnings(decl));
+          }
         }
       }
     }
@@ -180,36 +284,57 @@ public class ResourceServiceProcessor {
     return codes;
   }
 
-  public List<ResponseCode> extractWarnings(Declaration delegate) {
-    List<ResponseCode> codes = new ArrayList<ResponseCode>();
-    org.gedcomx.rt.rs.ResponseCode[] responseCodes = {};
-    Warnings warningsContainer = delegate.getAnnotation(Warnings.class);
-    if (warningsContainer != null) {
-      responseCodes = warningsContainer.value();
-    }
-    for (org.gedcomx.rt.rs.ResponseCode responseCode : responseCodes) {
-      codes.add(new ResponseCode(responseCode.code(), responseCode.condition()));
-    }
+  public ResourceDefinitionDeclaration findResourceDefinition(QName qname) {
+    return this.resourceServiceDefinitions.get(qname);
+  }
 
-    if (delegate instanceof TypeDeclaration) {
-      Collection<InterfaceType> supers = ((TypeDeclaration) delegate).getSuperinterfaces();
-      for (InterfaceType iface : supers) {
-        InterfaceDeclaration decl = iface.getDeclaration();
-        if (decl != null && decl.getAnnotation(ResourceServiceDefinition.class) == null && decl.getAnnotation(ResourceServiceBinding.class) == null) {
-          codes.addAll(extractWarnings(decl));
+  public ResourceDefinitionDeclaration findDefiningResourceDefinition(ResourceMethod method) {
+    TypeDeclaration declaringType = method.getDeclaringType();
+    if (declaringType == null) {
+      return null;
+    }
+    else if (declaringType.getAnnotation(ResourceDefinition.class) != null) {
+      //the resource method is declared on a resource definition...
+      ResourceDefinition rsdInfo = declaringType.getAnnotation(ResourceDefinition.class);
+      return findResourceDefinition(new QName(rsdInfo.namespace(), rsdInfo.name()));
+    }
+    else {
+      HashMap<QName, TypeDeclaration> candidates = new HashMap<QName, TypeDeclaration>();
+      gatherResourceDefinitions(candidates, declaringType);
+      Declarations utils = Context.getCurrentEnvironment().getDeclarationUtils();
+      for (Map.Entry<QName, TypeDeclaration> candidate : candidates.entrySet()) {
+        for (MethodDeclaration op : candidate.getValue().getMethods()) {
+          while (op instanceof DecoratedMethodDeclaration) {
+            op = (MethodDeclaration) ((DecoratedMethodDeclaration) op).getDelegate();
+          }
+
+          MethodDeclaration implOp = method;
+          while (implOp instanceof DecoratedMethodDeclaration) {
+            implOp = (MethodDeclaration) ((DecoratedMethodDeclaration) implOp).getDelegate();
+          }
+
+          if (utils.overrides(implOp, op)) {
+            return findResourceDefinition(candidate.getKey());
+          }
         }
       }
     }
 
-    return codes;
-  }
-
-  public ResourceServiceDefinitionDeclaration findResourceService(String fqn) {
-    for (ResourceServiceDefinitionDeclaration definition : resourceServiceDefinitions) {
-      if (fqn.equals(definition.getQualifiedName())) {
-        return definition;
-      }
-    }
     return null;
+  }
+
+  private void gatherResourceDefinitions(Map<QName, TypeDeclaration> bucket, TypeDeclaration declaration) {
+    Collection<InterfaceType> supers = declaration.getSuperinterfaces();
+    for (InterfaceType iface : supers) {
+      InterfaceDeclaration idecl = iface.getDeclaration();
+      if (idecl != null) {
+        ResourceDefinition rsdInfo = idecl.getAnnotation(ResourceDefinition.class);
+        if (rsdInfo != null) {
+          bucket.put(new QName(rsdInfo.namespace(), rsdInfo.name()), idecl);
+        }
+
+        gatherResourceDefinitions(bucket, idecl);
+      }
+    }
   }
 }

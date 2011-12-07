@@ -24,7 +24,7 @@ import org.codehaus.enunciate.contract.jaxb.Accessor;
 import org.codehaus.enunciate.contract.jaxb.RootElementDeclaration;
 import org.codehaus.enunciate.contract.jaxb.TypeDefinition;
 import org.codehaus.enunciate.contract.jaxb.types.XmlType;
-import org.gedcomx.build.enunciate.rs.ResourceServiceDefinitionDeclaration;
+import org.gedcomx.build.enunciate.rs.ResourceDefinitionDeclaration;
 import org.gedcomx.rt.CommonModels;
 
 import java.util.List;
@@ -42,8 +42,8 @@ public class IsGedcomxNamespaceMethod implements TemplateMethodModelEx {
 
     Object object = BeansWrapper.getDefaultInstance().unwrap((TemplateModel) list.get(0));
     String ns;
-    if (object instanceof ResourceServiceDefinitionDeclaration) {
-      ns = ((ResourceServiceDefinitionDeclaration) object).getNamespace();
+    if (object instanceof ResourceDefinitionDeclaration) {
+      ns = ((ResourceDefinitionDeclaration) object).getNamespace();
     }
     else if (object instanceof SchemaInfo) {
       ns = ((SchemaInfo) object).getNamespace();

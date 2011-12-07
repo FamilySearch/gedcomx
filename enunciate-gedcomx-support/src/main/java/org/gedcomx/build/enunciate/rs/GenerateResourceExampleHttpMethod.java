@@ -55,12 +55,12 @@ public abstract class GenerateResourceExampleHttpMethod implements TemplateMetho
       throw new TemplateModelException("The generateExampleRequestHeaders method must have a resource method as a parameter.");
     }
 
-    ResourceServiceDefinitionDeclaration def;
-    if (resourceMethod.getParent() instanceof ResourceServiceDefinitionDeclaration) {
-      def = (ResourceServiceDefinitionDeclaration) resourceMethod.getParent();
+    ResourceDefinitionDeclaration def;
+    if (resourceMethod.getParent() instanceof ResourceDefinitionDeclaration) {
+      def = (ResourceDefinitionDeclaration) resourceMethod.getParent();
     }
-    else if (resourceMethod.getMetaData().get("serviceBinding") instanceof ResourceServiceBindingMetadata) {
-      ResourceServiceBindingMetadata binding = (ResourceServiceBindingMetadata) resourceMethod.getMetaData().get("serviceBinding");
+    else if (resourceMethod.getMetaData().get("serviceBinding") instanceof ResourceBinding) {
+      ResourceBinding binding = (ResourceBinding) resourceMethod.getMetaData().get("serviceBinding");
       def = binding.getDefinition();
     }
     else {
@@ -73,9 +73,9 @@ public abstract class GenerateResourceExampleHttpMethod implements TemplateMetho
       element = (RootElementDeclaration) elements.get(0);
     }
 
-    Map<QName, ResourceServiceDefinitionDeclaration> subresourcesByType = new HashMap<QName, ResourceServiceDefinitionDeclaration>();
-    List<ResourceServiceDefinitionDeclaration> subresourceDeclarations = def.getSubresources();
-    for (ResourceServiceDefinitionDeclaration subresourceDeclaration : subresourceDeclarations) {
+    Map<QName, ResourceDefinitionDeclaration> subresourcesByType = new HashMap<QName, ResourceDefinitionDeclaration>();
+    List<ResourceDefinitionDeclaration> subresourceDeclarations = def.getSubresources();
+    for (ResourceDefinitionDeclaration subresourceDeclaration : subresourceDeclarations) {
       for (ElementDeclaration subresource : subresourceDeclaration.getResourceElements()) {
         subresourcesByType.put(((RootElementDeclaration) subresource).getTypeDefinition().getQname(), subresourceDeclaration);
       }
@@ -85,5 +85,5 @@ public abstract class GenerateResourceExampleHttpMethod implements TemplateMetho
     return generateExample(def, resourceMethod, element, subresourcesByType, json);
   }
 
-  protected abstract Object generateExample(ResourceServiceDefinitionDeclaration def, ResourceMethod resourceMethod, RootElementDeclaration element, Map<QName, ResourceServiceDefinitionDeclaration> subresourcesByType, boolean json);
+  protected abstract Object generateExample(ResourceDefinitionDeclaration def, ResourceMethod resourceMethod, RootElementDeclaration element, Map<QName, ResourceDefinitionDeclaration> subresourcesByType, boolean json);
 }

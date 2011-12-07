@@ -24,7 +24,7 @@ import org.codehaus.enunciate.contract.jaxb.Accessor;
 import org.codehaus.enunciate.contract.jaxb.RootElementDeclaration;
 import org.codehaus.enunciate.contract.jaxb.TypeDefinition;
 import org.codehaus.enunciate.contract.jaxb.types.XmlType;
-import org.gedcomx.build.enunciate.rs.ResourceServiceDefinitionDeclaration;
+import org.gedcomx.build.enunciate.rs.ResourceDefinitionDeclaration;
 
 import java.util.List;
 
@@ -46,8 +46,8 @@ public class GedcomxExtensionRootMethod implements TemplateMethodModelEx {
     }
 
     Object object = BeansWrapper.getDefaultInstance().unwrap((TemplateModel) list.get(0));
-    if (object instanceof ResourceServiceDefinitionDeclaration) {
-      if (IsGedcomxNamespaceMethod.isGedcomxNamepace(((ResourceServiceDefinitionDeclaration) object).getNamespace())) {
+    if (object instanceof ResourceDefinitionDeclaration) {
+      if (IsGedcomxNamespaceMethod.isGedcomxNamepace(((ResourceDefinitionDeclaration) object).getNamespace())) {
         return this.gedcomxRoot + "rs/";
       }
     }
