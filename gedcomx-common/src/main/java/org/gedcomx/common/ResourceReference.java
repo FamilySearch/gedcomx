@@ -52,6 +52,13 @@ public class ResourceReference implements Typed<ResourceType>, SupportsExtension
   private Map<QName, String> extensionAttributes;
   private List<Object> extensionElements;
 
+  public ResourceReference() {
+  }
+
+  public ResourceReference(URI resource) {
+    this.resource = resource;
+  }
+
   /**
    * The id of this resource reference. Note the distinction between this id and the id of the
    * resource being referenced.
