@@ -97,7 +97,7 @@ public class GedcomxExtensionDeploymentModule extends FreemarkerDeploymentModule
     }
 
     //export the generated documentation as an artifact.
-    getEnunciate().addArtifact(new FileArtifact(getName(), "docs-ext", buildDir));
+    getEnunciate().addArtifact(new FileArtifact(getName(), "gedcomx-ext-docs", buildDir));
   }
 
   @Override
