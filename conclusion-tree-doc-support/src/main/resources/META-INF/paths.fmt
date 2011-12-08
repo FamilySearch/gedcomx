@@ -39,12 +39,14 @@
   [#if resourceBindingsByPath[(methods?first).fullpath]??]
     [#assign binding=resourceBindingsByPath[(methods?first).fullpath]/]
     [#assign rsd=binding.definition/]
+      <p>${rsd.docValue!""}</p>
+
     [#if rsd.resourceElements?size > 0]
       <h3>Representation Model</h3>
 
       <p>This path binds the <a href="${gedcomxExtensionRoot(rsd)}${rsd.name}_resource.html">${rsd.name} Resource</a>,
         which uses the [#list rsd.resourceElements as resourceElement]<a href="${gedcomxExtensionRoot(resourceElement)}${schemaForNamespace(resourceElement).id}_el_${resourceElement.name}.html">[#if rsd.resourceBundle!false]resource bundle[#else]${resourceElement.name}[/#if]</a>[#if resourceElement_has_next] or [/#if][/#list]
-        element(s) to define its model.[#if rsd.subresources?size > 0]Subresources include [#list rsd.subresources as subresource]<a href="${gedcomxExtensionRoot(subresource)}${subresource.name}_resource.html">${subresource.name}</a>[#if subresource_has_next], [/#if][/#list][/#if].</p>
+        element(s) to define its model.[#if rsd.subresources?size > 0] Subresources include [#list rsd.subresources as subresource]<a href="${gedcomxExtensionRoot(subresource)}${subresource.name}_resource.html">${subresource.name} Resource</a>[#if subresource_has_next], [/#if][/#list][/#if].</p>
     [/#if]
     [#if binding.resourceRelationships?size > 0 || rsd.resourceRelationships?size > 0]
 
@@ -177,11 +179,11 @@
         </ul>
       [#list methods as method]
         [#list method.httpMethods as op]
-          [#assign definingMetadata = { "statusCodes" : [], "warnings" : []}/]
+          [#assign definingMethod = { "metaData" : { "statusCodes" : [], "warnings" : []} }/]
           [#if method.metaData.definedBy??]
             [#list method.metaData.definedBy.resourceMethods as candidate]
               [#if candidate.httpMethods[0] = op]
-                [#assign definingMetadata=candidate.metaData/]
+                [#assign definingMethod=candidate/]
                 [#break/]
               [/#if]
             [/#list]
@@ -189,8 +191,13 @@
 
         <div id="${op?upper_case}${method_index}${op_index}">
 
-        <p>${method.docValue!""}</p>
-          [#if method.metaData.statusCodes?size > 0 || definingMetadata.statusCodes?size > 0]
+        [#assign methodDocs=method.docValue!""/]
+        [#if methodDocs = ""]
+          [#assign methodDocs=definingMethod.docValue!""/]
+        [/#if]
+
+        <p>${methodDocs}</p>
+          [#if method.metaData.statusCodes?size > 0 || definingMethod.metaData.statusCodes?size > 0]
 
         <h4>Status Codes</h4>
 
@@ -205,7 +212,7 @@
             <td>${statusCode.condition}</td>
           </tr>
         [/#list]
-        [#list definingMetadata.statusCodes?sort_by("code") as statusCode]
+        [#list definingMethod.metaData.statusCodes?sort_by("code") as statusCode]
           <tr>
             <td>${statusCode.code}</td>
             <td>${statusCode.condition}</td>
@@ -213,7 +220,7 @@
         [/#list]
         </table>
       [/#if]
-      [#if method.metaData.warnings?size > 0 || definingMetadata.warnings?size > 0]
+      [#if method.metaData.warnings?size > 0 || definingMethod.metaData.warnings?size > 0]
 
         <h4>Warnings</h4>
 
@@ -228,7 +235,7 @@
             <td>${warning.condition}</td>
           </tr>
         [/#list]
-        [#list definingMetadata.warnings?sort_by("code") as warning]
+        [#list definingMethod.metaData.warnings?sort_by("code") as warning]
           <tr>
             <td>${warning.code}</td>
             <td>${warning.condition}</td>

@@ -156,7 +156,7 @@
         [#if rsd.subresources?size > 0]
         <tr>
           <td align="right">Subresources:</td>
-          <td>[#list rsd.subresources as subresource]<a href="${subresource.name}_resource.html">${subresource.name}</a>[#if subresource_has_next], [/#if][/#list]</td>
+          <td>[#list rsd.subresources as subresource]<a href="${subresource.name}_resource.html">${subresource.name} Resource</a>[#if subresource_has_next], [/#if][/#list]</td>
         </tr>
         [/#if]
 
