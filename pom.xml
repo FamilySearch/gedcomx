@@ -27,6 +27,7 @@
 
     <module>gedcomx-rs</module>
     <module>gedcomx-conclusion-rs</module>
+    <module>gedcomx-xrd</module>
   </modules>
 
   <dependencies>

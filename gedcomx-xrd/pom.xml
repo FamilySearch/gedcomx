@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>gedcomx-xrd</artifactId>
+  <version>0.7.0.BUILD-SNAPSHOT</version>
+  <name>GEDCOM X - XRD Model</name>
+
+  <parent>
+    <artifactId>gedcomx-parent</artifactId>
+    <groupId>org.gedcomx</groupId>
+    <version>0.7.0.BUILD-SNAPSHOT</version>
+  </parent>
+
+  <properties>
+    <!--we either have to refer to the parent directory (making modules-->
+    <!--incapable of building outside the context of the parent) or-->
+    <!--we have to duplicate the config files to all modules. Currently-->
+    <!--opting for the former.-->
+    <root.basedir>${basedir}/..</root.basedir>
+  </properties>
+</project>
