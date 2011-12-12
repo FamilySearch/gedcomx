@@ -14,6 +14,14 @@
  * limitations under the License.
  */
 
+/**
+ * The XRD model according to the OASIS XRD standard specification.
+ *
+ * See http://docs.oasis-open.org/xri/xrd/v1.0/xrd-1.0.html
+ *
+ * @author Mike Gardiner, Ryan Heaton
+ */
+
 @XmlSchema (
   namespace = XRDModel.XRD_V1_NAMESPACE,
   elementFormDefault = XmlNsForm.QUALIFIED,

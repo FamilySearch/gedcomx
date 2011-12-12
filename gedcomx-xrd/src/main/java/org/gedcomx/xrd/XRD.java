@@ -34,7 +34,12 @@ import java.util.*;
 
 
 /**
- * todo: docs
+ * The <XRD> element encapsulates the entire resource descriptor. None of the properties
+ * are mandatory.
+ *
+ * See http://docs.oasis-open.org/xri/xrd/v1.0/xrd-1.0.html#element.xrd
+ *
+ * @author Mike Gardiner, Ryan Heaton
  */
 @XmlRootElement (
   name = "XRD"

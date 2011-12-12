@@ -23,7 +23,16 @@ import java.net.URI;
 
 
 /**
- * todo: fill in docs
+ * The <Property> element declares a property of a resource (when used as a child of the <XRD> element)
+ * or link relation (when used as a child of the <Link> element), expressed as a key-value pair. The
+ * key is identified by the type attribute, and the value expressed as the string content of the
+ * <Property> element. A property MAY have no value if the type identifier alone is sufficient.
+ * <Property> elements that contain no value MUST include the xsi:nil attribute with a value of true
+ * as defined in [XML Schema].
+ *
+ * See http://docs.oasis-open.org/xri/xrd/v1.0/xrd-1.0.html#element.property
+ *
+ * @author Mike Gardiner, Ryan Heaton
  */
 @XmlType ( name = "Property" )
 @SuppressWarnings("rdf-incompatible-ns")

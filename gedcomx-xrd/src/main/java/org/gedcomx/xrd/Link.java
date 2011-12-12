@@ -24,7 +24,12 @@ import java.net.URI;
 
 
 /**
- * todo: docs
+ * The <Link> element serves as a container for metadata about a relation between
+ * the resource described by the XRD and a related resource.
+ *
+ * See http://docs.oasis-open.org/xri/xrd/v1.0/xrd-1.0.html#element.link
+ *
+ * @author Mike Gardiner, Ryan Heaton
  */
 @XmlType ( name = "Link" )
 @SuppressWarnings("rdf-incompatible-ns")
