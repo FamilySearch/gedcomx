@@ -169,7 +169,7 @@ public class GedcomxValidator extends BaseValidator {
     if ("".equals(typeDef.getNamespace())) {
       result.addError(typeDef, "Type definition should not be in the empty namespace.");
     }
-    else if (!typeDef.getNamespace().endsWith("/") && !typeDef.getNamespace().endsWith("#")) {
+    else if (!suppressWarning(typeDef, "rdf-incompatible-ns") && !typeDef.getNamespace().endsWith("/") && !typeDef.getNamespace().endsWith("#")) {
       result.addError(typeDef, "The namespace of type definitions should end with a '/' or a '#' in order to provide for defining them in terms of RDF Schema.");
     }
 
@@ -190,7 +190,7 @@ public class GedcomxValidator extends BaseValidator {
           result.addError(attribute, "Accessors of type 'java.net.URI' should of type xs:anyURI. Please annotate the attribute with @XmlSchemaType(name = \"anyURI\", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)");
         }
 
-        if ("type".equals(attribute.getName())) {
+        if (!suppressWarning(attribute, "rdf-incompatible-type-reference") && "type".equals(attribute.getName())) {
           result.addError(attribute, "Types should be specified with as an rdf:type reference, which is an element named 'type' in the rdf namespace with an rdf:resource attribute.");
         }
 
@@ -241,7 +241,7 @@ public class GedcomxValidator extends BaseValidator {
             result.addError(choice, "Entity links should be make with an attribute named 'href'. You probably need to apply @XmlAttribute.");
           }
 
-          if ("type".equals(choice.getName()) && !isTypeReference(choice)) {
+          if (!suppressWarning(choice, "rdf-incompatible-type-reference") && "type".equals(choice.getName()) && !isTypeReference(choice)) {
             result.addError(choice, "Types should be specified with as an rdf:type reference, which is an element named 'type' in the rdf namespace with an rdf:resource attribute.");
           }
 

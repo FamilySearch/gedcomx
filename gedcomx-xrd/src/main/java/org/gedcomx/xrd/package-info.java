@@ -14,5 +14,12 @@
  * limitations under the License.
  */
 
-@javax.xml.bind.annotation.XmlSchema(namespace = "http://docs.oasis-open.org/ns/xri/xrd-1.0", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
+@XmlSchema (
+  namespace = XRDModel.XRD_V1_NAMESPACE,
+  elementFormDefault = XmlNsForm.QUALIFIED,
+  attributeFormDefault = XmlNsForm.QUALIFIED
+)
 package org.gedcomx.xrd;
+
+import javax.xml.bind.annotation.XmlNsForm;
+import javax.xml.bind.annotation.XmlSchema;
