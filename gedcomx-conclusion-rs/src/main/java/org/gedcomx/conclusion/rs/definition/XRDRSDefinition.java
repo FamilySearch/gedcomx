@@ -35,7 +35,7 @@ import javax.ws.rs.core.Response;
 })
 
 public interface XRDRSDefinition extends CommonRSParameters {
-    /**
+  /**
    * Read the XRD.
    *
    * @return The XRD.
