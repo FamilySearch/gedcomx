@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema 
+  targetNamespace="http://docs.oasis-open.org/ns/xri/xrd-1.0"
+  xmlns="http://www.w3.org/2001/XMLSchema"
+  xmlns:xrd="http://docs.oasis-open.org/ns/xri/xrd-1.0"
+  elementFormDefault="unqualified"
+  attributeFormDefault="unqualified"
+  blockDefault="substitution"
+  version="1.0">
+
+	<import namespace="http://www.w3.org/XML/1998/namespace"
+	  schemaLocation="http://www.w3.org/2001/xml.xsd"/>
+
+	<annotation>
+		<documentation>
+			Document identifier: xrd-schema-1.0
+			Location: http://docs.oasis-open.org/xri/xrd/v1.0/
+		</documentation>
+	</annotation>
+
+	<complexType name="anyURI">
+		<simpleContent>
+			<extension base="anyURI">
+				<anyAttribute namespace="##other" processContents="lax"/>
+			</extension>
+		</simpleContent>
+	</complexType>
+
+	<complexType name="string">
+		<simpleContent>
+			<extension base="string">
+				<anyAttribute namespace="##other" processContents="lax"/>
+			</extension>
+		</simpleContent>
+	</complexType>
+
+	<element name="XRDS" type="xrd:XRDSType"/>
+	<complexType name="XRDSType">
+		<sequence>
+			<element ref="xrd:XRD" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+		<attribute name="ref" type="anyURI" use="optional"/>
+	</complexType>
+
+	<element name="XRD" type="xrd:XRDType"/>
+	<complexType name="XRDType">
+		<sequence>
+			<element ref="xrd:Expires" minOccurs="0"/>
+			<element ref="xrd:Subject" minOccurs="0"/>
+			<choice minOccurs="0" maxOccurs="unbounded">
+				<element ref="xrd:Alias"/>
+				<element ref="xrd:Property"/>
+				<element ref="xrd:Link"/>
+				<any namespace="##other" processContents="lax"/>
+			</choice>
+		</sequence>
+		<attribute ref="xml:id" use="optional"/>
+		<anyAttribute namespace="##other" processContents="lax"/>
+	</complexType>
+
+	<element name="Expires" type="xrd:ExpiresType"/>
+	<complexType name="ExpiresType">
+		<simpleContent>
+			<extension base="dateTime">
+				<anyAttribute namespace="##other" processContents="lax"/>
+			</extension>
+		</simpleContent>
+	</complexType>
+
+	<element name="Subject" type="xrd:anyURI"/>
+	<element name="Alias" type="xrd:anyURI"/>
+
+	<element name="Property" type="xrd:PropertyType" nillable="true"/>
+	<complexType name="PropertyType">
+		<simpleContent>
+			<extension base="xrd:string">
+				<attribute name="type" type="anyURI" use="required"/>
+			</extension>
+		</simpleContent>
+	</complexType>
+
+	<element name="Link" type="xrd:LinkType"/>
+	<complexType name="LinkType">
+		<choice minOccurs="0" maxOccurs="unbounded">
+			<element ref="xrd:Title"/>
+			<element ref="xrd:Property"/>
+			<any namespace="##other" processContents="lax"/>
+		</choice>
+		<attribute name="rel" type="anyURI" use="optional"/>
+		<attribute name="type" type="string" use="optional"/>
+		<attribute name="href" type="anyURI" use="optional"/>
+		<attribute name="template" type="string" use="optional"/>
+		<anyAttribute namespace="##other" processContents="lax"/>
+	</complexType>
+
+	<element name="Title" type="xrd:TitleType"/>
+	<complexType name="TitleType">
+		<simpleContent>
+			<extension base="xrd:string">
+				<attribute ref="xml:lang" use="optional"/>
+			</extension>
+		</simpleContent>
+	</complexType>
+
+</schema>

@@ -35,6 +35,7 @@ import java.net.URI;
 @JsonElementWrapper (name = "links")
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
+@SuppressWarnings("unqualified-attribute")
 public final class Link {
 
   private String rel;

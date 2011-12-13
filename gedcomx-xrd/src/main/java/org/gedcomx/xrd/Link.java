@@ -32,7 +32,7 @@ import java.net.URI;
  * @author Mike Gardiner, Ryan Heaton
  */
 @XmlType ( name = "Link" )
-@SuppressWarnings("rdf-incompatible-ns")
+@SuppressWarnings({"rdf-incompatible-ns", "unqualified-attribute"})
 public final class Link {
 
   private URI rel;

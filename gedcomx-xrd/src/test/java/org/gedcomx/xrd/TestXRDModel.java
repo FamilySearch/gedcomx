@@ -1,13 +1,23 @@
 package org.gedcomx.xrd;
 
 import org.testng.annotations.Test;
+
+import javax.xml.XMLConstants;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
+import java.io.StringReader;
 import java.net.URI;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import static org.gedcomx.rt.SerializationUtil.processThroughXml;
 import static org.gedcomx.rt.SerializationUtil.toXmlStream;
+import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertNotNull;
 
 /**
  * @author Mike Gardiner
@@ -63,29 +73,39 @@ public class TestXRDModel {
     xrd = processThroughXml(xrd);
 
     // Subject
-    assert xrd.getSubject() != null;
-    assert xrd.getSubject().equals(subject);
+    assertNotNull(xrd.getSubject());
+    assertEquals(xrd.getSubject(), subject);
 
     // Expires
-    assert xrd.getExpires() != null;
-    assert xrd.getExpires().equals(expires);
+    assertNotNull(xrd.getExpires());
+    assertEquals(xrd.getExpires(), expires);
 
     // Aliases
-    assert xrd.getAliases() != null;
-    assert xrd.getAliases().get(0).equals(alias1);
-    assert xrd.getAliases().get(1).equals(alias2);
+    assertNotNull(xrd.getAliases());
+    assertEquals(xrd.getAliases().get(0), alias1);
+    assertEquals(xrd.getAliases().get(1), alias2);
 
     // Links
-    assert xrd.getLinks() != null;
-    assert xrd.getLinks().get(0).getRel().getPath().equals("test1");
-    assert xrd.getLinks().get(1).getRel().getPath().equals("test2");
+    assertNotNull(xrd.getLinks());
+    assertEquals(xrd.getLinks().get(0).getRel().getPath(), "test1");
+    assertEquals(xrd.getLinks().get(1).getRel().getPath(), "test2");
 
     // Properties
-    assert xrd.getProperties() != null;
-    assert xrd.getProperties().get(0).getValue().equals("property1");
-    assert xrd.getProperties().get(1).getValue().equals("property2");
+    assertNotNull(xrd.getProperties());
+    assertEquals(xrd.getProperties().get(0).getValue(), "property1");
+    assertEquals(xrd.getProperties().get(1).getValue(), "property2");
 
-    byte[] bytes = toXmlStream(xrd);
-    System.out.print(new String(bytes));
+    String xml = new String(toXmlStream(xrd));
+    System.out.print(xml);
+
+    // Validate against XSD
+    JAXBContext context = JAXBContext.newInstance(XRD.class);
+    Unmarshaller unmarshaller = context.createUnmarshaller();
+    SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+    URL xrdSchema = this.getClass().getResource("/xrd-1.0-os.xsd");
+    Schema schema = sf.newSchema(xrdSchema);
+    unmarshaller.setSchema(schema);
+    StringReader stringReader = new StringReader(xml);
+    unmarshaller.unmarshal(stringReader);
   }
 }

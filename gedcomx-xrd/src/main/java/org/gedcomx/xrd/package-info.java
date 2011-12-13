@@ -24,8 +24,7 @@
 
 @XmlSchema (
   namespace = XRDModel.XRD_V1_NAMESPACE,
-  elementFormDefault = XmlNsForm.QUALIFIED,
-  attributeFormDefault = XmlNsForm.QUALIFIED
+  elementFormDefault = XmlNsForm.QUALIFIED
 )
 package org.gedcomx.xrd;
 

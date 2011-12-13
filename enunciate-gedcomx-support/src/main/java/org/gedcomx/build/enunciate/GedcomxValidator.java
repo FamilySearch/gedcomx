@@ -181,7 +181,7 @@ public class GedcomxValidator extends BaseValidator {
     if (attributes != null && !attributes.isEmpty()) {
       for (Attribute attribute : attributes) {
         String namespace = attribute.getNamespace();
-        if (namespace == null || "".equals(attribute.getNamespace())) {
+        if ((namespace == null || "".equals(attribute.getNamespace())) && !suppressWarning(typeDef, "unqualified-attribute")) {
           result.addError(attribute, "Attributes should be defined within a namespace so as to be well-defined within RDF. Hint: use attributeFormDefault=\"qualified\".");
         }
 

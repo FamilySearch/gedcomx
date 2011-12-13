@@ -27,14 +27,13 @@ import javax.ws.rs.core.Response;
 @ResourceDefinition(
   name = "XRD",
   resourceElement = XRD.class,
-  namespace = XRDModel.XRD_V1_NAMESPACE,
-  subresources = { XRDRSDefinition.class }
+  namespace = XRDModel.XRD_V1_NAMESPACE
 )
 @ResourceRelationships({
   @ResourceRelationship( identifier = "self", definedBy = XRDRSDefinition.class, description = "The XRD itself." )
 })
-
 public interface XRDRSDefinition extends CommonRSParameters {
+
   /**
    * Read the XRD.
    *
@@ -45,4 +44,5 @@ public interface XRDRSDefinition extends CommonRSParameters {
     @ResponseCode( code = 200, condition = "Upon a successful read.")
   })
   Response readXRD();
+
 }

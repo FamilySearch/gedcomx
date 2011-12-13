@@ -35,14 +35,14 @@ import java.net.URI;
  * @author Mike Gardiner, Ryan Heaton
  */
 @XmlType ( name = "Property" )
-@SuppressWarnings("rdf-incompatible-ns")
+@SuppressWarnings({"rdf-incompatible-ns", "unqualified-attribute"})
 public final class Property {
 
   private URI type;
   private String value;
 
-  @XmlAttribute ( required = true )
-  @XmlSchemaType( name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI )
+  @XmlAttribute ( required = true)
+  @XmlSchemaType( name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
   @SuppressWarnings("rdf-incompatible-type-reference")
   public URI getType() {
     return type;
