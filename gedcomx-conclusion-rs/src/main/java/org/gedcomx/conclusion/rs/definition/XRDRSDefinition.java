@@ -18,31 +18,43 @@ package org.gedcomx.conclusion.rs.definition;
 import org.gedcomx.rt.rs.*;
 import org.gedcomx.xrd.XRD;
 import org.gedcomx.xrd.XRDModel;
+
 import javax.ws.rs.GET;
+import javax.ws.rs.HEAD;
 import javax.ws.rs.core.Response;
 
 /**
  * @author Mike Gardiner
  */
 @ResourceDefinition(
-  name = "XRD",
-  resourceElement = XRD.class,
-  namespace = XRDModel.XRD_V1_NAMESPACE
+        name = "XRD",
+        resourceElement = XRD.class,
+        namespace = XRDModel.XRD_V1_NAMESPACE
 )
 @ResourceRelationships({
-  @ResourceRelationship( identifier = "self", definedBy = XRDRSDefinition.class, description = "The XRD itself." )
+        @ResourceRelationship(identifier = "self", definedBy = XRDRSDefinition.class, description = "The XRD itself.")
 })
 public interface XRDRSDefinition extends CommonRSParameters {
 
-  /**
-   * Read the XRD.
-   *
-   * @return The XRD.
-   */
-  @GET
-  @StatusCodes({
-    @ResponseCode( code = 200, condition = "Upon a successful read.")
-  })
-  Response readXRD();
+    /**
+     * Read the XRD.
+     *
+     * @return The XRD.
+     */
+    @GET
+    @StatusCodes({
+        @ResponseCode(code = 200, condition = "Upon a successful read.")
+    })
+    Response readXRD();
 
+    /**
+     * Read header information about XRD
+     *
+     * @return Header information related to the XRD
+     */
+    @HEAD
+    @StatusCodes({
+        @ResponseCode(code = 200, condition = "Upon a successful read.")
+    })
+    Response headXRD();
 }
