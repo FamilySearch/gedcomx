@@ -27,12 +27,12 @@ import javax.ws.rs.core.Response;
  * @author Mike Gardiner
  */
 @ResourceDefinition(
-        name = "XRD",
-        resourceElement = XRD.class,
-        namespace = XRDModel.XRD_V1_NAMESPACE
+    name = "XRD",
+    resourceElement = XRD.class,
+    namespace = XRDModel.XRD_V1_NAMESPACE
 )
 @ResourceRelationships({
-        @ResourceRelationship(identifier = "self", definedBy = XRDRSDefinition.class, description = "The XRD itself.")
+    @ResourceRelationship(identifier = "self", definedBy = XRDRSDefinition.class, description = "The XRD itself.")
 })
 public interface XRDRSDefinition extends CommonRSParameters {
 
