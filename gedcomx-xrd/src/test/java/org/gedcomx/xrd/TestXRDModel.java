@@ -4,12 +4,13 @@ import org.testng.annotations.Test;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.util.JAXBSource;
+import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
-import java.io.StringReader;
+import javax.xml.validation.Validator;
+import java.io.InputStream;
 import java.net.URI;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -99,13 +100,11 @@ public class TestXRDModel {
     System.out.print(xml);
 
     // Validate against XSD
-    JAXBContext context = JAXBContext.newInstance(XRD.class);
-    Unmarshaller unmarshaller = context.createUnmarshaller();
     SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-    URL xrdSchema = this.getClass().getResource("/xrd-1.0-os.xsd");
-    Schema schema = sf.newSchema(xrdSchema);
-    unmarshaller.setSchema(schema);
-    StringReader stringReader = new StringReader(xml);
-    unmarshaller.unmarshal(stringReader);
+    InputStream is = this.getClass().getResourceAsStream("/xrd-1.0-os.xsd");
+    Schema schema = sf.newSchema(new StreamSource(is));
+    Validator validator = schema.newValidator();
+    JAXBContext context = JAXBContext.newInstance(XRD.class);
+    validator.validate(new JAXBSource(context, xrd));
   }
 }
