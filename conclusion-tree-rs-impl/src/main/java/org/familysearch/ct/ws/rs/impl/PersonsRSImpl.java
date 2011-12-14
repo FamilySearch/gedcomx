@@ -13,8 +13,7 @@ import javax.ws.rs.core.UriInfo;
  * @author Ryan Heaton
  */
 @Path("/persons")
-public class PersonsRSImpl extends RSBase implements PersonsRSDefinition {
-    private PersonMapper mapper = new PersonMapper();
+public class PersonsRSImpl implements PersonsRSDefinition {
 
     public PersonsRSImpl() {
         super();
@@ -23,7 +22,6 @@ public class PersonsRSImpl extends RSBase implements PersonsRSDefinition {
     @POST
     @Override
     public Response createPerson(@Context UriInfo uriInfo, Person person) {
-        String personId = getPersonService().createPerson(mapper.fromResource(person));
         return null;
     }
 

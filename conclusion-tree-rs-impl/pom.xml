@@ -46,7 +46,7 @@
     </dependency>
     <dependency>
       <groupId>org.familysearch.ct</groupId>
-      <artifactId>conclusion-tree-service-impl</artifactId>
+      <artifactId>conclusion-tree-service</artifactId>
       <version>${project.version}</version>
     </dependency>
   </dependencies>
