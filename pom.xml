@@ -21,6 +21,7 @@
     <module>conclusion-tree-ws</module>
     <module>conclusion-tree-rs</module>
     <module>conclusion-tree-rs-impl</module>
+    <module>conclusion-tree-service</module>
   </modules>
 
   <dependencies>
