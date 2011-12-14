@@ -1,4 +1,4 @@
-package org.familysearch.ct.ws.rs.binding;
+package org.familysearch.ct.ws.rs.impl;
 
 import org.gedcomx.conclusion.Person;
 import org.gedcomx.conclusion.rs.definition.PersonRSDefinition;
@@ -17,27 +17,40 @@ import javax.ws.rs.core.UriInfo;
  * @author Ryan Heaton
  */
 @Path("/persons/{pid}")
-public interface PersonRSBinding extends PersonRSDefinition {
+public class PersonRSImpl implements PersonRSDefinition {
 
   @GET
   @Override
-  Response readPerson(@Context UriInfo uriInfo);
+  public Response readPerson(@Context UriInfo uriInfo) {
+    return null;
+  }
 
   @PUT
   @Override
-  void updatePerson(@Context UriInfo uriInfo, Person person);
+  public void updatePerson(@Context UriInfo uriInfo, Person person) {
+
+  }
 
   @DELETE
   @StatusCodes ({
     @ResponseCode (code = 400, condition = "The proof statement is not provided." )
   })
   @Override
-  void deletePerson(@Context UriInfo uriInfo);
+  public void deletePerson(@Context UriInfo uriInfo) {
+
+  }
 
   @Path("/conclusions")
-  ConclusionsRSBinding getConclusionsResource();
+  public ConclusionsRSImpl getConclusionsResource() {
+     return new ConclusionsRSImpl();
+  }
 
   @Path("/conclusions/{cid}")
-  ConclusionRSBinding getConclusionResource();
+  public ConclusionRSImpl getConclusionResource() {
+    return new ConclusionRSImpl();
+  }
 
+  public void setProofStatement(String proofStatement) {
+
+  }
 }
