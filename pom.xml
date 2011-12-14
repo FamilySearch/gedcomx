@@ -20,7 +20,6 @@
     <module>conclusion-tree-doc-support</module>
     <module>conclusion-tree-ws</module>
     <module>conclusion-tree-rs</module>
-    <module>conclusion-tree-service-impl</module>
     <module>conclusion-tree-rs-impl</module>
   </modules>
 
