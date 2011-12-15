@@ -49,6 +49,16 @@ public class TestXRDModel {
     final Link link2 = new Link();
     link2.setRel(new URI("test2"));
     link2.setHref(new URI("http://www.test.com/two"));
+      
+    Title title = new Title();
+    title.setLang("en");
+    title.setValue("Title1");
+    link2.getTitles().add(title);
+      
+    Property prop1 = new Property();
+    prop1.setType(new URI("http://wwww.test.com/test"));
+    prop1.setValue("test");
+    link2.getProperties().add(prop1);
     links.add(link2);
 
     // Properties

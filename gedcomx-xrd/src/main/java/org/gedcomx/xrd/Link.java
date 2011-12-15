@@ -16,45 +16,90 @@
 
 package org.gedcomx.xrd;
 
+import org.codehaus.enunciate.json.JsonName;
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonProperty;
+
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
  * The <Link> element serves as a container for metadata about a relation between
  * the resource described by the XRD and a related resource.
- *
+ * <p/>
  * See http://docs.oasis-open.org/xri/xrd/v1.0/xrd-1.0.html#element.link
  *
  * @author Mike Gardiner, Ryan Heaton
  */
-@XmlType ( name = "Link" )
+@XmlType(name = "Link", propOrder = {"titles", "properties"})
 @SuppressWarnings({"rdf-incompatible-ns", "unqualified-attribute"})
 public final class Link {
+    private URI rel;
+    protected URI href;
+    protected List<Title> titles;
+    protected List<Property> properties;
 
-  private URI rel;
-  protected URI href;
 
-  @XmlAttribute
-  @XmlSchemaType ( name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI )
-  public URI getRel() {
-    return rel;
-  }
+    @XmlAttribute
+    @XmlSchemaType(name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
+    public URI getRel() {
+        return rel;
+    }
 
-  public void setRel(URI rel) {
-    this.rel = rel;
-  }
+    public void setRel(URI rel) {
+        this.rel = rel;
+    }
 
-  @XmlAttribute
-  @XmlSchemaType( name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI )
-  public URI getHref() {
-    return href;
-  }
+    @XmlAttribute
+    @XmlSchemaType(name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
+    public URI getHref() {
+        return href;
+    }
 
-  public void setHref(URI href) {
-    this.href = href;
-  }
+    public void setHref(URI href) {
+        this.href = href;
+    }
+
+    @JsonName("titles")
+    @JsonProperty("titles")
+    @XmlElement( name = "Title" )
+    @JsonIgnore
+    public List<Title> getTitles() {
+        if (titles == null) {
+            titles = new ArrayList<Title>();
+        }
+
+        return this.titles;
+    }
+
+    @JsonName("titles")
+    @JsonProperty("titles")
+    public void setTitles(List<Title> titles) {
+        this.titles = titles;
+    }
+
+    @JsonName("properties")
+    @JsonProperty("properties")
+    @XmlElement( name = "Property" )
+    @JsonIgnore
+    public List<Property> getProperties() {
+        if (properties == null) {
+            properties = new ArrayList<Property>();
+        }
+
+        return this.properties;
+    }
+
+    @JsonName("properties")
+    @JsonProperty("properties")
+    public void setProperties(List<Property> properties) {
+        this.properties = properties;
+    }
 }
