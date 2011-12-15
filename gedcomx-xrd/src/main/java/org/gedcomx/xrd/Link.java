@@ -70,7 +70,6 @@ public final class Link {
     @JsonName("titles")
     @JsonProperty("titles")
     @XmlElement( name = "Title" )
-    @JsonIgnore
     public List<Title> getTitles() {
         if (titles == null) {
             titles = new ArrayList<Title>();
@@ -88,7 +87,6 @@ public final class Link {
     @JsonName("properties")
     @JsonProperty("properties")
     @XmlElement( name = "Property" )
-    @JsonIgnore
     public List<Property> getProperties() {
         if (properties == null) {
             properties = new ArrayList<Property>();
