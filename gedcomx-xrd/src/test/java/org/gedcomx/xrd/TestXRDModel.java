@@ -55,6 +55,10 @@ public class TestXRDModel {
     title.setValue("Title1");
     link2.getTitles().add(title);
       
+    Title noLangTitle = new Title();
+    noLangTitle.setValue("No Lang Attribute");
+    link2.getTitles().add(noLangTitle);
+      
     Property prop1 = new Property();
     prop1.setType(new URI("http://wwww.test.com/test"));
     prop1.setValue("test");
