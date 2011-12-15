@@ -23,17 +23,34 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlValue;
 
+/**
+ * The <Title> element contains a string value that provides a human-readable description
+ * for the link. This value is intended only for human consumption and MUST NOT be used by
+ * an XRD consumer to affect the processing of the document.
+ *
+ * See http://docs.oasis-open.org/xri/xrd/v1.0/xrd-1.0.html#element.title
+ */
 @XmlType( name = "Title")
 @SuppressWarnings({"rdf-incompatible-ns", "unqualified-attribute"})
 public final class Title {
     private String lang;
     private String value;
 
+    /**
+     * Optional Language of the title (i.e. en)
+     *
+     * @return String representing the language
+     */
     @XmlAttribute(required = false, namespace = XMLConstants.XML_NS_URI )
     public String getLang() {
         return lang;
     }
 
+    /**
+     * Optional Language of the title (i.e. en)
+     *
+     * @param lang - A String representing the language
+     */
     public void setLang(String lang) {
         this.lang = lang;
     }
