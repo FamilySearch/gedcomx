@@ -54,12 +54,22 @@ public final class Title {
     public void setLang(String lang) {
         this.lang = lang;
     }
-    
+
+    /**
+     * The actual value of the Title element
+     *
+     * @return String representing the value
+     */
     @XmlValue
     public String getValue() {
         return value;
     }
 
+    /**
+     * The actual value of the Title element
+     *
+     * @param value - A String representing the value
+     */
     public void setValue(String value) {
         this.value = value;
     }

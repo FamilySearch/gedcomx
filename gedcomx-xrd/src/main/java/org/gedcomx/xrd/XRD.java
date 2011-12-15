@@ -61,25 +61,53 @@ public final class XRD implements SupportsExtensionAttributes, SupportsExtension
   private Map<QName, java.lang.String> extensionAttributes;
   private List<Object> extensionElements;
 
+    /**
+     * Specifies when this document expires. See Section 2.2, “Element <Expires>”.
+     *
+     * @return Date when the document expires
+     */
   @XmlElement ( name = "Expires" )
   public Date getExpires() {
     return expires;
   }
 
+    /**
+     * Specifies a Date when the document expires.
+     *
+     * @param expires - Date when the document expires
+     */
   public void setExpires(Date expires) {
     this.expires = expires;
   }
 
+    /**
+     * Provides the identifier of the resource described by this XRD. See Section
+     * 2.3, “Element <Subject>”.
+     *
+     * @return A valid URI indicating the Subject
+     */
   @XmlElement ( name = "Subject" )
   @XmlSchemaType( name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI )
   public URI getSubject() {
     return subject;
   }
 
+    /**
+     * Provides the identifier of the resource described by this XRD. See Section
+     * 2.3, “Element <Subject>”
+     *
+     * @param subject - A valid URI indicating the subject.
+     */
   public void setSubject(URI subject) {
     this.subject = subject;
   }
 
+    /**
+     * Provides an additional identifier for the resource described by this XRD.
+     * See Section 2.4, “Element <Alias>”.
+     *
+     * @return Zero more more Alias elements
+     */
   @XmlElement ( name = "Alias" )
   @SuppressWarnings("gedcomx:plural_xml_name")
   @XmlSchemaType( name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI )
@@ -87,10 +115,22 @@ public final class XRD implements SupportsExtensionAttributes, SupportsExtension
     return aliases;
   }
 
+    /**
+     * Provides an additional identifier for the resource described by this XRD.
+     * See Section 2.4, “Element <Alias>”.
+     *
+     * @param aliases - Zero more more Aliases
+     */
   public void setAliases(List<URI> aliases) {
     this.aliases = aliases;
   }
 
+    /**
+     * Declares a property of the resource described by this XRD. See Section 2.5,
+     * “Element <Property>”.
+     *
+     * @return Zero more more Property elements.
+     */
   @XmlElement ( name = "Property" )
   @JsonName ("properties")
   @JsonProperty ("properties")
@@ -98,11 +138,24 @@ public final class XRD implements SupportsExtensionAttributes, SupportsExtension
     return properties;
   }
 
+    /**
+     * Declares a property of the resource described by this XRD. See Section 2.5,
+     * “Element <Property>”
+     *
+     * @param properties - Zero or more Property elements.
+     */
   @JsonProperty ("properties")
   public void setProperties(List<Property> properties) {
     this.properties = properties;
   }
 
+    /**
+     * Identifies another resource which is related to the resource described by
+     * this XRD, and describes the semantics of that relation. See Section 2.6,
+     * “Element <Link>”.
+     *
+     * @return Zero more more Link elements
+     */
   @XmlElement ( name = "Link" )
   @JsonName ("links")
   @JsonProperty ("links")
@@ -110,6 +163,13 @@ public final class XRD implements SupportsExtensionAttributes, SupportsExtension
     return links;
   }
 
+    /**
+     * Identifies another resource which is related to the resource described by
+     * this XRD, and describes the semantics of that relation. See Section 2.6,
+     * “Element <Link>”.
+     *
+     * @param links - Zero more more Link elements
+     */
   @JsonProperty ("links")
   public void setLinks(List<Link> links) {
     this.links = links;

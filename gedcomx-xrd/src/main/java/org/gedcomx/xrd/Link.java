@@ -17,7 +17,6 @@
 package org.gedcomx.xrd;
 
 import org.codehaus.enunciate.json.JsonName;
-import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 import javax.xml.XMLConstants;
@@ -47,26 +46,57 @@ public final class Link {
     protected List<Property> properties;
 
 
+    /**
+     * An optional value that defines the semantics of the relation between the resource
+     * described by the XRD and the linked resource.
+     *
+     * @return A valid URI
+     */
     @XmlAttribute
     @XmlSchemaType(name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
     public URI getRel() {
         return rel;
     }
 
+    /**
+     * Sets n optional value that defines the semantics of the relation between the resource
+     * described by the XRD and the linked resource.
+     *
+     * @param rel - An valid URI
+     */
     public void setRel(URI rel) {
         this.rel = rel;
     }
 
+    /**
+     * The optional href attribute provides the URI of the linked resource. If no
+     * href attribute is defined, it is assumed the URI can be obtained from a
+     * template attribute or by application-specific means.
+     *
+     * @return A valid URI
+     */
     @XmlAttribute
     @XmlSchemaType(name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
     public URI getHref() {
         return href;
     }
 
+    /**
+     * The optional href attribute provides the URI of the linked resource. If no
+     * href attribute is defined, it is assumed the URI can be obtained from a
+     * template attribute or by application-specific means.
+     *
+     * @param href - A valid URI
+     */
     public void setHref(URI href) {
         this.href = href;
     }
 
+    /**
+     * Provides a human-readable description of the linked resource.
+     *
+     * @return Zero or more Title elements
+     */
     @JsonName("titles")
     @JsonProperty("titles")
     @XmlElement( name = "Title" )
@@ -78,12 +108,26 @@ public final class Link {
         return this.titles;
     }
 
+    /**
+     * Provides a human-readable description of the linked resource.
+     *
+     * @param titles - Zero or more Title elements
+     */
     @JsonName("titles")
     @JsonProperty("titles")
     public void setTitles(List<Title> titles) {
         this.titles = titles;
     }
 
+    /**
+     *  Declares an optional property of this link relation, as described in
+     *  Section 2.5, “Element <Property>”. It is important to note that this
+     *  value does not identify any property of the linked resource or the
+     *  resource described by the XRD, but rather of the link relation between
+     *  the linked resources.
+     *
+     * @return Zero or more Property elements
+     */
     @JsonName("properties")
     @JsonProperty("properties")
     @XmlElement( name = "Property" )
@@ -95,6 +139,15 @@ public final class Link {
         return this.properties;
     }
 
+    /**
+     * Declares an optional property of this link relation, as described in
+     *  Section 2.5, “Element <Property>”. It is important to note that this
+     *  value does not identify any property of the linked resource or the
+     *  resource described by the XRD, but rather of the link relation between
+     *  the linked resources.
+     *
+     * @param properties - Zero or more Property elements
+     */
     @JsonName("properties")
     @JsonProperty("properties")
     public void setProperties(List<Property> properties) {
