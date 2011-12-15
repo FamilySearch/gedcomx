@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
   <modelVersion>4.0.0</modelVersion>
-  <artifactId>gedcomx-conclusion-rs</artifactId>
+  <artifactId>gedcomx-xrd</artifactId>
   <version>0.7.0.BUILD-SNAPSHOT</version>
-  <name>GEDCOM X - Conclusion Resource Services</name>
+  <name>GEDCOM X - XRD Model</name>
 
   <parent>
     <groupId>org.gedcomx</groupId>
@@ -20,6 +21,11 @@
   </properties>
 
   <build>
+    <testResources>
+      <testResource>
+        <directory>src/test/resources</directory>
+      </testResource>
+    </testResources>
     <plugins>
       <plugin>
         <groupId>org.codehaus.enunciate</groupId>
@@ -42,42 +48,8 @@
   <dependencies>
     <dependency>
       <groupId>org.gedcomx</groupId>
-      <artifactId>gedcomx-conclusion</artifactId>
+      <artifactId>gedcomx-common</artifactId>
       <version>0.7.0.BUILD-SNAPSHOT</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.gedcomx</groupId>
-      <artifactId>gedcomx-xrd</artifactId>
-      <version>0.7.0.BUILD-SNAPSHOT</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.gedcomx</groupId>
-      <artifactId>gedcomx-rs</artifactId>
-      <version>0.7.0.BUILD-SNAPSHOT</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.gedcomx</groupId>
-      <artifactId>gedcomx-rt-support</artifactId>
-      <version>0.7.0.BUILD-SNAPSHOT</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.gedcomx</groupId>
-      <artifactId>gedcomx-metadata</artifactId>
-      <version>0.7.0.BUILD-SNAPSHOT</version>
-
-      <scope>test</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>com.sun.jersey</groupId>
-      <artifactId>jersey-server</artifactId>
-      <version>1.5</version>
-
-      <scope>test</scope>
     </dependency>
   </dependencies>
 
