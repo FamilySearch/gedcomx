@@ -2,6 +2,7 @@ package org.familysearch.ct.ws.rs.impl;
 
 import org.gedcomx.conclusion.rs.definition.XRDRSDefinition;
 import org.gedcomx.xrd.Link;
+import org.gedcomx.xrd.Title;
 import org.gedcomx.xrd.XRD;
 
 import javax.ws.rs.GET;
@@ -44,17 +45,24 @@ public class XRDRSImpl implements XRDRSDefinition {
     }
 
     protected XRD buildXRD() throws Exception {
-        XRD xrd = new XRD();
-        xrd.setSubject(new URI(""));
         String basePath = uriInfo.getBaseUri().getPath();
-        
-        // Build Links
+        XRD xrd = new XRD();
+        xrd.setSubject(new URI(basePath));
+
+        // Persons Link
         Link personsLink = new Link();
         personsLink.setHref(new URI(basePath + "/persons"));
+        Title personsTitle = new Title();
+        personsTitle.setValue("Persons");
+        personsLink.getTitles().add(personsTitle);
         xrd.getLinks().add(personsLink);
-        
+
+        // Relationships Link
         Link relationshipsLink = new Link();
         relationshipsLink.setHref(new URI(relationshipsLink + "/relationships"));
+        Title relationshipsTitle = new Title();
+        relationshipsTitle.setValue("Relationships");
+        relationshipsLink.getTitles().add(relationshipsTitle);
         xrd.getLinks().add(relationshipsLink);
 
         return xrd;
