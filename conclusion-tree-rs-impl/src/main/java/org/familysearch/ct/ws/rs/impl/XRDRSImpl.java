@@ -12,6 +12,8 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.net.URI;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * @author Mike Gardiner
@@ -20,6 +22,7 @@ import java.net.URI;
 public class XRDRSImpl implements XRDRSDefinition {
     @Context
     UriInfo uriInfo;
+    Date startupDate =  Calendar.getInstance().getTime();
 
     @GET
     @Override
@@ -36,7 +39,7 @@ public class XRDRSImpl implements XRDRSDefinition {
     @HEAD
     @Override
     public Response headXRD() {
-        return null;
+        return Response.ok().lastModified(startupDate).build();
     }
 
     @Override
