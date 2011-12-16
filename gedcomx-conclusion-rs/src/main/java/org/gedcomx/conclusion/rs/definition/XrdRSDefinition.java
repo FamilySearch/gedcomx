@@ -32,9 +32,9 @@ import javax.ws.rs.core.Response;
     namespace = XRDModel.XRD_V1_NAMESPACE
 )
 @ResourceRelationships({
-    @ResourceRelationship(identifier = "self", definedBy = XRDRSDefinition.class, description = "The XRD itself.")
+    @ResourceRelationship(identifier = "self", definedBy = XrdRSDefinition.class, description = "The XRD itself.")
 })
-public interface XRDRSDefinition extends CommonRSParameters {
+public interface XrdRSDefinition extends CommonRSParameters {
 
     /**
      * Read the XRD.
