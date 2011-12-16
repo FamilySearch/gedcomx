@@ -59,7 +59,7 @@ public final class Link {
     }
 
     /**
-     * Sets n optional value that defines the semantics of the relation between the resource
+     * Sets an optional value that defines the semantics of the relation between the resource
      * described by the XRD and the linked resource.
      *
      * @param rel - An valid URI
