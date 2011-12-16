@@ -27,7 +27,7 @@ import javax.ws.rs.core.Response;
  * @author Mike Gardiner
  */
 @ResourceDefinition(
-    name = "XRD",
+    name = "LRDD",
     resourceElement = XRD.class,
     namespace = XRDModel.XRD_V1_NAMESPACE
 )
