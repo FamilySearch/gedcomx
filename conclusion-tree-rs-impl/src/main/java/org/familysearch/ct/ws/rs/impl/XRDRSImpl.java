@@ -57,6 +57,14 @@ public class XRDRSImpl implements XRDRSDefinition {
         personsLink.getTitles().add(personsTitle);
         xrd.getLinks().add(personsLink);
 
+        // Person Link
+        Link personLink = new Link();
+        personLink.setHref(new URI(basePath + "/person/{rid}"));
+        Title personTitle = new Title();
+        personTitle.setValue("Person");
+        personLink.getTitles().add(personTitle);
+        xrd.getLinks().add(personLink);
+
         // Relationships Link
         Link relationshipsLink = new Link();
         relationshipsLink.setHref(new URI(relationshipsLink + "/relationships"));
@@ -64,6 +72,14 @@ public class XRDRSImpl implements XRDRSDefinition {
         relationshipsTitle.setValue("Relationships");
         relationshipsLink.getTitles().add(relationshipsTitle);
         xrd.getLinks().add(relationshipsLink);
+
+        // Relationship Link
+        Link relationshipLink = new Link();
+        relationshipLink.setHref(new URI(relationshipLink + "/relationship/{rid}"));
+        Title relationshipTitle = new Title();
+        relationshipTitle.setValue("Relationship");
+        relationshipLink.getTitles().add(relationshipTitle);
+        xrd.getLinks().add(relationshipLink);
 
         return xrd;
     }
