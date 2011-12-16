@@ -1,6 +1,6 @@
 package org.familysearch.ct.ws.rs.impl;
 
-import org.gedcomx.conclusion.rs.definition.XRDRSDefinition;
+import org.gedcomx.conclusion.rs.definition.XrdRSDefinition;
 import org.gedcomx.xrd.Link;
 import org.gedcomx.xrd.Title;
 import org.gedcomx.xrd.XRD;
@@ -19,7 +19,7 @@ import java.util.Date;
  * @author Mike Gardiner
  */
 @Path("/discover")
-public class XRDRSImpl implements XRDRSDefinition {
+public class XrdRSImpl implements XrdRSDefinition {
     @Context
     UriInfo uriInfo;
     Date startupDate =  Calendar.getInstance().getTime();
