@@ -18,22 +18,16 @@ import java.util.Date;
 /**
  * @author Mike Gardiner
  */
-@Path("/discover")
+@Path("/.well-known/host-meta")
 public class XrdRSImpl implements XrdRSDefinition {
     @Context
     UriInfo uriInfo;
-    Date startupDate =  Calendar.getInstance().getTime();
+    Date startupDate = Calendar.getInstance().getTime();
 
     @GET
     @Override
     public Response readXRD() {
-
-        try {
-            return Response.ok(buildXRD()).build();
-        }
-        catch (Exception e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
-        }
+        return Response.ok(buildXRD()).build();
     }
 
     @HEAD
@@ -47,42 +41,18 @@ public class XrdRSImpl implements XrdRSDefinition {
 
     }
 
-    protected XRD buildXRD() throws Exception {
+    protected XRD buildXRD() {
         String basePath = uriInfo.getBaseUri().getPath();
         XRD xrd = new XRD();
-        xrd.setSubject(new URI(basePath));
+        xrd.setSubject(URI.create(basePath));
 
         // Persons Link
         Link personsLink = new Link();
-        personsLink.setHref(new URI(basePath + "/persons"));
+        personsLink.setHref(URI.create(basePath + "/persons"));
         Title personsTitle = new Title();
         personsTitle.setValue("Persons");
         personsLink.getTitles().add(personsTitle);
         xrd.getLinks().add(personsLink);
-
-        // Person Link
-        Link personLink = new Link();
-        personLink.setHref(new URI(basePath + "/person/{rid}"));
-        Title personTitle = new Title();
-        personTitle.setValue("Person");
-        personLink.getTitles().add(personTitle);
-        xrd.getLinks().add(personLink);
-
-        // Relationships Link
-        Link relationshipsLink = new Link();
-        relationshipsLink.setHref(new URI(relationshipsLink + "/relationships"));
-        Title relationshipsTitle = new Title();
-        relationshipsTitle.setValue("Relationships");
-        relationshipsLink.getTitles().add(relationshipsTitle);
-        xrd.getLinks().add(relationshipsLink);
-
-        // Relationship Link
-        Link relationshipLink = new Link();
-        relationshipLink.setHref(new URI(relationshipLink + "/relationship/{rid}"));
-        Title relationshipTitle = new Title();
-        relationshipTitle.setValue("Relationship");
-        relationshipLink.getTitles().add(relationshipTitle);
-        xrd.getLinks().add(relationshipLink);
 
         return xrd;
     }
