@@ -73,6 +73,7 @@ public class IsGedcomxNamespaceMethod implements TemplateMethodModelEx {
       || CommonModels.CONTACT_NAMESPACE.equals(ns)
       || CommonModels.FOAF_NAMESPACE.equals(ns)
       || CommonModels.RDF_NAMESPACE.equals(ns)
+      || "http://docs.oasis-open.org/ns/xri/xrd-1.0".equals(ns)
       || ns.startsWith(CommonModels.GEDCOMX_DOMAIN);
   }
 }
