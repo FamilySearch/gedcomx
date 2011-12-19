@@ -46,14 +46,18 @@ public class XrdRSImpl implements XrdRSDefinition {
   }
 
   protected XRD buildXRD() {
-    String basePath = uriInfo.getBaseUri().getPath();
+    String basePath = "";
+
+    if (uriInfo != null) {
+        basePath = uriInfo.getBaseUri().getPath();
+    }
+
     XRD xrd = new XRD();
     xrd.setLinks(new ArrayList<Link>());
-    xrd.setSubject(URI.create(basePath));
 
     // Persons Link
     Link personsLink = new Link();
-    personsLink.setHref(URI.create(basePath + "/persons"));
+    personsLink.setHref(URI.create(basePath + "persons"));
     Title personsTitle = new Title();
     personsTitle.setValue("Persons");
     personsLink.getTitles().add(personsTitle);

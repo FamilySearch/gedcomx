@@ -19,6 +19,11 @@
   </properties>
 
   <build>
+    <testResources>
+      <testResource>
+        <directory>src/test/java</directory>
+      </testResource>
+    </testResources>
     <plugins>
       <plugin>
         <groupId>org.codehaus.enunciate</groupId>
@@ -48,6 +53,12 @@
       <groupId>org.familysearch.ct</groupId>
       <artifactId>conclusion-tree-service</artifactId>
       <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>
+      <version>5.14</version>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 
