@@ -8,6 +8,7 @@ import org.gedcomx.xrd.XRD;
 import javax.ws.rs.GET;
 import javax.ws.rs.HEAD;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
@@ -19,6 +20,7 @@ import java.util.Date;
  * @author Mike Gardiner
  */
 @Path("/.well-known/host-meta")
+@Produces("application/xrd+xml")
 public class XrdRSImpl implements XrdRSDefinition {
     @Context
     UriInfo uriInfo;
