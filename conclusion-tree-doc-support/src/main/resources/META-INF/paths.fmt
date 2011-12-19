@@ -46,7 +46,7 @@
 
       <p>This path binds the <a href="${gedcomxExtensionRoot(rsd)}${rsd.name}_resource.html">${rsd.name} Resource</a>,
         which uses the [#list rsd.resourceElements as resourceElement]<a href="${gedcomxExtensionRoot(resourceElement)}${schemaForNamespace(resourceElement).id}_el_${resourceElement.name}.html">[#if rsd.resourceBundle!false]resource bundle[#else]${resourceElement.name}[/#if]</a>[#if resourceElement_has_next] or [/#if][/#list]
-        element(s) to define its model.[#if rsd.subresources?size > 0] Subresources include [#list rsd.subresources as subresource]<a href="${gedcomxExtensionRoot(subresource)}${subresource.name}_resource.html">${subresource.name} Resource</a>[#if subresource_has_next], [/#if][/#list][/#if].</p>
+        element(s) to define its model.[#if rsd.subresources?size > 0] Subresources include [#list rsd.subresources as subresource]<a href="${gedcomxExtensionRoot(subresource)}${subresource.name}_resource.html">${subresource.name} Resource</a>[#if subresource_has_next], [/#if][/#list].[/#if]</p>
     [/#if]
     [#if binding.resourceRelationships?size > 0 || rsd.resourceRelationships?size > 0]
 
