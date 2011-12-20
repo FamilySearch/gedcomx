@@ -21,6 +21,8 @@ import org.gedcomx.xrd.XRDModel;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.HEAD;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Request;
 import javax.ws.rs.core.Response;
 
 /**
@@ -49,12 +51,13 @@ public interface XrdRSDefinition extends CommonRSParameters {
 
     /**
      * Read header information about XRD
-     *
+     * @param request - The incoming request
      * @return Header information related to the XRD
      */
     @HEAD
     @StatusCodes({
-        @ResponseCode(code = 200, condition = "Upon a successful read.")
+        @ResponseCode(code = 200, condition = "Upon a successful read."),
+        @ResponseCode(code = 304, condition = "Resource not modified.")
     })
-    Response headXRD();
+    Response headXRD(@Context Request request);
 }
