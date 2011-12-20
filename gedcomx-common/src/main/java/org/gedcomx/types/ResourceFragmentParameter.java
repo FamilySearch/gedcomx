@@ -56,5 +56,5 @@ public enum ResourceFragmentParameter {
   end_milliseconds,
 
 	@XmlUnknownQNameEnumValue
-  other
+  OTHER
 }
