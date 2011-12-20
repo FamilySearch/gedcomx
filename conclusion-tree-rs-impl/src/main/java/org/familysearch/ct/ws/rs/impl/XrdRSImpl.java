@@ -10,6 +10,7 @@ import javax.ws.rs.HEAD;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Request;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.net.URI;
@@ -36,8 +37,16 @@ public class XrdRSImpl implements XrdRSDefinition {
 
   @HEAD
   @Override
-  public Response headXRD() {
-    return Response.ok().lastModified(startupDate).build();
+  public Response headXRD(@Context Request request) {
+
+    Response.ResponseBuilder rb  = request.evaluatePreconditions(startupDate);
+
+    if (rb == null) {
+        return Response.ok().lastModified(startupDate).build();
+    }
+    else {
+        return rb.build();
+    }
   }
 
   @Override
