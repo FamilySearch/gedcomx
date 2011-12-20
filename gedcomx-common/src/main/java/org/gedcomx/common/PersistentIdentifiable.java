@@ -20,7 +20,7 @@ import org.gedcomx.rt.RDFDomain;
 import org.gedcomx.rt.RDFSubPropertyOf;
 
 import javax.xml.bind.annotation.XmlType;
-import java.net.URI;
+import org.gedcomx.common.URI;
 import java.util.List;
 
 /**

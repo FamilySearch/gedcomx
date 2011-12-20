@@ -24,7 +24,7 @@ import org.gedcomx.rt.XmlTypeIdResolver;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.*;
-import java.net.URI;
+import org.gedcomx.common.URI;
 import java.util.ArrayList;
 import java.util.List;
 

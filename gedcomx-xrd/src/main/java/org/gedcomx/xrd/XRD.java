@@ -29,7 +29,7 @@ import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.*;
 import javax.xml.namespace.QName;
 import java.lang.String;
-import java.net.URI;
+import org.gedcomx.common.URI;
 import java.util.*;
 
 

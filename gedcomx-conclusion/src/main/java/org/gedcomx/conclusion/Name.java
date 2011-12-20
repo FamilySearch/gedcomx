@@ -77,7 +77,7 @@ public class Name extends Conclusion implements Typed<NameType> {
   @XmlTransient
   @JsonIgnore
   public NameType getKnownType() {
-    return getType() == null ? null : XmlQNameEnumUtil.fromURI(getType().getType(), NameType.class);
+    return getType() == null ? null : NameType.fromQNameURI(getType().getType());
   }
 
   /**

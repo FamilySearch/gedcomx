@@ -18,7 +18,7 @@ package org.gedcomx.types;
 import org.codehaus.enunciate.qname.XmlQNameEnum;
 import org.codehaus.enunciate.qname.XmlUnknownQNameEnumValue;
 
-import java.net.URI;
+import org.gedcomx.common.URI;
 
 /**
  * Enumeration of standard record field types.
@@ -39,7 +39,7 @@ public enum FieldType {
    * @return The QName value for this enum.
    */
   public URI toQNameURI() {
-    return org.codehaus.enunciate.XmlQNameEnumUtil.toURI(this);
+    return URI.create(org.codehaus.enunciate.XmlQNameEnumUtil.toURIValue(this));
   }
 
   /**
@@ -49,7 +49,7 @@ public enum FieldType {
    * @return The enumeration.
    */
   public static FieldType fromQNameURI(URI qname) {
-    return org.codehaus.enunciate.XmlQNameEnumUtil.fromURI(qname, FieldType.class);
+    return org.codehaus.enunciate.XmlQNameEnumUtil.fromURIValue(qname.toString(), FieldType.class);
   }
 
 }

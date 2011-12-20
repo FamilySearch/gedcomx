@@ -18,7 +18,7 @@ package org.gedcomx.types;
 import org.codehaus.enunciate.qname.XmlQNameEnum;
 import org.codehaus.enunciate.qname.XmlUnknownQNameEnumValue;
 
-import java.net.URI;
+import org.gedcomx.common.URI;
 
 /**
  * Enumeration of standard place part types.
@@ -61,7 +61,7 @@ public enum PlacePartType {
    * @return The QName value for this enum.
    */
   public URI toQNameURI() {
-    return org.codehaus.enunciate.XmlQNameEnumUtil.toURI(this);
+    return URI.create(org.codehaus.enunciate.XmlQNameEnumUtil.toURIValue(this));
   }
 
   /**
@@ -71,7 +71,7 @@ public enum PlacePartType {
    * @return The enumeration.
    */
   public static PlacePartType fromQNameURI(URI qname) {
-    return org.codehaus.enunciate.XmlQNameEnumUtil.fromURI(qname, PlacePartType.class);
+    return org.codehaus.enunciate.XmlQNameEnumUtil.fromURIValue(qname.toString(), PlacePartType.class);
   }
 
 }

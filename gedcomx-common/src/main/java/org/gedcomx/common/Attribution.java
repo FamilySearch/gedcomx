@@ -92,7 +92,7 @@ public final class Attribution {
   @XmlTransient
   @JsonIgnore
   public ConfidenceLevel getKnownConfidenceLevel() {
-    return getConfidence() == null ? null : XmlQNameEnumUtil.fromURI(getConfidence().getType(), ConfidenceLevel.class);
+    return getConfidence() == null ? null : ConfidenceLevel.fromQNameURI(getConfidence().getType());
   }
 
   /**

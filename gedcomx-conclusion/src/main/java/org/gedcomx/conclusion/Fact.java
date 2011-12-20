@@ -77,7 +77,7 @@ public class Fact extends Conclusion implements Typed<FactType>, Formalizeable {
   @XmlTransient
   @JsonIgnore
   public FactType getKnownType() {
-    return getType() == null ? null : XmlQNameEnumUtil.fromURI(getType().getType(), FactType.class);
+    return getType() == null ? null : FactType.fromQNameURI(getType().getType());
   }
 
   /**

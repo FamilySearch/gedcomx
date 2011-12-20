@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 import java.io.IOException;
-import java.net.URI;
+import org.gedcomx.common.URI;
 
 /**
  * A RDF reference to an age part type.
@@ -84,7 +84,7 @@ public final class TypeReference<T extends Enum> {
   @XmlTransient
   @JsonIgnore
   public void setKnownType(T type) {
-    setType(org.codehaus.enunciate.XmlQNameEnumUtil.toURI(type));
+    setType(URI.create(org.codehaus.enunciate.XmlQNameEnumUtil.toURIValue(type)));
   }
 
   public static class JsonSerializer extends org.codehaus.jackson.map.JsonSerializer<TypeReference> {

@@ -18,7 +18,7 @@ package org.gedcomx.types;
 import org.codehaus.enunciate.qname.XmlQNameEnum;
 import org.codehaus.enunciate.qname.XmlUnknownQNameEnumValue;
 
-import java.net.URI;
+import org.gedcomx.common.URI;
 
 /**
  * Enumeration of levels of confidence. This is taken directly from <i>Evidence Explained, Section 1.6</i>[1].
@@ -72,7 +72,7 @@ public enum ConfidenceLevel {
    * @return The QName value for this enum.
    */
   public URI toQNameURI() {
-    return org.codehaus.enunciate.XmlQNameEnumUtil.toURI(this);
+    return URI.create(org.codehaus.enunciate.XmlQNameEnumUtil.toURIValue(this));
   }
 
   /**
@@ -82,7 +82,7 @@ public enum ConfidenceLevel {
    * @return The enumeration.
    */
   public static ConfidenceLevel fromQNameURI(URI qname) {
-    return org.codehaus.enunciate.XmlQNameEnumUtil.fromURI(qname, ConfidenceLevel.class);
+    return org.codehaus.enunciate.XmlQNameEnumUtil.fromURIValue(qname.toString(), ConfidenceLevel.class);
   }
 
 }

@@ -4,7 +4,7 @@ import org.gedcomx.common.Attribution;
 import org.gedcomx.common.ResourceReference;
 import org.testng.annotations.Test;
 
-import java.net.URI;
+import org.gedcomx.common.URI;
 
 import static org.gedcomx.rt.SerializationUtil.processThroughJson;
 import static org.gedcomx.rt.SerializationUtil.processThroughXml;

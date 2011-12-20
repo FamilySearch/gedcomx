@@ -2,12 +2,10 @@ package org.gedcomx.common;
 
 import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.gedcomx.common.Collection;
-import org.gedcomx.common.ResourceReference;
 import org.gedcomx.types.RecordType;
 import org.gedcomx.types.TypeReference;
 import org.testng.annotations.Test;
 
-import java.net.URI;
 import java.util.ArrayList;
 
 import static org.gedcomx.rt.SerializationUtil.processThroughJson;
@@ -66,7 +64,7 @@ public class TestCollection {
     assertEquals("temporal coverage", collection.getTemporal());
     assertEquals("urn:item", collection.getItems().get(0).getResource().toString());
     assertEquals(1, collection.getTypes().size());
-    assertEquals(XmlQNameEnumUtil.toURI(RecordType.Birth), collection.getTypes().get(0).getType());
+    assertEquals(XmlQNameEnumUtil.toURIValue(RecordType.Birth), collection.getTypes().get(0).getType().toString());
   }
 
 }

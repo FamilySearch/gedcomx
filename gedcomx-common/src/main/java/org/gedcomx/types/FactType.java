@@ -19,7 +19,7 @@ import org.codehaus.enunciate.qname.XmlQNameEnum;
 import org.codehaus.enunciate.qname.XmlUnknownQNameEnumValue;
 
 import javax.xml.bind.annotation.XmlTransient;
-import java.net.URI;
+import org.gedcomx.common.URI;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.Set;
@@ -170,7 +170,7 @@ public enum FactType {
    * @return The QName value for this enum.
    */
   public URI toQNameURI() {
-    return org.codehaus.enunciate.XmlQNameEnumUtil.toURI(this);
+    return URI.create(org.codehaus.enunciate.XmlQNameEnumUtil.toURIValue(this));
   }
 
   /**
@@ -180,7 +180,7 @@ public enum FactType {
    * @return The enumeration.
    */
   public static FactType fromQNameURI(URI qname) {
-    return org.codehaus.enunciate.XmlQNameEnumUtil.fromURI(qname, FactType.class);
+    return org.codehaus.enunciate.XmlQNameEnumUtil.fromURIValue(qname.toString(), FactType.class);
   }
 
   /**

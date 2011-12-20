@@ -67,7 +67,7 @@ public class AgePart extends Field implements Typed<AgePartType> {
   @XmlTransient
   @JsonIgnore
   public AgePartType getKnownType() {
-    return getType() == null ? null : org.codehaus.enunciate.XmlQNameEnumUtil.fromURI(getType().getType(), AgePartType.class);
+    return getType() == null ? null : AgePartType.fromQNameURI(getType().getType());
   }
 
   /**

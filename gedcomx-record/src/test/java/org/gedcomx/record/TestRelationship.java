@@ -7,7 +7,7 @@ import org.gedcomx.types.TypeReference;
 import org.testng.annotations.Test;
 import org.w3c.dom.Document;
 
-import java.net.URI;
+import org.gedcomx.common.URI;
 
 import static org.gedcomx.rt.SerializationUtil.toJsonNode;
 import static org.gedcomx.rt.SerializationUtil.toXmlDom;

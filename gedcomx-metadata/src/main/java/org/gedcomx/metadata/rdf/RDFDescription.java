@@ -30,7 +30,7 @@ import org.gedcomx.types.TypeReference;
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.*;
 import javax.xml.namespace.QName;
-import java.net.URI;
+import org.gedcomx.common.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -150,7 +150,7 @@ public class RDFDescription implements SupportsExtensionAttributes, SupportsExte
   @XmlTransient
   @JsonIgnore
   public ResourceType getKnownType() {
-    return getType() == null ? null : XmlQNameEnumUtil.fromURI(getType().getType(), ResourceType.class);
+    return getType() == null ? null : ResourceType.fromQNameURI(getType().getType());
   }
 
   /**

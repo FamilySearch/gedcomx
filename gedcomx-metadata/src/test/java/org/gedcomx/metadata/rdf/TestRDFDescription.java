@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.namespace.QName;
-import java.net.URI;
+import org.gedcomx.common.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
 

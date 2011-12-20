@@ -64,7 +64,7 @@ public final class NamePart implements Typed<NamePartType> {
   @XmlTransient
   @JsonIgnore
   public NamePartType getKnownType() {
-    return getType() == null ? null : XmlQNameEnumUtil.fromURI(getType().getType(), NamePartType.class);
+    return getType() == null ? null : NamePartType.fromQNameURI(getType().getType());
   }
 
   /**

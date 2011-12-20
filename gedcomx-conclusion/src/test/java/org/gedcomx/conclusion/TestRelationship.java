@@ -6,7 +6,7 @@ import org.gedcomx.common.ResourceReference;
 import org.gedcomx.types.RelationshipType;
 import org.testng.annotations.Test;
 
-import java.net.URI;
+import org.gedcomx.common.URI;
 import java.util.Arrays;
 
 import static org.gedcomx.rt.SerializationUtil.processThroughJson;

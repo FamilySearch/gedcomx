@@ -40,7 +40,6 @@ import org.gedcomx.rt.*;
 
 import javax.xml.bind.annotation.XmlAnyAttribute;
 import javax.xml.namespace.QName;
-import java.net.URI;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -185,9 +184,9 @@ public class GedcomxValidator extends BaseValidator {
           result.addError(attribute, "Attributes should be defined within a namespace so as to be well-defined within RDF. Hint: use attributeFormDefault=\"qualified\".");
         }
 
-        boolean isURI = ((DecoratedTypeMirror) TypeMirrorDecorator.decorate(attribute.getAccessorType())).isInstanceOf(URI.class.getName());
+        boolean isURI = ((DecoratedTypeMirror) TypeMirrorDecorator.decorate(attribute.getAccessorType())).isInstanceOf("org.gedcomx.common.URI");
         if (isURI && !KnownXmlType.ANY_URI.getQname().equals(attribute.getBaseType().getQname())) {
-          result.addError(attribute, "Accessors of type 'java.net.URI' should of type xs:anyURI. Please annotate the attribute with @XmlSchemaType(name = \"anyURI\", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)");
+          result.addError(attribute, "Accessors of type 'org.gedcomx.common.URI' should of type xs:anyURI. Please annotate the attribute with @XmlSchemaType(name = \"anyURI\", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)");
         }
 
         if (!suppressWarning(attribute, "rdf-incompatible-type-reference") && "type".equals(attribute.getName())) {
@@ -222,9 +221,9 @@ public class GedcomxValidator extends BaseValidator {
         result.addError(value, "Accessors should not reference QName enums directly. You probably want to annotate this accessor with @XmlTransient.");
       }
 
-      boolean isURI = ((DecoratedTypeMirror) TypeMirrorDecorator.decorate(accessorType)).isInstanceOf(URI.class.getName());
+      boolean isURI = ((DecoratedTypeMirror) TypeMirrorDecorator.decorate(accessorType)).isInstanceOf("org.gedcomx.common.URI");
       if (isURI && !KnownXmlType.ANY_URI.getQname().equals(value.getBaseType().getQname())) {
-        result.addError(value, "Accessors of type 'java.net.URI' should of type xs:anyURI. Please annotate the value with @XmlSchemaType(name = \"anyURI\", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)");
+        result.addError(value, "Accessors of type 'org.gedcomx.common.URI' should of type xs:anyURI. Please annotate the value with @XmlSchemaType(name = \"anyURI\", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)");
       }
     }
 
@@ -232,9 +231,9 @@ public class GedcomxValidator extends BaseValidator {
     if (elements != null && !elements.isEmpty()) {
       for (Element element : elements) {
         for (Element choice : element.getChoices()) {
-          boolean isURI = ((DecoratedTypeMirror) TypeMirrorDecorator.decorate(choice.getAccessorType())).isInstanceOf(URI.class.getName());
+          boolean isURI = ((DecoratedTypeMirror) TypeMirrorDecorator.decorate(choice.getAccessorType())).isInstanceOf("org.gedcomx.common.URI");
           if (isURI && !KnownXmlType.ANY_URI.getQname().equals(choice.getBaseType().getQname())) {
-            result.addError(choice, "Accessors of type 'java.net.URI' should of type xs:anyURI. Please annotate the element with @XmlSchemaType(name = \"anyURI\", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)");
+            result.addError(choice, "Accessors of type 'org.gedcomx.common.URI' should of type xs:anyURI. Please annotate the element with @XmlSchemaType(name = \"anyURI\", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)");
           }
 
           if ("href".equals(choice.getName())) {

@@ -77,7 +77,7 @@ public class Relationship extends GenealogicalResource implements Typed<Relation
   @XmlTransient
   @JsonIgnore
   public RelationshipType getKnownType() {
-    return getType() == null ? null : XmlQNameEnumUtil.fromURI(getType().getType(), RelationshipType.class);
+    return getType() == null ? null : RelationshipType.fromQNameURI(getType().getType());
   }
 
   /**

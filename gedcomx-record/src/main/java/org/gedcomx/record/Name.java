@@ -70,7 +70,7 @@ public class Name extends Field implements Partitionable<NamePart>, Typed<NameTy
   @XmlTransient
   @JsonIgnore
   public NameType getKnownType() {
-    return getType() == null ? null : XmlQNameEnumUtil.fromURI(getType().getType(), NameType.class);
+    return getType() == null ? null : NameType.fromQNameURI(getType().getType());
   }
 
   /**

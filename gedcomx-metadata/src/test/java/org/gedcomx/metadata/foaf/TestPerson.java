@@ -4,7 +4,7 @@ import org.gedcomx.common.ResourceReference;
 import org.gedcomx.metadata.rdf.RDFLiteral;
 import org.testng.annotations.Test;
 
-import java.net.URI;
+import org.gedcomx.common.URI;
 import java.util.ArrayList;
 
 import static org.gedcomx.rt.SerializationUtil.processThroughJson;

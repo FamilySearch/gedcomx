@@ -84,7 +84,7 @@ public final class AlternateId implements Typed<AlternateIdType> {
   @XmlTransient
   @JsonIgnore
   public AlternateIdType getKnownType() {
-    return getType() == null ? null : XmlQNameEnumUtil.fromURI(getType().getType(), AlternateIdType.class);
+    return getType() == null ? null : AlternateIdType.fromQNameURI(getType().getType());
   }
 
   /**

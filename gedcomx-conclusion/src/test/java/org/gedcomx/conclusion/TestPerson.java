@@ -7,7 +7,7 @@ import org.gedcomx.common.ResourceReference;
 import org.gedcomx.types.*;
 import org.testng.annotations.Test;
 
-import java.net.URI;
+import org.gedcomx.common.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

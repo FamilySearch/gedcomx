@@ -73,7 +73,7 @@ public class Fact extends Field implements Typed<FactType> {
   @XmlTransient
   @JsonIgnore
   public org.gedcomx.types.FactType getKnownType() {
-    return getType() == null ? null : XmlQNameEnumUtil.fromURI(getType().getType(), org.gedcomx.types.FactType.class);
+    return getType() == null ? null : FactType.fromQNameURI(getType().getType());
   }
 
   /**

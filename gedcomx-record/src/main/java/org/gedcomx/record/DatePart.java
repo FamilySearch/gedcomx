@@ -66,7 +66,7 @@ public class DatePart extends Field implements Typed<DatePartType> {
   @XmlTransient
   @JsonIgnore
   public DatePartType getKnownType() {
-    return getType() == null ? null : XmlQNameEnumUtil.fromURI(getType().getType(), DatePartType.class);
+    return getType() == null ? null : DatePartType.fromQName(getType().getType());
   }
 
   /**

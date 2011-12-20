@@ -18,7 +18,7 @@ package org.gedcomx.types;
 import org.codehaus.enunciate.qname.XmlQNameEnum;
 import org.codehaus.enunciate.qname.XmlUnknownQNameEnumValue;
 
-import java.net.URI;
+import org.gedcomx.common.URI;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.Set;
@@ -67,7 +67,7 @@ public enum RecordType {
    * @return The QName value for this enum.
    */
   public URI toQNameURI() {
-    return org.codehaus.enunciate.XmlQNameEnumUtil.toURI(this);
+    return URI.create(org.codehaus.enunciate.XmlQNameEnumUtil.toURIValue(this));
   }
 
   /**
@@ -77,7 +77,7 @@ public enum RecordType {
    * @return The enumeration.
    */
   public static RecordType fromQNameURI(URI qname) {
-    return org.codehaus.enunciate.XmlQNameEnumUtil.fromURI(qname, RecordType.class);
+    return org.codehaus.enunciate.XmlQNameEnumUtil.fromURIValue(qname.toString(), RecordType.class);
   }
 
   public boolean isVital() {

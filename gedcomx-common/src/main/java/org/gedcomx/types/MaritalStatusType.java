@@ -18,7 +18,7 @@ package org.gedcomx.types;
 import org.codehaus.enunciate.qname.XmlQNameEnum;
 import org.codehaus.enunciate.qname.XmlUnknownQNameEnumValue;
 
-import java.net.URI;
+import org.gedcomx.common.URI;
 
 /**
  * Constrained vocabulary for marital status.
@@ -42,7 +42,7 @@ public enum MaritalStatusType {
    * @return The QName value for this enum.
    */
   public URI toQNameURI() {
-    return org.codehaus.enunciate.XmlQNameEnumUtil.toURI(this);
+    return URI.create(org.codehaus.enunciate.XmlQNameEnumUtil.toURIValue(this));
   }
 
   /**
@@ -52,7 +52,7 @@ public enum MaritalStatusType {
    * @return The enumeration.
    */
   public static MaritalStatusType fromQNameURI(URI qname) {
-    return org.codehaus.enunciate.XmlQNameEnumUtil.fromURI(qname, MaritalStatusType.class);
+    return org.codehaus.enunciate.XmlQNameEnumUtil.fromURIValue(qname.toString(), MaritalStatusType.class);
   }
 
 }

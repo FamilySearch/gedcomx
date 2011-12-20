@@ -22,9 +22,15 @@
   attributeFormDefault = XmlNsForm.QUALIFIED,
   elementFormDefault = XmlNsForm.QUALIFIED
 )
+@XmlSchemaTypes ({
+  @XmlSchemaType (type=URI.class, name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
+})
 package org.gedcomx.common;
 
 import org.gedcomx.rt.CommonModels;
 
+import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlNsForm;
 import javax.xml.bind.annotation.XmlSchema;
+import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlSchemaTypes;

@@ -10,7 +10,7 @@ import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 import java.io.InputStream;
-import java.net.URI;
+import org.gedcomx.common.URI;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -102,8 +102,8 @@ public class TestXRDModel {
 
     // Links
     assertNotNull(xrd.getLinks());
-    assertEquals(xrd.getLinks().get(0).getRel().getPath(), "test1");
-    assertEquals(xrd.getLinks().get(1).getRel().getPath(), "test2");
+    assertEquals(xrd.getLinks().get(0).getRel().toURI().getPath(), "test1");
+    assertEquals(xrd.getLinks().get(1).getRel().toURI().getPath(), "test2");
 
     // Properties
     assertNotNull(xrd.getProperties());

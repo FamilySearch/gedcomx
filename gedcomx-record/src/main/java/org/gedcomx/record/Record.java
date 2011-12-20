@@ -77,7 +77,7 @@ public class Record extends GenealogicalEntity implements Typed<RecordType>, Per
   @XmlTransient
   @JsonIgnore
   public RecordType getKnownType() {
-    return getType() == null ? null : XmlQNameEnumUtil.fromURI(getType().getType(), RecordType.class);
+    return getType() == null ? null : RecordType.fromQNameURI(getType().getType());
   }
 
   /**

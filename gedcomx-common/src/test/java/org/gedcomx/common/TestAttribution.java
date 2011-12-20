@@ -3,7 +3,7 @@ package org.gedcomx.common;
 import org.gedcomx.types.ConfidenceLevel;
 import org.testng.annotations.Test;
 
-import java.net.URI;
+import org.gedcomx.common.URI;
 import java.util.Date;
 
 import static org.gedcomx.rt.SerializationUtil.processThroughJson;

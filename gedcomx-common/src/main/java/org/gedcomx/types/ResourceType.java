@@ -18,6 +18,7 @@ package org.gedcomx.types;
 import org.codehaus.enunciate.qname.XmlQNameEnum;
 import org.codehaus.enunciate.qname.XmlQNameEnumValue;
 import org.codehaus.enunciate.qname.XmlUnknownQNameEnumValue;
+import org.gedcomx.common.URI;
 import org.gedcomx.rt.CommonModels;
 
 /**
@@ -172,6 +173,25 @@ public enum ResourceType {
    * Something else.
    */
   @XmlUnknownQNameEnumValue
-  OTHER
+  OTHER;
 
+
+  /**
+   * Return the QName value for this enum.
+   *
+   * @return The QName value for this enum.
+   */
+  public URI toQNameURI() {
+    return URI.create(org.codehaus.enunciate.XmlQNameEnumUtil.toURIValue(this));
+  }
+
+  /**
+   * Get the enumeration from the QName.
+   *
+   * @param qname The qname.
+   * @return The enumeration.
+   */
+  public static ResourceType fromQNameURI(URI qname) {
+    return org.codehaus.enunciate.XmlQNameEnumUtil.fromURIValue(qname.toString(), ResourceType.class);
+  }
 }

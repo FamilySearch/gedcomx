@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
-import java.net.URI;
+import org.gedcomx.common.URI;
 
 /**
  * Definition of the summary information for a person. The "summary" information is useful to applications

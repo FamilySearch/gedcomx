@@ -63,7 +63,7 @@ public class PlacePart extends Field implements Typed<PlacePartType> {
   @XmlTransient
   @JsonIgnore
   public PlacePartType getKnownType() {
-    return getType() == null ? null : XmlQNameEnumUtil.fromURI(getType().getType(), PlacePartType.class);
+    return getType() == null ? null : PlacePartType.fromQNameURI(getType().getType());
   }
 
   /**

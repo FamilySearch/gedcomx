@@ -19,7 +19,7 @@ package org.gedcomx.xrd;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.*;
-import java.net.URI;
+import org.gedcomx.common.URI;
 
 
 /**

@@ -24,7 +24,7 @@ import org.gedcomx.rt.XmlTypeIdResolver;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.*;
-import java.net.URI;
+import org.gedcomx.common.URI;
 
 /**
  * A value that has been formalized via normalization, standardization, or both.
@@ -99,7 +99,7 @@ public final class FormalValue {
    * @return The value.
    */
   public <E extends Enum<E>> E getKnownValue(Class<E> clazz) {
-    return XmlQNameEnumUtil.fromURI(getResource(), clazz);
+    return XmlQNameEnumUtil.fromURIValue(getResource().toString(), clazz);
   }
 
   /**
@@ -110,7 +110,7 @@ public final class FormalValue {
   @XmlTransient
   @JsonIgnore
   public void setKnownValue(Enum value) {
-    this.resource = XmlQNameEnumUtil.toURI(value);
+    this.resource = URI.create(XmlQNameEnumUtil.toURIValue(value));
   }
 
   /**

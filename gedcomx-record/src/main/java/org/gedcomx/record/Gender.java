@@ -65,7 +65,7 @@ public class Gender extends Field implements Typed<GenderType> {
   @XmlTransient
   @JsonIgnore
   public GenderType getKnownType() {
-    return getType() == null ? null : org.codehaus.enunciate.XmlQNameEnumUtil.fromURI(getType().getType(), GenderType.class);
+    return getType() == null ? null : GenderType.fromQNameURI(getType().getType());
   }
 
   /**
