@@ -1,5 +1,6 @@
 package org.familysearch.ct.ws.rs.impl;
 
+import org.gedcomx.common.URI;
 import org.gedcomx.conclusion.rs.definition.XrdRSDefinition;
 import org.gedcomx.xrd.Link;
 import org.gedcomx.xrd.Title;
@@ -13,7 +14,6 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Request;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;

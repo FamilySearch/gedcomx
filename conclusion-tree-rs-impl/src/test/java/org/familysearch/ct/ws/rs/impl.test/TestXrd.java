@@ -80,7 +80,7 @@ public class TestXrd {
 
         Link personLink = links.get(0);
         assertNotNull(personLink);
-        assertEquals("persons", personLink.getHref().getPath());
+        assertEquals("persons", personLink.getHref().toURI().getPath());
 
         assertNotNull(personLink.getTitles());
         assertEquals(1, personLink.getTitles().size());
