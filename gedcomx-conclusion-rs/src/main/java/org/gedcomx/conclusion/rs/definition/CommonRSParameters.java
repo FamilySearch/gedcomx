@@ -26,6 +26,7 @@ import javax.ws.rs.HeaderParam;
  * @author Ryan Heaton
  */
 @StatusCodes ( {
+  @ResponseCode ( code = 304, condition = "If preconditions of a read were met and a full response was withheld."),
   @ResponseCode ( code = 401, condition = "If authentication is needed, or if the supplied authentication is expired or otherwise invalid."),
   @ResponseCode ( code = 403, condition = "If the resource is forbidden even after considering a possibly valid authentication."),
   @ResponseCode ( code = 501, condition = "If the resource is not supported by the implementation.")
