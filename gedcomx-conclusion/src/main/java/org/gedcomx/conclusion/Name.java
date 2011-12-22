@@ -15,18 +15,17 @@
  */
 package org.gedcomx.conclusion;
 
-import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
+import org.gedcomx.common.URI;
 import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.JsonElementWrapper;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.NameType;
 import org.gedcomx.types.TypeReference;
-import org.gedcomx.types.Typed;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -44,8 +43,10 @@ import java.util.List;
 @XmlType ( name = "Name", propOrder = { "type", "primaryForm", "alternateForms" } )
 @XmlRootElement
 @JsonElementWrapper ( name = "names" )
-public class Name extends Conclusion implements Typed<NameType> {
+public class Name extends Conclusion {
 
+  @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
+  @JsonProperty
   private TypeReference<NameType> type;
   private NameForm primaryForm;
   private List<NameForm> alternateForms;
@@ -55,9 +56,10 @@ public class Name extends Conclusion implements Typed<NameType> {
    *
    * @return The type of the name.
    */
-  @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
-  public TypeReference<NameType> getType() {
-    return type;
+  @XmlTransient
+  @JsonIgnore
+  public URI getType() {
+    return this.type == null ? null : this.type.getType();
   }
 
   /**
@@ -65,8 +67,9 @@ public class Name extends Conclusion implements Typed<NameType> {
    *
    * @param type The type of the name.
    */
-  public void setType(TypeReference<NameType> type) {
-    this.type = type;
+  @JsonIgnore
+  public void setType(URI type) {
+    this.type = type == null ? null : new TypeReference<NameType>(type);
   }
 
   /**
@@ -77,7 +80,7 @@ public class Name extends Conclusion implements Typed<NameType> {
   @XmlTransient
   @JsonIgnore
   public NameType getKnownType() {
-    return getType() == null ? null : NameType.fromQNameURI(getType().getType());
+    return this.type == null ? null : NameType.fromQNameURI(this.type.getType());
   }
 
   /**
@@ -87,7 +90,7 @@ public class Name extends Conclusion implements Typed<NameType> {
    */
   @JsonIgnore
   public void setKnownType(NameType knownType) {
-    setType(knownType == null ? null : new TypeReference<NameType>(knownType));
+    this.type = knownType == null ? null : new TypeReference<NameType>(knownType);
   }
 
   /**

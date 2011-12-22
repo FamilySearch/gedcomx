@@ -15,15 +15,15 @@
  */
 package org.gedcomx.record;
 
-import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
+import org.gedcomx.common.URI;
 import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.PlacePartType;
 import org.gedcomx.types.TypeReference;
-import org.gedcomx.types.Typed;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -32,8 +32,10 @@ import javax.xml.bind.annotation.XmlType;
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "PlacePart" )
-public class PlacePart extends Field implements Typed<PlacePartType> {
+public class PlacePart extends Field {
 
+  @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
+  @JsonProperty
   private TypeReference<PlacePartType> type;
 
   /**
@@ -41,9 +43,10 @@ public class PlacePart extends Field implements Typed<PlacePartType> {
    *
    * @return The place part type.
    */
-  @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
-  public TypeReference<PlacePartType> getType() {
-    return type;
+  @XmlTransient
+  @JsonIgnore
+  public URI getType() {
+    return this.type == null ? null : this.type.getType();
   }
 
   /**
@@ -51,8 +54,9 @@ public class PlacePart extends Field implements Typed<PlacePartType> {
    *
    * @param type The place part type.
    */
-  public void setType(TypeReference<PlacePartType> type) {
-    this.type = type;
+  @JsonIgnore
+  public void setType(URI type) {
+    this.type = type == null ? null : new TypeReference<PlacePartType>(type);
   }
 
   /**
@@ -63,7 +67,7 @@ public class PlacePart extends Field implements Typed<PlacePartType> {
   @XmlTransient
   @JsonIgnore
   public PlacePartType getKnownType() {
-    return getType() == null ? null : PlacePartType.fromQNameURI(getType().getType());
+    return this.type == null ? null : PlacePartType.fromQNameURI(this.type.getType());
   }
 
   /**
@@ -73,6 +77,6 @@ public class PlacePart extends Field implements Typed<PlacePartType> {
    */
   @JsonIgnore
   public void setKnownType(PlacePartType knownType) {
-    setType(knownType == null ? null : new TypeReference<PlacePartType>(knownType));
+    this.type = knownType == null ? null : new TypeReference<PlacePartType>(knownType);
   }
 }

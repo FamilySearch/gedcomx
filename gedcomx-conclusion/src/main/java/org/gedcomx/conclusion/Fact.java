@@ -15,18 +15,18 @@
  */
 package org.gedcomx.conclusion;
 
-import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.common.FormalValue;
+import org.gedcomx.common.URI;
 import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.JsonElementWrapper;
 import org.gedcomx.rt.RDFSubClassOf;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.FactType;
 import org.gedcomx.types.TypeReference;
-import org.gedcomx.types.Typed;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -42,8 +42,10 @@ import javax.xml.bind.annotation.XmlType;
 @RDFSubClassOf ( CommonModels.DUBLIN_CORE_TYPE_NAMESPACE + "Event" )
 @XmlRootElement
 @JsonElementWrapper ( name = "facts" )
-public class Fact extends Conclusion implements Typed<FactType>, Formalizeable {
+public class Fact extends Conclusion implements Formalizeable {
 
+  @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
+  @JsonProperty
   private TypeReference<FactType> type;
   private Date date;
   private Place place;
@@ -55,9 +57,10 @@ public class Fact extends Conclusion implements Typed<FactType>, Formalizeable {
    *
    * @return The type of the fact.
    */
-  @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
-  public TypeReference<FactType> getType() {
-    return type;
+  @XmlTransient
+  @JsonIgnore
+  public URI getType() {
+    return this.type == null ? null : this.type.getType();
   }
 
   /**
@@ -65,8 +68,9 @@ public class Fact extends Conclusion implements Typed<FactType>, Formalizeable {
    *
    * @param type The type of the fact.
    */
-  public void setType(TypeReference<FactType> type) {
-    this.type = type;
+  @JsonIgnore
+  public void setType(URI type) {
+    this.type = type == null ? null : new TypeReference<FactType>(type);
   }
 
   /**
@@ -76,18 +80,18 @@ public class Fact extends Conclusion implements Typed<FactType>, Formalizeable {
    */
   @XmlTransient
   @JsonIgnore
-  public FactType getKnownType() {
-    return getType() == null ? null : FactType.fromQNameURI(getType().getType());
+  public org.gedcomx.types.FactType getKnownType() {
+    return this.type == null ? null : FactType.fromQNameURI(this.type.getType());
   }
 
   /**
-   * Set the type of this fact from a known enumeration of types.
+   * Set the type of this fact from a known enumeration of fact types.
    *
-   * @param knownType The known type.
+   * @param knownType the fact type.
    */
   @JsonIgnore
-  public void setKnownType(FactType knownType) {
-    setType(knownType == null ? null : new TypeReference<FactType>(knownType));
+  public void setKnownType(org.gedcomx.types.FactType knownType) {
+    this.type = knownType == null ? null : new TypeReference<FactType>(knownType);
   }
 
   /**

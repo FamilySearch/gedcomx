@@ -32,7 +32,7 @@ public class TestRelationship {
     
     Relationship or = new Relationship();
     or.setId("id");
-    or.setType(new TypeReference<RelationshipType>(URI.create("urn:custom#custom")));
+    or.setType(URI.create("urn:custom#custom"));
     dom = toXmlDom(or);
     assertNotNull(dom.getDocumentElement().getElementsByTagNameNS(CommonModels.RDF_NAMESPACE, "type"));
     assertEquals(1, dom.getDocumentElement().getElementsByTagNameNS(CommonModels.RDF_NAMESPACE, "type").getLength());

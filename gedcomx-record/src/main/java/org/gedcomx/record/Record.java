@@ -15,7 +15,6 @@
  */
 package org.gedcomx.record;
 
-import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
@@ -23,12 +22,12 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.common.GenealogicalEntity;
 import org.gedcomx.common.PersistentIdentifiable;
+import org.gedcomx.common.URI;
 import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.JsonElementWrapper;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.RecordType;
 import org.gedcomx.types.TypeReference;
-import org.gedcomx.types.Typed;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.*;
@@ -42,9 +41,11 @@ import java.util.List;
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "Record", propOrder = { "type", "personas", "relationships", "facts" } )
-public class Record extends GenealogicalEntity implements Typed<RecordType>, PersistentIdentifiable, HasFacts {
+public class Record extends GenealogicalEntity implements PersistentIdentifiable, HasFacts {
 
   private String lang;
+  @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
+  @JsonProperty
   private TypeReference<RecordType> type;
   private List<Persona> personas;
   private List<Fact> facts;
@@ -55,9 +56,10 @@ public class Record extends GenealogicalEntity implements Typed<RecordType>, Per
    * 
    * @return The type of the record.
    */
-  @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
-  public TypeReference<RecordType> getType() {
-    return type;
+  @XmlTransient
+  @JsonIgnore
+  public URI getType() {
+    return this.type == null ? null : this.type.getType();
   }
 
   /**
@@ -65,8 +67,9 @@ public class Record extends GenealogicalEntity implements Typed<RecordType>, Per
    * 
    * @param type The type of the record.
    */
-  public void setType(TypeReference<RecordType> type) {
-    this.type = type;
+  @JsonIgnore
+  public void setType(URI type) {
+    this.type = type == null ? null : new TypeReference<RecordType>(type);
   }
 
   /**
@@ -77,7 +80,7 @@ public class Record extends GenealogicalEntity implements Typed<RecordType>, Per
   @XmlTransient
   @JsonIgnore
   public RecordType getKnownType() {
-    return getType() == null ? null : RecordType.fromQNameURI(getType().getType());
+    return this.type == null ? null : RecordType.fromQNameURI(this.type.getType());
   }
 
   /**
@@ -87,7 +90,7 @@ public class Record extends GenealogicalEntity implements Typed<RecordType>, Per
    */
   @JsonIgnore
   public void setKnownType(RecordType knownType) {
-    setType(knownType == null ? null : new TypeReference<RecordType>(knownType));
+    this.type = knownType == null ? null : new TypeReference<RecordType>(knownType);
   }
 
   /**

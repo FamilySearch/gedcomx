@@ -15,7 +15,6 @@
  */
 package org.gedcomx.common;
 
-import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.enunciate.doc.DocumentationExample;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
@@ -27,13 +26,14 @@ import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.ResourceFragmentParameter;
 import org.gedcomx.types.ResourceType;
 import org.gedcomx.types.TypeReference;
-import org.gedcomx.types.Typed;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.*;
 import javax.xml.namespace.QName;
-import org.gedcomx.common.URI;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * A generic RDF-based reference to a resource.
@@ -44,7 +44,7 @@ import java.util.*;
 @JsonTypeInfo ( use = JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver ( XmlTypeIdResolver.class )
 @XmlSeeAlso(ResourceFragmentParameter.class)
-public class ResourceReference implements Typed<ResourceType>, SupportsExtensionAttributes, SupportsExtensionElements {
+public class ResourceReference implements SupportsExtensionAttributes, SupportsExtensionElements {
 
   private String id;
   private TypeReference<ResourceType> type;

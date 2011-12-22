@@ -15,7 +15,6 @@
  */
 package org.gedcomx.conclusion;
 
-import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
@@ -23,10 +22,10 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.common.GenealogicalEntity;
 import org.gedcomx.common.ResourceReference;
+import org.gedcomx.common.URI;
 import org.gedcomx.rt.*;
 import org.gedcomx.types.RelationshipType;
 import org.gedcomx.types.TypeReference;
-import org.gedcomx.types.Typed;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -44,8 +43,10 @@ import java.util.List;
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "Relationship", propOrder = { "type", "person1", "person2", "facts"} )
-public class Relationship extends GenealogicalEntity implements Typed<RelationshipType>, HasFacts {
+public class Relationship extends GenealogicalEntity implements HasFacts {
 
+  @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
+  @JsonProperty
   private TypeReference<RelationshipType> type;
   private ResourceReference person1;
   private ResourceReference person2;
@@ -56,9 +57,10 @@ public class Relationship extends GenealogicalEntity implements Typed<Relationsh
    *
    * @return The type of this relationship.
    */
-  @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
-  public TypeReference<RelationshipType> getType() {
-    return type;
+  @XmlTransient
+  @JsonIgnore
+  public URI getType() {
+    return this.type == null ? null : this.type.getType();
   }
 
   /**
@@ -66,8 +68,9 @@ public class Relationship extends GenealogicalEntity implements Typed<Relationsh
    *
    * @param type The type of this relationship.
    */
-  public void setType(TypeReference<RelationshipType> type) {
-    this.type = type;
+  @JsonIgnore
+  public void setType(URI type) {
+    this.type = type == null ? null : new TypeReference<RelationshipType>(type);
   }
 
   /**
@@ -78,7 +81,7 @@ public class Relationship extends GenealogicalEntity implements Typed<Relationsh
   @XmlTransient
   @JsonIgnore
   public RelationshipType getKnownType() {
-    return getType() == null ? null : RelationshipType.fromQNameURI(getType().getType());
+    return this.type == null ? null : RelationshipType.fromQNameURI(this.type.getType());
   }
 
   /**
@@ -88,7 +91,7 @@ public class Relationship extends GenealogicalEntity implements Typed<Relationsh
    */
   @JsonIgnore
   public void setKnownType(RelationshipType type) {
-    setType(type == null ? null : new TypeReference<RelationshipType>(type));
+    this.type = type == null ? null : new TypeReference<RelationshipType>(type);
   }
 
   /**

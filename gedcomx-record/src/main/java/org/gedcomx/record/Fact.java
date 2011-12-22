@@ -15,17 +15,17 @@
  */
 package org.gedcomx.record;
 
-import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
+import org.gedcomx.common.URI;
 import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.RDFSubClassOf;
 import org.gedcomx.rt.RDFSubPropertyOf;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.FactType;
 import org.gedcomx.types.TypeReference;
-import org.gedcomx.types.Typed;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
@@ -39,8 +39,10 @@ import javax.xml.bind.annotation.XmlType;
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType( name = "Fact", propOrder = { "type", "date", "place" } )
 @RDFSubClassOf ( CommonModels.DUBLIN_CORE_TYPE_NAMESPACE + "Event" )
-public class Fact extends Field implements Typed<FactType> {
+public class Fact extends Field {
 
+  @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
+  @JsonProperty
   private TypeReference<FactType> type;
   private Boolean primary;
   private Date date;
@@ -51,9 +53,10 @@ public class Fact extends Field implements Typed<FactType> {
    *
    * @return The type of the fact.
    */
-  @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
-  public TypeReference<FactType> getType() {
-    return type;
+  @XmlTransient
+  @JsonIgnore
+  public URI getType() {
+    return this.type == null ? null : this.type.getType();
   }
 
   /**
@@ -61,8 +64,9 @@ public class Fact extends Field implements Typed<FactType> {
    *
    * @param type The type of the fact.
    */
-  public void setType(TypeReference<FactType> type) {
-    this.type = type;
+  @JsonIgnore
+  public void setType(URI type) {
+    this.type = type == null ? null : new TypeReference<FactType>(type);
   }
 
   /**
@@ -73,7 +77,7 @@ public class Fact extends Field implements Typed<FactType> {
   @XmlTransient
   @JsonIgnore
   public org.gedcomx.types.FactType getKnownType() {
-    return getType() == null ? null : FactType.fromQNameURI(getType().getType());
+    return this.type == null ? null : FactType.fromQNameURI(this.type.getType());
   }
 
   /**
@@ -83,7 +87,7 @@ public class Fact extends Field implements Typed<FactType> {
    */
   @JsonIgnore
   public void setKnownType(org.gedcomx.types.FactType knownType) {
-    setType(knownType == null ? null : new TypeReference<FactType>(knownType));
+    this.type = knownType == null ? null : new TypeReference<FactType>(knownType);
   }
 
   /**

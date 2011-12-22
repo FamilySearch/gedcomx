@@ -15,12 +15,12 @@
  */
 package org.gedcomx.conclusion;
 
-import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonProperty;
+import org.gedcomx.common.URI;
 import org.gedcomx.rt.CommonModels;
 import org.gedcomx.types.NamePartType;
 import org.gedcomx.types.TypeReference;
-import org.gedcomx.types.Typed;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -32,8 +32,10 @@ import javax.xml.bind.annotation.XmlType;
  * @author Ryan Heaton
  */
 @XmlType ( name = "NamePart", propOrder = {"type", "text"})
-public final class NamePart implements Typed<NamePartType> {
+public final class NamePart {
 
+  @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
+  @JsonProperty
   private TypeReference<NamePartType> type;
   private String text;
 
@@ -42,9 +44,10 @@ public final class NamePart implements Typed<NamePartType> {
    *
    * @return The type of the name part.
    */
-  @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
-  public TypeReference<NamePartType> getType() {
-    return type;
+  @XmlTransient
+  @JsonIgnore
+  public URI getType() {
+    return this.type == null ? null : this.type.getType();
   }
 
   /**
@@ -52,8 +55,9 @@ public final class NamePart implements Typed<NamePartType> {
    *
    * @param type The type of the name part.
    */
-  public void setType(TypeReference<NamePartType> type) {
-    this.type = type;
+  @JsonIgnore
+  public void setType(URI type) {
+    this.type = type == null ? null : new TypeReference<NamePartType>(type);
   }
 
   /**
@@ -64,7 +68,7 @@ public final class NamePart implements Typed<NamePartType> {
   @XmlTransient
   @JsonIgnore
   public NamePartType getKnownType() {
-    return getType() == null ? null : NamePartType.fromQNameURI(getType().getType());
+    return this.type == null ? null : NamePartType.fromQNameURI(this.type.getType());
   }
 
   /**
@@ -74,7 +78,7 @@ public final class NamePart implements Typed<NamePartType> {
    */
   @JsonIgnore
   public void setKnownType(NamePartType knownType) {
-    setType(knownType == null ? null : new TypeReference<NamePartType>(knownType));
+    this.type = knownType == null ? null : new TypeReference<NamePartType>(knownType);
   }
 
   /**

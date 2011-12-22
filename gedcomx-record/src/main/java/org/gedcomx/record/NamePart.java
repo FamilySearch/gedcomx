@@ -15,17 +15,19 @@
  */
 package org.gedcomx.record;
 
-import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
+import org.gedcomx.common.URI;
 import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.NamePartType;
 import org.gedcomx.types.TypeReference;
-import org.gedcomx.types.Typed;
 
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  * A part of a name.
@@ -33,8 +35,10 @@ import javax.xml.bind.annotation.*;
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver ( XmlTypeIdResolver.class )
 @XmlType ( name = "NamePart" )
-public class NamePart extends Field implements Typed<NamePartType> {
+public class NamePart extends Field {
 
+  @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
+  @JsonProperty
   private TypeReference<NamePartType> type;
 
   /**
@@ -42,9 +46,10 @@ public class NamePart extends Field implements Typed<NamePartType> {
    *
    * @return The type of the name part.
    */
-  @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
-  public TypeReference<NamePartType> getType() {
-    return type;
+  @XmlTransient
+  @JsonIgnore
+  public URI getType() {
+    return this.type == null ? null : this.type.getType();
   }
 
   /**
@@ -52,8 +57,9 @@ public class NamePart extends Field implements Typed<NamePartType> {
    *
    * @param type The type of the name part.
    */
-  public void setType(TypeReference<NamePartType> type) {
-    this.type = type;
+  @JsonIgnore
+  public void setType(URI type) {
+    this.type = type == null ? null : new TypeReference<NamePartType>(type);
   }
 
   /**
@@ -64,7 +70,7 @@ public class NamePart extends Field implements Typed<NamePartType> {
   @XmlTransient
   @JsonIgnore
   public NamePartType getKnownType() {
-    return getType() == null ? null : NamePartType.fromQNameURI(getType().getType());
+    return this.type == null ? null : NamePartType.fromQNameURI(this.type.getType());
   }
 
   /**
@@ -74,7 +80,7 @@ public class NamePart extends Field implements Typed<NamePartType> {
    */
   @JsonIgnore
   public void setKnownType(NamePartType knownType) {
-    setType(knownType == null ? null : new TypeReference<NamePartType>(knownType));
+    this.type = knownType == null ? null : new TypeReference<NamePartType>(knownType);
   }
 
 }

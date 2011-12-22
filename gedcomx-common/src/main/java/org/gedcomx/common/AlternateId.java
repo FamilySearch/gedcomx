@@ -15,12 +15,11 @@
  */
 package org.gedcomx.common;
 
-import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.gedcomx.rt.CommonModels;
 import org.gedcomx.types.AlternateIdType;
 import org.gedcomx.types.TypeReference;
-import org.gedcomx.types.Typed;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -33,9 +32,11 @@ import javax.xml.bind.annotation.XmlType;
  * @author Ryan Heaton
  */
 @XmlType ( name = "AlternateId", propOrder = {"type", "value"})
-public final class AlternateId implements Typed<AlternateIdType> {
+public final class AlternateId {
 
   private String value;
+  @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
+  @JsonProperty
   private TypeReference<AlternateIdType> type;
 
   /**
@@ -62,9 +63,10 @@ public final class AlternateId implements Typed<AlternateIdType> {
    *
    * @return The type of the id.
    */
-  @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
-  public TypeReference<AlternateIdType> getType() {
-    return type;
+  @XmlTransient
+  @JsonIgnore
+  public URI getType() {
+    return this.type == null ? null : this.type.getType();
   }
 
   /**
@@ -72,8 +74,9 @@ public final class AlternateId implements Typed<AlternateIdType> {
    *
    * @param type The type of the id.
    */
-  public void setType(TypeReference<AlternateIdType> type) {
-    this.type = type;
+  @JsonIgnore
+  public void setType(URI type) {
+    this.type = type == null ? null : new TypeReference<AlternateIdType>(type);
   }
 
   /**
@@ -84,7 +87,7 @@ public final class AlternateId implements Typed<AlternateIdType> {
   @XmlTransient
   @JsonIgnore
   public AlternateIdType getKnownType() {
-    return getType() == null ? null : AlternateIdType.fromQNameURI(getType().getType());
+    return this.type == null ? null : AlternateIdType.fromQNameURI(this.type.getType());
   }
 
   /**
@@ -94,6 +97,6 @@ public final class AlternateId implements Typed<AlternateIdType> {
    */
   @JsonIgnore
   public void setKnownType(AlternateIdType knownType) {
-    setType(knownType == null ? null : new TypeReference<AlternateIdType>(knownType));
+    this.type = knownType == null ? null : new TypeReference<AlternateIdType>(knownType);
   }
 }

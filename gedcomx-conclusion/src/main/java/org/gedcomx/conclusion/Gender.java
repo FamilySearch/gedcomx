@@ -16,14 +16,15 @@
 package org.gedcomx.conclusion;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
+import org.gedcomx.common.URI;
 import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.JsonElementWrapper;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.GenderType;
 import org.gedcomx.types.TypeReference;
-import org.gedcomx.types.Typed;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -40,8 +41,10 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType ( name = "Gender" )
 @XmlRootElement
 @JsonElementWrapper ( name = "genders" )
-public class Gender extends Conclusion implements Typed<GenderType> {
+public class Gender extends Conclusion {
 
+  @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
+  @JsonProperty
   private TypeReference<GenderType> type;
 
   /**
@@ -49,9 +52,10 @@ public class Gender extends Conclusion implements Typed<GenderType> {
    *
    * @return The type of the gender.
    */
-  @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
-  public TypeReference<GenderType> getType() {
-    return type;
+  @XmlTransient
+  @JsonIgnore
+  public URI getType() {
+    return this.type == null ? null : this.type.getType();
   }
 
   /**
@@ -59,8 +63,9 @@ public class Gender extends Conclusion implements Typed<GenderType> {
    *
    * @param type The type of the gender.
    */
-  public void setType(TypeReference<GenderType> type) {
-    this.type = type;
+  @JsonIgnore
+  public void setType(URI type) {
+    this.type = type == null ? null : new TypeReference<GenderType>(type);
   }
 
   /**
@@ -71,7 +76,7 @@ public class Gender extends Conclusion implements Typed<GenderType> {
   @XmlTransient
   @JsonIgnore
   public GenderType getKnownType() {
-    return getType() == null ? null : GenderType.fromQNameURI(getType().getType());
+    return this.type == null ? null : GenderType.fromQNameURI(this.type.getType());
   }
 
   /**
@@ -81,7 +86,6 @@ public class Gender extends Conclusion implements Typed<GenderType> {
    */
   @JsonIgnore
   public void setKnownType(GenderType type) {
-    setType(type == null ? null : new TypeReference<GenderType>(type));
+    this.type = type == null ? null : new TypeReference<GenderType>(type);
   }
-
 }

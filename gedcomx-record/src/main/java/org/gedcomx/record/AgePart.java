@@ -16,13 +16,14 @@
 package org.gedcomx.record;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
+import org.gedcomx.common.URI;
 import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.AgePartType;
 import org.gedcomx.types.TypeReference;
-import org.gedcomx.types.Typed;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -36,8 +37,10 @@ import javax.xml.bind.annotation.XmlType;
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "AgePart" )
-public class AgePart extends Field implements Typed<AgePartType> {
+public class AgePart extends Field {
 
+  @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
+  @JsonProperty
   private TypeReference<AgePartType> type;
 
   /**
@@ -45,9 +48,10 @@ public class AgePart extends Field implements Typed<AgePartType> {
    *
    * @return The age part type.
    */
-  @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
-  public TypeReference<AgePartType> getType() {
-    return type;
+  @XmlTransient
+  @JsonIgnore
+  public URI getType() {
+    return this.type == null ? null : this.type.getType();
   }
 
   /**
@@ -55,8 +59,9 @@ public class AgePart extends Field implements Typed<AgePartType> {
    *
    * @param type The age part type.
    */
-  public void setType(TypeReference<AgePartType> type) {
-    this.type = type;
+  @JsonIgnore
+  public void setType(URI type) {
+    this.type = type == null ? null : new TypeReference<AgePartType>(type);
   }
 
   /**
@@ -67,7 +72,7 @@ public class AgePart extends Field implements Typed<AgePartType> {
   @XmlTransient
   @JsonIgnore
   public AgePartType getKnownType() {
-    return getType() == null ? null : AgePartType.fromQNameURI(getType().getType());
+    return this.type == null ? null : AgePartType.fromQNameURI(this.type.getType());
   }
 
   /**
@@ -77,7 +82,7 @@ public class AgePart extends Field implements Typed<AgePartType> {
    */
   @JsonIgnore
   public void setKnownType(AgePartType type) {
-    setType(type == null ? null : new TypeReference<AgePartType>(type));
+    this.type = type == null ? null : new TypeReference<AgePartType>(type);
   }
 
 }

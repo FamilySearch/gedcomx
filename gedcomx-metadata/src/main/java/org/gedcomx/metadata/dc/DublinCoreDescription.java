@@ -25,7 +25,6 @@ import org.gedcomx.metadata.rdf.RDFValue;
 import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.ResourceType;
-import org.gedcomx.types.Typed;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
@@ -46,7 +45,7 @@ import java.util.List;
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType (name = "Description")
 @XmlRootElement (name = "Description", namespace = CommonModels.RDF_NAMESPACE ) // (heatonra) see big comment in RDFDescription
-public class DublinCoreDescription extends RDFDescription implements Typed<ResourceType> {
+public class DublinCoreDescription extends RDFDescription {
 
   private RDFValue abstrct;
   private List<RDFValue> accessRights;

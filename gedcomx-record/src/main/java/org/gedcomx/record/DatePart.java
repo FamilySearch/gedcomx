@@ -15,15 +15,15 @@
  */
 package org.gedcomx.record;
 
-import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
+import org.gedcomx.common.URI;
 import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.DatePartType;
 import org.gedcomx.types.TypeReference;
-import org.gedcomx.types.Typed;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -35,8 +35,10 @@ import javax.xml.bind.annotation.XmlType;
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "DatePart" )
-public class DatePart extends Field implements Typed<DatePartType> {
+public class DatePart extends Field {
 
+  @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
+  @JsonProperty
   private TypeReference<DatePartType> type;
 
   /**
@@ -44,9 +46,10 @@ public class DatePart extends Field implements Typed<DatePartType> {
    *
    * @return The date part type.
    */
-  @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
-  public TypeReference<DatePartType> getType() {
-    return type;
+  @XmlTransient
+  @JsonIgnore
+  public URI getType() {
+    return this.type == null ? null : this.type.getType();
   }
 
   /**
@@ -54,8 +57,9 @@ public class DatePart extends Field implements Typed<DatePartType> {
    *
    * @param type The date part type.
    */
-  public void setType(TypeReference<DatePartType> type) {
-    this.type = type;
+  @JsonIgnore
+  public void setType(URI type) {
+    this.type = type == null ? null : new TypeReference<DatePartType>(type);
   }
 
   /**
@@ -66,7 +70,7 @@ public class DatePart extends Field implements Typed<DatePartType> {
   @XmlTransient
   @JsonIgnore
   public DatePartType getKnownType() {
-    return getType() == null ? null : DatePartType.fromQName(getType().getType());
+    return this.type == null ? null : DatePartType.fromQName(this.type.getType());
   }
 
   /**
@@ -76,6 +80,6 @@ public class DatePart extends Field implements Typed<DatePartType> {
    */
   @JsonIgnore
   public void setKnownType(DatePartType knownType) {
-    setType(knownType == null ? null : new TypeReference<DatePartType>(knownType));
+    this.type = knownType == null ? null : new TypeReference<DatePartType>(knownType);
   }
 }
