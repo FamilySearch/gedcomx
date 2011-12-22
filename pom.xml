@@ -12,7 +12,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <enunciate.version>1.25-RC2</enunciate.version>
-    <gedcomx.version>0.7.0.BUILD-SNAPSHOT</gedcomx.version>
+    <gedcomx.version>0.8.0.BUILD-SNAPSHOT</gedcomx.version>
     <root.basedir>${project.basedir}</root.basedir>
   </properties>
 
