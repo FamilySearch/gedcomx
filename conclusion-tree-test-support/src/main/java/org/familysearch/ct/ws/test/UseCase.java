@@ -1,11 +1,16 @@
 package org.familysearch.ct.ws.test;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Mike Gardiner and Ryan Heaton
+ * A documented use case for the CT API.
+ *
+ * @author Mike Gardiner
+ * @author Ryan Heaton
  */
+@XmlRootElement
 public class UseCase {
 
   private String title;

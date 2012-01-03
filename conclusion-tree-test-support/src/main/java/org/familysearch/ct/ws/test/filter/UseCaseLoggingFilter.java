@@ -8,18 +8,26 @@ import com.sun.jersey.api.client.filter.LoggingFilter;
 import org.familysearch.ct.ws.test.RequestAndResponse;
 import org.familysearch.ct.ws.test.UseCase;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author Mike Gardiner
  */
 public class UseCaseLoggingFilter extends LoggingFilter {
 
   private static final ThreadLocal<UseCase> CURRENT_USE_CASE = new ThreadLocal<UseCase>();
+  private final List<UseCase> useCases = new ArrayList<UseCase>();
 
-  public static void setCurrentUseCase(UseCase uc) {
+  public void setCurrentUseCase(UseCase uc) {
     if (CURRENT_USE_CASE.get() != null) {
-      //todo: add current use case to list of use cases
+      this.useCases.add(CURRENT_USE_CASE.get());
     }
     CURRENT_USE_CASE.set(uc);
+  }
+
+  public List<UseCase> getUseCases() {
+    return useCases;
   }
 
   @Override
