@@ -3,16 +3,17 @@ package org.familysearch.ct.ws.test;
 import com.sun.jersey.api.client.ClientRequest;
 import com.sun.jersey.api.client.ClientResponse;
 
-import java.util.Map;
+import javax.ws.rs.core.MultivaluedMap;
+import java.io.Serializable;
 
 /**
  * @author Mike Gardiner and Ryan Heaton
  */
-public class RequestAndResponse {
+public class RequestAndResponse implements Serializable {
 
-  private Map<String, String> requestHeaders;
+  private MultivaluedMap<String, Object> requestHeaders;
   private String requestBody;
-  private Map<String, String> responseHeaders;
+  private MultivaluedMap<String, String> responseHeaders;
   private String responseBody;
   private int responseCode;
 
@@ -20,14 +21,18 @@ public class RequestAndResponse {
   }
 
   public RequestAndResponse(ClientRequest request, ClientResponse response) {
-    //todo: copy all the stuff....
+    requestHeaders = request.getHeaders();
+    requestBody = (String) request.getEntity();
+    responseHeaders = response.getHeaders();
+    responseBody = response.getEntity(String.class);
+    responseCode = response.getStatus();
   }
 
-  public Map<String, String> getRequestHeaders() {
+  public MultivaluedMap<String, Object> getRequestHeaders() {
     return requestHeaders;
   }
 
-  public void setRequestHeaders(Map<String, String> requestHeaders) {
+  public void setRequestHeaders(MultivaluedMap<String, Object> requestHeaders) {
     this.requestHeaders = requestHeaders;
   }
 
@@ -39,11 +44,11 @@ public class RequestAndResponse {
     this.requestBody = requestBody;
   }
 
-  public Map<String, String> getResponseHeaders() {
+  public MultivaluedMap<String, String> getResponseHeaders() {
     return responseHeaders;
   }
 
-  public void setResponseHeaders(Map<String, String> responseHeaders) {
+  public void setResponseHeaders(MultivaluedMap<String, String> responseHeaders) {
     this.responseHeaders = responseHeaders;
   }
 
