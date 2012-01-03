@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>conclusion-tree-test-support</artifactId>
+  <name>FamilySearch Conclusion Tree Platform - Test Support</name>
+  <packaging>jar</packaging>
+
+  <parent>
+    <groupId>org.familysearch.ct</groupId>
+    <artifactId>conclusion-tree-parent</artifactId>
+    <version>0.1.0.BUILD-SNAPSHOT</version>
+  </parent>
+
+  <build>
+    <testResources>
+      <testResource>
+        <directory>src/test/java</directory>
+      </testResource>
+    </testResources>
+  </build>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.sun.jersey.jersey-test-framework</groupId>
+      <artifactId>jersey-test-framework-inmemory</artifactId>
+      <version>1.11</version>
+    </dependency>
+  </dependencies>
+</project>

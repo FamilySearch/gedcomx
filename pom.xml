@@ -17,6 +17,7 @@
   </properties>
 
   <modules>
+    <module>conclusion-tree-test-support</module>
     <module>conclusion-tree-doc-support</module>
     <module>conclusion-tree-model</module>
     <module>conclusion-tree-rs</module>
