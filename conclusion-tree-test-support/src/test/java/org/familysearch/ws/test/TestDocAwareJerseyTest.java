@@ -17,6 +17,11 @@ public class TestDocAwareJerseyTest extends DocAwareJerseyTest {
     super("org.familysearch.ws.test");
   }
 
+  /**
+   * Create a UseCase and verify it exists
+   *
+   * @throws Exception - An error occurred
+   */
   @Test
   public void testCreateUseCase() throws Exception {
 
@@ -29,6 +34,11 @@ public class TestDocAwareJerseyTest extends DocAwareJerseyTest {
     assertEquals(1, this.filter.getUseCases().size());
   }
 
+  /**
+   * Test to ensure that all the UseCase titles are unique
+   *
+   * @throws Exception - Shouldn't throw anything since we trap the exception
+   */
   @Test
   public void testTestNonUniqueTitle() throws Exception {
 
@@ -49,6 +59,11 @@ public class TestDocAwareJerseyTest extends DocAwareJerseyTest {
     }
   }
 
+  /**
+   * Override tearDown since we are testing the logic in each test
+   *
+   * @throws Exception - An exception occurred
+   */
   @Override
   public void tearDown() throws Exception {
 
