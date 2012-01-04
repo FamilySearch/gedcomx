@@ -6,8 +6,7 @@ import org.junit.Test;
 
 import java.io.File;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertTrue;
+import static junit.framework.Assert.*;
 
 
 /**
@@ -63,6 +62,21 @@ public class TestDocAwareJerseyTest extends DocAwareJerseyTest {
     catch (Exception e) {
       assertTrue(true);  // We should get here
     }
+  }
+
+  @Test
+  public void testRequestDescription() throws Exception {
+
+    setRequestDescription("Request Description");
+
+    createUseCase()
+      .withTitle("Request Description")
+      .withDescription("Title with request description");
+
+    String response = resource().path("/root").get(String.class);
+    assertNotNull(response);
+
+    super.tearDown();
   }
 
   private boolean fileExists(String title) {

@@ -27,11 +27,12 @@ public class RequestAndResponse implements Serializable {
   private String responseBody;
   private int responseCode;
   private String responseMessage;
+  private String description;
 
   public RequestAndResponse() {
   }
 
-  public RequestAndResponse(ClientRequest request, ClientResponse response) {
+  public RequestAndResponse(ClientRequest request, ClientResponse response, String description) {
     MultivaluedMap<String, Object> map = request.getHeaders();
     Set<String> set = map.keySet();
     Iterator<String> iterator = set.iterator();
@@ -60,6 +61,7 @@ public class RequestAndResponse implements Serializable {
     this.responseBody = response.getEntity(String.class);
     this.responseCode = response.getStatus();
     this.responseMessage = response.getClientResponseStatus().getReasonPhrase();
+    this.description = description;
   }
 
   public String getRequestMethod() {
@@ -126,5 +128,13 @@ public class RequestAndResponse implements Serializable {
 
   public void setResponseMessage(String responseMessage) {
     this.responseMessage = responseMessage;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
   }
 }

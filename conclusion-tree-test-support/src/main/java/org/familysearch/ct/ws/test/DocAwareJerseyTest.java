@@ -58,6 +58,10 @@ public class DocAwareJerseyTest extends JerseyTest {
     return uc;
   }
 
+  protected void setRequestDescription(String description) {
+    this.filter.setCurrentRequestDescription(description);
+  }
+
   @Override
   public void tearDown() throws Exception {
     super.tearDown();
