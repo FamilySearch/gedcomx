@@ -20,7 +20,7 @@ import java.io.OutputStream;
  */
 public class DocAwareJerseyTest extends JerseyTest {
 
-  protected static String OUTPUT_DIR = "target" + File.separator + "generated-doc";
+  protected static final String OUTPUT_DIR = "target" + File.separator + "generated-doc";
 
   protected UseCaseLoggingFilter filter;
 
