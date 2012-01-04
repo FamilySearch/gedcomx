@@ -20,7 +20,7 @@ import java.io.OutputStream;
  */
 public class DocAwareJerseyTest extends JerseyTest {
 
-  private static String OUTPUT_DIR = "target" + File.separator + "generated-doc";
+  protected static String OUTPUT_DIR = "target" + File.separator + "generated-doc";
 
   protected UseCaseLoggingFilter filter;
 
@@ -72,7 +72,7 @@ public class DocAwareJerseyTest extends JerseyTest {
       File file = new File(generateFilename(useCase.getTitle()));
 
       if (file.exists()) {
-        throw new Exception("File is not unique, please ensure the UseCase title is unique!");
+        throw new Exception("File is not unique, please ensure the UseCase title is unique!\n" + useCase.getTitle());
       }
 
       OutputStream os = new FileOutputStream(file);
