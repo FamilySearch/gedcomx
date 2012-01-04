@@ -21,8 +21,8 @@ public class TestDiscoveryRSImpl extends DocAwareJerseyTest {
   @Test
   public void testGet() throws Exception {
     createUseCase()
-      .withTitle("title of usecase")
-      .withDescription("here is a bigger description of the use case");
+      .withTitle("Discovery")
+      .withDescription("How to get the discovery resource.");
     ClientResponse response = resource().path("/.well-known/host-meta").accept(XRDModel.XRD_V1_XML_MEDIA_TYPE).get(ClientResponse.class);
     assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
     Date lastModified = response.getLastModified();
@@ -30,8 +30,8 @@ public class TestDiscoveryRSImpl extends DocAwareJerseyTest {
     Date later = new Date(lastModified.getTime() + (1000 * 60 * 60)); //one hour later
 
     createUseCase()
-      .withTitle("title of usecase2")
-      .withDescription("description of usecase 2");
+      .withTitle("Caching The Discovery")
+      .withDescription("How the caching mechanism works on the discovery resource.");
     response = resource().path("/.well-known/host-meta").accept(XRDModel.XRD_V1_XML_MEDIA_TYPE).header("If-Modified-Since", later).get(ClientResponse.class);
     assertEquals(Response.Status.NOT_MODIFIED.getStatusCode(), response.getStatus());
   }

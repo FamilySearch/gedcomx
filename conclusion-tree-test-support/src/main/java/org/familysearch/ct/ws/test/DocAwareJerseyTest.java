@@ -20,7 +20,7 @@ import java.io.OutputStream;
  */
 public class DocAwareJerseyTest extends JerseyTest {
 
-  protected static final String OUTPUT_DIR = "target" + File.separator + "generated-doc";
+  protected static final String DEFAULT_OUTPUT_DIR = "target" + File.separator + "generated-doc";
 
   protected UseCaseLoggingFilter filter;
 
@@ -63,13 +63,18 @@ public class DocAwareJerseyTest extends JerseyTest {
     super.tearDown();
     endUseCase();
 
-    File directory = new File(OUTPUT_DIR);
-    directory.mkdir();
+    String usecaseDir = System.getProperty("usecase.dir");
+    if (usecaseDir == null) {
+      usecaseDir = DEFAULT_OUTPUT_DIR;
+    }
+
+    File directory = new File(usecaseDir);
+    directory.mkdirs();
 
     Marshaller marshaller = JAXBContext.newInstance(UseCase.class).createMarshaller();
 
     for (UseCase useCase : this.filter.getUseCases()) {
-      File file = new File(generateFilename(useCase.getTitle()));
+      File file = new File(usecaseDir, generateFilename(useCase.getTitle()));
 
       if (file.exists()) {
         throw new Exception("File is not unique, please ensure the UseCase title is unique!\n" + useCase.getTitle());
@@ -82,14 +87,9 @@ public class DocAwareJerseyTest extends JerseyTest {
   }
 
   private String generateFilename(String title) {
-    StringBuffer filename = new StringBuffer("target");
-    filename.append(File.separator);
-    filename.append("generated-doc");
-    filename.append(File.separator);
-    filename.append(title.replace(' ', '-'));
+    StringBuilder filename = new StringBuilder(title.replace(' ', '-'));
     filename.append(".");
     filename.append("usecase.xml");
-
     return filename.toString();
   }
 

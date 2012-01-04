@@ -6,7 +6,7 @@
 [#list usecases as usecase]
   [@file name=titleToFilename(usecase.title) + ".content.html" charset="utf-8"]
 <div>
-  <h1>${usecase.title}</h1>
+  <h3>${usecase.title}</h3>
 
   <p>${usecase.description}</p>
 

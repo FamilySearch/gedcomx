@@ -66,7 +66,7 @@ public class TestDocAwareJerseyTest extends DocAwareJerseyTest {
   }
 
   private boolean fileExists(String title) {
-    StringBuilder sb = new StringBuilder(OUTPUT_DIR);
+    StringBuilder sb = new StringBuilder(DEFAULT_OUTPUT_DIR);
     sb.append(File.separator);
     sb.append(title);
     sb.append(".usecase.xml");
