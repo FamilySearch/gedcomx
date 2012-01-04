@@ -11,11 +11,16 @@ import org.familysearch.ct.ws.test.filter.UseCaseLoggingFilter;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 
 /**
  * @author Mike Gardiner and Ryan Heaton
  */
 public class DocAwareJerseyTest extends JerseyTest {
+
+  private static String OUTPUT_DIR = "target" + File.separator + "generated-doc";
 
   protected UseCaseLoggingFilter filter;
 
@@ -56,14 +61,39 @@ public class DocAwareJerseyTest extends JerseyTest {
   @Override
   public void tearDown() throws Exception {
     super.tearDown();
+    endUseCase();
+
+    File directory = new File(OUTPUT_DIR);
+    directory.mkdir();
 
     Marshaller marshaller = JAXBContext.newInstance(UseCase.class).createMarshaller();
+
     for (UseCase useCase : this.filter.getUseCases()) {
-      //todo: serialize out this use case to [id].usecase.xml
-      //marshaller.marshal(useCase, out);
-      //1. fill in this todo
-      //2. write some tests for this class and for the serialization of the UseCase object.
-      //3. fix the maven project so it packages up and attaches the jar with the .usecase.xml files in it.
+      File file = new File(generateFilename(useCase.getTitle()));
+
+      if (file.exists()) {
+        throw new Exception("File is not unique, please ensure the UseCase title is unique!");
+      }
+
+      OutputStream os = new FileOutputStream(file);
+      marshaller.marshal(useCase, os);
+      os.close();
     }
+  }
+
+  private String generateFilename(String title) {
+    StringBuffer filename = new StringBuffer("target");
+    filename.append(File.separator);
+    filename.append("generated-doc");
+    filename.append(File.separator);
+    filename.append(title.replace(' ', '-'));
+    filename.append(".");
+    filename.append("usecase.xml");
+
+    return filename.toString();
+  }
+
+  protected void endUseCase() {
+    this.filter.setCurrentUseCase(null);
   }
 }

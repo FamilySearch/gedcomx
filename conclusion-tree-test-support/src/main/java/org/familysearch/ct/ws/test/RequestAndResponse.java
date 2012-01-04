@@ -4,16 +4,22 @@ import com.sun.jersey.api.client.ClientRequest;
 import com.sun.jersey.api.client.ClientResponse;
 
 import javax.ws.rs.core.MultivaluedMap;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
 /**
  * @author Mike Gardiner and Ryan Heaton
  */
+@XmlType
 public class RequestAndResponse implements Serializable {
-
-  private MultivaluedMap<String, Object> requestHeaders;
+  private List<Header> requestHeaders = new ArrayList<Header>();
   private String requestBody;
-  private MultivaluedMap<String, String> responseHeaders;
+  private List<Header> responseHeaders = new ArrayList<Header>();
   private String responseBody;
   private int responseCode;
 
@@ -21,18 +27,39 @@ public class RequestAndResponse implements Serializable {
   }
 
   public RequestAndResponse(ClientRequest request, ClientResponse response) {
-    requestHeaders = request.getHeaders();
+    MultivaluedMap<String, Object> map = request.getHeaders();
+    Set<String> set = map.keySet();
+    Iterator<String> iterator = set.iterator();
+    String content;
+
+    while (iterator.hasNext()) {
+      String key = iterator.next();
+      content = map.get(key).get(0).toString();
+      requestHeaders.add(new Header(key, content));
+    }
+
     requestBody = (String) request.getEntity();
-    responseHeaders = response.getHeaders();
+
+    MultivaluedMap<String, String> responseMap = response.getHeaders();
+    set = responseMap.keySet();
+    iterator = set.iterator();
+
+    while (iterator.hasNext()) {
+      String key = iterator.next();
+      content = responseMap.get(key).get(0);
+      responseHeaders.add(new Header(key, content));
+    }
+
     responseBody = response.getEntity(String.class);
     responseCode = response.getStatus();
   }
 
-  public MultivaluedMap<String, Object> getRequestHeaders() {
+  @XmlElement ( name = "requestHeader" )
+  public List<Header> getRequestHeaders() {
     return requestHeaders;
   }
 
-  public void setRequestHeaders(MultivaluedMap<String, Object> requestHeaders) {
+  public void setRequestHeaders(List<Header> requestHeaders) {
     this.requestHeaders = requestHeaders;
   }
 
@@ -44,11 +71,12 @@ public class RequestAndResponse implements Serializable {
     this.requestBody = requestBody;
   }
 
-  public MultivaluedMap<String, String> getResponseHeaders() {
+  @XmlElement ( name = "responseHeader" )
+  public List<Header> getResponseHeaders() {
     return responseHeaders;
   }
 
-  public void setResponseHeaders(MultivaluedMap<String, String> responseHeaders) {
+  public void setResponseHeaders(List<Header> responseHeaders) {
     this.responseHeaders = responseHeaders;
   }
 
