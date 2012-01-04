@@ -4,6 +4,8 @@ import com.sun.jersey.test.framework.spi.container.TestContainerException;
 import org.familysearch.ct.ws.test.DocAwareJerseyTest;
 import org.junit.Test;
 
+import java.io.File;
+
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
 
@@ -24,14 +26,18 @@ public class TestDocAwareJerseyTest extends DocAwareJerseyTest {
    */
   @Test
   public void testCreateUseCase() throws Exception {
+    final String title = "title";
 
     createUseCase()
-      .title("title")
+      .title(title)
       .description("description");
 
     super.tearDown();
 
     assertEquals(1, this.filter.getUseCases().size());
+
+    // Make sure file exists
+    assertTrue(fileExists(title));
   }
 
   /**
@@ -57,6 +63,17 @@ public class TestDocAwareJerseyTest extends DocAwareJerseyTest {
     catch (Exception e) {
       assertTrue(true);  // We should get here
     }
+  }
+
+  private boolean fileExists(String title) {
+    StringBuilder sb = new StringBuilder(OUTPUT_DIR);
+    sb.append(File.separator);
+    sb.append(title);
+    sb.append(".usecase.xml");
+
+    File file = new File(sb.toString());
+
+    return file.exists();
   }
 
   /**
