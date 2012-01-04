@@ -30,6 +30,23 @@
         $( ".xml-docs" ).hide();
         $( ".json-docs" ).show();
       })
+
+      $(".usecase-include").each(function(){
+        var inc=$(this);
+        var title = window.location.hash;
+        if (inc.attr("title")) {
+          title = inc.attr("title");
+        }
+        else if (title) {
+          title = title.substring(title.indexOf("#") + 1)
+        }
+        if (title) {
+          var href = title.replace(/ /g, "-").replace(/:/g, ".") + ".content.html"
+          $.get(href, function(data){
+            inc.replaceWith(data);
+          });
+        }
+      });
     });
   </script>
   <script src="js/libs/prettify/prettify.js"></script>

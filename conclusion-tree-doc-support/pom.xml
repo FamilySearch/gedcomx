@@ -38,4 +38,17 @@
     </plugins>
   </build>
 
+  <dependencies>
+    <dependency>
+      <groupId>org.codehaus.enunciate</groupId>
+      <artifactId>enunciate-core</artifactId>
+      <version>${enunciate.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>conclusion-tree-test-support</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+  </dependencies>
+  
 </project>

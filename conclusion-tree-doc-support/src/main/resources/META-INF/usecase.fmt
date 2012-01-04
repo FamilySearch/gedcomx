@@ -1,0 +1,56 @@
+[#ftl]
+[#import "boilerplate.fmt" as libBoilerplate/]
+[#function titleToFilename title]
+  [#return title?string?replace(":",".")?replace(" ", "-")/]
+[/#function]
+[#list usecases as usecase]
+  [@file name=titleToFilename(usecase.title) + ".content.html" charset="utf-8"]
+<div>
+  <h1>${usecase.title}</h1>
+
+  <p>${usecase.description}</p>
+
+    [#list usecase.requests as request]
+      [#if request.description??]
+  <p>${request.description}</p>
+
+      [/#if]
+  <div class="xml-docs">
+    [#assign requestBody=request.requestBody?html?trim/]
+    [#assign responseBody=request.responseBody?html?trim/]
+    <h4>Request</h4>
+    <pre>${request.requestMethod?upper_case} ${request.requestPath.path}
+      [#list request.requestHeaders as header]
+${header.name}: ${header.value}
+      [/#list][#if request.requestBody??]
+<code class="prettyprint lang-xml">${request.requestBody?html?trim}</code>[/#if]</pre>
+
+    <h4>Response</h4>
+    <pre>HTTP/1.1 ${request.responseCode} ${request.responseMessage!""}
+      [#list request.responseHeaders as header]
+${header.name}: ${header.value}
+      [/#list][#if request.responseBody??]
+<code class="prettyprint lang-xml">${request.responseBody?html?trim}</code>[/#if]</pre>
+  </div>
+    [/#list]
+</div>
+  [/@file]
+[/#list]
+[@file name="usecase.html" charset="utf-8"]
+[@libBoilerplate.writeStartBody label="Use Case"/]
+[@libBoilerplate.writeHeader]
+  <ul class="clearfix" id="jsddm">
+    <li><a id="brand" href="Home.html">FamilySearch APIs - Home</a></li>
+    <li class="current"><a href="#">Use Case</a></li>
+  </ul>
+[/@libBoilerplate.writeHeader]
+<div class="wrap">
+  <article id="subject" class="clearfix">
+    <div class="feature-content clearfix">
+      <div class="usecase-include"></div>
+    </div>
+  </article>
+</div>
+[@libBoilerplate.writeFooter/]
+[@libBoilerplate.writeEndBody/]
+[/@file]
