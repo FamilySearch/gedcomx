@@ -29,8 +29,8 @@ public class TestDocAwareJerseyTest extends DocAwareJerseyTest {
     final String title = "title";
 
     createUseCase()
-      .title(title)
-      .description("description");
+      .withTitle(title)
+      .withDescription("description");
 
     super.tearDown();
 
@@ -50,12 +50,12 @@ public class TestDocAwareJerseyTest extends DocAwareJerseyTest {
 
     try {
       createUseCase()
-        .title("title2")
-        .description("description");
+        .withTitle("title2")
+        .withDescription("description");
 
       createUseCase()
-        .title("title2")
-        .description("description");
+        .withTitle("title2")
+        .withDescription("description");
 
       super.tearDown();
       assertTrue(false);  // We shouldn't get here
@@ -83,6 +83,5 @@ public class TestDocAwareJerseyTest extends DocAwareJerseyTest {
    */
   @Override
   public void tearDown() throws Exception {
-
   }
 }

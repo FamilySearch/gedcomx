@@ -7,6 +7,7 @@ import javax.ws.rs.core.MultivaluedMap;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 import java.io.Serializable;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -17,11 +18,15 @@ import java.util.Set;
  */
 @XmlType
 public class RequestAndResponse implements Serializable {
+
+  private String requestMethod;
+  private URI requestPath;
   private List<Header> requestHeaders = new ArrayList<Header>();
   private String requestBody;
   private List<Header> responseHeaders = new ArrayList<Header>();
   private String responseBody;
   private int responseCode;
+  private String responseMessage;
 
   public RequestAndResponse() {
   }
@@ -32,13 +37,15 @@ public class RequestAndResponse implements Serializable {
     Iterator<String> iterator = set.iterator();
     String content;
 
+    this.requestMethod = request.getMethod();
+    this.requestPath = request.getURI();
     while (iterator.hasNext()) {
       String key = iterator.next();
       content = map.get(key).get(0).toString();
-      requestHeaders.add(new Header(key, content));
+      this.requestHeaders.add(new Header(key, content));
     }
 
-    requestBody = (String) request.getEntity();
+    this.requestBody = (String) request.getEntity();
 
     MultivaluedMap<String, String> responseMap = response.getHeaders();
     set = responseMap.keySet();
@@ -47,11 +54,28 @@ public class RequestAndResponse implements Serializable {
     while (iterator.hasNext()) {
       String key = iterator.next();
       content = responseMap.get(key).get(0);
-      responseHeaders.add(new Header(key, content));
+      this.responseHeaders.add(new Header(key, content));
     }
 
-    responseBody = response.getEntity(String.class);
-    responseCode = response.getStatus();
+    this.responseBody = response.getEntity(String.class);
+    this.responseCode = response.getStatus();
+    this.responseMessage = response.getClientResponseStatus().getReasonPhrase();
+  }
+
+  public String getRequestMethod() {
+    return requestMethod;
+  }
+
+  public void setRequestMethod(String requestMethod) {
+    this.requestMethod = requestMethod;
+  }
+
+  public URI getRequestPath() {
+    return requestPath;
+  }
+
+  public void setRequestPath(URI requestPath) {
+    this.requestPath = requestPath;
   }
 
   @XmlElement ( name = "requestHeader" )
@@ -94,5 +118,13 @@ public class RequestAndResponse implements Serializable {
 
   public void setResponseCode(int responseCode) {
     this.responseCode = responseCode;
+  }
+
+  public String getResponseMessage() {
+    return responseMessage;
+  }
+
+  public void setResponseMessage(String responseMessage) {
+    this.responseMessage = responseMessage;
   }
 }

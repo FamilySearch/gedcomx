@@ -18,7 +18,7 @@ public class UseCase {
   private String description;
   private final List<RequestAndResponse> requests = new ArrayList<RequestAndResponse>();
 
-  public UseCase title(String title) {
+  public UseCase withTitle(String title) {
     setTitle(title);
     return this;
   }
@@ -31,7 +31,7 @@ public class UseCase {
     this.title = title;
   }
 
-  public UseCase description(String description) {
+  public UseCase withDescription(String description) {
     setDescription(description);
     return this;
   }
