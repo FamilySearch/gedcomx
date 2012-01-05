@@ -1,11 +1,9 @@
 package org.familysearch.ct.ws.test;
 
 import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.test.framework.AppDescriptor;
 import com.sun.jersey.test.framework.JerseyTest;
 import com.sun.jersey.test.framework.LowLevelAppDescriptor;
-import com.sun.jersey.test.framework.spi.client.ClientFactory;
 import com.sun.jersey.test.framework.spi.container.TestContainer;
 import com.sun.jersey.test.framework.spi.container.TestContainerException;
 import com.sun.jersey.test.framework.spi.container.TestContainerFactory;
@@ -64,8 +62,13 @@ public class DocAwareJerseyTest extends JerseyTest {
     return client;
   }
 
-  protected UseCase createUseCase() {
+  protected UseCase createUseCase(String title) {
+    if (title == null || title.isEmpty()) {
+      throw new IllegalArgumentException("title must not be null or empty");
+    }
+
     UseCase uc = new UseCase();
+    uc.setTitle(title);
     this.filter.setCurrentUseCase(uc);
     return uc;
   }

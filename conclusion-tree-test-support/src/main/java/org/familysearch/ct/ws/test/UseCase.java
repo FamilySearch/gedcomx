@@ -18,11 +18,6 @@ public class UseCase {
   private String description;
   private final List<RequestAndResponse> requests = new ArrayList<RequestAndResponse>();
 
-  public UseCase withTitle(String title) {
-    setTitle(title);
-    return this;
-  }
-
   public String getTitle() {
     return title;
   }

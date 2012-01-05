@@ -33,8 +33,7 @@ public class TestDocAwareJerseyTest extends DocAwareJerseyTest {
   public void testCreateUseCase() throws Exception {
     final String title = "title";
 
-    createUseCase()
-      .withTitle(title)
+    createUseCase(title)
       .withDescription("description");
 
     super.tearDown();
@@ -46,6 +45,31 @@ public class TestDocAwareJerseyTest extends DocAwareJerseyTest {
   }
 
   /**
+   * Make sure an exception is thrown if a UseCase is created without
+   * a title
+   */
+  @Test
+  public void testUseCaseNoTitle() {
+    // Null Title
+    try {
+      createUseCase(null);
+      assertTrue(false);  // Shouldn't get here
+    }
+    catch (Exception e) {
+      assertTrue(true);   // Should get here
+    }
+
+    // Empty Title
+    try {
+      createUseCase("");
+      assertTrue(false);  // Shouldn't get here
+    }
+    catch (Exception e) {
+      assertTrue(true);   // Should get here
+    }
+  }
+
+  /**
    * Test to ensure that all the UseCase titles are unique
    *
    * @throws Exception - Shouldn't throw anything since we trap the exception
@@ -54,12 +78,10 @@ public class TestDocAwareJerseyTest extends DocAwareJerseyTest {
   public void testTestNonUniqueTitle() throws Exception {
 
     try {
-      createUseCase()
-        .withTitle("title2")
+      createUseCase("title2")
         .withDescription("description");
 
-      createUseCase()
-        .withTitle("title2")
+      createUseCase("title2")
         .withDescription("description");
 
       super.tearDown();
@@ -82,8 +104,7 @@ public class TestDocAwareJerseyTest extends DocAwareJerseyTest {
     String requestDesc1 = "Request Description";
     setRequestDescription(requestDesc1);
 
-    createUseCase()
-      .withTitle("Request Description")
+    createUseCase("Request Description")
       .withDescription("Title with request description");
 
     ClientResponse response = resource().path("/root").get(ClientResponse.class);
@@ -93,8 +114,7 @@ public class TestDocAwareJerseyTest extends DocAwareJerseyTest {
     String requestDesc2 = "Request Description 2";
     setRequestDescription(requestDesc2);
 
-    createUseCase()
-      .withTitle("Request Description 2")
+    createUseCase("Request Description 2")
       .withDescription("Title with request description 2");
 
     response = resource().path("/root").get(ClientResponse.class);
