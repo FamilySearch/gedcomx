@@ -16,13 +16,12 @@
 
       [/#if]
   <div class="xml-docs">
-    [#assign requestBody=request.requestBody?html?trim/]
-    [#assign responseBody=request.responseBody?html?trim/]
     <h4>Request</h4>
     <pre>${request.requestMethod?upper_case} ${request.requestPath.path}
       [#list request.requestHeaders as header]
 ${header.name}: ${header.value}
       [/#list][#if request.requestBody??]
+
 <code class="prettyprint lang-xml">${request.requestBody?html?trim}</code>[/#if]</pre>
 
     <h4>Response</h4>
@@ -30,6 +29,7 @@ ${header.name}: ${header.value}
       [#list request.responseHeaders as header]
 ${header.name}: ${header.value}
       [/#list][#if request.responseBody??]
+
 <code class="prettyprint lang-xml">${request.responseBody?html?trim}</code>[/#if]</pre>
   </div>
     [/#list]

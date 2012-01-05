@@ -1,8 +1,11 @@
 package org.familysearch.ct.ws.test;
 
 import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.test.framework.AppDescriptor;
 import com.sun.jersey.test.framework.JerseyTest;
+import com.sun.jersey.test.framework.LowLevelAppDescriptor;
+import com.sun.jersey.test.framework.spi.client.ClientFactory;
 import com.sun.jersey.test.framework.spi.container.TestContainer;
 import com.sun.jersey.test.framework.spi.container.TestContainerException;
 import com.sun.jersey.test.framework.spi.container.TestContainerFactory;
@@ -14,6 +17,7 @@ import javax.xml.bind.Marshaller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.net.URI;
 
 /**
  * @author Mike Gardiner and Ryan Heaton
@@ -41,13 +45,21 @@ public class DocAwareJerseyTest extends JerseyTest {
 
   @Override
   protected TestContainerFactory getTestContainerFactory() throws TestContainerException {
-    return new InMemoryTestContainerFactory();
+    return new InMemoryTestContainerFactory() {
+      @Override
+      public TestContainer create(URI baseUri, AppDescriptor ad) {
+        //make sure xml is formatted for documentation purposes.
+        ((LowLevelAppDescriptor) ad).getResourceConfig().getSingletons().add(new FormattingJAXBContextResolver());
+        return super.create(baseUri, ad);
+      }
+    };
   }
 
   @Override
   protected Client getClient(TestContainer tc, AppDescriptor ad) {
     this.filter = new UseCaseLoggingFilter();
     Client client = super.getClient(tc, ad);
+    client.removeAllFilters();
     client.addFilter(filter);
     return client;
   }

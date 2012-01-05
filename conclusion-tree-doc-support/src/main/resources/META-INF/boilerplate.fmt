@@ -44,6 +44,7 @@
           var href = title.replace(/ /g, "-").replace(/:/g, ".") + ".content.html"
           $.get(href, function(data){
             inc.replaceWith(data);
+            prettyPrint();
           });
         }
       });
