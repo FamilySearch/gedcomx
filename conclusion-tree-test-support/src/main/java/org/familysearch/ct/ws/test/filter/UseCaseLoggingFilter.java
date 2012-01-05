@@ -12,6 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Extends the Jersey LoggingFilter so we can hook into the client requests
+ * in order to get the Request and Response information necessary to document
+ * the use cases.
+ *
  * @author Mike Gardiner
  */
 public class UseCaseLoggingFilter extends LoggingFilter {
@@ -20,6 +24,11 @@ public class UseCaseLoggingFilter extends LoggingFilter {
   private static final ThreadLocal<String> CURRENT_REQUEST_DESCRIPTION = new ThreadLocal<String>();
   private final List<UseCase> useCases = new ArrayList<UseCase>();
 
+  /**
+   * Sets the current use case
+   *
+   * @param uc - The use case to set as current
+   */
   public void setCurrentUseCase(UseCase uc) {
     if (CURRENT_USE_CASE.get() != null) {
       this.useCases.add(CURRENT_USE_CASE.get());
@@ -27,14 +36,29 @@ public class UseCaseLoggingFilter extends LoggingFilter {
     CURRENT_USE_CASE.set(uc);
   }
 
+  /**
+   * Set the description for the use case
+   *
+   * @param description - The use case description
+   */
   public void setCurrentRequestDescription(String description) {
     CURRENT_REQUEST_DESCRIPTION.set(description);
   }
 
+  /**
+   * @return A list of use cases
+   */
   public List<UseCase> getUseCases() {
     return useCases;
   }
 
+  /**
+   * Callback that gets called for each request
+   *
+   * @param request - The associated request
+   * @return The associated response
+   * @throws ClientHandlerException
+   */
   @Override
   public ClientResponse handle(ClientRequest request) throws ClientHandlerException {
     ClientResponse response = super.handle(request);
