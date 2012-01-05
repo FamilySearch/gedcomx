@@ -4,11 +4,130 @@
   [#return title?string?replace(":",".")?replace(" ", "-")/]
 [/#function]
 [#list usecases as usecase]
-  [@file name=titleToFilename(usecase.title) + ".content.html" charset="utf-8"]
-<div>
+  [@file name=titleToFilename(usecase.title) + ".usecase.html" charset="utf-8"]
+<html>
+<head>
+  <link rel="stylesheet" href="http://cdn.familysearch.org/www-web-common/css/reset.css" media="screen"/>
+  <link rel="stylesheet" href="http://cdn.familysearch.org/www-web-common/css/layout.css" media="screen"/>
+  <!--[if gte IE 8]><link rel="stylesheet" href="http://cdn.familysearch.org/www-web-common/css/ie8.css" media="screen"/><![endif]-->
+  <!--[if IE 7]><link rel="stylesheet" href="http://cdn.familysearch.org/www-web-common/css/ie7.css" media="screen"/><![endif]-->
+  <!--[if lte IE 6]><link rel="stylesheet" href="http://cdn.familysearch.org/www-web-common/css/ie6.css" media="screen"/><![endif]-->
+  <!--[if lte IE 8]><script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <link rel="stylesheet" href="css/prettify.css" media="screen"/>
+  <link rel="stylesheet" href="css/custom-theme/jquery-ui-1.8.16.custom.css" media="screen">
+  <style>
+    html {
+      background-color: #fff
+    }
+    
+    body {
+      background: #fff
+    }
+
+    h1,h2,h3,h4,h5,h6 {
+      color:#3c3b36;
+      clear:both;
+    }
+
+    h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+        color: #3c3b36;
+        text-decoration: none;
+    }
+
+    h1 { font-size: 30px; line-height:36px; padding:10px 0 18px 0; }
+    h2 { font-size: 20px; line-height:24px; }
+    h3 { font-size: 16px; line-height:20px; }
+    h4 { font-size: 12px; font-weight:bold; }
+    h5 { font-size: 12px; font-weight:bold; }
+    h6 { font-size: 12px; }
+
+    table {
+      margin-bottom: 16px;
+      border-top: 1px solid #ccc8c4;
+      border-left: 1px solid #ccc8c4;
+    }
+
+    th, td {
+      height: 13px;
+      padding: 2px 4px;
+      border-bottom: 1px solid #ccc8c4;
+      border-right: 1px solid #ccc8c4;
+    }
+
+    th {
+      font-weight: bold;
+    }
+
+    pre {
+      font: normal 1.2em Monaco, "Courier New", monospace;
+      margin-bottom: 9px;
+      background: #edece8;
+      border: 1px solid #ccc8c4;
+      padding: 8px;
+      max-height: 600px;
+      overflow: auto;
+    }
+
+    #subject h2 {
+      font-size: 1.8em;
+      font-weight: normal;
+      border-bottom: 3px solid #59524c;
+      padding-top: 10px;
+      padding-left: 0;
+      padding-right: 0;
+      margin-bottom: 6px;
+    }
+
+    #subject h3 {
+      font-size: 1.4em;
+      font-weight: normal;
+      border-bottom: 2px solid #dedbd7;
+      padding: 0 0 5px;
+      margin-bottom: 0.4em;
+    }
+
+    #mediatype-selection {
+      margin-bottom: 2em
+    }
+  </style>
+
+  <script type="text/javascript" src="js/libs/jquery-1.5.1.min.js"></script>
+  <script src="js/libs/jquery-ui.min.js"></script>
+  <script src="js/libs/jquery-iframe-auto-height.min.js"></script>
+  <script src="js/libs/prettify/prettify.js"></script>
+  <script>
+    $(function() {
+      //set up the button for switching between xml/json, if exists.
+      $( "#mediatype-selection" ).buttonset();
+
+      //set up the tabs, if exists.
+      $( "#tabs" ).tabs();
+
+      //hide any json docs
+      $( ".json-docs" ).hide();
+
+      //if xml is selected, hide the json and show the xml.
+      $( "#select-xml" ).click( function() {
+        $( ".json-docs" ).hide();
+        $( ".xml-docs" ).show();
+      })
+
+      //if json is selected, hide the xml and show the json.
+      $( "#select-json" ).click( function() {
+        $( ".xml-docs" ).hide();
+        $( ".json-docs" ).show();
+      })
+
+      //pretty-print any example code
+      prettyPrint();
+    });
+  </script>
+</head>
+
+<body>
   <h3>${usecase.title}</h3>
 
-  <p>${usecase.description}</p>
+  <p>${usecase.description!""}</p>
 
     [#list usecase.requests as request]
       [#if request.description??]
@@ -33,24 +152,41 @@ ${header.name}: ${header.value}
 <code class="prettyprint lang-xml">${request.responseBody?html?trim}</code>[/#if]</pre>
   </div>
     [/#list]
-</div>
+  <br/>
+</body>
+</html>
   [/@file]
 [/#list]
-[@file name="usecase.html" charset="utf-8"]
+[@file name="usecases.html" charset="utf-8"]
 [@libBoilerplate.writeStartBody label="Use Case"/]
 [@libBoilerplate.writeHeader]
   <ul class="clearfix" id="jsddm">
     <li><a id="brand" href="Home.html">FamilySearch APIs - Home</a></li>
-    <li class="current"><a href="#">Use Case</a></li>
+    <li class="current"><a href="#">Use Cases</a></li>
   </ul>
 [/@libBoilerplate.writeHeader]
 <div class="wrap">
   <article id="subject" class="clearfix">
     <div class="feature-content clearfix">
-      <div class="usecase-include"></div>
+      <h1>Use Cases</h1>
+  [#list usecases as usecase]
+      <h4><a href="#usecase-anchor" onClick="showUsecase('${usecase.title}');">${usecase.title}</a></h4>
+      <p>${usecase.description!""}</p>
+  [/#list]
+      <hr/>
+      <a name="usecase-anchor"></a>
+      <iframe id="usecase"></iframe>
     </div>
   </article>
 </div>
 [@libBoilerplate.writeFooter/]
+<script>
+  function showUsecase(title) {
+    var href = title.replace(/ /g, "-").replace(/:/g, ".") + ".usecase.html";
+    var iframe = $('#usecase');
+    iframe.attr("src", href);
+    iframe.iframeAutoHeight();
+  }
+</script>
 [@libBoilerplate.writeEndBody/]
 [/@file]
