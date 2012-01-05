@@ -1,5 +1,6 @@
 package org.familysearch.ws.test;
 
+import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.test.framework.spi.container.TestContainerException;
 import org.familysearch.ct.ws.test.DocAwareJerseyTest;
 import org.junit.Test;
@@ -14,6 +15,11 @@ import static junit.framework.Assert.*;
  */
 public class TestDocAwareJerseyTest extends DocAwareJerseyTest {
 
+  /**
+   * Setup the package to look for Jersey resources
+   *
+   * @throws TestContainerException if error occurs
+   */
   public TestDocAwareJerseyTest() throws TestContainerException {
     super("org.familysearch.ws.test");
   }
@@ -64,21 +70,53 @@ public class TestDocAwareJerseyTest extends DocAwareJerseyTest {
     }
   }
 
+  /**
+   * Create a couple of UseCases each with their own request
+   * description.
+   *
+   * @throws Exception - If an unexpected error occurred
+   */
   @Test
   public void testRequestDescription() throws Exception {
 
-    setRequestDescription("Request Description");
+    String requestDesc1 = "Request Description";
+    setRequestDescription(requestDesc1);
 
     createUseCase()
       .withTitle("Request Description")
       .withDescription("Title with request description");
 
-    String response = resource().path("/root").get(String.class);
+    ClientResponse response = resource().path("/root").get(ClientResponse.class);
     assertNotNull(response);
+    assertEquals(200, response.getStatus());
+
+    String requestDesc2 = "Request Description 2";
+    setRequestDescription(requestDesc2);
+
+    createUseCase()
+      .withTitle("Request Description 2")
+      .withDescription("Title with request description 2");
+
+    response = resource().path("/root").get(ClientResponse.class);
+    assertNotNull(response);
+    assertEquals(200, response.getStatus());
 
     super.tearDown();
+
+    assertEquals(requestDesc1, filter.getUseCases().get(0).getRequests().get(0).getDescription());
+    assertEquals(requestDesc2, filter.getUseCases().get(1).getRequests().get(0).getDescription());
   }
 
+  /**
+   * Helper method for seeing if a file exists. The title is used to build
+   * the filename.
+   *
+   * EXAMPLE: A title of "Unit Test" would create a file called
+   * "Unit-Test.usecase.xml" in the target/generated-doc directory.
+   *
+   * @param title - Title of the usecase
+   * @return true if the file indicated by the title exists
+   */
   private boolean fileExists(String title) {
     StringBuilder sb = new StringBuilder(DEFAULT_OUTPUT_DIR);
     sb.append(File.separator);
