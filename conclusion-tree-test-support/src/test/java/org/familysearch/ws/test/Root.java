@@ -5,6 +5,8 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 
 /**
+ * This is just a dummy resource need to test the DocAwareJerseyTest functionality
+ *
  * @author Mike Gardiner
  */
 @Path ( "/root" )
