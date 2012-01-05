@@ -50,8 +50,7 @@ public class TestDublinCoreDescription {
     abstrct.setExtensionAttributes(new HashMap<QName, String>());
     abstrct.getExtensionAttributes().put(new QName(CommonModels.GEDCOMX_COMMON_NAMESPACE, "hi"), "hello");
     abstrct.setResource(URI.create("urn:abstract"));
-    abstrct.setType(new TypeReference<ResourceType>());
-    abstrct.getType().setKnownType(ResourceType.Text);
+    abstrct.setKnownType(ResourceType.Text);
     metadata.setAbstract(abstrct);
     metadata.setAccessRights(new ArrayList<RDFValue>());
     metadata.setAccrualMethod(new RDFValue());
