@@ -56,7 +56,7 @@ public class DiscoveryRSImpl implements DiscoveryRSDefinition {
     // Persons Link
     Link personsLink = new Link();
     personsLink.setRel(URI.create(DiscoveryRSDefinition.PERSONS_RESOURCE_IDENTIFIER));
-    personsLink.setHref(URI.create(this.uriInfo.getBaseUriBuilder().path(PersonsRSImpl.class).build().toString()));
+    personsLink.setHref(URI.create(this.uriInfo.getBaseUriBuilder().path(PersonsRSImpl.class).build().getPath()));
     Title personsTitle = new Title();
     personsTitle.setValue("Persons");
     personsLink.getTitles().add(personsTitle);
