@@ -204,37 +204,47 @@ public class TestRecord {
     assertEquals(1, fact.getPlace().getParts().size());
     assertField(fact.getPlace().getParts().get(0), "event-place-part");
     assertEquals(PlacePartType.Cemetery, fact.getPlace().getParts().get(0).getKnownType());
+    assertEquals("", fact.toString());
+    assertEquals("event-date-normalized", fact.getDate().toString());
+    assertEquals("event-place-normalized", fact.getPlace().toString());
 
     assertEquals(1, record.getPersonas().size());
     Persona persona = record.getPersonas().get(0);
     assertEquals(1, persona.getFacts().size());
     assertField(persona.getFacts().get(0), "fact");
     assertEquals(FactType.Occupation, persona.getFacts().get(0).getKnownType());
+    assertEquals("persona-id: name-normalized", persona.toString());
 
     assertEquals(1, persona.getNames().size());
     Name name = persona.getNames().get(0);
     assertField(name, "name");
     assertEquals(NameType.Formal, name.getKnownType());
+    assertEquals("name-normalized", name.toString());
 
     assertEquals(1, name.getParts().size());
     NamePart namePart = name.getParts().get(0);
     namePart.setKnownType(NamePartType.Surname);
     assertField(namePart, "name-part");
+    assertEquals("name-part-normalized", namePart.toString());
 
     assertField(persona.getAge(), "age");
+    assertEquals("age-normalized", persona.getAge().toString());
     assertEquals(1, persona.getAge().getParts().size());
     AgePart agePart = persona.getAge().getParts().get(0);
     assertField(agePart, "age-part");
     assertEquals(AgePartType.Days, agePart.getKnownType());
+    assertEquals("age-part-normalized", agePart.toString());
 
     assertEquals(1, persona.getAlternateIds().size());
     assertEquals(AlternateIdType.Forwarded, persona.getAlternateIds().get(0).getKnownType());
     assertEquals("forward-value", persona.getAlternateIds().get(0).getValue());
+    assertEquals("forward-value", persona.getAlternateIds().get(0).toString());
 
     assertEquals("this persona exists.", persona.getAttribution().getProofStatement());
 
     assertField(persona.getGender(), "gender");
     assertEquals(GenderType.Female, persona.getGender().getKnownType());
+    assertEquals("gender-normalized", persona.getGender().toString());
 
     assertEquals("persona-id", persona.getId());
     assertEquals("urn:persona-id-value", persona.getPersistentId().toString());
@@ -253,6 +263,7 @@ public class TestRecord {
     assertEquals("couple-relationship-id", coupleRelationship.getId());
     assertEquals("#" + persona.getId(), coupleRelationship.getPersona1().getResource().toString());
     assertEquals("#" + persona.getId(), coupleRelationship.getPersona2().getResource().toString());
+    assertEquals("Couple couple-relationship-id: #persona-id - #persona-id", coupleRelationship.toString());
 
     Relationship parentRelationship = record.getRelationships().get(1);
     assertEquals(RelationshipType.ParentChild, parentRelationship.getKnownType());
@@ -260,14 +271,17 @@ public class TestRecord {
     assertEquals("#" + persona.getId(), parentRelationship.getPersona1().getResource().toString());
     assertEquals("#" + persona.getId(), parentRelationship.getPersona2().getResource().toString());
     assertEquals("relationship explanation", parentRelationship.getAttribution().getProofStatement());
+    assertEquals("ParentChild parent-relationship-id: #persona-id - #persona-id", parentRelationship.toString());
 
     assertEquals(1, record.getSources().size());
     ResourceReference sourceReference = record.getSources().get(0);
     assertEquals("urn:source-uri", sourceReference.getResource().toString());
+    assertEquals("urn:source-uri", sourceReference.toString());
     assertEquals("source-reference-id", sourceReference.getId());
     assertEquals(ResourceType.Collection, sourceReference.getKnownType());
 
     assertEquals("rid", record.getId());
+    assertEquals("rid", record.toString());
     assertEquals(Locale.ENGLISH.getLanguage(), record.getLang());
   }
 

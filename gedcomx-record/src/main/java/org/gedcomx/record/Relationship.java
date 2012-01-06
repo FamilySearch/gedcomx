@@ -171,4 +171,28 @@ public class Relationship extends GenealogicalResource implements HasFacts {
     this.facts = facts;
   }
 
+  /**
+   * Provide a simple toString() method.
+   */
+  @Override
+  public String toString() {
+    StringBuilder s = new StringBuilder();
+
+    // Show the id as the label for the relationship.
+    s.append(String.format("%s %s: ",
+        (getKnownType() == null) ? "" : getKnownType(),
+        (getId() == null) ? "" : getId()));
+
+    if (persona1 != null) {
+      s.append(persona1.toString());
+    }
+
+    s.append(" - ");
+    
+    if (persona2 != null) {
+      s.append(persona2.toString());
+    }
+
+    return s.toString();
+  }
 }

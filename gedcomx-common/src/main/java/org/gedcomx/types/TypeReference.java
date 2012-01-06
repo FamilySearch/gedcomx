@@ -113,4 +113,11 @@ public final class TypeReference<T extends Enum> {
     }
   }
 
+  /**
+   * Provide a simple toString() method.
+   */
+  @Override
+  public String toString() {
+    return (type == null) ? "" : type.toString();
+  }
 }

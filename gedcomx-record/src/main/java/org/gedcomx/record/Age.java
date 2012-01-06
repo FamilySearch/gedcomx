@@ -59,4 +59,22 @@ public class Age extends Field implements Partitionable<AgePart> {
     this.parts = parts;
   }
 
+  /**
+   * Provide a simple toString() method.
+   */
+  @Override
+  public String toString() {
+    StringBuilder s = new StringBuilder();
+
+    s.append(super.toString());
+
+    if ((s.length() <= 0) && (parts != null)) {
+      // Then show all the parts.
+      for (AgePart agePart : parts) {
+        s.append(agePart.toString() + " ");
+      }
+    }
+
+    return s.toString().trim();
+  }
 }

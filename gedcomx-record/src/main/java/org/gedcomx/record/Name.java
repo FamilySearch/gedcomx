@@ -107,4 +107,25 @@ public class Name extends Field implements Partitionable<NamePart> {
   public void setParts(List<NamePart> parts) {
     this.parts = parts;
   }
+
+  /**
+   * Provide a simple toString() method.
+   */
+  @Override
+  public String toString() {
+    StringBuilder s;
+    s = new StringBuilder();
+
+    if (! super.toString().isEmpty()) {
+      s.append(super.toString());
+    }
+
+    else if (getParts() != null) {
+      for (NamePart namePart : getParts()) {
+        s.append(namePart.toString() + " ");
+      }
+    }
+
+    return s.toString().trim();
+  }
 }

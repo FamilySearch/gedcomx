@@ -267,4 +267,11 @@ public class ResourceReference implements SupportsExtensionAttributes, SupportsE
     return ext;
   }
 
+  /**
+   * Provide a simple toString() method.
+   */
+  @Override
+  public String toString() {
+    return (resource == null) ? "" : resource.toString();
+  }
 }

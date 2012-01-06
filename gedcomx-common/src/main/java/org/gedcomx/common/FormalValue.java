@@ -132,4 +132,11 @@ public final class FormalValue {
     this.text = text;
   }
 
+  /**
+   * Provide a simple toString() method.
+   */
+  @Override
+  public String toString() {
+    return (text == null) ? "" : text;
+  }
 }

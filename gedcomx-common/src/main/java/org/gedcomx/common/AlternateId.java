@@ -99,4 +99,12 @@ public final class AlternateId {
   public void setKnownType(AlternateIdType knownType) {
     this.type = knownType == null ? null : new TypeReference<AlternateIdType>(knownType);
   }
+
+  /**
+   * Provide a simple toString() method.
+   */
+  @Override
+  public String toString() {
+    return (value == null) ? "" : value;
+  }
 }
