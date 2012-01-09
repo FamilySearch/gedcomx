@@ -11,7 +11,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <enunciate.version>1.25-RC2</enunciate.version>
+    <enunciate.version>1.25</enunciate.version>
     <root.basedir>${project.basedir}</root.basedir>
     <year>${inceptionYear}</year>
   </properties>
