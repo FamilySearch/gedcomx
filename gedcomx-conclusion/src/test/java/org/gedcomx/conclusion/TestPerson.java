@@ -109,6 +109,7 @@ public class TestPerson {
 
     List<Name> names = new ArrayList<Name>();
     Name name = new Name();
+    name.setPreferred(true);
     ArrayList<NameForm> alternateForms = new ArrayList<NameForm>();
     NameForm nameForm = new NameForm();
     nameForm.setFullText("alternate name form");
@@ -202,6 +203,7 @@ public class TestPerson {
 
     assertEquals(1, person.getNames().size());
     name = person.getNames().iterator().next();
+    assertTrue(name.getPreferred());
     assertEquals(1, name.getAlternateForms().size());
     assertEquals("alternate name form", name.getAlternateForms().get(0).getFullText());
     assertEquals(1, name.getAlternateForms().get(0).getParts().size());

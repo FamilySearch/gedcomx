@@ -23,6 +23,7 @@ import org.gedcomx.common.GenealogicalResource;
 import org.gedcomx.common.ResourceReference;
 import org.gedcomx.rt.*;
 
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 import java.util.List;
@@ -37,7 +38,27 @@ import java.util.List;
 @XmlType ( name = "Conclusion" )
 public abstract class Conclusion extends GenealogicalResource {
 
+  private Boolean preferred;
   private List<ResourceReference> sources;
+
+  /**
+   * Whether the conclusion is preferred above other conclusions of the same type. Useful, for example, for display purposes.
+   *
+   * @return Whether the conclusion is preferred above other conclusions of the same type. Useful, for example, for display purposes.
+   */
+  @XmlAttribute
+  public Boolean getPreferred() {
+    return preferred;
+  }
+
+  /**
+   * Whether the conclusion is preferred above other conclusions of the same type. Useful, for example, for display purposes.
+   *
+   * @param preferred Whether the conclusion is preferred above other conclusions of the same type. Useful, for example, for display purposes.
+   */
+  public void setPreferred(Boolean preferred) {
+    this.preferred = preferred;
+  }
 
   /**
    * The source references for a conclusion.
