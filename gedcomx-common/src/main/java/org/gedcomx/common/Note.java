@@ -77,4 +77,17 @@ public final class Note extends GenealogicalResource {
     this.text = text;
   }
 
+  /**
+   * Provide a simple toString() method.
+   */
+  @Override
+  public String toString() {
+    StringBuilder s = new StringBuilder((getId() == null) ? "" : getId());
+
+    if (getText() != null) {
+      s.append(": ").append(getText());
+    }
+
+    return s.toString();
+  }
 }

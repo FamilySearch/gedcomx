@@ -178,4 +178,11 @@ public class Record extends GenealogicalEntity implements PersistentIdentifiable
     this.relationships = relationships;
   }
 
+  /**
+   * Provide a simple toString() method.
+   */
+  @Override
+  public String toString() {
+    return (getId() == null) ? "" : getId();
+  }
 }
