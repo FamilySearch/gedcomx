@@ -156,4 +156,18 @@ public abstract class GenealogicalResource implements SupportsExtensionElements 
 
     return ext;
   }
+
+  /**
+   * Provide a simple toString() method.
+   */
+  @Override
+  public String toString() {
+    StringBuilder s = new StringBuilder((getId() == null) ? "" : getId());
+
+    if (getAttribution() != null) {
+      s.append(": ").append(getAttribution().toString());
+    }
+
+    return s.toString();
+  }
 }

@@ -143,4 +143,24 @@ public abstract class Field extends GenealogicalResource {
     this.source = source;
   }
 
+  /**
+   * Provide a simple toString() method.
+   */
+  @Override
+  public String toString() {
+    String s;
+
+    // Show one of the following values arranged in priority: Processed, Interpreted or Original
+    if ((processed != null) && (! processed.toString().isEmpty())) {
+      s = processed.toString();
+    } else if ((interpreted != null) && (! interpreted.isEmpty())) {
+      s = interpreted;
+    } else if ((original != null) && (! original.isEmpty())) {
+      s = original;
+    } else {
+      s = "";
+    }
+
+    return s;
+  }
 }

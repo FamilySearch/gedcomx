@@ -188,4 +188,24 @@ public class Persona extends GenealogicalResource implements PersistentIdentifia
     this.principal = isPrincipal;
   }
 
+  /**
+   * Provide a simple toString() method.
+   * It shows the Id and the toString() of the first Name if any.
+   */
+  @Override
+  public String toString() {
+    StringBuilder s = new StringBuilder();
+
+    // Show the id as the label for the actual name.
+    s.append(String.format("%s: ", (getId() == null) ? "" : getId()));
+
+    // Then show the names from all parts.
+    if (getNames() != null) {
+      for (Name name : getNames()) {
+        s.append(name.toString() + " ");
+      }
+    }
+
+    return s.toString().trim();
+  }
 }

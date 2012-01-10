@@ -142,4 +142,12 @@ public final class Attribution {
   public void setProofStatement(String proofStatement) {
     this.proofStatement = proofStatement;
   }
+
+  /**
+   * Provide a simple toString() method.
+   */
+  @Override
+  public String toString() {
+    return (contributor == null) ? "" : contributor.toString();
+  }
 }
