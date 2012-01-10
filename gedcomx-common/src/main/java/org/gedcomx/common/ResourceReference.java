@@ -17,12 +17,14 @@ package org.gedcomx.common;
 
 import org.codehaus.enunciate.doc.DocumentationExample;
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.SupportsExtensionAttributes;
 import org.gedcomx.rt.SupportsExtensionElements;
 import org.gedcomx.rt.XmlTypeIdResolver;
+import org.gedcomx.types.AlternateIdType;
 import org.gedcomx.types.ResourceFragmentParameter;
 import org.gedcomx.types.ResourceType;
 import org.gedcomx.types.TypeReference;
@@ -47,6 +49,8 @@ import java.util.Map;
 public class ResourceReference implements SupportsExtensionAttributes, SupportsExtensionElements {
 
   private String id;
+  @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
+  @JsonProperty
   private TypeReference<ResourceType> type;
   private URI resource;
   private Map<QName, String> extensionAttributes;
@@ -82,9 +86,10 @@ public class ResourceReference implements SupportsExtensionAttributes, SupportsE
    *
    * @return The type of the resource being referenced.
    */
-  @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
-  public TypeReference<ResourceType> getType() {
-    return type;
+  @XmlTransient
+  @JsonIgnore
+  public URI getType() {
+    return this.type == null ? null : this.type.getType();
   }
 
   /**
@@ -92,8 +97,9 @@ public class ResourceReference implements SupportsExtensionAttributes, SupportsE
    *
    * @param type The type of the resource being referenced.
    */
-  public void setType(TypeReference<ResourceType> type) {
-    this.type = type;
+  @JsonIgnore
+  public void setType(URI type) {
+    this.type = type == null ? null : new TypeReference<ResourceType>(type);
   }
 
   /**
@@ -104,17 +110,17 @@ public class ResourceReference implements SupportsExtensionAttributes, SupportsE
   @XmlTransient
   @JsonIgnore
   public ResourceType getKnownType() {
-    return getType() == null ? null : ResourceType.fromQNameURI(getType().getType());
+    return this.type == null ? null : ResourceType.fromQNameURI(this.type.getType());
   }
 
   /**
-   * Set the type of this source reference from an enumeration of known source reference types.
+   * Set the type of this reference from an enumeration of known source reference types.
    *
-   * @param knownType The source reference type.
+   * @param knownType The reference type.
    */
   @JsonIgnore
   public void setKnownType(ResourceType knownType) {
-    setType(knownType == null ? null : new TypeReference<ResourceType>(knownType));
+    this.type = knownType == null ? null : new TypeReference<ResourceType>(knownType);
   }
 
   /**
