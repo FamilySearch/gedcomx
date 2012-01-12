@@ -3,7 +3,9 @@ package org.familysearch.ct.ws.test;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * A documented use case for the CT API.
@@ -17,6 +19,7 @@ public class UseCase {
   private String title;
   private String description;
   private final List<RequestAndResponse> requests = new ArrayList<RequestAndResponse>();
+  private final Set<String> applicableBindings = new HashSet<String>();
 
   /**
    * @return Title of the use case
@@ -63,5 +66,26 @@ public class UseCase {
   @XmlElement
   public List<RequestAndResponse> getRequests() {
     return requests;
+  }
+
+  /**
+   * Add a binding class for which this use case is applicable.
+   *
+   * @param bindingClass The binding class to which this use case is applicable.
+   * @return this use case.
+   */
+  public UseCase applicableTo(Class<?> bindingClass) {
+    this.applicableBindings.add(bindingClass.getName());
+    return this;
+  }
+
+  /**
+   * The set of fully-qualified names of resource bindings to which this use case is applicable.
+   *
+   * @return The set of fully-qualified names of resource bindings to which this use case is applicable.
+   */
+  @XmlElement
+  public Set<String> getApplicableBindings() {
+    return applicableBindings;
   }
 }

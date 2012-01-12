@@ -7,6 +7,7 @@
 [/#function]
 [#macro writePathBindingsPage methods]
   [#assign fullpath=(methods?first).fullpath/]
+  [#assign bindingFqn=(methods?first).parent.qualifiedName/]
   [@libBoilerplate.writeStartBody label=fullpath/]
   [@libBoilerplate.writeHeader]
     <ul class="clearfix" id="jsddm">
@@ -272,6 +273,27 @@
     [/#list]
 
       </div>
+  [#if casesByFqn?? && casesByFqn[bindingFqn]??]
+
+      <h3>Use Cases</h3>
+
+      <script>
+        function showUsecase(title) {
+          var href = title.replace(/ /g, "-").replace(/:/g, ".") + ".usecase.html";
+          var iframe = $('#usecase');
+          iframe.attr("src", href);
+          iframe.iframeAutoHeight();
+        }
+      </script>
+
+    [#list casesByFqn[bindingFqn] as usecase]
+      <h4><a href="#usecase-anchor" onClick="showUsecase('${usecase.title}');">${usecase.title}</a></h4>
+      <p>${usecase.description!""}</p>
+    [/#list]
+      <hr/>
+      <a name="usecase-anchor"></a>
+      <iframe id="usecase"></iframe>
+  [/#if]
     </article>
   </div>
   [@libBoilerplate.writeFooter/]

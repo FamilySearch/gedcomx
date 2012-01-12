@@ -33,7 +33,8 @@ public class TestDocAwareJerseyTest extends DocAwareJerseyTest {
     final String title = "title";
 
     createUseCase(title)
-      .withDescription("description");
+      .withDescription("description")
+      .applicableTo(getClass());
 
     super.tearDown();
 
@@ -84,7 +85,7 @@ public class TestDocAwareJerseyTest extends DocAwareJerseyTest {
         .withDescription("description");
 
       super.tearDown();
-      assertTrue(false);  // We shouldn't get here
+      fail();  // We shouldn't get here
     }
     catch (Exception e) {
       assertTrue(true);  // We should get here

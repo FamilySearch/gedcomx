@@ -17,7 +17,8 @@ public class TestDiscoveryRSImpl extends ConclusionTreeUseCaseTest {
   @Test
   public void testGet() throws Exception {
     createUseCase("Discovery")
-      .withDescription("How to get the discovery resource.");
+      .withDescription("How to get the discovery resource.")
+      .applicableTo(DiscoveryRSImpl.class);
     ClientResponse response = resource().path("/.well-known/host-meta").accept(XRDModel.XRD_V1_XML_MEDIA_TYPE).get(ClientResponse.class);
     assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
     Date lastModified = response.getLastModified();
@@ -27,7 +28,8 @@ public class TestDiscoveryRSImpl extends ConclusionTreeUseCaseTest {
     assertEquals(PersonsRSDefinition.REL, xrd.getLinks().get(0).getRel().toString());
 
     createUseCase("Caching The Discovery")
-      .withDescription("How the caching mechanism works on the discovery resource.");
+      .withDescription("How the caching mechanism works on the discovery resource.")
+      .applicableTo(DiscoveryRSImpl.class);
     Date later = new Date(lastModified.getTime() + (1000 * 60 * 60)); //one hour later
     response = resource().path("/.well-known/host-meta").accept(XRDModel.XRD_V1_XML_MEDIA_TYPE).header("If-Modified-Since", later).get(ClientResponse.class);
     assertEquals(Response.Status.NOT_MODIFIED.getStatusCode(), response.getStatus());

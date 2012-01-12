@@ -3,6 +3,7 @@ package org.familysearch.ct.ws.build;
 import freemarker.template.TemplateException;
 import org.codehaus.enunciate.EnunciateException;
 import org.codehaus.enunciate.apt.EnunciateFreemarkerModel;
+import org.codehaus.enunciate.contract.jaxrs.RootResource;
 import org.codehaus.enunciate.main.Enunciate;
 import org.codehaus.enunciate.main.FileArtifact;
 import org.codehaus.enunciate.modules.FreemarkerDeploymentModule;
@@ -16,7 +17,9 @@ import java.io.InputStream;
 import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Ryan Heaton
@@ -65,7 +68,20 @@ public class CTUseCaseDeploymentModule extends FreemarkerDeploymentModule {
         }
 
         List<UseCase> cases = this.useCaseManager.getCases();
+        Map<String, List<UseCase>> casesByFqn = new HashMap<String, List<UseCase>>();
+        for (UseCase useCase : cases) {
+          for (String bindingFqn : useCase.getApplicableBindings()) {
+            List<UseCase> useCases = casesByFqn.get(bindingFqn);
+            if (useCases == null) {
+              useCases = new ArrayList<UseCase>();
+              casesByFqn.put(bindingFqn, useCases);
+            }
+            useCases.add(useCase);
+          }
+        }
+
         model.put("usecases", cases);
+        model.put("casesByFqn", casesByFqn);
         processTemplate(getUseCaseTemplateURL(), model);
       }
       catch (TemplateException e) {
