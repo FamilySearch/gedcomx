@@ -22,7 +22,8 @@ public class TestPersonSummaryRSImpl extends ConclusionTreeUseCaseTest {
   @Test
   public void testGet() throws Exception {
     createUseCase("Person Summary")
-      .withDescription("How to get the person summary resource.");
+      .withDescription("How to get the person summary resource.")
+      .applicableTo(PersonSummaryRSImpl.class);
     long timestamp = System.currentTimeMillis();
     Date now = new Date(timestamp - (timestamp % 1000));
     Person serverSidePerson = new Person();
@@ -48,7 +49,8 @@ public class TestPersonSummaryRSImpl extends ConclusionTreeUseCaseTest {
     assertEquals("12345", response.getEntity(Person.class).getId());
 
     createUseCase("Caching The Person Summary")
-      .withDescription("Example illustrating how the cacheing mechanism works on the person summary.");
+      .withDescription("Example illustrating how the cacheing mechanism works on the person summary.")
+      .applicableTo(PersonSummaryRSImpl.class);
     Date later = new Date(now.getTime() + (1000 * 60 * 60)); //one hour later
     expect(personService.getPersonSummary("12345")).andReturn(entity);
     expect(entity.getLastModified()).andReturn(now);
@@ -62,7 +64,8 @@ public class TestPersonSummaryRSImpl extends ConclusionTreeUseCaseTest {
   @Test
   public void testNotFound() {
     createUseCase("Person Summary Not Found")
-      .withDescription("Example illustrating a request for a person summary that doesn't exist.");
+      .withDescription("Example illustrating a request for a person summary that doesn't exist.")
+      .applicableTo(PersonSummaryRSImpl.class);
     PersonService personService = getServerSideMock(PersonService.class);
     EntityBundle entity = createMock(EntityBundle.class);
     expect(personService.getPersonSummary("NOTFOUND")).andReturn(null);
