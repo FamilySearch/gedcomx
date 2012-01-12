@@ -46,6 +46,26 @@ public class TestPersonSummaryRSImpl extends ConclusionTreeUseCaseTest {
     assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
     assertEquals(now.getTime(), response.getLastModified().getTime());
     assertEquals("12345", response.getEntity(Person.class).getId());
+
+    createUseCase("Caching The Person Summary")
+      .withDescription("Example illustrating how the cacheing mechanism works on the person summary.");
+    Date later = new Date(now.getTime() + (1000 * 60 * 60)); //one hour later
+    expect(personService.getPersonSummary("12345")).andReturn(entity);
+    expect(entity.getLastModified()).andReturn(now);
+    replay(personService, entity);
+    response = resource().path("/persons/12345/summary").accept(ConclusionModel.GEDCOMX_CONCLUSION_V1_XML_MEDIA_TYPE).header("If-Modified-Since", later).get(ClientResponse.class);
+    verify(personService, entity);
+    reset(personService, entity);
+    assertEquals(Response.Status.NOT_MODIFIED.getStatusCode(), response.getStatus());
+
+    createUseCase("Person Summary Not Found")
+      .withDescription("Example illustrating a request for a person summary that doesn't exist.");
+    expect(personService.getPersonSummary("NOTFOUND")).andReturn(null);
+    replay(personService, entity);
+    response = resource().path("/persons/NOTFOUND/summary").accept(ConclusionModel.GEDCOMX_CONCLUSION_V1_XML_MEDIA_TYPE).get(ClientResponse.class);
+    verify(personService, entity);
+    reset(personService, entity);
+    assertEquals(Response.Status.NOT_FOUND.getStatusCode(), response.getStatus());
   }
 
 }

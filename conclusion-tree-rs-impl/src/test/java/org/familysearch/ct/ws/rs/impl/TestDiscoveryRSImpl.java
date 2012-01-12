@@ -22,13 +22,13 @@ public class TestDiscoveryRSImpl extends ConclusionTreeUseCaseTest {
     assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
     Date lastModified = response.getLastModified();
     assertNotNull(lastModified);
-    Date later = new Date(lastModified.getTime() + (1000 * 60 * 60)); //one hour later
     XRD xrd = response.getEntity(XRD.class);
     assertEquals(1, xrd.getLinks().size());
     assertEquals(PersonsRSDefinition.REL, xrd.getLinks().get(0).getRel().toString());
 
     createUseCase("Caching The Discovery")
       .withDescription("How the caching mechanism works on the discovery resource.");
+    Date later = new Date(lastModified.getTime() + (1000 * 60 * 60)); //one hour later
     response = resource().path("/.well-known/host-meta").accept(XRDModel.XRD_V1_XML_MEDIA_TYPE).header("If-Modified-Since", later).get(ClientResponse.class);
     assertEquals(Response.Status.NOT_MODIFIED.getStatusCode(), response.getStatus());
 
