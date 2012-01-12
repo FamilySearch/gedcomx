@@ -34,7 +34,7 @@ import javax.ws.rs.HeaderParam;
 } )
 public interface CommonRSParameters {
 
-  public static final String GEDCOMX_LINK_REL_PREFIX = CommonModels.GEDCOMX_DOMAIN + "links";
+  public static final String GEDCOMX_LINK_REL_PREFIX = CommonModels.GEDCOMX_DOMAIN + "links/";
 
   /**
    * Set the proof statement given by the user to support changes to genealogical data.
