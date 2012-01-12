@@ -57,12 +57,17 @@ public class TestPersonSummaryRSImpl extends ConclusionTreeUseCaseTest {
     verify(personService, entity);
     reset(personService, entity);
     assertEquals(Response.Status.NOT_MODIFIED.getStatusCode(), response.getStatus());
+  }
 
+  @Test
+  public void testNotFound() {
     createUseCase("Person Summary Not Found")
       .withDescription("Example illustrating a request for a person summary that doesn't exist.");
+    PersonService personService = getServerSideMock(PersonService.class);
+    EntityBundle entity = createMock(EntityBundle.class);
     expect(personService.getPersonSummary("NOTFOUND")).andReturn(null);
     replay(personService, entity);
-    response = resource().path("/persons/NOTFOUND/summary").accept(ConclusionModel.GEDCOMX_CONCLUSION_V1_XML_MEDIA_TYPE).get(ClientResponse.class);
+    ClientResponse response = resource().path("/persons/NOTFOUND/summary").accept(ConclusionModel.GEDCOMX_CONCLUSION_V1_XML_MEDIA_TYPE).get(ClientResponse.class);
     verify(personService, entity);
     reset(personService, entity);
     assertEquals(Response.Status.NOT_FOUND.getStatusCode(), response.getStatus());
