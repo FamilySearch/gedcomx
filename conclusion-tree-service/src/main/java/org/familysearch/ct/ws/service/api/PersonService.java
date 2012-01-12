@@ -1,12 +1,21 @@
-package org.familysearch.ct.service.api.person;
+package org.familysearch.ct.ws.service.api;
 
 import java.util.Date;
 import org.gedcomx.conclusion.Person;
 
 /**
  * @author Randy Bliss
+ * @author Ryan Heaton
  */
 public interface PersonService {
+
+  /**
+   * Get the summary for the specified person.
+   *
+   * @param personId The id of the person for which to get the summary.
+   * @return The entity bundle, or null if the summary was not found.
+   */
+  public EntityBundle<Person> getPersonSummary(String personId);
 
   /**
    * Get the timestamp of the summary for the specified person.
@@ -24,17 +33,4 @@ public interface PersonService {
    */
   public Person getSummary(String personId);
 
-  /**
-   * Create the person
-   * @param person object contains conclusions for person to be created
-   * @return person id of newly created person
-   */
-  public String createPerson(Person person);
-
-  /**
-   * Get the person identified by the supplied person id
-   * @param personId id of the person that will be returned
-   * @return person object of retrieved person corresponding to supplied person id
-   */
-  public Person getPerson(String personId);
 }

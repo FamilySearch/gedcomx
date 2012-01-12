@@ -1,6 +1,6 @@
 package org.familysearch.ct.ws.rs.impl;
 
-import org.familysearch.ct.service.api.person.PersonService;
+import org.familysearch.ct.ws.service.api.PersonService;
 import org.familysearch.ct.ws.test.DocAwareJerseyTest;
 
 import java.util.Map;

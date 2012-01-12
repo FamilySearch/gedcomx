@@ -1,6 +1,8 @@
 package org.familysearch.ct.ws.rs.impl;
 
 import com.sun.jersey.api.client.ClientResponse;
+import org.gedcomx.conclusion.rs.definition.PersonsRSDefinition;
+import org.gedcomx.xrd.XRD;
 import org.gedcomx.xrd.XRDModel;
 import org.junit.Test;
 
@@ -21,6 +23,9 @@ public class TestDiscoveryRSImpl extends ConclusionTreeUseCaseTest {
     Date lastModified = response.getLastModified();
     assertNotNull(lastModified);
     Date later = new Date(lastModified.getTime() + (1000 * 60 * 60)); //one hour later
+    XRD xrd = response.getEntity(XRD.class);
+    assertEquals(1, xrd.getLinks().size());
+    assertEquals(PersonsRSDefinition.REL, xrd.getLinks().get(0).getRel().toString());
 
     createUseCase("Caching The Discovery")
       .withDescription("How the caching mechanism works on the discovery resource.");
