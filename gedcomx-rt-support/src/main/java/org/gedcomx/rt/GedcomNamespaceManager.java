@@ -157,7 +157,10 @@ public class GedcomNamespaceManager extends NamespacePrefixMapper {
   @Override
   public String getPreferredPrefix(String namespaceUri, String suggestion, boolean requirePrefix) {
     String choice = this.ns2prefix.get(namespaceUri);
-    if (this.defaultns.equals(namespaceUri)) {
+    if (!requirePrefix && this.defaultns.equals(namespaceUri)) {
+      //(01/12/12, heatonra) I looked into why 'requirePrefix' is always 'true'. It's because
+      // attributeFormDefault = "qualified" so attributes always have to have a prefix, so
+      // requirePrefix is always true.
       return "";
     }
     return choice;
