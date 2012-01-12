@@ -157,7 +157,7 @@ public class GedcomNamespaceManager extends NamespacePrefixMapper {
   @Override
   public String getPreferredPrefix(String namespaceUri, String suggestion, boolean requirePrefix) {
     String choice = this.ns2prefix.get(namespaceUri);
-    if (!requirePrefix && this.defaultns.equals(namespaceUri)) {
+    if (this.defaultns.equals(namespaceUri)) {
       return "";
     }
     return choice;
