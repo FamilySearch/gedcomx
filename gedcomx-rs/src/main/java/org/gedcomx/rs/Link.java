@@ -41,6 +41,14 @@ public final class Link {
   private String rel;
   private URI href;
 
+  public Link(String rel, URI href) {
+    this.rel = rel;
+    this.href = href;
+  }
+
+  public Link() {
+  }
+
   /**
    * The link relationship.
    *
