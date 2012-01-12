@@ -40,6 +40,8 @@ import javax.ws.rs.core.UriInfo;
 )
 public interface PersonsRSDefinition extends CommonRSParameters {
 
+  public static final String REL = CommonRSParameters.GEDCOMX_LINK_REL_PREFIX + "persons";
+
   /**
    * Create a person.
    *

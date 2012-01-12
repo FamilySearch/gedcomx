@@ -15,6 +15,7 @@
  */
 package org.gedcomx.conclusion.rs.definition;
 
+import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.rs.ResponseCode;
 import org.gedcomx.rt.rs.StatusCodes;
 
@@ -32,6 +33,8 @@ import javax.ws.rs.HeaderParam;
   @ResponseCode ( code = 501, condition = "If the resource is not supported by the implementation.")
 } )
 public interface CommonRSParameters {
+
+  public static final String GEDCOMX_LINK_REL_PREFIX = CommonModels.GEDCOMX_DOMAIN + "links";
 
   /**
    * Set the proof statement given by the user to support changes to genealogical data.

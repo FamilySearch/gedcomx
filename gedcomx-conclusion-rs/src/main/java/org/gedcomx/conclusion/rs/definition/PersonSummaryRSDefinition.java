@@ -44,9 +44,12 @@ import javax.ws.rs.core.UriInfo;
   subresources = { ConclusionRSDefinition.class, ConclusionsRSDefinition.class }
 )
 @ResourceRelationships({
-  @ResourceRelationship ( identifier = "self", definedBy = PersonSummaryRSDefinition.class, description = "The person summary itself." )
+  @ResourceRelationship ( identifier = "self", definedBy = PersonSummaryRSDefinition.class, description = "The person summary itself." ),
+  @ResourceRelationship ( identifier = PersonRSDefinition.REL, definedBy = PersonRSDefinition.class, description = "The person for which this is a summary." )
 })
 public interface PersonSummaryRSDefinition extends CommonRSParameters {
+
+  public static final String REL = CommonRSParameters.GEDCOMX_LINK_REL_PREFIX + "person/summary";
 
   /**
    * Read a person summary.

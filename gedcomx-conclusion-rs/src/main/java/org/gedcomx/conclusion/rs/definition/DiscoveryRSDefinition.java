@@ -15,7 +15,6 @@
  */
 package org.gedcomx.conclusion.rs.definition;
 
-import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.rs.*;
 import org.gedcomx.xrd.XRD;
 import org.gedcomx.xrd.XRDModel;
@@ -37,11 +36,9 @@ import javax.ws.rs.core.Response;
     namespace = XRDModel.XRD_V1_NAMESPACE
 )
 @ResourceRelationships({
-  @ResourceRelationship(identifier = DiscoveryRSDefinition.PERSONS_RESOURCE_IDENTIFIER, definedBy = DiscoveryRSDefinition.class, description = "A set of persons making up a family conclusion tree.")
+  @ResourceRelationship(identifier = PersonsRSDefinition.REL, definedBy = DiscoveryRSDefinition.class, description = "A set of persons making up a family conclusion tree.")
 })
 public interface DiscoveryRSDefinition extends CommonRSParameters {
-
-  public static final String PERSONS_RESOURCE_IDENTIFIER = CommonModels.GEDCOMX_DOMAIN + "links/persons";
 
   /**
    * Read the host metadata.
