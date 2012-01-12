@@ -21,7 +21,6 @@ public class TestDocAwareJerseyTest extends DocAwareJerseyTest {
    * @throws TestContainerException if error occurs
    */
   public TestDocAwareJerseyTest() throws TestContainerException {
-    super("org.familysearch.ws.test");
   }
 
   /**

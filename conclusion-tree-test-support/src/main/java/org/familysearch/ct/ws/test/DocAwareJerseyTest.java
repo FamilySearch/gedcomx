@@ -4,6 +4,7 @@ import com.sun.jersey.api.client.Client;
 import com.sun.jersey.test.framework.AppDescriptor;
 import com.sun.jersey.test.framework.JerseyTest;
 import com.sun.jersey.test.framework.LowLevelAppDescriptor;
+import com.sun.jersey.test.framework.WebAppDescriptor;
 import com.sun.jersey.test.framework.spi.container.TestContainer;
 import com.sun.jersey.test.framework.spi.container.TestContainerException;
 import com.sun.jersey.test.framework.spi.container.TestContainerFactory;
@@ -15,7 +16,8 @@ import javax.xml.bind.Marshaller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
-import java.net.URI;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * This class is used to document RESTful resources by describing uses cases for a given
@@ -24,10 +26,12 @@ import java.net.URI;
  * and the format of the filename is [some-title].usecase.xml.  By default the files will
  * be put into the target/generated-doc directory.
  *
- * @author Mike Gardiner and Ryan Heaton
+ * @author Mike Gardiner
+ * @author Ryan Heaton
  */
 public class DocAwareJerseyTest extends JerseyTest {
 
+  private Map<Class<?>, Object> serverSideComponents;
   protected static final String DEFAULT_OUTPUT_DIR = "target" + File.separator + "generated-doc";
 
   protected UseCaseLoggingFilter filter;
@@ -38,35 +42,29 @@ public class DocAwareJerseyTest extends JerseyTest {
    * @throws TestContainerException - An error occurred
    */
   public DocAwareJerseyTest() throws TestContainerException {
+    registerServerSideComponents(this.serverSideComponents);
+  }
+
+  protected void registerServerSideComponents(Map<Class<?>, Object> serverSideComponents) {
+    //default: no server-side components to register.
+  }
+
+  @Override
+  protected AppDescriptor configure() {
+    this.serverSideComponents = new HashMap<Class<?>, Object>();
+    LowLevelAppDescriptor app = LowLevelAppDescriptor.transform(new WebAppDescriptor.Builder(getClass().getPackage().getName()).build());
+    app.getResourceConfig().getSingletons().add(new BasicComponentRegistry(this.serverSideComponents));
+    configure(app);
+    return app;
   }
 
   /**
-   * Constructor
+   * Add extra configuration to the app descriptor.
    *
-   * @param testContainerFactory - A test container factory to use
+   * @param app The app descriptor.
    */
-  public DocAwareJerseyTest(TestContainerFactory testContainerFactory) {
-    super(testContainerFactory);
-  }
-
-  /**
-   * Constructor
-   *
-   * @param ad - The application descriptor to use
-   * @throws TestContainerException - An error occurred
-   */
-  public DocAwareJerseyTest(AppDescriptor ad) throws TestContainerException {
-    super(ad);
-  }
-
-  /**
-   * Constructor
-   *
-   * @param packages - Packages to scan for resources
-   * @throws TestContainerException - An error occurred
-   */
-  public DocAwareJerseyTest(String... packages) throws TestContainerException {
-    super(packages);
+  protected void configure(LowLevelAppDescriptor app) {
+    //no-op
   }
 
   /**
@@ -75,14 +73,7 @@ public class DocAwareJerseyTest extends JerseyTest {
    */
   @Override
   protected TestContainerFactory getTestContainerFactory() throws TestContainerException {
-    return new InMemoryTestContainerFactory() {
-      @Override
-      public TestContainer create(URI baseUri, AppDescriptor ad) {
-        //make sure xml is formatted for documentation purposes.
-        ((LowLevelAppDescriptor) ad).getResourceConfig().getSingletons().add(new FormattingJAXBContextResolver());
-        return super.create(baseUri, ad);
-      }
-    };
+    return new InMemoryTestContainerFactory();
   }
 
   /**
@@ -134,6 +125,11 @@ public class DocAwareJerseyTest extends JerseyTest {
    * @throws Exception
    */
   @Override
+  public void setUp() throws Exception {
+    super.setUp();
+  }
+
+  @Override
   public void tearDown() throws Exception {
     super.tearDown();
     endUseCase();
@@ -148,16 +144,27 @@ public class DocAwareJerseyTest extends JerseyTest {
 
     Marshaller marshaller = JAXBContext.newInstance(UseCase.class).createMarshaller();
 
+    boolean ensureUniqueUseCases = !"false".equals(System.getProperty("ensure.unique.usecases")) && !isRunningFromIntelliJ();
     for (UseCase useCase : this.filter.getUseCases()) {
       File file = new File(usecaseDir, generateFilename(useCase.getTitle()));
 
-      if (file.exists()) {
+      if (ensureUniqueUseCases && file.exists()) {
         throw new Exception("File is not unique, please ensure the UseCase title is unique!\n" + useCase.getTitle());
       }
 
       OutputStream os = new FileOutputStream(file);
       marshaller.marshal(useCase, os);
       os.close();
+    }
+  }
+
+  private boolean isRunningFromIntelliJ() {
+    try {
+      Class.forName("com.intellij.rt.execution.application.AppMain", false, getClass().getClassLoader());
+      return true;
+    }
+    catch (Throwable e) {
+      return false;
     }
   }
 

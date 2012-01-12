@@ -2,6 +2,7 @@ package org.familysearch.ct.ws.rs.impl;
 
 import org.gedcomx.common.URI;
 import org.gedcomx.conclusion.rs.definition.DiscoveryRSDefinition;
+import org.gedcomx.conclusion.rs.definition.PersonsRSDefinition;
 import org.gedcomx.xrd.Link;
 import org.gedcomx.xrd.Title;
 import org.gedcomx.xrd.XRD;
@@ -55,7 +56,7 @@ public class DiscoveryRSImpl implements DiscoveryRSDefinition {
 
     // Persons Link
     Link personsLink = new Link();
-    personsLink.setRel(URI.create(DiscoveryRSDefinition.PERSONS_RESOURCE_IDENTIFIER));
+    personsLink.setRel(URI.create(PersonsRSDefinition.REL));
     personsLink.setHref(URI.create(this.uriInfo.getBaseUriBuilder().path(PersonsRSImpl.class).build().getPath()));
     Title personsTitle = new Title();
     personsTitle.setValue("Persons");

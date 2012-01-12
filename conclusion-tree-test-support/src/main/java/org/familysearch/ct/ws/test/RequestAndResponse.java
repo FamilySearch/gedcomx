@@ -6,6 +6,8 @@ import com.sun.jersey.api.client.ClientResponse;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.net.URI;
 import java.util.ArrayList;
@@ -70,10 +72,41 @@ public class RequestAndResponse implements Serializable {
       this.responseHeaders.add(new Header(key, content));
     }
 
-    this.responseBody = response.getEntity(String.class);
+    try {
+      this.responseBody = consumeAndResetStream(response.getEntityInputStream());
+    }
+    catch (IOException e) {
+      throw new RuntimeException(e);
+    }
     this.responseCode = response.getStatus();
     this.responseMessage = response.getClientResponseStatus().getReasonPhrase();
     this.description = description;
+  }
+
+  private String consumeAndResetStream(InputStream entityStream) throws IOException {
+    if (!entityStream.markSupported()) {
+      //If we ever need to, we could consume and replace the stream, but for now we'll
+      //take the cheap route and just mark and reset the stream.
+      throw new IllegalStateException("Unable to consume the entity stream for logging purposes: mark not supported.");
+    }
+    entityStream.mark(Integer.MAX_VALUE);
+    try {
+      return consume(entityStream);
+    }
+    finally {
+      entityStream.reset();
+    }
+  }
+
+  private String consume(InputStream entityStream) throws IOException {
+    StringBuilder builder = new StringBuilder();
+    byte[] bytes = new byte[1024 * 5]; //5 K buffer...
+    int len = entityStream.read(bytes);
+    while (len > 0) {
+      builder.append(new String(bytes, 0, len));
+      len = entityStream.read(bytes);
+    }
+    return builder.toString();
   }
 
   /**

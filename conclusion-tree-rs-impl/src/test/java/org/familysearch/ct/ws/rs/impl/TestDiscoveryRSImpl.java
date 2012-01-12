@@ -1,8 +1,6 @@
-package org.familysearch.ct.ws.rs.impl.test;
+package org.familysearch.ct.ws.rs.impl;
 
 import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.test.framework.spi.container.TestContainerException;
-import org.familysearch.ct.ws.test.DocAwareJerseyTest;
 import org.gedcomx.xrd.XRDModel;
 import org.junit.Test;
 
@@ -12,11 +10,7 @@ import java.util.Date;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-public class TestDiscoveryRSImpl extends DocAwareJerseyTest {
-
-  public TestDiscoveryRSImpl() throws TestContainerException {
-    super("org.familysearch.ct.ws.rs.impl");
-  }
+public class TestDiscoveryRSImpl extends ConclusionTreeUseCaseTest {
 
   @Test
   public void testGet() throws Exception {
@@ -32,6 +26,8 @@ public class TestDiscoveryRSImpl extends DocAwareJerseyTest {
       .withDescription("How the caching mechanism works on the discovery resource.");
     response = resource().path("/.well-known/host-meta").accept(XRDModel.XRD_V1_XML_MEDIA_TYPE).header("If-Modified-Since", later).get(ClientResponse.class);
     assertEquals(Response.Status.NOT_MODIFIED.getStatusCode(), response.getStatus());
+
+
   }
 
 }
