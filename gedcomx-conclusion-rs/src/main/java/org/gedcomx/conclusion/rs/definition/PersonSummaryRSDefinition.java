@@ -25,15 +25,24 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 /**
- * The person summary resource defines a subset of information about a person, optimized for a summary view. The person summary is especially useful
+ * <p>The person summary resource defines a subset of information about a person, optimized for a summary view. The person summary is especially useful
  * for applications when providing quick access to the most useful data about a person, such as when retrieving a pedigree or when providing search
- * results.<br/><br/>
+ * results.</p>
  *
- * A person summary should contain at least the living status, a preferred name, the gender, birth, and death of a person. Applications may choose to
- * provide additional information to meet the specific requirements of their products.<br/><br/>
+ * <p>A person summary should contain at least the following (if available):</p>
  *
- * Note that the <tt>person</tt> element is used as the data format for the person summary resource, but the person summary resource is distinct from
- * the person resource.
+ * <ul>
+ *   <li>living status</li>
+ *   <li>preferred name</li>
+ *   <li>gender</li>
+ *   <li>birth</li>
+ *   <li>death</li>
+ * </ul>
+ *
+ * <p>Applications may choose to provide additional information to meet the specific requirements of their products.</p>
+ *
+ * <p>Note that the <tt>person</tt> element is used as the data format for the person summary resource, but the person summary resource is distinct from
+ * the person resource.</p>
  *
  * @author Ryan Heaton
  */
