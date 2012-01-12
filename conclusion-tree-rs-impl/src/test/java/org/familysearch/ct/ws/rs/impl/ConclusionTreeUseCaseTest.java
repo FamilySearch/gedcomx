@@ -12,13 +12,14 @@ import static org.easymock.EasyMock.createMock;
  */
 public abstract class ConclusionTreeUseCaseTest extends DocAwareJerseyTest {
 
-  protected PersonService mockPersonService;
-
   @Override
   protected void registerServerSideComponents(Map<Class<?>, Object> serverSideComponents) {
     super.registerServerSideComponents(serverSideComponents);
-    this.mockPersonService = createMock(PersonService.class);
-    serverSideComponents.put(PersonService.class, this.mockPersonService);
+    serverSideComponents.put(PersonService.class, createMock(PersonService.class));
+  }
+
+  protected <M> M getServerSideMock(Class<M> clazz) {
+    return (M) this.serverSideComponents.get(clazz);
   }
 
 }

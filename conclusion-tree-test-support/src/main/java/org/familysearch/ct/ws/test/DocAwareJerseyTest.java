@@ -31,7 +31,7 @@ import java.util.Map;
  */
 public class DocAwareJerseyTest extends JerseyTest {
 
-  private Map<Class<?>, Object> serverSideComponents;
+  protected Map<Class<?>, Object> serverSideComponents;
   protected static final String DEFAULT_OUTPUT_DIR = "target" + File.separator + "generated-doc";
 
   protected UseCaseLoggingFilter filter;
