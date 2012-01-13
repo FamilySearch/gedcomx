@@ -42,6 +42,7 @@ public class TestCollection {
     collection.setId("id");
     collection.setPublisher("publisher");
     collection.setTitle("title");
+    collection.setLang("en");
     collection.setBibliographicCitation("bibliographic citation");
     collection.setSpatial("spatial coverage");
     collection.setTemporal("temporal coverage");
@@ -59,6 +60,7 @@ public class TestCollection {
     assertEquals("id", collection.getId());
     assertEquals("publisher", collection.getPublisher());
     assertEquals("title", collection.getTitle());
+    assertEquals("en", collection.getLang());
     assertEquals("bibliographic citation", collection.getBibliographicCitation());
     assertEquals("spatial coverage", collection.getSpatial());
     assertEquals("temporal coverage", collection.getTemporal());

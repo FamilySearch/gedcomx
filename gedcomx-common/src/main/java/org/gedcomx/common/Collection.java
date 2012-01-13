@@ -22,6 +22,8 @@ import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.rt.*;
 import org.gedcomx.types.TypeReference;
 
+import javax.xml.XMLConstants;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
@@ -38,6 +40,7 @@ import java.util.List;
 @RDFSubClassOf ( CommonModels.DUBLIN_CORE_TYPE_NAMESPACE + "Collection" )
 public class Collection extends GenealogicalEntity {
 
+  private String lang;
   private String title;
   private String description;
   private String publisher;
@@ -45,6 +48,28 @@ public class Collection extends GenealogicalEntity {
   private String temporal;
   private List<TypeReference> types;
   private List<ResourceReference> items;
+
+  /**
+   * The language that is presumed to be applicable to the items in this collection (see
+   * <a href="http://www.w3.org/International/articles/language-tags/">http://www.w3.org/International/articles/language-tags/</a>). Note that the individual
+   * elements in this collection may specify their own language, overriding the language declared on the collection.
+   *
+   * @return The language that is presumed to be applicable to the items in this collection.
+   */
+  @XmlAttribute ( namespace = XMLConstants.XML_NS_URI )
+  public String getLang() {
+    return lang;
+  }
+
+  /**
+   * The language that is presumed to be applicable to the items in this collection (see
+   * <a href="http://www.w3.org/International/articles/language-tags/">http://www.w3.org/International/articles/language-tags/</a>).
+   *
+   * @param lang The language that is presumed to be applicable to the items in this collection.
+   */
+  public void setLang(String lang) {
+    this.lang = lang;
+  }
 
   /**
    * The title for the collection.
