@@ -15,7 +15,7 @@
     <gedcomx.version>0.8.0.BUILD-SNAPSHOT</gedcomx.version>
     <root.basedir>${project.basedir}</root.basedir>
     <sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
-    <sonar.exclusions>org/familysearch/ct/ws/rs/impl/**</sonar.exclusions>
+    <sonar.exclusions>org/familysearch/ct/ws/rs/impl/**,org/familysearch/ws/test/**</sonar.exclusions>
   </properties>
 
   <modules>
