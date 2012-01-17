@@ -118,4 +118,22 @@
       </plugins>
     </pluginManagement>
   </build>
+
+  <profiles>
+    <profile>
+      <id>fs-nexus</id>
+      <distributionManagement>
+        <repository>
+          <id>unapproved</id>
+          <name>Unapproved Artifact Repository</name>
+          <url>https://mvn.fsglobal.net/content/repositories/unapproved</url>
+        </repository>
+        <snapshotRepository>
+          <id>unapproved-snapshots</id>
+          <name>Unapproved snapshot Artifact Repository</name>
+          <url>https://mvn.fsglobal.net/content/repositories/unapproved-snapshots</url>
+       </snapshotRepository>
+      </distributionManagement>
+    </profile>
+  </profiles>
 </project>
