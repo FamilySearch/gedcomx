@@ -173,8 +173,8 @@ public class TestRecord {
     field.setId(label + "-id");
     field.setOriginal(label + "-original");
     field.setInterpreted(label + "-interpreted");
-    field.setProcessed(new FormalValue());
-    field.getProcessed().setText(label + "-normalized");
+    field.setFormal(new FormalValue());
+    field.getFormal().setText(label + "-normalized");
   }
 
   private void assertField(Field field, String label) {
@@ -183,7 +183,7 @@ public class TestRecord {
     assertEquals(label + "-id", field.getId());
     assertEquals(label + "-original", field.getOriginal());
     assertEquals(label + "-interpreted", field.getInterpreted());
-    assertEquals(label + "-normalized", field.getProcessed().getText());
+    assertEquals(label + "-normalized", field.getFormal().getText());
   }
 
   private void assertTestRecord(Record record) {
