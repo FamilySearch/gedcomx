@@ -292,7 +292,7 @@
     [/#list]
       <hr/>
       <a name="usecase-anchor"></a>
-      <iframe id="usecase"></iframe>
+      <iframe id="usecase" width="100%"></iframe>
   [/#if]
     </article>
   </div>
