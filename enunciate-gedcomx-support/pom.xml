@@ -2,13 +2,13 @@
 
   <modelVersion>4.0.0</modelVersion>
   <artifactId>enunciate-gedcomx-support</artifactId>
-  <version>0.8.0.BUILD-SNAPSHOT</version>
+  <version>0.8.0.RELEASE</version>
   <name>GEDCOM X - Enunciate Integration Support</name>
 
   <parent>
     <groupId>org.gedcomx</groupId>
     <artifactId>gedcomx-parent</artifactId>
-    <version>0.8.0.BUILD-SNAPSHOT</version>
+    <version>0.8.0.RELEASE</version>
   </parent>
 
   <properties>
