@@ -23,7 +23,7 @@ import java.util.Date;
 /**
  * @author Mike Gardiner
  */
-@Path ( "/.well-known/host-meta" )
+@Path ( "/discovery" )
 @Produces ( XRDModel.XRD_V1_XML_MEDIA_TYPE )
 public class DiscoveryRSImpl implements DiscoveryRSDefinition {
   
