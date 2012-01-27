@@ -112,12 +112,13 @@ public class GenerateExampleResponseBodyMethod extends GenerateResourceExampleHt
         writer.printf("}");
       }
       else {
-        writer.printf("<%s xmlns=\"%s\" xmlns:rs=\"...\">\n", element.getName(), element.getNamespace());
+        boolean isAtom = "http://www.w3.org/2005/Atom".equals(element.getNamespace());
+        writer.printf("<%s xmlns=\"%s\"%s>\n", element.getName(), element.getNamespace(), isAtom ? "" : " xmlns:atom=\"http://www.w3.org/2005/Atom\"");
         writer.printf("  ...\n");
         Iterator<ResourceRelationship> relIt = def != null ? def.getResourceRelationships().iterator() : Collections.<ResourceRelationship>emptyList().iterator();
         while (relIt.hasNext()) {
           ResourceRelationship rel = relIt.next();
-          writer.printf("  <atom:link rel=\"%s\" href=\"...\"/>\n", rel.getIdentifier());
+          writer.printf("  <%slink rel=\"%s\" href=\"...\"/>\n", isAtom ? "" : "atom:", rel.getIdentifier());
           if (!relIt.hasNext()) {
             writer.printf("  ...\n");
           }
@@ -150,7 +151,7 @@ public class GenerateExampleResponseBodyMethod extends GenerateResourceExampleHt
           relIt = entry.getValue().getResourceRelationships().iterator();
           while (relIt.hasNext()) {
             ResourceRelationship rel = relIt.next();
-            writer.printf("    <atom:link rel=\"%s\" href=\"...\"/>\n", rel.getIdentifier());
+            writer.printf("    <%slink rel=\"%s\" href=\"...\"/>\n", isAtom ? "" : "atom:", rel.getIdentifier());
             if (!relIt.hasNext()) {
               writer.printf("    ...\n");
             }
