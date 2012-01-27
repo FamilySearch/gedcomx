@@ -50,5 +50,5 @@ public class OpenSearchModel {
   public static final String OPENSEARCH_XML_MEDIA_TYPE = "application/opensearchdescription+xml";
   public static final String OPENSEARCH_GEDCOMX_JSON_MEDIA_TYPE = "application/x-gedcomx-opensearchdescription+json";
 
-  public static final String OPENSEARCH_RELEVANCE_NAMESPACE = "http://a9.com/-/spec/opensearch/1.1/";
+  public static final String OPENSEARCH_RELEVANCE_NAMESPACE = "http://a9.com/-/opensearch/extensions/relevance/1.0/";
 }

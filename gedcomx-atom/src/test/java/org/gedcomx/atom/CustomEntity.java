@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 /**
  * @author Ryan Heaton
  */
-@XmlRootElement
+@XmlRootElement (namespace = "urn:custom")
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME )
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 public class CustomEntity extends GenealogicalEntity {

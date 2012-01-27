@@ -354,7 +354,9 @@ public class Feed extends ExtensibleElement {
    *
    * @return The entries in the feed.
    */
-  @XmlElementWrapper( name = "entries" )
+  @XmlElement( name = "entry" )
+  @JsonName("entries")
+  @JsonProperty("entries")
   public List<Entry> getEntries() {
     return entries;
   }
@@ -364,6 +366,7 @@ public class Feed extends ExtensibleElement {
    *
    * @param entries The entries in the feed.
    */
+  @JsonProperty("entries")
   public void setEntries(List<Entry> entries) {
     this.entries = entries;
   }
