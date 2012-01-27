@@ -105,7 +105,6 @@ public class GedcomNamespaceManager extends NamespacePrefixMapper {
   public static synchronized Map<String, String> getKnownPrefixes() {
     if (KNOWN_PREFIXES == null) {
       Map<String, String> ns2prefix = new HashMap<String, String>();
-      ns2prefix.put("http://www.w3.org/1999/xlink", "xlink");
       ns2prefix.put("http://www.w3.org/2001/XMLSchema-instance", "xsi");
       ns2prefix.put("http://gedcomx.org/record/v1/", "gxr");
       ns2prefix.put("http://gedcomx.org/conclusion/v1/", "gxc");

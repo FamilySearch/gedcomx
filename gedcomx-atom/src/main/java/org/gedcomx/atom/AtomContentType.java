@@ -13,19 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package org.gedcomx.atom;
 
 /**
- * The www model defines the necessary extensions to provide genealogical data via the World Wide Web.
+ * @author Ryan Heaton
  */
-@XmlSchema (
-  namespace = RSModel.GEDCOMX_RS_V1_NAMESPACE,
-  attributeFormDefault = XmlNsForm.QUALIFIED,
-  elementFormDefault = XmlNsForm.QUALIFIED
-)
-@XmlAccessorOrder ( XmlAccessOrder.ALPHABETICAL )
-package org.gedcomx.rs;
+public enum AtomContentType {
 
-import javax.xml.bind.annotation.XmlAccessOrder;
-import javax.xml.bind.annotation.XmlAccessorOrder;
-import javax.xml.bind.annotation.XmlNsForm;
-import javax.xml.bind.annotation.XmlSchema;
+  text,
+
+  html
+
+}

@@ -117,7 +117,7 @@ public class GenerateExampleResponseBodyMethod extends GenerateResourceExampleHt
         Iterator<ResourceRelationship> relIt = def != null ? def.getResourceRelationships().iterator() : Collections.<ResourceRelationship>emptyList().iterator();
         while (relIt.hasNext()) {
           ResourceRelationship rel = relIt.next();
-          writer.printf("  <rs:link rel=\"%s\" href=\"...\"/>\n", rel.getIdentifier());
+          writer.printf("  <atom:link rel=\"%s\" href=\"...\"/>\n", rel.getIdentifier());
           if (!relIt.hasNext()) {
             writer.printf("  ...\n");
           }
@@ -150,7 +150,7 @@ public class GenerateExampleResponseBodyMethod extends GenerateResourceExampleHt
           relIt = entry.getValue().getResourceRelationships().iterator();
           while (relIt.hasNext()) {
             ResourceRelationship rel = relIt.next();
-            writer.printf("    <rs:link rel=\"%s\" href=\"...\"/>\n", rel.getIdentifier());
+            writer.printf("    <atom:link rel=\"%s\" href=\"...\"/>\n", rel.getIdentifier());
             if (!relIt.hasNext()) {
               writer.printf("    ...\n");
             }

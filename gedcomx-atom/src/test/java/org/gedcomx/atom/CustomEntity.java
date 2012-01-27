@@ -1,4 +1,4 @@
-package org.gedcomx.rs;
+package org.gedcomx.atom;
 
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
