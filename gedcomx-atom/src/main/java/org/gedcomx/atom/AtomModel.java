@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.rs;
+package org.gedcomx.atom;
 
 import org.gedcomx.rt.Model;
 import org.gedcomx.rt.Models;
@@ -26,20 +26,20 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlTransient
 @Models ( {
   @Model (
-    id = "gxrs",
-    namespace = RSModel.GEDCOMX_RS_V1_NAMESPACE,
-    label = "RS Model",
-    description = "The rs model defines the types and elements used to expose genealogical data through a REST interface.",
-    version = "v1",
-    xmlMediaType = RSModel.GEDCOMX_RS_V1_XML_MEDIA_TYPE,
-    jsonMediaType = RSModel.GEDCOMX_RS_V1_JSON_MEDIA_TYPE
+    id = "atom",
+    namespace = AtomModel.ATOM_NAMESPACE,
+    label = "Atom Model",
+    description = "The Atom model supplied the types and elements defined by the Atom syndication format.",
+    version = "2005",
+    xmlMediaType = AtomModel.ATOM_XML_MEDIA_TYPE,
+    jsonMediaType = AtomModel.ATOM_GEDCOMX_JSON_MEDIA_TYPE
   )
 } )
-public class RSModel {
+public class AtomModel {
 
-  private RSModel() {}
+  private AtomModel() {}
 
-  public static final String GEDCOMX_RS_V1_NAMESPACE = "http://gedcomx.org/rs/v1/";
-  public static final String GEDCOMX_RS_V1_XML_MEDIA_TYPE = "application/gedcomx-rs-v1+xml";
-  public static final String GEDCOMX_RS_V1_JSON_MEDIA_TYPE = "application/gedcomx-rs-v1+json";
+  public static final String ATOM_NAMESPACE = "http://www.w3.org/2005/Atom";
+  public static final String ATOM_XML_MEDIA_TYPE = "application/atom+xml";
+  public static final String ATOM_GEDCOMX_JSON_MEDIA_TYPE = "application/x-gedcomx-atom+json";
 }

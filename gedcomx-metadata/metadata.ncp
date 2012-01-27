@@ -1,0 +1,27 @@
+<Project>
+  <Name>metadata</Name>
+  <ProjectItem type="NClass.DiagramEditor.ClassDiagram.Diagram" assembly="NClass.DiagramEditor, Version=2.4.1823.0, Culture=neutral, PublicKeyToken=null">
+    <Name>source-description</Name>
+    <Language>Java</Language>
+    <Entities>
+      <Entity type="Class">
+        <Name>DublinCoreDescription</Name>
+        <Access>Public</Access>
+        <Location left="64" top="31" />
+        <Size width="314" height="234" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">public RDFValue language</Member>
+        <Member type="Field">public RDFLiteral bibliographicCitation</Member>
+        <Member type="Field">public Date date</Member>
+        <Member type="Field">public RDFValue description</Member>
+        <Member type="Field">public RDFValue format</Member>
+        <Member type="Field">public RDFLiteral identifier</Member>
+        <Member type="Field">public Date issued</Member>
+        <Member type="Field">public Date modified</Member>
+        <Member type="Field">public RDFLiteral title</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+    </Entities>
+    <Relationships />
+  </ProjectItem>
+</Project>
