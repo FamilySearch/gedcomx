@@ -62,6 +62,7 @@
 
       <h3>Operations</h3>
 
+      [#if rsd.resourceMethods?size > 0]
       <p>Pick your favorite representation format.</p>
 
       <div id="mediatype-selection">
@@ -71,15 +72,15 @@
 
       <div id="tabs">
         <ul>
-      [#list rsd.resourceMethods as op]
+        [#list rsd.resourceMethods as op]
           <li><a href="#${op.httpMethods[0]?upper_case}">${op.httpMethods[0]?upper_case}</a></li>
-      [/#list]
+        [/#list]
         </ul>
-      [#list rsd.resourceMethods as op]
-        [#assign method=op.httpMethods[0]?upper_case/]
+        [#list rsd.resourceMethods as op]
+          [#assign method=op.httpMethods[0]?upper_case/]
         <div id="${method}">
         <p>${op.docValue!""}</p>
-      [#if op.metaData.statusCodes?size > 0]
+        [#if op.metaData.statusCodes?size > 0]
 
         <h4>Status Codes</h4>
 
@@ -88,15 +89,15 @@
             <th align="center">code</th>
             <th align="center">condition</th>
           </tr>
-        [#list op.metaData.statusCodes?sort_by("code") as statusCode]
+          [#list op.metaData.statusCodes?sort_by("code") as statusCode]
           <tr>
             <td>${statusCode.code}</td>
             <td>${statusCode.condition}</td>
           </tr>
-        [/#list]
+          [/#list]
         </table>
-      [/#if]
-      [#if op.metaData.warnings?size > 0]
+        [/#if]
+        [#if op.metaData.warnings?size > 0]
 
         <h4>Warnings</h4>
 
@@ -105,18 +106,18 @@
             <th align="center">code</th>
             <th align="center">condition</th>
           </tr>
-        [#list op.metaData.warnings?sort_by("code") as warning]
+          [#list op.metaData.warnings?sort_by("code") as warning]
           <tr>
             <td>${warning.code}</td>
             <td>${warning.condition}</td>
           </tr>
-        [/#list]
+          [/#list]
         </table>
-      [/#if]
+        [/#if]
 
         <div class="xml-docs">
-      [#assign requestBody=generateExampleRequestBody(op)?html?trim/]
-      [#assign responseBody=generateExampleResponseBody(op)?html?trim/]
+        [#assign requestBody=generateExampleRequestBody(op)?html?trim/]
+        [#assign responseBody=generateExampleResponseBody(op)?html?trim/]
           <h4>Example Request</h4>
           <pre>${generateExampleRequestHeaders(op)}[#if requestBody?length > 0]
 <code class="prettyprint lang-xml">${requestBody}</code>[/#if]</pre>
@@ -127,8 +128,8 @@
         </div>
 
         <div class="json-docs">
-      [#assign requestBody=generateExampleRequestBody(op, true)?html?trim/]
-      [#assign responseBody=generateExampleResponseBody(op, true)?html?trim/]
+        [#assign requestBody=generateExampleRequestBody(op, true)?html?trim/]
+        [#assign responseBody=generateExampleResponseBody(op, true)?html?trim/]
           <h4>Example Request</h4>
           <pre>${generateExampleRequestHeaders(op, true)}[#if requestBody?length > 0]
 <code class="prettyprint lang-js">${requestBody}</code>[/#if]</pre>
@@ -138,7 +139,10 @@
 <code class="prettyprint lang-js">${responseBody}</code>[/#if]</pre>
         </div>
     </div>
-    [/#list]
+      [/#list]
+    [#else]
+      <p>No methods are defined on this resource.</p>
+    [/#if]
 
       </div>
     </article>
