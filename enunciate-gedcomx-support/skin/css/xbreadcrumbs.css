@@ -29,7 +29,7 @@
 /*  Base style of xBreadcrumbs  */
 /*  Top Level  */
 .xbreadcrumbs {
-	background: #f8fbfd;
+	background: #edebce;
 	width: 100%;
 }
 .xbreadcrumbs LI {
@@ -54,7 +54,7 @@
     padding-left: 20px;
 }
 .xbreadcrumbs LI A:HOVER, .xbreadcrumbs LI.hover A {
-	color: #b9d7ff;
+	color: #b2a581;
 }
 /*  Top Level - Current Page  */
 .xbreadcrumbs LI.current A {
@@ -64,7 +64,7 @@
 /*  Sub-level  */
 .xbreadcrumbs LI UL {
 	padding: 3px;
-	background: #e5f1ff;
+	background: #edebce;
 	font-size: 11px;
 	width: 180px;
 	top: 25px;
@@ -86,5 +86,5 @@
 	border-bottom: none;
 }
 .xbreadcrumbs LI UL LI A:HOVER {
-    background: #b9d7ff;
+    background: #edebce;
 }
