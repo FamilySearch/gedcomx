@@ -3,7 +3,7 @@ package org.familysearch.ct.ws.rs.impl;
 import org.gedcomx.common.ResourceSet;
 import org.gedcomx.conclusion.Person;
 import org.gedcomx.conclusion.Relationship;
-import org.gedcomx.rs.Link;
+import org.gedcomx.atom.Link;
 import org.gedcomx.rt.GedcomNamespaceManager;
 import org.gedcomx.xrd.XRD;
 

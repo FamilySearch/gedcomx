@@ -8,7 +8,7 @@ import org.gedcomx.conclusion.ConclusionModel;
 import org.gedcomx.conclusion.Person;
 import org.gedcomx.conclusion.rs.definition.PersonRSDefinition;
 import org.gedcomx.conclusion.rs.definition.PersonSummaryRSDefinition;
-import org.gedcomx.rs.Link;
+import org.gedcomx.atom.Link;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
