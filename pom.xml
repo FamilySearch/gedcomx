@@ -16,6 +16,18 @@
     <root.basedir>${project.basedir}</root.basedir>
     <sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
     <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+    <maven.repository.approved.url>
+      https://mvn.fsglobal.net/content/repositories/approved
+    </maven.repository.approved.url>
+    <maven.repository.approved-snapshots.url>
+      https://mvn.fsglobal.net/content/repositories/approved-snapshots
+    </maven.repository.approved-snapshots.url>
+    <maven.repository.unapproved.url>
+      https://mvn.fsglobal.net/content/repositories/unapproved
+    </maven.repository.unapproved.url>
+    <maven.repository.unapproved-snapshots.url>
+      https://mvn.fsglobal.net/content/repositories/unapproved-snapshots
+    </maven.repository.unapproved-snapshots.url>
   </properties>
 
   <modules>
@@ -140,6 +152,23 @@
           <url>https://mvn.fsglobal.net/content/repositories/unapproved-snapshots</url>
        </snapshotRepository>
       </distributionManagement>
+    </profile>
+    <profile>
+      <id>build-deploy</id>
+      <distributionManagement>
+        <snapshotRepository>
+          <id>approved-snapshots</id>
+          <name>Approved Artifact Repository</name>
+          <url>${maven.repository.approved-snapshots.url}</url>
+        </snapshotRepository>
+      </distributionManagement>
+      <repositories>
+        <repository>
+          <id>unapproved</id>
+          <name>Unapproved Repository</name>
+          <url>${maven.repository.unapproved.url}</url>
+        </repository>
+      </repositories>
     </profile>
   </profiles>
 </project>
