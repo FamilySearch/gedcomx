@@ -154,6 +154,21 @@
       </distributionManagement>
     </profile>
     <profile>
+      <id>pkg-deploy</id>
+      <distributionManagement>
+        <repository>
+          <id>approved</id>
+          <name>Approved Artifact Repository</name>
+          <url>${maven.repository.approved.url}</url>
+        </repository>
+        <snapshotRepository>
+          <id>approved-snapshots</id>
+          <name>Approved Artifact Repository</name>
+          <url>${maven.repository.approved-snapshots.url}</url>
+        </snapshotRepository>
+      </distributionManagement>
+    </profile>
+    <profile>
       <id>build-deploy</id>
       <distributionManagement>
         <snapshotRepository>
