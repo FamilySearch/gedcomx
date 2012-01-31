@@ -71,6 +71,33 @@ public class TestRecord {
     fact.getPlace().getParts().add(placePart);
     fact.setPrimary(true);
     facts.add(fact);
+
+    // Add a fact with a Date with nothing but parts defined.
+    fact = new Fact();
+    fact.setKnownType(FactType.Burial);
+    Date date = new Date();
+    date.setParts(new ArrayList<DatePart>());
+    fact.setDate(date);
+    datePart = new DatePart();
+    datePart.setKnownType(DatePartType.Months);
+    datePart.setOriginal("Jan");
+    fact.getDate().getParts().add(datePart);
+    datePart = new DatePart();
+    datePart.setKnownType(DatePartType.Years);
+    datePart.setOriginal("1805");
+    fact.getDate().getParts().add(datePart);
+
+    // Add a Place with nothing but parts defined
+    Place place = new Place();
+    place.setParts(new ArrayList<PlacePart>());
+    fact.setPlace(place);
+    placePart = new PlacePart();
+    placePart.setKnownType(PlacePartType.Cemetery);
+    placePart.setOriginal("Orem Cemetery");
+    fact.getPlace().getParts().add(placePart);
+
+    facts.add(fact);
+
     record.setFacts(facts);
 
     Persona persona = new Persona();
@@ -191,7 +218,7 @@ public class TestRecord {
     assertEquals(AlternateIdType.Forwarded, record.getAlternateIds().get(0).getKnownType());
     assertEquals("forward-value", record.getAlternateIds().get(0).getValue());
 
-    assertEquals(1, record.getFacts().size());
+    assertEquals(2, record.getFacts().size());
     Fact fact = record.getFacts().get(0);
     assertField(fact.getDate(), "event-date");
     assertEquals("event-id", fact.getId());
@@ -204,9 +231,14 @@ public class TestRecord {
     assertEquals(1, fact.getPlace().getParts().size());
     assertField(fact.getPlace().getParts().get(0), "event-place-part");
     assertEquals(PlacePartType.Cemetery, fact.getPlace().getParts().get(0).getKnownType());
-    assertEquals("", fact.toString());
+    assertEquals("event-id: Adoption: event-date-normalized: event-place-normalized", fact.toString());
     assertEquals("event-date-normalized", fact.getDate().toString());
     assertEquals("event-place-normalized", fact.getPlace().toString());
+
+    fact = record.getFacts().get(1);
+    assertEquals("Jan 1805", fact.getDate().toString());
+    assertEquals("Orem Cemetery", fact.getPlace().toString());
+    assertEquals("Burial: Jan 1805: Orem Cemetery", fact.toString());
 
     assertEquals(1, record.getPersonas().size());
     Persona persona = record.getPersonas().get(0);
