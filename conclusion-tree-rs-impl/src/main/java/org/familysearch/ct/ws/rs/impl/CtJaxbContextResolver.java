@@ -1,5 +1,6 @@
 package org.familysearch.ct.ws.rs.impl;
 
+import org.gedcomx.atom.Feed;
 import org.gedcomx.common.ResourceSet;
 import org.gedcomx.conclusion.Person;
 import org.gedcomx.conclusion.Relationship;
@@ -23,7 +24,7 @@ public class CtJaxbContextResolver implements ContextResolver<JAXBContext> {
   private JAXBContext context;
 
   public CtJaxbContextResolver() throws JAXBException {
-    this.context = JAXBContext.newInstance(Person.class, Relationship.class, ResourceSet.class, Link.class, XRD.class);
+    this.context = JAXBContext.newInstance(Person.class, Relationship.class, ResourceSet.class, Feed.class, Link.class, XRD.class);
   }
 
   @Override

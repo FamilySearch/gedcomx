@@ -16,5 +16,11 @@
       <artifactId>gedcomx-conclusion</artifactId>
       <version>${gedcomx.version}</version>
     </dependency>
+
+    <dependency>
+      <groupId>org.gedcomx</groupId>
+      <artifactId>gedcomx-atom</artifactId>
+      <version>${gedcomx.version}</version>
+    </dependency>
   </dependencies>
 </project>
