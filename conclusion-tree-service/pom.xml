@@ -7,7 +7,7 @@
   <parent>
     <groupId>org.familysearch.ct</groupId>
     <artifactId>conclusion-tree-parent</artifactId>
-    <version>0.1.0.BUILD</version>
+    <version>0.1.1.BUILD-SNAPSHOT</version>
   </parent>
 
   <dependencies>
