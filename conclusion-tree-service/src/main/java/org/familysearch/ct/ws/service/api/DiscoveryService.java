@@ -3,6 +3,7 @@ package org.familysearch.ct.ws.service.api;
 
 import org.gedcomx.xrd.Link;
 
+import org.gedcomx.metadata.foaf.Person;
 import java.util.List;
 
 /**
@@ -20,4 +21,11 @@ public interface DiscoveryService {
    * @return A valid session Id or Null if user is not authenticated
    */
   public String getSessionId();
+
+  /**
+   * Get meta-data about currently authenticated user
+   *
+   * @return Person meta-data
+   */
+  public Person getAuthenticatedPerson();
 }

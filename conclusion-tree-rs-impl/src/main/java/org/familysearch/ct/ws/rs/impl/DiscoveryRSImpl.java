@@ -6,6 +6,7 @@ import org.gedcomx.common.URI;
 import org.gedcomx.conclusion.rs.definition.DiscoveryRSDefinition;
 import org.gedcomx.conclusion.rs.definition.PersonSummaryRSDefinition;
 import org.gedcomx.conclusion.rs.definition.PersonsRSDefinition;
+import org.gedcomx.metadata.foaf.Person;
 import org.gedcomx.xrd.Link;
 import org.gedcomx.xrd.Title;
 import org.gedcomx.xrd.XRD;
@@ -26,6 +27,7 @@ import java.util.List;
 @Path ( "/discovery" )
 @Produces ( XRDModel.XRD_V1_XML_MEDIA_TYPE )
 public class DiscoveryRSImpl implements DiscoveryRSDefinition {
+  private static final String ID_TOKEN = "%7Bid%7D";
 
   @Context
   private Request request;
@@ -54,7 +56,11 @@ public class DiscoveryRSImpl implements DiscoveryRSDefinition {
         String sessionId = discoveryService.getSessionId();
         
         if(sessionId != null) {
-          xrd.getLinks().add(buildPersonSummaryLink(sessionId));
+          Person authPerson = discoveryService.getAuthenticatedPerson();
+          if (authPerson != null) {
+            xrd.getLinks().add(buildPersonSummaryLink(sessionId, authPerson.getId()));
+          }
+
           xrd.getLinks().add(buildPersonsLink(sessionId));  
         }
         else {
@@ -94,16 +100,18 @@ public class DiscoveryRSImpl implements DiscoveryRSDefinition {
   /**
    * Build the person summary link
    * @param sessionId A valid session if
+   * @param id = Id of person
    * @return Person summary link
    */
-  private Link buildPersonSummaryLink(String sessionId) {
+  private Link buildPersonSummaryLink(String sessionId, String id) {
     Link link = new Link();
     link.setRel(URI.create(PersonSummaryRSDefinition.REL));
 
-    link.setHref(URI.create(this.uriInfo.getBaseUriBuilder().
-      path(PersonSummaryRSImpl.class).
-      queryParam("sessionId", sessionId).
-      build().toString()));
+    String path = this.uriInfo.getBaseUriBuilder().path(PersonSummaryRSImpl.class).
+      queryParam("sessionId", sessionId).build().toString();
+
+    path = path.replace(ID_TOKEN, id);
+    link.setHref(URI.create(path));
 
     Title title = new Title();
     title.setValue("Person Summary");

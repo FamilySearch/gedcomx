@@ -18,6 +18,11 @@
     </dependency>
     <dependency>
       <groupId>org.gedcomx</groupId>
+      <artifactId>gedcomx-metadata</artifactId>
+      <version>${gedcomx.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.gedcomx</groupId>
       <artifactId>gedcomx-xrd</artifactId>
       <version>${gedcomx.version}</version>
     </dependency>
