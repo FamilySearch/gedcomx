@@ -17,12 +17,15 @@ package org.gedcomx.rt;
 
 import com.sun.xml.bind.marshaller.NamespacePrefixMapper;
 
+import javax.xml.bind.annotation.XmlElementDecl;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchema;
+import javax.xml.namespace.QName;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.*;
 
@@ -36,8 +39,10 @@ public class GedcomNamespaceManager extends NamespacePrefixMapper {
   private final String defaultns;
   private final Map<String, String> ns2prefix;
 
-  private static Map<String, String> KNOWN_PREFIXES = null;
+  private static boolean INITIALIZED = false;
+  private static final Map<String, String> KNOWN_PREFIXES = new HashMap<String, String>();
   private static final Map<String, String> RUNTIME_VERSIONS = new HashMap<String, String>();
+  private static final Map<QName, QName> KNOWN_JSON_ELEMENT_WRAPPER_NAMES = new HashMap<QName, QName>();
 
   public GedcomNamespaceManager(Class<?> rootClass) {
     this(getDefaultNamespace(rootClass));
@@ -102,23 +107,23 @@ public class GedcomNamespaceManager extends NamespacePrefixMapper {
    *
    * @return The known set of namespace-to-prefix mappings.
    */
-  public static synchronized Map<String, String> getKnownPrefixes() {
-    if (KNOWN_PREFIXES == null) {
-      Map<String, String> ns2prefix = new HashMap<String, String>();
-      ns2prefix.put("http://www.w3.org/2001/XMLSchema-instance", "xsi");
-      ns2prefix.put("http://gedcomx.org/record/v1/", "gxr");
-      ns2prefix.put("http://gedcomx.org/conclusion/v1/", "gxc");
-      Map<String, String> namespacePrefixes = loadNamespacePrefixes(Thread.currentThread().getContextClassLoader());
-      ns2prefix.putAll(namespacePrefixes);
-
-      KNOWN_PREFIXES = ns2prefix;
-    }
-
+  public static Map<String, String> getKnownPrefixes() {
+    init(Thread.currentThread().getContextClassLoader());
     return KNOWN_PREFIXES;
   }
 
-  protected static Map<String, String> loadNamespacePrefixes(ClassLoader loader) {
+  protected static synchronized void init(ClassLoader loader) {
+    if (INITIALIZED) {
+      return;
+    }
+
     Map<String, String> namespacePrefixes = new HashMap<String, String>();
+    namespacePrefixes.put("http://www.w3.org/2001/XMLSchema-instance", "xsi");
+    namespacePrefixes.put("http://gedcomx.org/record/v1/", "gxr");
+    namespacePrefixes.put("http://gedcomx.org/conclusion/v1/", "gxc");
+
+    Map<QName, QName> elementWrappers = new HashMap<QName, QName>();
+
     Set<Class<?>> modelClasses = new HashSet<Class<?>>();
     modelClasses.add(CommonModels.class);
 
@@ -147,10 +152,35 @@ public class GedcomNamespaceManager extends NamespacePrefixMapper {
       Models modelsInfo = modelClass.getAnnotation(Models.class);
       for (Model model : modelsInfo.value()) {
         namespacePrefixes.put(model.namespace(), model.id());
+
+        for (Class objectFactory : model.objectFactory()) {
+          for (Method method : objectFactory.getDeclaredMethods()) {
+            JsonElementWrapper jsonElementWrapper = method.getAnnotation(JsonElementWrapper.class);
+            if (jsonElementWrapper != null) {
+              XmlElementDecl elementDecl = method.getAnnotation(XmlElementDecl.class);
+              if (elementDecl != null) {
+                String ns = elementDecl.namespace();
+                if ("##default".equals(ns)) {
+                  if (objectFactory.getPackage().isAnnotationPresent(XmlSchema.class)) {
+                    ns = objectFactory.getPackage().getAnnotation(XmlSchema.class).namespace();
+                  }
+                  else {
+                    ns = "";
+                  }
+                }
+
+                String name = elementDecl.name();
+                elementWrappers.put(new QName(ns, name), new QName(jsonElementWrapper.namespace(), jsonElementWrapper.name()));
+              }
+            }
+          }
+        }
       }
     }
 
-    return namespacePrefixes;
+    KNOWN_PREFIXES.putAll(namespacePrefixes);
+    KNOWN_JSON_ELEMENT_WRAPPER_NAMES.putAll(elementWrappers);
+    INITIALIZED = true;
   }
 
   @Override
@@ -163,6 +193,17 @@ public class GedcomNamespaceManager extends NamespacePrefixMapper {
       return "";
     }
     return choice;
+  }
+
+  /**
+   * Get the json wrapper name for the specified XML element name.
+   *
+   * @param elementName The XML element wrapper name.
+   * @return The json wrapper name, or null if none.
+   */
+  public static QName getJsonWrapperName(QName elementName) {
+    init(Thread.currentThread().getContextClassLoader());
+    return KNOWN_JSON_ELEMENT_WRAPPER_NAMES.get(elementName);
   }
 
   /**

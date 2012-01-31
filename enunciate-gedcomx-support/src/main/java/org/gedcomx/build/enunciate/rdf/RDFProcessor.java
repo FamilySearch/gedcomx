@@ -90,6 +90,10 @@ public class RDFProcessor {
           //simple types and enum types aren't described by RDF schema except as RDF literals.
         }
 
+        for (LocalElementDeclaration local : schemaInfo.getLocalElementDeclarations()) {
+          describeRDFProperty(local, result);
+        }
+
         for (QNameEnumTypeDefinition typeDefinition : enums) {
           //enum descriptions are saved for last in case the enum references one of the classes.
           describeRDFClassesAndProperties(typeDefinition, result);
@@ -314,6 +318,94 @@ public class RDFProcessor {
     JavaDoc javaDoc = accessor.getJavaDoc();
     if (declaringMember != null) {
       javaDoc = new JavaDoc(declaringMember.getDocComment());
+    }
+    if (javaDoc != null) {
+      String comment = javaDoc.toString();
+      if (!comment.isEmpty()) {
+        description.addComment(comment);
+      }
+    }
+  }
+
+  /**
+   * Create the RDF description for the specified local element declaration and add it to the RDF schema.
+   *
+   * @param localEl The local element declaration for which to describe the RDF property.
+   * @param result The validation result to which to add any warnings or errors.
+   */
+  private void describeRDFProperty(LocalElementDeclaration localEl, ValidationResult result) {
+    String namespace = localEl.getNamespace();
+    if (isKnownRDFNamespace(namespace)) {
+      //nothing to describe; the property is already known.
+      return;
+    }
+
+    String name = localEl.getName();
+    String about = namespace + name;
+    Set<String> domain = new TreeSet<String>();
+    Set<String> range = determineRDFRange(localEl.getElementXmlType(), result);
+    Set<String> superProperties = new TreeSet<String>();
+    RDFSchema.RDFDescription description = this.rdfSchema.findDescription(about);
+    if (description == null) {
+      description = new RDFSchema.RDFDescription();
+      description.setAbout(about);
+      description.setLabel(name);
+      description.setIsDefinedBy(namespace);
+      description.setType(RDFSchema.RDF_PROPERTY_TYPE);
+      description.setRange(range);
+      description.setDomain(domain);
+      description.setSubPropertyOf(superProperties);
+      description.setAssociatedDeclaration(localEl);
+      this.rdfSchema.addDescription(description);
+    }
+    else {
+      if (!namespace.equals(description.getIsDefinedBy())) {
+        StringBuilder message = new StringBuilder("Unable to describe property ").append(about).append(" because it's already described as defined by '").append(description.getIsDefinedBy()).append("'");
+        appendPosition(message, description.getAssociatedDeclaration());
+        message.append('.');
+        result.addError(localEl, message.toString());
+      }
+
+      if (!RDFSchema.RDF_PROPERTY_TYPE.equals(description.getType())) {
+        StringBuilder message = new StringBuilder("Unable to describe property ").append(about).append(" because it's already described as of type '").append(description.getType()).append("'");
+        appendPosition(message, description.getAssociatedDeclaration());
+        message.append('.');
+        result.addError(localEl, message.toString());
+      }
+      else {
+        if (!range.equals(description.getRange()) && !description.getRange().isEmpty()) {
+          description.getRange().retainAll(range);
+
+          if (description.getRange().isEmpty()) {
+            //if the range isn't equal, we need to determine
+            StringBuilder message = new StringBuilder("Unable to determine range for property ").append(about).append(" because the intersection between the range ");
+            appendPosition(message, description.getAssociatedDeclaration());
+            message.append(" is empty.");
+            result.addWarning(localEl, message.toString());
+          }
+        }
+
+        if (!domain.equals(description.getDomain())) {
+          StringBuilder message = new StringBuilder("Unable to describe property ").append(about).append(" because it's domain is described as ");
+          message.append(getSetComparisonMessage(domain, description.getDomain()));
+          appendPosition(message, description.getAssociatedDeclaration());
+          message.append('.');
+          result.addError(localEl, message.toString());
+        }
+
+        if (!superProperties.equals(description.getSubPropertyOf())) {
+          StringBuilder message = new StringBuilder("Unable to describe property ").append(about).append(" because it's 'subPropertyOf' is described as ");
+          message.append(getSetComparisonMessage(superProperties, description.getSubPropertyOf()));
+          appendPosition(message, description.getAssociatedDeclaration());
+          message.append('.');
+          result.addError(localEl, message.toString());
+        }
+      }
+    }
+
+    JavaDoc javaDoc = localEl.getJavaDoc();
+    if (localEl != null) {
+      javaDoc = new JavaDoc(localEl.getDocComment());
     }
     if (javaDoc != null) {
       String comment = javaDoc.toString();

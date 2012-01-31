@@ -94,7 +94,10 @@ public class ExtensibleObjectSerializer extends BeanSerializer {
             name = new QName(el.getNamespaceURI() == null ? "" : el.getNamespaceURI(), el.getLocalName());
           }
           else if (element instanceof JAXBElement) {
-            name = ((JAXBElement) element).getName();
+            name = GedcomNamespaceManager.getJsonWrapperName(((JAXBElement) element).getName());
+            if (name == null) {
+              name = ((JAXBElement) element).getName();
+            }
             element = ((JAXBElement) element).getValue();
           }
           else if (element.getClass().isAnnotationPresent(JsonElementWrapper.class)) {

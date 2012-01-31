@@ -35,7 +35,8 @@ import javax.xml.bind.annotation.XmlTransient;
     version = "v1",
     xmlMediaType = ConclusionModel.GEDCOMX_CONCLUSION_V1_XML_MEDIA_TYPE,
     jsonMediaType = ConclusionModel.GEDCOMX_CONCLUSION_V1_JSON_MEDIA_TYPE,
-    definesRDFSchema = true
+    definesRDFSchema = true,
+    objectFactory = ObjectFactory.class
   )
 } )
 public class ConclusionModel {

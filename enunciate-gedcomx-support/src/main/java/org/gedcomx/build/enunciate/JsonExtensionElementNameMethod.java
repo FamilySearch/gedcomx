@@ -19,7 +19,7 @@ import freemarker.ext.beans.BeansWrapper;
 import freemarker.template.TemplateMethodModelEx;
 import freemarker.template.TemplateModel;
 import freemarker.template.TemplateModelException;
-import org.codehaus.enunciate.contract.jaxb.RootElementDeclaration;
+import org.codehaus.enunciate.contract.jaxb.ElementDeclaration;
 import org.gedcomx.rt.JsonElementWrapper;
 
 import java.util.List;
@@ -36,11 +36,11 @@ public class JsonExtensionElementNameMethod implements TemplateMethodModelEx {
 
     Object object = BeansWrapper.getDefaultInstance().unwrap((TemplateModel) list.get(0));
 
-    if (object instanceof RootElementDeclaration) {
-      RootElementDeclaration rootEl = (RootElementDeclaration) object;
-      String name = rootEl.getName();
-      String namespace = rootEl.getNamespace();
-      JsonElementWrapper ext = rootEl.getAnnotation(JsonElementWrapper.class);
+    if (object instanceof ElementDeclaration) {
+      ElementDeclaration el = (ElementDeclaration) object;
+      String name = el.getName();
+      String namespace = el.getNamespace();
+      JsonElementWrapper ext = el.getAnnotation(JsonElementWrapper.class);
       if (ext != null) {
         name = ext.name();
         namespace = ext.namespace();
@@ -49,7 +49,7 @@ public class JsonExtensionElementNameMethod implements TemplateMethodModelEx {
       return namespace + name;
     }
     else {
-      throw new TemplateModelException("The jsonExtensionElementName method must have a root element as a parameter.");
+      throw new TemplateModelException("The jsonExtensionElementName method must have an element declaration as a parameter.");
     }
   }
 

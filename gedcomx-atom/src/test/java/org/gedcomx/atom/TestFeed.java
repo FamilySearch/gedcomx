@@ -5,12 +5,14 @@ import org.gedcomx.opensearch.Query;
 import org.testng.annotations.Test;
 
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBElement;
 import java.util.ArrayList;
 import java.util.Date;
 
 import static org.gedcomx.rt.SerializationUtil.processThroughJson;
 import static org.gedcomx.rt.SerializationUtil.processThroughXml;
 import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.fail;
 
 /**
  * @author Ryan Heaton
@@ -83,8 +85,12 @@ public class TestFeed {
     entry.setScore(0.6F);
     entry.setTitle("entry title");
     entry.setUpdated(new Date(1234568L));
+
     CustomEntity customEntity = new CustomEntity();
     customEntity.setId("entityid");
+    CustomEntity subentity = new CustomEntity();
+    subentity.setId("subentityid");
+    customEntity.addExtensionElement(new ObjectFactory().createCustomEntitySubelement(subentity));
     entry.addExtensionElement(customEntity);
     feed.getEntries().add(entry);
     
@@ -173,6 +179,19 @@ public class TestFeed {
     assertEquals(1, entry.getExtensionElements().size());
     CustomEntity customEntity = entry.findExtensionOfType(CustomEntity.class);
     assertEquals("entityid", customEntity.getId());
+    assertEquals(1, customEntity.getExtensionElements().size());
+    Object ext = customEntity.getExtensionElements().get(0);
+    CustomEntity subentity = null;
+    if (ext instanceof CustomEntity) {
+      subentity = (CustomEntity) ext;
+    }
+    else if (ext instanceof JAXBElement) {
+      subentity = (CustomEntity) ((JAXBElement) ext).getValue();
+    }
+    else {
+      fail("Extension element should be an instance of CustomEntity or JAXBElement<CustomEntity>");
+    }
+    assertEquals("subentityid", subentity.getId());
 
     assertEquals(URI.create("urn:base"), feed.getGenerator().getBase());
     assertEquals("de", feed.getGenerator().getLang());
