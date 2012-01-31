@@ -7,13 +7,23 @@
   <parent>
     <groupId>org.familysearch.ct</groupId>
     <artifactId>conclusion-tree-parent</artifactId>
-    <version>0.1.0.BUILD-SNAPSHOT</version>
+    <version>0.1.1.BUILD-SNAPSHOT</version>
   </parent>
 
   <dependencies>
     <dependency>
       <groupId>org.gedcomx</groupId>
       <artifactId>gedcomx-conclusion</artifactId>
+      <version>${gedcomx.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.gedcomx</groupId>
+      <artifactId>gedcomx-metadata</artifactId>
+      <version>${gedcomx.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.gedcomx</groupId>
+      <artifactId>gedcomx-xrd</artifactId>
       <version>${gedcomx.version}</version>
     </dependency>
   </dependencies>
