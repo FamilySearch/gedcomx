@@ -39,7 +39,7 @@
   <scm>
     <connection>scm:git:git@github.com:FamilySearch/conclusion-tree.git</connection>
     <developerConnection>scm:git:git@github.com:FamilySearch/conclusion-tree.git</developerConnection>
-    <url>https://github.com/FamilySearch/conclusion-tree</url>
+    <url>git@github.com:FamilySearch/conclusion-tree.git</url>
   </scm>
 
   <build>
