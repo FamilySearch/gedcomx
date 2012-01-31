@@ -54,7 +54,7 @@
 
     <dependency>
       <groupId>org.gedcomx</groupId>
-      <artifactId>gedcomx-rs</artifactId>
+      <artifactId>gedcomx-atom</artifactId>
       <version>0.9.0.BUILD-SNAPSHOT</version>
     </dependency>
 

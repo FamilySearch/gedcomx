@@ -168,9 +168,6 @@ public class GedcomxValidator extends BaseValidator {
     if ("".equals(typeDef.getNamespace())) {
       result.addError(typeDef, "Type definition should not be in the empty namespace.");
     }
-    else if (!suppressWarning(typeDef, "rdf-incompatible-ns") && !typeDef.getNamespace().endsWith("/") && !typeDef.getNamespace().endsWith("#")) {
-      result.addError(typeDef, "The namespace of type definitions should end with a '/' or a '#' in order to provide for defining them in terms of RDF Schema.");
-    }
 
     if (typeDef.getName().toLowerCase().startsWith("web")) {
       result.addWarning(typeDef, "You probably don't want a type definition that starts with the name 'web'. Consider renaming using the @XmlType annotation.");
@@ -179,27 +176,14 @@ public class GedcomxValidator extends BaseValidator {
     Collection<Attribute> attributes = typeDef.getAttributes();
     if (attributes != null && !attributes.isEmpty()) {
       for (Attribute attribute : attributes) {
-        String namespace = attribute.getNamespace();
-        if ((namespace == null || "".equals(attribute.getNamespace())) && !suppressWarning(typeDef, "unqualified-attribute")) {
-          result.addError(attribute, "Attributes should be defined within a namespace so as to be well-defined within RDF. Hint: use attributeFormDefault=\"qualified\".");
-        }
-
         boolean isURI = ((DecoratedTypeMirror) TypeMirrorDecorator.decorate(attribute.getAccessorType())).isInstanceOf("org.gedcomx.common.URI");
         if (isURI && !KnownXmlType.ANY_URI.getQname().equals(attribute.getBaseType().getQname())) {
           result.addError(attribute, "Accessors of type 'org.gedcomx.common.URI' should of type xs:anyURI. Please annotate the attribute with @XmlSchemaType(name = \"anyURI\", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)");
         }
 
-        if (!suppressWarning(attribute, "rdf-incompatible-type-reference") && "type".equals(attribute.getName())) {
-          result.addError(attribute, "Types should be specified with as an rdf:type reference, which is an element named 'type' in the rdf namespace with an rdf:resource attribute.");
-        }
-
         if ("id".equalsIgnoreCase(attribute.getName())) {
           if (!attribute.isXmlID()) {
             result.addError(attribute, "Id attributes should be annotated as @XmlID.");
-          }
-
-          if (!CommonModels.RDF_NAMESPACE.equals(attribute.getNamespace()) && !"ID".equals(attribute.getName())) {
-            result.addError(attribute, "Id attributes should be named rdf:ID.");
           }
         }
 
@@ -238,14 +222,6 @@ public class GedcomxValidator extends BaseValidator {
 
           if ("href".equals(choice.getName())) {
             result.addError(choice, "Entity links should be make with an attribute named 'href'. You probably need to apply @XmlAttribute.");
-          }
-
-          if (!suppressWarning(choice, "rdf-incompatible-type-reference") && "type".equals(choice.getName()) && !isTypeReference(choice)) {
-            result.addError(choice, "Types should be specified with as an rdf:type reference, which is an element named 'type' in the rdf namespace with an rdf:resource attribute.");
-          }
-
-          if ("id".equals(choice.getName()) && !choice.isXmlID()) {
-            result.addError(choice, "Accessors named 'id' should be attributes named rdf:ID and annotated with @XmlID.");
           }
 
           if ("persistentId".equals(choice.getName()) && !isURI) {
@@ -382,22 +358,6 @@ public class GedcomxValidator extends BaseValidator {
     }
 
     return result;
-  }
-
-  private boolean isTypeReference(Element choice) {
-    if (CommonModels.RDF_NAMESPACE.equals(choice.getNamespace())) {
-      XmlType baseType = choice.getBaseType();
-      if (baseType instanceof XmlClassType) {
-        TypeDefinition typeDefinition = ((XmlClassType) baseType).getTypeDefinition();
-        for (Attribute attribute : typeDefinition.getAttributes()) {
-          if ("resource".equals(attribute.getName()) && CommonModels.RDF_NAMESPACE.equals(attribute.getNamespace())) {
-            return true;
-          }
-        }
-      }
-    }
-
-    return false;
   }
 
   private boolean isInstanceOf(TypeDefinition typeDef, String name) {

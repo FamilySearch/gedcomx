@@ -80,6 +80,7 @@ public class RDFProcessor {
         describeSchema(schemaInfo, result);
         List<QNameEnumTypeDefinition> enums = new ArrayList<QNameEnumTypeDefinition>();
         for (TypeDefinition typeDefinition : schemaInfo.getTypeDefinitions()) {
+          validate(result, typeDefinition);
           if (typeDefinition instanceof QNameEnumTypeDefinition) {
             enums.add((QNameEnumTypeDefinition) typeDefinition);
           }
@@ -96,6 +97,63 @@ public class RDFProcessor {
       }
     }
     return result;
+  }
+
+  protected void validate(ValidationResult result, TypeDefinition typeDef) {
+    if (!suppressWarning(typeDef, "rdf-incompatible-ns") && !typeDef.getNamespace().endsWith("/") && !typeDef.getNamespace().endsWith("#")) {
+      result.addError(typeDef, "The namespace of type definitions should end with a '/' or a '#' in order to provide for defining them in terms of RDF Schema.");
+    }
+
+    for (Attribute attribute : typeDef.getAttributes()) {
+      String namespace = attribute.getNamespace();
+      if ((namespace == null || "".equals(attribute.getNamespace())) && !suppressWarning(typeDef, "unqualified-attribute")) {
+        result.addError(attribute, "Attributes should be defined within a namespace so as to be well-defined within RDF. Hint: use attributeFormDefault=\"qualified\".");
+      }
+
+      if (!suppressWarning(attribute, "rdf-incompatible-type-reference") && "type".equals(attribute.getName())) {
+        result.addError(attribute, "Types should be specified with as an rdf:type reference, which is an element named 'type' in the rdf namespace with an rdf:resource attribute.");
+      }
+
+      if ("id".equalsIgnoreCase(attribute.getName())) {
+        if (!CommonModels.RDF_NAMESPACE.equals(attribute.getNamespace()) && !"ID".equals(attribute.getName())) {
+          result.addError(attribute, "Id attributes should be named rdf:ID.");
+        }
+      }
+    }
+
+    for (Element element : typeDef.getElements()) {
+      for (Element choice : element.getChoices()) {
+        if (!suppressWarning(choice, "rdf-incompatible-type-reference") && "type".equals(choice.getName()) && !isTypeReference(choice)) {
+          result.addError(choice, "Types should be specified with as an rdf:type reference, which is an element named 'type' in the rdf namespace with an rdf:resource attribute.");
+        }
+
+        if ("id".equals(choice.getName()) && !choice.isXmlID()) {
+          result.addError(choice, "Accessors named 'id' should be attributes named rdf:ID and annotated with @XmlID.");
+        }
+      }
+    }
+
+  }
+
+  private boolean suppressWarning(Declaration declaration, String warning) {
+    SuppressWarnings suppressionInfo = declaration.getAnnotation(SuppressWarnings.class);
+    return suppressionInfo != null && Arrays.asList(suppressionInfo.value()).contains(warning);
+  }
+
+  private boolean isTypeReference(Element choice) {
+    if (CommonModels.RDF_NAMESPACE.equals(choice.getNamespace())) {
+      org.codehaus.enunciate.contract.jaxb.types.XmlType baseType = choice.getBaseType();
+      if (baseType instanceof XmlClassType) {
+        TypeDefinition typeDefinition = ((XmlClassType) baseType).getTypeDefinition();
+        for (Attribute attribute : typeDefinition.getAttributes()) {
+          if ("resource".equals(attribute.getName()) && CommonModels.RDF_NAMESPACE.equals(attribute.getNamespace())) {
+            return true;
+          }
+        }
+      }
+    }
+
+    return false;
   }
 
   /**
