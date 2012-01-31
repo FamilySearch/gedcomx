@@ -147,4 +147,48 @@ public class Fact extends Field {
     this.place = place;
   }
 
+  /**
+   * Provide a simple toString() method.
+   */
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+
+    sb.append(super.toString());
+
+    // Did the Field's toString() provide something?
+    if (sb.length() <= 0) {
+      // No, so look at it's parts.
+      if (getId() != null) {
+        sb.append(getId());
+      }
+
+      // Show the Type
+      if (getKnownType() != null) {
+        if (sb.length() > 0) {
+          sb.append(": ");
+        }
+        sb.append(getKnownType().toString());
+      }
+
+      // Show the Date
+      if (date != null) {
+        if (sb.length() > 0) {
+          sb.append(": ");
+        }
+        sb.append(date.toString());
+      }
+
+      // Show the Place
+      if (place != null) {
+        if (sb.length() > 0) {
+          sb.append(": ");
+        }
+        sb.append(place.toString());
+      }
+    }
+
+    return sb.toString();
+  }
+
 }

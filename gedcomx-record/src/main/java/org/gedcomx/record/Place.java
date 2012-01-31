@@ -57,4 +57,25 @@ public class Place extends Field implements Partitionable<PlacePart> {
     this.parts = parts;
   }
 
+  /**
+   * Provide a simple toString() method.
+   */
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+
+    sb.append(super.toString());
+
+    if (sb.length() <= 0) {
+      // Then look to the parts for something to display
+      for (PlacePart part : parts) {
+        if (sb.length() > 0) {
+          sb.append(" ");
+        }
+        sb.append(part.toString());
+      }
+    }
+
+    return sb.toString();
+  }
 }
