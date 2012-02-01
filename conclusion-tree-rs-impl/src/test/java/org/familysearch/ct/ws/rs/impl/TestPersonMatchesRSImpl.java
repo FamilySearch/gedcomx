@@ -102,7 +102,7 @@ public class TestPersonMatchesRSImpl extends ConclusionTreeUseCaseTest {
 
     createUseCase("Caching The Person Matches")
       .withDescription("Example illustrating how the cacheing mechanism works on the person matches.")
-      .applicableTo(PersonSummaryRSImpl.class);
+      .applicableTo(PersonMatchesRSImpl.class);
     Date later = new Date(now.getTime() + (1000 * 60 * 60)); //one hour later
     expect(personService.getPersonMatches("12345")).andReturn(entity);
     expect(entity.getLastModified()).andReturn(now);
@@ -117,7 +117,7 @@ public class TestPersonMatchesRSImpl extends ConclusionTreeUseCaseTest {
   public void testNotFound() {
     createUseCase("Person Matches Not Found")
       .withDescription("Example illustrating a request for person matches that don't exist.")
-      .applicableTo(PersonSummaryRSImpl.class);
+      .applicableTo(PersonMatchesRSImpl.class);
     PersonService personService = getServerSideMock(PersonService.class);
     EntityBundle entity = createMock(EntityBundle.class);
     expect(personService.getPersonMatches("NOTFOUND")).andReturn(null);
