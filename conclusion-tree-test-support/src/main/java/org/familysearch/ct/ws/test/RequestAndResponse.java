@@ -11,8 +11,8 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.net.URI;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -48,27 +48,25 @@ public class RequestAndResponse implements Serializable {
    */
   public RequestAndResponse(ClientRequest request, ClientResponse response, String description) {
     MultivaluedMap<String, Object> map = request.getHeaders();
-    Set<String> set = map.keySet();
-    Iterator<String> iterator = set.iterator();
-    String content;
 
     this.requestMethod = request.getMethod();
     this.requestPath = request.getURI();
-    while (iterator.hasNext()) {
-      String key = iterator.next();
-      content = map.get(key).get(0).toString();
+    final Set<Map.Entry<String, List<Object>>> requestEntries = map.entrySet();
+    
+    for (Map.Entry<String, List<Object>> entry : requestEntries) {
+      String key = entry.getKey();
+      String content = entry.getValue().get(0).toString();
       this.requestHeaders.add(new Header(key, content));
     }
 
     this.requestBody = (String) request.getEntity();
 
     MultivaluedMap<String, String> responseMap = response.getHeaders();
-    set = responseMap.keySet();
-    iterator = set.iterator();
+    final Set<Map.Entry<String, List<String>>> responseEntries = responseMap.entrySet();
 
-    while (iterator.hasNext()) {
-      String key = iterator.next();
-      content = responseMap.get(key).get(0);
+    for (Map.Entry<String, List<String>> entry : responseEntries) {
+      String key = entry.getKey();
+      String content = entry.getValue().get(0);
       this.responseHeaders.add(new Header(key, content));
     }
 
