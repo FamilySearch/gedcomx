@@ -1,5 +1,6 @@
 package org.familysearch.ct.ws.rs.impl;
 
+import org.familysearch.ct.ws.service.api.DiscoveryService;
 import org.familysearch.ct.ws.service.api.PersonService;
 import org.familysearch.ct.ws.test.DocAwareJerseyTest;
 
@@ -16,6 +17,7 @@ public abstract class ConclusionTreeUseCaseTest extends DocAwareJerseyTest {
   protected void registerServerSideComponents(Map<Class<?>, Object> serverSideComponents) {
     super.registerServerSideComponents(serverSideComponents);
     serverSideComponents.put(PersonService.class, createMock(PersonService.class));
+    serverSideComponents.put(DiscoveryService.class, createMock(DiscoveryService.class));
   }
 
   protected <M> M getServerSideMock(Class<M> clazz) {
