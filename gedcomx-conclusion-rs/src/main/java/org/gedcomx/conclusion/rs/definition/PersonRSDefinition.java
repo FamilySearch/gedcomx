@@ -39,7 +39,7 @@ import javax.ws.rs.core.UriInfo;
 )
 @ResourceRelationships({
   @ResourceRelationship ( identifier = "self", definedBy = PersonRSDefinition.class, description = "The person itself." ),
-  @ResourceRelationship ( identifier = "parent-child-relationship", definedBy = RelationshipRSDefinition.class, description = "The parent-child relationships for a person." )
+  @ResourceRelationship ( identifier = PersonMatchesRSDefinition.REL, definedBy = PersonMatchesRSDefinition.class, description = "The matches for the person." )
 })
 public interface PersonRSDefinition extends CommonRSParameters {
 

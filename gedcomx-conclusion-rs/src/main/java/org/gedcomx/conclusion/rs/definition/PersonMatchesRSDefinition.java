@@ -56,6 +56,4 @@ public interface PersonMatchesRSDefinition extends CommonRSParameters {
   })
   Response readPersonMatches(@Context UriInfo uriInfo);
 
-  //todo: (heatonra, 2012/01/27) is there a requirement to be able to match a person not in the system, described by a POST or something? my assumption, for now, is "no" because the primary purpose of _matching_ is to analyze possible duplicates that exist in the system.
-
 }
