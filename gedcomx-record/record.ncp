@@ -13,7 +13,6 @@
         <Member type="Field">public RecordType type</Member>
         <Member type="Field">public String lang</Member>
         <Member type="Field">public Persona[] personas</Member>
-        <Member type="Field">public Event[] events</Member>
         <Member type="Field">public RecordField[] relationships</Member>
         <Member type="Field">public Fact[] facts</Member>
         <Modifier>None</Modifier>
@@ -40,7 +39,7 @@
         <Member type="Field">public RelationshipType type</Member>
         <Member type="Field">public ResourceReference persona1</Member>
         <Member type="Field">public ResourceReference persona2</Member>
-        <Member type="Field">public Extension facts</Member>
+        <Member type="Field">public Fact[] facts</Member>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Class">
@@ -170,8 +169,6 @@
     </Entities>
     <Relationships>
       <Relationship type="Association" first="1" second="3">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -184,8 +181,6 @@
         <EndMultiplicity>1</EndMultiplicity>
       </Relationship>
       <Relationship type="Association" first="1" second="4">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -202,8 +197,6 @@
         <EndMultiplicity>*</EndMultiplicity>
       </Relationship>
       <Relationship type="Association" first="1" second="5">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -220,8 +213,6 @@
         <EndMultiplicity>1</EndMultiplicity>
       </Relationship>
       <Relationship type="Association" first="1" second="6">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -238,8 +229,6 @@
         <EndMultiplicity>*</EndMultiplicity>
       </Relationship>
       <Relationship type="Association" first="0" second="1">
-        <Label>
-        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -256,8 +245,6 @@
         <EndMultiplicity>*</EndMultiplicity>
       </Relationship>
       <Relationship type="Association" first="2" second="6">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -362,8 +349,6 @@
         </BendPoint>
       </Relationship>
       <Relationship type="Association" first="4" second="9">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -376,8 +361,6 @@
         <EndMultiplicity>*</EndMultiplicity>
       </Relationship>
       <Relationship type="Association" first="5" second="10">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="False">
@@ -390,8 +373,6 @@
         <EndMultiplicity>*</EndMultiplicity>
       </Relationship>
       <Relationship type="Association" first="7" second="11">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <Direction>Unidirectional</Direction>
@@ -400,8 +381,6 @@
         <EndMultiplicity>*</EndMultiplicity>
       </Relationship>
       <Relationship type="Association" first="8" second="12">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <Direction>Unidirectional</Direction>
@@ -418,6 +397,8 @@
         </BendPoint>
       </Relationship>
       <Relationship type="Association" first="6" second="7">
+        <Label>
+        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -432,6 +413,8 @@
         <AssociationType>Aggregation</AssociationType>
       </Relationship>
       <Relationship type="Association" first="6" second="8">
+        <Label>
+        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -462,6 +445,8 @@
         </BendPoint>
       </Relationship>
       <Relationship type="Association" first="0" second="2">
+        <Label>
+        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <Direction>Unidirectional</Direction>
@@ -478,6 +463,8 @@
         </BendPoint>
       </Relationship>
       <Relationship type="Association" first="2" second="1">
+        <Label>
+        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -516,7 +503,6 @@
         <Member type="Field">public RecordType type</Member>
         <Member type="Field">public String lang</Member>
         <Member type="Field">public Persona[] personas</Member>
-        <Member type="Field">public Event[] events</Member>
         <Member type="Field">public RecordField[] relationships</Member>
         <Member type="Field">public Fact[] facts</Member>
         <Modifier>None</Modifier>
@@ -524,13 +510,13 @@
       <Entity type="Class">
         <Name>Relationship</Name>
         <Access>Public</Access>
-        <Location left="732" top="396" />
+        <Location left="733" top="396" />
         <Size width="293" height="145" />
         <Collapsed>False</Collapsed>
         <Member type="Field">public RelationshipType type</Member>
         <Member type="Field">public ResourceReference persona1</Member>
         <Member type="Field">public ResourceReference persona2</Member>
-        <Member type="Field">public Extension facts</Member>
+        <Member type="Field">public Fact[] facts</Member>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Class">
@@ -573,10 +559,12 @@
         </BendPoint>
       </Relationship>
       <Relationship type="Association" first="1" second="2">
+        <Label>
+        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
-          <X>916</X>
+          <X>917</X>
           <Y>73</Y>
         </BendPoint>
         <BendPoint relativeToStartShape="False">
@@ -597,6 +585,8 @@
         </BendPoint>
       </Relationship>
       <Relationship type="Association" first="0" second="1">
+        <Label>
+        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -604,7 +594,7 @@
           <Y>350</Y>
         </BendPoint>
         <BendPoint relativeToStartShape="False">
-          <X>784</X>
+          <X>785</X>
           <Y>371</Y>
         </BendPoint>
         <Direction>Unidirectional</Direction>
@@ -629,8 +619,6 @@
         <EndOrientation>Vertical</EndOrientation>
       </Relationship>
       <Relationship type="Association" first="0" second="2">
-        <Label>
-        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -762,8 +750,6 @@
         </BendPoint>
       </Relationship>
       <Relationship type="Association" first="0" second="1">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -776,8 +762,6 @@
         <EndMultiplicity>1</EndMultiplicity>
       </Relationship>
       <Relationship type="Association" first="0" second="2">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -814,8 +798,6 @@
         </BendPoint>
       </Relationship>
       <Relationship type="Association" first="0" second="4">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -832,8 +814,6 @@
         <EndMultiplicity>*</EndMultiplicity>
       </Relationship>
       <Relationship type="Association" first="0" second="3">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">

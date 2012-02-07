@@ -30,8 +30,6 @@
     </Entities>
     <Relationships>
       <Relationship type="Association" first="0" second="1">
-        <Label>
-        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <Direction>Unidirectional</Direction>
@@ -145,14 +143,14 @@
         <Collapsed>True</Collapsed>
       </Entity>
       <Entity type="Enum">
-        <Name>DateType</Name>
+        <Name>DatePartType</Name>
         <Access>Public</Access>
         <Location left="83" top="252" />
         <Size width="162" height="129" />
         <Collapsed>True</Collapsed>
       </Entity>
       <Entity type="Enum">
-        <Name>PlaceType</Name>
+        <Name>PlacePartType</Name>
         <Access>Public</Access>
         <Location left="317" top="252" />
         <Size width="162" height="216" />
