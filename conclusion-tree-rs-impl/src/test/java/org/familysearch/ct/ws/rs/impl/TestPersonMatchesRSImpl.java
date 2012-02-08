@@ -45,14 +45,12 @@ public class TestPersonMatchesRSImpl extends ConclusionTreeUseCaseTest {
     name.setPrimaryForm(new NameForm());
     name.getPrimaryForm().setFullText("Jonathan Heaton");
     matchedPerson1Father.getNames().add(name);
-    matchedPerson1.addExtensionElement(conclusionFactory.createFatherElement(matchedPerson1Father));
     Person matchedPerson1Mother = new Person();
     matchedPerson1Mother.setNames(new ArrayList<Name>());
     name = new Name();
     name.setPrimaryForm(new NameForm());
     name.getPrimaryForm().setFullText("Clarissa Hoyt");
     matchedPerson1Mother.getNames().add(name);
-    matchedPerson1.addExtensionElement(conclusionFactory.createMotherElement(matchedPerson1Mother));
 
     Person matchedPerson2 = new Person();
     matchedPerson2.setId("43210");
@@ -78,6 +76,8 @@ public class TestPersonMatchesRSImpl extends ConclusionTreeUseCaseTest {
     match1.setId(matchedPerson1.getPersistentId());
     match1.setScore(0.95F);
     match1.setUpdated(new Date());
+    match1.addExtensionElement(conclusionFactory.createFatherElement(matchedPerson1Father));
+    match1.addExtensionElement(conclusionFactory.createMotherElement(matchedPerson1Mother));
     serverSideMatchFeed.getEntries().add(match1);
 
     Entry match2 = new Entry();
