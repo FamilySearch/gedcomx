@@ -15,6 +15,7 @@
  */
 package org.gedcomx.rt.rs;
 
+import javax.xml.bind.annotation.XmlElement;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -60,4 +61,13 @@ public @interface ResourceDefinition {
    * @return The resource service definitions that are considered subresources of this resource.
    */
   Class<?>[] subresources() default {};
+
+  /**
+   * The valid elements that are used to carry the subresources of this resource. This is currently only applicable
+   * to resources that are represented by an extensible element that will use its extension mechanism
+   * to supply subresources.
+   *
+   * @return The valid elements that are used to carry the subresources of this resource.
+   */
+  XmlElement[] subresourceElements() default {};
 }

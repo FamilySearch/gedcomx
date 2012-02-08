@@ -17,9 +17,13 @@ package org.gedcomx.conclusion.rs.definition;
 
 import org.gedcomx.atom.Entry;
 import org.gedcomx.conclusion.ConclusionModel;
+import org.gedcomx.conclusion.Person;
+import org.gedcomx.conclusion.Relationship;
 import org.gedcomx.rt.rs.ResourceDefinition;
 import org.gedcomx.rt.rs.ResourceRelationship;
 import org.gedcomx.rt.rs.ResourceRelationships;
+
+import javax.xml.bind.annotation.XmlElement;
 
 /**
  * The person match resource defines a specific match for a person.
@@ -30,7 +34,13 @@ import org.gedcomx.rt.rs.ResourceRelationships;
   name = "PersonMatch",
   namespace = ConclusionModel.GEDCOMX_CONCLUSION_V1_NAMESPACE,
   resourceElement = Entry.class,
-  subresources = { PersonSummaryRSDefinition.class }
+  subresources = { PersonSummaryRSDefinition.class },
+  subresourceElements = {
+    @XmlElement (type = Person.class, name = "person", namespace = ConclusionModel.GEDCOMX_CONCLUSION_V1_NAMESPACE),
+    @XmlElement (type = Person.class, name = "parent", namespace = ConclusionModel.GEDCOMX_CONCLUSION_V1_NAMESPACE),
+    @XmlElement (type = Person.class, name = "spouse", namespace = ConclusionModel.GEDCOMX_CONCLUSION_V1_NAMESPACE),
+    @XmlElement (type = Relationship.class, name = "relationship", namespace = ConclusionModel.GEDCOMX_CONCLUSION_V1_NAMESPACE)
+  }
 )
 @ResourceRelationships ( {
   @ResourceRelationship( identifier = PersonSummaryRSDefinition.REL, definedBy = PersonSummaryRSDefinition.class, description = "The link to the summary of the person that is identified as a match candidate." ),

@@ -29,27 +29,15 @@ import javax.xml.namespace.QName;
 public class ObjectFactory {
 
   /**
-   * The father of a person.
+   * The parent of a person.
    *
-   * @param person The father.
+   * @param person The parent.
    * @return The element.
    */
-  @XmlElementDecl( namespace = ConclusionModel.GEDCOMX_CONCLUSION_V1_NAMESPACE, name = "father" )
-  @JsonElementWrapper( name = "fathers" )
-  public JAXBElement<Person> createFatherElement(Person person) {
-    return new JAXBElement<Person>(new QName(ConclusionModel.GEDCOMX_CONCLUSION_V1_NAMESPACE, "father"), Person.class,  person);
-  }
-
-  /**
-   * The mother of a person.
-   *
-   * @param person The mother.
-   * @return The element.
-   */
-  @XmlElementDecl( namespace = ConclusionModel.GEDCOMX_CONCLUSION_V1_NAMESPACE, name = "mother" )
-  @JsonElementWrapper( name = "mothers" )
-  public JAXBElement<Person> createMotherElement(Person person) {
-    return new JAXBElement<Person>(new QName(ConclusionModel.GEDCOMX_CONCLUSION_V1_NAMESPACE, "mother"), Person.class,  person);
+  @XmlElementDecl( namespace = ConclusionModel.GEDCOMX_CONCLUSION_V1_NAMESPACE, name = "parent" )
+  @JsonElementWrapper( name = "parents" )
+  public JAXBElement<Person> createParentElement(Person person) {
+    return new JAXBElement<Person>(new QName(ConclusionModel.GEDCOMX_CONCLUSION_V1_NAMESPACE, "parent"), Person.class,  person);
   }
 
   /**
@@ -62,42 +50,6 @@ public class ObjectFactory {
   @JsonElementWrapper( name = "spouses" )
   public JAXBElement<Person> createSpouseElement(Person person) {
     return new JAXBElement<Person>(new QName(ConclusionModel.GEDCOMX_CONCLUSION_V1_NAMESPACE, "spouse"), Person.class,  person);
-  }
-
-  /**
-   * The relationship of a person to the father.
-   *
-   * @param rel The relationship
-   * @return The element.
-   */
-  @XmlElementDecl( namespace = ConclusionModel.GEDCOMX_CONCLUSION_V1_NAMESPACE, name = "fatherRelationship" )
-  @JsonElementWrapper( name = "fatherRelationships" )
-  public JAXBElement<Relationship> createFatherRelationshipElement(Relationship rel) {
-    return new JAXBElement<Relationship>(new QName(ConclusionModel.GEDCOMX_CONCLUSION_V1_NAMESPACE, "fatherRelationship"), Relationship.class,  rel);
-  }
-
-  /**
-   * The relationship of a person to the mother.
-   *
-   * @param rel The relationship
-   * @return The element.
-   */
-  @XmlElementDecl( namespace = ConclusionModel.GEDCOMX_CONCLUSION_V1_NAMESPACE, name = "motherRelationship" )
-  @JsonElementWrapper( name = "motherRelationships" )
-  public JAXBElement<Relationship> createMotherRelationshipElement(Relationship rel) {
-    return new JAXBElement<Relationship>(new QName(ConclusionModel.GEDCOMX_CONCLUSION_V1_NAMESPACE, "motherRelationship"), Relationship.class,  rel);
-  }
-
-  /**
-   * The relationship of a person to the spouse.
-   *
-   * @param rel The relationship
-   * @return The element.
-   */
-  @XmlElementDecl( namespace = ConclusionModel.GEDCOMX_CONCLUSION_V1_NAMESPACE, name = "spouseRelationship" )
-  @JsonElementWrapper( name = "spouseRelationships" )
-  public JAXBElement<Relationship> createSpouseRelationshipElement(Relationship rel) {
-    return new JAXBElement<Relationship>(new QName(ConclusionModel.GEDCOMX_CONCLUSION_V1_NAMESPACE, "spouseRelationship"), Relationship.class,  rel);
   }
 
 }
