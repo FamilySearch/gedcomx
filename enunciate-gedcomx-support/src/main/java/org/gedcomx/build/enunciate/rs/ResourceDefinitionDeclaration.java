@@ -19,6 +19,7 @@ import com.sun.mirror.declaration.InterfaceDeclaration;
 import com.sun.mirror.declaration.TypeDeclaration;
 import com.sun.mirror.type.InterfaceType;
 import org.codehaus.enunciate.contract.jaxb.ElementDeclaration;
+import org.codehaus.enunciate.contract.jaxb.TypeDefinition;
 import org.codehaus.enunciate.contract.jaxrs.Resource;
 import org.codehaus.enunciate.contract.jaxrs.ResourceMethod;
 import org.codehaus.enunciate.contract.jaxrs.ResourceParameter;
@@ -26,11 +27,9 @@ import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.rs.ResourceDefinition;
 
 import javax.ws.rs.Path;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.namespace.QName;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author Ryan Heaton
@@ -45,8 +44,9 @@ public class ResourceDefinitionDeclaration extends Resource {
   private final Set<ResourceRelationship> resourceRelationships;
   private final List<ElementDeclaration> resourceElements;
   private final Set<QName> subresources;
+  private final Map<QName, TypeDefinition> subresourceElements;
 
-  public ResourceDefinitionDeclaration(TypeDeclaration delegate, List<ElementDeclaration> resourceElements, Set<QName> subresources, ResourceServiceProcessor processor) {
+  public ResourceDefinitionDeclaration(TypeDeclaration delegate, List<ElementDeclaration> resourceElements, Set<QName> subresources, Map<QName, TypeDefinition> subresourceElements, ResourceServiceProcessor processor) {
     super(delegate);
 
     this.processor = processor;
@@ -63,6 +63,7 @@ public class ResourceDefinitionDeclaration extends Resource {
       resourceMethod.putMetaData("statusCodes", processor.extractStatusCodes(resourceMethod));
       resourceMethod.putMetaData("warnings", processor.extractWarnings(resourceMethod));
     }
+    this.subresourceElements = Collections.unmodifiableMap(subresourceElements);
   }
 
   @Override
@@ -112,6 +113,10 @@ public class ResourceDefinitionDeclaration extends Resource {
     return subresources;
   }
 
+  public Map<QName, TypeDefinition> getSubresourceElements() {
+    return subresourceElements;
+  }
+
   public Set<ResponseCode> getStatusCodes() {
     return statusCodes;
   }
@@ -122,15 +127,6 @@ public class ResourceDefinitionDeclaration extends Resource {
 
   public Set<ResourceRelationship> getResourceRelationships() {
     return resourceRelationships;
-  }
-
-  public boolean isResourceBundle() {
-    for (ElementDeclaration resourceElement : this.resourceElements) {
-      if (CommonModels.RDF_NAMESPACE.equals(resourceElement.getNamespace()) && "RDF".equals(resourceElement.getName())) {
-        return true;
-      }
-    }
-    return false;
   }
 
 }

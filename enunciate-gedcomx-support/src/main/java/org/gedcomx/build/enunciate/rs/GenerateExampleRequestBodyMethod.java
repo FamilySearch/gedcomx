@@ -16,15 +16,14 @@
 package org.gedcomx.build.enunciate.rs;
 
 import org.codehaus.enunciate.apt.EnunciateFreemarkerModel;
-import org.codehaus.enunciate.contract.jaxb.Element;
-import org.codehaus.enunciate.contract.jaxb.RootElementDeclaration;
+import org.codehaus.enunciate.contract.jaxb.ElementDeclaration;
 import org.codehaus.enunciate.contract.jaxrs.ResourceMethod;
 
 import javax.ws.rs.HttpMethod;
-import javax.xml.namespace.QName;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.Map;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @author Ryan Heaton
@@ -35,7 +34,7 @@ public class GenerateExampleRequestBodyMethod extends GenerateResourceExampleHtt
     super(model);
   }
 
-  protected Object generateExample(ResourceDefinitionDeclaration def, ResourceMethod resourceMethod, RootElementDeclaration element, Map<QName, ResourceDefinitionDeclaration> subresourcesByType, boolean json) {
+  protected Object generateExample(ResourceDefinitionDeclaration def, ResourceMethod resourceMethod, ElementDeclaration element, List<SubresourceElement> subresources, boolean json) {
     if (element == null) {
       return "...";
     }
@@ -44,53 +43,20 @@ public class GenerateExampleRequestBodyMethod extends GenerateResourceExampleHtt
     StringWriter out = new StringWriter();
     PrintWriter writer = new PrintWriter(out);
 
-    if (HttpMethod.POST.equals(method) && def != null && def.isResourceBundle()) {
-      for (ResourceDefinitionDeclaration subresource : subresourcesByType.values()) {
-        if (!subresource.getResourceElements().isEmpty()) {
-          element = (RootElementDeclaration) subresource.getResourceElements().get(0);
+    if (HttpMethod.POST.equals(method)) {
+      for (SubresourceElement subresource : subresources) {
+        if (!subresource.getDefinition().getResourceElements().isEmpty()) {
+          element = subresource.getDefinition().getResourceElements().get(0);
         }
       }
     }
 
     if (HttpMethod.PUT.equals(method) || HttpMethod.POST.equals(method)) {
-      if (json) {
-        writer.printf("{\n");
-        writer.printf("  \"@type\" : \"%s%s\",\n", element.getTypeDefinition().getNamespace(), element.getTypeDefinition().getName());
-        writer.printf("  ...\n");
-
-        for (Element childElement : element.getTypeDefinition().getElements()) {
-          ResourceDefinitionDeclaration subresource = subresourcesByType.get(childElement.getBaseType().getQname());
-          if (subresource != null) {
-            writer.printf("  \"%s\" :%s{\n", childElement.getJsonMemberName(), childElement.isCollectionType() ? " [ " : " ");
-            writer.printf("    ...\n");
-            writer.printf("  }%s,\n", childElement.isCollectionType() ? " ]" : "");
-            writer.printf("  ...\n");
-          }
-        }
-        writer.printf("}");
-      }
-      else {
-        writer.printf("<%s xmlns=\"%s\">\n", element.getName(), element.getNamespace());
-        writer.printf("  ...\n");
-
-        for (Element childElement : element.getTypeDefinition().getElements()) {
-          ResourceDefinitionDeclaration subresource = subresourcesByType.get(childElement.getBaseType().getQname());
-          if (subresource != null) {
-            writer.printf("  <%s", childElement.getName());
-            if (childElement.getNamespace() != null && !element.getNamespace().equals(childElement.getNamespace())) {
-              writer.printf(" xmlns=\"%s\"", childElement.getNamespace());
-            }
-            writer.printf(">\n");
-            writer.printf("    ...\n");
-            writer.printf("  </%s>\n", childElement.getName());
-            writer.printf("  ...\n");
-          }
-        }
-        writer.printf("</%s>", element.getName());
-      }
+      writeExampleToBody(element, subresources, json, writer, false, Collections.<ResourceRelationship>emptyList());
     }
 
     return out.toString();
   }
+
 
 }

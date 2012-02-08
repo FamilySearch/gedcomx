@@ -15,25 +15,31 @@
  */
 package org.gedcomx.build.enunciate.rs;
 
+import com.sun.mirror.apt.AnnotationProcessorEnvironment;
 import com.sun.mirror.declaration.*;
-import com.sun.mirror.type.DeclaredType;
-import com.sun.mirror.type.InterfaceType;
-import com.sun.mirror.type.MirroredTypesException;
-import com.sun.mirror.type.TypeMirror;
+import com.sun.mirror.type.*;
 import com.sun.mirror.util.Declarations;
 import net.sf.jelly.apt.Context;
 import net.sf.jelly.apt.decorations.declaration.DecoratedMethodDeclaration;
 import org.codehaus.enunciate.apt.EnunciateFreemarkerModel;
+import org.codehaus.enunciate.config.SchemaInfo;
 import org.codehaus.enunciate.contract.jaxb.ElementDeclaration;
+import org.codehaus.enunciate.contract.jaxb.LocalElementDeclaration;
 import org.codehaus.enunciate.contract.jaxb.RootElementDeclaration;
+import org.codehaus.enunciate.contract.jaxb.TypeDefinition;
 import org.codehaus.enunciate.contract.jaxrs.Resource;
 import org.codehaus.enunciate.contract.jaxrs.ResourceMethod;
 import org.codehaus.enunciate.contract.jaxrs.RootResource;
 import org.codehaus.enunciate.contract.validation.ValidationResult;
 import org.codehaus.enunciate.util.ResourceMethodPathComparator;
-import org.gedcomx.rt.rs.*;
+import org.gedcomx.rt.JsonElementWrapper;
+import org.gedcomx.rt.rs.ResourceDefinition;
+import org.gedcomx.rt.rs.ResourceRelationships;
+import org.gedcomx.rt.rs.StatusCodes;
+import org.gedcomx.rt.rs.Warnings;
 
 import javax.ws.rs.Path;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.namespace.QName;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -86,15 +92,13 @@ public class ResourceServiceProcessor {
           resourceElementsFqn.addAll(e.getQualifiedNames());
         }
 
-        List<RootElementDeclaration> rootElementDeclarations = model.getRootElementDeclarations();
+        AnnotationProcessorEnvironment ape = Context.getCurrentEnvironment();
         ArrayList<ElementDeclaration> resourceElements = new ArrayList<ElementDeclaration>();
         for (String resourceElementFqn : resourceElementsFqn) {
+          TypeDeclaration declaration = ape.getTypeDeclaration(resourceElementFqn);
           ElementDeclaration resourceElement = null;
-          for (RootElementDeclaration rootElementDeclaration : rootElementDeclarations) {
-            if (resourceElementFqn.equals(rootElementDeclaration.getQualifiedName())) {
-              resourceElement = rootElementDeclaration;
-              break;
-            }
+          if (declaration instanceof ClassDeclaration) {
+            resourceElement = model.findElementDeclaration((ClassDeclaration) declaration);
           }
 
           if (resourceElement == null) {
@@ -136,7 +140,68 @@ public class ResourceServiceProcessor {
           }
         }
 
-        ResourceDefinitionDeclaration rsd = new ResourceDefinitionDeclaration(resourceServiceDefinition, resourceElements, subresources, this);
+        LinkedHashMap<QName, TypeDefinition> subresourceElements = new LinkedHashMap<QName, TypeDefinition>();
+        XmlElement[] subresourceElementsInfo = rsdInfo.subresourceElements();
+        for (XmlElement xmlElement : subresourceElementsInfo) {
+          TypeDeclaration subelementDeclaration = null;
+          try {
+            Class type = xmlElement.type();
+            subelementDeclaration = ape.getTypeDeclaration(type.getName());
+          }
+          catch (MirroredTypeException e) {
+            TypeMirror typeMirror = e.getTypeMirror();
+            if (typeMirror instanceof ClassType) {
+              subelementDeclaration = ((ClassType) typeMirror).getDeclaration();
+            }
+            else {
+              result.addError(resourceServiceDefinition, "Subresource elements must specify type() in the @XmlElement annotation.");
+            }
+          }
+
+          TypeDefinition typeDef = null;
+          RootElementDeclaration rootEl = null;
+          if (subelementDeclaration instanceof ClassDeclaration) {
+            if ("javax.xml.bind.annotation.XmlElement.DEFAULT".equals(subelementDeclaration.getQualifiedName())) {
+              result.addError(resourceServiceDefinition, "Subresource elements must specify type() in the @XmlElement annotation.");
+            }
+            else {
+              rootEl = model.findRootElementDeclaration((ClassDeclaration) subelementDeclaration);
+              typeDef = model.findTypeDefinition((ClassDeclaration) subelementDeclaration);
+            }
+          }
+
+          if (typeDef != null) {
+            String ns = xmlElement.namespace();
+            if ("##default".equals(ns)) {
+              ns = rootEl == null ? "" : rootEl.getNamespace();
+            }
+
+            String name = xmlElement.name();
+            if ("##default".equals(name)) {
+              name = rootEl == null ? null : rootEl.getName();
+            }
+
+            if (name != null) {
+              QName xmlName = new QName(ns, name);
+              ElementDeclaration elementDeclaration = findLocalElementDeclaration(model, xmlName);
+              if (elementDeclaration == null) {
+                elementDeclaration = rootEl;
+              }
+
+              if (elementDeclaration != null) {
+                JsonElementWrapper elementWrapper = elementDeclaration.getAnnotation(JsonElementWrapper.class);
+                String jsonName = elementWrapper != null ? (elementWrapper.namespace() + elementWrapper.name()) : (elementDeclaration.getNamespace() + elementDeclaration.getName());
+                subresourceElements.put(new QName(xmlName.getNamespaceURI(), xmlName.getLocalPart(), jsonName), typeDef);
+              }
+              else {
+                result.addWarning(resourceServiceDefinition, "Unable to find element declaration for subresource element " + xmlName);
+              }
+            }
+          }
+        }
+
+
+        ResourceDefinitionDeclaration rsd = new ResourceDefinitionDeclaration(resourceServiceDefinition, resourceElements, subresources, subresourceElements, this);
         Map<String, ResourceMethod> methodsByOp = new HashMap<String, ResourceMethod>();
         for (ResourceMethod method : rsd.getResourceMethods()) {
           if (method.getHttpMethods().size() > 1) {
@@ -216,6 +281,16 @@ public class ResourceServiceProcessor {
     //todo: warn if a definition method isn't bound?
 
     return result;
+  }
+
+  private ElementDeclaration findLocalElementDeclaration(EnunciateFreemarkerModel model, QName xmlName) {
+    SchemaInfo schemaInfo = model.getNamespacesToSchemas().get(xmlName.getNamespaceURI());
+    for (LocalElementDeclaration localElementDeclaration : schemaInfo.getLocalElementDeclarations()) {
+      if (xmlName.getLocalPart().equals(localElementDeclaration.getName())) {
+        return localElementDeclaration;
+      }
+    }
+    return null;
   }
 
   public Set<ResourceRelationship> extractResourceRelationships(TypeDeclaration delegate) {
