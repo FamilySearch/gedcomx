@@ -3,7 +3,7 @@ package org.familysearch.ct.ws.service.api;
 /**
  * @author Ryan Heaton
  */
-public class InsufficientQueryException extends Exception {
+public class InsufficientQueryException extends RuntimeException {
 
   public InsufficientQueryException() {
   }

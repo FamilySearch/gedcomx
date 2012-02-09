@@ -44,6 +44,18 @@ import java.util.*;
  *     <td>The exact family name of the person (i.e. do no include similar family names or family names of alternate spellings in the results).</td>
  *   </tr>
  * </table>
+ *
+ * <p>Searches for persons require a given name and a full name</p>
+ *
+ * <p>Searches for person matches require the gender, given name, family name and at least two of the following:</p>
+ *
+ * <ul>
+ *   <li>Birth event with a date and a place.</li>
+ *   <li>Death event with a date and a place.</li>
+ *   <li>Spouse with a given name and family name.</li>
+ *   <li>Father with a given name and family name.</li>
+ *   <li>Mother with a given name and family name.</li>
+ * </ul>
  * 
  * @author Ryan Heaton
  */
@@ -65,6 +77,10 @@ public class PersonSearchRSImpl implements SearchRSDefinition {
     EnumMap<SearchParameter, String> parameterMap = new EnumMap<SearchParameter, String>(SearchParameter.class);
     Map<Integer, List<String>> warnings = new TreeMap<Integer, List<String>>();
     for (Map.Entry<String, List<String>> queryParam : queryParameters.entrySet()) {
+      if ("resourceType".equals(queryParam.getKey())) {
+        continue;
+      }
+
       SearchParameter param;
       try {
         param = SearchParameter.valueOf(queryParam.getKey());
@@ -88,10 +104,12 @@ public class PersonSearchRSImpl implements SearchRSDefinition {
 
     Feed results;
     try {
+      validateParameters(parameterMap, match, warnings);
       results = match ? this.personService.searchForPersonMatches(parameterMap) : this.personService.searchForPersons(parameterMap);
     }
     catch (InsufficientQueryException e) {
       Response.ResponseBuilder res = Response.status(413);
+      addWarning(warnings, 299, e.getMessage());
       appendWarnings(res, warnings);
       return res.build();
     }
@@ -104,6 +122,47 @@ public class PersonSearchRSImpl implements SearchRSDefinition {
       Response.ResponseBuilder res = results.getEntries() == null || results.getEntries().isEmpty() ? Response.noContent() : Response.ok(results);
       appendWarnings(res, warnings);
       return res.build();
+    }
+  }
+
+  private void validateParameters(EnumMap<SearchParameter, String> parameterMap, boolean match, Map<Integer, List<String>> warnings) {
+    if (!parameterMap.containsKey(SearchParameter.name) && !parameterMap.containsKey(SearchParameter.givenName) && !parameterMap.containsKey(SearchParameter.familyName)) {
+      throw new InsufficientQueryException("A search query must include at least a given name or a family name.");
+    }
+
+    if (match) {
+      if (!parameterMap.containsKey(SearchParameter.name) && !(parameterMap.containsKey(SearchParameter.givenName) && parameterMap.containsKey(SearchParameter.familyName))) {
+        throw new InsufficientQueryException("A search query for person matches must include a given name and a family name.");
+      }
+
+      if (!parameterMap.containsKey(SearchParameter.gender)) {
+        throw new InsufficientQueryException("A search query for person matches must include the gender of the person.");
+      }
+      
+      int conditionCount = 0;
+      if (parameterMap.containsKey(SearchParameter.birthDate) && parameterMap.containsKey(SearchParameter.birthPlace)) {
+        conditionCount++;
+      }
+
+      if (parameterMap.containsKey(SearchParameter.deathDate) && parameterMap.containsKey(SearchParameter.deathPlace)) {
+        conditionCount++;
+      }
+
+      if (parameterMap.containsKey(SearchParameter.fatherName) || (parameterMap.containsKey(SearchParameter.fatherGivenName) && parameterMap.containsKey(SearchParameter.fatherFamilyName))) {
+        conditionCount++;
+      }
+
+      if (parameterMap.containsKey(SearchParameter.motherName) || (parameterMap.containsKey(SearchParameter.motherGivenName) && parameterMap.containsKey(SearchParameter.motherFamilyName))) {
+        conditionCount++;
+      }
+
+      if (parameterMap.containsKey(SearchParameter.spouseName) || (parameterMap.containsKey(SearchParameter.spouseGivenName) && parameterMap.containsKey(SearchParameter.spouseFamilyName))) {
+        conditionCount++;
+      }
+
+      if (conditionCount < 2) {
+        throw new InsufficientQueryException("A search query for person matches must include two of: birth date and place, death date and place, spouse given and family name, father given and family name, mother given and family name.");
+      }
     }
   }
 
