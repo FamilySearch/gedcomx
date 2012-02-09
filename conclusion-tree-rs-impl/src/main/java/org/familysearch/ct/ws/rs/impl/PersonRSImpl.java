@@ -50,7 +50,4 @@ public class PersonRSImpl implements PersonRSDefinition {
     return new ConclusionRSImpl();
   }
 
-  public void setProofStatement(String proofStatement) {
-
-  }
 }

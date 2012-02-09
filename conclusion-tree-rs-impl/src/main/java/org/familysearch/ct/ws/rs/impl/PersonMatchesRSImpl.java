@@ -8,7 +8,6 @@ import org.gedcomx.atom.Entry;
 import org.gedcomx.atom.Feed;
 import org.gedcomx.atom.Link;
 import org.gedcomx.common.URI;
-import org.gedcomx.conclusion.ConclusionModel;
 import org.gedcomx.conclusion.Person;
 import org.gedcomx.conclusion.rs.definition.PersonMatchesRSDefinition;
 import org.gedcomx.conclusion.rs.definition.PersonRSDefinition;
@@ -82,7 +81,4 @@ public class PersonMatchesRSImpl implements PersonMatchesRSDefinition {
     }
   }
 
-  @Override
-  public void setProofStatement(String proofStatement) {
-  }
 }

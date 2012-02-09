@@ -39,9 +39,13 @@
 
   [#if resourceBindingsByPath[(methods?first).fullpath]??]
     [#assign binding=resourceBindingsByPath[(methods?first).fullpath]/]
+    [#assign bindingDocs=(binding.docValue!"")?trim/]
     [#assign rsd=binding.definition/]
       <p>${rsd.docValue!""}</p>
 
+    [#if bindingDocs?length > 0]
+      [#if !bindingDocs?starts_with("<")]<p>[/#if]${bindingDocs}[#if !bindingDocs?starts_with("<")]</p>[/#if]
+    [/#if]
     [#if rsd.resourceElements?size > 0]
       <h3>Representation Model</h3>
 

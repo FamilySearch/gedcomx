@@ -60,7 +60,4 @@ public class PersonSummaryRSImpl implements PersonSummaryRSDefinition {
     }
   }
 
-  @Override
-  public void setProofStatement(String proofStatement) {
-  }
 }

@@ -24,8 +24,4 @@ public class PersonsRSImpl implements PersonsRSDefinition {
     public Response createPerson(@Context UriInfo uriInfo, Person person) {
         return null;
     }
-
-    public void setProofStatement(String proofStatement) {
-
-    }
 }

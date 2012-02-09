@@ -76,8 +76,8 @@ public class TestPersonMatchesRSImpl extends ConclusionTreeUseCaseTest {
     match1.setId(matchedPerson1.getPersistentId());
     match1.setScore(0.95F);
     match1.setUpdated(new Date());
-    match1.addExtensionElement(conclusionFactory.createFatherElement(matchedPerson1Father));
-    match1.addExtensionElement(conclusionFactory.createMotherElement(matchedPerson1Mother));
+    match1.addExtensionElement(conclusionFactory.createParentElement(matchedPerson1Father));
+    match1.addExtensionElement(conclusionFactory.createParentElement(matchedPerson1Mother));
     serverSideMatchFeed.getEntries().add(match1);
 
     Entry match2 = new Entry();

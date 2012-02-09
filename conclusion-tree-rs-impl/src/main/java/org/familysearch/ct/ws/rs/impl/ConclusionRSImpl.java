@@ -31,8 +31,4 @@ public class ConclusionRSImpl implements ConclusionRSDefinition {
   public void deleteConclusion(@Context UriInfo uriInfo) {
 
   }
-
-  public void setProofStatement(String proofStatement) {
-
-  }
 }

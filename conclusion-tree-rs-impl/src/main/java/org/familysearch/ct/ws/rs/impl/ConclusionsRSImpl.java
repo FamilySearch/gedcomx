@@ -25,7 +25,4 @@ public class ConclusionsRSImpl implements ConclusionsRSDefinition {
     return null;
   }
 
-  public void setProofStatement(String proofStatement) {
-
-  }
 }

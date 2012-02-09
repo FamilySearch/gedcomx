@@ -17,7 +17,6 @@ package org.familysearch.ct.ws.rs.definition;
 
 import org.familysearch.ct.ws.ConclusionTreeModel;
 import org.familysearch.ct.ws.TernaryRelationship;
-import org.gedcomx.conclusion.rs.definition.RelationshipRSDefinition;
 import org.gedcomx.rt.rs.*;
 
 import javax.ws.rs.DELETE;
@@ -38,11 +37,9 @@ import javax.ws.rs.core.UriInfo;
 @ResourceDefinition (
   name = "TernaryRelationship",
   namespace = ConclusionTreeModel.CONCLUSION_TREE_V1_NAMESPACE,
-  resourceElement = TernaryRelationship.class,
-  subresources = RelationshipRSDefinition.class
+  resourceElement = TernaryRelationship.class
 )
 @ResourceRelationships ({
-  @ResourceRelationship ( identifier = "self", definedBy = RelationshipRSDefinition.class, description = "The relationship itself." )
 })
 public interface TernaryRelationshipRSDefinition {
 

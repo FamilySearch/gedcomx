@@ -119,9 +119,4 @@ public class DiscoveryRSImpl implements DiscoveryRSDefinition {
 
     return link;
   }
-
-  @Override
-  public void setProofStatement(String proofStatement) {
-    //proof statement needed here?
-  }
 }
