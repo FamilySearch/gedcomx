@@ -27,6 +27,7 @@ public class ResourceBinding {
 
   private final String path;
   private final ResourceDefinitionDeclaration definition;
+  private String docValue;
   private final List<ResourceMethod> methods = new ArrayList<ResourceMethod>();
   private final Set<ResponseCode> statusCodes = new HashSet<ResponseCode>();
   private final Set<ResponseCode> warnings = new HashSet<ResponseCode>();
@@ -73,5 +74,13 @@ public class ResourceBinding {
 
   public Set<ResourceParameter> getResourceParameters() {
     return resourceParameters;
+  }
+
+  public String getDocValue() {
+    return docValue;
+  }
+
+  public void setDocValue(String docValue) {
+    this.docValue = docValue;
   }
 }
