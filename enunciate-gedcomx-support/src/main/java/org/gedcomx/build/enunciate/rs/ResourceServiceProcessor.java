@@ -269,6 +269,8 @@ public class ResourceServiceProcessor {
                 binding.getWarnings().addAll(extractWarnings(declaringResource));
                 binding.getResourceRelationships().addAll(extractResourceRelationships(declaringResource));
                 binding.getResourceParameters().addAll(declaringResource.getResourceParameters());
+
+                binding.setDocValue(declaringResource.getDocValue()); //last one in wins.
               }
             }
           }
