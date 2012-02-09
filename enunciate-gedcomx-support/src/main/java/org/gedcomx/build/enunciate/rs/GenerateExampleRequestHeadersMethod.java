@@ -17,16 +17,14 @@ package org.gedcomx.build.enunciate.rs;
 
 import org.codehaus.enunciate.apt.EnunciateFreemarkerModel;
 import org.codehaus.enunciate.config.SchemaInfo;
-import org.codehaus.enunciate.contract.jaxb.RootElementDeclaration;
+import org.codehaus.enunciate.contract.jaxb.ElementDeclaration;
 import org.codehaus.enunciate.contract.jaxrs.ResourceMethod;
 import org.codehaus.enunciate.contract.jaxrs.ResourceParameter;
 
 import javax.ws.rs.HttpMethod;
-import javax.xml.namespace.QName;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author Ryan Heaton
@@ -37,7 +35,7 @@ public class GenerateExampleRequestHeadersMethod extends GenerateResourceExample
     super(model);
   }
 
-  protected Object generateExample(ResourceDefinitionDeclaration def, ResourceMethod resourceMethod, RootElementDeclaration element, Map<QName, ResourceDefinitionDeclaration> subresourcesByType, boolean json) {
+  protected Object generateExample(ResourceDefinitionDeclaration def, ResourceMethod resourceMethod, ElementDeclaration element, List<SubresourceElement> subresources, boolean json) {
     String label = def != null ? def.getName().toLowerCase() : element != null ? element.getName() : "resource";
     String method = resourceMethod.getHttpMethods().iterator().next().toUpperCase();
     StringWriter out = new StringWriter();
@@ -55,10 +53,10 @@ public class GenerateExampleRequestHeadersMethod extends GenerateResourceExample
       }
     }
 
-    if (HttpMethod.POST.equals(method) && def != null && def.isResourceBundle()) {
-      for (ResourceDefinitionDeclaration subresource : subresourcesByType.values()) {
-        if (!subresource.getResourceElements().isEmpty()) {
-          element = (RootElementDeclaration) subresource.getResourceElements().get(0);
+    if (HttpMethod.POST.equals(method)) {
+      for (SubresourceElement subresource : subresources) {
+        if (!subresource.getDefinition().getResourceElements().isEmpty()) {
+          element = subresource.getDefinition().getResourceElements().get(0);
         }
       }
     }
