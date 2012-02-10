@@ -110,8 +110,8 @@ public class TestXRDModel {
     assertEquals(xrd.getProperties().get(0).getValue(), "property1");
     assertEquals(xrd.getProperties().get(1).getValue(), "property2");
 
-    String xml = new String(toXmlStream(xrd));
-    System.out.print(xml);
+//    String xml = new String(toXmlStream(xrd));
+//    System.out.print(xml);
 
     // Validate against XSD
     SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);

@@ -24,7 +24,9 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+
 import org.gedcomx.common.URI;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,120 +39,141 @@ import java.util.List;
  *
  * @author Mike Gardiner, Ryan Heaton
  */
-@XmlType(name = "Link", propOrder = {"titles", "properties"})
-@SuppressWarnings({"rdf-incompatible-ns", "unqualified-attribute"})
+@XmlType ( name = "Link", propOrder = {"titles", "properties"} )
+@SuppressWarnings ( {"rdf-incompatible-ns", "unqualified-attribute"} )
 public final class Link {
-    private URI rel;
-    protected URI href;
-    protected List<Title> titles;
-    protected List<Property> properties;
+
+  private URI rel;
+  protected URI href;
+  protected String template;
+  protected List<Title> titles;
+  protected List<Property> properties;
 
 
-    /**
-     * An optional value that defines the semantics of the relation between the resource
-     * described by the XRD and the linked resource.
-     *
-     * @return A valid URI
-     */
-    @XmlAttribute
-    @XmlSchemaType(name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
-    public URI getRel() {
-        return rel;
+  /**
+   * An optional value that defines the semantics of the relation between the resource
+   * described by the XRD and the linked resource.
+   *
+   * @return A valid URI
+   */
+  @XmlAttribute
+  @XmlSchemaType ( name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI )
+  public URI getRel() {
+    return rel;
+  }
+
+  /**
+   * Sets an optional value that defines the semantics of the relation between the resource
+   * described by the XRD and the linked resource.
+   *
+   * @param rel - An valid URI
+   */
+  public void setRel(URI rel) {
+    this.rel = rel;
+  }
+
+  /**
+   * The optional href attribute provides the URI of the linked resource. If no
+   * href attribute is defined, it is assumed the URI can be obtained from a
+   * template attribute or by application-specific means.
+   *
+   * @return A valid URI
+   */
+  @XmlAttribute
+  @XmlSchemaType ( name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI )
+  public URI getHref() {
+    return href;
+  }
+
+  /**
+   * The optional href attribute provides the URI of the linked resource. If no
+   * href attribute is defined, it is assumed the URI can be obtained from a
+   * template attribute or by application-specific means.
+   *
+   * @param href - A valid URI
+   */
+  public void setHref(URI href) {
+    this.href = href;
+  }
+
+  /**
+   * A <a href="http://tools.ietf.org/html/draft-gregorio-uritemplate">URI template</a> which can be used to obtain the URI of the linked resource.
+   *
+   * @return The template
+   */
+  @XmlAttribute
+  public String getTemplate() {
+    return template;
+  }
+
+  /**
+   * A <a href="http://tools.ietf.org/html/draft-gregorio-uritemplate">URI template</a> which can be used to obtain the URI of the linked resource.
+   *
+   * @param template The template
+   */
+  public void setTemplate(String template) {
+    this.template = template;
+  }
+
+  /**
+   * Provides a human-readable description of the linked resource.
+   *
+   * @return Zero or more Title elements
+   */
+  @JsonName ( "titles" )
+  @JsonProperty ( "titles" )
+  @XmlElement ( name = "Title" )
+  public List<Title> getTitles() {
+    if (titles == null) {
+      titles = new ArrayList<Title>();
     }
 
-    /**
-     * Sets an optional value that defines the semantics of the relation between the resource
-     * described by the XRD and the linked resource.
-     *
-     * @param rel - An valid URI
-     */
-    public void setRel(URI rel) {
-        this.rel = rel;
+    return this.titles;
+  }
+
+  /**
+   * Provides a human-readable description of the linked resource.
+   *
+   * @param titles - Zero or more Title elements
+   */
+  @JsonName ( "titles" )
+  @JsonProperty ( "titles" )
+  public void setTitles(List<Title> titles) {
+    this.titles = titles;
+  }
+
+  /**
+   * Declares an optional property of this link relation, as described in
+   * Section 2.5, “Element <Property>”. It is important to note that this
+   * value does not identify any property of the linked resource or the
+   * resource described by the XRD, but rather of the link relation between
+   * the linked resources.
+   *
+   * @return Zero or more Property elements
+   */
+  @JsonName ( "properties" )
+  @JsonProperty ( "properties" )
+  @XmlElement ( name = "Property" )
+  public List<Property> getProperties() {
+    if (properties == null) {
+      properties = new ArrayList<Property>();
     }
 
-    /**
-     * The optional href attribute provides the URI of the linked resource. If no
-     * href attribute is defined, it is assumed the URI can be obtained from a
-     * template attribute or by application-specific means.
-     *
-     * @return A valid URI
-     */
-    @XmlAttribute
-    @XmlSchemaType(name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
-    public URI getHref() {
-        return href;
-    }
+    return this.properties;
+  }
 
-    /**
-     * The optional href attribute provides the URI of the linked resource. If no
-     * href attribute is defined, it is assumed the URI can be obtained from a
-     * template attribute or by application-specific means.
-     *
-     * @param href - A valid URI
-     */
-    public void setHref(URI href) {
-        this.href = href;
-    }
-
-    /**
-     * Provides a human-readable description of the linked resource.
-     *
-     * @return Zero or more Title elements
-     */
-    @JsonName("titles")
-    @JsonProperty("titles")
-    @XmlElement( name = "Title" )
-    public List<Title> getTitles() {
-        if (titles == null) {
-            titles = new ArrayList<Title>();
-        }
-
-        return this.titles;
-    }
-
-    /**
-     * Provides a human-readable description of the linked resource.
-     *
-     * @param titles - Zero or more Title elements
-     */
-    @JsonName("titles")
-    @JsonProperty("titles")
-    public void setTitles(List<Title> titles) {
-        this.titles = titles;
-    }
-
-    /**
-     *  Declares an optional property of this link relation, as described in
-     *  Section 2.5, “Element <Property>”. It is important to note that this
-     *  value does not identify any property of the linked resource or the
-     *  resource described by the XRD, but rather of the link relation between
-     *  the linked resources.
-     *
-     * @return Zero or more Property elements
-     */
-    @JsonName("properties")
-    @JsonProperty("properties")
-    @XmlElement( name = "Property" )
-    public List<Property> getProperties() {
-        if (properties == null) {
-            properties = new ArrayList<Property>();
-        }
-
-        return this.properties;
-    }
-
-    /**
-     * Declares an optional property of this link relation, as described in
-     *  Section 2.5, “Element <Property>”. It is important to note that this
-     *  value does not identify any property of the linked resource or the
-     *  resource described by the XRD, but rather of the link relation between
-     *  the linked resources.
-     *
-     * @param properties - Zero or more Property elements
-     */
-    @JsonName("properties")
-    @JsonProperty("properties")
-    public void setProperties(List<Property> properties) {
-        this.properties = properties;
-    }
+  /**
+   * Declares an optional property of this link relation, as described in
+   * Section 2.5, “Element <Property>”. It is important to note that this
+   * value does not identify any property of the linked resource or the
+   * resource described by the XRD, but rather of the link relation between
+   * the linked resources.
+   *
+   * @param properties - Zero or more Property elements
+   */
+  @JsonName ( "properties" )
+  @JsonProperty ( "properties" )
+  public void setProperties(List<Property> properties) {
+    this.properties = properties;
+  }
 }
