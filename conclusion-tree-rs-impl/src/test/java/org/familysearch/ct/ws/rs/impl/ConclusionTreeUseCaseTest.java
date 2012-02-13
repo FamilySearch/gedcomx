@@ -1,5 +1,6 @@
 package org.familysearch.ct.ws.rs.impl;
 
+import com.sun.jersey.api.client.WebResource;
 import org.familysearch.ct.ws.service.api.DiscoveryService;
 import org.familysearch.ct.ws.service.api.PersonService;
 import org.familysearch.ct.ws.test.DocAwareJerseyTest;
@@ -24,4 +25,14 @@ public abstract class ConclusionTreeUseCaseTest extends DocAwareJerseyTest {
     return (M) this.serverSideComponents.get(clazz);
   }
 
+  @Override
+  public WebResource resource() {
+    WebResource resource = super.resource();
+    resource.addFilter(new OAuth2BearerTokenFilter("your_access_token"));
+    return resource;
+  }
+
+  public WebResource unauthenticatedResource() {
+    return super.resource();
+  }
 }

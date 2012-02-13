@@ -32,7 +32,7 @@ public abstract class RSImplBase {
   }
 
   /**
-   * The authorization carrying the OAuth 2.0 bearer token. See <a href="http://tools.ietf.org/html/draft-ietf-oauth-v2-bearer">Auth 2.0 Bearer Tokens</a>.
+   * The authorization carrying the OAuth 2.0 access token. See <a href="http://tools.ietf.org/html/draft-ietf-oauth-v2-bearer">Auth 2.0 Bearer Tokens</a>.
    *
    * @param authHeader The authorization header.
    */

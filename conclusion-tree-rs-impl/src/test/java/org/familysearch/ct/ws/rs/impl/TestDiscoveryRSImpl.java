@@ -43,7 +43,7 @@ public class TestDiscoveryRSImpl extends ConclusionTreeUseCaseTest {
     expect(linksBundle.getEntity()).andReturn(authLinks);
     replay(discoveryService, linksBundle);
 
-    ClientResponse response = resource().path(DISCOVERY_PATH).accept(XRDModel.XRD_V1_XML_MEDIA_TYPE).get(ClientResponse.class);
+    ClientResponse response = unauthenticatedResource().path(DISCOVERY_PATH).accept(XRDModel.XRD_V1_XML_MEDIA_TYPE).get(ClientResponse.class);
     verify(discoveryService, linksBundle);
     reset(discoveryService, linksBundle);
     assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
@@ -61,7 +61,7 @@ public class TestDiscoveryRSImpl extends ConclusionTreeUseCaseTest {
     expect(discoveryService.getAuthLinks()).andReturn(linksBundle);
     expect(linksBundle.getLastModified()).andReturn(now);
     replay(discoveryService, linksBundle);
-    response = resource().path(DISCOVERY_PATH).accept(XRDModel.XRD_V1_XML_MEDIA_TYPE).header("If-Modified-Since", later).get(ClientResponse.class);
+    response = unauthenticatedResource().path(DISCOVERY_PATH).accept(XRDModel.XRD_V1_XML_MEDIA_TYPE).header("If-Modified-Since", later).get(ClientResponse.class);
     assertEquals(Response.Status.NOT_MODIFIED.getStatusCode(), response.getStatus());
     verify(discoveryService, linksBundle);
     reset(discoveryService, linksBundle);
