@@ -94,7 +94,7 @@ public class TestDiscoveryRSImpl extends ConclusionTreeUseCaseTest {
     expect(linksBundle.getEntity()).andReturn(authLinks);
     replay(discoveryService, linksBundle, authPersonBundle);
 
-    ClientResponse response = resource().path(DISCOVERY_PATH).accept(XRDModel.XRD_V1_XML_MEDIA_TYPE).get(ClientResponse.class);
+    ClientResponse response = resource().path(DISCOVERY_PATH).queryParam("access_token", "abcdefg").accept(XRDModel.XRD_V1_XML_MEDIA_TYPE).get(ClientResponse.class);
     verify(discoveryService, linksBundle, authPersonBundle);
     reset(discoveryService, linksBundle, authPersonBundle);
     assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
@@ -105,6 +105,12 @@ public class TestDiscoveryRSImpl extends ConclusionTreeUseCaseTest {
     Set<String> linkRels = new TreeSet<String>(Arrays.asList("Identity", SearchRSDefinition.REL, PersonsRSDefinition.REL, PersonSummaryRSDefinition.REL));
     for (Link link : xrd.getLinks()) {
       assertTrue(linkRels.remove(link.getRel().toString()));
+      if (SearchRSDefinition.REL.equals(link.getRel().toString())) {
+        assertTrue(link.getTemplate().contains("access_token"));
+      }
+      else if (PersonSummaryRSDefinition.REL.equals(link.getRel().toString())) {
+        assertTrue(link.getHref().toString().contains("access_token"));
+      }
     }
     assertTrue(linkRels.isEmpty());
   }

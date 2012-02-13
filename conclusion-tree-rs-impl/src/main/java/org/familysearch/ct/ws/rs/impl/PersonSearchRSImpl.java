@@ -61,7 +61,7 @@ import java.util.*;
  */
 @Path ( "/search" )
 @Produces ( { AtomModel.ATOM_XML_MEDIA_TYPE, AtomModel.ATOM_GEDCOMX_JSON_MEDIA_TYPE })
-public class PersonSearchRSImpl implements SearchRSDefinition {
+public class PersonSearchRSImpl extends RSImplBase implements SearchRSDefinition {
   
   @InjectParam
   private PersonService personService;
@@ -190,7 +190,7 @@ public class PersonSearchRSImpl implements SearchRSDefinition {
         Person person = entry.findExtensionOfType(Person.class);
         String id = person.getId();
         List<Link> entryLinks = new ArrayList<Link>();
-        entryLinks.add(new Link(PersonRSDefinition.REL, URI.create(uriInfo.getBaseUriBuilder().path(PersonRSImpl.class).build(id).getPath())));
+        entryLinks.add(new Link(PersonRSDefinition.REL, URI.create(getBaseLinkBuilder(uriInfo).path(PersonRSImpl.class).build(id).getPath())));
         entry.setLinks(entryLinks);
       }
     }

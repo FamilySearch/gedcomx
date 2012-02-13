@@ -102,7 +102,7 @@ public class DiscoveryRSImpl extends RSImplBase implements DiscoveryRSDefinition
   private Link buildSearchLink() {
     Link link = new Link();
     link.setRel(URI.create(SearchRSDefinition.REL));
-    StringBuilder path = new StringBuilder(decorate(this.uriInfo.getBaseUriBuilder().path(PersonSearchRSImpl.class)).build().getPath());
+    StringBuilder path = new StringBuilder(getBaseLinkBuilder(this.uriInfo).path(PersonSearchRSImpl.class).build().toString());
     char queryChar = '?';
     if (path.indexOf("?") > 0) {
       queryChar = '&';
@@ -133,7 +133,7 @@ public class DiscoveryRSImpl extends RSImplBase implements DiscoveryRSDefinition
   private Link buildPersonsLink() {
     Link link = new Link();
     link.setRel(URI.create(PersonsRSDefinition.REL));
-    link.setHref(URI.create(decorate(this.uriInfo.getBaseUriBuilder().path(PersonsRSImpl.class)).build().getPath()));
+    link.setHref(URI.create(getBaseLinkBuilder(this.uriInfo).path(PersonsRSImpl.class).build().toString()));
 
     Title title = new Title();
     title.setValue("Persons");
@@ -152,8 +152,8 @@ public class DiscoveryRSImpl extends RSImplBase implements DiscoveryRSDefinition
     Link link = new Link();
     link.setRel(URI.create(PersonSummaryRSDefinition.REL));
 
-    UriBuilder summaryLinkBuilder = decorate(this.uriInfo.getBaseUriBuilder().path(PersonSummaryRSImpl.class));
-    link.setHref(URI.create(summaryLinkBuilder.build(id).getPath()));
+    UriBuilder summaryLinkBuilder = getBaseLinkBuilder(this.uriInfo).path(PersonSummaryRSImpl.class);
+    link.setHref(URI.create(summaryLinkBuilder.build(id).toString()));
 
     Title title = new Title();
     title.setValue("Person Summary");

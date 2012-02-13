@@ -3,6 +3,9 @@ package org.familysearch.ct.ws.rs.impl;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.UriBuilder;
+import javax.ws.rs.core.UriInfo;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 /**
  * Base class for RS implementations.
@@ -48,5 +51,25 @@ public abstract class RSImplBase {
    */
   protected UriBuilder decorate(UriBuilder path) {
     return this.sessionIdQueryParam != null ? path.queryParam("access_token", this.sessionIdQueryParam) : path;
+  }
+
+  protected UriBuilder getBaseLinkBuilder(UriInfo uriInfo) {
+    URI base = uriInfo.getBaseUri();
+    try {
+      return decorate(UriBuilder.fromUri(new URI(null, null, base.getPath(), base.getQuery(), base.getFragment())));
+    }
+    catch (URISyntaxException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  protected UriBuilder getAbsolutePathLinkBuilder(UriInfo uriInfo) {
+    URI absolutePath = uriInfo.getAbsolutePath();
+    try {
+      return decorate(UriBuilder.fromUri(new URI(null, null, absolutePath.getPath(), absolutePath.getQuery(), absolutePath.getFragment())));
+    }
+    catch (URISyntaxException e) {
+      throw new RuntimeException(e);
+    }
   }
 }

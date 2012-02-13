@@ -12,7 +12,7 @@ import javax.ws.rs.core.UriInfo;
 /**
  * @author Randy Bliss
  */
-public class ConclusionRSImpl implements ConclusionRSDefinition {
+public class ConclusionRSImpl extends RSImplBase implements ConclusionRSDefinition {
 
   @GET
   @Override

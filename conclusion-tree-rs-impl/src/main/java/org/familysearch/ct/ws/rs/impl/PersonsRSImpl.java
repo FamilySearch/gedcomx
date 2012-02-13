@@ -13,7 +13,7 @@ import javax.ws.rs.core.UriInfo;
  * @author Ryan Heaton
  */
 @Path("/persons")
-public class PersonsRSImpl implements PersonsRSDefinition {
+public class PersonsRSImpl extends RSImplBase implements PersonsRSDefinition {
 
     public PersonsRSImpl() {
         super();

@@ -15,10 +15,7 @@ import org.gedcomx.conclusion.rs.definition.PersonRSDefinition;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.Request;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
+import javax.ws.rs.core.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -28,7 +25,7 @@ import java.util.List;
  */
 @Path ( "/persons/{id}/matches" )
 @Produces ( { AtomModel.ATOM_XML_MEDIA_TYPE, AtomModel.ATOM_GEDCOMX_JSON_MEDIA_TYPE })
-public class PersonMatchesRSImpl implements PersonMatchesRSDefinition {
+public class PersonMatchesRSImpl extends RSImplBase implements PersonMatchesRSDefinition {
   
   @InjectParam
   private PersonService personService;
@@ -65,8 +62,9 @@ public class PersonMatchesRSImpl implements PersonMatchesRSDefinition {
 
   private void addLinks(Feed matches, String id, UriInfo uriInfo) {
     ArrayList<Link> links = new ArrayList<Link>();
-    links.add(new Link("self", URI.create(uriInfo.getAbsolutePath().getPath())));
-    links.add(new Link(PersonRSDefinition.REL, URI.create(uriInfo.getBaseUriBuilder().path(PersonRSImpl.class).build(id).getPath())));
+
+    links.add(new Link("self", URI.create(getAbsolutePathLinkBuilder(uriInfo).build().toString())));
+    links.add(new Link(PersonRSDefinition.REL, URI.create(getBaseLinkBuilder(uriInfo).path(PersonRSImpl.class).build(id).getPath())));
     matches.setLinks(links);
 
     List<Entry> entries = matches.getEntries();
@@ -75,7 +73,7 @@ public class PersonMatchesRSImpl implements PersonMatchesRSDefinition {
         Person person = entry.findExtensionOfType(Person.class);
         id = person.getId();
         List<Link> entryLinks = new ArrayList<Link>();
-        entryLinks.add(new Link(PersonRSDefinition.REL, URI.create(uriInfo.getBaseUriBuilder().path(PersonRSImpl.class).build(id).getPath())));
+        entryLinks.add(new Link(PersonRSDefinition.REL, URI.create(getBaseLinkBuilder(uriInfo).path(PersonRSImpl.class).build(id).getPath())));
         entry.setLinks(entryLinks);
       }
     }

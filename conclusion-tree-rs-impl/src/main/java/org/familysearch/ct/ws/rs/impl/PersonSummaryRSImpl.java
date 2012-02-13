@@ -24,7 +24,7 @@ import java.util.Date;
  */
 @Path ( "/persons/{id}/summary" )
 @Produces ( { ConclusionModel.GEDCOMX_CONCLUSION_V1_XML_MEDIA_TYPE, ConclusionModel.GEDCOMX_CONCLUSION_V1_JSON_MEDIA_TYPE })
-public class PersonSummaryRSImpl implements PersonSummaryRSDefinition {
+public class PersonSummaryRSImpl extends RSImplBase implements PersonSummaryRSDefinition {
 
   @InjectParam
   private PersonService personService;
@@ -52,8 +52,8 @@ public class PersonSummaryRSImpl implements PersonSummaryRSDefinition {
         }
         else {
           Person summary = summaryEntity.getEntity();
-          summary.addExtensionElement(new Link("self", URI.create(uriInfo.getAbsolutePath().getPath())));
-          summary.addExtensionElement(new Link(PersonRSDefinition.REL, URI.create(uriInfo.getBaseUriBuilder().path(PersonRSImpl.class).build(id).getPath())));
+          summary.addExtensionElement(new Link("self", URI.create(getAbsolutePathLinkBuilder(uriInfo).build().getPath())));
+          summary.addExtensionElement(new Link(PersonRSDefinition.REL, URI.create(getBaseLinkBuilder(uriInfo).path(PersonRSImpl.class).build(id).getPath())));
           return Response.ok(summary).lastModified(lastModified).build();
         }
       }

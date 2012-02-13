@@ -17,7 +17,7 @@ import javax.ws.rs.core.UriInfo;
  * @author Ryan Heaton
  */
 @Path("/persons/{pid}")
-public class PersonRSImpl implements PersonRSDefinition {
+public class PersonRSImpl extends RSImplBase implements PersonRSDefinition {
 
   @GET
   @Override
