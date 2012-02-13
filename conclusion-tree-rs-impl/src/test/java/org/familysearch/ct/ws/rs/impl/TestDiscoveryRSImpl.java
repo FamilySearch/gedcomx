@@ -105,6 +105,48 @@ public class TestDiscoveryRSImpl extends ConclusionTreeUseCaseTest {
     Set<String> linkRels = new TreeSet<String>(Arrays.asList("Identity", SearchRSDefinition.REL, PersonsRSDefinition.REL, PersonSummaryRSDefinition.REL));
     for (Link link : xrd.getLinks()) {
       assertTrue(linkRels.remove(link.getRel().toString()));
+    }
+    assertTrue(linkRels.isEmpty());
+  }
+
+  @Test
+  public void testGetAuthenticatedViaQueryParameter() throws Exception {
+    createUseCase("Discovery (Authenticated Via Query Parameter)")
+      .withDescription("An authenticated request for the discovery resource.")
+      .applicableTo(DiscoveryRSImpl.class);
+
+    long timestamp = System.currentTimeMillis();
+    Date now = new Date(timestamp - (timestamp % 1000));
+    Date earlier = new Date(timestamp - (timestamp % 1000) - 10000);
+    DiscoveryService discoveryService = getServerSideMock(DiscoveryService.class);
+    List<Link> authLinks = new ArrayList<Link>();
+    Link authLink = new Link();
+    authLink.setHref(URI.create("http://10.72.51.31:8080/identity/v2/login"));
+    authLink.setRel(URI.create("Identity"));
+    authLinks.add(authLink);
+    EntityBundle linksBundle = createMock(EntityBundle.class);
+    EntityBundle authPersonBundle = createMock(EntityBundle.class);
+    expect(discoveryService.getAuthenticatedPerson()).andReturn(authPersonBundle);
+    expect(discoveryService.getAuthLinks()).andReturn(linksBundle);
+    expect(authPersonBundle.getLastModified()).andReturn(now);
+    expect(linksBundle.getLastModified()).andReturn(earlier);
+    Person authPerson = new Person();
+    authPerson.setId("12345");
+    expect(authPersonBundle.getEntity()).andReturn(authPerson);
+    expect(linksBundle.getEntity()).andReturn(authLinks);
+    replay(discoveryService, linksBundle, authPersonBundle);
+
+    ClientResponse response = unauthenticatedResource().path(DISCOVERY_PATH).queryParam("access_token", "abcdefg").accept(XRDModel.XRD_V1_XML_MEDIA_TYPE).get(ClientResponse.class);
+    verify(discoveryService, linksBundle, authPersonBundle);
+    reset(discoveryService, linksBundle, authPersonBundle);
+    assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
+    Date lastModified = response.getLastModified();
+    assertEquals(now.getTime(), lastModified.getTime());
+    XRD xrd = response.getEntity(XRD.class);
+    assertFalse(xrd.getLinks().isEmpty());
+    Set<String> linkRels = new TreeSet<String>(Arrays.asList("Identity", SearchRSDefinition.REL, PersonsRSDefinition.REL, PersonSummaryRSDefinition.REL));
+    for (Link link : xrd.getLinks()) {
+      assertTrue(linkRels.remove(link.getRel().toString()));
       if (SearchRSDefinition.REL.equals(link.getRel().toString())) {
         assertTrue(link.getTemplate().contains("access_token"));
       }
