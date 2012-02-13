@@ -49,7 +49,7 @@ public class TestDocAwareJerseyTest extends DocAwareJerseyTest {
    * a title
    */
   @Test
-  public void testUseCaseNoTitle() {
+  public void testUseCaseNoTitle() throws Exception {
     // Null Title
     try {
       createUseCase(null);
@@ -67,6 +67,8 @@ public class TestDocAwareJerseyTest extends DocAwareJerseyTest {
     catch (Exception e) {
       assertTrue(true);   // Should get here
     }
+
+    super.tearDown();
   }
 
   /**

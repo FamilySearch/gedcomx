@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -50,7 +51,12 @@ public class RequestAndResponse implements Serializable {
     MultivaluedMap<String, Object> map = request.getHeaders();
 
     this.requestMethod = request.getMethod();
-    this.requestPath = request.getURI();
+    try {
+      this.requestPath = new URI(null, null, request.getURI().getPath(), request.getURI().getQuery(), request.getURI().getFragment());
+    }
+    catch (URISyntaxException e) {
+      throw new RuntimeException(e);
+    }
     final Set<Map.Entry<String, List<Object>>> requestEntries = map.entrySet();
     
     for (Map.Entry<String, List<Object>> entry : requestEntries) {

@@ -81,12 +81,6 @@
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.sun.jersey.jersey-test-framework</groupId>
-      <artifactId>jersey-test-framework-inmemory</artifactId>
-      <version>1.11</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
       <groupId>org.familysearch.ct</groupId>
       <artifactId>conclusion-tree-test-support</artifactId>
       <version>${project.version}</version>

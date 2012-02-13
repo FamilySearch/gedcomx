@@ -8,14 +8,16 @@ import com.sun.jersey.test.framework.WebAppDescriptor;
 import com.sun.jersey.test.framework.spi.container.TestContainer;
 import com.sun.jersey.test.framework.spi.container.TestContainerException;
 import com.sun.jersey.test.framework.spi.container.TestContainerFactory;
-import com.sun.jersey.test.framework.spi.container.inmemory.InMemoryTestContainerFactory;
+import com.sun.jersey.test.framework.spi.container.http.HTTPContainerFactory;
 import org.familysearch.ct.ws.test.filter.UseCaseLoggingFilter;
 
+import javax.ws.rs.core.UriBuilder;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -42,7 +44,6 @@ public class DocAwareJerseyTest extends JerseyTest {
    * @throws TestContainerException - An error occurred
    */
   public DocAwareJerseyTest() throws TestContainerException {
-    registerServerSideComponents(this.serverSideComponents);
   }
 
   protected void registerServerSideComponents(Map<Class<?>, Object> serverSideComponents) {
@@ -52,10 +53,20 @@ public class DocAwareJerseyTest extends JerseyTest {
   @Override
   protected AppDescriptor configure() {
     this.serverSideComponents = new HashMap<Class<?>, Object>();
+    registerServerSideComponents(this.serverSideComponents);
     LowLevelAppDescriptor app = LowLevelAppDescriptor.transform(new WebAppDescriptor.Builder(getClass().getPackage().getName()).build());
     app.getResourceConfig().getSingletons().add(new BasicComponentRegistry(this.serverSideComponents));
     configure(app);
     return app;
+  }
+
+  @Override
+  protected URI getBaseURI() {
+    return UriBuilder.fromUri(super.getBaseURI()).path(getContextPath()).build();
+  }
+
+  protected String getContextPath() {
+    return "";
   }
 
   /**
@@ -73,7 +84,7 @@ public class DocAwareJerseyTest extends JerseyTest {
    */
   @Override
   protected TestContainerFactory getTestContainerFactory() throws TestContainerException {
-    return new InMemoryTestContainerFactory();
+    return new HTTPContainerFactory();
   }
 
   /**

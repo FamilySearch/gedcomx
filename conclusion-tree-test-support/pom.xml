@@ -28,7 +28,7 @@
     </dependency>
     <dependency>
       <groupId>com.sun.jersey.jersey-test-framework</groupId>
-      <artifactId>jersey-test-framework-inmemory</artifactId>
+      <artifactId>jersey-test-framework-http</artifactId>
       <version>1.11</version>
     </dependency>
   </dependencies>

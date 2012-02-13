@@ -35,4 +35,9 @@ public abstract class ConclusionTreeUseCaseTest extends DocAwareJerseyTest {
   public WebResource unauthenticatedResource() {
     return super.resource();
   }
+
+  @Override
+  protected final String getContextPath() {
+    return "/xt";
+  }
 }
