@@ -136,7 +136,7 @@
       [/#if]
   <div class="xml-docs">
     <h4>Request</h4>
-    <pre>${request.requestMethod?upper_case} ${request.requestPath.path}
+    <pre>${request.requestMethod?upper_case} ${request.requestPath}
       [#list request.requestHeaders as header]
 ${header.name}: ${header.value}
       [/#list][#if request.requestBody??]
