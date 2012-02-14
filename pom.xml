@@ -18,6 +18,7 @@
 
   <modules>
     <module>gedcomx-rt-support</module>
+    <module>gedcomx-test-support</module>
     <module>enunciate-gedcomx-support</module>
 
     <module>gedcomx-common</module>

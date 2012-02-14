@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>gedcomx-test-support</artifactId>
+  <name>GEDCOM X - Test Support</name>
+
+  <parent>
+    <groupId>org.gedcomx</groupId>
+    <artifactId>gedcomx-parent</artifactId>
+    <version>0.10.0.BUILD-SNAPSHOT</version>
+  </parent>
+
+  <properties>
+    <!--we either have to refer to the parent directory (making modules-->
+    <!--incapable of building outside the context of the parent) or-->
+    <!--we have to duplicate the config files to all modules. Currently-->
+    <!--opting for the former.-->
+    <root.basedir>${basedir}/..</root.basedir>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>
+      <version>5.14</version>
+      <scope>compile</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.gedcomx</groupId>
+      <artifactId>gedcomx-rt-support</artifactId>
+      <version>0.10.0.BUILD-SNAPSHOT</version>
+    </dependency>
+  </dependencies>
+
+</project>
