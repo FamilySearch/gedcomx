@@ -32,13 +32,13 @@ import javax.xml.bind.annotation.XmlType;
  */
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType ( name = "Field", propOrder = { "original", "interpreted", "processed", "source" } )
+@XmlType ( name = "Field", propOrder = { "original", "interpreted", "formal", "source" } )
 public abstract class Field extends GenealogicalResource {
 
   private String label;
   private String original;
   private String interpreted;
-  private FormalValue processed;
+  private FormalValue formal;
   private ResourceReference source;
 
   /**
@@ -107,21 +107,21 @@ public abstract class Field extends GenealogicalResource {
   }
 
   /**
-   * Programmatic interpretation of the value based on an algorithm that considers the original and interpreted values.
+   * The discreet, formal value of the field as supplied by a user or applied by an algorithm based on the original and interpreted values.
    * 
-   * @return Programmatic interpretation of the value based on an algorithm that considers the original and interpreted values.
+   * @return The discreet, formal value of the field as supplied by a user or applied by an algorithm based on the original and interpreted values.
    */
-  public FormalValue getProcessed() {
-    return processed;
+  public FormalValue getFormal() {
+    return formal;
   }
 
   /**
-   * Programmatic interpretation of the value based on an algorithm that considers the original and interpreted values.
+   * The discreet, formal value of the field as supplied by a user or applied by an algorithm based on the original and interpreted values.
    * 
-   * @param processed Programmatic interpretation of the value based on an algorithm that considers the original and interpreted values.
+   * @param formal The discreet, formal value of the field as supplied by a user or applied by an algorithm based on the original and interpreted values.
    */
-  public void setProcessed(FormalValue processed) {
-    this.processed = processed;
+  public void setFormal(FormalValue formal) {
+    this.formal = formal;
   }
 
   /**
@@ -151,8 +151,8 @@ public abstract class Field extends GenealogicalResource {
     String s;
 
     // Show one of the following values arranged in priority: Processed, Interpreted or Original
-    if ((processed != null) && (! processed.toString().isEmpty())) {
-      s = processed.toString();
+    if ((formal != null) && (! formal.toString().isEmpty())) {
+      s = formal.toString();
     } else if ((interpreted != null) && (! interpreted.isEmpty())) {
       s = interpreted;
     } else if ((original != null) && (! original.isEmpty())) {
