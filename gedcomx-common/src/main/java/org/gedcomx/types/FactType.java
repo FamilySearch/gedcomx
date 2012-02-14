@@ -78,6 +78,7 @@ public enum FactType {
   MilitaryServiceBranch,
   Mission,
   Move,
+  NameOfShip,
   Naturalization,
   Namesake,
   NationalId,
@@ -89,9 +90,12 @@ public enum FactType {
   Ordinance,
   Ordination,
   PhysicalDescription,
+  PortOfDeparture,
+  PreviousResidence,
   Probate,
   Possessions,
   Race,
+  RelationshipToHead,
   ReligiousAffiliation,
   Residence,
   Retirement,
@@ -241,6 +245,7 @@ public enum FactType {
     public static final FactType MilitaryServiceBranch = include(FactType.MilitaryServiceBranch);
     public static final FactType Mission = include(FactType.Mission);
     public static final FactType Move = include(FactType.Move);
+    public static final FactType NameOfShip = include(FactType.NameOfShip);
     public static final FactType Naturalization = include(FactType.Naturalization);
     public static final FactType Namesake = include(FactType.Namesake);
     public static final FactType NationalId = include(FactType.NationalId);
@@ -253,8 +258,11 @@ public enum FactType {
     public static final FactType Ordination = include(FactType.Ordination);
     public static final FactType PhysicalDescription = include(FactType.PhysicalDescription);
     public static final FactType Probate = include(FactType.Probate);
+    public static final FactType PortOfDeparture = include(FactType.PortOfDeparture);
     public static final FactType Possessions = include(FactType.Possessions);
+    public static final FactType PreviousResidence = include(FactType.PreviousResidence);
     public static final FactType Race = include(FactType.Race);
+    public static final FactType RelationshipToHead = include(FactType.RelationshipToHead);
     public static final FactType ReligiousAffiliation = include(FactType.ReligiousAffiliation);
     public static final FactType Residence = include(FactType.Residence);
     public static final FactType Retirement = include(FactType.Retirement);
