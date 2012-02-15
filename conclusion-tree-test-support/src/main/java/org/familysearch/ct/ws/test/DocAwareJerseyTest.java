@@ -164,8 +164,12 @@ public class DocAwareJerseyTest extends JerseyTest {
       }
 
       OutputStream os = new FileOutputStream(file);
-      marshaller.marshal(useCase, os);
-      os.close();
+      try {
+        marshaller.marshal(useCase, os);
+      }
+      finally {
+        os.close();
+      }
     }
   }
 
@@ -174,7 +178,7 @@ public class DocAwareJerseyTest extends JerseyTest {
       Class.forName("com.intellij.rt.execution.application.AppMain", false, getClass().getClassLoader());
       return true;
     }
-    catch (Throwable e) {
+    catch (Throwable e) { //NOSONAR
       return false;
     }
   }
