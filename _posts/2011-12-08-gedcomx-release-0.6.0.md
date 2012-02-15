@@ -1,6 +1,7 @@
 ---
 title: GEDCOM X 0.6.0
 date: 2011-12-08 12:06:00
+layout: default
 ---
 
 Wow. Has it really been _three months_ since we cut the last release?

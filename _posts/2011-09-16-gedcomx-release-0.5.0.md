@@ -1,6 +1,7 @@
 ---
 title: GEDCOM X 0.5.0 Released
 date: 2011-09-16 11:50:00
+layout: default
 ---
 
 GEDCOM X 0.5.0 has been released.

@@ -1,6 +1,7 @@
 ---
 title: GEDCOM X and RDF
 date: 2011-08-31 15:14:00
+layout: default
 ---
 
 A lot of work has been done recently to define GEDCOM X in terms of an [RDF Vocabulary](http://www.w3.org/TR/rdf-primer/) 

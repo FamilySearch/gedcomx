@@ -1,6 +1,7 @@
 ---
 title: The GEDCOM X File Format
 date: 2011-07-28 16:18:00
+layout: default
 ---
 
 The initial draft of the GEDCOM X File Format is now available! This file format is designed to replace the legacy GEDCOM format 
