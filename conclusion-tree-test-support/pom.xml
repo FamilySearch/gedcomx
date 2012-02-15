@@ -9,7 +9,7 @@
   <parent>
     <groupId>org.familysearch.ct</groupId>
     <artifactId>conclusion-tree-parent</artifactId>
-    <version>0.2.1-SNAPSHOT</version>
+    <version>0.3.0-SNAPSHOT</version>
   </parent>
 
   <build>
