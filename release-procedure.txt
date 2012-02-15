@@ -5,7 +5,7 @@ To cut a new version:
 3. Update pom files to reflect new version change
 4. Commit
 5. Tag (e.g. "git tag -a v0.10.0 -m 'Release of version 0.10.0.")
-6. Push
+6. Push --tags
 7. Switch back to master branch.
 8. Merge changes from release branch.
 9. Update pom files to reflect a new snapshot.
