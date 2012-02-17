@@ -60,9 +60,12 @@ import javax.ws.rs.core.Response;
     namespace = XRDModel.XRD_V1_NAMESPACE
 )
 @ResourceRelationships({
-  @ResourceRelationship(identifier = PersonsRSDefinition.REL, definedBy = DiscoveryRSDefinition.class, description = "A set of persons making up a family conclusion tree.")
+  @ResourceRelationship (identifier = PersonsRSDefinition.REL, definedBy = DiscoveryRSDefinition.class, description = "A set of persons making up a family conclusion tree."),
+  @ResourceRelationship (identifier = PersonRSDefinition.REL, definedBy = PersonRSDefinition.class, description = "The link to the person for the currently logged in user." )
 })
 public interface DiscoveryRSDefinition extends CommonRSParameters {
+
+  String REL = CommonRSParameters.GEDCOMX_LINK_REL_PREFIX + "discovery";
 
   /**
    * Read the host metadata.
