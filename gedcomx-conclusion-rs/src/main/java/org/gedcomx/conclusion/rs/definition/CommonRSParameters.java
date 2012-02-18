@@ -16,6 +16,8 @@
 package org.gedcomx.conclusion.rs.definition;
 
 import org.gedcomx.rt.CommonModels;
+import org.gedcomx.rt.rs.ResourceRelationship;
+import org.gedcomx.rt.rs.ResourceRelationships;
 import org.gedcomx.rt.rs.ResponseCode;
 import org.gedcomx.rt.rs.StatusCodes;
 
@@ -31,6 +33,9 @@ import javax.ws.rs.HeaderParam;
   @ResponseCode ( code = 401, condition = "If authentication is needed, or if the supplied authentication is expired or otherwise invalid."),
   @ResponseCode ( code = 403, condition = "If the resource is forbidden even after considering a possibly valid authentication."),
   @ResponseCode ( code = 501, condition = "If the resource is not supported by the implementation.")
+} )
+@ResourceRelationships ({
+  @ResourceRelationship ( identifier = DiscoveryRSDefinition.REL, definedBy = DiscoveryRSDefinition.class, description = "The discovery resource for this application.")
 } )
 public interface CommonRSParameters {
 
