@@ -54,4 +54,11 @@ public @interface ResourceRelationship {
    */
   String description();
 
+  /**
+   * Whether this is a template link instead of an href.
+   *
+   * @return Whether this is a template link instead of an href.
+   */
+  boolean template() default false;
+
 }

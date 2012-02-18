@@ -32,7 +32,6 @@ import org.codehaus.enunciate.contract.jaxb.types.XmlType;
 import org.codehaus.enunciate.contract.jaxrs.ResourceEntityParameter;
 import org.codehaus.enunciate.contract.jaxrs.ResourceMethod;
 import org.codehaus.enunciate.contract.jaxrs.ResourceRepresentationMetadata;
-import org.gedcomx.rt.JsonElementWrapper;
 import org.gedcomx.rt.SupportsExtensionElements;
 
 import javax.xml.namespace.QName;
@@ -162,26 +161,27 @@ public abstract class GenerateResourceExampleHttpMethod implements TemplateMetho
       body.printf("  \"@type\" : \"%s%s\",\n", typeQName.getNamespaceURI(), typeQName.getLocalPart());
       body.printf("  ...\n");
       if (writeLinks) {
-        writeLinks(body, links, json, 0, false);
+        writeLinks(body, links, json, 0, null);
       }
       writeSubresourcesExampleToBody(element.getQname(), subresources, json, body, 1, 2, writeLinks);
-      body.printf("...\n");
+      body.printf("  ...\n");
       body.printf("}");
     }
     else {
       boolean isAtom = "http://www.w3.org/2005/Atom".equals(element.getNamespace());
+      boolean isXrd = "http://docs.oasis-open.org/ns/xri/xrd-1.0".equals(element.getNamespace());
       body.printf("<%s xmlns=\"%s\"%s>\n", element.getName(), element.getNamespace(), isAtom ? "" : writeLinks ? " xmlns:atom=\"http://www.w3.org/2005/Atom\"" : "");
       body.printf("  ...\n");
       if (writeLinks) {
-        writeLinks(body, links, json, 0, isAtom);
+        writeLinks(body, links, json, 0, isAtom ? "link" : isXrd ? "Link" : "atom:link");
       }
       writeSubresourcesExampleToBody(element.getQname(), subresources, json, body, 1, 2, writeLinks);
-      body.printf("...\n");
+      body.printf("  ...\n");
       body.printf("</%s>", element.getName());
     }
   }
 
-  private void writeLinks(PrintWriter body, Collection<ResourceRelationship> links, boolean json, int depth, boolean isAtom) {
+  private void writeLinks(PrintWriter body, Collection<ResourceRelationship> links, boolean json, int depth, String linkElement) {
     StringBuilder tab = new StringBuilder();
     for (int i = 0; i < depth; i++) {
       tab.append("  ");
@@ -194,7 +194,7 @@ public abstract class GenerateResourceExampleHttpMethod implements TemplateMetho
       }
       while (relIt.hasNext()) {
         ResourceRelationship rel = relIt.next();
-        body.printf("%s    { \"rel\" : \"%s\", \"href\" : \"...\" }", tab, rel.getIdentifier());
+        body.printf("%s    { \"rel\" : \"%s\", \"%s\" : \"...\" }", tab, rel.getIdentifier(), rel.isTemplate() ? "template" : "href");
         if (!relIt.hasNext()) {
           body.printf("\n%s  ],\n", tab);
         }
@@ -206,10 +206,7 @@ public abstract class GenerateResourceExampleHttpMethod implements TemplateMetho
     else {
       while (relIt.hasNext()) {
         ResourceRelationship rel = relIt.next();
-        body.printf("%s  <%slink rel=\"%s\" href=\"...\"/>\n", tab, isAtom ? "" : "atom:", rel.getIdentifier());
-        if (!relIt.hasNext()) {
-          body.printf("%s  ...\n", tab);
-        }
+        body.printf("%s  <%s rel=\"%s\" %s=\"...\"/>\n", tab, linkElement, rel.getIdentifier(), rel.isTemplate() ? "template" : "href");
       }
     }
   }
@@ -228,7 +225,7 @@ public abstract class GenerateResourceExampleHttpMethod implements TemplateMetho
           body.printf("%s  \"@type\" : \"%s%s\",\n", tab, typeQName.getNamespaceURI(), typeQName.getLocalPart());
           body.printf("%s  ...\n", tab);
           if (writeLinks) {
-            writeLinks(body, subresource.getDefinition().getResourceRelationships(), json, depth, false);
+            writeLinks(body, subresource.getDefinition().getResourceRelationships(), json, depth, null);
           }
           writeSubresourcesExampleToBody(subresource.getXmlName(), gatherSubresourceElements(subresource.getTypeDefinition(), subresource.getDefinition()), json, body, depth + 1, maxDepth, writeLinks);
         }
@@ -248,7 +245,7 @@ public abstract class GenerateResourceExampleHttpMethod implements TemplateMetho
         if (depth < maxDepth) {
           body.printf("%s  ...\n", tab);
           if (writeLinks) {
-            writeLinks(body, subresource.getDefinition().getResourceRelationships(), json, depth, "http://www.w3.org/2005/Atom".equals(parentQName.getNamespaceURI()));
+            writeLinks(body, subresource.getDefinition().getResourceRelationships(), json, depth, "http://www.w3.org/2005/Atom".equals(ns) ? "link" : "http://docs.oasis-open.org/ns/xri/xrd-1.0".equals(ns) ? "Link" : "atom:link");
           }
           writeSubresourcesExampleToBody(subresource.getXmlName(), gatherSubresourceElements(subresource.getTypeDefinition(), subresource.getDefinition()), json, body, depth + 1, maxDepth, writeLinks);
         }
