@@ -1,0 +1,76 @@
+[#ftl]
+[#import "boilerplate.fmt" as libBoilerplate/]
+[#function titleToFilename title]
+  [#return title?string?replace(":",".")?replace(" ", "-")/]
+[/#function]
+[#list recipes as recipe]
+  [@file name="recipes/" + titleToFilename(recipe.title) + ".recipe.html" charset="utf-8"]
+    [@libBoilerplate.writeStartBody label=recipe.title/]
+  <h3>${recipe.title}</h3>
+
+  <div id="mediatype-selection">
+    <input type="radio" id="select-xml" name="mediatype" checked="checked"/><label for="select-xml">XML</label>
+    <input type="radio" id="select-json" name="mediatype" /><label for="select-json">JSON</label>
+  </div>
+
+  <p>${recipe.description!""}</p>
+
+    [#list recipe.snippets as snippet]
+      [#if snippet.description??]
+  <p>${snippet.description}</p>
+
+      [/#if]
+  <div class="xml-docs">
+    <pre class="prettyprint lang-xml">
+${(snippet.xml!"<xml-snippet-available>false</xml-snippet-available>")?html?trim}
+    </pre>
+  </div>
+
+  <div class="json-docs">
+    <pre class="prettyprint lang-js">
+${(snippet.json!"{ 'json-snippet-available' : false }")?trim}
+    </pre>
+  </div>
+    [/#list]
+  <br/>
+    [@libBoilerplate.writeEndBody/]
+  [/@file]
+[/#list]
+[@file name="recipes/index.html" charset="utf-8"]
+[@libBoilerplate.writeStartBody label="Recipes"/]
+<div class="container">
+[@libBoilerplate.writeHeader]
+  <ul class="xbreadcrumbs" id="breadcrumbs">
+    <li><a href="Home.html" class="home">Home</a></li>
+    <li class="current">
+      <a href="index.html">Recipes</a>
+      <ul>
+        <li><a href="../model/index.html">Models</a></li>
+        <li><a href="../rs/index.html">Resources</a></li>
+        <li><a href="recipes/index.html">Recipes</a></li>
+      </ul>
+    </li>
+  </ul>
+[/@libBoilerplate.writeHeader]
+  <div id="main" class="column first last span-20">
+    <h1>Recipes</h1>
+  [#list recipes as recipe]
+    <h4><a href="#recipe-anchor" onClick="showRecipe('${recipe.title}');">${recipe.title}</a></h4>
+    <p>${recipe.description!""}</p>
+  [/#list]
+    <hr/>
+    <a name="recipe-anchor"></a>
+    <iframe id="recipe"></iframe>
+  </div>
+  <script>
+    function showRecipe(title) {
+      var href = title.replace(/ /g, "-").replace(/:/g, ".") + ".recipe.html";
+      var iframe = $('#recipe');
+      iframe.attr("src", href);
+      iframe.iframeAutoHeight();
+    }
+  </script>
+[@libBoilerplate.writeFooter/]
+</div> <!--! end of #container -->
+[@libBoilerplate.writeEndBody/]
+[/@file]
