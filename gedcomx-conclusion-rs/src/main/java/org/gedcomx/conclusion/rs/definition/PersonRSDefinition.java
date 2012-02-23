@@ -19,10 +19,7 @@ import org.gedcomx.conclusion.ConclusionModel;
 import org.gedcomx.conclusion.Person;
 import org.gedcomx.rt.rs.*;
 
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.HEAD;
-import javax.ws.rs.PUT;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
@@ -41,8 +38,7 @@ import javax.ws.rs.core.UriInfo;
 @ResourceRelationships({
   @ResourceRelationship ( identifier = "self", definedBy = PersonRSDefinition.class, description = "The person itself." ),
   @ResourceRelationship ( identifier = PersonMatchesRSDefinition.REL, definedBy = PersonMatchesRSDefinition.class, description = "The matches for the person." ),
-  @ResourceRelationship ( identifier = PersonSummaryRSDefinition.REL, definedBy = PersonSummaryRSDefinition.class, description = "The summary for the person."),
-  @ResourceRelationship ( identifier = DiscoveryRSDefinition.REL, definedBy = DiscoveryRSDefinition.class, description = "The discovery resource for this application")
+  @ResourceRelationship ( identifier = PersonSummaryRSDefinition.REL, definedBy = PersonSummaryRSDefinition.class, description = "The summary for the person.")
 })
 public interface PersonRSDefinition extends CommonRSParameters {
 
@@ -88,7 +84,7 @@ public interface PersonRSDefinition extends CommonRSParameters {
   @StatusCodes({
     @ResponseCode ( code = 204, condition = "The update was successful.")
   })
-  void updatePerson(@Context UriInfo uriInfo, Person person);
+  Response updatePerson(@Context UriInfo uriInfo, Person person);
 
   /**
    * Delete a person.
@@ -99,6 +95,6 @@ public interface PersonRSDefinition extends CommonRSParameters {
   @StatusCodes({
     @ResponseCode ( code = 204, condition = "The delete was successful.")
   })
-  void deletePerson(@Context UriInfo uriInfo);
+  Response deletePerson(@Context UriInfo uriInfo);
 
 }

@@ -1,5 +1,6 @@
 package org.gedcomx.test;
 
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
 import java.io.File;
@@ -131,5 +132,17 @@ public class TestRecipeTest extends RecipeTest {
    */
   @Override
   public void tearDown() throws Exception {
+  }
+  
+  @AfterClass
+  public void cleanUp() {
+    File dir = new File( DEFAULT_OUTPUT_DIR );
+    if (dir.exists()) {
+      File[] contents = dir.listFiles();
+      for (File file : contents) {
+        if (file.isFile())
+          file.delete();
+      }
+    }
   }
 }
