@@ -20,9 +20,7 @@ import org.gedcomx.conclusion.Person;
 import org.gedcomx.rt.rs.*;
 
 import javax.ws.rs.GET;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 
 /**
  * <p>The person summary resource defines a subset of information about a person, optimized for a summary view. The person summary is especially useful
@@ -63,7 +61,6 @@ public interface PersonSummaryRSDefinition extends CommonRSParameters {
   /**
    * Read a person summary.
    *
-   * @param uriInfo Information on the URI that was used to identify the person to read.
    * @return The person summary.
    */
   @GET
@@ -73,6 +70,6 @@ public interface PersonSummaryRSDefinition extends CommonRSParameters {
     @ResponseCode ( code = 404, condition = "If the requested person summary is not found."),
     @ResponseCode ( code = 410, condition = "If the requested person summary has been deleted.")
   })
-  Response readPersonSummary(@Context UriInfo uriInfo);
+  Response read();
 
 }

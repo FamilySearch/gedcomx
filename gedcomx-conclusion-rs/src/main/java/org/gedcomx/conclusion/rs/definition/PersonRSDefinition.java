@@ -19,10 +19,11 @@ import org.gedcomx.conclusion.ConclusionModel;
 import org.gedcomx.conclusion.Person;
 import org.gedcomx.rt.rs.*;
 
-import javax.ws.rs.*;
-import javax.ws.rs.core.Context;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.HEAD;
+import javax.ws.rs.PUT;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 
 /**
  * The person resource service is used to manage a conclusion person.
@@ -47,7 +48,6 @@ public interface PersonRSDefinition extends CommonRSParameters {
   /**
    * Read a person header attributes.
    *
-   * @param uriInfo Information on the URI that was used to identify the person to read.
    * @return The header attributes for the person.
    */
   @HEAD
@@ -57,12 +57,11 @@ public interface PersonRSDefinition extends CommonRSParameters {
     @ResponseCode ( code = 404, condition = "If the requested person is not found."),
     @ResponseCode ( code = 410, condition = "If the requested person has been deleted.")
   })
-  Response readPersonHead(@Context UriInfo uriInfo);
+  Response head();
 
   /**
    * Read a person.
    *
-   * @param uriInfo Information on the URI that was used to identify the person to read.
    * @return The person.
    */
   @GET
@@ -72,29 +71,28 @@ public interface PersonRSDefinition extends CommonRSParameters {
     @ResponseCode ( code = 404, condition = "If the requested person is not found."),
     @ResponseCode ( code = 410, condition = "If the requested person has been deleted.")
   })
-  Response readPerson(@Context UriInfo uriInfo);
+  Response read();
 
   /**
    * Update a person.
    *
    * @param person The person to be used for the update.
-   * @param uriInfo Information on the URI that was used to identify the person to update.
+   *
    */
   @PUT
   @StatusCodes({
     @ResponseCode ( code = 204, condition = "The update was successful.")
   })
-  Response updatePerson(@Context UriInfo uriInfo, Person person);
+  Response update(Person person);
 
   /**
    * Delete a person.
    *
-   * @param uriInfo Information on the URI that was used to identify the person to delete.
    */
   @DELETE
   @StatusCodes({
     @ResponseCode ( code = 204, condition = "The delete was successful.")
   })
-  Response deletePerson(@Context UriInfo uriInfo);
+  Response delete();
 
 }

@@ -20,9 +20,7 @@ import org.gedcomx.conclusion.ConclusionModel;
 import org.gedcomx.rt.rs.*;
 
 import javax.ws.rs.GET;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 
 /**
  * <p>The search resource defines the set of entries in the system that are applicable to specific search criteria.</p>
@@ -153,7 +151,6 @@ public interface SearchRSDefinition extends CommonRSParameters {
   /**
    * Read the results of a search.
    *
-   * @param uriInfo Information on the URI that was used to identify the search results.
    * @return The search results.
    */
   @GET
@@ -166,6 +163,6 @@ public interface SearchRSDefinition extends CommonRSParameters {
   @Warnings({
     @ResponseCode( code = 299, condition = "If part or all of the query is unable to be processed.")
   })
-  Response readPersonMatches(@Context UriInfo uriInfo);
+  Response read();
 
 }

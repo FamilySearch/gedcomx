@@ -20,9 +20,7 @@ import org.gedcomx.conclusion.ConclusionModel;
 import org.gedcomx.rt.rs.*;
 
 import javax.ws.rs.GET;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 
 /**
  * The person matches resource defines the set of matches in the system that are applicable to a person.
@@ -45,7 +43,6 @@ public interface PersonMatchesRSDefinition extends CommonRSParameters {
   /**
    * Read a set of matches for a person.
    *
-   * @param uriInfo Information on the URI that was used to identify the match set.
    * @return The match set.
    */
   @GET
@@ -54,6 +51,6 @@ public interface PersonMatchesRSDefinition extends CommonRSParameters {
     @ResponseCode ( code = 301, condition = "If the match set has been moved to a different location, e.g. as the result of a merge."),
     @ResponseCode ( code = 404, condition = "If the match set is not found. (Different from the case of the empty match set.)")
   })
-  Response readPersonMatches(@Context UriInfo uriInfo);
+  Response read();
 
 }

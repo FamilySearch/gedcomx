@@ -23,9 +23,7 @@ import org.gedcomx.rt.rs.ResponseCode;
 import org.gedcomx.rt.rs.StatusCodes;
 
 import javax.ws.rs.POST;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 
 /**
  * The persons resource service is used to manage a collection of persons.
@@ -45,7 +43,8 @@ public interface PersonsRSDefinition extends CommonRSParameters {
   /**
    * Create a person.
    *
-   * @param uriInfo Information on the URI that was used to identify the collection in which the person is to be created.
+   *
+   *
    * @param person The person to be created.
    * @return The appropriate response.
    */
@@ -53,6 +52,6 @@ public interface PersonsRSDefinition extends CommonRSParameters {
   @StatusCodes({
     @ResponseCode ( code = 201, condition = "The creation of the person was successful. Expect a location header specifying the link to the created person.")
   })
-  Response createPerson(@Context UriInfo uriInfo, Person person);
+  Response create(Person person);
 
 }

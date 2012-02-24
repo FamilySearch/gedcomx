@@ -24,9 +24,7 @@ import org.gedcomx.rt.rs.StatusCodes;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 
 /**
  * The conclusions resource service is used to manage a collection of conclusions.
@@ -44,19 +42,19 @@ public interface ConclusionsRSDefinition extends CommonRSParameters {
   /**
    * Get a set of conclusions.
    *
-   * @param uriInfo Information on the URI that was used to identify the conclusions.
    * @return The set of conclusions.
    */
   @GET
   @StatusCodes({
     @ResponseCode ( code = 200, condition = "Upon a successful read.")
   })
-  Response readConclusions(@Context UriInfo uriInfo);
+  Response read();
 
   /**
    * Create a conclusion.
    *
-   * @param uriInfo Information on the URI that was used to identify the collection in which the conclusion is to be created.
+   *
+   *
    * @param conclusion The conclusion to be created.
    * @return The appropriate response.
    */
@@ -64,6 +62,6 @@ public interface ConclusionsRSDefinition extends CommonRSParameters {
   @StatusCodes({
     @ResponseCode ( code = 201, condition = "The creation of the conclusion was successful. Expect a location header specifying the link to the created conclusion.")
   })
-  Response createConclusion(@Context UriInfo uriInfo, Conclusion conclusion);
+  Response create(Conclusion conclusion);
 
 }
