@@ -21,8 +21,6 @@ import org.gedcomx.rt.rs.*;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.UriInfo;
 
 /**
  * The conclusion resource service is used to manage a conclusion.
@@ -42,7 +40,6 @@ public interface ConclusionRSDefinition extends CommonRSParameters {
   /**
    * Read a conclusion.
    *
-   * @param uriInfo Information on the URI that was used to identify the conclusion to read.
    * @return The conclusion.
    */
   @GET
@@ -51,29 +48,28 @@ public interface ConclusionRSDefinition extends CommonRSParameters {
     @ResponseCode ( code = 404, condition = "If the requested conclusion is not found."),
     @ResponseCode ( code = 410, condition = "If the requested conclusion has been deleted.")
   })
-  Conclusion readConclusion(@Context UriInfo uriInfo);
+  Conclusion get();
 
   /**
    * Update a conclusion.
    *
    * @param conclusion The conclusion to be used for the update.
-   * @param uriInfo Information on the URI that was used to identify the conclusion to update.
+   *
    */
   @PUT
   @StatusCodes({
     @ResponseCode ( code = 204, condition = "The update was successful.")
   })
-  void updateConclusion(@Context UriInfo uriInfo, Conclusion conclusion);
+  void put(Conclusion conclusion);
 
   /**
    * Delete a conclusion.
    *
-   * @param uriInfo Information on the URI that was used to identify the conclusion to delete.
    */
   @DELETE
   @StatusCodes({
     @ResponseCode ( code = 204, condition = "The delete was successful.")
   })
-  void deleteConclusion(@Context UriInfo uriInfo);
+  void delete();
 
 }
