@@ -48,7 +48,7 @@ public interface ConclusionsRSDefinition extends CommonRSParameters {
   @StatusCodes({
     @ResponseCode ( code = 200, condition = "Upon a successful read.")
   })
-  Response read();
+  Response get();
 
   /**
    * Create a conclusion.
@@ -62,6 +62,6 @@ public interface ConclusionsRSDefinition extends CommonRSParameters {
   @StatusCodes({
     @ResponseCode ( code = 201, condition = "The creation of the conclusion was successful. Expect a location header specifying the link to the created conclusion.")
   })
-  Response create(Conclusion conclusion);
+  Response post(Conclusion conclusion);
 
 }

@@ -51,6 +51,6 @@ public interface PersonMatchesRSDefinition extends CommonRSParameters {
     @ResponseCode ( code = 301, condition = "If the match set has been moved to a different location, e.g. as the result of a merge."),
     @ResponseCode ( code = 404, condition = "If the match set is not found. (Different from the case of the empty match set.)")
   })
-  Response read();
+  Response get();
 
 }

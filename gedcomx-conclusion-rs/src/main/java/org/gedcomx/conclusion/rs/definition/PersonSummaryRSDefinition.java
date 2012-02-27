@@ -70,6 +70,6 @@ public interface PersonSummaryRSDefinition extends CommonRSParameters {
     @ResponseCode ( code = 404, condition = "If the requested person summary is not found."),
     @ResponseCode ( code = 410, condition = "If the requested person summary has been deleted.")
   })
-  Response read();
+  Response get();
 
 }

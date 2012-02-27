@@ -71,7 +71,7 @@ public interface PersonRSDefinition extends CommonRSParameters {
     @ResponseCode ( code = 404, condition = "If the requested person is not found."),
     @ResponseCode ( code = 410, condition = "If the requested person has been deleted.")
   })
-  Response read();
+  Response get();
 
   /**
    * Update a person.
@@ -83,7 +83,7 @@ public interface PersonRSDefinition extends CommonRSParameters {
   @StatusCodes({
     @ResponseCode ( code = 204, condition = "The update was successful.")
   })
-  Response update(Person person);
+  Response put(Person person);
 
   /**
    * Delete a person.

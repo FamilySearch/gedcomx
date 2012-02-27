@@ -52,6 +52,6 @@ public interface PersonsRSDefinition extends CommonRSParameters {
   @StatusCodes({
     @ResponseCode ( code = 201, condition = "The creation of the person was successful. Expect a location header specifying the link to the created person.")
   })
-  Response create(Person person);
+  Response post(Person person);
 
 }

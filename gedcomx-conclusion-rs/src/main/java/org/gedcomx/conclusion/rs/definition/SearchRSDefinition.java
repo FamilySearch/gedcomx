@@ -163,6 +163,6 @@ public interface SearchRSDefinition extends CommonRSParameters {
   @Warnings({
     @ResponseCode( code = 299, condition = "If part or all of the query is unable to be processed.")
   })
-  Response read();
+  Response get();
 
 }

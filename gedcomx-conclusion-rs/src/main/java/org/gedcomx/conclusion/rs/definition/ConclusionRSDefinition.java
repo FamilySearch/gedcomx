@@ -48,7 +48,7 @@ public interface ConclusionRSDefinition extends CommonRSParameters {
     @ResponseCode ( code = 404, condition = "If the requested conclusion is not found."),
     @ResponseCode ( code = 410, condition = "If the requested conclusion has been deleted.")
   })
-  Conclusion read();
+  Conclusion get();
 
   /**
    * Update a conclusion.
@@ -60,7 +60,7 @@ public interface ConclusionRSDefinition extends CommonRSParameters {
   @StatusCodes({
     @ResponseCode ( code = 204, condition = "The update was successful.")
   })
-  void update(Conclusion conclusion);
+  void put(Conclusion conclusion);
 
   /**
    * Delete a conclusion.
