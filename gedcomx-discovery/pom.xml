@@ -8,7 +8,7 @@
   <parent>
     <groupId>org.gedcomx</groupId>
     <artifactId>gedcomx-parent</artifactId>
-    <version>0.11.0.RELEASE</version>
+    <version>0.12.0.BUILD-SNAPSHOT</version>
   </parent>
 
   <properties>
@@ -48,7 +48,7 @@
     <dependency>
       <groupId>org.gedcomx</groupId>
       <artifactId>gedcomx-common</artifactId>
-      <version>0.11.0.RELEASE</version>
+      <version>0.12.0.BUILD-SNAPSHOT</version>
     </dependency>
   </dependencies>
 
