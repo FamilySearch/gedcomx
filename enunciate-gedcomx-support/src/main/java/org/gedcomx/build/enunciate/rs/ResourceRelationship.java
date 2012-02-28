@@ -29,12 +29,14 @@ public final class ResourceRelationship {
 
   private final String identifier;
   private final String description;
+  private final boolean template;
   private final QName resource;
   private final ResourceServiceProcessor processor;
 
   public ResourceRelationship(org.gedcomx.rt.rs.ResourceRelationship meta, ResourceServiceProcessor processor) {
     this.identifier = meta.identifier();
     this.description = meta.description();
+    this.template = meta.template();
     this.processor = processor;
     String fqn;
     ResourceDefinition def = null;
@@ -62,5 +64,7 @@ public final class ResourceRelationship {
     return this.processor.findResourceDefinition(this.resource);
   }
 
-
+  public boolean isTemplate() {
+    return template;
+  }
 }

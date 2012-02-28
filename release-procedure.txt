@@ -1,17 +1,18 @@
 To cut a new version:
 
-1.  Switch to the 'release' branch.
-2.  Merge changes from the master branch.
-3.  Update pom files to reflect new version change
-4.  Commit
-5.  Tag release
-6.  Push
-7.  Switch back to master branch.
-8.  Merge changes from release branch.
-9.  Update pom files to reflect a new snapshot.
+1. Switch to the 'release' branch.
+2. Merge changes from the master branch.
+3. Update pom files to reflect new version change
+4. Commit
+5. Tag (e.g. "git tag -a v0.10.0 -m 'Release of version 0.10.0.")
+6. Push --tags
+7. Switch back to master branch.
+8. Merge changes from release branch.
+9. Update pom files to reflect a new snapshot.
 10. Blog about the release
 11. Create a new milestone in the github issues.
 
 todo: document the procedure for cutting a new version of a single module and releasing it.
+
 
 

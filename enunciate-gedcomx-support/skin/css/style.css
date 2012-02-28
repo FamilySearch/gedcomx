@@ -321,6 +321,14 @@ p.quiet   { color: #666; }
   text-transform: lowercase;
 }
 
+.xml-docs {
+  text-align: left;
+}
+
+.json-docs {
+  text-align: left;
+}
+
 /* @end */
 
 /* @group styles */

@@ -21,10 +21,9 @@ import org.gedcomx.rt.rs.*;
 
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.HEAD;
 import javax.ws.rs.PUT;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 
 /**
  * The person resource service is used to manage a conclusion person.
@@ -39,16 +38,30 @@ import javax.ws.rs.core.UriInfo;
 )
 @ResourceRelationships({
   @ResourceRelationship ( identifier = "self", definedBy = PersonRSDefinition.class, description = "The person itself." ),
-  @ResourceRelationship ( identifier = PersonMatchesRSDefinition.REL, definedBy = PersonMatchesRSDefinition.class, description = "The matches for the person." )
+  @ResourceRelationship ( identifier = PersonMatchesRSDefinition.REL, definedBy = PersonMatchesRSDefinition.class, description = "The matches for the person." ),
+  @ResourceRelationship ( identifier = PersonSummaryRSDefinition.REL, definedBy = PersonSummaryRSDefinition.class, description = "The summary for the person.")
 })
 public interface PersonRSDefinition extends CommonRSParameters {
 
   public static final String REL = CommonRSParameters.GEDCOMX_LINK_REL_PREFIX + "person";
 
   /**
+   * Read a person header attributes.
+   *
+   * @return The header attributes for the person.
+   */
+  @HEAD
+  @StatusCodes({
+    @ResponseCode ( code = 200, condition = "Upon a successful read."),
+    @ResponseCode ( code = 301, condition = "If the requested person has been merged to another person."),
+    @ResponseCode ( code = 404, condition = "If the requested person is not found."),
+    @ResponseCode ( code = 410, condition = "If the requested person has been deleted.")
+  })
+  Response head();
+
+  /**
    * Read a person.
    *
-   * @param uriInfo Information on the URI that was used to identify the person to read.
    * @return The person.
    */
   @GET
@@ -58,29 +71,28 @@ public interface PersonRSDefinition extends CommonRSParameters {
     @ResponseCode ( code = 404, condition = "If the requested person is not found."),
     @ResponseCode ( code = 410, condition = "If the requested person has been deleted.")
   })
-  Response readPerson(@Context UriInfo uriInfo);
+  Response get();
 
   /**
    * Update a person.
    *
    * @param person The person to be used for the update.
-   * @param uriInfo Information on the URI that was used to identify the person to update.
+   *
    */
   @PUT
   @StatusCodes({
     @ResponseCode ( code = 204, condition = "The update was successful.")
   })
-  void updatePerson(@Context UriInfo uriInfo, Person person);
+  Response put(Person person);
 
   /**
    * Delete a person.
    *
-   * @param uriInfo Information on the URI that was used to identify the person to delete.
    */
   @DELETE
   @StatusCodes({
     @ResponseCode ( code = 204, condition = "The delete was successful.")
   })
-  void deletePerson(@Context UriInfo uriInfo);
+  Response delete();
 
 }
