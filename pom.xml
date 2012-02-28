@@ -6,7 +6,7 @@
   <artifactId>gedcomx-parent</artifactId>
   <groupId>org.gedcomx</groupId>
   <name>GEDCOM X - Parent Project</name>
-  <version>0.11.0.BUILD-SNAPSHOT</version>
+  <version>0.11.0.RELEASE</version>
   <packaging>pom</packaging>
 
   <properties>
@@ -186,7 +186,7 @@
             <dependency>
               <groupId>org.gedcomx</groupId>
               <artifactId>enunciate-gedcomx-support</artifactId>
-              <version>0.11.0.BUILD-SNAPSHOT</version>
+              <version>0.11.0.RELEASE</version>
             </dependency>
           </dependencies>
         </plugin>
