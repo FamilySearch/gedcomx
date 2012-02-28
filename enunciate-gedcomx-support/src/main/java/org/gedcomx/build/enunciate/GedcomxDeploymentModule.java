@@ -50,6 +50,7 @@ import org.gedcomx.rt.GedcomNamespaceManager;
 import org.gedcomx.rt.Model;
 import org.gedcomx.rt.Models;
 import org.gedcomx.rt.rs.ResourceDefinition;
+import org.gedcomx.test.Recipe;
 
 import java.io.File;
 import java.io.IOException;
@@ -70,6 +71,7 @@ public class GedcomxDeploymentModule extends FreemarkerDeploymentModule implemen
   private ResourceServiceProcessor resourceServiceProcessor;
   private final Map<String, String> primaryNav = new LinkedHashMap<String, String>();
   private boolean disableProcessing = false;
+  private RecipeClasspathHandler recipeManager;
 
   /**
    * @return "gedcomx"
@@ -195,6 +197,10 @@ public class GedcomxDeploymentModule extends FreemarkerDeploymentModule implemen
     return GedcomxDeploymentModule.class.getResource("rdfschema.fmt");
   }
 
+  protected URL getRecipeTemplateURL() {
+    return GedcomxDeploymentModule.class.getResource("recipes.fmt");
+  }
+
   @Override
   public void init(Enunciate enunciate) throws EnunciateException {
     super.init(enunciate);
@@ -208,6 +214,8 @@ public class GedcomxDeploymentModule extends FreemarkerDeploymentModule implemen
 
     this.rdfProcessor = new RDFProcessor();
     this.resourceServiceProcessor = new ResourceServiceProcessor();
+    this.recipeManager = new RecipeClasspathHandler(enunciate);
+    enunciate.addClasspathHandler(this.recipeManager);
   }
 
   @Override
@@ -390,9 +398,27 @@ public class GedcomxDeploymentModule extends FreemarkerDeploymentModule implemen
             }
           }
         }
+
+        List<Recipe> recipes = this.recipeManager.getRecipes();
+        Map<String, List<Recipe>> recipesByFqn = new HashMap<String, List<Recipe>>();
+        for (Recipe useCase : recipes) {
+          for (String bindingFqn : useCase.getApplicableTypes()) {
+            List<Recipe> useCases = recipesByFqn.get(bindingFqn);
+            if (useCases == null) {
+              useCases = new ArrayList<Recipe>();
+              recipesByFqn.put(bindingFqn, useCases);
+            }
+            useCases.add(useCase);
+          }
+        }
+
+        model.put("recipes", recipes);
+        model.put("recipesByFqn", recipesByFqn);
+
         if (!isDisableProcessing()) {
           processTemplate(getDocsTemplateURL(), model);
           processTemplate(getCodeTemplateURL(), model);
+          processTemplate(getRecipeTemplateURL(), model);
         }
       }
       catch (TemplateException e) {
@@ -420,6 +446,7 @@ public class GedcomxDeploymentModule extends FreemarkerDeploymentModule implemen
     modelDir.mkdirs();
     File rsDir = new File(buildDir, "rs");
     rsDir.mkdirs();
+    new File(buildDir, "recipes").mkdirs();
 
     enunciate.extractBase(GedcomxDeploymentModule.class.getResourceAsStream("/docs.base.zip"), buildDir);
 

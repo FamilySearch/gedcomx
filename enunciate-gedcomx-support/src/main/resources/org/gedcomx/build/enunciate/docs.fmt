@@ -33,6 +33,7 @@
           <ul>
             <li><a href="index.html">Models</a></li>
             <li><a href="../rs/index.html">Resources</a></li>
+            <li><a href="../recipes/index.html">Recipes</a></li>
           </ul>
         </li>
       </ul>
@@ -116,6 +117,7 @@
           <ul>
             <li><a href="../model/index.html">Models</a></li>
             <li><a href="index.html">Resources</a></li>
+            <li><a href="../recipes/index.html">Recipes</a></li>
           </ul>
         </li>
       </ul>

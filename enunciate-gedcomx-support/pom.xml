@@ -7,7 +7,7 @@
   <parent>
     <groupId>org.gedcomx</groupId>
     <artifactId>gedcomx-parent</artifactId>
-    <version>0.10.0.RELEASE</version>
+    <version>0.11.0.BUILD-SNAPSHOT</version>
   </parent>
 
   <properties>
@@ -65,6 +65,11 @@
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>gedcomx-rt-support</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>gedcomx-test-support</artifactId>
       <version>${project.version}</version>
     </dependency>
   </dependencies>
