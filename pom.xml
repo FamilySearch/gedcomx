@@ -350,4 +350,17 @@
     </profile>
   </profiles>
 
+  <distributionManagement>
+    <repository>
+      <id>gedcomx-release-repo</id>
+      <name>GEDCOM X Release Repository</name>
+      <url>https://repository-gedcom.forge.cloudbees.com/release/</url>
+    </repository>
+    <snapshotRepository>
+      <id>gedcomx-snapshot-repo</id>
+      <name>GEDCOM X Snapshot Repository</name>
+      <url>https://repository-gedcom.forge.cloudbees.com/snapshot/</url>
+    </snapshotRepository>
+  </distributionManagement>
+
 </project>
