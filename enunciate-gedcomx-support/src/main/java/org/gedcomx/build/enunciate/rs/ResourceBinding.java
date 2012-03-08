@@ -46,6 +46,7 @@ public class ResourceBinding {
   public ResourceBinding(String path, ResourceDefinitionDeclaration definition) {
     this.path = path;
     this.definition = definition;
+    this.definition.getBindings().add(this);
   }
 
   public String getPath() {
