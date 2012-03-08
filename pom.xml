@@ -23,12 +23,7 @@
 
     <module>gedcomx-common</module>
     <module>gedcomx-metadata</module>
-    <module>gedcomx-record</module>
     <module>gedcomx-conclusion</module>
-
-    <module>gedcomx-discovery</module>
-    <module>gedcomx-atom</module>
-    <module>gedcomx-conclusion-rs</module>
   </modules>
 
   <dependencies>
