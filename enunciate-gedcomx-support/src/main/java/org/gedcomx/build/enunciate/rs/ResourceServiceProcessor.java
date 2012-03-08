@@ -261,18 +261,19 @@ public class ResourceServiceProcessor {
             }
             else {
               binding.getMethods().add(resourceMethod);
-              if (declaringResource.getAnnotation(ResourceDefinition.class) == null) {
-                //as long as the parent resource class isn't a resource definition itself,
-                //we'll consider it's metadata as binding refinements.
-
-                binding.getStatusCodes().addAll(extractStatusCodes(declaringResource));
-                binding.getWarnings().addAll(extractWarnings(declaringResource));
-                binding.getResourceRelationships().addAll(extractResourceRelationships(declaringResource));
-                binding.getResourceParameters().addAll(declaringResource.getResourceParameters());
-
-                binding.setDocValue(declaringResource.getDocValue()); //last one in wins.
-              }
             }
+          }
+
+          if (declaringResource.getAnnotation(ResourceDefinition.class) == null) {
+            //as long as the declaring resource class isn't a resource definition itself,
+            //we'll consider it's metadata as binding refinements.
+
+            binding.getStatusCodes().addAll(extractStatusCodes(declaringResource));
+            binding.getWarnings().addAll(extractWarnings(declaringResource));
+            binding.getResourceRelationships().addAll(extractResourceRelationships(declaringResource));
+            binding.getResourceParameters().addAll(declaringResource.getResourceParameters());
+
+            binding.setDocValue(declaringResource.getDocValue()); //last one in wins.
           }
         }
       }
