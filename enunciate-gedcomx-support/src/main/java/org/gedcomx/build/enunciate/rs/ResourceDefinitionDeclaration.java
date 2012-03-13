@@ -23,11 +23,9 @@ import org.codehaus.enunciate.contract.jaxb.TypeDefinition;
 import org.codehaus.enunciate.contract.jaxrs.Resource;
 import org.codehaus.enunciate.contract.jaxrs.ResourceMethod;
 import org.codehaus.enunciate.contract.jaxrs.ResourceParameter;
-import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.rs.ResourceDefinition;
 
 import javax.ws.rs.Path;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.namespace.QName;
 import java.util.*;
 
@@ -45,6 +43,7 @@ public class ResourceDefinitionDeclaration extends Resource {
   private final List<ElementDeclaration> resourceElements;
   private final Set<QName> subresources;
   private final Map<QName, TypeDefinition> subresourceElements;
+  private final Set<ResourceBinding> bindings;
 
   public ResourceDefinitionDeclaration(TypeDeclaration delegate, List<ElementDeclaration> resourceElements, Set<QName> subresources, Map<QName, TypeDefinition> subresourceElements, ResourceServiceProcessor processor) {
     super(delegate);
@@ -64,6 +63,12 @@ public class ResourceDefinitionDeclaration extends Resource {
       resourceMethod.putMetaData("warnings", processor.extractWarnings(resourceMethod));
     }
     this.subresourceElements = Collections.unmodifiableMap(subresourceElements);
+    this.bindings = new TreeSet<ResourceBinding>(new Comparator<ResourceBinding>() {
+      @Override
+      public int compare(ResourceBinding o1, ResourceBinding o2) {
+        return o1.getPath().compareTo(o2.getPath());
+      }
+    });
   }
 
   @Override
@@ -129,4 +134,7 @@ public class ResourceDefinitionDeclaration extends Resource {
     return resourceRelationships;
   }
 
+  public Set<ResourceBinding> getBindings() {
+    return bindings;
+  }
 }
