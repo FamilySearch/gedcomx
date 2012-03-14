@@ -1,16 +1,14 @@
 To cut a new version:
 
-1. Switch to the 'release' branch.
-2. Merge changes from the master branch.
-3. Update pom files to reflect new version change
-4. Commit
-5. Tag (e.g. "git tag -a v0.10.0 -m 'Release of version 0.10.0.")
-6. Push --tags
-7. Switch back to master branch.
-8. Merge changes from release branch.
-9. Update pom files to reflect a new snapshot.
-10. Blog about the release
-11. Create a new milestone in the github issues.
+1. mvn release:prepare -Dtag=$RELEASE_VERSION -DreleaseVersion=$RELEASE_VERSION -DdevelopmentVersion=$NEXT_SNAPSHOT_VERSION
+2. mvn release:clean
+3. Configure the release build[1] with a branch specifier of $RELEASE_VERSION (todo: make this step easier)
+4. Build[2]
+5. Blog about the release
+6. Create a new milestone in the github issues.
+
+[1] https://gedcom.ci.cloudbees.com/job/gedcomx-release/configure
+[2] https://gedcom.ci.cloudbees.com/job/gedcomx-release/build?delay=0sec
 
 todo: document the procedure for cutting a new version of a single module and releasing it.
 
