@@ -22,7 +22,6 @@ import org.gedcomx.rt.rs.ResourceDefinition;
 import org.gedcomx.rt.rs.ResponseCode;
 import org.gedcomx.rt.rs.StatusCodes;
 
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.core.Response;
 
@@ -35,25 +34,14 @@ import javax.ws.rs.core.Response;
   name = "Conclusions",
   namespace = ConclusionModel.GEDCOMX_CONCLUSION_V1_NAMESPACE,
   resourceElement = ResourceSet.class,
-  subresources = { ConclusionRSDefinition.class }
+  subresources = ConclusionRSDefinition.class
 )
 public interface ConclusionsRSDefinition extends CommonRSParameters {
 
-  /**
-   * Get a set of conclusions.
-   *
-   * @return The set of conclusions.
-   */
-  @GET
-  @StatusCodes({
-    @ResponseCode ( code = 200, condition = "Upon a successful read.")
-  })
-  Response get();
+  public static final String REL = CommonRSParameters.GEDCOMX_LINK_REL_PREFIX + "conclusions";
 
   /**
    * Create a conclusion.
-   *
-   *
    *
    * @param conclusion The conclusion to be created.
    * @return The appropriate response.
@@ -63,5 +51,4 @@ public interface ConclusionsRSDefinition extends CommonRSParameters {
     @ResponseCode ( code = 201, condition = "The creation of the conclusion was successful. Expect a location header specifying the link to the created conclusion.")
   })
   Response post(Conclusion conclusion);
-
 }
