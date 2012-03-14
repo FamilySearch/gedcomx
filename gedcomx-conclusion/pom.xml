@@ -7,7 +7,7 @@
   <parent>
     <groupId>org.gedcomx</groupId>
     <artifactId>gedcomx-parent</artifactId>
-    <version>0.12.0.RELEASE</version>
+    <version>0.13.0-SNAPSHOT</version>
   </parent>
 
   <properties>
@@ -42,19 +42,19 @@
     <dependency>
       <groupId>org.gedcomx</groupId>
       <artifactId>gedcomx-common</artifactId>
-      <version>0.12.0.RELEASE</version>
+      <version>0.13.0-SNAPSHOT</version>
     </dependency>
     
     <dependency>
       <groupId>org.gedcomx</groupId>
       <artifactId>gedcomx-rt-support</artifactId>
-      <version>0.12.0.RELEASE</version>
+      <version>0.13.0-SNAPSHOT</version>
     </dependency>
 
     <dependency>
       <groupId>org.gedcomx</groupId>
       <artifactId>gedcomx-test-support</artifactId>
-      <version>0.12.0.RELEASE</version>
+      <version>0.13.0-SNAPSHOT</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
