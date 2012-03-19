@@ -27,6 +27,7 @@ import org.gedcomx.rt.XmlTypeIdResolver;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -134,4 +135,15 @@ public class Person extends GenealogicalEntity implements PersistentIdentifiable
     this.facts = facts;
   }
 
+  /**
+   * Add a fact conclusion to the person.
+   *
+   * @param fact The fact conclusion to be added.
+   */
+  public void addFact(Fact fact) {
+    if(facts == null) {
+      facts = new ArrayList<Fact>();
+    }
+    facts.add(fact);
+  }
 }
