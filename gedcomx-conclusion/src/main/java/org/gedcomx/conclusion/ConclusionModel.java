@@ -15,6 +15,7 @@
  */
 package org.gedcomx.conclusion;
 
+import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.Model;
 import org.gedcomx.rt.Models;
 
@@ -29,6 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Models ( {
   @Model (
     id = "gxc",
+    projectId = CommonModels.GEDCOMX_PROJECT_ID,
     namespace = ConclusionModel.GEDCOMX_CONCLUSION_V1_NAMESPACE,
     label = "Conclusion Model",
     description = "The conclusion model defines the types and elements of genealogical conclusion data.",

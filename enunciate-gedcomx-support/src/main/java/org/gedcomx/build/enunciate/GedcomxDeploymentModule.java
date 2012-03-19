@@ -45,10 +45,7 @@ import org.codehaus.enunciate.template.freemarker.IsDefinedGloballyMethod;
 import org.codehaus.enunciate.template.freemarker.UniqueContentTypesMethod;
 import org.gedcomx.build.enunciate.rdf.RDFProcessor;
 import org.gedcomx.build.enunciate.rs.*;
-import org.gedcomx.rt.DocIgnoreXmlRootElement;
-import org.gedcomx.rt.GedcomNamespaceManager;
-import org.gedcomx.rt.Model;
-import org.gedcomx.rt.Models;
+import org.gedcomx.rt.*;
 import org.gedcomx.rt.rs.ResourceDefinition;
 import org.gedcomx.test.Recipe;
 
@@ -65,6 +62,9 @@ import java.util.*;
  */
 public class GedcomxDeploymentModule extends FreemarkerDeploymentModule implements DocumentationAwareModule, EnunciateTypeDeclarationListener {
 
+  private String projectId = CommonModels.GEDCOMX_PROJECT_ID;
+  private String projectLabelModifier = null;
+  private final Map<String, String> baseProjectUris = new HashMap<String, String>();
   private final Map<String, TypeDeclaration> knownModelDeclarations = new HashMap<String, TypeDeclaration>();
   private final Map<String, TypeDeclaration> knownRsdDeclarations = new HashMap<String, TypeDeclaration>();
   private RDFProcessor rdfProcessor;
@@ -72,6 +72,7 @@ public class GedcomxDeploymentModule extends FreemarkerDeploymentModule implemen
   private final Map<String, String> primaryNav = new LinkedHashMap<String, String>();
   private boolean disableProcessing = false;
   private RecipeClasspathHandler recipeManager;
+  private String stylesheet;
 
   /**
    * @return "gedcomx"
@@ -174,6 +175,23 @@ public class GedcomxDeploymentModule extends FreemarkerDeploymentModule implemen
    */
   public void addPrimaryNav(String label, String href) {
     this.primaryNav.put(label, href);
+  }
+
+  /**
+   * The id of the GEDCOM X project to be built.
+   *
+   * @param projectId The id of the GEDCOM X project to be built.
+   */
+  public void setProjectId(String projectId) {
+    this.projectId = projectId;
+  }
+
+  public void setProjectLabelModifier(String projectLabelModifier) {
+    this.projectLabelModifier = projectLabelModifier;
+  }
+
+  public void setStylesheet(String stylesheet) {
+    this.stylesheet = stylesheet;
   }
 
   public void onTypeDeclarationInspected(TypeDeclaration typeDeclaration) {
@@ -299,8 +317,9 @@ public class GedcomxDeploymentModule extends FreemarkerDeploymentModule implemen
             description = null;
           }
           schemaInfo.setProperty("description", description);
-
           schemaInfo.setProperty("definesRDFSchema", m.definesRDFSchema());
+
+          schemaInfo.setProperty("projectId", m.projectId());
 
           //ensure the correct filenames are used for the schemas.
           schemaInfo.setProperty("filename", id + "-" + version + ".xsd");
@@ -382,6 +401,12 @@ public class GedcomxDeploymentModule extends FreemarkerDeploymentModule implemen
       model.put("resourceDefinitions", this.resourceServiceProcessor.getResourceDefinitions());
       model.put("resourceBindingsByPath", this.resourceServiceProcessor.getBindingsByPath());
       model.put("primaryNav", this.primaryNav);
+      model.put("projectId", this.projectId);
+      if (this.projectLabelModifier != null) {
+        model.put("projectLabelModifier", this.projectLabelModifier);
+      }
+      model.put("isOfProject", new IsOfProjectMethod(getModelInternal().getNamespacesToSchemas(), projectId));
+      model.put("baseProjectUri", new BaseProjectUriMethod(getBaseProjectUris(), getModelInternal().getNamespacesToSchemas()));
       try {
         for (SchemaInfo schemaInfo : model.getNamespacesToSchemas().values()) {
           String namespace = schemaInfo.getNamespace();
@@ -401,14 +426,14 @@ public class GedcomxDeploymentModule extends FreemarkerDeploymentModule implemen
 
         List<Recipe> recipes = this.recipeManager.getRecipes();
         Map<String, List<Recipe>> recipesByFqn = new HashMap<String, List<Recipe>>();
-        for (Recipe useCase : recipes) {
-          for (String bindingFqn : useCase.getApplicableTypes()) {
-            List<Recipe> useCases = recipesByFqn.get(bindingFqn);
-            if (useCases == null) {
-              useCases = new ArrayList<Recipe>();
-              recipesByFqn.put(bindingFqn, useCases);
+        for (Recipe recipe : recipes) {
+          for (String modelFqn : recipe.getApplicableTypes()) {
+            List<Recipe> recipeList = recipesByFqn.get(modelFqn);
+            if (recipeList == null) {
+              recipeList = new ArrayList<Recipe>();
+              recipesByFqn.put(modelFqn, recipeList);
             }
-            useCases.add(useCase);
+            recipeList.add(recipe);
           }
         }
 
@@ -442,19 +467,18 @@ public class GedcomxDeploymentModule extends FreemarkerDeploymentModule implemen
     Enunciate enunciate = getEnunciate();
     File buildDir = getBuildDir();
     buildDir.mkdirs();
-    File modelDir = new File(buildDir, "model");
-    modelDir.mkdirs();
-    File rsDir = new File(buildDir, "rs");
-    rsDir.mkdirs();
-    new File(buildDir, "recipes").mkdirs();
 
     enunciate.extractBase(GedcomxDeploymentModule.class.getResourceAsStream("/docs.base.zip"), buildDir);
+    if (this.stylesheet != null) {
+      File styleSheet = enunciate.resolvePath(stylesheet);
+      enunciate.copyFile(styleSheet, new File(new File(buildDir, "css"), "style.css"));
+    }
 
     for (SchemaInfo schemaInfo : getModel().getNamespacesToSchemas().values()) {
       if (schemaInfo.getProperty("file") != null) {
         File from = (File) schemaInfo.getProperty("file");
         String filename = schemaInfo.getProperty("filename") != null ? (String) schemaInfo.getProperty("filename") : from.getName();
-        File to = new File(modelDir, filename);
+        File to = new File(buildDir, filename);
         enunciate.copyFile(from, to);
       }
     }
@@ -463,14 +487,14 @@ public class GedcomxDeploymentModule extends FreemarkerDeploymentModule implemen
       if (wsdlInfo.getProperty("file") != null) {
         File from = (File) wsdlInfo.getProperty("file");
         String filename = wsdlInfo.getProperty("filename") != null ? (String) wsdlInfo.getProperty("filename") : from.getName();
-        File to = new File(rsDir, filename);
+        File to = new File(buildDir, filename);
         enunciate.copyFile(from, to);
       }
     }
 
     File wadlFile = getModelInternal().getWadlFile();
     if (wadlFile != null) {
-      enunciate.copyFile(wadlFile, new File(rsDir, wadlFile.getName()));
+      enunciate.copyFile(wadlFile, new File(buildDir, wadlFile.getName()));
     }
 
     Set<Artifact> downloads = new TreeSet<Artifact>();
@@ -481,8 +505,8 @@ public class GedcomxDeploymentModule extends FreemarkerDeploymentModule implemen
     }
 
     for (Artifact download : downloads) {
-      debug("Exporting %s to directory %s.", download.getId(), modelDir);
-      download.exportTo(modelDir, enunciate);
+      debug("Exporting %s to directory %s.", download.getId(), buildDir);
+      download.exportTo(buildDir, enunciate);
     }
 
     return downloads;
@@ -497,4 +521,13 @@ public class GedcomxDeploymentModule extends FreemarkerDeploymentModule implemen
   public RuleSet getConfigurationRules() {
     return new GedcomxRuleSet();
   }
+
+  public Map<String, String> getBaseProjectUris() {
+    return baseProjectUris;
+  }
+
+  public void putProjectBase(String id, String uri) {
+    this.baseProjectUris.put(id, uri);
+  }
+
 }

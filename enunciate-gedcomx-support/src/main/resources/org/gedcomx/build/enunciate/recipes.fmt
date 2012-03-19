@@ -4,7 +4,7 @@
   [#return title?string?replace(":",".")?replace(" ", "-")/]
 [/#function]
 [#list recipes as recipe]
-  [@file name="recipes/" + titleToFilename(recipe.title) + ".recipe.html" charset="utf-8"]
+  [@file name=titleToFilename(recipe.title) + ".recipe.html" charset="utf-8"]
     [@libBoilerplate.writeStartBody label=recipe.title/]
   <h3>${recipe.title}</h3>
 
@@ -36,18 +36,20 @@ ${(snippet.json!"{ 'json-snippet-available' : false }")?trim}
     [@libBoilerplate.writeEndBody/]
   [/@file]
 [/#list]
-[@file name="recipes/index.html" charset="utf-8"]
+[@file name="recipes.html" charset="utf-8"]
 [@libBoilerplate.writeStartBody label="Recipes"/]
 <div class="container">
 [@libBoilerplate.writeHeader]
   <ul class="xbreadcrumbs" id="breadcrumbs">
     <li><a href="Home.html" class="home">Home</a></li>
     <li class="current">
-      <a href="index.html">Recipes</a>
+      <a href="recipes.html">Recipes</a>
       <ul>
-        <li><a href="../model/index.html">Models</a></li>
-        <li><a href="../rs/index.html">Resources</a></li>
-        <li><a href="recipes/index.html">Recipes</a></li>
+        <li><a href="models.html">Models</a></li>
+  [#if resourceDefinitions?size > 0]
+        <li><a href="resource_definitions.html">Resource Definitions</a></li>
+  [/#if]
+        <li><a href="recipes.html">Recipes</a></li>
       </ul>
     </li>
   </ul>

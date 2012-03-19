@@ -70,4 +70,11 @@ public @interface ResourceDefinition {
    * @return The valid elements that are used to carry the subresources of this resource.
    */
   XmlElement[] subresourceElements() default {};
+
+  /**
+   * An identifier for a project to which this resource definition belongs.
+   *
+   * @return An identifier for a project to which this resource definition belongs.
+   */
+  String projectId();
 }

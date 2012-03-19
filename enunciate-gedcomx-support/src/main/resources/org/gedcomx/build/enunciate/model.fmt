@@ -7,13 +7,15 @@
   <div class="container">
     [@libBoilerplate.writeHeader]
       <ul class="xbreadcrumbs" id="breadcrumbs">
-        <li><a href="../Home.html" class="home">Home</a></li>
+        <li><a href="Home.html" class="home">Home</a></li>
         <li>
-          <a href="index.html">Models</a>
+          <a href="models.html">Models</a>
           <ul>
-            <li><a href="index.html">Models</a></li>
-            <li><a href="../rs/index.html">Resources</a></li>
-            <li><a href="../recipes/index.html">Recipes</a></li>
+            <li><a href="models.html">Models</a></li>
+      [#if resourceDefinitions?size > 0]
+            <li><a href="resource_definitions.html">Resource Definitions</a></li>
+      [/#if]
+            <li><a href="recipes.html">Recipes</a></li>
           </ul>
         </li>
         <li class="current">
@@ -21,7 +23,7 @@
           <ul>
       [@forEachSchema var="sch"]
         [#if (sch.typeDefinitions?size > 0) || (sch.globalElements?size > 0)]
-            <li><a href="${sch.id}.html">${sch.properties.label!("\"" + sch.id + "\" Model")}</a></li>
+            <li><a href="${baseProjectUri(sch)}${sch.id}.html">${sch.properties.label!("\"" + sch.id + "\" Model")}</a></li>
         [/#if]
       [/@forEachSchema]
           </ul>

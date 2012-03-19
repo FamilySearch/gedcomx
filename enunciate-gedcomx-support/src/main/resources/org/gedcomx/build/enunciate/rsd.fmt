@@ -7,20 +7,20 @@
   <div class="container">
     [@libBoilerplate.writeHeader]
       <ul class="xbreadcrumbs" id="breadcrumbs">
-        <li><a href="../Home.html" class="home">Home</a></li>
+        <li><a href="Home.html" class="home">Home</a></li>
         <li>
-          <a href="index.html">Resources</a>
+          <a href="resource_definitions.html">Resource Definitions</a>
           <ul>
-            <li><a href="../model/index.html">Models</a></li>
-            <li><a href="index.html">Resources</a></li>
-            <li><a href="../recipes/index.html">Recipes</a></li>
+            <li><a href="models.html">Models</a></li>
+            <li><a href="resource_definitions.html">Resources</a></li>
+            <li><a href="recipes.html">Recipes</a></li>
           </ul>
         </li>
         <li class="current">
           <a href="${rsd.name}_resource.html">${rsdName}</a>
           <ul>
       [#list resourceDefinitions?sort_by("name") as rs]
-            <li><a href="${rs.name}_resource.html">${rs.name?cap_first} Resource</a></li>
+            <li><a href="${baseProjectUri(rs)}${rs.name}_resource.html">${rs.name?cap_first} Resource</a></li>
       [/#list]
           </ul>
         </li>
@@ -45,13 +45,13 @@
         [#if rsd.resourceElements?size > 0]
         <tr>
           <td align="right">Representation(s):</td>
-          <td>[#list rsd.resourceElements as resourceElement]<a href="../model/${schemaForNamespace(resourceElement).id}_el_${resourceElement.name}.html">[#if rsd.resourceBundle!false]resource bundle[#else]${resourceElement.name}[/#if]</a>[#if resourceElement_has_next] or [/#if][/#list]</td>
+          <td>[#list rsd.resourceElements as resourceElement]<a href="${baseProjectUri(resourceElement)}${schemaForNamespace(resourceElement).id}_el_${resourceElement.name}.html">[#if rsd.resourceBundle!false]resource bundle[#else]${resourceElement.name}[/#if]</a>[#if resourceElement_has_next] or [/#if][/#list]</td>
         </tr>
         [/#if]
         [#if rsd.subresources?size > 0]
         <tr>
           <td align="right">Subresources:</td>
-          <td>[#list rsd.subresources as subresource]<a href="${subresource.name}_resource.html">${subresource.name}</a>[#if subresource_has_next], [/#if][/#list]</td>
+          <td>[#list rsd.subresources as subresource]<a href="${baseProjectUri(subresource)}${subresource.name}_resource.html">${subresource.name}</a>[#if subresource_has_next], [/#if][/#list]</td>
         </tr>
         [/#if]
 
@@ -69,7 +69,7 @@
         [#list rsd.resourceRelationships as resourceRelationship]
           <tr>
             <td>${resourceRelationship.identifier}</td>
-            <td>[#if resourceRelationship.definedBy??]<a href="${resourceRelationship.definedBy.name}_resource.html">${resourceRelationship.definedBy.name}</a>[#else](unknown)[/#if]</td>
+            <td>[#if resourceRelationship.definedBy??]<a href="${baseProjectUri(resourceRelationship.definedBy)}${resourceRelationship.definedBy.name}_resource.html">${resourceRelationship.definedBy.name}</a>[#else](unknown)[/#if]</td>
             <td>${resourceRelationship.description}</td>
           </tr>
         [/#list]

@@ -14,7 +14,7 @@
        Remove this if you use the .htaccess -->
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <title>GEDCOM X: ${label}</title>
+  <title>GEDCOM X[#if projectLabelModifier??] ${projectLabelModifier}[/#if]: ${label}</title>
   <meta name="description" content="">
   <meta name="author" content="">
 
@@ -22,13 +22,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- CSS: implied media="all" -->
-  <link rel="stylesheet" href="../css/style.css?v=2">
-  <link rel="stylesheet" href="../css/prettify.css">
-  <link rel="stylesheet" href="../css/custom-theme/jquery-ui-1.8.17.custom.css">
-  <link rel="stylesheet" href="../css/xbreadcrumbs.css">
+  <link rel="stylesheet" href="css/style.css?v=2">
+  <link rel="stylesheet" href="css/prettify.css">
+  <link rel="stylesheet" href="css/custom-theme/jquery-ui-1.8.17.custom.css">
+  <link rel="stylesheet" href="css/xbreadcrumbs.css">
 
   <!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
-  <script src="../js/libs/modernizr-1.7.min.js"></script>
+  <script src="js/libs/modernizr-1.7.min.js"></script>
 
 </head>
 
@@ -45,7 +45,7 @@
     </header>
 [/#macro]
 [#macro writePrimaryNav]
-        <div id="site-name" class="column first span-5 prepend-1 append-1"><a href="../Home.html">Gedcom<strong>X</strong></a></div>
+        <div id="site-name" class="column first span-5 prepend-1 append-1"><a href="Home.html">Gedcom<strong>X</strong>[#if projectLabelModifier??]-${projectLabelModifier?lower_case}[/#if]</a></div>
         <div id="primary" class="column span-13 last">
           <ul class="navigation">
   [#list primaryNav?keys as nav]
@@ -70,10 +70,10 @@
 
   <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if necessary -->
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-  <script>window.jQuery || document.write("<script src='../js/libs/jquery-1.6.2.min.js'>\x3C/script>")</script>
+  <script>window.jQuery || document.write("<script src='js/libs/jquery-1.6.2.min.js'>\x3C/script>")</script>
 
   <!--jquery ui-->
-  <script src="../js/libs/jquery-ui.js"></script>
+  <script src="js/libs/jquery-ui.js"></script>
   <script>
     $(function() {
       $( "#mediatype-selection" ).buttonset();
@@ -91,7 +91,7 @@
   </script>
 
   <!--xbreadcrumbs-->
-  <script src="../js/libs/xbreadcrumbs.js"></script>
+  <script src="js/libs/xbreadcrumbs.js"></script>
   <script>
     $(function() {
       $('#breadcrumbs').xBreadcrumbs();
@@ -99,7 +99,7 @@
   </script>
 
   <!-- prettify code blocks. see http://code.google.com/p/google-code-prettify/ -->
-  <script src="../js/libs/prettify/prettify.js"></script>
+  <script src="js/libs/prettify/prettify.js"></script>
   <script>
     $(function() {
       prettyPrint();
@@ -107,7 +107,7 @@
   </script>
 
   <!--[if lt IE 7 ]>
-    <script src="../js/libs/dd_belatedpng.js"></script>
+    <script src="js/libs/dd_belatedpng.js"></script>
     <script>DD_belatedPNG.fix("img, .png_bg"); // Fix any <img> or .png_bg bg-images. Also, please read goo.gl/mZiyb </script>
   <![endif]-->
 

@@ -6,47 +6,49 @@
 [#import "boilerplate.fmt" as libBoilerplate/]
 [#import "rsd.fmt" as libRsd/]
 [@forEachSchema]
-  [#if (schema.typeDefinitions?size > 0) || (schema.globalElements?size > 0)]
-    [@file name=("model/" + schema.id + ".html") charset="utf-8"]
+  [#if (isOfProject(schema) && ((schema.typeDefinitions?size > 0) || (schema.globalElements?size > 0)))]
+    [@file name=(schema.id + ".html") charset="utf-8"]
       [@libModel.writeModelPage schema=schema/]
     [/@file]
     [#list schema.globalElements as element]
-      [@file name=("model/" + schema.id + "_el_" + element.name + ".html") charset="utf-8"]
+      [@file name=(schema.id + "_el_" + element.name + ".html") charset="utf-8"]
         [@libElement.writeElementPage element=element/]
       [/@file]
     [/#list]
     [#list schema.typeDefinitions as type]
-      [@file name=("model/" + schema.id + "_" + type.name + ".html") charset="utf-8"]
+      [@file name=(schema.id + "_" + type.name + ".html") charset="utf-8"]
         [@libType.writeTypePage type=type/]
       [/@file]
     [/#list]
   [/#if]
 [/@forEachSchema]
-[@file name="model/index.html" charset="utf-8"]
+[@file name="models.html" charset="utf-8"]
   [@libBoilerplate.writeStartBody label="Models"/]
   <div class="container">
     [@libBoilerplate.writeHeader]
       <ul class="xbreadcrumbs" id="breadcrumbs">
-        <li><a href="../Home.html" class="home">Home</a></li>
+        <li><a href="Home.html" class="home">Home</a></li>
         <li class="current">
-          <a href="index.html">Models</a>
+          <a href="models.html">Models</a>
           <ul>
-            <li><a href="index.html">Models</a></li>
-            <li><a href="../rs/index.html">Resources</a></li>
-            <li><a href="../recipes/index.html">Recipes</a></li>
+            <li><a href="#">Models</a></li>
+      [#if resourceDefinitions?size > 0]
+            <li><a href="resource_definitions.html">Resource Definitions</a></li>
+      [/#if]
+            <li><a href="recipes.html">Recipes</a></li>
           </ul>
         </li>
       </ul>
     [/@libBoilerplate.writeHeader]
     <div id="main" class="column first last span-20">
-      <h1>GEDCOM X Models</h1>
+      <h1>GEDCOM X[#if projectLabelModifier??] ${projectLabelModifier}[/#if] Models</h1>
 
       <hr/>
 
     [#list ns2schema?values?sort_by("id") as schema]
-      [#if (schema.typeDefinitions?size > 0) || (schema.globalElements?size > 0)]
+      [#if (isOfProject(schema) && ((schema.typeDefinitions?size > 0) || (schema.globalElements?size > 0)))]
       <h3><a href="${schema.id}.html">${schema.properties.label!("\"" + schema.id + "\" Model")}</a></h3>
-      [#if schema.properties.description??]<p>${schema.properties.description}</p>[/#if]
+        [#if schema.properties.description??]<p>${schema.properties.description}</p>[/#if]
       <table>
         <tr>
           <td align="right">Model ID:</td>
@@ -102,32 +104,36 @@
   [@libBoilerplate.writeEndBody/]
 [/@file]
 [#list resourceDefinitions as rsd]
-  [@file name=("rs/" + rsd.name + "_resource.html")]
-    [@libRsd.writeResourceServiceDefinitionPage rsd=rsd/]
-  [/@file]
+  [#if isOfProject(rsd)]
+    [@file name=(rsd.name + "_resource.html")]
+      [@libRsd.writeResourceServiceDefinitionPage rsd=rsd/]
+    [/@file]
+  [/#if]
 [/#list]
-[@file name="rs/index.html" charset="utf-8"]
+[#if resourceDefinitions?size > 0]
+[@file name="resource_definitions.html" charset="utf-8"]
   [@libBoilerplate.writeStartBody label="Resources"/]
   <div class="container">
     [@libBoilerplate.writeHeader]
       <ul class="xbreadcrumbs" id="breadcrumbs">
-        <li><a href="../Home.html" class="home">Home</a></li>
+        <li><a href="Home.html" class="home">Home</a></li>
         <li>
-          <a href="index.html">Resources</a>
+          <a href="resource_definitions.html">Resource Definitions</a>
           <ul>
-            <li><a href="../model/index.html">Models</a></li>
-            <li><a href="index.html">Resources</a></li>
-            <li><a href="../recipes/index.html">Recipes</a></li>
+            <li><a href="models.html">Models</a></li>
+            <li><a href="#">Resource Definitions</a></li>
+            <li><a href="recipes.html">Recipes</a></li>
           </ul>
         </li>
       </ul>
     [/@libBoilerplate.writeHeader]
     <div id="main" class="column first last span-20">
-      <h1>GEDCOM X Resources</h1>
+      <h1>GEDCOM X[#if projectLabelModifier??] ${projectLabelModifier}[/#if] Resource Definitions</h1>
 
       <hr/>
 
     [#list resourceDefinitions?sort_by("name") as rsd]
+      [#if isOfProject(rsd)]
       <h3><a href="${rsd.name}_resource.html">${rsd.name} Resource</a></h3>
       <table>
         <tr>
@@ -141,17 +147,18 @@
         [#if rsd.resourceElements?size > 0]
         <tr>
           <td align="right">Representation(s):</td>
-          <td>[#list rsd.resourceElements as resourceElement]<a href="../model/${schemaForNamespace(resourceElement).id}_el_${resourceElement.name}.html">${resourceElement.name}</a>[#if resourceElement_has_next] or [/#if][/#list]</td>
+          <td>[#list rsd.resourceElements as resourceElement]<a href="${baseProjectUri(resourceElement)}${schemaForNamespace(resourceElement).id}_el_${resourceElement.name}.html">${resourceElement.name}</a>[#if resourceElement_has_next] or [/#if][/#list]</td>
         </tr>
         [/#if]
         [#if rsd.subresources?size > 0]
         <tr>
           <td align="right">Subresources:</td>
-          <td>[#list rsd.subresources as subresource]<a href="${subresource.name}_resource.html">${subresource.name} Resource</a>[#if subresource_has_next], [/#if][/#list]</td>
+          <td>[#list rsd.subresources as subresource]<a href="${baseProjectUri(subresource)}${subresource.name}_resource.html">${subresource.name} Resource</a>[#if subresource_has_next], [/#if][/#list]</td>
         </tr>
         [/#if]
 
       </table>
+      [/#if]
     [/#list]
 
       <div class="clear" />
@@ -161,3 +168,4 @@
 
   [@libBoilerplate.writeEndBody/]
 [/@file]
+[/#if]

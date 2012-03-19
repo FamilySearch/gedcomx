@@ -44,6 +44,7 @@ public class ResourceDefinitionDeclaration extends Resource {
   private final Set<QName> subresources;
   private final Map<QName, TypeDefinition> subresourceElements;
   private final Set<ResourceBinding> bindings;
+  private final String projectId;
 
   public ResourceDefinitionDeclaration(TypeDeclaration delegate, List<ElementDeclaration> resourceElements, Set<QName> subresources, Map<QName, TypeDefinition> subresourceElements, ResourceServiceProcessor processor) {
     super(delegate);
@@ -69,6 +70,7 @@ public class ResourceDefinitionDeclaration extends Resource {
         return o1.getPath().compareTo(o2.getPath());
       }
     });
+    this.projectId = rsdInfo.projectId();
   }
 
   @Override
@@ -105,6 +107,10 @@ public class ResourceDefinitionDeclaration extends Resource {
 
   public List<ElementDeclaration> getResourceElements() {
     return resourceElements;
+  }
+
+  public String getProjectId() {
+    return projectId;
   }
 
   public List<ResourceDefinitionDeclaration> getSubresources() {

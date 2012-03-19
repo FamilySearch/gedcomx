@@ -1,30 +1,32 @@
 [#ftl]
 [#-- @ftlvariable name="schema" type="org.codehaus.enunciate.config.SchemaInfo" --]
 [#import "boilerplate.fmt" as libBoilerplate/]
-[@file name="model/code.html" charset="utf-8"]
+[@file name="code.html" charset="utf-8"]
   [@libBoilerplate.writeStartBody label="Code"/]
   <div class="container">
     [@libBoilerplate.writeHeader]
       <ul class="xbreadcrumbs" id="breadcrumbs">
-        <li><a href="../Home.html" class="home">Home</a></li>
+        <li><a href="Home.html" class="home">Home</a></li>
         <li>
-          <a href="index.html">Models</a>
+          <a href="models.html">Models</a>
           <ul>
-            <li><a href="index.html">Models</a></li>
-            <li><a href="../rs/index.html">Resources</a></li>
-            <li><a href="../recipes/index.html">Recipes</a></li>
+            <li><a href="models.html">Models</a></li>
+      [#if resourceDefinitions?size > 0]
+            <li><a href="resource_definitions.html">Resource Definitions</a></li>
+      [/#if]
+            <li><a href="recipes.html">Recipes</a></li>
           </ul>
         </li>
         <li class="current"><a href="#">Code</a></li>
       </ul>
     [/@libBoilerplate.writeHeader]
     <div id="main" class="column first last span-20">
-      <h1>GEDCOM X Code</h1>
+      <h1>GEDCOM X[#if projectLabelModifier??] ${projectLabelModifier}[/#if] Code</h1>
 
       <hr/>
 
-      <p>The following libraries are available for use in consuming and producing GEDCOM X. For information on how to use these libraries, refer
-      to the <a href="../Code.html">wiki page</a>.</p>
+      <p>The following libraries are available for use in consuming and producing GEDCOM X[#if projectLabelModifier??] ${projectLabelModifier}[/#if]. For information on how to use these libraries, refer
+      to the <a href="Code.html">wiki page</a>.</p>
 
       <div>
         <ul>

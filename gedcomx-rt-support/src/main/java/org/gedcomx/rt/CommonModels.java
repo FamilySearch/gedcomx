@@ -25,6 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
   @Model (
     id = "gx",
     namespace = CommonModels.GEDCOMX_COMMON_NAMESPACE,
+    projectId = CommonModels.GEDCOMX_PROJECT_ID,
     label = "Common Model",
     description = "The common model defines the types and elements that are common to all model.",
     version = "v1",
@@ -35,6 +36,7 @@ import javax.xml.bind.annotation.XmlTransient;
   @Model (
     id = "rdf",
     namespace = CommonModels.RDF_NAMESPACE,
+    projectId = CommonModels.GEDCOMX_PROJECT_ID,
     label = "RDF Model",
     description = "The RDF model defines metadata in RDF format.",
     version = "1999-02-22",
@@ -44,6 +46,7 @@ import javax.xml.bind.annotation.XmlTransient;
   ),
   @Model (
     id = "dcterms",
+    projectId = CommonModels.GEDCOMX_PROJECT_ID,
     namespace = CommonModels.DUBLIN_CORE_NAMESPACE,
     label = "Dublin Core Terms Model",
     description = "The Dublin Core Terms model defines metadata using Dublin Core Terms.",
@@ -52,6 +55,7 @@ import javax.xml.bind.annotation.XmlTransient;
   ),
   @Model (
     id = "dctypes",
+    projectId = CommonModels.GEDCOMX_PROJECT_ID,
     namespace = CommonModels.DUBLIN_CORE_TYPE_NAMESPACE,
     label = "Dublin Core Types Model",
     description = "The Dublin Core Types model defines the types of Dublin Core metadata.",
@@ -60,6 +64,7 @@ import javax.xml.bind.annotation.XmlTransient;
   ),
   @Model (
     id = "foaf",
+    projectId = CommonModels.GEDCOMX_PROJECT_ID,
     namespace = CommonModels.FOAF_NAMESPACE,
     label = "FOAF Model",
     description = "The FOAF model defines the types and elements used to represent metadata about users, organizations, and projects.",
@@ -70,6 +75,7 @@ import javax.xml.bind.annotation.XmlTransient;
   ),
   @Model (
     id = "contact",
+    projectId = CommonModels.GEDCOMX_PROJECT_ID,
     namespace = CommonModels.CONTACT_NAMESPACE,
     label = "Contact Model",
     description = "The contact model defines the vocabulary for contact information, e.g. for users or organizations.",
@@ -82,6 +88,7 @@ public class CommonModels {
   private CommonModels() {}
 
   public static final String GEDCOMX_DOMAIN = "http://gedcomx.org/";
+  public static final String GEDCOMX_PROJECT_ID = "gedcomx";
 
   public static final String GEDCOMX_COMMON_NAMESPACE = "http://gedcomx.org/";
   public static final String GEDCOMX_COMMON_XML_MEDIA_TYPE = "application/x-gedcom+xml";

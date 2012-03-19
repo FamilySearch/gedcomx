@@ -28,5 +28,8 @@ public class GedcomxRuleSet extends RuleSetBase {
     digester.addCallParam("enunciate/modules/gedcomx/nav/a", 0);
     digester.addCallParam("enunciate/modules/gedcomx/nav/a", 1, "href");
 
+    digester.addCallMethod("enunciate/modules/gedcomx/project", "putProjectBase", 2);
+    digester.addCallParam("enunciate/modules/gedcomx/project", 0, "id");
+    digester.addCallParam("enunciate/modules/gedcomx/project", 1, "baseUri");
   }
 }

@@ -43,6 +43,13 @@ public @interface Model {
   String namespace();
 
   /**
+   * An identifier for a project to which this model belongs.
+   *
+   * @return An identifier for a project to which this model belongs.
+   */
+  String projectId();
+
+  /**
    * A label associated with the model, used to identify the model in the user documentation.
    *
    * @return A label associated with the model.

@@ -32,8 +32,6 @@ import java.net.URL;
  */
 public class GedcomxExtensionDeploymentModule extends FreemarkerDeploymentModule {
 
-  private String gedcomxRoot = "http://www.gedcomx.org/";
-
   @Override
   public String getName() {
     return "gedcomx-ext";
@@ -42,14 +40,6 @@ public class GedcomxExtensionDeploymentModule extends FreemarkerDeploymentModule
   @Override
   public final int getOrder() {
     return 101; //just after the gedcomx processing is done.
-  }
-
-  public String getGedcomxRoot() {
-    return gedcomxRoot;
-  }
-
-  public void setGedcomxRoot(String gedcomxRoot) {
-    this.gedcomxRoot = gedcomxRoot;
   }
 
   @Override
@@ -83,9 +73,6 @@ public class GedcomxExtensionDeploymentModule extends FreemarkerDeploymentModule
         getEnunciate().extractBase(base, buildDir);
       }
       try {
-        model.put("gedcomxRoot", getGedcomxRoot());
-        model.put("isGedcomxNamespace", new IsGedcomxNamespaceMethod());
-        model.put("gedcomxExtensionRoot", new GedcomxExtensionRootMethod(getGedcomxRoot()));
         processTemplate(getDocsTemplateURL(), model);
       }
       catch (TemplateException e) {
