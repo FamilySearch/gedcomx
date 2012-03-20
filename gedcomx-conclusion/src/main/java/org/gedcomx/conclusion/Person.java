@@ -48,7 +48,7 @@ public class Person extends GenealogicalResource implements PersistentIdentifiab
   private List<Gender> genders;
   private List<Name> names;
   private List<Fact> facts;
-  private List<ResourceReference> sources;
+  private List<SourceReference> sources;
   private List<Note> notes;
 
   /**
@@ -200,7 +200,7 @@ public class Person extends GenealogicalResource implements PersistentIdentifiab
   @XmlElement (name="source")
   @JsonProperty ("sources")
   @JsonName ("sources")
-  public List<ResourceReference> getSources() {
+  public List<SourceReference> getSources() {
     return sources;
   }
 
@@ -210,7 +210,7 @@ public class Person extends GenealogicalResource implements PersistentIdentifiab
    * @param sources The source references for a person.
    */
   @JsonProperty("sources")
-  public void setSources(List<ResourceReference> sources) {
+  public void setSources(List<SourceReference> sources) {
     this.sources = sources;
   }
 

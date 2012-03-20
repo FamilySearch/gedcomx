@@ -20,13 +20,18 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.common.*;
+import org.gedcomx.common.GenealogicalResource;
+import org.gedcomx.common.Note;
+import org.gedcomx.common.ResourceReference;
+import org.gedcomx.common.URI;
 import org.gedcomx.rt.*;
 import org.gedcomx.types.RelationshipType;
 import org.gedcomx.types.TypeReference;
 
-import javax.xml.XMLConstants;
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 import java.util.List;
 
 /**
@@ -47,7 +52,7 @@ public class Relationship extends GenealogicalResource implements HasFacts, HasN
   private ResourceReference person1;
   private ResourceReference person2;
   private List<Fact> facts;
-  private List<ResourceReference> sources;
+  private List<SourceReference> sources;
   private List<Note> notes;
 
   /**
@@ -178,7 +183,7 @@ public class Relationship extends GenealogicalResource implements HasFacts, HasN
   @XmlElement (name="source")
   @JsonProperty ("sources")
   @JsonName ("sources")
-  public List<ResourceReference> getSources() {
+  public List<SourceReference> getSources() {
     return sources;
   }
 
@@ -188,7 +193,7 @@ public class Relationship extends GenealogicalResource implements HasFacts, HasN
    * @param sources The source references for a resource.
    */
   @JsonProperty("sources")
-  public void setSources(List<ResourceReference> sources) {
+  public void setSources(List<SourceReference> sources) {
     this.sources = sources;
   }
 

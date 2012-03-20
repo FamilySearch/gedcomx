@@ -32,7 +32,7 @@ import java.util.List;
  * @author Ryan Heaton
  */
 @XmlType ( name = "GenealogicalResource", propOrder = { "attribution", "extensionElements" } )
-public abstract class GenealogicalResource implements SupportsExtensionElements {
+public abstract class GenealogicalResource implements Attributable, SupportsExtensionElements {
 
   private String id;
   private Attribution attribution;
@@ -69,6 +69,7 @@ public abstract class GenealogicalResource implements SupportsExtensionElements 
    * @return Attribution metadata for a genealogical resource. Attribution data is necessary to support
    * a sound <a href="https://wiki.familysearch.org/en/Genealogical_Proof_Standard">genealogical proof statement</a>.
    */
+  @Override
   public Attribution getAttribution() {
     return attribution;
   }
@@ -80,6 +81,7 @@ public abstract class GenealogicalResource implements SupportsExtensionElements 
    * @param attribution Attribution metadata for a genealogical resource. Attribution data is necessary to support
    * a sound <a href="https://wiki.familysearch.org/en/Genealogical_Proof_Standard">genealogical proof statement</a>.
    */
+  @Override
   public void setAttribution(Attribution attribution) {
     this.attribution = attribution;
   }

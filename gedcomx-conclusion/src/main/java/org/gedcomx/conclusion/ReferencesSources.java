@@ -42,12 +42,12 @@ public interface ReferencesSources {
   @RDFDomain ({}) //any resource can be identified persistently.
   @RDFRange ({}) //any resource can be identified as a source.
   @SuppressWarnings("rdf:no_range")
-  List<ResourceReference> getSources();
+  List<SourceReference> getSources();
 
   /**
    * The references to the sources of a conclusion resource.
    *
    * @param notes The references to the sources of a conclusion resource.
    */
-  void setSources(List<ResourceReference> notes);
+  void setSources(List<SourceReference> notes);
 }

@@ -100,9 +100,10 @@ public class PersonTest {
     normalized.setDatatype(URI.create("urn:place"));
     normalized.setKnownValue(PlacePartType.Cemetery);
     event.getPlace().setFormal(normalized);
-    event.setSources(new ArrayList<ResourceReference>());
-    ResourceReference eventSource = new ResourceReference();
+    event.setSources(new ArrayList<SourceReference>());
+    SourceReference eventSource = new SourceReference();
     eventSource.setId("event-source");
+    eventSource.setAttribution(new Attribution());
     event.getSources().add(eventSource);
     facts.add(event);
 
@@ -140,13 +141,12 @@ public class PersonTest {
 
     person.setPersistentId(URI.create("pal"));
 
-    ArrayList<ResourceReference> sources = new ArrayList<ResourceReference>();
-    ResourceReference attributedSourceReference = new ResourceReference();
+    ArrayList<SourceReference> sources = new ArrayList<SourceReference>();
+    SourceReference attributedSourceReference = new SourceReference();
     Attribution attribution = new Attribution();
     attribution.setContributor(new ResourceReference());
     attribution.getContributor().setResource(URI.create("urn:source-reference-attribution"));
-    attributedSourceReference.setExtensionElements(new ArrayList<Object>());
-    attributedSourceReference.getExtensionElements().add(attribution);
+    attributedSourceReference.setAttribution(attribution);
     attributedSourceReference.setResource(URI.create("urn:source-uri"));
     attributedSourceReference.setId("source-reference-id");
     attributedSourceReference.setKnownType(ResourceType.Collection);
@@ -166,7 +166,7 @@ public class PersonTest {
     Fact fact;
     Fact event;
     Name name;
-    ResourceReference attributedSourceReference;
+    SourceReference attributedSourceReference;
     AssertJUnit.assertEquals(GenderType.Male, person.getGenders().get(0).getKnownType());
 
     AssertJUnit.assertEquals(1, person.getAlternateIds().size());
@@ -221,7 +221,7 @@ public class PersonTest {
 
     AssertJUnit.assertEquals(1, person.getSources().size());
     attributedSourceReference = person.getSources().iterator().next();
-    AssertJUnit.assertEquals("urn:source-reference-attribution", ((Attribution) attributedSourceReference.getExtensionElements().iterator().next()).getContributor().getResource().toString());
+    AssertJUnit.assertEquals("urn:source-reference-attribution", attributedSourceReference.getAttribution().getContributor().getResource().toString());
     AssertJUnit.assertEquals("urn:source-uri", attributedSourceReference.getResource().toString());
     AssertJUnit.assertEquals("source-reference-id", attributedSourceReference.getId());
     AssertJUnit.assertEquals(ResourceType.Collection, attributedSourceReference.getKnownType());

@@ -15,15 +15,13 @@
  */
 package org.gedcomx.common;
 
-import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.annotate.JsonTypeInfo;
-import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.rt.*;
+import org.gedcomx.rt.CommonModels;
+import org.gedcomx.rt.RDFRange;
+import org.gedcomx.rt.RDFSubPropertyOf;
 import org.gedcomx.types.ConfidenceLevel;
 import org.gedcomx.types.TypeReference;
 
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 import java.util.Date;
@@ -33,10 +31,6 @@ import java.util.Date;
  *
  * @author Ryan Heaton
  */
-@XmlRootElement
-@JsonElementWrapper ( name = "attribution" )
-@JsonTypeInfo ( use = JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
-@JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "Attribution", propOrder = {"modified", "proofStatement", "confidence", "contributor" } )
 @SuppressWarnings("gedcomx:no_id")
 public final class Attribution {

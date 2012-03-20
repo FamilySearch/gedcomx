@@ -20,8 +20,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.common.GenealogicalResource;
-import org.gedcomx.common.ResourceReference;
-import org.gedcomx.rt.*;
+import org.gedcomx.rt.XmlTypeIdResolver;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
@@ -39,7 +38,7 @@ import java.util.List;
 public abstract class Conclusion extends GenealogicalResource implements ReferencesSources {
 
   private Boolean preferred;
-  private List<ResourceReference> sources;
+  private List<SourceReference> sources;
 
   /**
    * Whether the conclusion is preferred above other conclusions of the same type. Useful, for example, for display purposes.
@@ -68,7 +67,7 @@ public abstract class Conclusion extends GenealogicalResource implements Referen
   @XmlElement (name="source")
   @JsonProperty ("sources")
   @JsonName ("sources")
-  public List<ResourceReference> getSources() {
+  public List<SourceReference> getSources() {
     return sources;
   }
 
@@ -78,7 +77,7 @@ public abstract class Conclusion extends GenealogicalResource implements Referen
    * @param sources The source references for a conclusion.
    */
   @JsonProperty("sources")
-  public void setSources(List<ResourceReference> sources) {
+  public void setSources(List<SourceReference> sources) {
     this.sources = sources;
   }
 

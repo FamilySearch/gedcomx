@@ -54,7 +54,7 @@ public class RelationshipTest {
     relationship.getPerson1().setResource(URI.create("urn:person1"));
     relationship.setPerson2(new ResourceReference());
     relationship.getPerson2().setResource(URI.create("urn:person2"));
-    ResourceReference sourceReference = new ResourceReference();
+    SourceReference sourceReference = new SourceReference();
     sourceReference.setId("source-ref");
     relationship.setSources(Arrays.asList(sourceReference));
     return relationship;

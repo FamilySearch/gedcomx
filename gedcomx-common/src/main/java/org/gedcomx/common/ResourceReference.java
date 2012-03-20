@@ -24,7 +24,6 @@ import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.SupportsExtensionAttributes;
 import org.gedcomx.rt.SupportsExtensionElements;
 import org.gedcomx.rt.XmlTypeIdResolver;
-import org.gedcomx.types.AlternateIdType;
 import org.gedcomx.types.ResourceFragmentParameter;
 import org.gedcomx.types.ResourceType;
 import org.gedcomx.types.TypeReference;
@@ -180,24 +179,6 @@ public class ResourceReference implements SupportsExtensionAttributes, SupportsE
     }
 
     this.extensionAttributes.put(qname, value);
-  }
-
-  /**
-   * Convenience method for getting the attribution for this resource reference.
-   *
-   * @return The attribution for this resource reference.
-   */
-  public Attribution findAttribution() {
-    return findExtensionOfType(Attribution.class);
-  }
-
-  /**
-   * Convenience method for adding the attribution for this resource reference.
-   *
-   * @param attribution The attribution.
-   */
-  public void addAttribution(Attribution attribution) {
-    addExtensionElement(attribution);
   }
 
   /**
