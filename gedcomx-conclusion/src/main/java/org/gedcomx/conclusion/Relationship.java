@@ -20,17 +20,13 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.common.GenealogicalEntity;
-import org.gedcomx.common.ResourceReference;
-import org.gedcomx.common.URI;
+import org.gedcomx.common.*;
 import org.gedcomx.rt.*;
 import org.gedcomx.types.RelationshipType;
 import org.gedcomx.types.TypeReference;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.XMLConstants;
+import javax.xml.bind.annotation.*;
 import java.util.List;
 
 /**
@@ -42,8 +38,8 @@ import java.util.List;
 @JsonElementWrapper ( name = "relationships" )
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType ( name = "Relationship", propOrder = { "type", "person1", "person2", "facts"} )
-public class Relationship extends GenealogicalEntity implements HasFacts {
+@XmlType ( name = "Relationship", propOrder = { "type", "person1", "person2", "facts", "sources", "notes" } )
+public class Relationship extends GenealogicalResource implements HasFacts, HasNotes, ReferencesSources {
 
   @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
   @JsonProperty
@@ -51,6 +47,8 @@ public class Relationship extends GenealogicalEntity implements HasFacts {
   private ResourceReference person1;
   private ResourceReference person2;
   private List<Fact> facts;
+  private List<ResourceReference> sources;
+  private List<Note> notes;
 
   /**
    * The type of this relationship.
@@ -172,4 +170,47 @@ public class Relationship extends GenealogicalEntity implements HasFacts {
     this.facts = facts;
   }
 
+  /**
+   * The source references for a resource.
+   *
+   * @return The source references for a resource.
+   */
+  @XmlElement (name="source")
+  @JsonProperty ("sources")
+  @JsonName ("sources")
+  public List<ResourceReference> getSources() {
+    return sources;
+  }
+
+  /**
+   * The source references for a resource.
+   *
+   * @param sources The source references for a resource.
+   */
+  @JsonProperty("sources")
+  public void setSources(List<ResourceReference> sources) {
+    this.sources = sources;
+  }
+
+  /**
+   * Notes about a resource.
+   *
+   * @return Notes about a resource.
+   */
+  @XmlElement (name = "note")
+  @JsonProperty ("notes")
+  @JsonName ("notes")
+  public List<Note> getNotes() {
+    return notes;
+  }
+
+  /**
+   * Notes about a resource.
+   *
+   * @param notes Notes about a resource.
+   */
+  @JsonProperty ("notes")
+  public void setNotes(List<Note> notes) {
+    this.notes = notes;
+  }
 }

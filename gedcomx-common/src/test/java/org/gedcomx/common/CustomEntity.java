@@ -8,7 +8,6 @@ import org.gedcomx.rt.XmlTypeIdResolver;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Arrays;
 
 /**
@@ -18,8 +17,9 @@ import java.util.Arrays;
 @JsonElementWrapper (name = "customEntities")
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-public class CustomEntity extends GenealogicalEntity {
+public class CustomEntity extends GenealogicalResource {
 
+  private ResourceReference source;
   private URI refToSomething;
 
   public CustomEntity() {
@@ -29,15 +29,12 @@ public class CustomEntity extends GenealogicalEntity {
     setId(id);
   }
 
-  @XmlTransient
-  @JsonIgnore
   public ResourceReference getSource() {
-    return getSources().get(0);
+    return this.source;
   }
 
-  @JsonIgnore
   public void setSource(ResourceReference source) {
-    setSources(Arrays.asList(source));
+    this.source = source;
   }
 
   public URI getRefToSomething() {

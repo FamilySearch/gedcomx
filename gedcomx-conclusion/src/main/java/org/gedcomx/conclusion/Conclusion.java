@@ -36,7 +36,7 @@ import java.util.List;
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "Conclusion" )
-public abstract class Conclusion extends GenealogicalResource {
+public abstract class Conclusion extends GenealogicalResource implements ReferencesSources {
 
   private Boolean preferred;
   private List<ResourceReference> sources;
@@ -68,9 +68,6 @@ public abstract class Conclusion extends GenealogicalResource {
   @XmlElement (name="source")
   @JsonProperty ("sources")
   @JsonName ("sources")
-  @RDFSubPropertyOf ( CommonModels.GEDCOMX_COMMON_NAMESPACE + "source")
-  @RDFRange ({}) //any resource can be identified as a source.
-  @SuppressWarnings("rdf:no_range")
   public List<ResourceReference> getSources() {
     return sources;
   }

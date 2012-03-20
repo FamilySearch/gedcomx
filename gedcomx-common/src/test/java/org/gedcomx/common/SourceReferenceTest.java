@@ -3,7 +3,6 @@ package org.gedcomx.common;
 import org.gedcomx.types.ResourceType;
 import org.testng.annotations.Test;
 
-import org.gedcomx.common.URI;
 import java.util.ArrayList;
 
 import static org.gedcomx.rt.SerializationUtil.processThroughJson;

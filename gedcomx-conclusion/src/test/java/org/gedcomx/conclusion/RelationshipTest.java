@@ -42,7 +42,6 @@ public class RelationshipTest {
     relationship.setKnownType(RelationshipType.Couple);
     AlternateId alternateId = new AlternateId();
     alternateId.setValue("alt-id");
-    relationship.setAlternateIds(Arrays.asList(alternateId));
     relationship.setAttribution(new Attribution());
     relationship.getAttribution().setProofStatement("explanation");
     Fact fact = new Fact();
@@ -51,7 +50,6 @@ public class RelationshipTest {
     event.setId("event");
     relationship.setFacts(Arrays.asList(event, fact));
     relationship.setId("relationship");
-    relationship.setPersistentId(URI.create("urn:pid"));
     relationship.setPerson1(new ResourceReference());
     relationship.getPerson1().setResource(URI.create("urn:person1"));
     relationship.setPerson2(new ResourceReference());
@@ -59,22 +57,18 @@ public class RelationshipTest {
     ResourceReference sourceReference = new ResourceReference();
     sourceReference.setId("source-ref");
     relationship.setSources(Arrays.asList(sourceReference));
-    relationship.setBibliographicCitation("relationship bibliographic citation");
     return relationship;
   }
 
   private void assertTestRelationship(Relationship relationship) {
     assertEquals(RelationshipType.Couple, relationship.getKnownType());
-    assertEquals("alt-id", relationship.getAlternateIds().get(0).getValue());
     assertEquals("explanation", relationship.getAttribution().getProofStatement());
     assertEquals("fact", relationship.getFacts().get(1).getId());
     assertEquals("event", relationship.getFacts().get(0).getId());
     assertEquals("relationship", relationship.getId());
-    assertEquals(URI.create("urn:pid"), relationship.getPersistentId());
     assertEquals(URI.create("urn:person1"), relationship.getPerson1().getResource());
     assertEquals(URI.create("urn:person2"), relationship.getPerson2().getResource());
     assertEquals("source-ref", relationship.getSources().get(0).getId());
-    assertEquals("relationship bibliographic citation", relationship.getBibliographicCitation());
   }
 
 }

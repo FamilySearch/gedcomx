@@ -36,12 +36,13 @@ import java.util.List;
 @JsonElementWrapper ( name = "collections" )
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType ( name = "Collection", propOrder = { "title", "description", "publisher", "types", "spatial", "temporal", "items" } )
+@XmlType ( name = "Collection", propOrder = { "title", "description", "publisher", "bibliographicCitation", "types", "spatial", "temporal", "items" } )
 @RDFSubClassOf ( CommonModels.DUBLIN_CORE_TYPE_NAMESPACE + "Collection" )
-public class Collection extends GenealogicalEntity {
+public class Collection extends GenealogicalResource {
 
   private String lang;
   private String title;
+  private String bibliographicCitation;
   private String description;
   private String publisher;
   private String spatial;
@@ -126,6 +127,25 @@ public class Collection extends GenealogicalEntity {
    */
   public void setPublisher(String publisher) {
     this.publisher = publisher;
+  }
+
+  /**
+   * The bibliographic citation for this collection.
+   *
+   * @return The bibliographic citation for this collection.
+   */
+  @RDFSubPropertyOf ( CommonModels.DUBLIN_CORE_NAMESPACE + "bibliographicCitation" )
+  public String getBibliographicCitation() {
+    return bibliographicCitation;
+  }
+
+  /**
+   * The bibliographic citation for this collection.
+   *
+   * @param bibliographicCitation The bibliographic citation for this collection.
+   */
+  public void setBibliographicCitation(String bibliographicCitation) {
+    this.bibliographicCitation = bibliographicCitation;
   }
 
   /**

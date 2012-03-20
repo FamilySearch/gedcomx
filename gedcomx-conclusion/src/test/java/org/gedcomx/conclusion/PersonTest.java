@@ -154,7 +154,6 @@ public class PersonTest {
     person.setSources(sources);
 
     person.setId("pid");
-    person.setBibliographicCitation("person bibliographic citation");
     person.setAttribution(new Attribution());
     person.getAttribution().setProofStatement("this person existed.");
 
@@ -228,7 +227,6 @@ public class PersonTest {
     AssertJUnit.assertEquals(ResourceType.Collection, attributedSourceReference.getKnownType());
 
     AssertJUnit.assertEquals("pid", person.getId());
-    AssertJUnit.assertEquals("person bibliographic citation", person.getBibliographicCitation());
     AssertJUnit.assertEquals("this person existed.", person.getAttribution().getProofStatement());
 
     assertTrue(person.getLiving());

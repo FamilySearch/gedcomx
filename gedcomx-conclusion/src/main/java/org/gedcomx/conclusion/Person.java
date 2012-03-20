@@ -19,13 +19,13 @@ import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.common.GenealogicalEntity;
-import org.gedcomx.common.PersistentIdentifiable;
-import org.gedcomx.rt.JsonElementWrapper;
-import org.gedcomx.rt.XmlTypeIdResolver;
+import org.gedcomx.common.*;
+import org.gedcomx.rt.*;
 
+import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,13 +39,58 @@ import java.util.List;
 @JsonElementWrapper (name = "persons")
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType ( name = "Person", propOrder = { "living", "genders", "names", "facts" } )
-public class Person extends GenealogicalEntity implements PersistentIdentifiable, HasFacts {
+@XmlType ( name = "Person", propOrder = { "persistentId", "alternateIds", "living", "genders", "names", "facts", "sources", "notes" } )
+public class Person extends GenealogicalResource implements PersistentIdentifiable, HasFacts, HasNotes, ReferencesSources {
 
+  private URI persistentId;
+  private List<AlternateId> alternateIds;
   private Boolean living;
   private List<Gender> genders;
   private List<Name> names;
   private List<Fact> facts;
+  private List<ResourceReference> sources;
+  private List<Note> notes;
+
+  /**
+   * A long-term, persistent, globally unique identifier for this person.
+   *
+   * @return A long-term, persistent, globally unique identifier for this person.
+   */
+  @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
+  public URI getPersistentId() {
+    return persistentId;
+  }
+
+  /**
+   * A long-term, persistent, globally unique identifier for this person.
+   *
+   * @param persistentId A long-term, persistent, globally unique identifier for this person.
+   */
+  public void setPersistentId(URI persistentId) {
+    this.persistentId = persistentId;
+  }
+
+  /**
+   * The list of alternate ids of the person.
+   *
+   * @return The list of alternate ids of the person.
+   */
+  @XmlElement (name="alternateId")
+  @JsonProperty ("alternateIds")
+  @JsonName ("alternateIds")
+  public List<AlternateId> getAlternateIds() {
+    return alternateIds;
+  }
+
+  /**
+   * The list of alternate ids of the person.
+   *
+   * @param alternateIds The list of alternate ids of the person.
+   */
+  @JsonProperty ("alternateIds")
+  public void setAlternateIds(List<AlternateId> alternateIds) {
+    this.alternateIds = alternateIds;
+  }
 
   /**
    * Living status of the person as treated by the system. The value of this property is intended
@@ -145,5 +190,49 @@ public class Person extends GenealogicalEntity implements PersistentIdentifiable
       facts = new ArrayList<Fact>();
     }
     facts.add(fact);
+  }
+
+  /**
+   * The source references for a resource.
+   *
+   * @return The source references for a resource.
+   */
+  @XmlElement (name="source")
+  @JsonProperty ("sources")
+  @JsonName ("sources")
+  public List<ResourceReference> getSources() {
+    return sources;
+  }
+
+  /**
+   * The source references for a person.
+   *
+   * @param sources The source references for a person.
+   */
+  @JsonProperty("sources")
+  public void setSources(List<ResourceReference> sources) {
+    this.sources = sources;
+  }
+
+  /**
+   * Notes about a person.
+   *
+   * @return Notes about a person.
+   */
+  @XmlElement (name = "note")
+  @JsonProperty ("notes")
+  @JsonName ("notes")
+  public List<Note> getNotes() {
+    return notes;
+  }
+
+  /**
+   * Notes about a person.
+   *
+   * @param notes Notes about a person.
+   */
+  @JsonProperty ("notes")
+  public void setNotes(List<Note> notes) {
+    this.notes = notes;
   }
 }
