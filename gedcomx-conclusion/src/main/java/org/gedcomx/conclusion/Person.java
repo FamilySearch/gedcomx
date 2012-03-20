@@ -40,7 +40,7 @@ import java.util.List;
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "Person", propOrder = { "persistentId", "alternateIds", "living", "genders", "names", "facts", "sources", "notes" } )
-public class Person extends GenealogicalResource implements PersistentIdentifiable, HasFacts, HasNotes, ReferencesSources {
+public class Person extends GenealogicalResource implements HasFacts, HasNotes, ReferencesSources {
 
   private URI persistentId;
   private List<AlternateId> alternateIds;
