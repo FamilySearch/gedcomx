@@ -41,7 +41,7 @@ public class XmlTypeIdResolver implements TypeIdResolver {
 
   public static void initContextClass(JavaType javaType) {
     Class<?> rawClass = javaType.getRawClass();
-    String typeQName = typeQName(rawClass);
+    String typeQName = getTypeURI(rawClass);
     ID_TO_TYPE.put(typeQName, javaType);
     TYPE_TO_ID.put(rawClass, typeQName);
   }
@@ -70,7 +70,7 @@ public class XmlTypeIdResolver implements TypeIdResolver {
     return JsonTypeInfo.Id.CLASS;
   }
 
-  private static String typeQName(Class<?> rawClass) {
+  public static String getTypeURI(Class<?> rawClass) {
     String ns = "";
     Package pckg = rawClass.getPackage();
     if (pckg != null) {
