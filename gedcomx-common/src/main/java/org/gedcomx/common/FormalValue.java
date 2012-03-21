@@ -42,7 +42,8 @@ import org.gedcomx.common.URI;
 @JsonTypeInfo ( use = JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "FormalValue" )
-public final class FormalValue {
+@SuppressWarnings("gedcomx:no_id")
+public class FormalValue {
 
   private URI datatype;
   private URI resource;
