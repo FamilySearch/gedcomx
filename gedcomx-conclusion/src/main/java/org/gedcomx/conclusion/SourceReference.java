@@ -22,6 +22,7 @@ import org.gedcomx.common.Attribution;
 import org.gedcomx.common.ResourceReference;
 import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.JsonElementWrapper;
+import org.gedcomx.rt.RDFRange;
 import org.gedcomx.rt.XmlTypeIdResolver;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -41,6 +42,7 @@ import javax.xml.bind.annotation.XmlType;
 public class SourceReference extends ResourceReference implements Attributable {
 
   private Attribution attribution;
+  private ResourceReference description;
 
   /**
    * The attribution metadata for this source reference.
@@ -59,5 +61,24 @@ public class SourceReference extends ResourceReference implements Attributable {
    */
   public void setAttribution(Attribution attribution) {
     this.attribution = attribution;
+  }
+
+  /**
+   * A reference to a description about the source being referenced.
+   *
+   * @return A reference to a description about the source being referenced.
+   */
+  @RDFRange( external = "org.gedcomx.metadata.rdf.RDFDescription" )
+  public ResourceReference getDescription() {
+    return description;
+  }
+
+  /**
+   * A reference to a description about the source being referenced.
+   *
+   * @param description A reference to a description about the source being referenced.
+   */
+  public void setDescription(ResourceReference description) {
+    this.description = description;
   }
 }

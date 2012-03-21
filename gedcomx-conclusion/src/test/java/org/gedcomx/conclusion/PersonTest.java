@@ -1,21 +1,16 @@
 package org.gedcomx.conclusion;
 
-import org.gedcomx.common.Attribution;
-import org.gedcomx.common.AlternateId;
-import org.gedcomx.common.FormalValue;
-import org.gedcomx.common.ResourceReference;
+import org.gedcomx.common.*;
 import org.gedcomx.types.*;
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
-import org.gedcomx.common.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.gedcomx.rt.SerializationUtil.processThroughJson;
 import static org.gedcomx.rt.SerializationUtil.processThroughXml;
-import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertTrue;
 
 /**
@@ -150,6 +145,8 @@ public class PersonTest {
     attributedSourceReference.setResource(URI.create("urn:source-uri"));
     attributedSourceReference.setId("source-reference-id");
     attributedSourceReference.setKnownType(ResourceType.Collection);
+    attributedSourceReference.setDescription(new ResourceReference());
+    attributedSourceReference.getDescription().setResource(URI.create("urn:source-description"));
     sources.add(attributedSourceReference);
     person.setSources(sources);
 
@@ -225,6 +222,7 @@ public class PersonTest {
     AssertJUnit.assertEquals("urn:source-uri", attributedSourceReference.getResource().toString());
     AssertJUnit.assertEquals("source-reference-id", attributedSourceReference.getId());
     AssertJUnit.assertEquals(ResourceType.Collection, attributedSourceReference.getKnownType());
+    AssertJUnit.assertEquals("urn:source-description", attributedSourceReference.getDescription().getResource().toString());
 
     AssertJUnit.assertEquals("pid", person.getId());
     AssertJUnit.assertEquals("this person existed.", person.getAttribution().getProofStatement());
