@@ -25,7 +25,7 @@
           <ul>
       [@forEachSchema var="sch"]
         [#if (sch.typeDefinitions?size > 0) || (sch.globalElements?size > 0)]
-            <li><a href="${sch.id}.html">${sch.properties.label!("\"" + sch.id + "\" Model")}</a></li>
+            <li><a href="${baseProjectUri(sch)}${sch.id}.html">${sch.properties.label!("\"" + sch.id + "\" Model")}</a></li>
         [/#if]
       [/@forEachSchema]
           </ul>
@@ -61,7 +61,7 @@
         [#if !type.baseObject]
         <tr>
           <td align="right">Extends:</td>
-          <td><a href="${schemaForNamespace(type.baseType).id}_${type.baseType.name}.html">${typeName(type.baseType, type.namespace)}</a></td>
+          <td><a href="${baseProjectUri(type.baseType)}${schemaForNamespace(type.baseType).id}_${type.baseType.name}.html">${typeName(type.baseType, type.namespace)}</a></td>
         </tr>
         [/#if]
       </table>
@@ -111,7 +111,7 @@
             <th align="center">description</th>
           </tr>
           <tr>
-            <td>[#if hasSchema]<a href="${schemaForNamespace(type.value).id}_${type.value.baseType.qname.localPart}.html">[/#if]${typeName(type.value, type.namespace)}[#if hasSchema]</a>[/#if]</td>
+            <td>[#if hasSchema]<a href="${baseProjectUri(type.value)}${schemaForNamespace(type.value).id}_${type.value.baseType.qname.localPart}.html">[/#if]${typeName(type.value, type.namespace)}[#if hasSchema]</a>[/#if]</td>
             <td>${type.value.docValue!""}</td>
           </tr>
         </table>
@@ -129,7 +129,7 @@
           [#assign hasSchema=schemaForNamespace(attribute)??/]
           <tr>
             <td>${attribute.name}</td>
-            <td>[#if hasSchema]<a href="${schemaForNamespace(attribute).id}_${attribute.baseType.qname.localPart}.html">[/#if]${typeName(attribute, type.namespace)}[#if hasSchema]</a>[/#if]</td>
+            <td>[#if hasSchema]<a href="${baseProjectUri(attribute)}${schemaForNamespace(attribute).id}_${attribute.baseType.qname.localPart}.html">[/#if]${typeName(attribute, type.namespace)}[#if hasSchema]</a>[/#if]</td>
             <td>${attribute.docValue!""}</td>
           </tr>
         [/#list]
@@ -156,7 +156,7 @@
           [#assign hasSchema=schemaForNamespace(element)??/]
           <tr>
             <td>${element.name}[#if element.wrapped!false] (wrapped in "${element.wrapperName}" element)[/#if]</td>
-            <td>[#if hasSchema]<a href="${schemaForNamespace(element).id}_[#if element.ref??]${element.ref.localPart}[#else]${element.baseType.qname.localPart}[/#if].html">[/#if]${typeName(element, type.namespace)}[#if hasSchema]</a>[/#if]</td>
+            <td>[#if hasSchema]<a href="${baseProjectUri(element)}${schemaForNamespace(element).id}_[#if element.ref??]${element.ref.localPart}[#else]${element.baseType.qname.localPart}[/#if].html">[/#if]${typeName(element, type.namespace)}[#if hasSchema]</a>[/#if]</td>
             <td>${element.minOccurs}..[#if "unbounded" = element.maxOccurs]*[#else]${element.maxOccurs}[/#if]</td>
             <td>${element.docValue!""}</td>
           </tr>
@@ -190,7 +190,7 @@ ${generateExampleXml(type)?html}
           [#assign hasSchema=schemaForNamespace(attribute)??/]
           <tr>
             <td>${attribute.jsonMemberName}</td>
-            <td>[#if hasSchema]<a href="${schemaForNamespace(attribute).id}_${attribute.baseType.qname.localPart}.html">[/#if]${typeName(attribute, type.namespace)}[#if hasSchema]</a>[/#if]</td>
+            <td>[#if hasSchema]<a href="${baseProjectUri(attribute)}${schemaForNamespace(attribute).id}_${attribute.baseType.qname.localPart}.html">[/#if]${typeName(attribute, type.namespace)}[#if hasSchema]</a>[/#if]</td>
             <td>${attribute.docValue!""}</td>
           </tr>
         [/#list]
@@ -198,7 +198,7 @@ ${generateExampleXml(type)?html}
           [#assign hasSchema=schemaForNamespace(element)??/]
           <tr>
             <td>${element.jsonMemberName}</td>
-            <td>[#if element.collectionType!false]array of [/#if][#if hasSchema]<a href="${schemaForNamespace(element).id}_[#if element.ref??]${element.ref.localPart}[#else]${element.baseType.qname.localPart}[/#if].html">[/#if]${typeName(element, type.namespace)}[#if hasSchema]</a>[/#if]</td>
+            <td>[#if element.collectionType!false]array of [/#if][#if hasSchema]<a href="${baseProjectUri(element)}${schemaForNamespace(element).id}_[#if element.ref??]${element.ref.localPart}[#else]${element.baseType.qname.localPart}[/#if].html">[/#if]${typeName(element, type.namespace)}[#if hasSchema]</a>[/#if]</td>
             <td>${element.docValue!""}</td>
           </tr>
         [/#list]
@@ -206,7 +206,7 @@ ${generateExampleXml(type)?html}
           [#assign hasSchema=schemaForNamespace(type.value)??/]
           <tr>
             <td>${type.value.jsonMemberName}</td>
-            <td>[#if hasSchema]<a href="${schemaForNamespace(type.value).id}_${type.value.baseType.qname.localPart}.html">[/#if]${typeName(type.value, type.namespace)}[#if hasSchema]</a>[/#if]</td>
+            <td>[#if hasSchema]<a href="${baseProjectUri(type.value)}${schemaForNamespace(type.value).id}_${type.value.baseType.qname.localPart}.html">[/#if]${typeName(type.value, type.namespace)}[#if hasSchema]</a>[/#if]</td>
             <td>${type.value.docValue!""}</td>
           </tr>
         [/#if]

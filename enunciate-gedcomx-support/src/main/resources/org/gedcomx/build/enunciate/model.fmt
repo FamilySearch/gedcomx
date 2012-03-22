@@ -111,7 +111,7 @@
           <td>${element.namespace}${element.name}</td>
           <td>${jsonExtensionElementName(element)}</td>
           [#assign elementXmlType=element.elementXmlType/]
-          <td><a href="${schemaForNamespace(elementXmlType).id}_${elementXmlType.name}.html">${elementXmlType.namespace}${elementXmlType.name}</a></td>
+          <td><a href="${baseProjectUri(elementXmlType)}${schemaForNamespace(elementXmlType).id}_${elementXmlType.name}.html">${elementXmlType.namespace}${elementXmlType.name}</a></td>
           <td>${element.docValue!""}</td>
         </tr>
         [/#list]
