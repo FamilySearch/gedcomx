@@ -27,7 +27,9 @@ import javax.xml.bind.annotation.XmlType;
 import java.util.Date;
 
 /**
- * Attribution for data.
+ * Attribution for genealogical information. Attribution is used to model the analysis that was done
+ * on a specific piece of evidence or other relevant information. This includes the contributor of the
+ * information and the proof statement supplied by the contributor.
  *
  * @author Ryan Heaton
  */

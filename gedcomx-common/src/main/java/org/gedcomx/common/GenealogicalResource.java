@@ -39,11 +39,9 @@ public abstract class GenealogicalResource implements Attributable, SupportsExte
   protected List<Object> extensionElements;
 
   /**
-   * The id of this genealogical resource. As defined by RDF, the nature of this id
-   * is local to a specific context and not necessarily globally unique.
+   * A local, context-specific id for the data.
    *
-   * @return The id of this genealogical resource. As defined by RDF, the nature of this id
-   * is local to a specific context and not necessarily globally unique.
+   * @return A local, context-specific id for the data.
    */
   @XmlID
   @XmlAttribute ( name = "ID", namespace = CommonModels.RDF_NAMESPACE )
@@ -52,11 +50,9 @@ public abstract class GenealogicalResource implements Attributable, SupportsExte
   }
 
   /**
-   * The id of this genealogical resource. As defined by RDF, the nature of this id
-   * is local to a specific context and not necessarily globally unique.
+   * A local, context-specific id for the data.
    *
-   * @param id The id of this genealogical resource. As defined by RDF, the nature of this id
-   * is local to a specific context and not necessarily globally unique.
+   * @param id A local, context-specific id for the data.
    */
   public void setId(String id) {
     this.id = id;
