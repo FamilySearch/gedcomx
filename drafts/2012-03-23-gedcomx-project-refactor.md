@@ -19,7 +19,7 @@ Project Purpose and Scope
 
 The purpose of GEDCOM X has been stated as:
 
-> to define an open data model and an open serialization format for exchanging the 
+> To define an open data model and an open serialization format for exchanging the 
 > components of the genealogical proof standard.
 
 The genealogical proof standard has been articulated and defined by the 
@@ -33,7 +33,7 @@ that software architect and family historian [Mark Tucker](http://www.thinkgenea
 * Resolve Conflicts
 * Make a Soundly-Reasoned Conclusion
 
-_That_'s what GEDCOM X is trying to enable. If you think that sounds a lot like legacy GEDCOM,
+That's what GEDCOM X is trying to enable. If you think this sounds a lot like legacy GEDCOM,
 nobody's going to blame you. The difference between GEDCOM X and legacy GEDCOM isn't so much in the project scope 
 as much as it's in the capacity to achieve the same goals with the latest tools and technologies.
 
@@ -42,7 +42,7 @@ significantly greater potential and capacity.
 
 Even so, some might find the purpose of the GEDCOM X project to be kind of boring. Maybe you were
 hoping for a model for stating research goals. Or maybe you'd like to see a standard Web service 
-interface for genealogical data. Or maybe you'd like to see how large-scale field-based record data
+interface for genealogical data. Or maybe you'd like to see how large-scale, field-based record data
 can be exchanged between clients that do image extraction.
 
 That's where extension projects come in.
@@ -50,8 +50,8 @@ That's where extension projects come in.
 GEDCOM X Extension Projects
 ---------------------------
 
-GEDCOM X is designed from group up to be extensible. We thought we'd introduce you to the two extension
-projects that we've identified so far today.
+GEDCOM X is designed from ground up to be extensible. We'd like to introduce the two extension
+projects that we've identified so far today:
 
 *   [Web Services Extension](http://rs.gedcomx.org)
 
@@ -81,7 +81,7 @@ We'd love to hear your thoughts on some of the things we're working through righ
 to fill out a brief feedback form? We're just asking for three things:
 
 1. What are the top five biggest holes in GEDCOM 5.5 that you'd like to see addressed in GEDCOM X?
-2. There are currently two active proposals for the new GEDCOM X file format: a text-editor-friendly MIME multipart
+2. There are currently two active proposals for the new GEDCOM X file format:  a text-editor-friendly MIME multipart;
    or a binary, indexed, zip-based bundle. Which do you prefer and why?
 3. What kind of feedback do you have for us at this point in the project?
 
