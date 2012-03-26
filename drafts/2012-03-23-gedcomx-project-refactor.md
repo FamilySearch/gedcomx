@@ -1,16 +1,17 @@
 ---
-title: GEDCOM X Project Identity Refactor
+title: The Identity of GEDCOM X
 date: 2012-03-23 11:16:00
 layout: default
 ---
 
-So you haven't heard much from GEDCOM X for a good month. Please accept our apologies.
-We've been trying to pull together the resources we have available and make the needed structural 
-changes to be able to more actively engage the community with reasonable vigor and agility.
+We're excited to say that we've been given some new resources to help get GEDCOM X
+moving. This includes five new members of the GEDCOM X team at FamilySearch. We're hoping
+that these new resources will help us be able to more actively engage the community with
+reasonable vigor and agility.
 
 Thanks to some valuable feedback from the community, we've been active in refactoring the 
-GEDCOM X project to better articulate the concepts and vocabulary that are generally recognized
-and accepted. We'd like to invite you to revisit [gedcomx.org](http://www.gedcomx.org/Home.html)
+GEDCOM X project to better reflect the concepts that the members of the community are
+used to seeing and discussing. We'd like to invite you to revisit [gedcomx.org](http://www.gedcomx.org/Home.html)
 where you'll see some of the results of this refactor. We hope you'll like the changes.
 
 Project Purpose and Scope
@@ -18,13 +19,13 @@ Project Purpose and Scope
 
 The purpose of GEDCOM X has been stated as:
 
-> to define an open data model and an open serialization format for exchanging the components of the genealogical proof standard.
+> to define an open data model and an open serialization format for exchanging the 
+> components of the genealogical proof standard.
 
-Nobody articulates the proof standard concepts better than software architect and family 
-historian [Mark Tucker](http://www.thinkgenealogy.com/) with his 
-[Genealogy Research Process Map](http://www.thinkgenealogy.com/map/). (See also
-[the document](http://www.bcgcertification.org/resources/standard.html) supplied by the 
-[Board for Certification of Genealogists](http://www.bcgcertification.org/resources/standard.html).)
+The genealogical proof standard has been articulated and defined by the 
+[Board for Certification of Genealogists](http://www.bcgcertification.org/resources/standard.html).
+Around here, we also like to refer to the [Genealogy Research Process Map](http://www.thinkgenealogy.com/map/)
+that software architect and family historian [Mark Tucker](http://www.thinkgenealogy.com/) put together.
 
 * Search Reliable Sources
 * Cite Each Source
@@ -67,13 +68,13 @@ projects that we've identified so far today.
 Coming Soon...
 --------------
 
-We've got pretty exciting stuff that's currently in development. This includes things like conversion utilities,
-a GEDCOM X reference implementation, and some fun client applications. We're looking forward to showing it all
-to you, but give us a bit of time to make it presentable. 
+We've got pretty exciting stuff that's currently in development. This includes things like conversion utilities
+from legacy GEDCOM to GEDCOM X, a GEDCOM X reference implementation, and some fun client applications. We're looking 
+forward to showing it all to you, but give us a bit of time to make it presentable.
 
 We won't make you wait too long.
 
-Request For Feedback
+Submit Your Feedback
 --------------------
 
 We'd love to hear your thoughts on some of the things we're working through right now. Would you be willing
