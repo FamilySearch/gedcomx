@@ -20,6 +20,7 @@ import com.sun.mirror.declaration.*;
 import com.sun.mirror.type.*;
 import com.sun.mirror.util.Declarations;
 import net.sf.jelly.apt.Context;
+import net.sf.jelly.apt.decorations.declaration.DecoratedDeclaration;
 import net.sf.jelly.apt.decorations.declaration.DecoratedMethodDeclaration;
 import org.codehaus.enunciate.apt.EnunciateFreemarkerModel;
 import org.codehaus.enunciate.config.SchemaInfo;
@@ -54,7 +55,6 @@ public class ResourceServiceProcessor {
 
   private final Map<QName, ResourceDefinitionDeclaration> resourceDefinitions = new HashMap<QName, ResourceDefinitionDeclaration>();
   private Map<String, ResourceBinding> bindingsByPath;
-  private final List<ClassDeclaration> resourceImplementations = new ArrayList<ClassDeclaration>();
 
   /**
    * @see <a href="http://tools.ietf.org/html/draft-nottingham-http-link-header">Web Linking</a>
@@ -67,10 +67,6 @@ public class ResourceServiceProcessor {
 
   public Map<String, ResourceBinding> getBindingsByPath() {
     return bindingsByPath;
-  }
-
-  public List<ClassDeclaration> getResourceImplementations() {
-    return resourceImplementations;
   }
 
   public ValidationResult processModel(EnunciateFreemarkerModel model, Collection<TypeDeclaration> resourceServiceDefinitions) {
@@ -241,8 +237,8 @@ public class ResourceServiceProcessor {
     for (RootResource rootResource : model.getRootResources()) {
       List<ResourceMethod> resourceMethods = rootResource.getResourceMethods(true);
       for (ResourceMethod resourceMethod : resourceMethods) {
-        resourceMethod.putMetaData("statusCodes", extractStatusCodes(resourceMethod));
-        resourceMethod.putMetaData("warnings", extractWarnings(resourceMethod));
+        resourceMethod.putMetaData("statusCodes", extractStatusCodes(resourceMethod.getParent(), resourceMethod));
+        resourceMethod.putMetaData("warnings", extractWarnings(resourceMethod.getParent(), resourceMethod));
 
         Resource declaringResource = resourceMethod.getParent();
         ResourceDefinitionDeclaration rsd = findDefiningResourceDefinition(resourceMethod);
@@ -257,6 +253,11 @@ public class ResourceServiceProcessor {
           else {
             String fqn = binding.getDefinition().getQualifiedName();
             if (!fqn.equals(rsd.getQualifiedName())) {
+              //it would be nice if a binding could bind more that one resource because then
+              //you could return a different resource based on query paramaters.
+              //but there are a couple of reasons why this isn't supported yet
+              //one is because there would be no way to tell in the docs which resource method to use
+              //to get the error codes, etc.
               result.addError(resourceMethod, String.format("Cannot bind resource %s defined by %s to path %s because that path is already binding resource %s defined by %s.", rsd.getName(), rsd.getQualifiedName(), path, binding.getDefinition().getName(), binding.getDefinition().getQualifiedName()));
             }
             else {
@@ -316,6 +317,80 @@ public class ResourceServiceProcessor {
     }
 
     return rels;
+  }
+
+  public Set<ResponseCode> extractStatusCodes(TypeDeclaration type, final ResourceMethod method) {
+    HashSet<ResponseCode> codes = new HashSet<ResponseCode>();
+
+    if (type != null) {
+      for (MethodDeclaration methodDeclaration : type.getMethods()) {
+        if (refines(methodDeclaration, method)) {
+          codes.addAll(extractStatusCodes(methodDeclaration));
+        }
+      }
+
+      Collection<InterfaceType> superifaces = type.getSuperinterfaces();
+      for (InterfaceType superiface : superifaces) {
+        InterfaceDeclaration decl = superiface.getDeclaration();
+        codes.addAll(extractStatusCodes(decl, method));
+      }
+
+      if (type instanceof ClassDeclaration) {
+        codes.addAll(extractStatusCodes(((ClassDeclaration)type).getSuperclass().getDeclaration(), method));
+      }
+    }
+
+    return codes;
+  }
+
+  public Set<ResponseCode> extractWarnings(TypeDeclaration type, final ResourceMethod method) {
+    HashSet<ResponseCode> codes = new HashSet<ResponseCode>();
+
+    if (type != null) {
+      for (MethodDeclaration methodDeclaration : type.getMethods()) {
+        if (refines(methodDeclaration, method)) {
+          codes.addAll(extractWarnings(methodDeclaration));
+        }
+      }
+
+      Collection<InterfaceType> superifaces = type.getSuperinterfaces();
+      for (InterfaceType superiface : superifaces) {
+        InterfaceDeclaration decl = superiface.getDeclaration();
+        codes.addAll(extractWarnings(decl, method));
+      }
+
+      if (type instanceof ClassDeclaration) {
+        codes.addAll(extractWarnings(((ClassDeclaration)type).getSuperclass().getDeclaration(), method));
+      }
+    }
+
+    return codes;
+  }
+
+  private boolean refines(MethodDeclaration m1, MethodDeclaration m2) {
+    while (m1 instanceof DecoratedDeclaration) {
+      m1 = (MethodDeclaration) ((DecoratedDeclaration) m1).getDelegate();
+    }
+
+    while (m2 instanceof DecoratedDeclaration) {
+      m2 = (MethodDeclaration) ((DecoratedDeclaration) m2).getDelegate();
+    }
+
+    if (m1.equals(m2)) {
+      return true;
+    }
+    else {
+      AnnotationProcessorEnvironment env = Context.getCurrentEnvironment();
+      Declarations decls = env.getDeclarationUtils();
+      if (decls.overrides(m1, m2)) {
+        return true;
+      }
+      else if (decls.overrides(m2, m1)) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
   public Set<ResponseCode> extractStatusCodes(Declaration delegate) {
