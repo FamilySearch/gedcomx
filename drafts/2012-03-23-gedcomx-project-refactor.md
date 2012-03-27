@@ -4,14 +4,13 @@ date: 2012-03-23 11:16:00
 layout: default
 ---
 
-We're excited to say that we've been given some new resources to help get GEDCOM X
-moving. This includes five new members of the GEDCOM X team at FamilySearch. We're hoping
-that these new resources will help us be able to more actively engage the community with
-reasonable vigor and agility.
+We're excited to say that we've been given additional resources to keep GEDCOM X
+moving forward. This includes five new members of the GEDCOM X team at FamilySearch. These new 
+resources will allow us to more actively engage the community with reasonable vigor and agility.
 
 Thanks to some valuable feedback from the community, we've been active in refactoring the 
 GEDCOM X project to better reflect the concepts that the members of the community are
-used to seeing and discussing. We'd like to invite you to revisit [gedcomx.org](http://www.gedcomx.org/Home.html)
+used to seeing and discussing. We'd like to invite you to visit [gedcomx.org](http://www.gedcomx.org/Home.html),
 where you'll see some of the results of this refactor. We hope you'll like the changes.
 
 Project Purpose and Scope
@@ -26,6 +25,7 @@ The genealogical proof standard has been articulated and defined by the
 [Board for Certification of Genealogists](http://www.bcgcertification.org/resources/standard.html).
 Around here, we also like to refer to the [Genealogy Research Process Map](http://www.thinkgenealogy.com/map/)
 that software architect and family historian [Mark Tucker](http://www.thinkgenealogy.com/) put together.
+Here's how Mark articulates the proof standard:
 
 * Search Reliable Sources
 * Cite Each Source
@@ -34,8 +34,8 @@ that software architect and family historian [Mark Tucker](http://www.thinkgenea
 * Make a Soundly-Reasoned Conclusion
 
 That's what GEDCOM X is trying to enable. If you think this sounds a lot like legacy GEDCOM,
-nobody's going to blame you. The difference between GEDCOM X and legacy GEDCOM isn't so much in the project scope 
-as much as it's in the capacity to achieve the same goals with the latest tools and technologies.
+nobody's going to blame you. The difference between GEDCOM X and legacy GEDCOM isn't so much the project scope 
+as it is the capacity to achieve the same goals with the latest tools and technologies.
 
 A ferryboat may have goals similar to those of a ten-lane cable-stayed bridge, but the latter has
 significantly greater potential and capacity.
