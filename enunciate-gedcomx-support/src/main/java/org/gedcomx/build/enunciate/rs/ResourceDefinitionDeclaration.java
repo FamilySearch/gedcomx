@@ -39,7 +39,7 @@ public class ResourceDefinitionDeclaration extends Resource {
   private final String namespace;
   private final Set<ResponseCode> statusCodes;
   private final Set<ResponseCode> warnings;
-  private final Set<ResourceRelationship> resourceRelationships;
+  private final Set<ResourceLink> links;
   private final List<ElementDeclaration> resourceElements;
   private final Set<QName> subresources;
   private final Map<QName, TypeDefinition> subresourceElements;
@@ -58,7 +58,7 @@ public class ResourceDefinitionDeclaration extends Resource {
     this.namespace = rsdInfo.namespace();
     this.statusCodes = processor.extractStatusCodes(delegate);
     this.warnings = processor.extractWarnings(delegate);
-    this.resourceRelationships = processor.extractResourceRelationships(delegate);
+    this.links = processor.extractLinks(delegate);
     for (ResourceMethod resourceMethod : getResourceMethods()) {
       resourceMethod.putMetaData("statusCodes", processor.extractStatusCodes(resourceMethod));
       resourceMethod.putMetaData("warnings", processor.extractWarnings(resourceMethod));
@@ -136,8 +136,8 @@ public class ResourceDefinitionDeclaration extends Resource {
     return warnings;
   }
 
-  public Set<ResourceRelationship> getResourceRelationships() {
-    return resourceRelationships;
+  public Set<ResourceLink> getLinks() {
+    return links;
   }
 
   public Set<ResourceBinding> getBindings() {

@@ -25,20 +25,19 @@ import javax.xml.namespace.QName;
 /**
  * @author Ryan Heaton
  */
-public final class ResourceRelationship {
+public final class ResourceLink {
 
-  private final String identifier;
+  private final String rel;
   private final String description;
   private final boolean template;
   private final QName resource;
   private final ResourceServiceProcessor processor;
 
-  public ResourceRelationship(org.gedcomx.rt.rs.ResourceRelationship meta, ResourceServiceProcessor processor) {
-    this.identifier = meta.identifier();
+  public ResourceLink(org.gedcomx.rt.rs.ResourceLink meta, ResourceServiceProcessor processor) {
+    this.rel = meta.rel();
     this.description = meta.description();
     this.template = meta.template();
     this.processor = processor;
-    String fqn;
     ResourceDefinition def = null;
     try {
       def = meta.definedBy().getAnnotation(ResourceDefinition.class);
@@ -52,8 +51,8 @@ public final class ResourceRelationship {
     this.resource = new QName(def.namespace(), def.name());
   }
 
-  public String getIdentifier() {
-    return identifier;
+  public String getRel() {
+    return rel;
   }
 
   public String getDescription() {

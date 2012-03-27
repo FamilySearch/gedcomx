@@ -31,7 +31,7 @@ public class ResourceBinding {
   private final List<ResourceMethod> methods = new ArrayList<ResourceMethod>();
   private final Set<ResponseCode> statusCodes = new HashSet<ResponseCode>();
   private final Set<ResponseCode> warnings = new HashSet<ResponseCode>();
-  private final Set<ResourceRelationship> resourceRelationships = new HashSet<ResourceRelationship>();
+  private final Set<ResourceLink> links = new HashSet<ResourceLink>();
   private final Set<ResourceParameter> resourceParameters = new TreeSet<ResourceParameter>(new Comparator<ResourceParameter>() {
     @Override
     public int compare(ResourceParameter param1, ResourceParameter param2) {
@@ -65,8 +65,8 @@ public class ResourceBinding {
     return warnings;
   }
 
-  public Set<ResourceRelationship> getResourceRelationships() {
-    return resourceRelationships;
+  public Set<ResourceLink> getLinks() {
+    return links;
   }
 
   public List<ResourceMethod> getMethods() {

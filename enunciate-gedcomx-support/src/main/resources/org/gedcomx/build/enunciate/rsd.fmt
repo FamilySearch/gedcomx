@@ -57,8 +57,8 @@
 
       </table>
 
-      [#if rsd.resourceRelationships?size > 0]
-      <h3>Resource Relationships</h3>
+      [#if rsd.links?size > 0]
+      <h3>Links</h3>
 
       <table>
         <tr>
@@ -66,11 +66,11 @@
           <th>Resource</th>
           <th>Description</th>
         </tr>
-        [#list rsd.resourceRelationships as resourceRelationship]
+        [#list rsd.links as link]
           <tr>
-            <td>${resourceRelationship.identifier}</td>
-            <td>[#if resourceRelationship.definedBy??]<a href="${baseProjectUri(resourceRelationship.definedBy)}${resourceRelationship.definedBy.name}_resource.html">${resourceRelationship.definedBy.name}</a>[#else](unknown)[/#if]</td>
-            <td>${resourceRelationship.description}</td>
+            <td>${link.rel}</td>
+            <td>[#if link.definedBy??]<a href="${baseProjectUri(link.definedBy)}${link.definedBy.name}_resource.html">${link.definedBy.name}</a>[#else](unknown)[/#if]</td>
+            <td>${link.description}</td>
           </tr>
         [/#list]
       </table>

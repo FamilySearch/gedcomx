@@ -25,7 +25,7 @@ import java.lang.annotation.Target;
  * Metadata used to describe a resource and the way the HTTP operations apply to the resource. A resource
  * definition does not dictate the paths at which the resources are bound, but describes the resource in generic
  * terms such as the representation model, {@link StatusCodes status codes}, {@link Warnings warnings}, and
- * {@link ResourceRelationship resource relationship}s.
+ * {@link ResourceLink resource relationship}s.
  *
  * @author Ryan Heaton
  */

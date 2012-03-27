@@ -34,10 +34,7 @@ import org.codehaus.enunciate.contract.jaxrs.RootResource;
 import org.codehaus.enunciate.contract.validation.ValidationResult;
 import org.codehaus.enunciate.util.ResourceMethodPathComparator;
 import org.gedcomx.rt.JsonElementWrapper;
-import org.gedcomx.rt.rs.ResourceDefinition;
-import org.gedcomx.rt.rs.ResourceRelationships;
-import org.gedcomx.rt.rs.StatusCodes;
-import org.gedcomx.rt.rs.Warnings;
+import org.gedcomx.rt.rs.*;
 
 import javax.ws.rs.Path;
 import javax.xml.bind.annotation.XmlElement;
@@ -212,16 +209,16 @@ public class ResourceServiceProcessor {
           }
         }
 
-        for (ResourceRelationship resourceRelationship : rsd.getResourceRelationships()) {
-          String identifier = resourceRelationship.getIdentifier();
+        for (ResourceLink link : rsd.getLinks()) {
+          String identifier = link.getRel();
           if (!REGISTERED_LINK_RELATIONS.contains(identifier)) {
             try {
               if (!new URI(identifier).isAbsolute()) {
-                result.addWarning(rsd, String.format("Relationship identifier %s should be either a registered link type or a valid absolute URI. For more information, see http://tools.ietf.org/html/draft-nottingham-http-link-header.", identifier));
+                result.addWarning(rsd, String.format("Link rel %s should be either a registered link type or a valid absolute URI. For more information, see http://tools.ietf.org/html/draft-nottingham-http-link-header.", identifier));
               }
             }
             catch (URISyntaxException e) {
-              result.addWarning(rsd, String.format("Relationship identifier %s should be either a registered link type or a valid absolute URI. For more information, see http://tools.ietf.org/html/draft-nottingham-http-link-header.", identifier));
+              result.addWarning(rsd, String.format("Link rel %s should be either a registered link type or a valid absolute URI. For more information, see http://tools.ietf.org/html/draft-nottingham-http-link-header.", identifier));
             }
           }
         }
@@ -271,7 +268,7 @@ public class ResourceServiceProcessor {
 
             binding.getStatusCodes().addAll(extractStatusCodes(declaringResource));
             binding.getWarnings().addAll(extractWarnings(declaringResource));
-            binding.getResourceRelationships().addAll(extractResourceRelationships(declaringResource));
+            binding.getLinks().addAll(extractLinks(declaringResource));
             binding.getResourceParameters().addAll(declaringResource.getResourceParameters());
 
             binding.setDocValue(declaringResource.getDocValue()); //last one in wins.
@@ -297,22 +294,22 @@ public class ResourceServiceProcessor {
     return null;
   }
 
-  public Set<ResourceRelationship> extractResourceRelationships(TypeDeclaration delegate) {
-    Set<ResourceRelationship> rels = new HashSet<ResourceRelationship>();
-    org.gedcomx.rt.rs.ResourceRelationship[] resourceRelationshipInfo = {};
-    ResourceRelationships resourceRelationships = delegate.getAnnotation(ResourceRelationships.class);
-    if (resourceRelationships != null) {
-      resourceRelationshipInfo = resourceRelationships.value();
+  public Set<ResourceLink> extractLinks(TypeDeclaration delegate) {
+    Set<ResourceLink> rels = new HashSet<ResourceLink>();
+    org.gedcomx.rt.rs.ResourceLink[] resourceLinkInfo = {};
+    ResourceLinks resourceLinks = delegate.getAnnotation(ResourceLinks.class);
+    if (resourceLinks != null) {
+      resourceLinkInfo = resourceLinks.value();
     }
-    for (org.gedcomx.rt.rs.ResourceRelationship rel : resourceRelationshipInfo) {
-      rels.add(new ResourceRelationship(rel, this));
+    for (org.gedcomx.rt.rs.ResourceLink rel : resourceLinkInfo) {
+      rels.add(new ResourceLink(rel, this));
     }
 
     Collection<InterfaceType> supers = delegate.getSuperinterfaces();
     for (InterfaceType iface : supers) {
       InterfaceDeclaration decl = iface.getDeclaration();
       if (decl != null && decl.getAnnotation(ResourceDefinition.class) == null && decl.getAnnotation(Path.class) == null) {
-        rels.addAll(extractResourceRelationships(decl));
+        rels.addAll(extractLinks(decl));
       }
     }
 
@@ -360,7 +357,7 @@ public class ResourceServiceProcessor {
       }
 
       if (type instanceof ClassDeclaration) {
-        codes.addAll(extractWarnings(((ClassDeclaration)type).getSuperclass().getDeclaration(), method));
+        codes.addAll(extractWarnings(((ClassDeclaration) type).getSuperclass().getDeclaration(), method));
       }
     }
 

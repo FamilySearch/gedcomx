@@ -43,7 +43,7 @@ public class GenerateExampleResponseBodyMethod extends GenerateResourceExampleHt
     PrintWriter writer = new PrintWriter(out);
 
     if (HttpMethod.GET.equals(method)) {
-      writeExampleToBody(element, subresources, json, writer, true, def.getResourceRelationships());
+      writeExampleToBody(element, subresources, json, writer, true, def.getLinks());
     }
 
     return out.toString();

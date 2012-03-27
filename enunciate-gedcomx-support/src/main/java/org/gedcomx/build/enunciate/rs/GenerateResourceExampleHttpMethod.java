@@ -154,7 +154,7 @@ public abstract class GenerateResourceExampleHttpMethod implements TemplateMetho
     return false;
   }
 
-  protected void writeExampleToBody(ElementDeclaration element, List<SubresourceElement> subresources, boolean json, PrintWriter body, boolean writeLinks, Collection<ResourceRelationship> links) {
+  protected void writeExampleToBody(ElementDeclaration element, List<SubresourceElement> subresources, boolean json, PrintWriter body, boolean writeLinks, Collection<ResourceLink> links) {
     if (json) {
       QName typeQName = element instanceof RootElementDeclaration ? ((RootElementDeclaration) element).getTypeDefinition().getQname() : ((LocalElementDeclaration) element).getElementXmlType().getQname();
       body.printf("{\n");
@@ -181,20 +181,20 @@ public abstract class GenerateResourceExampleHttpMethod implements TemplateMetho
     }
   }
 
-  private void writeLinks(PrintWriter body, Collection<ResourceRelationship> links, boolean json, int depth, String linkElement) {
+  private void writeLinks(PrintWriter body, Collection<ResourceLink> links, boolean json, int depth, String linkElement) {
     StringBuilder tab = new StringBuilder();
     for (int i = 0; i < depth; i++) {
       tab.append("  ");
     }
 
-    Iterator<ResourceRelationship> relIt = links.iterator();
+    Iterator<ResourceLink> relIt = links.iterator();
     if (json) {
       if (relIt.hasNext()) {
         body.printf("%s  \"links\" : [\n", tab);
       }
       while (relIt.hasNext()) {
-        ResourceRelationship rel = relIt.next();
-        body.printf("%s    { \"rel\" : \"%s\", \"%s\" : \"...\" }", tab, rel.getIdentifier(), rel.isTemplate() ? "template" : "href");
+        ResourceLink rel = relIt.next();
+        body.printf("%s    { \"rel\" : \"%s\", \"%s\" : \"...\" }", tab, rel.getRel(), rel.isTemplate() ? "template" : "href");
         if (!relIt.hasNext()) {
           body.printf("\n%s  ],\n", tab);
         }
@@ -205,8 +205,8 @@ public abstract class GenerateResourceExampleHttpMethod implements TemplateMetho
     }
     else {
       while (relIt.hasNext()) {
-        ResourceRelationship rel = relIt.next();
-        body.printf("%s  <%s rel=\"%s\" %s=\"...\"/>\n", tab, linkElement, rel.getIdentifier(), rel.isTemplate() ? "template" : "href");
+        ResourceLink rel = relIt.next();
+        body.printf("%s  <%s rel=\"%s\" %s=\"...\"/>\n", tab, linkElement, rel.getRel(), rel.isTemplate() ? "template" : "href");
       }
     }
   }
@@ -225,7 +225,7 @@ public abstract class GenerateResourceExampleHttpMethod implements TemplateMetho
           body.printf("%s  \"@type\" : \"%s%s\",\n", tab, typeQName.getNamespaceURI(), typeQName.getLocalPart());
           body.printf("%s  ...\n", tab);
           if (writeLinks) {
-            writeLinks(body, subresource.getDefinition().getResourceRelationships(), json, depth, null);
+            writeLinks(body, subresource.getDefinition().getLinks(), json, depth, null);
           }
           writeSubresourcesExampleToBody(subresource.getXmlName(), gatherSubresourceElements(subresource.getTypeDefinition(), subresource.getDefinition()), json, body, depth + 1, maxDepth, writeLinks);
         }
@@ -245,7 +245,7 @@ public abstract class GenerateResourceExampleHttpMethod implements TemplateMetho
         if (depth < maxDepth) {
           body.printf("%s  ...\n", tab);
           if (writeLinks) {
-            writeLinks(body, subresource.getDefinition().getResourceRelationships(), json, depth, "http://www.w3.org/2005/Atom".equals(ns) ? "link" : "http://docs.oasis-open.org/ns/xri/xrd-1.0".equals(ns) ? "Link" : "atom:link");
+            writeLinks(body, subresource.getDefinition().getLinks(), json, depth, "http://www.w3.org/2005/Atom".equals(ns) ? "link" : "http://docs.oasis-open.org/ns/xri/xrd-1.0".equals(ns) ? "Link" : "atom:link");
           }
           writeSubresourcesExampleToBody(subresource.getXmlName(), gatherSubresourceElements(subresource.getTypeDefinition(), subresource.getDefinition()), json, body, depth + 1, maxDepth, writeLinks);
         }

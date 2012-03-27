@@ -15,19 +15,18 @@
  */
 package org.gedcomx.rt.rs;
 
-import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Metadata used to describe the relationships (links) between resources.
+ * Metadata used to describe the links between resources.
  *
  * @author Ryan Heaton
  */
 @Retention ( RetentionPolicy.RUNTIME )
 @Target ({ })
-public @interface ResourceRelationship {
+public @interface ResourceLink {
 
   /**
    * Identifier for the resource relationship. This is the value that will be used for the
@@ -38,7 +37,7 @@ public @interface ResourceRelationship {
    * @see <a href="http://tools.ietf.org/html/draft-nottingham-http-link-header-10">Web Linking</a>
    * @return The relationship identifier.
    */
-  String identifier();
+  String rel();
 
   /**
    * The resource service definition that defines the resource being related to.

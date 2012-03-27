@@ -52,7 +52,7 @@ public class GenerateExampleRequestBodyMethod extends GenerateResourceExampleHtt
     }
 
     if (HttpMethod.PUT.equals(method) || HttpMethod.POST.equals(method)) {
-      writeExampleToBody(element, subresources, json, writer, false, Collections.<ResourceRelationship>emptyList());
+      writeExampleToBody(element, subresources, json, writer, false, Collections.<ResourceLink>emptyList());
     }
 
     return out.toString();
