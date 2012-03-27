@@ -32,6 +32,8 @@ import org.codehaus.enunciate.contract.jaxb.types.XmlType;
 import org.codehaus.enunciate.contract.jaxrs.ResourceEntityParameter;
 import org.codehaus.enunciate.contract.jaxrs.ResourceMethod;
 import org.codehaus.enunciate.contract.jaxrs.ResourceRepresentationMetadata;
+import org.gedcomx.rt.CommonModels;
+import org.gedcomx.rt.JsonElementWrapper;
 import org.gedcomx.rt.SupportsExtensionElements;
 
 import javax.xml.namespace.QName;
@@ -42,6 +44,8 @@ import java.util.*;
  * @author Ryan Heaton
  */
 public abstract class GenerateResourceExampleHttpMethod implements TemplateMethodModelEx {
+  
+  static final QName RESOURCE_BUNDLE_TYPE_QNAME = new QName( CommonModels.RDF_NAMESPACE, "RDF" );
 
   final EnunciateFreemarkerModel model;
 
@@ -117,10 +121,19 @@ public abstract class GenerateResourceExampleHttpMethod implements TemplateMetho
       if (def != null && isInstanceOf(typeDef, SupportsExtensionElements.class.getName())) {
         for (ResourceDefinitionDeclaration subresource : def.getSubresources()) {
           for (ElementDeclaration el : subresource.getResourceElements()) {
-            QName typeQName = el instanceof RootElementDeclaration ? ((RootElementDeclaration) el).getTypeDefinition().getQname() : ((LocalElementDeclaration) el).getElementXmlType().getQname();
-            for (Map.Entry<QName, TypeDefinition> entry : def.getSubresourceElements().entrySet()) {
-              if (entry.getValue().getQname().equals(typeQName)) {
-                subresourceElements.add(new SubresourceElement(entry.getKey(), entry.getKey().getPrefix(), entry.getValue(), true, subresource));
+            if (def.getSubresourceElements().isEmpty() && RESOURCE_BUNDLE_TYPE_QNAME.equals(typeDef.getQname())) {
+              //special case for resource bundles: resource elements of subresources are automatically included as subresource definitions.
+              JsonElementWrapper elementWrapper = el.getAnnotation(JsonElementWrapper.class);
+              String jsonName = elementWrapper != null ? (elementWrapper.namespace() + elementWrapper.name()) : (el.getNamespace() + el.getName());
+              TypeDefinition typeDefinition = el instanceof RootElementDeclaration ? ((RootElementDeclaration) el).getTypeDefinition() : ((LocalElementDeclaration) el).getElementXmlType() instanceof XmlClassType ? ((XmlClassType)((LocalElementDeclaration) el).getElementXmlType()).getTypeDefinition() : null;
+              subresourceElements.add(new SubresourceElement(el.getQname(), jsonName, typeDefinition, true, subresource));
+            }
+            else {
+              QName typeQName = el instanceof RootElementDeclaration ? ((RootElementDeclaration) el).getTypeDefinition().getQname() : ((LocalElementDeclaration) el).getElementXmlType().getQname();
+              for (Map.Entry<QName, TypeDefinition> entry : def.getSubresourceElements().entrySet()) {
+                if (entry.getValue().getQname().equals(typeQName)) {
+                  subresourceElements.add(new SubresourceElement(entry.getKey(), entry.getKey().getPrefix(), entry.getValue(), true, subresource));
+                }
               }
             }
           }

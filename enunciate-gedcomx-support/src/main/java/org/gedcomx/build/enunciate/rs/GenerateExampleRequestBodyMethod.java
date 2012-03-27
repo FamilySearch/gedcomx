@@ -47,6 +47,7 @@ public class GenerateExampleRequestBodyMethod extends GenerateResourceExampleHtt
       for (SubresourceElement subresource : subresources) {
         if (!subresource.getDefinition().getResourceElements().isEmpty()) {
           element = subresource.getDefinition().getResourceElements().get(0);
+          subresources = gatherSubresourceElements(subresource.getTypeDefinition(), subresource.getDefinition());
         }
       }
     }

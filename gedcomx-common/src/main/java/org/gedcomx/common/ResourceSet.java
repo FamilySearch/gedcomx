@@ -37,7 +37,7 @@ import java.util.List;
 @JsonElementWrapper (name = "resourceSets")
 @JsonTypeInfo ( use = JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME )
 @JsonTypeIdResolver ( XmlTypeIdResolver.class )
-@XmlType ( name = "RDF" )
+@XmlType ( name = "RDF", namespace = CommonModels.RDF_NAMESPACE )
 public class ResourceSet implements SupportsExtensionElements {
 
   private String id;
