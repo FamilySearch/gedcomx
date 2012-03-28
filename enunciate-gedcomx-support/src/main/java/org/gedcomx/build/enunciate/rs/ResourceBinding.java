@@ -84,4 +84,20 @@ public class ResourceBinding {
   public void setDocValue(String docValue) {
     this.docValue = docValue;
   }
+  
+  public Set<String> getProduces() {
+    TreeSet<String> produces = new TreeSet<String>();
+    for (ResourceMethod method : getMethods()) {
+      produces.addAll(method.getProducesMime());
+    }
+    return produces;
+  }
+
+  public Set<String> getConsumes() {
+    TreeSet<String> produces = new TreeSet<String>();
+    for (ResourceMethod method : getMethods()) {
+      produces.addAll(method.getConsumesMime());
+    }
+    return produces;
+  }
 }

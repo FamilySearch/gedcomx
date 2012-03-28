@@ -27,11 +27,11 @@ import javax.xml.namespace.QName;
  */
 public final class ResourceLink {
 
-  private final String rel;
-  private final String description;
-  private final boolean template;
-  private final QName resource;
-  private final ResourceServiceProcessor processor;
+  final String rel;
+  final String description;
+  final boolean template;
+  final QName resource;
+  final ResourceServiceProcessor processor;
 
   public ResourceLink(org.gedcomx.rt.rs.ResourceLink meta, ResourceServiceProcessor processor) {
     this.rel = meta.rel();

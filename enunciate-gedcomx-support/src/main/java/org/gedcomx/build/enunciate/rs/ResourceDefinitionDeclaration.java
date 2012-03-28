@@ -143,4 +143,17 @@ public class ResourceDefinitionDeclaration extends Resource {
   public Set<ResourceBinding> getBindings() {
     return bindings;
   }
+  
+  public Map<ResourceLink, ResourceDefinitionDeclaration> getIncomingLinks() {
+    LinkedHashMap<ResourceLink, ResourceDefinitionDeclaration> linksIn = new LinkedHashMap<ResourceLink, ResourceDefinitionDeclaration>();
+    QName thisQName = new QName(getNamespace(), getName());
+    for (ResourceDefinitionDeclaration def : this.processor.getResourceDefinitions()) {
+      for (ResourceLink link : def.getLinks()) {
+        if (link.resource.equals(thisQName)) {
+          linksIn.put(link, def);
+        }
+      }
+    }
+    return linksIn;
+  }
 }
