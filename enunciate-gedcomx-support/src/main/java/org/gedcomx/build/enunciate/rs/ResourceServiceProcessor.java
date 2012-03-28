@@ -256,11 +256,11 @@ public class ResourceServiceProcessor {
               //one is because there would be no way to tell in the docs which resource method to use
               //to get the error codes, etc.
               result.addError(resourceMethod, String.format("Cannot bind resource %s defined by %s to path %s because that path is already binding resource %s defined by %s.", rsd.getName(), rsd.getQualifiedName(), path, binding.getDefinition().getName(), binding.getDefinition().getQualifiedName()));
-            }
-            else {
-              binding.getMethods().add(resourceMethod);
+              continue;
             }
           }
+
+          binding.getMethods().add(resourceMethod);
 
           if (declaringResource.getAnnotation(ResourceDefinition.class) == null) {
             //as long as the declaring resource class isn't a resource definition itself,
