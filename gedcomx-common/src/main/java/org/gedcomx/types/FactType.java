@@ -40,7 +40,7 @@ public enum FactType {
   Age,
   Baptism,
   BarMitzvah,
-  BasMitzvah,
+  BatMitzvah,
   Birth,
   Blessing,
   Burial,
@@ -207,7 +207,7 @@ public enum FactType {
     public static final FactType Age = include(FactType.Age);
     public static final FactType Baptism = include(FactType.Baptism);
     public static final FactType BarMitzvah = include(FactType.BarMitzvah);
-    public static final FactType BasMitzvah = include(FactType.BasMitzvah);
+    public static final FactType BatMitzvah = include(FactType.BatMitzvah);
     public static final FactType Birth = include(FactType.Birth);
     public static final FactType Blessing = include(FactType.Blessing);
     public static final FactType Burial = include(FactType.Burial);
