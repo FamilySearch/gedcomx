@@ -53,6 +53,42 @@ public class Fact extends Conclusion implements Formalizeable {
   private FormalValue formal;
 
   /**
+   * Create a fact.
+   */
+  public Fact() {
+  }
+
+  /**
+   * Create a fact with the passed in type and values.
+   *
+   * @param factType the fact type.
+   * @param original The original value as supplied by the user.
+   * @param formal The formal value.
+   */
+  public Fact(FactType factType, String original, FormalValue formal) {
+    setKnownType(factType);
+    setOriginal(original);
+    setFormal(formal);
+  }
+
+  /**
+   * Create a date/place fact with the passed in type and values.
+   *
+   * @param factType the fact type.
+   * @param date The date of applicability of this fact.
+   * @param place The place of applicability of this fact.
+   * @param original The original value as supplied by the user.
+   * @param formal The formal value.
+   */
+  public Fact(FactType factType, Date date, Place place, String original, FormalValue formal) {
+    setKnownType(factType);
+    setDate(date);
+    setPlace(place);
+    setOriginal(original);
+    setFormal(formal);
+  }
+
+  /**
    * The type of the fact.
    *
    * @return The type of the fact.

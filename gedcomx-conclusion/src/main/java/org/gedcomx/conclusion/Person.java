@@ -16,11 +16,17 @@
 package org.gedcomx.conclusion;
 
 import org.codehaus.enunciate.json.JsonName;
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.common.*;
-import org.gedcomx.rt.*;
+import org.gedcomx.common.AlternateId;
+import org.gedcomx.common.GenealogicalResource;
+import org.gedcomx.common.Note;
+import org.gedcomx.common.URI;
+import org.gedcomx.rt.JsonElementWrapper;
+import org.gedcomx.rt.XmlTypeIdResolver;
+import org.gedcomx.types.FactType;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlElement;
@@ -171,6 +177,25 @@ public class Person extends GenealogicalResource implements HasFacts, HasNotes, 
   }
 
   /**
+   * Helper method for obtaining specific fact conclusions.
+   *
+   * @param factType The type of facts to return.
+   * @return The fact conclusions that match the factType. An empty list will be returned if no facts are found.
+   */
+  @JsonIgnore
+  public List<Fact> getFacts(FactType factType) {
+    ArrayList<Fact> factsToReturn = new ArrayList<Fact>();
+    if (facts != null && factType != null) {
+      for (Fact fact : facts) {
+        if (fact.getKnownType() != null && fact.getKnownType().equals(factType)) {
+          factsToReturn.add(fact);
+        }
+      }
+    }
+    return factsToReturn;
+  }
+
+  /**
    * The fact conclusions for the person.
    *
    * @param facts The fact conclusions for the person.
@@ -186,10 +211,12 @@ public class Person extends GenealogicalResource implements HasFacts, HasNotes, 
    * @param fact The fact conclusion to be added.
    */
   public void addFact(Fact fact) {
-    if(facts == null) {
-      facts = new ArrayList<Fact>();
+    if (fact != null) {
+      if (facts == null) {
+        facts = new ArrayList<Fact>();
+      }
+      facts.add(fact);
     }
-    facts.add(fact);
   }
 
   /**
