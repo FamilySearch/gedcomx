@@ -36,7 +36,7 @@ public enum FactType {
 
   Adoption,
   AdultChristening,
-  Affiliate,
+  Affiliation,
   Age,
   Baptism,
   BarMitzvah,
@@ -203,7 +203,7 @@ public enum FactType {
     
     public static final FactType Adoption = include(FactType.Adoption);
     public static final FactType AdultChristening = include(FactType.AdultChristening);
-    public static final FactType Affiliate = include(FactType.Affiliate);
+    public static final FactType Affiliation = include(FactType.Affiliation);
     public static final FactType Age = include(FactType.Age);
     public static final FactType Baptism = include(FactType.Baptism);
     public static final FactType BarMitzvah = include(FactType.BarMitzvah);
