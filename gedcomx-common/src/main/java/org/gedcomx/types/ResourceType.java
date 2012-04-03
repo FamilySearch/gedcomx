@@ -143,31 +143,34 @@ public enum ResourceType {
   Text,
 
   /**
-   * A GEDCOM X Record. Instances of the type record must also be describable as instances of
+   * A person. Instances of the type person must also be describable as instances of
    * the broader type Dataset.
    */
-  @XmlQNameEnumValue(
-    namespace = "http://gedcomx.org/record/v1/"
-  )
-  Record,
-
-  /**
-   * A GEDCOM X Persona. Instances of the type persona must also be describable as instances of
-   * the broader type Dataset.
-   */
-  @XmlQNameEnumValue(
-    namespace = "http://gedcomx.org/record/v1/"
-  )
-  Persona,
-
-  /**
-   * A GEDCOM X Person. Instances of the type person must also be describable as instances of
-   * the broader type Dataset.
-   */
-  @XmlQNameEnumValue(
-    namespace = "http://gedcomx.org/conclusion/v1/"
-  )
   Person,
+
+  /**
+   * A relationship between two persons. Instances of the type person must also be describable as instances of
+   * the broader type Dataset.
+   */
+  Relationship,
+
+  /**
+   * A name of a person. Instances of the type person must also be describable as instances of
+   * the broader type Dataset.
+   */
+  Name,
+
+  /**
+   * A gender of a person. Instances of the type person must also be describable as instances of
+   * the broader type Dataset.
+   */
+  Gender,
+
+  /**
+   * A fact about a person or relationship. Instances of the type person must also be describable as instances of
+   * the broader type Dataset.
+   */
+  Fact,
 
   /**
    * Something else.
