@@ -207,6 +207,23 @@ public class GedcomNamespaceManager extends NamespacePrefixMapper {
   }
 
   /**
+   * Get the qname for the specified json wrapper name.
+   *
+   * @param jsonWrapperName The json wrapper name.
+   * @return The XML QName.
+   */
+  public static QName findQNameFromJsonWrapperName(String jsonWrapperName) {
+    init(Thread.currentThread().getContextClassLoader());
+    for (Map.Entry<QName, QName> entry : KNOWN_JSON_ELEMENT_WRAPPER_NAMES.entrySet()) {
+      if ((entry.getValue().getNamespaceURI() + entry.getValue().getLocalPart()).equals(jsonWrapperName)) {
+        return entry.getKey();
+      }
+    }
+
+    return null;
+  }
+
+  /**
    * Get the version of the runtime java library that defines the model for the given namespace.
    *
    * @param namespace The model namespace.

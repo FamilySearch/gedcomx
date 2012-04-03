@@ -16,26 +16,48 @@
 package org.gedcomx.metadata.rdf;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonTypeInfo;
+import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
+import org.gedcomx.common.URI;
+import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.SupportsExtensionAttributes;
+import org.gedcomx.rt.XmlTypeIdResolver;
 
 import javax.xml.XMLConstants;
-import javax.xml.bind.annotation.XmlAnyAttribute;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlValue;
+import javax.xml.bind.annotation.*;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
 import javax.xml.namespace.QName;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * An element representing an RDF value. For more information, see <a href="http://www.w3.org/TR/rdf-schema/#ch_literal">RDF Schema, Section 2.3</a>
+ * An element representing an RDF literal. For more information, see <a href="http://www.w3.org/TR/rdf-schema/#ch_literal">RDF Schema, Section 2.3</a>
  * and <a href="http://dublincore.org/documents/profile-guidelines/#appc">Using RDF properties in profiles: a technical primer</a>.
  *
  * @link http://www.w3.org/TR/rdf-schema/#ch_literal
  * @author Ryan Heaton
  */
+@XmlType ( name = "Literal", namespace = CommonModels.RDFS_NAMESPACE )
+@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
+@JsonTypeIdResolver (XmlTypeIdResolver.class)
 public final class RDFLiteral implements SupportsExtensionAttributes {
 
+  private static final URI DATE_DATATYPE = URI.create("http://www.w3.org/2001/XMLSchema#dateTime");
+  private static final DatatypeFactory DATATYPE_FACTORY;
+  static {
+    try {
+      DATATYPE_FACTORY = DatatypeFactory.newInstance();
+    }
+    catch (DatatypeConfigurationException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
   private String lang;
+  private URI datatype;
   private String value;
   private Map<QName, String> extensionAttributes;
 
@@ -44,6 +66,32 @@ public final class RDFLiteral implements SupportsExtensionAttributes {
 
   public RDFLiteral(String value) {
     this.value = value;
+  }
+
+  public RDFLiteral(Date value) {
+    setValueAsDate(value);
+  }
+
+  /**
+   * The datatype of the literal. For more information, start with the explanation of an
+   * <a href="http://www.w3.org/TR/rdf-primer/#typedliterals">RDF Typed Literal</a> in the RDF primer.
+   *
+   * @return The datatype of the literal.
+   */
+  @XmlAttribute( name="datatype", namespace = CommonModels.RDF_NAMESPACE )
+  @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
+  public URI getDatatype() {
+    return datatype;
+  }
+
+  /**
+   * The datatype of the literal. For more information, start with the explanation of an
+   * <a href="http://www.w3.org/TR/rdf-primer/#typedliterals">RDF Typed Literal</a> in the RDF primer.
+   *
+   * @param datatype The datatype of the literal.
+   */
+  public void setDatatype(URI datatype) {
+    this.datatype = datatype;
   }
 
   /**
@@ -82,6 +130,37 @@ public final class RDFLiteral implements SupportsExtensionAttributes {
    */
   public void setValue(String value) {
     this.value = value;
+  }
+
+  /**
+   * Get the value of this literal as a date.
+   *
+   * @return The value of this literal as a date.
+   */
+  @XmlTransient
+  @JsonIgnore
+  public Date getValueAsDate() {
+    if (getValue() == null) {
+      return null;
+    }
+    else if (getDatatype() != null && !DATE_DATATYPE.equals(getDatatype())) {
+      throw new IllegalStateException(String.format("Literal is of type %s, not of type %s.", getDatatype(), DATE_DATATYPE));
+    }
+
+    return DATATYPE_FACTORY.newXMLGregorianCalendar(getValue()).toGregorianCalendar().getTime();
+  }
+
+  /**
+   * Get the value of this literal as a date.
+   *
+   * @param valueAsDate The value of this literal as a date.
+   */
+  @JsonIgnore
+  public void setValueAsDate(Date valueAsDate) {
+    setDatatype(DATE_DATATYPE);
+    GregorianCalendar gc = new GregorianCalendar();
+    gc.setTime(valueAsDate);
+    setValue(DATATYPE_FACTORY.newXMLGregorianCalendar(gc).toXMLFormat());
   }
 
   /**

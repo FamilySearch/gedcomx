@@ -15,12 +15,16 @@
  */
 package org.gedcomx.metadata.rdf;
 
+import org.codehaus.jackson.annotate.JsonTypeInfo;
+import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.common.ResourceReference;
 import org.gedcomx.rt.CommonModels;
+import org.gedcomx.rt.XmlTypeIdResolver;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  * An element representing an RDF value. For more information, see <a href="http://www.w3.org/TR/rdf-schema/#ch_value">RDF Schema, Section 4.5.3</a>,
@@ -31,10 +35,20 @@ import javax.xml.bind.annotation.XmlElement;
  * @link http://www.w3.org/TR/2004/REC-rdf-primer-20040210/#rdfvalue
  * @author Ryan Heaton
  */
+@XmlType ( name = "Resource", namespace = CommonModels.RDFS_NAMESPACE )
+@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
+@JsonTypeIdResolver (XmlTypeIdResolver.class)
 public final class RDFValue extends ResourceReference {
 
   private String lang;
   private String value;
+
+  public RDFValue() {
+  }
+
+  public RDFValue(String value) {
+    this.value = value;
+  }
 
   /**
    * The language of the value of the property. See <a href="http://www.w3.org/International/articles/language-tags/>http://www.w3.org/International/articles/language-tags/</a>

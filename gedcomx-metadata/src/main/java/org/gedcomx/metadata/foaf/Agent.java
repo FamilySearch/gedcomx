@@ -18,7 +18,7 @@ package org.gedcomx.metadata.foaf;
 import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.gedcomx.common.ResourceReference;
-import org.gedcomx.metadata.rdf.RDFDescription;
+import org.gedcomx.metadata.rdf.Description;
 import org.gedcomx.metadata.rdf.RDFLiteral;
 import org.gedcomx.rt.CommonModels;
 
@@ -33,7 +33,7 @@ import java.util.List;
  * @author Ryan Heaton
  */
 @XmlType (name = "Agent")
-public abstract class Agent extends RDFDescription {
+public abstract class Agent extends Description {
 
   private RDFLiteral name;
   private RDFLiteral homepage;

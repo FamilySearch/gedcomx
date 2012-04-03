@@ -91,6 +91,10 @@ public class ExtensibleObjectDeserializer extends BeanDeserializer {
     }
 
     if (qname == null) {
+      qname = GedcomNamespaceManager.findQNameFromJsonWrapperName(propName);
+    }
+
+    if (qname == null) {
       qname = new QName("", propName);
     }
 

@@ -45,15 +45,6 @@ import javax.xml.bind.annotation.XmlTransient;
     definesRDFSchema = true
   ),
   @Model (
-    id = "dcterms",
-    projectId = CommonModels.GEDCOMX_PROJECT_ID,
-    namespace = CommonModels.DUBLIN_CORE_NAMESPACE,
-    label = "Dublin Core Terms Model",
-    description = "The Dublin Core Terms model defines metadata using Dublin Core Terms.",
-    version = "2010-10-11",
-    definesRDFSchema = true
-  ),
-  @Model (
     id = "dctypes",
     projectId = CommonModels.GEDCOMX_PROJECT_ID,
     namespace = CommonModels.DUBLIN_CORE_TYPE_NAMESPACE,
@@ -95,6 +86,7 @@ public class CommonModels {
   public static final String GEDCOMX_COMMON_JSON_MEDIA_TYPE = "application/x-gedcom+json";
 
   public static final String RDF_NAMESPACE = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
+  public static final String RDFS_NAMESPACE    = "http://www.w3.org/2000/01/rdf-schema#";
   public static final String RDF_XML_MEDIA_TYPE = "application/rdf+xml";
   public static final String RDF_JSON_MEDIA_TYPE = "application/rdf+json";
 

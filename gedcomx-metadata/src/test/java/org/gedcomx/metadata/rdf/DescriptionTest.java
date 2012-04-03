@@ -18,20 +18,20 @@ import static org.testng.AssertJUnit.assertEquals;
  * @author Ryan Heaton
  */
 @Test
-public class RDFDescriptionTest {
+public class DescriptionTest {
 
   /**
    * tests alternate id xml
    */
   public void testRDFMetadataXml() throws Exception {
-    RDFDescription meta = new RDFDescription();
+    Description meta = new Description();
     meta.setId("id");
     meta.setAbout(URI.create("urn:dataref"));
     meta.setExtensionAttributes(new HashMap<QName, String>());
     meta.getExtensionAttributes().put(new QName(CommonModels.GEDCOMX_COMMON_NAMESPACE, "data"), "custom");
     meta.setExtensionElements(new ArrayList<Object>());
     meta.getExtensionElements().add(new ResourceSet());
-    meta = processThroughXml(meta, RDFDescription.class, JAXBContext.newInstance(RDFDescription.class, ResourceSet.class));
+    meta = processThroughXml(meta, Description.class, JAXBContext.newInstance(Description.class, ResourceSet.class));
     assertEquals("id", meta.getId());
     assertEquals(URI.create("urn:dataref"), meta.getAbout());
     assertEquals("custom", meta.getExtensionAttributes().get(new QName(CommonModels.GEDCOMX_COMMON_NAMESPACE, "data")));
@@ -42,7 +42,7 @@ public class RDFDescriptionTest {
    * tests alternate id json
    */
   public void testRDFMetadataJson() throws Exception {
-    RDFDescription meta = new RDFDescription();
+    Description meta = new Description();
     meta.setId("id");
     meta.setAbout(URI.create("urn:dataref"));
     meta.setExtensionAttributes(new HashMap<QName, String>());
