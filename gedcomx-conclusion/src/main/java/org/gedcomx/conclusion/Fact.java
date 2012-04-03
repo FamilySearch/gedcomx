@@ -63,9 +63,8 @@ public class Fact extends Conclusion implements Formalizeable {
    *
    * @param factType the fact type.
    * @param original The original value as supplied by the user.
-   * @param formal The formal value.
    */
-  public Fact(FactType factType, String original, FormalValue formal) {
+  public Fact(FactType factType, String original) {
     setKnownType(factType);
     setOriginal(original);
     setFormal(formal);
@@ -78,14 +77,12 @@ public class Fact extends Conclusion implements Formalizeable {
    * @param date The date of applicability of this fact.
    * @param place The place of applicability of this fact.
    * @param original The original value as supplied by the user.
-   * @param formal The formal value.
    */
-  public Fact(FactType factType, Date date, Place place, String original, FormalValue formal) {
+  public Fact(FactType factType, Date date, Place place, String original) {
     setKnownType(factType);
     setDate(date);
     setPlace(place);
     setOriginal(original);
-    setFormal(formal);
   }
 
   /**
