@@ -1,5 +1,5 @@
 /**
- * Copyright 2011 Intellectual Reserve, Inc.
+ * Copyright 2011-2012 Intellectual Reserve, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,8 +17,8 @@ package org.gedcomx.types;
 
 import org.codehaus.enunciate.qname.XmlQNameEnum;
 import org.codehaus.enunciate.qname.XmlUnknownQNameEnumValue;
-
 import org.gedcomx.common.URI;
+
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.Set;

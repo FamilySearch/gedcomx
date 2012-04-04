@@ -1,5 +1,5 @@
 /**
- * Copyright 2011 Intellectual Reserve, Inc.
+ * Copyright 2011-2012 Intellectual Reserve, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
  */
 package org.gedcomx.metadata.rdf;
 
-import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
@@ -28,10 +27,12 @@ import org.gedcomx.types.ResourceType;
 import org.gedcomx.types.TypeReference;
 
 import javax.xml.XMLConstants;
-import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.*;
 import javax.xml.namespace.QName;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * A description of a resource.
