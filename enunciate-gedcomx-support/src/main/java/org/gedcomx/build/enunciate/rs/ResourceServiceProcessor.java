@@ -1,5 +1,5 @@
 /**
- * Copyright 2011 Intellectual Reserve, Inc.
+ * Copyright 2011-2012 Intellectual Reserve, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,7 +34,10 @@ import org.codehaus.enunciate.contract.jaxrs.RootResource;
 import org.codehaus.enunciate.contract.validation.ValidationResult;
 import org.codehaus.enunciate.util.ResourceMethodPathComparator;
 import org.gedcomx.rt.JsonElementWrapper;
-import org.gedcomx.rt.rs.*;
+import org.gedcomx.rt.rs.ResourceDefinition;
+import org.gedcomx.rt.rs.ResourceLinks;
+import org.gedcomx.rt.rs.StatusCodes;
+import org.gedcomx.rt.rs.Warnings;
 
 import javax.ws.rs.Path;
 import javax.xml.bind.annotation.XmlElement;
