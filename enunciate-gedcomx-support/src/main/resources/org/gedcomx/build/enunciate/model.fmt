@@ -111,7 +111,11 @@
           <td>${element.namespace}${element.name}</td>
           <td>${jsonExtensionElementName(element)}</td>
           [#assign elementXmlType=element.elementXmlType/]
+          [#if schemaForNamespace(elementXmlType)??]
           <td><a href="${baseProjectUri(elementXmlType)}${schemaForNamespace(elementXmlType).id}_${elementXmlType.name}.html">${elementXmlType.namespace}${elementXmlType.name}</a></td>
+          [#else]
+          <td>${elementXmlType?string?lower_case}</td>
+          [/#if]
           <td>${element.docValue!""}</td>
         </tr>
         [/#list]
