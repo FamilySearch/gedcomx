@@ -202,4 +202,9 @@ public class Fact extends Conclusion implements Formalizeable {
   public void setFormal(FormalValue formal) {
     this.formal = formal;
   }
+
+  @Override
+  public String toString() {
+    return "type=" + getKnownType() + ",orig=" + getOriginal() + ",date=" + getDate() + ",place=" + getPlace();
+  }
 }

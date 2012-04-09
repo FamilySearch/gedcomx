@@ -132,4 +132,9 @@ public class Name extends Conclusion {
   public void setAlternateForms(List<NameForm> alternateForms) {
     this.alternateForms = alternateForms;
   }
+
+  @Override
+  public String toString() {
+    return "type=" + getKnownType() + ",primaryform=" + (primaryForm == null?"null":primaryForm.getFullText()) + ",pref=" + getPreferred();
+  }
 }

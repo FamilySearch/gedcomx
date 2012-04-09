@@ -88,4 +88,9 @@ public class Gender extends Conclusion {
   public void setKnownType(GenderType type) {
     this.type = type == null ? null : new TypeReference<GenderType>(type);
   }
+
+  @Override
+  public String toString() {
+    return "type=" + getKnownType() + ",pref=" + getPreferred();
+  }
 }
