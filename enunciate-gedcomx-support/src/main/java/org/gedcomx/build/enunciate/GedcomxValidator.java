@@ -93,13 +93,13 @@ public class GedcomxValidator extends BaseValidator {
   }
 
   protected boolean hasIdAttribute(ComplexTypeDefinition complexType) {
-    boolean idAttributeFound = false;
     for (Attribute attribute : complexType.getAttributes()) {
       if (attribute.isXmlID()) {
-        idAttributeFound = true;
-        break;
+        return true;
       }
     }
+
+    boolean idAttributeFound = false;
     XmlType baseType = complexType.getBaseType();
     if (baseType instanceof XmlClassType) {
       TypeDefinition typeDefinition = ((XmlClassType) baseType).getTypeDefinition();
