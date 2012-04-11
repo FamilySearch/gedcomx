@@ -66,4 +66,27 @@ public final class ResourceLink {
   public boolean isTemplate() {
     return template;
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+
+    ResourceLink that = (ResourceLink) o;
+
+    if (rel != null ? !rel.equals(that.rel) : that.rel != null) {
+      return false;
+    }
+
+    return true;
+  }
+
+  @Override
+  public int hashCode() {
+    return rel != null ? rel.hashCode() : 0;
+  }
 }
