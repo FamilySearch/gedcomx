@@ -41,7 +41,7 @@ public class PersonTest {
     Person person = new Person();
     Gender gender = new Gender();
     gender.setKnownType(GenderType.Male);
-    person.setGenders(Arrays.asList(gender));
+    person.setGender(gender);
 
     ArrayList<AlternateId> alternateIds = new ArrayList<AlternateId>();
     AlternateId alternateId = new AlternateId();
@@ -164,7 +164,7 @@ public class PersonTest {
     Fact event;
     Name name;
     SourceReference attributedSourceReference;
-    AssertJUnit.assertEquals(GenderType.Male, person.getGenders().get(0).getKnownType());
+    AssertJUnit.assertEquals(GenderType.Male, person.getGender().getKnownType());
 
     AssertJUnit.assertEquals(1, person.getAlternateIds().size());
     AssertJUnit.assertEquals(AlternateIdType.Forwarded, person.getAlternateIds().get(0).getKnownType());

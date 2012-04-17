@@ -45,13 +45,13 @@ import java.util.List;
 @JsonElementWrapper (name = "persons")
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType ( name = "Person", propOrder = { "persistentId", "alternateIds", "living", "genders", "names", "facts", "sources", "notes" } )
+@XmlType ( name = "Person", propOrder = { "persistentId", "alternateIds", "living", "gender", "names", "facts", "sources", "notes" } )
 public class Person extends GenealogicalResource implements HasFacts, HasNotes, ReferencesSources {
 
   private URI persistentId;
   private List<AlternateId> alternateIds;
   private Boolean living;
-  private List<Gender> genders;
+  private Gender gender;
   private List<Name> names;
   private List<Fact> facts;
   private List<SourceReference> sources;
@@ -121,25 +121,21 @@ public class Person extends GenealogicalResource implements HasFacts, HasNotes, 
   }
 
   /**
-   * The gender conclusions for the person.
+   * The gender conclusion for the person.
    *
-   * @return The gender conclusions for the person.
+   * @return The gender conclusion for the person.
    */
-  @XmlElement(name="gender")
-  @JsonProperty("genders")
-  @JsonName("genders")
-  public List<Gender> getGenders() {
-    return genders;
+  public Gender getGender() {
+    return gender;
   }
 
   /**
-   * The gender conclusions for the person.
+   * The gender conclusion for the person.
    *
-   * @param genders The gender conclusions for the person.
+   * @param gender The gender conclusion for the person.
    */
-  @JsonProperty("genders")
-  public void setGenders(List<Gender> genders) {
-    this.genders = genders;
+  public void setGender(Gender gender) {
+    this.gender = gender;
   }
 
   /**

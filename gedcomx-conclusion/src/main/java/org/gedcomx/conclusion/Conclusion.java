@@ -37,27 +37,7 @@ import java.util.List;
 @XmlType ( name = "Conclusion" )
 public abstract class Conclusion extends GenealogicalResource implements ReferencesSources {
 
-  private Boolean preferred;
   private List<SourceReference> sources;
-
-  /**
-   * Whether the conclusion is preferred above other conclusions of the same type. Useful, for example, for display purposes.
-   *
-   * @return Whether the conclusion is preferred above other conclusions of the same type. Useful, for example, for display purposes.
-   */
-  @XmlAttribute
-  public Boolean getPreferred() {
-    return preferred;
-  }
-
-  /**
-   * Whether the conclusion is preferred above other conclusions of the same type. Useful, for example, for display purposes.
-   *
-   * @param preferred Whether the conclusion is preferred above other conclusions of the same type. Useful, for example, for display purposes.
-   */
-  public void setPreferred(Boolean preferred) {
-    this.preferred = preferred;
-  }
 
   /**
    * The source references for a conclusion.

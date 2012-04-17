@@ -27,10 +27,7 @@ import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.NameType;
 import org.gedcomx.types.TypeReference;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import java.util.List;
 
 /**
@@ -50,6 +47,7 @@ public class Name extends Conclusion {
   private TypeReference<NameType> type;
   private NameForm primaryForm;
   private List<NameForm> alternateForms;
+  private Boolean preferred;
 
   /**
    * The type of the name.
@@ -131,6 +129,25 @@ public class Name extends Conclusion {
   @JsonProperty ("alternateForms")
   public void setAlternateForms(List<NameForm> alternateForms) {
     this.alternateForms = alternateForms;
+  }
+
+  /**
+   * Whether the conclusion is preferred above other conclusions of the same type. Useful, for example, for display purposes.
+   *
+   * @return Whether the conclusion is preferred above other conclusions of the same type. Useful, for example, for display purposes.
+   */
+  @XmlAttribute
+  public Boolean getPreferred() {
+    return preferred;
+  }
+
+  /**
+   * Whether the conclusion is preferred above other conclusions of the same type. Useful, for example, for display purposes.
+   *
+   * @param preferred Whether the conclusion is preferred above other conclusions of the same type. Useful, for example, for display purposes.
+   */
+  public void setPreferred(Boolean preferred) {
+    this.preferred = preferred;
   }
 
   @Override

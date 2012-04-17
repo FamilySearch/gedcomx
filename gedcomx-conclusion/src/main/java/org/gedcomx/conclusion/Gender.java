@@ -91,6 +91,6 @@ public class Gender extends Conclusion {
 
   @Override
   public String toString() {
-    return "type=" + getKnownType() + ",pref=" + getPreferred();
+    return "type=" + getKnownType();
   }
 }
