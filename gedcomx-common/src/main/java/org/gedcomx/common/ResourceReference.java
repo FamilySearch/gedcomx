@@ -47,80 +47,9 @@ import java.util.Map;
 @XmlSeeAlso(ResourceFragmentParameter.class)
 public class ResourceReference implements SupportsExtensionAttributes, SupportsExtensionElements {
 
-  private String id;
-  @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
-  @JsonProperty
-  private TypeReference<ResourceType> type;
   private URI resource;
   private Map<QName, String> extensionAttributes;
   private List<Object> extensionElements;
-
-  /**
-   * The id of this resource reference. Note the distinction between this id and the id of the
-   * resource being referenced.
-   *
-   * @return The id of this resource reference. Note the distinction between this id and the id of the
-   * resource being referenced.
-   */
-  @XmlID
-  @XmlAttribute( name = "ID", namespace = CommonModels.RDF_NAMESPACE )
-  @DocumentationExample(exclude = true)
-  public String getId() {
-    return id;
-  }
-
-  /**
-   * The id of this resource reference. Note the distinction between this id and the id of the
-   * resource being referenced.
-   *
-   * @param id The id of this resource reference. Note the distinction between this id and the id of the
-   * resource being referenced.
-   */
-  public void setId(String id) {
-    this.id = id;
-  }
-
-  /**
-   * The type of the resource being referenced.
-   *
-   * @return The type of the resource being referenced.
-   */
-  @XmlTransient
-  @JsonIgnore
-  public URI getType() {
-    return this.type == null ? null : this.type.getType();
-  }
-
-  /**
-   * The type of the resource being referenced.
-   *
-   * @param type The type of the resource being referenced.
-   */
-  @JsonIgnore
-  public void setType(URI type) {
-    this.type = type == null ? null : new TypeReference<ResourceType>(type);
-  }
-
-  /**
-   * The enum referencing the known type of the resource being referenced, or {@link org.gedcomx.types.ResourceType#OTHER} if not known.
-   *
-   * @return The enum referencing the known type of the source reference, or {@link org.gedcomx.types.ResourceType#OTHER} if not known.
-   */
-  @XmlTransient
-  @JsonIgnore
-  public ResourceType getKnownType() {
-    return this.type == null ? null : ResourceType.fromQNameURI(this.type.getType());
-  }
-
-  /**
-   * Set the type of this reference from an enumeration of known source reference types.
-   *
-   * @param knownType The reference type.
-   */
-  @JsonIgnore
-  public void setKnownType(ResourceType knownType) {
-    this.type = knownType == null ? null : new TypeReference<ResourceType>(knownType);
-  }
 
   /**
    * The URI to the resource. For more information, see <a href="http://www.w3.org/TR/webarch/#identification">Architecture of the World

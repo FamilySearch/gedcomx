@@ -15,19 +15,23 @@
  */
 package org.gedcomx.conclusion;
 
+import org.codehaus.enunciate.doc.DocumentationExample;
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.common.Attributable;
 import org.gedcomx.common.Attribution;
 import org.gedcomx.common.ResourceReference;
+import org.gedcomx.common.URI;
 import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.JsonElementWrapper;
 import org.gedcomx.rt.RDFRange;
 import org.gedcomx.rt.XmlTypeIdResolver;
+import org.gedcomx.types.ResourceType;
+import org.gedcomx.types.TypeReference;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 /**
  * An attributable reference to a source for genealogical conclusions.
@@ -41,8 +45,79 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType ( name = "SourceReference" )
 public class SourceReference extends ResourceReference implements Attributable {
 
+  private String id;
+  @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
+  @JsonProperty
+  private TypeReference<ResourceType> type;
   private Attribution attribution;
   private ResourceReference description;
+
+  /**
+   * The id of this resource reference. Note the distinction between this id and the id of the
+   * resource being referenced.
+   *
+   * @return The id of this resource reference. Note the distinction between this id and the id of the
+   * resource being referenced.
+   */
+  @XmlID
+  @XmlAttribute ( name = "ID", namespace = CommonModels.RDF_NAMESPACE )
+  @DocumentationExample (exclude = true)
+  public String getId() {
+    return id;
+  }
+
+  /**
+   * The id of this resource reference. Note the distinction between this id and the id of the
+   * resource being referenced.
+   *
+   * @param id The id of this resource reference. Note the distinction between this id and the id of the
+   * resource being referenced.
+   */
+  public void setId(String id) {
+    this.id = id;
+  }
+
+  /**
+   * The type of the resource being referenced.
+   *
+   * @return The type of the resource being referenced.
+   */
+  @XmlTransient
+  @JsonIgnore
+  public URI getType() {
+    return this.type == null ? null : this.type.getType();
+  }
+
+  /**
+   * The type of the resource being referenced.
+   *
+   * @param type The type of the resource being referenced.
+   */
+  @JsonIgnore
+  public void setType(URI type) {
+    this.type = type == null ? null : new TypeReference<ResourceType>(type);
+  }
+
+  /**
+   * The enum referencing the known type of the resource being referenced, or {@link org.gedcomx.types.ResourceType#OTHER} if not known.
+   *
+   * @return The enum referencing the known type of the source reference, or {@link org.gedcomx.types.ResourceType#OTHER} if not known.
+   */
+  @XmlTransient
+  @JsonIgnore
+  public ResourceType getKnownType() {
+    return this.type == null ? null : ResourceType.fromQNameURI(this.type.getType());
+  }
+
+  /**
+   * Set the type of this reference from an enumeration of known source reference types.
+   *
+   * @param knownType The reference type.
+   */
+  @JsonIgnore
+  public void setKnownType(ResourceType knownType) {
+    this.type = knownType == null ? null : new TypeReference<ResourceType>(knownType);
+  }
 
   /**
    * The attribution metadata for this source reference.
