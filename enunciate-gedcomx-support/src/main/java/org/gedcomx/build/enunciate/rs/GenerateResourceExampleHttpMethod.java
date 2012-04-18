@@ -182,11 +182,10 @@ public abstract class GenerateResourceExampleHttpMethod implements TemplateMetho
     }
     else {
       boolean isAtom = "http://www.w3.org/2005/Atom".equals(element.getNamespace());
-      boolean isXrd = "http://docs.oasis-open.org/ns/xri/xrd-1.0".equals(element.getNamespace());
       body.printf("<%s xmlns=\"%s\"%s>\n", element.getName(), element.getNamespace(), isAtom ? "" : writeLinks ? " xmlns:atom=\"http://www.w3.org/2005/Atom\"" : "");
       body.printf("  ...\n");
       if (writeLinks) {
-        writeLinks(body, links, json, 0, isAtom ? "link" : isXrd ? "Link" : "atom:link");
+        writeLinks(body, links, json, 0, isAtom ? "link" : "atom:link");
       }
       writeSubresourcesExampleToBody(element.getQname(), subresources, json, body, 1, 2, writeLinks);
       body.printf("  ...\n");
@@ -258,7 +257,7 @@ public abstract class GenerateResourceExampleHttpMethod implements TemplateMetho
         if (depth < maxDepth) {
           body.printf("%s  ...\n", tab);
           if (writeLinks) {
-            writeLinks(body, subresource.getDefinition().getLinks(), json, depth, "http://www.w3.org/2005/Atom".equals(ns) ? "link" : "http://docs.oasis-open.org/ns/xri/xrd-1.0".equals(ns) ? "Link" : "atom:link");
+            writeLinks(body, subresource.getDefinition().getLinks(), json, depth, "http://www.w3.org/2005/Atom".equals(ns) ? "link" : "atom:link");
           }
           writeSubresourcesExampleToBody(subresource.getXmlName(), gatherSubresourceElements(subresource.getTypeDefinition(), subresource.getDefinition()), json, body, depth + 1, maxDepth, writeLinks);
         }
