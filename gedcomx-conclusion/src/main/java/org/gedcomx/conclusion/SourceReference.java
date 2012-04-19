@@ -38,8 +38,8 @@ import javax.xml.bind.annotation.*;
  *
  * @author Ryan Heaton
  */
-@XmlRootElement
-@JsonElementWrapper ( name = "attribution" )
+@XmlRootElement ( name = "source" )
+@JsonElementWrapper ( name = "sources" )
 @JsonTypeInfo ( use = JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "SourceReference" )
