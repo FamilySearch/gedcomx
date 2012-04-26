@@ -34,7 +34,15 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
 
     DublinCoreDescriptionDecorator source = DublinCoreDescriptionDecorator.newInstance()
       .bibliographicCitation(new RDFLiteral("\"Texas Deaths, 1890-1976,\" index and images, FamilySearch (https://familysearch.org/pal:/MM9.1.1/J69H-GV1 : accessed 13 April 2012), Lyndon Baines Johnson, 1973"))
+      .title(new RDFLiteral("Texas Deaths, 1890-1976"))
+      .creator(new RDFValue("Lyndon Baines Johnson"))
+      .description(new RDFValue("index and images"))
+      .publisher(new RDFValue("FamilySearch"))
+      .identifier(new RDFLiteral("https://familysearch.org/pal:/MM9.1.1/J69H-GV1"))
+      .temporal(new RDFValue("1890-1976"))
+      .spatial(new RDFValue("Texas, United States"))
       .source(sourceOfSourceRef);
+    source.getDecoratedDescription().setAbout(URI.create("https://familysearch.org/pal:/MM9.1.1/J69H-GV1"));
     source.getDecoratedDescription().setId(sourceId);
 
     DublinCoreDescriptionDecorator sourceOfTheSource = DublinCoreDescriptionDecorator.newInstance()
