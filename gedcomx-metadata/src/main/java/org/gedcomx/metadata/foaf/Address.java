@@ -21,8 +21,10 @@ import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.XmlTypeIdResolver;
 
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlType;
+
 
 /**
  * An address.
@@ -43,6 +45,7 @@ public class Address {
   private String street;
   private String street2;
   private String street3;
+  private String value;
 
   /**
    * The id of this address.
@@ -188,5 +191,24 @@ public class Address {
    */
   public void setStreet3(String street3) {
     this.street3 = street3;
+  }
+
+  /**
+   * The value of the property, if it can be expressed as a string. If the value can't be expressed as a string, use {@link #getResource() the resource ref}.
+   *
+   * @return The value of the property.
+   */
+  @XmlElement ( name = "value", namespace = CommonModels.RDF_NAMESPACE )
+  public String getValue() {
+    return value;
+  }
+
+  /**
+   * The value of the property, if it can be expressed as a string. If the value can't be expressed as a string, use {@link #getResource() the resource ref}.
+   *
+   * @param value The value of the property.
+   */
+  public void setValue(String value) {
+    this.value = value;
   }
 }
