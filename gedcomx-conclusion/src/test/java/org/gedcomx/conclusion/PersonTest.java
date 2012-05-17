@@ -6,7 +6,6 @@ import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.gedcomx.rt.SerializationUtil.processThroughJson;
@@ -39,9 +38,7 @@ public class PersonTest {
 
   static Person create() {
     Person person = new Person();
-    Gender gender = new Gender();
-    gender.setKnownType(GenderType.Male);
-    person.setGender(gender);
+    person.setGender(new Gender(GenderType.Male));
 
     ArrayList<AlternateId> alternateIds = new ArrayList<AlternateId>();
     AlternateId alternateId = new AlternateId();

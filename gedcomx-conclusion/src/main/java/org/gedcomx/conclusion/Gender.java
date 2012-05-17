@@ -48,6 +48,21 @@ public class Gender extends Conclusion {
   private TypeReference<GenderType> type;
 
   /**
+   * Default constructor.
+   */
+  public Gender() {
+  }
+
+  /**
+   * Constructs a new gender object with the passed in type.
+   *
+   * @param type The type of the gender.
+   */
+  public Gender(GenderType type) {
+    setKnownType(type);
+  }
+
+  /**
    * The type of the gender.
    *
    * @return The type of the gender.
