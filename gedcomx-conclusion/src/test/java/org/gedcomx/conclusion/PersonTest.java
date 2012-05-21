@@ -47,8 +47,6 @@ public class PersonTest {
     alternateIds.add(alternateId);
     person.setAlternateIds(alternateIds);
 
-    List<Fact> facts = new ArrayList<Fact>();
-
     Fact fact = new Fact();
     fact.setAttribution(new Attribution());
     fact.getAttribution().setContributor(new ResourceReference());
@@ -70,7 +68,7 @@ public class PersonTest {
     normalized.setKnownValue(PlacePartType.Cemetery);
     fact.getPlace().setFormal(normalized);
     fact.setOriginal("fact-value");
-    facts.add(fact);
+    person.addFact(fact);
 
     Fact event = new Fact();
     event.setAttribution(new Attribution());
@@ -97,8 +95,9 @@ public class PersonTest {
     eventSource.setId("event-source");
     eventSource.setAttribution(new Attribution());
     event.getSources().add(eventSource);
-    facts.add(event);
 
+    List<Fact> facts = person.getFacts();
+    facts.add(event);
     person.setFacts(facts);
 
     List<Name> names = new ArrayList<Name>();

@@ -238,6 +238,20 @@ public class Person extends GenealogicalResource implements HasFacts, HasNotes, 
   }
 
   /**
+   * Add a sourceReference.
+   *
+   * @param sourceReference The sourceReference to be added.
+   */
+  public void addSource(SourceReference sourceReference) {
+    if (sourceReference != null) {
+      if (sources == null) {
+        sources = new ArrayList<SourceReference>();
+      }
+      sources.add(sourceReference);
+    }
+  }
+
+  /**
    * Notes about a person.
    *
    * @return Notes about a person.
@@ -257,5 +271,19 @@ public class Person extends GenealogicalResource implements HasFacts, HasNotes, 
   @JsonProperty ("notes")
   public void setNotes(List<Note> notes) {
     this.notes = notes;
+  }
+
+  /**
+   * Add a note.
+   *
+   * @param note The note to be added.
+   */
+  public void addNote(Note note) {
+    if (note != null) {
+      if (notes == null) {
+        notes = new ArrayList<Note>();
+      }
+      notes.add(note);
+    }
   }
 }

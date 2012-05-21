@@ -32,6 +32,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -176,6 +177,20 @@ public class Relationship extends GenealogicalResource implements HasFacts, HasN
   }
 
   /**
+   * Add a fact conclusion.
+   *
+   * @param fact The fact conclusion to be added.
+   */
+  public void addFact(Fact fact) {
+    if (fact != null) {
+      if (facts == null) {
+        facts = new ArrayList<Fact>();
+      }
+      facts.add(fact);
+    }
+  }
+
+  /**
    * The source references for a resource.
    *
    * @return The source references for a resource.
@@ -198,6 +213,20 @@ public class Relationship extends GenealogicalResource implements HasFacts, HasN
   }
 
   /**
+   * Add a sourceReference.
+   *
+   * @param sourceReference The sourceReference to be added.
+   */
+  public void addSource(SourceReference sourceReference) {
+    if (sourceReference != null) {
+      if (sources == null) {
+        sources = new ArrayList<SourceReference>();
+      }
+      sources.add(sourceReference);
+    }
+  }
+
+  /**
    * Notes about a resource.
    *
    * @return Notes about a resource.
@@ -217,5 +246,19 @@ public class Relationship extends GenealogicalResource implements HasFacts, HasN
   @JsonProperty ("notes")
   public void setNotes(List<Note> notes) {
     this.notes = notes;
+  }
+
+  /**
+   * Add a note.
+   *
+   * @param note The note to be added.
+   */
+  public void addNote(Note note) {
+    if (note != null) {
+      if (notes == null) {
+        notes = new ArrayList<Note>();
+      }
+      notes.add(note);
+    }
   }
 }
