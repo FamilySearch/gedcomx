@@ -37,7 +37,6 @@ public enum FactType {
   Adoption,
   AdultChristening,
   Affiliation,
-  Age,
   Baptism,
   BarMitzvah,
   BatMitzvah,
@@ -56,7 +55,6 @@ public enum FactType {
   Cremation,
   Death,
   DiedBeforeEight,
-  Dwelling,
   Emigration,
   Ethnicity,
   Excommunication,
@@ -204,7 +202,6 @@ public enum FactType {
     public static final FactType Adoption = include(FactType.Adoption);
     public static final FactType AdultChristening = include(FactType.AdultChristening);
     public static final FactType Affiliation = include(FactType.Affiliation);
-    public static final FactType Age = include(FactType.Age);
     public static final FactType Baptism = include(FactType.Baptism);
     public static final FactType BarMitzvah = include(FactType.BarMitzvah);
     public static final FactType BatMitzvah = include(FactType.BatMitzvah);
@@ -223,7 +220,6 @@ public enum FactType {
     public static final FactType Cremation = include(FactType.Cremation);
     public static final FactType Death = include(FactType.Death);
     public static final FactType DiedBeforeEight = include(FactType.DiedBeforeEight);
-    public static final FactType Dwelling = include(FactType.Dwelling);
     public static final FactType Emigration = include(FactType.Emigration);
     public static final FactType Ethnicity = include(FactType.Ethnicity);
     public static final FactType Excommunication = include(FactType.Excommunication);

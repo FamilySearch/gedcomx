@@ -13,7 +13,6 @@ public class TypesTest {
     // These enum classes don't need to be tested, so just call toQNameURI to get the code referenced in a test
     AgePartType.Days.toQNameURI();
     DatePartType.Days.toQNameURI();
-    FactType.Age.isBirthLike();
     FactType.Couple.Marriage.toQNameURI();
     FactType.ParentChild.Biological.toQNameURI();
     FactType.Person.Baptism.toQNameURI();
