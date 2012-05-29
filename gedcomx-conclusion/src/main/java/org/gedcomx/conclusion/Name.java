@@ -37,7 +37,7 @@ import java.util.List;
  */
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType ( name = "Name", propOrder = { "type", "primaryForm", "alternateForms" } )
+@XmlType ( name = "Name", propOrder = { "type", "preferred", "primaryForm", "alternateForms" } )
 @XmlRootElement
 @JsonElementWrapper ( name = "names" )
 public class Name extends Conclusion {
@@ -136,7 +136,6 @@ public class Name extends Conclusion {
    *
    * @return Whether the conclusion is preferred above other conclusions of the same type. Useful, for example, for display purposes.
    */
-  @XmlAttribute
   public Boolean getPreferred() {
     return preferred;
   }

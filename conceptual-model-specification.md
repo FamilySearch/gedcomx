@@ -186,6 +186,8 @@ processing (e.g. for display purposes), it is said to be "normalized". If the va
 been resolved to a discrete, machine-identifiable value based on a specific standard, it is
 said to be "standardized".
 
+The `FormalValue` data type does NOT support extension properties (see [Extension Properties](#extension-properties)).
+
 ### identifier
 
 The identifier for the "FormalValue" data type is:
@@ -199,6 +201,9 @@ name  | description | data type
 value | A string supplying the value of the formal value. If the value has been standardized, a datatype will be supplied to identify how the string is to be parsed. | string
 datatype  | URI identifying the way the value is to be processed according to a specific standard. | [URI](#uri)
 resource | URI identifying the resource to which the formal value has been standardized. | [URI](#uri)
+
+If a value is supplied for the `datatype` property, a value SHALL NOT be supplied for the `resource` property.
+If a value is supplied for the `resource` property, a value SHALL NOT be supplied for the `datatype` property.
 
 ### examples
 
@@ -858,7 +863,7 @@ name | description | data type
 -----|-------------|----------
 type | URI identifying the type of the name. | [`http://www.w3.org/1999/02/22-rdf-syntax-ns#ResourceReference`](#resource-reference) - MUST resolve to a name type. Refer to the list of [known name types](#known-name-types).
 primaryForm | The primary form of the name. | `http://gedcomx.org/conclusion/v1/NameForm`
-alternateForms | The alternate forms of the name. | Ordered lits of `http://gedcomx.org/conclusion/v1/NameForm`
+alternateForms | The alternate forms of the name. | Ordered list of `http://gedcomx.org/conclusion/v1/NameForm`
 preferred | Whether this name is preferred above the other names of a person. | boolean
 
 <a id="known-name-types"/>
@@ -946,9 +951,9 @@ name | description | data type
 type | URI identifying the type of the relationship. | [`http://www.w3.org/1999/02/22-rdf-syntax-ns#ResourceReference`](#resource-reference) - MUST resolve to a relationship type. Refer to the list of [known relationship types](#known-relationship-types)
 person1 | Reference to the first person in the relationship. | [`http://www.w3.org/1999/02/22-rdf-syntax-ns#ResourceReference`](#resource-reference) - MUST resolve to an instance of [`http://gedcomx.org/conclusion/v1/Person`](#person)
 person2 | Reference to the second person in the relationship. | [`http://www.w3.org/1999/02/22-rdf-syntax-ns#ResourceReference`](#resource-reference) - MUST resolve to an instance of [`http://gedcomx.org/conclusion/v1/Person`](#person)
-facts | The conclusions about the facts of the life of the person. | Ordered list of [`http://gedcomx.org/conclusion/v1/Fact`](#fact-conclusion)
-sources | The list of references to the evidence of the person. | Ordered list of [`http://gedcomx.org/conclusion/v1/SourceReference`](#source-reference)
-notes | Contributed notes about the person. | Ordered list of [`http://gedcomx.org/Note`](#note)
+facts | The conclusions about the facts of the life of the relationship. | Ordered list of [`http://gedcomx.org/conclusion/v1/Fact`](#fact-conclusion)
+sources | The list of references to the evidence of the relationship. | Ordered list of [`http://gedcomx.org/conclusion/v1/SourceReference`](#source-reference)
+notes | Contributed notes about the relationship. | Ordered list of [`http://gedcomx.org/Note`](#note)
 
 Note: when a relationship type implies direction, the relationship is said to
 to *from* person1 *to* person2. For example, in a parent-child relationship, the
@@ -996,6 +1001,8 @@ such vocabularies are termed "unknown foreign vocabularies".
 When unknown foreign vocabularies are encountered, GEDCOM X Processors MAY
 bypass the foreign properties, type references, and textual content and
 MUST NOT change their behavior as a result of the presence of the vocabulary.
+
+<a id="extension-properties"/>
 
 ## Extension Properties
 
