@@ -409,7 +409,6 @@ name | description | data type
 id | A local identifier for the source reference. Note that this id MUST NOT be processed as an identifier for the resource being referenced, but instead as a transient identifier for the reference itself. | string
 type  | Reference to the type of the resource being referenced. | [`http://www.w3.org/1999/02/22-rdf-syntax-ns#ResourceReference`](#resource-reference) - MUST resolve to a resource type. See the list of [known resource types](#known-resource-types).
 description  | Reference to a _description_ of the source being referenced. | [`http://www.w3.org/1999/02/22-rdf-syntax-ns#ResourceReference`](#resource-reference) - MUST resolve to an instance of [`http://www.w3.org/1999/02/22-rdf-syntax-ns#Description`](#rdf-description)
-about | The URI to the resource being described. | [URI](#uri)
 attribution | The attribution of this source reference. | [`http://gedcomx.org/Attribution`](#attribution)
 
 

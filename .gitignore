@@ -4,3 +4,4 @@
 *.iws
 target
 .idea
+*.zargo~
