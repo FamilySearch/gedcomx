@@ -167,7 +167,7 @@ XML type defined by the XML schema specification will be used to (de)serialize t
 
 <a id="resource-reference"/>
 
-## 2.2 The "ResourceReference" XML Type
+## 2.2 The "ResourceReference" Data Type
 
 The `rdf:ResourceReference` XML type is used to (de)serialize the
 `http://www.w3.org/1999/02/22-rdf-syntax-ns#ResourceReference` data type.
@@ -229,7 +229,7 @@ proofStatement | A statement of proof provided by the contributor of the attribu
 
 ```xml
   <...>
-    <gx:contributor rdf:resource="http://path/to/contributor"/>
+    <gx:contributor rdf:resource="http://identifier/for/contributor"/>
     <gx:confidence rdf:resource="http://gedcomx.org/Certainly"/>
     <gx:modified>2012-05-29T00:00:00</gx:modified>
     <gx:proofStatement>...proof statement here...</gx:proofStatement>
@@ -267,13 +267,13 @@ Normalized value:
 Standardized value:
 
 ```xml
-  <... rdf:resource="http://path/to/standardized/value"/>
+  <... rdf:resource="http://identifier/for/standardized/value"/>
 ```
 
 Standardized and normalized value:
 
 ```xml
-  <... rdf:resource="http://path/to/standardized/value">...text of the normalized value...</...>
+  <... rdf:resource="http://identifier/for/standardized/value">...text of the normalized value...</...>
 ```
 
 ## 2.6 The "GenealogicalResource" Data Type
@@ -369,7 +369,7 @@ A value that has to be resolved, perhaps because more structure is needed
 than a string.
 
 ```xml
-  <... rdf:resource="http://path/to/the/value">
+  <... rdf:resource="http://identifier/for/the/value">
     <rdf:type rdf:resource="http://identifier/for/the/type/of/resource"/>
   </...>
 ```
@@ -934,6 +934,7 @@ these elements are encountered during processing (either as root elements of a d
 extension properties), the XML types are identified as follows:
 
 name | XML type
+-----|-----------------
 gxc:person | [gxc:Person](#person)
 gxc:relationship | [gxc:Relationship](#relationship)
 gxc:fact | [gxc:Fact](#fact-conclusion)

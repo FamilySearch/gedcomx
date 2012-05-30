@@ -19,10 +19,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.common.URI;
-import org.gedcomx.rt.CommonModels;
-import org.gedcomx.rt.SupportsExtensionAttributes;
-import org.gedcomx.rt.SupportsExtensionElements;
-import org.gedcomx.rt.XmlTypeIdResolver;
+import org.gedcomx.rt.*;
 import org.gedcomx.types.ResourceType;
 import org.gedcomx.types.TypeReference;
 
@@ -43,6 +40,7 @@ import java.util.Map;
 @XmlType ( name = "Description" )
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
+@JsonElementWrapper( name = "descriptions" )
 @XmlSeeAlso({RDFValue.class, RDFLiteral.class})
 public class Description implements SupportsExtensionAttributes, SupportsExtensionElements {
 
