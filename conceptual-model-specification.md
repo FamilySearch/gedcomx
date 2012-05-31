@@ -599,6 +599,15 @@ name | description | data type
 original | The original value of the date as supplied by the contributor. | string
 formal | The formal value of the date. | [`http://gedcomx.org/FormalValue`](#formal-value)
 
+### known date formats
+
+The following date formats are recognized by GEDCOM X:
+
+URI | description
+----|-------------
+`http://gedcomx.org/GEDCOM_5_5` | The date format specified by the GEDCOM 5.5 specification.
+`iso:8601` | The date format specified by [ISO 8601](http://en.wikipedia.org/wiki/ISO_8601).
+
 <a id="conclusion-place"/>
 
 ## 5.3 The "Place" Data Type
