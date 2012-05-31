@@ -80,9 +80,6 @@ public class GedcomxValidator extends BaseValidator {
         result.addError(complexType, "Non-final, non-abstract complex types need to be annotated with @org.codehaus.jackson.map.annotate.JsonTypeIdResolver(org.gedcomx.id.XmlTypeIdResolver.class) to specify their JSON type id.");
       }
 
-      if (!suppressWarning(complexType, "gedcomx:no_id") && !hasIdAttribute(complexType)) {
-        result.addWarning(complexType, "Non-final, non-abstract complex types might need to have an 'id' attribute so they can be referenced.");
-      }
     }
     return result;
   }
@@ -90,24 +87,6 @@ public class GedcomxValidator extends BaseValidator {
   private boolean suppressWarning(Declaration declaration, String warning) {
     SuppressWarnings suppressionInfo = declaration.getAnnotation(SuppressWarnings.class);
     return suppressionInfo != null && Arrays.asList(suppressionInfo.value()).contains(warning);
-  }
-
-  protected boolean hasIdAttribute(ComplexTypeDefinition complexType) {
-    for (Attribute attribute : complexType.getAttributes()) {
-      if (attribute.isXmlID()) {
-        return true;
-      }
-    }
-
-    boolean idAttributeFound = false;
-    XmlType baseType = complexType.getBaseType();
-    if (baseType instanceof XmlClassType) {
-      TypeDefinition typeDefinition = ((XmlClassType) baseType).getTypeDefinition();
-      if (typeDefinition.isComplex()) {
-        idAttributeFound = hasIdAttribute((ComplexTypeDefinition) typeDefinition);
-      }
-    }
-    return idAttributeFound;
   }
 
   @Override
