@@ -22,8 +22,8 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
 
   @Test
   public void testTexasDeaths() throws Exception {
-    createRecipe("Texas Deaths Online Citation")
-      .withDescription("Example for citing online Texas Death records.")
+    createRecipe("Describing a Texas Deaths Online Record")
+      .withDescription("Example for describing an online Texas Death record.")
       .applicableTo(Description.class);
 
     String sourceId = "1";
@@ -64,8 +64,8 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
 
   @Test
   public void test1930Census() throws Exception {
-    createRecipe("1930 Census Online Citation")
-      .withDescription("Example for citing online 1930 Census Records.")
+    createRecipe("Describing a 1930 Census Online Record")
+      .withDescription("Example for describing an online 1930 Census Record.")
       .applicableTo(Description.class);
 
     String sourceId = "1";
