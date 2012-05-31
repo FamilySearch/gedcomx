@@ -15,6 +15,7 @@
  */
 package org.gedcomx.metadata.dc;
 
+import org.gedcomx.common.URI;
 import org.gedcomx.metadata.rdf.Description;
 import org.gedcomx.metadata.rdf.RDFLiteral;
 import org.gedcomx.metadata.rdf.RDFValue;
@@ -72,6 +73,46 @@ public class DublinCoreDescriptionDecorator {
    */
   public Description getDecoratedDescription() {
     return description;
+  }
+
+  /**
+   * The URI of the resource being described.
+   *
+   * @param uri The URI of the resource being described.
+   * @return this builder.
+   */
+  public DublinCoreDescriptionDecorator about(URI uri) {
+    this.description.setAbout(uri);
+    return this;
+  }
+
+  /**
+   * The URI of the resource being described.
+   *
+   * @return The URI of the resource being described.
+   */
+  public URI getAbout() {
+    return this.description.getAbout();
+  }
+
+  /**
+   * The id of the description.
+   *
+   * @param id The id of the description.
+   * @return this builder.
+   */
+  public DublinCoreDescriptionDecorator id(String id) {
+    this.description.setId(id);
+    return this;
+  }
+
+  /**
+   * The id of the description.
+   *
+   * @return The id of the description.
+   */
+  public String getId() {
+    return this.description.getId();
   }
 
   /**
