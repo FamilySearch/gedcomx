@@ -1,0 +1,8 @@
+Description ::= ( id | ) ( type | ) ( about | ) ( dublin_core_term )*
+SourceReference ::= ( id | ) ( type | ) ( description | ) ( attribution | )
+description ::= resource_reference
+attribution ::= ( contributor | ) ( confidence | ) ( modified | ) ( proofStatement | )
+resource_reference ::= resource
+about ::= URI
+resource ::= URI
+contributor ::= resource_reference
