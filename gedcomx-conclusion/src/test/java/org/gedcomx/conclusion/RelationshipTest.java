@@ -1,6 +1,6 @@
 package org.gedcomx.conclusion;
 
-import org.gedcomx.common.AlternateId;
+import org.gedcomx.common.Identifier;
 import org.gedcomx.common.Attribution;
 import org.gedcomx.common.ResourceReference;
 import org.gedcomx.common.URI;
@@ -40,8 +40,8 @@ public class RelationshipTest {
   private Relationship createTestRelationship() {
     Relationship relationship = new Relationship();
     relationship.setKnownType(RelationshipType.Couple);
-    AlternateId alternateId = new AlternateId();
-    alternateId.setValue("alt-id");
+    Identifier identifier = new Identifier();
+    identifier.setValue("alt-id");
     relationship.setAttribution(new Attribution());
     relationship.getAttribution().setProofStatement("explanation");
     Fact fact = new Fact();

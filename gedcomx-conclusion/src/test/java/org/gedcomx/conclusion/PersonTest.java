@@ -40,12 +40,16 @@ public class PersonTest {
     Person person = new Person();
     person.setGender(new Gender(GenderType.Male));
 
-    ArrayList<AlternateId> alternateIds = new ArrayList<AlternateId>();
-    AlternateId alternateId = new AlternateId();
-    alternateId.setKnownType(AlternateIdType.Forwarded);
-    alternateId.setValue("forward-value");
-    alternateIds.add(alternateId);
-    person.setAlternateIds(alternateIds);
+    ArrayList<Identifier> identifiers = new ArrayList<Identifier>();
+    Identifier identifier = new Identifier();
+    identifier.setKnownType(IdentifierType.Forwarded);
+    identifier.setValue("forward-value");
+    identifiers.add(identifier);
+    identifier = new Identifier();
+    identifier.setKnownType(IdentifierType.Primary);
+    identifier.setValue("pal");
+    identifiers.add(identifier);
+    person.setIdentifiers(identifiers);
 
     Fact fact = new Fact();
     fact.setAttribution(new Attribution());
@@ -130,8 +134,6 @@ public class PersonTest {
     names.add(name);
     person.setNames(names);
 
-    person.setPersistentId(URI.create("pal"));
-
     ArrayList<SourceReference> sources = new ArrayList<SourceReference>();
     SourceReference attributedSourceReference = new SourceReference();
     Attribution attribution = new Attribution();
@@ -162,9 +164,11 @@ public class PersonTest {
     SourceReference attributedSourceReference;
     AssertJUnit.assertEquals(GenderType.Male, person.getGender().getKnownType());
 
-    AssertJUnit.assertEquals(1, person.getAlternateIds().size());
-    AssertJUnit.assertEquals(AlternateIdType.Forwarded, person.getAlternateIds().get(0).getKnownType());
-    AssertJUnit.assertEquals("forward-value", person.getAlternateIds().get(0).getValue());
+    AssertJUnit.assertEquals(2, person.getIdentifiers().size());
+    AssertJUnit.assertEquals(IdentifierType.Forwarded, person.getIdentifiers().get(0).getKnownType());
+    AssertJUnit.assertEquals("forward-value", person.getIdentifiers().get(0).getValue());
+    AssertJUnit.assertEquals(IdentifierType.Primary, person.getIdentifiers().get(1).getKnownType());
+    AssertJUnit.assertEquals("pal", person.getIdentifiers().get(1).getValue());
 
     AssertJUnit.assertEquals(2, person.getFacts().size());
     fact = person.getFacts().get(0);

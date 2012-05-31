@@ -15,7 +15,7 @@ import static org.testng.AssertJUnit.assertEquals;
 public class ResourceSetTest {
 
   /**
-   * tests alternate id xml
+   * tests id xml
    */
   public void testRDFMetadataBundleXml() throws Exception {
     ResourceSet meta = new ResourceSet();
@@ -28,7 +28,7 @@ public class ResourceSetTest {
   }
 
   /**
-   * tests alternate id json
+   * tests id json
    */
   public void testRDFMetadataJson() throws Exception {
     ResourceSet meta = new ResourceSet();

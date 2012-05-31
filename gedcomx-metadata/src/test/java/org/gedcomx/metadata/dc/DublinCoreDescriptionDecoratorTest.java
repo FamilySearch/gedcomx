@@ -21,7 +21,7 @@ import static org.testng.AssertJUnit.assertEquals;
 public class DublinCoreDescriptionDecoratorTest {
 
   /**
-   * tests alternate id xml
+   * tests id xml
    */
   public void testDublinCoreMetadataXml() throws Exception {
     DublinCoreDescriptionDecorator metadata = createMetadata();
@@ -30,7 +30,7 @@ public class DublinCoreDescriptionDecoratorTest {
   }
 
   /**
-   * tests alternate id json
+   * tests id json
    */
   public void testDublinCoreMetadataJson() throws Exception {
     DublinCoreDescriptionDecorator metadata = createMetadata();

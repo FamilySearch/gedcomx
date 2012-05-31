@@ -1,7 +1,5 @@
-Person ::= ( persistentId | ) ( alternateId )* ( living | ) ( gender | ) ( name )* ( fact )* ( source )* ( note )*
+Person ::= ( identifier )* ( living | ) ( gender | ) ( name )* ( fact )* ( source )* ( note )*
 Relationship ::= type person1 person2 ( fact )* ( source )* ( note )*
-persistentId ::= URI
-alternateId ::= identifier
 identifier ::= type resource
 living ::= ( <true> | <false> )
 gender ::=  conclusion_properties type

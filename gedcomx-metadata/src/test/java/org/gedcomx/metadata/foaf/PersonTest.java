@@ -24,7 +24,7 @@ public class PersonTest {
   }
 
   /**
-   * tests alternate id json
+   * tests id json
    */
   public void testPersonJson() throws Exception {
     Person person = createPerson();

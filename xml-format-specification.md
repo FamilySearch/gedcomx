@@ -818,8 +818,7 @@ data type.
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
-persistentId | URI identifying a long-lived persistent identifier for the person. | gxc:persistentId | [anyURI](#uri)
-alternateIds | Alternate identifiers for the person. | gxc:alternateId | [`gx:Identifier`](#identifier-type)
+identifiers | Identifiers for the person. | gxc:identifier | [`gx:Identifier`](#identifier-type)
 living | Whether the person is considered living. | gxc:living | xsd:boolean
 gender | The conclusion about the gender of the person. | gxc:gender | [`gxc:Gender`](#gender)
 names | The conclusions about the names of the person. | gxc:name | [`gxc:Name`](#name-conclusion)
@@ -831,10 +830,9 @@ notes | Contributed notes about the person. | gxc:note | [`gxc:Note`](#note)
 
 ```xml
   <... rdf:ID="local_id">
-    <gxc:persistentId>...</gxc:persistentId>
-    <gxc:alternateId>
+    <gxc:identifier>
       ...
-    </gxc:alternateId>
+    </gxc:identifier>
     <gxc:living>true</gxc:living>
     <gxc:gender>
       ...

@@ -20,20 +20,21 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.common.AlternateId;
 import org.gedcomx.common.GenealogicalResource;
+import org.gedcomx.common.Identifier;
 import org.gedcomx.common.Note;
 import org.gedcomx.common.URI;
 import org.gedcomx.rt.JsonElementWrapper;
 import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.FactType;
+import org.gedcomx.types.IdentifierType;
 
-import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -45,11 +46,10 @@ import java.util.List;
 @JsonElementWrapper (name = "persons")
 @JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
 @JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType ( name = "Person", propOrder = { "persistentId", "alternateIds", "living", "gender", "names", "facts", "sources", "notes" } )
+@XmlType ( name = "Person", propOrder = { "identifiers", "living", "gender", "names", "facts", "sources", "notes" } )
 public class Person extends GenealogicalResource implements HasFacts, HasNotes, ReferencesSources {
 
-  private URI persistentId;
-  private List<AlternateId> alternateIds;
+  private List<Identifier> identifiers;
   private Boolean living;
   private Gender gender;
   private List<Name> names;
@@ -58,13 +58,23 @@ public class Person extends GenealogicalResource implements HasFacts, HasNotes, 
   private List<Note> notes;
 
   /**
-   * A long-term, persistent, globally unique identifier for this person.
+   * Find the long-term, persistent identifier for this person from the list of identifiers.
    *
-   * @return A long-term, persistent, globally unique identifier for this person.
+   * @return The long-term, persistent identifier for this person.
    */
-  @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
+  @XmlTransient
+  @JsonIgnore
   public URI getPersistentId() {
-    return persistentId;
+    URI identifier = null;
+    if (this.identifiers != null) {
+      for (Identifier id : this.identifiers) {
+        if (IdentifierType.Primary.equals(id.getKnownType())) {
+          identifier = id.getValue() != null ? URI.create(id.getValue()) : null;
+          break;
+        }
+      }
+    }
+    return identifier;
   }
 
   /**
@@ -72,30 +82,46 @@ public class Person extends GenealogicalResource implements HasFacts, HasNotes, 
    *
    * @param persistentId A long-term, persistent, globally unique identifier for this person.
    */
+  @JsonIgnore
   public void setPersistentId(URI persistentId) {
-    this.persistentId = persistentId;
+    if (this.identifiers == null) {
+      this.identifiers = new ArrayList<Identifier>();
+    }
+
+    //clear out any other primary ids.
+    Iterator<Identifier> it = this.identifiers.iterator();
+    while (it.hasNext()) {
+      if (IdentifierType.Primary.equals(it.next().getKnownType())) {
+        it.remove();
+      }
+    }
+
+    Identifier identifier = new Identifier();
+    identifier.setKnownType(IdentifierType.Primary);
+    identifier.setValue(persistentId.toString());
+    this.identifiers.add(identifier);
   }
 
   /**
-   * The list of alternate ids of the person.
+   * The list of identifiers for the person.
    *
-   * @return The list of alternate ids of the person.
+   * @return The list of identifiers for the person.
    */
-  @XmlElement (name="alternateId")
-  @JsonProperty ("alternateIds")
-  @JsonName ("alternateIds")
-  public List<AlternateId> getAlternateIds() {
-    return alternateIds;
+  @XmlElement (name="identifier")
+  @JsonProperty ("identifiers")
+  @JsonName ("identifiers")
+  public List<Identifier> getIdentifiers() {
+    return identifiers;
   }
 
   /**
-   * The list of alternate ids of the person.
+   * The list of identifiers of the person.
    *
-   * @param alternateIds The list of alternate ids of the person.
+   * @param identifiers The list of identifiers of the person.
    */
-  @JsonProperty ("alternateIds")
-  public void setAlternateIds(List<AlternateId> alternateIds) {
-    this.alternateIds = alternateIds;
+  @JsonProperty ("identifiers")
+  public void setIdentifiers(List<Identifier> identifiers) {
+    this.identifiers = identifiers;
   }
 
   /**

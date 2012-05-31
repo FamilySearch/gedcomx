@@ -166,10 +166,6 @@ public class GedcomxValidator extends BaseValidator {
           }
         }
 
-        if ("persistentId".equalsIgnoreCase(attribute.getName())) {
-          result.addWarning(attribute, "Persistent IDs should be elements to conform to the established pattern.");
-        }
-
         TypeMirror accessorType = attribute.getAccessorType();
         if (accessorType instanceof EnumType && ((EnumType) accessorType).getDeclaration().getAnnotation(XmlQNameEnum.class) != null) {
           result.addError(attribute, "Accessors should not reference QName enums directly. You probably want to annotate this accessor with @XmlTransient.");
@@ -203,21 +199,9 @@ public class GedcomxValidator extends BaseValidator {
             result.addError(choice, "Entity links should be make with an attribute named 'href'. You probably need to apply @XmlAttribute.");
           }
 
-          if ("persistentId".equals(choice.getName()) && !isURI) {
-            result.addError(choice, "Accessors named 'persistentId' should be elements of type URI.");
-          }
-
           TypeMirror accessorType = choice.getAccessorType();
           if (accessorType instanceof EnumType && ((EnumType) accessorType).getDeclaration().getAnnotation(XmlQNameEnum.class) != null) {
             result.addError(choice, "Accessors should not reference QName enums directly. You probably want to annotate this accessor with @XmlTransient.");
-          }
-
-          accessorType = choice.getBareAccessorType();
-          if (accessorType instanceof DeclaredType) {
-            if ("alternateid".equals(((DeclaredType)accessorType).getDeclaration().getSimpleName().toLowerCase()) &&
-              (!"alternateId".equals(element.getName()) || element.isWrapped())) {
-              result.addWarning(element, "Element name for AlternateId should probably be named 'alternateId' to be consistent.");
-            }
           }
 
           QName ref = choice.getRef();

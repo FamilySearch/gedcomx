@@ -20,15 +20,23 @@ import org.codehaus.enunciate.qname.XmlUnknownQNameEnumValue;
 import org.gedcomx.common.URI;
 
 /**
- * Enumeration of standard alternate id types.
+ * Enumeration of standard identifier types.
  *
  * @author Ryan Heaton
  */
 @XmlQNameEnum (
   base = XmlQNameEnum.BaseType.URI
 )
-public enum AlternateIdType {
+public enum IdentifierType {
 
+  /**
+   * The primary identifier for the resource.
+   */
+  Primary,
+
+  /**
+   * A forwarded identifier for the resource, such as from the result of a merge.
+   */
   Forwarded,
 
   @XmlUnknownQNameEnumValue
@@ -49,8 +57,8 @@ public enum AlternateIdType {
    * @param qname The qname.
    * @return The enumeration.
    */
-  public static AlternateIdType fromQNameURI(URI qname) {
-    return org.codehaus.enunciate.XmlQNameEnumUtil.fromURIValue(qname.toString(), AlternateIdType.class);
+  public static IdentifierType fromQNameURI(URI qname) {
+    return org.codehaus.enunciate.XmlQNameEnumUtil.fromURIValue(qname.toString(), IdentifierType.class);
   }
 
 }

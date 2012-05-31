@@ -920,8 +920,7 @@ This data type extends the following data type:
 
 name | description | data type
 -----|-------------|----------
-persistentId | URI identifying a long-lived persistent identifier for the person. | [URI](#uri)
-alternateIds | Alternate identifiers for the person. | Ordered list of [`http://gedcomx.org/Identifier`](#identifier-type)
+identifiers | Identifiers for the person. | Ordered list of [`http://gedcomx.org/Identifier`](#identifier-type)
 living | Whether the person is considered living. | boolean
 gender | The conclusion about the gender of the person. | [`http://gedcomx.org/conclusion/v1/Gender`](#gender)
 names | The conclusions about the names of the person. | Ordered list of [`http://gedcomx.org/conclusion/v1/Name`](#name-conclusion)

@@ -922,8 +922,7 @@ The JSON object used to (de)serialize the `http://gedcomx.org/conclusion/v1/Pers
 
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
-persistentId | URI identifying a long-lived persistent identifier for the person. | persistentId | [anyURI](#uri)
-alternateIds | Alternate identifiers for the person. | alternateIds | array of [`Identifier`](#identifier-type)
+identifiers | Identifiers for the person. | identifiers | array of [`Identifier`](#identifier-type)
 living | Whether the person is considered living. | living | true or false
 gender | The conclusion about the gender of the person. | gender | [`Gender`](#gender)
 names | The conclusions about the names of the person. | names | array of [`Name`](#name-conclusion)
@@ -937,8 +936,7 @@ notes | Contributed notes about the person. | notes | array of [`Note`](#note)
 {
   "@type" : "http://gedcomx.org/conclusion/v1/Person",
   "id" : "local_id",
-  "persistentId" : "...",
-  "alternateIds" : [ { ... }, { ... } ],
+  "identifiers" : [ { ... }, { ... } ],
   "living" : true,
   "gender" : {
     ...
