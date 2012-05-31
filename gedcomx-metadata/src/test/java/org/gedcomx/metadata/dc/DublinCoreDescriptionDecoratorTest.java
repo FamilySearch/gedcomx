@@ -6,6 +6,8 @@ import org.gedcomx.metadata.rdf.RDFValue;
 import org.testng.annotations.Test;
 
 import javax.xml.bind.JAXBContext;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static org.gedcomx.rt.SerializationUtil.processThroughJson;
@@ -675,8 +677,15 @@ public class DublinCoreDescriptionDecoratorTest {
      *
      * @link http://dublincore.org/documents/dcmi-terms/#terms-created
      */
+    assertEquals(1, metadata.getCreatedAsDate().size());
+    Date date = metadata.getCreatedAsDate().get(0);
+    assertEquals("created".hashCode(), date.getTime());
+    SimpleDateFormat dateFormat = (SimpleDateFormat)DateFormat.getDateTimeInstance();
+    dateFormat.applyPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
+    StringBuilder builder = new StringBuilder(dateFormat.format(date));
+    builder.insert(builder.length() - 2, ':');
     assertEquals(1, metadata.getCreated().size());
-    assertEquals("created".hashCode(), metadata.getCreated().get(0).getTime());
+    assertEquals(builder.toString(), metadata.getCreated().get(0).getValue());
 
     /**
      * Entities primarily responsible for making the resource.

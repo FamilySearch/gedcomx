@@ -226,10 +226,22 @@ public class DublinCoreDescriptionDecorator {
    * Date of creation of the resource.
    *
    * @return Date of creation of the resource.
-   * 
+   *
    * @link http://dublincore.org/documents/dcmi-terms/#terms-created
    */
   public DublinCoreDescriptionDecorator created(Date created) {
+    this.description.addExtensionElement(OBJECT_FACTORY.createCreatedElement(new RDFLiteral(created)));
+    return this;
+  }
+
+  /**
+   * Date of creation of the resource.
+   *
+   * @return Date of creation of the resource.
+   *
+   * @link http://dublincore.org/documents/dcmi-terms/#terms-created
+   */
+  public DublinCoreDescriptionDecorator created(String created) {
     this.description.addExtensionElement(OBJECT_FACTORY.createCreatedElement(new RDFLiteral(created)));
     return this;
   }
@@ -881,7 +893,18 @@ public class DublinCoreDescriptionDecorator {
    * 
    * @link http://dublincore.org/documents/dcmi-terms/#terms-created
    */
-  public List<Date> getCreated() {
+  public List<RDFLiteral> getCreated() {
+    return findElements("created", RDFLiteral.class);
+  }
+
+  /**
+   * Date of creation of the resource.
+   *
+   * @return Date of creation of the resource.
+   *
+   * @link http://dublincore.org/documents/dcmi-terms/#terms-created
+   */
+  public List<Date> getCreatedAsDate() {
     return findElements("created", Date.class);
   }
 
