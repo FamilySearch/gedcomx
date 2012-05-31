@@ -3,7 +3,7 @@
 ## Status
 
 This document specifies a JSON serialization format for the [GEDCOM X standard conceptual
-model](conceptual-model-specification.md), and requests discussion and suggestions for improvements.
+model](https://github.com/FamilySearch/gedcomx/blob/master/conceptual-model-specification.md), and requests discussion and suggestions for improvements.
 
 ## Copyright Notice
 
@@ -28,7 +28,7 @@ the GEDCOM X conceptual model is serialized to and deserialized from
 
 ## 1.1 Examples
 
-The following example shows the serialization of a [person data type](conceptual-model-specification.md#person)
+The following example shows the serialization of a [person data type](https://github.com/FamilySearch/gedcomx/blob/master/conceptual-model-specification.md#person)
 in JSON according to this specification:
 
 ```json
