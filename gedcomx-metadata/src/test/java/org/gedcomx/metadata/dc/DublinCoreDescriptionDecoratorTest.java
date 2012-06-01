@@ -1140,7 +1140,10 @@ public class DublinCoreDescriptionDecoratorTest {
 
   private String toW3CDTF(Date date) {
     StringBuilder builder = new StringBuilder(dateFormat.format(date));
-    builder.insert(builder.length() - 2, ':');
+    int length = builder.length();
+    if (builder.charAt(length - 1) != 'Z') {
+      builder.insert(length - 2, ':');
+    }
     return builder.toString();
   }
 }
