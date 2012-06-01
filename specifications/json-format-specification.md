@@ -26,7 +26,18 @@ The GEDCOM X JSON Serialization Format is a specification that defines the way t
 the GEDCOM X conceptual model is serialized to and deserialized from
 [JSON](http://json.org).
 
-## 1.1 Examples
+## 1.1 Identifier, Version, and Dependencies
+
+The identifier for this specification is:
+
+`http://gedcomx.org/json/v1`
+
+For convenience, the GEDCOM X JSON Format may be referred to as "GEDCOM X JSON 1.0".
+
+This specification is depends on the conceptual model specification identified
+by [`http://gedcomx.org/conceptual-model/v1`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md).
+
+## 1.2 Examples
 
 The following example shows the serialization of a [person data type](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md#person)
 in JSON according to this specification:
@@ -179,7 +190,7 @@ JSON according to this specification:
 ```
 
 
-## 1.2 Notational Conventions
+## 1.3 Notational Conventions
 
 For each data type specified by the GEDCOM X conceptual model, a
 JSON data format is supplied which specifies how each of the
@@ -193,7 +204,7 @@ document are to be interpreted as described in BCP 14,
 [RFC2119](http://tools.ietf.org/html/rfc2119), as scoped to those conformance 
 targets.
 
-## 1.3 Data Type Identification in JSON Using "@type"
+## 1.4 Data Type Identification in JSON Using "@type"
 
 Because JSON is not a formally typed data format, a mechanism for
 identifying the data type must be specified so that GEDCOM X JSON processors

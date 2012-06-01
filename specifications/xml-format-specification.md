@@ -26,7 +26,18 @@ The GEDCOM X XML Serialization Format is a specification that defines the way th
 the GEDCOM X conceptual model is serialized to and deserialized from
 [XML](http://www.w3.org/TR/REC-xml/).
 
-## 1.1 Examples
+## 1.1 Identifier, Version, and Dependencies
+
+The identifier for this specification is:
+
+`http://gedcomx.org/xml/v1`
+
+For convenience, the GEDCOM X XML Format may be referred to as "GEDCOM X XML 1.0".
+
+This specification is depends on the conceptual model specification identified
+by [`http://gedcomx.org/conceptual-model/v1`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md).
+
+## 1.2 Examples
 
 The following example shows the serialization of a [person data type](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md#person)
 in XML according to this specification:
@@ -121,7 +132,7 @@ XML according to this specification:
 ```
 
 
-## 1.2 Notational Conventions
+## 1.3 Notational Conventions
 
 This document uses the following namespace prefixes:
 

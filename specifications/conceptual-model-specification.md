@@ -23,12 +23,11 @@ that are used to provide a standard model and vocabulary for describing genealog
 data. Genealogical data is structured by data types such as persons, 
 relationships, and sources.
 
-## 1.1 Namespace and Version
+## 1.1 Identifier and Version
 
-The concepts and types specified by the GEDCOM X conceptual model are defined within
-this namespace:
+The identifier for this specification is:
 
-http://gedcomx.org/v1
+`http://gedcomx.org/conceptual-model/v1`
 
 For convenience, the GEDCOM X conceptual model may be referred to as "GEDCOM X 1.0".
 This specification uses "GEDCOM X" internally.
