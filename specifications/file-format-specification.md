@@ -1,6 +1,6 @@
 # File Format
 
-This document defines the specification for the GEDCOM X File Format.
+This document specifies the GEDCOM X File Format.
 
 A GEDCOM X file is a bundle of digital genealogical resources. Resources reference other resources,
 which may be located within the same file or may be located external to the file.
@@ -20,11 +20,11 @@ contained in it.
 
 # GEDCOM X Resource Representations
 
-For all resources defined by the [GEDCOM X conceptual model](https://github.com/FamilySearch/gedcomx/blob/master/conceptual-model-specification.md),
+For all resources defined by the [GEDCOM X conceptual model](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md),
 file format processors MUST support the XML representation of those resources as defined by the
-[XML format specification](https://github.com/FamilySearch/gedcomx/blob/master/xml-format-specification.md). Processors
+[XML format specification](https://github.com/FamilySearch/gedcomx/blob/master/specifications/xml-format-specification.md). Processors
 MAY also support the JSON representation of the resource as defined by the
-[JSON format specification](https://github.com/FamilySearch/gedcomx/blob/master/json-format-specification.md).
+[JSON format specification](https://github.com/FamilySearch/gedcomx/blob/master/specifications/json-format-specification.md).
 
 # The Manifest
 
