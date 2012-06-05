@@ -5,7 +5,7 @@ layout: default
 ---
 
 Having made the decision to go with a [zip-based file format](https://github.com/FamilySearch/gedcomx/blob/master/specifications/file-format-specification.md)
-for GEDCOM X ([thanks for your feedback, by the way](http://familysearch.github.com/gedcomx//2012/06/05/thanks-for-feedback.html),
+for GEDCOM X ([thanks for your feedback, by the way](http://familysearch.github.com/gedcomx//2012/06/05/thanks-for-feedback.html)),
 we thought that what was _really needed_ was a way for everybody to convert a GEDCOM 5.5 file
 to a GEDCOM X file.
 
