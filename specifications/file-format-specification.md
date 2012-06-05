@@ -91,8 +91,11 @@ Currently, the GEDCOM X File Format does not require any of the Main attributes 
 All of the headers defined by the [GEDCOM X Standard Header Set](https://github.com/FamilySearch/gedcomx/blob/master/specifications/standard-header-set-specification.md)
 MAY be used as main attributes and are interpreted to be applicable to the file itself. Some of the most notable include:
 
-* `DC-created`, used to determine when the file was created.
-* `DC-creator`, used to identify the creator of the file.
+* `X-DC-created`, used to determine when the file was created.
+* `X-DC-creator`, used to identify the creator of the file.
+* `X-DC-conformsTo`, used to identify the specification(s) this file conforms to. Conformance to `http://gedcomx.org/file/v1` is assumed for ALL files.
+* `X-DC-requires`, used to identify the specification(s) that processors of this file are REQUIRED to comply with. If a processor does not recognize
+  or otherwise know how to comply with the specifications listed, it MUST NOT process the file. All processors MUST comply with `http://gedcomx.org/file/v1`.
 
 ## 4.2 Per-Entry Attributes
 
@@ -105,7 +108,7 @@ MAY be used as per-entry attributes and are interpreted to be applicable to the 
 
 * `Content-Type` MUST be supplied and is used to determine the media type of the resource in the file.
 * `ETag` is used to supply a version for the resource.
-* `DC-modified` is used to supply a timestamp of when the resource was last modified.
+* `X-DC-modified` is used to supply a timestamp of when the resource was last modified.
 
 In addition to the headers defined by the [GEDCOM X Standard Header Set](https://github.com/FamilySearch/gedcomx/blob/master/specifications/standard-header-set-specification.md),
 The GEDCOM-X File Format defined the following per-entry attributes:
