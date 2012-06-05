@@ -105,6 +105,7 @@ Content-Length | text | The size of the resource, as defined by [RFC 2616, Secti
 Content-Location | text | The location of the resource, as defined by [RFC 2616, Section 14](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html).
 Content-MD5 | text | The MD5 sum of the resource for integrity checks, as defined by [RFC 2616, Section 14](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html).
 ETag | text | Version of the resource, as defined by [RFC 2616, Section 14](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html).
+User-Agent | text | Information about the user agent originating the request or file, as defined by [RFC 2616, Section 14](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html).
 X-DC-abstract | text | A summary of the resource, as defined by [http://purl.org/dc/terms/abstract](http://dublincore.org/documents/dcmi-terms/#terms-abstract).
 X-DC-accessRights | URI | Identifier for information about who can access the resource or an indication of its security status, as defined by [http://purl.org/dc/terms/accessRights](http://dublincore.org/documents/dcmi-terms/#terms-accessRights).
 X-DC-accrualMethod | URI | Identifier for the method by which items are added to a collection, as defined by [http://purl.org/dc/terms/accrualMethod](http://dublincore.org/documents/dcmi-terms/#terms-accrualMethod).
