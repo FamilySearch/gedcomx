@@ -40,6 +40,27 @@ public class PersonRecipesTest extends RecipeTest {
 //    assertEquals(person);
   }
 
+  public void testMarriageWithNoSpouse() throws Exception {
+    createRecipe("Marriage Fact With No Spouse Provided")
+      .withDescription("How to model a marriage (or divorce) event for which the spouse is not available or otherwise not provided.")
+      .applicableTo(Person.class);
+
+    Person person = new Person();
+    Fact fact = new Fact();
+    fact.setKnownType(FactType.Marriage);
+    fact.setDate(new Date());
+    fact.getDate().setOriginal("January 6, 1759");
+    fact.setPlace(new Place());
+    fact.getPlace().setOriginal("New Kent, Virginia");
+    person.addFact(fact);
+    Snippet snippet = new Snippet("Note that the recommendation is to add a marriage fact directly to the person. It is not recommended to create a relationship with only one person.");
+    person = processThroughXml(person, snippet);
+    person = processThroughJson(person, snippet);
+    addSnippet(snippet);
+//    assertEquals(person);
+  }
+
+
   static Person create() {
     Person person = new Person();
     person.setGender(new Gender(GenderType.Male));
