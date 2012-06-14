@@ -23,7 +23,7 @@ public class TypesTest {
     NameType.Formal.toQNameURI();
     PlacePartType.Address.toQNameURI();
     RecordType.Census.getBaseType();
-    RelationshipRole.Ancestor.toQNameURI();
+    EventRoleType.Ancestor.toQNameURI();
     RelationshipType.Couple.toQNameURI();
   }
 }

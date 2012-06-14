@@ -780,9 +780,39 @@ formal | The formal value of the place. | formal | [`FormalValue`](#formal-value
 }
 ```
 
+<a id="conclusion-event-role"/>
+
+## 5.4 The "EventRole" Data Type
+
+The JSON object used to (de)serialize the `http://gedcomx.org/conclusion/v1/EventRole`
+data type is defined as follows:
+
+### properties
+
+name | description | JSON member | JSON object type
+-----|-------------|--------------|---------
+person | Reference to the person playing the role in the event. | person | [`ResourceReference`](#resource-reference)
+role | Reference to the role. | role | [`ResourceReference`](#resource-reference)
+
+### examples
+
+```json
+{
+  "@type" : "http://gedcomx.org/conclusion/v1/EventRole",
+  "id" : "local_id",
+  "person" : {
+    "resource" : "http://identifier/for/person/1"
+  }
+  "role" : {
+    "resource" : "http://gedcomx.org/Witness"
+  }
+}
+```
+
+
 <a id="fact-conclusion"/>
 
-## 5.4 The "Fact" Data Type
+## 5.5 The "Fact" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/conclusion/v1/Fact` data type is defined as follows:
 
@@ -821,7 +851,7 @@ formal | The formal value of the fact. | formal | [`FormalValue`](#formal-value)
 
 <a id="gender-conclusion"/>
 
-## 5.5 The "Gender" Data Type
+## 5.6 The "Gender" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/conclusion/v1/Gender` data type is defined as follows:
 
@@ -845,7 +875,7 @@ type | URI identifying the type of the gender. | type | [`ResourceReference`](#r
 
 <a id="name-part"/>
 
-## 5.6 The "NamePart" Data Type
+## 5.7 The "NamePart" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/conclusion/v1/NamePart` data type is defined as follows:
 
@@ -868,7 +898,7 @@ text | The text of the name part. | text | string
 }
 ```
 
-## 5.7 The "NameForm" Data Type
+## 5.8 The "NameForm" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/conclusion/v1/NameForm` data type is defined as follows:
 
@@ -891,7 +921,7 @@ parts | The parts of the name form. | parts | array of [`NamePart`](#name-part)
 
 <a id="name-conclusion"/>
 
-## 5.8 The "Name" Data Type
+## 5.9 The "Name" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/conclusion/v1/Name` data type is defined as follows:
 
@@ -952,9 +982,9 @@ notes | Contributed notes about the person. | notes | array of [`Note`](#note)
   "gender" : {
     ...
   },
-  "names" : [ { ... }, { ... } ]
-  "facts" : [ { ... }, { ... } ]
-  "sources" : [ { ... }, { ... } ]
+  "names" : [ { ... }, { ... } ],
+  "facts" : [ { ... }, { ... } ],
+  "sources" : [ { ... }, { ... } ],
   "notes" : [ { ... }, { ... } ]
 }
 ```
@@ -995,14 +1025,58 @@ notes | Contributed notes about the relationship. | notes | array of [`Note`](#n
   },
   "person2" : {
     "resource" : "http://identifier/for/person/2"
-  }
-  "facts" : [ { ... }, { ... } ]
-  "sources" : [ { ... }, { ... } ]
+  },
+  "facts" : [ { ... }, { ... } ],
+  "sources" : [ { ... }, { ... } ],
   "notes" : [ { ... }, { ... } ]
 }
 ```
 
-# 8. Known JSON Extension Members
+
+<a id="event"/>
+
+# 8. The Event
+
+This section defines the `Event` XML type corresponding to the `Event` data type
+specified by the section titled "The Event" of the conceptual model specification.
+
+## 8.1 The "Event" Data Type
+
+The `gxc:Event` is used to (de)serialize the `http://gedcomx.org/conclusion/v1/Event`
+data type.
+
+### properties
+
+name | description | JSON member | JSON object type
+-----|-------------|--------------|---------
+type | URI identifying the type of the event. | type | [`ResourceReference`](#resource-reference)
+date | The date of the event. | date | [`Date`](#conclusion-date)
+place | The place the event. | place | [`Place`](#conclusion-place)
+roles | The roles of the persons in the event. | roles | Ordered list of [`EventRole`](#conclusion-event-role)
+sources | The list of references to the evidence of the event. | sources | Ordered list of [`SourceReference`](#source-reference)
+
+### examples
+
+```json
+{
+  "@type" : "http://gedcomx.org/conclusion/v1/Event",
+  "id" : "local_id",
+  "type" : {
+    resource = "http://gedcomx.org/Marriage"
+  },
+  "date" : {
+    ...
+  },
+  "place" : {
+    ...
+  }
+  "roles" : [ { ... }, { ... } ],
+  "sources" : [ { ... }, { ... } ]
+}
+```
+
+
+# 9. Known JSON Extension Members
 
 GEDCOM X defines the notion of extension properties, and the JSON serialization
 supports the extensibility requirements detailed in the GEDCOM X conceptual model

@@ -626,9 +626,54 @@ name | description | data type
 original | The original value of the place as supplied by the contributor. | string
 formal | The formal value of the place. | [`http://gedcomx.org/FormalValue`](#formal-value)
 
+
+<a id="conclusion-event-role"/>
+
+## 5.4 The "EventRole" Data Type
+
+The `EventRole` data type defines a role played in an event by a person.
+
+### identifier
+
+The identifier for the `EventRole` data type is:
+
+`http://gedcomx.org/conclusion/v1/EventRole`
+
+### extension
+
+This data type extends the following data type:
+
+`http://gedcomx.org/GenealogicalResource`
+
+### properties
+
+name | description | data type
+-----|-------------|----------
+person | Reference to the person playing the role in the event. | [`http://www.w3.org/1999/02/22-rdf-syntax-ns#ResourceReference`](#resource-reference) - MUST resolve to an instance of [`http://gedcomx.org/conclusion/v1/Person`](#person)
+role | Reference to the role. | [`http://www.w3.org/1999/02/22-rdf-syntax-ns#ResourceReference`](#resource-reference) - MUST resolve to a role. Refer to the list of [known roles](#known-roles).
+
+<a id="known-roles"/>
+
+### known roles
+
+The following roles are defined by GEDCOM X:
+
+URI | description
+----|------------
+`http://gedcomx.org/Spouse`|
+`http://gedcomx.org/Parent`|
+`http://gedcomx.org/Child`|
+`http://gedcomx.org/Grandparent`|
+`http://gedcomx.org/Grandchild`|
+`http://gedcomx.org/Ancestor`|
+`http://gedcomx.org/Descendant`|
+`http://gedcomx.org/Cousin`|
+`http://gedcomx.org/InLaw`|
+`http://gedcomx.org/Witness`|
+
 <a id="fact-conclusion"/>
 
-## 5.4 The "Fact" Data Type
+## 5.5 The "Fact" Data Type
 
 The `Fact` data type defines a conclusion about a fact of the life of a person or
 the nature of a relationship. The `Fact` data type extends the `Conclusion` data type.
@@ -760,7 +805,7 @@ URI | description | scope
 
 <a id="gender-conclusion"/>
 
-## 5.5 The "Gender" Data Type
+## 5.6 The "Gender" Data Type
 
 The `Gender` data type defines a conclusion about the gender of a person. the `Gender` data type
 extends the `Conclusion` data type.
@@ -797,7 +842,7 @@ URI | description
 
 <a id="name-part"/>
 
-## 5.6 The "NamePart" Data Type
+## 5.7 The "NamePart" Data Type
 
 The `NamePart` data type defines a part of a name of a person.
 
@@ -828,7 +873,7 @@ URI | description
 `http://gedcomx.org/Surname`|
 
 
-## 5.7 The "NameForm" Data Type
+## 5.8 The "NameForm" Data Type
 
 The `NameForm` data type defines a form of a name of a person.
 
@@ -847,7 +892,7 @@ parts | The parts of the name form. | Ordered list of [`http://gedcomx.org/concl
 
 <a id="name-conclusion"/>
 
-## 5.8 The "Name" Data Type
+## 5.9 The "Name" Data Type
 
 The `Name` data type defines a conclusion about a name of a person. The `Name` data type
 extends the `Conclusion` data type.
@@ -978,7 +1023,39 @@ URI | description
 `http://gedcomx.org/ParentChild`|
 
 
-# 8. Extensibility
+# 8. The Event
+
+An event describes a historical event.
+
+## 8.1 The "Event" Data Type
+
+The `Event` data type defines a description of a historical event. The `Event` data type
+extends the `GenealogicalResource` data type.
+
+### identifier
+
+The identifier for the `Event` data type is:
+
+`http://gedcomx.org/conclusion/v1/Event`
+
+### extension
+
+This data type extends the following data type:
+
+`http://gedcomx.org/GenealogicalResource`
+
+### properties
+
+name | description | data type
+-----|-------------|----------
+type | URI identifying the type of the event. | [`http://www.w3.org/1999/02/22-rdf-syntax-ns#ResourceReference`](#resource-reference) - MUST resolve to an event type. Refer to the list of [known fact types](#known-fact-types)
+date | The date of the event. | [`http://gedcomx.org/conclusion/v1/Date`](#conclusion-date)
+place | The place of the event. | [`http://gedcomx.org/conclusion/v1/Place`](#conclusion-place)
+roles | The roles of the persons in the event. | [`http://gedcomx.org/conclusion/v1/EventRole`](#conclusion-event-role)
+sources | The list of references to the evidence of the event. | Ordered list of [`http://gedcomx.org/conclusion/v1/SourceReference`](#source-reference)
+
+
+# 9. Extensibility
 
 ## Extensions from Non-GEDCOM X Vocabularies
 

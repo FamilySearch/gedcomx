@@ -67,7 +67,6 @@ public class Fact extends Conclusion implements Formalizeable {
   public Fact(FactType factType, String original) {
     setKnownType(factType);
     setOriginal(original);
-    setFormal(formal);
   }
 
   /**
