@@ -27,15 +27,9 @@ import org.gedcomx.common.URI;
 )
 public enum EventRoleType {
 
-  Spouse,
-  Parent,
-  Child,
-  Grandparent,
-  Grandchild,
-  Ancestor,
-  Descendant,
-  Cousin,
-  InLaw,
+  Principal,
+  Participant,
+  Official,
   Witness,
   @XmlUnknownQNameEnumValue
   OTHER;

@@ -48,7 +48,7 @@ public class EventTest {
     event.getPlace().setOriginal("place");
     event.setRoles(new ArrayList<EventRole>());
     EventRole role = new EventRole();
-    role.setKnownRole(EventRoleType.Cousin);
+    role.setKnownRole(EventRoleType.Official);
     role.setPerson(new ResourceReference());
     role.getPerson().setResource(URI.create("urn:person"));
     event.getRoles().add(role);
@@ -64,7 +64,7 @@ public class EventTest {
     assertEquals("date", event.getDate().getOriginal());
     assertEquals("place", event.getPlace().getOriginal());
     assertEquals(1, event.getRoles().size());
-    assertEquals(EventRoleType.Cousin, event.getRoles().get(0).getKnownRole());
+    assertEquals(EventRoleType.Official, event.getRoles().get(0).getKnownRole());
     assertEquals("urn:person", event.getRoles().get(0).getPerson().getResource().toString());
     assertEquals("source-ref", event.getSources().get(0).getId());
   }
