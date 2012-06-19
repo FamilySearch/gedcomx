@@ -1037,13 +1037,13 @@ notes | Contributed notes about the relationship. | notes | array of [`Note`](#n
 
 # 8. The Event
 
-This section defines the `Event` XML type corresponding to the `Event` data type
+This section defines the `Event` JSON type corresponding to the `Event` data type
 specified by the section titled "The Event" of the conceptual model specification.
 
 ## 8.1 The "Event" Data Type
 
-The `gxc:Event` is used to (de)serialize the `http://gedcomx.org/conclusion/v1/Event`
-data type.
+the JSON object used to (de)serialize the `http://gedcomx.org/conclusion/v1/Event` data type
+is defined as follows:
 
 ### properties
 
