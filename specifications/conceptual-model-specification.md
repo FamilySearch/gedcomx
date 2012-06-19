@@ -1042,12 +1042,56 @@ This data type extends the following data type:
 
 name | description | data type
 -----|-------------|----------
-type | URI identifying the type of the event. | [`http://www.w3.org/1999/02/22-rdf-syntax-ns#ResourceReference`](#resource-reference) - MUST resolve to an event type. Refer to the list of [known fact types](#known-fact-types)
+type | URI identifying the type of the event. | [`http://www.w3.org/1999/02/22-rdf-syntax-ns#ResourceReference`](#resource-reference) - MUST resolve to an event type. Refer to the list of [known event types](#known-event-types)
 date | The date of the event. | [`http://gedcomx.org/conclusion/v1/Date`](#conclusion-date)
 place | The place of the event. | [`http://gedcomx.org/conclusion/v1/Place`](#conclusion-place)
 roles | The roles of the persons in the event. | [`http://gedcomx.org/conclusion/v1/EventRole`](#conclusion-event-role)
 sources | The list of references to the evidence of the event. | Ordered list of [`http://gedcomx.org/conclusion/v1/SourceReference`](#source-reference)
 
+<a id="known-event-types"/>
+
+### known roles
+
+The following event types are defined by GEDCOM X:
+
+URI | description
+----|------------
+`http://gedcomx.org/Adoption`|
+`http://gedcomx.org/AdultChristening`|
+`http://gedcomx.org/Annulment`|
+`http://gedcomx.org/Arrival`|
+`http://gedcomx.org/Baptism`|
+`http://gedcomx.org/BarMitzvah`|
+`http://gedcomx.org/BatMitzvah`|
+`http://gedcomx.org/Birth`|
+`http://gedcomx.org/Blessing`|
+`http://gedcomx.org/Burial`|
+`http://gedcomx.org/Census`|
+`http://gedcomx.org/Christening`|
+`http://gedcomx.org/Circumcision`|
+`http://gedcomx.org/Confirmation`|
+`http://gedcomx.org/Cremation`|
+`http://gedcomx.org/Death`|
+`http://gedcomx.org/Departure`|
+`http://gedcomx.org/Divorce`|
+`http://gedcomx.org/DivorceFiling`|
+`http://gedcomx.org/Engagement`|
+`http://gedcomx.org/Emigration`|
+`http://gedcomx.org/Excommunication`|
+`http://gedcomx.org/FirstCommunion`|
+`http://gedcomx.org/Funeral`|
+`http://gedcomx.org/Graduation`|
+`http://gedcomx.org/Immigration`|
+`http://gedcomx.org/Interment`|
+`http://gedcomx.org/Marriage`|
+`http://gedcomx.org/MilitaryAward`|
+`http://gedcomx.org/MilitaryDischarge`|
+`http://gedcomx.org/Mission`|
+`http://gedcomx.org/Move`|
+`http://gedcomx.org/Ordinance`|
+`http://gedcomx.org/Ordination`|
+`http://gedcomx.org/Retirement`|
+`http://gedcomx.org/ScholasticAchievement`|
 
 # 9. Extensibility
 
