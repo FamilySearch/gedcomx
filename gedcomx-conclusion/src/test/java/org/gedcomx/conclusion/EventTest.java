@@ -4,7 +4,7 @@ import org.gedcomx.common.Attribution;
 import org.gedcomx.common.ResourceReference;
 import org.gedcomx.common.URI;
 import org.gedcomx.types.EventRoleType;
-import org.gedcomx.types.FactType;
+import org.gedcomx.types.EventType;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
@@ -39,7 +39,7 @@ public class EventTest {
 
   private Event createTestEvent() {
     Event event = new Event();
-    event.setKnownType(FactType.Marriage);
+    event.setKnownType(EventType.Marriage);
     event.setAttribution(new Attribution());
     event.getAttribution().setProofStatement("explanation");
     event.setDate(new Date());
@@ -59,7 +59,7 @@ public class EventTest {
   }
 
   private void assertTestEvent(Event event) {
-    assertEquals(FactType.Marriage, event.getKnownType());
+    assertEquals(EventType.Marriage, event.getKnownType());
     assertEquals("explanation", event.getAttribution().getProofStatement());
     assertEquals("date", event.getDate().getOriginal());
     assertEquals("place", event.getPlace().getOriginal());

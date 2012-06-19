@@ -25,7 +25,7 @@ import org.gedcomx.common.URI;
 import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.JsonElementWrapper;
 import org.gedcomx.rt.XmlTypeIdResolver;
-import org.gedcomx.types.FactType;
+import org.gedcomx.types.EventType;
 import org.gedcomx.types.TypeReference;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -49,7 +49,7 @@ public class Event extends GenealogicalResource implements ReferencesSources {
 
   @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
   @JsonProperty
-  private TypeReference<FactType> type;
+  private TypeReference<EventType> type;
   private Date date;
   private Place place;
   private List<EventRole> roles;
@@ -64,21 +64,21 @@ public class Event extends GenealogicalResource implements ReferencesSources {
   /**
    * Create an event with the passed in type and values.
    *
-   * @param FactType the event type.
+   * @param EventType the event type.
    */
-  public Event(FactType FactType) {
-    setKnownType(FactType);
+  public Event(EventType EventType) {
+    setKnownType(EventType);
   }
 
   /**
    * Create a date/place event with the passed in type and values.
    *
-   * @param FactType the event type.
+   * @param EventType the event type.
    * @param date The date of applicability of this event.
    * @param place The place of applicability of this event.
    */
-  public Event(FactType FactType, Date date, Place place) {
-    setKnownType(FactType);
+  public Event(EventType EventType, Date date, Place place) {
+    setKnownType(EventType);
     setDate(date);
     setPlace(place);
   }
@@ -101,18 +101,18 @@ public class Event extends GenealogicalResource implements ReferencesSources {
    */
   @JsonIgnore
   public void setType(URI type) {
-    this.type = type == null ? null : new TypeReference<FactType>(type);
+    this.type = type == null ? null : new TypeReference<EventType>(type);
   }
 
   /**
-   * The enum referencing the known type of the event, or {@link org.gedcomx.types.FactType#OTHER} if not known.
+   * The enum referencing the known type of the event, or {@link org.gedcomx.types.EventType#OTHER} if not known.
    *
-   * @return The enum referencing the known type of the event, or {@link org.gedcomx.types.FactType#OTHER} if not known.
+   * @return The enum referencing the known type of the event, or {@link org.gedcomx.types.EventType#OTHER} if not known.
    */
   @XmlTransient
   @JsonIgnore
-  public org.gedcomx.types.FactType getKnownType() {
-    return this.type == null ? null : FactType.fromQNameURI(this.type.getType());
+  public org.gedcomx.types.EventType getKnownType() {
+    return this.type == null ? null : EventType.fromQNameURI(this.type.getType());
   }
 
   /**
@@ -121,8 +121,8 @@ public class Event extends GenealogicalResource implements ReferencesSources {
    * @param knownType the event type.
    */
   @JsonIgnore
-  public void setKnownType(org.gedcomx.types.FactType knownType) {
-    this.type = knownType == null ? null : new TypeReference<FactType>(knownType);
+  public void setKnownType(org.gedcomx.types.EventType knownType) {
+    this.type = knownType == null ? null : new TypeReference<EventType>(knownType);
   }
 
   /**
