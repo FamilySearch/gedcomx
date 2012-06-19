@@ -660,15 +660,9 @@ The following roles are defined by GEDCOM X:
 
 URI | description
 ----|------------
-`http://gedcomx.org/Spouse`|
-`http://gedcomx.org/Parent`|
-`http://gedcomx.org/Child`|
-`http://gedcomx.org/Grandparent`|
-`http://gedcomx.org/Grandchild`|
-`http://gedcomx.org/Ancestor`|
-`http://gedcomx.org/Descendant`|
-`http://gedcomx.org/Cousin`|
-`http://gedcomx.org/InLaw`|
+`http://gedcomx.org/Principal`|
+`http://gedcomx.org/Participant`|
+`http://gedcomx.org/Official`|
 `http://gedcomx.org/Witness`|
 
 <a id="fact-conclusion"/>
