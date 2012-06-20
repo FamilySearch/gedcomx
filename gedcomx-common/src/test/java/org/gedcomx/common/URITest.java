@@ -21,11 +21,6 @@ public class URITest {
     custom.setRefToSomething(new URI("uri:hello"));
     custom = processThroughXml(custom);
     assertEquals(custom.getRefToSomething().toString(), "uri:hello");
-
-    // code to further exercise URIAdapter
-    custom.setRefToSomething(null);
-    custom = processThroughXml(custom);
-    assertNull(custom.getRefToSomething());
   }
 
   /**
