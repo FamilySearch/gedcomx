@@ -53,7 +53,7 @@ public final class URI {
 
   @Override
   public boolean equals(Object o) {
-    return this == o || !(o == null || getClass() != o.getClass()) && value.equals(((URI) o).value);
+    return this == o || !(o == null) && value.equals(((URI) o).value);
   }
 
   @Override
