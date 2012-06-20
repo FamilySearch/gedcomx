@@ -25,10 +25,10 @@ import net.sf.jelly.apt.decorations.declaration.PropertyDeclaration;
 import net.sf.jelly.apt.decorations.type.DecoratedClassType;
 import net.sf.jelly.apt.decorations.type.DecoratedInterfaceType;
 import net.sf.jelly.apt.decorations.type.DecoratedTypeMirror;
+import org.codehaus.enunciate.apt.EnunciateFreemarkerModel;
+import org.codehaus.enunciate.config.SchemaInfo;
 import org.codehaus.enunciate.contract.jaxb.*;
 import org.codehaus.enunciate.contract.jaxb.types.KnownXmlType;
-import org.codehaus.enunciate.contract.jaxb.types.XmlClassType;
-import org.codehaus.enunciate.contract.jaxb.types.XmlType;
 import org.codehaus.enunciate.contract.validation.BaseValidator;
 import org.codehaus.enunciate.contract.validation.ValidationResult;
 import org.codehaus.enunciate.qname.XmlQNameEnum;
@@ -42,11 +42,36 @@ import javax.xml.bind.annotation.XmlAnyAttribute;
 import javax.xml.namespace.QName;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Ryan Heaton
  */
 public class GedcomxValidator extends BaseValidator {
+
+  private final Map<String, Declaration> jsonNameDeclarations = new HashMap<String, Declaration>();
+
+  @Override
+  public ValidationResult validate(EnunciateFreemarkerModel model) {
+    ValidationResult result = super.validate(model);
+    for (SchemaInfo schemaInfo : model.getNamespacesToSchemas().values()) {
+      for (Registry registry : schemaInfo.getRegistries()) {
+        Collection<LocalElementDeclaration> localElements = registry.getLocalElementDeclarations();
+        for (LocalElementDeclaration localElement : localElements) {
+          JsonElementWrapper elementWrapper = localElement.getAnnotation(JsonElementWrapper.class);
+          if (elementWrapper != null) {
+            String jsonName = elementWrapper.namespace() + elementWrapper.name();
+            Declaration previous = this.jsonNameDeclarations.put(jsonName, localElement);
+            if (previous != null) {
+              result.addError(localElement, "JSON name conflict with " + String.valueOf(previous.getPosition()));
+            }
+          }
+        }
+      }
+    }
+    return result;
+  }
 
   @Override
   public ValidationResult validateComplexType(ComplexTypeDefinition complexType) {
@@ -131,8 +156,17 @@ public class GedcomxValidator extends BaseValidator {
       result.addError(rootElementDeclaration, "Root elements need to be annotated with @org.codehaus.jackson.map.annotate.JsonTypeIdResolver(org.gedcomx.id.XmlTypeIdResolver.class) to specify their JSON type id.");
     }
 
-    if (namespace.startsWith(CommonModels.GEDCOMX_DOMAIN) && rootElementDeclaration.getAnnotation(JsonElementWrapper.class) == null) {
+    JsonElementWrapper elementWrapper = rootElementDeclaration.getAnnotation(JsonElementWrapper.class);
+    if (namespace.startsWith(CommonModels.GEDCOMX_DOMAIN) && elementWrapper == null) {
       result.addWarning(rootElementDeclaration, "Root elements in the '" + CommonModels.GEDCOMX_DOMAIN + "' namespace should probably be annotated with @" + JsonElementWrapper.class.getSimpleName() + ".");
+    }
+
+    if (elementWrapper != null) {
+      String jsonName = elementWrapper.namespace() + elementWrapper.name();
+      Declaration previous = this.jsonNameDeclarations.put(jsonName, rootElementDeclaration);
+      if (previous != null) {
+        result.addError(rootElementDeclaration, "JSON name conflict with " + String.valueOf(previous.getPosition()));
+      }
     }
 
     return result;
