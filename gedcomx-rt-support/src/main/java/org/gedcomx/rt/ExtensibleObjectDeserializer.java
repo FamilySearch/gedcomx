@@ -25,7 +25,6 @@ import org.codehaus.jackson.map.type.SimpleType;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.namespace.QName;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -52,9 +51,43 @@ public class ExtensibleObjectDeserializer extends BeanDeserializer {
     if (XmlTypeIdResolver.TYPE_PROPERTY_NAME.equals(propName)) {
       return;
     }
-    
-    QName qname = null;
-    if (propName.indexOf(':') >= 0) {
+
+    if (beanOrClass instanceof SupportsExtensionElements) {
+      SupportsExtensionElements target = (SupportsExtensionElements) beanOrClass;
+      //first check if it's a known json type
+      Class<?> type = GedcomNamespaceManager.getKnownJsonType(propName);
+      if (type != null) {
+        //if it's a known json type, just deserialize and go
+        for (Object ext : readArrayOf(type, jp, ctxt)) {
+          target.addExtensionElement(ext);
+        }
+        return;
+      }
+      else {
+        QName wrapper = getWrapperName(propName);
+        type = GedcomNamespaceManager.getWrappedTypeForJsonName(propName);
+        if (type != null) {
+          List<?> objects = readArrayOf(type, jp, ctxt);
+          for (Object ext : objects) {
+            target.addExtensionElement(new JAXBElement(wrapper, type, ext));
+          }
+          return;
+        }
+      }
+    }
+
+    if (beanOrClass instanceof SupportsExtensionAttributes && jp.getCurrentToken().isScalarValue()) {
+      ((SupportsExtensionAttributes) beanOrClass).addExtensionAttribute(getWrapperName(propName), jp.getText());
+      return;
+    }
+
+    super.handleUnknownProperty(jp, ctxt, beanOrClass, propName);
+  }
+
+  private QName getWrapperName(String propName) {
+    QName qname = GedcomNamespaceManager.findWrapperNameForJsonName(propName);
+
+    if (qname == null && propName.indexOf(':') >= 0) {
       //if the propname has a ':', we'll treat it as a qname, because all qnames I know have a ':' in them.
       List<String> knownNS = new ArrayList<String>(GedcomNamespaceManager.getKnownPrefixes().keySet());
       knownNS.add(XMLConstants.XML_NS_URI + "#");
@@ -91,39 +124,27 @@ public class ExtensibleObjectDeserializer extends BeanDeserializer {
     }
 
     if (qname == null) {
-      qname = GedcomNamespaceManager.findQNameFromJsonWrapperName(propName);
-    }
-
-    if (qname == null) {
       qname = new QName("", propName);
     }
 
-    if (beanOrClass instanceof SupportsExtensionAttributes && jp.getCurrentToken().isScalarValue()) {
-      ((SupportsExtensionAttributes) beanOrClass).addExtensionAttribute(qname, jp.getText());
-    }
-    else if (beanOrClass instanceof SupportsExtensionElements) {
-      if (jp.getCurrentToken() == JsonToken.START_ARRAY) {
+    return qname;
+  }
+
+  private List<?> readArrayOf(Class<?> type, JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+    ArrayList<Object> objects = new ArrayList<Object>();
+
+    if (jp.getCurrentToken() == JsonToken.START_ARRAY) {
+      jp.nextToken();
+      while (jp.getCurrentToken() != JsonToken.END_ARRAY) {
+        objects.add(jp.readValueAs(type));
         jp.nextToken();
-        while (jp.getCurrentToken() != JsonToken.END_ARRAY) {
-          Object element = this.typeDeserializer.deserializeTypedFromAny(jp, ctxt);
-          if (element != null && !element.getClass().isAnnotationPresent(XmlRootElement.class)) {
-            element = new JAXBElement(qname, element.getClass(), element);
-          }
-          ((SupportsExtensionElements) beanOrClass).addExtensionElement(element);
-          jp.nextToken();
-        }
-      }
-      else {
-        Object element = this.typeDeserializer.deserializeTypedFromAny(jp, ctxt);
-        if (element != null && !element.getClass().isAnnotationPresent(XmlRootElement.class)) {
-          element = new JAXBElement(qname, element.getClass(), element);
-        }
-        ((SupportsExtensionElements) beanOrClass).addExtensionElement(element);
       }
     }
     else {
-      super.handleUnknownProperty(jp, ctxt, beanOrClass, propName);
+      objects.add(jp.readValueAs(type));
     }
+
+    return objects;
   }
 
 }

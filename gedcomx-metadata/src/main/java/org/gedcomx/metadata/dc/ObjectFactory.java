@@ -277,7 +277,7 @@ public class ObjectFactory {
    * @link http://dublincore.org/documents/dcmi-terms/#terms-description
    */
   @XmlElementDecl ( namespace = CommonModels.DUBLIN_CORE_NAMESPACE, name = "description" )
-  @JsonElementWrapper ( name = "descriptions" )
+  @JsonElementWrapper ( name = "dc-descriptions" )
   public JAXBElement<RDFValue> createDescriptionElement(RDFValue description) {
     return new JAXBElement<RDFValue>(new QName(CommonModels.DUBLIN_CORE_NAMESPACE, "description"), RDFValue.class, description);
   }

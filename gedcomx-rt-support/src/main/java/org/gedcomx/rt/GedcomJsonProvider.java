@@ -59,6 +59,7 @@ public class GedcomJsonProvider extends JacksonJaxbJsonProvider {
     mapper.registerModule(new GedcomJacksonModule());
     for (Class<?> contextClass : classes) {
       XmlTypeIdResolver.initContextClass(SimpleType.construct(contextClass));
+      GedcomNamespaceManager.registerKnownJsonType(contextClass);
     }
     return mapper;
   }

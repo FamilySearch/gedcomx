@@ -155,6 +155,7 @@ public class SerializationUtil {
   }
 
   protected static <C> byte[] toJsonStream(Object reference, Class<? extends C> instanceClass, ObjectMapper mapper, SerializationProcessListener... listeners) throws IOException {
+    GedcomNamespaceManager.registerKnownJsonType(instanceClass);
     ByteArrayOutputStream out = new ByteArrayOutputStream();
     mapper.getSerializationConfig().enable(SerializationConfig.Feature.INDENT_OUTPUT);
     mapper.getSerializationConfig().setSerializationInclusion(JsonSerialize.Inclusion.NON_NULL);
