@@ -30,6 +30,10 @@ public final class URI {
   private final String value;
 
   public URI(String value) {
+    if (value == null) {
+      throw new IllegalArgumentException("value cannot be null");
+    }
+
     this.value = value;
   }
 

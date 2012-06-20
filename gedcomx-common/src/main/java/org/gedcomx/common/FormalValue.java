@@ -99,7 +99,7 @@ public class FormalValue {
    * @return The value.
    */
   public <E extends Enum<E>> E getKnownValue(Class<E> clazz) {
-    return XmlQNameEnumUtil.fromURIValue(getResource().toString(), clazz);
+    return getResource() != null ? XmlQNameEnumUtil.fromURIValue(getResource().toString(), clazz) : null;
   }
 
   /**
