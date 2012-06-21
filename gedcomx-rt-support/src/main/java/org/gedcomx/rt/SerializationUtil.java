@@ -19,6 +19,8 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.SerializationConfig;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.node.ObjectNode;
+import org.gedcomx.rt.json.GedcomJsonProvider;
+import org.gedcomx.rt.json.GedcomNamespaceManager;
 import org.w3c.dom.Document;
 
 import javax.xml.bind.JAXBContext;

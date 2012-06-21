@@ -23,7 +23,7 @@ import org.gedcomx.common.Attribution;
 import org.gedcomx.common.ResourceReference;
 import org.gedcomx.common.URI;
 import org.gedcomx.rt.CommonModels;
-import org.gedcomx.rt.JsonElementWrapper;
+import org.gedcomx.rt.json.JsonElementWrapper;
 import org.gedcomx.rt.RDFRange;
 import org.gedcomx.types.ResourceType;
 import org.gedcomx.types.TypeReference;

@@ -22,7 +22,7 @@ import org.gedcomx.common.GenealogicalResource;
 import org.gedcomx.common.Identifier;
 import org.gedcomx.common.Note;
 import org.gedcomx.common.URI;
-import org.gedcomx.rt.JsonElementWrapper;
+import org.gedcomx.rt.json.JsonElementWrapper;
 import org.gedcomx.types.FactType;
 import org.gedcomx.types.IdentifierType;
 

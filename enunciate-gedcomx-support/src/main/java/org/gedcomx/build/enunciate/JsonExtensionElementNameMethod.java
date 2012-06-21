@@ -20,7 +20,7 @@ import freemarker.template.TemplateMethodModelEx;
 import freemarker.template.TemplateModel;
 import freemarker.template.TemplateModelException;
 import org.codehaus.enunciate.contract.jaxb.ElementDeclaration;
-import org.gedcomx.rt.JsonElementWrapper;
+import org.gedcomx.rt.json.JsonElementWrapper;
 
 import java.util.List;
 

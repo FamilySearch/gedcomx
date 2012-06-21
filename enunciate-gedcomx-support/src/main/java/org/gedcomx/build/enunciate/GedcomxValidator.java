@@ -34,9 +34,8 @@ import org.codehaus.enunciate.contract.validation.ValidationResult;
 import org.codehaus.enunciate.qname.XmlQNameEnum;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.annotate.JsonTypeInfo;
-import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.rt.*;
+import org.gedcomx.rt.json.JsonElementWrapper;
 
 import javax.xml.bind.annotation.XmlAnyAttribute;
 import javax.xml.namespace.QName;

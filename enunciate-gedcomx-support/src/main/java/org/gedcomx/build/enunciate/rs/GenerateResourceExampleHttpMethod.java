@@ -33,7 +33,7 @@ import org.codehaus.enunciate.contract.jaxrs.ResourceEntityParameter;
 import org.codehaus.enunciate.contract.jaxrs.ResourceMethod;
 import org.codehaus.enunciate.contract.jaxrs.ResourceRepresentationMetadata;
 import org.gedcomx.rt.CommonModels;
-import org.gedcomx.rt.JsonElementWrapper;
+import org.gedcomx.rt.json.JsonElementWrapper;
 import org.gedcomx.rt.SupportsExtensionElements;
 
 import javax.xml.namespace.QName;

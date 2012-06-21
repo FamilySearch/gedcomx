@@ -2,7 +2,7 @@ package org.gedcomx.conclusion;
 
 import org.gedcomx.common.GenealogicalResource;
 import org.gedcomx.common.URI;
-import org.gedcomx.rt.JsonElementWrapper;
+import org.gedcomx.rt.json.JsonElementWrapper;
 
 import javax.xml.bind.annotation.XmlRootElement;
 

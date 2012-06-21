@@ -17,9 +17,8 @@ package org.gedcomx.common;
 
 import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.annotate.JsonTypeInfo;
-import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.rt.*;
+import org.gedcomx.rt.json.JsonElementWrapper;
 import org.gedcomx.types.TypeReference;
 
 import javax.xml.XMLConstants;

@@ -18,7 +18,7 @@ package org.gedcomx.metadata.rdf;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.gedcomx.common.URI;
 import org.gedcomx.rt.CommonModels;
-import org.gedcomx.rt.JsonElementWrapper;
+import org.gedcomx.rt.json.JsonElementWrapper;
 import org.gedcomx.rt.SupportsExtensionAttributes;
 import org.gedcomx.rt.SupportsExtensionElements;
 import org.gedcomx.types.ResourceType;

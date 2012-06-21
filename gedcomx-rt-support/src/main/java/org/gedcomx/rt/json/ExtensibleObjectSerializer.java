@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.rt;
+package org.gedcomx.rt.json;
 
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.JsonGenerator;
@@ -21,6 +21,8 @@ import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.SerializerProvider;
 import org.codehaus.jackson.map.ser.BeanSerializer;
+import org.gedcomx.rt.SupportsExtensionAttributes;
+import org.gedcomx.rt.SupportsExtensionElements;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
@@ -115,16 +117,23 @@ public class ExtensibleObjectSerializer extends BeanSerializer {
       }
 
       for (Map.Entry<String, List<Object>> prop : extensionProperties.entrySet()) {
-        jgen.writeArrayFieldStart(prop.getKey());
-        for (Object element : prop.getValue()) {
-          if (element instanceof Element) {
-            serializeElement((Element) element, jgen);
-          }
-          else {
-            provider.findTypedValueSerializer(element.getClass(), true, null).serialize(element, jgen, provider);
-          }
+        if (prop.getValue().get(0) instanceof HasUniqueJsonKey) {
+          //we're serialize out this list as a keyed map.
+          jgen.writeFieldName(prop.getKey());
+          KeyedListSerializer.serializeGeneric(prop.getValue(), jgen, provider);
         }
-        jgen.writeEndArray();
+        else {
+          jgen.writeArrayFieldStart(prop.getKey());
+          for (Object element : prop.getValue()) {
+            if (element instanceof Element) {
+              serializeElement((Element) element, jgen);
+            }
+            else {
+              provider.findTypedValueSerializer(element.getClass(), true, null).serialize(element, jgen, provider);
+            }
+          }
+          jgen.writeEndArray();
+        }
       }
     }
   }

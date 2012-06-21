@@ -15,7 +15,7 @@
  */
 package org.gedcomx.common;
 
-import org.gedcomx.rt.JsonElementWrapper;
+import org.gedcomx.rt.json.JsonElementWrapper;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlAttribute;

@@ -18,7 +18,7 @@ package org.gedcomx.metadata.dc;
 import org.gedcomx.metadata.rdf.RDFLiteral;
 import org.gedcomx.metadata.rdf.RDFValue;
 import org.gedcomx.rt.CommonModels;
-import org.gedcomx.rt.JsonElementWrapper;
+import org.gedcomx.rt.json.JsonElementWrapper;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlElementDecl;

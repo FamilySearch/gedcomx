@@ -13,9 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.rt;
+package org.gedcomx.rt.json;
 
 import com.sun.xml.bind.marshaller.NamespacePrefixMapper;
+import org.gedcomx.rt.CommonModels;
+import org.gedcomx.rt.DefaultNamespace;
+import org.gedcomx.rt.Model;
+import org.gedcomx.rt.Models;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlElementDecl;
@@ -27,7 +31,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.*;

@@ -33,7 +33,7 @@ import org.codehaus.enunciate.contract.jaxrs.ResourceMethod;
 import org.codehaus.enunciate.contract.jaxrs.RootResource;
 import org.codehaus.enunciate.contract.validation.ValidationResult;
 import org.codehaus.enunciate.util.ResourceMethodPathComparator;
-import org.gedcomx.rt.JsonElementWrapper;
+import org.gedcomx.rt.json.JsonElementWrapper;
 import org.gedcomx.rt.rs.ResourceDefinition;
 import org.gedcomx.rt.rs.ResourceLinks;
 import org.gedcomx.rt.rs.StatusCodes;

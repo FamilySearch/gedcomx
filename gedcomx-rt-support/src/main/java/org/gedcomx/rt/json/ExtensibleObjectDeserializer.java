@@ -13,13 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.rt;
+package org.gedcomx.rt.json;
 
 import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.JsonToken;
 import org.codehaus.jackson.map.DeserializationContext;
+import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.deser.BeanDeserializer;
+import org.gedcomx.rt.SupportsExtensionAttributes;
+import org.gedcomx.rt.SupportsExtensionElements;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBElement;
@@ -46,9 +49,17 @@ public class ExtensibleObjectDeserializer extends BeanDeserializer {
       //first check if it's a known json type
       Class<?> type = GedcomNamespaceManager.getKnownJsonType(propName);
       if (type != null) {
-        //if it's a known json type, just deserialize and go
-        for (Object ext : readArrayOf(type, jp, ctxt)) {
-          target.addExtensionElement(ext);
+        //it's a known json type.
+        if (HasUniqueJsonKey.class.isAssignableFrom(type)) {
+          for (Object ext : readKeyedMapOf(type, jp, ctxt)) {
+            target.addExtensionElement(ext);
+          }
+        }
+        else {
+          //otherwise just deserialize as a list and go.
+          for (Object ext : readArrayOf(type, jp, ctxt)) {
+            target.addExtensionElement(ext);
+          }
         }
         return;
       }
@@ -134,6 +145,15 @@ public class ExtensibleObjectDeserializer extends BeanDeserializer {
     }
 
     return objects;
+  }
+
+  private List<?> readKeyedMapOf(Class<?> type, JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+    if (jp.getCurrentToken() == JsonToken.START_OBJECT) {
+      return KeyedListDeserializer.deserializeGeneric(jp, ctxt, type);
+    }
+    else {
+      throw new JsonMappingException("Unable to parse keyed map of " + type.getName() + ": expect start object, but got: " + jp.getCurrentToken().name());
+    }
   }
 
 }

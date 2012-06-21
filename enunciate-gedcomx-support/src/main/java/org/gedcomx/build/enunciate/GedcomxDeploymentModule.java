@@ -46,6 +46,7 @@ import org.codehaus.enunciate.template.freemarker.UniqueContentTypesMethod;
 import org.gedcomx.build.enunciate.rdf.RDFProcessor;
 import org.gedcomx.build.enunciate.rs.*;
 import org.gedcomx.rt.*;
+import org.gedcomx.rt.json.GedcomNamespaceManager;
 import org.gedcomx.rt.rs.ResourceDefinition;
 import org.gedcomx.test.Recipe;
 

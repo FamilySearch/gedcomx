@@ -17,7 +17,7 @@ package org.gedcomx.common;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.gedcomx.rt.CommonModels;
-import org.gedcomx.rt.JsonElementWrapper;
+import org.gedcomx.rt.json.JsonElementWrapper;
 import org.gedcomx.rt.SupportsExtensionElements;
 
 import javax.xml.bind.annotation.*;
