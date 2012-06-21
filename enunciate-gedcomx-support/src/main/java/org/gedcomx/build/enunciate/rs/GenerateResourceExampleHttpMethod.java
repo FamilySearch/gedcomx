@@ -160,18 +160,13 @@ public abstract class GenerateResourceExampleHttpMethod implements TemplateMetho
     }
 
     ClassType superclass = typeDef.getSuperclass();
-    if (superclass != null && ((DecoratedClassType) TypeMirrorDecorator.decorate(superclass)).isInstanceOf(name)) {
-      return true;
-    }
+    return superclass != null && ((DecoratedClassType) TypeMirrorDecorator.decorate(superclass)).isInstanceOf(name);
 
-    return false;
   }
 
   protected void writeExampleToBody(ElementDeclaration element, List<SubresourceElement> subresources, boolean json, PrintWriter body, boolean writeLinks, Collection<ResourceLink> links) {
     if (json) {
-      QName typeQName = element instanceof RootElementDeclaration ? ((RootElementDeclaration) element).getTypeDefinition().getQname() : ((LocalElementDeclaration) element).getElementXmlType().getQname();
       body.printf("{\n");
-      body.printf("  \"@type\" : \"%s%s\",\n", typeQName.getNamespaceURI(), typeQName.getLocalPart());
       body.printf("  ...\n");
       if (writeLinks) {
         writeLinks(body, links, json, 0, null);
@@ -233,8 +228,6 @@ public abstract class GenerateResourceExampleHttpMethod implements TemplateMetho
       for (SubresourceElement subresource : subresources) {
         body.printf("%s\"%s\" :%s{\n", tab, subresource.getJsonName(), subresource.isCollection() ? " [ " : " ");
         if (depth < maxDepth) {
-          QName typeQName = subresource.getTypeDefinition().getQname();
-          body.printf("%s  \"@type\" : \"%s%s\",\n", tab, typeQName.getNamespaceURI(), typeQName.getLocalPart());
           body.printf("%s  ...\n", tab);
           if (writeLinks) {
             writeLinks(body, subresource.getDefinition().getLinks(), json, depth, null);

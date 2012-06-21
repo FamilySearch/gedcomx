@@ -44,9 +44,7 @@ in JSON according to this specification:
 
 ```json
 {
-  "@type" : "http://gedcomx.org/conclusion/v1/Person",
   "names" : [ {
-    "@type" : "http://gedcomx.org/conclusion/v1/Name",
     "primaryForm" : {
       "fullText" : "George Washington",
       "parts" : [ {
@@ -61,33 +59,27 @@ in JSON according to this specification:
     "id" : "789",
     "attribution" : {
       "contributor" : {
-        "@type" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#ResourceReference",
         "resource" : "https://familysearch.org/platform/contributors/STV-WXZY"
       }
     }
   } ],
   "sources" : [ {
-    "@type" : "http://gedcomx.org/conclusion/v1/SourceReference",
     "type" : "http://purl.org/dc/dcmitype/Text",
     "attribution" : {
       "contributor" : {
-        "@type" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#ResourceReference",
         "resource" : "https://familysearch.org/platform/contributors/STV-WXZY"
       }
     },
     "resource" : "http://en.wikipedia.org/wiki/George_washington"
   } ],
   "gender" : {
-    "@type" : "http://gedcomx.org/conclusion/v1/Gender",
     "type" : "http://gedcomx.org/Male"
   },
   "facts" : [ {
-    "@type" : "http://gedcomx.org/conclusion/v1/Fact",
     "type" : "http://gedcomx.org/Birth",
     "date" : {
       "original" : "February 22, 1732",
       "formal" : {
-        "@type" : "http://gedcomx.org/FormalValue",
         "text" : "1732-02-22",
         "datatype" : "http://www.w3.org/2001/XMLSchema#date"
       }
@@ -95,7 +87,6 @@ in JSON according to this specification:
     "place" : {
       "original" : "Pope's Creek, Westmoreland, Virginia",
       "formal" : {
-        "@type" : "http://gedcomx.org/FormalValue",
         "resource" : "https://familysearch.org/platform/places/12345",
         "text" : "Pope's Creek, Westmoreland, Virginia"
       }
@@ -103,17 +94,14 @@ in JSON according to this specification:
     "id" : "123",
     "attribution" : {
       "contributor" : {
-        "@type" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#ResourceReference",
         "resource" : "https://familysearch.org/platform/contributors/BCD-FGHJ"
       }
     }
   }, {
-    "@type" : "http://gedcomx.org/conclusion/v1/Fact",
     "type" : "http://gedcomx.org/Death",
     "date" : {
       "original" : "December 14, 1799",
       "formal" : {
-        "@type" : "http://gedcomx.org/FormalValue",
         "text" : "1799-12-14T22:00:00",
         "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime"
       }
@@ -121,7 +109,6 @@ in JSON according to this specification:
     "place" : {
       "original" : "Mount Vernon, Virginia",
       "formal" : {
-        "@type" : "http://gedcomx.org/FormalValue",
         "resource" : "https://familysearch.org/platform/places/67890",
         "text" : "Mount Vernon, Fairfax County, Virginia"
       }
@@ -129,7 +116,6 @@ in JSON according to this specification:
     "id" : "456",
     "attribution" : {
       "contributor" : {
-        "@type" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#ResourceReference",
         "resource" : "https://familysearch.org/platform/contributors/KLM-NPQR"
       }
     }
@@ -143,29 +129,23 @@ JSON according to this specification:
 
 ```json
 {
-  "@type" : "http://gedcomx.org/conclusion/v1/Relationship",
   "type" : "http://gedcomx.org/Couple",
   "sources" : [ {
-    "@type" : "http://gedcomx.org/conclusion/v1/SourceReference",
     "type" : "http://purl.org/dc/dcmitype/Text",
     "id" : "5678",
     "resource" : "http://en.wikipedia.org/wiki/George_washington"
   } ],
   "person1" : {
-    "@type" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#ResourceReference",
     "resource" : "https://familysearch.org/platform/persons/DDD-DDDD"
   },
   "person2" : {
-    "@type" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#ResourceReference",
     "resource" : "https://familysearch.org/platform/persons/FFF-FFFF"
   },
   "facts" : [ {
-    "@type" : "http://gedcomx.org/conclusion/v1/Fact",
     "type" : "http://gedcomx.org/Marriage",
     "date" : {
       "original" : "January 6, 1759",
       "formal" : {
-        "@type" : "http://gedcomx.org/FormalValue",
         "text" : "1759-01-06",
         "datatype" : "http://www.w3.org/2001/XMLSchema#date"
       }
@@ -173,7 +153,6 @@ JSON according to this specification:
     "id" : "123",
     "attribution" : {
       "contributor" : {
-        "@type" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#ResourceReference",
         "resource" : "https://familysearch.org/platform/contributors/HHH-HHHH"
       }
     }
@@ -181,7 +160,6 @@ JSON according to this specification:
   "id" : "CCC-CCCC",
   "attribution" : {
     "contributor" : {
-      "@type" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#ResourceReference",
       "resource" : "https://familysearch.org/platform/contributors/BCD-FGHJ"
     },
     "proofStatement" : "(proof statement here)"
@@ -204,19 +182,15 @@ document are to be interpreted as described in BCP 14,
 [RFC2119](http://tools.ietf.org/html/rfc2119), as scoped to those conformance 
 targets.
 
-## 1.4 Data Type Identification in JSON Using "@type"
-
+## 1.4 Data Type Identification in JSON Using
 Because JSON is not a formally typed data format, a mechanism for
 identifying the data type must be specified so that GEDCOM X JSON processors
 may identify how to semantically process a JSON object that
 appears as either a standalone document or as an extension property.
 
 GEDCOM X specifies that JSON objects MAY supply the identifier
-for their data type using the "@type" JSON member. When appearing
-as a standalone document or as an extension property, the JSON object
-MUST specify its data type using the "@type" JSON member. When supplied,
-the "@type" member MUST be the first member of the JSON object.
-
+for their data type using theas a standalone document or as an extension property, the JSON object
+MUST specify its data type using thethe
 
 # 2. Common Data Types
 
@@ -268,7 +242,6 @@ type  | URI identifying the type of the identifier. | type | [`ResourceReference
 
 ```json
 {
-  "@type" : "http://gedcomx.org/Identifier",
   "value" : "value_of_identifier",
   "type" : {
     "resource" : "http://gedcomx.org/IdentifierType"
@@ -295,7 +268,6 @@ proofStatement | A statement of proof provided by the contributor of the attribu
 
 ```json
 {
-  "@type" : "http://gedcomx.org/Attribution",
   "contributor" : {
     "resource" : "http://identifier/for/contributor"
   },
@@ -327,7 +299,6 @@ Standardized value with a specified datatype:
 
 ```json
 {
-  "@type" : "http://gedcomx.org/FormalValue",
   "datatype" : "http://www.w3.org/2001/XMLSchema#date",
   "value" : "1732-02-22"
 }
@@ -337,7 +308,6 @@ Normalized value:
 
 ```json
 {
-  "@type" : "http://gedcomx.org/FormalValue",
   "value" : "...text of the normalized value..."
 }
 ```
@@ -345,7 +315,6 @@ Standardized value:
 
 ```json
 {
-  "@type" : "http://gedcomx.org/FormalValue",
   "resource" : "http://identifier/for/standardized/value"
 }
 ```
@@ -354,7 +323,6 @@ Standardized and normalized value:
 
 ```json
 {
-  "@type" : "http://gedcomx.org/FormalValue",
   "resource" : "http://identifier/for/standardized/value",
   "value" : "...text of the normalized value..."
 }
@@ -375,7 +343,6 @@ attribution | The attribution of this resource. | attribution | [`Attribution`](
 
 ```json
 {
-  "@type" : "...",
   "id" : "some_local_id",
   "attribution" :  {
     ...
@@ -400,7 +367,6 @@ text | The text of the note. | text | string
 
 ```json
 {
-  "@type" : "http://gedcomx.org/Note",
   "lang" : "en",
   "text" : "...text of the note..."
 }
@@ -424,7 +390,6 @@ lang | The language of the literal value. | lang | string
 
 ```json
 {
-  "@type" : "http://www.w3.org/2000/01/rdf-schema#Literal",
   "datatype" : "...",
   "lang" : "en",
   "value" : "...text of the literal value..."
@@ -451,7 +416,6 @@ A value that can be specified as a string:
 
 ```json
 {
-  "@type" : "http://www.w3.org/2000/01/rdf-schema#Resource",
   "id" : "...",
   "lang" : "en",
   "value" : "...text of the value..."
@@ -463,7 +427,6 @@ than a string.
 
 ```json
 {
-  "@type" : "http://www.w3.org/2000/01/rdf-schema#Resource",
   "resource" : "http://identifier/for/the/value",
   "type" : {
     "resource" : "http://identifier/for/the/type/of/resource"
@@ -503,7 +466,6 @@ description of a resource. The DCMI terms are supported as arrays of members of 
 
 ```json
 {
-  "@type" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#Description",
   "id" : "local_id",
   "about" : "http://identifier/for/the/resource/being/described",
   "type" : {
@@ -535,7 +497,6 @@ attribution | The attribution of this source reference. | attribution | [`attrib
 
 ```json
 {
-  "@type" : "http://gedcomx.org/conclusion/v1/SourceReference",
   "id" : "local_id",
   "type" : {
     "resource" : "http://identifier/for/the/type/of/resource/being/referenced"
@@ -571,7 +532,6 @@ displayName | A display name for the account. | displayName | [`Literal`](#rdf-l
 
 ```json
 {
-  "@type" : "http://xmlns.com/foaf/0.1/OnlineAccount",
   "id" : "local_id",
   "serviceHomepage" : {
     "resource" : "http://familysearch.org/"
@@ -608,7 +568,6 @@ street3 | The street (third line). | street3 | string
 
 ```json
 {
-  "@type" : "http://www.w3.org/2000/10/swap/pim/contact#Address",
   "id" : "local_id",
   "city" : "...",
   "country" : "...",
@@ -640,7 +599,6 @@ addresses  | The addresses of the person or organization. | addresses | array of
 
 ```json
 {
-  "@type" : "...",
   "id" : "local_id",
   "name" : {
     "value" : "..."
@@ -689,7 +647,6 @@ language | The language of the person. | language | [`Literal`](#rdf-literal)
 
 ```json
 {
-  "@type" : "http://xmlns.com/foaf/0.1/Person",
   "id" : "local_id",
   "familyName" : {
     "value" : "..."
@@ -722,7 +679,6 @@ sources | The list of references to the sources of the conclusion. | sources | a
 
 ```json
 {
-  "@type" : "...",
   "id" : "local_id",
   "sources" : [ { resource : "http://identifier/for/the/source" }, { resource : "http://identifier/for/the/source" } ]
 }
@@ -745,7 +701,6 @@ formal | The formal value of the date. | formal | [`FormalValue`](#formal-value)
 
 ```json
 {
-  "@type" : "http://gedcomx.org/conclusion/v1/Date",
   "id" : "local_id",
   "original" : "...the original text...",
   "formal" : {
@@ -771,7 +726,6 @@ formal | The formal value of the place. | formal | [`FormalValue`](#formal-value
 
 ```json
 {
-  "@type" : "http://gedcomx.org/conclusion/v1/Place",
   "id" : "local_id",
   "original" : "...the original text...",
   "formal" : {
@@ -800,7 +754,6 @@ formal | The formal value of the fact. | formal | [`FormalValue`](#formal-value)
 
 ```json
 {
-  "@type" : "http://gedcomx.org/conclusion/v1/Place",
   "id" : "local_id",
   "type" : {
     "resource" : "http://gedcomx.org/Birth"
@@ -835,7 +788,6 @@ type | URI identifying the type of the gender. | type | [`ResourceReference`](#r
 
 ```json
 {
-  "@type" : "http://gedcomx.org/conclusion/v1/Place",
   "id" : "local_id",
   "type" : {
     resource = "http://gedcomx.org/Male"
@@ -860,7 +812,6 @@ text | The text of the name part. | text | string
 
 ```json
 {
-  "@type" : "http://gedcomx.org/conclusion/v1/NamePart",
   "type" : {
     resource = "http://gedcomx.org/Prefix"
   },
@@ -883,7 +834,6 @@ parts | The parts of the name form. | parts | array of [`NamePart`](#name-part)
 
 ```json
 {
-  "@type" : "http://gedcomx.org/conclusion/v1/NameForm",
   "fullText" : "...full text of the name form...",
   "parts" : [ { ... }, { ... } ]
 }
@@ -908,7 +858,6 @@ preferred | Whether this name is preferred above the other names of a person. | 
 
 ```json
 {
-  "@type" : "http://gedcomx.org/conclusion/v1/Name",
   "id" : "local_id",
   "type" : {
     resource = "http://gedcomx.org/BirthName"
@@ -945,7 +894,6 @@ notes | Contributed notes about the person. | notes | array of [`Note`](#note)
 
 ```json
 {
-  "@type" : "http://gedcomx.org/conclusion/v1/Person",
   "id" : "local_id",
   "identifiers" : [ { ... }, { ... } ],
   "living" : true,
@@ -985,7 +933,6 @@ notes | Contributed notes about the relationship. | notes | array of [`Note`](#n
 
 ```json
 {
-  "@type" : "http://gedcomx.org/conclusion/v1/Relationship",
   "id" : "local_id",
   "type" : {
     resource = "http://gedcomx.org/Couple"
@@ -1007,8 +954,7 @@ notes | Contributed notes about the relationship. | notes | array of [`Note`](#n
 GEDCOM X defines the notion of extension properties, and the JSON serialization
 supports the extensibility requirements detailed in the GEDCOM X conceptual model
 specification. When an extension property is provided in a JSON object, the type
-of the object can be determined by the value of the "@type" member as defined in
-section 1.3 above.
+of the object can be determined by the value of thesection 1.3 above.
 
 For convenience, GEDCOM X reserves the use of the following member names as
 "known" extension members:
