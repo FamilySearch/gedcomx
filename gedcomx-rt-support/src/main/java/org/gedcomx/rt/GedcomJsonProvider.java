@@ -19,7 +19,6 @@ import org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider;
 import org.codehaus.jackson.map.AnnotationIntrospector;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.introspect.JacksonAnnotationIntrospector;
-import org.codehaus.jackson.map.type.SimpleType;
 import org.codehaus.jackson.xc.JaxbAnnotationIntrospector;
 
 import javax.ws.rs.Consumes;
@@ -58,7 +57,6 @@ public class GedcomJsonProvider extends JacksonJaxbJsonProvider {
     mapper.getDeserializationConfig().withAnnotationIntrospector(introspector);
     mapper.registerModule(new GedcomJacksonModule());
     for (Class<?> contextClass : classes) {
-      XmlTypeIdResolver.initContextClass(SimpleType.construct(contextClass));
       GedcomNamespaceManager.registerKnownJsonType(contextClass);
     }
     return mapper;

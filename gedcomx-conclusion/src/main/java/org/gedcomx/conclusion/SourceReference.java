@@ -18,8 +18,6 @@ package org.gedcomx.conclusion;
 import org.codehaus.enunciate.doc.DocumentationExample;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.annotate.JsonTypeInfo;
-import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.common.Attributable;
 import org.gedcomx.common.Attribution;
 import org.gedcomx.common.ResourceReference;
@@ -27,7 +25,6 @@ import org.gedcomx.common.URI;
 import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.JsonElementWrapper;
 import org.gedcomx.rt.RDFRange;
-import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.ResourceType;
 import org.gedcomx.types.TypeReference;
 
@@ -40,8 +37,6 @@ import javax.xml.bind.annotation.*;
  */
 @XmlRootElement ( name = "source" )
 @JsonElementWrapper ( name = "sources" )
-@JsonTypeInfo ( use = JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
-@JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "SourceReference" )
 public class SourceReference extends ResourceReference implements Attributable {
 

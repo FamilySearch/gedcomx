@@ -15,18 +15,11 @@
  */
 package org.gedcomx.common;
 
-import org.codehaus.enunciate.doc.DocumentationExample;
 import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.annotate.JsonTypeInfo;
-import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.SupportsExtensionAttributes;
 import org.gedcomx.rt.SupportsExtensionElements;
-import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.ResourceFragmentParameter;
-import org.gedcomx.types.ResourceType;
-import org.gedcomx.types.TypeReference;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.*;
@@ -42,8 +35,6 @@ import java.util.Map;
  * @author Ryan Heaton
  */
 @XmlType ( name = "ResourceReference", namespace = CommonModels.RDF_NAMESPACE )
-@JsonTypeInfo ( use = JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
-@JsonTypeIdResolver ( XmlTypeIdResolver.class )
 @XmlSeeAlso(ResourceFragmentParameter.class)
 public class ResourceReference implements SupportsExtensionAttributes, SupportsExtensionElements {
 

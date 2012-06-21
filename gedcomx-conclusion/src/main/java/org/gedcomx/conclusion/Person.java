@@ -18,14 +18,11 @@ package org.gedcomx.conclusion;
 import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.annotate.JsonTypeInfo;
-import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.common.GenealogicalResource;
 import org.gedcomx.common.Identifier;
 import org.gedcomx.common.Note;
 import org.gedcomx.common.URI;
 import org.gedcomx.rt.JsonElementWrapper;
-import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.FactType;
 import org.gedcomx.types.IdentifierType;
 
@@ -44,8 +41,6 @@ import java.util.List;
  */
 @XmlRootElement
 @JsonElementWrapper (name = "persons")
-@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
-@JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "Person", propOrder = { "identifiers", "living", "gender", "names", "facts", "sources", "notes" } )
 public class Person extends GenealogicalResource implements HasFacts, HasNotes, ReferencesSources {
 

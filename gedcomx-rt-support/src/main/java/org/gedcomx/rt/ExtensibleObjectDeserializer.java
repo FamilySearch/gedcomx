@@ -20,8 +20,6 @@ import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.JsonToken;
 import org.codehaus.jackson.map.DeserializationContext;
 import org.codehaus.jackson.map.deser.BeanDeserializer;
-import org.codehaus.jackson.map.jsontype.impl.AsPropertyTypeDeserializer;
-import org.codehaus.jackson.map.type.SimpleType;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBElement;
@@ -37,21 +35,12 @@ import java.util.List;
  */
 public class ExtensibleObjectDeserializer extends BeanDeserializer {
 
-  private final XmlTypeIdResolver xmlTypeIdResolver;
-  private final AsPropertyTypeDeserializer typeDeserializer;
-
   public ExtensibleObjectDeserializer(BeanDeserializer src) {
     super(src);
-    this.xmlTypeIdResolver = new XmlTypeIdResolver();
-    this.typeDeserializer = new AsPropertyTypeDeserializer(SimpleType.construct(Object.class), this.xmlTypeIdResolver, null, XmlTypeIdResolver.TYPE_PROPERTY_NAME);
   }
 
   @Override
   protected void handleUnknownProperty(JsonParser jp, DeserializationContext ctxt, Object beanOrClass, String propName) throws IOException, JsonProcessingException {
-    if (XmlTypeIdResolver.TYPE_PROPERTY_NAME.equals(propName)) {
-      return;
-    }
-
     if (beanOrClass instanceof SupportsExtensionElements) {
       SupportsExtensionElements target = (SupportsExtensionElements) beanOrClass;
       //first check if it's a known json type

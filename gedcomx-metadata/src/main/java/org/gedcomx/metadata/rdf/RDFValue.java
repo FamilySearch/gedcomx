@@ -18,12 +18,9 @@ package org.gedcomx.metadata.rdf;
 import org.codehaus.enunciate.doc.DocumentationExample;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.annotate.JsonTypeInfo;
-import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.common.ResourceReference;
 import org.gedcomx.common.URI;
 import org.gedcomx.rt.CommonModels;
-import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.ResourceType;
 import org.gedcomx.types.TypeReference;
 
@@ -40,8 +37,6 @@ import javax.xml.bind.annotation.*;
  * @author Ryan Heaton
  */
 @XmlType ( name = "Resource", namespace = CommonModels.RDFS_NAMESPACE )
-@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
-@JsonTypeIdResolver (XmlTypeIdResolver.class)
 public final class RDFValue extends ResourceReference {
 
   private String id;

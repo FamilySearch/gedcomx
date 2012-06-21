@@ -23,13 +23,11 @@ import net.sf.jelly.apt.decorations.type.DecoratedInterfaceType;
 import org.codehaus.enunciate.apt.EnunciateFreemarkerModel;
 import org.codehaus.enunciate.contract.jaxb.TypeDefinition;
 import org.codehaus.enunciate.modules.docs.WhateverNode;
-import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.node.ArrayNode;
 import org.codehaus.jackson.node.JsonNodeFactory;
 import org.codehaus.jackson.node.ObjectNode;
 import org.gedcomx.rt.SupportsExtensionAttributes;
 import org.gedcomx.rt.SupportsExtensionElements;
-import org.gedcomx.rt.XmlTypeIdResolver;
 
 /**
  * @author Ryan Heaton
@@ -42,10 +40,6 @@ public class GenerateExampleJsonMethod extends org.codehaus.enunciate.modules.do
 
   protected void generateExampleJson(TypeDefinition type, ObjectNode jsonNode, int maxDepth) {
     if (type != null) {
-      if (!jsonNode.has(XmlTypeIdResolver.TYPE_PROPERTY_NAME) && type.getAnnotation(JsonTypeInfo.class) != null) {
-        jsonNode.put(XmlTypeIdResolver.TYPE_PROPERTY_NAME, JsonNodeFactory.instance.textNode(type.getNamespace() + type.getName()));
-      }
-
       super.generateExampleJson(type, jsonNode, maxDepth);
 
       if (isInstanceOf(type, SupportsExtensionAttributes.class.getName())) {

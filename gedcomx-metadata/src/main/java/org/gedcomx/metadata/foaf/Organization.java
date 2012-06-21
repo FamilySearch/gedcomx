@@ -15,10 +15,6 @@
  */
 package org.gedcomx.metadata.foaf;
 
-import org.codehaus.jackson.annotate.JsonTypeInfo;
-import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.rt.XmlTypeIdResolver;
-
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
@@ -30,7 +26,5 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlType ( name = "Organization" )
 @XmlRootElement ( name = "Organization" )
-@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
-@JsonTypeIdResolver (XmlTypeIdResolver.class)
 public class Organization extends Agent {
 }
