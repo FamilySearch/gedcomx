@@ -663,7 +663,7 @@ public class ObjectFactory {
    * @link http://dublincore.org/documents/dcmi-terms/#terms-source
    */
   @XmlElementDecl ( namespace = CommonModels.DUBLIN_CORE_NAMESPACE, name = "source" )
-  @JsonElementWrapper ( name = "sources" )
+  @JsonElementWrapper ( name = "dc-sources" )
   public JAXBElement<RDFValue> createSourceElement(RDFValue source) {
     return new JAXBElement<RDFValue>(new QName(CommonModels.DUBLIN_CORE_NAMESPACE, "source"), RDFValue.class, source);
   }
