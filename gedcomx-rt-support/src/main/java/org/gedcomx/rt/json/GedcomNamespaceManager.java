@@ -25,6 +25,7 @@ import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlElementDecl;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchema;
+import javax.xml.bind.annotation.XmlType;
 import javax.xml.namespace.QName;
 import java.beans.Introspector;
 import java.io.BufferedReader;
@@ -48,9 +49,10 @@ public class GedcomNamespaceManager extends NamespacePrefixMapper {
   private static boolean INITIALIZED = false;
   private static final Map<String, String> KNOWN_PREFIXES = new HashMap<String, String>();
   private static final Map<String, String> RUNTIME_VERSIONS = new HashMap<String, String>();
-  private static final Map<String, Class<?>> WRAPPED_JSON_TYPES = new HashMap<String, Class<?>>();
-  private static final Map<QName, String> WRAPPER_JSON_NAMES = new HashMap<QName, String>();
-  private static final Map<String, Class<?>> KNOWN_JSON_TYPES = new HashMap<String, Class<?>>();
+  private static final Map<String, Class<?>> WRAPPED_JSON_TYPES_BY_NAME = new HashMap<String, Class<?>>();
+  private static final Map<QName, String> QNAME_WRAPPER_JSON_NAMES = new HashMap<QName, String>();
+  private static final Map<String, Class<?>> KNOWN_JSON_TYPES_BY_NAME = new HashMap<String, Class<?>>();
+  private static final Map<String, Class<?>> KNOWN_JSON_TYPES_BY_TYPE_ID = new HashMap<String, Class<?>>();
 
   public GedcomNamespaceManager(Class<?> rootClass) {
     this(getDefaultNamespace(rootClass));
@@ -190,8 +192,8 @@ public class GedcomNamespaceManager extends NamespacePrefixMapper {
     }
 
     KNOWN_PREFIXES.putAll(namespacePrefixes);
-    WRAPPER_JSON_NAMES.putAll(wrapperJsonNames);
-    WRAPPED_JSON_TYPES.putAll(wrappedJsonTypes);
+    QNAME_WRAPPER_JSON_NAMES.putAll(wrapperJsonNames);
+    WRAPPED_JSON_TYPES_BY_NAME.putAll(wrappedJsonTypes);
     INITIALIZED = true;
   }
 
@@ -228,7 +230,7 @@ public class GedcomNamespaceManager extends NamespacePrefixMapper {
    */
   public static String getJsonNameForWrapperName(QName wrapperName) {
     init(Thread.currentThread().getContextClassLoader());
-    return WRAPPER_JSON_NAMES.get(wrapperName);
+    return QNAME_WRAPPER_JSON_NAMES.get(wrapperName);
   }
 
   /**
@@ -239,7 +241,7 @@ public class GedcomNamespaceManager extends NamespacePrefixMapper {
    */
   public static QName findWrapperNameForJsonName(String jsonName) {
     init(Thread.currentThread().getContextClassLoader());
-    for (Map.Entry<QName, String> entry : WRAPPER_JSON_NAMES.entrySet()) {
+    for (Map.Entry<QName, String> entry : QNAME_WRAPPER_JSON_NAMES.entrySet()) {
       if (entry.getValue().equals(jsonName)) {
         return entry.getKey();
       }
@@ -256,7 +258,7 @@ public class GedcomNamespaceManager extends NamespacePrefixMapper {
    */
   public static Class<?> getWrappedTypeForJsonName(String jsonName) {
     init(Thread.currentThread().getContextClassLoader());
-    return WRAPPED_JSON_TYPES.get(jsonName);
+    return WRAPPED_JSON_TYPES_BY_NAME.get(jsonName);
   }
 
   /**
@@ -267,8 +269,9 @@ public class GedcomNamespaceManager extends NamespacePrefixMapper {
   public static void registerKnownJsonType(Class<?> type) {
     String jsonName = getJsonName(type);
     if (jsonName != null) {
-      KNOWN_JSON_TYPES.put(jsonName, type);
+      KNOWN_JSON_TYPES_BY_NAME.put(jsonName, type);
     }
+    KNOWN_JSON_TYPES_BY_TYPE_ID.put(getTypeIdName(type), type);
   }
 
   /**
@@ -309,13 +312,50 @@ public class GedcomNamespaceManager extends NamespacePrefixMapper {
   }
 
   /**
+   * Get the id for the specified type.
+   *
+   * @param type The type.
+   * @return The type id.
+   */
+  static String getTypeIdName(Class<?> type) {
+    String ns = "";
+    if (type.getPackage() != null && type.getPackage().isAnnotationPresent(XmlSchema.class)) {
+      ns = type.getPackage().getAnnotation(XmlSchema.class).namespace();
+    }
+
+    String name = Introspector.decapitalize(type.getSimpleName());
+    if (type.isAnnotationPresent(XmlType.class)) {
+      XmlType typeMeta = type.getAnnotation(XmlType.class);
+      if (!"##default".equals(typeMeta.name())) {
+        name = typeMeta.name();
+      }
+
+      if (!"##default".equals(typeMeta.namespace())) {
+        ns = typeMeta.namespace();
+      }
+    }
+
+    return ns + name;
+  }
+
+  /**
    * Get the known type for the given JSON name.
    *
    * @param jsonName The json name.
    * @return The known type, or null if not known.
    */
   public static Class<?> getKnownJsonType(String jsonName) {
-    return KNOWN_JSON_TYPES.get(jsonName);
+    return KNOWN_JSON_TYPES_BY_NAME.get(jsonName);
+  }
+
+  /**
+   * Get the known type for the given data type.
+   *
+   * @param typeId The type id.
+   * @return The known type, or null if not known.
+   */
+  public static Class<?> getKnownTypeById(String typeId) {
+    return KNOWN_JSON_TYPES_BY_NAME.get(typeId);
   }
 
   /**

@@ -24,7 +24,12 @@ import org.codehaus.jackson.xc.JaxbAnnotationIntrospector;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.ext.Provider;
+import java.io.IOException;
+import java.io.InputStream;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Type;
 
 /**
  * The custom json provider for GEDCOM JSON data.
@@ -60,5 +65,17 @@ public class GedcomJsonProvider extends JacksonJaxbJsonProvider {
       GedcomNamespaceManager.registerKnownJsonType(contextClass);
     }
     return mapper;
+  }
+
+  @Override
+  public Object readFrom(Class<Object> type, Type genericType, Annotation[] annotations, MediaType mediaType, MultivaluedMap<String, String> httpHeaders, InputStream entityStream) throws IOException {
+    String dataType = httpHeaders.getFirst("X-type");
+    if (dataType != null) {
+      Class<Object> knownType = (Class<Object>) GedcomNamespaceManager.getKnownTypeById(dataType);
+      if (type != null && knownType != null && type.isAssignableFrom(knownType)) {
+        type = knownType;
+      }
+    }
+    return super.readFrom(type, genericType, annotations, mediaType, httpHeaders, entityStream);
   }
 }
