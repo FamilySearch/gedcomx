@@ -18,16 +18,21 @@ package org.gedcomx.build.enunciate;
 import com.sun.mirror.type.ClassType;
 import com.sun.mirror.type.InterfaceType;
 import net.sf.jelly.apt.decorations.TypeMirrorDecorator;
+import net.sf.jelly.apt.decorations.declaration.DecoratedDeclaration;
 import net.sf.jelly.apt.decorations.type.DecoratedClassType;
 import net.sf.jelly.apt.decorations.type.DecoratedInterfaceType;
+import net.sf.jelly.apt.decorations.type.DecoratedTypeMirror;
 import org.codehaus.enunciate.apt.EnunciateFreemarkerModel;
+import org.codehaus.enunciate.contract.jaxb.Element;
 import org.codehaus.enunciate.contract.jaxb.TypeDefinition;
 import org.codehaus.enunciate.modules.docs.WhateverNode;
+import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.node.ArrayNode;
 import org.codehaus.jackson.node.JsonNodeFactory;
 import org.codehaus.jackson.node.ObjectNode;
 import org.gedcomx.rt.SupportsExtensionAttributes;
 import org.gedcomx.rt.SupportsExtensionElements;
+import org.gedcomx.rt.json.HasUniqueJsonKey;
 
 /**
  * @author Ryan Heaton
@@ -56,6 +61,22 @@ public class GenerateExampleJsonMethod extends org.codehaus.enunciate.modules.do
         exampleValues.add(WhateverNode.instance);
         jsonNode.put("extension", exampleValues);
       }
+    }
+  }
+
+  @Override
+  protected void generateExampleJson(Element element, ObjectNode jsonNode, int maxDepth) {
+    if (element.isCollectionType() && ((DecoratedTypeMirror)element.getBareAccessorType()).isInstanceOf(HasUniqueJsonKey.class.getName())) {
+      String jsonName = element.getJsonMemberName();
+      ObjectNode on = JsonNodeFactory.instance.objectNode();
+      JsonNode val = generateExampleJson(element.getBaseType(), "...", maxDepth);
+      on.put("type1", val);
+      on.put("type2", val);
+      on.put("...", WhateverNode.instance);
+      jsonNode.put(jsonName, on);
+    }
+    else {
+      super.generateExampleJson(element, jsonNode, maxDepth);
     }
   }
 
