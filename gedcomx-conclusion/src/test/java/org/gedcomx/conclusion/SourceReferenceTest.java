@@ -8,8 +8,6 @@ import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 
-import static org.gedcomx.rt.SerializationUtil.processThroughJson;
-import static org.gedcomx.rt.SerializationUtil.processThroughXml;
 import static org.testng.AssertJUnit.assertEquals;
 
 /**

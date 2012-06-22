@@ -23,12 +23,20 @@ import org.gedcomx.common.Attribution;
 import org.gedcomx.common.ResourceReference;
 import org.gedcomx.common.URI;
 import org.gedcomx.rt.CommonModels;
+import org.gedcomx.rt.SupportsExtensionAttributes;
+import org.gedcomx.rt.SupportsExtensionElements;
 import org.gedcomx.rt.json.JsonElementWrapper;
 import org.gedcomx.rt.RDFRange;
 import org.gedcomx.types.ResourceType;
 import org.gedcomx.types.TypeReference;
 
+import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.*;
+import javax.xml.namespace.QName;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * An attributable reference to a source for genealogical conclusions.
@@ -38,14 +46,17 @@ import javax.xml.bind.annotation.*;
 @XmlRootElement ( name = "source" )
 @JsonElementWrapper ( name = "sources" )
 @XmlType ( name = "SourceReference" )
-public class SourceReference extends ResourceReference implements Attributable {
+public class SourceReference implements Attributable, SupportsExtensionAttributes, SupportsExtensionElements {
 
   private String id;
   @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
   @JsonProperty
   private TypeReference<ResourceType> type;
+  private URI resource;
   private Attribution attribution;
   private ResourceReference description;
+  private Map<QName, String> extensionAttributes;
+  private List<Object> extensionElements;
 
   /**
    * The id of this resource reference. Note the distinction between this id and the id of the
@@ -115,6 +126,30 @@ public class SourceReference extends ResourceReference implements Attributable {
   }
 
   /**
+   * The URI to the resource. For more information, see <a href="http://www.w3.org/TR/webarch/#identification">Architecture of the World
+   * Wide Web, Volume One, Section 2</a>
+   *
+   * @link http://www.w3.org/TR/webarch/#identification
+   * @return The URI to the resource.
+   */
+  @XmlAttribute (namespace= CommonModels.RDF_NAMESPACE)
+  @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
+  public URI getResource() {
+    return resource;
+  }
+
+  /**
+   * The URI to the resource. For more information, see <a href="http://www.w3.org/TR/webarch/#identification">Architecture of the World
+   * Wide Web, Volume One, Section 2</a>
+   *
+   * @link http://www.w3.org/TR/webarch/#identification
+   * @param resource The URI to the resource.
+   */
+  public void setResource(URI resource) {
+    this.resource = resource;
+  }
+
+  /**
    * The attribution metadata for this source reference.
    *
    * @return The attribution metadata for this source reference.
@@ -150,5 +185,113 @@ public class SourceReference extends ResourceReference implements Attributable {
    */
   public void setDescription(ResourceReference description) {
     this.description = description;
+  }
+
+  /**
+   * Custom attributes applicable to this resource reference.
+   *
+   * @return Custom attributes applicable to this resource reference.
+   */
+  @XmlAnyAttribute
+  @JsonIgnore
+  public Map<QName, String> getExtensionAttributes() {
+    return extensionAttributes;
+  }
+
+  /**
+   * Custom attributes applicable to this resource reference.
+   *
+   * @param extensionAttributes Custom attributes applicable to this resource reference.
+   */
+  @JsonIgnore
+  public void setExtensionAttributes(Map<QName, String> extensionAttributes) {
+    this.extensionAttributes = extensionAttributes;
+  }
+
+  /**
+   * Add a custom extension attribute.
+   *
+   * @param qname The qname of the attribute.
+   * @param value The value of the attribute.
+   */
+  public void addExtensionAttribute(QName qname, String value) {
+    if (this.extensionAttributes == null) {
+      this.extensionAttributes = new HashMap<QName, String>();
+    }
+
+    this.extensionAttributes.put(qname, value);
+  }
+
+  /**
+   * Custom attributes applicable to this resource reference.
+   *
+   * @return Custom attributes applicable to this resource reference.
+   */
+  @XmlAnyElement ( lax = true )
+  @JsonIgnore
+  public List<Object> getExtensionElements() {
+    return extensionElements;
+  }
+
+  /**
+   * Custom attributes applicable to this resource reference.
+   *
+   * @param extensionElements Custom attributes applicable to this resource reference.
+   */
+  @JsonIgnore
+  public void setExtensionElements(List<Object> extensionElements) {
+    this.extensionElements = extensionElements;
+  }
+
+  /**
+   * Add an extension element.
+   *
+   * @param element The extension element to add.
+   */
+  public void addExtensionElement(Object element) {
+    if (this.extensionElements == null) {
+      this.extensionElements = new ArrayList<Object>();
+    }
+
+    this.extensionElements.add(element);
+  }
+
+  /**
+   * Finds the first extension of a specified type.
+   *
+   * @param clazz The type.
+   * @return The extension, or null if none found.
+   */
+  @SuppressWarnings ( {"unchecked"} )
+  public <E> E findExtensionOfType(Class<E> clazz) {
+    if (this.extensionElements != null) {
+      for (Object extension : extensionElements) {
+        if (clazz.isInstance(extension)) {
+          return (E) extension;
+        }
+      }
+    }
+
+    return null;
+  }
+
+  /**
+   * Find the extensions of a specified type.
+   *
+   * @param clazz The type.
+   * @return The extensions, possibly empty but not null.
+   */
+  @SuppressWarnings ( {"unchecked"} )
+  public <E> List<E> findExtensionsOfType(Class<E> clazz) {
+    List<E> ext = new ArrayList<E>();
+    if (this.extensionElements != null) {
+      for (Object extension : extensionElements) {
+        if (clazz.isInstance(extension)) {
+          ext.add((E) extension);
+        }
+      }
+    }
+
+    return ext;
   }
 }

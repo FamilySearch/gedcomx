@@ -15,24 +15,22 @@
  */
 package org.gedcomx.build.enunciate;
 
-import com.sun.mirror.type.ClassType;
-import com.sun.mirror.type.InterfaceType;
-import net.sf.jelly.apt.decorations.TypeMirrorDecorator;
-import net.sf.jelly.apt.decorations.declaration.DecoratedDeclaration;
-import net.sf.jelly.apt.decorations.type.DecoratedClassType;
-import net.sf.jelly.apt.decorations.type.DecoratedInterfaceType;
+import com.sun.mirror.declaration.TypeDeclaration;
+import com.sun.mirror.type.DeclaredType;
+import com.sun.mirror.type.TypeMirror;
 import net.sf.jelly.apt.decorations.type.DecoratedTypeMirror;
 import org.codehaus.enunciate.apt.EnunciateFreemarkerModel;
 import org.codehaus.enunciate.contract.jaxb.Element;
 import org.codehaus.enunciate.contract.jaxb.TypeDefinition;
+import org.codehaus.enunciate.contract.jaxb.types.XmlClassType;
+import org.codehaus.enunciate.contract.jaxb.types.XmlType;
+import org.codehaus.enunciate.doc.DocumentationExample;
 import org.codehaus.enunciate.modules.docs.WhateverNode;
 import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.node.ArrayNode;
 import org.codehaus.jackson.node.JsonNodeFactory;
 import org.codehaus.jackson.node.ObjectNode;
-import org.gedcomx.rt.SupportsExtensionAttributes;
-import org.gedcomx.rt.SupportsExtensionElements;
 import org.gedcomx.rt.json.HasUniqueJsonKey;
+import org.gedcomx.rt.json.JsonSimpleValue;
 
 /**
  * @author Ryan Heaton
@@ -41,27 +39,6 @@ public class GenerateExampleJsonMethod extends org.codehaus.enunciate.modules.do
 
   public GenerateExampleJsonMethod(EnunciateFreemarkerModel model) {
     super(model);
-  }
-
-  protected void generateExampleJson(TypeDefinition type, ObjectNode jsonNode, int maxDepth) {
-    if (type != null) {
-      super.generateExampleJson(type, jsonNode, maxDepth);
-
-      if (isInstanceOf(type, SupportsExtensionAttributes.class.getName())) {
-        jsonNode.put("http://extension/attribute", JsonNodeFactory.instance.textNode("..."));
-      }
-
-      if (isInstanceOf(type, SupportsExtensionElements.class.getName())) {
-        ArrayNode exampleValues = JsonNodeFactory.instance.arrayNode();
-        exampleValues.add(WhateverNode.instance);
-        exampleValues.add(WhateverNode.instance);
-        jsonNode.put("http://extension/element", exampleValues);
-        exampleValues = JsonNodeFactory.instance.arrayNode();
-        exampleValues.add(WhateverNode.instance);
-        exampleValues.add(WhateverNode.instance);
-        jsonNode.put("extension", exampleValues);
-      }
-    }
   }
 
   @Override
@@ -76,22 +53,46 @@ public class GenerateExampleJsonMethod extends org.codehaus.enunciate.modules.do
       jsonNode.put(jsonName, on);
     }
     else {
-      super.generateExampleJson(element, jsonNode, maxDepth);
+      String simpleValue = getSimpleValue(element);
+      if (simpleValue != null) {
+        jsonNode.put(element.getJsonMemberName(), simpleValue);
+      }
+      else {
+        super.generateExampleJson(element, jsonNode, maxDepth);
+      }
     }
   }
 
-  private boolean isInstanceOf(TypeDefinition typeDef, String name) {
-    for (InterfaceType interfaceType : typeDef.getSuperinterfaces()) {
-      if (((DecoratedInterfaceType) TypeMirrorDecorator.decorate(interfaceType)).isInstanceOf(name)) {
-        return true;
+  private String getSimpleValue(Element element) {
+    String val = null;
+    TypeMirror accessorType = element.getAccessorType();
+    if (accessorType instanceof DeclaredType) {
+      TypeDeclaration decl = ((DeclaredType) accessorType).getDeclaration();
+      if (decl != null) {
+        JsonSimpleValue sv = decl.getAnnotation(JsonSimpleValue.class);
+        if (sv != null) {
+          DocumentationExample example = element.getAnnotation(DocumentationExample.class);
+          val = example == null || "##default".equals(example.value()) ? "##default".equals(sv.example()) ? "..." : sv.example() : example.value();
+        }
+      }
+    }
+    return val;
+  }
+
+  @Override
+  protected JsonNode generateExampleJson(XmlType type, String specifiedValue, int maxDepth) {
+    if (type instanceof XmlClassType) {
+      TypeDefinition typeDef = ((XmlClassType) type).getTypeDefinition();
+      JsonSimpleValue sv = typeDef == null ? null : typeDef.getAnnotation(JsonSimpleValue.class);
+      if (sv != null) {
+        if ("...".equals(specifiedValue) && !"##default".equals(sv.example())) {
+          specifiedValue = sv.example();
+        }
+        return JsonNodeFactory.instance.textNode(specifiedValue);
       }
     }
 
-    ClassType superclass = typeDef.getSuperclass();
-    if (superclass != null && ((DecoratedClassType) TypeMirrorDecorator.decorate(superclass)).isInstanceOf(name)) {
-      return true;
-    }
-
-    return false;
+    return super.generateExampleJson(type, specifiedValue, maxDepth);
   }
+
 }
