@@ -20,6 +20,7 @@ import org.codehaus.jackson.map.AnnotationIntrospector;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.introspect.JacksonAnnotationIntrospector;
 import org.codehaus.jackson.xc.JaxbAnnotationIntrospector;
+import org.gedcomx.rt.GedcomNamespaceManager;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;

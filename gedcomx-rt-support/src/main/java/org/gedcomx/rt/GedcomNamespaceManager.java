@@ -13,13 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.rt.json;
+package org.gedcomx.rt;
 
 import com.sun.xml.bind.marshaller.NamespacePrefixMapper;
-import org.gedcomx.rt.CommonModels;
-import org.gedcomx.rt.DefaultNamespace;
-import org.gedcomx.rt.Model;
-import org.gedcomx.rt.Models;
+import org.gedcomx.rt.json.JsonElementWrapper;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlElementDecl;
@@ -197,7 +194,7 @@ public class GedcomNamespaceManager extends NamespacePrefixMapper {
     INITIALIZED = true;
   }
 
-  static String nameFromQName(String namespaceUri, String localPart) {
+  public static String nameFromQName(String namespaceUri, String localPart) {
     if (namespaceUri == null) {
       namespaceUri = "";
     }
@@ -280,7 +277,7 @@ public class GedcomNamespaceManager extends NamespacePrefixMapper {
    * @param type The type.
    * @return The json name.
    */
-  static String getJsonName(Class<?> type) {
+  public static String getJsonName(Class<?> type) {
     if (type.isAnnotationPresent(JsonElementWrapper.class)) {
       //support custom json element name
       JsonElementWrapper ext = type.getAnnotation(JsonElementWrapper.class);

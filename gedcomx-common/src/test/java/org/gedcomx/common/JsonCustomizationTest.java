@@ -1,6 +1,6 @@
 package org.gedcomx.common;
 
-import org.gedcomx.rt.json.GedcomNamespaceManager;
+import org.gedcomx.rt.GedcomNamespaceManager;
 import org.testng.annotations.Test;
 
 import javax.xml.bind.JAXBContext;
