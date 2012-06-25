@@ -44,7 +44,7 @@ import java.util.Map;
  * @author Ryan Heaton
  */
 @XmlRootElement ( name = "source" )
-@JsonElementWrapper ( name = "sources" )
+@JsonElementWrapper ( name = "source-references" )
 @XmlType ( name = "SourceReference" )
 public class SourceReference implements Attributable, SupportsExtensionAttributes, SupportsExtensionElements {
 
