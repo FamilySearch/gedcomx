@@ -15,17 +15,14 @@
  */
 package org.gedcomx.conclusion;
 
-import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
-import org.gedcomx.common.GenealogicalResource;
-import org.gedcomx.common.Note;
 import org.gedcomx.common.ResourceReference;
 import org.gedcomx.common.URI;
 import org.gedcomx.rt.CommonModels;
-import org.gedcomx.rt.json.JsonElementWrapper;
 import org.gedcomx.rt.RDFRange;
 import org.gedcomx.rt.RDFSubPropertyOf;
+import org.gedcomx.rt.json.JsonElementWrapper;
 import org.gedcomx.types.RelationshipType;
 import org.gedcomx.types.TypeReference;
 
@@ -33,8 +30,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A relationship between two or more persons.
@@ -44,16 +39,13 @@ import java.util.List;
 @XmlRootElement
 @JsonElementWrapper ( name = "relationships" )
 @XmlType ( name = "Relationship", propOrder = { "type", "person1", "person2", "facts", "sources", "notes" } )
-public class Relationship extends GenealogicalResource implements HasFacts, HasNotes, ReferencesSources {
+public class Relationship extends AbstractRelationship {
 
   @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
   @JsonProperty
   private TypeReference<RelationshipType> type;
   private ResourceReference person1;
   private ResourceReference person2;
-  private List<Fact> facts;
-  private List<SourceReference> sources;
-  private List<Note> notes;
 
   /**
    * The type of this relationship.
@@ -151,113 +143,5 @@ public class Relationship extends GenealogicalResource implements HasFacts, HasN
    */
   public void setPerson2(ResourceReference person2) {
     this.person2 = person2;
-  }
-
-  /**
-   * The fact conclusions for the relationship.
-   *
-   * @return The fact conclusions for the relationship.
-   */
-  @XmlElement(name="fact")
-  @JsonProperty("facts")
-  @JsonName("facts")
-  public List<Fact> getFacts() {
-    return facts;
-  }
-
-  /**
-   * The fact conclusions for the relationship.
-   *
-   * @param facts The fact conclusions for the relationship.
-   */
-  @JsonProperty("facts")
-  public void setFacts(List<Fact> facts) {
-    this.facts = facts;
-  }
-
-  /**
-   * Add a fact conclusion.
-   *
-   * @param fact The fact conclusion to be added.
-   */
-  public void addFact(Fact fact) {
-    if (fact != null) {
-      if (facts == null) {
-        facts = new ArrayList<Fact>();
-      }
-      facts.add(fact);
-    }
-  }
-
-  /**
-   * The source references for a resource.
-   *
-   * @return The source references for a resource.
-   */
-  @XmlElement (name="source")
-  @JsonProperty ("sources")
-  @JsonName ("sources")
-  public List<SourceReference> getSources() {
-    return sources;
-  }
-
-  /**
-   * The source references for a resource.
-   *
-   * @param sources The source references for a resource.
-   */
-  @JsonProperty("sources")
-  public void setSources(List<SourceReference> sources) {
-    this.sources = sources;
-  }
-
-  /**
-   * Add a sourceReference.
-   *
-   * @param sourceReference The sourceReference to be added.
-   */
-  public void addSource(SourceReference sourceReference) {
-    if (sourceReference != null) {
-      if (sources == null) {
-        sources = new ArrayList<SourceReference>();
-      }
-      sources.add(sourceReference);
-    }
-  }
-
-  /**
-   * Notes about a resource.
-   *
-   * @return Notes about a resource.
-   */
-  @XmlElement (name = "note")
-  @JsonProperty ("notes")
-  @JsonName ("notes")
-  public List<Note> getNotes() {
-    return notes;
-  }
-
-  /**
-   * Notes about a resource.
-   *
-   * @param notes Notes about a resource.
-   */
-  @JsonProperty ("notes")
-  public void setNotes(List<Note> notes) {
-    this.notes = notes;
-  }
-
-  /**
-   * Add a note.
-   *
-   * @param note The note to be added.
-   */
-  public void addNote(Note note) {
-    if (note != null) {
-      if (notes == null) {
-        notes = new ArrayList<Note>();
-      }
-      notes.add(note);
-    }
   }
 }
