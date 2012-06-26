@@ -6,6 +6,7 @@
 [#list recipes as recipe]
   [@file name=titleToFilename(recipe.title) + ".recipe.html" charset="utf-8"]
     [@libBoilerplate.writeStartBody label=recipe.title/]
+  <div id="main">
   <h3>${recipe.title}</h3>
 
   <div id="mediatype-selection">
@@ -33,6 +34,7 @@ ${(snippet.json!"{ 'json-snippet-available' : false }")?trim}
   </div>
     [/#list]
   <br/>
+  </div>
     [@libBoilerplate.writeEndBody/]
   [/@file]
 [/#list]
@@ -56,22 +58,17 @@ ${(snippet.json!"{ 'json-snippet-available' : false }")?trim}
 [/@libBoilerplate.writeHeader]
   <div id="main" class="column first last span-20">
     <h1>Recipes</h1>
-  [#list recipes as recipe]
-    <h4><a href="#recipe-anchor" onClick="showRecipe('${recipe.title}');">${recipe.title}</a></h4>
-    <p>${recipe.description!""}</p>
+    <div id="recipes">
+      <table>
+  [#list recipes?sort_by("title") as recipe]
+          <tr>
+            <td><a class="recipe-popup" title="${recipe.title}">${recipe.title}</a></td>
+            <td><p>${recipe.description!""}</p></td>
+          </tr>
   [/#list]
-    <hr/>
-    <a name="recipe-anchor"></a>
-    <iframe id="recipe"></iframe>
+      </table>
+    </div>
   </div>
-  <script>
-    function showRecipe(title) {
-      var href = title.replace(/ /g, "-").replace(/:/g, ".") + ".recipe.html";
-      var iframe = $('#recipe');
-      iframe.attr("src", href);
-      iframe.iframeAutoHeight();
-    }
-  </script>
 [@libBoilerplate.writeFooter/]
 </div> <!--! end of #container -->
 [@libBoilerplate.writeEndBody/]

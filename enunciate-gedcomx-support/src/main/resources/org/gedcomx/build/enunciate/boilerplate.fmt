@@ -64,6 +64,7 @@
         <img src="img/cloudbees.png" width="96"/>
       </div>
     </footer>
+    <div id="recipe-dialog"><iframe id="recipe" width="100%" src="loading.recipe.html"></iframe></div>
 [/#macro]
 [#macro writeEndBody]
   <!-- JavaScript at the bottom for fast page loading -->
@@ -88,6 +89,43 @@
         $( ".json-docs" ).show();
       })
     });
+  </script>
+
+  <!-- iframe loading for recipes -->
+  <script src="js/libs/jquery-iframe-auto-height.min.js"></script>
+  <script>
+    $(function() {
+      $(".recipe-popup").button();
+
+      //for each usecase include, add the iframe.
+      $(".recipe-popup").click(function(){
+        var inc = $(this);
+        var title = inc.attr("title");
+        if (title) {
+          showRecipe(title);
+        }
+      });
+
+      $( "#recipe-dialog" ).dialog({
+        autoOpen: false,
+        modal: true,
+        width: 800,
+        maxHeight: 800,
+        position: ["center", "top"],
+        close: function() {
+          $('#recipe').attr("src", "loading.recipe.html");
+        }
+      });
+    });
+
+    function showRecipe(title) {
+      var href = title.replace(/ /g, "-").replace(/:/g, ".") + ".recipe.html";
+      var iframe = $('#recipe');
+      iframe.attr("src", href);
+      iframe.iframeAutoHeight();
+      $("#recipe-dialog").dialog( "open" );
+      return false;
+    }
   </script>
 
   <!--xbreadcrumbs-->

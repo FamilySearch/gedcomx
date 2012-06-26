@@ -18,12 +18,9 @@ package org.gedcomx.conclusion;
 import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.annotate.JsonTypeInfo;
-import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.common.URI;
 import org.gedcomx.rt.CommonModels;
-import org.gedcomx.rt.JsonElementWrapper;
-import org.gedcomx.rt.XmlTypeIdResolver;
+import org.gedcomx.rt.json.JsonElementWrapper;
 import org.gedcomx.types.NameType;
 import org.gedcomx.types.TypeReference;
 
@@ -38,9 +35,7 @@ import java.util.List;
  *
  * @author Ryan Heaton
  */
-@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
-@JsonTypeIdResolver (XmlTypeIdResolver.class)
-@XmlType ( name = "Name", propOrder = { "type", "primaryForm", "alternateForms" } )
+@XmlType ( name = "Name", propOrder = { "type", "preferred", "primaryForm", "alternateForms" } )
 @XmlRootElement
 @JsonElementWrapper ( name = "names" )
 public class Name extends Conclusion {
@@ -50,6 +45,7 @@ public class Name extends Conclusion {
   private TypeReference<NameType> type;
   private NameForm primaryForm;
   private List<NameForm> alternateForms;
+  private Boolean preferred;
 
   /**
    * The type of the name.
@@ -131,5 +127,28 @@ public class Name extends Conclusion {
   @JsonProperty ("alternateForms")
   public void setAlternateForms(List<NameForm> alternateForms) {
     this.alternateForms = alternateForms;
+  }
+
+  /**
+   * Whether the conclusion is preferred above other conclusions of the same type. Useful, for example, for display purposes.
+   *
+   * @return Whether the conclusion is preferred above other conclusions of the same type. Useful, for example, for display purposes.
+   */
+  public Boolean getPreferred() {
+    return preferred;
+  }
+
+  /**
+   * Whether the conclusion is preferred above other conclusions of the same type. Useful, for example, for display purposes.
+   *
+   * @param preferred Whether the conclusion is preferred above other conclusions of the same type. Useful, for example, for display purposes.
+   */
+  public void setPreferred(Boolean preferred) {
+    this.preferred = preferred;
+  }
+
+  @Override
+  public String toString() {
+    return "type=" + getKnownType() + ",primaryform=" + (primaryForm == null?"null":primaryForm.getFullText()) + ",pref=" + getPreferred();
   }
 }

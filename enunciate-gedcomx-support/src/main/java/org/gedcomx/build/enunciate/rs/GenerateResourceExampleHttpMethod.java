@@ -33,7 +33,7 @@ import org.codehaus.enunciate.contract.jaxrs.ResourceEntityParameter;
 import org.codehaus.enunciate.contract.jaxrs.ResourceMethod;
 import org.codehaus.enunciate.contract.jaxrs.ResourceRepresentationMetadata;
 import org.gedcomx.rt.CommonModels;
-import org.gedcomx.rt.JsonElementWrapper;
+import org.gedcomx.rt.json.JsonElementWrapper;
 import org.gedcomx.rt.SupportsExtensionElements;
 
 import javax.xml.namespace.QName;
@@ -160,18 +160,13 @@ public abstract class GenerateResourceExampleHttpMethod implements TemplateMetho
     }
 
     ClassType superclass = typeDef.getSuperclass();
-    if (superclass != null && ((DecoratedClassType) TypeMirrorDecorator.decorate(superclass)).isInstanceOf(name)) {
-      return true;
-    }
+    return superclass != null && ((DecoratedClassType) TypeMirrorDecorator.decorate(superclass)).isInstanceOf(name);
 
-    return false;
   }
 
   protected void writeExampleToBody(ElementDeclaration element, List<SubresourceElement> subresources, boolean json, PrintWriter body, boolean writeLinks, Collection<ResourceLink> links) {
     if (json) {
-      QName typeQName = element instanceof RootElementDeclaration ? ((RootElementDeclaration) element).getTypeDefinition().getQname() : ((LocalElementDeclaration) element).getElementXmlType().getQname();
       body.printf("{\n");
-      body.printf("  \"@type\" : \"%s%s\",\n", typeQName.getNamespaceURI(), typeQName.getLocalPart());
       body.printf("  ...\n");
       if (writeLinks) {
         writeLinks(body, links, json, 0, null);
@@ -182,11 +177,10 @@ public abstract class GenerateResourceExampleHttpMethod implements TemplateMetho
     }
     else {
       boolean isAtom = "http://www.w3.org/2005/Atom".equals(element.getNamespace());
-      boolean isXrd = "http://docs.oasis-open.org/ns/xri/xrd-1.0".equals(element.getNamespace());
       body.printf("<%s xmlns=\"%s\"%s>\n", element.getName(), element.getNamespace(), isAtom ? "" : writeLinks ? " xmlns:atom=\"http://www.w3.org/2005/Atom\"" : "");
       body.printf("  ...\n");
       if (writeLinks) {
-        writeLinks(body, links, json, 0, isAtom ? "link" : isXrd ? "Link" : "atom:link");
+        writeLinks(body, links, json, 0, isAtom ? "link" : "atom:link");
       }
       writeSubresourcesExampleToBody(element.getQname(), subresources, json, body, 1, 2, writeLinks);
       body.printf("  ...\n");
@@ -234,8 +228,6 @@ public abstract class GenerateResourceExampleHttpMethod implements TemplateMetho
       for (SubresourceElement subresource : subresources) {
         body.printf("%s\"%s\" :%s{\n", tab, subresource.getJsonName(), subresource.isCollection() ? " [ " : " ");
         if (depth < maxDepth) {
-          QName typeQName = subresource.getTypeDefinition().getQname();
-          body.printf("%s  \"@type\" : \"%s%s\",\n", tab, typeQName.getNamespaceURI(), typeQName.getLocalPart());
           body.printf("%s  ...\n", tab);
           if (writeLinks) {
             writeLinks(body, subresource.getDefinition().getLinks(), json, depth, null);
@@ -258,7 +250,7 @@ public abstract class GenerateResourceExampleHttpMethod implements TemplateMetho
         if (depth < maxDepth) {
           body.printf("%s  ...\n", tab);
           if (writeLinks) {
-            writeLinks(body, subresource.getDefinition().getLinks(), json, depth, "http://www.w3.org/2005/Atom".equals(ns) ? "link" : "http://docs.oasis-open.org/ns/xri/xrd-1.0".equals(ns) ? "Link" : "atom:link");
+            writeLinks(body, subresource.getDefinition().getLinks(), json, depth, "http://www.w3.org/2005/Atom".equals(ns) ? "link" : "atom:link");
           }
           writeSubresourcesExampleToBody(subresource.getXmlName(), gatherSubresourceElements(subresource.getTypeDefinition(), subresource.getDefinition()), json, body, depth + 1, maxDepth, writeLinks);
         }

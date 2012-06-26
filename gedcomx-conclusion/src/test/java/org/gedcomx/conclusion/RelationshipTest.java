@@ -1,13 +1,13 @@
 package org.gedcomx.conclusion;
 
-import org.gedcomx.common.AlternateId;
+import org.gedcomx.common.Identifier;
 import org.gedcomx.common.Attribution;
 import org.gedcomx.common.ResourceReference;
+import org.gedcomx.common.URI;
 import org.gedcomx.types.RelationshipType;
 import org.testng.annotations.Test;
 
-import org.gedcomx.common.URI;
-import java.util.Arrays;
+import java.util.List;
 
 import static org.gedcomx.rt.SerializationUtil.processThroughJson;
 import static org.gedcomx.rt.SerializationUtil.processThroughXml;
@@ -40,15 +40,18 @@ public class RelationshipTest {
   private Relationship createTestRelationship() {
     Relationship relationship = new Relationship();
     relationship.setKnownType(RelationshipType.Couple);
-    AlternateId alternateId = new AlternateId();
-    alternateId.setValue("alt-id");
+    Identifier identifier = new Identifier();
+    identifier.setValue("alt-id");
     relationship.setAttribution(new Attribution());
     relationship.getAttribution().setProofStatement("explanation");
     Fact fact = new Fact();
     fact.setId("fact");
     Fact event = new Fact();
     event.setId("event");
-    relationship.setFacts(Arrays.asList(event, fact));
+    relationship.addFact(event);
+    List<Fact> facts = relationship.getFacts();
+    facts.add(fact);
+    relationship.setFacts(facts);
     relationship.setId("relationship");
     relationship.setPerson1(new ResourceReference());
     relationship.getPerson1().setResource(URI.create("urn:person1"));
@@ -56,7 +59,7 @@ public class RelationshipTest {
     relationship.getPerson2().setResource(URI.create("urn:person2"));
     SourceReference sourceReference = new SourceReference();
     sourceReference.setId("source-ref");
-    relationship.setSources(Arrays.asList(sourceReference));
+    relationship.addSource(sourceReference);
     return relationship;
   }
 

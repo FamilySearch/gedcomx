@@ -1,26 +1,23 @@
 package org.gedcomx.common;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.annotate.JsonTypeInfo;
-import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.rt.JsonElementWrapper;
-import org.gedcomx.rt.XmlTypeIdResolver;
+import org.gedcomx.rt.json.JsonElementWrapper;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
-import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author Ryan Heaton
  */
 @XmlRootElement
 @JsonElementWrapper (name = "customEntities")
-@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
-@JsonTypeIdResolver (XmlTypeIdResolver.class)
 public class CustomEntity extends GenealogicalResource {
 
   private ResourceReference source;
   private URI refToSomething;
+  private List<UniqueCustomKeyedItem> uniqueKeyedItems;
+  private List<CustomKeyedItem> keyedItems;
 
   public CustomEntity() {
   }
@@ -43,5 +40,23 @@ public class CustomEntity extends GenealogicalResource {
 
   public void setRefToSomething(URI refToSomething) {
     this.refToSomething = refToSomething;
+  }
+
+  @XmlElement ( name = "item" )
+  public List<CustomKeyedItem> getKeyedItems() {
+    return keyedItems;
+  }
+
+  public void setKeyedItems(List<CustomKeyedItem> keyedItems) {
+    this.keyedItems = keyedItems;
+  }
+
+  @XmlElement ( name = "uitem" )
+  public List<UniqueCustomKeyedItem> getUniqueKeyedItems() {
+    return uniqueKeyedItems;
+  }
+
+  public void setUniqueKeyedItems(List<UniqueCustomKeyedItem> uniqueKeyedItems) {
+    this.uniqueKeyedItems = uniqueKeyedItems;
   }
 }

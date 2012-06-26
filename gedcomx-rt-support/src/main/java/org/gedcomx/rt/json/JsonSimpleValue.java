@@ -13,32 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.rt;
+package org.gedcomx.rt.json;
 
-import org.codehaus.jackson.Version;
-import org.codehaus.jackson.map.Module;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
- * GEDCOM Jackson module for Jackson customizations.
+ * Marker to denote an object that is serialized as a JSON simple value.
  *
  * @author Ryan Heaton
  */
-public class GedcomJacksonModule extends Module {
+@Retention ( RetentionPolicy.RUNTIME )
+@Target ( { ElementType.TYPE, ElementType.METHOD } )
+public @interface JsonSimpleValue {
 
-  @Override
-  public String getModuleName() {
-    return "gedcomx";
-  }
-
-  @Override
-  public Version version() {
-    return new Version(1,0,0,null);
-  }
-
-  @Override
-  public void setupModule(SetupContext context) {
-    context.addBeanSerializerModifier(new GedcomBeanSerializerModifier());
-    context.addBeanDeserializerModifier(new GedcomBeanDeserializerModifier());
-  }
+  /**
+   * The example value, if any, for documentation purposes.
+   *
+   * @return The example value, if any, for documentation purposes.
+   */
+  String example() default "##default";
 
 }

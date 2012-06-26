@@ -6,6 +6,8 @@ import org.gedcomx.metadata.rdf.RDFValue;
 import org.testng.annotations.Test;
 
 import javax.xml.bind.JAXBContext;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static org.gedcomx.rt.SerializationUtil.processThroughJson;
@@ -17,9 +19,14 @@ import static org.testng.AssertJUnit.assertEquals;
  */
 @Test
 public class DublinCoreDescriptionDecoratorTest {
+  private static final SimpleDateFormat dateFormat;
+  static {
+    dateFormat = (SimpleDateFormat)DateFormat.getDateTimeInstance();
+    dateFormat.applyPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
+  }
 
   /**
-   * tests alternate id xml
+   * tests id xml
    */
   public void testDublinCoreMetadataXml() throws Exception {
     DublinCoreDescriptionDecorator metadata = createMetadata();
@@ -28,7 +35,7 @@ public class DublinCoreDescriptionDecoratorTest {
   }
 
   /**
-   * tests alternate id json
+   * tests id json
    */
   public void testDublinCoreMetadataJson() throws Exception {
     DublinCoreDescriptionDecorator metadata = createMetadata();
@@ -544,6 +551,8 @@ public class DublinCoreDescriptionDecoratorTest {
   }
 
   private void assertMetadata(DublinCoreDescriptionDecorator metadata) {
+    Date date;
+
     /**
      * A summary of the resource.
      *
@@ -623,8 +632,11 @@ public class DublinCoreDescriptionDecoratorTest {
      *
      * @link http://dublincore.org/documents/dcmi-terms/#terms-available
      */
+    assertEquals(1, metadata.getAvailableAsDate().size());
+    date = metadata.getAvailableAsDate().get(0);
+    assertEquals("available".hashCode(), date.getTime());
     assertEquals(1, metadata.getAvailable().size());
-    assertEquals("available".hashCode(), metadata.getAvailable().get(0).getTime());
+    assertEquals(toW3CDTF(date), metadata.getAvailable().get(0).getValue());
 
     /**
      * A bibliographic reference for the resource. Recommended practice is to include sufficient
@@ -675,8 +687,11 @@ public class DublinCoreDescriptionDecoratorTest {
      *
      * @link http://dublincore.org/documents/dcmi-terms/#terms-created
      */
+    assertEquals(1, metadata.getCreatedAsDate().size());
+    date = metadata.getCreatedAsDate().get(0);
+    assertEquals("created".hashCode(), date.getTime());
     assertEquals(1, metadata.getCreated().size());
-    assertEquals("created".hashCode(), metadata.getCreated().get(0).getTime());
+    assertEquals(toW3CDTF(date), metadata.getCreated().get(0).getValue());
 
     /**
      * Entities primarily responsible for making the resource.
@@ -695,8 +710,11 @@ public class DublinCoreDescriptionDecoratorTest {
      *
      * @link http://dublincore.org/documents/dcmi-terms/#terms-date
      */
+    assertEquals(1, metadata.getDateAsDate().size());
+    date = metadata.getDateAsDate().get(0);
+    assertEquals("date".hashCode(), date.getTime());
     assertEquals(1, metadata.getDate().size());
-    assertEquals("date".hashCode(), metadata.getDate().get(0).getTime());
+    assertEquals(toW3CDTF(date), metadata.getDate().get(0).getValue());
 
     /**
      * Date of acceptance of the resource.
@@ -705,8 +723,11 @@ public class DublinCoreDescriptionDecoratorTest {
      *
      * @link http://dublincore.org/documents/dcmi-terms/#terms-dateAccepted
      */
+    assertEquals(1, metadata.getDateAcceptedAsDate().size());
+    date = metadata.getDateAcceptedAsDate().get(0);
+    assertEquals("dateAccepted".hashCode(), date.getTime());
     assertEquals(1, metadata.getDateAccepted().size());
-    assertEquals("dateAccepted".hashCode(), metadata.getDateAccepted().get(0).getTime());
+    assertEquals(toW3CDTF(date), metadata.getDateAccepted().get(0).getValue());
 
     /**
      * Date of copyright.
@@ -715,8 +736,11 @@ public class DublinCoreDescriptionDecoratorTest {
      *
      * @link http://dublincore.org/documents/dcmi-terms/#terms-dateCopyrighted
      */
+    assertEquals(1, metadata.getDateCopyrightedAsDate().size());
+    date = metadata.getDateCopyrightedAsDate().get(0);
+    assertEquals("dateCopyrighted".hashCode(), date.getTime());
     assertEquals(1, metadata.getDateCopyrighted().size());
-    assertEquals("dateCopyrighted".hashCode(), metadata.getDateCopyrighted().get(0).getTime());
+    assertEquals(toW3CDTF(date), metadata.getDateCopyrighted().get(0).getValue());
 
     /**
      * Date of submission of the resource.
@@ -725,8 +749,11 @@ public class DublinCoreDescriptionDecoratorTest {
      *
      * @link http://dublincore.org/documents/dcmi-terms/#terms-dateSubmitted
      */
+    assertEquals(1, metadata.getDateSubmittedAsDate().size());
+    date = metadata.getDateSubmittedAsDate().get(0);
+    assertEquals("dateSubmitted".hashCode(), date.getTime());
     assertEquals(1, metadata.getDateSubmitted().size());
-    assertEquals("dateSubmitted".hashCode(), metadata.getDateSubmitted().get(0).getTime());
+    assertEquals(toW3CDTF(date), metadata.getDateSubmitted().get(0).getValue());
 
     /**
      * An account of the resource.
@@ -882,8 +909,11 @@ public class DublinCoreDescriptionDecoratorTest {
      *
      * @link http://dublincore.org/documents/dcmi-terms/#terms-issued
      */
+    assertEquals(1, metadata.getIssuedAsDate().size());
+    date = metadata.getIssuedAsDate().get(0);
+    assertEquals("issued".hashCode(), date.getTime());
     assertEquals(1, metadata.getIssued().size());
-    assertEquals("issued".hashCode(), metadata.getIssued().get(0).getTime());
+    assertEquals(toW3CDTF(date), metadata.getIssued().get(0).getValue());
 
     /**
      * A related resource of which the described resource is a version, edition, or adaptation. Changes in version imply substantive changes
@@ -944,8 +974,11 @@ public class DublinCoreDescriptionDecoratorTest {
      *
      * @link http://dublincore.org/documents/dcmi-terms/#terms-modified
      */
+    assertEquals(1, metadata.getModifiedAsDate().size());
+    date = metadata.getModifiedAsDate().get(0);
+    assertEquals("modified".hashCode(), date.getTime());
     assertEquals(1, metadata.getModified().size());
-    assertEquals("modified".hashCode(), metadata.getModified().get(0).getTime());
+    assertEquals(toW3CDTF(date), metadata.getModified().get(0).getValue());
 
     /**
      * A statement of any changes in ownership and custody of the resource since its creation that are significant for its authenticity, integrity, and interpretation.
@@ -1098,8 +1131,19 @@ public class DublinCoreDescriptionDecoratorTest {
      *
      * @link http://dublincore.org/documents/dcmi-terms/#terms-valid
      */
+    assertEquals(1, metadata.getValidAsDate().size());
+    date = metadata.getValidAsDate().get(0);
+    assertEquals("valid".hashCode(), date.getTime());
     assertEquals(1, metadata.getValid().size());
-    assertEquals("valid".hashCode(), metadata.getValid().get(0).getTime());
+    assertEquals(toW3CDTF(date), metadata.getValid().get(0).getValue());
   }
 
+  private String toW3CDTF(Date date) {
+    StringBuilder builder = new StringBuilder(dateFormat.format(date));
+    int length = builder.length();
+    if (builder.charAt(length - 1) != 'Z') {
+      builder.insert(length - 2, ':');
+    }
+    return builder.toString();
+  }
 }

@@ -1,0 +1,5 @@
+Contributor ::= agent ( familyName | ) ( givenName | ) ( language | )
+Organization ::= agent
+agent ::= ( name | ) ( homepage | ) ( openid | ) ( account )* ( email )* ( phone )* ( address )*
+address ::= ( id | ) ( city | ) ( country | ) ( postalCode | ) ( stateOrProvince | ) ( street | ) ( street2 | ) ( street3 | )
+account ::= ( id | ) ( serviceHomepage | ) ( accountName | ) ( displayName | )

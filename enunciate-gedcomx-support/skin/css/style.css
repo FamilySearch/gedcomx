@@ -545,6 +545,10 @@ body.advisories #nav-advisories,body.community #nav-community,body.blog #nav-blo
     margin-bottom: 10px;
 }
 
+#recipe {
+    max-height: 600px;
+}
+
 /* @end */
 /* @group Footer */
 

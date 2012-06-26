@@ -6,7 +6,6 @@ import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.gedcomx.rt.SerializationUtil.processThroughJson;
@@ -39,18 +38,18 @@ public class PersonTest {
 
   static Person create() {
     Person person = new Person();
-    Gender gender = new Gender();
-    gender.setKnownType(GenderType.Male);
-    person.setGenders(Arrays.asList(gender));
+    person.setGender(new Gender(GenderType.Male));
 
-    ArrayList<AlternateId> alternateIds = new ArrayList<AlternateId>();
-    AlternateId alternateId = new AlternateId();
-    alternateId.setKnownType(AlternateIdType.Forwarded);
-    alternateId.setValue("forward-value");
-    alternateIds.add(alternateId);
-    person.setAlternateIds(alternateIds);
-
-    List<Fact> facts = new ArrayList<Fact>();
+    ArrayList<Identifier> identifiers = new ArrayList<Identifier>();
+    Identifier identifier = new Identifier();
+    identifier.setKnownType(IdentifierType.Forwarded);
+    identifier.setValue("forward-value");
+    identifiers.add(identifier);
+    identifier = new Identifier();
+    identifier.setKnownType(IdentifierType.Primary);
+    identifier.setValue("pal");
+    identifiers.add(identifier);
+    person.setIdentifiers(identifiers);
 
     Fact fact = new Fact();
     fact.setAttribution(new Attribution());
@@ -73,7 +72,7 @@ public class PersonTest {
     normalized.setKnownValue(PlacePartType.Cemetery);
     fact.getPlace().setFormal(normalized);
     fact.setOriginal("fact-value");
-    facts.add(fact);
+    person.addFact(fact);
 
     Fact event = new Fact();
     event.setAttribution(new Attribution());
@@ -100,8 +99,9 @@ public class PersonTest {
     eventSource.setId("event-source");
     eventSource.setAttribution(new Attribution());
     event.getSources().add(eventSource);
-    facts.add(event);
 
+    List<Fact> facts = person.getFacts();
+    facts.add(event);
     person.setFacts(facts);
 
     List<Name> names = new ArrayList<Name>();
@@ -134,8 +134,6 @@ public class PersonTest {
     names.add(name);
     person.setNames(names);
 
-    person.setPersistentId(URI.create("pal"));
-
     ArrayList<SourceReference> sources = new ArrayList<SourceReference>();
     SourceReference attributedSourceReference = new SourceReference();
     Attribution attribution = new Attribution();
@@ -164,14 +162,16 @@ public class PersonTest {
     Fact event;
     Name name;
     SourceReference attributedSourceReference;
-    AssertJUnit.assertEquals(GenderType.Male, person.getGenders().get(0).getKnownType());
+    AssertJUnit.assertEquals(GenderType.Male, person.getGender().getKnownType());
 
-    AssertJUnit.assertEquals(1, person.getAlternateIds().size());
-    AssertJUnit.assertEquals(AlternateIdType.Forwarded, person.getAlternateIds().get(0).getKnownType());
-    AssertJUnit.assertEquals("forward-value", person.getAlternateIds().get(0).getValue());
+    AssertJUnit.assertEquals(2, person.getIdentifiers().size());
+    AssertJUnit.assertEquals(IdentifierType.Forwarded, person.getIdentifiers().get(0).getKnownType());
+    AssertJUnit.assertEquals("forward-value", person.getIdentifiers().get(0).getValue());
+    AssertJUnit.assertEquals(IdentifierType.Primary, person.getIdentifiers().get(1).getKnownType());
+    AssertJUnit.assertEquals("pal", person.getIdentifiers().get(1).getValue());
 
     AssertJUnit.assertEquals(2, person.getFacts().size());
-    fact = person.getFacts().get(0);
+    fact = person.getFirstFactOfType(FactType.Occupation);
     AssertJUnit.assertEquals("urn:fact-attribution", fact.getAttribution().getContributor().getResource().toString());
     AssertJUnit.assertEquals("original date", fact.getDate().getOriginal());
     AssertJUnit.assertEquals("normalized date", fact.getDate().getFormal().getText());
@@ -185,7 +185,7 @@ public class PersonTest {
     AssertJUnit.assertEquals("urn:date", fact.getDate().getFormal().getDatatype().toString());
     AssertJUnit.assertEquals("fact-value", fact.getOriginal());
 
-    event = person.getFacts().get(1);
+    event = person.getFirstFactOfType(FactType.Adoption);
     AssertJUnit.assertEquals("urn:event-attribution", event.getAttribution().getContributor().getResource().toString());
     AssertJUnit.assertEquals("original date", event.getDate().getOriginal());
     AssertJUnit.assertEquals("normalized date", event.getDate().getFormal().getText());

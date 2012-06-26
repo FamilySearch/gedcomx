@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.rt;
+package org.gedcomx.rt.json;
 
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.JsonGenerator;
@@ -21,15 +21,14 @@ import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.SerializerProvider;
 import org.codehaus.jackson.map.ser.BeanSerializer;
+import org.gedcomx.rt.GedcomNamespaceManager;
+import org.gedcomx.rt.SupportsExtensionAttributes;
+import org.gedcomx.rt.SupportsExtensionElements;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
-import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSchema;
 import javax.xml.namespace.QName;
-import java.beans.Introspector;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -88,59 +87,30 @@ public class ExtensibleObjectSerializer extends BeanSerializer {
       Map<String, List<Object>> extensionProperties = new HashMap<String, List<Object>>();
       for (Object element : extensionElements) {
         if (element != null) {
-          QName name;
+          String name;
           if (element instanceof Element) {
             Element el = (Element) element;
-            name = new QName(el.getNamespaceURI() == null ? "" : el.getNamespaceURI(), el.getLocalName());
+            name = GedcomNamespaceManager.nameFromQName(el.getNamespaceURI(), el.getLocalName());
           }
           else if (element instanceof JAXBElement) {
-            name = GedcomNamespaceManager.getJsonWrapperName(((JAXBElement) element).getName());
+            name = GedcomNamespaceManager.getJsonNameForWrapperName(((JAXBElement) element).getName());
             if (name == null) {
-              name = ((JAXBElement) element).getName();
+              name = GedcomNamespaceManager.nameFromQName(((JAXBElement) element).getName().getNamespaceURI(), ((JAXBElement) element).getName().getLocalPart());
             }
             element = ((JAXBElement) element).getValue();
           }
-          else if (element.getClass().isAnnotationPresent(JsonElementWrapper.class)) {
-            //support custom json element name
-            JsonElementWrapper ext = element.getClass().getAnnotation(JsonElementWrapper.class);
-            name = new QName(ext.namespace(), ext.name());
-          }
           else {
-            XmlRootElement rootElement = element.getClass().getAnnotation(XmlRootElement.class);
-            if (rootElement != null) {
-              String localPart = rootElement.name();
-              if ("##default".equals(localPart)) {
-                localPart = Introspector.decapitalize(element.getClass().getSimpleName());
-              }
-              String namespaceURI = rootElement.namespace();
-              if ("##default".equals(namespaceURI)) {
-                Package pkg = element.getClass().getPackage();
-                if (pkg != null && pkg.isAnnotationPresent(XmlSchema.class)) {
-                  namespaceURI = pkg.getAnnotation(XmlSchema.class).namespace();
-                }
-                else {
-                  namespaceURI = "";
-                }
-              }
-
-              name = new QName(namespaceURI, localPart);
-            }
-            else {
+            name = GedcomNamespaceManager.getJsonName(element.getClass());
+            if (name == null) {
               throw new JsonMappingException("Unable to serialize custom element " + value +
-                                               " because it isn't annotated with @XmlRootElement. If you need to, wrap it in a javax.xml.bind.JAXBElement so we can identify its name.");
+                                               " because it's not a JAXBElement, DOM element, nor is it annotated with either @JsonElementWrapper or @XmlRootElement.");
             }
           }
 
-          String fullname = name.getNamespaceURI();
-          if (XMLConstants.XML_NS_URI.equals(name.getNamespaceURI())) {
-            fullname += "#";
-          }
-          fullname += name.getLocalPart();
-
-          List<Object> propList = extensionProperties.get(fullname);
+          List<Object> propList = extensionProperties.get(name);
           if (propList == null) {
             propList = new ArrayList<Object>();
-            extensionProperties.put(fullname, propList);
+            extensionProperties.put(name, propList);
           }
 
           propList.add(element);
@@ -148,16 +118,23 @@ public class ExtensibleObjectSerializer extends BeanSerializer {
       }
 
       for (Map.Entry<String, List<Object>> prop : extensionProperties.entrySet()) {
-        jgen.writeArrayFieldStart(prop.getKey());
-        for (Object element : prop.getValue()) {
-          if (element instanceof Element) {
-            serializeElement((Element) element, jgen);
-          }
-          else {
-            provider.findTypedValueSerializer(element.getClass(), true, null).serialize(element, jgen, provider);
-          }
+        if (prop.getValue().get(0) instanceof HasJsonKey) {
+          //we're serialize out this list as a keyed map.
+          jgen.writeFieldName(prop.getKey());
+          KeyedListSerializer.serializeGeneric(prop.getValue(), jgen, provider);
         }
-        jgen.writeEndArray();
+        else {
+          jgen.writeArrayFieldStart(prop.getKey());
+          for (Object element : prop.getValue()) {
+            if (element instanceof Element) {
+              serializeElement((Element) element, jgen);
+            }
+            else {
+              provider.findTypedValueSerializer(element.getClass(), true, null).serialize(element, jgen, provider);
+            }
+          }
+          jgen.writeEndArray();
+        }
       }
     }
   }

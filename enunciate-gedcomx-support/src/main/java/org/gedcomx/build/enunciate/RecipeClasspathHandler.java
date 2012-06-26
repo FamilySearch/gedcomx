@@ -33,7 +33,7 @@ import java.util.List;
 public class RecipeClasspathHandler implements ClasspathHandler {
 
   private final Enunciate enunciate;
-  private final List<Recipe> cases = new ArrayList<Recipe>();
+  private final List<Recipe> recipes = new ArrayList<Recipe>();
   private final Unmarshaller unmarshaller;
 
   public RecipeClasspathHandler(Enunciate enunciate) {
@@ -47,7 +47,7 @@ public class RecipeClasspathHandler implements ClasspathHandler {
   }
 
   public List<Recipe> getRecipes() {
-    return cases;
+    return recipes;
   }
 
   @Override
@@ -58,7 +58,7 @@ public class RecipeClasspathHandler implements ClasspathHandler {
   public void handleResource(ClasspathResource resource) {
     if (resource.getPath().endsWith(".recipe.xml")) {
       try {
-        this.cases.add((Recipe) unmarshaller.unmarshal(resource.read()));
+        this.recipes.add((Recipe) unmarshaller.unmarshal(resource.read()));
       }
       catch (Exception e) {
         this.enunciate.error("Unable to unmarshal recipe %s: %s.", resource.getPath(), e.getMessage());

@@ -19,6 +19,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.SerializationConfig;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.node.ObjectNode;
+import org.gedcomx.rt.json.GedcomJsonProvider;
 import org.w3c.dom.Document;
 
 import javax.xml.bind.JAXBContext;
@@ -155,6 +156,7 @@ public class SerializationUtil {
   }
 
   protected static <C> byte[] toJsonStream(Object reference, Class<? extends C> instanceClass, ObjectMapper mapper, SerializationProcessListener... listeners) throws IOException {
+    GedcomNamespaceManager.registerKnownJsonType(instanceClass);
     ByteArrayOutputStream out = new ByteArrayOutputStream();
     mapper.getSerializationConfig().enable(SerializationConfig.Feature.INDENT_OUTPUT);
     mapper.getSerializationConfig().setSerializationInclusion(JsonSerialize.Inclusion.NON_NULL);

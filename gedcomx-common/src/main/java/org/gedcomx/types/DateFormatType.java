@@ -16,20 +16,27 @@
 package org.gedcomx.types;
 
 import org.codehaus.enunciate.qname.XmlQNameEnum;
+import org.codehaus.enunciate.qname.XmlQNameEnumValue;
 import org.codehaus.enunciate.qname.XmlUnknownQNameEnumValue;
 import org.gedcomx.common.URI;
 
 /**
- * Enumeration of standard alternate id types.
+ * Enumeration of standard age part types.
  *
  * @author Ryan Heaton
  */
 @XmlQNameEnum (
   base = XmlQNameEnum.BaseType.URI
 )
-public enum AlternateIdType {
+public enum DateFormatType {
 
-  Forwarded,
+  GEDCOM_5_5,
+
+  @XmlQNameEnumValue(
+    namespace = "iso:",
+    localPart = "8601"
+  )
+  ISO8601,
 
   @XmlUnknownQNameEnumValue
   OTHER;
@@ -49,8 +56,8 @@ public enum AlternateIdType {
    * @param qname The qname.
    * @return The enumeration.
    */
-  public static AlternateIdType fromQNameURI(URI qname) {
-    return org.codehaus.enunciate.XmlQNameEnumUtil.fromURIValue(qname.toString(), AlternateIdType.class);
+  public static DateFormatType fromQNameURI(URI qname) {
+    return org.codehaus.enunciate.XmlQNameEnumUtil.fromURIValue(qname.toString(), DateFormatType.class);
   }
 
 }

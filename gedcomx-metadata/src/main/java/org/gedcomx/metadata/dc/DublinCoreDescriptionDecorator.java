@@ -15,6 +15,7 @@
  */
 package org.gedcomx.metadata.dc;
 
+import org.gedcomx.common.URI;
 import org.gedcomx.metadata.rdf.Description;
 import org.gedcomx.metadata.rdf.RDFLiteral;
 import org.gedcomx.metadata.rdf.RDFValue;
@@ -72,6 +73,46 @@ public class DublinCoreDescriptionDecorator {
    */
   public Description getDecoratedDescription() {
     return description;
+  }
+
+  /**
+   * The URI of the resource being described.
+   *
+   * @param uri The URI of the resource being described.
+   * @return this builder.
+   */
+  public DublinCoreDescriptionDecorator about(URI uri) {
+    this.description.setAbout(uri);
+    return this;
+  }
+
+  /**
+   * The URI of the resource being described.
+   *
+   * @return The URI of the resource being described.
+   */
+  public URI getAbout() {
+    return this.description.getAbout();
+  }
+
+  /**
+   * The id of the description.
+   *
+   * @param id The id of the description.
+   * @return this builder.
+   */
+  public DublinCoreDescriptionDecorator id(String id) {
+    this.description.setId(id);
+    return this;
+  }
+
+  /**
+   * The id of the description.
+   *
+   * @return The id of the description.
+   */
+  public String getId() {
+    return this.description.getId();
   }
 
   /**
@@ -164,10 +205,22 @@ public class DublinCoreDescriptionDecorator {
    * Date that the resource became or will become available.
    *
    * @return Date that the resource became or will become available.
-   * 
+   *
    * @link http://dublincore.org/documents/dcmi-terms/#terms-available
    */
   public DublinCoreDescriptionDecorator available(Date available) {
+    this.description.addExtensionElement(OBJECT_FACTORY.createAvailableElement(new RDFLiteral(available)));
+    return this;
+  }
+
+  /**
+   * Date that the resource became or will become available.
+   *
+   * @return Date that the resource became or will become available.
+   *
+   * @link http://dublincore.org/documents/dcmi-terms/#terms-available
+   */
+  public DublinCoreDescriptionDecorator available(String available) {
     this.description.addExtensionElement(OBJECT_FACTORY.createAvailableElement(new RDFLiteral(available)));
     return this;
   }
@@ -226,10 +279,22 @@ public class DublinCoreDescriptionDecorator {
    * Date of creation of the resource.
    *
    * @return Date of creation of the resource.
-   * 
+   *
    * @link http://dublincore.org/documents/dcmi-terms/#terms-created
    */
   public DublinCoreDescriptionDecorator created(Date created) {
+    this.description.addExtensionElement(OBJECT_FACTORY.createCreatedElement(new RDFLiteral(created)));
+    return this;
+  }
+
+  /**
+   * Date of creation of the resource.
+   *
+   * @return Date of creation of the resource.
+   *
+   * @link http://dublincore.org/documents/dcmi-terms/#terms-created
+   */
+  public DublinCoreDescriptionDecorator created(String created) {
     this.description.addExtensionElement(OBJECT_FACTORY.createCreatedElement(new RDFLiteral(created)));
     return this;
   }
@@ -259,6 +324,18 @@ public class DublinCoreDescriptionDecorator {
   }
 
   /**
+   * A point or period of time associated with an event in the lifecycle of the resource.
+   *
+   * @return A point or period of time associated with an event in the lifecycle of the resource.
+   *
+   * @link http://dublincore.org/documents/dcmi-terms/#terms-date
+   */
+  public DublinCoreDescriptionDecorator date(String date) {
+    this.description.addExtensionElement(OBJECT_FACTORY.createDateElement(new RDFLiteral(date)));
+    return this;
+  }
+
+  /**
    * Date of acceptance of the resource.
    *
    * @return Date of acceptance of the resource.
@@ -266,6 +343,18 @@ public class DublinCoreDescriptionDecorator {
    * @link http://dublincore.org/documents/dcmi-terms/#terms-dateAccepted
    */
   public DublinCoreDescriptionDecorator dateAccepted(Date dateAccepted) {
+    this.description.addExtensionElement(OBJECT_FACTORY.createDateAcceptedElement(new RDFLiteral(dateAccepted)));
+    return this;
+  }
+
+  /**
+   * Date of acceptance of the resource.
+   *
+   * @return Date of acceptance of the resource.
+   *
+   * @link http://dublincore.org/documents/dcmi-terms/#terms-dateAccepted
+   */
+  public DublinCoreDescriptionDecorator dateAccepted(String dateAccepted) {
     this.description.addExtensionElement(OBJECT_FACTORY.createDateAcceptedElement(new RDFLiteral(dateAccepted)));
     return this;
   }
@@ -283,6 +372,18 @@ public class DublinCoreDescriptionDecorator {
   }
 
   /**
+   * Date of copyright.
+   *
+   * @return Date of copyright.
+   *
+   * @link http://dublincore.org/documents/dcmi-terms/#terms-dateCopyrighted
+   */
+  public DublinCoreDescriptionDecorator dateCopyrighted(String dateCopyrighted) {
+    this.description.addExtensionElement(OBJECT_FACTORY.createDateCopyrightedElement(new RDFLiteral(dateCopyrighted)));
+    return this;
+  }
+
+  /**
    * Date of submission of the resource.
    *
    * @return Date of submission of the resource.
@@ -290,6 +391,18 @@ public class DublinCoreDescriptionDecorator {
    * @link http://dublincore.org/documents/dcmi-terms/#terms-dateSubmitted
    */
   public DublinCoreDescriptionDecorator dateSubmitted(Date dateSubmitted) {
+    this.description.addExtensionElement(OBJECT_FACTORY.createDateSubmittedElement(new RDFLiteral(dateSubmitted)));
+    return this;
+  }
+
+  /**
+   * Date of submission of the resource.
+   *
+   * @return Date of submission of the resource.
+   *
+   * @link http://dublincore.org/documents/dcmi-terms/#terms-dateSubmitted
+   */
+  public DublinCoreDescriptionDecorator dateSubmitted(String dateSubmitted) {
     this.description.addExtensionElement(OBJECT_FACTORY.createDateSubmittedElement(new RDFLiteral(dateSubmitted)));
     return this;
   }
@@ -482,6 +595,18 @@ public class DublinCoreDescriptionDecorator {
   }
 
   /**
+   * Date of formal issuance (e.g., publication) of the resource.
+   *
+   * @return Date of formal issuance (e.g., publication) of the resource.
+   *
+   * @link http://dublincore.org/documents/dcmi-terms/#terms-issued
+   */
+  public DublinCoreDescriptionDecorator issued(String issued) {
+    this.description.addExtensionElement(OBJECT_FACTORY.createIssuedElement(new RDFLiteral(issued)));
+    return this;
+  }
+
+  /**
    * A related resource of which the described resource is a version, edition, or adaptation. Changes in version imply substantive changes
    * in content rather than differences in format.
    *
@@ -551,6 +676,18 @@ public class DublinCoreDescriptionDecorator {
    * @link http://dublincore.org/documents/dcmi-terms/#terms-modified
    */
   public DublinCoreDescriptionDecorator modified(Date modified) {
+    this.description.addExtensionElement(OBJECT_FACTORY.createModifiedElement(new RDFLiteral(modified)));
+    return this;
+  }
+
+  /**
+   * Date on which the resource was changed.
+   *
+   * @return Date on which the resource was changed.
+   *
+   * @link http://dublincore.org/documents/dcmi-terms/#terms-modified
+   */
+  public DublinCoreDescriptionDecorator modified(String modified) {
     this.description.addExtensionElement(OBJECT_FACTORY.createModifiedElement(new RDFLiteral(modified)));
     return this;
   }
@@ -731,10 +868,22 @@ public class DublinCoreDescriptionDecorator {
    * Date of validity of a resource.
    *
    * @return Date of validity of a resource.
-   * 
+   *
    * @link http://dublincore.org/documents/dcmi-terms/#terms-valid
    */
   public DublinCoreDescriptionDecorator valid(Date valid) {
+    this.description.addExtensionElement(OBJECT_FACTORY.createValidElement(new RDFLiteral(valid)));
+    return this;
+  }
+
+  /**
+   * Date of validity of a resource.
+   *
+   * @return Date of validity of a resource.
+   *
+   * @link http://dublincore.org/documents/dcmi-terms/#terms-valid
+   */
+  public DublinCoreDescriptionDecorator valid(String valid) {
     this.description.addExtensionElement(OBJECT_FACTORY.createValidElement(new RDFLiteral(valid)));
     return this;
   }
@@ -821,10 +970,21 @@ public class DublinCoreDescriptionDecorator {
    * Date that the resource became or will become available.
    *
    * @return Date that the resource became or will become available.
+   *
+   * @link http://dublincore.org/documents/dcmi-terms/#terms-available
+   */
+  public List<RDFLiteral> getAvailable() {
+    return findElements("available", RDFLiteral.class);
+  }
+
+  /**
+   * Date that the resource became or will become available.
+   *
+   * @return Date that the resource became or will become available.
    * 
    * @link http://dublincore.org/documents/dcmi-terms/#terms-available
    */
-  public List<Date> getAvailable() {
+  public List<Date> getAvailableAsDate() {
     return findElements("available", Date.class);
   }
 
@@ -881,7 +1041,18 @@ public class DublinCoreDescriptionDecorator {
    * 
    * @link http://dublincore.org/documents/dcmi-terms/#terms-created
    */
-  public List<Date> getCreated() {
+  public List<RDFLiteral> getCreated() {
+    return findElements("created", RDFLiteral.class);
+  }
+
+  /**
+   * Date of creation of the resource.
+   *
+   * @return Date of creation of the resource.
+   *
+   * @link http://dublincore.org/documents/dcmi-terms/#terms-created
+   */
+  public List<Date> getCreatedAsDate() {
     return findElements("created", Date.class);
   }
 
@@ -903,7 +1074,18 @@ public class DublinCoreDescriptionDecorator {
    * 
    * @link http://dublincore.org/documents/dcmi-terms/#terms-date
    */
-  public List<Date> getDate() {
+  public List<RDFLiteral> getDate() {
+    return findElements("date", RDFLiteral.class);
+  }
+
+  /**
+   * A point or period of time associated with an event in the lifecycle of the resource.
+   *
+   * @return A point or period of time associated with an event in the lifecycle of the resource.
+   *
+   * @link http://dublincore.org/documents/dcmi-terms/#terms-date
+   */
+  public List<Date> getDateAsDate() {
     return findElements("date", Date.class);
   }
 
@@ -911,10 +1093,21 @@ public class DublinCoreDescriptionDecorator {
    * Date of acceptance of the resource.
    *
    * @return Date of acceptance of the resource.
-   * 
+   *
    * @link http://dublincore.org/documents/dcmi-terms/#terms-dateAccepted
    */
-  public List<Date> getDateAccepted() {
+  public List<RDFLiteral> getDateAccepted() {
+    return findElements("dateAccepted", RDFLiteral.class);
+  }
+
+  /**
+   * Date of acceptance of the resource.
+   *
+   * @return Date of acceptance of the resource.
+   *
+   * @link http://dublincore.org/documents/dcmi-terms/#terms-dateAccepted
+   */
+  public List<Date> getDateAcceptedAsDate() {
     return findElements("dateAccepted", Date.class);
   }
 
@@ -922,10 +1115,21 @@ public class DublinCoreDescriptionDecorator {
    * Date of copyright.
    *
    * @return Date of copyright.
-   * 
+   *
    * @link http://dublincore.org/documents/dcmi-terms/#terms-dateCopyrighted
    */
-  public List<Date> getDateCopyrighted() {
+  public List<RDFLiteral> getDateCopyrighted() {
+    return findElements("dateCopyrighted", RDFLiteral.class);
+  }
+
+  /**
+   * Date of copyright.
+   *
+   * @return Date of copyright.
+   *
+   * @link http://dublincore.org/documents/dcmi-terms/#terms-dateCopyrighted
+   */
+  public List<Date> getDateCopyrightedAsDate() {
     return findElements("dateCopyrighted", Date.class);
   }
 
@@ -933,10 +1137,21 @@ public class DublinCoreDescriptionDecorator {
    * Date of submission of the resource.
    *
    * @return Date of submission of the resource.
-   * 
+   *
    * @link http://dublincore.org/documents/dcmi-terms/#terms-dateSubmitted
    */
-  public List<Date> getDateSubmitted() {
+  public List<RDFLiteral> getDateSubmitted() {
+    return findElements("dateSubmitted", RDFLiteral.class);
+  }
+
+  /**
+   * Date of submission of the resource.
+   *
+   * @return Date of submission of the resource.
+   *
+   * @link http://dublincore.org/documents/dcmi-terms/#terms-dateSubmitted
+   */
+  public List<Date> getDateSubmittedAsDate() {
     return findElements("dateSubmitted", Date.class);
   }
 
@@ -1105,10 +1320,21 @@ public class DublinCoreDescriptionDecorator {
    * Date of formal issuance (e.g., publication) of the resource.
    *
    * @return Date of formal issuance (e.g., publication) of the resource.
-   * 
+   *
    * @link http://dublincore.org/documents/dcmi-terms/#terms-issued
    */
-  public List<Date> getIssued() {
+  public List<RDFLiteral> getIssued() {
+    return findElements("issued", RDFLiteral.class);
+  }
+
+  /**
+   * Date of formal issuance (e.g., publication) of the resource.
+   *
+   * @return Date of formal issuance (e.g., publication) of the resource.
+   *
+   * @link http://dublincore.org/documents/dcmi-terms/#terms-issued
+   */
+  public List<Date> getIssuedAsDate() {
     return findElements("issued", Date.class);
   }
 
@@ -1176,7 +1402,18 @@ public class DublinCoreDescriptionDecorator {
    * 
    * @link http://dublincore.org/documents/dcmi-terms/#terms-modified
    */
-  public List<Date> getModified() {
+  public List<RDFLiteral> getModified() {
+    return findElements("modified", RDFLiteral.class);
+  }
+
+  /**
+   * Date on which the resource was changed.
+   *
+   * @return Date on which the resource was changed.
+   *
+   * @link http://dublincore.org/documents/dcmi-terms/#terms-modified
+   */
+  public List<Date> getModifiedAsDate() {
     return findElements("modified", Date.class);
   }
 
@@ -1342,10 +1579,21 @@ public class DublinCoreDescriptionDecorator {
    * Date of validity of a resource.
    *
    * @return Date of validity of a resource.
-   * 
+   *
    * @link http://dublincore.org/documents/dcmi-terms/#terms-valid
    */
-  public List<Date> getValid() {
+  public List<RDFLiteral> getValid() {
+    return findElements("valid", RDFLiteral.class);
+  }
+
+  /**
+   * Date of validity of a resource.
+   *
+   * @return Date of validity of a resource.
+   *
+   * @link http://dublincore.org/documents/dcmi-terms/#terms-valid
+   */
+  public List<Date> getValidAsDate() {
     return findElements("valid", Date.class);
   }
 

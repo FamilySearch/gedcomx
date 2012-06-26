@@ -17,12 +17,9 @@ package org.gedcomx.conclusion;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.annotate.JsonTypeInfo;
-import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.common.URI;
 import org.gedcomx.rt.CommonModels;
-import org.gedcomx.rt.JsonElementWrapper;
-import org.gedcomx.rt.XmlTypeIdResolver;
+import org.gedcomx.rt.json.JsonElementWrapper;
 import org.gedcomx.types.GenderType;
 import org.gedcomx.types.TypeReference;
 
@@ -36,8 +33,6 @@ import javax.xml.bind.annotation.XmlType;
  *
  * @author Ryan Heaton
  */
-@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
-@JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "Gender" )
 @XmlRootElement
 @JsonElementWrapper ( name = "genders" )
@@ -46,6 +41,21 @@ public class Gender extends Conclusion {
   @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
   @JsonProperty
   private TypeReference<GenderType> type;
+
+  /**
+   * Default constructor.
+   */
+  public Gender() {
+  }
+
+  /**
+   * Constructs a new gender object with the passed in type.
+   *
+   * @param type The type of the gender.
+   */
+  public Gender(GenderType type) {
+    setKnownType(type);
+  }
 
   /**
    * The type of the gender.
@@ -87,5 +97,10 @@ public class Gender extends Conclusion {
   @JsonIgnore
   public void setKnownType(GenderType type) {
     this.type = type == null ? null : new TypeReference<GenderType>(type);
+  }
+
+  @Override
+  public String toString() {
+    return "type=" + getKnownType();
   }
 }

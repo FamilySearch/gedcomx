@@ -17,9 +17,8 @@ package org.gedcomx.common;
 
 import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.annotate.JsonTypeInfo;
-import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.rt.*;
+import org.gedcomx.rt.json.JsonElementWrapper;
 import org.gedcomx.types.TypeReference;
 
 import javax.xml.XMLConstants;
@@ -34,8 +33,6 @@ import java.util.List;
  */
 @XmlRootElement
 @JsonElementWrapper ( name = "collections" )
-@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
-@JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "Collection", propOrder = { "title", "description", "publisher", "bibliographicCitation", "types", "spatial", "temporal", "items" } )
 @RDFSubClassOf ( CommonModels.DUBLIN_CORE_TYPE_NAMESPACE + "Collection" )
 public class Collection extends GenealogicalResource {

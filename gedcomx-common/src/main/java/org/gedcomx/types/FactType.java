@@ -37,7 +37,7 @@ public enum FactType {
   Adoption,
   AdultChristening,
   Affiliation,
-  Age,
+  Arrival,
   Baptism,
   BarMitzvah,
   BatMitzvah,
@@ -55,8 +55,8 @@ public enum FactType {
   CountOfMarriages,
   Cremation,
   Death,
+  Departure,
   DiedBeforeEight,
-  Dwelling,
   Emigration,
   Ethnicity,
   Excommunication,
@@ -203,7 +203,7 @@ public enum FactType {
     public static final FactType Adoption = include(FactType.Adoption);
     public static final FactType AdultChristening = include(FactType.AdultChristening);
     public static final FactType Affiliation = include(FactType.Affiliation);
-    public static final FactType Age = include(FactType.Age);
+    public static final FactType Arrival = include(FactType.Arrival);
     public static final FactType Baptism = include(FactType.Baptism);
     public static final FactType BarMitzvah = include(FactType.BarMitzvah);
     public static final FactType BatMitzvah = include(FactType.BatMitzvah);
@@ -221,8 +221,8 @@ public enum FactType {
     public static final FactType CountOfMarriages = include(FactType.CountOfMarriages);
     public static final FactType Cremation = include(FactType.Cremation);
     public static final FactType Death = include(FactType.Death);
+    public static final FactType Departure = include(FactType.Departure);
     public static final FactType DiedBeforeEight = include(FactType.DiedBeforeEight);
-    public static final FactType Dwelling = include(FactType.Dwelling);
     public static final FactType Emigration = include(FactType.Emigration);
     public static final FactType Ethnicity = include(FactType.Ethnicity);
     public static final FactType Excommunication = include(FactType.Excommunication);
@@ -260,7 +260,7 @@ public enum FactType {
     public static final FactType PhysicalDescription = include(FactType.PhysicalDescription);
     public static final FactType Probate = include(FactType.Probate);
     public static final FactType PortOfDeparture = include(FactType.PortOfDeparture);
-    public static final FactType Possessions = include(FactType.Property);
+    public static final FactType Property = include(FactType.Property);
     public static final FactType PreviousResidence = include(FactType.PreviousResidence);
     public static final FactType Race = include(FactType.Race);
     public static final FactType RelationshipToHead = include(FactType.RelationshipToHead);

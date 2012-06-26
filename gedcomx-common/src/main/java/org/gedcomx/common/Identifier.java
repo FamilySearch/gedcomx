@@ -18,7 +18,7 @@ package org.gedcomx.common;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.gedcomx.rt.CommonModels;
-import org.gedcomx.types.AlternateIdType;
+import org.gedcomx.types.IdentifierType;
 import org.gedcomx.types.TypeReference;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -26,18 +26,17 @@ import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 /**
- * An alternate id for an entity, such as the id in another system or
- * an id prior to a merge operation.
+ * An identifier for a resource.
  *
  * @author Ryan Heaton
  */
-@XmlType ( name = "AlternateId", propOrder = {"type", "value"})
-public final class AlternateId {
+@XmlType ( name = "Identifier", propOrder = {"type", "value"})
+public final class Identifier {
 
   private String value;
   @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
   @JsonProperty
-  private TypeReference<AlternateIdType> type;
+  private TypeReference<IdentifierType> type;
 
   /**
    * The id value.
@@ -76,28 +75,28 @@ public final class AlternateId {
    */
   @JsonIgnore
   public void setType(URI type) {
-    this.type = type == null ? null : new TypeReference<AlternateIdType>(type);
+    this.type = type == null ? null : new TypeReference<IdentifierType>(type);
   }
 
   /**
-   * The enum referencing a known alternate id type.
+   * The enum referencing a known identifier type.
    *
-   * @return The enum referencing a known alternate id type, or {@link AlternateIdType#OTHER} if not known.
+   * @return The enum referencing a known identifier type, or {@link org.gedcomx.types.IdentifierType#OTHER} if not known.
    */
   @XmlTransient
   @JsonIgnore
-  public AlternateIdType getKnownType() {
-    return this.type == null ? null : AlternateIdType.fromQNameURI(this.type.getType());
+  public IdentifierType getKnownType() {
+    return this.type == null ? null : IdentifierType.fromQNameURI(this.type.getType());
   }
 
   /**
-   * Set the value of the id type from a known alternate id type.
+   * Set the value of the id type from a known identifier type.
    *
-   * @param knownType The known alternate id type.
+   * @param knownType The known identifier type.
    */
   @JsonIgnore
-  public void setKnownType(AlternateIdType knownType) {
-    this.type = knownType == null ? null : new TypeReference<AlternateIdType>(knownType);
+  public void setKnownType(IdentifierType knownType) {
+    this.type = knownType == null ? null : new TypeReference<IdentifierType>(knownType);
   }
 
   /**

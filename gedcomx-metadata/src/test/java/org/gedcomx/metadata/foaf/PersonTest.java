@@ -24,7 +24,7 @@ public class PersonTest {
   }
 
   /**
-   * tests alternate id json
+   * tests id json
    */
   public void testPersonJson() throws Exception {
     Person person = createPerson();
@@ -47,6 +47,7 @@ public class PersonTest {
     person.getAccounts().add(account);
     person.setAddresses(new ArrayList<Address>());
     Address address = new Address();
+    address.setValue("street1\nstreet2\nstreet3\ncity UT, 88888\ncountry");
     address.setCity("city");
     address.setCountry("country");
     address.setId("id");
@@ -80,6 +81,7 @@ public class PersonTest {
     assertEquals("id", person.getAccounts().get(0).getId());
     assertEquals("http://familysearch.org", person.getAccounts().get(0).getServiceHomepage().getResource().toString());
     assertEquals(1, person.getAddresses().size());
+    assertEquals("street1\nstreet2\nstreet3\ncity UT, 88888\ncountry", person.getAddresses().get(0).getValue());
     assertEquals("city", person.getAddresses().get(0).getCity());
     assertEquals("country", person.getAddresses().get(0).getCountry());
     assertEquals("id", person.getAddresses().get(0).getId());

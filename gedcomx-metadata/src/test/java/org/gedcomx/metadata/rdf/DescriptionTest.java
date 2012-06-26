@@ -21,7 +21,7 @@ import static org.testng.AssertJUnit.assertEquals;
 public class DescriptionTest {
 
   /**
-   * tests alternate id xml
+   * tests id xml
    */
   public void testRDFMetadataXml() throws Exception {
     Description meta = new Description();
@@ -39,7 +39,7 @@ public class DescriptionTest {
   }
 
   /**
-   * tests alternate id json
+   * tests id json
    */
   public void testRDFMetadataJson() throws Exception {
     Description meta = new Description();
