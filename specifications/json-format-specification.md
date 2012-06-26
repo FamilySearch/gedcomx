@@ -58,19 +58,15 @@ in JSON according to this specification:
     "preferred" : true,
     "id" : "789",
     "attribution" : {
-      "contributor" : {
-        "resource" : "https://familysearch.org/platform/contributors/STV-WXZY"
-      }
+      "contributor" : "https://familysearch.org/platform/contributors/STV-WXZY"
     }
   } ],
   "sources" : [ {
     "type" : "http://purl.org/dc/dcmitype/Text",
     "attribution" : {
-      "contributor" : {
-        "resource" : "https://familysearch.org/platform/contributors/STV-WXZY"
-      }
+      "contributor" : "https://familysearch.org/platform/contributors/STV-WXZY"
     },
-    "resource" : "http://en.wikipedia.org/wiki/George_washington"
+    "uri" : "http://en.wikipedia.org/wiki/George_washington"
   } ],
   "gender" : {
     "type" : "http://gedcomx.org/Male"
@@ -93,9 +89,7 @@ in JSON according to this specification:
     },
     "id" : "123",
     "attribution" : {
-      "contributor" : {
-        "resource" : "https://familysearch.org/platform/contributors/BCD-FGHJ"
-      }
+      "contributor" : "https://familysearch.org/platform/contributors/BCD-FGHJ"
     }
   }, {
     "type" : "http://gedcomx.org/Death",
@@ -115,9 +109,7 @@ in JSON according to this specification:
     },
     "id" : "456",
     "attribution" : {
-      "contributor" : {
-        "resource" : "https://familysearch.org/platform/contributors/KLM-NPQR"
-      }
+      "contributor" : "https://familysearch.org/platform/contributors/KLM-NPQR"
     }
   } ],
   "id" : "BBB-BBBB"
@@ -135,12 +127,8 @@ JSON according to this specification:
     "id" : "5678",
     "resource" : "http://en.wikipedia.org/wiki/George_washington"
   } ],
-  "person1" : {
-    "resource" : "https://familysearch.org/platform/persons/DDD-DDDD"
-  },
-  "person2" : {
-    "resource" : "https://familysearch.org/platform/persons/FFF-FFFF"
-  },
+  "person1" : "https://familysearch.org/platform/persons/DDD-DDDD",
+  "person2" : "https://familysearch.org/platform/persons/FFF-FFFF",
   "facts" : [ {
     "type" : "http://gedcomx.org/Marriage",
     "date" : {
@@ -152,16 +140,12 @@ JSON according to this specification:
     },
     "id" : "123",
     "attribution" : {
-      "contributor" : {
-        "resource" : "https://familysearch.org/platform/contributors/HHH-HHHH"
-      }
+      "contributor" : "https://familysearch.org/platform/contributors/HHH-HHHH"
     }
   } ],
   "id" : "CCC-CCCC",
   "attribution" : {
-    "contributor" : {
-      "resource" : "https://familysearch.org/platform/contributors/BCD-FGHJ"
-    },
+    "contributor" : "https://familysearch.org/platform/contributors/BCD-FGHJ",
     "proofStatement" : "(proof statement here)"
   }
 }
@@ -203,31 +187,9 @@ under the "Common Data Types" section of the conceptual model specification.
 
 URIs are supplied as JSON strings.
 
-<a id="resource-reference"/>
-
-## 2.2 The "ResourceReference" Data Type
-
-The JSON object used to (de)serialize the
-`http://www.w3.org/1999/02/22-rdf-syntax-ns#ResourceReference` data type
-is defined as follows:
-
-### properties
-
-name | description | JSON member | JSON object type
------|-------------|--------------|---------
-resource | The URI to the resource being referenced. | value | string
-
-### examples
-
-```json
-{
-  "resource" : "http://uri/to/resource/being/referenced"
-}
-```
-
 <a id="identifier-type"/>
 
-## 2.3 The "Identifier" Data Type
+## 2.2 The "Identifier" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/Identifier` data type is defined as follows:
 
@@ -236,22 +198,20 @@ The JSON object used to (de)serialize the `http://gedcomx.org/Identifier` data t
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 value | The value of the identifier. | value | string
-type  | URI identifying the type of the identifier. | type | [`ResourceReference`](#resource-reference)
+type  | URI identifying the type of the identifier. | type | [`URI`](#uri)
 
 ### examples
 
 ```json
 {
   "value" : "value_of_identifier",
-  "type" : {
-    "resource" : "http://gedcomx.org/IdentifierType"
-  }
+  "type" : "http://gedcomx.org/IdentifierType"
 }
 ```
 
 <a id="attribution"/>
 
-## 2.4 The "Attribution" Data Type
+## 2.3 The "Attribution" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/Attribution` data type is defined as follows:
 
@@ -259,8 +219,8 @@ The JSON object used to (de)serialize the `http://gedcomx.org/Attribution` data 
 
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
-contributor | Reference to the contributor to whom the attributed data is attributed. | contributor | [`ResourceReference`](#resource-reference)
-confidence  | Reference to the confidence level of the contributor of the attributed data. | confidence | [`ResourceReference`](#resource-reference)
+contributor | Reference to the contributor to whom the attributed data is attributed. | contributor | [`URI`](#uri)
+confidence  | Reference to the confidence level of the contributor of the attributed data. | confidence | [`URI`](#uri)
 modified | Timestamp of when the attributed data was contributed. | modified | number (milliseconds since epoch)
 proofStatement | A statement of proof provided by the contributor of the attributed data | proofStatement | string
 
@@ -268,12 +228,8 @@ proofStatement | A statement of proof provided by the contributor of the attribu
 
 ```json
 {
-  "contributor" : {
-    "resource" : "http://identifier/for/contributor"
-  },
-  "confidence" : {
-    resource : "http://gedcomx.org/Certainly"
-  },
+  "contributor" : "http://identifier/for/contributor",
+  "confidence" : "http://gedcomx.org/Certainly",
   "modified" : "1338394969",
   "proofStatement" : "...proof statement here..."
 }
@@ -281,7 +237,7 @@ proofStatement | A statement of proof provided by the contributor of the attribu
 
 <a id="formal-value"/>
 
-## 2.5 The "FormalValue" Data Type
+## 2.4 The "FormalValue" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/FormalValue` data type is defined as follows:
 
@@ -328,7 +284,7 @@ Standardized and normalized value:
 }
 ```
 
-## 2.6 The "GenealogicalResource" Data Type
+## 2.5 The "GenealogicalResource" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/GenealogicalResource` data type is defined as follows:
 
@@ -352,7 +308,7 @@ attribution | The attribution of this resource. | attribution | [`Attribution`](
 
 <a id="note"/>
 
-## 2.7 The "Note" Data Type
+## 2.6 The "Note" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/Note` data type is defined as follows:
 
@@ -374,7 +330,7 @@ text | The text of the note. | text | string
 
 <a id="rdf-literal"/>
 
-## 2.8 The "RDF Literal" Data Type
+## 2.7 The "RDF Literal" Data Type
 
 The JSON object used to (de)serialize the `http://www.w3.org/2000/01/rdf-schema#Literal` data type is defined as follows:
 
@@ -397,7 +353,7 @@ lang | The language of the literal value. | lang | string
 ```
 
 
-## 2.9 The "RDF Value" Data Type
+## 2.8 The "RDF Value" Data Type
 
 The JSON object used to (de)serialize the `http://www.w3.org/2000/01/rdf-schema#Resource` data type is defined as follows:
 
@@ -406,7 +362,8 @@ The JSON object used to (de)serialize the `http://www.w3.org/2000/01/rdf-schema#
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 id | A local identifier for the value. | id | string
-type  | Reference to the type of the value. | type | [`ResourceReference`](#resource-reference)
+resource | Identifier for the value | resource | [URI](#uri)
+type  | Reference to the type of the value. | type | [`URI`](#uri)
 value | The string form of the value. | value | string
 lang | The language of the string form of the value. | lang | string
 
@@ -417,6 +374,7 @@ A value that can be specified as a string:
 ```json
 {
   "id" : "...",
+  "resource" : "http://identifier/for/the/value",
   "lang" : "en",
   "value" : "...text of the value..."
 }
@@ -428,9 +386,7 @@ than a string.
 ```json
 {
   "resource" : "http://identifier/for/the/value",
-  "type" : {
-    "resource" : "http://identifier/for/the/type/of/resource"
-  }
+  "type" : "http://identifier/for/the/type/of/resource"
   "value" : "...text of the value..."
 }
 ```
@@ -453,7 +409,7 @@ name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 id | A local, transient identifier for the resource being described. | id | string
 about | A uniform resource identifier (URI) for the resource being described. | about | string
-type  | Reference to the type of the resource being described. | type | [`ResourceReference`](#resource-reference)
+type  | Reference to the type of the resource being described. | type | [`URI`](#uri)
 
 ### standard extension properties
 
@@ -468,9 +424,7 @@ description of a resource. The DCMI terms are supported as arrays of members of 
 {
   "id" : "local_id",
   "about" : "http://identifier/for/the/resource/being/described",
-  "type" : {
-    "resource" : "http://identifier/for/the/type/of/resource/being/described"
-  },
+  "type" : "http://identifier/for/the/type/of/resource/being/described",
   "titles" : [ {...}, {...} ],
   "creators" : [ {...}, {...} ],
   ...
@@ -489,8 +443,9 @@ data type is defined as follows:
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 id | A local identifier for the source reference. | id | string
-type  | Reference to the type of the resource being referenced. | type | [`ResourceReference`](#resource-reference)
-description  | Reference to a _description_ of the source being referenced. | description | [`ResourceReference`](#resource-reference)
+resource | Identifier for the source being referenced. | uri | [`URI`](#uri)
+type  | Reference to the type of the resource being referenced. | type | [`URI`](#uri)
+description  | Reference to a _description_ of the source being referenced. | description | [`URI`](#uri)
 attribution | The attribution of this source reference. | attribution | [`attribution`](#attribution)
 
 ### examples
@@ -498,12 +453,9 @@ attribution | The attribution of this source reference. | attribution | [`attrib
 ```json
 {
   "id" : "local_id",
-  "type" : {
-    "resource" : "http://identifier/for/the/type/of/resource/being/referenced"
-  },
-  "description" : {
-    "resource" : "http://identifier/for/the/description/of/resource/being/referenced"
-  },
+  "uri" : "http://identifier/for/the/source/being/referenced",
+  "type" : "http://identifier/for/the/type/of/resource/being/referenced",
+  "description" : "http://identifier/for/the/description/of/resource/being/referenced",
   "attribution" : { ... }
 }
 ```
@@ -524,7 +476,7 @@ The JSON object used to (de)serialize the `http://xmlns.com/foaf/0.1/OnlineAccou
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 id | A local, transient identifier for the online account. | id | string
-serviceHomepage  | The home page of the service. | serviceHomepage | [`ResourceReference`](#resource-reference)
+serviceHomepage  | The home page of the service. | serviceHomepage | [`URI`](#uri)
 accountName | The name of the account. | accountName | [`Literal`](#rdf-literal)
 displayName | A display name for the account. | displayName | [`Literal`](#rdf-literal)
 
@@ -533,9 +485,7 @@ displayName | A display name for the account. | displayName | [`Literal`](#rdf-l
 ```json
 {
   "id" : "local_id",
-  "serviceHomepage" : {
-    "resource" : "http://familysearch.org/"
-  },
+  "serviceHomepage" : "http://familysearch.org/",
   "accountName" : {
     "value" : "...name of the account..."
   },
@@ -591,8 +541,8 @@ name | The name of the person or organization. | name | [`Literal`](#rdf-literal
 homepage | The homepage of the person or organization. | homepage | [`Literal`](#rdf-literal)
 openid  | The [openid](http://openid.net/) of the person or organization. | openid | [`Literal`](#rdf-literal)
 accounts  | The online accounts of the person or organization. | accounts | array of [`OnlineAccount`](#online-account)
-emails  | The email addresses of the person or organization. | emails | array of [`ResourceReference`](#resource-reference)
-phones  | The phones (voice, fax, mobile) of the person or organization. | phones | array of [`ResourceReference`](#resource-reference)
+emails  | The email addresses of the person or organization. | emails | array of [`URI`](#uri)
+phones  | The phones (voice, fax, mobile) of the person or organization. | phones | array of [`URI`](#uri)
 addresses  | The addresses of the person or organization. | addresses | array of [`Address`](#address)
 
 ### examples
@@ -610,8 +560,8 @@ addresses  | The addresses of the person or organization. | addresses | array of
     "value" : "..."
   },
   "accounts" : [ { ... }, { ... } ],
-  "emails" : [ { resource : "mailto:someone@gedcomx.org" }, { resource : "mailto:someone@somewhere-else.org" } ],
-  "phones" : [ { resource : "tel:+1-201-555-0123" }, { resource : "fax:+1-201-555-5555" } ],
+  "emails" : [ "mailto:someone@gedcomx.org" , "mailto:someone@somewhere-else.org" ],
+  "phones" : [ "tel:+1-201-555-0123" , "fax:+1-201-555-5555" ],
   "addresses" : [ { ... }, { ... } ]
 }
 ```
@@ -744,7 +694,7 @@ The JSON object used to (de)serialize the `http://gedcomx.org/conclusion/v1/Fact
 
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
-type | URI identifying the type of the fact. | type | [`ResourceReference`](#resource-reference)
+type | URI identifying the type of the fact. | type | [`URI`](#uri)
 date | The date of applicability of the fact. | date | [`Date`](#conclusion-date)
 place | The place of applicability of the fact. | place | [`Place`](#conclusion-place)
 original | The value of the fact as supplied by the contributor. | original | string
@@ -755,9 +705,7 @@ formal | The formal value of the fact. | formal | [`FormalValue`](#formal-value)
 ```json
 {
   "id" : "local_id",
-  "type" : {
-    "resource" : "http://gedcomx.org/Birth"
-  },
+  "type" : "http://gedcomx.org/Birth",
   "date" : {
     ...
   },
@@ -782,16 +730,14 @@ The JSON object used to (de)serialize the `http://gedcomx.org/conclusion/v1/Gend
 
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
-type | URI identifying the type of the gender. | type | [`ResourceReference`](#resource-reference)
+type | URI identifying the type of the gender. | type | [`URI`](#uri)
 
 ### examples
 
 ```json
 {
   "id" : "local_id",
-  "type" : {
-    resource = "http://gedcomx.org/Male"
-  }
+  "type" : "http://gedcomx.org/Male"
 }
 ```
 
@@ -805,16 +751,14 @@ The JSON object used to (de)serialize the `http://gedcomx.org/conclusion/v1/Name
 
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
-type | URI identifying the type of the name part. | type | [`ResourceReference`](#resource-reference)
+type | URI identifying the type of the name part. | type | [`URI`](#uri)
 text | The text of the name part. | text | string
 
 ### examples
 
 ```json
 {
-  "type" : {
-    resource = "http://gedcomx.org/Prefix"
-  },
+  "type" : "http://gedcomx.org/Prefix",
   "text" : "...text of the name piece..."
 }
 ```
@@ -849,7 +793,7 @@ The JSON object used to (de)serialize the `http://gedcomx.org/conclusion/v1/Name
 
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
-type | URI identifying the type of the name. | type | [`ResourceReference`](#resource-reference)
+type | URI identifying the type of the name. | type | [`URI`](#uri)
 primaryForm | The primary form of the name. | primaryForm | `NameForm`
 alternateForms | The alternate forms of the name. | alternateForms | array of `NameForm`
 preferred | Whether this name is preferred above the other names of a person. | preferred | true or false
@@ -859,9 +803,7 @@ preferred | Whether this name is preferred above the other names of a person. | 
 ```json
 {
   "id" : "local_id",
-  "type" : {
-    resource = "http://gedcomx.org/BirthName"
-  },
+  "type" : "http://gedcomx.org/BirthName",
   "primaryForm" : { ... },
   "alternateForms" : [ { ... }, { ... } ]
 }
@@ -922,9 +864,9 @@ The JSON object used to (de)serialize the `http://gedcomx.org/conclusion/v1/Rela
 
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
-type | URI identifying the type of the relationship. | type | [`ResourceReference`](#resource-reference)
-person1 | Reference to the first person in the relationship. | person1 | [`ResourceReference`](#resource-reference)
-person2 | Reference to the second person in the relationship. | person2 | [`ResourceReference`](#resource-reference)
+type | URI identifying the type of the relationship. | type | [`URI`](#uri)
+person1 | Reference to the first person in the relationship. | person1 | [`URI`](#uri)
+person2 | Reference to the second person in the relationship. | person2 | [`URI`](#uri)
 facts | The conclusions about the facts of the life of the relationship. | facts | array of [`Fact`](#fact-conclusion)
 sources | The list of references to the evidence of the relationship. | sources | array of [`SourceReference`](#source-reference)
 notes | Contributed notes about the relationship. | notes | array of [`Note`](#note)
@@ -934,17 +876,11 @@ notes | Contributed notes about the relationship. | notes | array of [`Note`](#n
 ```json
 {
   "id" : "local_id",
-  "type" : {
-    resource = "http://gedcomx.org/Couple"
-  },
-  "person1" : {
-    "resource" : "http://identifier/for/person/1"
-  },
-  "person2" : {
-    "resource" : "http://identifier/for/person/2"
-  }
-  "facts" : [ { ... }, { ... } ]
-  "sources" : [ { ... }, { ... } ]
+  "type" : "http://gedcomx.org/Couple",
+  "person1" : "http://identifier/for/person/1",
+  "person2" : "http://identifier/for/person/2",
+  "facts" : [ { ... }, { ... } ],
+  "sources" : [ { ... }, { ... } ],
   "notes" : [ { ... }, { ... } ]
 }
 ```

@@ -180,10 +180,8 @@ XML type defined by the XML schema specification will be used to (de)serialize t
 
 ## 2.2 The "ResourceReference" Data Type
 
-The `rdf:ResourceReference` XML type is used to (de)serialize the
-`http://www.w3.org/1999/02/22-rdf-syntax-ns#ResourceReference` data type.
-
-References to resources are serialized in XML using the `rdf:resource` XML attribute.
+The GEDCOM X XML format uses the `rdf:resource` XML attribute to refer to other resources,
+in conformance to the RDF specification.
 
 ### properties
 
