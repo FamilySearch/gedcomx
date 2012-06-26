@@ -652,6 +652,7 @@ URI | description | scope
 `http://gedcomx.org/Death`| | person
 `http://gedcomx.org/DiedBeforeEight`| | person
 `http://gedcomx.org/Dwelling`| | person
+`http://gedcomx.org/Education`| | person
 `http://gedcomx.org/Emigration`| | person
 `http://gedcomx.org/Ethnicity`| | person
 `http://gedcomx.org/Excommunication`| | person
@@ -659,7 +660,6 @@ URI | description | scope
 `http://gedcomx.org/Flourish`| | person
 `http://gedcomx.org/Funeral`| | person
 `http://gedcomx.org/GedcomUUID`| | person
-`http://gedcomx.org/Graduation`| | person
 `http://gedcomx.org/Illness`| | person
 `http://gedcomx.org/Immigration`| | person
 `http://gedcomx.org/Interment`| | person
@@ -678,7 +678,7 @@ URI | description | scope
 `http://gedcomx.org/Naturalization`| | person
 `http://gedcomx.org/Namesake`| | person
 `http://gedcomx.org/NationalId`| | person
-`http://gedcomx.org/NationalOrigin`| | person
+`http://gedcomx.org/Nationality`| | person
 `http://gedcomx.org/NeverHadChildren`| | person
 `http://gedcomx.org/NeverMarried`| | person
 `http://gedcomx.org/NotAccountable`| | person
@@ -689,13 +689,12 @@ URI | description | scope
 `http://gedcomx.org/PortOfDeparture`| | person
 `http://gedcomx.org/PreviousResidence`| | person
 `http://gedcomx.org/Probate`| | person
-`http://gedcomx.org/Possessions`| | person
+`http://gedcomx.org/Property`| | person
 `http://gedcomx.org/Race`| | person
 `http://gedcomx.org/RelationshipToHead`| | person
-`http://gedcomx.org/ReligiousAffiliation`| | person
+`http://gedcomx.org/Religion`| | person
 `http://gedcomx.org/Residence`| | person
 `http://gedcomx.org/Retirement`| | person
-`http://gedcomx.org/ScholasticAchievement`| | person
 `http://gedcomx.org/SocialSecurityNumber`| | person
 `http://gedcomx.org/Stillborn`| | person
 `http://gedcomx.org/TitleOfNobility`| | person
