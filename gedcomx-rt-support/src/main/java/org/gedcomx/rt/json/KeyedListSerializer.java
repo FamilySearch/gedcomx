@@ -17,7 +17,6 @@ package org.gedcomx.rt.json;
 
 import org.codehaus.jackson.JsonGenerator;
 import org.codehaus.jackson.JsonProcessingException;
-import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.JsonSerializer;
 import org.codehaus.jackson.map.SerializerProvider;
 
@@ -28,6 +27,8 @@ import java.util.*;
  * @author Ryan Heaton
  */
 public class KeyedListSerializer extends JsonSerializer<Collection<? extends HasUniqueJsonKey>> {
+
+  public static final String JSON_DEFAULT_KEY = "$";
 
   @Override
   public void serialize(Collection<? extends HasUniqueJsonKey> value, JsonGenerator jgen, SerializerProvider provider) throws IOException, JsonProcessingException {
@@ -44,7 +45,7 @@ public class KeyedListSerializer extends JsonSerializer<Collection<? extends Has
       for (Object keyed : value) {
         String jsonKey = ((HasJsonKey) keyed).getJsonKey();
         if (jsonKey == null) {
-          throw new JsonMappingException("Extension element of type " + keyed.getClass().getName() + " returned a null JSON key.");
+          jsonKey = JSON_DEFAULT_KEY;
         }
 
         List<Object> keyedList = bykey.get(jsonKey);

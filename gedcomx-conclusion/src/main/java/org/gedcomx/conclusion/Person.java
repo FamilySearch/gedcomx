@@ -25,6 +25,7 @@ import org.gedcomx.common.URI;
 import org.gedcomx.rt.json.JsonElementWrapper;
 import org.gedcomx.types.FactType;
 import org.gedcomx.types.IdentifierType;
+import org.gedcomx.types.NameType;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -172,6 +173,27 @@ public class Person extends GenealogicalResource implements HasFacts, HasNotes, 
   }
 
   /**
+   * Get the first name of the specified type.
+   *
+   * @param type The type.
+   * @return the first name in the name list of the specified type, or null if none.
+   */
+  @JsonIgnore
+  public Name getFirstNameOfType(NameType type) {
+    if (this.names == null) {
+      return null;
+    }
+
+    for (Name name : this.names) {
+      if (type.equals(name.getKnownType())) {
+        return name;
+      }
+    }
+
+    return null;
+  }
+
+  /**
    * The name conclusions for the person.
    *
    * @param names The name conclusions for the person.
@@ -191,6 +213,27 @@ public class Person extends GenealogicalResource implements HasFacts, HasNotes, 
   @JsonName("facts")
   public List<Fact> getFacts() {
     return facts;
+  }
+
+  /**
+   * Get the first fact of the specified type.
+   *
+   * @param type The type.
+   * @return the first fact in the fact list of the specified type, or null if none.
+   */
+  @JsonIgnore
+  public Fact getFirstFactOfType(FactType type) {
+    if (this.facts == null) {
+      return null;
+    }
+    
+    for (Fact fact : this.facts) {
+      if (type.equals(fact.getKnownType())) {
+        return fact;
+      }
+    }
+    
+    return null;
   }
 
   /**

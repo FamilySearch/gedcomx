@@ -67,7 +67,9 @@ public class KeyedListDeserializer extends JsonDeserializer<List<? extends HasJs
           }
           else {
             value = (HasJsonKey) jp.readValueAs(itemType);
-            value.setJsonKey(key);
+            if (!KeyedListSerializer.JSON_DEFAULT_KEY.equals(key)) {
+              value.setJsonKey(key);
+            }
           }
 
           list.add(value);
@@ -75,7 +77,9 @@ public class KeyedListDeserializer extends JsonDeserializer<List<? extends HasJs
       }
       else {
         HasJsonKey value = (HasJsonKey) jp.readValueAs(itemType);
-        value.setJsonKey(key);
+        if (!KeyedListSerializer.JSON_DEFAULT_KEY.equals(key)) {
+          value.setJsonKey(key);
+        }
         list.add(value);
       }
     }

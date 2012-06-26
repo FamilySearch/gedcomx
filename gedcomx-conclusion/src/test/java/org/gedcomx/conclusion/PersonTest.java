@@ -171,7 +171,7 @@ public class PersonTest {
     AssertJUnit.assertEquals("pal", person.getIdentifiers().get(1).getValue());
 
     AssertJUnit.assertEquals(2, person.getFacts().size());
-    fact = person.getFacts().get(0);
+    fact = person.getFirstFactOfType(FactType.Occupation);
     AssertJUnit.assertEquals("urn:fact-attribution", fact.getAttribution().getContributor().getResource().toString());
     AssertJUnit.assertEquals("original date", fact.getDate().getOriginal());
     AssertJUnit.assertEquals("normalized date", fact.getDate().getFormal().getText());
@@ -185,7 +185,7 @@ public class PersonTest {
     AssertJUnit.assertEquals("urn:date", fact.getDate().getFormal().getDatatype().toString());
     AssertJUnit.assertEquals("fact-value", fact.getOriginal());
 
-    event = person.getFacts().get(1);
+    event = person.getFirstFactOfType(FactType.Adoption);
     AssertJUnit.assertEquals("urn:event-attribution", event.getAttribution().getContributor().getResource().toString());
     AssertJUnit.assertEquals("original date", event.getDate().getOriginal());
     AssertJUnit.assertEquals("normalized date", event.getDate().getFormal().getText());
