@@ -64,7 +64,7 @@ public enum FactType {
   Flourish,
   Funeral,
   GedcomUUID,
-  Graduation,
+  Education,
   Illness,
   Immigration,
   Interment,
@@ -83,7 +83,7 @@ public enum FactType {
   Naturalization,
   Namesake,
   NationalId,
-  NationalOrigin,
+  Nationality,
   NeverHadChildren,
   NeverMarried,
   NotAccountable,
@@ -94,13 +94,12 @@ public enum FactType {
   PortOfDeparture,
   PreviousResidence,
   Probate,
-  Possessions,
+  Property,
   Race,
   RelationshipToHead,
-  ReligiousAffiliation,
+  Religion,
   Residence,
   Retirement,
-  ScholasticAchievement,
   SocialSecurityNumber,
   Stillborn,
   TitleOfNobility,
@@ -231,7 +230,7 @@ public enum FactType {
     public static final FactType Flourish = include(FactType.Flourish);
     public static final FactType Funeral = include(FactType.Funeral);
     public static final FactType GedcomUUID = include(FactType.GedcomUUID);
-    public static final FactType Graduation = include(FactType.Graduation);
+    public static final FactType Education = include(FactType.Education);
     public static final FactType Illness = include(FactType.Illness);
     public static final FactType Immigration = include(FactType.Immigration);
     public static final FactType Interment = include(FactType.Interment);
@@ -251,7 +250,7 @@ public enum FactType {
     public static final FactType Naturalization = include(FactType.Naturalization);
     public static final FactType Namesake = include(FactType.Namesake);
     public static final FactType NationalId = include(FactType.NationalId);
-    public static final FactType NationalOrigin = include(FactType.NationalOrigin);
+    public static final FactType Nationality = include(FactType.Nationality);
     public static final FactType NeverHadChildren = include(FactType.NeverHadChildren);
     public static final FactType NeverMarried = include(FactType.NeverMarried);
     public static final FactType NotAccountable = include(FactType.NotAccountable);
@@ -261,14 +260,13 @@ public enum FactType {
     public static final FactType PhysicalDescription = include(FactType.PhysicalDescription);
     public static final FactType Probate = include(FactType.Probate);
     public static final FactType PortOfDeparture = include(FactType.PortOfDeparture);
-    public static final FactType Possessions = include(FactType.Possessions);
+    public static final FactType Possessions = include(FactType.Property);
     public static final FactType PreviousResidence = include(FactType.PreviousResidence);
     public static final FactType Race = include(FactType.Race);
     public static final FactType RelationshipToHead = include(FactType.RelationshipToHead);
-    public static final FactType ReligiousAffiliation = include(FactType.ReligiousAffiliation);
+    public static final FactType Religion = include(FactType.Religion);
     public static final FactType Residence = include(FactType.Residence);
     public static final FactType Retirement = include(FactType.Retirement);
-    public static final FactType ScholasticAchievement = include(FactType.ScholasticAchievement);
     public static final FactType SocialSecurityNumber = include(FactType.SocialSecurityNumber);
     public static final FactType Stillborn = include(FactType.Stillborn);
     public static final FactType TitleOfNobility = include(FactType.TitleOfNobility);
