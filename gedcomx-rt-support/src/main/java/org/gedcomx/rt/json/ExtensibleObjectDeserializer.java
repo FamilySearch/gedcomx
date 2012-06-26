@@ -51,7 +51,7 @@ public class ExtensibleObjectDeserializer extends BeanDeserializer {
       Class<?> type = GedcomNamespaceManager.getKnownJsonType(propName);
       if (type != null) {
         //it's a known json type.
-        if (HasUniqueJsonKey.class.isAssignableFrom(type)) {
+        if (HasJsonKey.class.isAssignableFrom(type)) {
           for (Object ext : readKeyedMapOf(type, jp, ctxt)) {
             target.addExtensionElement(ext);
           }

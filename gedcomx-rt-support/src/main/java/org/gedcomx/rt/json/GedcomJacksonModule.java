@@ -48,7 +48,7 @@ public class GedcomJacksonModule extends Module {
 
     @Override
     public JsonSerializer<?> findCollectionSerializer(SerializationConfig config, CollectionType type, BeanDescription beanDesc, BeanProperty property, TypeSerializer elementTypeSerializer, JsonSerializer<Object> elementValueSerializer) {
-      if (type.getContentType() != null && HasUniqueJsonKey.class.isAssignableFrom(type.getContentType().getRawClass())) {
+      if (type.getContentType() != null && HasJsonKey.class.isAssignableFrom(type.getContentType().getRawClass())) {
         return new KeyedListSerializer();
       }
 
@@ -60,7 +60,7 @@ public class GedcomJacksonModule extends Module {
 
     @Override
     public JsonDeserializer<?> findCollectionDeserializer(CollectionType type, DeserializationConfig config, DeserializerProvider provider, BeanDescription beanDesc, BeanProperty property, TypeDeserializer elementTypeDeserializer, JsonDeserializer<?> elementDeserializer) throws JsonMappingException {
-      if (type.getContentType() != null && HasUniqueJsonKey.class.isAssignableFrom(type.getContentType().getRawClass())) {
+      if (type.getContentType() != null && HasJsonKey.class.isAssignableFrom(type.getContentType().getRawClass())) {
         return new KeyedListDeserializer(type.getContentType().getRawClass());
       }
 

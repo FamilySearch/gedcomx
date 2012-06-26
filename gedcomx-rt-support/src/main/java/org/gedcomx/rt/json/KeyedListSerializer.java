@@ -22,7 +22,7 @@ import org.codehaus.jackson.map.JsonSerializer;
 import org.codehaus.jackson.map.SerializerProvider;
 
 import java.io.IOException;
-import java.util.Collection;
+import java.util.*;
 
 /**
  * @author Ryan Heaton
@@ -40,13 +40,36 @@ public class KeyedListSerializer extends JsonSerializer<Collection<? extends Has
     }
     else {
       jgen.writeStartObject();
+      Map<String, List<Object>> bykey = new HashMap<String, List<Object>>();
       for (Object keyed : value) {
-        String jsonKey = ((HasUniqueJsonKey) keyed).getJsonKey();
+        String jsonKey = ((HasJsonKey) keyed).getJsonKey();
         if (jsonKey == null) {
           throw new JsonMappingException("Extension element of type " + keyed.getClass().getName() + " returned a null JSON key.");
         }
+
+        List<Object> keyedList = bykey.get(jsonKey);
+        if (keyedList == null) {
+          keyedList = new ArrayList<Object>();
+          bykey.put(jsonKey, keyedList);
+        }
+        keyedList.add(keyed);
+      }
+
+      for (Map.Entry<String, List<Object>> keyedObjects : bykey.entrySet()) {
+        String jsonKey = keyedObjects.getKey();
         jgen.writeFieldName(jsonKey);
-        provider.findTypedValueSerializer(keyed.getClass(), true, null).serialize(keyed, jgen, provider);
+        boolean notUnique = keyedObjects.getValue().size() != 1 || (!(keyedObjects.getValue().get(0) instanceof HasUniqueJsonKey));
+        if (notUnique) {
+          jgen.writeStartArray();
+        }
+
+        for (Object keyed : keyedObjects.getValue()) {
+          provider.findTypedValueSerializer(keyed.getClass(), true, null).serialize(keyed, jgen, provider);
+        }
+
+        if (notUnique) {
+          jgen.writeEndArray();
+        }
       }
       jgen.writeEndObject();
     }

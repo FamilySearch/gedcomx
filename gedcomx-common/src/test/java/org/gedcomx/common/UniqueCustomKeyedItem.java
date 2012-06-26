@@ -1,7 +1,7 @@
 package org.gedcomx.common;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
-import org.gedcomx.rt.json.HasJsonKey;
+import org.gedcomx.rt.json.HasUniqueJsonKey;
 import org.gedcomx.rt.json.JsonElementWrapper;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -11,8 +11,8 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Ryan Heaton
  */
 @XmlRootElement
-@JsonElementWrapper(name = "customkeys")
-public class CustomKeyedItem implements HasJsonKey {
+@JsonElementWrapper(name = "ucustomkeys")
+public class UniqueCustomKeyedItem implements HasUniqueJsonKey {
 
   private String key = String.valueOf(hashCode());
   private String val1;

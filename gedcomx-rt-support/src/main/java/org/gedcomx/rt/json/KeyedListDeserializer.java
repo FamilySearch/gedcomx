@@ -29,7 +29,7 @@ import java.util.List;
 /**
  * @author Ryan Heaton
  */
-public class KeyedListDeserializer extends JsonDeserializer<List<? extends HasUniqueJsonKey>> {
+public class KeyedListDeserializer extends JsonDeserializer<List<? extends HasJsonKey>> {
 
   private final Class<?> itemType;
 
@@ -41,11 +41,11 @@ public class KeyedListDeserializer extends JsonDeserializer<List<? extends HasUn
   }
 
   @Override
-  public List<? extends HasUniqueJsonKey> deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+  public List<? extends HasJsonKey> deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
     return deserializeGeneric(jp, ctxt, this.itemType);
   }
 
-  static List<? extends HasUniqueJsonKey> deserializeGeneric(JsonParser jp, DeserializationContext ctxt, Class<?> itemType) throws IOException, JsonProcessingException {
+  static List<? extends HasJsonKey> deserializeGeneric(JsonParser jp, DeserializationContext ctxt, Class<?> itemType) throws IOException, JsonProcessingException {
     if (jp.getCurrentToken() == JsonToken.START_OBJECT) {
       jp.nextToken();
     }
@@ -53,14 +53,33 @@ public class KeyedListDeserializer extends JsonDeserializer<List<? extends HasUn
       throw new JsonMappingException("Unable to deserialize keyed list: unexpected token: " + jp.getCurrentToken().name());
     }
 
-    ArrayList<HasUniqueJsonKey> list = new ArrayList<HasUniqueJsonKey>();
+    ArrayList<HasJsonKey> list = new ArrayList<HasJsonKey>();
     for (; jp.getCurrentToken() != JsonToken.END_OBJECT; jp.nextToken()) {
       String key = jp.getCurrentName();
       jp.nextToken();
-      HasUniqueJsonKey value = (HasUniqueJsonKey) jp.readValueAs(itemType);
-      value.setJsonKey(key);
-      list.add(value);
+      if (jp.isExpectedStartArrayToken()) {
+        JsonToken t;
+        while ((t = jp.nextToken()) != JsonToken.END_ARRAY) {
+          HasJsonKey value;
+
+          if (t == JsonToken.VALUE_NULL) {
+            value = null;
+          }
+          else {
+            value = (HasJsonKey) jp.readValueAs(itemType);
+            value.setJsonKey(key);
+          }
+
+          list.add(value);
+        }
+      }
+      else {
+        HasJsonKey value = (HasJsonKey) jp.readValueAs(itemType);
+        value.setJsonKey(key);
+        list.add(value);
+      }
     }
+
     return list;
   }
 }

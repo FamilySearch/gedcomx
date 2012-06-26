@@ -27,8 +27,10 @@ import org.codehaus.enunciate.contract.jaxb.types.XmlType;
 import org.codehaus.enunciate.doc.DocumentationExample;
 import org.codehaus.enunciate.modules.docs.WhateverNode;
 import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.node.ArrayNode;
 import org.codehaus.jackson.node.JsonNodeFactory;
 import org.codehaus.jackson.node.ObjectNode;
+import org.gedcomx.rt.json.HasJsonKey;
 import org.gedcomx.rt.json.HasUniqueJsonKey;
 import org.gedcomx.rt.json.JsonSimpleValue;
 
@@ -43,12 +45,24 @@ public class GenerateExampleJsonMethod extends org.codehaus.enunciate.modules.do
 
   @Override
   protected void generateExampleJson(Element element, ObjectNode jsonNode, int maxDepth) {
-    if (element.isCollectionType() && ((DecoratedTypeMirror)element.getBareAccessorType()).isInstanceOf(HasUniqueJsonKey.class.getName())) {
+    if (element.isCollectionType() && ((DecoratedTypeMirror)element.getBareAccessorType()).isInstanceOf(HasJsonKey.class.getName())) {
       String jsonName = element.getJsonMemberName();
       ObjectNode on = JsonNodeFactory.instance.objectNode();
       JsonNode val = generateExampleJson(element.getBaseType(), "...", maxDepth);
-      on.put("type1", val);
-      on.put("type2", val);
+      JsonNode ex;
+      boolean isUnique = ((DecoratedTypeMirror)element.getBareAccessorType()).isInstanceOf(HasUniqueJsonKey.class.getName());
+      if (!isUnique) {
+        ArrayNode exs = JsonNodeFactory.instance.arrayNode();
+        exs.add(val);
+        exs.add(WhateverNode.instance);
+        ex = exs;
+      }
+      else {
+        ex = val;
+      }
+
+      on.put("type1", ex);
+      on.put("type2", ex);
       on.put("...", WhateverNode.instance);
       jsonNode.put(jsonName, on);
     }

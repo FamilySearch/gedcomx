@@ -118,7 +118,7 @@ public class ExtensibleObjectSerializer extends BeanSerializer {
       }
 
       for (Map.Entry<String, List<Object>> prop : extensionProperties.entrySet()) {
-        if (prop.getValue().get(0) instanceof HasUniqueJsonKey) {
+        if (prop.getValue().get(0) instanceof HasJsonKey) {
           //we're serialize out this list as a keyed map.
           jgen.writeFieldName(prop.getKey());
           KeyedListSerializer.serializeGeneric(prop.getValue(), jgen, provider);

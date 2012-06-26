@@ -16,10 +16,24 @@
 package org.gedcomx.rt.json;
 
 /**
- * Marker interface used as an indicator that each of these objects in a list have a unique json key.
+ * Interface for objects that support access by a JSON map instead of access by a list when a list of the objects are supplied.
  *
  * @author Ryan Heaton
  */
-public interface HasUniqueJsonKey extends HasJsonKey {
+public interface HasJsonKey {
+
+  /**
+   * The JSON key in the map for this object.
+   *
+   * @return The key in the map.
+   */
+  String getJsonKey();
+
+  /**
+   * The JSON key in the map for this object.
+   *
+   * @param jsonKey The key in the map.
+   */
+  void setJsonKey(String jsonKey);
 
 }
