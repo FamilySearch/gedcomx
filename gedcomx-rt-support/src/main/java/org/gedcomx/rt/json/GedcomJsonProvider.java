@@ -15,6 +15,7 @@
  */
 package org.gedcomx.rt.json;
 
+import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider;
 import org.codehaus.jackson.map.AnnotationIntrospector;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -24,8 +25,10 @@ import org.gedcomx.rt.GedcomNamespaceManager;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
 import java.io.IOException;
 import java.io.InputStream;
@@ -77,6 +80,11 @@ public class GedcomJsonProvider extends JacksonJaxbJsonProvider {
         type = knownType;
       }
     }
-    return super.readFrom(type, genericType, annotations, mediaType, httpHeaders, entityStream);
+    try {
+      return super.readFrom(type, genericType, annotations, mediaType, httpHeaders, entityStream);
+    }
+    catch (JsonProcessingException e) {
+      throw new WebApplicationException(e, Response.Status.BAD_REQUEST);
+    }
   }
 }
