@@ -78,6 +78,7 @@ public class GedcomJsonProvider extends JacksonJaxbJsonProvider {
       Class<Object> knownType = (Class<Object>) GedcomNamespaceManager.getKnownTypeById(dataType);
       if (type != null && knownType != null && type.isAssignableFrom(knownType)) {
         type = knownType;
+        genericType = knownType;
       }
     }
     try {
