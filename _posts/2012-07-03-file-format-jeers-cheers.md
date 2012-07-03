@@ -441,7 +441,7 @@ file to a GEDCOM X file on my local computer. On my box, the VM starts off at
 200 MB. At 8:53:45, I kick off the conversion process that climbs to about 
 1500 MB of memory before finishing:
 
-![Memory Profile Converting GEDCOM 5.5](familysearch.github.com/gedcomx/img/gedcom5-conversion.png)
+![Memory Profile Converting GEDCOM 5.5](http://familysearch.github.com/gedcomx/img/gedcom5-conversion.png)
 
 The memory profile will differ depending on the machine you're using and the
 configuration of the VM, but the basic shape of the graph should look similar.
@@ -460,7 +460,7 @@ Here's the memory profile on my machine. Like above, the VM starts off at
 200 MB. At about 9:15:25, I kick off the process. See how flat that line is?
 I can do this _all day_ folks.
 
-![Memory Profile Processing GEDCOM X](familysearch.github.com/gedcomx/img/gedcom5-process.png)
+![Memory Profile Processing GEDCOM X](http://familysearch.github.com/gedcomx/img/gedcom5-process.png)
 
 Now, to be fair, a more efficient GEDCOM 5.5 processor might be able to maintain
 a flatter profile. But in order to fully validate the GEDCOM 5.5 data, you'd
