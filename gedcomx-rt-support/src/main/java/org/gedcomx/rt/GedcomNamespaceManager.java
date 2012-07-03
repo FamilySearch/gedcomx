@@ -352,7 +352,7 @@ public class GedcomNamespaceManager extends NamespacePrefixMapper {
    * @return The known type, or null if not known.
    */
   public static Class<?> getKnownTypeById(String typeId) {
-    return KNOWN_JSON_TYPES_BY_NAME.get(typeId);
+    return KNOWN_JSON_TYPES_BY_TYPE_ID.get(typeId);
   }
 
   /**
