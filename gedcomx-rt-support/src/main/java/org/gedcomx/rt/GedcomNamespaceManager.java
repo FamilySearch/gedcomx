@@ -314,7 +314,7 @@ public class GedcomNamespaceManager extends NamespacePrefixMapper {
    * @param type The type.
    * @return The type id.
    */
-  static String getTypeIdName(Class<?> type) {
+  public static String getTypeIdName(Class<?> type) {
     String ns = "";
     if (type.getPackage() != null && type.getPackage().isAnnotationPresent(XmlSchema.class)) {
       ns = type.getPackage().getAnnotation(XmlSchema.class).namespace();
