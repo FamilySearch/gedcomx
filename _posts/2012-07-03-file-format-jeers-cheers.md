@@ -1,5 +1,5 @@
 ---
-title: The File Format: Jeers and Cheers
+title: The File Format - Jeers and Cheers
 date: 2012-07-03 12:09:00
 layout: default
 ---
