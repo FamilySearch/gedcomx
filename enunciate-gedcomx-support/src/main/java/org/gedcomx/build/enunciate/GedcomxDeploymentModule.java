@@ -44,10 +44,7 @@ import org.codehaus.enunciate.template.freemarker.GetGroupsMethod;
 import org.codehaus.enunciate.template.freemarker.IsDefinedGloballyMethod;
 import org.codehaus.enunciate.template.freemarker.UniqueContentTypesMethod;
 import org.gedcomx.build.enunciate.rdf.RDFProcessor;
-import org.gedcomx.build.enunciate.rs.*;
 import org.gedcomx.rt.*;
-import org.gedcomx.rt.GedcomNamespaceManager;
-import org.gedcomx.rt.rs.ResourceDefinition;
 import org.gedcomx.test.Recipe;
 
 import java.io.File;
@@ -69,7 +66,6 @@ public class GedcomxDeploymentModule extends FreemarkerDeploymentModule implemen
   private final Map<String, TypeDeclaration> knownModelDeclarations = new HashMap<String, TypeDeclaration>();
   private final Map<String, TypeDeclaration> knownRsdDeclarations = new HashMap<String, TypeDeclaration>();
   private RDFProcessor rdfProcessor;
-  private ResourceServiceProcessor resourceServiceProcessor;
   private final Map<String, String> primaryNav = new LinkedHashMap<String, String>();
   private boolean disableProcessing = false;
   private RecipeClasspathHandler recipeManager;
@@ -199,9 +195,6 @@ public class GedcomxDeploymentModule extends FreemarkerDeploymentModule implemen
     if (typeDeclaration.getAnnotation(Models.class) != null) {
       this.knownModelDeclarations.put(typeDeclaration.getQualifiedName(), typeDeclaration);
     }
-    if (typeDeclaration.getAnnotation(ResourceDefinition.class) != null) {
-      this.knownRsdDeclarations.put(typeDeclaration.getQualifiedName(), typeDeclaration);
-    }
   }
 
   protected URL getDocsTemplateURL() {
@@ -232,7 +225,6 @@ public class GedcomxDeploymentModule extends FreemarkerDeploymentModule implemen
     }
 
     this.rdfProcessor = new RDFProcessor();
-    this.resourceServiceProcessor = new ResourceServiceProcessor();
     this.recipeManager = new RecipeClasspathHandler(enunciate);
     enunciate.addClasspathHandler(this.recipeManager);
   }
@@ -330,7 +322,6 @@ public class GedcomxDeploymentModule extends FreemarkerDeploymentModule implemen
     }
 
     ValidationResult validationResult = this.rdfProcessor.processModel(model);
-    validationResult.aggregate(this.resourceServiceProcessor.processModel(model, this.knownRsdDeclarations.values()));
     Messager messager = Context.getCurrentEnvironment().getMessager();
     if (validationResult.hasWarnings()) {
       warn("Warnings while processing RDF and resource services.");
@@ -392,21 +383,16 @@ public class GedcomxDeploymentModule extends FreemarkerDeploymentModule implemen
       model.put("defaultDate", new Date());
       model.setVariable("generateExampleJson", new GenerateExampleJsonMethod(model));
       model.setVariable("generateExampleXml", new GenerateExampleXmlMethod(null, model));
-      model.setVariable("generateExampleRequestHeaders", new GenerateExampleRequestHeadersMethod(model));
-      model.setVariable("generateExampleRequestBody", new GenerateExampleRequestBodyMethod(model));
-      model.setVariable("generateExampleResponseHeaders", new GenerateExampleResponseHeadersMethod(model));
-      model.setVariable("generateExampleResponseBody", new GenerateExampleResponseBodyMethod(model));
       model.setVariable("typeName", new TypeNameMethod());
       model.setVariable("jsonExtensionElementName", new JsonExtensionElementNameMethod());
       model.put("rdfschema", this.rdfProcessor.getRdfSchema());
-      model.put("resourceDefinitions", this.resourceServiceProcessor.getResourceDefinitions());
-      model.put("resourceBindingsByPath", this.resourceServiceProcessor.getBindingsByPath());
       model.put("primaryNav", this.primaryNav);
       model.put("projectId", this.projectId);
       if (this.projectLabelModifier != null) {
         model.put("projectLabelModifier", this.projectLabelModifier);
       }
       model.put("isOfProject", new IsOfProjectMethod(getModelInternal().getNamespacesToSchemas(), projectId));
+      model.put("baseProjectUris", getBaseProjectUris());
       model.put("baseProjectUri", new BaseProjectUriMethod(getBaseProjectUris(), getModelInternal().getNamespacesToSchemas()));
       try {
         for (SchemaInfo schemaInfo : model.getNamespacesToSchemas().values()) {

@@ -24,7 +24,6 @@ import org.codehaus.enunciate.contract.jaxb.Accessor;
 import org.codehaus.enunciate.contract.jaxb.RootElementDeclaration;
 import org.codehaus.enunciate.contract.jaxb.TypeDefinition;
 import org.codehaus.enunciate.contract.jaxb.types.XmlType;
-import org.gedcomx.build.enunciate.rs.ResourceDefinitionDeclaration;
 
 import java.util.List;
 import java.util.Map;
@@ -49,35 +48,29 @@ public class BaseProjectUriMethod implements TemplateMethodModelEx {
     }
 
     Object object = BeansWrapper.getDefaultInstance().unwrap((TemplateModel) list.get(0));
-    if (object instanceof ResourceDefinitionDeclaration) {
-      String baseUri = this.baseProjectUris.get(((ResourceDefinitionDeclaration) object).getProjectId());
-      return baseUri == null ? "" : baseUri;
+    String ns;
+    if (object instanceof SchemaInfo) {
+      ns = ((SchemaInfo) object).getNamespace();
+    }
+    else if (object instanceof XmlType) {
+      ns = ((XmlType) object).getNamespace();
+    }
+    else if (object instanceof Accessor) {
+      ns = ((Accessor) object).getBaseType().getNamespace();
+    }
+    else if (object instanceof TypeDefinition) {
+      ns = ((TypeDefinition) object).getNamespace();
+    }
+    else if (object instanceof RootElementDeclaration) {
+      ns = ((RootElementDeclaration) object).getNamespace();
     }
     else {
-      String ns;
-      if (object instanceof SchemaInfo) {
-        ns = ((SchemaInfo) object).getNamespace();
-      }
-      else if (object instanceof XmlType) {
-        ns = ((XmlType) object).getNamespace();
-      }
-      else if (object instanceof Accessor) {
-        ns = ((Accessor) object).getBaseType().getNamespace();
-      }
-      else if (object instanceof TypeDefinition) {
-        ns = ((TypeDefinition) object).getNamespace();
-      }
-      else if (object instanceof RootElementDeclaration) {
-        ns = ((RootElementDeclaration) object).getNamespace();
-      }
-      else {
-        ns = String.valueOf(object);
-      }
-  
-      SchemaInfo schemaInfo = this.namespacesToSchemas.get(ns);
-      String projectId = schemaInfo == null ? null : (String) schemaInfo.getProperty("projectId");
-      String baseUri = baseProjectUris.get(projectId);
-      return baseUri == null ? "" : baseUri;
+      ns = String.valueOf(object);
     }
+
+    SchemaInfo schemaInfo = this.namespacesToSchemas.get(ns);
+    String projectId = schemaInfo == null ? null : (String) schemaInfo.getProperty("projectId");
+    String baseUri = baseProjectUris.get(projectId);
+    return baseUri == null ? "" : baseUri;
   }
 }
