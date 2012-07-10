@@ -35,6 +35,7 @@ public class EventRole extends GenealogicalResource {
 
   private ResourceReference person;
   private TypeReference<EventRoleType> role;
+  private String details;
 
   /**
    * Reference to the person playing the role in the event.
@@ -71,6 +72,24 @@ public class EventRole extends GenealogicalResource {
    */
   public void setRole(TypeReference<EventRoleType> role) {
     this.role = role;
+  }
+
+  /**
+   * Details about the role of the person in the event.
+   *
+   * @return Details about the role of the person in the event.
+   */
+  public String getDetails() {
+    return details;
+  }
+
+  /**
+   * Details about the role of the person in the event.
+   *
+   * @param details Details about the role of the person in the event.
+   */
+  public void setDetails(String details) {
+    this.details = details;
   }
 
   /**

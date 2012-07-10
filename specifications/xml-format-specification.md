@@ -683,6 +683,7 @@ name | description | XML property | XML type
 -----|-------------|--------------|---------
 person | Reference to the person playing the role in the event. | gxc:person | [`rdf:ResourceReference`](#resource-reference)
 role | Reference to the role. | gxc:role | [`rdf#ResourceReference`](#resource-reference)
+details | Details about the role of the person in the event. | details | xs:string
 
 ### examples
 
@@ -690,6 +691,7 @@ role | Reference to the role. | gxc:role | [`rdf#ResourceReference`](#resource-r
   <... rdf:ID="local_id">
     <gxc:person rdf:resource="http://identifier/for/person/1"/>
     <gxc:role rdf:resource="http://gedcomx.org/Witness"/>
+    <gxc:details>...</gxc:details>
   </...>
 ```
 

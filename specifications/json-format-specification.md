@@ -793,6 +793,7 @@ name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 person | Reference to the person playing the role in the event. | person | [`ResourceReference`](#resource-reference)
 role | Reference to the role. | role | [`ResourceReference`](#resource-reference)
+details | Details about the role of the person in the event. | details | string
 
 ### examples
 
@@ -802,10 +803,11 @@ role | Reference to the role. | role | [`ResourceReference`](#resource-reference
   "id" : "local_id",
   "person" : {
     "resource" : "http://identifier/for/person/1"
-  }
+  },
   "role" : {
     "resource" : "http://gedcomx.org/Witness"
-  }
+  },
+  details: "..."
 }
 ```
 

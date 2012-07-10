@@ -651,6 +651,7 @@ name | description | data type
 -----|-------------|----------
 person | Reference to the person playing the role in the event. | [`http://www.w3.org/1999/02/22-rdf-syntax-ns#ResourceReference`](#resource-reference) - MUST resolve to an instance of [`http://gedcomx.org/conclusion/v1/Person`](#person)
 role | Reference to the role. | [`http://www.w3.org/1999/02/22-rdf-syntax-ns#ResourceReference`](#resource-reference) - MUST resolve to a role. Refer to the list of [known roles](#known-roles).
+details | Details about the role of the person in the event. | string
 
 <a id="known-roles"/>
 
