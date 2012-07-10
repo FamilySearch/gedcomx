@@ -1075,6 +1075,7 @@ URI | description
 `http://gedcomx.org/Departure`|
 `http://gedcomx.org/Divorce`|
 `http://gedcomx.org/DivorceFiling`|
+`http://gedcomx.org/Education`|
 `http://gedcomx.org/Engagement`|
 `http://gedcomx.org/Emigration`|
 `http://gedcomx.org/Excommunication`|
@@ -1091,7 +1092,6 @@ URI | description
 `http://gedcomx.org/Ordinance`|
 `http://gedcomx.org/Ordination`|
 `http://gedcomx.org/Retirement`|
-`http://gedcomx.org/ScholasticAchievement`|
 
 # 9. Extensibility
 

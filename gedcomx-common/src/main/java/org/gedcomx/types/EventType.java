@@ -46,6 +46,7 @@ public enum EventType {
   Departure,
   Divorce,
   DivorceFiling,
+  Education,
   Engagement,
   Emigration,
   Excommunication,
@@ -62,7 +63,6 @@ public enum EventType {
   Ordinance,
   Ordination,
   Retirement,
-  ScholasticAchievement,
 
 
   @XmlUnknownQNameEnumValue
