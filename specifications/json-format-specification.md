@@ -1052,8 +1052,8 @@ name | description | JSON member | JSON object type
 type | URI identifying the type of the event. | type | [`ResourceReference`](#resource-reference)
 date | The date of the event. | date | [`Date`](#conclusion-date)
 place | The place the event. | place | [`Place`](#conclusion-place)
-roles | The roles of the persons in the event. | roles | Ordered list of [`EventRole`](#conclusion-event-role)
-sources | The list of references to the evidence of the event. | sources | Ordered list of [`SourceReference`](#source-reference)
+roles | The roles of the persons in the event. | roles | List of [`EventRole`](#conclusion-event-role)
+sources | The list of references to the evidence of the event. | sources | List of [`SourceReference`](#source-reference)
 
 ### examples
 
