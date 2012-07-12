@@ -978,8 +978,8 @@ name | description | XML property | XML type
 type | URI identifying the type of the event. | gxc:type | [`rdf:ResourceReference`](#resource-reference)
 date | The date of the event. | gxc:date | [`gxc:Date`](#conclusion-date)
 place | The place the event. | gxc:place | [`gxc:Place`](#conclusion-place)
-roles | The roles of the persons in the event. | gxc:role | List of [`gxc:EventRole`](#conclusion-event-role)
-sources | The list of references to the evidence of the event. | gxc:source | List of [`gxc:SourceReference`](#source-reference)
+roles | The roles of the persons in the event. | gxc:role | [`gxc:EventRole`](#conclusion-event-role)
+sources | The list of references to the evidence of the event. | gxc:source | [`gxc:SourceReference`](#source-reference)
 
 ### examples
 

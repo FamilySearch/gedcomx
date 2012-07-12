@@ -494,10 +494,10 @@ name | description | data type
 name | The name of the person or organization. | [`http://www.w3.org/2000/01/rdf-schema#Literal`](#rdf-literal)
 homepage | The homepage of the person or organization. | [`http://www.w3.org/2000/01/rdf-schema#Literal`](#rdf-literal)
 openid  | The [openid](http://openid.net/) of the person or organization. | [`http://www.w3.org/2000/01/rdf-schema#Literal`](#rdf-literal)
-accounts  | The online accounts of the person or organization. | List of [`http://xmlns.com/foaf/0.1/OnlineAccount`](#online-account)
-emails  | The email addresses of the person or organization. | List of [`http://www.w3.org/1999/02/22-rdf-syntax-ns#ResourceReference`](#resource-reference) - MUST resolve to a valid e-mail address (e.g. "mailto:someone@gedcomx.org")
-phones  | The phones (voice, fax, mobile) of the person or organization. | List of [`http://www.w3.org/1999/02/22-rdf-syntax-ns#ResourceReference`](#resource-reference) - MUST resolve to a valid phone number (e.g. "tel:+1-201-555-0123")
-addresses  | The addresses of the person or organization. | List of [`http://www.w3.org/2000/10/swap/pim/contact#Address`](#address)
+accounts  | The online accounts of the person or organization. | List of [`http://xmlns.com/foaf/0.1/OnlineAccount`](#online-account). Order is preserved.
+emails  | The email addresses of the person or organization. | List of [`http://www.w3.org/1999/02/22-rdf-syntax-ns#ResourceReference`](#resource-reference). Order is preserved. MUST resolve to a valid e-mail address (e.g. "mailto:someone@gedcomx.org").
+phones  | The phones (voice, fax, mobile) of the person or organization. | List of [`http://www.w3.org/1999/02/22-rdf-syntax-ns#ResourceReference`](#resource-reference). Order is preserved. MUST resolve to a valid phone number (e.g. "tel:+1-201-555-0123").
+addresses  | The addresses of the person or organization. | List of [`http://www.w3.org/2000/10/swap/pim/contact#Address`](#address). Order is preserved.
 
 <a id="organization"/>
 
@@ -577,7 +577,7 @@ This data type extends the following data type:
 
 name | description | data type
 -----|-------------|----------
-sources | The list of references to the sources of the conclusion. The sources of a conclusion MUST also be sources of the conclusion's containing entity (i.e. [`Person`](#person) or [`Relationship`](#relationship) ).| List of [`http://gedcomx.org/conclusion/v1/SourceReference`](#source-reference).
+sources | The list of references to the sources of the conclusion. The sources of a conclusion MUST also be sources of the conclusion's containing entity (i.e. [`Person`](#person) or [`Relationship`](#relationship) ).| List of [`http://gedcomx.org/conclusion/v1/SourceReference`](#source-reference). Order is preserved.
 
 <a id="conclusion-date"/>
 
@@ -867,6 +867,7 @@ URI | description
 `http://gedcomx.org/Given`|
 `http://gedcomx.org/Surname`|
 
+<a id="name-form"/>
 
 ## 5.8 The "NameForm" Data Type
 
@@ -883,7 +884,7 @@ The identifier for the `NameForm` data type is:
 name | description | data type
 -----|-------------|----------
 fullText | The full text of the name form. | string
-parts | The parts of the name form. | List of [`http://gedcomx.org/conclusion/v1/NamePart`](#name-part)
+parts | The parts of the name form. | List of [`http://gedcomx.org/conclusion/v1/NamePart`](#name-part). Order is preserved.
 
 <a id="name-conclusion"/>
 
@@ -910,7 +911,7 @@ name | description | data type
 -----|-------------|----------
 type | URI identifying the type of the name. | [`http://www.w3.org/1999/02/22-rdf-syntax-ns#ResourceReference`](#resource-reference) - MUST resolve to a name type. Refer to the list of [known name types](#known-name-types).
 primaryForm | The primary form of the name. | `http://gedcomx.org/conclusion/v1/NameForm`
-alternateForms | The alternate forms of the name. | List of `http://gedcomx.org/conclusion/v1/NameForm`
+alternateForms | The alternate forms of the name. | List of [`http://gedcomx.org/conclusion/v1/NameForm`](#name-form). Order is preserved.
 preferred | Whether this name is preferred above the other names of a person. | boolean
 
 <a id="known-name-types"/>
@@ -959,13 +960,13 @@ This data type extends the following data type:
 
 name | description | data type
 -----|-------------|----------
-identifiers | Identifiers for the person. | List of [`http://gedcomx.org/Identifier`](#identifier-type)
+identifiers | Identifiers for the person. | List of [`http://gedcomx.org/Identifier`](#identifier-type). Order is preserved.
 living | Whether the person is considered living. | boolean
 gender | The conclusion about the gender of the person. | [`http://gedcomx.org/conclusion/v1/Gender`](#gender)
-names | The conclusions about the names of the person. | List of [`http://gedcomx.org/conclusion/v1/Name`](#name-conclusion)
-facts | The conclusions about the facts of the life of the person. | List of [`http://gedcomx.org/conclusion/v1/Fact`](#fact-conclusion)
-sources | The list of references to the evidence of the person. | List of [`http://gedcomx.org/conclusion/v1/SourceReference`](#source-reference)
-notes | Contributed notes about the person. | List of [`http://gedcomx.org/Note`](#note)
+names | The conclusions about the names of the person. | List of [`http://gedcomx.org/conclusion/v1/Name`](#name-conclusion). Order is preserved.
+facts | The conclusions about the facts of the life of the person. | List of [`http://gedcomx.org/conclusion/v1/Fact`](#fact-conclusion). Order is preserved.
+sources | The list of references to the evidence of the person. | List of [`http://gedcomx.org/conclusion/v1/SourceReference`](#source-reference). Order is preserved.
+notes | Contributed notes about the person. | List of [`http://gedcomx.org/Note`](#note). Order is preserved.
 
 <a id="relationship"/>
 
@@ -997,9 +998,9 @@ name | description | data type
 type | URI identifying the type of the relationship. | [`http://www.w3.org/1999/02/22-rdf-syntax-ns#ResourceReference`](#resource-reference) - MUST resolve to a relationship type. Refer to the list of [known relationship types](#known-relationship-types)
 person1 | Reference to the first person in the relationship. | [`http://www.w3.org/1999/02/22-rdf-syntax-ns#ResourceReference`](#resource-reference) - MUST resolve to an instance of [`http://gedcomx.org/conclusion/v1/Person`](#person)
 person2 | Reference to the second person in the relationship. | [`http://www.w3.org/1999/02/22-rdf-syntax-ns#ResourceReference`](#resource-reference) - MUST resolve to an instance of [`http://gedcomx.org/conclusion/v1/Person`](#person)
-facts | The conclusions about the facts of the life of the relationship. | List of [`http://gedcomx.org/conclusion/v1/Fact`](#fact-conclusion)
-sources | The list of references to the evidence of the relationship. | List of [`http://gedcomx.org/conclusion/v1/SourceReference`](#source-reference)
-notes | Contributed notes about the relationship. | List of [`http://gedcomx.org/Note`](#note)
+facts | The conclusions about the facts of the life of the relationship. | List of [`http://gedcomx.org/conclusion/v1/Fact`](#fact-conclusion). Order is preserved.
+sources | The list of references to the evidence of the relationship. | List of [`http://gedcomx.org/conclusion/v1/SourceReference`](#source-reference). Order is preserved.
+notes | Contributed notes about the relationship. | List of [`http://gedcomx.org/Note`](#note). Order is preserved.
 
 Note: when a relationship type implies direction, the relationship is said to
 to *from* person1 *to* person2. For example, in a parent-child relationship, the
@@ -1043,11 +1044,11 @@ This data type extends the following data type:
 
 name | description | data type
 -----|-------------|----------
-type | URI identifying the type of the event. | [`http://www.w3.org/1999/02/22-rdf-syntax-ns#ResourceReference`](#resource-reference) - MUST resolve to an event type. Refer to the list of [known event types](#known-event-types)
+type | URI identifying the type of the event. | [`http://www.w3.org/1999/02/22-rdf-syntax-ns#ResourceReference`](#resource-reference). MUST resolve to an event type. Refer to the list of [known event types](#known-event-types)
 date | The date of the event. | [`http://gedcomx.org/conclusion/v1/Date`](#conclusion-date)
 place | The place of the event. | [`http://gedcomx.org/conclusion/v1/Place`](#conclusion-place)
-roles | The roles of the persons in the event. | [`http://gedcomx.org/conclusion/v1/EventRole`](#conclusion-event-role)
-sources | The list of references to the evidence of the event. | List of [`http://gedcomx.org/conclusion/v1/SourceReference`](#source-reference)
+roles | The roles of the persons in the event. | List of [`http://gedcomx.org/conclusion/v1/EventRole`](#conclusion-event-role). Order is preserved.
+sources | The list of references to the evidence of the event. | List of [`http://gedcomx.org/conclusion/v1/SourceReference`](#source-reference). Order is preserved.
 
 <a id="known-event-types"/>
 
