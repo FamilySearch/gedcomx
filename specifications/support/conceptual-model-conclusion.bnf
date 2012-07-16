@@ -1,5 +1,6 @@
 Person ::= ( identifier )* ( living | ) ( gender | ) ( name )* ( fact )* ( source )* ( note )*
 Relationship ::= type person1 person2 ( fact )* ( source )* ( note )*
+Event ::= type date place ( role )* ( source )*
 identifier ::= type resource
 living ::= ( <true> | <false> )
 gender ::=  conclusion_properties type
@@ -12,6 +13,7 @@ primaryForm ::= nameForm
 alternateForm ::= nameForm
 nameForm ::= ( fullText | ) ( namePart )*
 namePart ::= type text
+role ::= person1 type
 preferred ::= ( <true> | <false> )
 conclusion_properties ::= genealogical_resource_properties ( source )*
 genealogical_resource_properties ::= ( id | ) attribution
