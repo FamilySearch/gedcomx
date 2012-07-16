@@ -23,8 +23,8 @@ import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.common.GenealogicalResource;
 import org.gedcomx.common.URI;
 import org.gedcomx.rt.CommonModels;
-import org.gedcomx.rt.JsonElementWrapper;
-import org.gedcomx.rt.XmlTypeIdResolver;
+import org.gedcomx.rt.RDFSubClassOf;
+import org.gedcomx.rt.json.JsonElementWrapper;
 import org.gedcomx.types.EventType;
 import org.gedcomx.types.TypeReference;
 
@@ -42,10 +42,8 @@ import java.util.List;
  */
 @XmlRootElement
 @JsonElementWrapper (name = "events")
-@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
-@JsonTypeIdResolver ( XmlTypeIdResolver.class )
 @XmlType ( name = "Event", propOrder = { "type", "date", "place", "roles", "sources" } )
-public class Event extends GenealogicalResource implements ReferencesSources {
+public class Event extends GenealogicalResource implements ReferencesSources, HasDateAndPlace {
 
   @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
   @JsonProperty
@@ -130,6 +128,7 @@ public class Event extends GenealogicalResource implements ReferencesSources {
    *
    * @return The date of this event.
    */
+  @Override
   public Date getDate() {
     return date;
   }
@@ -139,6 +138,7 @@ public class Event extends GenealogicalResource implements ReferencesSources {
    *
    * @param date The date of this event.
    */
+  @Override
   public void setDate(Date date) {
     this.date = date;
   }
@@ -148,6 +148,7 @@ public class Event extends GenealogicalResource implements ReferencesSources {
    *
    * @return The place of this event.
    */
+  @Override
   public Place getPlace() {
     return place;
   }
@@ -157,6 +158,7 @@ public class Event extends GenealogicalResource implements ReferencesSources {
    *
    * @param place The place of this event.
    */
+  @Override
   public void setPlace(Place place) {
     this.place = place;
   }

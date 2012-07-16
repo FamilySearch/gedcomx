@@ -16,12 +16,16 @@
 package org.gedcomx.conclusion;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.gedcomx.common.GenealogicalResource;
 import org.gedcomx.common.ResourceReference;
+import org.gedcomx.common.URI;
+import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.RDFRange;
 import org.gedcomx.types.EventRoleType;
 import org.gedcomx.types.TypeReference;
 
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
@@ -30,11 +34,13 @@ import javax.xml.bind.annotation.XmlType;
  *
  * @author Ryan Heaton
  */
-@XmlType ( name = "EventRole", propOrder = { "person", "role" } )
+@XmlType ( name = "EventRole", propOrder = { "person", "type", "details" } )
 public class EventRole extends GenealogicalResource {
 
   private ResourceReference person;
-  private TypeReference<EventRoleType> role;
+  @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
+  @JsonProperty
+  private TypeReference<EventRoleType> type;
   private String details;
 
   /**
@@ -57,21 +63,45 @@ public class EventRole extends GenealogicalResource {
   }
 
   /**
-   * The role the person plays in the event.
+   * The type of the resource being referenced.
    *
-   * @return The role the person plays in the event.
+   * @return The type of the resource being referenced.
    */
-  public TypeReference<EventRoleType> getRole() {
-    return role;
+  @XmlTransient
+  @JsonIgnore
+  public URI getType() {
+    return this.type == null ? null : this.type.getType();
   }
 
   /**
-   * The role the person plays in the event.
+   * The type of the resource being referenced.
    *
-   * @param role The role the person plays in the event.
+   * @param type The type of the resource being referenced.
    */
-  public void setRole(TypeReference<EventRoleType> role) {
-    this.role = role;
+  @JsonIgnore
+  public void setType(URI type) {
+    this.type = type == null ? null : new TypeReference<EventRoleType>(type);
+  }
+
+  /**
+   * The enum referencing the known type of the resource being referenced, or {@link org.gedcomx.types.ResourceType#OTHER} if not known.
+   *
+   * @return The enum referencing the known type of the source reference, or {@link org.gedcomx.types.ResourceType#OTHER} if not known.
+   */
+  @XmlTransient
+  @JsonIgnore
+  public EventRoleType getKnownType() {
+    return this.type == null ? null : EventRoleType.fromQNameURI(this.type.getType());
+  }
+
+  /**
+   * Set the type of this reference from an enumeration of known source reference types.
+   *
+   * @param knownType The reference type.
+   */
+  @JsonIgnore
+  public void setKnownType(EventRoleType knownType) {
+    this.type = knownType == null ? null : new TypeReference<EventRoleType>(knownType);
   }
 
   /**
@@ -90,27 +120,6 @@ public class EventRole extends GenealogicalResource {
    */
   public void setDetails(String details) {
     this.details = details;
-  }
-
-  /**
-   * The enum referencing the known role, or {@link org.gedcomx.types.EventRoleType#OTHER} if not known.
-   *
-   * @return The enum referencing the known role, or {@link org.gedcomx.types.EventRoleType#OTHER} if not known.
-   */
-  @XmlTransient
-  @JsonIgnore
-  public EventRoleType getKnownRole() {
-    return getRole() == null ? null : EventRoleType.fromQNameURI(getRole().getType());
-  }
-
-  /**
-   * Set the role from a known enumeration of roles.
-   *
-   * @param role The known role.
-   */
-  @JsonIgnore
-  public void setKnownRole(EventRoleType role) {
-    setRole(role == null ? null : new TypeReference<EventRoleType>(role));
   }
 
   /**
