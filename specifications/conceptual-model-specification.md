@@ -460,10 +460,10 @@ name | description | data type
 name | The name of the person or organization. | [`http://www.w3.org/2000/01/rdf-schema#Literal`](#rdf-literal)
 homepage | The homepage of the person or organization. | [`http://www.w3.org/2000/01/rdf-schema#Literal`](#rdf-literal)
 openid  | The [openid](http://openid.net/) of the person or organization. | [`http://www.w3.org/2000/01/rdf-schema#Literal`](#rdf-literal)
-accounts  | The online accounts of the person or organization. | Ordered list of [`http://xmlns.com/foaf/0.1/OnlineAccount`](#online-account)
-emails  | The email addresses of the person or organization. | Ordered list of [URI](#uri) - MUST resolve to a valid e-mail address (e.g. "mailto:someone@gedcomx.org")
-phones  | The phones (voice, fax, mobile) of the person or organization. | Ordered list of [URI](#uri) - MUST resolve to a valid phone number (e.g. "tel:+1-201-555-0123")
-addresses  | The addresses of the person or organization. | Ordered list of [`http://www.w3.org/2000/10/swap/pim/contact#Address`](#address)
+accounts  | The online accounts of the person or organization. | List of [`http://xmlns.com/foaf/0.1/OnlineAccount`](#online-account). Order is preserved.
+emails  | The email addresses of the person or organization. | List of [URI](#uri) - MUST resolve to a valid e-mail address (e.g. "mailto:someone@gedcomx.org"). Order is preserved.
+phones  | The phones (voice, fax, mobile) of the person or organization. | List of [URI](#uri) - MUST resolve to a valid phone number (e.g. "tel:+1-201-555-0123"). Order is preserved.
+addresses  | The addresses of the person or organization. | List of [`http://www.w3.org/2000/10/swap/pim/contact#Address`](#address). Order is preserved.
 
 <a id="organization"/>
 
@@ -543,7 +543,7 @@ This data type extends the following data type:
 
 name | description | data type
 -----|-------------|----------
-sources | The list of references to the sources of the conclusion. The sources of a conclusion MUST also be sources of the conclusion's containing entity (i.e. [`Person`](#person) or [`Relationship`](#relationship) ).| Ordered list of [`http://gedcomx.org/conclusion/v1/SourceReference`](#source-reference).
+sources | The list of references to the sources of the conclusion. The sources of a conclusion MUST also be sources of the conclusion's containing entity (i.e. [`Person`](#person) or [`Relationship`](#relationship) ).| List of [`http://gedcomx.org/conclusion/v1/SourceReference`](#source-reference). Order is preserved.
 
 <a id="conclusion-date"/>
 
@@ -592,9 +592,49 @@ name | description | data type
 original | The original value of the place as supplied by the contributor. | string
 formal | The formal value of the place. | [`http://gedcomx.org/FormalValue`](#formal-value)
 
+
+<a id="conclusion-event-role"/>
+
+## 5.4 The "EventRole" Data Type
+
+The `EventRole` data type defines a role played in an event by a person.
+
+### identifier
+
+The identifier for the `EventRole` data type is:
+
+`http://gedcomx.org/conclusion/v1/EventRole`
+
+### extension
+
+This data type extends the following data type:
+
+`http://gedcomx.org/GenealogicalResource`
+
+### properties
+
+name | description | data type
+-----|-------------|----------
+person | Reference to the person playing the role in the event. | [`URI`](#uri) - MUST resolve to an instance of [`http://gedcomx.org/conclusion/v1/Person`](#person)
+role | Reference to the role. | [`URI`](#uri) - MUST resolve to a role. Refer to the list of [known roles](#known-roles).
+details | Details about the role of the person in the event. | string
+
+<a id="known-roles"/>
+
+### known roles
+
+The following roles are defined by GEDCOM X:
+
+URI | description
+----|------------
+`http://gedcomx.org/Principal`|
+`http://gedcomx.org/Participant`|
+`http://gedcomx.org/Official`|
+`http://gedcomx.org/Witness`|
+
 <a id="fact-conclusion"/>
 
-## 5.4 The "Fact" Data Type
+## 5.5 The "Fact" Data Type
 
 The `Fact` data type defines a conclusion about a fact of the life of a person or
 the nature of a relationship. The `Fact` data type extends the `Conclusion` data type.
@@ -725,7 +765,7 @@ URI | description | scope
 
 <a id="gender-conclusion"/>
 
-## 5.5 The "Gender" Data Type
+## 5.6 The "Gender" Data Type
 
 The `Gender` data type defines a conclusion about the gender of a person. the `Gender` data type
 extends the `Conclusion` data type.
@@ -762,7 +802,7 @@ URI | description
 
 <a id="name-part"/>
 
-## 5.6 The "NamePart" Data Type
+## 5.7 The "NamePart" Data Type
 
 The `NamePart` data type defines a part of a name of a person.
 
@@ -792,8 +832,9 @@ URI | description
 `http://gedcomx.org/Given`|
 `http://gedcomx.org/Surname`|
 
+<a id="name-form"/>
 
-## 5.7 The "NameForm" Data Type
+## 5.8 The "NameForm" Data Type
 
 The `NameForm` data type defines a form of a name of a person.
 
@@ -808,11 +849,11 @@ The identifier for the `NameForm` data type is:
 name | description | data type
 -----|-------------|----------
 fullText | The full text of the name form. | string
-parts | The parts of the name form. | Ordered list of [`http://gedcomx.org/conclusion/v1/NamePart`](#name-part)
+parts | The parts of the name form. | List of [`http://gedcomx.org/conclusion/v1/NamePart`](#name-part). Order is preserved.
 
 <a id="name-conclusion"/>
 
-## 5.8 The "Name" Data Type
+## 5.9 The "Name" Data Type
 
 The `Name` data type defines a conclusion about a name of a person. The `Name` data type
 extends the `Conclusion` data type.
@@ -835,7 +876,7 @@ name | description | data type
 -----|-------------|----------
 type | URI identifying the type of the name. | [URI](#uri) - MUST resolve to a name type. Refer to the list of [known name types](#known-name-types).
 primaryForm | The primary form of the name. | `http://gedcomx.org/conclusion/v1/NameForm`
-alternateForms | The alternate forms of the name. | Ordered list of `http://gedcomx.org/conclusion/v1/NameForm`
+alternateForms | The alternate forms of the name. | List of [`http://gedcomx.org/conclusion/v1/NameForm`](#name-form). Order is preserved.
 preferred | Whether this name is preferred above the other names of a person. | boolean
 
 <a id="known-name-types"/>
@@ -884,13 +925,13 @@ This data type extends the following data type:
 
 name | description | data type
 -----|-------------|----------
-identifiers | Identifiers for the person. | Ordered list of [`http://gedcomx.org/Identifier`](#identifier-type)
+identifiers | Identifiers for the person. | List of [`http://gedcomx.org/Identifier`](#identifier-type). Order is preserved.
 living | Whether the person is considered living. | boolean
 gender | The conclusion about the gender of the person. | [`http://gedcomx.org/conclusion/v1/Gender`](#gender)
-names | The conclusions about the names of the person. | Ordered list of [`http://gedcomx.org/conclusion/v1/Name`](#name-conclusion)
-facts | The conclusions about the facts of the life of the person. | Ordered list of [`http://gedcomx.org/conclusion/v1/Fact`](#fact-conclusion)
-sources | The list of references to the evidence of the person. | Ordered list of [`http://gedcomx.org/conclusion/v1/SourceReference`](#source-reference)
-notes | Contributed notes about the person. | Ordered list of [`http://gedcomx.org/Note`](#note)
+names | The conclusions about the names of the person. | List of [`http://gedcomx.org/conclusion/v1/Name`](#name-conclusion). Order is preserved.
+facts | The conclusions about the facts of the life of the person. | List of [`http://gedcomx.org/conclusion/v1/Fact`](#fact-conclusion). Order is preserved.
+sources | The list of references to the evidence of the person. | List of [`http://gedcomx.org/conclusion/v1/SourceReference`](#source-reference). Order is preserved.
+notes | Contributed notes about the person. | List of [`http://gedcomx.org/Note`](#note). Order is preserved.
 
 <a id="relationship"/>
 
@@ -922,9 +963,9 @@ name | description | data type
 type | URI identifying the type of the relationship. | [URI](#uri) - MUST resolve to a relationship type. Refer to the list of [known relationship types](#known-relationship-types)
 person1 | Reference to the first person in the relationship. | [URI](#uri) - MUST resolve to an instance of [`http://gedcomx.org/conclusion/v1/Person`](#person)
 person2 | Reference to the second person in the relationship. | [URI](#uri) - MUST resolve to an instance of [`http://gedcomx.org/conclusion/v1/Person`](#person)
-facts | The conclusions about the facts of the life of the relationship. | Ordered list of [`http://gedcomx.org/conclusion/v1/Fact`](#fact-conclusion)
-sources | The list of references to the evidence of the relationship. | Ordered list of [`http://gedcomx.org/conclusion/v1/SourceReference`](#source-reference)
-notes | Contributed notes about the relationship. | Ordered list of [`http://gedcomx.org/Note`](#note)
+facts | The conclusions about the facts of the life of the relationship. | List of [`http://gedcomx.org/conclusion/v1/Fact`](#fact-conclusion). Order is preserved.
+sources | The list of references to the evidence of the relationship. | List of [`http://gedcomx.org/conclusion/v1/SourceReference`](#source-reference). Order is preserved.
+notes | Contributed notes about the relationship. | List of [`http://gedcomx.org/Note`](#note). Order is preserved.
 
 Note: when a relationship type implies direction, the relationship is said to
 to *from* person1 *to* person2. For example, in a parent-child relationship, the
@@ -943,7 +984,83 @@ URI | description
 `http://gedcomx.org/ParentChild`|
 
 
-# 8. Extensibility
+# 8. The Event
+
+An event describes a historical event.
+
+## 8.1 The "Event" Data Type
+
+The `Event` data type defines a description of a historical event. The `Event` data type
+extends the `GenealogicalResource` data type.
+
+### identifier
+
+The identifier for the `Event` data type is:
+
+`http://gedcomx.org/conclusion/v1/Event`
+
+### extension
+
+This data type extends the following data type:
+
+`http://gedcomx.org/GenealogicalResource`
+
+### properties
+
+name | description | data type
+-----|-------------|----------
+type | URI identifying the type of the event. | [URI](#uri). MUST resolve to an event type. Refer to the list of [known event types](#known-event-types)
+date | The date of the event. | [`http://gedcomx.org/conclusion/v1/Date`](#conclusion-date)
+place | The place of the event. | [`http://gedcomx.org/conclusion/v1/Place`](#conclusion-place)
+roles | The roles of the persons in the event. | List of [`http://gedcomx.org/conclusion/v1/EventRole`](#conclusion-event-role). Order is preserved.
+sources | The list of references to the evidence of the event. | List of [`http://gedcomx.org/conclusion/v1/SourceReference`](#source-reference). Order is preserved.
+
+<a id="known-event-types"/>
+
+### known roles
+
+The following event types are defined by GEDCOM X:
+
+URI | description
+----|------------
+`http://gedcomx.org/Adoption`|
+`http://gedcomx.org/AdultChristening`|
+`http://gedcomx.org/Annulment`|
+`http://gedcomx.org/Arrival`|
+`http://gedcomx.org/Baptism`|
+`http://gedcomx.org/BarMitzvah`|
+`http://gedcomx.org/BatMitzvah`|
+`http://gedcomx.org/Birth`|
+`http://gedcomx.org/Blessing`|
+`http://gedcomx.org/Burial`|
+`http://gedcomx.org/Census`|
+`http://gedcomx.org/Christening`|
+`http://gedcomx.org/Circumcision`|
+`http://gedcomx.org/Confirmation`|
+`http://gedcomx.org/Cremation`|
+`http://gedcomx.org/Death`|
+`http://gedcomx.org/Departure`|
+`http://gedcomx.org/Divorce`|
+`http://gedcomx.org/DivorceFiling`|
+`http://gedcomx.org/Education`|
+`http://gedcomx.org/Engagement`|
+`http://gedcomx.org/Emigration`|
+`http://gedcomx.org/Excommunication`|
+`http://gedcomx.org/FirstCommunion`|
+`http://gedcomx.org/Funeral`|
+`http://gedcomx.org/Graduation`|
+`http://gedcomx.org/Immigration`|
+`http://gedcomx.org/Interment`|
+`http://gedcomx.org/Marriage`|
+`http://gedcomx.org/MilitaryAward`|
+`http://gedcomx.org/MilitaryDischarge`|
+`http://gedcomx.org/Mission`|
+`http://gedcomx.org/Move`|
+`http://gedcomx.org/Ordinance`|
+`http://gedcomx.org/Ordination`|
+`http://gedcomx.org/Retirement`|
+
+# 9. Extensibility
 
 ## Extensions from Non-GEDCOM X Vocabularies
 
