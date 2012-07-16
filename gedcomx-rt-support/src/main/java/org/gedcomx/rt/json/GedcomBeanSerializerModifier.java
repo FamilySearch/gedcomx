@@ -13,22 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.rt;
+package org.gedcomx.rt.json;
 
-import org.codehaus.jackson.map.DeserializationConfig;
-import org.codehaus.jackson.map.JsonDeserializer;
-import org.codehaus.jackson.map.deser.BeanDeserializer;
-import org.codehaus.jackson.map.deser.BeanDeserializerModifier;
+import org.codehaus.jackson.map.JsonSerializer;
+import org.codehaus.jackson.map.SerializationConfig;
 import org.codehaus.jackson.map.introspect.BasicBeanDescription;
+import org.codehaus.jackson.map.ser.BeanSerializer;
+import org.codehaus.jackson.map.ser.BeanSerializerModifier;
 
 /**
  * Modifications for GEDCOM bean serializers.
  *
  * @author Ryan Heaton
  */
-public class GedcomBeanDeserializerModifier extends BeanDeserializerModifier {
+public class GedcomBeanSerializerModifier extends BeanSerializerModifier {
+
   @Override
-  public JsonDeserializer<?> modifyDeserializer(DeserializationConfig config, BasicBeanDescription beanDesc, JsonDeserializer<?> deserializer) {
-    return deserializer instanceof BeanDeserializer ? new ExtensibleObjectDeserializer((BeanDeserializer) deserializer) : deserializer;
+  public JsonSerializer<?> modifySerializer(SerializationConfig config, BasicBeanDescription beanDesc, JsonSerializer<?> serializer) {
+    return (serializer instanceof BeanSerializer) ? new ExtensibleObjectSerializer((BeanSerializer) serializer) : serializer;
   }
+
 }

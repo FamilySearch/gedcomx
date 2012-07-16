@@ -4,7 +4,6 @@
 [#import "element.fmt" as libElement/]
 [#import "type.fmt" as libType/]
 [#import "boilerplate.fmt" as libBoilerplate/]
-[#import "rsd.fmt" as libRsd/]
 [@forEachSchema]
   [#if (isOfProject(schema) && ((schema.typeDefinitions?size > 0) || (schema.globalElements?size > 0)))]
     [@file name=(schema.id + ".html") charset="utf-8"]
@@ -32,9 +31,6 @@
           <a href="models.html">Models</a>
           <ul>
             <li><a href="#">Models</a></li>
-      [#if resourceDefinitions?size > 0]
-            <li><a href="resource_definitions.html">Resource Definitions</a></li>
-      [/#if]
             <li><a href="recipes.html">Recipes</a></li>
           </ul>
         </li>
@@ -103,69 +99,3 @@
 
   [@libBoilerplate.writeEndBody/]
 [/@file]
-[#list resourceDefinitions as rsd]
-  [#if isOfProject(rsd)]
-    [@file name=(rsd.name + "_resource.html")]
-      [@libRsd.writeResourceServiceDefinitionPage rsd=rsd/]
-    [/@file]
-  [/#if]
-[/#list]
-[#if resourceDefinitions?size > 0]
-[@file name="resource_definitions.html" charset="utf-8"]
-  [@libBoilerplate.writeStartBody label="Resources"/]
-  <div class="container">
-    [@libBoilerplate.writeHeader]
-      <ul class="xbreadcrumbs" id="breadcrumbs">
-        <li><a href="Home.html" class="home">Home</a></li>
-        <li>
-          <a href="resource_definitions.html">Resource Definitions</a>
-          <ul>
-            <li><a href="models.html">Models</a></li>
-            <li><a href="#">Resource Definitions</a></li>
-            <li><a href="recipes.html">Recipes</a></li>
-          </ul>
-        </li>
-      </ul>
-    [/@libBoilerplate.writeHeader]
-    <div id="main" class="column first last span-20">
-      <h1>GEDCOM X[#if projectLabelModifier??] ${projectLabelModifier}[/#if] Resource Definitions</h1>
-
-      <hr/>
-
-    [#list resourceDefinitions?sort_by("name") as rsd]
-      [#if isOfProject(rsd)]
-      <h3><a href="${rsd.name}_resource.html">${rsd.name} Resource</a></h3>
-      <table>
-        <tr>
-          <td align="right">Name:</td>
-          <td>${rsd.name}</td>
-        </tr>
-        <tr>
-          <td align="right">Namespace:</td>
-          <td>${rsd.namespace}</td>
-        </tr>
-        [#if rsd.resourceElements?size > 0]
-        <tr>
-          <td align="right">Representation(s):</td>
-          <td>[#list rsd.resourceElements as resourceElement]<a href="${baseProjectUri(resourceElement)}${schemaForNamespace(resourceElement).id}_el_${resourceElement.name}.html">${resourceElement.name}</a>[#if resourceElement_has_next] or [/#if][/#list]</td>
-        </tr>
-        [/#if]
-        [#if rsd.subresources?size > 0]
-        <tr>
-          <td align="right">Subresources:</td>
-          <td>[#list rsd.subresources as subresource]<a href="${baseProjectUri(subresource)}${subresource.name}_resource.html">${subresource.name} Resource</a>[#if subresource_has_next], [/#if][/#list]</td>
-        </tr>
-        [/#if]
-
-      </table>
-      [/#if]
-    [/#list]
-
-      <div class="clear" />
-    </div>
-    [@libBoilerplate.writeFooter/]
-  </div> <!--! end of #container -->
-
-  [@libBoilerplate.writeEndBody/]
-[/@file]
-[/#if]

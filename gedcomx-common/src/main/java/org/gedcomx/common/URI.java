@@ -30,6 +30,10 @@ public final class URI {
   private final String value;
 
   public URI(String value) {
+    if (value == null) {
+      throw new IllegalArgumentException("value cannot be null");
+    }
+
     this.value = value;
   }
 
@@ -49,7 +53,7 @@ public final class URI {
 
   @Override
   public boolean equals(Object o) {
-    return this == o || !(o == null || getClass() != o.getClass()) && value.equals(((URI) o).value);
+    return this == o || !(o == null) && value.equals(((URI) o).value);
   }
 
   @Override

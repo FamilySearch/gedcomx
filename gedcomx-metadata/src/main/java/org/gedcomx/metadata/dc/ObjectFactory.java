@@ -18,7 +18,7 @@ package org.gedcomx.metadata.dc;
 import org.gedcomx.metadata.rdf.RDFLiteral;
 import org.gedcomx.metadata.rdf.RDFValue;
 import org.gedcomx.rt.CommonModels;
-import org.gedcomx.rt.JsonElementWrapper;
+import org.gedcomx.rt.json.JsonElementWrapper;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlElementDecl;
@@ -277,7 +277,7 @@ public class ObjectFactory {
    * @link http://dublincore.org/documents/dcmi-terms/#terms-description
    */
   @XmlElementDecl ( namespace = CommonModels.DUBLIN_CORE_NAMESPACE, name = "description" )
-  @JsonElementWrapper ( name = "descriptions" )
+  @JsonElementWrapper ( name = "dc-descriptions" )
   public JAXBElement<RDFValue> createDescriptionElement(RDFValue description) {
     return new JAXBElement<RDFValue>(new QName(CommonModels.DUBLIN_CORE_NAMESPACE, "description"), RDFValue.class, description);
   }
@@ -663,7 +663,7 @@ public class ObjectFactory {
    * @link http://dublincore.org/documents/dcmi-terms/#terms-source
    */
   @XmlElementDecl ( namespace = CommonModels.DUBLIN_CORE_NAMESPACE, name = "source" )
-  @JsonElementWrapper ( name = "sources" )
+  @JsonElementWrapper ( name = "dc-sources" )
   public JAXBElement<RDFValue> createSourceElement(RDFValue source) {
     return new JAXBElement<RDFValue>(new QName(CommonModels.DUBLIN_CORE_NAMESPACE, "source"), RDFValue.class, source);
   }

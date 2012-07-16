@@ -13,34 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.rt.rs;
+package org.gedcomx.rt.json;
 
+import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Generic holder for a response code. Response codes are used as both the HTTP status response
- * and as HTTP Warnings.
+ * Marker to denote an object that is serialized as a JSON simple value.
  *
  * @author Ryan Heaton
  */
-@Retention( RetentionPolicy.RUNTIME )
-@Target( {} )
-public @interface ResponseCode {
+@Retention ( RetentionPolicy.RUNTIME )
+@Target ( { ElementType.TYPE, ElementType.METHOD } )
+public @interface JsonSimpleValue {
 
   /**
-   * The code.
+   * The example value, if any, for documentation purposes.
    *
-   * @return The code.
+   * @return The example value, if any, for documentation purposes.
    */
-  int code();
-
-  /**
-   * The condition under which the code is supplied.
-   *
-   * @return The condition under which the code is supplied.
-   */
-  String condition();
+  String example() default "##default";
 
 }

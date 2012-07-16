@@ -16,12 +16,9 @@
 package org.gedcomx.metadata.rdf;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.annotate.JsonTypeInfo;
-import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.common.URI;
 import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.SupportsExtensionAttributes;
-import org.gedcomx.rt.XmlTypeIdResolver;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.*;
@@ -41,8 +38,6 @@ import java.util.Map;
  * @author Ryan Heaton
  */
 @XmlType ( name = "Literal", namespace = CommonModels.RDFS_NAMESPACE )
-@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
-@JsonTypeIdResolver (XmlTypeIdResolver.class)
 public final class RDFLiteral implements SupportsExtensionAttributes {
 
   private static final URI DATE_DATATYPE = URI.create("http://www.w3.org/2001/XMLSchema#dateTime");

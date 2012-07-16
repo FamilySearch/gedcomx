@@ -25,61 +25,49 @@ import net.sf.jelly.apt.decorations.declaration.PropertyDeclaration;
 import net.sf.jelly.apt.decorations.type.DecoratedClassType;
 import net.sf.jelly.apt.decorations.type.DecoratedInterfaceType;
 import net.sf.jelly.apt.decorations.type.DecoratedTypeMirror;
+import org.codehaus.enunciate.apt.EnunciateFreemarkerModel;
+import org.codehaus.enunciate.config.SchemaInfo;
 import org.codehaus.enunciate.contract.jaxb.*;
 import org.codehaus.enunciate.contract.jaxb.types.KnownXmlType;
-import org.codehaus.enunciate.contract.jaxb.types.XmlClassType;
-import org.codehaus.enunciate.contract.jaxb.types.XmlType;
 import org.codehaus.enunciate.contract.validation.BaseValidator;
 import org.codehaus.enunciate.contract.validation.ValidationResult;
 import org.codehaus.enunciate.qname.XmlQNameEnum;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.annotate.JsonTypeInfo;
-import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.rt.*;
+import org.gedcomx.rt.json.JsonElementWrapper;
 
 import javax.xml.bind.annotation.XmlAnyAttribute;
 import javax.xml.namespace.QName;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Ryan Heaton
  */
 public class GedcomxValidator extends BaseValidator {
 
+  private final Map<String, Declaration> jsonNameDeclarations = new HashMap<String, Declaration>();
+
   @Override
-  public ValidationResult validateComplexType(ComplexTypeDefinition complexType) {
-    ValidationResult result = validateTypeDefinition(complexType);
-    if (!complexType.isFinal() && !complexType.isAbstract()) {
-      //validate the json type info.
-      // (heatonra, 9/12/2011) for the record, I looked into lifting the requirement to annotate all non-abstract, non-final
-      // classes with @JsonTypeInfo, @JsonTypeIdResolver and limiting its application to all classes that _extend_ non-abstract, non-final
-      // classes. Everything seemed to work fine until you came across lists/collections that could possibly be mixed. When
-      // Jackson deserializes a list of, e.g. RDFDescription that contains an instance of e.g. DublinCoreDescription then it pukes
-      // with a message like "unrecognized property" because it's attempting to deserialize a DublinCoreDescription into an instance
-      // of RDFDescription. Sigh. So it was decided that we'll continue with the policy of always writing out the type of non-final classes,
-      // at least until Jackson provides some more runtime flexibility.
-      JsonTypeInfo jsonTypeInfo = complexType.getAnnotation(JsonTypeInfo.class);
-      if (jsonTypeInfo == null || jsonTypeInfo.include() != JsonTypeInfo.As.PROPERTY || jsonTypeInfo.use() != JsonTypeInfo.Id.CUSTOM || !XmlTypeIdResolver.TYPE_PROPERTY_NAME.equals(jsonTypeInfo.property())) {
-        result.addError(complexType, "Non-final, non-abstract complex types need to be annotated with @JsonTypeInfo(use=JsonTypeInfo.Id.CUSTOM, property=\"@type\")");
-      }
-
-      String idResolverName = "";
-      JsonTypeIdResolver typeIdResolverInfo = complexType.getAnnotation(JsonTypeIdResolver.class);
-      if (typeIdResolverInfo != null) {
-        try {
-          idResolverName = typeIdResolverInfo.value().getName();
-        }
-        catch (MirroredTypeException e) {
-          idResolverName = ((DeclaredType) e.getTypeMirror()).getDeclaration().getQualifiedName();
+  public ValidationResult validate(EnunciateFreemarkerModel model) {
+    ValidationResult result = super.validate(model);
+    for (SchemaInfo schemaInfo : model.getNamespacesToSchemas().values()) {
+      for (Registry registry : schemaInfo.getRegistries()) {
+        Collection<LocalElementDeclaration> localElements = registry.getLocalElementDeclarations();
+        for (LocalElementDeclaration localElement : localElements) {
+          JsonElementWrapper elementWrapper = localElement.getAnnotation(JsonElementWrapper.class);
+          if (elementWrapper != null) {
+            String jsonName = elementWrapper.namespace() + elementWrapper.name();
+            Declaration previous = this.jsonNameDeclarations.put(jsonName, localElement);
+            if (previous != null) {
+              result.addError(localElement, "JSON name conflict with " + String.valueOf(previous.getPosition()));
+            }
+          }
         }
       }
-
-      if (!XmlTypeIdResolver.class.getName().equals(idResolverName)) {
-        result.addError(complexType, "Non-final, non-abstract complex types need to be annotated with @org.codehaus.jackson.map.annotate.JsonTypeIdResolver(org.gedcomx.id.XmlTypeIdResolver.class) to specify their JSON type id.");
-      }
-
     }
     return result;
   }
@@ -103,7 +91,11 @@ public class GedcomxValidator extends BaseValidator {
   public ValidationResult validateRootElement(RootElementDeclaration rootElementDeclaration) {
     ValidationResult result = super.validateRootElement(rootElementDeclaration);
     String namespace = rootElementDeclaration.getNamespace();
-    if (namespace == null || "".equals(namespace)) {
+    if (namespace == null) {
+      namespace = "";
+    }
+
+    if (namespace.isEmpty()) {
       result.addError(rootElementDeclaration, "Root element should not be in the empty namespace.");
     }
 
@@ -111,28 +103,17 @@ public class GedcomxValidator extends BaseValidator {
       result.addWarning(rootElementDeclaration, "You probably don't want a root element that starts with the name 'web'. Consider renaming using the @XmlRootElement annotation.");
     }
 
-    JsonTypeInfo jsonTypeInfo = rootElementDeclaration.getAnnotation(JsonTypeInfo.class);
-    if (jsonTypeInfo == null || jsonTypeInfo.include() != JsonTypeInfo.As.PROPERTY || jsonTypeInfo.use() != JsonTypeInfo.Id.CUSTOM || !XmlTypeIdResolver.TYPE_PROPERTY_NAME.equals(jsonTypeInfo.property())) {
-      result.addError(rootElementDeclaration, "Root elements need to be annotated with @JsonTypeInfo(use=JsonTypeInfo.Id.CUSTOM, property=\"@type\")");
-    }
-
-    String idResolverName = "";
-    JsonTypeIdResolver typeIdResolverInfo = rootElementDeclaration.getAnnotation(JsonTypeIdResolver.class);
-    if (typeIdResolverInfo != null) {
-      try {
-        idResolverName = typeIdResolverInfo.value().getName();
-      }
-      catch (MirroredTypeException e) {
-        idResolverName = ((DeclaredType) e.getTypeMirror()).getDeclaration().getQualifiedName();
-      }
-    }
-
-    if (!XmlTypeIdResolver.class.getName().equals(idResolverName)) {
-      result.addError(rootElementDeclaration, "Root elements need to be annotated with @org.codehaus.jackson.map.annotate.JsonTypeIdResolver(org.gedcomx.id.XmlTypeIdResolver.class) to specify their JSON type id.");
-    }
-
-    if (namespace.startsWith(CommonModels.GEDCOMX_DOMAIN) && rootElementDeclaration.getAnnotation(JsonElementWrapper.class) == null) {
+    JsonElementWrapper elementWrapper = rootElementDeclaration.getAnnotation(JsonElementWrapper.class);
+    if (namespace.startsWith(CommonModels.GEDCOMX_DOMAIN) && elementWrapper == null) {
       result.addWarning(rootElementDeclaration, "Root elements in the '" + CommonModels.GEDCOMX_DOMAIN + "' namespace should probably be annotated with @" + JsonElementWrapper.class.getSimpleName() + ".");
+    }
+
+    if (elementWrapper != null) {
+      String jsonName = elementWrapper.namespace() + elementWrapper.name();
+      Declaration previous = this.jsonNameDeclarations.put(jsonName, rootElementDeclaration);
+      if (previous != null) {
+        result.addError(rootElementDeclaration, "JSON name conflict with " + String.valueOf(previous.getPosition()));
+      }
     }
 
     return result;

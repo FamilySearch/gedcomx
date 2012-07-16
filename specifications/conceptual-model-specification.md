@@ -76,33 +76,12 @@ sources. The URI is also used to identify the data structures that describe thos
 and even the data types that define those data structures. The URI is specified by
 [RFC3986](http://tools.ietf.org/html/rfc3986).
 
-<a id="resource-reference"/>
-
-## 2.2 The "ResourceReference" Data Type
-
-The `ResourceReference` data type defines the data structure used to refer to separate resources.
-
-### identifier
-
-The identifier for the "ResourceReference" data type is:
-
-`http://www.w3.org/1999/02/22-rdf-syntax-ns#ResourceReference`
-
-(Note that GEDCOM X leverages the RDF namespace to identify the `ResourceReference` data type
-because RDF defines and specifies the concept.)
-
-### properties
-
-name | description | data type
------|-------------|----------
-resource | The URI to the resource being referenced. | URI
-
 <a id="identifier-type"/>
 
-## 2.3 The "Identifier" Data Type
+## 2.2 The "Identifier" Data Type
 
 The `Identifier` data type defines the data structure used to supply an identifier of a 
-genealogical resource.
+genealogical resource in a specific data set.
 
 ### identifier
 
@@ -115,7 +94,7 @@ The identifier for the "Identifier" data type is:
 name  | description | data type
 ------|-------------|----------
 value | The value of the identifier. | string (possibly interpreted as a URI, depending on the type of the identifier).
-type  | URI identifying the type of the identifier. | [`http://www.w3.org/1999/02/22-rdf-syntax-ns#ResourceReference`](#resource-reference) - MUST resolve to an identifier type. Refer to the list of [known identifier types](#known-identifier-types).
+type  | URI identifying the type of the identifier. | [URI](#uri) - MUST resolve to an identifier type. Refer to the list of [known identifier types](#known-identifier-types).
 
 <a id="known-identifier-types"/>
 
@@ -133,7 +112,7 @@ todo: fill in some examples.
 
 <a id="attribution"/>
 
-## 2.4 The "Attribution" Data Type
+## 2.3 The "Attribution" Data Type
 
 The `Attribution` data type defines the data structure used to supply the attribution (including
 who, when, and why) of genealogical data.
@@ -148,8 +127,8 @@ The identifier for the "Attribution" data type is:
 
 name  | description | data type
 ------|-------------|----------
-contributor | Reference to the contributor to whom the attributed data is attributed. | [`http://www.w3.org/1999/02/22-rdf-syntax-ns#ResourceReference`](#resource-reference) - MUST resolve to an instance of [`http://xmlns.com/foaf/0.1/Person`](#foaf-person) or [`http://xmlns.com/foaf/0.1/Organization`](#organization).
-confidence  | Reference to the confidence level of the contributor of the attributed data. | [`http://www.w3.org/1999/02/22-rdf-syntax-ns#ResourceReference`](#resource-reference) - MUST resolve to a confidence level. Refer to the list of [known confidence levels](#known-confidence-levels).
+contributor | Reference to the contributor to whom the attributed data is attributed. | [URI](#uri) - MUST resolve to an instance of [`http://xmlns.com/foaf/0.1/Person`](#foaf-person) or [`http://xmlns.com/foaf/0.1/Organization`](#organization).
+confidence  | Reference to the confidence level of the contributor of the attributed data. | [URI](#uri) - MUST resolve to a confidence level. Refer to the list of [known confidence levels](#known-confidence-levels).
 modified | Timestamp of when the attributed data was contributed. | timestamp
 proofStatement | A statement of proof provided by the contributor of the attributed data | string
 
@@ -176,7 +155,7 @@ todo:
 
 <a id="formal-value"/>
 
-## 2.5 The "FormalValue" Data Type
+## 2.4 The "FormalValue" Data Type
 
 The `FormalValue` data type defines the data structure used to supply a normalized and/or
 standardized value. The formal value is used to supply a formal interpretation of a
@@ -225,7 +204,7 @@ If a value is supplied for the `resource` property, a value SHALL NOT be supplie
   the user-supplied text (e.g. "Boston, Suffolk, Massachusetts, United States").
 
 
-## 2.6 The "GenealogicalResource" Data Type
+## 2.5 The "GenealogicalResource" Data Type
 
 The `GenealogicalResource` data type defines an abstract data structure that defines a basic
 genealogical resource. The `GenealogicalResource` data type is not designed to be used independently,
@@ -247,7 +226,7 @@ attribution | The attribution of this resource. | [`http://gedcomx.org/Attributi
 
 <a id="note"/>
 
-## 2.7 The "Note" Data Type
+## 2.6 The "Note" Data Type
 
 The `Note` data type defines a note that was contributed from genealogical research.
 
@@ -272,7 +251,7 @@ text | The text of the note. | string
 
 <a id="rdf-literal"/>
 
-## 2.8 The "RDF Literal" Data Type
+## 2.7 The "RDF Literal" Data Type
 
 The `RDF Literal` data type defines a literal RDF value. The `Literal` is
 defined by the Resource Description Framework (RDF), but its definition is included here
@@ -293,11 +272,9 @@ datatype  | URI identifying the way the value is to be processed according to a 
 lang | The language of the literal value. | `http://www.w3.org/XML/1998/namespace#lang`
 
 
-## 2.9 The "RDF Value" Data Type
+## 2.8 The "RDF Value" Data Type
 
-The `RDF Value` data type defines the value of an RDF resource. The RDF value data type
-extends the `ResourceReference` data types because RDF values MAY resolve to specific
-resources, or it MAY supply the value of the resource in string form. This data type is defined by the
+The `RDF Value` data type defines the value of an RDF resource. This data type is defined by the
 Resource Description Framework (RDF), but its definition is included here for convenience.
 
 ### identifier
@@ -306,25 +283,20 @@ The identifier for the "RDF Value" data type is:
 
 `http://www.w3.org/2000/01/rdf-schema#Resource`
 
-### extension
-
-This data type extends the following data type:
-
-`http://www.w3.org/1999/02/22-rdf-syntax-ns#ResourceReference`
-
 ### properties
 
 name  | description | data type
 ------|-------------|----------
 id | A local identifier for the value. | string
-type  | Reference to the type of the value. | [`http://www.w3.org/1999/02/22-rdf-syntax-ns#ResourceReference`](#resource-reference) - MUST resolve to a resource type. See the list of [known resource types](#known-resource-types).
+resource | Identifier for the value | [URI](#uri) (No restrictions on what the URI must resolve to. It could be an image, a conclusion, a book, etc.)
+type  | Reference to the type of the identifier. | [URI](#uri) - MUST resolve to a resource type. See the list of [known resource types](#known-resource-types).
 value | The string form of the value. | string
 lang | The language of the string form of the value. | `http://www.w3.org/XML/1998/namespace#lang`
 
 
 <a id="known-resource-types"/>
 
-## 2.10 Resource Types
+## 2.9 Resource Types
 
 The following resource types are defined by GEDCOM X:
 
@@ -369,7 +341,7 @@ name | description | data type
 -----|-------------|----------
 id | A local, transient identifier for the resource being described. Note that as a local, transient identifier, the id may only be used to resolve references to the resource within a well-defined scope (such as a single web service request or a single file). | string
 about | A uniform resource identifier (URI) for the resource being described. | [URI](#uri)
-type  | Reference to the type of the resource being described. | [`http://www.w3.org/1999/02/22-rdf-syntax-ns#ResourceReference`](#resource-reference) - MUST resolve to a resource type. See the list of [known resource types](#known-resource-types).
+type  | Reference to the type of the resource being described. | [URI](#uri) - MUST resolve to a resource type. See the list of [known resource types](#known-resource-types).
 
 ### standard extension properties
 
@@ -386,8 +358,7 @@ todo: list the dublin core terms here with their types and descriptions for conv
 ## 3.2 The "SourceReference" Data Type
 
 The `SourceReference` data type defines a reference to a source. Genealogical data cites its evidence
-using an instance of `SourceReference`, which is an extension of the `ResourceReference` data
-type.
+using an instance of `SourceReference`.
 
 ### identifier
 
@@ -395,19 +366,14 @@ The identifier for the "SourceReference" data type is:
 
 `http://gedcomx.org/conclusion/v1/SourceReference`
 
-### extension
-
-This data type extends the following data type:
-
-`http://www.w3.org/1999/02/22-rdf-syntax-ns#ResourceReference`
-
 ### properties
 
 name | description | data type
 -----|-------------|----------
 id | A local identifier for the source reference. Note that this id MUST NOT be processed as an identifier for the resource being referenced, but instead as a transient identifier for the reference itself. | string
-type  | Reference to the type of the resource being referenced. | [`http://www.w3.org/1999/02/22-rdf-syntax-ns#ResourceReference`](#resource-reference) - MUST resolve to a resource type. See the list of [known resource types](#known-resource-types).
-description  | Reference to a _description_ of the source being referenced. | [`http://www.w3.org/1999/02/22-rdf-syntax-ns#ResourceReference`](#resource-reference) - MUST resolve to an instance of [`http://www.w3.org/1999/02/22-rdf-syntax-ns#Description`](#rdf-description)
+resource | Identifier for the resource being cited. | [URI](#uri) (No restrictions on what the URI must resolve to. It could be an image, a conclusion, a book, etc.)
+type  | Reference to the type of the source being referenced. | [URI](#uri) - MUST resolve to a resource type. See the list of [known resource types](#known-resource-types).
+description  | Reference to a _description_ of the source being referenced. | [URI](#uri) - MUST resolve to an instance of [`http://www.w3.org/1999/02/22-rdf-syntax-ns#Description`](#rdf-description)
 attribution | The attribution of this source reference. | [`http://gedcomx.org/Attribution`](#attribution)
 
 
@@ -438,7 +404,7 @@ The identifier for the `OnlineAccount` data type is:
 name | description | data type
 -----|-------------|----------
 id | A local, transient identifier for the online account. | string
-serviceHomepage  | The home page of the service. | [`http://www.w3.org/1999/02/22-rdf-syntax-ns#ResourceReference`](#resource-reference)
+serviceHomepage  | The home page of the service. | [URI](#uri)
 accountName | The name of the account. | [`http://www.w3.org/2000/01/rdf-schema#Literal`](#rdf-literal)
 displayName | A display name for the account. | [`http://www.w3.org/2000/01/rdf-schema#Literal`](#rdf-literal)
 
@@ -495,8 +461,8 @@ name | The name of the person or organization. | [`http://www.w3.org/2000/01/rdf
 homepage | The homepage of the person or organization. | [`http://www.w3.org/2000/01/rdf-schema#Literal`](#rdf-literal)
 openid  | The [openid](http://openid.net/) of the person or organization. | [`http://www.w3.org/2000/01/rdf-schema#Literal`](#rdf-literal)
 accounts  | The online accounts of the person or organization. | List of [`http://xmlns.com/foaf/0.1/OnlineAccount`](#online-account). Order is preserved.
-emails  | The email addresses of the person or organization. | List of [`http://www.w3.org/1999/02/22-rdf-syntax-ns#ResourceReference`](#resource-reference). Order is preserved. MUST resolve to a valid e-mail address (e.g. "mailto:someone@gedcomx.org").
-phones  | The phones (voice, fax, mobile) of the person or organization. | List of [`http://www.w3.org/1999/02/22-rdf-syntax-ns#ResourceReference`](#resource-reference). Order is preserved. MUST resolve to a valid phone number (e.g. "tel:+1-201-555-0123").
+emails  | The email addresses of the person or organization. | List of [URI](#uri) - MUST resolve to a valid e-mail address (e.g. "mailto:someone@gedcomx.org"). Order is preserved.
+phones  | The phones (voice, fax, mobile) of the person or organization. | List of [URI](#uri) - MUST resolve to a valid phone number (e.g. "tel:+1-201-555-0123"). Order is preserved.
 addresses  | The addresses of the person or organization. | List of [`http://www.w3.org/2000/10/swap/pim/contact#Address`](#address). Order is preserved.
 
 <a id="organization"/>
@@ -649,8 +615,8 @@ This data type extends the following data type:
 
 name | description | data type
 -----|-------------|----------
-person | Reference to the person playing the role in the event. | [`http://www.w3.org/1999/02/22-rdf-syntax-ns#ResourceReference`](#resource-reference) - MUST resolve to an instance of [`http://gedcomx.org/conclusion/v1/Person`](#person)
-role | Reference to the role. | [`http://www.w3.org/1999/02/22-rdf-syntax-ns#ResourceReference`](#resource-reference) - MUST resolve to a role. Refer to the list of [known roles](#known-roles).
+person | Reference to the person playing the role in the event. | [`URI`](#uri) - MUST resolve to an instance of [`http://gedcomx.org/conclusion/v1/Person`](#person)
+role | Reference to the role. | [`URI`](#uri) - MUST resolve to a role. Refer to the list of [known roles](#known-roles).
 details | Details about the role of the person in the event. | string
 
 <a id="known-roles"/>
@@ -689,7 +655,7 @@ This data type extends the following data type:
 
 name | description | data type
 -----|-------------|----------
-type | URI identifying the type of the fact. | [`http://www.w3.org/1999/02/22-rdf-syntax-ns#ResourceReference`](#resource-reference) - MUST resolve to a fact type. See the list of [known fact types](#known-fact-types).
+type | URI identifying the type of the fact. | [URI](#uri) - MUST resolve to a fact type. See the list of [known fact types](#known-fact-types).
 date | The date of applicability of the fact. | [`http://gedcomx.org/conclusion/v1/Date`](#conclusion-date)
 place | The place of applicability of the fact. | [`http://gedcomx.org/conclusion/v1/Place`](#conclusion-place)
 original | The value of the fact as supplied by the contributor. | string
@@ -726,6 +692,7 @@ URI | description | scope
 `http://gedcomx.org/Death`| | person
 `http://gedcomx.org/DiedBeforeEight`| | person
 `http://gedcomx.org/Dwelling`| | person
+`http://gedcomx.org/Education`| | person
 `http://gedcomx.org/Emigration`| | person
 `http://gedcomx.org/Ethnicity`| | person
 `http://gedcomx.org/Excommunication`| | person
@@ -733,7 +700,6 @@ URI | description | scope
 `http://gedcomx.org/Flourish`| | person
 `http://gedcomx.org/Funeral`| | person
 `http://gedcomx.org/GedcomUUID`| | person
-`http://gedcomx.org/Graduation`| | person
 `http://gedcomx.org/Illness`| | person
 `http://gedcomx.org/Immigration`| | person
 `http://gedcomx.org/Interment`| | person
@@ -752,7 +718,7 @@ URI | description | scope
 `http://gedcomx.org/Naturalization`| | person
 `http://gedcomx.org/Namesake`| | person
 `http://gedcomx.org/NationalId`| | person
-`http://gedcomx.org/NationalOrigin`| | person
+`http://gedcomx.org/Nationality`| | person
 `http://gedcomx.org/NeverHadChildren`| | person
 `http://gedcomx.org/NeverMarried`| | person
 `http://gedcomx.org/NotAccountable`| | person
@@ -763,13 +729,12 @@ URI | description | scope
 `http://gedcomx.org/PortOfDeparture`| | person
 `http://gedcomx.org/PreviousResidence`| | person
 `http://gedcomx.org/Probate`| | person
-`http://gedcomx.org/Possessions`| | person
+`http://gedcomx.org/Property`| | person
 `http://gedcomx.org/Race`| | person
 `http://gedcomx.org/RelationshipToHead`| | person
-`http://gedcomx.org/ReligiousAffiliation`| | person
+`http://gedcomx.org/Religion`| | person
 `http://gedcomx.org/Residence`| | person
 `http://gedcomx.org/Retirement`| | person
-`http://gedcomx.org/ScholasticAchievement`| | person
 `http://gedcomx.org/SocialSecurityNumber`| | person
 `http://gedcomx.org/Stillborn`| | person
 `http://gedcomx.org/TitleOfNobility`| | person
@@ -821,7 +786,7 @@ This data type extends the following data type:
 
 name | description | data type
 -----|-------------|----------
-type | URI identifying the type of the gender. | [`http://www.w3.org/1999/02/22-rdf-syntax-ns#ResourceReference`](#resource-reference) - MUST resolve to a gender type. Refer to the list of [known gender types](#known-gender-types).
+type | URI identifying the type of the gender. | [URI](#uri) - MUST resolve to a gender type. Refer to the list of [known gender types](#known-gender-types).
 
 <a id="known-gender-types"/>
 
@@ -851,7 +816,7 @@ The identifier for the `NamePart` data type is:
 
 name | description | data type
 -----|-------------|----------
-type | URI identifying the type of the name part. | [`http://www.w3.org/1999/02/22-rdf-syntax-ns#ResourceReference`](#resource-reference) - MUST resolve to a name part type. Refer to the list of [known name part types](#known-name-part-types).
+type | URI identifying the type of the name part. | [URI](#uri) - MUST resolve to a name part type. Refer to the list of [known name part types](#known-name-part-types).
 text | The text of the name part. | string
 
 <a id="known-name-part-types"/>
@@ -909,7 +874,7 @@ This data type extends the following data type:
 
 name | description | data type
 -----|-------------|----------
-type | URI identifying the type of the name. | [`http://www.w3.org/1999/02/22-rdf-syntax-ns#ResourceReference`](#resource-reference) - MUST resolve to a name type. Refer to the list of [known name types](#known-name-types).
+type | URI identifying the type of the name. | [URI](#uri) - MUST resolve to a name type. Refer to the list of [known name types](#known-name-types).
 primaryForm | The primary form of the name. | `http://gedcomx.org/conclusion/v1/NameForm`
 alternateForms | The alternate forms of the name. | List of [`http://gedcomx.org/conclusion/v1/NameForm`](#name-form). Order is preserved.
 preferred | Whether this name is preferred above the other names of a person. | boolean
@@ -995,9 +960,9 @@ This data type extends the following data type:
 
 name | description | data type
 -----|-------------|----------
-type | URI identifying the type of the relationship. | [`http://www.w3.org/1999/02/22-rdf-syntax-ns#ResourceReference`](#resource-reference) - MUST resolve to a relationship type. Refer to the list of [known relationship types](#known-relationship-types)
-person1 | Reference to the first person in the relationship. | [`http://www.w3.org/1999/02/22-rdf-syntax-ns#ResourceReference`](#resource-reference) - MUST resolve to an instance of [`http://gedcomx.org/conclusion/v1/Person`](#person)
-person2 | Reference to the second person in the relationship. | [`http://www.w3.org/1999/02/22-rdf-syntax-ns#ResourceReference`](#resource-reference) - MUST resolve to an instance of [`http://gedcomx.org/conclusion/v1/Person`](#person)
+type | URI identifying the type of the relationship. | [URI](#uri) - MUST resolve to a relationship type. Refer to the list of [known relationship types](#known-relationship-types)
+person1 | Reference to the first person in the relationship. | [URI](#uri) - MUST resolve to an instance of [`http://gedcomx.org/conclusion/v1/Person`](#person)
+person2 | Reference to the second person in the relationship. | [URI](#uri) - MUST resolve to an instance of [`http://gedcomx.org/conclusion/v1/Person`](#person)
 facts | The conclusions about the facts of the life of the relationship. | List of [`http://gedcomx.org/conclusion/v1/Fact`](#fact-conclusion). Order is preserved.
 sources | The list of references to the evidence of the relationship. | List of [`http://gedcomx.org/conclusion/v1/SourceReference`](#source-reference). Order is preserved.
 notes | Contributed notes about the relationship. | List of [`http://gedcomx.org/Note`](#note). Order is preserved.
@@ -1044,7 +1009,7 @@ This data type extends the following data type:
 
 name | description | data type
 -----|-------------|----------
-type | URI identifying the type of the event. | [`http://www.w3.org/1999/02/22-rdf-syntax-ns#ResourceReference`](#resource-reference). MUST resolve to an event type. Refer to the list of [known event types](#known-event-types)
+type | URI identifying the type of the event. | [URI](#uri). MUST resolve to an event type. Refer to the list of [known event types](#known-event-types)
 date | The date of the event. | [`http://gedcomx.org/conclusion/v1/Date`](#conclusion-date)
 place | The place of the event. | [`http://gedcomx.org/conclusion/v1/Place`](#conclusion-place)
 roles | The roles of the persons in the event. | List of [`http://gedcomx.org/conclusion/v1/EventRole`](#conclusion-event-role). Order is preserved.

@@ -18,16 +18,14 @@ package org.gedcomx.conclusion;
 import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.annotate.JsonTypeInfo;
-import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.common.GenealogicalResource;
 import org.gedcomx.common.Identifier;
 import org.gedcomx.common.Note;
 import org.gedcomx.common.URI;
-import org.gedcomx.rt.JsonElementWrapper;
-import org.gedcomx.rt.XmlTypeIdResolver;
+import org.gedcomx.rt.json.JsonElementWrapper;
 import org.gedcomx.types.FactType;
 import org.gedcomx.types.IdentifierType;
+import org.gedcomx.types.NameType;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -44,8 +42,6 @@ import java.util.List;
  */
 @XmlRootElement
 @JsonElementWrapper (name = "persons")
-@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
-@JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "Person", propOrder = { "identifiers", "living", "gender", "names", "facts", "sources", "notes" } )
 public class Person extends GenealogicalResource implements HasFacts, HasNotes, ReferencesSources {
 
@@ -177,6 +173,27 @@ public class Person extends GenealogicalResource implements HasFacts, HasNotes, 
   }
 
   /**
+   * Get the first name of the specified type.
+   *
+   * @param type The type.
+   * @return the first name in the name list of the specified type, or null if none.
+   */
+  @JsonIgnore
+  public Name getFirstNameOfType(NameType type) {
+    if (this.names == null) {
+      return null;
+    }
+
+    for (Name name : this.names) {
+      if (type.equals(name.getKnownType())) {
+        return name;
+      }
+    }
+
+    return null;
+  }
+
+  /**
    * The name conclusions for the person.
    *
    * @param names The name conclusions for the person.
@@ -196,6 +213,27 @@ public class Person extends GenealogicalResource implements HasFacts, HasNotes, 
   @JsonName("facts")
   public List<Fact> getFacts() {
     return facts;
+  }
+
+  /**
+   * Get the first fact of the specified type.
+   *
+   * @param type The type.
+   * @return the first fact in the fact list of the specified type, or null if none.
+   */
+  @JsonIgnore
+  public Fact getFirstFactOfType(FactType type) {
+    if (this.facts == null) {
+      return null;
+    }
+    
+    for (Fact fact : this.facts) {
+      if (type.equals(fact.getKnownType())) {
+        return fact;
+      }
+    }
+    
+    return null;
   }
 
   /**

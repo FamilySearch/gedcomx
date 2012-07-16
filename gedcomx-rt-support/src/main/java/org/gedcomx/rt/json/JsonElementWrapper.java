@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.rt.rs;
+package org.gedcomx.rt.json;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -21,13 +21,27 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * The warnings that are possible under specified conditions.
+ * Provides a custom name for a wrapper element for JSON serialization.
  *
  * @author Ryan Heaton
  */
 @Retention ( RetentionPolicy.RUNTIME )
-@Target ({ ElementType.TYPE, ElementType.METHOD })
-public @interface Warnings {
+@Target ( { ElementType.TYPE, ElementType.METHOD } )
+public @interface JsonElementWrapper {
 
-  ResponseCode[] value() default {};
+  /**
+   * The name of the JSON property for arrays of this element.
+   *
+   * @return The name of the JSON property for arrays of this element.
+   */
+  String name();
+
+  /**
+   * The namespace of the JSON property if this element is added as an extension element. The
+   * namespace will be prepended to the name during JSON serialization. Note the default value
+   * is the empty string, which overrides the namespace of @XmlRootElement and @XmlSchema.
+   *
+   * @return The namespace of the JSON property if this element is added as an extension element.
+   */
+  String namespace() default "";
 }

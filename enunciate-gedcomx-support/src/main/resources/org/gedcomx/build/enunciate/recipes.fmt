@@ -48,9 +48,6 @@ ${(snippet.json!"{ 'json-snippet-available' : false }")?trim}
       <a href="recipes.html">Recipes</a>
       <ul>
         <li><a href="models.html">Models</a></li>
-  [#if resourceDefinitions?size > 0]
-        <li><a href="resource_definitions.html">Resource Definitions</a></li>
-  [/#if]
         <li><a href="recipes.html">Recipes</a></li>
       </ul>
     </li>

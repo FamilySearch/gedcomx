@@ -101,12 +101,15 @@ MAY be used as main attributes and are interpreted to be applicable to the file 
 
 Attributes that apply to a specific resource in the file are referred to as
 ["Per-Entry Attributes" defined by the JAR specification](http://docs.oracle.com/javase/7/docs/technotes/guides/jar/jar.html#Per-Entry_Attributes).
-All entries in a GEDCOM X file _MUST_ supply a `Name` and `Content-Type` attributes.
+As defined by the [JAR specification](http://docs.oracle.com/javase/7/docs/technotes/guides/jar/jar.html#JAR_Manifest), each section that supplies attributes
+for a specific entry starts with an attribute with the name as "Name", and the value must be a relative path
+to the file.
 
 All of the headers defined by the [GEDCOM X Standard Header Set](https://github.com/FamilySearch/gedcomx/blob/master/specifications/standard-header-set-specification.md)
 MAY be used as per-entry attributes and are interpreted to be applicable to the resource associated with the entry. Some of the most notable include:
 
-* `Content-Type` MUST be supplied and is used to determine the media type of the resource in the file.
+* `Content-Type` is used to determine the media type of the resource in the file. If the media type is NOT among those identified by the GEDCOM X XML
+  1.0 specification, the `Content-Type` attribute MUST be defined.
 * `ETag` is used to supply a version for the resource.
 * `X-DC-modified` is used to supply a timestamp of when the resource was last modified.
 

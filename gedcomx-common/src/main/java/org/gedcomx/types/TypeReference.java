@@ -25,6 +25,7 @@ import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.gedcomx.common.URI;
 import org.gedcomx.rt.CommonModels;
+import org.gedcomx.rt.json.JsonSimpleValue;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -41,6 +42,7 @@ import java.io.IOException;
 @XmlType ( namespace = CommonModels.RDF_NAMESPACE, name = "type" )
 @JsonSerialize (using = TypeReference.JsonSerializer.class)
 @JsonDeserialize (using = TypeReference.JsonDeserializer.class)
+@JsonSimpleValue
 public final class TypeReference<T extends Enum> {
 
   private URI type;

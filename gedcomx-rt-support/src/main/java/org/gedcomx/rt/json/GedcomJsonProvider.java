@@ -13,19 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.rt;
+package org.gedcomx.rt.json;
 
+import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider;
 import org.codehaus.jackson.map.AnnotationIntrospector;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.introspect.JacksonAnnotationIntrospector;
-import org.codehaus.jackson.map.type.SimpleType;
 import org.codehaus.jackson.xc.JaxbAnnotationIntrospector;
+import org.gedcomx.rt.GedcomNamespaceManager;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.MultivaluedMap;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
+import java.io.IOException;
+import java.io.InputStream;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Type;
 
 /**
  * The custom json provider for GEDCOM JSON data.
@@ -58,8 +66,26 @@ public class GedcomJsonProvider extends JacksonJaxbJsonProvider {
     mapper.getDeserializationConfig().withAnnotationIntrospector(introspector);
     mapper.registerModule(new GedcomJacksonModule());
     for (Class<?> contextClass : classes) {
-      XmlTypeIdResolver.initContextClass(SimpleType.construct(contextClass));
+      GedcomNamespaceManager.registerKnownJsonType(contextClass);
     }
     return mapper;
+  }
+
+  @Override
+  public Object readFrom(Class<Object> type, Type genericType, Annotation[] annotations, MediaType mediaType, MultivaluedMap<String, String> httpHeaders, InputStream entityStream) throws IOException {
+    String dataType = httpHeaders.getFirst("X-type");
+    if (dataType != null) {
+      Class<Object> knownType = (Class<Object>) GedcomNamespaceManager.getKnownTypeById(dataType);
+      if (type != null && knownType != null && type.isAssignableFrom(knownType)) {
+        type = knownType;
+        genericType = knownType;
+      }
+    }
+    try {
+      return super.readFrom(type, genericType, annotations, mediaType, httpHeaders, entityStream);
+    }
+    catch (JsonProcessingException e) {
+      throw new WebApplicationException(e, Response.Status.BAD_REQUEST);
+    }
   }
 }

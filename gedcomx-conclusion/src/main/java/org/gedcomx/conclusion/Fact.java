@@ -17,14 +17,11 @@ package org.gedcomx.conclusion;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.annotate.JsonTypeInfo;
-import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
 import org.gedcomx.common.FormalValue;
 import org.gedcomx.common.URI;
 import org.gedcomx.rt.CommonModels;
-import org.gedcomx.rt.JsonElementWrapper;
+import org.gedcomx.rt.json.JsonElementWrapper;
 import org.gedcomx.rt.RDFSubClassOf;
-import org.gedcomx.rt.XmlTypeIdResolver;
 import org.gedcomx.types.FactType;
 import org.gedcomx.types.TypeReference;
 
@@ -36,8 +33,6 @@ import javax.xml.bind.annotation.XmlType;
 /**
  * A conclusion about a fact applicable to a person or relationship.
  */
-@JsonTypeInfo ( use =JsonTypeInfo.Id.CUSTOM, property = XmlTypeIdResolver.TYPE_PROPERTY_NAME)
-@JsonTypeIdResolver (XmlTypeIdResolver.class)
 @XmlType ( name = "Fact", propOrder = {"type", "date", "place", "original", "formal" })
 @RDFSubClassOf ( CommonModels.DUBLIN_CORE_TYPE_NAMESPACE + "Event" )
 @XmlRootElement
