@@ -1,2 +1,3 @@
 org.gedcomx.metadata.dc.DublinCoreModel
 org.gedcomx.metadata.foaf.FoafModel
+org.gedcomx.metadata.source.SourceModel

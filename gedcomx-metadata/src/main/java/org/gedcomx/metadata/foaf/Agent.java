@@ -16,15 +16,26 @@
 package org.gedcomx.metadata.foaf;
 
 import org.codehaus.enunciate.json.JsonName;
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.gedcomx.common.ResourceReference;
-import org.gedcomx.metadata.rdf.Description;
 import org.gedcomx.metadata.rdf.RDFLiteral;
 import org.gedcomx.rt.CommonModels;
+import org.gedcomx.rt.SupportsExtensionAttributes;
+import org.gedcomx.rt.SupportsExtensionElements;
 
+import javax.xml.bind.annotation.XmlAnyAttribute;
+import javax.xml.bind.annotation.XmlAnyElement;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.namespace.QName;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 
 /**
  * A FOAF agent, e.g. person or organization
@@ -33,8 +44,9 @@ import java.util.List;
  * @author Ryan Heaton
  */
 @XmlType (name = "Agent")
-public abstract class Agent extends Description {
+public abstract class Agent implements SupportsExtensionAttributes, SupportsExtensionElements {
 
+  private String id;
   private RDFLiteral name;
   private RDFLiteral homepage;
   private RDFLiteral openid;
@@ -42,6 +54,28 @@ public abstract class Agent extends Description {
   private List<ResourceReference> emails;
   private List<ResourceReference> phones;
   private List<Address> addresses;
+  private Map<QName, String> extensionAttributes;
+  private List<Object> extensionElements;
+
+  /**
+   * The id of this piece of metadata.
+   *
+   * @return The id of this piece of metadata.
+   */
+  @XmlAttribute ( name = "ID" )
+  @XmlID
+  public String getId() {
+    return id;
+  }
+
+  /**
+   * The id of this piece of metadata.
+   *
+   * @param id The id of this piece of metadata.
+   */
+  public void setId(String id) {
+    this.id = id;
+  }
 
   /**
    * The name of the person or organization.
@@ -186,5 +220,113 @@ public abstract class Agent extends Description {
   @JsonProperty ("addresses")
   public void setAddresses(List<Address> addresses) {
     this.addresses = addresses;
+  }
+
+  /**
+   * Custom attributes applicable as part of this metadata.
+   *
+   * @return Custom attributes applicable as part of this metadata.
+   */
+  @XmlAnyAttribute
+  @JsonIgnore
+  public Map<QName, String> getExtensionAttributes() {
+    return extensionAttributes;
+  }
+
+  /**
+   * Custom attributes applicable as part of this metadata.
+   *
+   * @param extensionAttributes Custom attributes applicable as part of this metadata.
+   */
+  @JsonIgnore
+  public void setExtensionAttributes(Map<QName, String> extensionAttributes) {
+    this.extensionAttributes = extensionAttributes;
+  }
+
+  /**
+   * Add an extension element.
+   *
+   * @param element The extension element to add.
+   */
+  public void addExtensionElement(Object element) {
+    if (this.extensionElements == null) {
+      this.extensionElements = new ArrayList<Object>();
+    }
+
+    this.extensionElements.add(element);
+  }
+
+  /**
+   * Finds the first extension of a specified type.
+   *
+   * @param clazz The type.
+   * @return The extension, or null if none found.
+   */
+  @SuppressWarnings ( {"unchecked"} )
+  public <E> E findExtensionOfType(Class<E> clazz) {
+    if (this.extensionElements != null) {
+      for (Object extension : extensionElements) {
+        if (clazz.isInstance(extension)) {
+          return (E) extension;
+        }
+      }
+    }
+
+    return null;
+  }
+
+  /**
+   * Find the extensions of a specified type.
+   *
+   * @param clazz The type.
+   * @return The extensions, possibly empty but not null.
+   */
+  @SuppressWarnings ( {"unchecked"} )
+  public <E> List<E> findExtensionsOfType(Class<E> clazz) {
+    List<E> ext = new ArrayList<E>();
+    if (this.extensionElements != null) {
+      for (Object extension : extensionElements) {
+        if (clazz.isInstance(extension)) {
+          ext.add((E) extension);
+        }
+      }
+    }
+
+    return ext;
+  }
+
+  /**
+   * Custom elements applicable as part of this metadata.
+   *
+   * @return Custom elements applicable as part of this metadata.
+   */
+  @XmlAnyElement ( lax = true )
+  @JsonIgnore
+  public List<Object> getExtensionElements() {
+    return extensionElements;
+  }
+
+  /**
+   * Custom elements applicable as part of this metadata.
+   *
+   * @param extensionElements Custom elements applicable as part of this metadata.
+   */
+  @JsonIgnore
+  public void setExtensionElements(List<Object> extensionElements) {
+    this.extensionElements = extensionElements;
+  }
+
+  /**
+   * Add a custom extension attribute.
+   *
+   * @param qname The qname of the attribute.
+   * @param value The value of the attribute.
+   */
+  public void addExtensionAttribute(QName qname, String value) {
+    if (this.extensionAttributes == null) {
+      this.extensionAttributes = new HashMap<QName, String>();
+    }
+
+    this.extensionAttributes.put(qname, value);
   }
 }

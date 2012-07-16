@@ -24,7 +24,7 @@
         <Member type="Field">public ResourceReference contributor</Member>
         <Member type="Field">public ConfidenceLevel confidence</Member>
         <Member type="Field">public Date modified</Member>
-        <Member type="Field">public String proofStatement</Member>
+        <Member type="Field">public String changeMessage</Member>
         <Modifier>None</Modifier>
       </Entity>
     </Entities>
@@ -68,7 +68,7 @@
         <Collapsed>False</Collapsed>
         <Member type="Field">public URI persistentId</Member>
         <Member type="Field">public String bibliographicCitation</Member>
-        <Member type="Field">public ResourceReference[] sources</Member>
+        <Member type="Field">public ResourceReference[] sourceReferences</Member>
         <Member type="Field">public ResourceReference[] notes</Member>
         <Modifier>None</Modifier>
       </Entity>

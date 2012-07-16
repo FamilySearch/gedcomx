@@ -3,13 +3,14 @@ package org.gedcomx.conclusion;
 import org.gedcomx.common.Attribution;
 import org.gedcomx.common.FormalValue;
 import org.gedcomx.common.ResourceReference;
+import org.gedcomx.common.SourceReference;
 import org.gedcomx.common.URI;
 import org.gedcomx.test.RecipeTest;
 import org.gedcomx.test.Snippet;
 import org.gedcomx.types.FactType;
 import org.gedcomx.types.GenderType;
 import org.gedcomx.types.NamePartType;
-import org.gedcomx.types.ResourceType;
+import org.gedcomx.types.SourceReferenceType;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ import java.util.List;
 
 import static org.gedcomx.rt.SerializationUtil.processThroughJson;
 import static org.gedcomx.rt.SerializationUtil.processThroughXml;
+
 
 /**
  * @author Ryan Heaton
@@ -140,10 +142,10 @@ public class PersonRecipesTest extends RecipeTest {
     attribution.setContributor(new ResourceReference());
     attribution.getContributor().setResource(URI.create("https://familysearch.org/platform/contributors/STV-WXZY"));
     attributedSourceReference.setAttribution(attribution);
-    attributedSourceReference.setResource(URI.create("http://en.wikipedia.org/wiki/George_washington"));
-    attributedSourceReference.setKnownType(ResourceType.Text);
+    attributedSourceReference.setSource(URI.create("http://en.wikipedia.org/wiki/George_washington"));
+    attributedSourceReference.setKnownType(SourceReferenceType.ExtractedConclusion);
     sources.add(attributedSourceReference);
-    person.setSources(sources);
+    person.setSourceReferences(sources);
 
     person.setId("BBB-BBBB");
 

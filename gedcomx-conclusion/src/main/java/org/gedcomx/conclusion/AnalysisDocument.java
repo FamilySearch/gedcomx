@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.metadata.foaf;
+package org.gedcomx.conclusion;
 
 import org.gedcomx.rt.json.JsonElementWrapper;
 
@@ -22,13 +22,10 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * An organization as described by FOAF.
- *
- * @see <a href="http://xmlns.com/foaf/spec/#term_Organization">foaf:Organization</a>
- * @author Ryan Heaton
+ * Represents a document containing analysis (e.g., evidence analysis, genealogical proof statements, source analysis, etc.).
  */
-@XmlType ( name = "Organization" )
-@XmlRootElement ( name = "Organization" )
-@JsonElementWrapper ( name = "organizations" )
-public class Organization extends Agent {
+@XmlRootElement (name = "analysis")
+@JsonElementWrapper (name = "analyses")
+@XmlType ( name = "AnalysisDocument" )
+public class AnalysisDocument extends Document {
 }

@@ -15,6 +15,7 @@
  */
 package org.gedcomx.conclusion;
 
+import org.gedcomx.common.SourceReference;
 import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.RDFDomain;
 import org.gedcomx.rt.RDFRange;
@@ -22,6 +23,7 @@ import org.gedcomx.rt.RDFSubPropertyOf;
 
 import javax.xml.bind.annotation.XmlType;
 import java.util.List;
+
 
 /**
  * Conclusion data that references sources.
@@ -40,12 +42,12 @@ public interface ReferencesSources {
   @RDFDomain ({}) //any resource can be identified persistently.
   @RDFRange ({}) //any resource can be identified as a source.
   @SuppressWarnings("rdf:no_range")
-  List<SourceReference> getSources();
+  List<SourceReference> getSourceReferences();
 
   /**
    * The references to the sources of a conclusion resource.
    *
    * @param notes The references to the sources of a conclusion resource.
    */
-  void setSources(List<SourceReference> notes);
+  void setSourceReferences(List<SourceReference> notes);
 }

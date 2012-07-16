@@ -2,6 +2,7 @@ package org.gedcomx.conclusion;
 
 import org.gedcomx.common.Attribution;
 import org.gedcomx.common.ResourceReference;
+import org.gedcomx.common.SourceReference;
 import org.gedcomx.common.URI;
 import org.gedcomx.metadata.dc.DublinCoreDescriptionDecorator;
 import org.gedcomx.metadata.rdf.Description;
@@ -110,11 +111,11 @@ public class EvidenceRecipesTest extends RecipeTest {
     attribution.setContributor(new ResourceReference());
     attribution.getContributor().setResource(URI.create("https://familysearch.org/platform/contributors/STV-WXZY"));
     attributedSourceReference.setAttribution(attribution);
-    attributedSourceReference.setResource(URI.create("https://familysearch.org/pal:/MM9.1.1/M8PT-4GN"));
-    attributedSourceReference.setDescription(new ResourceReference());
-    attributedSourceReference.getDescription().setResource(URI.create("https://familysearch.org/platform/sources/GGG-GGGG"));
+    attributedSourceReference.setSource(URI.create("https://familysearch.org/pal:/MM9.1.1/M8PT-4GN"));
+    attributedSourceReference.setSourceDescription(new ResourceReference());
+    attributedSourceReference.getSourceDescription().setResource(URI.create("https://familysearch.org/platform/sources/GGG-GGGG"));
     sources.add(attributedSourceReference);
-    person.setSources(sources);
+    person.setSourceReferences(sources);
 
     person.setId("KWCD-QBC");
 
@@ -209,10 +210,10 @@ public class EvidenceRecipesTest extends RecipeTest {
     attribution.setContributor(new ResourceReference());
     attribution.getContributor().setResource(URI.create("https://familysearch.org/platform/contributors/STV-WXZY"));
     attributedSourceReference.setAttribution(attribution);
-    attributedSourceReference.setDescription(new ResourceReference());
-    attributedSourceReference.getDescription().setResource(URI.create("https://familysearch.org/platform/sources/KKK-KKKK"));
+    attributedSourceReference.setSourceDescription(new ResourceReference());
+    attributedSourceReference.getSourceDescription().setResource(URI.create("https://familysearch.org/platform/sources/KKK-KKKK"));
     sources.add(attributedSourceReference);
-    person.setSources(sources);
+    person.setSourceReferences(sources);
 
     person.setId("K2VD-4P2");
 
@@ -296,9 +297,9 @@ public class EvidenceRecipesTest extends RecipeTest {
     attribution.setContributor(new ResourceReference());
     attribution.getContributor().setResource(URI.create("https://familysearch.org/platform/contributors/STV-WXZY"));
     attributedSourceReference.setAttribution(attribution);
-    attributedSourceReference.setResource(URI.create("https://familysearch.org/platform/persons/NNN-NNNN"));
+    attributedSourceReference.setSource(URI.create("https://familysearch.org/platform/persons/NNN-NNNN"));
     sources.add(attributedSourceReference);
-    person.setSources(sources);
+    person.setSourceReferences(sources);
 
     person.setId("KWCD-QBC");
 
@@ -343,10 +344,10 @@ public class EvidenceRecipesTest extends RecipeTest {
     attribution.setContributor(new ResourceReference());
     attribution.getContributor().setResource(URI.create("https://familysearch.org/platform/contributors/ZZZ-ZZZZ"));
     attributedSourceReference.setAttribution(attribution);
-    attributedSourceReference.setDescription(new ResourceReference());
-    attributedSourceReference.getDescription().setResource(URI.create("https://familysearch.org/platform/sources/JJJ-JJJJ"));
+    attributedSourceReference.setSourceDescription(new ResourceReference());
+    attributedSourceReference.getSourceDescription().setResource(URI.create("https://familysearch.org/platform/sources/JJJ-JJJJ"));
     sources.add(attributedSourceReference);
-    person.setSources(sources);
+    person.setSourceReferences(sources);
 
     person.setId("KWCD-QBC");
 

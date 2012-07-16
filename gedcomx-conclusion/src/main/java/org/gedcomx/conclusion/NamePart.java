@@ -17,6 +17,7 @@ package org.gedcomx.conclusion;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.gedcomx.common.HasText;
 import org.gedcomx.common.URI;
 import org.gedcomx.rt.CommonModels;
 import org.gedcomx.types.NamePartType;
@@ -26,13 +27,14 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
+
 /**
  * A part of a name.
  *
  * @author Ryan Heaton
  */
 @XmlType ( name = "NamePart", propOrder = {"type", "text"})
-public final class NamePart {
+public final class NamePart implements HasText {
 
   @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
   @JsonProperty

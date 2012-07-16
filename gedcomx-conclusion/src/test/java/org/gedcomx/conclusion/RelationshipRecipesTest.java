@@ -5,14 +5,12 @@ import org.gedcomx.test.RecipeTest;
 import org.gedcomx.test.Snippet;
 import org.gedcomx.types.FactType;
 import org.gedcomx.types.RelationshipType;
-import org.gedcomx.types.ResourceType;
+import org.gedcomx.types.SourceReferenceType;
 import org.testng.annotations.Test;
-
-import java.util.List;
 
 import static org.gedcomx.rt.SerializationUtil.processThroughJson;
 import static org.gedcomx.rt.SerializationUtil.processThroughXml;
-import static org.testng.AssertJUnit.assertEquals;
+
 
 /**
  * @author Ryan Heaton
@@ -38,7 +36,7 @@ public class RelationshipRecipesTest extends RecipeTest {
     relationship.setKnownType(RelationshipType.Couple);
 
     relationship.setAttribution(new Attribution());
-    relationship.getAttribution().setProofStatement("(proof statement here)");
+    relationship.getAttribution().setChangeMessage("(justification here)");
     ResourceReference contributor = new ResourceReference();
     contributor.setResource(URI.create("https://familysearch.org/platform/contributors/BCD-FGHJ"));
     relationship.getAttribution().setContributor(contributor);
@@ -63,9 +61,9 @@ public class RelationshipRecipesTest extends RecipeTest {
     relationship.getPerson2().setResource(URI.create("https://familysearch.org/platform/persons/FFF-FFFF"));
     SourceReference sourceReference = new SourceReference();
     sourceReference.setId("5678");
-    sourceReference.setResource(URI.create("http://en.wikipedia.org/wiki/George_washington"));
-    sourceReference.setKnownType(ResourceType.Text);
-    relationship.addSource(sourceReference);
+    sourceReference.setSource(URI.create("http://en.wikipedia.org/wiki/George_washington"));
+    sourceReference.setKnownType(SourceReferenceType.ExtractedConclusion);
+    relationship.addSourceReference(sourceReference);
     return relationship;
   }
 

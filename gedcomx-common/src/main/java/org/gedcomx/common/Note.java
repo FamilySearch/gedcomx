@@ -22,18 +22,20 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+
 /**
- * A note about a genealogical resource.
+ * A note about a genealogical resource (e.g. conclusion or source).
  *
  * @author Ryan Heaton
  */
 @XmlRootElement
 @JsonElementWrapper(name = "notes")
-@XmlType ( name = "Note", propOrder = { "text" } )
-public final class Note extends GenealogicalResource {
+@XmlType ( name = "Note", propOrder = { "text", "attribution" } )
+public class Note implements Attributable, HasText {
 
   private String lang;
   private String text;
+  private Attribution attribution;
 
   /**
    * The language of the note. See <a href="http://www.w3.org/International/articles/language-tags/>http://www.w3.org/International/articles/language-tags/</a>
@@ -73,16 +75,22 @@ public final class Note extends GenealogicalResource {
   }
 
   /**
-   * Provide a simple toString() method.
+   * Attribution metadata for a note.
+   *
+   * @return Attribution metadata for a note.
    */
   @Override
-  public String toString() {
-    StringBuilder s = new StringBuilder((getId() == null) ? "" : getId());
+  public Attribution getAttribution() {
+    return attribution;
+  }
 
-    if (getText() != null) {
-      s.append(": ").append(getText());
-    }
-
-    return s.toString();
+  /**
+   * Attribution metadata for a note.
+   *
+   * @param attribution Attribution metadata for a note.
+   */
+  @Override
+  public void setAttribution(Attribution attribution) {
+    this.attribution = attribution;
   }
 }

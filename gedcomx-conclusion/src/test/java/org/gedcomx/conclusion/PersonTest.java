@@ -12,6 +12,7 @@ import static org.gedcomx.rt.SerializationUtil.processThroughJson;
 import static org.gedcomx.rt.SerializationUtil.processThroughXml;
 import static org.testng.AssertJUnit.assertTrue;
 
+
 /**
  * @author Ryan Heaton
  */
@@ -94,11 +95,11 @@ public class PersonTest {
     normalized.setDatatype(URI.create("urn:place"));
     normalized.setKnownValue(PlacePartType.Cemetery);
     event.getPlace().setFormal(normalized);
-    event.setSources(new ArrayList<SourceReference>());
+    event.setSourceReferences(new ArrayList<SourceReference>());
     SourceReference eventSource = new SourceReference();
     eventSource.setId("event-source");
     eventSource.setAttribution(new Attribution());
-    event.getSources().add(eventSource);
+    event.getSourceReferences().add(eventSource);
 
     List<Fact> facts = person.getFacts();
     facts.add(event);
@@ -140,17 +141,17 @@ public class PersonTest {
     attribution.setContributor(new ResourceReference());
     attribution.getContributor().setResource(URI.create("urn:source-reference-attribution"));
     attributedSourceReference.setAttribution(attribution);
-    attributedSourceReference.setResource(URI.create("urn:source-uri"));
+    attributedSourceReference.setSource(URI.create("urn:source-uri"));
     attributedSourceReference.setId("source-reference-id");
-    attributedSourceReference.setKnownType(ResourceType.Collection);
-    attributedSourceReference.setDescription(new ResourceReference());
-    attributedSourceReference.getDescription().setResource(URI.create("urn:source-description"));
+    attributedSourceReference.setKnownType(SourceReferenceType.WorkingConclusion);
+    attributedSourceReference.setSourceDescription(new ResourceReference());
+    attributedSourceReference.getSourceDescription().setResource(URI.create("urn:source-description"));
     sources.add(attributedSourceReference);
-    person.setSources(sources);
+    person.setSourceReferences(sources);
 
     person.setId("pid");
     person.setAttribution(new Attribution());
-    person.getAttribution().setProofStatement("this person existed.");
+    person.getAttribution().setChangeMessage("this person existed.");
 
     person.setLiving(true);
 
@@ -216,16 +217,16 @@ public class PersonTest {
 
     AssertJUnit.assertEquals("pal", person.getPersistentId().toString());
 
-    AssertJUnit.assertEquals(1, person.getSources().size());
-    attributedSourceReference = person.getSources().iterator().next();
+    AssertJUnit.assertEquals(1, person.getSourceReferences().size());
+    attributedSourceReference = person.getSourceReferences().iterator().next();
     AssertJUnit.assertEquals("urn:source-reference-attribution", attributedSourceReference.getAttribution().getContributor().getResource().toString());
-    AssertJUnit.assertEquals("urn:source-uri", attributedSourceReference.getResource().toString());
+    AssertJUnit.assertEquals("urn:source-uri", attributedSourceReference.getSource().toString());
     AssertJUnit.assertEquals("source-reference-id", attributedSourceReference.getId());
-    AssertJUnit.assertEquals(ResourceType.Collection, attributedSourceReference.getKnownType());
-    AssertJUnit.assertEquals("urn:source-description", attributedSourceReference.getDescription().getResource().toString());
+    AssertJUnit.assertEquals(SourceReferenceType.WorkingConclusion, attributedSourceReference.getKnownType());
+    AssertJUnit.assertEquals("urn:source-description", attributedSourceReference.getSourceDescription().getResource().toString());
 
     AssertJUnit.assertEquals("pid", person.getId());
-    AssertJUnit.assertEquals("this person existed.", person.getAttribution().getProofStatement());
+    AssertJUnit.assertEquals("this person existed.", person.getAttribution().getChangeMessage());
 
     assertTrue(person.getLiving());
   }
