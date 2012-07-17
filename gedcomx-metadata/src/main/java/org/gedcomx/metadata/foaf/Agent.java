@@ -21,20 +21,15 @@ import org.codehaus.jackson.annotate.JsonProperty;
 import org.gedcomx.common.ResourceReference;
 import org.gedcomx.metadata.rdf.RDFLiteral;
 import org.gedcomx.rt.CommonModels;
-import org.gedcomx.rt.SupportsExtensionAttributes;
 import org.gedcomx.rt.SupportsExtensionElements;
 
-import javax.xml.bind.annotation.XmlAnyAttribute;
 import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.namespace.QName;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 /**
@@ -54,7 +49,6 @@ public abstract class Agent implements SupportsExtensionElements {
   private List<ResourceReference> emails;
   private List<ResourceReference> phones;
   private List<Address> addresses;
-  private Map<QName, String> extensionAttributes;
   private List<Object> extensionElements;
 
   /**
@@ -293,19 +287,5 @@ public abstract class Agent implements SupportsExtensionElements {
   @JsonIgnore
   public void setExtensionElements(List<Object> extensionElements) {
     this.extensionElements = extensionElements;
-  }
-
-  /**
-   * Add a custom extension attribute.
-   *
-   * @param qname The qname of the attribute.
-   * @param value The value of the attribute.
-   */
-  public void addExtensionAttribute(QName qname, String value) {
-    if (this.extensionAttributes == null) {
-      this.extensionAttributes = new HashMap<QName, String>();
-    }
-
-    this.extensionAttributes.put(qname, value);
   }
 }
