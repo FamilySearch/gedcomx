@@ -20,18 +20,21 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.gedcomx.common.URI;
 import org.gedcomx.rt.CommonModels;
-import org.gedcomx.rt.SupportsExtensionAttributes;
 import org.gedcomx.rt.SupportsExtensionElements;
 import org.gedcomx.types.ResourceType;
 import org.gedcomx.types.TypeReference;
 
 import javax.xml.XMLConstants;
-import javax.xml.bind.annotation.*;
-import javax.xml.namespace.QName;
+import javax.xml.bind.annotation.XmlAnyElement;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 
 /**
  * An element representing an RDF value. For more information, see <a href="http://www.w3.org/TR/rdf-schema/#ch_value">RDF Schema, Section 4.5.3</a>,
@@ -52,7 +55,6 @@ public final class RDFValue implements SupportsExtensionElements {
   @JsonProperty
   private TypeReference<ResourceType> type;
   private URI resource;
-  private Map<QName, String> extensionAttributes;
   private List<Object> extensionElements;
 
   public RDFValue() {
@@ -189,20 +191,6 @@ public final class RDFValue implements SupportsExtensionElements {
    */
   public void setResource(URI resource) {
     this.resource = resource;
-  }
-
-  /**
-   * Add a custom extension attribute.
-   *
-   * @param qname The qname of the attribute.
-   * @param value The value of the attribute.
-   */
-  public void addExtensionAttribute(QName qname, String value) {
-    if (this.extensionAttributes == null) {
-      this.extensionAttributes = new HashMap<QName, String>();
-    }
-
-    this.extensionAttributes.put(qname, value);
   }
 
   /**

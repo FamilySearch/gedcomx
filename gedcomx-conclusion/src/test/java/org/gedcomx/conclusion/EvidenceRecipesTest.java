@@ -43,11 +43,12 @@ public class EvidenceRecipesTest extends RecipeTest {
 
     snippet = new Snippet("The description of the source. The URI to the description is \"https://familysearch.org/platform/sources/GGG-GGGG\".");
     Description description = createDescriptionOfOnlineArtifact();
-    processThroughXml(description, snippet);
-    processThroughJson(description, snippet);
+    Description descriptionThruXml = processThroughXml(description, snippet);
+    Description descriptionThruJson = processThroughJson(description, snippet);
     addSnippet(snippet);
 
-//    assertEquals(person);
+    verifySourceDescription(descriptionThruXml);
+    verifySourceDescription(descriptionThruJson);
   }
 
   static Description createDescriptionOfOnlineArtifact() {
@@ -111,7 +112,6 @@ public class EvidenceRecipesTest extends RecipeTest {
     attribution.setContributor(new ResourceReference());
     attribution.getContributor().setResource(URI.create("https://familysearch.org/platform/contributors/STV-WXZY"));
     attributedSourceReference.setAttribution(attribution);
-    attributedSourceReference.setSource(URI.create("https://familysearch.org/pal:/MM9.1.1/M8PT-4GN"));
     attributedSourceReference.setSourceDescription(new ResourceReference());
     attributedSourceReference.getSourceDescription().setResource(URI.create("https://familysearch.org/platform/sources/GGG-GGGG"));
     sources.add(attributedSourceReference);
@@ -138,11 +138,12 @@ public class EvidenceRecipesTest extends RecipeTest {
 
     snippet = new Snippet("The description of the source. The URI to the description is \"https://familysearch.org/platform/sources/KKK-KKKK\".");
     Description description = createDescriptionOfPhysicalArtifact();
-    processThroughXml(description, snippet);
-    processThroughJson(description, snippet);
+    Description descriptionThruXml = processThroughXml(description, snippet);
+    Description descriptionThruJson = processThroughJson(description, snippet);
     addSnippet(snippet);
 
-//    assertEquals(person);
+    verifySourceDescription(descriptionThruXml);
+    verifySourceDescription(descriptionThruJson);
   }
 
   static Description createDescriptionOfPhysicalArtifact() {
@@ -237,11 +238,12 @@ public class EvidenceRecipesTest extends RecipeTest {
 
     snippet = new Snippet("The person being cited. The URI to this conclusion person is \"https://familysearch.org/platform/sources/NNN-NNNN\".");
     Person description = createPersonBeingCitedByAnotherPerson();
-    processThroughXml(description, snippet);
-    processThroughJson(description, snippet);
+    Person descriptionThruXml = processThroughXml(description, snippet);
+    Person descriptionThruJson = processThroughJson(description, snippet);
     addSnippet(snippet);
 
-//    assertEquals(person);
+    verifyPerson(descriptionThruXml);
+    verifyPerson(descriptionThruJson);
   }
 
   static Person createPersonCitingOtherConclusion() {
@@ -297,7 +299,6 @@ public class EvidenceRecipesTest extends RecipeTest {
     attribution.setContributor(new ResourceReference());
     attribution.getContributor().setResource(URI.create("https://familysearch.org/platform/contributors/STV-WXZY"));
     attributedSourceReference.setAttribution(attribution);
-    attributedSourceReference.setSource(URI.create("https://familysearch.org/platform/persons/NNN-NNNN"));
     sources.add(attributedSourceReference);
     person.setSourceReferences(sources);
 
@@ -354,8 +355,11 @@ public class EvidenceRecipesTest extends RecipeTest {
     return person;
   }
 
-  static void assertEquals(Person person) {
-    //todo:
+  static void verifySourceDescription(Description description) {
+    //TODO: verify contents of source description
   }
 
+  static void verifyPerson(Person person) {
+    //TODO: verify contents of person
+  }
 }

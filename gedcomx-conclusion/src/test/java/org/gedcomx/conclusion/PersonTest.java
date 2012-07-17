@@ -2,7 +2,6 @@ package org.gedcomx.conclusion;
 
 import org.gedcomx.common.*;
 import org.gedcomx.types.*;
-import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
@@ -10,6 +9,7 @@ import java.util.List;
 
 import static org.gedcomx.rt.SerializationUtil.processThroughJson;
 import static org.gedcomx.rt.SerializationUtil.processThroughXml;
+import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertTrue;
 
 
@@ -25,7 +25,7 @@ public class PersonTest {
   static public void testPersonXml() throws Exception {
     Person person = create();
     person = processThroughXml(person);
-    assertEquals(person);
+    assertPersonEquals(person);
   }
 
   /**
@@ -34,7 +34,7 @@ public class PersonTest {
   static public void testPersonJson() throws Exception {
     Person person = create();
     person = processThroughJson(person);
-    assertEquals(person);
+    assertPersonEquals(person);
   }
 
   static Person create() {
@@ -141,7 +141,6 @@ public class PersonTest {
     attribution.setContributor(new ResourceReference());
     attribution.getContributor().setResource(URI.create("urn:source-reference-attribution"));
     attributedSourceReference.setAttribution(attribution);
-    attributedSourceReference.setSource(URI.create("urn:source-uri"));
     attributedSourceReference.setId("source-reference-id");
     attributedSourceReference.setKnownType(SourceReferenceType.WorkingConclusion);
     attributedSourceReference.setSourceDescription(new ResourceReference());
@@ -158,75 +157,74 @@ public class PersonTest {
     return person;
   }
 
-  static void assertEquals(Person person) {
+  static void assertPersonEquals(Person person) {
     Fact fact;
     Fact event;
     Name name;
     SourceReference attributedSourceReference;
-    AssertJUnit.assertEquals(GenderType.Male, person.getGender().getKnownType());
+    assertEquals(GenderType.Male, person.getGender().getKnownType());
 
-    AssertJUnit.assertEquals(2, person.getIdentifiers().size());
-    AssertJUnit.assertEquals(IdentifierType.Forwarded, person.getIdentifiers().get(0).getKnownType());
-    AssertJUnit.assertEquals("forward-value", person.getIdentifiers().get(0).getValue());
-    AssertJUnit.assertEquals(IdentifierType.Primary, person.getIdentifiers().get(1).getKnownType());
-    AssertJUnit.assertEquals("pal", person.getIdentifiers().get(1).getValue());
+    assertEquals(2, person.getIdentifiers().size());
+    assertEquals(IdentifierType.Forwarded, person.getIdentifiers().get(0).getKnownType());
+    assertEquals("forward-value", person.getIdentifiers().get(0).getValue());
+    assertEquals(IdentifierType.Primary, person.getIdentifiers().get(1).getKnownType());
+    assertEquals("pal", person.getIdentifiers().get(1).getValue());
 
-    AssertJUnit.assertEquals(2, person.getFacts().size());
+    assertEquals(2, person.getFacts().size());
     fact = person.getFirstFactOfType(FactType.Occupation);
-    AssertJUnit.assertEquals("urn:fact-attribution", fact.getAttribution().getContributor().getResource().toString());
-    AssertJUnit.assertEquals("original date", fact.getDate().getOriginal());
-    AssertJUnit.assertEquals("normalized date", fact.getDate().getFormal().getText());
-    AssertJUnit.assertEquals(DatePartType.Years, fact.getDate().getFormal().getKnownValue(DatePartType.class));
-    AssertJUnit.assertEquals("urn:date", fact.getDate().getFormal().getDatatype().toString());
-    AssertJUnit.assertEquals("fact-id", fact.getId());
-    AssertJUnit.assertEquals(FactType.Occupation, fact.getKnownType());
-    AssertJUnit.assertEquals("original place", fact.getPlace().getOriginal());
-    AssertJUnit.assertEquals("normalized place", fact.getPlace().getFormal().getText());
-    AssertJUnit.assertEquals(PlacePartType.Cemetery, fact.getPlace().getFormal().getKnownValue(PlacePartType.class));
-    AssertJUnit.assertEquals("urn:date", fact.getDate().getFormal().getDatatype().toString());
-    AssertJUnit.assertEquals("fact-value", fact.getOriginal());
+    assertEquals("urn:fact-attribution", fact.getAttribution().getContributor().getResource().toString());
+    assertEquals("original date", fact.getDate().getOriginal());
+    assertEquals("normalized date", fact.getDate().getFormal().getText());
+    assertEquals(DatePartType.Years, fact.getDate().getFormal().getKnownValue(DatePartType.class));
+    assertEquals("urn:date", fact.getDate().getFormal().getDatatype().toString());
+    assertEquals("fact-id", fact.getId());
+    assertEquals(FactType.Occupation, fact.getKnownType());
+    assertEquals("original place", fact.getPlace().getOriginal());
+    assertEquals("normalized place", fact.getPlace().getFormal().getText());
+    assertEquals(PlacePartType.Cemetery, fact.getPlace().getFormal().getKnownValue(PlacePartType.class));
+    assertEquals("urn:date", fact.getDate().getFormal().getDatatype().toString());
+    assertEquals("fact-value", fact.getOriginal());
 
     event = person.getFirstFactOfType(FactType.Adoption);
-    AssertJUnit.assertEquals("urn:event-attribution", event.getAttribution().getContributor().getResource().toString());
-    AssertJUnit.assertEquals("original date", event.getDate().getOriginal());
-    AssertJUnit.assertEquals("normalized date", event.getDate().getFormal().getText());
-    AssertJUnit.assertEquals(DatePartType.Years, event.getDate().getFormal().getKnownValue(DatePartType.class));
-    AssertJUnit.assertEquals("urn:date", event.getDate().getFormal().getDatatype().toString());
-    AssertJUnit.assertEquals("event-id", event.getId());
-    AssertJUnit.assertEquals(FactType.Adoption, event.getKnownType());
-    AssertJUnit.assertEquals("original place", event.getPlace().getOriginal());
-    AssertJUnit.assertEquals("normalized place", event.getPlace().getFormal().getText());
-    AssertJUnit.assertEquals(PlacePartType.Cemetery, event.getPlace().getFormal().getKnownValue(PlacePartType.class));
-    AssertJUnit.assertEquals("urn:date", event.getDate().getFormal().getDatatype().toString());
+    assertEquals("urn:event-attribution", event.getAttribution().getContributor().getResource().toString());
+    assertEquals("original date", event.getDate().getOriginal());
+    assertEquals("normalized date", event.getDate().getFormal().getText());
+    assertEquals(DatePartType.Years, event.getDate().getFormal().getKnownValue(DatePartType.class));
+    assertEquals("urn:date", event.getDate().getFormal().getDatatype().toString());
+    assertEquals("event-id", event.getId());
+    assertEquals(FactType.Adoption, event.getKnownType());
+    assertEquals("original place", event.getPlace().getOriginal());
+    assertEquals("normalized place", event.getPlace().getFormal().getText());
+    assertEquals(PlacePartType.Cemetery, event.getPlace().getFormal().getKnownValue(PlacePartType.class));
+    assertEquals("urn:date", event.getDate().getFormal().getDatatype().toString());
 
-    AssertJUnit.assertEquals(1, person.getNames().size());
+    assertEquals(1, person.getNames().size());
     name = person.getNames().iterator().next();
     assertTrue(name.getPreferred());
-    AssertJUnit.assertEquals(1, name.getAlternateForms().size());
-    AssertJUnit.assertEquals("alternate name form", name.getAlternateForms().get(0).getFullText());
-    AssertJUnit.assertEquals(1, name.getAlternateForms().get(0).getParts().size());
-    AssertJUnit.assertEquals("alternate name part", name.getAlternateForms().get(0).getParts().get(0).getText());
-    AssertJUnit.assertEquals(NamePartType.Given, name.getAlternateForms().get(0).getParts().get(0).getKnownType());
-    AssertJUnit.assertEquals("urn:name-attribution", name.getAttribution().getContributor().getResource().toString());
-    AssertJUnit.assertEquals("name-id", name.getId());
-    AssertJUnit.assertEquals(NameType.Formal, name.getKnownType());
-    AssertJUnit.assertEquals("primary form", name.getPrimaryForm().getFullText());
-    AssertJUnit.assertEquals(1, name.getPrimaryForm().getParts().size());
-    AssertJUnit.assertEquals("primary surname", name.getPrimaryForm().getParts().get(0).getText());
-    AssertJUnit.assertEquals(NamePartType.Surname, name.getPrimaryForm().getParts().get(0).getKnownType());
+    assertEquals(1, name.getAlternateForms().size());
+    assertEquals("alternate name form", name.getAlternateForms().get(0).getFullText());
+    assertEquals(1, name.getAlternateForms().get(0).getParts().size());
+    assertEquals("alternate name part", name.getAlternateForms().get(0).getParts().get(0).getText());
+    assertEquals(NamePartType.Given, name.getAlternateForms().get(0).getParts().get(0).getKnownType());
+    assertEquals("urn:name-attribution", name.getAttribution().getContributor().getResource().toString());
+    assertEquals("name-id", name.getId());
+    assertEquals(NameType.Formal, name.getKnownType());
+    assertEquals("primary form", name.getPrimaryForm().getFullText());
+    assertEquals(1, name.getPrimaryForm().getParts().size());
+    assertEquals("primary surname", name.getPrimaryForm().getParts().get(0).getText());
+    assertEquals(NamePartType.Surname, name.getPrimaryForm().getParts().get(0).getKnownType());
 
-    AssertJUnit.assertEquals("pal", person.getPersistentId().toString());
+    assertEquals("pal", person.getPersistentId().toString());
 
-    AssertJUnit.assertEquals(1, person.getSourceReferences().size());
+    assertEquals(1, person.getSourceReferences().size());
     attributedSourceReference = person.getSourceReferences().iterator().next();
-    AssertJUnit.assertEquals("urn:source-reference-attribution", attributedSourceReference.getAttribution().getContributor().getResource().toString());
-    AssertJUnit.assertEquals("urn:source-uri", attributedSourceReference.getSource().toString());
-    AssertJUnit.assertEquals("source-reference-id", attributedSourceReference.getId());
-    AssertJUnit.assertEquals(SourceReferenceType.WorkingConclusion, attributedSourceReference.getKnownType());
-    AssertJUnit.assertEquals("urn:source-description", attributedSourceReference.getSourceDescription().getResource().toString());
+    assertEquals("urn:source-reference-attribution", attributedSourceReference.getAttribution().getContributor().getResource().toString());
+    assertEquals("source-reference-id", attributedSourceReference.getId());
+    assertEquals(SourceReferenceType.WorkingConclusion, attributedSourceReference.getKnownType());
+    assertEquals("urn:source-description", attributedSourceReference.getSourceDescription().getResource().toString());
 
-    AssertJUnit.assertEquals("pid", person.getId());
-    AssertJUnit.assertEquals("this person existed.", person.getAttribution().getChangeMessage());
+    assertEquals("pid", person.getId());
+    assertEquals("this person existed.", person.getAttribution().getChangeMessage());
 
     assertTrue(person.getLiving());
   }

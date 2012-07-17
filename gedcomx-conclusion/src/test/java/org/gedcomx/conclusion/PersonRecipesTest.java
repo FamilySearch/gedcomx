@@ -35,11 +35,14 @@ public class PersonRecipesTest extends RecipeTest {
       .applicableTo(Person.class);
 
     Person person = create();
+
     Snippet snippet = new Snippet();
-    person = processThroughXml(person, snippet);
-    person = processThroughJson(person, snippet);
+    Person personThurXml = processThroughXml(person, snippet);
+    Person personThurJson = processThroughJson(person, snippet);
     addSnippet(snippet);
-//    assertEquals(person);
+
+    verifyPerson(personThurXml);
+    verifyPerson(personThurJson);
   }
 
   public void testMarriageWithNoSpouse() throws Exception {
@@ -55,11 +58,14 @@ public class PersonRecipesTest extends RecipeTest {
     fact.setPlace(new Place());
     fact.getPlace().setOriginal("New Kent, Virginia");
     person.addFact(fact);
+
     Snippet snippet = new Snippet("Note that the recommendation is to add a marriage fact directly to the person. It is not recommended to create a relationship with only one person.");
-    person = processThroughXml(person, snippet);
-    person = processThroughJson(person, snippet);
+    Person personThruXml = processThroughXml(person, snippet);
+    Person personThruJson = processThroughJson(person, snippet);
     addSnippet(snippet);
-//    assertEquals(person);
+
+    verifyPerson(personThruXml);
+    verifyPerson(personThruJson);
   }
 
 
@@ -142,7 +148,6 @@ public class PersonRecipesTest extends RecipeTest {
     attribution.setContributor(new ResourceReference());
     attribution.getContributor().setResource(URI.create("https://familysearch.org/platform/contributors/STV-WXZY"));
     attributedSourceReference.setAttribution(attribution);
-    attributedSourceReference.setSource(URI.create("http://en.wikipedia.org/wiki/George_washington"));
     attributedSourceReference.setKnownType(SourceReferenceType.ExtractedConclusion);
     sources.add(attributedSourceReference);
     person.setSourceReferences(sources);
@@ -152,8 +157,7 @@ public class PersonRecipesTest extends RecipeTest {
     return person;
   }
 
-  static void assertEquals(Person person) {
-    //todo:
+  static void verifyPerson(Person person) {
+    //TODO: verify contents of person
   }
-
 }

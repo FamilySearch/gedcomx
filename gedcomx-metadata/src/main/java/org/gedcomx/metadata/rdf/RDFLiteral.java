@@ -18,17 +18,18 @@ package org.gedcomx.metadata.rdf;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.gedcomx.common.URI;
 import org.gedcomx.rt.CommonModels;
-import org.gedcomx.rt.SupportsExtensionAttributes;
 
 import javax.xml.XMLConstants;
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.XmlValue;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
-import javax.xml.namespace.QName;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.Map;
+
 
 /**
  * An element representing an RDF literal. For more information, see <a href="http://www.w3.org/TR/rdf-schema/#ch_literal">RDF Schema, Section 2.3</a>
@@ -54,7 +55,6 @@ public class RDFLiteral {
   private String lang;
   private URI datatype;
   private String value;
-  private Map<QName, String> extensionAttributes;
 
   public RDFLiteral() {
   }
@@ -156,19 +156,5 @@ public class RDFLiteral {
     GregorianCalendar gc = new GregorianCalendar();
     gc.setTime(valueAsDate);
     setValue(DATATYPE_FACTORY.newXMLGregorianCalendar(gc).toXMLFormat());
-  }
-
-  /**
-   * Add a custom extension attribute.
-   *
-   * @param qname The qname of the attribute.
-   * @param value The value of the attribute.
-   */
-  public void addExtensionAttribute(QName qname, String value) {
-    if (this.extensionAttributes == null) {
-      this.extensionAttributes = new HashMap<QName, String>();
-    }
-
-    this.extensionAttributes.put(qname, value);
   }
 }

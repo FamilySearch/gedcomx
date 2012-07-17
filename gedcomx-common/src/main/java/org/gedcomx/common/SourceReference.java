@@ -26,11 +26,8 @@ import org.gedcomx.types.SourceReferenceType;
 import org.gedcomx.types.TypeReference;
 
 import javax.xml.bind.annotation.*;
-import javax.xml.namespace.QName;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 /**
@@ -48,9 +45,7 @@ public class SourceReference implements Attributable, SupportsExtensionElements 
   @JsonProperty
   private TypeReference<SourceReferenceType> type;
   private ResourceReference sourceDescription;
-  private ResourceReference source;
   private Attribution attribution;
-  private Map<QName, String> extensionAttributes;
   private List<Object> extensionElements;
 
   /**
@@ -121,41 +116,6 @@ public class SourceReference implements Attributable, SupportsExtensionElements 
   }
 
   /**
-   * The URI to the resource. For more information, see <a href="http://www.w3.org/TR/webarch/#identification">Architecture of the World
-   * Wide Web, Volume One, Section 2</a>
-   *
-   * @link http://www.w3.org/TR/webarch/#identification
-   * @return The URI to the resource.
-   */
-  public ResourceReference getSource() {
-    return source;
-  }
-
-  /**
-   * The URI to the resource. For more information, see <a href="http://www.w3.org/TR/webarch/#identification">Architecture of the World
-   * Wide Web, Volume One, Section 2</a>
-   *
-   * @link http://www.w3.org/TR/webarch/#identification
-   * @param source The URI to the resource.
-   */
-  public void setSource(ResourceReference source) {
-    this.source = source;
-  }
-
-  /**
-   * The URI to the resource. For more information, see <a href="http://www.w3.org/TR/webarch/#identification">Architecture of the World
-   * Wide Web, Volume One, Section 2</a>
-   *
-   * @link http://www.w3.org/TR/webarch/#identification
-   * @param source The URI to the resource.
-   */
-  @XmlTransient
-  @JsonIgnore
-  public void setSource(URI source) {
-    this.source = source != null  ? new ResourceReference(source) : null;
-  }
-
-  /**
    * The attribution metadata for this source reference.
    *
    * @return The attribution metadata for this source reference.
@@ -202,20 +162,6 @@ public class SourceReference implements Attributable, SupportsExtensionElements 
   @JsonIgnore
   public void setSourceDescription(URI descriptionRef) {
     this.sourceDescription = descriptionRef != null ? new ResourceReference(descriptionRef) : null;
-  }
-
-  /**
-   * Add a custom extension attribute.
-   *
-   * @param qname The qname of the attribute.
-   * @param value The value of the attribute.
-   */
-  public void addExtensionAttribute(QName qname, String value) {
-    if (this.extensionAttributes == null) {
-      this.extensionAttributes = new HashMap<QName, String>();
-    }
-
-    this.extensionAttributes.put(qname, value);
   }
 
   /**

@@ -24,10 +24,14 @@ public class RelationshipRecipesTest extends RecipeTest {
       .applicableTo(Relationship.class);
 
     Relationship relationship = createTestRelationship();
+
     Snippet snippet = new Snippet();
-    relationship = processThroughXml(relationship, snippet);
-    relationship = processThroughJson(relationship, snippet);
-    assertTestRelationship(relationship);
+    Relationship relationshipThruXml = processThroughXml(relationship, snippet);
+    Relationship relationshipThruJson = processThroughJson(relationship, snippet);
+    addSnippet(snippet);
+
+    verifyRelationship(relationshipThruXml);
+    verifyRelationship(relationshipThruJson);
   }
 
   private Relationship createTestRelationship() {
@@ -61,13 +65,12 @@ public class RelationshipRecipesTest extends RecipeTest {
     relationship.getPerson2().setResource(URI.create("https://familysearch.org/platform/persons/FFF-FFFF"));
     SourceReference sourceReference = new SourceReference();
     sourceReference.setId("5678");
-    sourceReference.setSource(URI.create("http://en.wikipedia.org/wiki/George_washington"));
     sourceReference.setKnownType(SourceReferenceType.ExtractedConclusion);
     relationship.addSourceReference(sourceReference);
     return relationship;
   }
 
-  private void assertTestRelationship(Relationship relationship) {
+  private void verifyRelationship(Relationship relationship) {
     //todo
   }
 
