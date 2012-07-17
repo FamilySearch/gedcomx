@@ -38,7 +38,7 @@ import java.util.Map;
  * @author Ryan Heaton
  */
 @XmlType ( name = "Literal", namespace = CommonModels.RDFS_NAMESPACE )
-public final class RDFLiteral implements SupportsExtensionAttributes {
+public class RDFLiteral {
 
   private static final URI DATE_DATATYPE = URI.create("http://www.w3.org/2001/XMLSchema#dateTime");
   private static final DatatypeFactory DATATYPE_FACTORY;
@@ -156,27 +156,6 @@ public final class RDFLiteral implements SupportsExtensionAttributes {
     GregorianCalendar gc = new GregorianCalendar();
     gc.setTime(valueAsDate);
     setValue(DATATYPE_FACTORY.newXMLGregorianCalendar(gc).toXMLFormat());
-  }
-
-  /**
-   * Attribute extensions to the property.
-   *
-   * @return Attribute extensions to the property.
-   */
-  @XmlAnyAttribute
-  @JsonIgnore
-  public Map<QName, String> getExtensionAttributes() {
-    return extensionAttributes;
-  }
-
-  /**
-   * Attribute extensions to the property.
-   *
-   * @param extensionAttributes Attribute extensions to the property.
-   */
-  @JsonIgnore
-  public void setExtensionAttributes(Map<QName, String> extensionAttributes) {
-    this.extensionAttributes = extensionAttributes;
   }
 
   /**

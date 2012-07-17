@@ -43,7 +43,7 @@ import java.util.Map;
  * @author Ryan Heaton
  */
 @XmlType ( name = "Resource", namespace = CommonModels.RDFS_NAMESPACE )
-public final class RDFValue implements SupportsExtensionAttributes, SupportsExtensionElements {
+public final class RDFValue implements SupportsExtensionElements {
 
   private String id;
   private String lang;
@@ -189,27 +189,6 @@ public final class RDFValue implements SupportsExtensionAttributes, SupportsExte
    */
   public void setResource(URI resource) {
     this.resource = resource;
-  }
-
-  /**
-   * Custom attributes applicable to this resource reference.
-   *
-   * @return Custom attributes applicable to this resource reference.
-   */
-  @XmlAnyAttribute
-  @JsonIgnore
-  public Map<QName, String> getExtensionAttributes() {
-    return extensionAttributes;
-  }
-
-  /**
-   * Custom attributes applicable to this resource reference.
-   *
-   * @param extensionAttributes Custom attributes applicable to this resource reference.
-   */
-  @JsonIgnore
-  public void setExtensionAttributes(Map<QName, String> extensionAttributes) {
-    this.extensionAttributes = extensionAttributes;
   }
 
   /**

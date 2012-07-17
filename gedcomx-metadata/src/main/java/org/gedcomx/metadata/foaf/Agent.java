@@ -44,7 +44,7 @@ import java.util.Map;
  * @author Ryan Heaton
  */
 @XmlType (name = "Agent")
-public abstract class Agent implements SupportsExtensionAttributes, SupportsExtensionElements {
+public abstract class Agent implements SupportsExtensionElements {
 
   private String id;
   private RDFLiteral name;
@@ -220,27 +220,6 @@ public abstract class Agent implements SupportsExtensionAttributes, SupportsExte
   @JsonProperty ("addresses")
   public void setAddresses(List<Address> addresses) {
     this.addresses = addresses;
-  }
-
-  /**
-   * Custom attributes applicable as part of this metadata.
-   *
-   * @return Custom attributes applicable as part of this metadata.
-   */
-  @XmlAnyAttribute
-  @JsonIgnore
-  public Map<QName, String> getExtensionAttributes() {
-    return extensionAttributes;
-  }
-
-  /**
-   * Custom attributes applicable as part of this metadata.
-   *
-   * @param extensionAttributes Custom attributes applicable as part of this metadata.
-   */
-  @JsonIgnore
-  public void setExtensionAttributes(Map<QName, String> extensionAttributes) {
-    this.extensionAttributes = extensionAttributes;
   }
 
   /**

@@ -19,10 +19,9 @@ import org.codehaus.enunciate.doc.DocumentationExample;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.gedcomx.rt.CommonModels;
-import org.gedcomx.rt.SupportsExtensionAttributes;
+import org.gedcomx.rt.RDFRange;
 import org.gedcomx.rt.SupportsExtensionElements;
 import org.gedcomx.rt.json.JsonElementWrapper;
-import org.gedcomx.rt.RDFRange;
 import org.gedcomx.types.SourceReferenceType;
 import org.gedcomx.types.TypeReference;
 
@@ -42,7 +41,7 @@ import java.util.Map;
 @XmlRootElement ( name = "sourceReference" )
 @JsonElementWrapper ( name = "source-references" )
 @XmlType ( name = "SourceReference" )
-public class SourceReference implements Attributable, SupportsExtensionAttributes, SupportsExtensionElements {
+public class SourceReference implements Attributable, SupportsExtensionElements {
 
   private String id;
   @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
@@ -203,27 +202,6 @@ public class SourceReference implements Attributable, SupportsExtensionAttribute
   @JsonIgnore
   public void setSourceDescription(URI descriptionRef) {
     this.sourceDescription = descriptionRef != null ? new ResourceReference(descriptionRef) : null;
-  }
-
-  /**
-   * Custom attributes applicable to this resource reference.
-   *
-   * @return Custom attributes applicable to this resource reference.
-   */
-  @XmlAnyAttribute
-  @JsonIgnore
-  public Map<QName, String> getExtensionAttributes() {
-    return extensionAttributes;
-  }
-
-  /**
-   * Custom attributes applicable to this resource reference.
-   *
-   * @param extensionAttributes Custom attributes applicable to this resource reference.
-   */
-  @JsonIgnore
-  public void setExtensionAttributes(Map<QName, String> extensionAttributes) {
-    this.extensionAttributes = extensionAttributes;
   }
 
   /**

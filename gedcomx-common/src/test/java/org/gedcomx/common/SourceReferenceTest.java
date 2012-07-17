@@ -44,8 +44,6 @@ public class SourceReferenceTest {
     assertEquals("urn:srcDescInstance", custom.getSource().getSourceDescription().toString());
     assertEquals("urn:someid", custom.getSource().getSource().toString());
     assertEquals("refid", custom.getSource().getId());
-    assertEquals("attribVal1", custom.getSource().getExtensionAttributes().get(qnameAttrib1));
-    assertEquals("attribVal2", custom.getSource().getExtensionAttributes().get(qnameAttrib2));
     assertEquals("alt1", ((CustomEntity) custom.getSource().getExtensionElements().get(0)).getId());
     assertEquals("alt2", ((CustomEntity) custom.getSource().getExtensionElements().get(1)).getId());
     assertNull(custom.getSource().findExtensionOfType(String.class));
