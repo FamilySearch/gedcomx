@@ -48,7 +48,7 @@ public enum DatePartType {
    * @param qname The qname.
    * @return The enumeration.
    */
-  public static DatePartType fromQName(URI qname) {
+  public static DatePartType fromQNameURI(URI qname) {
     return org.codehaus.enunciate.XmlQNameEnumUtil.fromURIValue(qname.toString(), DatePartType.class);
   }
 
