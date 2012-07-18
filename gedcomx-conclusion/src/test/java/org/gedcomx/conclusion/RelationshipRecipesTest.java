@@ -66,7 +66,7 @@ public class RelationshipRecipesTest extends RecipeTest {
     SourceReference sourceReference = new SourceReference();
     sourceReference.setId("5678");
     sourceReference.setKnownType(SourceReferenceType.ExtractedConclusion);
-    relationship.addSourceReference(sourceReference);
+    relationship.addSource(sourceReference);
     return relationship;
   }
 

@@ -88,16 +88,16 @@ public abstract class Conclusion implements Attributable, ReferencesSources, Has
   }
 
   /**
-   * Add a sourceReference.
+   * Add a source reference.
    *
-   * @param sourceReference The sourceReference to be added.
+   * @param source The source reference to be added.
    */
-  public void addSourceReference(SourceReference sourceReference) {
-    if (sourceReference != null) {
+  public void addSource(SourceReference source) {
+    if (source != null) {
       if (sources == null) {
         sources = new ArrayList<SourceReference>();
       }
-      sources.add(sourceReference);
+      sources.add(source);
     }
   }
 

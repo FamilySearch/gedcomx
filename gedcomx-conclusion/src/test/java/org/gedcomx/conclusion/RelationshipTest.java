@@ -61,7 +61,7 @@ public class RelationshipTest {
     relationship.getPerson2().setResource(URI.create("urn:person2"));
     SourceReference sourceReference = new SourceReference();
     sourceReference.setId("source-ref");
-    relationship.addSourceReference(sourceReference);
+    relationship.addSource(sourceReference);
     return relationship;
   }
 
