@@ -40,7 +40,7 @@ import java.util.List;
 public abstract class Conclusion implements Attributable, ReferencesSources, HasNotes, SupportsExtensionElements {
 
   private String id;
-  private List<SourceReference> sourceReferences;
+  private List<SourceReference> sources;
   private List<Note> notes;
   private Attribution attribution;
   protected List<Object> extensionElements;
@@ -70,11 +70,11 @@ public abstract class Conclusion implements Attributable, ReferencesSources, Has
    *
    * @return The source references for a conclusion.
    */
-  @XmlElement (name="sourceReference")
-  @JsonProperty ("sourceReferences")
-  @JsonName ("sourceReferences")
-  public List<SourceReference> getSourceReferences() {
-    return sourceReferences;
+  @XmlElement (name="source")
+  @JsonProperty ("sources")
+  @JsonName ("sources")
+  public List<SourceReference> getSources() {
+    return sources;
   }
 
   /**
@@ -82,9 +82,9 @@ public abstract class Conclusion implements Attributable, ReferencesSources, Has
    *
    * @param sourceReferences The source references for a conclusion.
    */
-  @JsonProperty("sourceReferences")
-  public void setSourceReferences(List<SourceReference> sourceReferences) {
-    this.sourceReferences = sourceReferences;
+  @JsonProperty("sources")
+  public void setSources(List<SourceReference> sourceReferences) {
+    this.sources = sourceReferences;
   }
 
   /**
@@ -94,10 +94,10 @@ public abstract class Conclusion implements Attributable, ReferencesSources, Has
    */
   public void addSourceReference(SourceReference sourceReference) {
     if (sourceReference != null) {
-      if (sourceReferences == null) {
-        sourceReferences = new ArrayList<SourceReference>();
+      if (sources == null) {
+        sources = new ArrayList<SourceReference>();
       }
-      sourceReferences.add(sourceReference);
+      sources.add(sourceReference);
     }
   }
 

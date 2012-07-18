@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.conclusion;
+package org.gedcomx.common;
 
-import org.gedcomx.common.SourceReference;
 import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.RDFDomain;
 import org.gedcomx.rt.RDFRange;
@@ -42,12 +41,12 @@ public interface ReferencesSources {
   @RDFDomain ({}) //any resource can be identified persistently.
   @RDFRange ({}) //any resource can be identified as a source.
   @SuppressWarnings("rdf:no_range")
-  List<SourceReference> getSourceReferences();
+  List<SourceReference> getSources();
 
   /**
    * The references to the sources of a conclusion resource.
    *
    * @param notes The references to the sources of a conclusion resource.
    */
-  void setSourceReferences(List<SourceReference> notes);
+  void setSources(List<SourceReference> notes);
 }

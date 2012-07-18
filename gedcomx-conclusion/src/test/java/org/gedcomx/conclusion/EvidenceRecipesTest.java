@@ -121,7 +121,7 @@ public class EvidenceRecipesTest extends RecipeTest {
     attributedSourceReference.setSourceDescription(new ResourceReference());
     attributedSourceReference.getSourceDescription().setResource(URI.create("https://familysearch.org/platform/sources/GGG-GGGG"));
     sources.add(attributedSourceReference);
-    person.setSourceReferences(sources);
+    person.setSources(sources);
 
     person.setId("KWCD-QBC");
 
@@ -227,7 +227,7 @@ public class EvidenceRecipesTest extends RecipeTest {
     attributedSourceReference.setSourceDescription(new ResourceReference());
     attributedSourceReference.getSourceDescription().setResource(URI.create("https://familysearch.org/platform/sources/KKK-KKKK"));
     sources.add(attributedSourceReference);
-    person.setSourceReferences(sources);
+    person.setSources(sources);
 
     person.setId("K2VD-4P2");
 
@@ -313,7 +313,7 @@ public class EvidenceRecipesTest extends RecipeTest {
     attribution.getContributor().setResource(URI.create("https://familysearch.org/platform/contributors/STV-WXZY"));
     attributedSourceReference.setAttribution(attribution);
     sources.add(attributedSourceReference);
-    person.setSourceReferences(sources);
+    person.setSources(sources);
 
     person.setId("KWCD-QBC");
 
@@ -361,7 +361,7 @@ public class EvidenceRecipesTest extends RecipeTest {
     attributedSourceReference.setSourceDescription(new ResourceReference());
     attributedSourceReference.getSourceDescription().setResource(URI.create("https://familysearch.org/platform/sources/JJJ-JJJJ"));
     sources.add(attributedSourceReference);
-    person.setSourceReferences(sources);
+    person.setSources(sources);
 
     person.setId("KWCD-QBC");
 

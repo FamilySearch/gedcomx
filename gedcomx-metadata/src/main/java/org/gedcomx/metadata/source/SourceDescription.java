@@ -18,8 +18,10 @@ package org.gedcomx.metadata.source;
 import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.gedcomx.common.HasNotes;
 import org.gedcomx.common.LiteralValue;
 import org.gedcomx.common.Note;
+import org.gedcomx.common.ReferencesSources;
 import org.gedcomx.common.ResourceReference;
 import org.gedcomx.common.SourceReference;
 import org.gedcomx.common.URI;
@@ -37,12 +39,12 @@ import java.util.List;
 @XmlRootElement
 @XmlType ( name = "SourceDescription" )
 @JsonElementWrapper ( name = "source-descriptions" )
-public class SourceDescription {
+public class SourceDescription implements HasNotes, ReferencesSources {
   private String id;
   private SourceCitation citation;
   private URI about;
   private ResourceReference mediator;
-  private List<SourceReference> sourceReferences;
+  private List<SourceReference> sources;
   private String displayName;
   private List<LiteralValue> alternateNames;
   private List<Note> notes;
@@ -138,21 +140,21 @@ public class SourceDescription {
    *
    * @return References to any sources to which this source is related (usually applicable to sources that are derived from or contained in another source).
    */
-  @XmlElement (name="sourceReference")
-  @JsonProperty ("sourceReferences")
-  @JsonName ("sourceReferences")
-  public List<SourceReference> getSourceReferences() {
-    return sourceReferences;
+  @XmlElement (name="source")
+  @JsonProperty ("sources")
+  @JsonName ("sources")
+  public List<SourceReference> getSources() {
+    return sources;
   }
 
   /**
    * References to any sources to which this source is related (usually applicable to sources that are derived from or contained in another source).
    *
-   * @param sourceReferences References to any sources to which this source is related (usually applicable to sources that are derived from or contained in another source).
+   * @param sources References to any sources to which this source is related (usually applicable to sources that are derived from or contained in another source).
    */
-  @JsonProperty ("sourceReferences")
-  public void setSourceReferences(List<SourceReference> sourceReferences) {
-    this.sourceReferences = sourceReferences;
+  @JsonProperty ("sources")
+  public void setSources(List<SourceReference> sources) {
+    this.sources = sources;
   }
 
   /**

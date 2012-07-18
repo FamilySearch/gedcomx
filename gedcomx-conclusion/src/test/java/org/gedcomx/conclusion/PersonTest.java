@@ -95,11 +95,11 @@ public class PersonTest {
     normalized.setDatatype(URI.create("urn:place"));
     normalized.setKnownValue(PlacePartType.Cemetery);
     event.getPlace().setFormal(normalized);
-    event.setSourceReferences(new ArrayList<SourceReference>());
+    event.setSources(new ArrayList<SourceReference>());
     SourceReference eventSource = new SourceReference();
     eventSource.setId("event-source");
     eventSource.setAttribution(new Attribution());
-    event.getSourceReferences().add(eventSource);
+    event.getSources().add(eventSource);
 
     List<Fact> facts = person.getFacts();
     facts.add(event);
@@ -146,7 +146,7 @@ public class PersonTest {
     attributedSourceReference.setSourceDescription(new ResourceReference());
     attributedSourceReference.getSourceDescription().setResource(URI.create("urn:source-description"));
     sources.add(attributedSourceReference);
-    person.setSourceReferences(sources);
+    person.setSources(sources);
 
     person.setId("pid");
     person.setAttribution(new Attribution());
@@ -216,8 +216,8 @@ public class PersonTest {
 
     assertEquals("pal", person.getPersistentId().toString());
 
-    assertEquals(1, person.getSourceReferences().size());
-    attributedSourceReference = person.getSourceReferences().iterator().next();
+    assertEquals(1, person.getSources().size());
+    attributedSourceReference = person.getSources().iterator().next();
     assertEquals("urn:source-reference-attribution", attributedSourceReference.getAttribution().getContributor().getResource().toString());
     assertEquals("source-reference-id", attributedSourceReference.getId());
     assertEquals(SourceReferenceType.WorkingConclusion, attributedSourceReference.getKnownType());

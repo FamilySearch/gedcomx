@@ -68,7 +68,7 @@
         <Collapsed>False</Collapsed>
         <Member type="Field">public URI persistentId</Member>
         <Member type="Field">public String bibliographicCitation</Member>
-        <Member type="Field">public ResourceReference[] sourceReferences</Member>
+        <Member type="Field">public ResourceReference[] sources</Member>
         <Member type="Field">public ResourceReference[] notes</Member>
         <Modifier>None</Modifier>
       </Entity>

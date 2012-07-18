@@ -150,7 +150,7 @@ public class PersonRecipesTest extends RecipeTest {
     attributedSourceReference.setAttribution(attribution);
     attributedSourceReference.setKnownType(SourceReferenceType.ExtractedConclusion);
     sources.add(attributedSourceReference);
-    person.setSourceReferences(sources);
+    person.setSources(sources);
 
     person.setId("BBB-BBBB");
 

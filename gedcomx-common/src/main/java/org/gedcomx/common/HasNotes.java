@@ -13,9 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.conclusion;
-
-import org.gedcomx.common.Note;
+package org.gedcomx.common;
 
 import javax.xml.bind.annotation.XmlType;
 import java.util.List;

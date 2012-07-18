@@ -73,7 +73,7 @@ public class RelationshipTest {
     assertEquals("relationship", relationship.getId());
     assertEquals(URI.create("urn:person1"), relationship.getPerson1().getResource());
     assertEquals(URI.create("urn:person2"), relationship.getPerson2().getResource());
-    assertEquals("source-ref", relationship.getSourceReferences().get(0).getId());
+    assertEquals("source-ref", relationship.getSources().get(0).getId());
   }
 
 }
