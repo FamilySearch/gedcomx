@@ -31,7 +31,7 @@ import java.util.List;
 
 
 /**
- * An attributable reference to a source for genealogical conclusions.
+ * An attributable reference to a description of a source.
  *
  * @author Ryan Heaton
  */

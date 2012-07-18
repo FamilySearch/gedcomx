@@ -29,42 +29,42 @@ import org.gedcomx.common.URI;
 public enum SourceReferenceType {
 
   /**
-   * An indication that the object making the reference is a component of the referenced object.
+   * An indication that the object making the reference is a component of the referenced source.
    */
   ComponentOf,
 
   /**
-   * An indication that the object making the reference is a preservation copy of the referenced object.
+   * An indication that the object making the reference is a preservation copy of the referenced source.
    */
   PreservationCopy,
 
   /**
-   * An indication that the object making the reference is an abstract of the referenced object.
+   * An indication that the object making the reference is an abstract of the referenced source.
    */
   Abstract,
 
   /**
-   * An indication that the object making the reference is a transcription (can be full or partial) of the referenced object.
+   * An indication that the object making the reference is a transcription (can be full or partial) of the referenced source.
    */
   Transcription,
 
   /**
-   * An indication that the object making the reference is a translation (can be full or partial) of the referenced object.
+   * An indication that the object making the reference is a translation (can be full or partial) of the referenced source.
    */
   Translation,
 
   /**
-   * An indication that the object making the reference is an extracted conclusion from the referenced object.
+   * An indication that the object making the reference is an extracted conclusion from the referenced source.
    */
   ExtractedConclusion,
 
   /**
-   * An indication that the object making the reference contains analysis involving the referenced object.
+   * An indication that the object making the reference contains analysis involving the referenced source.
    */
   Analysis,
 
   /**
-   * An indication that the object making the reference is a working conclusion based in part on the referenced object.
+   * An indication that the object making the reference is a working conclusion based in part on the referenced source.
    */
   WorkingConclusion,
 
