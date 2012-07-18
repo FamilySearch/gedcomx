@@ -131,7 +131,7 @@ public class LiteralValue {
     if (getValue() == null) {
       return null;
     }
-    else if (getDatatype() != null && !DATE_DATATYPE.equals(getDatatype())) {
+    else if ((getDatatype() == null) || (!DATE_DATATYPE.equals(getDatatype()))) {
       throw new IllegalStateException(String.format("Literal is of type %s, not of type %s.", getDatatype(), DATE_DATATYPE));
     }
 
