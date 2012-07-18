@@ -4,10 +4,9 @@ import org.gedcomx.common.Attribution;
 import org.gedcomx.common.ResourceReference;
 import org.gedcomx.common.SourceReference;
 import org.gedcomx.common.URI;
-import org.gedcomx.metadata.dc.DublinCoreDescriptionDecorator;
-import org.gedcomx.metadata.rdf.Description;
-import org.gedcomx.metadata.rdf.RDFLiteral;
-import org.gedcomx.metadata.rdf.RDFValue;
+import org.gedcomx.metadata.source.CitationField;
+import org.gedcomx.metadata.source.SourceCitation;
+import org.gedcomx.metadata.source.SourceDescription;
 import org.gedcomx.test.RecipeTest;
 import org.gedcomx.test.Snippet;
 import org.gedcomx.types.FactType;
@@ -19,6 +18,7 @@ import java.util.List;
 
 import static org.gedcomx.rt.SerializationUtil.processThroughJson;
 import static org.gedcomx.rt.SerializationUtil.processThroughXml;
+
 
 /**
  * Recipes for citing evidence in GEDCOM X.
@@ -36,27 +36,33 @@ public class EvidenceRecipesTest extends RecipeTest {
       .applicableTo(Person.class);
 
     Person person = createPersonCitingOnlineArtifact();
+
     Snippet snippet = new Snippet("The person.");
-    processThroughXml(person, snippet);
-    processThroughJson(person, snippet);
+    Person personThruXml = processThroughXml(person, snippet);
+    Person personThruJson = processThroughJson(person, snippet);
     addSnippet(snippet);
+
+    verifyPerson(personThruXml);
+    verifyPerson(personThruJson);
+
+    SourceDescription sourceDescription = createDescriptionOfOnlineArtifact();
 
     snippet = new Snippet("The description of the source. The URI to the description is \"https://familysearch.org/platform/sources/GGG-GGGG\".");
-    Description description = createDescriptionOfOnlineArtifact();
-    Description descriptionThruXml = processThroughXml(description, snippet);
-    Description descriptionThruJson = processThroughJson(description, snippet);
+    SourceDescription sourceDescriptionThruXml = processThroughXml(sourceDescription, snippet);
+    SourceDescription sourceDescriptionThruJson = processThroughJson(sourceDescription, snippet);
     addSnippet(snippet);
 
-    verifySourceDescription(descriptionThruXml);
-    verifySourceDescription(descriptionThruJson);
+    verifySourceDescription(sourceDescriptionThruXml);
+    verifySourceDescription(sourceDescriptionThruJson);
   }
 
-  static Description createDescriptionOfOnlineArtifact() {
-    return DublinCoreDescriptionDecorator.newInstance()
-      .bibliographicCitation(new RDFLiteral("\"United States Census, 1920,\" index and images, FamilySearch (https://familysearch.org/pal:/MM9.1.1/M8PT-4GN : accessed 31 May 2012), Israel H Heaton, , Kane, Utah."))
-      .title(new RDFLiteral("\"United States Census, 1920,\" Israel H Heaton, , Kane, Utah"))
-      .about(URI.create("https://familysearch.org/pal:/MM9.1.1/M8PT-4GN"))
-      .getDecoratedDescription();
+  static SourceDescription createDescriptionOfOnlineArtifact() {
+    SourceDescription sourceDescription = new SourceDescription();
+    sourceDescription.setCitation(new SourceCitation());
+    sourceDescription.getCitation().setValue("\"United States Census, 1920,\" index and images, FamilySearch (https://familysearch.org/pal:/MM9.1.1/M8PT-4GN : accessed 31 May 2012), Israel H Heaton, , Kane, Utah.");
+    sourceDescription.setDisplayName("\"United States Census, 1920,\" Israel H Heaton, , Kane, Utah");
+    sourceDescription.setAbout(URI.create("https://familysearch.org/pal:/MM9.1.1/M8PT-4GN"));
+    return sourceDescription;
   }
 
   static Person createPersonCitingOnlineArtifact() {
@@ -131,31 +137,38 @@ public class EvidenceRecipesTest extends RecipeTest {
       .applicableTo(Person.class);
 
     Person person = createPersonCitingPhysicalArtifact();
+
     Snippet snippet = new Snippet("The person.");
-    processThroughXml(person, snippet);
-    processThroughJson(person, snippet);
+    Person personThruXml = processThroughXml(person, snippet);
+    Person personThruJson = processThroughJson(person, snippet);
     addSnippet(snippet);
 
+    verifyPerson(personThruXml);
+    verifyPerson(personThruJson);
+
+    SourceDescription description = createDescriptionOfPhysicalArtifact();
+
     snippet = new Snippet("The description of the source. The URI to the description is \"https://familysearch.org/platform/sources/KKK-KKKK\".");
-    Description description = createDescriptionOfPhysicalArtifact();
-    Description descriptionThruXml = processThroughXml(description, snippet);
-    Description descriptionThruJson = processThroughJson(description, snippet);
+    SourceDescription descriptionThruXml = processThroughXml(description, snippet);
+    SourceDescription descriptionThruJson = processThroughJson(description, snippet);
     addSnippet(snippet);
 
     verifySourceDescription(descriptionThruXml);
     verifySourceDescription(descriptionThruJson);
   }
 
-  static Description createDescriptionOfPhysicalArtifact() {
-    return DublinCoreDescriptionDecorator.newInstance()
-      .bibliographicCitation(new RDFLiteral("Helen Kelly Brink, Some of the Descendants of Asa Phillips (1793-1844); Who were Born in Vermont and Who Settled in Steuben County, New York in 1802, (Marco Island, Florida, By the Author, 1992) p.34"))
-      .title(new RDFLiteral("Some of the Descendants of Asa Phillips (1793-1844); Who were Born in Vermont and Who Settled in Steuben County, New York in 1802"))
-      .creator(new RDFValue("Helen Kelly Brink"))
-      .publisher(new RDFValue("Helen Kelly Brink"))
-      .temporal(new RDFValue("1802"))
-      .spatial(new RDFValue("Steuben County, New York"))
-      .id("KKK-KKKK")
-      .getDecoratedDescription();
+  static SourceDescription createDescriptionOfPhysicalArtifact() {
+    SourceDescription sourceDescription = new SourceDescription();
+    sourceDescription.setId("KKK-KKKK");
+    sourceDescription.setCitation(new SourceCitation());
+    sourceDescription.getCitation().setValue("Helen Kelly Brink, Some of the Descendants of Asa Phillips (1793-1844); Who were Born in Vermont and Who Settled in Steuben County, New York in 1802, (Marco Island, Florida, By the Author, 1992) p.34");
+    sourceDescription.getCitation().setFields(new ArrayList<CitationField>());
+    sourceDescription.getCitation().getFields().add(new CitationField("title", "Some of the Descendants of Asa Phillips (1793-1844); Who were Born in Vermont and Who Settled in Steuben County, New York in 1802"));
+    sourceDescription.getCitation().getFields().add(new CitationField("author", "Helen Kelly Brink"));
+    sourceDescription.getCitation().getFields().add(new CitationField("publisher", "Helen Kelly Brink"));
+    sourceDescription.getCitation().getFields().add(new CitationField("publisher-locality", "Steuben County, New York"));
+    sourceDescription.getCitation().getFields().add(new CitationField("publish-date", "1802"));
+    return sourceDescription;
   }
 
   static Person createPersonCitingPhysicalArtifact() {
@@ -355,7 +368,7 @@ public class EvidenceRecipesTest extends RecipeTest {
     return person;
   }
 
-  static void verifySourceDescription(Description description) {
+  static void verifySourceDescription(SourceDescription sourceDescription) {
     //TODO: verify contents of source description
   }
 

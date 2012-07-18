@@ -1,4 +1,4 @@
-package org.gedcomx.metadata.dc;
+package org.gedcomx.metadata.rdf;
 
 import org.gedcomx.common.Attribution;
 import org.gedcomx.common.Note;
@@ -8,7 +8,6 @@ import org.gedcomx.common.SourceReference;
 import org.gedcomx.common.URI;
 import org.gedcomx.metadata.foaf.Address;
 import org.gedcomx.metadata.foaf.Organization;
-import org.gedcomx.metadata.rdf.RDFLiteral;
 import org.gedcomx.metadata.source.CitationField;
 import org.gedcomx.metadata.source.SourceCitation;
 import org.gedcomx.metadata.source.SourceDescription;
@@ -98,7 +97,6 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
     GedcomNamespaceManager.registerKnownJsonType(SourceDescription.class);
     GedcomNamespaceManager.registerKnownJsonType(Organization.class);
     GedcomNamespaceManager.registerKnownJsonType(Note.class);
-    GedcomNamespaceManager.registerKnownJsonType(ObjectFactory.class);
   }
 
   private final Organization orgFamilySearch;
@@ -183,7 +181,7 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
     resourceSet.addExtensionElement(orgFhl);
 
     Snippet snippet = new Snippet();
-    ResourceSet resourceSetThurXml = processThroughXml(resourceSet, ResourceSet.class, JAXBContext.newInstance(ResourceSet.class, SourceDescription.class, Organization.class, Note.class, ObjectFactory.class), (SerializationProcessListener)snippet);
+    ResourceSet resourceSetThurXml = processThroughXml(resourceSet, ResourceSet.class, JAXBContext.newInstance(ResourceSet.class, SourceDescription.class, Organization.class, Note.class), (SerializationProcessListener)snippet);
     ResourceSet resourceSetThurJson = processThroughJson(resourceSet, (SerializationProcessListener) snippet);
     addSnippet(snippet);
 
@@ -224,7 +222,7 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
       }
     }
 
-    assertNull(srcDesc1);
+    assertNotNull(srcDesc1);
     assertEquals(srcDesc1.getId(), SRC_OF_SRC_ID);
     assertNotNull(srcDesc1.getCitation());
     assertEquals(srcDesc1.getCitation().getValue(), DEATH_CERT_FULL_CITATION);
@@ -243,7 +241,7 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
     assertEquals(fieldNameValuePairs.get(FLDNM_FHL_FILM), FLDVAL_FHL_FILM1);
     assertEquals(srcDesc1.getMediator().getResource().toURI().toString(), MEDIATOR_URI_PREFIX + ORG_FHL_ID);
 
-    assertNull(srcDesc2);
+    assertNotNull(srcDesc2);
     assertEquals(srcDesc2.getId(), SRC_ID);
     assertEquals(srcDesc2.getAbout().toURI().toString(), RECORD_PAL_LYNDON_B_JOHNSON);
     assertNotNull(srcDesc2.getSourceReferences());
@@ -411,7 +409,7 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
     resourceSet.addExtensionElement(note);
 
     Snippet snippet = new Snippet();
-    ResourceSet resourceSetThruXml = processThroughXml(resourceSet, ResourceSet.class, JAXBContext.newInstance(ResourceSet.class, SourceDescription.class, Organization.class, Note.class, ObjectFactory.class), (SerializationProcessListener)snippet);
+    ResourceSet resourceSetThruXml = processThroughXml(resourceSet, ResourceSet.class, JAXBContext.newInstance(ResourceSet.class, SourceDescription.class, Organization.class, Note.class), (SerializationProcessListener)snippet);
     ResourceSet resourceSetThruJson = processThroughJson(resourceSet, (SerializationProcessListener) snippet);
     addSnippet(snippet);
 
