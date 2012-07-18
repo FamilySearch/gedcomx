@@ -18,11 +18,11 @@ package org.gedcomx.metadata.source;
 import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.gedcomx.common.LiteralValue;
 import org.gedcomx.common.Note;
 import org.gedcomx.common.ResourceReference;
 import org.gedcomx.common.SourceReference;
 import org.gedcomx.common.URI;
-import org.gedcomx.metadata.rdf.RDFLiteral;
 import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.json.JsonElementWrapper;
 
@@ -44,7 +44,7 @@ public class SourceDescription {
   private ResourceReference mediator;
   private List<SourceReference> sourceReferences;
   private String displayName;
-  private List<RDFLiteral> alternateNames;
+  private List<LiteralValue> alternateNames;
   private List<Note> notes;
 
   /**
@@ -181,7 +181,7 @@ public class SourceDescription {
   @XmlElement (name="alternateName")
   @JsonProperty ("alternateNames")
   @JsonName ("alternateNames")
-  public List<RDFLiteral> getAlternateNames() {
+  public List<LiteralValue> getAlternateNames() {
     return alternateNames;
   }
 
@@ -191,7 +191,7 @@ public class SourceDescription {
    * @param alternateNames A list of alternate display names for this source.
    */
   @JsonProperty ("alternateNames")
-  public void setAlternateNames(List<RDFLiteral> alternateNames) {
+  public void setAlternateNames(List<LiteralValue> alternateNames) {
     this.alternateNames = alternateNames;
   }
 

@@ -13,10 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.metadata.rdf;
+package org.gedcomx.common;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
-import org.gedcomx.common.URI;
 import org.gedcomx.rt.CommonModels;
 
 import javax.xml.XMLConstants;
@@ -32,14 +31,10 @@ import java.util.GregorianCalendar;
 
 
 /**
- * An element representing an RDF literal. For more information, see <a href="http://www.w3.org/TR/rdf-schema/#ch_literal">RDF Schema, Section 2.3</a>
- * and <a href="http://dublincore.org/documents/profile-guidelines/#appc">Using RDF properties in profiles: a technical primer</a>.
- *
- * @link http://www.w3.org/TR/rdf-schema/#ch_literal
- * @author Ryan Heaton
+ * An element representing a literal.
  */
 @XmlType ( name = "Literal", namespace = CommonModels.RDFS_NAMESPACE )
-public class RDFLiteral {
+public class LiteralValue {
 
   private static final URI DATE_DATATYPE = URI.create("http://www.w3.org/2001/XMLSchema#dateTime");
   private static final DatatypeFactory DATATYPE_FACTORY;
@@ -56,20 +51,19 @@ public class RDFLiteral {
   private URI datatype;
   private String value;
 
-  public RDFLiteral() {
+  public LiteralValue() {
   }
 
-  public RDFLiteral(String value) {
+  public LiteralValue(String value) {
     this.value = value;
   }
 
-  public RDFLiteral(Date value) {
+  public LiteralValue(Date value) {
     setValueAsDate(value);
   }
 
   /**
-   * The datatype of the literal. For more information, start with the explanation of an
-   * <a href="http://www.w3.org/TR/rdf-primer/#typedliterals">RDF Typed Literal</a> in the RDF primer.
+   * The datatype of the literal.
    *
    * @return The datatype of the literal.
    */
@@ -80,8 +74,7 @@ public class RDFLiteral {
   }
 
   /**
-   * The datatype of the literal. For more information, start with the explanation of an
-   * <a href="http://www.w3.org/TR/rdf-primer/#typedliterals">RDF Typed Literal</a> in the RDF primer.
+   * The datatype of the literal.
    *
    * @param datatype The datatype of the literal.
    */
@@ -146,7 +139,7 @@ public class RDFLiteral {
   }
 
   /**
-   * Get the value of this literal as a date.
+   * Set the value of this literal using a date.
    *
    * @param valueAsDate The value of this literal as a date.
    */

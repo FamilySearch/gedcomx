@@ -15,7 +15,7 @@
  */
 package org.gedcomx.metadata.foaf;
 
-import org.gedcomx.metadata.rdf.RDFLiteral;
+import org.gedcomx.common.LiteralValue;
 import org.gedcomx.rt.CommonModels;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -32,16 +32,16 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement ( name = "Person" )
 public class Person extends Agent {
 
-  private RDFLiteral familyName;
-  private RDFLiteral givenName;
-  private RDFLiteral language;
+  private LiteralValue familyName;
+  private LiteralValue givenName;
+  private LiteralValue language;
 
   /**
    * The family name of the person.
    *
    * @return The family name of the person.
    */
-  public RDFLiteral getFamilyName() {
+  public LiteralValue getFamilyName() {
     return familyName;
   }
 
@@ -50,7 +50,7 @@ public class Person extends Agent {
    *
    * @param familyName The family name of the person.
    */
-  public void setFamilyName(RDFLiteral familyName) {
+  public void setFamilyName(LiteralValue familyName) {
     this.familyName = familyName;
   }
 
@@ -59,7 +59,7 @@ public class Person extends Agent {
    *
    * @return The given name of the person.
    */
-  public RDFLiteral getGivenName() {
+  public LiteralValue getGivenName() {
     return givenName;
   }
 
@@ -68,7 +68,7 @@ public class Person extends Agent {
    *
    * @param givenName The given name of the person.
    */
-  public void setGivenName(RDFLiteral givenName) {
+  public void setGivenName(LiteralValue givenName) {
     this.givenName = givenName;
   }
 
@@ -78,7 +78,7 @@ public class Person extends Agent {
    * @return The language of the person.
    */
   @XmlElement ( namespace = CommonModels.DUBLIN_CORE_NAMESPACE )
-  public RDFLiteral getLanguage() {
+  public LiteralValue getLanguage() {
     return language;
   }
 
@@ -87,7 +87,7 @@ public class Person extends Agent {
    *
    * @param language The language of the person.
    */
-  public void setLanguage(RDFLiteral language) {
+  public void setLanguage(LiteralValue language) {
     this.language = language;
   }
 

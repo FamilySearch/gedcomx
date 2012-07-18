@@ -1,6 +1,7 @@
-package org.gedcomx.metadata.rdf;
+package org.gedcomx.metadata.source;
 
 import org.gedcomx.common.Attribution;
+import org.gedcomx.common.LiteralValue;
 import org.gedcomx.common.Note;
 import org.gedcomx.common.ResourceReference;
 import org.gedcomx.common.ResourceSet;
@@ -8,9 +9,6 @@ import org.gedcomx.common.SourceReference;
 import org.gedcomx.common.URI;
 import org.gedcomx.metadata.foaf.Address;
 import org.gedcomx.metadata.foaf.Organization;
-import org.gedcomx.metadata.source.CitationField;
-import org.gedcomx.metadata.source.SourceCitation;
-import org.gedcomx.metadata.source.SourceDescription;
 import org.gedcomx.rt.GedcomNamespaceManager;
 import org.gedcomx.rt.SerializationProcessListener;
 import org.gedcomx.test.RecipeTest;
@@ -104,13 +102,13 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
   {
     orgFamilySearch = new Organization();
     orgFamilySearch.setId(ORG_FS_ID);
-    orgFamilySearch.setName(new RDFLiteral(FAMILY_SEARCH_INTERNATIONAL));
-    orgFamilySearch.setHomepage(new RDFLiteral(FAMILYSEARCH_HOME_PAGE));
+    orgFamilySearch.setName(new LiteralValue(FAMILY_SEARCH_INTERNATIONAL));
+    orgFamilySearch.setHomepage(new LiteralValue(FAMILYSEARCH_HOME_PAGE));
 
     orgFhl = new Organization();
     orgFhl.setId(ORG_FHL_ID);
-    orgFhl.setName(new RDFLiteral(FAMILY_HISTORY_LIBRARY));
-    orgFhl.setHomepage(new RDFLiteral(FAMILY_HISTORY_LIBRARY_HOME_PAGE));
+    orgFhl.setName(new LiteralValue(FAMILY_HISTORY_LIBRARY));
+    orgFhl.setHomepage(new LiteralValue(FAMILY_HISTORY_LIBRARY_HOME_PAGE));
     orgFhl.setAddresses(new ArrayList<Address>());
     orgFhl.getAddresses().add(new Address());
     orgFhl.getAddresses().get(0).setValue(FHL_ADDRESS);
@@ -194,7 +192,7 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
 
     // the following adds code coverage for SourceDescription
     srcDesc1.setMediator((URI)null);
-    srcDesc1.setAlternateNames(new ArrayList<RDFLiteral>());
+    srcDesc1.setAlternateNames(new ArrayList<LiteralValue>());
     assertNull(srcDesc1.getMediator());
     assertEquals(srcDesc1.getAlternateNames().size(), 0);
   }
@@ -317,8 +315,8 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
 
     Organization orgNara = new Organization();
     orgNara.setId(orgIdNara);
-    orgNara.setName(new RDFLiteral("National Archives and Records Administration"));
-    orgNara.setHomepage(new RDFLiteral("http://www.archives.gov/"));
+    orgNara.setName(new LiteralValue("National Archives and Records Administration"));
+    orgNara.setHomepage(new LiteralValue("http://www.archives.gov/"));
     orgNara.setAddresses(new ArrayList<Address>());
     orgNara.getAddresses().add(new Address());
     orgNara.getAddresses().get(0).setValue("The National Archives and Records Administration\n8601 Adelphi Road\nCollege Park, MD 20740-6001");

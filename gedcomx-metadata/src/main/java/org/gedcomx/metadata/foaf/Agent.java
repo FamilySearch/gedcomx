@@ -18,8 +18,8 @@ package org.gedcomx.metadata.foaf;
 import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.gedcomx.common.LiteralValue;
 import org.gedcomx.common.ResourceReference;
-import org.gedcomx.metadata.rdf.RDFLiteral;
 import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.SupportsExtensionElements;
 
@@ -42,9 +42,9 @@ import java.util.List;
 public abstract class Agent implements SupportsExtensionElements {
 
   private String id;
-  private RDFLiteral name;
-  private RDFLiteral homepage;
-  private RDFLiteral openid;
+  private LiteralValue name;
+  private LiteralValue homepage;
+  private LiteralValue openid;
   private List<OnlineAccount> accounts;
   private List<ResourceReference> emails;
   private List<ResourceReference> phones;
@@ -76,7 +76,7 @@ public abstract class Agent implements SupportsExtensionElements {
    *
    * @return The name of the person or organization.
    */
-  public RDFLiteral getName() {
+  public LiteralValue getName() {
     return name;
   }
 
@@ -85,7 +85,7 @@ public abstract class Agent implements SupportsExtensionElements {
    *
    * @param name The name of the person or organization.
    */
-  public void setName(RDFLiteral name) {
+  public void setName(LiteralValue name) {
     this.name = name;
   }
 
@@ -95,7 +95,7 @@ public abstract class Agent implements SupportsExtensionElements {
    *
    * @return The homepage.
    */
-  public RDFLiteral getHomepage() {
+  public LiteralValue getHomepage() {
     return homepage;
   }
 
@@ -105,7 +105,7 @@ public abstract class Agent implements SupportsExtensionElements {
    *
    * @param homepage The homepage.
    */
-  public void setHomepage(RDFLiteral homepage) {
+  public void setHomepage(LiteralValue homepage) {
     this.homepage = homepage;
   }
 
@@ -114,7 +114,7 @@ public abstract class Agent implements SupportsExtensionElements {
    *
    * @return The <a href="http://openid.net/">openid</a> of the person or organization.
    */
-  public RDFLiteral getOpenid() {
+  public LiteralValue getOpenid() {
     return openid;
   }
 
@@ -123,7 +123,7 @@ public abstract class Agent implements SupportsExtensionElements {
    *
    * @param openid The <a href="http://openid.net/">openid</a> of the person or organization.
    */
-  public void setOpenid(RDFLiteral openid) {
+  public void setOpenid(LiteralValue openid) {
     this.openid = openid;
   }
 
