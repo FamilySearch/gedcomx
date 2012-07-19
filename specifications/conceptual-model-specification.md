@@ -130,7 +130,7 @@ name  | description | data type
 contributor | Reference to the contributor to whom the attributed data is attributed. | [URI](#uri) - MUST resolve to an instance of [`http://xmlns.com/foaf/0.1/Person`](#foaf-person) or [`http://xmlns.com/foaf/0.1/Organization`](#organization).
 confidence  | Reference to the confidence level of the contributor of the attributed data. | [URI](#uri) - MUST resolve to a confidence level. Refer to the list of [known confidence levels](#known-confidence-levels).
 modified | Timestamp of when the attributed data was contributed. | timestamp
-proofStatement | A statement of proof provided by the contributor of the attributed data | string
+justification | A statement about why the attributed data is being provided by the contributor. | string
 
 <a id="known-confidence-levels"/>
 
@@ -204,37 +204,11 @@ If a value is supplied for the `resource` property, a value SHALL NOT be supplie
   the user-supplied text (e.g. "Boston, Suffolk, Massachusetts, United States").
 
 
-## 2.5 The "GenealogicalResource" Data Type
-
-The `GenealogicalResource` data type defines an abstract data structure that defines a basic
-genealogical resource. The `GenealogicalResource` data type is not designed to be used independently,
-but instead as an abstraction from with other data types can inherit.
-
-### identifier
-
-The identifier for the "GenealogicalResource" data type is:
-
-`http://gedcomx.org/GenealogicalResource`
-
-### properties
-
-name  | description | data type
-------|-------------|----------
-id | A local, transient identifier for the genealogical resource being described. Note that as a local, transient identifier, the id may only be used to resolve references within a well-defined scope (such as a single web service request or a single file). | string
-attribution | The attribution of this resource. | [`http://gedcomx.org/Attribution`](#attribution)
-
-
 <a id="note"/>
 
-## 2.6 The "Note" Data Type
+## 2.5 The "Note" Data Type
 
 The `Note` data type defines a note that was contributed from genealogical research.
-
-### extension
-
-This data type extends the following data type:
-
-`http://gedcomx.org/GenealogicalResource`
 
 ### identifier
 
@@ -251,17 +225,15 @@ text | The text of the note. | string
 
 <a id="rdf-literal"/>
 
-## 2.7 The "RDF Literal" Data Type
+## 2.6 The "LiteralValue" Data Type
 
-The `RDF Literal` data type defines a literal RDF value. The `Literal` is
-defined by the Resource Description Framework (RDF), but its definition is included here
-for convenience.
+The `LiteralValue` data type defines a literal value.
 
 ### identifier
 
-The identifier for the "RDF Literal" data type is:
+The identifier for the "LiteralValue" data type is:
 
-`http://www.w3.org/2000/01/rdf-schema#Literal`
+`http://gedcomx.org/Literal`
 
 ### properties
 
@@ -271,43 +243,8 @@ value | The literal value. A datatype MAY be supplied to identify how the string
 datatype  | URI identifying the way the value is to be processed according to a specific standard. | [URI](#uri)
 lang | The language of the literal value. | `http://www.w3.org/XML/1998/namespace#lang`
 
-
-## 2.8 The "RDF Value" Data Type
-
-The `RDF Value` data type defines the value of an RDF resource. This data type is defined by the
-Resource Description Framework (RDF), but its definition is included here for convenience.
-
-### identifier
-
-The identifier for the "RDF Value" data type is:
-
-`http://www.w3.org/2000/01/rdf-schema#Resource`
-
-### properties
-
-name  | description | data type
-------|-------------|----------
-id | A local identifier for the value. | string
-resource | Identifier for the value | [URI](#uri) (No restrictions on what the URI must resolve to. It could be an image, a conclusion, a book, etc.)
-type  | Reference to the type of the identifier. | [URI](#uri) - MUST resolve to a resource type. See the list of [known resource types](#known-resource-types).
-value | The string form of the value. | string
-lang | The language of the string form of the value. | `http://www.w3.org/XML/1998/namespace#lang`
-
-
 <a id="known-resource-types"/>
 
-## 2.9 Resource Types
-
-The following resource types are defined by GEDCOM X:
-
-URI | description
-----|-------------
-`http://gedcomx.org/Person`|
-`http://gedcomx.org/Relationship`|
-
-In addition to the resource types defined by GEDCOM X, GEDCOM X recognizes the
-[Dublin Core Type Vocabulary](http://dublincore.org/documents/dcmi-type-vocabulary/) as
-valid resource types.
 
 
 
