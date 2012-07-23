@@ -355,7 +355,7 @@ attribution | The attribution of this source reference. | [`http://gedcomx.org/A
 
 <a id="known-source-reference-types"/>
 
-### known confidence levels
+### known source reference types
 
 The following source reference types are defined by GEDCOM X.
 
@@ -604,7 +604,7 @@ The identifier for the `EventRole` data type is:
 
 This data type extends the following data type:
 
-`http://gedcomx.org/GenealogicalResource`
+`http://gedcomx.org/conclusion/v1/Conclusion`
 
 ### properties
 
@@ -1012,7 +1012,7 @@ sources | The list of references to the evidence of the event. | List of [`http:
 
 <a id="known-event-types"/>
 
-### known roles
+### known event types
 
 The following event types are defined by GEDCOM X:
 
