@@ -15,8 +15,6 @@
  */
 package org.gedcomx.conclusion;
 
-import org.gedcomx.common.FormalValue;
-
 /**
  * @author Ryan Heaton
  */

@@ -33,7 +33,7 @@ import java.util.GregorianCalendar;
 /**
  * An element representing a literal.
  */
-@XmlType ( name = "Literal", namespace = CommonModels.RDFS_NAMESPACE )
+@XmlType ( name = "Literal" )
 public class LiteralValue {
 
   private static final URI DATE_DATATYPE = URI.create("http://www.w3.org/2001/XMLSchema#dateTime");

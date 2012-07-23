@@ -1,6 +1,5 @@
 package org.gedcomx.conclusion;
 
-import org.gedcomx.common.Identifier;
 import org.gedcomx.common.Attribution;
 import org.gedcomx.common.ResourceReference;
 import org.gedcomx.common.SourceReference;

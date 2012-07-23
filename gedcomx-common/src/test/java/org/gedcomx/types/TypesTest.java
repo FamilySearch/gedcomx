@@ -32,7 +32,6 @@ public class TypesTest {
     assertEquals(RecordType.fromQNameURI(RecordType.Census.toQNameURI()).toQNameURI().toString(), "http://gedcomx.org/Census");
     assertEquals(RelationshipRole.fromQNameURI(RelationshipRole.Ancestor.toQNameURI()).toQNameURI().toString(), "http://gedcomx.org/Ancestor");
     assertEquals(RelationshipType.fromQNameURI(RelationshipType.Couple.toQNameURI()).toQNameURI().toString(), "http://gedcomx.org/Couple");
-    assertEquals(ResourceType.fromQNameURI(ResourceType.Person.toQNameURI()).toQNameURI().toString(), "http://gedcomx.org/Person");
     assertEquals(SourceReferenceType.fromQNameURI(SourceReferenceType.Abstract.toQNameURI()).toQNameURI().toString(), "http://gedcomx.org/Abstract");
   }
 
