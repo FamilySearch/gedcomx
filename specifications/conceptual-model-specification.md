@@ -60,11 +60,14 @@ document are to be interpreted as described in BCP 14,
 [RFC2119](http://tools.ietf.org/html/rfc2119), as scoped to those conformance 
 targets.
 
+
+
 # 2. Common Data Types
 
 Many data types of the GEDCOM X conceptual model share common structures. This section
 defines the data types of those shared structures and their requirements for convenient
 reference by the other data type definitions.
+
 
 <a id="uri"/>
 
@@ -75,6 +78,7 @@ The URI is used to identify specific resources, such as persons, relationships, 
 sources. The URI is also used to identify the data structures that describe those resources
 and even the data types that define those data structures. The URI is specified by
 [RFC3986](http://tools.ietf.org/html/rfc3986).
+
 
 <a id="identifier-type"/>
 
@@ -110,6 +114,7 @@ URI | description
 
 todo: fill in some examples.
 
+
 <a id="attribution"/>
 
 ## 2.3 The "Attribution" Data Type
@@ -132,6 +137,7 @@ confidence  | Reference to the confidence level of the contributor of the attrib
 modified | Timestamp of when the attributed data was contributed. | timestamp
 justification | A statement about why the attributed data is being provided by the contributor. | string
 
+
 <a id="known-confidence-levels"/>
 
 ### known confidence levels
@@ -152,6 +158,7 @@ URI | description
 ### examples
 
 todo:
+
 
 <a id="formal-value"/>
 
@@ -223,7 +230,8 @@ name  | description | data type
 lang | The language of the note. | `http://www.w3.org/XML/1998/namespace#lang`
 text | The text of the note. | string
 
-<a id="rdf-literal"/>
+
+<a id="literal-value"/>
 
 ## 2.6 The "LiteralValue" Data Type
 
@@ -253,46 +261,82 @@ lang | The language of the literal value. | `http://www.w3.org/XML/1998/namespac
 Citing sound evidence is a critical component to the exchange of genealogical data. The source of
 a piece of genealogical data has to be completely and accurately described in order to be
 consistently evaluated by other genealogical researchers. Many sources do not have a digital
-representation (e.g. books or other physical artifacts). These sources are instead _described_
-and their _description_ is provided in digital form.
+representation (e.g. books or other physical artifacts). Sources are instead _described_
+and their _description_ is provided as the digital representation of a source.
 
 This section defines the data types that are used for describing and referencing sources.
 
+
 <a id="rdf-description"/>
 
-## 3.1 The "Description" Data Type
+## 3.1 The "SourceDescription" Data Type
 
-The `Description` data type defines a description of a resource. The `Description` is
-defined by the Resource Description Framework (RDF), but its definition is included here
-for convenience.
+The `SourceDescription` data type defines a description of a source.
 
 ### identifier
 
-The identifier for the "Description" data type is:
+The identifier for the "SourceDescription" data type is:
 
-`http://www.w3.org/1999/02/22-rdf-syntax-ns#Description`
+`http://gedcomx.org/source/v1/SourceDescription`
 
 ### properties
 
 name | description | data type
 -----|-------------|----------
 id | A local, transient identifier for the resource being described. Note that as a local, transient identifier, the id may only be used to resolve references to the resource within a well-defined scope (such as a single web service request or a single file). | string
-about | A uniform resource identifier (URI) for the resource being described. | [URI](#uri)
-type  | Reference to the type of the resource being described. | [URI](#uri) - MUST resolve to a resource type. See the list of [known resource types](#known-resource-types).
+ciation | The bibliographic citation for this source. | [`http://gedcomx.org/source/v1/SourceCitation`](#source-citation) - REQUIRED
+about | A uniform resource identifier (URI) for the resource being described. | [URI](#uri) - OPTIONAL
+mediator | A reference to the entity that mediates access to the described source. | [URI](#uri) - OPTIONAL; MUST resolve to an instance of [`http://xmlns.com/foaf/0.1/Person`](#foaf-person) or [`http://xmlns.com/foaf/0.1/Organization`](#organization).
+sources | References to any sources to which this source is related. This is usually applicable to sources that are derived from or contained in another source. | List of [`http://gedcomx.org/SourceReference`](#source-reference) - OPTIONAL
+displayName | A display name for this source. | string - OPTIONAL
+alternateNames | A list of alternate display names for this source. | List of [`http://gedcomx.org/Literal`](#literal-value) - OPTIONAL
+notes  | A list of notes about a source. | List of [`http://gedcomx.org/Note`](#note) - OPTIONAL
 
-### standard extension properties
 
-As defined by RDF, the RDF description may contain additional "extension" properties that
-are used to provide additional details about the resource being described.
+<a id="source-citation"/>
 
-GEDCOM X recognizes the [Dublin Core Metadata Terms](http://dublincore.org/documents/dcmi-terms/) as
-standard properties for a description of a resource.
+## 3.2 The "SourceCitation" Data Type
 
-todo: list the dublin core terms here with their types and descriptions for convenience.
+The `SourceCitation` data type defines the information necessary to identify a source(s).
+
+### identifier
+
+The identifier for the "SourceCitation" data type is:
+
+`http://gedcomx.org/source/v1/SourceCitation`
+
+### properties
+
+name | description | data type
+-----|-------------|----------
+value | A rendering of the full (working) citation as a string. | string - REQUIRED
+citationTemplate | The identifier of the citation template by which this citation may be interpreted. | [URI](#uri) - OPTIONAL
+fields  | A list of citation fields about a source. | List of [`http://gedcomx.org/source/v1/CitationField`](#citation-field) - OPTIONAL
+
+
+<a id="citation-field"/>
+
+## 3.3 The "CitationField" Data Type
+
+The `CitationField` data type defines a field to represent essential details (e.g., author, volume, page, publisher, etc.) necessary to fully and uniquely identify a source.
+
+### identifier
+
+The identifier for the "CitationField" data type is:
+
+`http://gedcomx.org/source/v1/CitationField`
+
+### properties
+
+name | description | data type
+-----|-------------|----------
+name | The name associated with the citation detail -- typically defined as part of a citation template or citation template library. | string - REQUIRED
+value | The value of the citation detail. | string - OPTIONAL
+
 
 <a id="source-reference"/>
 
-## 3.2 The "SourceReference" Data Type
+## 3.4 The "SourceReference" Data Type
 
 The `SourceReference` data type defines a reference to a source. Genealogical data cites its evidence
 using an instance of `SourceReference`.
@@ -301,17 +345,39 @@ using an instance of `SourceReference`.
 
 The identifier for the "SourceReference" data type is:
 
-`http://gedcomx.org/conclusion/v1/SourceReference`
+`http://gedcomx.org/SourceReference`
 
 ### properties
 
 name | description | data type
 -----|-------------|----------
 id | A local identifier for the source reference. Note that this id MUST NOT be processed as an identifier for the resource being referenced, but instead as a transient identifier for the reference itself. | string
-resource | Identifier for the resource being cited. | [URI](#uri) (No restrictions on what the URI must resolve to. It could be an image, a conclusion, a book, etc.)
-type  | Reference to the type of the source being referenced. | [URI](#uri) - MUST resolve to a resource type. See the list of [known resource types](#known-resource-types).
-description  | Reference to a _description_ of the source being referenced. | [URI](#uri) - MUST resolve to an instance of [`http://www.w3.org/1999/02/22-rdf-syntax-ns#Description`](#rdf-description)
+type  | Reference to the type of relationship that exists between the genealogical resource making the reference and the the source that is being referenced. | [URI](#uri) - MUST resolve to a source reference type. See the list of [known source reference types](#known-source-reference-types).
+sourceDescription  | Reference to a _description_ of the source being referenced. | [URI](#uri) - MUST resolve to an instance of [`http://gedcomx.org/source/v1/SourceDescription`](#source-description)
 attribution | The attribution of this source reference. | [`http://gedcomx.org/Attribution`](#attribution)
+
+
+<a id="known-source-reference-types"/>
+
+### known confidence levels
+
+The following source reference types are defined by GEDCOM X.
+
+URI | description
+----|------------
+`http://gedcomx.org/ComponentOf`| The genealogical resource refering to the source is a component of the source (e.g., an enumeration district might be a component of a census).
+`http://gedcomx.org/PreservationCopy`| The genealogical resource refering to the source is a preservation copy (e.g. a photograph) of the source.
+`http://gedcomx.org/Abstract`| The genealogical resource refering to the source is a abstract of the source.
+`http://gedcomx.org/Transcription`| The genealogical resource refering to the source is a transcription of the source.
+`http://gedcomx.org/Translation`| The genealogical resource refering to the source is a translation of the source.
+`http://gedcomx.org/ExtractedConclusion`| The genealogical resource refering to the source is an extracted conclusion of the source.
+`http://gedcomx.org/Analysis`| The genealogical resource refering to the source is a document containing analysis of the source.
+`http://gedcomx.org/WorkingConclusion`| The genealogical resource refering to the source is a working conclusion based on the source.
+
+### examples
+
+todo:
+
 
 
 # 4. Data Types for Describing Contributors
