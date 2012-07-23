@@ -464,6 +464,7 @@ emails  | The email addresses of the person or organization. | List of [URI](#ur
 phones  | The phones (voice, fax, mobile) of the person or organization. | List of [URI](#uri) - MUST resolve to a valid phone number (e.g. "tel:+1-201-555-0123"). Order is preserved.
 addresses  | The addresses of the person or organization. | List of [`http://www.w3.org/2000/10/swap/pim/contact#Address`](#address). Order is preserved.
 
+
 <a id="organization"/>
 
 ## 4.4 The "Organization" Data Type
@@ -486,6 +487,7 @@ This data type extends the following data type:
 
 The `Organization` data type defines no additional properties beyond those defined by
 its extended type.
+
 
 <a id="foaf-person"/>
 
@@ -515,11 +517,14 @@ givenName | The given name of the person. | [`http://www.w3.org/2000/01/rdf-sche
 language | The language of the person. | [`http://www.w3.org/2000/01/rdf-schema#Literal`](#rdf-literal)
 
 
+
 # 5. Data Types for Describing Conclusions
 
 This section describes the data types that are used to define conclusions about genealogical
 data.
 
+
+<a id="conclusion"/>
 
 ## 5.1 The "Conclusion" Data Type
 
@@ -540,65 +545,31 @@ sources | The list of references to the sources of related to this conclusion. T
 notes  | A list of notes about a conclusion. | List of [`http://gedcomx.org/Note`](#note) - OPTIONAL
 attribution | The attribution of this conclusion. | [`http://gedcomx.org/Attribution`](#attribution)
 
-<a id="conclusion-date"/>
 
-## 5.2 The "Date" Data Type
+<a id="document"/>
+## 5.2 The "Document" Data Type
+<a id="abstract-document"/>
+## 5.2.1 The "AbstractDocument" Data Type
+<a id="transcription-document"/>
+## 5.2.2 The "TranscriptionDocument" Data Type
+<a id="translation-document"/>
+## 5.2.3 The "TranslationDocument" Data Type
+<a id="analysis-document"/>
+## 5.2.4 The "AnalysisDocument" Data Type
 
-The `Date` data type defines the value of a genealogical date.
 
-### identifier
+<a id="gender-conclusion"/>
 
-The identifier for the `Date` data type is:
+## 5.3 The "Gender" Data Type
 
-`http://gedcomx.org/conclusion/v1/Date`
-
-### properties
-
-name | description | data type
------|-------------|----------
-original | The original value of the date as supplied by the contributor. | string
-formal | The formal value of the date. | [`http://gedcomx.org/FormalValue`](#formal-value)
-
-### known date formats
-
-The following date formats are recognized by GEDCOM X:
-
-URI | description
-----|-------------
-`http://gedcomx.org/GEDCOM_5_5` | The date format specified by the GEDCOM 5.5 specification.
-`iso:8601` | The date format specified by [ISO 8601](http://en.wikipedia.org/wiki/ISO_8601).
-
-<a id="conclusion-place"/>
-
-## 5.3 The "Place" Data Type
-
-The `Place` data type defines the value of a genealogical place.
+The `Gender` data type defines a conclusion about the gender of a person. the `Gender` data type
+extends the `Conclusion` data type.
 
 ### identifier
 
-The identifier for the `Place` data type is:
+The identifier for the `Gender` data type is:
 
-`http://gedcomx.org/conclusion/v1/Place`
-
-### properties
-
-name | description | data type
------|-------------|----------
-original | The original value of the place as supplied by the contributor. | string
-formal | The formal value of the place. | [`http://gedcomx.org/FormalValue`](#formal-value)
-
-
-<a id="conclusion-event-role"/>
-
-## 5.4 The "EventRole" Data Type
-
-The `EventRole` data type defines a role played in an event by a person.
-
-### identifier
-
-The identifier for the `EventRole` data type is:
-
-`http://gedcomx.org/conclusion/v1/EventRole`
+`http://gedcomx.org/conclusion/v1/Gender`
 
 ### extension
 
@@ -610,22 +581,68 @@ This data type extends the following data type:
 
 name | description | data type
 -----|-------------|----------
-person | Reference to the person playing the role in the event. | [`URI`](#uri) - MUST resolve to an instance of [`http://gedcomx.org/conclusion/v1/Person`](#person)
-type | Reference to the role. | [`URI`](#uri) - MUST resolve to a role. Refer to the list of [known roles](#known-roles).
-details | Details about the role of the person in the event. | string
+type | URI identifying the type of the gender. | [URI](#uri) - MUST resolve to a gender type. Refer to the list of [known gender types](#known-gender-types).
 
-<a id="known-roles"/>
+<a id="known-gender-types"/>
 
-### known roles
+### known gender types
 
-The following roles are defined by GEDCOM X:
+The following gender types are defined by GEDCOM X:
 
 URI | description
-----|------------
-`http://gedcomx.org/Principal`|
-`http://gedcomx.org/Participant`|
-`http://gedcomx.org/Official`|
-`http://gedcomx.org/Witness`|
+----|-------------
+`http://gedcomx.org/Male`|
+`http://gedcomx.org/Female`|
+`http://gedcomx.org/Unknown`|
+
+
+<a id="name-conclusion"/>
+
+## 5.4 The "Name" Data Type
+
+The `Name` data type defines a conclusion about a name of a person. The `Name` data type
+extends the `Conclusion` data type.
+
+### identifier
+
+The identifier for the `Name` data type is:
+
+`http://gedcomx.org/conclusion/v1/Name`
+
+### extension
+
+This data type extends the following data type:
+
+`http://gedcomx.org/conclusion/v1/Conclusion`
+
+### properties
+
+name | description | data type
+-----|-------------|----------
+type | URI identifying the type of the name. | [URI](#uri) - MUST resolve to a name type. Refer to the list of [known name types](#known-name-types).
+primaryForm | The primary form of the name. | `http://gedcomx.org/conclusion/v1/NameForm`
+alternateForms | The alternate forms of the name. | List of [`http://gedcomx.org/conclusion/v1/NameForm`](#name-form). Order is preserved.
+preferred | Whether this name is preferred above the other names of a person. | boolean
+
+<a id="known-name-types"/>
+
+### known name types
+
+The following name types are defined by GEDCOM X:
+
+URI | description
+----|-------------
+`http://gedcomx.org/Name`|
+`http://gedcomx.org/BirthName`|
+`http://gedcomx.org/DeathName`|
+`http://gedcomx.org/MarriedName`|
+`http://gedcomx.org/AlsoKnownAs`|
+`http://gedcomx.org/MaidenName`|
+`http://gedcomx.org/Nickname`|
+`http://gedcomx.org/Adoptive`|
+`http://gedcomx.org/Formal`|
+`http://gedcomx.org/Religious`|
+
 
 <a id="fact-conclusion"/>
 
@@ -758,151 +775,13 @@ URI | description | scope
 `http://gedcomx.org/Foster`| | parent-child relationship
 `http://gedcomx.org/Guardianship`| | parent-child relationship
 
-<a id="gender-conclusion"/>
-
-## 5.6 The "Gender" Data Type
-
-The `Gender` data type defines a conclusion about the gender of a person. the `Gender` data type
-extends the `Conclusion` data type.
-
-### identifier
-
-The identifier for the `Gender` data type is:
-
-`http://gedcomx.org/conclusion/v1/Gender`
-
-### extension
-
-This data type extends the following data type:
-
-`http://gedcomx.org/conclusion/v1/Conclusion`
-
-### properties
-
-name | description | data type
------|-------------|----------
-type | URI identifying the type of the gender. | [URI](#uri) - MUST resolve to a gender type. Refer to the list of [known gender types](#known-gender-types).
-
-<a id="known-gender-types"/>
-
-### known gender types
-
-The following gender types are defined by GEDCOM X:
-
-URI | description
-----|-------------
-`http://gedcomx.org/Male`|
-`http://gedcomx.org/Female`|
-`http://gedcomx.org/Unknown`|
-
-<a id="name-part"/>
-
-## 5.7 The "NamePart" Data Type
-
-The `NamePart` data type defines a part of a name of a person.
-
-### identifier
-
-The identifier for the `NamePart` data type is:
-
-`http://gedcomx.org/conclusion/v1/NamePart`
-
-### properties
-
-name | description | data type
------|-------------|----------
-type | URI identifying the type of the name part. | [URI](#uri) - MUST resolve to a name part type. Refer to the list of [known name part types](#known-name-part-types).
-text | The text of the name part. | string
-
-<a id="known-name-part-types"/>
-
-### known name part types
-
-The following name part types are defined by GEDCOM X:
-
-URI | description
-----|-------------
-`http://gedcomx.org/Prefix`|
-`http://gedcomx.org/Suffix`|
-`http://gedcomx.org/Given`|
-`http://gedcomx.org/Surname`|
-
-<a id="name-form"/>
-
-## 5.8 The "NameForm" Data Type
-
-The `NameForm` data type defines a form of a name of a person.
-
-### identifier
-
-The identifier for the `NameForm` data type is:
-
-`http://gedcomx.org/conclusion/v1/NameForm`
-
-### properties
-
-name | description | data type
------|-------------|----------
-fullText | The full text of the name form. | string
-parts | The parts of the name form. | List of [`http://gedcomx.org/conclusion/v1/NamePart`](#name-part). Order is preserved.
-
-<a id="name-conclusion"/>
-
-## 5.9 The "Name" Data Type
-
-The `Name` data type defines a conclusion about a name of a person. The `Name` data type
-extends the `Conclusion` data type.
-
-### identifier
-
-The identifier for the `Name` data type is:
-
-`http://gedcomx.org/conclusion/v1/Name`
-
-### extension
-
-This data type extends the following data type:
-
-`http://gedcomx.org/conclusion/v1/Conclusion`
-
-### properties
-
-name | description | data type
------|-------------|----------
-type | URI identifying the type of the name. | [URI](#uri) - MUST resolve to a name type. Refer to the list of [known name types](#known-name-types).
-primaryForm | The primary form of the name. | `http://gedcomx.org/conclusion/v1/NameForm`
-alternateForms | The alternate forms of the name. | List of [`http://gedcomx.org/conclusion/v1/NameForm`](#name-form). Order is preserved.
-preferred | Whether this name is preferred above the other names of a person. | boolean
-
-<a id="known-name-types"/>
-
-### known name types
-
-The following name types are defined by GEDCOM X:
-
-URI | description
-----|-------------
-`http://gedcomx.org/Name`|
-`http://gedcomx.org/BirthName`|
-`http://gedcomx.org/DeathName`|
-`http://gedcomx.org/MarriedName`|
-`http://gedcomx.org/AlsoKnownAs`|
-`http://gedcomx.org/MaidenName`|
-`http://gedcomx.org/Nickname`|
-`http://gedcomx.org/Adoptive`|
-`http://gedcomx.org/Formal`|
-`http://gedcomx.org/Religious`|
 
 <a id="person"/>
 
-# 6. The Person
-
-The person is the fundamental unit of genealogical research.
-
-## 6.1 The "Person" Data Type
+## 5.6 The "Person" Data Type
 
 The `Person` data type defines a description of a person. The `Person` data type
-extends the `GenealogicalResource` data type.
+extends the `Conclusion` data type.
 
 ### identifier
 
@@ -914,7 +793,7 @@ The identifier for the `Person` data type is:
 
 This data type extends the following data type:
 
-`http://gedcomx.org/GenealogicalResource`
+`http://gedcomx.org/conclusion/v1/Conclusion`
 
 ### properties
 
@@ -928,16 +807,13 @@ facts | The conclusions about the facts of the life of the person. | List of [`h
 sources | The list of references to the evidence of the person. | List of [`http://gedcomx.org/conclusion/v1/SourceReference`](#source-reference). Order is preserved.
 notes | Contributed notes about the person. | List of [`http://gedcomx.org/Note`](#note). Order is preserved.
 
+
 <a id="relationship"/>
 
-# 7. The Relationship
+## 5.7 The "Relationship" Data Type
 
-A relationship describes the relationship between two persons.
-
-## 7.1 The "Relationship" Data Type
-
-The `Relationship` data type defines a description of a relationship. The `Relationship` data type
-extends the `GenealogicalResource` data type.
+The `Relationship` data type describes the relationship between two persons. The `Relationship` data type
+extends the `Conclusion` data type.
 
 ### identifier
 
@@ -949,7 +825,7 @@ The identifier for the `Relationship` data type is:
 
 This data type extends the following data type:
 
-`http://gedcomx.org/GenealogicalResource`
+`http://gedcomx.org/conclusion/v1/Conclusion`
 
 ### properties
 
@@ -979,14 +855,52 @@ URI | description
 `http://gedcomx.org/ParentChild`|
 
 
-# 8. The Event
+<a id="conclusion-event-role"/>
 
-An event describes a historical event.
+## 5.8 The "EventRole" Data Type
 
-## 8.1 The "Event" Data Type
+The `EventRole` data type defines a role played in an event by a person.  The `EventRole` data type extends the `Conclusion` data type.
+
+### identifier
+
+The identifier for the `EventRole` data type is:
+
+`http://gedcomx.org/conclusion/v1/EventRole`
+
+### extension
+
+This data type extends the following data type:
+
+`http://gedcomx.org/conclusion/v1/Conclusion`
+
+### properties
+
+name | description | data type
+-----|-------------|----------
+person | Reference to the person playing the role in the event. | [`URI`](#uri) - MUST resolve to an instance of [`http://gedcomx.org/conclusion/v1/Person`](#person)
+type | Reference to the role. | [`URI`](#uri) - MUST resolve to a role. Refer to the list of [known roles](#known-roles).
+details | Details about the role of the person in the event. | string
+
+<a id="known-roles"/>
+
+### known roles
+
+The following roles are defined by GEDCOM X:
+
+URI | description
+----|------------
+`http://gedcomx.org/Principal`|
+`http://gedcomx.org/Participant`|
+`http://gedcomx.org/Official`|
+`http://gedcomx.org/Witness`|
+
+
+<a id="event"/>
+
+## 5.9 The "Event" Data Type
 
 The `Event` data type defines a description of a historical event. The `Event` data type
-extends the `GenealogicalResource` data type.
+extends the `Conclusion` data type.
 
 ### identifier
 
@@ -998,7 +912,7 @@ The identifier for the `Event` data type is:
 
 This data type extends the following data type:
 
-`http://gedcomx.org/GenealogicalResource`
+`http://gedcomx.org/conclusion/v1/Conclusion`
 
 ### properties
 
@@ -1055,7 +969,109 @@ URI | description
 `http://gedcomx.org/Ordination`|
 `http://gedcomx.org/Retirement`|
 
-# 9. Extensibility
+
+<a id="conclusion-date"/>
+
+## 5.10 The "Date" Data Type
+
+The `Date` data type defines the value of a genealogical date.
+
+### identifier
+
+The identifier for the `Date` data type is:
+
+`http://gedcomx.org/conclusion/v1/Date`
+
+### properties
+
+name | description | data type
+-----|-------------|----------
+original | The original value of the date as supplied by the contributor. | string
+formal | The formal value of the date. | [`http://gedcomx.org/FormalValue`](#formal-value)
+
+### known date formats
+
+The following date formats are recognized by GEDCOM X:
+
+URI | description
+----|-------------
+`http://gedcomx.org/GEDCOM_5_5` | The date format specified by the GEDCOM 5.5 specification.
+`iso:8601` | The date format specified by [ISO 8601](http://en.wikipedia.org/wiki/ISO_8601).
+
+
+<a id="conclusion-place"/>
+
+## 5.11 The "Place" Data Type
+
+The `Place` data type defines the value of a genealogical place.
+
+### identifier
+
+The identifier for the `Place` data type is:
+
+`http://gedcomx.org/conclusion/v1/Place`
+
+### properties
+
+name | description | data type
+-----|-------------|----------
+original | The original value of the place as supplied by the contributor. | string
+formal | The formal value of the place. | [`http://gedcomx.org/FormalValue`](#formal-value)
+
+
+<a id="name-part"/>
+
+## 5.12 The "NamePart" Data Type
+
+The `NamePart` data type defines a part of a name of a person.
+
+### identifier
+
+The identifier for the `NamePart` data type is:
+
+`http://gedcomx.org/conclusion/v1/NamePart`
+
+### properties
+
+name | description | data type
+-----|-------------|----------
+type | URI identifying the type of the name part. | [URI](#uri) - MUST resolve to a name part type. Refer to the list of [known name part types](#known-name-part-types).
+text | The text of the name part. | string
+
+<a id="known-name-part-types"/>
+
+### known name part types
+
+The following name part types are defined by GEDCOM X:
+
+URI | description
+----|-------------
+`http://gedcomx.org/Prefix`|
+`http://gedcomx.org/Suffix`|
+`http://gedcomx.org/Given`|
+`http://gedcomx.org/Surname`|
+
+<a id="name-form"/>
+
+## 5.13 The "NameForm" Data Type
+
+The `NameForm` data type defines a form of a name of a person.
+
+### identifier
+
+The identifier for the `NameForm` data type is:
+
+`http://gedcomx.org/conclusion/v1/NameForm`
+
+### properties
+
+name | description | data type
+-----|-------------|----------
+fullText | The full text of the name form. | string
+parts | The parts of the name form. | List of [`http://gedcomx.org/conclusion/v1/NamePart`](#name-part). Order is preserved.
+
+
+# 6. Extensibility
 
 ## Extensions from Non-GEDCOM X Vocabularies
 
@@ -1111,7 +1127,7 @@ In the case where a user has supplied a title or description instead of selectin
 a known data type, GEDCOM X recognizes the data URI scheme as defined by
 [RFC 2397](http://tools.ietf.org/html/rfc2397).
 
-# 9. Miscellaneous To Do
+# 7. Miscellaneous To Do
 
 todo: add details about which properties are required.
 
