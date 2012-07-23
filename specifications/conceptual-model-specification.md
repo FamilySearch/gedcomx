@@ -137,7 +137,6 @@ confidence  | Reference to the confidence level of the contributor of the attrib
 modified | Timestamp of when the attributed data was contributed. | timestamp
 justification | A statement about why the attributed data is being provided by the contributor. | string
 
-
 <a id="known-confidence-levels"/>
 
 ### known confidence levels
@@ -251,9 +250,6 @@ value | The literal value. A datatype MAY be supplied to identify how the string
 datatype  | URI identifying the way the value is to be processed according to a specific standard. | [URI](#uri)
 lang | The language of the literal value. | `http://www.w3.org/XML/1998/namespace#lang`
 
-<a id="known-resource-types"/>
-
-
 
 
 # 3. Data Types for Describing Sources
@@ -267,7 +263,7 @@ and their _description_ is provided as the digital representation of a source.
 This section defines the data types that are used for describing and referencing sources.
 
 
-<a id="rdf-description"/>
+<a id="source-description"/>
 
 ## 3.1 The "SourceDescription" Data Type
 
@@ -318,7 +314,7 @@ fields  | A list of citation fields about a source. | List of [`http://gedcomx.o
 
 ## 3.3 The "CitationField" Data Type
 
-The `CitationField` data type defines a field to represent essential details (e.g., author, volume, page, publisher, etc.) necessary to fully and uniquely identify a source.
+The `CitationField` data type defines a field to represent an essential detail(s) (e.g., author, volume, page, publisher, etc.) necessary to fully and uniquely identify a source.
 
 ### identifier
 
@@ -355,7 +351,6 @@ id | A local identifier for the source reference. Note that this id MUST NOT be 
 type  | Reference to the type of relationship that exists between the genealogical resource making the reference and the the source that is being referenced. | [URI](#uri) - MUST resolve to a source reference type. See the list of [known source reference types](#known-source-reference-types).
 sourceDescription  | Reference to a _description_ of the source being referenced. | [URI](#uri) - MUST resolve to an instance of [`http://gedcomx.org/source/v1/SourceDescription`](#source-description)
 attribution | The attribution of this source reference. | [`http://gedcomx.org/Attribution`](#attribution)
-
 
 <a id="known-source-reference-types"/>
 

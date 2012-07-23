@@ -20,22 +20,51 @@ import org.codehaus.enunciate.qname.XmlUnknownQNameEnumValue;
 import org.gedcomx.common.URI;
 
 /**
- * Enumeration of standard relationship roles.
+ * Enumeration of standard event types.
  */
 @XmlQNameEnum (
   base = XmlQNameEnum.BaseType.URI
 )
-public enum RelationshipRole {
+public enum EventType {
 
-  Spouse,
-  Parent,
-  Child,
-  Grandparent,
-  Grandchild,
-  Ancestor,
-  Descendant,
-  Cousin,
-  InLaw,
+  Adoption,
+  AdultChristening,
+  Annulment,
+  Arrival,
+  Baptism,
+  BarMitzvah,
+  BatMitzvah,
+  Birth,
+  Blessing,
+  Burial,
+  Census,
+  Christening,
+  Circumcision,
+  Confirmation,
+  Cremation,
+  Death,
+  Departure,
+  Divorce,
+  DivorceFiling,
+  Education,
+  Engagement,
+  Emigration,
+  Excommunication,
+  FirstCommunion,
+  Funeral,
+  Graduation,
+  Immigration,
+  Interment,
+  Marriage,
+  MilitaryAward,
+  MilitaryDischarge,
+  Mission,
+  Move,
+  Ordinance,
+  Ordination,
+  Retirement,
+
+
   @XmlUnknownQNameEnumValue
   OTHER;
 
@@ -54,8 +83,8 @@ public enum RelationshipRole {
    * @param qname The qname.
    * @return The enumeration.
    */
-  public static RelationshipRole fromQNameURI(URI qname) {
-    return org.codehaus.enunciate.XmlQNameEnumUtil.fromURIValue(qname.toString(), RelationshipRole.class);
+  public static EventType fromQNameURI(URI qname) {
+    return org.codehaus.enunciate.XmlQNameEnumUtil.fromURIValue(qname.toString(), EventType.class);
   }
 
 }

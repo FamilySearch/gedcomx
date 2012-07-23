@@ -30,7 +30,7 @@ public class TypesTest {
     assertEquals(NameType.fromQNameURI(NameType.Formal.toQNameURI()).toQNameURI().toString(), "http://gedcomx.org/Formal");
     assertEquals(PlacePartType.fromQNameURI(PlacePartType.Address.toQNameURI()).toQNameURI().toString(), "http://gedcomx.org/Address");
     assertEquals(RecordType.fromQNameURI(RecordType.Census.toQNameURI()).toQNameURI().toString(), "http://gedcomx.org/Census");
-    assertEquals(RelationshipRole.fromQNameURI(RelationshipRole.Ancestor.toQNameURI()).toQNameURI().toString(), "http://gedcomx.org/Ancestor");
+    assertEquals(EventRoleType.fromQNameURI(EventRoleType.Principal.toQNameURI()).toQNameURI().toString(), "http://gedcomx.org/Principal");
     assertEquals(RelationshipType.fromQNameURI(RelationshipType.Couple.toQNameURI()).toQNameURI().toString(), "http://gedcomx.org/Couple");
     assertEquals(SourceReferenceType.fromQNameURI(SourceReferenceType.Abstract.toQNameURI()).toQNameURI().toString(), "http://gedcomx.org/Abstract");
   }

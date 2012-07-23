@@ -20,7 +20,6 @@ import org.codehaus.jackson.annotate.JsonProperty;
 import org.gedcomx.common.URI;
 import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.json.JsonElementWrapper;
-import org.gedcomx.rt.RDFSubClassOf;
 import org.gedcomx.types.FactType;
 import org.gedcomx.types.TypeReference;
 
@@ -33,10 +32,9 @@ import javax.xml.bind.annotation.XmlType;
  * A conclusion about a fact applicable to a person or relationship.
  */
 @XmlType ( name = "Fact", propOrder = {"type", "date", "place", "original", "formal" })
-@RDFSubClassOf ( CommonModels.DUBLIN_CORE_TYPE_NAMESPACE + "Event" )
 @XmlRootElement
 @JsonElementWrapper ( name = "facts" )
-public class Fact extends Conclusion implements Formalizeable {
+public class Fact extends Conclusion implements Formalizeable, HasDateAndPlace {
 
   @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
   @JsonProperty
@@ -61,7 +59,6 @@ public class Fact extends Conclusion implements Formalizeable {
   public Fact(FactType factType, String original) {
     setKnownType(factType);
     setOriginal(original);
-    setFormal(formal);
   }
 
   /**

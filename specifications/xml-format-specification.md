@@ -668,9 +668,35 @@ formal | The formal value of the place. | gxc:formal | [`gx:FormalValue`](#forma
   </...>
 ```
 
+<a id="conclusion-event-role"/>
+
+## 5.4 The "EventRole" Data Type
+
+The `gxc:EventRole` XML type is used to (de)serialize the `http://gedcomx.org/conclusion/v1/EventRole`
+data type.
+
+### properties
+
+name | description | XML property | XML type
+-----|-------------|--------------|---------
+person | Reference to the person playing the role in the event. | gxc:person | [`rdf:ResourceReference`](#resource-reference)
+role | Reference to the role. | gxc:role | [`rdf#ResourceReference`](#resource-reference)
+details | Details about the role of the person in the event. | details | xs:string
+
+### examples
+
+```xml
+  <... rdf:ID="local_id">
+    <gxc:person rdf:resource="http://identifier/for/person/1"/>
+    <gxc:role rdf:resource="http://gedcomx.org/Witness"/>
+    <gxc:details>...</gxc:details>
+  </...>
+```
+
+
 <a id="fact-conclusion"/>
 
-## 5.4 The "Fact" Data Type
+## 5.5 The "Fact" Data Type
 
 The `gxc:Fact` XML type is used to (de)serialize the `http://gedcomx.org/conclusion/v1/Fact`
 data type.
@@ -706,7 +732,7 @@ formal | The formal value of the fact. | gxc:formal | [`gxc:FormalValue`](#forma
 
 <a id="gender-conclusion"/>
 
-## 5.5 The "Gender" Data Type
+## 5.6 The "Gender" Data Type
 
 The `gxc:Gender` XML type is used to (de)serialize the `http://gedcomx.org/conclusion/v1/Gender`
 data type.
@@ -727,7 +753,7 @@ type | URI identifying the type of the gender. | gxc:type | [`rdf:ResourceRefere
 
 <a id="name-part"/>
 
-## 5.6 The "NamePart" Data Type
+## 5.7 The "NamePart" Data Type
 
 The `gxc:NamePart` XML type is used to (de)serialize the `http://gedcomx.org/conclusion/v1/NamePart`
 data type.
@@ -748,7 +774,7 @@ text | The text of the name part. | gxc:text | xsd:string
   </...>
 ```
 
-## 5.7 The "NameForm" Data Type
+## 5.8 The "NameForm" Data Type
 
 The `NameForm` XML type is used to (de)serialize the `http://gedcomx.org/conclusion/v1/NameForm`
 data type.
@@ -779,7 +805,7 @@ parts | The parts of the name form. | gxc:part | [`gxc:NamePart`](#name-part)
 
 <a id="name-conclusion"/>
 
-## 5.8 The "Name" Data Type
+## 5.9 The "Name" Data Type
 
 The `gxc:Name` XML type is used to (de)serialize the `http://gedcomx.org/conclusion/v1/Name`
 data type.
@@ -882,7 +908,7 @@ specified by the section titled "The Relationship" of the conceptual model speci
 
 ## 7.1 The "Relationship" Data Type
 
-The `Relationship` XML type is used to (de)serialize the `http://gedcomx.org/conclusion/v1/Relationship`
+The `gxc:Relationship` XML type is used to (de)serialize the `http://gedcomx.org/conclusion/v1/Relationship`
 data type.
 
 ### properties
@@ -930,7 +956,57 @@ notes | Contributed notes about the relationship. | gxc:note | [`gxc:Note`](#not
   </...>
 ```
 
-# 8. XML Elements
+
+<a id="event"/>
+
+# 8. The Event
+
+This section defines the `Event` XML type corresponding to the `Event` data type
+specified by the section titled "The Event" of the conceptual model specification.
+
+## 8.1 The "Event" Data Type
+
+The `gxc:Event` is used to (de)serialize the `http://gedcomx.org/conclusion/v1/Event`
+data type.
+
+### properties
+
+name | description | XML property | XML type
+-----|-------------|--------------|---------
+type | URI identifying the type of the event. | gxc:type | [`rdf:ResourceReference`](#resource-reference)
+date | The date of the event. | gxc:date | [`gxc:Date`](#conclusion-date)
+place | The place the event. | gxc:place | [`gxc:Place`](#conclusion-place)
+roles | The roles of the persons in the event. | gxc:role | [`gxc:EventRole`](#conclusion-event-role)
+sources | The list of references to the evidence of the event. | gxc:source | [`gxc:SourceReference`](#source-reference)
+
+### examples
+
+```xml
+  <... rdf:ID="local_id">
+    <gxc:type rdf:resource="http://gedcomx.org/Marriage"/>
+    <gxc:date>
+      ...
+    </gxc:date>
+    <gxc:place>
+      ...
+    </gxc:place>
+    <gxc:role>
+      ...
+    </gxc:role>
+    <gxc:role>
+      ...
+    </gxc:role>
+    <gxc:source>
+      ...
+    </gxc:source>
+    <gxc:source>
+      ...
+    </gxc:source>
+  </...>
+```
+
+
+# 9. XML Elements
 
 XML types are not enough to provide an XML serialization format for a data model. XML requires elements to be defined
 that can be used as the "root" of an XML document. XML elements are also used to identify any extension properties that
