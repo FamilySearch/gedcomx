@@ -18,13 +18,7 @@ package org.gedcomx.metadata.source;
 import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
-import org.gedcomx.common.HasNotes;
-import org.gedcomx.common.LiteralValue;
-import org.gedcomx.common.Note;
-import org.gedcomx.common.ReferencesSources;
-import org.gedcomx.common.ResourceReference;
-import org.gedcomx.common.SourceReference;
-import org.gedcomx.common.URI;
+import org.gedcomx.common.*;
 import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.json.JsonElementWrapper;
 
@@ -39,7 +33,7 @@ import java.util.List;
 @XmlRootElement
 @XmlType ( name = "SourceDescription" )
 @JsonElementWrapper ( name = "source-descriptions" )
-public class SourceDescription implements HasNotes, ReferencesSources {
+public class SourceDescription implements Attributable, HasNotes, ReferencesSources {
   private String id;
   private SourceCitation citation;
   private URI about;
@@ -48,6 +42,7 @@ public class SourceDescription implements HasNotes, ReferencesSources {
   private String displayName;
   private List<LiteralValue> alternateNames;
   private List<Note> notes;
+  private Attribution attribution;
 
   /**
    * A local, context-specific id for the data.
@@ -218,4 +213,24 @@ public class SourceDescription implements HasNotes, ReferencesSources {
   public void setNotes(List<Note> notes) {
     this.notes = notes;
   }
+
+  /**
+   * The attribution metadata for this source description.
+   *
+   * @return The attribution metadata for this source description.
+   */
+  @XmlElement ( namespace = CommonModels.GEDCOMX_COMMON_NAMESPACE )
+  public Attribution getAttribution() {
+    return attribution;
+  }
+
+  /**
+   * The attribution metadata for this source description.
+   *
+   * @param attribution The attribution metadata for this source description.
+   */
+  public void setAttribution(Attribution attribution) {
+    this.attribution = attribution;
+  }
+
 }

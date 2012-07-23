@@ -135,7 +135,7 @@ name  | description | data type
 contributor | Reference to the contributor to whom the attributed data is attributed. | [URI](#uri) - MUST resolve to an instance of [`http://xmlns.com/foaf/0.1/Person`](#foaf-person) or [`http://xmlns.com/foaf/0.1/Organization`](#organization).
 confidence  | Reference to the confidence level of the contributor of the attributed data. | [URI](#uri) - MUST resolve to a confidence level. Refer to the list of [known confidence levels](#known-confidence-levels).
 modified | Timestamp of when the attributed data was contributed. | timestamp
-justification | A statement about why the attributed data is being provided by the contributor. | string
+changeMessage | A statement of why the attributed data is being provided by the contributor. | string
 
 <a id="known-confidence-levels"/>
 
@@ -287,6 +287,7 @@ sources | References to any sources to which this source is related. This is usu
 displayName | A display name for this source. | string - OPTIONAL
 alternateNames | A list of alternate display names for this source. | List of [`http://gedcomx.org/Literal`](#literal-value) - OPTIONAL
 notes  | A list of notes about a source. | List of [`http://gedcomx.org/Note`](#note) - OPTIONAL
+attribution | The attribution of this source description. | [`http://gedcomx.org/Attribution`](#attribution)
 
 
 <a id="source-citation"/>
@@ -523,7 +524,6 @@ data.
 ## 5.1 The "Conclusion" Data Type
 
 The `Conclusion` data type defines the base conceptual model for basic genealogical conclusions.
-The `Conclusion` data type is an extension of the `GenealogicalResource` data type.
 
 ### identifier
 
@@ -531,17 +531,14 @@ The identifier for the `Conclusion` data type is:
 
 `http://gedcomx.org/conclusion/v1/Conclusion`
 
-### extension
-
-This data type extends the following data type:
-
-`http://gedcomx.org/GenealogicalResource`
-
 ### properties
 
 name | description | data type
 -----|-------------|----------
-sources | The list of references to the sources of the conclusion. The sources of a conclusion MUST also be sources of the conclusion's containing entity (i.e. [`Person`](#person) or [`Relationship`](#relationship) ).| List of [`http://gedcomx.org/conclusion/v1/SourceReference`](#source-reference). Order is preserved.
+id | A local identifier for the source reference. Note that this id MUST NOT be processed as an identifier for the resource being referenced, but instead as a transient identifier for the reference itself. | string
+sources | The list of references to the sources of related to this conclusion. The sources of a conclusion MUST also be sources of the conclusion's containing entity (i.e. [`Person`](#person) or [`Relationship`](#relationship) ).| List of [`http://gedcomx.org/conclusion/v1/SourceReference`](#source-reference). Order is preserved.
+notes  | A list of notes about a conclusion. | List of [`http://gedcomx.org/Note`](#note) - OPTIONAL
+attribution | The attribution of this conclusion. | [`http://gedcomx.org/Attribution`](#attribution)
 
 <a id="conclusion-date"/>
 
