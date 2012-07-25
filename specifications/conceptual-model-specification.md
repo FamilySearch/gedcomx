@@ -216,6 +216,8 @@ If a value is supplied for the `resource` property, a value SHALL NOT be supplie
 
 The `Note` data type defines a note that was contributed from genealogical research.
 
+Notes are not intended to contain genealogical conclusions.  Notes are only associated with a single genealogical resource.
+
 ### identifier
 
 The identifier for the "Note" data type is:
@@ -547,15 +549,105 @@ attribution | The attribution of this conclusion. | [`http://gedcomx.org/Attribu
 
 
 <a id="document"/>
+
 ## 5.2 The "Document" Data Type
+
+The `Document` data type defines the base conceptual model for genealogical conclusions that are managed as textual documents.  The `Document` data type extends the `Conclusion` data type.
+
+### identifier
+
+The identifier for the `Document` data type is:
+
+`http://gedcomx.org/conclusion/v1/Document`
+
+### extension
+
+This data type extends the following data type:
+
+`http://gedcomx.org/conclusion/v1/Conclusion`
+
+### properties
+
+name | description | data type
+-----|-------------|----------
+lang | The language of the document. | `http://www.w3.org/XML/1998/namespace#lang`
+text | The text of the document. | string
+
+
 <a id="abstract-document"/>
+
 ## 5.2.1 The "AbstractDocument" Data Type
+
+The `AbstractDocument` data type is used to represent document abstracts.  The `AbstractDocument` data type extends the `Document` data type.
+
+### identifier
+
+The identifier for the `AbstractDocument` data type is:
+
+`http://gedcomx.org/conclusion/v1/AbstractDocument`
+
+### extension
+
+This data type extends the following data type:
+
+`http://gedcomx.org/conclusion/v1/Document`
+
+
 <a id="transcription-document"/>
+
 ## 5.2.2 The "TranscriptionDocument" Data Type
+
+The `TranscriptionDocument` data type is used to represent document transcriptions -- to include partial transcriptions (also called extracts).  The `TranscriptionDocument` data type extends the `Document` data type.
+
+### identifier
+
+The identifier for the `TranscriptionDocument` data type is:
+
+`http://gedcomx.org/conclusion/v1/TranscriptionDocument`
+
+### extension
+
+This data type extends the following data type:
+
+`http://gedcomx.org/conclusion/v1/Document`
+
+
 <a id="translation-document"/>
+
 ## 5.2.3 The "TranslationDocument" Data Type
+
+The `TranslationDocument` data type is used to represent document translations.  The `TranslationDocument` data type extends the `Document` data type.
+
+### identifier
+
+The identifier for the `TranslationDocument` data type is:
+
+`http://gedcomx.org/conclusion/v1/TranslationDocument`
+
+### extension
+
+This data type extends the following data type:
+
+`http://gedcomx.org/conclusion/v1/Document`
+
+
 <a id="analysis-document"/>
+
 ## 5.2.4 The "AnalysisDocument" Data Type
+
+The `AnalysisDocument` data type is used to represent documents with evidence analysis -- e.g., a genealogical proof statement.  The `AnalysisDocument` data type extends the `Document` data type.
+
+### identifier
+
+The identifier for the `AnalysisDocument` data type is:
+
+`http://gedcomx.org/conclusion/v1/AnalysisDocument`
+
+### extension
+
+This data type extends the following data type:
+
+`http://gedcomx.org/conclusion/v1/Document`
 
 
 <a id="gender-conclusion"/>
