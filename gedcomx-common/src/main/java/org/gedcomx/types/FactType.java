@@ -16,6 +16,7 @@
 package org.gedcomx.types;
 
 import org.codehaus.enunciate.qname.XmlQNameEnum;
+import org.codehaus.enunciate.qname.XmlQNameEnumValue;
 import org.codehaus.enunciate.qname.XmlUnknownQNameEnumValue;
 import org.gedcomx.common.URI;
 
@@ -135,15 +136,15 @@ public enum FactType {
   Guardianship,
 
   //facts generally applicable within the scope of a record.
-  @XmlQNameEnum( namespace = "http://record.gedcomx.org/")
+  @XmlQNameEnumValue ( namespace = "http://record.gedcomx.org/")
   Household,
-  @XmlQNameEnum( namespace = "http://record.gedcomx.org/")
+  @XmlQNameEnumValue ( namespace = "http://record.gedcomx.org/")
   BatchNumber,
-  @XmlQNameEnum( namespace = "http://record.gedcomx.org/")
+  @XmlQNameEnumValue ( namespace = "http://record.gedcomx.org/")
   LineNumber,
-  @XmlQNameEnum( namespace = "http://record.gedcomx.org/")
+  @XmlQNameEnumValue ( namespace = "http://record.gedcomx.org/")
   PageNumber,
-  @XmlQNameEnum( namespace = "http://record.gedcomx.org/")
+  @XmlQNameEnumValue ( namespace = "http://record.gedcomx.org/")
   CertificateNumber,
 
   @XmlUnknownQNameEnumValue
