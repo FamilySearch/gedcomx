@@ -388,6 +388,7 @@ GEDCOM X refers to the [Friend of a Friend](http://www.foaf-project.org/) projec
 data types for describing contributors. The data types are duplicated here for convenience
 and consistency.
 
+
 <a id="online-account"/>
 
 ## 4.1 The "OnlineAccount" Data Type
@@ -404,7 +405,7 @@ The identifier for the `OnlineAccount` data type is:
 
 name | description | data type
 -----|-------------|----------
-id | A local, transient identifier for the online account. | string
+id | A local identifier for the online account. Note that this id MUST NOT be processed as an identifier for the resource being referenced, but instead as a transient identifier for the reference itself. | string
 serviceHomepage  | The home page of the service. | [URI](#uri)
 accountName | The name of the account. | [`http://www.w3.org/2000/01/rdf-schema#Literal`](#rdf-literal)
 displayName | A display name for the account. | [`http://www.w3.org/2000/01/rdf-schema#Literal`](#rdf-literal)
@@ -426,7 +427,7 @@ The identifier for the `Address` data type is:
 
 name | description | data type
 -----|-------------|----------
-id | A local, transient identifier for the address. | string
+id | A local identifier for the address. Note that this id MUST NOT be processed as an identifier for the resource being referenced, but instead as a transient identifier for the reference itself. | string
 city | The city. | string
 country | The country. | string
 postalCode | The postal code. | string
@@ -458,6 +459,7 @@ This data type extends the following data type:
 
 name | description | data type
 -----|-------------|----------
+id | A local identifier for the agent. Note that this id MUST NOT be processed as an identifier for the resource being referenced, but instead as a transient identifier for the reference itself. | string
 name | The name of the person or organization. | [`http://www.w3.org/2000/01/rdf-schema#Literal`](#rdf-literal)
 homepage | The homepage of the person or organization. | [`http://www.w3.org/2000/01/rdf-schema#Literal`](#rdf-literal)
 openid  | The [openid](http://openid.net/) of the person or organization. | [`http://www.w3.org/2000/01/rdf-schema#Literal`](#rdf-literal)
@@ -542,7 +544,7 @@ The identifier for the `Conclusion` data type is:
 
 name | description | data type
 -----|-------------|----------
-id | A local identifier for the source reference. Note that this id MUST NOT be processed as an identifier for the resource being referenced, but instead as a transient identifier for the reference itself. | string
+id | A local identifier for the conclusion. Note that this id MUST NOT be processed as an identifier for the resource being referenced, but instead as a transient identifier for the reference itself. | string
 sources | The list of references to the sources of related to this conclusion. The sources of a conclusion MUST also be sources of the conclusion's containing entity (i.e. [`Person`](#person) or [`Relationship`](#relationship) ).| List of [`http://gedcomx.org/conclusion/v1/SourceReference`](#source-reference). Order is preserved.
 notes  | A list of notes about a conclusion. | List of [`http://gedcomx.org/Note`](#note) - OPTIONAL
 attribution | The attribution of this conclusion. | [`http://gedcomx.org/Attribution`](#attribution)
@@ -896,8 +898,6 @@ living | Whether the person is considered living. | boolean
 gender | The conclusion about the gender of the person. | [`http://gedcomx.org/conclusion/v1/Gender`](#gender)
 names | The conclusions about the names of the person. | List of [`http://gedcomx.org/conclusion/v1/Name`](#name-conclusion). Order is preserved.
 facts | The conclusions about the facts of the life of the person. | List of [`http://gedcomx.org/conclusion/v1/Fact`](#fact-conclusion). Order is preserved.
-sources | The list of references to the evidence of the person. | List of [`http://gedcomx.org/conclusion/v1/SourceReference`](#source-reference). Order is preserved.
-notes | Contributed notes about the person. | List of [`http://gedcomx.org/Note`](#note). Order is preserved.
 
 
 <a id="relationship"/>
@@ -927,11 +927,9 @@ type | URI identifying the type of the relationship. | [URI](#uri) - MUST resolv
 person1 | Reference to the first person in the relationship. | [URI](#uri) - MUST resolve to an instance of [`http://gedcomx.org/conclusion/v1/Person`](#person)
 person2 | Reference to the second person in the relationship. | [URI](#uri) - MUST resolve to an instance of [`http://gedcomx.org/conclusion/v1/Person`](#person)
 facts | The conclusions about the facts of the life of the relationship. | List of [`http://gedcomx.org/conclusion/v1/Fact`](#fact-conclusion). Order is preserved.
-sources | The list of references to the evidence of the relationship. | List of [`http://gedcomx.org/conclusion/v1/SourceReference`](#source-reference). Order is preserved.
-notes | Contributed notes about the relationship. | List of [`http://gedcomx.org/Note`](#note). Order is preserved.
 
 Note: when a relationship type implies direction, the relationship is said to
-to *from* person1 *to* person2. For example, in a parent-child relationship, the
+be *from* person1 *to* person2. For example, in a parent-child relationship, the
 `person1` property refers to the parent and the `person2` property refers to the
 child.
 
@@ -970,14 +968,14 @@ This data type extends the following data type:
 name | description | data type
 -----|-------------|----------
 person | Reference to the person playing the role in the event. | [`URI`](#uri) - MUST resolve to an instance of [`http://gedcomx.org/conclusion/v1/Person`](#person)
-type | Reference to the role. | [`URI`](#uri) - MUST resolve to a role. Refer to the list of [known roles](#known-roles).
+type | Reference to the role type. | [`URI`](#uri) - MUST resolve to a role type. Refer to the list of [known role types](#known-roles).
 details | Details about the role of the person in the event. | string
 
 <a id="known-roles"/>
 
-### known roles
+### known role types
 
-The following roles are defined by GEDCOM X:
+The following role types are defined by GEDCOM X:
 
 URI | description
 ----|------------
@@ -1014,7 +1012,6 @@ type | URI identifying the type of the event. | [URI](#uri). MUST resolve to an 
 date | The date of the event. | [`http://gedcomx.org/conclusion/v1/Date`](#conclusion-date)
 place | The place of the event. | [`http://gedcomx.org/conclusion/v1/Place`](#conclusion-place)
 roles | The roles of the persons in the event. | List of [`http://gedcomx.org/conclusion/v1/EventRole`](#conclusion-event-role). Order is preserved.
-sources | The list of references to the evidence of the event. | List of [`http://gedcomx.org/conclusion/v1/SourceReference`](#source-reference). Order is preserved.
 
 <a id="known-event-types"/>
 

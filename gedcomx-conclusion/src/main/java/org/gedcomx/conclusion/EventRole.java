@@ -63,9 +63,9 @@ public class EventRole extends Conclusion {
   }
 
   /**
-   * The type of the resource being referenced.
+   * The role type.
    *
-   * @return The type of the resource being referenced.
+   * @return The role type.
    */
   @XmlTransient
   @JsonIgnore
@@ -74,9 +74,9 @@ public class EventRole extends Conclusion {
   }
 
   /**
-   * The type of the resource being referenced.
+   * The role type.
    *
-   * @param type The type of the resource being referenced.
+   * @param type The role type.
    */
   @JsonIgnore
   public void setType(URI type) {
@@ -84,9 +84,9 @@ public class EventRole extends Conclusion {
   }
 
   /**
-   * The enum referencing the known type of the resource being referenced, or {@link org.gedcomx.types.EventRoleType#OTHER} if not known.
+   * The enum referencing the known role type, or {@link org.gedcomx.types.EventRoleType#OTHER} if not known.
    *
-   * @return The enum referencing the known type of the source reference, or {@link org.gedcomx.types.EventRoleType#OTHER} if not known.
+   * @return The enum referencing the known role type, or {@link org.gedcomx.types.EventRoleType#OTHER} if not known.
    */
   @XmlTransient
   @JsonIgnore
@@ -95,9 +95,9 @@ public class EventRole extends Conclusion {
   }
 
   /**
-   * Set the type of this reference from an enumeration of known source reference types.
+   * Set the role type from an enumeration of known role types.
    *
-   * @param knownType The reference type.
+   * @param knownType The role type.
    */
   @JsonIgnore
   public void setKnownType(EventRoleType knownType) {
