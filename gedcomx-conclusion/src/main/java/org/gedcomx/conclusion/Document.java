@@ -16,6 +16,7 @@
 package org.gedcomx.conclusion;
 
 import org.gedcomx.common.HasText;
+import org.gedcomx.common.TextValue;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -27,34 +28,14 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlType(name = "Document")
 public abstract class Document extends Conclusion implements HasText {
-  private String lang;
-  private String text;
-
-  /**
-   * The language of the text in the document. See <a href="http://www.w3.org/International/articles/language-tags/>http://www.w3.org/International/articles/language-tags/</a>
-   *
-   * @return The language of note.
-   */
-  @XmlAttribute ( namespace = XMLConstants.XML_NS_URI )
-  public String getLang() {
-    return lang;
-  }
-
-  /**
-   * The language of the text in the document. See <a href="http://www.w3.org/International/articles/language-tags/>http://www.w3.org/International/articles/language-tags/</a>
-   *
-   * @param lang The language of the text in the document.
-   */
-  public void setLang(String lang) {
-    this.lang = lang;
-  }
+  private TextValue text;
 
   /**
    * The document text.
    *
    * @return The document text.
    */
-  public String getText() {
+  public TextValue getText() {
     return text;
   }
 
@@ -63,7 +44,7 @@ public abstract class Document extends Conclusion implements HasText {
    *
    * @param text The document text.
    */
-  public void setText(String text) {
+  public void setText(TextValue text) {
     this.text = text;
   }
 }

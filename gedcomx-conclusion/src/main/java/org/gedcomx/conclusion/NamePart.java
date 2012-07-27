@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlType;
  * @author Ryan Heaton
  */
 @XmlType ( name = "NamePart", propOrder = {"type", "text"})
-public final class NamePart implements HasText {
+public final class NamePart {
 
   @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
   @JsonProperty

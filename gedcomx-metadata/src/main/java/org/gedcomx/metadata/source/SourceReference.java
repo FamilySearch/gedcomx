@@ -13,11 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.common;
+package org.gedcomx.metadata.source;
 
 import org.codehaus.enunciate.doc.DocumentationExample;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.gedcomx.common.Attributable;
+import org.gedcomx.common.Attribution;
+import org.gedcomx.common.ResourceReference;
+import org.gedcomx.common.URI;
 import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.RDFRange;
 import org.gedcomx.rt.SupportsExtensionElements;

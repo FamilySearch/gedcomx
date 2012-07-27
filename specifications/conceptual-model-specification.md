@@ -91,7 +91,7 @@ genealogical resource in a specific data set.
 
 The identifier for the "Identifier" data type is:
 
-`http://gedcomx.org/Identifier`
+`http://gedcomx.org/conclusion/v1/Identifier`
 
 ### properties
 
@@ -133,8 +133,8 @@ The identifier for the "Attribution" data type is:
 name  | description | data type
 ------|-------------|----------
 contributor | Reference to the contributor to whom the attributed data is attributed. | [URI](#uri) - MUST resolve to an instance of [`http://xmlns.com/foaf/0.1/Person`](#foaf-person) or [`http://xmlns.com/foaf/0.1/Organization`](#organization).
-confidence  | Reference to the confidence level of the contributor of the attributed data. | [URI](#uri) - MUST resolve to a confidence level. Refer to the list of [known confidence levels](#known-confidence-levels).
 modified | Timestamp of when the attributed data was contributed. | timestamp
+confidence  | Reference to the confidence level of the contributor of the attributed data. | [URI](#uri) - MUST resolve to a confidence level. Refer to the list of [known confidence levels](#known-confidence-levels).
 changeMessage | A statement of why the attributed data is being provided by the contributor. | string
 
 <a id="known-confidence-levels"/>
@@ -176,7 +176,7 @@ The `FormalValue` data type does NOT support extension properties (see [Extensio
 
 The identifier for the "FormalValue" data type is:
 
-`http://gedcomx.org/FormalValue`
+`http://gedcomx.org/conclusion/v1/FormalValue`
 
 ### properties
 
@@ -228,8 +228,8 @@ The identifier for the "Note" data type is:
 
 name  | description | data type
 ------|-------------|----------
-lang | The language of the note. | `http://www.w3.org/XML/1998/namespace#lang`
-text | The text of the note. | string
+text | The text of the note. | [`http://gedcomx.org/TextValue`](#text-value)
+attribution | The attribution of this note. | [`http://gedcomx.org/Attribution`](#attribution)
 
 
 <a id="literal-value"/>
@@ -248,9 +248,29 @@ The identifier for the "LiteralValue" data type is:
 
 name  | description | data type
 ------|-------------|----------
-value | The literal value. A datatype MAY be supplied to identify how the string is to be parsed. | string
 datatype  | URI identifying the way the value is to be processed according to a specific standard. | [URI](#uri)
 lang | The language of the literal value. | `http://www.w3.org/XML/1998/namespace#lang`
+value | The literal value. A datatype MAY be supplied to identify how the string is to be parsed. | string
+
+
+<a id="texxt-value"/>
+
+## 2.7 The "TextValue" Data Type
+
+The `TextValue` data type defines a literal value.
+
+### identifier
+
+The identifier for the "TextValue" data type is:
+
+`http://gedcomx.org/TextValue`
+
+### properties
+
+name  | description | data type
+------|-------------|----------
+lang | The language of the literal value. | `http://www.w3.org/XML/1998/namespace#lang`
+value | The literal value. A datatype MAY be supplied to identify how the string is to be parsed. | string
 
 
 
@@ -285,7 +305,7 @@ id | A local, transient identifier for the resource being described. Note that a
 ciation | The bibliographic citation for this source. | [`http://gedcomx.org/source/v1/SourceCitation`](#source-citation) - REQUIRED
 about | A uniform resource identifier (URI) for the resource being described. | [URI](#uri) - OPTIONAL
 mediator | A reference to the entity that mediates access to the described source. | [URI](#uri) - OPTIONAL; MUST resolve to an instance of [`http://xmlns.com/foaf/0.1/Person`](#foaf-person) or [`http://xmlns.com/foaf/0.1/Organization`](#organization).
-sources | References to any sources to which this source is related. This is usually applicable to sources that are derived from or contained in another source. | List of [`http://gedcomx.org/SourceReference`](#source-reference) - OPTIONAL
+sources | References to any sources to which this source is related. This is usually applicable to sources that are derived from or contained in another source. | List of [`http://gedcomx.org/source/v1/SourceReference`](#source-reference) - OPTIONAL
 displayName | A display name for this source. | string - OPTIONAL
 alternateNames | A list of alternate display names for this source. | List of [`http://gedcomx.org/Literal`](#literal-value) - OPTIONAL
 notes  | A list of notes about a source. | List of [`http://gedcomx.org/Note`](#note) - OPTIONAL
@@ -344,7 +364,7 @@ using an instance of `SourceReference`.
 
 The identifier for the "SourceReference" data type is:
 
-`http://gedcomx.org/SourceReference`
+`http://gedcomx.org/source/v1/SourceReference`
 
 ### properties
 
@@ -572,8 +592,7 @@ This data type extends the following data type:
 
 name | description | data type
 -----|-------------|----------
-lang | The language of the document. | `http://www.w3.org/XML/1998/namespace#lang`
-text | The text of the document. | string
+text | The text of the document. | [`http://gedcomx.org/TextValue`](#text-value)
 
 
 <a id="abstract-document"/>
@@ -594,6 +613,10 @@ This data type extends the following data type:
 
 `http://gedcomx.org/conclusion/v1/Document`
 
+### properties
+
+The `AbstractDocument` data type defines no additional properties beyond those defined by its extended type.
+
 
 <a id="transcription-document"/>
 
@@ -612,6 +635,10 @@ The identifier for the `TranscriptionDocument` data type is:
 This data type extends the following data type:
 
 `http://gedcomx.org/conclusion/v1/Document`
+
+### properties
+
+The `TranscriptionDocument` data type defines no additional properties beyond those defined by its extended type.
 
 
 <a id="translation-document"/>
@@ -632,6 +659,10 @@ This data type extends the following data type:
 
 `http://gedcomx.org/conclusion/v1/Document`
 
+### properties
+
+The `TranslationDocument` data type defines no additional properties beyond those defined by its extended type.
+
 
 <a id="analysis-document"/>
 
@@ -650,6 +681,10 @@ The identifier for the `AnalysisDocument` data type is:
 This data type extends the following data type:
 
 `http://gedcomx.org/conclusion/v1/Document`
+
+### properties
+
+The `AnalysisDocument` data type defines no additional properties beyond those defined by its extended type.
 
 
 <a id="gender-conclusion"/>
@@ -714,9 +749,9 @@ This data type extends the following data type:
 name | description | data type
 -----|-------------|----------
 type | URI identifying the type of the name. | [URI](#uri) - MUST resolve to a name type. Refer to the list of [known name types](#known-name-types).
+preferred | Whether this name is preferred above the other names of a person. | boolean
 primaryForm | The primary form of the name. | `http://gedcomx.org/conclusion/v1/NameForm`
 alternateForms | The alternate forms of the name. | List of [`http://gedcomx.org/conclusion/v1/NameForm`](#name-form). Order is preserved.
-preferred | Whether this name is preferred above the other names of a person. | boolean
 
 <a id="known-name-types"/>
 
@@ -765,7 +800,7 @@ type | URI identifying the type of the fact. | [URI](#uri) - MUST resolve to a f
 date | The date of applicability of the fact. | [`http://gedcomx.org/conclusion/v1/Date`](#conclusion-date)
 place | The place of applicability of the fact. | [`http://gedcomx.org/conclusion/v1/Place`](#conclusion-place)
 original | The value of the fact as supplied by the contributor. | string
-formal | The formal value of the fact. | [`http://gedcomx.org/FormalValue`](#formal-value)
+formal | The formal value of the fact. | [`http://gedcomx.org/conclusion/v1/FormalValue`](#formal-value)
 
 <a id="known-fact-types"/>
 
@@ -893,7 +928,7 @@ This data type extends the following data type:
 
 name | description | data type
 -----|-------------|----------
-identifiers | Identifiers for the person. | List of [`http://gedcomx.org/Identifier`](#identifier-type). Order is preserved.
+identifiers | Identifiers for the person. | List of [`http://gedcomx.org/conclusion/v1/Identifier`](#identifier-type). Order is preserved.
 living | Whether the person is considered living. | boolean
 gender | The conclusion about the gender of the person. | [`http://gedcomx.org/conclusion/v1/Gender`](#gender)
 names | The conclusions about the names of the person. | List of [`http://gedcomx.org/conclusion/v1/Name`](#name-conclusion). Order is preserved.

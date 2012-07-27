@@ -18,7 +18,12 @@ package org.gedcomx.conclusion;
 import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
-import org.gedcomx.common.*;
+import org.gedcomx.common.Attributable;
+import org.gedcomx.common.Attribution;
+import org.gedcomx.common.HasNotes;
+import org.gedcomx.common.Note;
+import org.gedcomx.metadata.source.ReferencesSources;
+import org.gedcomx.metadata.source.SourceReference;
 import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.SupportsExtensionElements;
 

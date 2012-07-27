@@ -1,18 +1,13 @@
 package org.gedcomx.metadata.source;
 
-import org.gedcomx.common.Attribution;
-import org.gedcomx.common.LiteralValue;
-import org.gedcomx.common.Note;
-import org.gedcomx.common.ResourceReference;
-import org.gedcomx.common.ResourceSet;
-import org.gedcomx.common.SourceReference;
-import org.gedcomx.common.URI;
+import org.gedcomx.common.*;
 import org.gedcomx.metadata.foaf.Address;
 import org.gedcomx.metadata.foaf.Organization;
 import org.gedcomx.rt.GedcomNamespaceManager;
 import org.gedcomx.rt.SerializationProcessListener;
 import org.gedcomx.test.RecipeTest;
 import org.gedcomx.test.Snippet;
+import org.gedcomx.types.ConfidenceLevel;
 import org.testng.annotations.Test;
 
 import javax.xml.bind.JAXBContext;
@@ -75,6 +70,7 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
   public static final String NOTE_TEXT_1 = "Image available with record if you sign into FamilySearch.";
   public static final String CONTRIBUTOR_1_ID = "#contributorid";
   public static final long MODIFIED_20111111_11_11_11_111 = 1321027871111L;
+  public static final String CHANGE_MESSAGE = "Matches published information about his death; referenced by other researchers.";
 
   public static final String ORG_FS_ID = "R1";
   public static final String FAMILY_SEARCH_INTERNATIONAL = "FamilySearch International";
@@ -128,8 +124,8 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
       .applicableTo(SourceDescription.class);
 
     Note note = new Note();
-    note.setLang(LANG_EN_US);
-    note.setText(NOTE_TEXT_1);
+    note.setText(new TextValue(NOTE_TEXT_1));
+    note.getText().setLang(LANG_EN_US);
     note.setAttribution(new Attribution());
     note.getAttribution().setContributor(new ResourceReference(URI.create(CONTRIBUTOR_1_ID)));
     note.getAttribution().setModified(new Date(MODIFIED_20111111_11_11_11_111)); // 11 Nov 2011 11:11:11.111
@@ -148,7 +144,7 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
     srcDesc1.getCitation().getFields().add(new CitationField());
     srcDesc1.getCitation().getFields().get(5).setName(FLDNM_FHL_FILM);
     srcDesc1.getCitation().getFields().get(5).setValue(FLDVAL_FHL_FILM1);
-    srcDesc1.setMediator(URI.create(MEDIATOR_URI_PREFIX + ORG_FHL_ID));
+    srcDesc1.setMediatorURI(URI.create(MEDIATOR_URI_PREFIX + ORG_FHL_ID));
 
     SourceDescription srcDesc2 = new SourceDescription();
     srcDesc2.setId(SRC_ID);
@@ -168,9 +164,14 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
     srcDesc2.getSources().add(new SourceReference());
     srcDesc2.getSources().get(0).setSourceDescription(URI.create(SRCDESC_URI_PREFIX + SRC_OF_SRC_ID));
     srcDesc2.setDisplayName(PRESIDENT_LYNDON_B_JOHNSON_DEATH_CERTIFICATE);
-    srcDesc2.setMediator(URI.create(MEDIATOR_URI_PREFIX + ORG_FS_ID));
+    srcDesc2.setMediatorURI(URI.create(MEDIATOR_URI_PREFIX + ORG_FS_ID));
     srcDesc2.setNotes(new ArrayList<Note>());
     srcDesc2.getNotes().add(note);
+    srcDesc2.setAttribution(new Attribution());
+    srcDesc2.getAttribution().setContributor(new ResourceReference(URI.create(CONTRIBUTOR_1_ID)));
+    srcDesc2.getAttribution().setModified(new Date(MODIFIED_20111111_11_11_11_111)); // 11 Nov 2011 11:11:11.111
+    srcDesc2.getAttribution().setKnownConfidenceLevel(ConfidenceLevel.Certainly);
+    srcDesc2.getAttribution().setChangeMessage(CHANGE_MESSAGE);
 
     ResourceSet resourceSet = new ResourceSet();
     resourceSet.addExtensionElement(srcDesc2);
@@ -191,7 +192,7 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
     assertNull(srcDesc1.getCitation().getFields().get(5).getName()); // for branch coverage on setName
 
     // the following adds code coverage for SourceDescription
-    srcDesc1.setMediator((URI)null);
+    srcDesc1.setMediatorURI((URI)null);
     srcDesc1.setAlternateNames(new ArrayList<LiteralValue>());
     assertNull(srcDesc1.getMediator());
     assertEquals(srcDesc1.getAlternateNames().size(), 0);
@@ -267,10 +268,16 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
 
     assertNotNull(srcDesc2.getNotes());
     assertEquals(srcDesc2.getNotes().size(), 1);
-    assertEquals(srcDesc2.getNotes().get(0).getLang(), LANG_EN_US);
-    assertEquals(srcDesc2.getNotes().get(0).getText(), NOTE_TEXT_1);
+    assertEquals(srcDesc2.getNotes().get(0).getText().getLang(), LANG_EN_US);
+    assertEquals(srcDesc2.getNotes().get(0).getText().getValue(), NOTE_TEXT_1);
     assertEquals(srcDesc2.getNotes().get(0).getAttribution().getContributor().getResource().toURI().toString(), CONTRIBUTOR_1_ID);
     assertEquals(srcDesc2.getNotes().get(0).getAttribution().getModified().getTime(), MODIFIED_20111111_11_11_11_111);
+
+    assertNotNull(srcDesc2.getAttribution());
+    assertEquals(srcDesc2.getAttribution().getContributor().getResource().toURI().toString(), CONTRIBUTOR_1_ID);
+    assertEquals(srcDesc2.getAttribution().getModified().getTime(), MODIFIED_20111111_11_11_11_111);
+    assertEquals(srcDesc2.getAttribution().getKnownConfidenceLevel(), ConfidenceLevel.Certainly);
+    assertEquals(srcDesc2.getAttribution().getChangeMessage(), CHANGE_MESSAGE);
 
     assertNotNull(orgFamilySearch);
     assertEquals(orgFamilySearch.getId(), ORG_FS_ID);
@@ -330,8 +337,9 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
     orgNara.getPhones().add(new ResourceReference(URI.create("fax:+1-301-837-0483")));
 
     Note note = new Note();
-    note.setLang("en-US");
-    note.setText("Image available with record.");
+    note.setText(new TextValue());
+    note.getText().setLang("en-US");
+    note.getText().setValue("Image available with record.");
     note.setAttribution(new Attribution());
     note.getAttribution().setContributor(new ResourceReference(URI.create("#contributorid")));
     note.getAttribution().setModified(new Date(1321027871111L)); // 11 Nov 2011 11:11:11.111
@@ -352,7 +360,7 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
     srcDesc0.getCitation().getFields().add(new CitationField("nara-film-roll", "523"));
     srcDesc0.getCitation().getFields().add(new CitationField("archive", "National Archives and Records Administration"));
     srcDesc0.getCitation().getFields().add(new CitationField("archive-locality", "Washington D.C."));
-    srcDesc0.setMediator(URI.create("repository#" + orgIdNara));
+    srcDesc0.setMediatorURI(URI.create("repository#" + orgIdNara));
 
     SourceDescription srcDesc1 = new SourceDescription();
     srcDesc1.setId(sourceOfS1);
@@ -366,7 +374,7 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
     srcDesc1.getCitation().getFields().add(new CitationField("archive-name", "National Archives and Records Administration"));
     srcDesc1.getCitation().getFields().add(new CitationField("archive-locality", "Washington D.C"));
     srcDesc1.getCitation().getFields().add(new CitationField("fhl-film", "FHL US/CAN Census Area Film 2340258"));
-    srcDesc1.setMediator(URI.create("repository#" + ORG_FHL_ID));
+    srcDesc1.setMediatorURI(URI.create("repository#" + ORG_FHL_ID));
 
     SourceDescription srcDesc2 = new SourceDescription();
     srcDesc2.setId(sourceS1);
@@ -393,7 +401,7 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
     srcDesc2.getSources().add(new SourceReference());
     srcDesc2.getSources().get(0).setSourceDescription(URI.create("#" + sourceOfS1));
     srcDesc2.setDisplayName("President Ronald Reagan with his parents in 1830 census");
-    srcDesc2.setMediator(URI.create("repository#" + ORG_FS_ID));
+    srcDesc2.setMediatorURI(URI.create("repository#" + ORG_FS_ID));
     srcDesc2.setNotes(new ArrayList<Note>());
     srcDesc2.getNotes().add(note);
 

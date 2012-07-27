@@ -15,7 +15,6 @@ import java.util.List;
 public class CustomEntity {
 
   private String id;
-  private SourceReference source;
   private URI refToSomething;
   private List<UniqueCustomKeyedItem> uniqueKeyedItems;
   private List<CustomKeyedItem> keyedItems;
@@ -33,14 +32,6 @@ public class CustomEntity {
 
   public void setId(String id) {
     this.id = id;
-  }
-
-  public SourceReference getSource() {
-    return this.source;
-  }
-
-  public void setSource(SourceReference source) {
-    this.source = source;
   }
 
   public URI getRefToSomething() {

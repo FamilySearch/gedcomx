@@ -31,7 +31,7 @@ import java.util.List;
  * Represents a description of a source.
  */
 @XmlRootElement
-@XmlType ( name = "SourceDescription" )
+@XmlType ( name = "SourceDescription", propOrder = { "citation", "mediator", "sources", "displayName", "alternateNames", "notes", "attribution" } )
 @JsonElementWrapper ( name = "source-descriptions" )
 public class SourceDescription implements Attributable, HasNotes, ReferencesSources {
   private String id;
@@ -126,7 +126,7 @@ public class SourceDescription implements Attributable, HasNotes, ReferencesSour
    */
   @XmlTransient
   @JsonIgnore
-  public void setMediator(URI mediator) {
+  public void setMediatorURI(URI mediator) {
     this.mediator = mediator != null ? new ResourceReference(mediator) : null;
   }
 

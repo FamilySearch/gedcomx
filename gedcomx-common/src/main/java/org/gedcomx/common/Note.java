@@ -33,35 +33,16 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType ( name = "Note", propOrder = { "text", "attribution" } )
 public class Note implements Attributable, HasText {
 
-  private String lang;
-  private String text;
+  private TextValue text;
   private Attribution attribution;
-
-  /**
-   * The language of the note. See <a href="http://www.w3.org/International/articles/language-tags/>http://www.w3.org/International/articles/language-tags/</a>
-   *
-   * @return The language of note.
-   */
-  @XmlAttribute( namespace = XMLConstants.XML_NS_URI )
-  public String getLang() {
-    return lang;
-  }
-
-  /**
-   * The language of the note. See <a href="http://www.w3.org/International/articles/language-tags/>http://www.w3.org/International/articles/language-tags/</a>
-   *
-   * @param lang The language of the note.
-   */
-  public void setLang(String lang) {
-    this.lang = lang;
-  }
 
   /**
    * The text of the note.
    *
    * @return The text of the note.
    */
-  public String getText() {
+  @Override
+  public TextValue getText() {
     return text;
   }
 
@@ -70,7 +51,8 @@ public class Note implements Attributable, HasText {
    *
    * @param text The text of the note.
    */
-  public void setText(String text) {
+  @Override
+  public void setText(TextValue text) {
     this.text = text;
   }
 

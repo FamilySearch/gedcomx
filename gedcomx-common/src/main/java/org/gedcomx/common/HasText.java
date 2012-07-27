@@ -29,12 +29,12 @@ public interface HasText {
    *
    * @return The text.
    */
-  String getText();
+  TextValue getText();
 
   /**
    * The text.
    *
    * @param text The text.
    */
-  void setText(String text);
+  void setText(TextValue text);
 }

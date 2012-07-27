@@ -1,7 +1,12 @@
-package org.gedcomx.common;
+package org.gedcomx.metadata.source;
 
+import org.gedcomx.common.Attribution;
+import org.gedcomx.common.ResourceReference;
+import org.gedcomx.common.URI;
+import org.gedcomx.metadata.CustomEntity;
 import org.gedcomx.rt.SerializationUtil;
 import org.gedcomx.types.SourceReferenceType;
+import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
@@ -36,8 +41,8 @@ public class SourceReferenceTest {
     assertEquals("urn:contributorid", custom.getSource().getAttribution().toString());
     assertEquals("urn:srcDescInstance", custom.getSource().getSourceDescription().toString());
     assertEquals("refid", custom.getSource().getId());
-    assertEquals("alt1", ((CustomEntity) custom.getSource().getExtensionElements().get(0)).getId());
-    assertEquals("alt2", ((CustomEntity) custom.getSource().getExtensionElements().get(1)).getId());
+    AssertJUnit.assertEquals("alt1", ((CustomEntity) custom.getSource().getExtensionElements().get(0)).getId());
+    AssertJUnit.assertEquals("alt2", ((CustomEntity) custom.getSource().getExtensionElements().get(1)).getId());
     assertNull(custom.getSource().findExtensionOfType(String.class));
     assertEquals("alt1", custom.getSource().findExtensionOfType(CustomEntity.class).getId());
     assertEquals(0, custom.getSource().findExtensionsOfType(String.class).size());
@@ -78,7 +83,7 @@ public class SourceReferenceTest {
     assertEquals(SourceReferenceType.Analysis, custom.getSource().getKnownType());
     assertEquals("urn:srcDescInstance", custom.getSource().getSourceDescription().toString());
     assertEquals("refid", custom.getSource().getId());
-    assertEquals("alt", ((CustomEntity) custom.getSource().getExtensionElements().get(0)).getId());
+    AssertJUnit.assertEquals("alt", ((CustomEntity) custom.getSource().getExtensionElements().get(0)).getId());
   }
 
 }
