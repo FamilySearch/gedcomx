@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlType;
 import java.io.IOException;
 
 /**
- * A RDF reference to an age part type.
+ * A reference to an element of a constrained vocabulary.
  *
  * @author Ryan Heaton
  */
