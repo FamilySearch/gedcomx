@@ -302,10 +302,10 @@ The identifier for the "SourceDescription" data type is:
 name | description | data type
 -----|-------------|----------
 id | A local, transient identifier for the resource being described. Note that as a local, transient identifier, the id may only be used to resolve references to the resource within a well-defined scope (such as a single web service request or a single file). | string
-ciation | The bibliographic citation for this source. | [`http://gedcomx.org/source/v1/SourceCitation`](#source-citation) - REQUIRED
+citation | The citation for this source. | [`http://gedcomx.org/source/v1/SourceCitation`](#source-citation) - REQUIRED
 about | A uniform resource identifier (URI) for the resource being described. | [URI](#uri) - OPTIONAL
 mediator | A reference to the entity that mediates access to the described source. | [URI](#uri) - OPTIONAL; MUST resolve to an instance of [`http://xmlns.com/foaf/0.1/Person`](#foaf-person) or [`http://xmlns.com/foaf/0.1/Organization`](#organization).
-sources | References to any sources to which this source is related. This is usually applicable to sources that are derived from or contained in another source. | List of [`http://gedcomx.org/source/v1/SourceReference`](#source-reference) - OPTIONAL
+sources | References to any sources to which this source is related. This is usually applicable to sources that are derived from or a component of another source. | List of [`http://gedcomx.org/source/v1/SourceReference`](#source-reference) - OPTIONAL
 displayName | A display name for this source. | string - OPTIONAL
 alternateNames | A list of alternate display names for this source. | List of [`http://gedcomx.org/Literal`](#literal-value) - OPTIONAL
 notes  | A list of notes about a source. | List of [`http://gedcomx.org/Note`](#note) - OPTIONAL
@@ -316,7 +316,8 @@ attribution | The attribution of this source description. | [`http://gedcomx.org
 
 ## 3.2 The "SourceCitation" Data Type
 
-The `SourceCitation` data type defines the information necessary to identify a source(s).
+The `SourceCitation` data type defines a container for the metadata necessary to identify a source(s)
+and from which bibliographic citation strings may be rendered.
 
 ### identifier
 
@@ -337,7 +338,8 @@ fields  | A list of citation fields about a source. | List of [`http://gedcomx.o
 
 ## 3.3 The "CitationField" Data Type
 
-The `CitationField` data type defines a field to represent an essential detail(s) (e.g., author, volume, page, publisher, etc.) necessary to fully and uniquely identify a source.
+The `CitationField` data type defines a piece of metadata (e.g., author, volume, page, publisher, etc.)
+necessary to identify a source.
 
 ### identifier
 
@@ -349,7 +351,7 @@ The identifier for the "CitationField" data type is:
 
 name | description | data type
 -----|-------------|----------
-name | The name associated with the citation detail -- typically defined as part of a citation template or citation template library. | string - REQUIRED
+name | The identifier for the citation detail -- defined by a citation template or a citation template library. | [URI](#uri) - REQUIRED
 value | The value of the citation detail. | string - OPTIONAL
 
 
@@ -388,7 +390,7 @@ URI | description
 `http://gedcomx.org/Abstract`| The genealogical resource refering to the source is a abstract of the source.
 `http://gedcomx.org/Transcription`| The genealogical resource refering to the source is a transcription of the source.
 `http://gedcomx.org/Translation`| The genealogical resource refering to the source is a translation of the source.
-`http://gedcomx.org/ExtractedConclusion`| The genealogical resource refering to the source is an extracted conclusion of the source.
+`http://gedcomx.org/ExtractedConclusion`| The genealogical resource refering to the source is a conclusion extracted from the source.
 `http://gedcomx.org/Analysis`| The genealogical resource refering to the source is a document containing analysis of the source.
 `http://gedcomx.org/WorkingConclusion`| The genealogical resource refering to the source is a working conclusion based on the source.
 
@@ -427,8 +429,8 @@ name | description | data type
 -----|-------------|----------
 id | A local identifier for the online account. Note that this id MUST NOT be processed as an identifier for the resource being referenced, but instead as a transient identifier for the reference itself. | string
 serviceHomepage  | The home page of the service. | [URI](#uri)
-accountName | The name of the account. | [`http://www.w3.org/2000/01/rdf-schema#Literal`](#rdf-literal)
-displayName | A display name for the account. | [`http://www.w3.org/2000/01/rdf-schema#Literal`](#rdf-literal)
+accountName | The name of the account. | [`http://gedcomx.org/Literal`](#literal-value)
+displayName | A display name for the account. | [`http://gedcomx.org/Literal`](#literal-value)
 
 <a id="address"/>
 
@@ -468,12 +470,6 @@ between contributor data types such as FOAF `Person` and `Organization`.
 The identifier for the `Agent` data type is:
 
 `http://xmlns.com/foaf/0.1/Agent`
-
-### extension
-
-This data type extends the following data type:
-
-`http://www.w3.org/1999/02/22-rdf-syntax-ns#Description`
 
 ### properties
 
@@ -544,8 +540,7 @@ language | The language of the person. | [`http://www.w3.org/2000/01/rdf-schema#
 
 # 5. Data Types for Describing Conclusions
 
-This section describes the data types that are used to define conclusions about genealogical
-data.
+This section describes the data types that are used to define genealogical conclusions.
 
 
 <a id="conclusion"/>
@@ -1160,7 +1155,7 @@ The identifier for the `NamePart` data type is:
 name | description | data type
 -----|-------------|----------
 type | URI identifying the type of the name part. | [URI](#uri) - MUST resolve to a name part type. Refer to the list of [known name part types](#known-name-part-types).
-text | The text of the name part. | string
+value | The value of the name part. | string
 
 <a id="known-name-part-types"/>
 

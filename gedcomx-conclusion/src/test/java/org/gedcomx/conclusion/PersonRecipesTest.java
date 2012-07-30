@@ -126,11 +126,11 @@ public class PersonRecipesTest extends RecipeTest {
     ArrayList<NamePart> parts = new ArrayList<NamePart>();
     NamePart part = new NamePart();
     part.setKnownType(NamePartType.Given);
-    part.setText("George");
+    part.setValue("George");
     parts.add(part);
     part = new NamePart();
     part.setKnownType(NamePartType.Surname);
-    part.setText("Washington");
+    part.setValue("Washington");
     parts.add(part);
     nameForm.setParts(parts);
     name.setPrimaryForm(nameForm);

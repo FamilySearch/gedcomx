@@ -17,7 +17,6 @@ package org.gedcomx.conclusion;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
-import org.gedcomx.common.HasText;
 import org.gedcomx.common.URI;
 import org.gedcomx.rt.CommonModels;
 import org.gedcomx.types.NamePartType;
@@ -33,13 +32,13 @@ import javax.xml.bind.annotation.XmlType;
  *
  * @author Ryan Heaton
  */
-@XmlType ( name = "NamePart", propOrder = {"type", "text"})
+@XmlType ( name = "NamePart", propOrder = {"type", "value"})
 public final class NamePart {
 
   @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
   @JsonProperty
   private TypeReference<NamePartType> type;
-  private String text;
+  private String value;
 
   /**
    * The type of the name part.
@@ -84,20 +83,20 @@ public final class NamePart {
   }
 
   /**
-   * The text of the name part.
+   * The value of the name part.
    *
-   * @return The text of the name part.
+   * @return The value of the name part.
    */
-  public String getText() {
-    return text;
+  public String getValue() {
+    return value;
   }
 
   /**
-   * The text of the name part.
+   * The value of the name part.
    *
-   * @param text The text of the name part.
+   * @param value The value of the name part.
    */
-  public void setText(String text) {
-    this.text = text;
+  public void setValue(String value) {
+    this.value = value;
   }
 }

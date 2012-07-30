@@ -44,14 +44,20 @@ in XML according to this specification:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<person xmlns:gx="http://gedcomx.org/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://gedcomx.org/conclusion/v1/" rdf:ID="BBB-BBBB">
+<person xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:gx="http://gedcomx.org/" xmlns="http://gedcomx.org/conclusion/v1/" xmlns:gxs="http://gedcomx.org/source/v1/" rdf:ID="BBB-BBBB">
+    <source>
+        <gx:attribution>
+            <gx:contributor rdf:resource="https://familysearch.org/platform/contributors/STV-WXZY"/>
+        </gx:attribution>
+        <rdf:type rdf:resource="http://gedcomx.org/ExtractedConclusion"/>
+    </source>
     <gender>
         <rdf:type rdf:resource="http://gedcomx.org/Male"/>
     </gender>
     <name rdf:ID="789">
-        <gx:attribution>
+        <attribution>
             <gx:contributor rdf:resource="https://familysearch.org/platform/contributors/STV-WXZY"/>
-        </gx:attribution>
+        </attribution>
         <preferred>true</preferred>
         <primaryForm>
             <fullText>George Washington</fullText>
@@ -66,9 +72,9 @@ in XML according to this specification:
         </primaryForm>
     </name>
     <fact rdf:ID="123">
-        <gx:attribution>
+        <attribution>
             <gx:contributor rdf:resource="https://familysearch.org/platform/contributors/BCD-FGHJ"/>
-        </gx:attribution>
+        </attribution>
         <rdf:type rdf:resource="http://gedcomx.org/Birth"/>
         <date>
             <original>February 22, 1732</original>
@@ -80,9 +86,9 @@ in XML according to this specification:
         </place>
     </fact>
     <fact rdf:ID="456">
-        <gx:attribution>
+        <attribution>
             <gx:contributor rdf:resource="https://familysearch.org/platform/contributors/KLM-NPQR"/>
-        </gx:attribution>
+        </attribution>
         <rdf:type rdf:resource="http://gedcomx.org/Death"/>
         <date>
             <original>December 14, 1799</original>
@@ -93,12 +99,6 @@ in XML according to this specification:
             <formal rdf:resource="https://familysearch.org/platform/places/67890">Mount Vernon, Fairfax County, Virginia</formal>
         </place>
     </fact>
-    <source rdf:resource="http://en.wikipedia.org/wiki/George_washington">
-        <gx:attribution>
-            <gx:contributor rdf:resource="https://familysearch.org/platform/contributors/STV-WXZY"/>
-        </gx:attribution>
-        <rdf:type rdf:resource="http://purl.org/dc/dcmitype/Text"/>
-    </source>
 </person>
 ```
 
@@ -107,27 +107,27 @@ XML according to this specification:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<relationship rdf:ID="CCC-CCCC" xmlns:gx="http://gedcomx.org/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://gedcomx.org/conclusion/v1/">
-    <gx:attribution>
-        <gx:proofStatement>(proof statement here)</gx:proofStatement>
+<relationship xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:gx="http://gedcomx.org/" xmlns="http://gedcomx.org/conclusion/v1/" xmlns:gxs="http://gedcomx.org/source/v1/" rdf:ID="CCC-CCCC">
+    <attribution>
         <gx:contributor rdf:resource="https://familysearch.org/platform/contributors/BCD-FGHJ"/>
-    </gx:attribution>
+        <gx:changeMessage>(justification here)</gx:changeMessage>
+    </attribution>
+    <source rdf:ID="5678">
+        <rdf:type rdf:resource="http://gedcomx.org/ExtractedConclusion"/>
+    </source>
     <rdf:type rdf:resource="http://gedcomx.org/Couple"/>
     <person1 rdf:resource="https://familysearch.org/platform/persons/DDD-DDDD"/>
     <person2 rdf:resource="https://familysearch.org/platform/persons/FFF-FFFF"/>
     <fact rdf:ID="123">
-        <gx:attribution>
+        <attribution>
             <gx:contributor rdf:resource="https://familysearch.org/platform/contributors/HHH-HHHH"/>
-        </gx:attribution>
+        </attribution>
         <rdf:type rdf:resource="http://gedcomx.org/Marriage"/>
         <date>
             <original>January 6, 1759</original>
             <formal rdf:datatype="http://www.w3.org/2001/XMLSchema#date">1759-01-06</formal>
         </date>
     </fact>
-    <source rdf:ID="5678" rdf:resource="http://en.wikipedia.org/wiki/George_washington">
-        <rdf:type rdf:resource="http://purl.org/dc/dcmitype/Text"/>
-    </source>
 </relationship>
 ```
 
@@ -142,7 +142,6 @@ gx | `http://gedcomx.org/`
 gxc | `http://gedcomx.org/conclusion/v1/`
 gxs | `http://gedcomx.org/source/v1/`
 rdf | `http://www.w3.org/1999/02/22-rdf-syntax-ns#`
-dc | `http://purl.org/dc/terms/`
 foaf | `http://xmlns.com/foaf/0.1/`
 contact | `http://www.w3.org/2000/10/swap/pim/contact#`
 xsd | `http://www.w3.org/2001/XMLSchema`
@@ -160,8 +159,8 @@ each property is to be serialized.
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
 "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
-document are to be interpreted as described in BCP 14, 
-[RFC2119](http://tools.ietf.org/html/rfc2119), as scoped to those conformance 
+document are to be interpreted as described in BCP 14,
+[RFC2119](http://tools.ietf.org/html/rfc2119), as scoped to those conformance
 targets.
 
 
@@ -370,7 +369,7 @@ The `gxs:SourceDescription` XML type is used to (de)serialize the
 name | description | XML property | XML type
 -----|-------------|--------------|---------
 id | A local, transient identifier for the resource being described. | rdf:ID (attribute) | xsd:string
-citation | The bibliographic citation for this source | gxs:citation | [`gxs:SourceCitation`](#source-citation)
+citation | The citation for this source | gxs:citation | [`gxs:SourceCitation`](#source-citation)
 about | A uniform resource identifier (URI) for the resource being described. | rdf:about (attribute) | [anyURI](#uri)
 mediator | A reference to the entity that mediates access to the described source. | gxs:mediator | [`rdf:ResourceReference`](#resource-reference)
 sources | A list of references to sources to which this source is related. This is usually applicable to sources that are derived from or contained in another source. | gxs:source | [`gxs:SourceReference`](#source-reference)
@@ -445,7 +444,7 @@ The `gxs:CitationField` XML type is used to (de)serialize the
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
-name | A rendering of the full (working) citation as a string. | gxs:name | [anyURI](#uri)
+name | The identifier for the citation detail -- defined by a citation template or a citation template library. | gxs:name | [anyURI](#uri)
 value | A rendering of the full (working) citation as a string. | rdf:value | xsd:string
 
 ### examples
@@ -482,8 +481,9 @@ attribution | The attribution of this source reference. | gxs:attribution | [`gx
     <gxs:attribution>
       ...
     </gxs:attribution>
+
     <!-- possibility of extension elements -->
-    ...
+
   </...>
 ```
 
@@ -513,8 +513,12 @@ displayName | A display name for the account. | foaf:displayName | [`gx:LiteralV
 ```xml
   <... rdf:ID="local_id">
     <foaf:serviceHomepage rdf:resource="http://familysearch.org/"/>
-    <foaf:accountName>...name of the account...</foaf:accountName>
-    <foaf:displayName>...display name of the account...</foaf:displayName>
+    <foaf:accountName>
+      ...
+    </foaf:accountName>
+    <foaf:displayName>
+      ...
+    </foaf:displayName>
   </...>
 ```
 
@@ -588,8 +592,9 @@ addresses  | The addresses of the person or organization. | contact:address | [`
       ...
     </contact:address>
     ...
+
     <!-- possibility of extension elements -->
-    ...
+
   </...>
 ```
 
@@ -625,6 +630,9 @@ language | The language of the person. | foaf:language | [`gx:LiteralValue`](#li
 
 ```xml
   <... rdf:ID="local_id">
+
+    <!-- ...the members of foaf:Agent... -->
+
     <foaf:familyName>
       ...
     </foaf:familyName>
@@ -653,8 +661,8 @@ name | description | XML property | XML type
 -----|-------------|--------------|---------
 id | A local, transient identifier for the resource being described. | rdf:ID (attribute) | xsd:string
 sources | A list of references to the sources of the conclusion. | gxc:source | [`gxs:SourceReference`](#source-reference)
-notes | A list of notes about a source | gxc:note | [`gx:Note`](#note)
-attribution | The attribution of this source. | gxc:attribution | [`gx:Attribution`](#attribution)
+notes | A list of notes about this conclusion. | gxc:note | [`gx:Note`](#note)
+attribution | The attribution of this conclusion. | gxc:attribution | [`gx:Attribution`](#attribution)
 
 ### examples
 
@@ -671,8 +679,9 @@ attribution | The attribution of this source. | gxc:attribution | [`gx:Attributi
     <gxc:attribution>
       ...
     </gxc:attribution>
+
     <!-- possibility of extension elements -->
-    ...
+
   </...>
 ```
 
@@ -693,7 +702,9 @@ text | The text of the document. | gxc:text | [`gx:TextValue`](#text-value)
 
 ```xml
   <...>
-    ...
+
+    <!-- ...the members of gxc:Conclusion... -->
+
     <gxc:text xml:lang="en">...text of the document...</gxc:text>
   </...>
 ```
@@ -755,6 +766,9 @@ type | The gender type. | rdf:type | [`rdf:ResourceReference`](#resource-referen
 
 ```xml
   <... rdf:ID="local_id">
+
+    <!-- ...the members of gxc:Conclusion... -->
+
     <rdf:type rdf:resource="http://gedcomx.org/Male"/>
   </...>
 ```
@@ -779,6 +793,9 @@ alternateForms | A list of alternate forms of the name. | gxc:alternateForm | [`
 
 ```xml
   <... rdf:ID="local_id">
+
+    <!-- ...the members of gxc:Conclusion... -->
+
     <rdf:type rdf:resource="http://gedcomx.org/BirthName"/>
     <gxc:preferred>true</gxc:preferred>
     <gxc:primaryForm>
@@ -812,6 +829,9 @@ formal | The formal value of the fact. | gxc:formal | [`gxc:FormalValue`](#forma
 
 ```xml
   <... rdf:ID="local_id">
+
+    <!-- ...the members of gxc:Conclusion... -->
+
     <rdf:type rdf:resource="http://gedcomx.org/Birth"/>
     <gxc:date>
       ...
@@ -847,6 +867,9 @@ facts | The conclusions about the facts of the life of the person. | gxc:fact | 
 
 ```xml
   <... rdf:ID="local_id">
+
+    <!-- ...the members of gxc:Conclusion... -->
+
     <gxc:identifier>
       ...
     </gxc:identifier>
@@ -886,6 +909,9 @@ facts | The conclusions about the facts of the life of the relationship. | gxc:f
 
 ```xml
   <... rdf:ID="local_id">
+
+    <!-- ...the members of gxc:Conclusion... -->
+
     <rdf:type rdf:resource="http://gedcomx.org/Couple"/>
     <gxc:person1 rdf:resource="http://identifier/for/person/1"/>
     <gxc:person2 rdf:resource="http://identifier/for/person/2"/>
@@ -908,13 +934,16 @@ data type.
 name | description | XML property | XML type
 -----|-------------|--------------|---------
 person | Reference to the person playing the role in the event. | gxc:person | [`rdf:ResourceReference`](#resource-reference)
-type | Reference to the role. | rdf:type | [`rdf#ResourceReference`](#resource-reference)
+type | Reference to the role type. | rdf:type | [`rdf:ResourceReference`](#resource-reference)
 details | Details about the role of the person in the event. | gxc:details | xs:string
 
 ### examples
 
 ```xml
   <... rdf:ID="local_id">
+
+    <!-- ...the members of gxc:Conclusion... -->
+
     <gxc:person rdf:resource="http://identifier/for/person/1"/>
     <rdf:type rdf:resource="http://gedcomx.org/Witness"/>
     <gxc:details>...</gxc:details>
@@ -941,6 +970,9 @@ roles | The roles of the persons in the event. | gxc:role | [`gxc:EventRole`](#c
 
 ```xml
   <... rdf:ID="local_id">
+
+    <!-- ...the members of gxc:Conclusion... -->
+
     <rdf:type rdf:resource="http://gedcomx.org/Marriage"/>
     <gxc:date>
       ...
@@ -1017,14 +1049,14 @@ data type.
 name | description | XML property | XML type
 -----|-------------|--------------|---------
 type | URI identifying the type of the name part. | rdf:type | [`rdf:ResourceReference`](#resource-reference)
-text | The text of the name part. | gxc:text | xsd:string
+value | The text of the name part. | gxc:value | xsd:string
 
 ### examples
 
 ```xml
   <...>
     <rdf:type rdf:resource="http://gedcomx.org/Prefix"/>
-    <gxc:text>...text of the name piece...</gxc:text>
+    <gxc:value>...value of the name part...</gxc:value>
   </...>
 ```
 
@@ -1078,6 +1110,6 @@ gxs:SourceDescription | [`gxs:SourceDescription`](#rdf-description)
 foaf:Person | [`foaf:Person`](#foaf-person)
 foaf:Organization | [`foaf:Organization`](#organization)
 
-# 9. Miscellaneous To Do
+# 7. Miscellaneous To Do
 
 todo: provide the normative XML schema (inline)?

@@ -115,7 +115,7 @@ public class PersonTest {
     ArrayList<NamePart> parts = new ArrayList<NamePart>();
     NamePart part = new NamePart();
     part.setKnownType(NamePartType.Given);
-    part.setText("alternate name part");
+    part.setValue("alternate name part");
     parts.add(part);
     nameForm.setParts(parts);
     alternateForms.add(nameForm);
@@ -130,7 +130,7 @@ public class PersonTest {
     primaryForm.setParts(new ArrayList<NamePart>());
     NamePart namePart = new NamePart();
     namePart.setKnownType(NamePartType.Surname);
-    namePart.setText("primary surname");
+    namePart.setValue("primary surname");
     primaryForm.getParts().add(namePart);
     name.setPrimaryForm(primaryForm);
     names.add(name);
@@ -205,14 +205,14 @@ public class PersonTest {
     assertEquals(1, name.getAlternateForms().size());
     assertEquals("alternate name form", name.getAlternateForms().get(0).getFullText());
     assertEquals(1, name.getAlternateForms().get(0).getParts().size());
-    assertEquals("alternate name part", name.getAlternateForms().get(0).getParts().get(0).getText());
+    assertEquals("alternate name part", name.getAlternateForms().get(0).getParts().get(0).getValue());
     assertEquals(NamePartType.Given, name.getAlternateForms().get(0).getParts().get(0).getKnownType());
     assertEquals("urn:name-attribution", name.getAttribution().getContributor().getResource().toString());
     assertEquals("name-id", name.getId());
     assertEquals(NameType.Formal, name.getKnownType());
     assertEquals("primary form", name.getPrimaryForm().getFullText());
     assertEquals(1, name.getPrimaryForm().getParts().size());
-    assertEquals("primary surname", name.getPrimaryForm().getParts().get(0).getText());
+    assertEquals("primary surname", name.getPrimaryForm().getParts().get(0).getValue());
     assertEquals(NamePartType.Surname, name.getPrimaryForm().getParts().get(0).getKnownType());
 
     assertEquals("pal", person.getPersistentId().toString());

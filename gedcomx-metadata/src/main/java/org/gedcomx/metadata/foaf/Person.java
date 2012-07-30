@@ -17,6 +17,7 @@ package org.gedcomx.metadata.foaf;
 
 import org.gedcomx.common.LiteralValue;
 import org.gedcomx.rt.CommonModels;
+import org.gedcomx.rt.json.JsonElementWrapper;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -30,6 +31,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlType( name = "Person" )
 @XmlRootElement ( name = "Person" )
+@JsonElementWrapper ( name = "contributors" )
 public class Person extends Agent {
 
   private LiteralValue familyName;
