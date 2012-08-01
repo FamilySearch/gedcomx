@@ -106,3 +106,7 @@ Content-MD5 | text | The MD5 sum of the resource for integrity checks, as define
 ETag | text | Version of the resource, as defined by [RFC 2616, Section 14](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html).
 User-Agent | text | Information about the user agent originating the request or file, as defined by [RFC 2616, Section 14](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html).
 X-type | URI | Identifier for the data type of the resource.
+X-DC-created | date | Date of creation of the resource, as defined by [http://purl.org/dc/terms/created](http://dublincore.org/documents/dcmi-terms/#terms-created).
+X-DC-creator | URI | Identifier for an entity primarily responsible for making the resource, as defined by [http://purl.org/dc/terms/creator](http://dublincore.org/documents/dcmi-terms/#terms-creator).
+X-DC-conformsTo | URI | Identifier for an established standard to which the described resource conforms, as defined by [http://purl.org/dc/terms/conformsTo](http://dublincore.org/documents/dcmi-terms/#terms-conformsTo).
+X-DC-modified | date | Date on which the resource was changed, as defined by [http://purl.org/dc/terms/modified](http://dublincore.org/documents/dcmi-terms/#terms-modified).
