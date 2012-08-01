@@ -330,9 +330,8 @@ The identifier for the "SourceCitation" data type is:
 name | description | data type
 -----|-------------|----------
 value | A rendering of the full (working) citation as a string. | string - REQUIRED
-citationTemplate | The identifier of the citation template by which this citation may be interpreted. | [URI](#uri) - OPTIONAL
+citationTemplate | The identifier of the citation template by which this citation may be interpreted. | [URI](#uri) - OPTIONAL;  MUST resolve to an instance of [`http://gedcomx.org/source/v1/CitationTemplate`](#citation-template).
 fields  | A list of citation fields about a source. | List of [`http://gedcomx.org/source/v1/CitationField`](#citation-field) - OPTIONAL
-
 
 <a id="citation-field"/>
 
@@ -359,8 +358,9 @@ value | The value of the citation detail. | string - OPTIONAL
 
 ## 3.4 The "SourceReference" Data Type
 
-The `SourceReference` data type defines a reference to a source. Genealogical data cites its evidence
-using an instance of `SourceReference`.
+The `SourceReference` data type defines a reference to a source.  A genealogical conclusion or a
+derivate source [the referring object -- the object holding the `SourceReference` instance] cites
+its supporting source(s) [the target source(s)] using an instance(s) of `SourceReference`.
 
 ### identifier
 
@@ -373,8 +373,8 @@ The identifier for the "SourceReference" data type is:
 name | description | data type
 -----|-------------|----------
 id | A local identifier for the source reference. Note that this id MUST NOT be processed as an identifier for the resource being referenced, but instead as a transient identifier for the reference itself. | string
-type  | Reference to the type of relationship that exists between the genealogical resource making the reference and the the source that is being referenced. | [URI](#uri) - MUST resolve to a source reference type. See the list of [known source reference types](#known-source-reference-types).
-sourceDescription  | Reference to a _description_ of the source being referenced. | [URI](#uri) - MUST resolve to an instance of [`http://gedcomx.org/source/v1/SourceDescription`](#source-description)
+type  | Reference to the type of relationship that exists between the referring object and the target source. | [URI](#uri) - MUST resolve to a source reference type. See the list of [known source reference types](#known-source-reference-types).
+sourceDescription  | Reference to a _description_ of the target source. | [URI](#uri) - MUST resolve to an instance of [`http://gedcomx.org/source/v1/SourceDescription`](#source-description)
 attribution | The attribution of this source reference. | [`http://gedcomx.org/Attribution`](#attribution)
 
 <a id="known-source-reference-types"/>
@@ -385,18 +385,70 @@ The following source reference types are defined by GEDCOM X.
 
 URI | description
 ----|------------
-`http://gedcomx.org/ComponentOf`| The genealogical resource refering to the source is a component of the source (e.g., an enumeration district might be a component of a census).
-`http://gedcomx.org/PreservationCopy`| The genealogical resource refering to the source is a preservation copy (e.g. a photograph) of the source.
-`http://gedcomx.org/Abstract`| The genealogical resource refering to the source is a abstract of the source.
-`http://gedcomx.org/Transcription`| The genealogical resource refering to the source is a transcription of the source.
-`http://gedcomx.org/Translation`| The genealogical resource refering to the source is a translation of the source.
-`http://gedcomx.org/ExtractedConclusion`| The genealogical resource refering to the source is a conclusion extracted from the source.
-`http://gedcomx.org/Analysis`| The genealogical resource refering to the source is a document containing analysis of the source.
-`http://gedcomx.org/WorkingConclusion`| The genealogical resource refering to the source is a working conclusion based on the source.
+`http://gedcomx.org/Original`| The type given if the target source is an "original" from which the referring object is derived.  For example, the record about [Lyndon B. Johnson's](https://familysearch.org/pal:/MM9.1.1/J69H-GV1) death is a component of the ["Texas, Deaths, 1890-1976"](https://familysearch.org/search/collection/show#uri=https%3A%2F%2Fapi.familysearch.org%2Frecords%2Fcollection%2F1320964) index on FamilySearch.
+`http://gedcomx.org/PreservationCopy`| The type given if the target source is a "preservation copy" from which the referring object is derived.  A microfilm image of an origianl document is an example of a preservation copy.
+`http://gedcomx.org/Abstract`| The type given if the target source is an "abstract" from which the referring object is derived.  When this type is used, the referring object SHOULD resolve to an `AbstractDocument`.
+`http://gedcomx.org/Transcription`| The type given if the target source is a "transcription of" from which the referring object is derived.  When this type is used, the referring object SHOULD resolve to a `TranscriptionDocument`.
+`http://gedcomx.org/Translation`| The type given if the target source is a "translation of" from which the referring object is derived.  When this type is used, the referring object SHOULD resolve to a `TranslationDocument`.
+`http://gedcomx.org/ExtractedConclusion`| The type given if the target source is a "extracted" `Conclusion` from which the referring object is derived.  Extracted conclusions are tightly coupled a single source (e.g., a single death record).  Therefore, the referring object SHOULD not have multiple `SourceReference` instances of type `http://gedcomx.org/ExtractedConclusion`.  When this type is used, the referring object SHOULD resolve to a derivation of `Conclusion`.  An example would be a `Person` representing a decedant in a _described_ death record.
+`http://gedcomx.org/Analysis`| The type given if the target source is a document containing "analysis" from which the referring object is derived.  A "genealogical proof statement" is an example of a document containing analysis.  When this type is used, the referring object SHOULD resolve to a `AnalysisDocument`.
+`http://gedcomx.org/WorkingConclusion`| The type given if the target source is a "working" `Conclusion` from which the referring object is derived.  Working conclusions are what is typically found in pedigree; a working conclusion typically start out as a "hypothesis" and progresses to a "proven" state as sources and analysis are accumulated.  When this type is used, the referring object SHOULD resolve to a derivation of `Conclusion`.
 
 ### examples
 
 todo:
+
+<a id="citation-template"/>
+
+## 3.5 The "CitationTemplate" Data Type
+
+todo: define citation templates and any associated infrastructure
+
+<a id="note-about-citation-templates"/>
+<table>
+  <tr>
+    <td style="background:#F0F0FF;border-color:#F0F0FF; padding-bottom:0px; font-size:18px">
+<b>a note about citation templates (not part of this specification)</b>
+    </td>
+  </tr>
+  <tr>
+    <td style="background:#F0F0FF;border-color:#F0F0FF; padding-top:0px">
+<p>
+Building source citations is said to be an "art" and requires a great deal of flexibility.  While citation style
+guides exist (e.g. Chicago style, Turabian, Evidence Style -- see <i>Evidence Explained</i> by Elizabeth Shown Mills,
+etc.), they are considered guides and execution within their guidelines allows for flexibility.
+No one style has been universally accepted, nor will a style become universally accepted in the forseeable future.  Therefore,
+the approach to collecting citation metadata and the exchange of this data needs to support flexibility.
+</p><p/><p>
+The citation metadata is collected as a set of name-value pairs (see the CitationField data type), but there still remains
+a set of difficult questions, including:</p>
+<ul>
+  <li>What is the set of valid "names" (e.g. controlled vocabulary)?</li>
+  <li>What "values" are valid values for a given "name"?</li>
+  <li>What fields (name-value pairs) are required, and under what circumstances might they be optional?</li>
+  <li>What metadata needs to be collected to properly site data in a specific record?  For example, is a citation for the 1900 US Census
+different from a citation for the 1910 US Census and from a citation for the 1911 England and Wales Census?</li>
+</ul>
+<p/><p>
+Further questions remain about how to arrange the fields into citations. For example, given a set of metadata, can it be expressed
+in the Chicago style?  The Evidence style?  What about a lesser-used or custom style?
+</p><p/><p>
+To address these design issues, we define <b><i>citation templates</i></b>.  A citation template defines the metadata that should
+be collected for a given source and the semantics associated with that metadata.  Templates also specify how the metadata
+is rendered into specific citation styles, such as Chicago style or Evidence style.  Templates could be designed to
+address specific record types and may be grouped by type (e.g., a group of templates for census records, or newspapers, or
+US census records, or UK census records, etc.).  Templates could also be associated with other templates into libraries
+such that a specific piece of citation metadata (e.g., a citation field named "Volume") has a shared semantic meanign across the set
+of associated templates -- a template library. Perhaps a standard template library could be developed that would address the most
+common citation needs.
+</p><p/><p>
+Citation templates have not been fully specified and are therefore outlined here in broad terms.  For now, this
+section functions as a place holder for the needed specifications.  We will likely consider ideas like those expressed
+at http://sourcetemplates.org/ when we define this portion of the specification.
+</p>
+    </td>
+  </tr>
+</table>
 
 
 
