@@ -513,6 +513,7 @@ name | description | data type
 -----|-------------|----------
 familyName | The family name of the person. | [`http://www.w3.org/2000/01/rdf-schema#Literal`](#rdf-literal)
 givenName | The given name of the person. | [`http://www.w3.org/2000/01/rdf-schema#Literal`](#rdf-literal)
+postName | The post name of the person. | [`http://www.w3.org/2000/01/rdf-schema#Literal`](#rdf-literal)
 language | The language of the person. | [`http://www.w3.org/2000/01/rdf-schema#Literal`](#rdf-literal)
 
 
@@ -897,6 +898,7 @@ URI | description
 `http://gedcomx.org/Adoptive`|
 `http://gedcomx.org/Formal`|
 `http://gedcomx.org/Religious`|
+`http://gedcomx.org/PostName`|
 
 <a id="person"/>
 
