@@ -303,6 +303,7 @@ name | description | data type
 -----|-------------|----------
 id | A local, transient identifier for the resource being described. Note that as a local, transient identifier, the id may only be used to resolve references to the resource within a well-defined scope (such as a single web service request or a single file). | string
 citation | The citation for this source. | [`http://gedcomx.org/source/v1/SourceCitation`](#source-citation) - REQUIRED
+sourceDerivationType  | Describes the type of derivation the described source is relative to its parent source (if applicable). | [URI](#uri) - OPTIONAL; MUST resolve to a source derivation type. See the list of [known source derivation types](#known-source-derivation-types).
 about | A uniform resource identifier (URI) for the resource being described. | [URI](#uri) - OPTIONAL
 mediator | A reference to the entity that mediates access to the described source. | [URI](#uri) - OPTIONAL; MUST resolve to an instance of [`http://xmlns.com/foaf/0.1/Person`](#foaf-person) or [`http://xmlns.com/foaf/0.1/Organization`](#organization).
 sources | References to any sources to which this source is related. This is usually applicable to sources that are derived from or a component of another source. | List of [`http://gedcomx.org/source/v1/SourceReference`](#source-reference) - OPTIONAL
@@ -310,6 +311,23 @@ displayName | A display name for this source. | string - OPTIONAL
 alternateNames | A list of alternate display names for this source. | List of [`http://gedcomx.org/Literal`](#literal-value) - OPTIONAL
 notes  | A list of notes about a source. | List of [`http://gedcomx.org/Note`](#note) - OPTIONAL
 attribution | The attribution of this source description. | [`http://gedcomx.org/Attribution`](#attribution)
+
+<a id="known-source-derivatoin-types"/>
+
+### known source derivatoin types
+
+The following source derivation types are defined by GEDCOM X.
+
+URI | description
+----|------------
+`http://gedcomx.org/Original`| The type given if a source description is about an original source.
+`http://gedcomx.org/PreservationCopy`| The type given if a source description is about a preservation copy of another source.  A microfilm image of an origianl document is an example of a preservation copy.
+`http://gedcomx.org/Abstract`| The type given if a source description is about an abstract of another source.  When this type is used, the referring object SHOULD resolve to an `AbstractDocument`.
+`http://gedcomx.org/Transcription`| The type given if a source description is about a transcription (can be full or partial) of another source.  When this type is used, the referring object SHOULD resolve to a `TranscriptionDocument`.
+`http://gedcomx.org/Translation`| The type given if a source description is about a translation (can be full or partial) of another source.  When this type is used, the referring object SHOULD resolve to a `TranslationDocument`.
+`http://gedcomx.org/ExtractedConclusion`| The type given if a source description is about a conclusion (e.g., relationship, fact, event, etc.) that was extracted from another source.  Extracted conclusions are tightly coupled a single source (e.g., a single death record).  Therefore, the referring object SHOULD not have multiple `SourceReference` instances of type `http://gedcomx.org/ExtractedConclusion`.  When this type is used, the referring object SHOULD resolve to a derivation of `Conclusion`.  An example would be a `Person` representing a decedant in a _described_ death record.
+`http://gedcomx.org/Analysis`| The type given if a source description is about a document that contains analysis (e.g., a genealogical proof statement).  A "genealogical proof statement" is an example of a document containing analysis.  When this type is used, the referring object SHOULD resolve to a `AnalysisDocument`.
+`http://gedcomx.org/WorkingConclusion`| The type given if a source description is about a working conclusion (e.g., relationship, fact, event, etc.) -- typically the conclusion representing the current state of one's research.  Working conclusions are what is typically found in pedigree; a working conclusion typically start out as a "hypothesis" and progresses to a "proven" state as sources and analysis are accumulated.  When this type is used, the referring object SHOULD resolve to a derivation of `Conclusion`.
 
 
 <a id="source-citation"/>
@@ -373,26 +391,8 @@ The identifier for the "SourceReference" data type is:
 name | description | data type
 -----|-------------|----------
 id | A local identifier for the source reference. Note that this id MUST NOT be processed as an identifier for the resource being referenced, but instead as a transient identifier for the reference itself. | string
-type  | Reference to the type of relationship that exists between the referring object and the target source. | [URI](#uri) - MUST resolve to a source reference type. See the list of [known source reference types](#known-source-reference-types).
 sourceDescription  | Reference to a _description_ of the target source. | [URI](#uri) - MUST resolve to an instance of [`http://gedcomx.org/source/v1/SourceDescription`](#source-description)
 attribution | The attribution of this source reference. | [`http://gedcomx.org/Attribution`](#attribution)
-
-<a id="known-source-reference-types"/>
-
-### known source reference types
-
-The following source reference types are defined by GEDCOM X.
-
-URI | description
-----|------------
-`http://gedcomx.org/Original`| The type given if the target source is an "original" from which the referring object is derived.  For example, the record about [Lyndon B. Johnson's](https://familysearch.org/pal:/MM9.1.1/J69H-GV1) death is a component of the ["Texas, Deaths, 1890-1976"](https://familysearch.org/search/collection/show#uri=https%3A%2F%2Fapi.familysearch.org%2Frecords%2Fcollection%2F1320964) index on FamilySearch.
-`http://gedcomx.org/PreservationCopy`| The type given if the target source is a "preservation copy" from which the referring object is derived.  A microfilm image of an origianl document is an example of a preservation copy.
-`http://gedcomx.org/Abstract`| The type given if the target source is an "abstract" from which the referring object is derived.  When this type is used, the referring object SHOULD resolve to an `AbstractDocument`.
-`http://gedcomx.org/Transcription`| The type given if the target source is a "transcription of" from which the referring object is derived.  When this type is used, the referring object SHOULD resolve to a `TranscriptionDocument`.
-`http://gedcomx.org/Translation`| The type given if the target source is a "translation of" from which the referring object is derived.  When this type is used, the referring object SHOULD resolve to a `TranslationDocument`.
-`http://gedcomx.org/ExtractedConclusion`| The type given if the target source is a "extracted" `Conclusion` from which the referring object is derived.  Extracted conclusions are tightly coupled a single source (e.g., a single death record).  Therefore, the referring object SHOULD not have multiple `SourceReference` instances of type `http://gedcomx.org/ExtractedConclusion`.  When this type is used, the referring object SHOULD resolve to a derivation of `Conclusion`.  An example would be a `Person` representing a decedant in a _described_ death record.
-`http://gedcomx.org/Analysis`| The type given if the target source is a document containing "analysis" from which the referring object is derived.  A "genealogical proof statement" is an example of a document containing analysis.  When this type is used, the referring object SHOULD resolve to a `AnalysisDocument`.
-`http://gedcomx.org/WorkingConclusion`| The type given if the target source is a "working" `Conclusion` from which the referring object is derived.  Working conclusions are what is typically found in pedigree; a working conclusion typically start out as a "hypothesis" and progresses to a "proven" state as sources and analysis are accumulated.  When this type is used, the referring object SHOULD resolve to a derivation of `Conclusion`.
 
 ### examples
 

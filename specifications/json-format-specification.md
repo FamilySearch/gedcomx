@@ -49,10 +49,10 @@ in JSON according to this specification:
       "fullText" : "George Washington",
       "parts" : [ {
         "type" : "http://gedcomx.org/Given",
-        "text" : "George"
+        "value" : "George"
       }, {
         "type" : "http://gedcomx.org/Surname",
-        "text" : "Washington"
+        "value" : "Washington"
       } ]
     },
     "preferred" : true,
@@ -107,7 +107,6 @@ in JSON according to this specification:
   } ],
   "id" : "BBB-BBBB",
   "sources" : [ {
-    "type" : "http://gedcomx.org/ExtractedConclusion",
     "attribution" : {
       "contributor" : "https://familysearch.org/platform/contributors/STV-WXZY"
     }
@@ -139,8 +138,8 @@ JSON according to this specification:
   } ],
   "id" : "CCC-CCCC",
   "sources" : [ {
-    "type" : "http://gedcomx.org/ExtractedConclusion",
-    "id" : "5678"
+    "id" : "5678",
+    "sourceDescription" : "urn:srcDescId"
   } ],
   "attribution" : {
     "contributor" : "https://familysearch.org/platform/contributors/BCD-FGHJ",
@@ -361,6 +360,7 @@ name | description | JSON member | JSON object type
 id | A local, transient identifier for the source description. | id | string
 citation | The citation for this source | citation | [`SourceCitation`](#source-citation)
 about | A uniform resource identifier (URI) for the resource being described. | about | [`URI`](#uri)
+sourceDerivationType | Describes the type of derivation the described source is relative to its parent source. | sourceDerivationType | [`URI`](#uri)
 mediator | A reference to the entity that mediates access to the described source. | mediator | [`URI`](#uri)
 sources | A list of references to sources to which this source is related. This is usually applicable to sources that are derived from or contained in another source. | sources | array of [`SourceReference`](#source-reference)
 displayName | A display name for this source. | displayName | string
@@ -375,6 +375,7 @@ attribution | The attribution of this source. | attribution | [`Attribution`](#a
   "id" : "local_id",
   "citation" : { ... },
   "about" : "http://identifier/for/the/source/being/described",
+  "sourceDerivationType" : "http://gedcomx.org/PreservationCopy",
   "mediator" : "http://identifier/for/the/mediator/of/source/being/described",
   "sources" : [ { ... }, { ... } ],
   "displayName" : "...display name...",
@@ -444,7 +445,6 @@ data type is defined as follows:
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 id | A local identifier for the source reference. | id | string
-type  | Reference to the type of the resource being referenced. | type | [`URI`](#uri)
 sourceDescription  | Reference to a _description_ of the source being referenced. | sourceDescription | [`URI`](#uri)
 attribution | The attribution of this source reference. | attribution | [`Attribution`](#attribution)
 
@@ -453,7 +453,6 @@ attribution | The attribution of this source reference. | attribution | [`Attrib
 ```json
 {
   "id" : "local_id",
-  "type" : "http://gedcomx.org/PreservationCopy",
   "sourceDescription" : "http://identifier/for/description/of/source/being/referenced",
   "attribution" : { ... }
 }

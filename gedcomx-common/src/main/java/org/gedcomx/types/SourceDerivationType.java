@@ -29,42 +29,42 @@ import org.gedcomx.common.URI;
 public enum SourceDerivationType {
 
   /**
-   * An indication that the source description is about an original source.
+   * An indication that a source description is about an original source.
    */
   Original,
 
   /**
-   * An indication that the source description is about a preservation copy of another source.
+   * An indication that a source description is about a preservation copy of another source.
    */
   PreservationCopy,
 
   /**
-   * An indication that the source description is about an abstract of another source.
+   * An indication that a source description is about an abstract of another source.
    */
   Abstract,
 
   /**
-   * An indication that the source description is about a transcription (can be full or partial) of another source.
+   * An indication that a source description is about a transcription (can be full or partial) of another source.
    */
   Transcription,
 
   /**
-   * An indication that the source description is about a translation (can be full or partial) of another source.
+   * An indication that a source description is about a translation (can be full or partial) of another source.
    */
   Translation,
 
   /**
-   * An indication that the source description is about a conclusion (e.g., relationship, fact, event, etc.) that was extracted from another source.
+   * An indication that a source description is about a conclusion (e.g., relationship, fact, event, etc.) that was extracted from another source.
    */
   ExtractedConclusion,
 
   /**
-   * An indication that the source description is about a document that contains analysis (e.g., a genealogical proof statement).
+   * An indication that a source description is about a document that contains analysis (e.g., a genealogical proof statement).
    */
   Analysis,
 
   /**
-   * An indication that the source description is about a working conclusion (e.g., relationship, fact, event, etc.) -- typically the conclusion representing the current state of ones research.
+   * An indication that a source description is about a working conclusion (e.g., relationship, fact, event, etc.) -- typically the conclusion representing the current state of one's research.
    */
   WorkingConclusion,
 
