@@ -6,7 +6,6 @@ import org.gedcomx.test.RecipeTest;
 import org.gedcomx.test.Snippet;
 import org.gedcomx.types.FactType;
 import org.gedcomx.types.RelationshipType;
-import org.gedcomx.types.SourceReferenceType;
 import org.testng.annotations.Test;
 
 import static org.gedcomx.rt.SerializationUtil.processThroughJson;
@@ -66,7 +65,7 @@ public class RelationshipRecipesTest extends RecipeTest {
     relationship.getPerson2().setResource(URI.create("https://familysearch.org/platform/persons/FFF-FFFF"));
     SourceReference sourceReference = new SourceReference();
     sourceReference.setId("5678");
-    sourceReference.setKnownType(SourceReferenceType.ExtractedConclusion);
+    sourceReference.setSourceDescriptionURI(URI.create("urn:srcDescId"));
     relationship.addSource(sourceReference);
     return relationship;
   }

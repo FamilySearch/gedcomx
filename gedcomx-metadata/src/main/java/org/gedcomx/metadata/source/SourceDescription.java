@@ -21,6 +21,8 @@ import org.codehaus.jackson.annotate.JsonProperty;
 import org.gedcomx.common.*;
 import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.json.JsonElementWrapper;
+import org.gedcomx.types.SourceDerivationType;
+import org.gedcomx.types.TypeReference;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.*;
@@ -31,11 +33,12 @@ import java.util.List;
  * Represents a description of a source.
  */
 @XmlRootElement
-@XmlType ( name = "SourceDescription", propOrder = { "citation", "mediator", "sources", "displayName", "alternateNames", "notes", "attribution" } )
+@XmlType ( name = "SourceDescription", propOrder = { "citation", "sourceDerivationType", "mediator", "sources", "displayName", "alternateNames", "notes", "attribution" } )
 @JsonElementWrapper ( name = "source-descriptions" )
 public class SourceDescription implements Attributable, HasNotes, ReferencesSources {
   private String id;
   private SourceCitation citation;
+  private TypeReference<SourceDerivationType> sourceDerivationType;
   private URI about;
   private ResourceReference mediator;
   private List<SourceReference> sources;
@@ -79,6 +82,45 @@ public class SourceDescription implements Attributable, HasNotes, ReferencesSour
    */
   public void setCitation(SourceCitation citation) {
     this.citation = citation;
+  }
+
+  /**
+   * The derivation type of the described source.
+   *
+   * @return The derivation type of the described source.
+   */
+  public TypeReference<SourceDerivationType> getSourceDerivationType() {
+    return this.sourceDerivationType;
+  }
+
+  /**
+   * The derivation type of the described source.
+   *
+   * @param derivationType The derivation type of the described source.
+   */
+  public void setSourceDerivationType(TypeReference<SourceDerivationType> derivationType) {
+    this.sourceDerivationType = derivationType;
+  }
+
+  /**
+   * The value the known derivation type of the described source, or {@link org.gedcomx.types.SourceDerivationType#OTHER} if not known.
+   *
+   * @return value the known derivation type of the described source, or {@link org.gedcomx.types.SourceDerivationType#OTHER} if not known.
+   */
+  @XmlTransient
+  @JsonIgnore
+  public SourceDerivationType getKnownSourceDerivationType() {
+    return this.sourceDerivationType == null ? null : SourceDerivationType.fromQNameURI(this.sourceDerivationType.getType());
+  }
+
+  /**
+   * Set the derivation type of this source from an enumeration of known source derivation types.
+   *
+   * @param knownDerivationType The known source derivation type.
+   */
+  @JsonIgnore
+  public void setKnownSourceDerivationType(SourceDerivationType knownDerivationType) {
+    this.sourceDerivationType = knownDerivationType == null ? null : new TypeReference<SourceDerivationType>(knownDerivationType);
   }
 
   /**

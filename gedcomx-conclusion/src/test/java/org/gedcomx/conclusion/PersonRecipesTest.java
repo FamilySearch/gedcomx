@@ -9,7 +9,6 @@ import org.gedcomx.test.Snippet;
 import org.gedcomx.types.FactType;
 import org.gedcomx.types.GenderType;
 import org.gedcomx.types.NamePartType;
-import org.gedcomx.types.SourceReferenceType;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
@@ -147,7 +146,6 @@ public class PersonRecipesTest extends RecipeTest {
     attribution.setContributor(new ResourceReference());
     attribution.getContributor().setResource(URI.create("https://familysearch.org/platform/contributors/STV-WXZY"));
     attributedSourceReference.setAttribution(attribution);
-    attributedSourceReference.setKnownType(SourceReferenceType.ExtractedConclusion);
     sources.add(attributedSourceReference);
     person.setSources(sources);
 

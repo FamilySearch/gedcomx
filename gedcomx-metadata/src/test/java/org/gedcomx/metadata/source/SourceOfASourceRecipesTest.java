@@ -8,6 +8,8 @@ import org.gedcomx.rt.SerializationProcessListener;
 import org.gedcomx.test.RecipeTest;
 import org.gedcomx.test.Snippet;
 import org.gedcomx.types.ConfidenceLevel;
+import org.gedcomx.types.SourceDerivationType;
+import org.gedcomx.types.TypeReference;
 import org.testng.annotations.Test;
 
 import javax.xml.bind.JAXBContext;
@@ -144,6 +146,7 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
     srcDesc1.getCitation().getFields().add(new CitationField());
     srcDesc1.getCitation().getFields().get(5).setName(FLDNM_FHL_FILM);
     srcDesc1.getCitation().getFields().get(5).setValue(FLDVAL_FHL_FILM1);
+    srcDesc1.setKnownSourceDerivationType(SourceDerivationType.PreservationCopy);
     srcDesc1.setMediatorURI(URI.create(MEDIATOR_URI_PREFIX + ORG_FHL_ID));
 
     SourceDescription srcDesc2 = new SourceDescription();
@@ -159,10 +162,11 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
     srcDesc2.getCitation().getFields().add(new CitationField(FLDNM_DECADENT, FLDVAL_DECADENT2));
     srcDesc2.getCitation().getFields().add(new CitationField(FLDNM_DEATH_YEAR, FLDVAL_DEATH_YEAR2));
     srcDesc2.getCitation().getFields().add(new CitationField(FLDNM_DATE_ACCESSED, FLDVAL_DATE_ACCESSED2));
+    srcDesc2.setSourceDerivationType(new TypeReference<SourceDerivationType>(SourceDerivationType.ExtractedConclusion));
     srcDesc2.setAbout(URI.create(RECORD_PAL_LYNDON_B_JOHNSON));
     srcDesc2.setSources(new ArrayList<SourceReference>());
     srcDesc2.getSources().add(new SourceReference());
-    srcDesc2.getSources().get(0).setSourceDescription(URI.create(SRCDESC_URI_PREFIX + SRC_OF_SRC_ID));
+    srcDesc2.getSources().get(0).setSourceDescriptionURI(URI.create(SRCDESC_URI_PREFIX + SRC_OF_SRC_ID));
     srcDesc2.setDisplayName(PRESIDENT_LYNDON_B_JOHNSON_DEATH_CERTIFICATE);
     srcDesc2.setMediatorURI(URI.create(MEDIATOR_URI_PREFIX + ORG_FS_ID));
     srcDesc2.setNotes(new ArrayList<Note>());
@@ -238,6 +242,7 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
     assertEquals(fieldNameValuePairs.get(FLDNM_ARCHIVE_NAME), FLDVAL_ARCHIVE_NAME1);
     assertEquals(fieldNameValuePairs.get(FLDNM_ARCHIVE_LOCALITY), FLDVAL_ARCHIVE_LOCALITY1);
     assertEquals(fieldNameValuePairs.get(FLDNM_FHL_FILM), FLDVAL_FHL_FILM1);
+    assertEquals(srcDesc1.getSourceDerivationType().getType().toURI().toString(), SourceDerivationType.PreservationCopy.toQNameURI().toURI().toString());
     assertEquals(srcDesc1.getMediator().getResource().toURI().toString(), MEDIATOR_URI_PREFIX + ORG_FHL_ID);
 
     assertNotNull(srcDesc2);
@@ -262,6 +267,7 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
     assertEquals(fieldNameValuePairs.get(FLDNM_DECADENT), FLDVAL_DECADENT2);
     assertEquals(fieldNameValuePairs.get(FLDNM_DEATH_YEAR), FLDVAL_DEATH_YEAR2);
     assertEquals(fieldNameValuePairs.get(FLDNM_DATE_ACCESSED), FLDVAL_DATE_ACCESSED2);
+    assertEquals(srcDesc2.getKnownSourceDerivationType().toQNameURI().toURI().toString(), SourceDerivationType.ExtractedConclusion.toQNameURI().toURI().toString());
     assertEquals(srcDesc2.getMediator().getResource().toURI().toString(), MEDIATOR_URI_PREFIX + ORG_FS_ID);
     assertEquals(srcDesc2.getDisplayName(), PRESIDENT_LYNDON_B_JOHNSON_DEATH_CERTIFICATE);
     assertNull(srcDesc2.getAlternateNames());
@@ -360,6 +366,7 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
     srcDesc0.getCitation().getFields().add(new CitationField("nara-film-roll", "523"));
     srcDesc0.getCitation().getFields().add(new CitationField("archive", "National Archives and Records Administration"));
     srcDesc0.getCitation().getFields().add(new CitationField("archive-locality", "Washington D.C."));
+    srcDesc0.setKnownSourceDerivationType(SourceDerivationType.PreservationCopy);
     srcDesc0.setMediatorURI(URI.create("repository#" + orgIdNara));
 
     SourceDescription srcDesc1 = new SourceDescription();
@@ -374,6 +381,7 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
     srcDesc1.getCitation().getFields().add(new CitationField("archive-name", "National Archives and Records Administration"));
     srcDesc1.getCitation().getFields().add(new CitationField("archive-locality", "Washington D.C"));
     srcDesc1.getCitation().getFields().add(new CitationField("fhl-film", "FHL US/CAN Census Area Film 2340258"));
+    srcDesc1.setKnownSourceDerivationType(SourceDerivationType.PreservationCopy);
     srcDesc1.setMediatorURI(URI.create("repository#" + ORG_FHL_ID));
 
     SourceDescription srcDesc2 = new SourceDescription();
@@ -396,10 +404,11 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
     srcDesc2.getCitation().getFields().add(new CitationField("county", "Lee"));
     srcDesc2.getCitation().getFields().add(new CitationField("state", "Illinois"));
     srcDesc2.getCitation().getFields().add(new CitationField("accessed", "12 July 2012"));
+    srcDesc2.setKnownSourceDerivationType(SourceDerivationType.ExtractedConclusion);
     srcDesc2.setAbout(URI.create("https://familysearch.org/pal:/MM9.1.1/XSYY-Q6P"));
     srcDesc2.setSources(new ArrayList<SourceReference>());
     srcDesc2.getSources().add(new SourceReference());
-    srcDesc2.getSources().get(0).setSourceDescription(URI.create("#" + sourceOfS1));
+    srcDesc2.getSources().get(0).setSourceDescriptionURI(URI.create("#" + sourceOfS1));
     srcDesc2.setDisplayName("President Ronald Reagan with his parents in 1830 census");
     srcDesc2.setMediatorURI(URI.create("repository#" + ORG_FS_ID));
     srcDesc2.setNotes(new ArrayList<Note>());

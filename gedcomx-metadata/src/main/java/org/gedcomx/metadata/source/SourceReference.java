@@ -26,8 +26,6 @@ import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.RDFRange;
 import org.gedcomx.rt.SupportsExtensionElements;
 import org.gedcomx.rt.json.JsonElementWrapper;
-import org.gedcomx.types.SourceReferenceType;
-import org.gedcomx.types.TypeReference;
 
 import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
@@ -45,9 +43,6 @@ import java.util.List;
 public class SourceReference implements Attributable, SupportsExtensionElements {
 
   private String id;
-  @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
-  @JsonProperty
-  private TypeReference<SourceReferenceType> type;
   private ResourceReference sourceDescription;
   private Attribution attribution;
   private List<Object> extensionElements;
@@ -78,48 +73,6 @@ public class SourceReference implements Attributable, SupportsExtensionElements 
   }
 
   /**
-   * The type of source reference.
-   *
-   * @return The type of source reference.
-   */
-  @XmlTransient
-  @JsonIgnore
-  public URI getType() {
-    return this.type == null ? null : this.type.getType();
-  }
-
-  /**
-   * The type of source reference.
-   *
-   * @param type The type of source reference.
-   */
-  @JsonIgnore
-  public void setType(URI type) {
-    this.type = type == null ? null : new TypeReference<SourceReferenceType>(type);
-  }
-
-  /**
-   * The value the known type of source reference, or {@link org.gedcomx.types.SourceReferenceType#OTHER} if not known.
-   *
-   * @return value the known type of source reference, or {@link org.gedcomx.types.SourceReferenceType#OTHER} if not known.
-   */
-  @XmlTransient
-  @JsonIgnore
-  public SourceReferenceType getKnownType() {
-    return this.type == null ? null : SourceReferenceType.fromQNameURI(this.type.getType());
-  }
-
-  /**
-   * Set the type of this source reference from an enumeration of known source reference types.
-   *
-   * @param knownType The known source reference type.
-   */
-  @JsonIgnore
-  public void setKnownType(SourceReferenceType knownType) {
-    this.type = knownType == null ? null : new TypeReference<SourceReferenceType>(knownType);
-  }
-
-  /**
    * The attribution metadata for this source reference.
    *
    * @return The attribution metadata for this source reference.
@@ -143,6 +96,8 @@ public class SourceReference implements Attributable, SupportsExtensionElements 
    *
    * @return A reference to a description of the source being referenced.
    */
+  @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
+  @JsonProperty
   @RDFRange( external = "org.gedcomx.metadata.source.SourceDescription" )
   public ResourceReference getSourceDescription() {
     return sourceDescription;
@@ -164,7 +119,7 @@ public class SourceReference implements Attributable, SupportsExtensionElements 
    */
   @XmlTransient
   @JsonIgnore
-  public void setSourceDescription(URI descriptionRef) {
+  public void setSourceDescriptionURI(URI descriptionRef) {
     this.sourceDescription = descriptionRef != null ? new ResourceReference(descriptionRef) : null;
   }
 

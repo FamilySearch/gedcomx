@@ -21,50 +21,50 @@ import org.gedcomx.common.URI;
 
 
 /**
- * An enumeration of known source reference types.
+ * An enumeration of known source derivation types.
  */
 @XmlQNameEnum (
   base = XmlQNameEnum.BaseType.URI
 )
-public enum SourceReferenceType {
+public enum SourceDerivationType {
 
   /**
-   * An indication that the object making the reference is a component of the referenced source.
+   * An indication that the source description is about an original source.
    */
-  ComponentOf,
+  Original,
 
   /**
-   * An indication that the object making the reference is a preservation copy of the referenced source.
+   * An indication that the source description is about a preservation copy of another source.
    */
   PreservationCopy,
 
   /**
-   * An indication that the object making the reference is an abstract of the referenced source.
+   * An indication that the source description is about an abstract of another source.
    */
   Abstract,
 
   /**
-   * An indication that the object making the reference is a transcription (can be full or partial) of the referenced source.
+   * An indication that the source description is about a transcription (can be full or partial) of another source.
    */
   Transcription,
 
   /**
-   * An indication that the object making the reference is a translation (can be full or partial) of the referenced source.
+   * An indication that the source description is about a translation (can be full or partial) of another source.
    */
   Translation,
 
   /**
-   * An indication that the object making the reference is an extracted conclusion from the referenced source.
+   * An indication that the source description is about a conclusion (e.g., relationship, fact, event, etc.) that was extracted from another source.
    */
   ExtractedConclusion,
 
   /**
-   * An indication that the object making the reference contains analysis involving the referenced source.
+   * An indication that the source description is about a document that contains analysis (e.g., a genealogical proof statement).
    */
   Analysis,
 
   /**
-   * An indication that the object making the reference is a working conclusion based in part on the referenced source.
+   * An indication that the source description is about a working conclusion (e.g., relationship, fact, event, etc.) -- typically the conclusion representing the current state of ones research.
    */
   WorkingConclusion,
 
@@ -90,7 +90,7 @@ public enum SourceReferenceType {
    * @param qname The qname.
    * @return The enumeration.
    */
-  public static SourceReferenceType fromQNameURI(URI qname) {
-    return org.codehaus.enunciate.XmlQNameEnumUtil.fromURIValue(qname.toString(), SourceReferenceType.class);
+  public static SourceDerivationType fromQNameURI(URI qname) {
+    return org.codehaus.enunciate.XmlQNameEnumUtil.fromURIValue(qname.toString(), SourceDerivationType.class);
   }
 }
