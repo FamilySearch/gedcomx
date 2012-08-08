@@ -312,9 +312,9 @@ alternateNames | A list of alternate display names for this source. | List of [`
 notes  | A list of notes about a source. | List of [`http://gedcomx.org/Note`](#note) - OPTIONAL
 attribution | The attribution of this source description. | [`http://gedcomx.org/Attribution`](#attribution)
 
-<a id="known-source-derivatoin-types"/>
+<a id="known-source-derivation-types"/>
 
-### known source derivatoin types
+### known source derivation types
 
 The following source derivation types are defined by GEDCOM X.
 
@@ -326,7 +326,7 @@ URI | description
 `http://gedcomx.org/Transcription`| The type given if a source description is about a transcription (can be full or partial) of another source.  When this type is used, the referring object SHOULD resolve to a `TranscriptionDocument`.
 `http://gedcomx.org/Translation`| The type given if a source description is about a translation (can be full or partial) of another source.  When this type is used, the referring object SHOULD resolve to a `TranslationDocument`.
 `http://gedcomx.org/ExtractedConclusion`| The type given if a source description is about a conclusion (e.g., relationship, fact, event, etc.) that was extracted from another source.  Extracted conclusions are tightly coupled a single source (e.g., a single death record).  Therefore, the referring object SHOULD not have multiple `SourceReference` instances of type `http://gedcomx.org/ExtractedConclusion`.  When this type is used, the referring object SHOULD resolve to a derivation of `Conclusion`.  An example would be a `Person` representing a decedant in a _described_ death record.
-`http://gedcomx.org/Analysis`| The type given if a source description is about a document that contains analysis (e.g., a genealogical proof statement).  A "genealogical proof statement" is an example of a document containing analysis.  When this type is used, the referring object SHOULD resolve to a `AnalysisDocument`.
+`http://gedcomx.org/Analysis`| The type given if a source description is about a document that contains analysis.  A "genealogical proof statement" is an example of a document containing analysis.  When this type is used, the referring object SHOULD resolve to a `AnalysisDocument`.
 `http://gedcomx.org/WorkingConclusion`| The type given if a source description is about a working conclusion (e.g., relationship, fact, event, etc.) -- typically the conclusion representing the current state of one's research.  Working conclusions are what is typically found in pedigree; a working conclusion typically start out as a "hypothesis" and progresses to a "proven" state as sources and analysis are accumulated.  When this type is used, the referring object SHOULD resolve to a derivation of `Conclusion`.
 
 
