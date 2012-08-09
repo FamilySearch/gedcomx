@@ -71,4 +71,9 @@ public final class Place implements Formalizeable {
   public void setFormal(FormalValue formal) {
     this.formal = formal;
   }
+
+  @Override
+  public String toString() {
+    return "Place{" + "original='" + original + '\'' + ", formal=" + formal + '}';
+  }
 }

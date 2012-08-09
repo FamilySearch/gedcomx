@@ -71,4 +71,9 @@ public final class Date implements Formalizeable {
   public void setFormal(FormalValue formal) {
     this.formal = formal;
   }
+
+  @Override
+  public String toString() {
+    return "Date{" + "original='" + original + '\'' + ", formal=" + formal + '}';
+  }
 }
