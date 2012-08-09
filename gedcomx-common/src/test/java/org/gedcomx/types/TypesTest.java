@@ -28,13 +28,13 @@ public class TypesTest {
     assertEquals(FactType.fromQNameURI(FactType.Baptism.toQNameURI()).toQNameURI().toString(), "http://gedcomx.org/Baptism");
     assertEquals(FactType.fromQNameURI(FactType.Household.toQNameURI()).toQNameURI().toString(), "http://gedcomx.org/Household");
     assertEquals(GenderType.fromQNameURI(GenderType.Male.toQNameURI()).toQNameURI().toString(), "http://gedcomx.org/Male");
+    assertEquals(IdentifierType.fromQNameURI(IdentifierType.Primary.toQNameURI()).toQNameURI().toString(), "http://gedcomx.org/Primary");
     assertEquals(MaritalStatusType.fromQNameURI(MaritalStatusType.Married.toQNameURI()).toQNameURI().toString(), "http://gedcomx.org/Married");
     assertEquals(NamePartType.fromQNameURI(NamePartType.Given.toQNameURI()).toQNameURI().toString(), "http://gedcomx.org/Given");
     assertEquals(NameType.fromQNameURI(NameType.Formal.toQNameURI()).toQNameURI().toString(), "http://gedcomx.org/Formal");
     assertEquals(PlacePartType.fromQNameURI(PlacePartType.Address.toQNameURI()).toQNameURI().toString(), "http://gedcomx.org/Address");
     assertEquals(RecordType.fromQNameURI(RecordType.Census.toQNameURI()).toQNameURI().toString(), "http://gedcomx.org/Census");
     assertEquals(RelationshipType.fromQNameURI(RelationshipType.Couple.toQNameURI()).toQNameURI().toString(), "http://gedcomx.org/Couple");
-    assertEquals(SourceDerivationType.fromQNameURI(SourceDerivationType.Abstract.toQNameURI()).toQNameURI().toString(), "http://gedcomx.org/Abstract");
   }
 
   @Test

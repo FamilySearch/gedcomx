@@ -8,8 +8,6 @@ import org.gedcomx.rt.SerializationProcessListener;
 import org.gedcomx.test.RecipeTest;
 import org.gedcomx.test.Snippet;
 import org.gedcomx.types.ConfidenceLevel;
-import org.gedcomx.types.SourceDerivationType;
-import org.gedcomx.types.TypeReference;
 import org.testng.annotations.Test;
 
 import javax.xml.bind.JAXBContext;
@@ -146,7 +144,6 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
     srcDesc1.getCitation().getFields().add(new CitationField());
     srcDesc1.getCitation().getFields().get(5).setName(FLDNM_FHL_FILM);
     srcDesc1.getCitation().getFields().get(5).setValue(FLDVAL_FHL_FILM1);
-    srcDesc1.setKnownSourceDerivationType(SourceDerivationType.PreservationCopy);
     srcDesc1.setMediatorURI(URI.create(MEDIATOR_URI_PREFIX + ORG_FHL_ID));
 
     SourceDescription srcDesc2 = new SourceDescription();
@@ -162,7 +159,6 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
     srcDesc2.getCitation().getFields().add(new CitationField(FLDNM_DECADENT, FLDVAL_DECADENT2));
     srcDesc2.getCitation().getFields().add(new CitationField(FLDNM_DEATH_YEAR, FLDVAL_DEATH_YEAR2));
     srcDesc2.getCitation().getFields().add(new CitationField(FLDNM_DATE_ACCESSED, FLDVAL_DATE_ACCESSED2));
-    srcDesc2.setSourceDerivationType(new TypeReference<SourceDerivationType>(SourceDerivationType.ExtractedConclusion));
     srcDesc2.setAbout(URI.create(RECORD_PAL_LYNDON_B_JOHNSON));
     srcDesc2.setSources(new ArrayList<SourceReference>());
     srcDesc2.getSources().add(new SourceReference());
@@ -197,7 +193,7 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
 
     // the following adds code coverage for SourceDescription
     srcDesc1.setMediatorURI((URI)null);
-    srcDesc1.setAlternateNames(new ArrayList<LiteralValue>());
+    srcDesc1.setAlternateNames(new ArrayList<TextValue>());
     assertNull(srcDesc1.getMediator());
     assertEquals(srcDesc1.getAlternateNames().size(), 0);
   }
@@ -242,7 +238,6 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
     assertEquals(fieldNameValuePairs.get(FLDNM_ARCHIVE_NAME), FLDVAL_ARCHIVE_NAME1);
     assertEquals(fieldNameValuePairs.get(FLDNM_ARCHIVE_LOCALITY), FLDVAL_ARCHIVE_LOCALITY1);
     assertEquals(fieldNameValuePairs.get(FLDNM_FHL_FILM), FLDVAL_FHL_FILM1);
-    assertEquals(srcDesc1.getSourceDerivationType().getType().toURI().toString(), SourceDerivationType.PreservationCopy.toQNameURI().toURI().toString());
     assertEquals(srcDesc1.getMediator().getResource().toURI().toString(), MEDIATOR_URI_PREFIX + ORG_FHL_ID);
 
     assertNotNull(srcDesc2);
@@ -267,7 +262,6 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
     assertEquals(fieldNameValuePairs.get(FLDNM_DECADENT), FLDVAL_DECADENT2);
     assertEquals(fieldNameValuePairs.get(FLDNM_DEATH_YEAR), FLDVAL_DEATH_YEAR2);
     assertEquals(fieldNameValuePairs.get(FLDNM_DATE_ACCESSED), FLDVAL_DATE_ACCESSED2);
-    assertEquals(srcDesc2.getKnownSourceDerivationType().toQNameURI().toURI().toString(), SourceDerivationType.ExtractedConclusion.toQNameURI().toURI().toString());
     assertEquals(srcDesc2.getMediator().getResource().toURI().toString(), MEDIATOR_URI_PREFIX + ORG_FS_ID);
     assertEquals(srcDesc2.getDisplayName(), PRESIDENT_LYNDON_B_JOHNSON_DEATH_CERTIFICATE);
     assertNull(srcDesc2.getAlternateNames());
@@ -353,9 +347,10 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
     String sourceS1 = "S1";
     String sourceOfS1 = "S2";
     String sourceOfS2 = "S3";
+    String sourceS3 = "S4";
 
     SourceDescription srcDesc0 = new SourceDescription();
-    srcDesc0.setId(sourceOfS2);
+    srcDesc0.setId(sourceS3);
     srcDesc0.setCitation(new SourceCitation());
     srcDesc0.getCitation().setValue("Bureau of the Census. \"Population Schedules for the 1930 Census.\" NARA microfilm publication T626, roll 523. National Archives and Records Administration, Washington D.C.");
     srcDesc0.getCitation().setCitationTemplate(new ResourceReference(new URI("http:/source-template-authority/nara-microfilm-pub-template")));
@@ -366,11 +361,10 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
     srcDesc0.getCitation().getFields().add(new CitationField("nara-film-roll", "523"));
     srcDesc0.getCitation().getFields().add(new CitationField("archive", "National Archives and Records Administration"));
     srcDesc0.getCitation().getFields().add(new CitationField("archive-locality", "Washington D.C."));
-    srcDesc0.setKnownSourceDerivationType(SourceDerivationType.PreservationCopy);
     srcDesc0.setMediatorURI(URI.create("repository#" + orgIdNara));
 
     SourceDescription srcDesc1 = new SourceDescription();
-    srcDesc1.setId(sourceOfS1);
+    srcDesc1.setId(sourceOfS2);
     srcDesc1.setCitation(new SourceCitation());
     srcDesc1.getCitation().setValue("United States. Bureau of the Census. 15th census, 1930. United States, 1930 federal census : population schedules; NARA microfilm publication T626. National Archives and Records Administration, Washington D.C. FHL US/CAN Census Area Film 2340258. Family History Library, Salt Lake City, Utah");
     srcDesc1.getCitation().setCitationTemplate(new ResourceReference(new URI("http:/source-template-authority/fhl-film-collection-template")));
@@ -381,11 +375,13 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
     srcDesc1.getCitation().getFields().add(new CitationField("archive-name", "National Archives and Records Administration"));
     srcDesc1.getCitation().getFields().add(new CitationField("archive-locality", "Washington D.C"));
     srcDesc1.getCitation().getFields().add(new CitationField("fhl-film", "FHL US/CAN Census Area Film 2340258"));
-    srcDesc1.setKnownSourceDerivationType(SourceDerivationType.PreservationCopy);
+    srcDesc1.setSources(new ArrayList<SourceReference>());
+    srcDesc1.getSources().add(new SourceReference());
+    srcDesc1.getSources().get(0).setSourceDescriptionURI(URI.create("#" + sourceS3));
     srcDesc1.setMediatorURI(URI.create("repository#" + ORG_FHL_ID));
 
     SourceDescription srcDesc2 = new SourceDescription();
-    srcDesc2.setId(sourceS1);
+    srcDesc2.setId(sourceOfS1);
     srcDesc2.setCitation(new SourceCitation());
     srcDesc2.getCitation().setValue("\"United States Census, 1930,\" index and images, FamilySearch (https://familysearch.org/pal:/MM9.1.1/XSYY-Q6P : accessed 12 July 2012), Ronald Reagan in household of John E Reagan, Dixon, Lee, Illinois.");
     srcDesc2.getCitation().setCitationTemplate(new ResourceReference(new URI("http://source-template-authority/fsindex-uscensus-template")));
@@ -393,28 +389,42 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
     srcDesc2.getCitation().getFields().add(new CitationField("title", "United States Census, 1930"));
     srcDesc2.getCitation().getFields().add(new CitationField("description", "index and images"));
     srcDesc2.getCitation().getFields().add(new CitationField("publisher", "FamilySearch"));
-    srcDesc2.getCitation().getFields().add(new CitationField("record-pal", "https://familysearch.org/pal:/MM9.1.1/J69H-GV1"));
-    srcDesc2.getCitation().getFields().add(new CitationField("person-of-interest", "Ronald Reagan"));
-    srcDesc2.getCitation().getFields().add(new CitationField("head-of-household-if-not-poi", "John E Reagan"));
-    srcDesc2.getCitation().getFields().add(new CitationField("line", "44"));
-    srcDesc2.getCitation().getFields().add(new CitationField("family", "207"));
-    srcDesc2.getCitation().getFields().add(new CitationField("sheet", "7A"));
-    srcDesc2.getCitation().getFields().add(new CitationField("enumeration-district", "52-0017"));
-    srcDesc2.getCitation().getFields().add(new CitationField("incorporated-place", "Dixon"));
-    srcDesc2.getCitation().getFields().add(new CitationField("county", "Lee"));
-    srcDesc2.getCitation().getFields().add(new CitationField("state", "Illinois"));
-    srcDesc2.getCitation().getFields().add(new CitationField("accessed", "12 July 2012"));
-    srcDesc2.setKnownSourceDerivationType(SourceDerivationType.ExtractedConclusion);
-    srcDesc2.setAbout(URI.create("https://familysearch.org/pal:/MM9.1.1/XSYY-Q6P"));
+    srcDesc2.setAbout(URI.create("https://www.familysearch.org/search/collection/show#uri=http://www.familysearch.org/searchapi/search/collection/1810731"));
     srcDesc2.setSources(new ArrayList<SourceReference>());
     srcDesc2.getSources().add(new SourceReference());
-    srcDesc2.getSources().get(0).setSourceDescriptionURI(URI.create("#" + sourceOfS1));
-    srcDesc2.setDisplayName("President Ronald Reagan with his parents in 1830 census");
+    srcDesc2.getSources().get(0).setSourceDescriptionURI(URI.create("#" + sourceOfS2));
+    srcDesc2.setDisplayName("1930 US Census");
     srcDesc2.setMediatorURI(URI.create("repository#" + ORG_FS_ID));
     srcDesc2.setNotes(new ArrayList<Note>());
     srcDesc2.getNotes().add(note);
 
+
+    SourceDescription srcDesc3 = new SourceDescription();
+    srcDesc3.setId(sourceS1);
+    srcDesc3.setCitation(new SourceCitation());
+    srcDesc3.getCitation().setValue("(https://familysearch.org/pal:/MM9.1.1/XSYY-Q6P : accessed 12 July 2012), Ronald Reagan in household of John E Reagan, Dixon, Lee, Illinois.");
+    srcDesc3.getCitation().setCitationTemplate(new ResourceReference(new URI("http://source-template-authority/fsindex-uscensus-template/details")));
+    srcDesc3.getCitation().setFields(new ArrayList<CitationField>());
+    srcDesc3.getCitation().getFields().add(new CitationField("record-pal", "https://familysearch.org/pal:/MM9.1.1/J69H-GV1"));
+    srcDesc3.getCitation().getFields().add(new CitationField("person-of-interest", "Ronald Reagan"));
+    srcDesc3.getCitation().getFields().add(new CitationField("head-of-household-if-not-poi", "John E Reagan"));
+    srcDesc3.getCitation().getFields().add(new CitationField("line", "44"));
+    srcDesc3.getCitation().getFields().add(new CitationField("family", "207"));
+    srcDesc3.getCitation().getFields().add(new CitationField("sheet", "7A"));
+    srcDesc3.getCitation().getFields().add(new CitationField("enumeration-district", "52-0017"));
+    srcDesc3.getCitation().getFields().add(new CitationField("incorporated-place", "Dixon"));
+    srcDesc3.getCitation().getFields().add(new CitationField("county", "Lee"));
+    srcDesc3.getCitation().getFields().add(new CitationField("state", "Illinois"));
+    srcDesc3.getCitation().getFields().add(new CitationField("accessed", "12 July 2012"));
+    srcDesc3.setAbout(URI.create("https://familysearch.org/pal:/MM9.1.1/XSYY-Q6P"));
+    srcDesc3.setComponentOf(new SourceReference());
+    srcDesc3.getComponentOf().setSourceDescriptionURI(URI.create("#" + sourceOfS1));
+    srcDesc3.setDisplayName("President Ronald Reagan with his parents in 1830 census");
+    srcDesc3.setNotes(new ArrayList<Note>());
+    srcDesc3.getNotes().add(note);
+
     ResourceSet resourceSet = new ResourceSet();
+    resourceSet.addExtensionElement(srcDesc3);
     resourceSet.addExtensionElement(srcDesc2);
     resourceSet.addExtensionElement(srcDesc1);
     resourceSet.addExtensionElement(srcDesc0);

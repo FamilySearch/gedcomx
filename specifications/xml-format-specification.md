@@ -111,7 +111,7 @@ XML according to this specification:
         <gx:contributor rdf:resource="https://familysearch.org/platform/contributors/BCD-FGHJ"/>
         <gx:changeMessage>(justification here)</gx:changeMessage>
     </attribution>
-    <source rdf:ID="5678">
+    <source>
         <rdf:sourceDescription rdf:resource="urn:srcDescId"/>
     </source>
     <rdf:type rdf:resource="http://gedcomx.org/Couple"/>
@@ -369,12 +369,12 @@ name | description | XML property | XML type
 -----|-------------|--------------|---------
 id | A local, transient identifier for the resource being described. | rdf:ID (attribute) | xsd:string
 citation | The citation for this source | gxs:citation | [`gxs:SourceCitation`](#source-citation)
-sourceDerivationType | Describes the type of derivation the described source is relative to its parent source. | gxs:sourceDerivationType | [`rdf#ResourceReference`](#resource-reference)
 about | A uniform resource identifier (URI) for the resource being described. | rdf:about (attribute) | [anyURI](#uri)
 mediator | A reference to the entity that mediates access to the described source. | gxs:mediator | [`rdf:ResourceReference`](#resource-reference)
-sources | A list of references to sources to which this source is related. This is usually applicable to sources that are derived from or contained in another source. | gxs:source | [`gxs:SourceReference`](#source-reference)
+sources | A list of references to any sources from which this source is derived (i.e., sources cited by this source). | gxs:source | [`gxs:SourceReference`](#source-reference)
+componentOf | A reference to the source that contains this source. | gxs:componentOf | [`gxs:SourceReference`](#source-reference)
 displayName | A display name for this source. | gxs:displayName | xsd:string
-alternateNames | A list of alternate display names for this source. | gxs:alternateName | [`gx:LiteralValue`](#literal-value)
+alternateNames | A list of alternate display names for this source. | gxs:alternateName | [`gx:TextValue`](#text-value)
 notes | A list of notes about a source | gxs:note | [`gx:Note`](#note)
 attribution | The attribution of this source. | gxs:attribution | [`gx:Attribution`](#attribution)
 
@@ -385,12 +385,14 @@ attribution | The attribution of this source. | gxs:attribution | [`gx:Attributi
     <gxs:citation>
       ...
     </gxs:citation>
-    <gxs:sourceDerivationType rdf:resource="http://gedcomx.org/PreservationCopy"/>
     <gxs:mediator rdf:resource="http://identifier/for/the/mediator/of/source/being/described"/>
     <gxs:source>
       ...
     </gxs:source>
     ...
+    <gxs:componentOf>
+      ...
+    </gxs:componentOf>
     <gxs:displayName>...the display name for this source...</gxs:displayName>
     <gxs:alternateName>
       ...
@@ -468,14 +470,13 @@ data type.
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
-id | A local identifier for the source reference. | rdf:ID (attribute) | xsd:string
 sourceDescription  | Reference to a _description_ of the source being referenced. | gxs:sourceDescription | [`rdf:ResourceReference`](#resource-reference)
 attribution | The attribution of this source reference. | gxs:attribution | [`gx:Attribution`](#attribution)
 
 ### examples
 
 ```xml
-  <... rdf:ID="local_id">
+  <...>
     <gxs:sourceDescription rdf:resource="http://identifier/for/description/of/source/being/referenced"/>
     <gxs:attribution>
       ...

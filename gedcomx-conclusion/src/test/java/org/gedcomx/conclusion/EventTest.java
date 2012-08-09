@@ -54,7 +54,7 @@ public class EventTest {
     role.getPerson().setResource(URI.create("urn:person"));
     event.getRoles().add(role);
     SourceReference sourceReference = new SourceReference();
-    sourceReference.setId("source-ref");
+    sourceReference.setSourceDescriptionURI(URI.create("urn:source-ref"));
     event.addSource(sourceReference);
     return event;
   }
@@ -67,7 +67,7 @@ public class EventTest {
     assertEquals(1, event.getRoles().size());
     assertEquals(EventRoleType.Official, event.getRoles().get(0).getKnownType());
     assertEquals("urn:person", event.getRoles().get(0).getPerson().getResource().toString());
-    assertEquals("source-ref", event.getSources().get(0).getId());
+    assertEquals("urn:source-ref", event.getSources().get(0).getSourceDescription().getResource().toURI().toString());
   }
 
 }

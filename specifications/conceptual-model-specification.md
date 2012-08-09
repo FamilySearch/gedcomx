@@ -253,7 +253,7 @@ lang | The language of the literal value. | `http://www.w3.org/XML/1998/namespac
 value | The literal value. A datatype MAY be supplied to identify how the string is to be parsed. | string
 
 
-<a id="texxt-value"/>
+<a id="text-value"/>
 
 ## 2.7 The "TextValue" Data Type
 
@@ -303,32 +303,14 @@ name | description | data type
 -----|-------------|----------
 id | A local, transient identifier for the resource being described. Note that as a local, transient identifier, the id may only be used to resolve references to the resource within a well-defined scope (such as a single web service request or a single file). | string
 citation | The citation for this source. | [`http://gedcomx.org/source/v1/SourceCitation`](#source-citation) - REQUIRED
-sourceDerivationType  | Describes the type of derivation the described source is relative to its parent source (if applicable). | [URI](#uri) - OPTIONAL; MUST resolve to a source derivation type. See the list of [known source derivation types](#known-source-derivation-types).
 about | A uniform resource identifier (URI) for the resource being described. | [URI](#uri) - OPTIONAL
 mediator | A reference to the entity that mediates access to the described source. | [URI](#uri) - OPTIONAL; MUST resolve to an instance of [`http://xmlns.com/foaf/0.1/Person`](#foaf-person) or [`http://xmlns.com/foaf/0.1/Organization`](#organization).
-sources | References to any sources to which this source is related. This is usually applicable to sources that are derived from or a component of another source. | List of [`http://gedcomx.org/source/v1/SourceReference`](#source-reference) - OPTIONAL
+sources | A list of references to any sources from which this source is derived (i.e., sources cited by this source). | List of [`http://gedcomx.org/source/v1/SourceReference`](#source-reference) - OPTIONAL
+componentOf | A reference to the source that contains this source -- its parent context; this is for cases where this description is not complete without the description of its parent context | [`http://gedcomx.org/source/v1/SourceReference`](#source-reference) - OPTIONAL
 displayName | A display name for this source. | string - OPTIONAL
-alternateNames | A list of alternate display names for this source. | List of [`http://gedcomx.org/Literal`](#literal-value) - OPTIONAL
+alternateNames | A list of alternate display names for this source. | List of [`http://gedcomx.org/TextValue`](#text-value) - OPTIONAL
 notes  | A list of notes about a source. | List of [`http://gedcomx.org/Note`](#note) - OPTIONAL
 attribution | The attribution of this source description. | [`http://gedcomx.org/Attribution`](#attribution)
-
-<a id="known-source-derivation-types"/>
-
-### known source derivation types
-
-The following source derivation types are defined by GEDCOM X.
-
-URI | description
-----|------------
-`http://gedcomx.org/Original`| The type given if a source description is about an original source.
-`http://gedcomx.org/PreservationCopy`| The type given if a source description is about a preservation copy of another source.  A microfilm image of an origianl document is an example of a preservation copy.
-`http://gedcomx.org/Abstract`| The type given if a source description is about an abstract of another source.  When this type is used, the referring object SHOULD resolve to an `AbstractDocument`.
-`http://gedcomx.org/Transcription`| The type given if a source description is about a transcription (can be full or partial) of another source.  When this type is used, the referring object SHOULD resolve to a `TranscriptionDocument`.
-`http://gedcomx.org/Translation`| The type given if a source description is about a translation (can be full or partial) of another source.  When this type is used, the referring object SHOULD resolve to a `TranslationDocument`.
-`http://gedcomx.org/ExtractedConclusion`| The type given if a source description is about a conclusion (e.g., relationship, fact, event, etc.) that was extracted from another source.  Extracted conclusions are tightly coupled a single source (e.g., a single death record).  Therefore, the referring object SHOULD not have multiple `SourceReference` instances of type `http://gedcomx.org/ExtractedConclusion`.  When this type is used, the referring object SHOULD resolve to a derivation of `Conclusion`.  An example would be a `Person` representing a decedant in a _described_ death record.
-`http://gedcomx.org/Analysis`| The type given if a source description is about a document that contains analysis.  A "genealogical proof statement" is an example of a document containing analysis.  When this type is used, the referring object SHOULD resolve to a `AnalysisDocument`.
-`http://gedcomx.org/WorkingConclusion`| The type given if a source description is about a working conclusion (e.g., relationship, fact, event, etc.) -- typically the conclusion representing the current state of one's research.  Working conclusions are what is typically found in pedigree; a working conclusion typically start out as a "hypothesis" and progresses to a "proven" state as sources and analysis are accumulated.  When this type is used, the referring object SHOULD resolve to a derivation of `Conclusion`.
-
 
 <a id="source-citation"/>
 
@@ -390,7 +372,6 @@ The identifier for the "SourceReference" data type is:
 
 name | description | data type
 -----|-------------|----------
-id | A local identifier for the source reference. Note that this id MUST NOT be processed as an identifier for the resource being referenced, but instead as a transient identifier for the reference itself. | string
 sourceDescription  | Reference to a _description_ of the target source. | [URI](#uri) - MUST resolve to an instance of [`http://gedcomx.org/source/v1/SourceDescription`](#source-description)
 attribution | The attribution of this source reference. | [`http://gedcomx.org/Attribution`](#attribution)
 

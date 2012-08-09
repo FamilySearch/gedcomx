@@ -98,7 +98,7 @@ public class PersonTest {
     event.getPlace().setFormal(normalized);
     event.setSources(new ArrayList<SourceReference>());
     SourceReference eventSource = new SourceReference();
-    eventSource.setId("event-source");
+    eventSource.setSourceDescriptionURI(URI.create("urn:event-source"));
     eventSource.setAttribution(new Attribution());
     event.getSources().add(eventSource);
 
@@ -142,7 +142,6 @@ public class PersonTest {
     attribution.setContributor(new ResourceReference());
     attribution.getContributor().setResource(URI.create("urn:source-reference-attribution"));
     attributedSourceReference.setAttribution(attribution);
-    attributedSourceReference.setId("source-reference-id");
     attributedSourceReference.setSourceDescription(new ResourceReference());
     attributedSourceReference.getSourceDescription().setResource(URI.create("urn:source-description"));
     sources.add(attributedSourceReference);
@@ -219,7 +218,6 @@ public class PersonTest {
     assertEquals(1, person.getSources().size());
     attributedSourceReference = person.getSources().iterator().next();
     assertEquals("urn:source-reference-attribution", attributedSourceReference.getAttribution().getContributor().getResource().toString());
-    assertEquals("source-reference-id", attributedSourceReference.getId());
     assertEquals("urn:source-description", attributedSourceReference.getSourceDescription().getResource().toString());
 
     assertEquals("pid", person.getId());

@@ -59,7 +59,7 @@ public class RelationshipTest {
     relationship.setPerson2(new ResourceReference());
     relationship.getPerson2().setResource(URI.create("urn:person2"));
     SourceReference sourceReference = new SourceReference();
-    sourceReference.setId("source-ref");
+    sourceReference.setSourceDescriptionURI(URI.create("urn:sourceDescription1"));
     relationship.addSource(sourceReference);
     return relationship;
   }
@@ -72,7 +72,7 @@ public class RelationshipTest {
     assertEquals("relationship", relationship.getId());
     assertEquals(URI.create("urn:person1"), relationship.getPerson1().getResource());
     assertEquals(URI.create("urn:person2"), relationship.getPerson2().getResource());
-    assertEquals("source-ref", relationship.getSources().get(0).getId());
+    assertEquals(URI.create("urn:sourceDescription1"), relationship.getSources().get(0).getSourceDescription().getResource());
   }
 
 }

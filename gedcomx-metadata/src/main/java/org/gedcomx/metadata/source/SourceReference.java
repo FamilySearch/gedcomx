@@ -15,7 +15,6 @@
  */
 package org.gedcomx.metadata.source;
 
-import org.codehaus.enunciate.doc.DocumentationExample;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.gedcomx.common.Attributable;
@@ -42,35 +41,9 @@ import java.util.List;
 @XmlType ( name = "SourceReference" )
 public class SourceReference implements Attributable, SupportsExtensionElements {
 
-  private String id;
   private ResourceReference sourceDescription;
   private Attribution attribution;
   private List<Object> extensionElements;
-
-  /**
-   * The id of this resource reference. Note the distinction between this id and the id of the
-   * resource being referenced.
-   *
-   * @return The id of this resource reference. Note the distinction between this id and the id of the
-   * resource being referenced.
-   */
-  @XmlID
-  @XmlAttribute ( name = "ID", namespace = CommonModels.RDF_NAMESPACE )
-  @DocumentationExample (exclude = true)
-  public String getId() {
-    return id;
-  }
-
-  /**
-   * The id of this resource reference. Note the distinction between this id and the id of the
-   * resource being referenced.
-   *
-   * @param id The id of this resource reference. Note the distinction between this id and the id of the
-   * resource being referenced.
-   */
-  public void setId(String id) {
-    this.id = id;
-  }
 
   /**
    * The attribution metadata for this source reference.
