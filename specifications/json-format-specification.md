@@ -360,7 +360,7 @@ id | A local, transient identifier for the source description. | id | string
 citation | The citation for this source | citation | [`SourceCitation`](#source-citation)
 about | A uniform resource identifier (URI) for the resource being described. | about | [`URI`](#uri)
 mediator | A reference to the entity that mediates access to the described source. | mediator | [`URI`](#uri)
-sources | A list of references to any sources from which this source is derived (i.e., sources cited by this source). | sources | array of [`SourceReference`](#source-reference)
+sources | A list of references to any sources from which this source is derived. | sources | array of [`SourceReference`](#source-reference)
 componentOf | A reference to the source that contains this source. | componentOf | [`SourceReference`](#source-reference)
 displayName | A display name for this source. | displayName | string
 alternateNames | A list of alternate display names for this source. | alternateNames | array of [`TextValue`](#text-value)

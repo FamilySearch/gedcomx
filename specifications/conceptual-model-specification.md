@@ -305,7 +305,7 @@ id | A local, transient identifier for the resource being described. Note that a
 citation | The citation for this source. | [`http://gedcomx.org/source/v1/SourceCitation`](#source-citation) - REQUIRED
 about | A uniform resource identifier (URI) for the resource being described. | [URI](#uri) - OPTIONAL
 mediator | A reference to the entity that mediates access to the described source. | [URI](#uri) - OPTIONAL; MUST resolve to an instance of [`http://xmlns.com/foaf/0.1/Person`](#foaf-person) or [`http://xmlns.com/foaf/0.1/Organization`](#organization).
-sources | A list of references to any sources from which this source is derived (i.e., sources cited by this source). | List of [`http://gedcomx.org/source/v1/SourceReference`](#source-reference) - OPTIONAL
+sources | A list of references to any sources from which this source is derived. | List of [`http://gedcomx.org/source/v1/SourceReference`](#source-reference) - OPTIONAL
 componentOf | A reference to the source that contains this source -- its parent context; this is for cases where this description is not complete without the description of its parent context | [`http://gedcomx.org/source/v1/SourceReference`](#source-reference) - OPTIONAL
 displayName | A display name for this source. | string - OPTIONAL
 alternateNames | A list of alternate display names for this source. | List of [`http://gedcomx.org/TextValue`](#text-value) - OPTIONAL

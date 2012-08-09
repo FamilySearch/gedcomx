@@ -371,7 +371,7 @@ id | A local, transient identifier for the resource being described. | rdf:ID (a
 citation | The citation for this source | gxs:citation | [`gxs:SourceCitation`](#source-citation)
 about | A uniform resource identifier (URI) for the resource being described. | rdf:about (attribute) | [anyURI](#uri)
 mediator | A reference to the entity that mediates access to the described source. | gxs:mediator | [`rdf:ResourceReference`](#resource-reference)
-sources | A list of references to any sources from which this source is derived (i.e., sources cited by this source). | gxs:source | [`gxs:SourceReference`](#source-reference)
+sources | A list of references to any sources from which this source is derived. | gxs:source | [`gxs:SourceReference`](#source-reference)
 componentOf | A reference to the source that contains this source. | gxs:componentOf | [`gxs:SourceReference`](#source-reference)
 displayName | A display name for this source. | gxs:displayName | xsd:string
 alternateNames | A list of alternate display names for this source. | gxs:alternateName | [`gx:TextValue`](#text-value)
