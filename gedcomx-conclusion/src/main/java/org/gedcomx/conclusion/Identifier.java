@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType ( name = "Identifier", propOrder = {"type", "value"})
 public final class Identifier {
 
-  private String value;
+  private URI value;
   @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
   @JsonProperty
   private TypeReference<IdentifierType> type;
@@ -45,7 +45,7 @@ public final class Identifier {
    * @return The id value.
    */
   @XmlElement ( name = "value", namespace = CommonModels.RDF_NAMESPACE )
-  public String getValue() {
+  public URI getValue() {
     return value;
   }
 
@@ -54,7 +54,7 @@ public final class Identifier {
    *
    * @param value The id value.
    */
-  public void setValue(String value) {
+  public void setValue(URI value) {
     this.value = value;
   }
 
@@ -105,6 +105,6 @@ public final class Identifier {
    */
   @Override
   public String toString() {
-    return (value == null) ? "" : value;
+    return (value == null) ? "" : value.toString();
   }
 }

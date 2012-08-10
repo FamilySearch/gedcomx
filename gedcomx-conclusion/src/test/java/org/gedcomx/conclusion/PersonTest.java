@@ -44,12 +44,12 @@ public class PersonTest {
 
     ArrayList<Identifier> identifiers = new ArrayList<Identifier>();
     Identifier identifier = new Identifier();
-    identifier.setKnownType(IdentifierType.Forwarded);
-    identifier.setValue("forward-value");
+    identifier.setKnownType(IdentifierType.Deprecated);
+    identifier.setValue(URI.create("forward-value"));
     identifiers.add(identifier);
     identifier = new Identifier();
-    identifier.setKnownType(IdentifierType.Primary);
-    identifier.setValue("pal");
+    identifier.setKnownType(IdentifierType.Persistent);
+    identifier.setValue(URI.create("pal"));
     identifiers.add(identifier);
     person.setIdentifiers(identifiers);
 
@@ -164,10 +164,10 @@ public class PersonTest {
     assertEquals(GenderType.Male, person.getGender().getKnownType());
 
     assertEquals(2, person.getIdentifiers().size());
-    assertEquals(IdentifierType.Forwarded, person.getIdentifiers().get(0).getKnownType());
-    assertEquals("forward-value", person.getIdentifiers().get(0).getValue());
-    assertEquals(IdentifierType.Primary, person.getIdentifiers().get(1).getKnownType());
-    assertEquals("pal", person.getIdentifiers().get(1).getValue());
+    assertEquals(IdentifierType.Deprecated, person.getIdentifiers().get(0).getKnownType());
+    assertEquals("forward-value", person.getIdentifiers().get(0).getValue().toString());
+    assertEquals(IdentifierType.Persistent, person.getIdentifiers().get(1).getKnownType());
+    assertEquals("pal", person.getIdentifiers().get(1).getValue().toString());
 
     assertEquals(2, person.getFacts().size());
     fact = person.getFirstFactOfType(FactType.Occupation);

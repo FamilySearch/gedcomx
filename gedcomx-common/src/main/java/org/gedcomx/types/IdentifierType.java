@@ -35,9 +35,18 @@ public enum IdentifierType {
   Primary,
 
   /**
-   * A forwarded identifier for the resource, such as from the result of a merge.
+   * An identifier that has been relegated, deprecated, or otherwise downgraded. This
+   * identifier is commonly used as the result of a merge when what was once a primary
+   * identifier for a person is no longer primary.
    */
-  Forwarded,
+  Deprecated,
+
+  /**
+   * An identifier that is considered to be a long-term persistent identifier. Applications
+   * that provide persistent identifiers are claiming that links to the resource the identifier
+   * won't break.
+   */
+  Persistent,
 
   @XmlUnknownQNameEnumValue
   OTHER;
