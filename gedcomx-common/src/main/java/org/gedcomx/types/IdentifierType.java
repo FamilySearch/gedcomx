@@ -43,7 +43,7 @@ public enum IdentifierType {
 
   /**
    * An identifier that is considered to be a long-term persistent identifier. Applications
-   * that provide persistent identifiers are claiming that links to the resource the identifier
+   * that provide persistent identifiers are claiming that links to the resource using the identifier
    * won't break.
    */
   Persistent,
