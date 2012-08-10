@@ -2,6 +2,7 @@ package org.gedcomx.conclusion;
 
 import org.gedcomx.common.Attribution;
 import org.gedcomx.common.ResourceReference;
+import org.gedcomx.metadata.source.SourceReference;
 import org.gedcomx.common.URI;
 import org.gedcomx.types.EventRoleType;
 import org.gedcomx.types.EventType;
@@ -41,7 +42,7 @@ public class EventTest {
     Event event = new Event();
     event.setKnownType(EventType.Marriage);
     event.setAttribution(new Attribution());
-    event.getAttribution().setProofStatement("explanation");
+    event.getAttribution().setChangeMessage("explanation");
     event.setDate(new Date());
     event.getDate().setOriginal("date");
     event.setPlace(new Place());
@@ -53,20 +54,20 @@ public class EventTest {
     role.getPerson().setResource(URI.create("urn:person"));
     event.getRoles().add(role);
     SourceReference sourceReference = new SourceReference();
-    sourceReference.setId("source-ref");
+    sourceReference.setSourceDescriptionURI(URI.create("urn:source-ref"));
     event.addSource(sourceReference);
     return event;
   }
 
   private void assertTestEvent(Event event) {
     assertEquals(EventType.Marriage, event.getKnownType());
-    assertEquals("explanation", event.getAttribution().getProofStatement());
+    assertEquals("explanation", event.getAttribution().getChangeMessage());
     assertEquals("date", event.getDate().getOriginal());
     assertEquals("place", event.getPlace().getOriginal());
     assertEquals(1, event.getRoles().size());
     assertEquals(EventRoleType.Official, event.getRoles().get(0).getKnownType());
     assertEquals("urn:person", event.getRoles().get(0).getPerson().getResource().toString());
-    assertEquals("source-ref", event.getSources().get(0).getId());
+    assertEquals("urn:source-ref", event.getSources().get(0).getSourceDescription().getResource().toURI().toString());
   }
 
 }

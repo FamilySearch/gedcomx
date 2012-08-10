@@ -44,31 +44,36 @@ in XML according to this specification:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<person xmlns:gx="http://gedcomx.org/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://gedcomx.org/conclusion/v1/" rdf:ID="BBB-BBBB">
+<person xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:gx="http://gedcomx.org/" xmlns="http://gedcomx.org/conclusion/v1/" xmlns:gxs="http://gedcomx.org/source/v1/" rdf:ID="BBB-BBBB">
+    <source>
+        <gx:attribution>
+            <gx:contributor rdf:resource="https://familysearch.org/platform/contributors/STV-WXZY"/>
+        </gx:attribution>
+    </source>
     <gender>
         <rdf:type rdf:resource="http://gedcomx.org/Male"/>
     </gender>
     <name rdf:ID="789">
-        <gx:attribution>
+        <attribution>
             <gx:contributor rdf:resource="https://familysearch.org/platform/contributors/STV-WXZY"/>
-        </gx:attribution>
+        </attribution>
         <preferred>true</preferred>
         <primaryForm>
             <fullText>George Washington</fullText>
             <part>
                 <rdf:type rdf:resource="http://gedcomx.org/Given"/>
-                <text>George</text>
+                <value>George</value>
             </part>
             <part>
                 <rdf:type rdf:resource="http://gedcomx.org/Surname"/>
-                <text>Washington</text>
+                <value>Washington</value>
             </part>
         </primaryForm>
     </name>
     <fact rdf:ID="123">
-        <gx:attribution>
+        <attribution>
             <gx:contributor rdf:resource="https://familysearch.org/platform/contributors/BCD-FGHJ"/>
-        </gx:attribution>
+        </attribution>
         <rdf:type rdf:resource="http://gedcomx.org/Birth"/>
         <date>
             <original>February 22, 1732</original>
@@ -80,9 +85,9 @@ in XML according to this specification:
         </place>
     </fact>
     <fact rdf:ID="456">
-        <gx:attribution>
+        <attribution>
             <gx:contributor rdf:resource="https://familysearch.org/platform/contributors/KLM-NPQR"/>
-        </gx:attribution>
+        </attribution>
         <rdf:type rdf:resource="http://gedcomx.org/Death"/>
         <date>
             <original>December 14, 1799</original>
@@ -93,12 +98,6 @@ in XML according to this specification:
             <formal rdf:resource="https://familysearch.org/platform/places/67890">Mount Vernon, Fairfax County, Virginia</formal>
         </place>
     </fact>
-    <source rdf:resource="http://en.wikipedia.org/wiki/George_washington">
-        <gx:attribution>
-            <gx:contributor rdf:resource="https://familysearch.org/platform/contributors/STV-WXZY"/>
-        </gx:attribution>
-        <rdf:type rdf:resource="http://purl.org/dc/dcmitype/Text"/>
-    </source>
 </person>
 ```
 
@@ -107,27 +106,27 @@ XML according to this specification:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<relationship rdf:ID="CCC-CCCC" xmlns:gx="http://gedcomx.org/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://gedcomx.org/conclusion/v1/">
-    <gx:attribution>
-        <gx:proofStatement>(proof statement here)</gx:proofStatement>
+<relationship xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:gx="http://gedcomx.org/" xmlns="http://gedcomx.org/conclusion/v1/" xmlns:gxs="http://gedcomx.org/source/v1/" rdf:ID="CCC-CCCC">
+    <attribution>
         <gx:contributor rdf:resource="https://familysearch.org/platform/contributors/BCD-FGHJ"/>
-    </gx:attribution>
+        <gx:changeMessage>(justification here)</gx:changeMessage>
+    </attribution>
+    <source>
+        <rdf:sourceDescription rdf:resource="urn:srcDescId"/>
+    </source>
     <rdf:type rdf:resource="http://gedcomx.org/Couple"/>
     <person1 rdf:resource="https://familysearch.org/platform/persons/DDD-DDDD"/>
     <person2 rdf:resource="https://familysearch.org/platform/persons/FFF-FFFF"/>
     <fact rdf:ID="123">
-        <gx:attribution>
+        <attribution>
             <gx:contributor rdf:resource="https://familysearch.org/platform/contributors/HHH-HHHH"/>
-        </gx:attribution>
+        </attribution>
         <rdf:type rdf:resource="http://gedcomx.org/Marriage"/>
         <date>
             <original>January 6, 1759</original>
             <formal rdf:datatype="http://www.w3.org/2001/XMLSchema#date">1759-01-06</formal>
         </date>
     </fact>
-    <source rdf:ID="5678" rdf:resource="http://en.wikipedia.org/wiki/George_washington">
-        <rdf:type rdf:resource="http://purl.org/dc/dcmitype/Text"/>
-    </source>
 </relationship>
 ```
 
@@ -140,8 +139,8 @@ prefix | namespace
 -------|----------
 gx | `http://gedcomx.org/`
 gxc | `http://gedcomx.org/conclusion/v1/`
+gxs | `http://gedcomx.org/source/v1/`
 rdf | `http://www.w3.org/1999/02/22-rdf-syntax-ns#`
-dc | `http://purl.org/dc/terms/`
 foaf | `http://xmlns.com/foaf/0.1/`
 contact | `http://www.w3.org/2000/10/swap/pim/contact#`
 xsd | `http://www.w3.org/2001/XMLSchema`
@@ -159,8 +158,8 @@ each property is to be serialized.
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
 "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
-document are to be interpreted as described in BCP 14, 
-[RFC2119](http://tools.ietf.org/html/rfc2119), as scoped to those conformance 
+document are to be interpreted as described in BCP 14,
+[RFC2119](http://tools.ietf.org/html/rfc2119), as scoped to those conformance
 targets.
 
 
@@ -180,14 +179,14 @@ XML type defined by the XML schema specification will be used to (de)serialize t
 
 ## 2.2 The "ResourceReference" Data Type
 
-The GEDCOM X XML format uses the `rdf:resource` XML attribute to refer to other resources,
+The `rdf:ResourceReference` XML type uses the `rdf:resource` XML attribute to refer to other resources,
 in conformance to the RDF specification.
 
 ### properties
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
-resource | The URI to the resource being referenced. | rdf:value (attribute) | [anyURI](#uri)
+resource | The URI to the resource being referenced. | rdf:resource (attribute) | [anyURI](#uri)
 
 ### examples
 
@@ -199,7 +198,7 @@ resource | The URI to the resource being referenced. | rdf:value (attribute) | [
 
 ## 2.3 The "Identifier" Data Type
 
-The `gx:Identifier` XML type is used to (de)serialize the `http://gedcomx.org/Identifier`
+The `gxc:Identifier` XML type is used to (de)serialize the `http://gedcomx.org/conclusion/v1/Identifier`
 data type.
 
 ### properties
@@ -230,18 +229,18 @@ data type.
 name | description | XML property | XML type
 -----|-------------|--------------|---------
 contributor | Reference to the contributor to whom the attributed data is attributed. | gx:contributor | [`rdf#ResourceReference`](#resource-reference)
-confidence  | Reference to the confidence level of the contributor of the attributed data. | gx:confidence | [`rdf#ResourceReference`](#resource-reference)
 modified | Timestamp of when the attributed data was contributed. | gx:modified | xsd:dateTime
-proofStatement | A statement of proof provided by the contributor of the attributed data | gx:proofStatement | xsd:string
+confidence  | Reference to the confidence level of the contributor of the attributed data. | gx:confidence | [`rdf#ResourceReference`](#resource-reference)
+changeMessage | A statement of why the attributed data is being provided by the contributor. | gx:changeMessage | xsd:string
 
 ### examples
 
 ```xml
   <...>
     <gx:contributor rdf:resource="http://identifier/for/contributor"/>
-    <gx:confidence rdf:resource="http://gedcomx.org/Certainly"/>
     <gx:modified>2012-05-29T00:00:00</gx:modified>
-    <gx:proofStatement>...proof statement here...</gx:proofStatement>
+    <gx:confidence rdf:resource="http://gedcomx.org/Certainly"/>
+    <gx:changeMessage>...change message here...</gx:changeMessage>
   </...>
 ```
 
@@ -249,7 +248,7 @@ proofStatement | A statement of proof provided by the contributor of the attribu
 
 ## 2.5 The "FormalValue" Data Type
 
-The `gx:FormalValue` XML type is used to (de)serialize the `http://gedcomx.org/FormalValue`
+The `gxc:FormalValue` XML type is used to (de)serialize the `http://gedcomx.org/conclusion/v1/FormalValue`
 data type.
 
 ### properties
@@ -285,31 +284,10 @@ Standardized and normalized value:
   <... rdf:resource="http://identifier/for/standardized/value">...text of the normalized value...</...>
 ```
 
-## 2.6 The "GenealogicalResource" Data Type
-
-The `gx:GenealogicalResource` XML type is used to (de)serialize the `http://gedcomx.org/GenealogicalResource`
-data type.
-
-### properties
-
-name | description | XML property | XML type
------|-------------|--------------|---------
-id | A local, transient identifier for the genealogical resource being described. | rdf:ID (attribute) | xsd:string
-attribution | The attribution of this resource. | gx:attribution | [`gx:Attribution`](#attribution)
-
-### examples
-
-```xml
-  <... rdf:ID="some_local_id">
-    <gx:attribution>
-      ...
-    </gx:attribution>
-  </...>
-```
 
 <a id="note"/>
 
-## 2.7 The "Note" Data Type
+## 2.6 The "Note" Data Type
 
 The `gx:Note` XML type is used to (de)serialize the `http://gedcomx.org/Note` data type.
 
@@ -317,31 +295,34 @@ The `gx:Note` XML type is used to (de)serialize the `http://gedcomx.org/Note` da
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
-lang | The language of the note. | xml:lang (attribute) | xml:lang
-text | The text of the note. | gx:text | xsd:string
+text | The text of the note. | gx:text | [`gx:TextValue`](#text-value)
+attribution | The attribution of this note. | gx:attribution | [`gx:Attribution`](#attribution)
 
 ### examples
 
 ```xml
-  <... xml:lang="en">
-    <gx:text>...text of the note...</gx:text>
+  <...>
+    <gx:text xml:lang="en">...text of the note...</gx:text>
+    <gx:attribution>
+      ...
+    </gx:attribution>
   </...>
 ```
 
-<a id="rdf-literal"/>
+<a id="literal-value"/>
 
-## 2.8 The "RDF Literal" Data Type
+## 2.7 The "LiteralValue" Data Type
 
-The `rdfs:Literal` XML type is used to (de)serialize the `http://www.w3.org/2000/01/rdf-schema#Literal`
+The `gx:LiteralValue` XML type is used to (de)serialize the `http://gedcomx.org/Literal`
 data type.
 
 ### properties
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
-value | The literal value. | (child text) | xsd:string
-datatype  | URI identifying the way the value is to be processed according to a specific standard. | rdf:datatype (attribute) | [anyURI](#uri)
 lang | The language of the literal value. | xml:lang (attribute) | xml:lang
+datatype  | URI identifying the way the value is to be processed according to a specific standard. | rdf:datatype (attribute) | [anyURI](#uri)
+value | The literal value. | (child text) | xsd:string
 
 ### examples
 
@@ -349,102 +330,160 @@ lang | The language of the literal value. | xml:lang (attribute) | xml:lang
   <... xml:lang="en" rdf:datatype="...">...text of the literal value...</...>
 ```
 
+<a id="text-value"/>
 
-## 2.9 The "RDF Value" Data Type
+## 2.8 The "TextValue" Data Type
 
-The `rdf:Resource` XML type is used to (de)serialize the `http://www.w3.org/2000/01/rdf-schema#Resource`
+The `gx:TextValue` XML type is used to (de)serialize the `http://gedcomx.org/TextValue`
 data type.
 
 ### properties
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
-id | A local identifier for the value. | rdf:ID (attribute) | xsd:string
-type  | Reference to the type of the value. | rdf:type | [`rdf:ResourceReference`](#resource-reference)
-value | The string form of the value. | rdf:value | xsd:string
-lang | The language of the string form of the value. | xml:lang (attribute) | xml:lang
+lang | The language of the text value. | xml:lang (attribute) | xml:lang
+value | The text value. | (child text) | xsd:string
 
 ### examples
 
-A value that can be specified as a string:
-
 ```xml
-  <... xml:lang="en" rdf:ID="...">
-    <rdf:value>...text of the value...</rdf:value>
-  </...>
+  <... xml:lang="en">...textual value...</...>
 ```
 
-A value that has to be resolved, perhaps because more structure is needed
-than a string.
-
-```xml
-  <... rdf:resource="http://identifier/for/the/value">
-    <rdf:type rdf:resource="http://identifier/for/the/type/of/resource"/>
-  </...>
-```
 
 # 3. Data Types for Describing Sources
 
 This section defines XML types for each of the data types specified by the
 "Data Types for Describing Sources" section of the conceptual model specification.
 
-<a id="rdf-description"/>
+<a id="source-description"/>
 
-## 3.1 The "Description" Data Type
+## 3.1 The "SourceDescription" Data Type
 
-The `rdf:Description` XML type is used to (de)serialize the
-`http://www.w3.org/1999/02/22-rdf-syntax-ns#Description` data type.
+The `gxs:SourceDescription` XML type is used to (de)serialize the
+`http://gedcomx.org/source/v1/SourceDescription` data type.
 
 ### properties
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
 id | A local, transient identifier for the resource being described. | rdf:ID (attribute) | xsd:string
+citation | The citation for this source | gxs:citation | [`gxs:SourceCitation`](#source-citation)
 about | A uniform resource identifier (URI) for the resource being described. | rdf:about (attribute) | [anyURI](#uri)
-type  | Reference to the type of the resource being described. | rdf:type | [`rdf:ResourceReference`](#resource-reference)
-
-### standard extension properties
-
-As stated by the conceptual model specification, GEDCOM X recognizes the
-[Dublin Core Metadata Terms](http://dublincore.org/documents/dcmi-terms/) as standard properties for a
-description of a resource. The DCMI terms are supported as elements of an instance of the
-rdf:Description XML Type.
+mediator | A reference to the entity that mediates access to the described source. | gxs:mediator | [`rdf:ResourceReference`](#resource-reference)
+sources | A list of references to any sources from which this source is derived. | gxs:source | [`gxs:SourceReference`](#source-reference)
+componentOf | A reference to the source that contains this source. | gxs:componentOf | [`gxs:SourceReference`](#source-reference)
+displayName | A display name for this source. | gxs:displayName | xsd:string
+alternateNames | A list of alternate display names for this source. | gxs:alternateName | [`gx:TextValue`](#text-value)
+notes | A list of notes about a source | gxs:note | [`gx:Note`](#note)
+attribution | The attribution of this source. | gxs:attribution | [`gx:Attribution`](#attribution)
 
 ### examples
 
 ```xml
-  <... rdf:ID="local_id" rdf:about="http://identifier/for/the/resource/being/described">
-    <rdf:type rdf:resource="http://identifier/for/the/type/of/resource/being/described"/>
-    <dc:title>...</dc:title>
-    <dc:creator>...</dc:creator>
+  <... rdf:ID="local_id" rdf:about="http://identifier/for/the/source/being/described">
+    <gxs:citation>
+      ...
+    </gxs:citation>
+    <gxs:mediator rdf:resource="http://identifier/for/the/mediator/of/source/being/described"/>
+    <gxs:source>
+      ...
+    </gxs:source>
     ...
+    <gxs:componentOf>
+      ...
+    </gxs:componentOf>
+    <gxs:displayName>...the display name for this source...</gxs:displayName>
+    <gxs:alternateName>
+      ...
+    </gxs:alternateName>
+    ...
+    <gxs:note>
+      ...
+    </gxs:note>
+    ...
+    <gxs:attribution>
+      ...
+    </gxs:attribution>
+  </...>
+```
+
+<a id="source-citation"/>
+
+## 3.2 The "SourceCitation" Data Type
+
+The `gxs:SourceCitation` XML type is used to (de)serialize the
+`http://gedcomx.org/source/v1/SourceCitation` data type.
+
+### properties
+
+name | description | XML property | XML type
+-----|-------------|--------------|---------
+value | A rendering of the full (working) citation as a string. | rdf:value | xsd:string
+citationTemplate | The identifier of the citation template by which this citation may be interpreted. | gxs:citationTemplate | [`rdf:ResourceReference`](#resource-reference)
+fields | A list of citation fields about a source. | gxs:field | [`gx:CitationField`](#citation-field)
+
+### examples
+
+```xml
+  <... rdf:ID="local_id" rdf:about="http://identifier/for/the/source/being/described">
+    <rdf:value>...a rendering of the full (working) citation as a string...</rdf:value>
+    <gxs:citationTemplate rdf:resource="http://identifier/for/ciation/template"/>
+    <gxs:field>
+      ...
+    </gxs:field>
+    ...
+  </...>
+```
+
+<a id="citation-field"/>
+
+## 3.3 The "CitationField" Data Type
+
+The `gxs:CitationField` XML type is used to (de)serialize the
+`http://gedcomx.org/source/v1/CitationField` data type.
+
+### properties
+
+name | description | XML property | XML type
+-----|-------------|--------------|---------
+name | The identifier for the citation detail -- defined by a citation template or a citation template library. | gxs:name | [anyURI](#uri)
+value | A rendering of the full (working) citation as a string. | rdf:value | xsd:string
+
+### examples
+
+```xml
+  <...>
+    <gxs:name>...a citation field name...</gxs:name>
+    <rdf:value>...a citation field value...</rdf:value>
   </...>
 ```
 
 <a id="source-reference"/>
 
-## 3.2 The "SourceReference" Data Type
+## 3.4 The "SourceReference" Data Type
 
-The `gxc:SourceReference` XML type is used to (de)serialized the `http://gedcomx.org/conclusion/v1/SourceReference`
+The `gxs:SourceReference` XML type is used to (de)serialized the `http://gedcomx.org/source/v1/SourceReference`
 data type.
 
 ### properties
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
-id | A local identifier for the source reference. | rdf:ID (attribute) | xsd:string
-type  | Reference to the type of the resource being referenced. | rdf:type | [`rdf:ResourceReference`](#resource-reference)
-description  | Reference to a _description_ of the source being referenced. | gx:description | [`rdf:ResourceReference`](#resource-reference)
-attribution | The attribution of this source reference. | gx:attribution | [`gx:attribution`](#attribution)
+sourceDescription  | Reference to a _description_ of the source being referenced. | gxs:sourceDescription | [`rdf:ResourceReference`](#resource-reference)
+attribution | The attribution of this source reference. | gxs:attribution | [`gx:Attribution`](#attribution)
 
 ### examples
 
 ```xml
-  <... rdf:ID="local_id">
-    <rdf:type rdf:resource="http://identifier/for/the/type/of/resource/being/referenced"/>
-    <gx:description rdf:resource="http://identifier/for/description/of/source/being/referenced"/>
-    <gx:attribution>...</gx:attribution>
-    ...
+  <...>
+    <gxs:sourceDescription rdf:resource="http://identifier/for/description/of/source/being/referenced"/>
+    <gxs:attribution>
+      ...
+    </gxs:attribution>
+
+    <!-- possibility of extension elements -->
+
   </...>
 ```
 
@@ -466,16 +505,20 @@ name | description | XML property | XML type
 -----|-------------|--------------|---------
 id | A local, transient identifier for the online account. | rdf:ID (attribute) | xsd:string
 serviceHomepage  | The home page of the service. | foaf:serviceHomepage | [`rdf:ResourceReference`](#resource-reference)
-accountName | The name of the account. | foaf:accountName | [`rdfs:Literal`](#rdf-literal)
-displayName | A display name for the account. | foaf:displayName | [`rdfs:Literal`](#rdf-literal)
+accountName | The name of the account. | foaf:accountName | [`gx:LiteralValue`](#literal-value)
+displayName | A display name for the account. | foaf:displayName | [`gx:LiteralValue`](#literal-value)
 
 ### examples
 
 ```xml
   <... rdf:ID="local_id">
     <foaf:serviceHomepage rdf:resource="http://familysearch.org/"/>
-    <foaf:accountName>...name of the account...</foaf:accountName>
-    <foaf:displayName>...display name of the account...</foaf:displayName>
+    <foaf:accountName>
+      ...
+    </foaf:accountName>
+    <foaf:displayName>
+      ...
+    </foaf:displayName>
   </...>
 ```
 
@@ -522,9 +565,9 @@ data type.
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
-name | The name of the person or organization. | foaf:name | [`rdfs:Literal`](#rdf-literal)
-homepage | The homepage of the person or organization. | foaf:homepage | [`rdfs:Literal`](#rdf-literal)
-openid  | The [openid](http://openid.net/) of the person or organization. | foaf:openid | [`rdfs:Literal`](#rdf-literal)
+name | The name of the person or organization. | foaf:name | [`gx:LiteralValue`](#literal-value)
+homepage | The homepage of the person or organization. | foaf:homepage | [`gx:LiteralValue`](#literal-value)
+openid  | The [openid](http://openid.net/) of the person or organization. | foaf:openid | [`gx:LiteralValue`](#literal-value)
 accounts  | The online accounts of the person or organization. | foaf:account | [`foaf:OnlineAccount`](#online-account)
 emails  | The email addresses of the person or organization. | foaf:mbox | [`rdf:ResourceReference`](#resource-reference)
 phones  | The phones (voice, fax, mobile) of the person or organization. | foaf:phone | [`rdf:ResourceReference`](#resource-reference)
@@ -540,19 +583,20 @@ addresses  | The addresses of the person or organization. | contact:address | [`
     <foaf:account>
       ...
     </foaf:account>
-    <foaf:account>
-      ...
-    </foaf:account>
+    ...
     <foaf:mbox rdf:resource="mailto:someone@gedcomx.org"/>
-    <foaf:mbox rdf:resource="mailto:someone@somewhere-else.org"/>
+    ...
     <foaf:phone rdf:resource="tel:+1-201-555-0123"/>
-    <foaf:phone rdf:resource="fax:+1-201-555-5555"/>
+    ...
     <contact:address>
       ...
     </contact:address>
+    ...
+
+    <!-- possibility of extension elements -->
+
   </...>
 ```
-
 
 <a id="organization"/>
 
@@ -578,17 +622,26 @@ data type.
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
-familyName | The family name of the person. | foaf:familyName | [`rdfs:Literal`](#rdf-literal)
-givenName | The given name of the person. | foaf:givenName | [`rdfs:Literal`](#rdf-literal)
-language | The language of the person. | foaf:language | [`rdfs:Literal`](#rdf-literal)
+familyName | The family name of the person. | foaf:familyName | [`gx:LiteralValue`](#literal-value)
+givenName | The given name of the person. | foaf:givenName | [`gx:LiteralValue`](#literal-value)
+language | The language of the person. | foaf:language | [`gx:LiteralValue`](#literal-value)
 
 ### examples
 
 ```xml
   <... rdf:ID="local_id">
-    <foaf:familyName>...</foaf:familyName>
-    <foaf:givenName>...</foaf:givenName>
-    <foaf:language>...</foaf:language>
+
+    <!-- ...the members of foaf:Agent... -->
+
+    <foaf:familyName>
+      ...
+    </foaf:familyName>
+    <foaf:givenName>
+      ...
+    </foaf:givenName>
+    <foaf:language>
+      ...
+    </foaf:language>
   </...>
 ```
 
@@ -606,21 +659,337 @@ data type.
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
-sources | The list of references to the sources of the conclusion. | gxc:source | [`gxc:SourceReference`](#source-reference).
+id | A local, transient identifier for the resource being described. | rdf:ID (attribute) | xsd:string
+sources | A list of references to the sources of the conclusion. | gxc:source | [`gxs:SourceReference`](#source-reference)
+notes | A list of notes about this conclusion. | gxc:note | [`gx:Note`](#note)
+attribution | The attribution of this conclusion. | gxc:attribution | [`gx:Attribution`](#attribution)
 
 ### examples
 
 ```xml
   <... rdf:ID="local_id">
-    <gxc:source rdf:resource="http://identifier/for/the/source"/>
-    <gxc:source rdf:resource="http://identifier/for/the/source"/>
+    <gxc:source>
+      ...
+    </gxc:source>
+    ...
+    <gxc:note>
+      ...
+    </gxc:note>
+    ...
+    <gxc:attribution>
+      ...
+    </gxc:attribution>
+
+    <!-- possibility of extension elements -->
+
+  </...>
+```
+
+
+<a id="document"/>
+
+## 5.2 The "Document" Data Type
+
+The `gxc:Document` XML type is used to (de)serialize the `http://gedcomx.org/conclusion/v1/Document` data type.
+
+### properties
+
+name | description | XML property | XML type
+-----|-------------|--------------|---------
+text | The text of the document. | gxc:text | [`gx:TextValue`](#text-value)
+
+### examples
+
+```xml
+  <...>
+
+    <!-- ...the members of gxc:Conclusion... -->
+
+    <gxc:text xml:lang="en">...text of the document...</gxc:text>
+  </...>
+```
+
+<a id="abstract-document"/>
+
+## 5.2.1 The "AbstractDocument" Data Type
+
+The `gxc:AbstractDocument` XML type is used to (de)serialize the `http://gedcomx.org/conclusion/v1/AbstractDocument` data type.
+
+### properties
+
+The `gxc:AbstractDocument` data type defines no additional properties beyond those defined by its extended type.
+
+<a id="transcription-document"/>
+
+## 5.2.2 The "TranscriptionDocument" Data Type
+
+The `gxc:TranscriptionDocument` XML type is used to (de)serialize the `http://gedcomx.org/conclusion/v1/TranscriptionDocument` data type.
+
+### properties
+
+The `gxc:TranscriptionDocument` data type defines no additional properties beyond those defined by its extended type.
+
+<a id="translation-document"/>
+
+## 5.2.3 The "TranslationDocument" Data Type
+
+The `gxc:TranslationDocument` XML type is used to (de)serialize the `http://gedcomx.org/conclusion/v1/TranslationDocument` data type.
+
+### properties
+
+The `gxc:TranslationDocument` data type defines no additional properties beyond those defined by its extended type.
+
+<a id="analysis-document"/>
+
+## 5.2.4 The "AnalysisDocument" Data Type
+
+The `gxc:AnalysisDocument` XML type is used to (de)serialize the `http://gedcomx.org/conclusion/v1/AnalysisDocument` data type.
+
+### properties
+
+The `gxc:AnalysisDocument` data type defines no additional properties beyond those defined by its extended type.
+
+<a id="gender-conclusion"/>
+
+## 5.3 The "Gender" Data Type
+
+The `gxc:Gender` XML type is used to (de)serialize the `http://gedcomx.org/conclusion/v1/Gender`
+data type.
+
+### properties
+
+name | description | XML property | XML type
+-----|-------------|--------------|---------
+type | The gender type. | rdf:type | [`rdf:ResourceReference`](#resource-reference)
+
+### examples
+
+```xml
+  <... rdf:ID="local_id">
+
+    <!-- ...the members of gxc:Conclusion... -->
+
+    <rdf:type rdf:resource="http://gedcomx.org/Male"/>
+  </...>
+```
+
+<a id="name-conclusion"/>
+
+## 5.4 The "Name" Data Type
+
+The `gxc:Name` XML type is used to (de)serialize the `http://gedcomx.org/conclusion/v1/Name`
+data type.
+
+### properties
+
+name | description | XML property | XML type
+-----|-------------|--------------|---------
+type | The name type. | rdf:type | [`rdf:ResourceReference`](#resource-reference)
+preferred | Whether this name is preferred above the other names of a person. | gxc:preferred | xsd:boolean
+primaryForm | The primary form of the name. | gxc:primaryForm | [`gxc:NameForm`](#name-form)
+alternateForms | A list of alternate forms of the name. | gxc:alternateForm | [`gxc:NameForm`](#name-form)
+
+### examples
+
+```xml
+  <... rdf:ID="local_id">
+
+    <!-- ...the members of gxc:Conclusion... -->
+
+    <rdf:type rdf:resource="http://gedcomx.org/BirthName"/>
+    <gxc:preferred>true</gxc:preferred>
+    <gxc:primaryForm>
+      ...
+    </gxc:primaryForm>
+    <gxc:alternateForm>
+      ...
+    </gxc:alternateForm>
+    ...
+  </...>
+```
+
+<a id="fact-conclusion"/>
+
+## 5.5 The "Fact" Data Type
+
+The `gxc:Fact` XML type is used to (de)serialize the `http://gedcomx.org/conclusion/v1/Fact`
+data type.
+
+### properties
+
+name | description | XML property | XML type
+-----|-------------|--------------|---------
+type | URI identifying the type of the fact. | rdf:type | [`rdf:ResourceReference`](#resource-reference)
+date | The date of applicability of the fact. | gxc:date | [`gxc:Date`](#conclusion-date)
+place | The place of applicability of the fact. | gxc:place | [`gxc:Place`](#conclusion-place)
+original | The value of the fact as supplied by the contributor. | gxc:original | xsd:string
+formal | The formal value of the fact. | gxc:formal | [`gxc:FormalValue`](#formal-value)
+
+### examples
+
+```xml
+  <... rdf:ID="local_id">
+
+    <!-- ...the members of gxc:Conclusion... -->
+
+    <rdf:type rdf:resource="http://gedcomx.org/Birth"/>
+    <gxc:date>
+      ...
+    </gxc:date>
+    <gxc:place>
+      ...
+    </gxc:place>
+    <gxc:original>...original value of the fact...</gxc:original>
+    <gxc:formal>
+      ...
+    </gxc:formal>
+  </...>
+```
+
+<a id="person"/>
+
+## 5.6 The "Person" Data Type
+
+The `gxc:Person` XML type is used to (de)serialize the `http://gedcomx.org/conclusion/v1/Person`
+data type.
+
+### properties
+
+name | description | XML property | XML type
+-----|-------------|--------------|---------
+identifiers | Identifiers for the person. | gxc:identifier | [`gxc:Identifier`](#identifier-type)
+living | Whether the person is considered living. | gxc:living | xsd:boolean
+gender | The conclusion about the gender of the person. | gxc:gender | [`gxc:Gender`](#gender)
+names | The conclusions about the names of the person. | gxc:name | [`gxc:Name`](#name-conclusion)
+facts | The conclusions about the facts of the life of the person. | gxc:fact | [`gxc:Fact`](#fact-conclusion)
+
+### examples
+
+```xml
+  <... rdf:ID="local_id">
+
+    <!-- ...the members of gxc:Conclusion... -->
+
+    <gxc:identifier>
+      ...
+    </gxc:identifier>
+    ...
+    <gxc:living>true</gxc:living>
+    <gxc:gender>
+      ...
+    </gxc:gender>
+    <gxc:name>
+      ...
+    </gxc:name>
+    ...
+    <gxc:fact>
+      ...
+    </gxc:fact>
+    ...
+  </...>
+```
+
+<a id="relationship"/>
+
+## 5.7 The "Relationship" Data Type
+
+The `gxc:Relationship` XML type is used to (de)serialize the `http://gedcomx.org/conclusion/v1/Relationship`
+data type.
+
+### properties
+
+name | description | XML property | XML type
+-----|-------------|--------------|---------
+type | URI identifying the type of the relationship. | rdf:type | [`rdf:ResourceReference`](#resource-reference)
+person1 | Reference to the first person in the relationship. | gxc:person1 | [`rdf:ResourceReference`](#resource-reference)
+person2 | Reference to the second person in the relationship. | gxc:person2 | [`rdf:ResourceReference`](#resource-reference)
+facts | The conclusions about the facts of the life of the relationship. | gxc:fact | [`gxc:Fact`](#fact-conclusion)
+
+### examples
+
+```xml
+  <... rdf:ID="local_id">
+
+    <!-- ...the members of gxc:Conclusion... -->
+
+    <rdf:type rdf:resource="http://gedcomx.org/Couple"/>
+    <gxc:person1 rdf:resource="http://identifier/for/person/1"/>
+    <gxc:person2 rdf:resource="http://identifier/for/person/2"/>
+    <gxc:fact>
+      ...
+    </gxc:fact>
+    ...
+  </...>
+```
+
+<a id="conclusion-event-role"/>
+
+## 5.8 The "EventRole" Data Type
+
+The `gxc:EventRole` XML type is used to (de)serialize the `http://gedcomx.org/conclusion/v1/EventRole`
+data type.
+
+### properties
+
+name | description | XML property | XML type
+-----|-------------|--------------|---------
+person | Reference to the person playing the role in the event. | gxc:person | [`rdf:ResourceReference`](#resource-reference)
+type | Reference to the role type. | rdf:type | [`rdf:ResourceReference`](#resource-reference)
+details | Details about the role of the person in the event. | gxc:details | xs:string
+
+### examples
+
+```xml
+  <... rdf:ID="local_id">
+
+    <!-- ...the members of gxc:Conclusion... -->
+
+    <gxc:person rdf:resource="http://identifier/for/person/1"/>
+    <rdf:type rdf:resource="http://gedcomx.org/Witness"/>
+    <gxc:details>...</gxc:details>
+  </...>
+```
+
+<a id="event"/>
+
+## 5.9 The "Event" Data Type
+
+The `gxc:Event` is used to (de)serialize the `http://gedcomx.org/conclusion/v1/Event`
+data type.
+
+### properties
+
+name | description | XML property | XML type
+-----|-------------|--------------|---------
+type | URI identifying the type of the event. | rdf:type | [`rdf:ResourceReference`](#resource-reference)
+date | The date of the event. | gxc:date | [`gxc:Date`](#conclusion-date)
+place | The place the event. | gxc:place | [`gxc:Place`](#conclusion-place)
+roles | The roles of the persons in the event. | gxc:role | [`gxc:EventRole`](#conclusion-event-role)
+
+### examples
+
+```xml
+  <... rdf:ID="local_id">
+
+    <!-- ...the members of gxc:Conclusion... -->
+
+    <rdf:type rdf:resource="http://gedcomx.org/Marriage"/>
+    <gxc:date>
+      ...
+    </gxc:date>
+    <gxc:place>
+      ...
+    </gxc:place>
+    <gxc:role>
+      ...
+    </gxc:role>
     ...
   </...>
 ```
 
 <a id="conclusion-date"/>
 
-## 5.2 The "Date" Data Type
+## 5.10 The "Date" Data Type
 
 The `gxc:Date` XML type is used to (de)serialize the `http://gedcomx.org/conclusion/v1/Date`
 data type.
@@ -630,7 +999,7 @@ data type.
 name | description | XML property | XML type
 -----|-------------|--------------|---------
 original | The original value of the date as supplied by the contributor. | gxc:original | xsd:string
-formal | The formal value of the date. | gxc:formal | [`gx:FormalValue`](#formal-value)
+formal | The formal value of the date. | gxc:formal | [`gxc:FormalValue`](#formal-value)
 
 ### examples
 
@@ -645,7 +1014,7 @@ formal | The formal value of the date. | gxc:formal | [`gx:FormalValue`](#formal
 
 <a id="conclusion-place"/>
 
-## 5.3 The "Place" Data Type
+## 5.11 The "Place" Data Type
 
 The `gxc:Place` XML type is used to (de)serialize the `http://gedcomx.org/conclusion/v1/Place`
 data type.
@@ -655,7 +1024,7 @@ data type.
 name | description | XML property | XML type
 -----|-------------|--------------|---------
 original | The original value of the place as supplied by the contributor. | gxc:original | xsd:string
-formal | The formal value of the place. | gxc:formal | [`gx:FormalValue`](#formal-value)
+formal | The formal value of the place. | gxc:formal | [`gxc:FormalValue`](#formal-value)
 
 ### examples
 
@@ -668,92 +1037,9 @@ formal | The formal value of the place. | gxc:formal | [`gx:FormalValue`](#forma
   </...>
 ```
 
-<a id="conclusion-event-role"/>
-
-## 5.4 The "EventRole" Data Type
-
-The `gxc:EventRole` XML type is used to (de)serialize the `http://gedcomx.org/conclusion/v1/EventRole`
-data type.
-
-### properties
-
-name | description | XML property | XML type
------|-------------|--------------|---------
-person | Reference to the person playing the role in the event. | gxc:person | [`rdf:ResourceReference`](#resource-reference)
-role | Reference to the role. | gxc:role | [`rdf#ResourceReference`](#resource-reference)
-details | Details about the role of the person in the event. | details | xs:string
-
-### examples
-
-```xml
-  <... rdf:ID="local_id">
-    <gxc:person rdf:resource="http://identifier/for/person/1"/>
-    <gxc:role rdf:resource="http://gedcomx.org/Witness"/>
-    <gxc:details>...</gxc:details>
-  </...>
-```
-
-
-<a id="fact-conclusion"/>
-
-## 5.5 The "Fact" Data Type
-
-The `gxc:Fact` XML type is used to (de)serialize the `http://gedcomx.org/conclusion/v1/Fact`
-data type.
-
-### properties
-
-name | description | XML property | XML type
------|-------------|--------------|---------
-type | URI identifying the type of the fact. | gxc:type | [`rdf:ResourceReference`](#resource-reference)
-date | The date of applicability of the fact. | gxc:date | [`gxc:Date`](#conclusion-date)
-place | The place of applicability of the fact. | gxc:place | [`gxc:Place`](#conclusion-place)
-original | The value of the fact as supplied by the contributor. | gxc:original | xsd:string
-formal | The formal value of the fact. | gxc:formal | [`gxc:FormalValue`](#formal-value)
-
-### examples
-
-```xml
-  <... rdf:ID="local_id">
-    <gxc:type rdf:resource="http://gedcomx.org/Birth"/>
-    <gxc:date>
-      ...
-    </gxc:date>
-    <gxc:place>
-      ...
-    </gxc:place>
-    <gxc:original>...original value of the fact...</gxc:original>
-    <gxc:formal>
-      ...
-    </gxc:formal>
-  </...>
-```
-
-
-<a id="gender-conclusion"/>
-
-## 5.6 The "Gender" Data Type
-
-The `gxc:Gender` XML type is used to (de)serialize the `http://gedcomx.org/conclusion/v1/Gender`
-data type.
-
-### properties
-
-name | description | XML property | XML type
------|-------------|--------------|---------
-type | URI identifying the type of the gender. | gxc:type | [`rdf:ResourceReference`](#resource-reference)
-
-### examples
-
-```xml
-  <... rdf:ID="local_id">
-    <gxc:type rdf:resource="http://gedcomx.org/Male"/>
-  </...>
-```
-
 <a id="name-part"/>
 
-## 5.7 The "NamePart" Data Type
+## 5.12 The "NamePart" Data Type
 
 The `gxc:NamePart` XML type is used to (de)serialize the `http://gedcomx.org/conclusion/v1/NamePart`
 data type.
@@ -762,19 +1048,21 @@ data type.
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
-type | URI identifying the type of the name part. | gxc:type | [`rdf:ResourceReference`](#resource-reference)
-text | The text of the name part. | gxc:text | xsd:string
+type | URI identifying the type of the name part. | rdf:type | [`rdf:ResourceReference`](#resource-reference)
+value | The text of the name part. | gxc:value | xsd:string
 
 ### examples
 
 ```xml
   <...>
-    <gxc:type rdf:resource="http://gedcomx.org/Prefix"/>
-    <gxc:text>...text of the name piece...</gxc:text>
+    <rdf:type rdf:resource="http://gedcomx.org/Prefix"/>
+    <gxc:value>...value of the name part...</gxc:value>
   </...>
 ```
 
-## 5.8 The "NameForm" Data Type
+ <a id="name-form"/>
+
+## 5.13 The "NameForm" Data Type
 
 The `NameForm` XML type is used to (de)serialize the `http://gedcomx.org/conclusion/v1/NameForm`
 data type.
@@ -794,219 +1082,13 @@ parts | The parts of the name form. | gxc:part | [`gxc:NamePart`](#name-part)
     <gxc:part>
       ...
     </gxc:part>
-    <gxc:part>
-      ...
-    </gxc:part>
-    <gxc:part>
-      ...
-    </gxc:part>
-  </...>
-```
-
-<a id="name-conclusion"/>
-
-## 5.9 The "Name" Data Type
-
-The `gxc:Name` XML type is used to (de)serialize the `http://gedcomx.org/conclusion/v1/Name`
-data type.
-
-### properties
-
-name | description | XML property | XML type
------|-------------|--------------|---------
-type | URI identifying the type of the name. | gxc:type | [`rdf:ResourceReference`](#resource-reference)
-primaryForm | The primary form of the name. | gxc:primaryForm | `gxc:NameForm`
-alternateForms | The alternate forms of the name. | gxc:alternateForm | `gxc:NameForm`
-preferred | Whether this name is preferred above the other names of a person. | gxc:preferred | xsd:boolean
-
-### examples
-
-```xml
-  <... rdf:ID="local_id">
-    <gxc:type rdf:resource="http://gedcomx.org/BirthName"/>
-    <gxc:preferred>true</gxc:preferred>
-    <gxc:primaryForm>
-      ...
-    </gxc:primaryForm>
-    <gxc:alternateForm>
-      ...
-    </gxc:alternateForm>
-    <gxc:alternateForm>
-      ...
-    </gxc:alternateForm>
-  </...>
-```
-
-<a id="person"/>
-
-# 6. The Person
-
-This section defines the `Person` XML type corresponding to the `Person` data type
-specified by the section titled "The Person" of the conceptual model specification.
-
-## 6.1 The "Person" Data Type
-
-The `gxc:Person` XML type is used to (de)serialize the `http://gedcomx.org/conclusion/v1/Person`
-data type.
-
-### properties
-
-name | description | XML property | XML type
------|-------------|--------------|---------
-identifiers | Identifiers for the person. | gxc:identifier | [`gx:Identifier`](#identifier-type)
-living | Whether the person is considered living. | gxc:living | xsd:boolean
-gender | The conclusion about the gender of the person. | gxc:gender | [`gxc:Gender`](#gender)
-names | The conclusions about the names of the person. | gxc:name | [`gxc:Name`](#name-conclusion)
-facts | The conclusions about the facts of the life of the person. | gxc:fact | [`gxc:Fact`](#fact-conclusion)
-sources | The list of references to the evidence of the person. | gxc:source | [`gxc:SourceReference`](#source-reference)
-notes | Contributed notes about the person. | gxc:note | [`gxc:Note`](#note)
-
-### examples
-
-```xml
-  <... rdf:ID="local_id">
-    <gxc:identifier>
-      ...
-    </gxc:identifier>
-    <gxc:living>true</gxc:living>
-    <gxc:gender>
-      ...
-    </gxc:gender>
-    <gxc:fact>
-      ...
-    </gxc:fact>
-    <gxc:fact>
-      ...
-    </gxc:fact>
-    <gxc:name>
-      ...
-    </gxc:name>
-    <gxc:name>
-      ...
-    </gxc:name>
-    <gxc:source>
-      ...
-    </gxc:source>
-    <gxc:source>
-      ...
-    </gxc:source>
-    <gxc:note>
-      ...
-    </gxc:note>
-    <gxc:note>
-      ...
-    </gxc:note>
-  </...>
-```
-
-<a id="relationship"/>
-
-# 7. The Relationship
-
-This section defines the `Relationship` XML type corresponding to the `Relationship` data type
-specified by the section titled "The Relationship" of the conceptual model specification.
-
-## 7.1 The "Relationship" Data Type
-
-The `gxc:Relationship` XML type is used to (de)serialize the `http://gedcomx.org/conclusion/v1/Relationship`
-data type.
-
-### properties
-
-name | description | XML property | XML type
------|-------------|--------------|---------
-type | URI identifying the type of the relationship. | gxc:type | [`rdf:ResourceReference`](#resource-reference)
-person1 | Reference to the first person in the relationship. | gxc:person1 | [`rdf:ResourceReference`](#resource-reference)
-person2 | Reference to the second person in the relationship. | gxc:person2 | [`rdf:ResourceReference`](#resource-reference)
-facts | The conclusions about the facts of the life of the relationship. | gxc:fact | [`gxc:Fact`](#fact-conclusion)
-sources | The list of references to the evidence of the relationship. | gxc:source | [`gxc:SourceReference`](#source-reference)
-notes | Contributed notes about the relationship. | gxc:note | [`gxc:Note`](#note)
-
-### examples
-
-```xml
-  <... rdf:ID="local_id">
-    <gxc:type rdf:resource="http://gedcomx.org/Couple"/>
-    <gxc:person1 rdf:resource="http://identifier/for/person/1"/>
-    <gxc:person2 rdf:resource="http://identifier/for/person/2"/>
-    <gxc:fact>
-      ...
-    </gxc:fact>
-    <gxc:fact>
-      ...
-    </gxc:fact>
-    <gxc:name>
-      ...
-    </gxc:name>
-    <gxc:name>
-      ...
-    </gxc:name>
-    <gxc:source>
-      ...
-    </gxc:source>
-    <gxc:source>
-      ...
-    </gxc:source>
-    <gxc:note>
-      ...
-    </gxc:note>
-    <gxc:note>
-      ...
-    </gxc:note>
+    ...
   </...>
 ```
 
 
-<a id="event"/>
 
-# 8. The Event
-
-This section defines the `Event` XML type corresponding to the `Event` data type
-specified by the section titled "The Event" of the conceptual model specification.
-
-## 8.1 The "Event" Data Type
-
-The `gxc:Event` is used to (de)serialize the `http://gedcomx.org/conclusion/v1/Event`
-data type.
-
-### properties
-
-name | description | XML property | XML type
------|-------------|--------------|---------
-type | URI identifying the type of the event. | gxc:type | [`rdf:ResourceReference`](#resource-reference)
-date | The date of the event. | gxc:date | [`gxc:Date`](#conclusion-date)
-place | The place the event. | gxc:place | [`gxc:Place`](#conclusion-place)
-roles | The roles of the persons in the event. | gxc:role | [`gxc:EventRole`](#conclusion-event-role)
-sources | The list of references to the evidence of the event. | gxc:source | [`gxc:SourceReference`](#source-reference)
-
-### examples
-
-```xml
-  <... rdf:ID="local_id">
-    <gxc:type rdf:resource="http://gedcomx.org/Marriage"/>
-    <gxc:date>
-      ...
-    </gxc:date>
-    <gxc:place>
-      ...
-    </gxc:place>
-    <gxc:role>
-      ...
-    </gxc:role>
-    <gxc:role>
-      ...
-    </gxc:role>
-    <gxc:source>
-      ...
-    </gxc:source>
-    <gxc:source>
-      ...
-    </gxc:source>
-  </...>
-```
-
-
-# 9. XML Elements
+# 6. XML Elements
 
 XML types are not enough to provide an XML serialization format for a data model. XML requires elements to be defined
 that can be used as the "root" of an XML document. XML elements are also used to identify any extension properties that
@@ -1018,16 +1100,16 @@ extension properties), the XML types are identified as follows:
 
 name | XML type
 -----|-----------------
-gxc:person | [gxc:Person](#person)
-gxc:relationship | [gxc:Relationship](#relationship)
-gxc:fact | [gxc:Fact](#fact-conclusion)
-gxc:name | [gxc:Name](#name-conclusion)
-gxc:gender | [gxc:Gender](#gender-conclusion)
-gxc:sourceReference | [gxc:SourceReference](#source-reference)
-rdf:Description | [rdf:Description](#rdf-description)
-foaf:Person | [foaf:Person](#foaf-person)
-foaf:Organization | [foaf:Organization](#organization)
+gxc:person | [`gxc:Person`](#person)
+gxc:relationship | [`gxc:Relationship`](#relationship)
+gxc:fact | [`gxc:Fact`](#fact-conclusion)
+gxc:name | [`gxc:Name`](#name-conclusion)
+gxc:gender | [`gxc:Gender`](#gender-conclusion)
+gxs:sourceReference | [`gxs:SourceReference`](#source-reference)
+gxs:SourceDescription | [`gxs:SourceDescription`](#rdf-description)
+foaf:Person | [`foaf:Person`](#foaf-person)
+foaf:Organization | [`foaf:Organization`](#organization)
 
-# 9. Miscellaneous To Do
+# 7. Miscellaneous To Do
 
 todo: provide the normative XML schema (inline)?

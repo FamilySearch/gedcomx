@@ -3,18 +3,18 @@ package org.gedcomx.common;
 import org.gedcomx.rt.json.JsonElementWrapper;
 
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
+
 
 /**
  * @author Ryan Heaton
  */
 @XmlRootElement
 @JsonElementWrapper (name = "customEntities")
-public class CustomEntity extends GenealogicalResource {
+public class CustomEntity {
 
-  private ResourceReference source;
+  private String id;
   private URI refToSomething;
   private List<UniqueCustomKeyedItem> uniqueKeyedItems;
   private List<CustomKeyedItem> keyedItems;
@@ -23,15 +23,15 @@ public class CustomEntity extends GenealogicalResource {
   }
 
   public CustomEntity(String id) {
-    setId(id);
+    this.id = id;
   }
 
-  public ResourceReference getSource() {
-    return this.source;
+  public String getId() {
+    return id;
   }
 
-  public void setSource(ResourceReference source) {
-    this.source = source;
+  public void setId(String id) {
+    this.id = id;
   }
 
   public URI getRefToSomething() {

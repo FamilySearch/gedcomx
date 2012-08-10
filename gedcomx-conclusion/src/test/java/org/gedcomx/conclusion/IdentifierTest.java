@@ -1,4 +1,4 @@
-package org.gedcomx.common;
+package org.gedcomx.conclusion;
 
 import org.gedcomx.types.IdentifierType;
 import org.testng.annotations.Test;

@@ -24,7 +24,7 @@
         <Member type="Field">public ResourceReference contributor</Member>
         <Member type="Field">public ConfidenceLevel confidence</Member>
         <Member type="Field">public Date modified</Member>
-        <Member type="Field">public String proofStatement</Member>
+        <Member type="Field">public String changeMessage</Member>
         <Modifier>None</Modifier>
       </Entity>
     </Entities>

@@ -1,15 +1,14 @@
 package org.gedcomx.conclusion;
 
 import org.gedcomx.common.Attribution;
-import org.gedcomx.common.FormalValue;
 import org.gedcomx.common.ResourceReference;
+import org.gedcomx.metadata.source.SourceReference;
 import org.gedcomx.common.URI;
 import org.gedcomx.test.RecipeTest;
 import org.gedcomx.test.Snippet;
 import org.gedcomx.types.FactType;
 import org.gedcomx.types.GenderType;
 import org.gedcomx.types.NamePartType;
-import org.gedcomx.types.ResourceType;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
@@ -17,6 +16,7 @@ import java.util.List;
 
 import static org.gedcomx.rt.SerializationUtil.processThroughJson;
 import static org.gedcomx.rt.SerializationUtil.processThroughXml;
+
 
 /**
  * @author Ryan Heaton
@@ -33,11 +33,14 @@ public class PersonRecipesTest extends RecipeTest {
       .applicableTo(Person.class);
 
     Person person = create();
+
     Snippet snippet = new Snippet();
-    person = processThroughXml(person, snippet);
-    person = processThroughJson(person, snippet);
+    Person personThurXml = processThroughXml(person, snippet);
+    Person personThurJson = processThroughJson(person, snippet);
     addSnippet(snippet);
-//    assertEquals(person);
+
+    verifyPerson(personThurXml);
+    verifyPerson(personThurJson);
   }
 
   public void testMarriageWithNoSpouse() throws Exception {
@@ -53,11 +56,14 @@ public class PersonRecipesTest extends RecipeTest {
     fact.setPlace(new Place());
     fact.getPlace().setOriginal("New Kent, Virginia");
     person.addFact(fact);
+
     Snippet snippet = new Snippet("Note that the recommendation is to add a marriage fact directly to the person. It is not recommended to create a relationship with only one person.");
-    person = processThroughXml(person, snippet);
-    person = processThroughJson(person, snippet);
+    Person personThruXml = processThroughXml(person, snippet);
+    Person personThruJson = processThroughJson(person, snippet);
     addSnippet(snippet);
-//    assertEquals(person);
+
+    verifyPerson(personThruXml);
+    verifyPerson(personThruJson);
   }
 
 
@@ -119,11 +125,11 @@ public class PersonRecipesTest extends RecipeTest {
     ArrayList<NamePart> parts = new ArrayList<NamePart>();
     NamePart part = new NamePart();
     part.setKnownType(NamePartType.Given);
-    part.setText("George");
+    part.setValue("George");
     parts.add(part);
     part = new NamePart();
     part.setKnownType(NamePartType.Surname);
-    part.setText("Washington");
+    part.setValue("Washington");
     parts.add(part);
     nameForm.setParts(parts);
     name.setPrimaryForm(nameForm);
@@ -140,8 +146,6 @@ public class PersonRecipesTest extends RecipeTest {
     attribution.setContributor(new ResourceReference());
     attribution.getContributor().setResource(URI.create("https://familysearch.org/platform/contributors/STV-WXZY"));
     attributedSourceReference.setAttribution(attribution);
-    attributedSourceReference.setResource(URI.create("http://en.wikipedia.org/wiki/George_washington"));
-    attributedSourceReference.setKnownType(ResourceType.Text);
     sources.add(attributedSourceReference);
     person.setSources(sources);
 
@@ -150,8 +154,7 @@ public class PersonRecipesTest extends RecipeTest {
     return person;
   }
 
-  static void assertEquals(Person person) {
-    //todo:
+  static void verifyPerson(Person person) {
+    //TODO: verify contents of person
   }
-
 }

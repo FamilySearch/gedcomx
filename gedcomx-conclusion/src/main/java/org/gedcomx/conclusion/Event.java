@@ -18,12 +18,8 @@ package org.gedcomx.conclusion;
 import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.annotate.JsonTypeInfo;
-import org.codehaus.jackson.map.annotate.JsonTypeIdResolver;
-import org.gedcomx.common.GenealogicalResource;
 import org.gedcomx.common.URI;
 import org.gedcomx.rt.CommonModels;
-import org.gedcomx.rt.RDFSubClassOf;
 import org.gedcomx.rt.json.JsonElementWrapper;
 import org.gedcomx.types.EventType;
 import org.gedcomx.types.TypeReference;
@@ -32,8 +28,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
-import java.util.ArrayList;
 import java.util.List;
+
 
 /**
  * A historical event.
@@ -42,8 +38,8 @@ import java.util.List;
  */
 @XmlRootElement
 @JsonElementWrapper (name = "events")
-@XmlType ( name = "Event", propOrder = { "type", "date", "place", "roles", "sources" } )
-public class Event extends GenealogicalResource implements ReferencesSources, HasDateAndPlace {
+@XmlType ( name = "Event", propOrder = { "type", "date", "place", "roles" } )
+public class Event extends Conclusion implements HasDateAndPlace {
 
   @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
   @JsonProperty
@@ -51,7 +47,6 @@ public class Event extends GenealogicalResource implements ReferencesSources, Ha
   private Date date;
   private Place place;
   private List<EventRole> roles;
-  private List<SourceReference> sources;
 
   /**
    * Create an event.
@@ -182,42 +177,6 @@ public class Event extends GenealogicalResource implements ReferencesSources, Ha
    */
   public void setRoles(List<EventRole> roles) {
     this.roles = roles;
-  }
-
-  /**
-   * The source references for this event.
-   *
-   * @return The source references for this event.
-   */
-  @XmlElement (name="source")
-  @JsonProperty ("sources")
-  @JsonName ("sources")
-  public List<SourceReference> getSources() {
-    return sources;
-  }
-
-  /**
-   * The source references for this event.
-   *
-   * @param sources The source references for this event.
-   */
-  @JsonProperty("sources")
-  public void setSources(List<SourceReference> sources) {
-    this.sources = sources;
-  }
-
-  /**
-   * Add a sourceReference.
-   *
-   * @param sourceReference The sourceReference to be added.
-   */
-  public void addSource(SourceReference sourceReference) {
-    if (sourceReference != null) {
-      if (sources == null) {
-        sources = new ArrayList<SourceReference>();
-      }
-      sources.add(sourceReference);
-    }
   }
 
 }

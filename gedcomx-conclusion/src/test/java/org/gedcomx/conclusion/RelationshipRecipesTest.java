@@ -1,18 +1,16 @@
 package org.gedcomx.conclusion;
 
 import org.gedcomx.common.*;
+import org.gedcomx.metadata.source.SourceReference;
 import org.gedcomx.test.RecipeTest;
 import org.gedcomx.test.Snippet;
 import org.gedcomx.types.FactType;
 import org.gedcomx.types.RelationshipType;
-import org.gedcomx.types.ResourceType;
 import org.testng.annotations.Test;
-
-import java.util.List;
 
 import static org.gedcomx.rt.SerializationUtil.processThroughJson;
 import static org.gedcomx.rt.SerializationUtil.processThroughXml;
-import static org.testng.AssertJUnit.assertEquals;
+
 
 /**
  * @author Ryan Heaton
@@ -26,10 +24,14 @@ public class RelationshipRecipesTest extends RecipeTest {
       .applicableTo(Relationship.class);
 
     Relationship relationship = createTestRelationship();
+
     Snippet snippet = new Snippet();
-    relationship = processThroughXml(relationship, snippet);
-    relationship = processThroughJson(relationship, snippet);
-    assertTestRelationship(relationship);
+    Relationship relationshipThruXml = processThroughXml(relationship, snippet);
+    Relationship relationshipThruJson = processThroughJson(relationship, snippet);
+    addSnippet(snippet);
+
+    verifyRelationship(relationshipThruXml);
+    verifyRelationship(relationshipThruJson);
   }
 
   private Relationship createTestRelationship() {
@@ -38,7 +40,7 @@ public class RelationshipRecipesTest extends RecipeTest {
     relationship.setKnownType(RelationshipType.Couple);
 
     relationship.setAttribution(new Attribution());
-    relationship.getAttribution().setProofStatement("(proof statement here)");
+    relationship.getAttribution().setChangeMessage("(justification here)");
     ResourceReference contributor = new ResourceReference();
     contributor.setResource(URI.create("https://familysearch.org/platform/contributors/BCD-FGHJ"));
     relationship.getAttribution().setContributor(contributor);
@@ -62,14 +64,12 @@ public class RelationshipRecipesTest extends RecipeTest {
     relationship.setPerson2(new ResourceReference());
     relationship.getPerson2().setResource(URI.create("https://familysearch.org/platform/persons/FFF-FFFF"));
     SourceReference sourceReference = new SourceReference();
-    sourceReference.setId("5678");
-    sourceReference.setResource(URI.create("http://en.wikipedia.org/wiki/George_washington"));
-    sourceReference.setKnownType(ResourceType.Text);
+    sourceReference.setSourceDescriptionURI(URI.create("urn:srcDescId"));
     relationship.addSource(sourceReference);
     return relationship;
   }
 
-  private void assertTestRelationship(Relationship relationship) {
+  private void verifyRelationship(Relationship relationship) {
     //todo
   }
 

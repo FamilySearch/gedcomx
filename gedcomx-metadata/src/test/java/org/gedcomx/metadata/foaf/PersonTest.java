@@ -1,7 +1,7 @@
 package org.gedcomx.metadata.foaf;
 
+import org.gedcomx.common.LiteralValue;
 import org.gedcomx.common.ResourceReference;
-import org.gedcomx.metadata.rdf.RDFLiteral;
 import org.testng.annotations.Test;
 
 import org.gedcomx.common.URI;
@@ -34,13 +34,13 @@ public class PersonTest {
 
   private Person createPerson() {
     Person person = new Person();
-    person.setFamilyName(new RDFLiteral("family name"));
-    person.setGivenName(new RDFLiteral("given name"));
-    person.setLanguage(new RDFLiteral("en"));
+    person.setFamilyName(new LiteralValue("family name"));
+    person.setGivenName(new LiteralValue("given name"));
+    person.setLanguage(new LiteralValue("en"));
     person.setAccounts(new ArrayList<OnlineAccount>());
     OnlineAccount account = new OnlineAccount();
-    account.setAccountName(new RDFLiteral("account name"));
-    account.setDisplayName(new RDFLiteral("display name"));
+    account.setAccountName(new LiteralValue("account name"));
+    account.setDisplayName(new LiteralValue("display name"));
     account.setId("id");
     account.setServiceHomepage(new ResourceReference());
     account.getServiceHomepage().setResource(URI.create("http://familysearch.org"));
@@ -61,9 +61,9 @@ public class PersonTest {
     ResourceReference email = new ResourceReference();
     email.setResource(URI.create("mailto:heatonra@familysearch.org"));
     person.getEmails().add(email);
-    person.setHomepage(new RDFLiteral("http://familysearch.org/heatonra"));
-    person.setName(new RDFLiteral("Ryan Heaton"));
-    person.setOpenid(new RDFLiteral("openid"));
+    person.setHomepage(new LiteralValue("http://familysearch.org/heatonra"));
+    person.setName(new LiteralValue("Ryan Heaton"));
+    person.setOpenid(new LiteralValue("openid"));
     person.setPhones(new ArrayList<ResourceReference>());
     ResourceReference phone = new ResourceReference();
     phone.setResource(URI.create("tel:+18012401000"));

@@ -1,6 +1,5 @@
 package org.gedcomx.conclusion;
 
-import org.gedcomx.common.FormalValue;
 import org.gedcomx.test.RecipeTest;
 import org.gedcomx.test.Snippet;
 import org.gedcomx.types.DateFormatType;

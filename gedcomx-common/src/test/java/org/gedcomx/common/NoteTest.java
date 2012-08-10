@@ -2,11 +2,10 @@ package org.gedcomx.common;
 
 import org.testng.annotations.Test;
 
-import java.util.Arrays;
-
 import static org.gedcomx.rt.SerializationUtil.processThroughJson;
 import static org.gedcomx.rt.SerializationUtil.processThroughXml;
 import static org.testng.AssertJUnit.assertEquals;
+
 
 /**
  * @author Ryan Heaton
@@ -19,25 +18,20 @@ public class NoteTest {
    */
   public void testNoteXml() throws Exception {
     Note note = new Note();
-    note.setText("hello, there");
+    note.setText(new TextValue("hello, there"));
     note.setAttribution(new Attribution());
-    note.getAttribution().setProofStatement("note statement");
+    note.getAttribution().setChangeMessage("note statement");
     Note otherNote = new Note();
-    otherNote.setText("note of a note");
+    otherNote.setText(new TextValue("note of a note"));
     Note otherNote2 = new Note();
-    otherNote2.setText("note2 of a note");
-    note.setExtensionElements(Arrays.asList((Object) otherNote, otherNote2));
-    note.setId("id");
-    note.setLang("en");
+    otherNote2.setText(new TextValue("note2 of a note"));
+    note.getText().setLang("en");
 
     note = processThroughXml(note);
 
-    assertEquals("hello, there", note.getText());
-    assertEquals("note statement", note.getAttribution().getProofStatement());
-    assertEquals("note of a note", ((Note) note.getExtensionElements().get(0)).getText());
-    assertEquals("note2 of a note", ((Note) note.getExtensionElements().get(1)).getText());
-    assertEquals("id", note.getId());
-    assertEquals("en", note.getLang());
+    assertEquals("hello, there", note.getText().getValue());
+    assertEquals("note statement", note.getAttribution().getChangeMessage());
+    assertEquals("en", note.getText().getLang());
   }
 
   /**
@@ -45,25 +39,16 @@ public class NoteTest {
    */
   public void testNoteJson() throws Exception {
     Note note = new Note();
-    note.setText("hello, there");
+    note.setText(new TextValue("hello, there"));
     note.setAttribution(new Attribution());
-    note.getAttribution().setProofStatement("note statement");
-    Note otherNote = new Note();
-    otherNote.setText("note of a note");
-    Note otherNote2 = new Note();
-    otherNote2.setText("note2 of a note");
-    note.setExtensionElements(Arrays.asList((Object) otherNote, otherNote2));
-    note.setId("id");
-    note.setLang("en");
+    note.getAttribution().setChangeMessage("note statement");
+    note.getText().setLang("en");
 
     note = processThroughJson(note);
 
-    assertEquals("hello, there", note.getText());
-    assertEquals("note statement", note.getAttribution().getProofStatement());
-    assertEquals("note of a note", ((Note) note.getExtensionElements().get(0)).getText());
-    assertEquals("note2 of a note", ((Note) note.getExtensionElements().get(1)).getText());
-    assertEquals("id", note.getId());
-    assertEquals("en", note.getLang());
+    assertEquals("hello, there", note.getText().getValue());
+    assertEquals("note statement", note.getAttribution().getChangeMessage());
+    assertEquals("en", note.getText().getLang());
   }
 
 }

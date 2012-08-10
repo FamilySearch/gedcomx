@@ -15,46 +15,17 @@
  */
 package org.gedcomx.conclusion;
 
-import org.gedcomx.rt.CommonModels;
-import org.gedcomx.rt.RDFSubClassOf;
+import org.gedcomx.rt.json.JsonElementWrapper;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * Conclusion data that has a date and place.
- *
- * @author Ryan Heaton
+ * Represents a document transcription.  It may be a full or partial transcription.
  */
-@RDFSubClassOf ( CommonModels.DUBLIN_CORE_TYPE_NAMESPACE + "Event" )
-@XmlType ( name = "HasDateAndPlace" )
-public interface HasDateAndPlace {
-
-  /**
-   * The date.
-   *
-   * @return The date.
-   */
-  Date getDate();
-
-  /**
-   * The date.
-   *
-   * @param date The date.
-   */
-  void setDate(Date date);
-
-  /**
-   * The place.
-   *
-   * @return The place.
-   */
-  Place getPlace();
-
-  /**
-   * The place.
-   *
-   * @param place The place.
-   */
-  void setPlace(Place place);
+@XmlRootElement (name = "transcription")
+@JsonElementWrapper (name = "transcriptions")
+@XmlType ( name = "TranscriptionDocument" )
+public class TranscriptionDocument extends Document {
 }

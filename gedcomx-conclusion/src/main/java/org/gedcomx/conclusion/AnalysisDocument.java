@@ -15,30 +15,17 @@
  */
 package org.gedcomx.conclusion;
 
-import org.gedcomx.common.Note;
+import org.gedcomx.rt.json.JsonElementWrapper;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-import java.util.List;
+
 
 /**
- * Conclusion data that has notes.
- *
- * @author Ryan Heaton
+ * Represents a document containing analysis (e.g., evidence analysis, genealogical proof statements, source analysis, etc.).
  */
-@XmlType ( name = "HasNotes" )
-public interface HasNotes {
-
-  /**
-   * The notes of a conclusion resource.
-   *
-   * @return The notes of a conclusion resource.
-   */
-  List<Note> getNotes();
-
-  /**
-   * The notes of a conclusion resource.
-   *
-   * @param notes The notes of a conclusion resource.
-   */
-  void setNotes(List<Note> notes);
+@XmlRootElement (name = "analysis")
+@JsonElementWrapper (name = "analyses")
+@XmlType ( name = "AnalysisDocument" )
+public class AnalysisDocument extends Document {
 }
