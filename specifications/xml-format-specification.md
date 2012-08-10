@@ -205,15 +205,15 @@ data type.
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
-value | The value of the identifier. | rdf:value | xsd:string
+value | The value of the identifier. | rdf:value | [anyURI](#uri)
 type  | URI identifying the type of the identifier. | rdf:type | [`rdf:ResourceReference`](#resource-reference)
 
 ### examples
 
 ```xml
   <...>
-    <rdf:value>value_of_identifier</rdf:value>
-    <rdf:type rdf:resource="http://gedcomx.org/IdentifierType"/>
+    <rdf:value>afn:1BS3-9X1</rdf:value>
+    <rdf:type rdf:resource="http://gedcomx.org/Deprecated"/>
   </...>
 ```
 

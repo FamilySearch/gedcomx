@@ -85,7 +85,18 @@ and even the data types that define those data structures. The URI is specified 
 ## 2.2 The "Identifier" Data Type
 
 The `Identifier` data type defines the data structure used to supply an identifier of a 
-genealogical resource in a specific data set.
+genealogical resource in a specific data set. The value of the identifier is interpreted as a
+URI so as to be able to uniquely identify both the data set and the resource within the
+data set.
+
+GEDCOM X recognizes the following URI schemes that MAY be used in identifier values:
+
+scheme | description
+-------|------------
+gedcom-uid | The identifier is a GEDCOM UID. See [GEDCOM Unique Identifiers](https://devnet.familysearch.org/docs/gedcom/GEDCOMUniqueIdentifiers.pdf).
+afn | The identifier is an Ancestral File Number. See [Ancestral File](https://familysearch.org/learn/wiki/en/Ancestral_File).
+
+For example, the value of an identifier for Ancestral File Number "1BS3-9X1" would be "afn:1BS3-9X1".
 
 ### identifier
 
@@ -97,7 +108,7 @@ The identifier for the "Identifier" data type is:
 
 name  | description | data type
 ------|-------------|----------
-value | The value of the identifier. | string (possibly interpreted as a URI, depending on the type of the identifier).
+value | The value of the identifier. | [URI](#uri).
 type  | URI identifying the type of the identifier. | [URI](#uri) - MUST resolve to an identifier type. Refer to the list of [known identifier types](#known-identifier-types).
 
 <a id="known-identifier-types"/>
@@ -108,7 +119,9 @@ The following identifier types are defined by GEDCOM X.
 
 URI | description
 ----|------------
-`http://gedcomx.org/Forwarded` |
+`http://gedcomx.org/Primary` |
+`http://gedcomx.org/Deprecated` |
+`http://gedcomx.org/Persistent` |
 
 ### examples
 

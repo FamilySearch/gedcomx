@@ -184,15 +184,15 @@ The JSON object used to (de)serialize the `http://gedcomx.org/conclusion/v1/Iden
 
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
-value | The value of the identifier. | value | string
+value | The value of the identifier. | value | [`URI`](#uri)
 type  | URI identifying the type of the identifier. | type | [`URI`](#uri)
 
 ### examples
 
 ```json
 {
-  "value" : "value_of_identifier",
-  "type" : "http://gedcomx.org/IdentifierType"
+  "value" : "afn:1BS3-9X1",
+  "type" : "http://gedcomx.org/Deprecated"
 }
 ```
 
