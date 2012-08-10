@@ -13,48 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.conclusion;
-
-import org.gedcomx.rt.CommonModels;
-import org.gedcomx.rt.RDFSubClassOf;
+package org.gedcomx.common;
 
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * Conclusion data that has a date and place.
- *
- * @author Ryan Heaton
+ * A genealogical resource that has text.
  */
-@RDFSubClassOf ( CommonModels.DUBLIN_CORE_TYPE_NAMESPACE + "Event" )
-@XmlType ( name = "HasDateAndPlace" )
-public interface HasDateAndPlace {
+@XmlType ( name = "HasText" )
+public interface HasText {
 
   /**
-   * The date.
+   * The text.
    *
-   * @return The date.
+   * @return The text.
    */
-  Date getDate();
+  TextValue getText();
 
   /**
-   * The date.
+   * The text.
    *
-   * @param date The date.
+   * @param text The text.
    */
-  void setDate(Date date);
-
-  /**
-   * The place.
-   *
-   * @return The place.
-   */
-  Place getPlace();
-
-  /**
-   * The place.
-   *
-   * @param place The place.
-   */
-  void setPlace(Place place);
+  void setText(TextValue text);
 }

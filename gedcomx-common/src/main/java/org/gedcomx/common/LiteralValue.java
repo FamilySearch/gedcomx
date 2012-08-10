@@ -13,32 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.metadata.rdf;
+package org.gedcomx.common;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
-import org.gedcomx.common.URI;
 import org.gedcomx.rt.CommonModels;
-import org.gedcomx.rt.SupportsExtensionAttributes;
 
 import javax.xml.XMLConstants;
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.XmlValue;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
-import javax.xml.namespace.QName;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.Map;
+
 
 /**
- * An element representing an RDF literal. For more information, see <a href="http://www.w3.org/TR/rdf-schema/#ch_literal">RDF Schema, Section 2.3</a>
- * and <a href="http://dublincore.org/documents/profile-guidelines/#appc">Using RDF properties in profiles: a technical primer</a>.
- *
- * @link http://www.w3.org/TR/rdf-schema/#ch_literal
- * @author Ryan Heaton
+ * An element representing a literal.
  */
-@XmlType ( name = "Literal", namespace = CommonModels.RDFS_NAMESPACE )
-public final class RDFLiteral implements SupportsExtensionAttributes {
+@XmlType ( name = "Literal" )
+public class LiteralValue {
 
   private static final URI DATE_DATATYPE = URI.create("http://www.w3.org/2001/XMLSchema#dateTime");
   private static final DatatypeFactory DATATYPE_FACTORY;
@@ -54,22 +50,20 @@ public final class RDFLiteral implements SupportsExtensionAttributes {
   private String lang;
   private URI datatype;
   private String value;
-  private Map<QName, String> extensionAttributes;
 
-  public RDFLiteral() {
+  public LiteralValue() {
   }
 
-  public RDFLiteral(String value) {
+  public LiteralValue(String value) {
     this.value = value;
   }
 
-  public RDFLiteral(Date value) {
+  public LiteralValue(Date value) {
     setValueAsDate(value);
   }
 
   /**
-   * The datatype of the literal. For more information, start with the explanation of an
-   * <a href="http://www.w3.org/TR/rdf-primer/#typedliterals">RDF Typed Literal</a> in the RDF primer.
+   * The datatype of the literal.
    *
    * @return The datatype of the literal.
    */
@@ -80,8 +74,7 @@ public final class RDFLiteral implements SupportsExtensionAttributes {
   }
 
   /**
-   * The datatype of the literal. For more information, start with the explanation of an
-   * <a href="http://www.w3.org/TR/rdf-primer/#typedliterals">RDF Typed Literal</a> in the RDF primer.
+   * The datatype of the literal.
    *
    * @param datatype The datatype of the literal.
    */
@@ -138,7 +131,7 @@ public final class RDFLiteral implements SupportsExtensionAttributes {
     if (getValue() == null) {
       return null;
     }
-    else if (getDatatype() != null && !DATE_DATATYPE.equals(getDatatype())) {
+    else if ((getDatatype() == null) || (!DATE_DATATYPE.equals(getDatatype()))) {
       throw new IllegalStateException(String.format("Literal is of type %s, not of type %s.", getDatatype(), DATE_DATATYPE));
     }
 
@@ -146,7 +139,7 @@ public final class RDFLiteral implements SupportsExtensionAttributes {
   }
 
   /**
-   * Get the value of this literal as a date.
+   * Set the value of this literal using a date.
    *
    * @param valueAsDate The value of this literal as a date.
    */
@@ -156,40 +149,5 @@ public final class RDFLiteral implements SupportsExtensionAttributes {
     GregorianCalendar gc = new GregorianCalendar();
     gc.setTime(valueAsDate);
     setValue(DATATYPE_FACTORY.newXMLGregorianCalendar(gc).toXMLFormat());
-  }
-
-  /**
-   * Attribute extensions to the property.
-   *
-   * @return Attribute extensions to the property.
-   */
-  @XmlAnyAttribute
-  @JsonIgnore
-  public Map<QName, String> getExtensionAttributes() {
-    return extensionAttributes;
-  }
-
-  /**
-   * Attribute extensions to the property.
-   *
-   * @param extensionAttributes Attribute extensions to the property.
-   */
-  @JsonIgnore
-  public void setExtensionAttributes(Map<QName, String> extensionAttributes) {
-    this.extensionAttributes = extensionAttributes;
-  }
-
-  /**
-   * Add a custom extension attribute.
-   *
-   * @param qname The qname of the attribute.
-   * @param value The value of the attribute.
-   */
-  public void addExtensionAttribute(QName qname, String value) {
-    if (this.extensionAttributes == null) {
-      this.extensionAttributes = new HashMap<QName, String>();
-    }
-
-    this.extensionAttributes.put(qname, value);
   }
 }

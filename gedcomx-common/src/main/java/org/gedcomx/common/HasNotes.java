@@ -13,32 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.metadata.dc;
+package org.gedcomx.common;
 
-import org.gedcomx.rt.CommonModels;
-import org.gedcomx.rt.Model;
-import org.gedcomx.rt.Models;
-
-import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
+import java.util.List;
 
 /**
+ * Conclusion data that has notes.
+ *
  * @author Ryan Heaton
  */
-@XmlTransient
-@Models ( {
-  @Model (
-    id = "dc",
-    projectId = CommonModels.GEDCOMX_PROJECT_ID,
-    namespace = CommonModels.DUBLIN_CORE_NAMESPACE,
-    label = "Dublin Core Terms Model",
-    description = "The Dublin Core Terms model defines metadata using Dublin Core Terms.",
-    version = "2010-10-11",
-    definesRDFSchema = true,
-    objectFactory = ObjectFactory.class
-  )
-} )
-public class DublinCoreModel {
+@XmlType ( name = "HasNotes" )
+public interface HasNotes {
 
-  private DublinCoreModel() {}
+  /**
+   * The notes of a conclusion resource.
+   *
+   * @return The notes of a conclusion resource.
+   */
+  List<Note> getNotes();
 
+  /**
+   * The notes of a conclusion resource.
+   *
+   * @param notes The notes of a conclusion resource.
+   */
+  void setNotes(List<Note> notes);
 }

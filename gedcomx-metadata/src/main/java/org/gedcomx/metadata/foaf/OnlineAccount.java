@@ -17,8 +17,8 @@ package org.gedcomx.metadata.foaf;
 
 import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.gedcomx.common.LiteralValue;
 import org.gedcomx.common.ResourceReference;
-import org.gedcomx.metadata.rdf.RDFLiteral;
 import org.gedcomx.rt.CommonModels;
 
 import javax.xml.bind.annotation.XmlAttribute;
@@ -37,8 +37,8 @@ public class OnlineAccount {
 
   private String id;
   private ResourceReference serviceHomepage;
-  private RDFLiteral accountName;
-  private RDFLiteral displayName;
+  private LiteralValue accountName;
+  private LiteralValue displayName;
 
   /**
    * The id of this online account.
@@ -87,7 +87,7 @@ public class OnlineAccount {
    *
    * @return The name associated the holder of this account with the account.
    */
-  public RDFLiteral getAccountName() {
+  public LiteralValue getAccountName() {
     return accountName;
   }
 
@@ -96,7 +96,7 @@ public class OnlineAccount {
    *
    * @param accountName The name associated the holder of this account with the account.
    */
-  public void setAccountName(RDFLiteral accountName) {
+  public void setAccountName(LiteralValue accountName) {
     this.accountName = accountName;
   }
 
@@ -106,7 +106,7 @@ public class OnlineAccount {
    * @return The display name of the person or organization associated with this account.
    */
   @XmlElement( name = "nick" )
-  public RDFLiteral getDisplayName() {
+  public LiteralValue getDisplayName() {
     return displayName;
   }
 
@@ -115,7 +115,7 @@ public class OnlineAccount {
    *
    * @param displayName The display name of the person or organization associated with this account.
    */
-  public void setDisplayName(RDFLiteral displayName) {
+  public void setDisplayName(LiteralValue displayName) {
     this.displayName = displayName;
   }
 }

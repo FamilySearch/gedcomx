@@ -15,8 +15,11 @@
  */
 package org.gedcomx.metadata.foaf;
 
+import org.gedcomx.rt.json.JsonElementWrapper;
+
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+
 
 /**
  * An organization as described by FOAF.
@@ -26,5 +29,6 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlType ( name = "Organization" )
 @XmlRootElement ( name = "Organization" )
+@JsonElementWrapper ( name = "organizations" )
 public class Organization extends Agent {
 }

@@ -15,46 +15,36 @@
  */
 package org.gedcomx.conclusion;
 
-import org.gedcomx.rt.CommonModels;
-import org.gedcomx.rt.RDFSubClassOf;
+import org.gedcomx.common.HasText;
+import org.gedcomx.common.TextValue;
 
+import javax.xml.XMLConstants;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * Conclusion data that has a date and place.
- *
- * @author Ryan Heaton
+ * An abstract document that contains derived (conclusionary) text -- for example, a transcription or researcher analysis.
  */
-@RDFSubClassOf ( CommonModels.DUBLIN_CORE_TYPE_NAMESPACE + "Event" )
-@XmlType ( name = "HasDateAndPlace" )
-public interface HasDateAndPlace {
+@XmlType(name = "Document")
+public abstract class Document extends Conclusion implements HasText {
+  private TextValue text;
 
   /**
-   * The date.
+   * The document text.
    *
-   * @return The date.
+   * @return The document text.
    */
-  Date getDate();
+  public TextValue getText() {
+    return text;
+  }
 
   /**
-   * The date.
+   * The document text.
    *
-   * @param date The date.
+   * @param text The document text.
    */
-  void setDate(Date date);
-
-  /**
-   * The place.
-   *
-   * @return The place.
-   */
-  Place getPlace();
-
-  /**
-   * The place.
-   *
-   * @param place The place.
-   */
-  void setPlace(Place place);
+  public void setText(TextValue text) {
+    this.text = text;
+  }
 }

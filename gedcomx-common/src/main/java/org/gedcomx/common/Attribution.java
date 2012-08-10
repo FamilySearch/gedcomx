@@ -26,21 +26,20 @@ import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 import java.util.Date;
 
+
 /**
- * Attribution for genealogical information. Attribution is used to model the analysis that was done
- * on a specific piece of evidence or other relevant information. This includes the contributor of the
- * information and the proof statement supplied by the contributor.
- *
- * @author Ryan Heaton
+ * Attribution for genealogical information. Attribution is used to model the who is contributing/modifying information,
+ * when they contributited it, why they are making the contribution/modification, and a statement about their confidence
+ * in the information being provided.
  */
-@XmlType ( name = "Attribution", propOrder = {"modified", "proofStatement", "confidence", "contributor" } )
+@XmlType ( name = "Attribution", propOrder = { "contributor", "modified", "confidence", "changeMessage" } )
 @SuppressWarnings("gedcomx:no_id")
 public final class Attribution {
 
   private ResourceReference contributor;
   private TypeReference<ConfidenceLevel> confidence;
   private Date modified;
-  private String proofStatement;
+  private String changeMessage;
 
   /**
    * Reference to the contributor of the attributed data.
@@ -81,9 +80,9 @@ public final class Attribution {
   }
 
   /**
-   * The enum referencing the known confidence level, or {@link org.gedcomx.types.ConfidenceLevel#OTHER} if not known.
+   * The value of a the known confidence level, or {@link org.gedcomx.types.ConfidenceLevel#OTHER} if not known.
    *
-   * @return The enum referencing the known confidence level, or {@link org.gedcomx.types.ConfidenceLevel#OTHER} if not known.
+   * @return The value of a the known confidence level, or {@link org.gedcomx.types.ConfidenceLevel#OTHER} if not known.
    */
   @XmlTransient
   @JsonIgnore
@@ -121,22 +120,22 @@ public final class Attribution {
   }
 
   /**
-   * The "proof statement" for the attributed data provided by the contributor.
+   * The "change message" for the attributed data provided by the contributor.
    *
-   * @return The "proof statement" for the attributed data provided by the contributor.
+   * @return The "change message" for the attributed data provided by the contributor.
    */
   @RDFSubPropertyOf( CommonModels.DUBLIN_CORE_NAMESPACE + "description")
-  public String getProofStatement() {
-    return proofStatement;
+  public String getChangeMessage() {
+    return changeMessage;
   }
 
   /**
-   * The "proof statement" for the attributed data provided by the contributor.
+   * The "change message" for the attributed data provided by the contributor.
    *
-   * @param proofStatement The "proof statement" for the attributed data provided by the contributor.
+   * @param changeMessage The "change message" for the attributed data provided by the contributor.
    */
-  public void setProofStatement(String proofStatement) {
-    this.proofStatement = proofStatement;
+  public void setChangeMessage(String changeMessage) {
+    this.changeMessage = changeMessage;
   }
 
   /**

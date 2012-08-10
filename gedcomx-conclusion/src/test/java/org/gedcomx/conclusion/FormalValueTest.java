@@ -1,5 +1,6 @@
-package org.gedcomx.common;
+package org.gedcomx.conclusion;
 
+import org.gedcomx.common.URI;
 import org.gedcomx.types.DatePartType;
 import org.gedcomx.types.PlacePartType;
 import org.testng.annotations.Test;

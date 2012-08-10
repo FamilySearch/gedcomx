@@ -18,9 +18,6 @@ package org.gedcomx.conclusion;
 import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
-import org.gedcomx.common.GenealogicalResource;
-import org.gedcomx.common.Identifier;
-import org.gedcomx.common.Note;
 import org.gedcomx.common.URI;
 import org.gedcomx.rt.json.JsonElementWrapper;
 import org.gedcomx.types.FactType;
@@ -35,6 +32,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+
 /**
  * A person.
  *
@@ -42,16 +40,14 @@ import java.util.List;
  */
 @XmlRootElement
 @JsonElementWrapper (name = "persons")
-@XmlType ( name = "Person", propOrder = { "identifiers", "living", "gender", "names", "facts", "sources", "notes" } )
-public class Person extends GenealogicalResource implements HasFacts, HasNotes, ReferencesSources {
+@XmlType ( name = "Person", propOrder = { "identifiers", "living", "gender", "names", "facts" } )
+public class Person extends Conclusion implements HasFacts {
 
   private List<Identifier> identifiers;
   private Boolean living;
   private Gender gender;
   private List<Name> names;
   private List<Fact> facts;
-  private List<SourceReference> sources;
-  private List<Note> notes;
 
   /**
    * Find the long-term, persistent identifier for this person from the list of identifiers.
@@ -276,78 +272,6 @@ public class Person extends GenealogicalResource implements HasFacts, HasNotes, 
         facts = new ArrayList<Fact>();
       }
       facts.add(fact);
-    }
-  }
-
-  /**
-   * The source references for a resource.
-   *
-   * @return The source references for a resource.
-   */
-  @XmlElement (name="source")
-  @JsonProperty ("sources")
-  @JsonName ("sources")
-  public List<SourceReference> getSources() {
-    return sources;
-  }
-
-  /**
-   * The source references for a person.
-   *
-   * @param sources The source references for a person.
-   */
-  @JsonProperty("sources")
-  public void setSources(List<SourceReference> sources) {
-    this.sources = sources;
-  }
-
-  /**
-   * Add a sourceReference.
-   *
-   * @param sourceReference The sourceReference to be added.
-   */
-  public void addSource(SourceReference sourceReference) {
-    if (sourceReference != null) {
-      if (sources == null) {
-        sources = new ArrayList<SourceReference>();
-      }
-      sources.add(sourceReference);
-    }
-  }
-
-  /**
-   * Notes about a person.
-   *
-   * @return Notes about a person.
-   */
-  @XmlElement (name = "note")
-  @JsonProperty ("notes")
-  @JsonName ("notes")
-  public List<Note> getNotes() {
-    return notes;
-  }
-
-  /**
-   * Notes about a person.
-   *
-   * @param notes Notes about a person.
-   */
-  @JsonProperty ("notes")
-  public void setNotes(List<Note> notes) {
-    this.notes = notes;
-  }
-
-  /**
-   * Add a note.
-   *
-   * @param note The note to be added.
-   */
-  public void addNote(Note note) {
-    if (note != null) {
-      if (notes == null) {
-        notes = new ArrayList<Note>();
-      }
-      notes.add(note);
     }
   }
 }

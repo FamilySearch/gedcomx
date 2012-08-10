@@ -20,15 +20,12 @@
  * @see <a href="http://www.w3.org/TR/2004/REC-rdf-primer-20040210/">RDF Primer</a>
  */
 @XmlSchema (
-  namespace = CommonModels.RDF_NAMESPACE,
+  namespace = SourceModel.GEDCOMX_SOURCE_V1_NAMESPACE,
   elementFormDefault = XmlNsForm.QUALIFIED,
   attributeFormDefault = XmlNsForm.QUALIFIED
 )
 @XmlAccessorOrder ( XmlAccessOrder.ALPHABETICAL )
-package org.gedcomx.metadata.rdf;
-//todo: document how metadata refers to data and how metadata refers to other metadata.
-
-import org.gedcomx.rt.CommonModels;
+package org.gedcomx.metadata.source;
 
 import javax.xml.bind.annotation.XmlAccessOrder;
 import javax.xml.bind.annotation.XmlAccessorOrder;

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.conclusion;
+package org.gedcomx.metadata.source;
 
 import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.RDFDomain;
@@ -22,6 +22,7 @@ import org.gedcomx.rt.RDFSubPropertyOf;
 
 import javax.xml.bind.annotation.XmlType;
 import java.util.List;
+
 
 /**
  * Conclusion data that references sources.

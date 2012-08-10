@@ -13,23 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package org.gedcomx.conclusion;
+
+import org.gedcomx.rt.json.JsonElementWrapper;
+
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+
 
 /**
- * The Dublin Core metadata model.
- *
- * @see <a href="http://dublincore.org/">Dublin Core Metadata Initiative</a>
+ * Represents a document translation.  It may be a full or partial translation.
  */
-@XmlSchema(
-  namespace = CommonModels.DUBLIN_CORE_NAMESPACE,
-  elementFormDefault = XmlNsForm.QUALIFIED,
-  attributeFormDefault = XmlNsForm.QUALIFIED
-)
-@XmlAccessorOrder( XmlAccessOrder.ALPHABETICAL )
-package org.gedcomx.metadata.dc;
-
-import org.gedcomx.rt.CommonModels;
-
-import javax.xml.bind.annotation.XmlAccessOrder;
-import javax.xml.bind.annotation.XmlAccessorOrder;
-import javax.xml.bind.annotation.XmlNsForm;
-import javax.xml.bind.annotation.XmlSchema;
+@XmlRootElement (name = "translation")
+@JsonElementWrapper (name = "translations")
+@XmlType ( name = "TranslationDocument" )
+public class TranslationDocument extends Document {
+}
