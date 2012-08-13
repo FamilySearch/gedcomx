@@ -49,12 +49,40 @@ public enum FactType {
    * A fact of a person's baptism.
    */
   Baptism,
+
+  /**
+   * A fact of a person's bar mitzvah.
+   */
   BarMitzvah,
+
+  /**
+   * A fact of a person's bat mitzvah.
+   */
   BatMitzvah,
+
+  /**
+   * A fact of a person's birth.
+   */
   Birth,
+
+  /**
+   * A fact of an official blessing received by a person, such as at the hands of a clergy member or at another religious rite.
+   */
   Blessing,
+
+  /**
+   * A fact of the burial of person's body after death.
+   */
   Burial,
-  CasteName,
+
+  /**
+   * A fact of a person's caste.
+   */
+  Caste,
+
+  /**
+   * A fact of a person's participation in a census.
+   */
   Census,
   Christening,
   Circumcision,
@@ -226,7 +254,7 @@ public enum FactType {
     public static final FactType Birth = include(FactType.Birth);
     public static final FactType Blessing = include(FactType.Blessing);
     public static final FactType Burial = include(FactType.Burial);
-    public static final FactType CasteName = include(FactType.CasteName);
+    public static final FactType Caste = include(FactType.Caste);
     public static final FactType Census = include(FactType.Census);
     public static final FactType Christening = include(FactType.Christening);
     public static final FactType Circumcision = include(FactType.Circumcision);

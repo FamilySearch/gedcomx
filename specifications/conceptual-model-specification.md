@@ -841,13 +841,13 @@ URI | description | scope
 `http://gedcomx.org/Adoption`| A fact of a person's adoption. In the context of a parent-child relationship, it describes a fact of the adoption of a child by a parent. | person
 `http://gedcomx.org/AdultChristening`| A fact of a person's christening or baptism as an adult. | person
 `http://gedcomx.org/Baptism`| A fact of a person's baptism. | person
-`http://gedcomx.org/BarMitzvah`| | person
-`http://gedcomx.org/BatMitzvah`| | person
-`http://gedcomx.org/Birth`| | person
-`http://gedcomx.org/Blessing`| | person
-`http://gedcomx.org/Burial`| | person
-`http://gedcomx.org/CasteName`| | person
-`http://gedcomx.org/Census`| | person
+`http://gedcomx.org/BarMitzvah`| A fact of a person's bar mitzvah. | person
+`http://gedcomx.org/BatMitzvah`| A fact of a person's bat mitzvah. | person
+`http://gedcomx.org/Birth`| A fact of a person's birth. | person
+`http://gedcomx.org/Blessing`| A fact of an official blessing received by a person, such as at the hands of a clergy member or at another religious rite. | person
+`http://gedcomx.org/Burial`| A fact of the burial of person's body after death. | person
+`http://gedcomx.org/Caste`| A fact of a person's caste. | person
+`http://gedcomx.org/Census`| A fact of a person's participation in a census. | person
 `http://gedcomx.org/Christening`| | person
 `http://gedcomx.org/Circumcision`| | person
 `http://gedcomx.org/Citizenship`| | person
