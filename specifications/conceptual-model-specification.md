@@ -852,8 +852,6 @@ URI | description | scope
 `http://gedcomx.org/Circumcision`| A fact of a person's circumcision. | person
 `http://gedcomx.org/Clan`| A fact of a person's clan. | person
 `http://gedcomx.org/Confirmation`| A fact of a person's confirmation (or other rite of initiation) in a church or religion. | person
-`http://gedcomx.org/CountOfChildren`| | person
-`http://gedcomx.org/CountOfMarriages`| | person
 `http://gedcomx.org/Cremation`| | person
 `http://gedcomx.org/Death`| | person
 `http://gedcomx.org/DiedBeforeEight`| | person
