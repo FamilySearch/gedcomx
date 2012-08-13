@@ -89,6 +89,10 @@ public enum FactType {
    * A fact of a person's christening *at birth*. Note: use `AdultChristening` for the christening as an adult.
    */
   Christening,
+
+  /**
+   * A fact of a person's circumcision.
+   */
   Circumcision,
   Citizenship,
   ClanName,
