@@ -104,6 +104,10 @@ public enum FactType {
    * A fact of a person's confirmation (or other rite of initiation) in a church or religion.
    */
   Confirmation,
+
+  /**
+   * A fact of the cremation of person's body after death.
+   */
   Cremation,
   Death,
   DiedBeforeEight,
