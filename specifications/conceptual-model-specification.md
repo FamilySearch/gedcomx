@@ -907,7 +907,6 @@ URI | description | scope
 `http://gedcomx.org/Will`| | person
 `http://gedcomx.org/Annulment`| The fact of an annulment of a marriage. | couple relationship
 `http://gedcomx.org/CommonLawMarriage`| | couple relationship
-`http://gedcomx.org/CurrentlySpouses`| | couple relationship
 `http://gedcomx.org/Divorce`| | couple relationship
 `http://gedcomx.org/DivorceFiling`| | couple relationship
 `http://gedcomx.org/Engagement`| | couple relationship

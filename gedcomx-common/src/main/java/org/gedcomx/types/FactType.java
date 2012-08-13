@@ -168,7 +168,6 @@ public enum FactType {
    */
   Annulment,
   CommonLawMarriage,
-  CurrentlySpouses,
   Divorce,
   DivorceFiling,
   Engagement,
@@ -354,7 +353,6 @@ public enum FactType {
     
     public static final FactType Annulment = include(FactType.Annulment);
     public static final FactType CommonLawMarriage = include(FactType.CommonLawMarriage);
-    public static final FactType CurrentlySpouses = include(FactType.CurrentlySpouses);
     public static final FactType Divorce = include(FactType.Divorce);
     public static final FactType DivorceFiling = include(FactType.DivorceFiling);
     public static final FactType Engagement = include(FactType.Engagement);
