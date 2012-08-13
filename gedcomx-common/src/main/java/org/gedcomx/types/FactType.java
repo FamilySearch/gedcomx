@@ -61,7 +61,6 @@ public enum FactType {
   CountOfMarriages,
   Cremation,
   Death,
-  Departure,
   DiedBeforeEight,
   Emigration,
   Ethnicity,
@@ -231,7 +230,6 @@ public enum FactType {
     public static final FactType CountOfMarriages = include(FactType.CountOfMarriages);
     public static final FactType Cremation = include(FactType.Cremation);
     public static final FactType Death = include(FactType.Death);
-    public static final FactType Departure = include(FactType.Departure);
     public static final FactType DiedBeforeEight = include(FactType.DiedBeforeEight);
     public static final FactType Emigration = include(FactType.Emigration);
     public static final FactType Ethnicity = include(FactType.Ethnicity);
