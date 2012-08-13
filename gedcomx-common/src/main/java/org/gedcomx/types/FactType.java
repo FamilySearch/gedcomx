@@ -39,6 +39,10 @@ public enum FactType {
    * A fact of a person's adoption. In the context of a parent-child relationship, it describes a fact of the adoption of a child by a parent.
    */
   Adoption,
+
+  /**
+   * A fact of a person's christening or baptism as an adult.
+   */
   AdultChristening,
   Arrival,
   Baptism,
