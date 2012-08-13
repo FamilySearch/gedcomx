@@ -15,12 +15,15 @@
  */
 package org.gedcomx.common;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.gedcomx.rt.SupportsExtensionElements;
 import org.gedcomx.rt.json.JsonElementWrapper;
 
-import javax.xml.XMLConstants;
-import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -31,10 +34,11 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement
 @JsonElementWrapper(name = "notes")
 @XmlType ( name = "Note", propOrder = { "text", "attribution" } )
-public class Note implements Attributable, HasText {
+public class Note implements Attributable, HasText, SupportsExtensionElements {
 
   private TextValue text;
   private Attribution attribution;
+  private List<Object> extensionElements;
 
   /**
    * The text of the note.
@@ -74,5 +78,78 @@ public class Note implements Attributable, HasText {
   @Override
   public void setAttribution(Attribution attribution) {
     this.attribution = attribution;
+  }
+
+  /**
+   * The other elements such as a note title (<code>NoteTitle</code>).
+   *
+   * @return The other elements.
+   */
+  @XmlAnyElement ( lax = true )
+  @JsonIgnore
+  public List<Object> getExtensionElements() {
+    return extensionElements;
+  }
+
+  /**
+   * The other elements such as a note title (<code>NoteTitle</code>).
+   *
+   * @param extensionElements The other elements.
+   */
+  @JsonIgnore
+  public void setExtensionElements(List<Object> extensionElements) {
+    this.extensionElements = extensionElements;
+  }
+
+  /**
+   * Add an extension element.
+   *
+   * @param element The extension element to add.
+   */
+  public void addExtensionElement(Object element) {
+    if (this.extensionElements == null) {
+      this.extensionElements = new ArrayList<Object>();
+    }
+
+    this.extensionElements.add(element);
+  }
+
+  /**
+   * Finds the first extension of a specified type.
+   *
+   * @param clazz The type.
+   * @return The extension, or null if none found.
+   */
+  @SuppressWarnings ( {"unchecked"} )
+  public <E> E findExtensionOfType(Class<E> clazz) {
+    if (this.extensionElements != null) {
+      for (Object extension : extensionElements) {
+        if (clazz.isInstance(extension)) {
+          return (E) extension;
+        }
+      }
+    }
+
+    return null;
+  }
+
+  /**
+   * Find the extensions of a specified type.
+   *
+   * @param clazz The type.
+   * @return The extensions, possibly empty but not null.
+   */
+  @SuppressWarnings ( {"unchecked"} )
+  public <E> List<E> findExtensionsOfType(Class<E> clazz) {
+    List<E> ext = new ArrayList<E>();
+    if (this.extensionElements != null) {
+      for (Object extension : extensionElements) {
+        if (clazz.isInstance(extension)) {
+          ext.add((E) extension);
+        }
+      }
+    }
+
+    return ext;
   }
 }
