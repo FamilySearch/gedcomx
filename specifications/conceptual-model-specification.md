@@ -850,7 +850,6 @@ URI | description | scope
 `http://gedcomx.org/Census`| A fact of a person's participation in a census. | person
 `http://gedcomx.org/Christening`| A fact of a person's christening *at birth*. Note: use `AdultChristening` for the christening as an adult. | person
 `http://gedcomx.org/Circumcision`| A fact of a person's circumcision. | person
-`http://gedcomx.org/Citizenship`| | person
 `http://gedcomx.org/ClanName`| | person
 `http://gedcomx.org/Confirmation`| | person
 `http://gedcomx.org/CountOfChildren`| | person
