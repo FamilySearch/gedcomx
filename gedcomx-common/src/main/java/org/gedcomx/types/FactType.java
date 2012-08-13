@@ -114,6 +114,9 @@ public enum FactType {
 
   // facts generally applicable within the scope of a couple.
 
+  /**
+   * The fact of an annulment of a marriage.
+   */
   Annulment,
   CommonLawMarriage,
   CurrentlySpouses,
