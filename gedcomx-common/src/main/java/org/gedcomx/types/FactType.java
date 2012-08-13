@@ -84,6 +84,10 @@ public enum FactType {
    * A fact of a person's participation in a census.
    */
   Census,
+
+  /**
+   * A fact of a person's christening *at birth*. Note: use `AdultChristening` for the christening as an adult.
+   */
   Christening,
   Circumcision,
   Citizenship,

@@ -848,7 +848,7 @@ URI | description | scope
 `http://gedcomx.org/Burial`| A fact of the burial of person's body after death. | person
 `http://gedcomx.org/Caste`| A fact of a person's caste. | person
 `http://gedcomx.org/Census`| A fact of a person's participation in a census. | person
-`http://gedcomx.org/Christening`| | person
+`http://gedcomx.org/Christening`| A fact of a person's christening *at birth*. Note: use `AdultChristening` for the christening as an adult. | person
 `http://gedcomx.org/Circumcision`| | person
 `http://gedcomx.org/Citizenship`| | person
 `http://gedcomx.org/ClanName`| | person
