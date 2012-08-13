@@ -1,5 +1,6 @@
 package org.gedcomx.conclusion;
 
+import org.gedcomx.common.URI;
 import org.gedcomx.types.IdentifierType;
 import org.testng.annotations.Test;
 
@@ -18,11 +19,11 @@ public class IdentifierTest {
    */
   public void testIdXml() throws Exception {
     Identifier id = new Identifier();
-    id.setKnownType(IdentifierType.Forwarded);
-    id.setValue("value");
+    id.setKnownType(IdentifierType.Deprecated);
+    id.setValue(URI.create("value"));
     id = processThroughXml(id);
-    assertEquals(IdentifierType.Forwarded, id.getKnownType());
-    assertEquals("value", id.getValue());
+    assertEquals(IdentifierType.Deprecated, id.getKnownType());
+    assertEquals("value", id.getValue().toString());
   }
 
   /**
@@ -30,11 +31,11 @@ public class IdentifierTest {
    */
   public void testIdJson() throws Exception {
     Identifier id = new Identifier();
-    id.setKnownType(IdentifierType.Forwarded);
-    id.setValue("value");
+    id.setKnownType(IdentifierType.Deprecated);
+    id.setValue(URI.create("value"));
     id = processThroughJson(id);
-    assertEquals(IdentifierType.Forwarded, id.getKnownType());
-    assertEquals("value", id.getValue());
+    assertEquals(IdentifierType.Deprecated, id.getKnownType());
+    assertEquals("value", id.getValue().toString());
   }
 
 }

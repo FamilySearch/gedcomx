@@ -174,31 +174,9 @@ under the "Common Data Types" section of the conceptual model specification.
 URIs are supplied as JSON strings and are interpreted according to
 [RFC 3986: Uniform Resource Identifier (URI): Generic Syntax](http://www.ietf.org/rfc/rfc3986.txt).
 
-<a id="identifier-type"/>
-
-## 2.2 The "Identifier" Data Type
-
-The JSON object used to (de)serialize the `http://gedcomx.org/conclusion/v1/Identifier` data type is defined as follows:
-
-### properties
-
-name | description | JSON member | JSON object type
------|-------------|--------------|---------
-value | The value of the identifier. | value | string
-type  | URI identifying the type of the identifier. | type | [`URI`](#uri)
-
-### examples
-
-```json
-{
-  "value" : "value_of_identifier",
-  "type" : "http://gedcomx.org/IdentifierType"
-}
-```
-
 <a id="attribution"/>
 
-## 2.3 The "Attribution" Data Type
+## 2.2 The "Attribution" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/Attribution` data type is defined as follows:
 
@@ -224,7 +202,7 @@ changeMessage | A statement of why the attributed data is being provided by the 
 
 <a id="formal-value"/>
 
-## 2.4 The "FormalValue" Data Type
+## 2.3 The "FormalValue" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/conclusion/v1/FormalValue` data type is defined as follows:
 
@@ -273,7 +251,7 @@ Standardized and normalized value:
 
 <a id="note"/>
 
-## 2.5 The "Note" Data Type
+## 2.4 The "Note" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/Note` data type is defined as follows:
 
@@ -295,7 +273,7 @@ attribution | The attribution of this note. | attribution | [`Attribution`](#att
 
 <a id="rdf-literal"/>
 
-## 2.6 The "LiteralValue" Data Type
+## 2.5 The "LiteralValue" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/Literal` data type is defined as follows:
 
@@ -317,7 +295,7 @@ value | The literal value. | value | string
 }
 ```
 
-## 2.7 The "TextValue" Data Type
+## 2.6 The "TextValue" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/TextValue` data type is defined as follows:
 
@@ -978,6 +956,27 @@ parts | The parts of the name form. | parts | array of [`NamePart`](#name-part)
 }
 ```
 
+<a id="identifier-type"/>
+
+## 5.14 The "Identifier" Data Type
+
+The JSON object used to (de)serialize the `http://gedcomx.org/conclusion/v1/Identifier` data type is defined as follows:
+
+### properties
+
+name | description | JSON member | JSON object type
+-----|-------------|--------------|---------
+value | The value of the identifier. | value | [`URI`](#uri)
+type  | URI identifying the type of the identifier. | type | [`URI`](#uri)
+
+### examples
+
+```json
+{
+  "value" : "afn:1BS3-9X1",
+  "type" : "http://gedcomx.org/Deprecated"
+}
+```
 
 
 # 6. Known JSON Extension Members

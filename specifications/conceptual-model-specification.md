@@ -80,44 +80,9 @@ and even the data types that define those data structures. The URI is specified 
 [RFC3986](http://tools.ietf.org/html/rfc3986).
 
 
-<a id="identifier-type"/>
-
-## 2.2 The "Identifier" Data Type
-
-The `Identifier` data type defines the data structure used to supply an identifier of a 
-genealogical resource in a specific data set.
-
-### identifier
-
-The identifier for the "Identifier" data type is:
-
-`http://gedcomx.org/conclusion/v1/Identifier`
-
-### properties
-
-name  | description | data type
-------|-------------|----------
-value | The value of the identifier. | string (possibly interpreted as a URI, depending on the type of the identifier).
-type  | URI identifying the type of the identifier. | [URI](#uri) - MUST resolve to an identifier type. Refer to the list of [known identifier types](#known-identifier-types).
-
-<a id="known-identifier-types"/>
-
-### known identifier types
-
-The following identifier types are defined by GEDCOM X.
-
-URI | description
-----|------------
-`http://gedcomx.org/Forwarded` |
-
-### examples
-
-todo: fill in some examples.
-
-
 <a id="attribution"/>
 
-## 2.3 The "Attribution" Data Type
+## 2.2 The "Attribution" Data Type
 
 The `Attribution` data type defines the data structure used to supply the attribution (including
 who, when, and why) of genealogical data.
@@ -141,8 +106,8 @@ changeMessage | A statement of why the attributed data is being provided by the 
 
 ### known confidence levels
 
-The following confidence levels are defined by GEDCOM X. For more information, refer to 
-Mills, Elizabeth Shown. "Fundamentals of Evidence Analysis." <i>Evidence Explained.</i> 2nd ed. 
+The following confidence levels are defined by GEDCOM X. For more information, refer to
+Mills, Elizabeth Shown. "Fundamentals of Evidence Analysis." <i>Evidence Explained.</i> 2nd ed.
 (Baltimore, Maryland: Genealogical Publishing Company, 2009), 19-20 (Section 1.6).
 
 URI | description
@@ -161,7 +126,7 @@ todo:
 
 <a id="formal-value"/>
 
-## 2.4 The "FormalValue" Data Type
+## 2.3 The "FormalValue" Data Type
 
 The `FormalValue` data type defines the data structure used to supply a normalized and/or
 standardized value. The formal value is used to supply a formal interpretation of a
@@ -212,7 +177,7 @@ If a value is supplied for the `resource` property, a value SHALL NOT be supplie
 
 <a id="note"/>
 
-## 2.5 The "Note" Data Type
+## 2.4 The "Note" Data Type
 
 The `Note` data type defines a note that was contributed from genealogical research.
 
@@ -234,7 +199,7 @@ attribution | The attribution of this note. | [`http://gedcomx.org/Attribution`]
 
 <a id="literal-value"/>
 
-## 2.6 The "LiteralValue" Data Type
+## 2.5 The "LiteralValue" Data Type
 
 The `LiteralValue` data type defines a literal value.
 
@@ -255,7 +220,7 @@ value | The literal value. A datatype MAY be supplied to identify how the string
 
 <a id="text-value"/>
 
-## 2.7 The "TextValue" Data Type
+## 2.6 The "TextValue" Data Type
 
 The `TextValue` data type defines a literal value.
 
@@ -1221,6 +1186,58 @@ name | description | data type
 -----|-------------|----------
 fullText | The full text of the name form. | string
 parts | The parts of the name form. | List of [`http://gedcomx.org/conclusion/v1/NamePart`](#name-part). Order is preserved.
+
+
+<a id="identifier-type"/>
+
+
+## 5.14 The "Identifier" Data Type
+
+The `Identifier` data type defines the data structure used to supply a cross reference to the same person in another data set, for
+the purpose of synchronizing data between different data sets. Note that the identifier does _not_ model a _conclusion_ about the
+person, but instead models an attribute of the data. A change to the set of identifiers on a person implies a change to the nature,
+scope, and applicability of the person data.
+
+The value of the identifier is interpreted as a URI so as to be able to uniquely identify both the data set and the resource within the
+data set.
+
+GEDCOM X specifies the following URI schemes that MAY be used in identifier values:
+
+scheme | description
+-------|------------
+gedcom-uid | The identifier is a GEDCOM UID. See [GEDCOM Unique Identifiers](https://devnet.familysearch.org/docs/gedcom/GEDCOMUniqueIdentifiers.pdf).
+afn | The identifier is an Ancestral File Number. See [Ancestral File](https://familysearch.org/learn/wiki/en/Ancestral_File).
+
+For example, the value of an identifier for Ancestral File Number "1BS3-9X1" would be "afn:1BS3-9X1".
+
+### identifier
+
+The identifier for the "Identifier" data type is:
+
+`http://gedcomx.org/conclusion/v1/Identifier`
+
+### properties
+
+name  | description | data type
+------|-------------|----------
+value | The value of the identifier. | [URI](#uri).
+type  | URI identifying the type of the identifier. | [URI](#uri) - MUST resolve to an identifier type. Refer to the list of [known identifier types](#known-identifier-types).
+
+<a id="known-identifier-types"/>
+
+### known identifier types
+
+The following identifier types are defined by GEDCOM X.
+
+URI | description
+----|------------
+`http://gedcomx.org/Primary` | The primary identifier for the resource.
+`http://gedcomx.org/Deprecated` | An identifier that has been relegated, deprecated, or otherwise downgraded. This identifier is commonly used as the result of a merge when what was once a primary identifier for a person is no longer primary.
+`http://gedcomx.org/Persistent` |  An identifier that is considered to be a long-term persistent identifier. Applications that provide persistent identifiers are claiming that links to the resource using the identifier won't break.
+
+### examples
+
+todo: fill in some examples.
 
 
 # 6. Extensibility
