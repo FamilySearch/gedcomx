@@ -44,7 +44,6 @@ public enum FactType {
    * A fact of a person's christening or baptism as an adult.
    */
   AdultChristening,
-  Arrival,
   Baptism,
   BarMitzvah,
   BatMitzvah,
@@ -215,7 +214,6 @@ public enum FactType {
     
     public static final FactType Adoption = include(FactType.Adoption);
     public static final FactType AdultChristening = include(FactType.AdultChristening);
-    public static final FactType Arrival = include(FactType.Arrival);
     public static final FactType Baptism = include(FactType.Baptism);
     public static final FactType BarMitzvah = include(FactType.BarMitzvah);
     public static final FactType BatMitzvah = include(FactType.BatMitzvah);
