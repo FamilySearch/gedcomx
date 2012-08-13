@@ -35,6 +35,9 @@ public enum FactType {
 
   // facts generally applicable within the scope of a person.
 
+  /**
+   * A fact of a person's adoption. In the context of a parent-child relationship, it describes a fact of the adoption of a child by a parent.
+   */
   Adoption,
   AdultChristening,
   Affiliation,
@@ -128,9 +131,8 @@ public enum FactType {
   UniversalId,
 
   // facts generally applicable within the scope of a parent-child relationship.
-
+  // Adoption, (applicable on a person, too).
   Biological,
-  Adopted,
   Step,
   Foster,
   Guardianship,
@@ -342,7 +344,7 @@ public enum FactType {
     }
     
     public static final FactType Biological = include(FactType.Biological);
-    public static final FactType Adopted = include(FactType.Adopted);
+    public static final FactType Adopted = include(FactType.Adoption);
     public static final FactType Step = include(FactType.Step);
     public static final FactType Foster = include(FactType.Foster);
     public static final FactType Guardianship = include(FactType.Guardianship);

@@ -838,7 +838,7 @@ The following fact types are defined by GEDCOM X:
 
 URI | description | scope
 ----|-------------|------
-`http://gedcomx.org/Adoption`| | person
+`http://gedcomx.org/Adoption`| A fact of a person's adoption. In the context of a parent-child relationship, it describes a fact of the adoption of a child by a parent. | person
 `http://gedcomx.org/AdultChristening`| | person
 `http://gedcomx.org/Affiliation`| | person
 `http://gedcomx.org/Age`| | person
@@ -927,7 +927,7 @@ URI | description | scope
 `http://gedcomx.org/Separation`| | couple relationship
 `http://gedcomx.org/UniversalId`| | couple relationship
 `http://gedcomx.org/Biological`| | parent-child relationship
-`http://gedcomx.org/Adopted`| | parent-child relationship
+`http://gedcomx.org/Adoption`| A fact of a person's adoption. In the context of a parent-child relationship, it describes a fact of the adoption of a child by a parent. | parent-child relationship
 `http://gedcomx.org/Step`| | parent-child relationship
 `http://gedcomx.org/Foster`| | parent-child relationship
 `http://gedcomx.org/Guardianship`| | parent-child relationship
