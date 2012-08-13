@@ -84,12 +84,15 @@ and even the data types that define those data structures. The URI is specified 
 
 ## 2.2 The "Identifier" Data Type
 
-The `Identifier` data type defines the data structure used to supply an identifier of a 
-genealogical resource in a specific data set. The value of the identifier is interpreted as a
-URI so as to be able to uniquely identify both the data set and the resource within the
+The `Identifier` data type defines the data structure used to supply a cross reference to the same person in another data set, for
+the purpose of synchronizing data between different data sets. Note that the identifier does _not_ model a _conclusion_ about the
+person, but instead models an attribute of the data. A change to the set of identifiers on a person implies a change to the nature,
+scope, and applicability of the person data.
+
+The value of the identifier is interpreted as a URI so as to be able to uniquely identify both the data set and the resource within the
 data set.
 
-GEDCOM X recognizes the following URI schemes that MAY be used in identifier values:
+GEDCOM X specifies the following URI schemes that MAY be used in identifier values:
 
 scheme | description
 -------|------------
