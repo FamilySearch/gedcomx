@@ -94,7 +94,15 @@ public enum FactType {
    * A fact of a person's circumcision.
    */
   Circumcision,
-  ClanName,
+
+  /**
+   * A fact of a person's clan.
+   */
+  Clan,
+
+  /**
+   * A fact of a person's confirmation (or other rite of initiation) in a church or religion.
+   */
   Confirmation,
   CountOfChildren,
   CountOfMarriages,
@@ -265,7 +273,7 @@ public enum FactType {
     public static final FactType Census = include(FactType.Census);
     public static final FactType Christening = include(FactType.Christening);
     public static final FactType Circumcision = include(FactType.Circumcision);
-    public static final FactType ClanName = include(FactType.ClanName);
+    public static final FactType Clan = include(FactType.Clan);
     public static final FactType Confirmation = include(FactType.Confirmation);
     public static final FactType CountOfChildren = include(FactType.CountOfChildren);
     public static final FactType CountOfMarriages = include(FactType.CountOfMarriages);
