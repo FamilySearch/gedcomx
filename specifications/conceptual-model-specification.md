@@ -840,8 +840,7 @@ URI | description | scope
 ----|-------------|------
 `http://gedcomx.org/Adoption`| A fact of a person's adoption. In the context of a parent-child relationship, it describes a fact of the adoption of a child by a parent. | person
 `http://gedcomx.org/AdultChristening`| A fact of a person's christening or baptism as an adult. | person
-`http://gedcomx.org/Age`| | person
-`http://gedcomx.org/Baptism`| | person
+`http://gedcomx.org/Baptism`| A fact of a person's baptism. | person
 `http://gedcomx.org/BarMitzvah`| | person
 `http://gedcomx.org/BatMitzvah`| | person
 `http://gedcomx.org/Birth`| | person

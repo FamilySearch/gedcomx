@@ -41,9 +41,13 @@ public enum FactType {
   Adoption,
 
   /**
-   * A fact of a person's christening or baptism as an adult.
+   * A fact of a person's christening as an adult.
    */
   AdultChristening,
+
+  /**
+   * A fact of a person's baptism.
+   */
   Baptism,
   BarMitzvah,
   BatMitzvah,
