@@ -149,11 +149,15 @@ public enum FactType {
    * A fact of a person's funeral.
    */
   Funeral,
-  Illness,
   Immigration,
   Interment,
   Living,
   MaritalStatus,
+
+  /**
+   * A fact of a person's medical record, such as for an illness or hospital stay.
+   */
+  Medical,
   MilitaryAward,
   MilitaryCompany,
   MilitaryDischarge,
@@ -334,12 +338,12 @@ public enum FactType {
     public static final FactType Flourish = include(FactType.Flourish);
     public static final FactType Funeral = include(FactType.Funeral);
     public static final FactType Education = include(FactType.Education);
-    public static final FactType Illness = include(FactType.Illness);
     public static final FactType Immigration = include(FactType.Immigration);
     public static final FactType Interment = include(FactType.Interment);
     public static final FactType Household = include(FactType.Household);
     public static final FactType Living = include(FactType.Living);
     public static final FactType MaritalStatus = include(FactType.MaritalStatus);
+    public static final FactType Medical = include(FactType.Medical);
     public static final FactType MilitaryAward = include(FactType.MilitaryAward);
     public static final FactType MilitaryCompany = include(FactType.MilitaryCompany);
     public static final FactType MilitaryDischarge = include(FactType.MilitaryDischarge);
