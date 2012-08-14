@@ -907,10 +907,8 @@ URI | description | scope
 `http://gedcomx.org/Marriage`| The fact of a marriage. | couple relationship
 `http://gedcomx.org/MarriageBanns`| The fact of a marriage banns. | couple relationship
 `http://gedcomx.org/MarriageContract`| The fact of a marriage contract. | couple relationship
-`http://gedcomx.org/MarriageIntent`| | couple relationship
-`http://gedcomx.org/MarriageLicense`| | couple relationship
-`http://gedcomx.org/MarriageNotice`| | couple relationship
-`http://gedcomx.org/MarriageSettlement`| | couple relationship
+`http://gedcomx.org/MarriageLicense`| The fact of a marriage license. | couple relationship
+`http://gedcomx.org/MarriageNotice`| The fact of a marriage notice. | couple relationship
 `http://gedcomx.org/NumberOfChildren`| | couple relationship
 `http://gedcomx.org/Separation`| | couple relationship
 `http://gedcomx.org/UniversalId`| | couple relationship

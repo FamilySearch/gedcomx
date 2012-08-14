@@ -241,10 +241,16 @@ public enum FactType {
    * The fact of a marriage contract.
    */
   MarriageContract,
-  MarriageIntent,
+
+  /**
+   * The fact of a marriage license.
+   */
   MarriageLicense,
+
+  /**
+   * The fact of a marriage notice.
+   */
   MarriageNotice,
-  MarriageSettlement,
   NumberOfChildren,
   Separation,
   UniversalId,
@@ -277,7 +283,7 @@ public enum FactType {
 
   public final static Set<FactType> BIRTHLIKE_FACT_TYPES = Collections.unmodifiableSet(EnumSet.of(Baptism, Birth, Christening, Blessing, Circumcision, Adoption));
   public final static Set<FactType> DEATHLIKE_FACT_TYPES = Collections.unmodifiableSet(EnumSet.of(Death, Burial, Cremation, Funeral, Probate, Will));
-  public final static Set<FactType> MARRIAGELIKE_FACT_TYPES = Collections.unmodifiableSet(EnumSet.of(Marriage, Engagement, MarriageBanns, MarriageContract, MarriageLicense, MarriageNotice, MarriageSettlement));
+  public final static Set<FactType> MARRIAGELIKE_FACT_TYPES = Collections.unmodifiableSet(EnumSet.of(Marriage, Engagement, MarriageBanns, MarriageContract, MarriageLicense, MarriageNotice));
   public final static Set<FactType> DIVORCELIKE_FACT_TYPES = Collections.unmodifiableSet(EnumSet.of(Divorce, DivorceFiling, Annulment, Separation));
   public final static Set<FactType> MIGRATIONLIKE_FACT_TYPES = Collections.unmodifiableSet(EnumSet.of(Immigration, Emigration, Naturalization, Move));
 
@@ -425,10 +431,8 @@ public enum FactType {
     public static final FactType Marriage = include(FactType.Marriage);
     public static final FactType MarriageBanns = include(FactType.MarriageBanns);
     public static final FactType MarriageContract = include(FactType.MarriageContract);
-    public static final FactType MarriageIntent = include(FactType.MarriageIntent);
     public static final FactType MarriageLicense = include(FactType.MarriageLicense);
     public static final FactType MarriageNotice = include(FactType.MarriageNotice);
-    public static final FactType MarriageSettlement = include(FactType.MarriageSettlement);
     public static final FactType NumberOfChildren = include(FactType.NumberOfChildren);
     public static final FactType Separation = include(FactType.Separation);
     public static final FactType UniversalId = include(FactType.UniversalId);
