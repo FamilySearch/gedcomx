@@ -156,6 +156,11 @@ public enum FactType {
   Immigration,
 
   /**
+   * A fact of a land transaction enacted by a person.
+   */
+  LandTransation,
+
+  /**
    * A fact of a person's marital status.
    */
   MaritalStatus,
@@ -458,6 +463,7 @@ public enum FactType {
     public static final FactType Education = include(FactType.Education);
     public static final FactType Immigration = include(FactType.Immigration);
     public static final FactType Household = include(FactType.Household);
+    public static final FactType LandTransation = include(FactType.LandTransation);
     public static final FactType MaritalStatus = include(FactType.MaritalStatus);
     public static final FactType Medical = include(FactType.Medical);
     public static final FactType MilitaryAward = include(FactType.MilitaryAward);
