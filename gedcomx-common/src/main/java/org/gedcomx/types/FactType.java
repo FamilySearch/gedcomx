@@ -149,7 +149,6 @@ public enum FactType {
    * A fact of a person's funeral.
    */
   Funeral,
-  GedcomUUID,
   Illness,
   Immigration,
   Interment,
@@ -330,7 +329,6 @@ public enum FactType {
     public static final FactType FirstCommunion = include(FactType.FirstCommunion);
     public static final FactType Flourish = include(FactType.Flourish);
     public static final FactType Funeral = include(FactType.Funeral);
-    public static final FactType GedcomUUID = include(FactType.GedcomUUID);
     public static final FactType Education = include(FactType.Education);
     public static final FactType Illness = include(FactType.Illness);
     public static final FactType Immigration = include(FactType.Immigration);

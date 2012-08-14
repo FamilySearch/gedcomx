@@ -861,7 +861,6 @@ URI | description | scope
 `http://gedcomx.org/FirstCommunion`| A fact of a person's first communion in a church. | person
 `http://gedcomx.org/Flourish`| A fact of a person's flourish, defined to mean the time period in an adult's life where he was most productive, perhaps as a writer or member of the state assembly. It does not reflect the person's birth and death dates. | person
 `http://gedcomx.org/Funeral`| A fact of a person's funeral. | person
-`http://gedcomx.org/GedcomUUID`| | person
 `http://gedcomx.org/Illness`| | person
 `http://gedcomx.org/Immigration`| | person
 `http://gedcomx.org/Interment`| | person
