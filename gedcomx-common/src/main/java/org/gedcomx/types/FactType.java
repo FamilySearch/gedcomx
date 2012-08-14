@@ -149,6 +149,10 @@ public enum FactType {
    * A fact of a person's funeral.
    */
   Funeral,
+
+  /**
+   * A fact of a person's immigration.
+   */
   Immigration,
   Interment,
   Living,
