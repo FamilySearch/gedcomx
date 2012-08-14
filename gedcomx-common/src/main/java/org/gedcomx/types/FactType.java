@@ -204,6 +204,10 @@ public enum FactType {
    * A fact of a person's national id (e.g. social security number).
    */
   NationalId,
+
+  /**
+   * A fact of a person's nationality.
+   */
   Nationality,
   NeverHadChildren,
   NeverMarried,

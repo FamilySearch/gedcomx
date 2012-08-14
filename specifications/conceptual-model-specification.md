@@ -872,7 +872,7 @@ URI | description | scope
 `http://gedcomx.org/MoveFrom`| A fact of a person's move (i.e. change of residence) from a location. | person
 `http://gedcomx.org/Naturalization`| A fact of a person's naturalization (i.e. acquisition of citizenship and nationality). | person
 `http://gedcomx.org/NationalId`| A fact of a person's national id (e.g. social security number). | person
-`http://gedcomx.org/Nationality`| | person
+`http://gedcomx.org/Nationality`| A fact of a person's nationality. | person
 `http://gedcomx.org/NeverHadChildren`| | person
 `http://gedcomx.org/NeverMarried`| | person
 `http://gedcomx.org/NotAccountable`| | person
