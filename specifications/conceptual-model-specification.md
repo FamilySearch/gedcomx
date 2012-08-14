@@ -881,7 +881,6 @@ URI | description | scope
 `http://gedcomx.org/Religion`| A fact of a person's religion. | person
 `http://gedcomx.org/Residence`| A fact of a person's residence. | person
 `http://gedcomx.org/Retirement`| A fact of a person's retirement. | person
-`http://gedcomx.org/SocialSecurityNumber`| | person
 `http://gedcomx.org/Stillborn`| | person
 `http://gedcomx.org/TitleOfNobility`| | person
 `http://gedcomx.org/TribeName`| | person

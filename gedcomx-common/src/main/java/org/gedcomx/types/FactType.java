@@ -249,7 +249,6 @@ public enum FactType {
    * A fact of a person's retirement.
    */
   Retirement,
-  SocialSecurityNumber,
   Stillborn,
   TitleOfNobility,
   TribeName,
@@ -439,7 +438,6 @@ public enum FactType {
     public static final FactType Religion = include(FactType.Religion);
     public static final FactType Residence = include(FactType.Residence);
     public static final FactType Retirement = include(FactType.Retirement);
-    public static final FactType SocialSecurityNumber = include(FactType.SocialSecurityNumber);
     public static final FactType Stillborn = include(FactType.Stillborn);
     public static final FactType TitleOfNobility = include(FactType.TitleOfNobility);
     public static final FactType TribeName = include(FactType.TribeName);
