@@ -838,99 +838,73 @@ The following fact types are defined by GEDCOM X:
 
 URI | description | scope
 ----|-------------|------
-`http://gedcomx.org/Adoption`| | person
-`http://gedcomx.org/AdultChristening`| | person
-`http://gedcomx.org/Affiliation`| | person
-`http://gedcomx.org/Age`| | person
-`http://gedcomx.org/Baptism`| | person
-`http://gedcomx.org/BarMitzvah`| | person
-`http://gedcomx.org/BatMitzvah`| | person
-`http://gedcomx.org/Birth`| | person
-`http://gedcomx.org/Blessing`| | person
-`http://gedcomx.org/Burial`| | person
-`http://gedcomx.org/CasteName`| | person
-`http://gedcomx.org/Census`| | person
-`http://gedcomx.org/Christening`| | person
-`http://gedcomx.org/Circumcision`| | person
-`http://gedcomx.org/Citizenship`| | person
-`http://gedcomx.org/ClanName`| | person
-`http://gedcomx.org/Confirmation`| | person
-`http://gedcomx.org/CountOfChildren`| | person
-`http://gedcomx.org/CountOfMarriages`| | person
-`http://gedcomx.org/Cremation`| | person
-`http://gedcomx.org/Death`| | person
-`http://gedcomx.org/DiedBeforeEight`| | person
-`http://gedcomx.org/Dwelling`| | person
-`http://gedcomx.org/Education`| | person
-`http://gedcomx.org/Emigration`| | person
-`http://gedcomx.org/Ethnicity`| | person
-`http://gedcomx.org/Excommunication`| | person
-`http://gedcomx.org/FirstCommunion`| | person
-`http://gedcomx.org/Flourish`| | person
-`http://gedcomx.org/Funeral`| | person
-`http://gedcomx.org/GedcomUUID`| | person
-`http://gedcomx.org/Illness`| | person
-`http://gedcomx.org/Immigration`| | person
-`http://gedcomx.org/Interment`| | person
-`http://gedcomx.org/Living`| | person
-`http://gedcomx.org/MaritalStatus`| | person
-`http://gedcomx.org/MilitaryAward`| | person
-`http://gedcomx.org/MilitaryCompany`| | person
-`http://gedcomx.org/MilitaryDischarge`| | person
-`http://gedcomx.org/MilitaryRank`| | person
-`http://gedcomx.org/MilitaryRegiment`| | person
-`http://gedcomx.org/MilitaryService`| | person
-`http://gedcomx.org/MilitaryServiceBranch`| | person
-`http://gedcomx.org/Mission`| | person
-`http://gedcomx.org/Move`| | person
-`http://gedcomx.org/NameOfShip`| | person
-`http://gedcomx.org/Naturalization`| | person
-`http://gedcomx.org/Namesake`| | person
-`http://gedcomx.org/NationalId`| | person
-`http://gedcomx.org/Nationality`| | person
-`http://gedcomx.org/NeverHadChildren`| | person
-`http://gedcomx.org/NeverMarried`| | person
-`http://gedcomx.org/NotAccountable`| | person
-`http://gedcomx.org/Occupation`| | person
-`http://gedcomx.org/Ordinance`| | person
-`http://gedcomx.org/Ordination`| | person
-`http://gedcomx.org/PhysicalDescription`| | person
-`http://gedcomx.org/PortOfDeparture`| | person
-`http://gedcomx.org/PreviousResidence`| | person
-`http://gedcomx.org/Probate`| | person
-`http://gedcomx.org/Property`| | person
-`http://gedcomx.org/Race`| | person
-`http://gedcomx.org/RelationshipToHead`| | person
-`http://gedcomx.org/Religion`| | person
-`http://gedcomx.org/Residence`| | person
-`http://gedcomx.org/Retirement`| | person
-`http://gedcomx.org/SocialSecurityNumber`| | person
-`http://gedcomx.org/Stillborn`| | person
-`http://gedcomx.org/TitleOfNobility`| | person
-`http://gedcomx.org/TribeName`| | person
-`http://gedcomx.org/Twin`| | person
-`http://gedcomx.org/Will`| | person
-`http://gedcomx.org/Annulment`| | couple relationship
-`http://gedcomx.org/CommonLawMarriage`| | couple relationship
-`http://gedcomx.org/CurrentlySpouses`| | couple relationship
-`http://gedcomx.org/Divorce`| | couple relationship
-`http://gedcomx.org/DivorceFiling`| | couple relationship
-`http://gedcomx.org/Engagement`| | couple relationship
-`http://gedcomx.org/Marriage`| | couple relationship
-`http://gedcomx.org/MarriageBanns`| | couple relationship
-`http://gedcomx.org/MarriageContract`| | couple relationship
-`http://gedcomx.org/MarriageIntent`| | couple relationship
-`http://gedcomx.org/MarriageLicense`| | couple relationship
-`http://gedcomx.org/MarriageNotice`| | couple relationship
-`http://gedcomx.org/MarriageSettlement`| | couple relationship
-`http://gedcomx.org/NumberOfChildren`| | couple relationship
-`http://gedcomx.org/Separation`| | couple relationship
-`http://gedcomx.org/UniversalId`| | couple relationship
-`http://gedcomx.org/Biological`| | parent-child relationship
-`http://gedcomx.org/Adopted`| | parent-child relationship
-`http://gedcomx.org/Step`| | parent-child relationship
-`http://gedcomx.org/Foster`| | parent-child relationship
-`http://gedcomx.org/Guardianship`| | parent-child relationship
+`http://gedcomx.org/Adoption`| A fact of a person's adoption. In the context of a parent-child relationship, it describes a fact of the adoption of a child by a parent. | person
+`http://gedcomx.org/AdultChristening`| A fact of a person's christening or baptism as an adult. | person
+`http://gedcomx.org/Baptism`| A fact of a person's baptism. | person
+`http://gedcomx.org/BarMitzvah`| A fact of a person's bar mitzvah. | person
+`http://gedcomx.org/BatMitzvah`| A fact of a person's bat mitzvah. | person
+`http://gedcomx.org/Birth`| A fact of a person's birth. | person
+`http://gedcomx.org/Blessing`| A fact of an official blessing received by a person, such as at the hands of a clergy member or at another religious rite. | person
+`http://gedcomx.org/Burial`| A fact of the burial of person's body after death. | person
+`http://gedcomx.org/Caste`| A fact of a person's caste. | person
+`http://gedcomx.org/Census`| A fact of a person's participation in a census. | person
+`http://gedcomx.org/Christening`| A fact of a person's christening *at birth*. Note: use `AdultChristening` for the christening as an adult. | person
+`http://gedcomx.org/Circumcision`| A fact of a person's circumcision. | person
+`http://gedcomx.org/Clan`| A fact of a person's clan. | person
+`http://gedcomx.org/Confirmation`| A fact of a person's confirmation (or other rite of initiation) in a church or religion. | person
+`http://gedcomx.org/Cremation`| A fact of the cremation of person's body after death. | person
+`http://gedcomx.org/Death`| A fact of the death of a person. | person
+`http://gedcomx.org/Education`| A fact of an education or an educational achievement (e.g. diploma, graduation, scholarship, etc.) of a person. | person
+`http://gedcomx.org/Emigration`| A fact of the emigration of a person. | person
+`http://gedcomx.org/Ethnicity`| A fact of a person's ethnicity or race. | person
+`http://gedcomx.org/Excommunication`| A fact of a person's excommunication from a church. | person
+`http://gedcomx.org/FirstCommunion`| A fact of a person's first communion in a church. | person
+`http://gedcomx.org/Funeral`| A fact of a person's funeral. | person
+`http://gedcomx.org/Immigration`| A fact of a person's immigration. | person
+`http://gedcomx.org/LandTransation`| A fact of a land transaction enacted by a person. | person
+`http://gedcomx.org/Living`| A fact of a record of a person's living for a specific period. This is designed to include "flourish", defined to mean the time period in an adult's life where he was most productive, perhaps as a writer or member of the state assembly. It does not reflect the person's birth and death dates. | person
+`http://gedcomx.org/MaritalStatus`| A fact of a person's marital status. | person
+`http://gedcomx.org/Medical`| A fact of a person's medical record, such as for an illness or hospital stay. | person
+`http://gedcomx.org/MilitaryAward`| A fact of a person's military award. | person
+`http://gedcomx.org/MilitaryDischarge`| A fact of a person's military discharge. | person
+`http://gedcomx.org/MilitaryService`| A fact of a person's militray service. | person
+`http://gedcomx.org/Mission`| A fact of a person's church mission. | person
+`http://gedcomx.org/MoveTo`| A fact of a person's move (i.e. change of residence) to a new location. | person
+`http://gedcomx.org/MoveFrom`| A fact of a person's move (i.e. change of residence) from a location. | person
+`http://gedcomx.org/MultipleBirth`| A fact that a person was born as part of a multiple birth (e.g. twin, triplet, etc.) | person
+`http://gedcomx.org/NationalId`| A fact of a person's national id (e.g. social security number). | person
+`http://gedcomx.org/Nationality`| A fact of a person's nationality. | person
+`http://gedcomx.org/Naturalization`| A fact of a person's naturalization (i.e. acquisition of citizenship and nationality). | person
+`http://gedcomx.org/NumberOfChildren`| A fact of the number of children of a person or relationship. | person
+`http://gedcomx.org/NumberOfMarriages`| A fact of a person's number of marriages. | person
+`http://gedcomx.org/Occupation`| A fact of a person's occupation or employment. | person
+`http://gedcomx.org/Ordination`| A fact of a person's ordination to a stewardship in a church. | person
+`http://gedcomx.org/PhysicalDescription`| A fact of a person's physical description. | person
+`http://gedcomx.org/Probate`| A fact of a receipt of probate of a person's property. | person
+`http://gedcomx.org/Property`| A fact of a person's property or possessions. | person
+`http://gedcomx.org/Religion`| A fact of a person's religion. | person
+`http://gedcomx.org/Residence`| A fact of a person's residence. | person
+`http://gedcomx.org/Retirement`| A fact of a person's retirement. | person
+`http://gedcomx.org/Stillbirth`| A fact of a person's stillbirth. | person
+`http://gedcomx.org/Will`| A fact of a person's will. | person
+`http://gedcomx.org/Visit`| A fact of a person's visit to a place different from the person's residence. | person
+`http://gedcomx.org/Annulment`| The fact of an annulment of a marriage. | couple relationship
+`http://gedcomx.org/CommonLawMarriage`| The fact of a marriage by common law. | couple relationship
+`http://gedcomx.org/Divorce`| The fact of a divorce of a couple. | couple relationship
+`http://gedcomx.org/DivorceFiling`| The fact of a filing for divorce. | couple relationship
+`http://gedcomx.org/Engagement`| The fact of an engagement to be married. | couple relationship
+`http://gedcomx.org/Marriage`| The fact of a marriage. | couple relationship
+`http://gedcomx.org/MarriageBanns`| The fact of a marriage banns. | couple relationship
+`http://gedcomx.org/MarriageContract`| The fact of a marriage contract. | couple relationship
+`http://gedcomx.org/MarriageLicense`| The fact of a marriage license. | couple relationship
+`http://gedcomx.org/MarriageNotice`| The fact of a marriage notice. | couple relationship
+`http://gedcomx.org/NumberOfChildren`| A fact of the number of children of a person or relationship. | couple relationship
+`http://gedcomx.org/Separation`| A fact of a couple's separation. | couple relationship
+`http://gedcomx.org/BiologicalLineage`| A fact about the biological lineage of a child to a parent. | parent-child relationship
+`http://gedcomx.org/Adoption`| A fact of a person's adoption. In the context of a parent-child relationship, it describes a fact of the adoption of a child by a parent. | parent-child relationship
+`http://gedcomx.org/Foster`| A fact about a foster relationship between a foster parent and a child. | parent-child relationship
+`http://gedcomx.org/Guardianship`| A fact about a legal guardianship between a parent and a child. | parent-child relationship
+`http://gedcomx.org/Step`| A fact about the step relationship between a parent and a child. | parent-child relationship
 
 
 <a id="person"/>
