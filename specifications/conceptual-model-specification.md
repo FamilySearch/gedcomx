@@ -905,9 +905,9 @@ URI | description | scope
 `http://gedcomx.org/Twin`| | person
 `http://gedcomx.org/Will`| | person
 `http://gedcomx.org/Annulment`| The fact of an annulment of a marriage. | couple relationship
-`http://gedcomx.org/CommonLawMarriage`| | couple relationship
-`http://gedcomx.org/Divorce`| | couple relationship
-`http://gedcomx.org/DivorceFiling`| | couple relationship
+`http://gedcomx.org/CommonLawMarriage`| The fact of a marriage by common law. | couple relationship
+`http://gedcomx.org/Divorce`| The fact of a divorce of a couple. | couple relationship
+`http://gedcomx.org/DivorceFiling`| The fact of a filing for divorce. | couple relationship
 `http://gedcomx.org/Engagement`| | couple relationship
 `http://gedcomx.org/Marriage`| | couple relationship
 `http://gedcomx.org/MarriageBanns`| | couple relationship

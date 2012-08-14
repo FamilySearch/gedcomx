@@ -170,8 +170,20 @@ public enum FactType {
    * The fact of an annulment of a marriage.
    */
   Annulment,
+
+  /**
+   * The fact of a marriage by common law.
+   */
   CommonLawMarriage,
+
+  /**
+   * The fact of a divorce of a couple.
+   */
   Divorce,
+
+  /**
+   * The fact of a filing for divorce.
+   */
   DivorceFiling,
   Engagement,
   Marriage,
