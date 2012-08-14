@@ -139,6 +139,10 @@ public enum FactType {
    * A fact of a person's first communion in a church.
    */
   FirstCommunion,
+
+  /**
+   * A fact of a person's flourish, defined to mean the time period in an adult's life where he was most productive, perhaps as a writer or member of the state assembly. It does not reflect the person's birth and death dates.
+   */
   Flourish,
   Funeral,
   GedcomUUID,

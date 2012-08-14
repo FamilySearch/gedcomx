@@ -859,7 +859,7 @@ URI | description | scope
 `http://gedcomx.org/Ethnicity`| A fact of a person's ethnicity or race. | person
 `http://gedcomx.org/Excommunication`| A fact of a person's excommunication from a church. | person
 `http://gedcomx.org/FirstCommunion`| A fact of a person's first communion in a church. | person
-`http://gedcomx.org/Flourish`| | person
+`http://gedcomx.org/Flourish`| A fact of a person's flourish, defined to mean the time period in an adult's life where he was most productive, perhaps as a writer or member of the state assembly. It does not reflect the person's birth and death dates. | person
 `http://gedcomx.org/Funeral`| | person
 `http://gedcomx.org/GedcomUUID`| | person
 `http://gedcomx.org/Illness`| | person
