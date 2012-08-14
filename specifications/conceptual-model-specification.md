@@ -864,13 +864,9 @@ URI | description | scope
 `http://gedcomx.org/Immigration`| A fact of a person's immigration. | person
 `http://gedcomx.org/MaritalStatus`| A fact of a person's marital status. | person
 `http://gedcomx.org/Medical`| A fact of a person's medical record, such as for an illness or hospital stay. | person
-`http://gedcomx.org/MilitaryAward`| | person
-`http://gedcomx.org/MilitaryCompany`| | person
-`http://gedcomx.org/MilitaryDischarge`| | person
-`http://gedcomx.org/MilitaryRank`| | person
-`http://gedcomx.org/MilitaryRegiment`| | person
-`http://gedcomx.org/MilitaryService`| | person
-`http://gedcomx.org/MilitaryServiceBranch`| | person
+`http://gedcomx.org/MilitaryAward`| A fact of a person's military award. | person
+`http://gedcomx.org/MilitaryDischarge`| A fact of a person's military discharge. | person
+`http://gedcomx.org/MilitaryService`| A fact of a person's militray service. | person
 `http://gedcomx.org/Mission`| | person
 `http://gedcomx.org/Move`| | person
 `http://gedcomx.org/NameOfShip`| | person

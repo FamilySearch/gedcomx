@@ -164,13 +164,21 @@ public enum FactType {
    * A fact of a person's medical record, such as for an illness or hospital stay.
    */
   Medical,
+
+  /**
+   * A fact of a person's military award.
+   */
   MilitaryAward,
-  MilitaryCompany,
+
+  /**
+   * A fact of a person's military discharge.
+   */
   MilitaryDischarge,
-  MilitaryRank,
-  MilitaryRegiment,
+
+  /**
+   * A fact of a person's militray service.
+   */
   MilitaryService,
-  MilitaryServiceBranch,
   Mission,
   Move,
   NameOfShip,
@@ -367,12 +375,8 @@ public enum FactType {
     public static final FactType MaritalStatus = include(FactType.MaritalStatus);
     public static final FactType Medical = include(FactType.Medical);
     public static final FactType MilitaryAward = include(FactType.MilitaryAward);
-    public static final FactType MilitaryCompany = include(FactType.MilitaryCompany);
     public static final FactType MilitaryDischarge = include(FactType.MilitaryDischarge);
-    public static final FactType MilitaryRank = include(FactType.MilitaryRank);
-    public static final FactType MilitaryRegiment = include(FactType.MilitaryRegiment);
     public static final FactType MilitaryService = include(FactType.MilitaryService);
-    public static final FactType MilitaryServiceBranch = include(FactType.MilitaryServiceBranch);
     public static final FactType Mission = include(FactType.Mission);
     public static final FactType Move = include(FactType.Move);
     public static final FactType NameOfShip = include(FactType.NameOfShip);
