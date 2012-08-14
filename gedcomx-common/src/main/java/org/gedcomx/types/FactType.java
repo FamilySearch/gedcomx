@@ -259,6 +259,10 @@ public enum FactType {
    * A fact of a person's stillbirth.
    */
   Stillbirth,
+
+  /**
+   * A fact of a person's will.
+   */
   Will,
 
   // facts generally applicable within the scope of a couple.
