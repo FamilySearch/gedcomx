@@ -254,7 +254,6 @@ public enum FactType {
    * A fact of a person's stillbirth.
    */
   Stillbirth,
-  TitleOfNobility,
   TribeName,
   Twin,
   Will,
@@ -443,7 +442,6 @@ public enum FactType {
     public static final FactType Residence = include(FactType.Residence);
     public static final FactType Retirement = include(FactType.Retirement);
     public static final FactType Stillbirth = include(FactType.Stillbirth);
-    public static final FactType TitleOfNobility = include(FactType.TitleOfNobility);
     public static final FactType TribeName = include(FactType.TribeName);
     public static final FactType Twin = include(FactType.Twin);
     public static final FactType Will = include(FactType.Will);
