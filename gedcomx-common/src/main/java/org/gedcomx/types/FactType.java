@@ -114,7 +114,6 @@ public enum FactType {
    * A fact of the death of a person.
    */
   Death,
-  DiedBeforeEight,
   Emigration,
   Ethnicity,
   Excommunication,
@@ -282,7 +281,6 @@ public enum FactType {
     public static final FactType Confirmation = include(FactType.Confirmation);
     public static final FactType Cremation = include(FactType.Cremation);
     public static final FactType Death = include(FactType.Death);
-    public static final FactType DiedBeforeEight = include(FactType.DiedBeforeEight);
     public static final FactType Emigration = include(FactType.Emigration);
     public static final FactType Ethnicity = include(FactType.Ethnicity);
     public static final FactType Excommunication = include(FactType.Excommunication);
