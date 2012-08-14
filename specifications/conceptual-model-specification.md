@@ -876,7 +876,6 @@ URI | description | scope
 `http://gedcomx.org/Occupation`| A fact of a person's occupation or employment. | person
 `http://gedcomx.org/Ordination`| A fact of a person's ordination to a stewardship in a church. | person
 `http://gedcomx.org/PhysicalDescription`| A fact of a person's physical description. | person
-`http://gedcomx.org/PortOfDeparture`| | person
 `http://gedcomx.org/PreviousResidence`| | person
 `http://gedcomx.org/Probate`| | person
 `http://gedcomx.org/Property`| | person

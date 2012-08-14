@@ -224,7 +224,6 @@ public enum FactType {
    * A fact of a person's physical description.
    */
   PhysicalDescription,
-  PortOfDeparture,
   PreviousResidence,
   Probate,
   Property,
@@ -418,7 +417,6 @@ public enum FactType {
     public static final FactType Ordination = include(FactType.Ordination);
     public static final FactType PhysicalDescription = include(FactType.PhysicalDescription);
     public static final FactType Probate = include(FactType.Probate);
-    public static final FactType PortOfDeparture = include(FactType.PortOfDeparture);
     public static final FactType Property = include(FactType.Property);
     public static final FactType PreviousResidence = include(FactType.PreviousResidence);
     public static final FactType RelationshipToHead = include(FactType.RelationshipToHead);
