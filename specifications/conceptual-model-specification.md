@@ -871,7 +871,6 @@ URI | description | scope
 `http://gedcomx.org/MoveTo`| A fact of a person's move (i.e. change of residence) to a new location. | person
 `http://gedcomx.org/MoveFrom`| A fact of a person's move (i.e. change of residence) from a location. | person
 `http://gedcomx.org/Naturalization`| A fact of a person's naturalization (i.e. acquisition of citizenship and nationality). | person
-`http://gedcomx.org/Namesake`| | person
 `http://gedcomx.org/NationalId`| | person
 `http://gedcomx.org/Nationality`| | person
 `http://gedcomx.org/NeverHadChildren`| | person

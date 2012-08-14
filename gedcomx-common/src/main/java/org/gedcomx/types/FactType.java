@@ -199,7 +199,6 @@ public enum FactType {
    * A fact of a person's naturalization (i.e. acquisition of citizenship and nationality).
    */
   Naturalization,
-  Namesake,
   NationalId,
   Nationality,
   NeverHadChildren,
@@ -397,7 +396,6 @@ public enum FactType {
     public static final FactType MoveTo = include(FactType.MoveTo);
     public static final FactType MoveFrom = include(FactType.MoveFrom);
     public static final FactType Naturalization = include(FactType.Naturalization);
-    public static final FactType Namesake = include(FactType.Namesake);
     public static final FactType NationalId = include(FactType.NationalId);
     public static final FactType Nationality = include(FactType.Nationality);
     public static final FactType NeverHadChildren = include(FactType.NeverHadChildren);
