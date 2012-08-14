@@ -210,8 +210,6 @@ public enum FactType {
    */
   Naturalization,
 
-  NeverHadChildren,
-  NeverMarried,
   NotAccountable,
   Occupation,
   Ordinance,
@@ -407,8 +405,6 @@ public enum FactType {
     public static final FactType Naturalization = include(FactType.Naturalization);
     public static final FactType NationalId = include(FactType.NationalId);
     public static final FactType Nationality = include(FactType.Nationality);
-    public static final FactType NeverHadChildren = include(FactType.NeverHadChildren);
-    public static final FactType NeverMarried = include(FactType.NeverMarried);
     public static final FactType NotAccountable = include(FactType.NotAccountable);
     public static final FactType Occupation = include(FactType.Occupation);
     public static final FactType Ordinance = include(FactType.Ordinance);
