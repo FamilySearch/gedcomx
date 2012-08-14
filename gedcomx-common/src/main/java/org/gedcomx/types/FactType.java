@@ -216,6 +216,11 @@ public enum FactType {
   Naturalization,
 
   /**
+   * A fact of a person's number of marriages.
+   */
+  NumberOfMarriages,
+
+  /**
    * A fact of a person's occupation or employment.
    */
   Occupation,
@@ -316,6 +321,10 @@ public enum FactType {
    * The fact of a marriage notice.
    */
   MarriageNotice,
+
+  /**
+   * A fact of the number of children of a person or relationship.
+   */
   NumberOfChildren,
   Separation,
   UniversalId,
@@ -438,6 +447,7 @@ public enum FactType {
     public static final FactType MoveTo = include(FactType.MoveTo);
     public static final FactType MoveFrom = include(FactType.MoveFrom);
     public static final FactType Naturalization = include(FactType.Naturalization);
+    public static final FactType NumberOfMarriages = include(FactType.NumberOfMarriages);
     public static final FactType NationalId = include(FactType.NationalId);
     public static final FactType Nationality = include(FactType.Nationality);
     public static final FactType Occupation = include(FactType.Occupation);

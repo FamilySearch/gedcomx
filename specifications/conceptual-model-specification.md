@@ -874,6 +874,8 @@ URI | description | scope
 `http://gedcomx.org/NationalId`| A fact of a person's national id (e.g. social security number). | person
 `http://gedcomx.org/Nationality`| A fact of a person's nationality. | person
 `http://gedcomx.org/Naturalization`| A fact of a person's naturalization (i.e. acquisition of citizenship and nationality). | person
+`http://gedcomx.org/NumberOfChildren`| A fact of the number of children of a person or relationship. | person
+`http://gedcomx.org/NumberOfMarriages`| A fact of a person's number of marriages. | person
 `http://gedcomx.org/Occupation`| A fact of a person's occupation or employment. | person
 `http://gedcomx.org/Ordination`| A fact of a person's ordination to a stewardship in a church. | person
 `http://gedcomx.org/PhysicalDescription`| A fact of a person's physical description. | person
@@ -894,7 +896,7 @@ URI | description | scope
 `http://gedcomx.org/MarriageContract`| The fact of a marriage contract. | couple relationship
 `http://gedcomx.org/MarriageLicense`| The fact of a marriage license. | couple relationship
 `http://gedcomx.org/MarriageNotice`| The fact of a marriage notice. | couple relationship
-`http://gedcomx.org/NumberOfChildren`| | couple relationship
+`http://gedcomx.org/NumberOfChildren`| A fact of the number of children of a person or relationship. | couple relationship
 `http://gedcomx.org/Separation`| | couple relationship
 `http://gedcomx.org/UniversalId`| | couple relationship
 `http://gedcomx.org/BiologicalLineage`| A fact about the biological lineage of a child to a parent. | parent-child relationship
