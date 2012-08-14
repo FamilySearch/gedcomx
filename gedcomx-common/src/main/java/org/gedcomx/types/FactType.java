@@ -214,7 +214,10 @@ public enum FactType {
    * A fact of a person's occupation or employment.
    */
   Occupation,
-  Ordinance,
+
+  /**
+   * A fact of a person's ordination to a stewardship in a church.
+   */
   Ordination,
   PhysicalDescription,
   PortOfDeparture,
@@ -408,7 +411,6 @@ public enum FactType {
     public static final FactType NationalId = include(FactType.NationalId);
     public static final FactType Nationality = include(FactType.Nationality);
     public static final FactType Occupation = include(FactType.Occupation);
-    public static final FactType Ordinance = include(FactType.Ordinance);
     public static final FactType Ordination = include(FactType.Ordination);
     public static final FactType PhysicalDescription = include(FactType.PhysicalDescription);
     public static final FactType Probate = include(FactType.Probate);
