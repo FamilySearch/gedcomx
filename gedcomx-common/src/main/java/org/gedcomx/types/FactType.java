@@ -339,8 +339,20 @@ public enum FactType {
    * A fact about the biological lineage of a child to a parent.
    */
   BiologicalLineage,
+
+  /**
+   * A fact about a foster relationship between a foster parent and a child.
+   */
   Foster,
+
+  /**
+   * A fact about a legal guardianship between a parent and a child.
+   */
   Guardianship,
+
+  /**
+   * A fact about the step relationship between a parent and a child.
+   */
   Step,
 
   //facts generally applicable within the scope of a record.

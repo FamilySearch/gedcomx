@@ -900,9 +900,9 @@ URI | description | scope
 `http://gedcomx.org/Separation`| A fact of a couple's separation. | couple relationship
 `http://gedcomx.org/BiologicalLineage`| A fact about the biological lineage of a child to a parent. | parent-child relationship
 `http://gedcomx.org/Adoption`| A fact of a person's adoption. In the context of a parent-child relationship, it describes a fact of the adoption of a child by a parent. | parent-child relationship
-`http://gedcomx.org/Foster`| | parent-child relationship
-`http://gedcomx.org/Guardianship`| | parent-child relationship
-`http://gedcomx.org/Step`| | parent-child relationship
+`http://gedcomx.org/Foster`| A fact about a foster relationship between a foster parent and a child. | parent-child relationship
+`http://gedcomx.org/Guardianship`| A fact about a legal guardianship between a parent and a child. | parent-child relationship
+`http://gedcomx.org/Step`| A fact about the step relationship between a parent and a child. | parent-child relationship
 
 
 <a id="person"/>
