@@ -129,7 +129,15 @@ public enum FactType {
    * A fact of a person's ethnicity or race.
    */
   Ethnicity,
+
+  /**
+   * A fact of a person's excommunication from a church.
+   */
   Excommunication,
+
+  /**
+   * A fact of a person's first communion in a church.
+   */
   FirstCommunion,
   Flourish,
   Funeral,

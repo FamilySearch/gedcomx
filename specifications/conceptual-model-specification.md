@@ -857,8 +857,8 @@ URI | description | scope
 `http://gedcomx.org/Education`| A fact of an education or an educational achievement (e.g. diploma, graduation, scholarship, etc.) of a person. | person
 `http://gedcomx.org/Emigration`| A fact of the emigration of a person. | person
 `http://gedcomx.org/Ethnicity`| A fact of a person's ethnicity or race. | person
-`http://gedcomx.org/Excommunication`| | person
-`http://gedcomx.org/FirstCommunion`| | person
+`http://gedcomx.org/Excommunication`| A fact of a person's excommunication from a church. | person
+`http://gedcomx.org/FirstCommunion`| A fact of a person's first communion in a church. | person
 `http://gedcomx.org/Flourish`| | person
 `http://gedcomx.org/Funeral`| | person
 `http://gedcomx.org/GedcomUUID`| | person
