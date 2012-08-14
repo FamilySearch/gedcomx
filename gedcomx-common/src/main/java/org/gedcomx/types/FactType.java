@@ -231,7 +231,15 @@ public enum FactType {
    * The fact of a marriage.
    */
   Marriage,
+
+  /**
+   * The fact of a marriage banns.
+   */
   MarriageBanns,
+
+  /**
+   * The fact of a marriage contract.
+   */
   MarriageContract,
   MarriageIntent,
   MarriageLicense,

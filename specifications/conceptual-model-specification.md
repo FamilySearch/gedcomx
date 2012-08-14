@@ -905,8 +905,8 @@ URI | description | scope
 `http://gedcomx.org/DivorceFiling`| The fact of a filing for divorce. | couple relationship
 `http://gedcomx.org/Engagement`| The fact of an engagement to be married. | couple relationship
 `http://gedcomx.org/Marriage`| The fact of a marriage. | couple relationship
-`http://gedcomx.org/MarriageBanns`| | couple relationship
-`http://gedcomx.org/MarriageContract`| | couple relationship
+`http://gedcomx.org/MarriageBanns`| The fact of a marriage banns. | couple relationship
+`http://gedcomx.org/MarriageContract`| The fact of a marriage contract. | couple relationship
 `http://gedcomx.org/MarriageIntent`| | couple relationship
 `http://gedcomx.org/MarriageLicense`| | couple relationship
 `http://gedcomx.org/MarriageNotice`| | couple relationship
