@@ -882,7 +882,6 @@ URI | description | scope
 `http://gedcomx.org/Residence`| A fact of a person's residence. | person
 `http://gedcomx.org/Retirement`| A fact of a person's retirement. | person
 `http://gedcomx.org/Stillbirth`| A fact of a person's stillbirth. | person
-`http://gedcomx.org/TribeName`| | person
 `http://gedcomx.org/Twin`| | person
 `http://gedcomx.org/Will`| | person
 `http://gedcomx.org/Annulment`| The fact of an annulment of a marriage. | couple relationship
