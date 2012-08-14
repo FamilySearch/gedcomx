@@ -886,6 +886,7 @@ URI | description | scope
 `http://gedcomx.org/Retirement`| A fact of a person's retirement. | person
 `http://gedcomx.org/Stillbirth`| A fact of a person's stillbirth. | person
 `http://gedcomx.org/Will`| A fact of a person's will. | person
+`http://gedcomx.org/Visit`| A fact of a person's visit to a place different from the person's residence. | person
 `http://gedcomx.org/Annulment`| The fact of an annulment of a marriage. | couple relationship
 `http://gedcomx.org/CommonLawMarriage`| The fact of a marriage by common law. | couple relationship
 `http://gedcomx.org/Divorce`| The fact of a divorce of a couple. | couple relationship

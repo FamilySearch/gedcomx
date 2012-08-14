@@ -270,6 +270,11 @@ public enum FactType {
    */
   Will,
 
+  /**
+   * A fact of a person's visit to a place different from the person's residence.
+   */
+  Visit,
+
   // facts generally applicable within the scope of a couple.
 
   /**
@@ -476,7 +481,8 @@ public enum FactType {
     public static final FactType Stillbirth = include(FactType.Stillbirth);
     public static final FactType MultipleBirth = include(FactType.MultipleBirth);
     public static final FactType Will = include(FactType.Will);
-    
+    public static final FactType Visit = include(FactType.Visit);
+
     /**
      * Whether the given fact type is applicable to a person.
      * 
