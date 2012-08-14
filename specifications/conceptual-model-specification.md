@@ -877,7 +877,7 @@ URI | description | scope
 `http://gedcomx.org/Ordination`| A fact of a person's ordination to a stewardship in a church. | person
 `http://gedcomx.org/PhysicalDescription`| A fact of a person's physical description. | person
 `http://gedcomx.org/Probate`| A fact of a receipt of probate of a person's property. | person
-`http://gedcomx.org/Property`| | person
+`http://gedcomx.org/Property`| A fact of a person's property or possessions. | person
 `http://gedcomx.org/RelationshipToHead`| | person
 `http://gedcomx.org/Religion`| | person
 `http://gedcomx.org/Residence`| | person

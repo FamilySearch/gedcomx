@@ -229,6 +229,10 @@ public enum FactType {
    * A fact of a receipt of probate of a person's property.
    */
   Probate,
+
+  /**
+   * A fact of a person's property or possessions.
+   */
   Property,
   RelationshipToHead,
   Religion,
