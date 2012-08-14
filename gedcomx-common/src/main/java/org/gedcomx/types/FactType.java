@@ -195,7 +195,6 @@ public enum FactType {
    */
   MoveTo,
 
-  NameOfShip,
   Naturalization,
   Namesake,
   NationalId,
@@ -394,7 +393,6 @@ public enum FactType {
     public static final FactType Mission = include(FactType.Mission);
     public static final FactType MoveTo = include(FactType.MoveTo);
     public static final FactType MoveFrom = include(FactType.MoveFrom);
-    public static final FactType NameOfShip = include(FactType.NameOfShip);
     public static final FactType Naturalization = include(FactType.Naturalization);
     public static final FactType Namesake = include(FactType.Namesake);
     public static final FactType NationalId = include(FactType.NationalId);
