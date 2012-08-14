@@ -226,6 +226,10 @@ public enum FactType {
    * The fact of an engagement to be married.
    */
   Engagement,
+
+  /**
+   * The fact of a marriage.
+   */
   Marriage,
   MarriageBanns,
   MarriageContract,
