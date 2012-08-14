@@ -862,7 +862,7 @@ URI | description | scope
 `http://gedcomx.org/Flourish`| A fact of a person's flourish, defined to mean the time period in an adult's life where he was most productive, perhaps as a writer or member of the state assembly. It does not reflect the person's birth and death dates. | person
 `http://gedcomx.org/Funeral`| A fact of a person's funeral. | person
 `http://gedcomx.org/Immigration`| A fact of a person's immigration. | person
-`http://gedcomx.org/MaritalStatus`| | person
+`http://gedcomx.org/MaritalStatus`| A fact of a person's marital status. | person
 `http://gedcomx.org/Medical`| A fact of a person's medical record, such as for an illness or hospital stay. | person
 `http://gedcomx.org/MilitaryAward`| | person
 `http://gedcomx.org/MilitaryCompany`| | person

@@ -154,6 +154,10 @@ public enum FactType {
    * A fact of a person's immigration.
    */
   Immigration,
+
+  /**
+   * A fact of a person's marital status.
+   */
   MaritalStatus,
 
   /**
