@@ -196,6 +196,11 @@ public enum FactType {
   MoveTo,
 
   /**
+   * A fact that a person was born as part of a multiple birth (e.g. twin, triplet, etc.)
+   */
+  MultipleBirth,
+
+  /**
    * A fact of a person's national id (e.g. social security number).
    */
   NationalId,
@@ -254,7 +259,6 @@ public enum FactType {
    * A fact of a person's stillbirth.
    */
   Stillbirth,
-  Twin,
   Will,
 
   // facts generally applicable within the scope of a couple.
@@ -441,7 +445,7 @@ public enum FactType {
     public static final FactType Residence = include(FactType.Residence);
     public static final FactType Retirement = include(FactType.Retirement);
     public static final FactType Stillbirth = include(FactType.Stillbirth);
-    public static final FactType Twin = include(FactType.Twin);
+    public static final FactType MultipleBirth = include(FactType.MultipleBirth);
     public static final FactType Will = include(FactType.Will);
     
     /**

@@ -870,6 +870,7 @@ URI | description | scope
 `http://gedcomx.org/Mission`| A fact of a person's church mission. | person
 `http://gedcomx.org/MoveTo`| A fact of a person's move (i.e. change of residence) to a new location. | person
 `http://gedcomx.org/MoveFrom`| A fact of a person's move (i.e. change of residence) from a location. | person
+`http://gedcomx.org/MultipleBirth`| A fact that a person was born as part of a multiple birth (e.g. twin, triplet, etc.) | person
 `http://gedcomx.org/NationalId`| A fact of a person's national id (e.g. social security number). | person
 `http://gedcomx.org/Nationality`| A fact of a person's nationality. | person
 `http://gedcomx.org/Naturalization`| A fact of a person's naturalization (i.e. acquisition of citizenship and nationality). | person
@@ -882,7 +883,6 @@ URI | description | scope
 `http://gedcomx.org/Residence`| A fact of a person's residence. | person
 `http://gedcomx.org/Retirement`| A fact of a person's retirement. | person
 `http://gedcomx.org/Stillbirth`| A fact of a person's stillbirth. | person
-`http://gedcomx.org/Twin`| | person
 `http://gedcomx.org/Will`| | person
 `http://gedcomx.org/Annulment`| The fact of an annulment of a marriage. | couple relationship
 `http://gedcomx.org/CommonLawMarriage`| The fact of a marriage by common law. | couple relationship
