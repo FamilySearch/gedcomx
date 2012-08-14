@@ -119,6 +119,10 @@ public enum FactType {
    * A fact of an education or an educational achievement (e.g. diploma, graduation, scholarship, etc.) of a person.
    */
   Education,
+
+  /**
+   * A fact of the emigration of a person.
+   */
   Emigration,
   Ethnicity,
   Excommunication,
