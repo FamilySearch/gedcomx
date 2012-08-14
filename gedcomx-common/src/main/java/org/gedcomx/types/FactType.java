@@ -154,7 +154,6 @@ public enum FactType {
    * A fact of a person's immigration.
    */
   Immigration,
-  Interment,
   Living,
   MaritalStatus,
 
@@ -262,7 +261,7 @@ public enum FactType {
   OTHER;
 
   public final static Set<FactType> BIRTHLIKE_FACT_TYPES = Collections.unmodifiableSet(EnumSet.of(Baptism, Birth, Christening, Blessing, Circumcision, Adoption));
-  public final static Set<FactType> DEATHLIKE_FACT_TYPES = Collections.unmodifiableSet(EnumSet.of(Death, Burial, Cremation, Funeral, Interment, Probate, Will));
+  public final static Set<FactType> DEATHLIKE_FACT_TYPES = Collections.unmodifiableSet(EnumSet.of(Death, Burial, Cremation, Funeral, Probate, Will));
   public final static Set<FactType> MARRIAGELIKE_FACT_TYPES = Collections.unmodifiableSet(EnumSet.of(Marriage, Engagement, MarriageBanns, MarriageContract, MarriageLicense, MarriageNotice, MarriageSettlement));
   public final static Set<FactType> DIVORCELIKE_FACT_TYPES = Collections.unmodifiableSet(EnumSet.of(Divorce, DivorceFiling, Annulment, Separation));
   public final static Set<FactType> MIGRATIONLIKE_FACT_TYPES = Collections.unmodifiableSet(EnumSet.of(Immigration, Emigration, Naturalization, Move));
@@ -343,7 +342,6 @@ public enum FactType {
     public static final FactType Funeral = include(FactType.Funeral);
     public static final FactType Education = include(FactType.Education);
     public static final FactType Immigration = include(FactType.Immigration);
-    public static final FactType Interment = include(FactType.Interment);
     public static final FactType Household = include(FactType.Household);
     public static final FactType Living = include(FactType.Living);
     public static final FactType MaritalStatus = include(FactType.MaritalStatus);
