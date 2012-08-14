@@ -326,6 +326,10 @@ public enum FactType {
    * A fact of the number of children of a person or relationship.
    */
   NumberOfChildren,
+
+  /**
+   * A fact of a couple's separation.
+   */
   Separation,
   UniversalId,
 
