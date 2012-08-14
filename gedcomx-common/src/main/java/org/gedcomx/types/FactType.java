@@ -114,6 +114,11 @@ public enum FactType {
    * A fact of the death of a person.
    */
   Death,
+
+  /**
+   * A fact of an education or an educational achievement (e.g. diploma, graduation, scholarship, etc.) of a person.
+   */
+  Education,
   Emigration,
   Ethnicity,
   Excommunication,
@@ -121,7 +126,6 @@ public enum FactType {
   Flourish,
   Funeral,
   GedcomUUID,
-  Education,
   Illness,
   Immigration,
   Interment,
