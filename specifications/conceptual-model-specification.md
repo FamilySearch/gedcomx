@@ -916,11 +916,11 @@ URI | description | scope
 `http://gedcomx.org/NumberOfChildren`| | couple relationship
 `http://gedcomx.org/Separation`| | couple relationship
 `http://gedcomx.org/UniversalId`| | couple relationship
-`http://gedcomx.org/Biological`| | parent-child relationship
+`http://gedcomx.org/BiologicalLineage`| A fact about the biological lineage of a child to a parent. | parent-child relationship
 `http://gedcomx.org/Adoption`| A fact of a person's adoption. In the context of a parent-child relationship, it describes a fact of the adoption of a child by a parent. | parent-child relationship
-`http://gedcomx.org/Step`| | parent-child relationship
 `http://gedcomx.org/Foster`| | parent-child relationship
 `http://gedcomx.org/Guardianship`| | parent-child relationship
+`http://gedcomx.org/Step`| | parent-child relationship
 
 
 <a id="person"/>

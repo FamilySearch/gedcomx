@@ -229,10 +229,14 @@ public enum FactType {
 
   // facts generally applicable within the scope of a parent-child relationship.
   // Adoption, (applicable on a person, too).
-  Biological,
-  Step,
+
+  /**
+   * A fact about the biological lineage of a child to a parent.
+   */
+  BiologicalLineage,
   Foster,
   Guardianship,
+  Step,
 
   //facts generally applicable within the scope of a record.
   @XmlQNameEnumValue ( namespace = "http://record.gedcomx.org/")
@@ -430,7 +434,7 @@ public enum FactType {
       return type;
     }
     
-    public static final FactType Biological = include(FactType.Biological);
+    public static final FactType Biological = include(FactType.BiologicalLineage);
     public static final FactType Adopted = include(FactType.Adoption);
     public static final FactType Step = include(FactType.Step);
     public static final FactType Foster = include(FactType.Foster);
