@@ -234,7 +234,6 @@ public enum FactType {
    * A fact of a person's property or possessions.
    */
   Property,
-  RelationshipToHead,
   Religion,
   Residence,
   Retirement,
@@ -425,7 +424,6 @@ public enum FactType {
     public static final FactType PhysicalDescription = include(FactType.PhysicalDescription);
     public static final FactType Probate = include(FactType.Probate);
     public static final FactType Property = include(FactType.Property);
-    public static final FactType RelationshipToHead = include(FactType.RelationshipToHead);
     public static final FactType Religion = include(FactType.Religion);
     public static final FactType Residence = include(FactType.Residence);
     public static final FactType Retirement = include(FactType.Retirement);
