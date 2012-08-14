@@ -195,6 +195,9 @@ public enum FactType {
    */
   MoveTo,
 
+  /**
+   * A fact of a person's naturalization (i.e. acquisition of citizenship and nationality).
+   */
   Naturalization,
   Namesake,
   NationalId,
