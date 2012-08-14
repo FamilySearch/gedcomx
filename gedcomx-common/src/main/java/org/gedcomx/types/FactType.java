@@ -331,7 +331,6 @@ public enum FactType {
    * A fact of a couple's separation.
    */
   Separation,
-  UniversalId,
 
   // facts generally applicable within the scope of a parent-child relationship.
   // Adoption, (applicable on a person, too).
@@ -499,7 +498,6 @@ public enum FactType {
     public static final FactType MarriageNotice = include(FactType.MarriageNotice);
     public static final FactType NumberOfChildren = include(FactType.NumberOfChildren);
     public static final FactType Separation = include(FactType.Separation);
-    public static final FactType UniversalId = include(FactType.UniversalId);
 
     /**
      * Whether the given fact type is applicable to a couple.
