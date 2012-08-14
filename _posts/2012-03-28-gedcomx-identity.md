@@ -2,6 +2,7 @@
 title: The Identity of GEDCOM X
 date: 2012-03-23 11:16:00
 layout: default
+author: Ryan Heaton
 ---
 
 We're excited to say that we've been given additional resources to keep GEDCOM X

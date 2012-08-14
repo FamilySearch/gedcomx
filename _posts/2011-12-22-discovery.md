@@ -2,6 +2,7 @@
 title: GEDCOM X Discovery
 date: 2011-12-22 15:00:00
 layout: default
+author: Ryan Heaton
 ---
 
 Since the inception of the GEDCOM X project, we've known that GEDCOM X will be more than just a file format. GEDCOM X is also being developed as the standard for genealogical Web service APIs. To flesh out those API definitions, we're starting with the notion of discovery.

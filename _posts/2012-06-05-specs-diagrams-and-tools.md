@@ -2,6 +2,7 @@
 title: Specs, Diagrams, and Illustrations
 date: 2012-06-05 14:13:00
 layout: default
+author: Ryan Heaton
 ---
 
 We're glad to (finally!) announce the availability of some additional resources

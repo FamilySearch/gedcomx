@@ -2,6 +2,7 @@
 title: The File Format - Jeers and Cheers
 date: 2012-07-03 12:09:00
 layout: default
+author: Ryan Heaton
 ---
 
 So now that we've had a few weeks to take a look at the new file

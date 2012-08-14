@@ -2,6 +2,7 @@
 title: GEDCOM X 0.3.0 Released
 date: 2011-08-04 12:04:00
 layout: default
+author: Ryan Heaton
 ---
 
 GEDCOM X 0.3.0 has been released.

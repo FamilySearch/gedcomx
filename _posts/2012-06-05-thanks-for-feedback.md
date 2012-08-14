@@ -2,6 +2,7 @@
 title: Thanks for Your Feedback
 date: 2012-06-05 13:20:00
 layout: default
+author: Ryan Heaton
 ---
 
 We just wanted to express our thanks to everybody who participated in the

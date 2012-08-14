@@ -2,6 +2,7 @@
 title: GEDCOM X 0.8.0
 date: 2012-01-18 12:48:00
 layout: default
+author: Ryan Heaton
 ---
 
 GEDCOM X 0.8.0 has been released.

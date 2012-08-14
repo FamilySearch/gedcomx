@@ -2,6 +2,7 @@
 title: GEDCOM X 0.10.0
 date: 2012-02-15 14:55:00
 layout: default
+author: Ryan Heaton
 ---
 
 It's been a wild two weeks since RootsTech 2012. We've already received a lot of great feedback

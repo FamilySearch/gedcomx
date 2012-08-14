@@ -2,6 +2,7 @@
 title: Your Comments Here
 date: 2012-06-06 10:33:00
 layout: default
+author: Ryan Heaton
 ---
 
 Until today, the GEDCOM X Blog has been closed to your comments. But it's 

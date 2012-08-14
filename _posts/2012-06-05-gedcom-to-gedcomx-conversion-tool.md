@@ -2,6 +2,7 @@
 title: The GEDCOM 5.5 to GEDCOM X Conversion Tool
 date: 2012-06-05 14:38:00
 layout: default
+author: Ryan Heaton
 ---
 
 Having made the decision to go with a [zip-based file format](https://github.com/FamilySearch/gedcomx/blob/master/specifications/file-format-specification.md)
