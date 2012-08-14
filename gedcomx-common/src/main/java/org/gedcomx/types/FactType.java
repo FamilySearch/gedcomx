@@ -124,6 +124,10 @@ public enum FactType {
    * A fact of the emigration of a person.
    */
   Emigration,
+
+  /**
+   * A fact of a person's ethnicity or race.
+   */
   Ethnicity,
   Excommunication,
   FirstCommunion,
@@ -160,7 +164,6 @@ public enum FactType {
   PreviousResidence,
   Probate,
   Property,
-  Race,
   RelationshipToHead,
   Religion,
   Residence,
@@ -344,7 +347,6 @@ public enum FactType {
     public static final FactType PortOfDeparture = include(FactType.PortOfDeparture);
     public static final FactType Property = include(FactType.Property);
     public static final FactType PreviousResidence = include(FactType.PreviousResidence);
-    public static final FactType Race = include(FactType.Race);
     public static final FactType RelationshipToHead = include(FactType.RelationshipToHead);
     public static final FactType Religion = include(FactType.Religion);
     public static final FactType Residence = include(FactType.Residence);

@@ -856,7 +856,7 @@ URI | description | scope
 `http://gedcomx.org/Death`| A fact of the death of a person. | person
 `http://gedcomx.org/Education`| A fact of an education or an educational achievement (e.g. diploma, graduation, scholarship, etc.) of a person. | person
 `http://gedcomx.org/Emigration`| A fact of the emigration of a person. | person
-`http://gedcomx.org/Ethnicity`| | person
+`http://gedcomx.org/Ethnicity`| A fact of a person's ethnicity or race. | person
 `http://gedcomx.org/Excommunication`| | person
 `http://gedcomx.org/FirstCommunion`| | person
 `http://gedcomx.org/Flourish`| | person
@@ -892,7 +892,6 @@ URI | description | scope
 `http://gedcomx.org/PreviousResidence`| | person
 `http://gedcomx.org/Probate`| | person
 `http://gedcomx.org/Property`| | person
-`http://gedcomx.org/Race`| | person
 `http://gedcomx.org/RelationshipToHead`| | person
 `http://gedcomx.org/Religion`| | person
 `http://gedcomx.org/Residence`| | person
