@@ -210,6 +210,9 @@ public enum FactType {
    */
   Naturalization,
 
+  /**
+   * A fact of a person's occupation or employment.
+   */
   Occupation,
   Ordinance,
   Ordination,
