@@ -141,11 +141,6 @@ public enum FactType {
   FirstCommunion,
 
   /**
-   * A fact of a person's flourish, defined to mean the time period in an adult's life where he was most productive, perhaps as a writer or member of the state assembly. It does not reflect the person's birth and death dates.
-   */
-  Flourish,
-
-  /**
    * A fact of a person's funeral.
    */
   Funeral,
@@ -159,6 +154,12 @@ public enum FactType {
    * A fact of a land transaction enacted by a person.
    */
   LandTransation,
+
+  /**
+   * A fact of a record of a person's living for a specific period. This is designed to include "flourish", defined to mean the time period
+   * in an adult's life where he was most productive, perhaps as a writer or member of the state assembly. It does not reflect the person's birth and death dates.
+   */
+  Living,
 
   /**
    * A fact of a person's marital status.
@@ -458,7 +459,7 @@ public enum FactType {
     public static final FactType Ethnicity = include(FactType.Ethnicity);
     public static final FactType Excommunication = include(FactType.Excommunication);
     public static final FactType FirstCommunion = include(FactType.FirstCommunion);
-    public static final FactType Flourish = include(FactType.Flourish);
+    public static final FactType Living = include(FactType.Living);
     public static final FactType Funeral = include(FactType.Funeral);
     public static final FactType Education = include(FactType.Education);
     public static final FactType Immigration = include(FactType.Immigration);
