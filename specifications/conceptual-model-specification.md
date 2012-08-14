@@ -853,7 +853,7 @@ URI | description | scope
 `http://gedcomx.org/Clan`| A fact of a person's clan. | person
 `http://gedcomx.org/Confirmation`| A fact of a person's confirmation (or other rite of initiation) in a church or religion. | person
 `http://gedcomx.org/Cremation`| A fact of the cremation of person's body after death. | person
-`http://gedcomx.org/Death`| | person
+`http://gedcomx.org/Death`| A fact of the death of a person. | person
 `http://gedcomx.org/DiedBeforeEight`| | person
 `http://gedcomx.org/Dwelling`| | person
 `http://gedcomx.org/Education`| | person

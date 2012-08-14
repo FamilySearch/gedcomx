@@ -109,6 +109,10 @@ public enum FactType {
    * A fact of the cremation of person's body after death.
    */
   Cremation,
+
+  /**
+   * A fact of the death of a person.
+   */
   Death,
   DiedBeforeEight,
   Emigration,
