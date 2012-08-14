@@ -193,6 +193,10 @@ public enum FactType {
    * The fact of a filing for divorce.
    */
   DivorceFiling,
+
+  /**
+   * The fact of an engagement to be married.
+   */
   Engagement,
   Marriage,
   MarriageBanns,
