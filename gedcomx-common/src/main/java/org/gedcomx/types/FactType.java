@@ -179,8 +179,22 @@ public enum FactType {
    * A fact of a person's militray service.
    */
   MilitaryService,
+
+  /**
+   * A fact of a person's church mission.
+   */
   Mission,
-  Move,
+
+  /**
+   * A fact of a person's move (i.e. change of residence) from a location.
+   */
+  MoveFrom,
+
+  /**
+   * A fact of a person's move (i.e. change of residence) to a new location.
+   */
+  MoveTo,
+
   NameOfShip,
   Naturalization,
   Namesake,
@@ -293,7 +307,7 @@ public enum FactType {
   public final static Set<FactType> DEATHLIKE_FACT_TYPES = Collections.unmodifiableSet(EnumSet.of(Death, Burial, Cremation, Funeral, Probate, Will));
   public final static Set<FactType> MARRIAGELIKE_FACT_TYPES = Collections.unmodifiableSet(EnumSet.of(Marriage, Engagement, MarriageBanns, MarriageContract, MarriageLicense, MarriageNotice));
   public final static Set<FactType> DIVORCELIKE_FACT_TYPES = Collections.unmodifiableSet(EnumSet.of(Divorce, DivorceFiling, Annulment, Separation));
-  public final static Set<FactType> MIGRATIONLIKE_FACT_TYPES = Collections.unmodifiableSet(EnumSet.of(Immigration, Emigration, Naturalization, Move));
+  public final static Set<FactType> MIGRATIONLIKE_FACT_TYPES = Collections.unmodifiableSet(EnumSet.of(Immigration, Emigration, Naturalization, MoveTo, MoveFrom));
 
   public boolean isBirthLike() {
     return BIRTHLIKE_FACT_TYPES.contains(this);
@@ -378,7 +392,8 @@ public enum FactType {
     public static final FactType MilitaryDischarge = include(FactType.MilitaryDischarge);
     public static final FactType MilitaryService = include(FactType.MilitaryService);
     public static final FactType Mission = include(FactType.Mission);
-    public static final FactType Move = include(FactType.Move);
+    public static final FactType MoveTo = include(FactType.MoveTo);
+    public static final FactType MoveFrom = include(FactType.MoveFrom);
     public static final FactType NameOfShip = include(FactType.NameOfShip);
     public static final FactType Naturalization = include(FactType.Naturalization);
     public static final FactType Namesake = include(FactType.Namesake);

@@ -867,8 +867,9 @@ URI | description | scope
 `http://gedcomx.org/MilitaryAward`| A fact of a person's military award. | person
 `http://gedcomx.org/MilitaryDischarge`| A fact of a person's military discharge. | person
 `http://gedcomx.org/MilitaryService`| A fact of a person's militray service. | person
-`http://gedcomx.org/Mission`| | person
-`http://gedcomx.org/Move`| | person
+`http://gedcomx.org/Mission`| A fact of a person's church mission. | person
+`http://gedcomx.org/MoveTo`| A fact of a person's move (i.e. change of residence) to a new location. | person
+`http://gedcomx.org/MoveFrom`| A fact of a person's move (i.e. change of residence) from a location. | person
 `http://gedcomx.org/NameOfShip`| | person
 `http://gedcomx.org/Naturalization`| | person
 `http://gedcomx.org/Namesake`| | person
