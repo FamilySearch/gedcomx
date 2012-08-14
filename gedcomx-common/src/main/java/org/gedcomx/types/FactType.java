@@ -199,6 +199,10 @@ public enum FactType {
    * A fact of a person's naturalization (i.e. acquisition of citizenship and nationality).
    */
   Naturalization,
+
+  /**
+   * A fact of a person's national id (e.g. social security number).
+   */
   NationalId,
   Nationality,
   NeverHadChildren,
