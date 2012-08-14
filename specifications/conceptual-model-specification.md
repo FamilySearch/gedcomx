@@ -875,7 +875,7 @@ URI | description | scope
 `http://gedcomx.org/Naturalization`| A fact of a person's naturalization (i.e. acquisition of citizenship and nationality). | person
 `http://gedcomx.org/Occupation`| A fact of a person's occupation or employment. | person
 `http://gedcomx.org/Ordination`| A fact of a person's ordination to a stewardship in a church. | person
-`http://gedcomx.org/PhysicalDescription`| | person
+`http://gedcomx.org/PhysicalDescription`| A fact of a person's physical description. | person
 `http://gedcomx.org/PortOfDeparture`| | person
 `http://gedcomx.org/PreviousResidence`| | person
 `http://gedcomx.org/Probate`| | person

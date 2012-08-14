@@ -219,6 +219,10 @@ public enum FactType {
    * A fact of a person's ordination to a stewardship in a church.
    */
   Ordination,
+
+  /**
+   * A fact of a person's physical description.
+   */
   PhysicalDescription,
   PortOfDeparture,
   PreviousResidence,
