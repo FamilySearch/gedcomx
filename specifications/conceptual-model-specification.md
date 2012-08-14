@@ -878,9 +878,9 @@ URI | description | scope
 `http://gedcomx.org/PhysicalDescription`| A fact of a person's physical description. | person
 `http://gedcomx.org/Probate`| A fact of a receipt of probate of a person's property. | person
 `http://gedcomx.org/Property`| A fact of a person's property or possessions. | person
-`http://gedcomx.org/Religion`| | person
-`http://gedcomx.org/Residence`| | person
-`http://gedcomx.org/Retirement`| | person
+`http://gedcomx.org/Religion`| A fact of a person's religion. | person
+`http://gedcomx.org/Residence`| A fact of a person's residence. | person
+`http://gedcomx.org/Retirement`| A fact of a person's retirement. | person
 `http://gedcomx.org/SocialSecurityNumber`| | person
 `http://gedcomx.org/Stillborn`| | person
 `http://gedcomx.org/TitleOfNobility`| | person

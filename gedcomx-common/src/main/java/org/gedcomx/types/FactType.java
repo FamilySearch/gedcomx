@@ -234,8 +234,20 @@ public enum FactType {
    * A fact of a person's property or possessions.
    */
   Property,
+
+  /**
+   * A fact of a person's religion.
+   */
   Religion,
+
+  /**
+   * A fact of a person's residence.
+   */
   Residence,
+
+  /**
+   * A fact of a person's retirement.
+   */
   Retirement,
   SocialSecurityNumber,
   Stillborn,
