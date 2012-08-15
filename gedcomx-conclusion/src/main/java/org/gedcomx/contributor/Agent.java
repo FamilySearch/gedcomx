@@ -13,38 +13,37 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.metadata.foaf;
+package org.gedcomx.contributor;
 
 import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
-import org.gedcomx.common.LiteralValue;
 import org.gedcomx.common.ResourceReference;
 import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.SupportsExtensionElements;
+import org.gedcomx.rt.json.JsonElementWrapper;
 
-import javax.xml.bind.annotation.XmlAnyElement;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
 
 /**
- * A FOAF agent, e.g. person or organization
+ * An agent, e.g. person, organization, or group. In genealogical research, an agent often
+ * takes the role of a contributor.
  *
  * @see <a href="http://xmlns.com/foaf/spec/#term_Agent">foaf:Agent</a>
  * @author Ryan Heaton
  */
-@XmlType (name = "Agent")
-public abstract class Agent implements SupportsExtensionElements {
+@XmlRootElement
+@XmlType ( name = "Agent" )
+@JsonElementWrapper ( name = "agents" )
+public class Agent implements SupportsExtensionElements {
 
   private String id;
-  private LiteralValue name;
-  private LiteralValue homepage;
-  private LiteralValue openid;
+  private String name;
+  private ResourceReference homepage;
+  private ResourceReference openid;
   private List<OnlineAccount> accounts;
   private List<ResourceReference> emails;
   private List<ResourceReference> phones;
@@ -76,7 +75,7 @@ public abstract class Agent implements SupportsExtensionElements {
    *
    * @return The name of the person or organization.
    */
-  public LiteralValue getName() {
+  public String getName() {
     return name;
   }
 
@@ -85,7 +84,7 @@ public abstract class Agent implements SupportsExtensionElements {
    *
    * @param name The name of the person or organization.
    */
-  public void setName(LiteralValue name) {
+  public void setName(String name) {
     this.name = name;
   }
 
@@ -95,7 +94,7 @@ public abstract class Agent implements SupportsExtensionElements {
    *
    * @return The homepage.
    */
-  public LiteralValue getHomepage() {
+  public ResourceReference getHomepage() {
     return homepage;
   }
 
@@ -105,7 +104,7 @@ public abstract class Agent implements SupportsExtensionElements {
    *
    * @param homepage The homepage.
    */
-  public void setHomepage(LiteralValue homepage) {
+  public void setHomepage(ResourceReference homepage) {
     this.homepage = homepage;
   }
 
@@ -114,7 +113,7 @@ public abstract class Agent implements SupportsExtensionElements {
    *
    * @return The <a href="http://openid.net/">openid</a> of the person or organization.
    */
-  public LiteralValue getOpenid() {
+  public ResourceReference getOpenid() {
     return openid;
   }
 
@@ -123,7 +122,7 @@ public abstract class Agent implements SupportsExtensionElements {
    *
    * @param openid The <a href="http://openid.net/">openid</a> of the person or organization.
    */
-  public void setOpenid(LiteralValue openid) {
+  public void setOpenid(ResourceReference openid) {
     this.openid = openid;
   }
 
@@ -154,7 +153,7 @@ public abstract class Agent implements SupportsExtensionElements {
    *
    * @return The emails that belong to this person or organization.
    */
-  @XmlElement(name = "mbox")
+  @XmlElement(name = "email")
   @JsonName ("emails")
   @JsonProperty ("emails")
   public List<ResourceReference> getEmails() {
@@ -198,7 +197,7 @@ public abstract class Agent implements SupportsExtensionElements {
    *
    * @return The addresses that belong to this person or organization.
    */
-  @XmlElement(name = "address", namespace = CommonModels.CONTACT_NAMESPACE)
+  @XmlElement(name = "address")
   @JsonName ("addresses")
   @JsonProperty ("addresses")
   @SuppressWarnings("gedcomx:plural_xml_name")

@@ -13,17 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.metadata.foaf;
+package org.gedcomx.contributor;
 
-import org.codehaus.enunciate.json.JsonName;
-import org.codehaus.jackson.annotate.JsonProperty;
-import org.gedcomx.common.LiteralValue;
 import org.gedcomx.common.ResourceReference;
-import org.gedcomx.rt.CommonModels;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlType;
 
 /**
@@ -35,39 +28,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType( name = "OnlineAccount" )
 public class OnlineAccount {
 
-  private String id;
   private ResourceReference serviceHomepage;
-  private LiteralValue accountName;
-  private LiteralValue displayName;
-
-  /**
-   * The id of this online account.
-   *
-   * @return The id of this online account.
-   */
-  @XmlAttribute ( name = "ID", namespace = CommonModels.RDF_NAMESPACE  )
-  @XmlID
-  public String getId() {
-    return id;
-  }
-
-  /**
-   * The id of this online account.
-   *
-   * @param id The id of this online account.
-   */
-  public void setId(String id) {
-    this.id = id;
-  }
+  private String accountName;
 
   /**
    * The homepage of the service that provides this account.
    *
    * @return The homepage of the service that provides this account.
    */
-  @XmlElement (name = "accountServiceHomepage")
-  @JsonName ("serviceHomepage")
-  @JsonProperty ("serviceHomepage")
   public ResourceReference getServiceHomepage() {
     return serviceHomepage;
   }
@@ -77,7 +45,6 @@ public class OnlineAccount {
    *
    * @param serviceHomepage The homepage of the service that provides this account.
    */
-  @JsonProperty ("serviceHomepage")
   public void setServiceHomepage(ResourceReference serviceHomepage) {
     this.serviceHomepage = serviceHomepage;
   }
@@ -87,7 +54,7 @@ public class OnlineAccount {
    *
    * @return The name associated the holder of this account with the account.
    */
-  public LiteralValue getAccountName() {
+  public String getAccountName() {
     return accountName;
   }
 
@@ -96,26 +63,8 @@ public class OnlineAccount {
    *
    * @param accountName The name associated the holder of this account with the account.
    */
-  public void setAccountName(LiteralValue accountName) {
+  public void setAccountName(String accountName) {
     this.accountName = accountName;
   }
 
-  /**
-   * The display name of the person or organization associated with this account.
-   *
-   * @return The display name of the person or organization associated with this account.
-   */
-  @XmlElement( name = "nick" )
-  public LiteralValue getDisplayName() {
-    return displayName;
-  }
-
-  /**
-   * The display name of the person or organization associated with this account.
-   *
-   * @param displayName The display name of the person or organization associated with this account.
-   */
-  public void setDisplayName(LiteralValue displayName) {
-    this.displayName = displayName;
-  }
 }

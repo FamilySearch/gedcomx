@@ -2,7 +2,7 @@ package org.gedcomx.conclusion;
 
 import org.gedcomx.common.Attribution;
 import org.gedcomx.common.ResourceReference;
-import org.gedcomx.metadata.source.SourceReference;
+import org.gedcomx.source.SourceReference;
 import org.gedcomx.common.URI;
 import org.gedcomx.test.RecipeTest;
 import org.gedcomx.test.Snippet;

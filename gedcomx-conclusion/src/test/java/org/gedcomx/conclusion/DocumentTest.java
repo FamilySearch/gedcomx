@@ -1,7 +1,8 @@
 package org.gedcomx.conclusion;
 
+import org.gedcomx.CustomEntity;
 import org.gedcomx.common.*;
-import org.gedcomx.metadata.source.SourceReference;
+import org.gedcomx.source.SourceReference;
 import org.testng.annotations.Test;
 
 import static org.testng.AssertJUnit.assertEquals;

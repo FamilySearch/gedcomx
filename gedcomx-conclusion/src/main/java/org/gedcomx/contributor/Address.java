@@ -13,13 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.metadata.foaf;
+package org.gedcomx.contributor;
 
 import org.gedcomx.rt.CommonModels;
 
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlType;
 
 
@@ -29,10 +27,9 @@ import javax.xml.bind.annotation.XmlType;
  * @see <a href="http://www.w3.org/2000/10/swap/pim/contact">Contact RDF Schema</a>
  * @author Ryan Heaton
  */
-@XmlType (name = "Address", namespace = CommonModels.CONTACT_NAMESPACE)
+@XmlType ( name = "Address" )
 public class Address {
 
-  private String id;
   private String city;
   private String country;
   private String postalCode;
@@ -41,26 +38,6 @@ public class Address {
   private String street2;
   private String street3;
   private String value;
-
-  /**
-   * The id of this address.
-   *
-   * @return The id of this address.
-   */
-  @XmlAttribute ( name = "ID", namespace = CommonModels.RDF_NAMESPACE )
-  @XmlID
-  public String getId() {
-    return id;
-  }
-
-  /**
-   * The id of this address.
-   *
-   * @param id The id of this address.
-   */
-  public void setId(String id) {
-    this.id = id;
-  }
 
   /**
    * The city.
@@ -189,7 +166,7 @@ public class Address {
   }
 
   /**
-   * The value of the property, if it can be expressed as a string. If the value can't be expressed as a string, use {@link #getResource() the resource ref}.
+   * The value of the property, if it can be expressed as a string.
    *
    * @return The value of the property.
    */
@@ -199,7 +176,7 @@ public class Address {
   }
 
   /**
-   * The value of the property, if it can be expressed as a string. If the value can't be expressed as a string, use {@link #getResource() the resource ref}.
+   * The value of the property, if it can be expressed as a string.
    *
    * @param value The value of the property.
    */

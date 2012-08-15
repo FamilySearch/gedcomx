@@ -1,7 +1,7 @@
 package org.gedcomx.conclusion;
 
 import org.gedcomx.common.*;
-import org.gedcomx.metadata.source.SourceReference;
+import org.gedcomx.source.SourceReference;
 import org.gedcomx.test.RecipeTest;
 import org.gedcomx.test.Snippet;
 import org.gedcomx.types.FactType;

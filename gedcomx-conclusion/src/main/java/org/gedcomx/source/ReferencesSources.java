@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.metadata.source;
+package org.gedcomx.source;
 
 import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.RDFDomain;

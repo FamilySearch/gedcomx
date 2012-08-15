@@ -13,22 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.metadata.foaf;
-
-import org.gedcomx.rt.json.JsonElementWrapper;
-
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
-
 
 /**
- * An organization as described by FOAF.
- *
- * @see <a href="http://xmlns.com/foaf/spec/#term_Organization">foaf:Organization</a>
- * @author Ryan Heaton
+ * The contributor model.
  */
-@XmlType ( name = "Organization" )
-@XmlRootElement ( name = "Organization" )
-@JsonElementWrapper ( name = "organizations" )
-public class Organization extends Agent {
-}
+@XmlSchema(
+  namespace = ConclusionModel.GEDCOMX_CONCLUSION_V1_NAMESPACE,
+  elementFormDefault = XmlNsForm.QUALIFIED,
+  attributeFormDefault = XmlNsForm.QUALIFIED
+)
+@XmlAccessorOrder( XmlAccessOrder.ALPHABETICAL )
+package org.gedcomx.contributor;
+
+import org.gedcomx.conclusion.ConclusionModel;
+
+import javax.xml.bind.annotation.XmlAccessOrder;
+import javax.xml.bind.annotation.XmlAccessorOrder;
+import javax.xml.bind.annotation.XmlNsForm;
+import javax.xml.bind.annotation.XmlSchema;

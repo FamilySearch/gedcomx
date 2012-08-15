@@ -36,8 +36,7 @@ import javax.xml.bind.annotation.XmlTransient;
     description = "The conclusion model defines the types and elements of genealogical conclusion data.",
     version = "v1",
     xmlMediaType = ConclusionModel.GEDCOMX_CONCLUSION_V1_XML_MEDIA_TYPE,
-    jsonMediaType = ConclusionModel.GEDCOMX_CONCLUSION_V1_JSON_MEDIA_TYPE,
-    definesRDFSchema = true
+    jsonMediaType = ConclusionModel.GEDCOMX_CONCLUSION_V1_JSON_MEDIA_TYPE
   )
 } )
 public class ConclusionModel {

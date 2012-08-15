@@ -1,7 +1,7 @@
 package org.gedcomx.conclusion;
 
 import org.gedcomx.common.*;
-import org.gedcomx.metadata.source.SourceReference;
+import org.gedcomx.source.SourceReference;
 import org.gedcomx.types.*;
 import org.testng.annotations.Test;
 

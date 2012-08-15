@@ -1,8 +1,8 @@
-package org.gedcomx.metadata.source;
+package org.gedcomx.source;
 
 import org.gedcomx.common.*;
-import org.gedcomx.metadata.foaf.Address;
-import org.gedcomx.metadata.foaf.Organization;
+import org.gedcomx.contributor.Address;
+import org.gedcomx.contributor.Agent;
 import org.gedcomx.rt.GedcomNamespaceManager;
 import org.gedcomx.rt.SerializationProcessListener;
 import org.gedcomx.test.RecipeTest;
@@ -11,7 +11,6 @@ import org.gedcomx.types.ConfidenceLevel;
 import org.testng.annotations.Test;
 
 import javax.xml.bind.JAXBContext;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -19,9 +18,7 @@ import java.util.Map;
 
 import static org.gedcomx.rt.SerializationUtil.processThroughJson;
 import static org.gedcomx.rt.SerializationUtil.processThroughXml;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertNull;
+import static org.testng.Assert.*;
 
 
 /**
@@ -89,22 +86,22 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
 
   static {
     GedcomNamespaceManager.registerKnownJsonType(SourceDescription.class);
-    GedcomNamespaceManager.registerKnownJsonType(Organization.class);
+    GedcomNamespaceManager.registerKnownJsonType(Agent.class);
     GedcomNamespaceManager.registerKnownJsonType(Note.class);
   }
 
-  private final Organization orgFamilySearch;
-  private final Organization orgFhl;
+  private final Agent orgFamilySearch;
+  private final Agent orgFhl;
   {
-    orgFamilySearch = new Organization();
+    orgFamilySearch = new Agent();
     orgFamilySearch.setId(ORG_FS_ID);
-    orgFamilySearch.setName(new LiteralValue(FAMILY_SEARCH_INTERNATIONAL));
-    orgFamilySearch.setHomepage(new LiteralValue(FAMILYSEARCH_HOME_PAGE));
+    orgFamilySearch.setName(FAMILY_SEARCH_INTERNATIONAL);
+    orgFamilySearch.setHomepage(new ResourceReference(URI.create(FAMILYSEARCH_HOME_PAGE)));
 
-    orgFhl = new Organization();
+    orgFhl = new Agent();
     orgFhl.setId(ORG_FHL_ID);
-    orgFhl.setName(new LiteralValue(FAMILY_HISTORY_LIBRARY));
-    orgFhl.setHomepage(new LiteralValue(FAMILY_HISTORY_LIBRARY_HOME_PAGE));
+    orgFhl.setName(FAMILY_HISTORY_LIBRARY);
+    orgFhl.setHomepage(new ResourceReference(URI.create(FAMILY_HISTORY_LIBRARY_HOME_PAGE)));
     orgFhl.setAddresses(new ArrayList<Address>());
     orgFhl.getAddresses().add(new Address());
     orgFhl.getAddresses().get(0).setValue(FHL_ADDRESS);
@@ -180,7 +177,7 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
     resourceSet.addExtensionElement(orgFhl);
 
     Snippet snippet = new Snippet();
-    ResourceSet resourceSetThurXml = processThroughXml(resourceSet, ResourceSet.class, JAXBContext.newInstance(ResourceSet.class, SourceDescription.class, Organization.class, Note.class), (SerializationProcessListener)snippet);
+    ResourceSet resourceSetThurXml = processThroughXml(resourceSet, ResourceSet.class, JAXBContext.newInstance(ResourceSet.class, SourceDescription.class, Agent.class, Note.class), (SerializationProcessListener)snippet);
     ResourceSet resourceSetThurJson = processThroughJson(resourceSet, (SerializationProcessListener) snippet);
     addSnippet(snippet);
 
@@ -210,10 +207,10 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
       }
     }
 
-    Organization orgFamilySearch = null;
-    Organization orgFhl = null;
-    assertEquals(resourceSet.findExtensionsOfType(Organization.class).size(), 2);
-    for (Organization organization : resourceSet.findExtensionsOfType(Organization.class)) {
+    Agent orgFamilySearch = null;
+    Agent orgFhl = null;
+    assertEquals(resourceSet.findExtensionsOfType(Agent.class).size(), 2);
+    for (Agent organization : resourceSet.findExtensionsOfType(Agent.class)) {
       if (organization.getId().equals(ORG_FHL_ID)) {
         orgFhl = organization;
       } else {
@@ -281,8 +278,8 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
 
     assertNotNull(orgFamilySearch);
     assertEquals(orgFamilySearch.getId(), ORG_FS_ID);
-    assertEquals(orgFamilySearch.getName().getValue(), FAMILY_SEARCH_INTERNATIONAL);
-    assertEquals(orgFamilySearch.getHomepage().getValue(), FAMILYSEARCH_HOME_PAGE);
+    assertEquals(orgFamilySearch.getName(), FAMILY_SEARCH_INTERNATIONAL);
+    assertEquals(orgFamilySearch.getHomepage().getResource().toString(), FAMILYSEARCH_HOME_PAGE);
     assertNull(orgFamilySearch.getAddresses());
     assertNull(orgFamilySearch.getAccounts());
     assertNull(orgFamilySearch.getEmails());
@@ -292,8 +289,8 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
 
     assertNotNull(orgFhl);
     assertEquals(orgFhl.getId(), ORG_FHL_ID);
-    assertEquals(orgFhl.getName().getValue(), FAMILY_HISTORY_LIBRARY);
-    assertEquals(orgFhl.getHomepage().getValue(), FAMILY_HISTORY_LIBRARY_HOME_PAGE);
+    assertEquals(orgFhl.getName(), FAMILY_HISTORY_LIBRARY);
+    assertEquals(orgFhl.getHomepage().getResource().toString(), FAMILY_HISTORY_LIBRARY_HOME_PAGE);
     assertNotNull(orgFhl.getAddresses());
     assertEquals(orgFhl.getAddresses().size(), 1);
     assertEquals(orgFhl.getAddresses().get(0).getValue(), FHL_ADDRESS);
@@ -320,10 +317,10 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
 
     String orgIdNara = "R3";
 
-    Organization orgNara = new Organization();
+    Agent orgNara = new Agent();
     orgNara.setId(orgIdNara);
-    orgNara.setName(new LiteralValue("National Archives and Records Administration"));
-    orgNara.setHomepage(new LiteralValue("http://www.archives.gov/"));
+    orgNara.setName("National Archives and Records Administration");
+    orgNara.setHomepage(new ResourceReference(URI.create("http://www.archives.gov/")));
     orgNara.setAddresses(new ArrayList<Address>());
     orgNara.getAddresses().add(new Address());
     orgNara.getAddresses().get(0).setValue("The National Archives and Records Administration\n8601 Adelphi Road\nCollege Park, MD 20740-6001");
@@ -434,7 +431,7 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
     resourceSet.addExtensionElement(note);
 
     Snippet snippet = new Snippet();
-    ResourceSet resourceSetThruXml = processThroughXml(resourceSet, ResourceSet.class, JAXBContext.newInstance(ResourceSet.class, SourceDescription.class, Organization.class, Note.class), (SerializationProcessListener)snippet);
+    ResourceSet resourceSetThruXml = processThroughXml(resourceSet, ResourceSet.class, JAXBContext.newInstance(ResourceSet.class, SourceDescription.class, Agent.class, Note.class), (SerializationProcessListener)snippet);
     ResourceSet resourceSetThruJson = processThroughJson(resourceSet, (SerializationProcessListener) snippet);
     addSnippet(snippet);
 

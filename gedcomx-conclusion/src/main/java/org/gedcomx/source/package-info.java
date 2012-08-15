@@ -15,19 +15,17 @@
  */
 
 /**
- * The FOAF metadata model.
+ * The RDF-based metadata model.
  *
- * @see <a href="http://xmlns.com/foaf/spec/">FOAF</a>
+ * @see <a href="http://www.w3.org/TR/2004/REC-rdf-primer-20040210/">RDF Primer</a>
  */
-@XmlSchema(
-  namespace = CommonModels.FOAF_NAMESPACE,
+@XmlSchema (
+  namespace = SourceModel.GEDCOMX_SOURCE_V1_NAMESPACE,
   elementFormDefault = XmlNsForm.QUALIFIED,
   attributeFormDefault = XmlNsForm.QUALIFIED
 )
-@XmlAccessorOrder( XmlAccessOrder.ALPHABETICAL )
-package org.gedcomx.metadata.foaf;
-
-import org.gedcomx.rt.CommonModels;
+@XmlAccessorOrder ( XmlAccessOrder.ALPHABETICAL )
+package org.gedcomx.source;
 
 import javax.xml.bind.annotation.XmlAccessOrder;
 import javax.xml.bind.annotation.XmlAccessorOrder;

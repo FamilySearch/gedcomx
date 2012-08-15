@@ -21,7 +21,6 @@
     <module>enunciate-gedcomx-support</module>
 
     <module>gedcomx-common</module>
-    <module>gedcomx-metadata</module>
     <module>gedcomx-conclusion</module>
   </modules>
 
