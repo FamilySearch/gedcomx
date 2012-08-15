@@ -132,7 +132,7 @@ The identifier for the "Attribution" data type is:
 
 name  | description | data type
 ------|-------------|----------
-contributor | Reference to the contributor to whom the attributed data is attributed. | [URI](#uri) - MUST resolve to an instance of [`http://xmlns.com/foaf/0.1/Person`](#foaf-person) or [`http://xmlns.com/foaf/0.1/Organization`](#organization).
+contributor | Reference to the contributor to whom the attributed data is attributed. | [URI](#uri) - MUST resolve to an instance of [`http://gedcomx.org/conclusion/v1/Agent`](#agent).
 modified | Timestamp of when the attributed data was contributed. | timestamp
 confidence  | Reference to the confidence level of the contributor of the attributed data. | [URI](#uri) - MUST resolve to a confidence level. Refer to the list of [known confidence levels](#known-confidence-levels).
 changeMessage | A statement of why the attributed data is being provided by the contributor. | string
@@ -304,7 +304,7 @@ name | description | data type
 id | A local, transient identifier for the resource being described. Note that as a local, transient identifier, the id may only be used to resolve references to the resource within a well-defined scope (such as a single web service request or a single file). | string
 citation | The citation for this source. | [`http://gedcomx.org/source/v1/SourceCitation`](#source-citation) - REQUIRED
 about | A uniform resource identifier (URI) for the resource being described. | [URI](#uri) - OPTIONAL
-mediator | A reference to the entity that mediates access to the described source. | [URI](#uri) - OPTIONAL; MUST resolve to an instance of [`http://xmlns.com/foaf/0.1/Person`](#foaf-person) or [`http://xmlns.com/foaf/0.1/Organization`](#organization).
+mediator | A reference to the entity that mediates access to the described source. | [URI](#uri) - OPTIONAL; MUST resolve to an instance of [`http://gedcomx.org/conclusion/v1/Agent`](#agent).
 sources | A list of references to any sources from which this source is derived. | List of [`http://gedcomx.org/source/v1/SourceReference`](#source-reference) - OPTIONAL
 componentOf | A reference to the source that contains this source -- its parent context; this is for cases where this description is not complete without the description of its parent context | [`http://gedcomx.org/source/v1/SourceReference`](#source-reference) - OPTIONAL
 displayName | A display name for this source. | string - OPTIONAL
@@ -439,11 +439,6 @@ Genealogical research is performed and data is gathered by a living person or or
 This section describes the data types that are used to provide information about
 contributors of genealogical data.
 
-GEDCOM X refers to the [Friend of a Friend](http://www.foaf-project.org/) project to define the
-data types for describing contributors. The data types are duplicated here for convenience
-and consistency.
-
-
 <a id="online-account"/>
 
 ## 4.1 The "OnlineAccount" Data Type
@@ -454,35 +449,32 @@ The `OnlineAccount` data type defines a description of an account in an online w
 
 The identifier for the `OnlineAccount` data type is:
 
-`http://xmlns.com/foaf/0.1/OnlineAccount`
+`http://gedcomx.org/conclusion/v1/OnlineAccount`
 
 ### properties
 
 name | description | data type
 -----|-------------|----------
-id | A local identifier for the online account. Note that this id MUST NOT be processed as an identifier for the resource being referenced, but instead as a transient identifier for the reference itself. | string
 serviceHomepage  | The home page of the service. | [URI](#uri)
-accountName | The name of the account. | [`http://gedcomx.org/Literal`](#literal-value)
-displayName | A display name for the account. | [`http://gedcomx.org/Literal`](#literal-value)
+accountName | The name, label, or id associating the owner of the account with the account. | string
 
 <a id="address"/>
 
 ## 4.2 The "Address" Data Type
 
-The `Address` data type defines a street address of a person or organization. The `Address` data type is
-defined by the [Contact](http://www.w3.org/2000/10/swap/pim/contact) schema.
+The `Address` data type defines a street address of a person or organization.
 
 ### identifier
 
 The identifier for the `Address` data type is:
 
-`http://www.w3.org/2000/10/swap/pim/contact#Address`
+`http://gedcomx.org/conclusion/v1/Address`
 
 ### properties
 
 name | description | data type
 -----|-------------|----------
-id | A local identifier for the address. Note that this id MUST NOT be processed as an identifier for the resource being referenced, but instead as a transient identifier for the reference itself. | string
+value | A string representation of the value. Used when the address isn't separated into its constituent parts. | string
 city | The city. | string
 country | The country. | string
 postalCode | The postal code. | string
@@ -492,82 +484,30 @@ street2 | The street (second line). | string
 street3 | The street (third line). | string
 
 
+<a id="agent"/>
+
 ## 4.3 The "Agent" Data Type
 
-The `Agent` data type defines data that is common to a living entity, such as a person (user)
-or organization. The `Agent` data type use used as an abstraction to share properties
-between contributor data types such as FOAF `Person` and `Organization`.
+The `Agent` data type defines a living entity, such as a person (user) or organization.
 
 ### identifier
 
 The identifier for the `Agent` data type is:
 
-`http://xmlns.com/foaf/0.1/Agent`
+`http://gedcomx.org/conclusion/v1/Agent`
 
 ### properties
 
 name | description | data type
 -----|-------------|----------
 id | A local identifier for the agent. Note that this id MUST NOT be processed as an identifier for the resource being referenced, but instead as a transient identifier for the reference itself. | string
-name | The name of the person or organization. | [`http://www.w3.org/2000/01/rdf-schema#Literal`](#rdf-literal)
-homepage | The homepage of the person or organization. | [`http://www.w3.org/2000/01/rdf-schema#Literal`](#rdf-literal)
-openid  | The [openid](http://openid.net/) of the person or organization. | [`http://www.w3.org/2000/01/rdf-schema#Literal`](#rdf-literal)
-accounts  | The online accounts of the person or organization. | List of [`http://xmlns.com/foaf/0.1/OnlineAccount`](#online-account). Order is preserved.
+name | The name of the person or organization. | string
+homepage | The homepage of the person or organization. | [URI](#uri)
+openid  | The [openid](http://openid.net/) of the person or organization. | [URI](#uri)
+accounts  | The online accounts of the person or organization. | List of [`http://gedcomx.org/conclusion/v1/OnlineAccount`](#online-account). Order is preserved.
 emails  | The email addresses of the person or organization. | List of [URI](#uri) - MUST resolve to a valid e-mail address (e.g. "mailto:someone@gedcomx.org"). Order is preserved.
 phones  | The phones (voice, fax, mobile) of the person or organization. | List of [URI](#uri) - MUST resolve to a valid phone number (e.g. "tel:+1-201-555-0123"). Order is preserved.
-addresses  | The addresses of the person or organization. | List of [`http://www.w3.org/2000/10/swap/pim/contact#Address`](#address). Order is preserved.
-
-
-<a id="organization"/>
-
-## 4.4 The "Organization" Data Type
-
-The `Organization` data type defines data describing an organization.
-
-### identifier
-
-The identifier for the `Organization` data type is:
-
-`http://xmlns.com/foaf/0.1/Organization`
-
-### extension
-
-This data type extends the following data type:
-
-`http://xmlns.com/foaf/0.1/Agent`
-
-### properties
-
-The `Organization` data type defines no additional properties beyond those defined by
-its extended type.
-
-
-<a id="foaf-person"/>
-
-## 4.5 The "FOAF Person" Data Type
-
-The `Person` data type defines data that is common to a living person (user). The `Person`
-data type is an extension of the `Agent` data type.
-
-### identifier
-
-The identifier for the `Person` data type is:
-
-`http://xmlns.com/foaf/0.1/Person`
-
-### extension
-
-This data type extends the following data type:
-
-`http://xmlns.com/foaf/0.1/Agent`
-
-### properties
-
-name | description | data type
------|-------------|----------
-familyName | The family name of the person. | [`http://www.w3.org/2000/01/rdf-schema#Literal`](#rdf-literal)
-givenName | The given name of the person. | [`http://www.w3.org/2000/01/rdf-schema#Literal`](#rdf-literal)
-language | The language of the person. | [`http://www.w3.org/2000/01/rdf-schema#Literal`](#rdf-literal)
+addresses  | The addresses of the person or organization. | List of [`http://gedcomx.org/conclusion/v1/Address`](#address). Order is preserved.
 
 
 

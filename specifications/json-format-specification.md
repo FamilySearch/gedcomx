@@ -464,25 +464,21 @@ This section defines JSON types for each of the data types specified by the
 
 ## 4.1 The "OnlineAccount" Data Type
 
-The JSON object used to (de)serialize the `http://xmlns.com/foaf/0.1/OnlineAccount` data type is defined as follows:
+The JSON object used to (de)serialize the `http://gedcomx.org/conclusion/v1/OnlineAccount` data type is defined as follows:
 
 ### properties
 
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
-id | A local, transient identifier for the online account. | id | string
 serviceHomepage  | The home page of the service. | serviceHomepage | [`URI`](#uri)
-accountName | The name of the account. | accountName | [`LiteralValue`](#literal-value)
-displayName | A display name for the account. | displayName | [`LiteralValue`](#literal-value)
+accountName | The name, label, or id associating the owner of the account with the account. | accountName | string
 
 ### examples
 
 ```json
 {
-  "id" : "local_id",
   "serviceHomepage" : "http://familysearch.org/",
-  "accountName" : { ... },
-  "displayName" : { ... },
+  "accountName" : "...",
 }
 ```
 
@@ -490,13 +486,13 @@ displayName | A display name for the account. | displayName | [`LiteralValue`](#
 
 ## 4.2 The "Address" Data Type
 
-The JSON object used to (de)serialize the `http://www.w3.org/2000/10/swap/pim/contact#Address` data type is defined as follows:
+The JSON object used to (de)serialize the `http://gedcomx.org/conclusion/v1/Address` data type is defined as follows:
 
 ### properties
 
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
-id | A local, transient identifier for the address. | id | string
+value | A string representation of the value. Used when the address isn't separated into its constituent parts. | value | string
 city | The city. | city | string
 country | The country. | country | string
 postalCode | The postal code. | postalCode | string
@@ -509,28 +505,30 @@ street3 | The street (third line). | street3 | string
 
 ```json
 {
-  "id" : "local_id",
   "city" : "...",
   "country" : "...",
   "postalCode" : "...",
   "stateOrProvince" : "...",
   "street" : "...",
   "street2" : "...",
-  "street3" : "..."
+  "street3" : "...",
+  "value" : "..."
 }
 ```
+<a id="agent"/>
 
 ## 4.3 The "Agent" Data Type
 
-The JSON object used to (de)serialize the `http://xmlns.com/foaf/0.1/Agent` data type is defined as follows:
+The JSON object used to (de)serialize the `http://gedcomx.org/conclusion/v1/Agent` data type is defined as follows:
 
 ### properties
 
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
-name | The name of the person or organization. | name | [`LiteralValue`](#literal-value)
-homepage | The homepage of the person or organization. | homepage | [`LiteralValue`](#literal-value)
-openid  | The [openid](http://openid.net/) of the person or organization. | openid | [`LiteralValue`](#literal-value)
+id | A local, transient identifier for the resource being described. | id | string
+name | The name of the person or organization. | name | string
+homepage | The homepage of the person or organization. | homepage | [`URI`](#uri)
+openid  | The [openid](http://openid.net/) of the person or organization. | openid | [`URI`](#uri)
 accounts  | The online accounts of the person or organization. | accounts | array of [`OnlineAccount`](#online-account)
 emails  | The email addresses of the person or organization. | emails | array of [`URI`](#uri)
 phones  | The phones (voice, fax, mobile) of the person or organization. | phones | array of [`URI`](#uri)
@@ -541,9 +539,9 @@ addresses  | The addresses of the person or organization. | addresses | array of
 ```json
 {
   "id" : "local_id",
-  "name" : { ... },
-  "homepage" : { ... },
-  "openid" : { ... },
+  "name" : "...",
+  "homepage" : "...",
+  "openid" : "...",
   "accounts" : [ { ... }, { ... } ],
   "emails" : [ "mailto:someone@gedcomx.org" , "mailto:someone@somewhere-else.org" ],
   "phones" : [ "tel:+1-201-555-0123" , "fax:+1-201-555-5555" ],
@@ -554,45 +552,6 @@ addresses  | The addresses of the person or organization. | addresses | array of
 }
 ```
 
-
-<a id="organization"/>
-
-## 4.4 The "Organization" Data Type
-
-The JSON object used to (de)serialize the `http://xmlns.com/foaf/0.1/Organization` data type is defined as follows:
-
-### properties
-
-The `Organization` data type defines no additional properties beyond those defined by
-its extended type.
-
-
-<a id="foaf-person"/>
-
-## 4.5 The "FOAF Person" Data Type
-
-The JSON object used to (de)serialize the `http://xmlns.com/foaf/0.1/Person` data type is defined as follows:
-
-### properties
-
-name | description | JSON member | JSON object type
------|-------------|--------------|---------
-familyName | The family name of the person. | familyName | [`LiteralValue`](#literal-value)
-givenName | The given name of the person. | givenName | [`LiteralValue`](#literal-value)
-language | The language of the person. | language | [`LiteralValue`](#literal-value)
-
-### examples
-
-```json
-{
-
-  ...the members of foaf:Agent...,
-
-  "familyName" : { ... },
-  "givenName" : { ... },
-  "language" : { ... }
-}
-```
 
 # 5. Data Types for Describing Conclusions
 
@@ -999,8 +958,7 @@ names | array of [`Name`](#name-conclusion)
 genders | array of [`Gender`](#gender-conclusion)
 source-references | array of [`SourceReference`](#source-reference)
 source-descriptions | array of [`SourceDescription`](#rdf-description)
-contributors | [`FOAF Person`](#foaf-person)
-organizations | [`Organization`](#organization)
+agents | array of [`Agent`](#agent)
 
 # 7. Miscellaneous To Do
 

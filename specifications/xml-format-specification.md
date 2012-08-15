@@ -141,8 +141,6 @@ gx | `http://gedcomx.org/`
 gxc | `http://gedcomx.org/conclusion/v1/`
 gxs | `http://gedcomx.org/source/v1/`
 rdf | `http://www.w3.org/1999/02/22-rdf-syntax-ns#`
-foaf | `http://xmlns.com/foaf/0.1/`
-contact | `http://www.w3.org/2000/10/swap/pim/contact#`
 xsd | `http://www.w3.org/2001/XMLSchema`
 
 For each data type specified by the GEDCOM X conceptual model, an
@@ -496,29 +494,22 @@ This section defines XML types for each of the data types specified by the
 
 ## 4.1 The "OnlineAccount" Data Type
 
-The `foaf:OnlineAccount` XML type is used to (de)serialize the `http://xmlns.com/foaf/0.1/OnlineAccount`
+The `gxc:OnlineAccount` XML type is used to (de)serialize the `http://gedcomx.org/conclusion/v1/OnlineAccount`
 data type.
 
 ### properties
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
-id | A local, transient identifier for the online account. | rdf:ID (attribute) | xsd:string
-serviceHomepage  | The home page of the service. | foaf:serviceHomepage | [`rdf:ResourceReference`](#resource-reference)
-accountName | The name of the account. | foaf:accountName | [`gx:LiteralValue`](#literal-value)
-displayName | A display name for the account. | foaf:displayName | [`gx:LiteralValue`](#literal-value)
+serviceHomepage  | The home page of the service. | gxc:serviceHomepage | [`rdf:ResourceReference`](#resource-reference)
+accountName | The name, label, or id associating the owner of the account with the account. | gxc:accountName | xsd:string
 
 ### examples
 
 ```xml
-  <... rdf:ID="local_id">
-    <foaf:serviceHomepage rdf:resource="http://familysearch.org/"/>
-    <foaf:accountName>
-      ...
-    </foaf:accountName>
-    <foaf:displayName>
-      ...
-    </foaf:displayName>
+  <...>
+    <gxc:serviceHomepage rdf:resource="http://familysearch.org/"/>
+    <gxc:accountName>...</gxc:accountName>
   </...>
 ```
 
@@ -526,122 +517,80 @@ displayName | A display name for the account. | foaf:displayName | [`gx:LiteralV
 
 ## 4.2 The "Address" Data Type
 
-The `contact:Address` XML type is used to (de)serialize the `http://www.w3.org/2000/10/swap/pim/contact#Address`
+The `gxc:Address` XML type is used to (de)serialize the `http://gedcomx.org/conclusion/v1/Address`
 data type.
 
 ### properties
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
-id | A local, transient identifier for the address. | rdf:ID (attribute) | xsd:string
-city | The city. | contact:city | xsd:string
-country | The country. | contact:country | xsd:string
-postalCode | The postal code. | contact:postalCode | xsd:string
-stateOrProvince | The state or province. | contact:stateOrProvince | xsd:string
-street | The street. | contact:street | xsd:string
-street2 | The street (second line). | contact:street2 | xsd:string
-street3 | The street (third line). | contact:street3 | xsd:string
+value | A string representation of the value. Used when the address isn't separated into its constituent parts. | rdf:value | xsd:string
+city | The city. | gxc:city | xsd:string
+country | The country. | gxc:country | xsd:string
+postalCode | The postal code. | gxc:postalCode | xsd:string
+stateOrProvince | The state or province. | gxc:stateOrProvince | xsd:string
+street | The street. | gxc:street | xsd:string
+street2 | The street (second line). | gxc:street2 | xsd:string
+street3 | The street (third line). | gxc:street3 | xsd:string
+street3 | The street (third line). | gxc:street3 | xsd:string
 
 ### examples
 
 ```xml
-  <... rdf:ID="local_id">
-    <contact:city>...</contact:city>
-    <contact:country>...</contact:country>
-    <contact:postalCode>...</contact:postalCode>
-    <contact:stateOrProvince>...</contact:stateOrProvince>
-    <contact:street>...</contact:street>
-    <contact:street2>...</contact:street2>
-    <contact:street3>...</contact:street3>
+  <...>
+    <rdf:value>...</rdf:value>
+    <gxc:city>...</gxc:city>
+    <gxc:country>...</gxc:country>
+    <gxc:postalCode>...</gxc:postalCode>
+    <gxc:stateOrProvince>...</gxc:stateOrProvince>
+    <gxc:street>...</gxc:street>
+    <gxc:street2>...</gxc:street2>
+    <gxc:street3>...</gxc:street3>
   </...>
 ```
 
+<a id="agent"/>
+
 ## 4.3 The "Agent" Data Type
 
-The `foaf:Agent` XML type is used to (de)serialize the `http://xmlns.com/foaf/0.1/Agent`
+The `gxc:Agent` XML type is used to (de)serialize the `http://gedcomx.org/conclusion/v1/Agent`
 data type.
 
 ### properties
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
-name | The name of the person or organization. | foaf:name | [`gx:LiteralValue`](#literal-value)
-homepage | The homepage of the person or organization. | foaf:homepage | [`gx:LiteralValue`](#literal-value)
-openid  | The [openid](http://openid.net/) of the person or organization. | foaf:openid | [`gx:LiteralValue`](#literal-value)
-accounts  | The online accounts of the person or organization. | foaf:account | [`foaf:OnlineAccount`](#online-account)
-emails  | The email addresses of the person or organization. | foaf:mbox | [`rdf:ResourceReference`](#resource-reference)
-phones  | The phones (voice, fax, mobile) of the person or organization. | foaf:phone | [`rdf:ResourceReference`](#resource-reference)
-addresses  | The addresses of the person or organization. | contact:address | [`contact:Address`](#address)
+id | A local, transient identifier for the resource being described. | rdf:ID (attribute) | xsd:string
+name | The name of the person or organization. | gxc:name | xsd:string
+homepage | The homepage of the person or organization. | gxc:homepage | [`rdf:ResourceReference`](#resource-reference)
+openid  | The [openid](http://openid.net/) of the person or organization. | gxc:openid | [`rdf:ResourceReference`](#resource-reference)
+accounts  | The online accounts of the person or organization. | gxc:account | [`gxc:OnlineAccount`](#online-account)
+emails  | The email addresses of the person or organization. | gxc:email | [`rdf:ResourceReference`](#resource-reference)
+phones  | The phones (voice, fax, mobile) of the person or organization. | gxc:phone | [`rdf:ResourceReference`](#resource-reference)
+addresses  | The addresses of the person or organization. | gxc:address | [`gxc:Address`](#address)
 
 ### examples
 
 ```xml
   <... rdf:ID="local_id">
-    <foaf:name>...</foaf:name>
-    <foaf:homepage>...</foaf:homepage>
-    <foaf:openid>...</foaf:openid>
-    <foaf:account>
+    <gxc:name>...</gxc:name>
+    <gxc:homepage>...</gxc:homepage>
+    <gxc:openid>...</gxc:openid>
+    <gxc:account>
       ...
-    </foaf:account>
+    </gxc:account>
     ...
-    <foaf:mbox rdf:resource="mailto:someone@gedcomx.org"/>
+    <gxc:email rdf:resource="mailto:someone@gedcomx.org"/>
     ...
-    <foaf:phone rdf:resource="tel:+1-201-555-0123"/>
+    <gxc:phone rdf:resource="tel:+1-201-555-0123"/>
     ...
-    <contact:address>
+    <gxc:address>
       ...
-    </contact:address>
+    </gxc:address>
     ...
 
     <!-- possibility of extension elements -->
 
-  </...>
-```
-
-<a id="organization"/>
-
-## 4.4 The "Organization" Data Type
-
-The `foaf:Organization` XML type is used to (de)serialize the `http://xmlns.com/foaf/0.1/Organization`
-data type.
-
-### properties
-
-The `Organization` data type defines no additional properties beyond those defined by
-its extended type.
-
-
-<a id="foaf-person"/>
-
-## 4.5 The "FOAF Person" Data Type
-
-The `foaf:Person` XML type is used to (de)serialize the `http://xmlns.com/foaf/0.1/Person`
-data type.
-
-### properties
-
-name | description | XML property | XML type
------|-------------|--------------|---------
-familyName | The family name of the person. | foaf:familyName | [`gx:LiteralValue`](#literal-value)
-givenName | The given name of the person. | foaf:givenName | [`gx:LiteralValue`](#literal-value)
-language | The language of the person. | foaf:language | [`gx:LiteralValue`](#literal-value)
-
-### examples
-
-```xml
-  <... rdf:ID="local_id">
-
-    <!-- ...the members of foaf:Agent... -->
-
-    <foaf:familyName>
-      ...
-    </foaf:familyName>
-    <foaf:givenName>
-      ...
-    </foaf:givenName>
-    <foaf:language>
-      ...
-    </foaf:language>
   </...>
 ```
 
@@ -1107,8 +1056,7 @@ gxc:name | [`gxc:Name`](#name-conclusion)
 gxc:gender | [`gxc:Gender`](#gender-conclusion)
 gxs:sourceReference | [`gxs:SourceReference`](#source-reference)
 gxs:SourceDescription | [`gxs:SourceDescription`](#rdf-description)
-foaf:Person | [`foaf:Person`](#foaf-person)
-foaf:Organization | [`foaf:Organization`](#organization)
+gxc:agent| [`gxc:Agent`](#agent)
 
 # 7. Miscellaneous To Do
 
