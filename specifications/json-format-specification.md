@@ -48,11 +48,12 @@ in JSON according to this specification:
     "primaryForm" : {
       "fullText" : "George Washington",
       "parts" : [ {
-        "type" : "http://gedcomx.org/Given",
-        "value" : "George"
-      }, {
-        "type" : "http://gedcomx.org/Surname",
-        "value" : "Washington"
+        "value" : "George",
+        "type" : "http://gedcomx.org/Given"
+      },
+      {
+        "value" : "Washington",
+        "type" : "http://gedcomx.org/Surname"
       } ]
     },
     "preferred" : true,
@@ -178,7 +179,7 @@ URIs are supplied as JSON strings and are interpreted according to
 
 ## 2.2 The "Identifier" Data Type
 
-The JSON object used to (de)serialize the `http://gedcomx.org/conclusion/v1/Identifier` data type is defined as follows:
+The JSON object used to (de)serialize the `http://gedcomx.org/v1/Identifier` data type is defined as follows:
 
 ### properties
 
@@ -200,7 +201,7 @@ type  | URI identifying the type of the identifier. | type | [`URI`](#uri)
 
 ## 2.3 The "Attribution" Data Type
 
-The JSON object used to (de)serialize the `http://gedcomx.org/Attribution` data type is defined as follows:
+The JSON object used to (de)serialize the `http://gedcomx.org/v1/Attribution` data type is defined as follows:
 
 ### properties
 
@@ -226,7 +227,7 @@ changeMessage | A statement of why the attributed data is being provided by the 
 
 ## 2.4 The "FormalValue" Data Type
 
-The JSON object used to (de)serialize the `http://gedcomx.org/conclusion/v1/FormalValue` data type is defined as follows:
+The JSON object used to (de)serialize the `http://gedcomx.org/v1/FormalValue` data type is defined as follows:
 
 ### properties
 
@@ -275,7 +276,7 @@ Standardized and normalized value:
 
 ## 2.5 The "Note" Data Type
 
-The JSON object used to (de)serialize the `http://gedcomx.org/Note` data type is defined as follows:
+The JSON object used to (de)serialize the `http://gedcomx.org/v1/Note` data type is defined as follows:
 
 ### properties
 
@@ -297,7 +298,7 @@ attribution | The attribution of this note. | attribution | [`Attribution`](#att
 
 ## 2.6 The "LiteralValue" Data Type
 
-The JSON object used to (de)serialize the `http://gedcomx.org/Literal` data type is defined as follows:
+The JSON object used to (de)serialize the `http://gedcomx.org/v1/Literal` data type is defined as follows:
 
 ### properties
 
@@ -319,7 +320,7 @@ value | The literal value. | value | string
 
 ## 2.7 The "TextValue" Data Type
 
-The JSON object used to (de)serialize the `http://gedcomx.org/TextValue` data type is defined as follows:
+The JSON object used to (de)serialize the `http://gedcomx.org/v1/TextValue` data type is defined as follows:
 
 ### properties
 
@@ -349,7 +350,7 @@ This section defines JSON types for each of the data types specified by the
 
 ## 3.1 The "SourceDescription" Data Type
 
-The JSON object used to (de)serialize the `http://gedcomx.org/source/v1/SourceDescription`
+The JSON object used to (de)serialize the `http://gedcomx.org/v1/SourceDescription`
 data type is defined as follows:
 
 ### properties
@@ -389,7 +390,7 @@ attribution | The attribution of this source. | attribution | [`Attribution`](#a
 
 ## 3.2 The "SourceCitation" Data Type
 
-The JSON object used to (de)serialize the `http://gedcomx.org/source/v1/SourceCitation` data type is defined as follows:
+The JSON object used to (de)serialize the `http://gedcomx.org/v1/SourceCitation` data type is defined as follows:
 
 ### properties
 
@@ -414,7 +415,7 @@ fields | A list of citation fields about a source. | field | array of [`Citation
 ## 3.3 The "CitationField" Data Type
 
 The JSON object used to (de)serialize the
-`http://gedcomx.org/source/v1/CitationField` data type is defined as follows:
+`http://gedcomx.org/v1/CitationField` data type is defined as follows:
 
 ### properties
 
@@ -436,7 +437,7 @@ value | The value of the citation detail. | value | string
 
 ## 3.4 The "SourceReference" Data Type
 
-The JSON object used to (de)serialize the `http://gedcomx.org/source/v1/SourceReference`
+The JSON object used to (de)serialize the `http://gedcomx.org/v1/SourceReference`
 data type is defined as follows:
 
 ### properties
@@ -464,7 +465,7 @@ This section defines JSON types for each of the data types specified by the
 
 ## 4.1 The "OnlineAccount" Data Type
 
-The JSON object used to (de)serialize the `http://gedcomx.org/conclusion/v1/OnlineAccount` data type is defined as follows:
+The JSON object used to (de)serialize the `http://gedcomx.org/v1/OnlineAccount` data type is defined as follows:
 
 ### properties
 
@@ -486,7 +487,7 @@ accountName | The name, label, or id associating the owner of the account with t
 
 ## 4.2 The "Address" Data Type
 
-The JSON object used to (de)serialize the `http://gedcomx.org/conclusion/v1/Address` data type is defined as follows:
+The JSON object used to (de)serialize the `http://gedcomx.org/v1/Address` data type is defined as follows:
 
 ### properties
 
@@ -519,7 +520,7 @@ street3 | The street (third line). | street3 | string
 
 ## 4.3 The "Agent" Data Type
 
-The JSON object used to (de)serialize the `http://gedcomx.org/conclusion/v1/Agent` data type is defined as follows:
+The JSON object used to (de)serialize the `http://gedcomx.org/v1/Agent` data type is defined as follows:
 
 ### properties
 
@@ -561,7 +562,7 @@ This section defines JSON types for each of the data types specified by the
 
 ## 5.1 The "Conclusion" Data Type
 
-The JSON object used to (de)serialize the `http://gedcomx.org/conclusion/v1/Conclusion` data type is defined as follows:
+The JSON object used to (de)serialize the `http://gedcomx.org/v1/Conclusion` data type is defined as follows:
 
 ### properties
 
@@ -588,7 +589,7 @@ attribution | The attribution of this conclusion. | attribution | [`gx:Attributi
 
 ## 5.2 The "Document" Data Type
 
-The JSON object used to (de)serialize the `http://gedcomx.org/conclusion/v1/Document` data type is defined as follows:
+The JSON object used to (de)serialize the `http://gedcomx.org/v1/Document` data type is defined as follows:
 
 ### properties
 
@@ -614,7 +615,7 @@ text | The text of the document. | gxc:text | [`TextValue`](#text-value)
 
 ## 5.2.1 The "AbstractDocument" Data Type
 
-The JSON object used to (de)serialize the `http://gedcomx.org/conclusion/v1/AbstractDocument` data type is defined as follows:
+The JSON object used to (de)serialize the `http://gedcomx.org/v1/AbstractDocument` data type is defined as follows:
 
 ### properties
 
@@ -624,7 +625,7 @@ The `AbstractDocument` data type defines no additional properties beyond those d
 
 ## 5.2.2 The "TranscriptionDocument" Data Type
 
-The JSON object used to (de)serialize the `http://gedcomx.org/conclusion/v1/TranscriptionDocument` data type is defined as follows:
+The JSON object used to (de)serialize the `http://gedcomx.org/v1/TranscriptionDocument` data type is defined as follows:
 
 ### properties
 
@@ -634,7 +635,7 @@ The `TranscriptionDocument` data type defines no additional properties beyond th
 
 ## 5.2.3 The "TranslationDocument" Data Type
 
-The JSON object used to (de)serialize the `http://gedcomx.org/conclusion/v1/TranslationDocument` data type is defined as follows:
+The JSON object used to (de)serialize the `http://gedcomx.org/v1/TranslationDocument` data type is defined as follows:
 
 ### properties
 
@@ -644,7 +645,7 @@ The `TranslationDocument` data type defines no additional properties beyond thos
 
 ## 5.2.4 The "AnalysisDocument" Data Type
 
-The JSON object used to (de)serialize the `http://gedcomx.org/conclusion/v1/AnalysisDocument` data type is defined as follows:
+The JSON object used to (de)serialize the `http://gedcomx.org/v1/AnalysisDocument` data type is defined as follows:
 
 ### properties
 
@@ -654,7 +655,7 @@ The `AnalysisDocument` data type defines no additional properties beyond those d
 
 ## 5.3 The "Gender" Data Type
 
-The JSON object used to (de)serialize the `http://gedcomx.org/conclusion/v1/Gender` data type is defined as follows:
+The JSON object used to (de)serialize the `http://gedcomx.org/v1/Gender` data type is defined as follows:
 
 ### properties
 
@@ -677,7 +678,7 @@ type | URI identifying the type of the gender. | type | [`URI`](#uri)
 
 ## 5.4 The "Name" Data Type
 
-The JSON object used to (de)serialize the `http://gedcomx.org/conclusion/v1/Name` data type is defined as follows:
+The JSON object used to (de)serialize the `http://gedcomx.org/v1/Name` data type is defined as follows:
 
 ### properties
 
@@ -706,7 +707,7 @@ alternateForms | The alternate forms of the name. | alternateForms | array of [`
 
 ## 5.5 The "Fact" Data Type
 
-The JSON object used to (de)serialize the `http://gedcomx.org/conclusion/v1/Fact` data type is defined as follows:
+The JSON object used to (de)serialize the `http://gedcomx.org/v1/Fact` data type is defined as follows:
 
 ### properties
 
@@ -738,7 +739,7 @@ formal | The formal value of the fact. | formal | [`FormalValue`](#formal-value)
 
 # 5.6 The "Person" Data Type
 
-The JSON object used to (de)serialize the `http://gedcomx.org/conclusion/v1/Person` data type is defined as follows:
+The JSON object used to (de)serialize the `http://gedcomx.org/v1/Person` data type is defined as follows:
 
 ### properties
 
@@ -769,7 +770,7 @@ facts | The conclusions about the facts of the life of the person. | facts | arr
 
 ## 5.7 The "Relationship" Data Type
 
-The JSON object used to (de)serialize the `http://gedcomx.org/conclusion/v1/Relationship` data type is defined as follows:
+The JSON object used to (de)serialize the `http://gedcomx.org/v1/Relationship` data type is defined as follows:
 
 ### properties
 
@@ -798,7 +799,7 @@ facts | The conclusions about the facts of the life of the relationship. | facts
 
 ## 5.8 The "EventRole" Data Type
 
-The JSON object used to (de)serialize the `http://gedcomx.org/conclusion/v1/EventRole`
+The JSON object used to (de)serialize the `http://gedcomx.org/v1/EventRole`
 data type is defined as follows:
 
 ### properties
@@ -826,7 +827,7 @@ details | Details about the role of the person in the event. | details | string
 
 # 5.9 The "Event" Data Type
 
-the JSON object used to (de)serialize the `http://gedcomx.org/conclusion/v1/Event` data type
+the JSON object used to (de)serialize the `http://gedcomx.org/v1/Event` data type
 is defined as follows:
 
 ### properties
@@ -856,7 +857,7 @@ roles | The roles of the persons in the event. | roles | array of [`EventRole`](
 
 ## 5.10 The "Date" Data Type
 
-The JSON object used to (de)serialize the `http://gedcomx.org/conclusion/v1/Date` data type is defined as follows:
+The JSON object used to (de)serialize the `http://gedcomx.org/v1/Date` data type is defined as follows:
 
 ### properties
 
@@ -878,7 +879,7 @@ formal | The formal value of the date. | formal | [`FormalValue`](#formal-value)
 
 ## 5.11 The "Place" Data Type
 
-The JSON object used to (de)serialize the `http://gedcomx.org/conclusion/v1/Place` data type is defined as follows:
+The JSON object used to (de)serialize the `http://gedcomx.org/v1/Place` data type is defined as follows:
 
 ### properties
 
@@ -900,7 +901,7 @@ formal | The formal value of the place. | formal | [`FormalValue`](#formal-value
 
 ## 5.12 The "NamePart" Data Type
 
-The JSON object used to (de)serialize the `http://gedcomx.org/conclusion/v1/NamePart` data type is defined as follows:
+The JSON object used to (de)serialize the `http://gedcomx.org/v1/NamePart` data type is defined as follows:
 
 ### properties
 
@@ -920,7 +921,7 @@ value | The text of the name part. | value | string
 
 ## 5.13 The "NameForm" Data Type
 
-The JSON object used to (de)serialize the `http://gedcomx.org/conclusion/v1/NameForm` data type is defined as follows:
+The JSON object used to (de)serialize the `http://gedcomx.org/v1/NameForm` data type is defined as follows:
 
 ### properties
 

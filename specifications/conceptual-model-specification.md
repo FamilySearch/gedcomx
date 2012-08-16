@@ -91,7 +91,7 @@ genealogical resource in a specific data set.
 
 The identifier for the "Identifier" data type is:
 
-`http://gedcomx.org/conclusion/v1/Identifier`
+`http://gedcomx.org/v1/Identifier`
 
 ### properties
 
@@ -126,13 +126,13 @@ who, when, and why) of genealogical data.
 
 The identifier for the "Attribution" data type is:
 
-`http://gedcomx.org/Attribution`
+`http://gedcomx.org/v1/Attribution`
 
 ### properties
 
 name  | description | data type
 ------|-------------|----------
-contributor | Reference to the contributor to whom the attributed data is attributed. | [URI](#uri) - MUST resolve to an instance of [`http://gedcomx.org/conclusion/v1/Agent`](#agent).
+contributor | Reference to the contributor to whom the attributed data is attributed. | [URI](#uri) - MUST resolve to an instance of [`http://gedcomx.org/v1/Agent`](#agent).
 modified | Timestamp of when the attributed data was contributed. | timestamp
 confidence  | Reference to the confidence level of the contributor of the attributed data. | [URI](#uri) - MUST resolve to a confidence level. Refer to the list of [known confidence levels](#known-confidence-levels).
 changeMessage | A statement of why the attributed data is being provided by the contributor. | string
@@ -176,7 +176,7 @@ The `FormalValue` data type does NOT support extension properties (see [Extensio
 
 The identifier for the "FormalValue" data type is:
 
-`http://gedcomx.org/conclusion/v1/FormalValue`
+`http://gedcomx.org/v1/FormalValue`
 
 ### properties
 
@@ -222,7 +222,7 @@ Notes are not intended to contain genealogical conclusions.  Notes are only asso
 
 The identifier for the "Note" data type is:
 
-`http://gedcomx.org/Note`
+`http://gedcomx.org/v1/Note`
 
 ### properties
 
@@ -242,7 +242,7 @@ The `LiteralValue` data type defines a literal value.
 
 The identifier for the "LiteralValue" data type is:
 
-`http://gedcomx.org/Literal`
+`http://gedcomx.org/v1/Literal`
 
 ### properties
 
@@ -263,7 +263,7 @@ The `TextValue` data type defines a literal value.
 
 The identifier for the "TextValue" data type is:
 
-`http://gedcomx.org/TextValue`
+`http://gedcomx.org/v1/TextValue`
 
 ### properties
 
@@ -295,18 +295,18 @@ The `SourceDescription` data type defines a description of a source.
 
 The identifier for the "SourceDescription" data type is:
 
-`http://gedcomx.org/source/v1/SourceDescription`
+`http://gedcomx.org/v1/SourceDescription`
 
 ### properties
 
 name | description | data type
 -----|-------------|----------
 id | A local, transient identifier for the resource being described. Note that as a local, transient identifier, the id may only be used to resolve references to the resource within a well-defined scope (such as a single web service request or a single file). | string
-citation | The citation for this source. | [`http://gedcomx.org/source/v1/SourceCitation`](#source-citation) - REQUIRED
+citation | The citation for this source. | [`http://gedcomx.org/v1/SourceCitation`](#source-citation) - REQUIRED
 about | A uniform resource identifier (URI) for the resource being described. | [URI](#uri) - OPTIONAL
-mediator | A reference to the entity that mediates access to the described source. | [URI](#uri) - OPTIONAL; MUST resolve to an instance of [`http://gedcomx.org/conclusion/v1/Agent`](#agent).
-sources | A list of references to any sources from which this source is derived. | List of [`http://gedcomx.org/source/v1/SourceReference`](#source-reference) - OPTIONAL
-componentOf | A reference to the source that contains this source -- its parent context; this is for cases where this description is not complete without the description of its parent context | [`http://gedcomx.org/source/v1/SourceReference`](#source-reference) - OPTIONAL
+mediator | A reference to the entity that mediates access to the described source. | [URI](#uri) - OPTIONAL; MUST resolve to an instance of [`http://gedcomx.org/v1/Agent`](#agent).
+sources | A list of references to any sources from which this source is derived. | List of [`http://gedcomx.org/v1/SourceReference`](#source-reference) - OPTIONAL
+componentOf | A reference to the source that contains this source -- its parent context; this is for cases where this description is not complete without the description of its parent context | [`http://gedcomx.org/v1/SourceReference`](#source-reference) - OPTIONAL
 displayName | A display name for this source. | string - OPTIONAL
 alternateNames | A list of alternate display names for this source. | List of [`http://gedcomx.org/TextValue`](#text-value) - OPTIONAL
 notes  | A list of notes about a source. | List of [`http://gedcomx.org/Note`](#note) - OPTIONAL
@@ -323,15 +323,15 @@ and from which bibliographic citation strings may be rendered.
 
 The identifier for the "SourceCitation" data type is:
 
-`http://gedcomx.org/source/v1/SourceCitation`
+`http://gedcomx.org/v1/SourceCitation`
 
 ### properties
 
 name | description | data type
 -----|-------------|----------
 value | A rendering of the full (working) citation as a string. | string - REQUIRED
-citationTemplate | The identifier of the citation template by which this citation may be interpreted. | [URI](#uri) - OPTIONAL;  MUST resolve to an instance of [`http://gedcomx.org/source/v1/CitationTemplate`](#citation-template).
-fields  | A list of citation fields about a source. | List of [`http://gedcomx.org/source/v1/CitationField`](#citation-field) - OPTIONAL
+citationTemplate | The identifier of the citation template by which this citation may be interpreted. | [URI](#uri) - OPTIONAL;  MUST resolve to an instance of [`http://gedcomx.org/v1/CitationTemplate`](#citation-template).
+fields  | A list of citation fields about a source. | List of [`http://gedcomx.org/v1/CitationField`](#citation-field) - OPTIONAL
 
 <a id="citation-field"/>
 
@@ -344,7 +344,7 @@ necessary to identify a source.
 
 The identifier for the "CitationField" data type is:
 
-`http://gedcomx.org/source/v1/CitationField`
+`http://gedcomx.org/v1/CitationField`
 
 ### properties
 
@@ -366,13 +366,13 @@ its supporting source(s) [the target source(s)] using an instance(s) of `SourceR
 
 The identifier for the "SourceReference" data type is:
 
-`http://gedcomx.org/source/v1/SourceReference`
+`http://gedcomx.org/v1/SourceReference`
 
 ### properties
 
 name | description | data type
 -----|-------------|----------
-sourceDescription  | Reference to a _description_ of the target source. | [URI](#uri) - MUST resolve to an instance of [`http://gedcomx.org/source/v1/SourceDescription`](#source-description)
+sourceDescription  | Reference to a _description_ of the target source. | [URI](#uri) - MUST resolve to an instance of [`http://gedcomx.org/v1/SourceDescription`](#source-description)
 attribution | The attribution of this source reference. | [`http://gedcomx.org/Attribution`](#attribution)
 
 ### examples
@@ -449,7 +449,7 @@ The `OnlineAccount` data type defines a description of an account in an online w
 
 The identifier for the `OnlineAccount` data type is:
 
-`http://gedcomx.org/conclusion/v1/OnlineAccount`
+`http://gedcomx.org/v1/OnlineAccount`
 
 ### properties
 
@@ -468,7 +468,7 @@ The `Address` data type defines a street address of a person or organization.
 
 The identifier for the `Address` data type is:
 
-`http://gedcomx.org/conclusion/v1/Address`
+`http://gedcomx.org/v1/Address`
 
 ### properties
 
@@ -494,21 +494,21 @@ The `Agent` data type defines a living entity, such as a person (user) or organi
 
 The identifier for the `Agent` data type is:
 
-`http://gedcomx.org/conclusion/v1/Agent`
+`http://gedcomx.org/v1/Agent`
 
 ### properties
 
 name | description | data type
 -----|-------------|----------
 id | A local identifier for the agent. Note that this id MUST NOT be processed as an identifier for the resource being referenced, but instead as a transient identifier for the reference itself. | string
-identifiers | Identifiers for the agent. When an identifier for an agent is also an identifier for a person, the data in the person describes the agent. | List of [`http://gedcomx.org/conclusion/v1/Identifier`](#identifier-type). Order is preserved.
+identifiers | Identifiers for the agent. When an identifier for an agent is also an identifier for a person, the data in the person describes the agent. | List of [`http://gedcomx.org/v1/Identifier`](#identifier-type). Order is preserved.
 name | The name of the person or organization. | string
 homepage | The homepage of the person or organization. | [URI](#uri)
 openid  | The [openid](http://openid.net/) of the person or organization. | [URI](#uri)
-accounts  | The online accounts of the person or organization. | List of [`http://gedcomx.org/conclusion/v1/OnlineAccount`](#online-account). Order is preserved.
+accounts  | The online accounts of the person or organization. | List of [`http://gedcomx.org/v1/OnlineAccount`](#online-account). Order is preserved.
 emails  | The email addresses of the person or organization. | List of [URI](#uri) - MUST resolve to a valid e-mail address (e.g. "mailto:someone@gedcomx.org"). Order is preserved.
 phones  | The phones (voice, fax, mobile) of the person or organization. | List of [URI](#uri) - MUST resolve to a valid phone number (e.g. "tel:+1-201-555-0123"). Order is preserved.
-addresses  | The addresses of the person or organization. | List of [`http://gedcomx.org/conclusion/v1/Address`](#address). Order is preserved.
+addresses  | The addresses of the person or organization. | List of [`http://gedcomx.org/v1/Address`](#address). Order is preserved.
 
 
 
@@ -527,14 +527,14 @@ The `Conclusion` data type defines the base conceptual model for basic genealogi
 
 The identifier for the `Conclusion` data type is:
 
-`http://gedcomx.org/conclusion/v1/Conclusion`
+`http://gedcomx.org/v1/Conclusion`
 
 ### properties
 
 name | description | data type
 -----|-------------|----------
 id | A local identifier for the conclusion. Note that this id MUST NOT be processed as an identifier for the resource being referenced, but instead as a transient identifier for the reference itself. | string
-sources | The list of references to the sources of related to this conclusion. The sources of a conclusion MUST also be sources of the conclusion's containing entity (i.e. [`Person`](#person) or [`Relationship`](#relationship) ).| List of [`http://gedcomx.org/conclusion/v1/SourceReference`](#source-reference). Order is preserved.
+sources | The list of references to the sources of related to this conclusion. The sources of a conclusion MUST also be sources of the conclusion's containing entity (i.e. [`Person`](#person) or [`Relationship`](#relationship) ).| List of [`http://gedcomx.org/v1/SourceReference`](#source-reference). Order is preserved.
 notes  | A list of notes about a conclusion. | List of [`http://gedcomx.org/Note`](#note) - OPTIONAL
 attribution | The attribution of this conclusion. | [`http://gedcomx.org/Attribution`](#attribution)
 
@@ -549,13 +549,13 @@ The `Document` data type defines the base conceptual model for genealogical conc
 
 The identifier for the `Document` data type is:
 
-`http://gedcomx.org/conclusion/v1/Document`
+`http://gedcomx.org/v1/Document`
 
 ### extension
 
 This data type extends the following data type:
 
-`http://gedcomx.org/conclusion/v1/Conclusion`
+`http://gedcomx.org/v1/Conclusion`
 
 ### properties
 
@@ -574,13 +574,13 @@ The `AbstractDocument` data type is used to represent document abstracts.  The `
 
 The identifier for the `AbstractDocument` data type is:
 
-`http://gedcomx.org/conclusion/v1/AbstractDocument`
+`http://gedcomx.org/v1/AbstractDocument`
 
 ### extension
 
 This data type extends the following data type:
 
-`http://gedcomx.org/conclusion/v1/Document`
+`http://gedcomx.org/v1/Document`
 
 ### properties
 
@@ -597,13 +597,13 @@ The `TranscriptionDocument` data type is used to represent document transcriptio
 
 The identifier for the `TranscriptionDocument` data type is:
 
-`http://gedcomx.org/conclusion/v1/TranscriptionDocument`
+`http://gedcomx.org/v1/TranscriptionDocument`
 
 ### extension
 
 This data type extends the following data type:
 
-`http://gedcomx.org/conclusion/v1/Document`
+`http://gedcomx.org/v1/Document`
 
 ### properties
 
@@ -620,13 +620,13 @@ The `TranslationDocument` data type is used to represent document translations. 
 
 The identifier for the `TranslationDocument` data type is:
 
-`http://gedcomx.org/conclusion/v1/TranslationDocument`
+`http://gedcomx.org/v1/TranslationDocument`
 
 ### extension
 
 This data type extends the following data type:
 
-`http://gedcomx.org/conclusion/v1/Document`
+`http://gedcomx.org/v1/Document`
 
 ### properties
 
@@ -643,13 +643,13 @@ The `AnalysisDocument` data type is used to represent documents with evidence an
 
 The identifier for the `AnalysisDocument` data type is:
 
-`http://gedcomx.org/conclusion/v1/AnalysisDocument`
+`http://gedcomx.org/v1/AnalysisDocument`
 
 ### extension
 
 This data type extends the following data type:
 
-`http://gedcomx.org/conclusion/v1/Document`
+`http://gedcomx.org/v1/Document`
 
 ### properties
 
@@ -667,13 +667,13 @@ extends the `Conclusion` data type.
 
 The identifier for the `Gender` data type is:
 
-`http://gedcomx.org/conclusion/v1/Gender`
+`http://gedcomx.org/v1/Gender`
 
 ### extension
 
 This data type extends the following data type:
 
-`http://gedcomx.org/conclusion/v1/Conclusion`
+`http://gedcomx.org/v1/Conclusion`
 
 ### properties
 
@@ -705,13 +705,13 @@ extends the `Conclusion` data type.
 
 The identifier for the `Name` data type is:
 
-`http://gedcomx.org/conclusion/v1/Name`
+`http://gedcomx.org/v1/Name`
 
 ### extension
 
 This data type extends the following data type:
 
-`http://gedcomx.org/conclusion/v1/Conclusion`
+`http://gedcomx.org/v1/Conclusion`
 
 ### properties
 
@@ -719,8 +719,8 @@ name | description | data type
 -----|-------------|----------
 type | URI identifying the type of the name. | [URI](#uri) - MUST resolve to a name type. Refer to the list of [known name types](#known-name-types).
 preferred | Whether this name is preferred above the other names of a person. | boolean
-primaryForm | The primary form of the name. | `http://gedcomx.org/conclusion/v1/NameForm`
-alternateForms | The alternate forms of the name. | List of [`http://gedcomx.org/conclusion/v1/NameForm`](#name-form). Order is preserved.
+primaryForm | The primary form of the name. | `http://gedcomx.org/v1/NameForm`
+alternateForms | The alternate forms of the name. | List of [`http://gedcomx.org/v1/NameForm`](#name-form). Order is preserved.
 
 <a id="known-name-types"/>
 
@@ -753,23 +753,23 @@ the nature of a relationship. The `Fact` data type extends the `Conclusion` data
 
 The identifier for the `Fact` data type is:
 
-`http://gedcomx.org/conclusion/v1/Fact`
+`http://gedcomx.org/v1/Fact`
 
 ### extension
 
 This data type extends the following data type:
 
-`http://gedcomx.org/conclusion/v1/Conclusion`
+`http://gedcomx.org/v1/Conclusion`
 
 ### properties
 
 name | description | data type
 -----|-------------|----------
 type | URI identifying the type of the fact. | [URI](#uri) - MUST resolve to a fact type. See the list of [known fact types](#known-fact-types).
-date | The date of applicability of the fact. | [`http://gedcomx.org/conclusion/v1/Date`](#conclusion-date)
-place | The place of applicability of the fact. | [`http://gedcomx.org/conclusion/v1/Place`](#conclusion-place)
+date | The date of applicability of the fact. | [`http://gedcomx.org/v1/Date`](#conclusion-date)
+place | The place of applicability of the fact. | [`http://gedcomx.org/v1/Place`](#conclusion-place)
 original | The value of the fact as supplied by the contributor. | string
-formal | The formal value of the fact. | [`http://gedcomx.org/conclusion/v1/FormalValue`](#formal-value)
+formal | The formal value of the fact. | [`http://gedcomx.org/v1/FormalValue`](#formal-value)
 
 <a id="known-fact-types"/>
 
@@ -885,23 +885,23 @@ extends the `Conclusion` data type.
 
 The identifier for the `Person` data type is:
 
-`http://gedcomx.org/conclusion/v1/Person`
+`http://gedcomx.org/v1/Person`
 
 ### extension
 
 This data type extends the following data type:
 
-`http://gedcomx.org/conclusion/v1/Conclusion`
+`http://gedcomx.org/v1/Conclusion`
 
 ### properties
 
 name | description | data type
 -----|-------------|----------
-identifiers | Identifiers for the person. | List of [`http://gedcomx.org/conclusion/v1/Identifier`](#identifier-type). Order is preserved.
+identifiers | Identifiers for the person. | List of [`http://gedcomx.org/v1/Identifier`](#identifier-type). Order is preserved.
 living | Whether the person is considered living. | boolean
-gender | The conclusion about the gender of the person. | [`http://gedcomx.org/conclusion/v1/Gender`](#gender)
-names | The conclusions about the names of the person. | List of [`http://gedcomx.org/conclusion/v1/Name`](#name-conclusion). Order is preserved.
-facts | The conclusions about the facts of the life of the person. | List of [`http://gedcomx.org/conclusion/v1/Fact`](#fact-conclusion). Order is preserved.
+gender | The conclusion about the gender of the person. | [`http://gedcomx.org/v1/Gender`](#gender)
+names | The conclusions about the names of the person. | List of [`http://gedcomx.org/v1/Name`](#name-conclusion). Order is preserved.
+facts | The conclusions about the facts of the life of the person. | List of [`http://gedcomx.org/v1/Fact`](#fact-conclusion). Order is preserved.
 
 
 <a id="relationship"/>
@@ -915,22 +915,22 @@ extends the `Conclusion` data type.
 
 The identifier for the `Relationship` data type is:
 
-`http://gedcomx.org/conclusion/v1/Relationship`
+`http://gedcomx.org/v1/Relationship`
 
 ### extension
 
 This data type extends the following data type:
 
-`http://gedcomx.org/conclusion/v1/Conclusion`
+`http://gedcomx.org/v1/Conclusion`
 
 ### properties
 
 name | description | data type
 -----|-------------|----------
 type | URI identifying the type of the relationship. | [URI](#uri) - MUST resolve to a relationship type. Refer to the list of [known relationship types](#known-relationship-types)
-person1 | Reference to the first person in the relationship. | [URI](#uri) - MUST resolve to an instance of [`http://gedcomx.org/conclusion/v1/Person`](#person)
-person2 | Reference to the second person in the relationship. | [URI](#uri) - MUST resolve to an instance of [`http://gedcomx.org/conclusion/v1/Person`](#person)
-facts | The conclusions about the facts of the life of the relationship. | List of [`http://gedcomx.org/conclusion/v1/Fact`](#fact-conclusion). Order is preserved.
+person1 | Reference to the first person in the relationship. | [URI](#uri) - MUST resolve to an instance of [`http://gedcomx.org/v1/Person`](#person)
+person2 | Reference to the second person in the relationship. | [URI](#uri) - MUST resolve to an instance of [`http://gedcomx.org/v1/Person`](#person)
+facts | The conclusions about the facts of the life of the relationship. | List of [`http://gedcomx.org/v1/Fact`](#fact-conclusion). Order is preserved.
 
 Note: when a relationship type implies direction, the relationship is said to
 be *from* person1 *to* person2. For example, in a parent-child relationship, the
@@ -959,19 +959,19 @@ The `EventRole` data type defines a role played in an event by a person.  The `E
 
 The identifier for the `EventRole` data type is:
 
-`http://gedcomx.org/conclusion/v1/EventRole`
+`http://gedcomx.org/v1/EventRole`
 
 ### extension
 
 This data type extends the following data type:
 
-`http://gedcomx.org/conclusion/v1/Conclusion`
+`http://gedcomx.org/v1/Conclusion`
 
 ### properties
 
 name | description | data type
 -----|-------------|----------
-person | Reference to the person playing the role in the event. | [`URI`](#uri) - MUST resolve to an instance of [`http://gedcomx.org/conclusion/v1/Person`](#person)
+person | Reference to the person playing the role in the event. | [`URI`](#uri) - MUST resolve to an instance of [`http://gedcomx.org/v1/Person`](#person)
 type | Reference to the role type. | [`URI`](#uri) - MUST resolve to a role type. Refer to the list of [known role types](#known-roles).
 details | Details about the role of the person in the event. | string
 
@@ -1000,22 +1000,22 @@ extends the `Conclusion` data type.
 
 The identifier for the `Event` data type is:
 
-`http://gedcomx.org/conclusion/v1/Event`
+`http://gedcomx.org/v1/Event`
 
 ### extension
 
 This data type extends the following data type:
 
-`http://gedcomx.org/conclusion/v1/Conclusion`
+`http://gedcomx.org/v1/Conclusion`
 
 ### properties
 
 name | description | data type
 -----|-------------|----------
 type | URI identifying the type of the event. | [URI](#uri). MUST resolve to an event type. Refer to the list of [known event types](#known-event-types)
-date | The date of the event. | [`http://gedcomx.org/conclusion/v1/Date`](#conclusion-date)
-place | The place of the event. | [`http://gedcomx.org/conclusion/v1/Place`](#conclusion-place)
-roles | The roles of the persons in the event. | List of [`http://gedcomx.org/conclusion/v1/EventRole`](#conclusion-event-role). Order is preserved.
+date | The date of the event. | [`http://gedcomx.org/v1/Date`](#conclusion-date)
+place | The place of the event. | [`http://gedcomx.org/v1/Place`](#conclusion-place)
+roles | The roles of the persons in the event. | List of [`http://gedcomx.org/v1/EventRole`](#conclusion-event-role). Order is preserved.
 
 <a id="known-event-types"/>
 
@@ -1073,7 +1073,7 @@ The `Date` data type defines the value of a genealogical date.
 
 The identifier for the `Date` data type is:
 
-`http://gedcomx.org/conclusion/v1/Date`
+`http://gedcomx.org/v1/Date`
 
 ### properties
 
@@ -1102,7 +1102,7 @@ The `Place` data type defines the value of a genealogical place.
 
 The identifier for the `Place` data type is:
 
-`http://gedcomx.org/conclusion/v1/Place`
+`http://gedcomx.org/v1/Place`
 
 ### properties
 
@@ -1122,7 +1122,7 @@ The `NamePart` data type defines a part of a name of a person.
 
 The identifier for the `NamePart` data type is:
 
-`http://gedcomx.org/conclusion/v1/NamePart`
+`http://gedcomx.org/v1/NamePart`
 
 ### properties
 
@@ -1154,14 +1154,14 @@ The `NameForm` data type defines a form of a name of a person.
 
 The identifier for the `NameForm` data type is:
 
-`http://gedcomx.org/conclusion/v1/NameForm`
+`http://gedcomx.org/v1/NameForm`
 
 ### properties
 
 name | description | data type
 -----|-------------|----------
 fullText | The full text of the name form. | string
-parts | The parts of the name form. | List of [`http://gedcomx.org/conclusion/v1/NamePart`](#name-part). Order is preserved.
+parts | The parts of the name form. | List of [`http://gedcomx.org/v1/NamePart`](#name-part). Order is preserved.
 
 
 # 6. Extensibility
