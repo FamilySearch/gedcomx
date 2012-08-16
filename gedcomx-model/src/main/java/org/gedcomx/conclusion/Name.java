@@ -18,15 +18,11 @@ package org.gedcomx.conclusion;
 import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
-import org.gedcomx.common.TypeReference;
 import org.gedcomx.common.URI;
 import org.gedcomx.rt.json.JsonElementWrapper;
 import org.gedcomx.types.NameType;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import java.util.List;
 
 /**
@@ -34,14 +30,12 @@ import java.util.List;
  *
  * @author Ryan Heaton
  */
-@XmlType ( name = "Name", propOrder = { "type", "preferred", "primaryForm", "alternateForms" } )
+@XmlType ( name = "Name", propOrder = { "preferred", "primaryForm", "alternateForms" } )
 @XmlRootElement
 @JsonElementWrapper ( name = "names" )
 public class Name extends Conclusion {
 
-  @XmlElement
-  @JsonProperty
-  private TypeReference<NameType> type;
+  private URI type;
   private NameForm primaryForm;
   private List<NameForm> alternateForms;
   private Boolean preferred;
@@ -51,10 +45,9 @@ public class Name extends Conclusion {
    *
    * @return The type of the name.
    */
-  @XmlTransient
-  @JsonIgnore
+  @XmlAttribute
   public URI getType() {
-    return this.type == null ? null : this.type.getType();
+    return type;
   }
 
   /**
@@ -62,9 +55,8 @@ public class Name extends Conclusion {
    *
    * @param type The type of the name.
    */
-  @JsonIgnore
   public void setType(URI type) {
-    this.type = type == null ? null : new TypeReference<NameType>(type);
+    this.type = type;
   }
 
   /**
@@ -75,7 +67,7 @@ public class Name extends Conclusion {
   @XmlTransient
   @JsonIgnore
   public NameType getKnownType() {
-    return this.type == null ? null : NameType.fromQNameURI(this.type.getType());
+    return getType() == null ? null : NameType.fromQNameURI(getType());
   }
 
   /**
@@ -85,7 +77,7 @@ public class Name extends Conclusion {
    */
   @JsonIgnore
   public void setKnownType(NameType knownType) {
-    this.type = knownType == null ? null : new TypeReference<NameType>(knownType);
+    setType(knownType == null ? null : URI.create(org.codehaus.enunciate.XmlQNameEnumUtil.toURIValue(knownType)));
   }
 
   /**

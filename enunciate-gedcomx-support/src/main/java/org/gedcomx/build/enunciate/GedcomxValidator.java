@@ -180,6 +180,10 @@ public class GedcomxValidator extends BaseValidator {
             result.addError(choice, "Entity links should be make with an attribute named 'href'. You probably need to apply @XmlAttribute.");
           }
 
+          if ("type".equals(choice.getName())) {
+            result.addError(choice, "Type references should be attributes. You probably need to apply @XmlAttribute.");
+          }
+
           TypeMirror accessorType = choice.getAccessorType();
           if (accessorType instanceof EnumType && ((EnumType) accessorType).getDeclaration().getAnnotation(XmlQNameEnum.class) != null) {
             result.addError(choice, "Accessors should not reference QName enums directly. You probably want to annotate this accessor with @XmlTransient.");

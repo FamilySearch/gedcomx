@@ -35,7 +35,7 @@ import java.util.Date;
 public final class Attribution {
 
   private ResourceReference contributor;
-  private TypeReference<ConfidenceLevel> confidence;
+  private URI confidence;
   private Date modified;
   private String changeMessage;
 
@@ -64,7 +64,7 @@ public final class Attribution {
    *
    * @return The level of confidence the contributor has about the data.
    */
-  public TypeReference<ConfidenceLevel> getConfidence() {
+  public URI getConfidence() {
     return confidence;
   }
 
@@ -73,7 +73,7 @@ public final class Attribution {
    *
    * @param confidence The level of confidence the contributor has about the data.
    */
-  public void setConfidence(TypeReference<ConfidenceLevel> confidence) {
+  public void setConfidence(URI confidence) {
     this.confidence = confidence;
   }
 
@@ -85,7 +85,7 @@ public final class Attribution {
   @XmlTransient
   @JsonIgnore
   public ConfidenceLevel getKnownConfidenceLevel() {
-    return getConfidence() == null ? null : ConfidenceLevel.fromQNameURI(getConfidence().getType());
+    return getConfidence() == null ? null : ConfidenceLevel.fromQNameURI(getConfidence());
   }
 
   /**
@@ -95,7 +95,7 @@ public final class Attribution {
    */
   @JsonIgnore
   public void setKnownConfidenceLevel(ConfidenceLevel level) {
-    setConfidence(level == null ? null : new TypeReference<ConfidenceLevel>(level));
+    setConfidence(level == null ? null : URI.create(org.codehaus.enunciate.XmlQNameEnumUtil.toURIValue(level)));
   }
 
   /**

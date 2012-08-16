@@ -18,15 +18,11 @@ package org.gedcomx.conclusion;
 import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
-import org.gedcomx.common.TypeReference;
 import org.gedcomx.common.URI;
 import org.gedcomx.rt.json.JsonElementWrapper;
 import org.gedcomx.types.EventType;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import java.util.List;
 
 
@@ -37,12 +33,10 @@ import java.util.List;
  */
 @XmlRootElement
 @JsonElementWrapper (name = "events")
-@XmlType ( name = "Event", propOrder = { "type", "date", "place", "roles" } )
+@XmlType ( name = "Event", propOrder = { "date", "place", "roles" } )
 public class Event extends Conclusion implements HasDateAndPlace {
 
-  @XmlElement
-  @JsonProperty
-  private TypeReference<EventType> type;
+  private URI type;
   private Date date;
   private Place place;
   private List<EventRole> roles;
@@ -80,10 +74,9 @@ public class Event extends Conclusion implements HasDateAndPlace {
    *
    * @return The type of the event.
    */
-  @XmlTransient
-  @JsonIgnore
+  @XmlAttribute
   public URI getType() {
-    return this.type == null ? null : this.type.getType();
+    return type;
   }
 
   /**
@@ -91,9 +84,8 @@ public class Event extends Conclusion implements HasDateAndPlace {
    *
    * @param type The type of the event.
    */
-  @JsonIgnore
   public void setType(URI type) {
-    this.type = type == null ? null : new TypeReference<EventType>(type);
+    this.type = type;
   }
 
   /**
@@ -104,7 +96,7 @@ public class Event extends Conclusion implements HasDateAndPlace {
   @XmlTransient
   @JsonIgnore
   public org.gedcomx.types.EventType getKnownType() {
-    return this.type == null ? null : EventType.fromQNameURI(this.type.getType());
+    return getType() == null ? null : EventType.fromQNameURI(getType());
   }
 
   /**
@@ -114,7 +106,7 @@ public class Event extends Conclusion implements HasDateAndPlace {
    */
   @JsonIgnore
   public void setKnownType(org.gedcomx.types.EventType knownType) {
-    this.type = knownType == null ? null : new TypeReference<EventType>(knownType);
+    setType(knownType == null ? null : URI.create(org.codehaus.enunciate.XmlQNameEnumUtil.toURIValue(knownType)));
   }
 
   /**

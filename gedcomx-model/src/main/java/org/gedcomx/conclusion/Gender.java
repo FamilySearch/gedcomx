@@ -16,13 +16,11 @@
 package org.gedcomx.conclusion;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.annotate.JsonProperty;
-import org.gedcomx.common.TypeReference;
 import org.gedcomx.common.URI;
 import org.gedcomx.rt.json.JsonElementWrapper;
 import org.gedcomx.types.GenderType;
 
-import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
@@ -37,9 +35,7 @@ import javax.xml.bind.annotation.XmlType;
 @JsonElementWrapper ( name = "genders" )
 public class Gender extends Conclusion {
 
-  @XmlElement
-  @JsonProperty
-  private TypeReference<GenderType> type;
+  private URI type;
 
   /**
    * Default constructor.
@@ -61,10 +57,9 @@ public class Gender extends Conclusion {
    *
    * @return The type of the gender.
    */
-  @XmlTransient
-  @JsonIgnore
+  @XmlAttribute
   public URI getType() {
-    return this.type == null ? null : this.type.getType();
+    return type;
   }
 
   /**
@@ -72,9 +67,8 @@ public class Gender extends Conclusion {
    *
    * @param type The type of the gender.
    */
-  @JsonIgnore
   public void setType(URI type) {
-    this.type = type == null ? null : new TypeReference<GenderType>(type);
+    this.type = type;
   }
 
   /**
@@ -85,7 +79,7 @@ public class Gender extends Conclusion {
   @XmlTransient
   @JsonIgnore
   public GenderType getKnownType() {
-    return this.type == null ? null : GenderType.fromQNameURI(this.type.getType());
+    return getType() == null ? null : GenderType.fromQNameURI(getType());
   }
 
   /**
@@ -95,7 +89,7 @@ public class Gender extends Conclusion {
    */
   @JsonIgnore
   public void setKnownType(GenderType type) {
-    this.type = type == null ? null : new TypeReference<GenderType>(type);
+    setType(type == null ? null : URI.create(org.codehaus.enunciate.XmlQNameEnumUtil.toURIValue(type)));
   }
 
   @Override

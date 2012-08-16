@@ -16,13 +16,11 @@
 package org.gedcomx.conclusion;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.annotate.JsonProperty;
-import org.gedcomx.common.TypeReference;
 import org.gedcomx.common.URI;
 import org.gedcomx.rt.json.JsonElementWrapper;
 import org.gedcomx.types.FactType;
 
-import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
@@ -30,14 +28,12 @@ import javax.xml.bind.annotation.XmlType;
 /**
  * A conclusion about a fact applicable to a person or relationship.
  */
-@XmlType ( name = "Fact", propOrder = {"type", "date", "place", "original", "formal" })
+@XmlType ( name = "Fact", propOrder = { "date", "place", "original", "formal" })
 @XmlRootElement
 @JsonElementWrapper ( name = "facts" )
 public class Fact extends Conclusion implements Formalizeable, HasDateAndPlace {
 
-  @XmlElement
-  @JsonProperty
-  private TypeReference<FactType> type;
+  private URI type;
   private Date date;
   private Place place;
   private String original;
@@ -80,10 +76,9 @@ public class Fact extends Conclusion implements Formalizeable, HasDateAndPlace {
    *
    * @return The type of the fact.
    */
-  @XmlTransient
-  @JsonIgnore
+  @XmlAttribute
   public URI getType() {
-    return this.type == null ? null : this.type.getType();
+    return type;
   }
 
   /**
@@ -91,9 +86,8 @@ public class Fact extends Conclusion implements Formalizeable, HasDateAndPlace {
    *
    * @param type The type of the fact.
    */
-  @JsonIgnore
   public void setType(URI type) {
-    this.type = type == null ? null : new TypeReference<FactType>(type);
+    this.type = type;
   }
 
   /**
@@ -104,7 +98,7 @@ public class Fact extends Conclusion implements Formalizeable, HasDateAndPlace {
   @XmlTransient
   @JsonIgnore
   public org.gedcomx.types.FactType getKnownType() {
-    return this.type == null ? null : FactType.fromQNameURI(this.type.getType());
+    return getType() == null ? null : FactType.fromQNameURI(getType());
   }
 
   /**
@@ -114,7 +108,7 @@ public class Fact extends Conclusion implements Formalizeable, HasDateAndPlace {
    */
   @JsonIgnore
   public void setKnownType(org.gedcomx.types.FactType knownType) {
-    this.type = knownType == null ? null : new TypeReference<FactType>(knownType);
+    setType(knownType == null ? null : URI.create(org.codehaus.enunciate.XmlQNameEnumUtil.toURIValue(knownType)));
   }
 
   /**

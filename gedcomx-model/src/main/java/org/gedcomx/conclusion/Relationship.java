@@ -19,17 +19,13 @@ import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.gedcomx.common.ResourceReference;
-import org.gedcomx.common.TypeReference;
 import org.gedcomx.common.URI;
 import org.gedcomx.rt.RDFRange;
 import org.gedcomx.rt.RDFSubPropertyOf;
 import org.gedcomx.rt.json.JsonElementWrapper;
 import org.gedcomx.types.RelationshipType;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,12 +37,10 @@ import java.util.List;
  */
 @XmlRootElement
 @JsonElementWrapper ( name = "relationships" )
-@XmlType ( name = "Relationship", propOrder = { "type", "person1", "person2", "facts" } )
+@XmlType ( name = "Relationship", propOrder = { "person1", "person2", "facts" } )
 public class Relationship extends Conclusion implements HasFacts {
 
-  @XmlElement
-  @JsonProperty
-  private TypeReference<RelationshipType> type;
+  private URI type;
   private ResourceReference person1;
   private ResourceReference person2;
   private List<Fact> facts;
@@ -56,10 +50,9 @@ public class Relationship extends Conclusion implements HasFacts {
    *
    * @return The type of this relationship.
    */
-  @XmlTransient
-  @JsonIgnore
+  @XmlAttribute
   public URI getType() {
-    return this.type == null ? null : this.type.getType();
+    return type;
   }
 
   /**
@@ -67,9 +60,8 @@ public class Relationship extends Conclusion implements HasFacts {
    *
    * @param type The type of this relationship.
    */
-  @JsonIgnore
   public void setType(URI type) {
-    this.type = type == null ? null : new TypeReference<RelationshipType>(type);
+    this.type = type;
   }
 
   /**
@@ -80,7 +72,7 @@ public class Relationship extends Conclusion implements HasFacts {
   @XmlTransient
   @JsonIgnore
   public RelationshipType getKnownType() {
-    return this.type == null ? null : RelationshipType.fromQNameURI(this.type.getType());
+    return getType() == null ? null : RelationshipType.fromQNameURI(getType());
   }
 
   /**
@@ -90,7 +82,7 @@ public class Relationship extends Conclusion implements HasFacts {
    */
   @JsonIgnore
   public void setKnownType(RelationshipType type) {
-    this.type = type == null ? null : new TypeReference<RelationshipType>(type);
+    setType(type == null ? null : URI.create(org.codehaus.enunciate.XmlQNameEnumUtil.toURIValue(type)));
   }
 
   /**

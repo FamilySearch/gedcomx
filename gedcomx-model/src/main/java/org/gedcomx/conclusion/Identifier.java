@@ -16,12 +16,10 @@
 package org.gedcomx.conclusion;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.annotate.JsonProperty;
-import org.gedcomx.common.TypeReference;
 import org.gedcomx.common.URI;
 import org.gedcomx.types.IdentifierType;
 
-import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
@@ -30,13 +28,11 @@ import javax.xml.bind.annotation.XmlType;
  *
  * @author Ryan Heaton
  */
-@XmlType ( name = "Identifier", propOrder = {"type", "value"})
+@XmlType ( name = "Identifier" )
 public final class Identifier {
 
   private String value;
-  @XmlElement
-  @JsonProperty
-  private TypeReference<IdentifierType> type;
+  private URI type;
 
   /**
    * The id value.
@@ -61,10 +57,9 @@ public final class Identifier {
    *
    * @return The type of the id.
    */
-  @XmlTransient
-  @JsonIgnore
+  @XmlAttribute
   public URI getType() {
-    return this.type == null ? null : this.type.getType();
+    return type;
   }
 
   /**
@@ -72,9 +67,8 @@ public final class Identifier {
    *
    * @param type The type of the id.
    */
-  @JsonIgnore
   public void setType(URI type) {
-    this.type = type == null ? null : new TypeReference<IdentifierType>(type);
+    this.type = type;
   }
 
   /**
@@ -85,7 +79,7 @@ public final class Identifier {
   @XmlTransient
   @JsonIgnore
   public IdentifierType getKnownType() {
-    return this.type == null ? null : IdentifierType.fromQNameURI(this.type.getType());
+    return getType() == null ? null : IdentifierType.fromQNameURI(getType());
   }
 
   /**
@@ -95,7 +89,7 @@ public final class Identifier {
    */
   @JsonIgnore
   public void setKnownType(IdentifierType knownType) {
-    this.type = knownType == null ? null : new TypeReference<IdentifierType>(knownType);
+    setType(knownType == null ? null : URI.create(org.codehaus.enunciate.XmlQNameEnumUtil.toURIValue(knownType)));
   }
 
   /**

@@ -16,12 +16,10 @@
 package org.gedcomx.conclusion;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.annotate.JsonProperty;
-import org.gedcomx.common.TypeReference;
 import org.gedcomx.common.URI;
 import org.gedcomx.types.NamePartType;
 
-import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
@@ -31,12 +29,10 @@ import javax.xml.bind.annotation.XmlType;
  *
  * @author Ryan Heaton
  */
-@XmlType ( name = "NamePart", propOrder = {"type", "value"})
+@XmlType ( name = "NamePart" )
 public final class NamePart {
 
-  @XmlElement
-  @JsonProperty
-  private TypeReference<NamePartType> type;
+  private URI type;
   private String value;
 
   /**
@@ -44,10 +40,9 @@ public final class NamePart {
    *
    * @return The type of the name part.
    */
-  @XmlTransient
-  @JsonIgnore
+  @XmlAttribute
   public URI getType() {
-    return this.type == null ? null : this.type.getType();
+    return type;
   }
 
   /**
@@ -55,9 +50,8 @@ public final class NamePart {
    *
    * @param type The type of the name part.
    */
-  @JsonIgnore
   public void setType(URI type) {
-    this.type = type == null ? null : new TypeReference<NamePartType>(type);
+    this.type = type;
   }
 
   /**
@@ -68,7 +62,7 @@ public final class NamePart {
   @XmlTransient
   @JsonIgnore
   public NamePartType getKnownType() {
-    return this.type == null ? null : NamePartType.fromQNameURI(this.type.getType());
+    return getType() == null ? null : NamePartType.fromQNameURI(getType());
   }
 
   /**
@@ -78,7 +72,7 @@ public final class NamePart {
    */
   @JsonIgnore
   public void setKnownType(NamePartType knownType) {
-    this.type = knownType == null ? null : new TypeReference<NamePartType>(knownType);
+    setType(knownType == null ? null : URI.create(org.codehaus.enunciate.XmlQNameEnumUtil.toURIValue(knownType)));
   }
 
   /**

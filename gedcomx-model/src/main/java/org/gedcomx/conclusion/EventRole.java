@@ -16,14 +16,12 @@
 package org.gedcomx.conclusion;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.annotate.JsonProperty;
 import org.gedcomx.common.ResourceReference;
-import org.gedcomx.common.TypeReference;
 import org.gedcomx.common.URI;
 import org.gedcomx.rt.RDFRange;
 import org.gedcomx.types.EventRoleType;
 
-import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
@@ -32,13 +30,11 @@ import javax.xml.bind.annotation.XmlType;
  *
  * @author Ryan Heaton
  */
-@XmlType ( name = "EventRole", propOrder = { "person", "type", "details" } )
+@XmlType ( name = "EventRole", propOrder = { "person", "details" } )
 public class EventRole extends Conclusion {
 
   private ResourceReference person;
-  @XmlElement
-  @JsonProperty
-  private TypeReference<EventRoleType> type;
+  private URI type;
   private String details;
 
   /**
@@ -65,10 +61,9 @@ public class EventRole extends Conclusion {
    *
    * @return The role type.
    */
-  @XmlTransient
-  @JsonIgnore
+  @XmlAttribute
   public URI getType() {
-    return this.type == null ? null : this.type.getType();
+    return type;
   }
 
   /**
@@ -76,9 +71,8 @@ public class EventRole extends Conclusion {
    *
    * @param type The role type.
    */
-  @JsonIgnore
   public void setType(URI type) {
-    this.type = type == null ? null : new TypeReference<EventRoleType>(type);
+    this.type = type;
   }
 
   /**
@@ -89,7 +83,7 @@ public class EventRole extends Conclusion {
   @XmlTransient
   @JsonIgnore
   public EventRoleType getKnownType() {
-    return this.type == null ? null : EventRoleType.fromQNameURI(this.type.getType());
+    return getType() == null ? null : EventRoleType.fromQNameURI(getType());
   }
 
   /**
@@ -99,7 +93,7 @@ public class EventRole extends Conclusion {
    */
   @JsonIgnore
   public void setKnownType(EventRoleType knownType) {
-    this.type = knownType == null ? null : new TypeReference<EventRoleType>(knownType);
+    setType(knownType == null ? null : URI.create(org.codehaus.enunciate.XmlQNameEnumUtil.toURIValue(knownType)));
   }
 
   /**
