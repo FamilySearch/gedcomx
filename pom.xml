@@ -19,7 +19,7 @@
     <module>gedcomx-rt-support</module>
     <module>gedcomx-test-support</module>
     <module>enunciate-gedcomx-support</module>
-    <module>gedcomx-conclusion</module>
+    <module>gedcomx-model</module>
   </modules>
 
   <dependencies>
