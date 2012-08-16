@@ -30,8 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
     description = "The common model defines the types and elements that are common to all model.",
     version = "v1",
     xmlMediaType = CommonModels.GEDCOMX_COMMON_XML_MEDIA_TYPE,
-    jsonMediaType = CommonModels.GEDCOMX_COMMON_JSON_MEDIA_TYPE,
-    definesRDFSchema = true
+    jsonMediaType = CommonModels.GEDCOMX_COMMON_JSON_MEDIA_TYPE
   ),
   @Model (
     id = "rdf",
@@ -41,8 +40,7 @@ import javax.xml.bind.annotation.XmlTransient;
     description = "The RDF model defines metadata in RDF format.",
     version = "1999-02-22",
     xmlMediaType = CommonModels.RDF_XML_MEDIA_TYPE,
-    jsonMediaType = CommonModels.RDF_JSON_MEDIA_TYPE,
-    definesRDFSchema = true
+    jsonMediaType = CommonModels.RDF_JSON_MEDIA_TYPE
   )
 } )
 public class CommonModels {

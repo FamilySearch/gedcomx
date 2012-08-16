@@ -18,8 +18,6 @@ package org.gedcomx.conclusion;
 import org.gedcomx.common.HasText;
 import org.gedcomx.common.TextValue;
 
-import javax.xml.XMLConstants;
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
 

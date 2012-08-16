@@ -35,8 +35,7 @@ import javax.xml.bind.annotation.XmlTransient;
     description = "The Source Metadata model defines the types and elements used to represent metadata about sources.",
     version = "v1",
     xmlMediaType = SourceModel.GEDCOMX_SOURCE_V1_XML_MEDIA_TYPE,
-    jsonMediaType = SourceModel.GEDCOMX_SOURCE_V1_JSON_MEDIA_TYPE,
-    definesRDFSchema = true
+    jsonMediaType = SourceModel.GEDCOMX_SOURCE_V1_JSON_MEDIA_TYPE
   )
 } )
 public class SourceModel {
