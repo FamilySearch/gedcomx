@@ -18,12 +18,13 @@
  * The conclusion model defines genealogical conclusion data.
  */
 @XmlSchema(
-  namespace = ConclusionModel.GEDCOMX_CONCLUSION_V1_NAMESPACE,
-  attributeFormDefault = XmlNsForm.QUALIFIED,
+  namespace = CommonModels.GEDCOMX_NAMESPACE,
   elementFormDefault = XmlNsForm.QUALIFIED
 )
 @XmlAccessorOrder ( XmlAccessOrder.ALPHABETICAL )
 package org.gedcomx.conclusion;
+
+import org.gedcomx.rt.CommonModels;
 
 import javax.xml.bind.annotation.XmlAccessOrder;
 import javax.xml.bind.annotation.XmlAccessorOrder;

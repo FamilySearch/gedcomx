@@ -18,12 +18,13 @@
  * The sources model.
  */
 @XmlSchema (
-  namespace = SourceModel.GEDCOMX_SOURCE_V1_NAMESPACE,
-  elementFormDefault = XmlNsForm.QUALIFIED,
-  attributeFormDefault = XmlNsForm.QUALIFIED
+  namespace = CommonModels.GEDCOMX_NAMESPACE,
+  elementFormDefault = XmlNsForm.QUALIFIED
 )
 @XmlAccessorOrder ( XmlAccessOrder.ALPHABETICAL )
 package org.gedcomx.source;
+
+import org.gedcomx.rt.CommonModels;
 
 import javax.xml.bind.annotation.XmlAccessOrder;
 import javax.xml.bind.annotation.XmlAccessorOrder;

@@ -19,7 +19,6 @@
  */
 @XmlSchema(
   namespace = CommonModels.GEDCOMX_NAMESPACE,
-  attributeFormDefault = XmlNsForm.QUALIFIED,
   elementFormDefault = XmlNsForm.QUALIFIED
 )
 @XmlSchemaTypes ({
