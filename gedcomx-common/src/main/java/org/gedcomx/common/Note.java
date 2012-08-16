@@ -33,7 +33,7 @@ import java.util.List;
  */
 @XmlRootElement
 @JsonElementWrapper(name = "notes")
-@XmlType ( name = "Note", propOrder = { "text", "attribution" } )
+@XmlType ( name = "Note", propOrder = { "text", "attribution", "extensionElements" } )
 public class Note implements Attributable, HasText, SupportsExtensionElements {
 
   private TextValue text;
