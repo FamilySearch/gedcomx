@@ -3,6 +3,7 @@ package org.gedcomx.contributor;
 import org.gedcomx.common.ResourceReference;
 import org.gedcomx.common.URI;
 import org.gedcomx.CustomEntity;
+import org.gedcomx.conclusion.Identifier;
 import org.gedcomx.rt.json.GedcomJsonProvider;
 import org.testng.Assert;
 import org.testng.AssertJUnit;
@@ -10,6 +11,7 @@ import org.testng.annotations.Test;
 
 import javax.xml.bind.JAXBContext;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import static org.gedcomx.rt.SerializationUtil.processThroughJson;
 import static org.gedcomx.rt.SerializationUtil.processThroughXml;
@@ -105,6 +107,9 @@ public class AgentTest {
     person.setName("Ryan Heaton");
     person.setOpenid(new ResourceReference(URI.create("openid")));
     person.setPhones(new ArrayList<ResourceReference>());
+    Identifier identifier = new Identifier();
+    identifier.setValue("identifier");
+    person.setIdentifiers(Arrays.asList(identifier));
     ResourceReference phone = new ResourceReference();
     phone.setResource(URI.create("tel:+18012401000"));
     person.getPhones().add(phone);
@@ -131,5 +136,6 @@ public class AgentTest {
     AssertJUnit.assertEquals("openid", person.getOpenid().getResource().toString());
     AssertJUnit.assertEquals(1, person.getPhones().size());
     AssertJUnit.assertEquals("tel:+18012401000", person.getPhones().get(0).getResource().toString());
+    AssertJUnit.assertEquals("identifier", person.getIdentifiers().get(0).getValue());
   }
 }

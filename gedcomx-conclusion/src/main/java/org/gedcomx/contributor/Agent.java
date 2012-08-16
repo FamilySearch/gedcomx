@@ -19,6 +19,7 @@ import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.gedcomx.common.ResourceReference;
+import org.gedcomx.conclusion.Identifier;
 import org.gedcomx.rt.SupportsExtensionElements;
 import org.gedcomx.rt.json.JsonElementWrapper;
 
@@ -41,6 +42,7 @@ public class Agent implements SupportsExtensionElements {
 
   private String id;
   private String name;
+  private List<Identifier> identifiers;
   private ResourceReference homepage;
   private ResourceReference openid;
   private List<OnlineAccount> accounts;
@@ -85,6 +87,28 @@ public class Agent implements SupportsExtensionElements {
    */
   public void setName(String name) {
     this.name = name;
+  }
+
+  /**
+   * The list of identifiers for the agent.
+   *
+   * @return The list of identifiers for the agent.
+   */
+  @XmlElement (name="identifier")
+  @JsonProperty ("identifiers")
+  @JsonName ("identifiers")
+  public List<Identifier> getIdentifiers() {
+    return identifiers;
+  }
+
+  /**
+   * The list of identifiers of the agent.
+   *
+   * @param identifiers The list of identifiers of the agent.
+   */
+  @JsonProperty ("identifiers")
+  public void setIdentifiers(List<Identifier> identifiers) {
+    this.identifiers = identifiers;
   }
 
   /**

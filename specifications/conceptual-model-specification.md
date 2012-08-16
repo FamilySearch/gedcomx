@@ -501,6 +501,7 @@ The identifier for the `Agent` data type is:
 name | description | data type
 -----|-------------|----------
 id | A local identifier for the agent. Note that this id MUST NOT be processed as an identifier for the resource being referenced, but instead as a transient identifier for the reference itself. | string
+identifiers | Identifiers for the agent. When an identifier for an agent is also an identifier for a person, the data in the person describes the agent. | List of [`http://gedcomx.org/conclusion/v1/Identifier`](#identifier-type). Order is preserved.
 name | The name of the person or organization. | string
 homepage | The homepage of the person or organization. | [URI](#uri)
 openid  | The [openid](http://openid.net/) of the person or organization. | [URI](#uri)

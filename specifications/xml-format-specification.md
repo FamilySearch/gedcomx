@@ -561,6 +561,7 @@ data type.
 name | description | XML property | XML type
 -----|-------------|--------------|---------
 id | A local, transient identifier for the resource being described. | rdf:ID (attribute) | xsd:string
+identifiers | Identifiers for the agent. | gxc:identifier | [`gxc:Identifier`](#identifier-type)
 name | The name of the person or organization. | gxc:name | xsd:string
 homepage | The homepage of the person or organization. | gxc:homepage | [`rdf:ResourceReference`](#resource-reference)
 openid  | The [openid](http://openid.net/) of the person or organization. | gxc:openid | [`rdf:ResourceReference`](#resource-reference)

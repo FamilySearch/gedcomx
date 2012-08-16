@@ -527,6 +527,7 @@ name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 id | A local, transient identifier for the resource being described. | id | string
 name | The name of the person or organization. | name | string
+identifiers | Identifiers for the agent. | identifiers | [`Identifier`](#identifier-type)
 homepage | The homepage of the person or organization. | homepage | [`URI`](#uri)
 openid  | The [openid](http://openid.net/) of the person or organization. | openid | [`URI`](#uri)
 accounts  | The online accounts of the person or organization. | accounts | array of [`OnlineAccount`](#online-account)
