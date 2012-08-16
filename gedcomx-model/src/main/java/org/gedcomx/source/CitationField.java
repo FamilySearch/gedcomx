@@ -19,8 +19,10 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import org.gedcomx.common.URI;
 import org.gedcomx.rt.json.HasUniqueJsonKey;
 
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.XmlValue;
 
 
 /**
@@ -40,7 +42,7 @@ public class CitationField implements HasUniqueJsonKey {
   }
 
   public CitationField(String name, String value) {
-    setName(name);
+    setNameValue(name);
     setValue(value);
   }
 
@@ -49,6 +51,7 @@ public class CitationField implements HasUniqueJsonKey {
    *
    * @return The citation field's name.
    */
+  @XmlAttribute
   public URI getName() {
     return name;
   }
@@ -69,7 +72,7 @@ public class CitationField implements HasUniqueJsonKey {
    */
   @XmlTransient
   @JsonIgnore
-  public void setName(String name) {
+  public void setNameValue(String name) {
     this.name = name != null ? new URI(name) : null;
   }
 
@@ -93,7 +96,7 @@ public class CitationField implements HasUniqueJsonKey {
   @JsonIgnore
   @Override
   public void setJsonKey(String jsonKey) {
-    setName(jsonKey);
+    setNameValue(jsonKey);
   }
 
   /**
@@ -101,6 +104,7 @@ public class CitationField implements HasUniqueJsonKey {
    *
    * @return The citation field's value.
    */
+  @XmlValue
   public String getValue() {
     return value;
   }

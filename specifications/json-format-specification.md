@@ -294,30 +294,6 @@ attribution | The attribution of this note. | attribution | [`Attribution`](#att
 }
 ```
 
-<a id="rdf-literal"/>
-
-## 2.6 The "LiteralValue" Data Type
-
-The JSON object used to (de)serialize the `http://gedcomx.org/v1/Literal` data type is defined as follows:
-
-### properties
-
-name | description | JSON member | JSON object type
------|-------------|--------------|---------
-lang | The language of the literal value. | lang | string
-datatype  | URI identifying the way the value is to be processed according to a specific standard. | datatype | [URI](#uri)
-value | The literal value. | value | string
-
-### examples
-
-```json
-{
-  "lang" : "en",
-  "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
-  "value" : "...text of the literal value (e.g., "2012-05-29T00:00:00")..."
-}
-```
-
 ## 2.7 The "TextValue" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/v1/TextValue` data type is defined as follows:

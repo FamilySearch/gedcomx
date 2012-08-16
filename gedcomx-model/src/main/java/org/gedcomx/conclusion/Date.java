@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlType;
 @ClientName ("DateInfo")
 @XmlType ( name = "Date", propOrder = { "original", "formal" })
 @RDFSubClassOf ( "http://purl.org/dc/terms/PeriodOfTime" )
-public final class Date implements Formalizeable {
+public class Date implements Formalizeable {
 
   private String original;
   private FormalValue formal;

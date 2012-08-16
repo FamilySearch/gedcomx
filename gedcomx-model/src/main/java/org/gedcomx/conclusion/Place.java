@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlType ( name = "Place", propOrder = { "original", "formal" } )
 @RDFSubClassOf ( "http://purl.org/dc/terms/Location" )
-public final class Place implements Formalizeable {
+public class Place implements Formalizeable {
 
   private String original;
   private FormalValue formal;

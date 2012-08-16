@@ -22,6 +22,7 @@ import org.gedcomx.types.IdentifierType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.XmlValue;
 
 /**
  * An identifier for a resource.
@@ -48,6 +49,7 @@ public final class Identifier {
    *
    * @param value The id value.
    */
+  @XmlValue
   public void setValue(String value) {
     this.value = value;
   }

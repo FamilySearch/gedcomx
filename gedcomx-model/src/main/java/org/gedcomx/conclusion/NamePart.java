@@ -22,6 +22,7 @@ import org.gedcomx.types.NamePartType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.XmlValue;
 
 
 /**
@@ -80,6 +81,7 @@ public final class NamePart {
    *
    * @return The value of the name part.
    */
+  @XmlValue
   public String getValue() {
     return value;
   }

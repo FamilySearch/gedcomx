@@ -87,6 +87,8 @@ and even the data types that define those data structures. The URI is specified 
 The `Identifier` data type defines the data structure used to supply an identifier of a 
 genealogical resource in a specific data set.
 
+The `Identifier` data type does NOT support extension properties (see [Extension Properties](#extension-properties)).
+
 ### identifier
 
 The identifier for the "Identifier" data type is:
@@ -121,6 +123,8 @@ todo: fill in some examples.
 
 The `Attribution` data type defines the data structure used to supply the attribution (including
 who, when, and why) of genealogical data.
+
+The `Attribution` data type does NOT support extension properties (see [Extension Properties](#extension-properties)).
 
 ### identifier
 
@@ -232,32 +236,13 @@ text | The text of the note. | [`http://gedcomx.org/TextValue`](#text-value)
 attribution | The attribution of this note. | [`http://gedcomx.org/Attribution`](#attribution)
 
 
-<a id="literal-value"/>
-
-## 2.6 The "LiteralValue" Data Type
-
-The `LiteralValue` data type defines a literal value.
-
-### identifier
-
-The identifier for the "LiteralValue" data type is:
-
-`http://gedcomx.org/v1/Literal`
-
-### properties
-
-name  | description | data type
-------|-------------|----------
-datatype  | URI identifying the way the value is to be processed according to a specific standard. | [URI](#uri)
-lang | The language of the literal value. | `http://www.w3.org/XML/1998/namespace#lang`
-value | The literal value. A datatype MAY be supplied to identify how the string is to be parsed. | string
-
-
 <a id="text-value"/>
 
 ## 2.7 The "TextValue" Data Type
 
 The `TextValue` data type defines a literal value.
+
+The `TextValue` data type does NOT support extension properties (see [Extension Properties](#extension-properties)).
 
 ### identifier
 
@@ -339,6 +324,8 @@ fields  | A list of citation fields about a source. | List of [`http://gedcomx.o
 
 The `CitationField` data type defines a piece of metadata (e.g., author, volume, page, publisher, etc.)
 necessary to identify a source.
+
+The `CitationField` data type does NOT support extension properties (see [Extension Properties](#extension-properties)).
 
 ### identifier
 
@@ -1117,6 +1104,8 @@ formal | The formal value of the place. | [`http://gedcomx.org/FormalValue`](#fo
 ## 5.12 The "NamePart" Data Type
 
 The `NamePart` data type defines a part of a name of a person.
+
+The `NamePart` data type does NOT support extension properties (see [Extension Properties](#extension-properties)).
 
 ### identifier
 

@@ -28,7 +28,7 @@ import java.util.List;
  * @author Ryan Heaton
  */
 @XmlType ( name = "NameForm" )
-public final class NameForm {
+public class NameForm {
 
   private String fullText;
   private List<NamePart> parts;

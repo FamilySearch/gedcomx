@@ -58,12 +58,8 @@ in XML according to this specification:
         <preferred>true</preferred>
         <primaryForm>
             <fullText>George Washington</fullText>
-            <part type="http://gedcomx.org/Given">
-                <value>George</value>
-            </part>
-            <part type="http://gedcomx.org/Surname">
-                <value>Washington</value>
-            </part>
+            <part type="http://gedcomx.org/Given">George</part>
+            <part type="http://gedcomx.org/Surname">Washington</part>
         </primaryForm>
     </name>
     <fact type="http://gedcomx.org/Birth" id="123">
@@ -191,15 +187,13 @@ data type.
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
-value | The value of the identifier. | gx:value | xsd:string
+value | The value of the identifier. | (child text) | xsd:string
 type  | URI identifying the type of the identifier. | type (attribute) | [`URI`](#uri)
 
 ### examples
 
 ```xml
-  <... type="http://gedcomx.org/Primary">
-    <gx:value>value_of_identifier</gx:value>
-  </...>
+  <... type="http://gedcomx.org/Primary">value_of_identifier</...>
 ```
 
 <a id="attribution"/>
@@ -292,27 +286,6 @@ attribution | The attribution of this note. | gx:attribution | [`gx:Attribution`
       ...
     </gx:attribution>
   </...>
-```
-
-<a id="literal-value"/>
-
-## 2.7 The "LiteralValue" Data Type
-
-The `gx:LiteralValue` XML type is used to (de)serialize the `http://gedcomx.org/Literal`
-data type.
-
-### properties
-
-name | description | XML property | XML type
------|-------------|--------------|---------
-lang | The language of the literal value. | xml:lang (attribute) | xml:lang
-datatype  | URI identifying the way the value is to be processed according to a specific standard. | datatype (attribute) | [anyURI](#uri)
-value | The literal value. | (child text) | xsd:string
-
-### examples
-
-```xml
-  <... xml:lang="en" datatype="...">...text of the literal value...</...>
 ```
 
 <a id="text-value"/>
@@ -438,10 +411,7 @@ value | A rendering of the full (working) citation as a string. | gx:value | xsd
 ### examples
 
 ```xml
-  <...>
-    <gx:name>...a citation field name...</gx:name>
-    <gx:value>...a citation field value...</gx:value>
-  </...>
+  <... name="...a citation field name...">...a citation field value...</...>
 ```
 
 <a id="source-reference"/>
@@ -980,14 +950,12 @@ data type.
 name | description | XML property | XML type
 -----|-------------|--------------|---------
 type | URI identifying the type of the name part. | type (attribute) | [`URI`](#uri)
-value | The text of the name part. | gx:value | xsd:string
+value | The text of the name part. | (child text) | xsd:string
 
 ### examples
 
 ```xml
-  <... type="http://gedcomx.org/Prefix">
-    <gx:value>...value of the name part...</gx:value>
-  </...>
+  <... type="http://gedcomx.org/Prefix">...value of the name part...</...>
 ```
 
  <a id="name-form"/>

@@ -139,7 +139,7 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
     srcDesc1.getCitation().getFields().add(new CitationField(FLDNM_ARCHIVE_NAME, FLDVAL_ARCHIVE_NAME1));
     srcDesc1.getCitation().getFields().add(new CitationField(FLDNM_ARCHIVE_LOCALITY, FLDVAL_ARCHIVE_LOCALITY1));
     srcDesc1.getCitation().getFields().add(new CitationField());
-    srcDesc1.getCitation().getFields().get(5).setName(FLDNM_FHL_FILM);
+    srcDesc1.getCitation().getFields().get(5).setNameValue(FLDNM_FHL_FILM);
     srcDesc1.getCitation().getFields().get(5).setValue(FLDVAL_FHL_FILM1);
     srcDesc1.setMediatorURI(URI.create(MEDIATOR_URI_PREFIX + ORG_FHL_ID));
 
@@ -185,7 +185,7 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
     verifyDeathCertExample(resourceSetThurJson);
 
     // the following adds code coverage for CitationField
-    srcDesc1.getCitation().getFields().get(5).setName((String)null); // for branch coverage on setName
+    srcDesc1.getCitation().getFields().get(5).setNameValue((String) null); // for branch coverage on setName
     assertNull(srcDesc1.getCitation().getFields().get(5).getName()); // for branch coverage on setName
 
     // the following adds code coverage for SourceDescription
