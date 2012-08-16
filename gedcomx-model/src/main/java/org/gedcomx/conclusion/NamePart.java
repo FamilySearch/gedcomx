@@ -17,10 +17,9 @@ package org.gedcomx.conclusion;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.gedcomx.common.TypeReference;
 import org.gedcomx.common.URI;
-import org.gedcomx.rt.CommonModels;
 import org.gedcomx.types.NamePartType;
-import org.gedcomx.types.TypeReference;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -35,7 +34,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType ( name = "NamePart", propOrder = {"type", "value"})
 public final class NamePart {
 
-  @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
+  @XmlElement
   @JsonProperty
   private TypeReference<NamePartType> type;
   private String value;

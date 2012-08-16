@@ -15,7 +15,6 @@
  */
 package org.gedcomx.conclusion;
 
-import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.RDFSubClassOf;
 
 import javax.xml.bind.annotation.XmlType;
@@ -26,7 +25,7 @@ import javax.xml.bind.annotation.XmlType;
  * @author Ryan Heaton
  */
 @XmlType ( name = "Place", propOrder = { "original", "formal" } )
-@RDFSubClassOf ( CommonModels.DUBLIN_CORE_NAMESPACE + "Location" )
+@RDFSubClassOf ( "http://purl.org/dc/terms/Location" )
 public final class Place implements Formalizeable {
 
   private String original;

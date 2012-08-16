@@ -15,7 +15,6 @@
  */
 package org.gedcomx.conclusion;
 
-import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.RDFSubClassOf;
 
 import javax.xml.bind.annotation.XmlType;
@@ -26,7 +25,7 @@ import javax.xml.bind.annotation.XmlType;
  *
  * @author Ryan Heaton
  */
-@RDFSubClassOf ( CommonModels.DUBLIN_CORE_TYPE_NAMESPACE + "Event" )
+@RDFSubClassOf ( "http://purl.org/dc/dcmitype/Event" )
 @XmlType ( name = "HasDateAndPlace" )
 public interface HasDateAndPlace {
 

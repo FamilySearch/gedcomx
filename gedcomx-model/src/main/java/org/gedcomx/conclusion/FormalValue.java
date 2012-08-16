@@ -18,7 +18,6 @@ package org.gedcomx.conclusion;
 import org.codehaus.enunciate.XmlQNameEnumUtil;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.gedcomx.common.URI;
-import org.gedcomx.rt.CommonModels;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.*;
@@ -30,9 +29,8 @@ import javax.xml.bind.annotation.*;
  * purposes). Normalization <i>might</i> be based on a known standard.
  *
  * A <i>standardized</i> value is a value that has been resolved to a discrete, machine-identifiable value based on a specific standard.
- * A value that has been standardized will either refer to a specific item of a constrained vocabulary (via resource references)
- * OR constrain the value to a standard using the datatype, creating an
- * <a href="http://www.w3.org/TR/rdf-primer/#typedliterals">RDF Typed Literal</a>.
+ * A value that has been standardized will either refer to a specific item of a constrained vocabulary OR constrain the value to a standard
+ * using the datatype, much like an <a href="http://www.w3.org/TR/rdf-primer/#typedliterals">RDF Typed Literal</a>.
  *
  * @author Ryan Heaton
  */
@@ -51,7 +49,7 @@ public class FormalValue {
    *
    * @return The datatype of the the normalized value.
    */
-  @XmlAttribute( name="datatype", namespace = CommonModels.RDF_NAMESPACE )
+  @XmlAttribute
   @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
   public URI getDatatype() {
     return datatype;
@@ -73,7 +71,7 @@ public class FormalValue {
    *
    * @return A reference to the resource that defines the normalized value in a structured form.
    */
-  @XmlAttribute( name="resource", namespace = CommonModels.RDF_NAMESPACE )
+  @XmlAttribute
   @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
   public URI getResource() {
     return resource;

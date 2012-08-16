@@ -18,7 +18,7 @@
  * The id model defines the standard mechanisms for identifying genealogical entities.
  */
 @XmlSchema(
-  namespace = CommonModels.GEDCOMX_COMMON_NAMESPACE,
+  namespace = CommonModels.GEDCOMX_NAMESPACE,
   attributeFormDefault = XmlNsForm.QUALIFIED,
   elementFormDefault = XmlNsForm.QUALIFIED
 )

@@ -17,11 +17,10 @@ package org.gedcomx.conclusion;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.gedcomx.common.TypeReference;
 import org.gedcomx.common.URI;
-import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.json.JsonElementWrapper;
 import org.gedcomx.types.FactType;
-import org.gedcomx.types.TypeReference;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -36,7 +35,7 @@ import javax.xml.bind.annotation.XmlType;
 @JsonElementWrapper ( name = "facts" )
 public class Fact extends Conclusion implements Formalizeable, HasDateAndPlace {
 
-  @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
+  @XmlElement
   @JsonProperty
   private TypeReference<FactType> type;
   private Date date;

@@ -19,13 +19,12 @@ import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.gedcomx.common.ResourceReference;
+import org.gedcomx.common.TypeReference;
 import org.gedcomx.common.URI;
-import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.RDFRange;
 import org.gedcomx.rt.RDFSubPropertyOf;
 import org.gedcomx.rt.json.JsonElementWrapper;
 import org.gedcomx.types.RelationshipType;
-import org.gedcomx.types.TypeReference;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -45,7 +44,7 @@ import java.util.List;
 @XmlType ( name = "Relationship", propOrder = { "type", "person1", "person2", "facts" } )
 public class Relationship extends Conclusion implements HasFacts {
 
-  @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
+  @XmlElement
   @JsonProperty
   private TypeReference<RelationshipType> type;
   private ResourceReference person1;
@@ -104,7 +103,7 @@ public class Relationship extends Conclusion implements HasFacts {
    * implies direction, it goes from "person1" to "person2".
    */
   @RDFRange (Person.class)
-  @RDFSubPropertyOf ( CommonModels.DUBLIN_CORE_NAMESPACE + "hasPart")
+  @RDFSubPropertyOf ( "http://purl.org/dc/terms/hasPart")
   public ResourceReference getPerson1() {
     return person1;
   }
@@ -132,7 +131,7 @@ public class Relationship extends Conclusion implements HasFacts {
    * implies direction, it goes from "person1" to "person2".
    */
   @RDFRange (Person.class)
-  @RDFSubPropertyOf ( CommonModels.DUBLIN_CORE_NAMESPACE + "hasPart")
+  @RDFSubPropertyOf ( "http://purl.org/dc/terms/hasPart")
   public ResourceReference getPerson2() {
     return person2;
   }

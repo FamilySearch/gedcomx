@@ -19,7 +19,6 @@ import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.gedcomx.common.*;
-import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.json.JsonElementWrapper;
 
 import javax.xml.XMLConstants;
@@ -51,7 +50,7 @@ public class SourceDescription implements Attributable, HasNotes, ReferencesSour
    * @return A local, context-specific id for the data.
    */
   @XmlID
-  @XmlAttribute ( name = "ID", namespace = CommonModels.RDF_NAMESPACE )
+  @XmlAttribute
   public String getId() {
     return id;
   }
@@ -238,7 +237,6 @@ public class SourceDescription implements Attributable, HasNotes, ReferencesSour
    *
    * @return The attribution metadata for this source description.
    */
-  @XmlElement ( namespace = CommonModels.GEDCOMX_COMMON_NAMESPACE )
   public Attribution getAttribution() {
     return attribution;
   }

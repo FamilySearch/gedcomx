@@ -18,7 +18,6 @@ package org.gedcomx.source;
 import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.gedcomx.common.ResourceReference;
-import org.gedcomx.rt.CommonModels;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
@@ -39,7 +38,6 @@ public class SourceCitation {
    *
    * @return A rendering (as a string) of a source citation.  This rendering should be the most complete rendering available.
    */
-  @XmlElement ( name = "value", namespace = CommonModels.RDF_NAMESPACE )
   public String getValue() {
     return value;
   }

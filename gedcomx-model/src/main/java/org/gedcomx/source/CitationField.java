@@ -17,10 +17,8 @@ package org.gedcomx.source;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.gedcomx.common.URI;
-import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.json.HasUniqueJsonKey;
 
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
@@ -103,7 +101,6 @@ public class CitationField implements HasUniqueJsonKey {
    *
    * @return The citation field's value.
    */
-  @XmlElement ( name = "value", namespace = CommonModels.RDF_NAMESPACE )
   public String getValue() {
     return value;
   }

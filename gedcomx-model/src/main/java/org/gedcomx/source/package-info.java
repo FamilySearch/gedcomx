@@ -15,9 +15,7 @@
  */
 
 /**
- * The RDF-based metadata model.
- *
- * @see <a href="http://www.w3.org/TR/2004/REC-rdf-primer-20040210/">RDF Primer</a>
+ * The sources model.
  */
 @XmlSchema (
   namespace = SourceModel.GEDCOMX_SOURCE_V1_NAMESPACE,

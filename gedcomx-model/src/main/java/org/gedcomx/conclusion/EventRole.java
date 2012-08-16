@@ -18,11 +18,10 @@ package org.gedcomx.conclusion;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.gedcomx.common.ResourceReference;
+import org.gedcomx.common.TypeReference;
 import org.gedcomx.common.URI;
-import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.RDFRange;
 import org.gedcomx.types.EventRoleType;
-import org.gedcomx.types.TypeReference;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -37,7 +36,7 @@ import javax.xml.bind.annotation.XmlType;
 public class EventRole extends Conclusion {
 
   private ResourceReference person;
-  @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
+  @XmlElement
   @JsonProperty
   private TypeReference<EventRoleType> type;
   private String details;

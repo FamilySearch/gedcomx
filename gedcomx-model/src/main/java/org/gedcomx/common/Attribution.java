@@ -16,11 +16,9 @@
 package org.gedcomx.common;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
-import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.RDFRange;
 import org.gedcomx.rt.RDFSubPropertyOf;
 import org.gedcomx.types.ConfidenceLevel;
-import org.gedcomx.types.TypeReference;
 
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
@@ -47,7 +45,7 @@ public final class Attribution {
    * @return Reference to the contributor of the attributed data.
    */
   @RDFRange({})
-  @RDFSubPropertyOf( CommonModels.DUBLIN_CORE_NAMESPACE + "contributor")
+  @RDFSubPropertyOf( "http://purl.org/dc/terms/contributor")
   public ResourceReference getContributor() {
     return contributor;
   }
@@ -105,7 +103,7 @@ public final class Attribution {
    *
    * @return The modified timestamp for the attributed data.
    */
-  @RDFSubPropertyOf( CommonModels.DUBLIN_CORE_NAMESPACE + "modified")
+  @RDFSubPropertyOf( "http://purl.org/dc/terms/modified")
   public Date getModified() {
     return modified;
   }
@@ -124,7 +122,7 @@ public final class Attribution {
    *
    * @return The "change message" for the attributed data provided by the contributor.
    */
-  @RDFSubPropertyOf( CommonModels.DUBLIN_CORE_NAMESPACE + "description")
+  @RDFSubPropertyOf( "http://purl.org/dc/terms/description")
   public String getChangeMessage() {
     return changeMessage;
   }

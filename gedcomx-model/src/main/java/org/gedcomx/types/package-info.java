@@ -18,7 +18,7 @@
  * The types model defines the standard set of types of genealogical data.
  */
 @XmlSchema(
-  namespace = CommonModels.GEDCOMX_COMMON_NAMESPACE,
+  namespace = CommonModels.GEDCOMX_TYPES_NAMESPACE,
   attributeFormDefault = XmlNsForm.QUALIFIED,
   elementFormDefault = XmlNsForm.QUALIFIED
 )

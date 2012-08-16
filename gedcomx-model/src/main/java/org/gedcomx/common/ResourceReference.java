@@ -22,7 +22,6 @@ import org.codehaus.jackson.map.DeserializationContext;
 import org.codehaus.jackson.map.SerializerProvider;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
-import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.json.JsonSimpleValue;
 import org.gedcomx.types.ResourceFragmentParameter;
 
@@ -34,11 +33,11 @@ import javax.xml.bind.annotation.XmlType;
 import java.io.IOException;
 
 /**
- * A generic RDF-based reference to a resource.
+ * A generic reference to a resource.
  *
  * @author Ryan Heaton
  */
-@XmlType ( name = "ResourceReference", namespace = CommonModels.RDF_NAMESPACE )
+@XmlType ( name = "ResourceReference" )
 @XmlSeeAlso(ResourceFragmentParameter.class)
 @JsonSerialize (using = ResourceReference.JsonSerializer.class)
 @JsonDeserialize (using = ResourceReference.JsonDeserializer.class)
@@ -61,7 +60,7 @@ public final class ResourceReference {
    * @link http://www.w3.org/TR/webarch/#identification
    * @return The URI to the resource.
    */
-  @XmlAttribute (namespace= CommonModels.RDF_NAMESPACE)
+  @XmlAttribute
   @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
   public URI getResource() {
     return resource;

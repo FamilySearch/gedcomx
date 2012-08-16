@@ -56,7 +56,7 @@ public class Agent implements SupportsExtensionElements {
    *
    * @return The id of this piece of metadata.
    */
-  @XmlAttribute ( name = "ID" )
+  @XmlAttribute
   @XmlID
   public String getId() {
     return id;

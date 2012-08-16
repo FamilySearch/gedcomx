@@ -16,7 +16,6 @@
 package org.gedcomx.conclusion;
 
 import org.codehaus.enunciate.ClientName;
-import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.RDFSubClassOf;
 
 import javax.xml.bind.annotation.XmlType;
@@ -26,7 +25,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @ClientName ("DateInfo")
 @XmlType ( name = "Date", propOrder = { "original", "formal" })
-@RDFSubClassOf ( CommonModels.DUBLIN_CORE_NAMESPACE + "PeriodOfTime" )
+@RDFSubClassOf ( "http://purl.org/dc/terms/PeriodOfTime" )
 public final class Date implements Formalizeable {
 
   private String original;

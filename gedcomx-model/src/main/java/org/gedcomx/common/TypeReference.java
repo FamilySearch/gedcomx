@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.types;
+package org.gedcomx.common;
 
 import org.codehaus.jackson.JsonGenerator;
 import org.codehaus.jackson.JsonParser;
@@ -23,8 +23,6 @@ import org.codehaus.jackson.map.DeserializationContext;
 import org.codehaus.jackson.map.SerializerProvider;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
-import org.gedcomx.common.URI;
-import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.json.JsonSimpleValue;
 
 import javax.xml.XMLConstants;
@@ -39,9 +37,9 @@ import java.io.IOException;
  *
  * @author Ryan Heaton
  */
-@XmlType ( namespace = CommonModels.RDF_NAMESPACE, name = "type" )
-@JsonSerialize (using = TypeReference.JsonSerializer.class)
-@JsonDeserialize (using = TypeReference.JsonDeserializer.class)
+@XmlType ( name = "TypeReference" )
+@JsonSerialize ( using = TypeReference.JsonSerializer.class )
+@JsonDeserialize ( using = TypeReference.JsonDeserializer.class )
 @JsonSimpleValue
 public final class TypeReference<T extends Enum> {
 
@@ -63,7 +61,7 @@ public final class TypeReference<T extends Enum> {
    *
    * @return The identifier of the type being referenced.
    */
-  @XmlAttribute ( namespace= CommonModels.RDF_NAMESPACE, name = "resource" )
+  @XmlAttribute ( name = "resource" )
   @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
   public URI getType() {
     return type;

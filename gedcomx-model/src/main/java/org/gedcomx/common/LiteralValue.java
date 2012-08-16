@@ -16,14 +16,9 @@
 package org.gedcomx.common;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
-import org.gedcomx.rt.CommonModels;
 
 import javax.xml.XMLConstants;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.XmlValue;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import java.util.Date;
@@ -67,7 +62,7 @@ public class LiteralValue {
    *
    * @return The datatype of the literal.
    */
-  @XmlAttribute( name="datatype", namespace = CommonModels.RDF_NAMESPACE )
+  @XmlAttribute
   @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
   public URI getDatatype() {
     return datatype;

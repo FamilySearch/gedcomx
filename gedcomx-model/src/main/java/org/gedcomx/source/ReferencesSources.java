@@ -15,7 +15,6 @@
  */
 package org.gedcomx.source;
 
-import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.RDFDomain;
 import org.gedcomx.rt.RDFRange;
 import org.gedcomx.rt.RDFSubPropertyOf;
@@ -37,7 +36,7 @@ public interface ReferencesSources {
    *
    * @return The references to the sources of a conclusion resource.
    */
-  @RDFSubPropertyOf ( CommonModels.DUBLIN_CORE_NAMESPACE + "source")
+  @RDFSubPropertyOf ( "http://purl.org/dc/terms/source")
   @RDFDomain ({}) //any resource can be identified persistently.
   @RDFRange ({}) //any resource can be identified as a source.
   @SuppressWarnings("rdf:no_range")

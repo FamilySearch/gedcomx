@@ -22,16 +22,11 @@ import org.gedcomx.common.Attributable;
 import org.gedcomx.common.Attribution;
 import org.gedcomx.common.HasNotes;
 import org.gedcomx.common.Note;
+import org.gedcomx.rt.SupportsExtensionElements;
 import org.gedcomx.source.ReferencesSources;
 import org.gedcomx.source.SourceReference;
-import org.gedcomx.rt.CommonModels;
-import org.gedcomx.rt.SupportsExtensionElements;
 
-import javax.xml.bind.annotation.XmlAnyElement;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,7 +51,7 @@ public abstract class Conclusion implements Attributable, ReferencesSources, Has
    * @return A local, context-specific id for the data.
    */
   @XmlID
-  @XmlAttribute ( name = "ID", namespace = CommonModels.RDF_NAMESPACE )
+  @XmlAttribute
   public String getId() {
     return id;
   }

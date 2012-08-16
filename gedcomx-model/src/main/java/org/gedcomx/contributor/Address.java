@@ -15,16 +15,12 @@
  */
 package org.gedcomx.contributor;
 
-import org.gedcomx.rt.CommonModels;
-
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
  * An address.
  *
- * @see <a href="http://www.w3.org/2000/10/swap/pim/contact">Contact RDF Schema</a>
  * @author Ryan Heaton
  */
 @XmlType ( name = "Address" )
@@ -170,7 +166,6 @@ public class Address {
    *
    * @return The value of the property.
    */
-  @XmlElement ( name = "value", namespace = CommonModels.RDF_NAMESPACE )
   public String getValue() {
     return value;
   }

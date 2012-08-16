@@ -21,12 +21,14 @@ import org.gedcomx.common.Attributable;
 import org.gedcomx.common.Attribution;
 import org.gedcomx.common.ResourceReference;
 import org.gedcomx.common.URI;
-import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.RDFRange;
 import org.gedcomx.rt.SupportsExtensionElements;
 import org.gedcomx.rt.json.JsonElementWrapper;
 
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlAnyElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,7 +52,6 @@ public class SourceReference implements Attributable, SupportsExtensionElements 
    *
    * @return The attribution metadata for this source reference.
    */
-  @XmlElement ( namespace = CommonModels.GEDCOMX_COMMON_NAMESPACE )
   public Attribution getAttribution() {
     return attribution;
   }
@@ -69,9 +70,8 @@ public class SourceReference implements Attributable, SupportsExtensionElements 
    *
    * @return A reference to a description of the source being referenced.
    */
-  @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
   @JsonProperty
-  @RDFRange( external = "org.gedcomx.metadata.source.SourceDescription" )
+  @RDFRange( external = "org.gedcomx.source.SourceDescription" )
   public ResourceReference getSourceDescription() {
     return sourceDescription;
   }

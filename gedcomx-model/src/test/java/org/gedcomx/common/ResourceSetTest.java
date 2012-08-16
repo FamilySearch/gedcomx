@@ -17,7 +17,7 @@ public class ResourceSetTest {
   /**
    * tests id xml
    */
-  public void testRDFMetadataBundleXml() throws Exception {
+  public void testResourceSetXml() throws Exception {
     ResourceSet meta = new ResourceSet();
     meta.setId("id");
     meta.setExtensionElements(new ArrayList<Object>());
@@ -30,7 +30,7 @@ public class ResourceSetTest {
   /**
    * tests id json
    */
-  public void testRDFMetadataJson() throws Exception {
+  public void testResourceSetJson() throws Exception {
     ResourceSet meta = new ResourceSet();
     meta.setId("id");
     meta.setExtensionElements(new ArrayList<Object>());

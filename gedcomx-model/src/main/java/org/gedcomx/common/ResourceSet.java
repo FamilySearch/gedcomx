@@ -16,23 +16,21 @@
 package org.gedcomx.common;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
-import org.gedcomx.rt.CommonModels;
-import org.gedcomx.rt.json.JsonElementWrapper;
 import org.gedcomx.rt.SupportsExtensionElements;
+import org.gedcomx.rt.json.JsonElementWrapper;
 
 import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Generic holder/container/collection for a set of resources. The <a href="http://www.w3.org/TR/2004/REC-rdf-primer-20040210/#rdfxml">RDF spec</a>
- * calls this an RDF "description set".
+ * Generic holder/container/collection for a set of resources.
  *
  * @author Ryan Heaton
  */
-@XmlRootElement ( name = "RDF", namespace = CommonModels.RDF_NAMESPACE )
+@XmlRootElement ( name = "resources" )
 @JsonElementWrapper (name = "resourceSets")
-@XmlType ( name = "RDF", namespace = CommonModels.RDF_NAMESPACE )
+@XmlType ( name = "ResourceSet" )
 public class ResourceSet implements SupportsExtensionElements {
 
   private String id;
@@ -43,7 +41,7 @@ public class ResourceSet implements SupportsExtensionElements {
    *
    * @return The id of this bundle.
    */
-  @XmlAttribute ( name = "ID" )
+  @XmlAttribute
   @XmlID
   public String getId() {
     return id;
@@ -59,9 +57,9 @@ public class ResourceSet implements SupportsExtensionElements {
   }
 
   /**
-   * The other (non-RDF) descriptions in this bundle.
+   * The list of resources contained in this set.
    *
-   * @return The other (non-RDF) descriptions in this bundle.
+   * @return The list of resources contained in this set.
    */
   @XmlAnyElement ( lax = true )
   @JsonIgnore
@@ -70,9 +68,9 @@ public class ResourceSet implements SupportsExtensionElements {
   }
 
   /**
-   * The other (non-RDF) descriptions in this bundle.
+   * The list of resources contained in this set.
    *
-   * @param extensionElements The other (non-RDF) descriptions in this bundle.
+   * @param extensionElements The list of resources contained in this set.
    */
   @JsonIgnore
   public void setExtensionElements(List<Object> extensionElements) {

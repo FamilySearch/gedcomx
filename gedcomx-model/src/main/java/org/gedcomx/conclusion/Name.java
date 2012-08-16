@@ -18,11 +18,10 @@ package org.gedcomx.conclusion;
 import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.gedcomx.common.TypeReference;
 import org.gedcomx.common.URI;
-import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.json.JsonElementWrapper;
 import org.gedcomx.types.NameType;
-import org.gedcomx.types.TypeReference;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -40,7 +39,7 @@ import java.util.List;
 @JsonElementWrapper ( name = "names" )
 public class Name extends Conclusion {
 
-  @XmlElement (namespace = CommonModels.RDF_NAMESPACE)
+  @XmlElement
   @JsonProperty
   private TypeReference<NameType> type;
   private NameForm primaryForm;
