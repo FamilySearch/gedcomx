@@ -20,9 +20,8 @@ import org.gedcomx.common.ResourceReference;
 import javax.xml.bind.annotation.XmlType;
 
 /**
- * An online account as described by FOAF.
+ * An online account for a web application.
  *
- * @see <a href="http://xmlns.com/foaf/spec/#term_OnlineAccount">foaf:OnlineAccount</a>
  * @author Ryan Heaton
  */
 @XmlType( name = "OnlineAccount" )
