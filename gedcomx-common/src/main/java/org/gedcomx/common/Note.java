@@ -33,12 +33,31 @@ import java.util.List;
  */
 @XmlRootElement
 @JsonElementWrapper(name = "notes")
-@XmlType ( name = "Note", propOrder = { "text", "attribution", "extensionElements" } )
+@XmlType ( name = "Note", propOrder = { "subject", "text", "attribution", "extensionElements" } )
 public class Note implements Attributable, HasText, SupportsExtensionElements {
 
+  private TextValue subject;
   private TextValue text;
   private Attribution attribution;
   private List<Object> extensionElements;
+
+  /**
+   * The subject of the note. This is a short title describing the contents of the note text.
+   *
+   * @return The subject of the note.
+   */
+  public TextValue getSubject() {
+    return subject;
+  }
+
+  /**
+   * The subject of the note.
+   *
+   * @param text The subject of the note.
+   */
+  public void setSubject(TextValue text) {
+    this.subject = text;
+  }
 
   /**
    * The text of the note.
@@ -151,5 +170,24 @@ public class Note implements Attributable, HasText, SupportsExtensionElements {
     }
 
     return ext;
+  }
+
+  private String getTextBrief() {
+    if (text != null && text.getValue() != null) {
+      final int substrLen = 40;
+      if (text.getValue().length() > substrLen)
+        return text.getValue().substring(0, substrLen) + "...";
+      return text.getValue();
+    }
+    return null;
+  }
+
+  @Override
+  public String toString() {
+    return "Note{" +
+      "subject=" + subject +
+      ", text=" + getTextBrief() +
+      ", attribution=" + attribution +
+      '}';
   }
 }

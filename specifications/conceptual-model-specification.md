@@ -228,7 +228,8 @@ The identifier for the "Note" data type is:
 
 name  | description | data type
 ------|-------------|----------
-text | The text of the note. | [`http://gedcomx.org/TextValue`](#text-value)
+subject | The subject or title of the note. | [`http://gedcomx.org/TextValue`](#text-value)
+text | The textual body of the note. | [`http://gedcomx.org/TextValue`](#text-value)
 attribution | The attribution of this note. | [`http://gedcomx.org/Attribution`](#attribution)
 
 

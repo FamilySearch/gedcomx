@@ -284,14 +284,16 @@ The JSON object used to (de)serialize the `http://gedcomx.org/Note` data type is
 
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
-text | The text of the note. | text | [`TextValue`](#text-value)
+subject | The subject or title of the note. | subject | [`TextValue`](#text-value)
+text | The textual body of the note. | text | [`TextValue`](#text-value)
 attribution | The attribution of this note. | attribution | [`Attribution`](#attribution)
 
 ### examples
 
 ```json
 {
-  "text" : { ... }
+  "subject" : { "value" : "...", "lang" : "en" },
+  "text" : { "value" : "...", "lang" : "en" },
   "attribution" : { ... }
 }
 ```

@@ -298,13 +298,15 @@ The `gx:Note` XML type is used to (de)serialize the `http://gedcomx.org/Note` da
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
-text | The text of the note. | gx:text | [`gx:TextValue`](#text-value)
+subject | The subject or title of the note. | gx:subject | [`gx:TextValue`](#text-value)
+text | The textual body of the note. | gx:text | [`gx:TextValue`](#text-value)
 attribution | The attribution of this note. | gx:attribution | [`gx:Attribution`](#attribution)
 
 ### examples
 
 ```xml
   <...>
+    <gx:subject xml:lang="en">...subject of the note...</gx:subject>
     <gx:text xml:lang="en">...text of the note...</gx:text>
     <gx:attribution>
       ...
