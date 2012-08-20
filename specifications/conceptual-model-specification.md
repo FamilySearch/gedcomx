@@ -1058,43 +1058,40 @@ The following event types are defined by GEDCOM X:
 
 URI | description
 ----|------------
-`http://gedcomx.org/Adoption`|
-`http://gedcomx.org/AdultChristening`|
-`http://gedcomx.org/Annulment`|
-`http://gedcomx.org/Arrival`|
-`http://gedcomx.org/Baptism`|
-`http://gedcomx.org/BarMitzvah`|
-`http://gedcomx.org/BatMitzvah`|
-`http://gedcomx.org/Birth`|
-`http://gedcomx.org/Blessing`|
-`http://gedcomx.org/Burial`|
-`http://gedcomx.org/Census`|
-`http://gedcomx.org/Christening`|
-`http://gedcomx.org/Circumcision`|
-`http://gedcomx.org/Confirmation`|
-`http://gedcomx.org/Cremation`|
-`http://gedcomx.org/Death`|
-`http://gedcomx.org/Departure`|
-`http://gedcomx.org/Divorce`|
-`http://gedcomx.org/DivorceFiling`|
-`http://gedcomx.org/Education`|
-`http://gedcomx.org/Engagement`|
-`http://gedcomx.org/Emigration`|
-`http://gedcomx.org/Excommunication`|
-`http://gedcomx.org/FirstCommunion`|
-`http://gedcomx.org/Funeral`|
-`http://gedcomx.org/Graduation`|
-`http://gedcomx.org/Immigration`|
-`http://gedcomx.org/Interment`|
-`http://gedcomx.org/Marriage`|
-`http://gedcomx.org/MilitaryAward`|
-`http://gedcomx.org/MilitaryDischarge`|
-`http://gedcomx.org/Mission`|
-`http://gedcomx.org/Move`|
-`http://gedcomx.org/Ordinance`|
-`http://gedcomx.org/Ordination`|
-`http://gedcomx.org/Retirement`|
-
+`http://gedcomx.org/Adoption` | An adoption event.
+`http://gedcomx.org/AdultChristening` | An adult christening event.
+`http://gedcomx.org/Annulment` | An annulment event of a marriage.
+`http://gedcomx.org/Baptism` | A baptism event.
+`http://gedcomx.org/BarMitzvah` | A bar mitzvah event.
+`http://gedcomx.org/BatMitzvah` | A bat mitzvah event.
+`http://gedcomx.org/Birth` | A birth event.
+`http://gedcomx.org/Blessing` | A an official blessing event, such as at the hands of a clergy member or at another religious rite.
+`http://gedcomx.org/Burial` | A burial event.
+`http://gedcomx.org/Census` | A census event.
+`http://gedcomx.org/Christening` | A christening event *at birth*. Note: use `AdultChristening` for a christening event as an adult.
+`http://gedcomx.org/Circumcision` | A circumcision event.
+`http://gedcomx.org/Confirmation` | A confirmation event (or other rite of initiation) in a church or religion.
+`http://gedcomx.org/Cremation` | A cremation event after death.
+`http://gedcomx.org/Death` | A death event.
+`http://gedcomx.org/Divorce` | A divorce event.
+`http://gedcomx.org/DivorceFiling` | A divorce filing event.
+`http://gedcomx.org/Education` | A education or an educational achievement event (e.g. diploma, graduation, scholarship, etc.).
+`http://gedcomx.org/Engagement` | An engagement to be married event.
+`http://gedcomx.org/Emigration` | An emigration event.
+`http://gedcomx.org/Excommunication` | An excommunication event from a church.
+`http://gedcomx.org/FirstCommunion` | A first communion event.
+`http://gedcomx.org/Funeral` | A funeral event.
+`http://gedcomx.org/Immigration` | An immigration event.
+`http://gedcomx.org/LandTransation` | A land transaction event.
+`http://gedcomx.org/Marriage` | A marriage event.
+`http://gedcomx.org/MilitaryAward` | A military award event.
+`http://gedcomx.org/MilitaryDischarge` | A military discharge event.
+`http://gedcomx.org/Mission` | A mission event.
+`http://gedcomx.org/MoveFrom` | An event of a move (i.e. change of residence) from a location.
+`http://gedcomx.org/MoveTo` | An event of a move (i.e. change of residence) to a location.
+`http://gedcomx.org/Naturalization` | A naturalization event (i.e. acquisition of citizenship and nationality).
+`http://gedcomx.org/Ordination` | An ordination event.
+`http://gedcomx.org/Retirement` | A retirement event.
 
 <a id="conclusion-date"/>
 
