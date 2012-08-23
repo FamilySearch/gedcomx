@@ -24,7 +24,7 @@ public class TypesTest {
     assertEquals(EventRoleType.fromQNameURI(EventRoleType.Principal.toQNameURI()).toQNameURI().toString(), "http://gedcomx.org/Principal");
     assertEquals(EventType.fromQNameURI(EventType.Burial.toQNameURI()).toQNameURI().toString(), "http://gedcomx.org/Burial");
     assertEquals(FactType.fromQNameURI(FactType.Marriage.toQNameURI()).toQNameURI().toString(), "http://gedcomx.org/Marriage");
-    assertEquals(FactType.fromQNameURI(FactType.Biological.toQNameURI()).toQNameURI().toString(), "http://gedcomx.org/Biological");
+    assertEquals(FactType.fromQNameURI(FactType.BiologicalLineage.toQNameURI()).toQNameURI().toString(), "http://gedcomx.org/BiologicalLineage");
     assertEquals(FactType.fromQNameURI(FactType.Baptism.toQNameURI()).toQNameURI().toString(), "http://gedcomx.org/Baptism");
     assertEquals(FactType.fromQNameURI(FactType.Household.toQNameURI()).toQNameURI().toString(), "http://record.gedcomx.org/Household");
     assertEquals(GenderType.fromQNameURI(GenderType.Male.toQNameURI()).toQNameURI().toString(), "http://gedcomx.org/Male");

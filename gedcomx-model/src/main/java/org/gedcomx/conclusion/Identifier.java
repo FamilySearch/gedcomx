@@ -32,7 +32,7 @@ import javax.xml.bind.annotation.XmlValue;
 @XmlType ( name = "Identifier" )
 public final class Identifier {
 
-  private String value;
+  private URI value;
   private URI type;
 
   /**
@@ -40,7 +40,7 @@ public final class Identifier {
    *
    * @return The id value.
    */
-  public String getValue() {
+  public URI getValue() {
     return value;
   }
 
@@ -50,7 +50,7 @@ public final class Identifier {
    * @param value The id value.
    */
   @XmlValue
-  public void setValue(String value) {
+  public void setValue(URI value) {
     this.value = value;
   }
 
@@ -99,6 +99,6 @@ public final class Identifier {
    */
   @Override
   public String toString() {
-    return (value == null) ? "" : value;
+    return (value == null) ? "" : value.toString();
   }
 }

@@ -27,41 +27,174 @@ import org.gedcomx.common.URI;
 )
 public enum EventType {
 
+  /**
+   * An adoption event.
+   */
   Adoption,
+
+  /**
+   * An adult christening event.
+   */
   AdultChristening,
+
+  /**
+   * An annulment event of a marriage.
+   */
   Annulment,
-  Arrival,
+
+  /**
+   * A baptism event.
+   */
   Baptism,
+
+  /**
+   * A bar mitzvah event.
+   */
   BarMitzvah,
+
+  /**
+   * A bat mitzvah event.
+   */
   BatMitzvah,
+
+  /**
+   * A birth event.
+   */
   Birth,
+
+  /**
+   * A an official blessing event, such as at the hands of a clergy member or at another religious rite.
+   */
   Blessing,
+
+  /**
+   * A burial event.
+   */
   Burial,
+
+  /**
+   * A census event.
+   */
   Census,
+
+  /**
+   * A christening event *at birth*. Note: use `AdultChristening` for a christening event as an adult.
+   */
   Christening,
+
+  /**
+   * A circumcision event.
+   */
   Circumcision,
+
+  /**
+   * A confirmation event (or other rite of initiation) in a church or religion.
+   */
   Confirmation,
+
+  /**
+   * A cremation event after death.
+   */
   Cremation,
+
+  /**
+   * A death event.
+   */
   Death,
-  Departure,
+
+  /**
+   * A divorce event.
+   */
   Divorce,
+
+  /**
+   * A divorce filing event.
+   */
   DivorceFiling,
+
+  /**
+   * A education or an educational achievement event (e.g. diploma, graduation, scholarship, etc.).
+   */
   Education,
+
+  /**
+   * An engagement to be married event.
+   */
   Engagement,
+
+  /**
+   * An emigration event.
+   */
   Emigration,
+
+  /**
+   * An excommunication event from a church.
+   */
   Excommunication,
+
+  /**
+   * A first communion event.
+   */
   FirstCommunion,
+
+  /**
+   * A funeral event.
+   */
   Funeral,
-  Graduation,
+
+  /**
+   * An immigration event.
+   */
   Immigration,
-  Interment,
+
+  /**
+   * A land transaction event.
+   */
+  LandTransation,
+
+  /**
+   * A marriage event.
+   */
   Marriage,
+
+  /**
+   * A military award event.
+   */
   MilitaryAward,
+
+  /**
+   * A military discharge event.
+   */
   MilitaryDischarge,
+
+  /**
+   * A mission event.
+   */
   Mission,
-  Move,
-  Ordinance,
+
+  /**
+   * An event of a move (i.e. change of residence) from a location.
+   */
+  MoveFrom,
+
+  /**
+   * An event of a move (i.e. change of residence) to a location.
+   */
+  MoveTo,
+
+  /**
+   * A naturalization event (i.e. acquisition of citizenship and nationality).
+   */
+  Naturalization,
+
+  /**
+   * An ordination event.
+   */
   Ordination,
+
+  /**
+   * A retirement event.
+   */
   Retirement,
 
 

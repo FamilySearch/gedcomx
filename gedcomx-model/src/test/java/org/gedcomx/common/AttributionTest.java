@@ -1,8 +1,10 @@
 package org.gedcomx.common;
 
+import org.gedcomx.rt.GedcomNamespaceManager;
 import org.gedcomx.types.ConfidenceLevel;
 import org.testng.annotations.Test;
 
+import javax.xml.bind.JAXBContext;
 import java.util.Date;
 
 import static org.gedcomx.rt.SerializationUtil.processThroughJson;
@@ -17,41 +19,71 @@ import static org.testng.AssertJUnit.assertNull;
 @Test
 public class AttributionTest {
 
+  static {
+    GedcomNamespaceManager.registerKnownJsonType(CustomEntity.class);
+  }
+
   /**
    * tests attribution xml
    */
   public void testAttributionXml() throws Exception {
+    Date ts = new Date();
+
     Attribution attribution = new Attribution();
     attribution.setContributor(new ResourceReference());
     attribution.getContributor().setResource(URI.create("urn:someid"));
-    attribution.setChangeMessage("hello, there.");
-    attribution.setKnownConfidenceLevel(ConfidenceLevel.Possibly);
-    Date ts = new Date();
     attribution.setModified(ts);
-    attribution = processThroughXml(attribution);
+    attribution.setKnownConfidenceLevel(ConfidenceLevel.Possibly);
+    attribution.setChangeMessage("hello, there.");
+    attribution.addExtensionElement(new CustomEntity("alt1"));
+    attribution.addExtensionElement(new CustomEntity("alt2"));
+
+    attribution = processThroughXml(attribution, Attribution.class, JAXBContext.newInstance(Attribution.class, CustomEntity.class));
     assertEquals("urn:someid", attribution.getContributor().getResource().toString());
-    assertEquals("hello, there.", attribution.getChangeMessage());
     assertEquals(ts, attribution.getModified());
     assertEquals(ConfidenceLevel.Possibly, attribution.getKnownConfidenceLevel());
+    assertEquals("hello, there.", attribution.getChangeMessage());
+    assertEquals(((CustomEntity) attribution.getExtensionElements().get(0)).getId(), "alt1");
+    assertEquals(((CustomEntity) attribution.getExtensionElements().get(1)).getId(), "alt2");
+    assertNull(attribution.findExtensionOfType(String.class));
+    assertEquals(attribution.findExtensionOfType(CustomEntity.class).getId(), "alt1");
+    assertEquals(0, attribution.findExtensionsOfType(String.class).size());
+    assertEquals(2, attribution.findExtensionsOfType(CustomEntity.class).size());
+    assertEquals(attribution.findExtensionsOfType(CustomEntity.class).get(1).getId(), "alt2");
+
+    attribution.setExtensionElements(null);
+    assertNull(attribution.findExtensionOfType(CustomEntity.class));
+    assertEquals(attribution.findExtensionsOfType(CustomEntity.class).size(), 0);
   }
 
   /**
    * tests attribution json
    */
   public void testAttributionJson() throws Exception {
+    Date ts = new Date();
+
     Attribution attribution = new Attribution();
     attribution.setContributor(new ResourceReference());
     attribution.getContributor().setResource(URI.create("urn:someid"));
-    attribution.setChangeMessage("hello, there.");
+    attribution.setModified(ts);
     attribution.setKnownConfidenceLevel(ConfidenceLevel.Possibly);
     attribution.setKnownConfidenceLevel(null);
-    Date ts = new Date();
-    attribution.setModified(ts);
+    attribution.setChangeMessage("hello, there.");
+    attribution.addExtensionElement(new CustomEntity("alt1"));
+    attribution.addExtensionElement(new CustomEntity("alt2"));
+
     attribution = processThroughJson(attribution);
     assertEquals("urn:someid", attribution.getContributor().getResource().toString());
-    assertEquals("hello, there.", attribution.getChangeMessage());
     assertEquals(ts, attribution.getModified());
     assertNull(attribution.getKnownConfidenceLevel());
+    assertEquals("hello, there.", attribution.getChangeMessage());
+    assertEquals(((CustomEntity) attribution.getExtensionElements().get(0)).getId(), "alt1");
+    assertEquals(((CustomEntity) attribution.getExtensionElements().get(1)).getId(), "alt2");
+    assertNull(attribution.findExtensionOfType(String.class));
+    assertEquals(attribution.findExtensionOfType(CustomEntity.class).getId(), "alt1");
+    assertEquals(0, attribution.findExtensionsOfType(String.class).size());
+    assertEquals(2, attribution.findExtensionsOfType(CustomEntity.class).size());
+    assertEquals(attribution.findExtensionsOfType(CustomEntity.class).get(1).getId(), "alt2");
 
     assertEquals("urn:someid", attribution.toString());
     attribution.setContributor(null);

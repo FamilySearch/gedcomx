@@ -41,8 +41,6 @@ public class RelationshipTest {
   private Relationship createTestRelationship() {
     Relationship relationship = new Relationship();
     relationship.setKnownType(RelationshipType.Couple);
-    Identifier identifier = new Identifier();
-    identifier.setValue("alt-id");
     relationship.setAttribution(new Attribution());
     relationship.getAttribution().setChangeMessage("explanation");
     Fact fact = new Fact();

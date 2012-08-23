@@ -108,7 +108,7 @@ public class AgentTest {
     person.setOpenid(new ResourceReference(URI.create("openid")));
     person.setPhones(new ArrayList<ResourceReference>());
     Identifier identifier = new Identifier();
-    identifier.setValue("identifier");
+    identifier.setValue(URI.create("identifier"));
     person.setIdentifiers(Arrays.asList(identifier));
     ResourceReference phone = new ResourceReference();
     phone.setResource(URI.create("tel:+18012401000"));
@@ -136,6 +136,6 @@ public class AgentTest {
     AssertJUnit.assertEquals("openid", person.getOpenid().getResource().toString());
     AssertJUnit.assertEquals(1, person.getPhones().size());
     AssertJUnit.assertEquals("tel:+18012401000", person.getPhones().get(0).getResource().toString());
-    AssertJUnit.assertEquals("identifier", person.getIdentifiers().get(0).getValue());
+    AssertJUnit.assertEquals("identifier", person.getIdentifiers().get(0).getValue().toString());
   }
 }
