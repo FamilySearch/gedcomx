@@ -82,6 +82,7 @@ and even the data types that define those data structures. The URI is specified 
 
 <a id="identifier-type"/>
 
+
 ## 2.2 The "Identifier" Data Type
 
 The `Identifier` data type defines the data structure used to supply an identifier of a 

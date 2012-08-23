@@ -60,8 +60,8 @@ public class Person extends Conclusion implements HasFacts {
     URI identifier = null;
     if (this.identifiers != null) {
       for (Identifier id : this.identifiers) {
-        if (IdentifierType.Primary.equals(id.getKnownType())) {
-          identifier = id.getValue() != null ? URI.create(id.getValue()) : null;
+        if (IdentifierType.Persistent.equals(id.getKnownType())) {
+          identifier = id.getValue();
           break;
         }
       }
@@ -83,14 +83,14 @@ public class Person extends Conclusion implements HasFacts {
     //clear out any other primary ids.
     Iterator<Identifier> it = this.identifiers.iterator();
     while (it.hasNext()) {
-      if (IdentifierType.Primary.equals(it.next().getKnownType())) {
+      if (IdentifierType.Persistent.equals(it.next().getKnownType())) {
         it.remove();
       }
     }
 
     Identifier identifier = new Identifier();
-    identifier.setKnownType(IdentifierType.Primary);
-    identifier.setValue(persistentId.toString());
+    identifier.setKnownType(IdentifierType.Persistent);
+    identifier.setValue(persistentId);
     this.identifiers.add(identifier);
   }
 

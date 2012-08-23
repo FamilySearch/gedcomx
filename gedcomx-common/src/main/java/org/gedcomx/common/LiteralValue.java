@@ -19,11 +19,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import org.gedcomx.rt.CommonModels;
 
 import javax.xml.XMLConstants;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.XmlValue;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import java.util.Date;
@@ -149,5 +145,46 @@ public class LiteralValue {
     GregorianCalendar gc = new GregorianCalendar();
     gc.setTime(valueAsDate);
     setValue(DATATYPE_FACTORY.newXMLGregorianCalendar(gc).toXMLFormat());
+  }
+
+  @Override
+  public boolean equals( Object o ) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+
+    LiteralValue that = (LiteralValue) o;
+
+    if (datatype != null ? !datatype.equals( that.datatype ) : that.datatype != null) {
+      return false;
+    }
+    if (lang != null ? !lang.equals( that.lang ) : that.lang != null) {
+      return false;
+    }
+    if (value != null ? !value.equals( that.value ) : that.value != null) {
+      return false;
+    }
+
+    return true;
+  }
+
+  @Override
+  public int hashCode() {
+    int result = lang != null ? lang.hashCode() : 0;
+    result = 31 * result + (datatype != null ? datatype.hashCode() : 0);
+    result = 31 * result + (value != null ? value.hashCode() : 0);
+    return result;
+  }
+
+  @Override
+  public String toString() {
+    return "LiteralValue{" +
+      "value='" + value + '\'' +
+      ", datatype=" + datatype +
+      ", lang='" + lang + '\'' +
+      '}';
   }
 }
