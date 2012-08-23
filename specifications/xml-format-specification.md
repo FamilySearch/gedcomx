@@ -194,9 +194,32 @@ resource | The URI to the resource being referenced. | rdf:resource (attribute) 
 <... rdf:resource="http://uri/to/resource/being/referenced"/>
 ```
 
+<a id="identifier-type"/>
+
+## 2.3 The "Identifier" Data Type
+
+The `gxc:Identifier` XML type is used to (de)serialize the `http://gedcomx.org/conclusion/v1/Identifier`
+data type.
+
+### properties
+
+name | description | XML property | XML type
+-----|-------------|--------------|---------
+value | The value of the identifier. | rdf:value | xsd:string
+type  | URI identifying the type of the identifier. | rdf:type | [`rdf:ResourceReference`](#resource-reference)
+
+### examples
+
+```xml
+  <...>
+    <rdf:value>value_of_identifier</rdf:value>
+    <rdf:type rdf:resource="http://gedcomx.org/IdentifierType"/>
+  </...>
+```
+
 <a id="attribution"/>
 
-## 2.3 The "Attribution" Data Type
+## 2.4 The "Attribution" Data Type
 
 The `gx:Attribution` XML type is used to (de)serialize the `http://gedcomx.org/Attribution`
 data type.
@@ -223,7 +246,7 @@ changeMessage | A statement of why the attributed data is being provided by the 
 
 <a id="formal-value"/>
 
-## 2.4 The "FormalValue" Data Type
+## 2.5 The "FormalValue" Data Type
 
 The `gxc:FormalValue` XML type is used to (de)serialize the `http://gedcomx.org/conclusion/v1/FormalValue`
 data type.
@@ -264,7 +287,7 @@ Standardized and normalized value:
 
 <a id="note"/>
 
-## 2.5 The "Note" Data Type
+## 2.6 The "Note" Data Type
 
 The `gx:Note` XML type is used to (de)serialize the `http://gedcomx.org/Note` data type.
 
@@ -288,7 +311,7 @@ attribution | The attribution of this note. | gx:attribution | [`gx:Attribution`
 
 <a id="literal-value"/>
 
-## 2.6 The "LiteralValue" Data Type
+## 2.7 The "LiteralValue" Data Type
 
 The `gx:LiteralValue` XML type is used to (de)serialize the `http://gedcomx.org/Literal`
 data type.
@@ -309,7 +332,7 @@ value | The literal value. | (child text) | xsd:string
 
 <a id="text-value"/>
 
-## 2.7 The "TextValue" Data Type
+## 2.8 The "TextValue" Data Type
 
 The `gx:TextValue` XML type is used to (de)serialize the `http://gedcomx.org/TextValue`
 data type.
@@ -1063,28 +1086,6 @@ parts | The parts of the name form. | gxc:part | [`gxc:NamePart`](#name-part)
   </...>
 ```
 
-<a id="identifier-type"/>
-
-## 5.14 The "Identifier" Data Type
-
-The `gxc:Identifier` XML type is used to (de)serialize the `http://gedcomx.org/conclusion/v1/Identifier`
-data type.
-
-### properties
-
-name | description | XML property | XML type
------|-------------|--------------|---------
-value | The value of the identifier. | rdf:value | [anyURI](#uri)
-type  | URI identifying the type of the identifier. | rdf:type | [`rdf:ResourceReference`](#resource-reference)
-
-### examples
-
-```xml
-  <...>
-    <rdf:value>afn:1BS3-9X1</rdf:value>
-    <rdf:type rdf:resource="http://gedcomx.org/Deprecated"/>
-  </...>
-```
 
 
 # 6. XML Elements

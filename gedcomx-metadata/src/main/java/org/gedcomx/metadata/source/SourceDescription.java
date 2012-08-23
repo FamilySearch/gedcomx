@@ -20,10 +20,12 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.gedcomx.common.*;
 import org.gedcomx.rt.CommonModels;
+import org.gedcomx.rt.SupportsExtensionElements;
 import org.gedcomx.rt.json.JsonElementWrapper;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.*;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -31,9 +33,9 @@ import java.util.List;
  * Represents a description of a source.
  */
 @XmlRootElement
-@XmlType ( name = "SourceDescription", propOrder = { "citation", "mediator", "sources", "componentOf", "displayName", "alternateNames", "notes", "attribution" } )
+@XmlType ( name = "SourceDescription", propOrder = { "citation", "mediator", "sources", "componentOf", "displayName", "alternateNames", "notes", "attribution", "extensionElements" } )
 @JsonElementWrapper ( name = "source-descriptions" )
-public class SourceDescription implements Attributable, HasNotes, ReferencesSources {
+public class SourceDescription implements Attributable, HasNotes, ReferencesSources, SupportsExtensionElements {
   private String id;
   private SourceCitation citation;
   private URI about;
@@ -44,6 +46,7 @@ public class SourceDescription implements Attributable, HasNotes, ReferencesSour
   private List<TextValue> alternateNames;
   private List<Note> notes;
   private Attribution attribution;
+  private List<Object> extensionElements;
 
   /**
    * A local, context-specific id for the data.
@@ -252,4 +255,76 @@ public class SourceDescription implements Attributable, HasNotes, ReferencesSour
     this.attribution = attribution;
   }
 
+  /**
+   * Custom attributes applicable to this resource reference.
+   *
+   * @return Custom attributes applicable to this resource reference.
+   */
+  @XmlAnyElement ( lax = true )
+  @JsonIgnore
+  public List<Object> getExtensionElements() {
+    return extensionElements;
+  }
+
+  /**
+   * Custom attributes applicable to this resource reference.
+   *
+   * @param extensionElements Custom attributes applicable to this resource reference.
+   */
+  @JsonIgnore
+  public void setExtensionElements(List<Object> extensionElements) {
+    this.extensionElements = extensionElements;
+  }
+
+  /**
+   * Add an extension element.
+   *
+   * @param element The extension element to add.
+   */
+  public void addExtensionElement(Object element) {
+    if (this.extensionElements == null) {
+      this.extensionElements = new ArrayList<Object>();
+    }
+
+    this.extensionElements.add(element);
+  }
+
+  /**
+   * Finds the first extension of a specified type.
+   *
+   * @param clazz The type.
+   * @return The extension, or null if none found.
+   */
+  @SuppressWarnings ( {"unchecked"} )
+  public <E> E findExtensionOfType(Class<E> clazz) {
+    if (this.extensionElements != null) {
+      for (Object extension : extensionElements) {
+        if (clazz.isInstance(extension)) {
+          return (E) extension;
+        }
+      }
+    }
+
+    return null;
+  }
+
+  /**
+   * Find the extensions of a specified type.
+   *
+   * @param clazz The type.
+   * @return The extensions, possibly empty but not null.
+   */
+  @SuppressWarnings ( {"unchecked"} )
+  public <E> List<E> findExtensionsOfType(Class<E> clazz) {
+    List<E> ext = new ArrayList<E>();
+    if (this.extensionElements != null) {
+      for (Object extension : extensionElements) {
+        if (clazz.isInstance(extension)) {
+          ext.add((E) extension);
+        }
+      }
+    }
+
+    return ext;
+  }
 }
