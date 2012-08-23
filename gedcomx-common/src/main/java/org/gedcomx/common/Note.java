@@ -172,7 +172,7 @@ public class Note implements Attributable, HasText, SupportsExtensionElements {
     return ext;
   }
 
-  private String getTextBrief() {
+  private String getTextBrief( TextValue text ) {
     if (text != null && text.getValue() != null) {
       final int substrLen = 40;
       if (text.getValue().length() > substrLen)
@@ -185,8 +185,8 @@ public class Note implements Attributable, HasText, SupportsExtensionElements {
   @Override
   public String toString() {
     return "Note{" +
-      "subject=" + subject +
-      ", text=" + getTextBrief() +
+      "subject=" + getTextBrief(subject) +
+      ", text=" + getTextBrief(text) +
       ", attribution=" + attribution +
       '}';
   }
