@@ -26,7 +26,6 @@ public class TypesTest {
     assertEquals(FactType.fromQNameURI(FactType.Marriage.toQNameURI()).toQNameURI().toString(), "http://gedcomx.org/Marriage");
     assertEquals(FactType.fromQNameURI(FactType.BiologicalLineage.toQNameURI()).toQNameURI().toString(), "http://gedcomx.org/BiologicalLineage");
     assertEquals(FactType.fromQNameURI(FactType.Baptism.toQNameURI()).toQNameURI().toString(), "http://gedcomx.org/Baptism");
-    assertEquals(FactType.fromQNameURI(FactType.Household.toQNameURI()).toQNameURI().toString(), "http://record.gedcomx.org/Household");
     assertEquals(GenderType.fromQNameURI(GenderType.Male.toQNameURI()).toQNameURI().toString(), "http://gedcomx.org/Male");
     assertEquals(IdentifierType.fromQNameURI(IdentifierType.Primary.toQNameURI()).toQNameURI().toString(), "http://gedcomx.org/Primary");
     assertEquals(MaritalStatusType.fromQNameURI(MaritalStatusType.Married.toQNameURI()).toQNameURI().toString(), "http://gedcomx.org/Married");
@@ -40,12 +39,6 @@ public class TypesTest {
   @Test
   public void testFactTypeIsLike() throws Exception {
     // NOTE: not a full test, but gets some code coverage
-
-    assertFalse(FactType.Household.isBirthLike());
-    assertFalse(FactType.Household.isDeathLike());
-    assertFalse(FactType.Household.isMarriageLike());
-    assertFalse(FactType.Household.isDivorceLike());
-    assertFalse(FactType.Household.isMigrationLike());
 
     assertTrue(FactType.Christening.isBirthLike());
     assertTrue(FactType.Burial.isDeathLike());
@@ -61,7 +54,6 @@ public class TypesTest {
     assertTrue(FactType.Person.isApplicable(FactType.Will));
     assertTrue(FactType.Couple.isApplicable(FactType.Separation));
     assertTrue(FactType.ParentChild.isApplicable(FactType.Guardianship));
-    assertTrue(FactType.Record.isApplicable(FactType.Household));
   }
 
   @Test

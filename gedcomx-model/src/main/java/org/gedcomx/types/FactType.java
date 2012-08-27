@@ -366,18 +366,6 @@ public enum FactType {
    */
   Step,
 
-  //facts generally applicable within the scope of a record.
-  @XmlQNameEnumValue ( namespace = "http://record.gedcomx.org/")
-  Household,
-  @XmlQNameEnumValue ( namespace = "http://record.gedcomx.org/")
-  BatchNumber,
-  @XmlQNameEnumValue ( namespace = "http://record.gedcomx.org/")
-  LineNumber,
-  @XmlQNameEnumValue ( namespace = "http://record.gedcomx.org/")
-  PageNumber,
-  @XmlQNameEnumValue ( namespace = "http://record.gedcomx.org/")
-  CertificateNumber,
-
   @XmlUnknownQNameEnumValue
   OTHER;
 
@@ -463,7 +451,6 @@ public enum FactType {
     public static final FactType Funeral = include(FactType.Funeral);
     public static final FactType Education = include(FactType.Education);
     public static final FactType Immigration = include(FactType.Immigration);
-    public static final FactType Household = include(FactType.Household);
     public static final FactType LandTransation = include(FactType.LandTransation);
     public static final FactType MaritalStatus = include(FactType.MaritalStatus);
     public static final FactType Medical = include(FactType.Medical);
@@ -559,33 +546,6 @@ public enum FactType {
      */
     public static boolean isApplicable(FactType type) {
       return PARENT_CHILD_FACT_TYPES.contains(type);
-    }
-  }
-
-  @XmlTransient
-  public static final class Record {
-    private Record() {}
-
-    private static final EnumSet<FactType> RECORD_FACT_TYPES = EnumSet.noneOf(FactType.class);
-    private static FactType include(FactType type) {
-      RECORD_FACT_TYPES.add(type);
-      return type;
-    }
-
-    public static final FactType Household = include(FactType.Household);
-    public static final FactType BatchNumber = include(FactType.BatchNumber);
-    public static final FactType LineNumber = include(FactType.LineNumber);
-    public static final FactType PageNumber = include(FactType.PageNumber);
-    public static final FactType CertificateNumber = include(FactType.CertificateNumber);
-
-    /**
-     * Whether the given fact type is applicable to a record.
-     *
-     * @param type The fact type.
-     * @return Whether the given fact type is applicable to a record.
-     */
-    public static boolean isApplicable(FactType type) {
-      return RECORD_FACT_TYPES.contains(type);
     }
   }
 
