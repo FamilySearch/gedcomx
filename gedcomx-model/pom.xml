@@ -72,6 +72,7 @@
         <artifactId>maven-antrun-plugin</artifactId>
         <executions>
           <execution>
+            <id>delete-recipes</id>
             <phase>process-test-classes</phase>
             <configuration>
               <tasks>
@@ -82,7 +83,62 @@
               <goal>run</goal>
             </goals>
           </execution>
+          <execution>
+            <id>package-uml</id>
+            <phase>process-resources</phase>
+            <configuration>
+              <tasks>
+                <move file="${project.build.directory}/uml/Class Diagram.png" tofile="${project.build.directory}/uml/model.png"/>
+                <zip destfile="${project.build.directory}/uml.zip" basedir="${project.build.directory}/uml"/>
+              </tasks>
+            </configuration>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <version>1.7</version>
+        <executions>
+          <execution>
+            <id>attach-uml</id>
+            <phase>package</phase>
+            <goals>
+              <goal>attach-artifact</goal>
+            </goals>
+            <configuration>
+              <artifacts>
+                <artifact>
+                  <file>${project.build.directory}/uml.zip</file>
+                  <type>zip</type>
+                  <classifier>uml</classifier>
+                </artifact>
+              </artifacts>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>argouml-maven-plugin</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <executions>
+          <execution>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>transform</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <inputFiles>
+            <inputFile>../specifications/support/gedcomx.zargo</inputFile>
+          </inputFiles>
+          <outputDirectory>${project.build.directory}/uml</outputDirectory>
+        </configuration>
       </plugin>
     </plugins>
   </build>
@@ -101,6 +157,16 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>codehaus</id>
+      <url>http://snapshots.repository.codehaus.org/</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </pluginRepository>
+  </pluginRepositories>
 
   <profiles>
     <profile>
