@@ -68,9 +68,8 @@ public class RDFProcessor {
     return RDFSchema.RDF_NAMESPACE.equals(namespace) ||
       RDFSchema.RDFS_NAMESPACE.equals(namespace) ||
       XMLConstants.XML_NS_URI.equals(namespace) ||
-      CommonModels.DUBLIN_CORE_TYPE_NAMESPACE.equals(namespace) ||
-      CommonModels.DUBLIN_CORE_NAMESPACE.equals(namespace) ||
-      CommonModels.FOAF_NAMESPACE.equals(namespace);
+      RDFSchema.DUBLIN_CORE_TYPE_NAMESPACE.equals(namespace) ||
+      RDFSchema.DUBLIN_CORE_NAMESPACE.equals(namespace);
   }
 
   public ValidationResult processModel(EnunciateFreemarkerModel model) {
@@ -119,7 +118,7 @@ public class RDFProcessor {
       }
 
       if ("id".equalsIgnoreCase(attribute.getName())) {
-        if (!CommonModels.RDF_NAMESPACE.equals(attribute.getNamespace()) && !"ID".equals(attribute.getName())) {
+        if (!RDFSchema.RDF_NAMESPACE.equals(attribute.getNamespace()) && !"ID".equals(attribute.getName())) {
           result.addError(attribute, "Id attributes should be named rdf:ID.");
         }
       }
@@ -145,12 +144,12 @@ public class RDFProcessor {
   }
 
   private boolean isTypeReference(Element choice) {
-    if (CommonModels.RDF_NAMESPACE.equals(choice.getNamespace())) {
+    if (RDFSchema.RDF_NAMESPACE.equals(choice.getNamespace())) {
       org.codehaus.enunciate.contract.jaxb.types.XmlType baseType = choice.getBaseType();
       if (baseType instanceof XmlClassType) {
         TypeDefinition typeDefinition = ((XmlClassType) baseType).getTypeDefinition();
         for (Attribute attribute : typeDefinition.getAttributes()) {
-          if ("resource".equals(attribute.getName()) && CommonModels.RDF_NAMESPACE.equals(attribute.getNamespace())) {
+          if ("resource".equals(attribute.getName()) && RDFSchema.RDF_NAMESPACE.equals(attribute.getNamespace())) {
             return true;
           }
         }

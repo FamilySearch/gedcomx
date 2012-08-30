@@ -82,16 +82,19 @@ and even the data types that define those data structures. The URI is specified 
 
 <a id="identifier-type"/>
 
+
 ## 2.2 The "Identifier" Data Type
 
 The `Identifier` data type defines the data structure used to supply an identifier of a 
 genealogical resource in a specific data set.
 
+The `Identifier` data type does NOT support extension properties (see [Extension Properties](#extension-properties)).
+
 ### identifier
 
 The identifier for the "Identifier" data type is:
 
-`http://gedcomx.org/conclusion/v1/Identifier`
+`http://gedcomx.org/v1/Identifier`
 
 ### properties
 
@@ -122,17 +125,19 @@ todo: fill in some examples.
 The `Attribution` data type defines the data structure used to supply the attribution (including
 who, when, and why) of genealogical data.
 
+The `Attribution` data type does NOT support extension properties (see [Extension Properties](#extension-properties)).
+
 ### identifier
 
 The identifier for the "Attribution" data type is:
 
-`http://gedcomx.org/Attribution`
+`http://gedcomx.org/v1/Attribution`
 
 ### properties
 
 name  | description | data type
 ------|-------------|----------
-contributor | Reference to the contributor to whom the attributed data is attributed. | [URI](#uri) - MUST resolve to an instance of [`http://xmlns.com/foaf/0.1/Person`](#foaf-person) or [`http://xmlns.com/foaf/0.1/Organization`](#organization).
+contributor | Reference to the contributor to whom the attributed data is attributed. | [URI](#uri) - MUST resolve to an instance of [`http://gedcomx.org/v1/Agent`](#agent).
 modified | Timestamp of when the attributed data was contributed. | timestamp
 confidence  | Reference to the confidence level of the contributor of the attributed data. | [URI](#uri) - MUST resolve to a confidence level. Refer to the list of [known confidence levels](#known-confidence-levels).
 changeMessage | A statement of why the attributed data is being provided by the contributor. | string
@@ -176,7 +181,7 @@ The `FormalValue` data type does NOT support extension properties (see [Extensio
 
 The identifier for the "FormalValue" data type is:
 
-`http://gedcomx.org/conclusion/v1/FormalValue`
+`http://gedcomx.org/v1/FormalValue`
 
 ### properties
 
@@ -222,36 +227,14 @@ Notes are not intended to contain genealogical conclusions.  Notes are only asso
 
 The identifier for the "Note" data type is:
 
-`http://gedcomx.org/Note`
+`http://gedcomx.org/v1/Note`
 
 ### properties
 
 name  | description | data type
 ------|-------------|----------
-subject | The subject or title of the note. | [`http://gedcomx.org/TextValue`](#text-value)
-text | The textual body of the note. | [`http://gedcomx.org/TextValue`](#text-value)
+text | The text of the note. | [`http://gedcomx.org/TextValue`](#text-value)
 attribution | The attribution of this note. | [`http://gedcomx.org/Attribution`](#attribution)
-
-
-<a id="literal-value"/>
-
-## 2.6 The "LiteralValue" Data Type
-
-The `LiteralValue` data type defines a literal value.
-
-### identifier
-
-The identifier for the "LiteralValue" data type is:
-
-`http://gedcomx.org/Literal`
-
-### properties
-
-name  | description | data type
-------|-------------|----------
-datatype  | URI identifying the way the value is to be processed according to a specific standard. | [URI](#uri)
-lang | The language of the literal value. | `http://www.w3.org/XML/1998/namespace#lang`
-value | The literal value. A datatype MAY be supplied to identify how the string is to be parsed. | string
 
 
 <a id="text-value"/>
@@ -260,11 +243,13 @@ value | The literal value. A datatype MAY be supplied to identify how the string
 
 The `TextValue` data type defines a literal value.
 
+The `TextValue` data type does NOT support extension properties (see [Extension Properties](#extension-properties)).
+
 ### identifier
 
 The identifier for the "TextValue" data type is:
 
-`http://gedcomx.org/TextValue`
+`http://gedcomx.org/v1/TextValue`
 
 ### properties
 
@@ -296,18 +281,18 @@ The `SourceDescription` data type defines a description of a source.
 
 The identifier for the "SourceDescription" data type is:
 
-`http://gedcomx.org/source/v1/SourceDescription`
+`http://gedcomx.org/v1/SourceDescription`
 
 ### properties
 
 name | description | data type
 -----|-------------|----------
 id | A local, transient identifier for the resource being described. Note that as a local, transient identifier, the id may only be used to resolve references to the resource within a well-defined scope (such as a single web service request or a single file). | string
-citation | The citation for this source. | [`http://gedcomx.org/source/v1/SourceCitation`](#source-citation) - REQUIRED
+citation | The citation for this source. | [`http://gedcomx.org/v1/SourceCitation`](#source-citation) - REQUIRED
 about | A uniform resource identifier (URI) for the resource being described. | [URI](#uri) - OPTIONAL
-mediator | A reference to the entity that mediates access to the described source. | [URI](#uri) - OPTIONAL; MUST resolve to an instance of [`http://xmlns.com/foaf/0.1/Person`](#foaf-person) or [`http://xmlns.com/foaf/0.1/Organization`](#organization).
-sources | A list of references to any sources from which this source is derived. | List of [`http://gedcomx.org/source/v1/SourceReference`](#source-reference) - OPTIONAL
-componentOf | A reference to the source that contains this source -- its parent context; this is for cases where this description is not complete without the description of its parent context | [`http://gedcomx.org/source/v1/SourceReference`](#source-reference) - OPTIONAL
+mediator | A reference to the entity that mediates access to the described source. | [URI](#uri) - OPTIONAL; MUST resolve to an instance of [`http://gedcomx.org/v1/Agent`](#agent).
+sources | A list of references to any sources from which this source is derived. | List of [`http://gedcomx.org/v1/SourceReference`](#source-reference) - OPTIONAL
+componentOf | A reference to the source that contains this source -- its parent context; this is for cases where this description is not complete without the description of its parent context | [`http://gedcomx.org/v1/SourceReference`](#source-reference) - OPTIONAL
 displayName | A display name for this source. | string - OPTIONAL
 alternateNames | A list of alternate display names for this source. | List of [`http://gedcomx.org/TextValue`](#text-value) - OPTIONAL
 notes  | A list of notes about a source. | List of [`http://gedcomx.org/Note`](#note) - OPTIONAL
@@ -324,15 +309,15 @@ and from which bibliographic citation strings may be rendered.
 
 The identifier for the "SourceCitation" data type is:
 
-`http://gedcomx.org/source/v1/SourceCitation`
+`http://gedcomx.org/v1/SourceCitation`
 
 ### properties
 
 name | description | data type
 -----|-------------|----------
 value | A rendering of the full (working) citation as a string. | string - REQUIRED
-citationTemplate | The identifier of the citation template by which this citation may be interpreted. | [URI](#uri) - OPTIONAL;  MUST resolve to an instance of [`http://gedcomx.org/source/v1/CitationTemplate`](#citation-template).
-fields  | A list of citation fields about a source. | List of [`http://gedcomx.org/source/v1/CitationField`](#citation-field) - OPTIONAL
+citationTemplate | The identifier of the citation template by which this citation may be interpreted. | [URI](#uri) - OPTIONAL;  MUST resolve to an instance of [`http://gedcomx.org/v1/CitationTemplate`](#citation-template).
+fields  | A list of citation fields about a source. | List of [`http://gedcomx.org/v1/CitationField`](#citation-field) - OPTIONAL
 
 <a id="citation-field"/>
 
@@ -341,11 +326,13 @@ fields  | A list of citation fields about a source. | List of [`http://gedcomx.o
 The `CitationField` data type defines a piece of metadata (e.g., author, volume, page, publisher, etc.)
 necessary to identify a source.
 
+The `CitationField` data type does NOT support extension properties (see [Extension Properties](#extension-properties)).
+
 ### identifier
 
 The identifier for the "CitationField" data type is:
 
-`http://gedcomx.org/source/v1/CitationField`
+`http://gedcomx.org/v1/CitationField`
 
 ### properties
 
@@ -367,13 +354,13 @@ its supporting source(s) [the target source(s)] using an instance(s) of `SourceR
 
 The identifier for the "SourceReference" data type is:
 
-`http://gedcomx.org/source/v1/SourceReference`
+`http://gedcomx.org/v1/SourceReference`
 
 ### properties
 
 name | description | data type
 -----|-------------|----------
-sourceDescription  | Reference to a _description_ of the target source. | [URI](#uri) - MUST resolve to an instance of [`http://gedcomx.org/source/v1/SourceDescription`](#source-description)
+sourceDescription  | Reference to a _description_ of the target source. | [URI](#uri) - MUST resolve to an instance of [`http://gedcomx.org/v1/SourceDescription`](#source-description)
 attribution | The attribution of this source reference. | [`http://gedcomx.org/Attribution`](#attribution)
 
 ### examples
@@ -440,11 +427,6 @@ Genealogical research is performed and data is gathered by a living person or or
 This section describes the data types that are used to provide information about
 contributors of genealogical data.
 
-GEDCOM X refers to the [Friend of a Friend](http://www.foaf-project.org/) project to define the
-data types for describing contributors. The data types are duplicated here for convenience
-and consistency.
-
-
 <a id="online-account"/>
 
 ## 4.1 The "OnlineAccount" Data Type
@@ -455,35 +437,32 @@ The `OnlineAccount` data type defines a description of an account in an online w
 
 The identifier for the `OnlineAccount` data type is:
 
-`http://xmlns.com/foaf/0.1/OnlineAccount`
+`http://gedcomx.org/v1/OnlineAccount`
 
 ### properties
 
 name | description | data type
 -----|-------------|----------
-id | A local identifier for the online account. Note that this id MUST NOT be processed as an identifier for the resource being referenced, but instead as a transient identifier for the reference itself. | string
 serviceHomepage  | The home page of the service. | [URI](#uri)
-accountName | The name of the account. | [`http://gedcomx.org/Literal`](#literal-value)
-displayName | A display name for the account. | [`http://gedcomx.org/Literal`](#literal-value)
+accountName | The name, label, or id associating the owner of the account with the account. | string
 
 <a id="address"/>
 
 ## 4.2 The "Address" Data Type
 
-The `Address` data type defines a street address of a person or organization. The `Address` data type is
-defined by the [Contact](http://www.w3.org/2000/10/swap/pim/contact) schema.
+The `Address` data type defines a street address of a person or organization.
 
 ### identifier
 
 The identifier for the `Address` data type is:
 
-`http://www.w3.org/2000/10/swap/pim/contact#Address`
+`http://gedcomx.org/v1/Address`
 
 ### properties
 
 name | description | data type
 -----|-------------|----------
-id | A local identifier for the address. Note that this id MUST NOT be processed as an identifier for the resource being referenced, but instead as a transient identifier for the reference itself. | string
+value | A string representation of the value. Used when the address isn't separated into its constituent parts. | string
 city | The city. | string
 country | The country. | string
 postalCode | The postal code. | string
@@ -493,82 +472,31 @@ street2 | The street (second line). | string
 street3 | The street (third line). | string
 
 
+<a id="agent"/>
+
 ## 4.3 The "Agent" Data Type
 
-The `Agent` data type defines data that is common to a living entity, such as a person (user)
-or organization. The `Agent` data type use used as an abstraction to share properties
-between contributor data types such as FOAF `Person` and `Organization`.
+The `Agent` data type defines a living entity, such as a person (user) or organization.
 
 ### identifier
 
 The identifier for the `Agent` data type is:
 
-`http://xmlns.com/foaf/0.1/Agent`
+`http://gedcomx.org/v1/Agent`
 
 ### properties
 
 name | description | data type
 -----|-------------|----------
 id | A local identifier for the agent. Note that this id MUST NOT be processed as an identifier for the resource being referenced, but instead as a transient identifier for the reference itself. | string
-name | The name of the person or organization. | [`http://www.w3.org/2000/01/rdf-schema#Literal`](#rdf-literal)
-homepage | The homepage of the person or organization. | [`http://www.w3.org/2000/01/rdf-schema#Literal`](#rdf-literal)
-openid  | The [openid](http://openid.net/) of the person or organization. | [`http://www.w3.org/2000/01/rdf-schema#Literal`](#rdf-literal)
-accounts  | The online accounts of the person or organization. | List of [`http://xmlns.com/foaf/0.1/OnlineAccount`](#online-account). Order is preserved.
+identifiers | Identifiers for the agent. When an identifier for an agent is also an identifier for a person, the data in the person describes the agent. | List of [`http://gedcomx.org/v1/Identifier`](#identifier-type). Order is preserved.
+name | The name of the person or organization. | string
+homepage | The homepage of the person or organization. | [URI](#uri)
+openid  | The [openid](http://openid.net/) of the person or organization. | [URI](#uri)
+accounts  | The online accounts of the person or organization. | List of [`http://gedcomx.org/v1/OnlineAccount`](#online-account). Order is preserved.
 emails  | The email addresses of the person or organization. | List of [URI](#uri) - MUST resolve to a valid e-mail address (e.g. "mailto:someone@gedcomx.org"). Order is preserved.
 phones  | The phones (voice, fax, mobile) of the person or organization. | List of [URI](#uri) - MUST resolve to a valid phone number (e.g. "tel:+1-201-555-0123"). Order is preserved.
-addresses  | The addresses of the person or organization. | List of [`http://www.w3.org/2000/10/swap/pim/contact#Address`](#address). Order is preserved.
-
-
-<a id="organization"/>
-
-## 4.4 The "Organization" Data Type
-
-The `Organization` data type defines data describing an organization.
-
-### identifier
-
-The identifier for the `Organization` data type is:
-
-`http://xmlns.com/foaf/0.1/Organization`
-
-### extension
-
-This data type extends the following data type:
-
-`http://xmlns.com/foaf/0.1/Agent`
-
-### properties
-
-The `Organization` data type defines no additional properties beyond those defined by
-its extended type.
-
-
-<a id="foaf-person"/>
-
-## 4.5 The "FOAF Person" Data Type
-
-The `Person` data type defines data that is common to a living person (user). The `Person`
-data type is an extension of the `Agent` data type.
-
-### identifier
-
-The identifier for the `Person` data type is:
-
-`http://xmlns.com/foaf/0.1/Person`
-
-### extension
-
-This data type extends the following data type:
-
-`http://xmlns.com/foaf/0.1/Agent`
-
-### properties
-
-name | description | data type
------|-------------|----------
-familyName | The family name of the person. | [`http://www.w3.org/2000/01/rdf-schema#Literal`](#rdf-literal)
-givenName | The given name of the person. | [`http://www.w3.org/2000/01/rdf-schema#Literal`](#rdf-literal)
-language | The language of the person. | [`http://www.w3.org/2000/01/rdf-schema#Literal`](#rdf-literal)
+addresses  | The addresses of the person or organization. | List of [`http://gedcomx.org/v1/Address`](#address). Order is preserved.
 
 
 
@@ -587,14 +515,14 @@ The `Conclusion` data type defines the base conceptual model for basic genealogi
 
 The identifier for the `Conclusion` data type is:
 
-`http://gedcomx.org/conclusion/v1/Conclusion`
+`http://gedcomx.org/v1/Conclusion`
 
 ### properties
 
 name | description | data type
 -----|-------------|----------
 id | A local identifier for the conclusion. Note that this id MUST NOT be processed as an identifier for the resource being referenced, but instead as a transient identifier for the reference itself. | string
-sources | The list of references to the sources of related to this conclusion. The sources of a conclusion MUST also be sources of the conclusion's containing entity (i.e. [`Person`](#person) or [`Relationship`](#relationship) ).| List of [`http://gedcomx.org/conclusion/v1/SourceReference`](#source-reference). Order is preserved.
+sources | The list of references to the sources of related to this conclusion. The sources of a conclusion MUST also be sources of the conclusion's containing entity (i.e. [`Person`](#person) or [`Relationship`](#relationship) ).| List of [`http://gedcomx.org/v1/SourceReference`](#source-reference). Order is preserved.
 notes  | A list of notes about a conclusion. | List of [`http://gedcomx.org/Note`](#note) - OPTIONAL
 attribution | The attribution of this conclusion. | [`http://gedcomx.org/Attribution`](#attribution)
 
@@ -609,13 +537,13 @@ The `Document` data type defines the base conceptual model for genealogical conc
 
 The identifier for the `Document` data type is:
 
-`http://gedcomx.org/conclusion/v1/Document`
+`http://gedcomx.org/v1/Document`
 
 ### extension
 
 This data type extends the following data type:
 
-`http://gedcomx.org/conclusion/v1/Conclusion`
+`http://gedcomx.org/v1/Conclusion`
 
 ### properties
 
@@ -634,13 +562,13 @@ The `AbstractDocument` data type is used to represent document abstracts.  The `
 
 The identifier for the `AbstractDocument` data type is:
 
-`http://gedcomx.org/conclusion/v1/AbstractDocument`
+`http://gedcomx.org/v1/AbstractDocument`
 
 ### extension
 
 This data type extends the following data type:
 
-`http://gedcomx.org/conclusion/v1/Document`
+`http://gedcomx.org/v1/Document`
 
 ### properties
 
@@ -657,13 +585,13 @@ The `TranscriptionDocument` data type is used to represent document transcriptio
 
 The identifier for the `TranscriptionDocument` data type is:
 
-`http://gedcomx.org/conclusion/v1/TranscriptionDocument`
+`http://gedcomx.org/v1/TranscriptionDocument`
 
 ### extension
 
 This data type extends the following data type:
 
-`http://gedcomx.org/conclusion/v1/Document`
+`http://gedcomx.org/v1/Document`
 
 ### properties
 
@@ -680,13 +608,13 @@ The `TranslationDocument` data type is used to represent document translations. 
 
 The identifier for the `TranslationDocument` data type is:
 
-`http://gedcomx.org/conclusion/v1/TranslationDocument`
+`http://gedcomx.org/v1/TranslationDocument`
 
 ### extension
 
 This data type extends the following data type:
 
-`http://gedcomx.org/conclusion/v1/Document`
+`http://gedcomx.org/v1/Document`
 
 ### properties
 
@@ -703,13 +631,13 @@ The `AnalysisDocument` data type is used to represent documents with evidence an
 
 The identifier for the `AnalysisDocument` data type is:
 
-`http://gedcomx.org/conclusion/v1/AnalysisDocument`
+`http://gedcomx.org/v1/AnalysisDocument`
 
 ### extension
 
 This data type extends the following data type:
 
-`http://gedcomx.org/conclusion/v1/Document`
+`http://gedcomx.org/v1/Document`
 
 ### properties
 
@@ -727,13 +655,13 @@ extends the `Conclusion` data type.
 
 The identifier for the `Gender` data type is:
 
-`http://gedcomx.org/conclusion/v1/Gender`
+`http://gedcomx.org/v1/Gender`
 
 ### extension
 
 This data type extends the following data type:
 
-`http://gedcomx.org/conclusion/v1/Conclusion`
+`http://gedcomx.org/v1/Conclusion`
 
 ### properties
 
@@ -765,13 +693,13 @@ extends the `Conclusion` data type.
 
 The identifier for the `Name` data type is:
 
-`http://gedcomx.org/conclusion/v1/Name`
+`http://gedcomx.org/v1/Name`
 
 ### extension
 
 This data type extends the following data type:
 
-`http://gedcomx.org/conclusion/v1/Conclusion`
+`http://gedcomx.org/v1/Conclusion`
 
 ### properties
 
@@ -779,8 +707,8 @@ name | description | data type
 -----|-------------|----------
 type | URI identifying the type of the name. | [URI](#uri) - MUST resolve to a name type. Refer to the list of [known name types](#known-name-types).
 preferred | Whether this name is preferred above the other names of a person. | boolean
-primaryForm | The primary form of the name. | `http://gedcomx.org/conclusion/v1/NameForm`
-alternateForms | The alternate forms of the name. | List of [`http://gedcomx.org/conclusion/v1/NameForm`](#name-form). Order is preserved.
+primaryForm | The primary form of the name. | `http://gedcomx.org/v1/NameForm`
+alternateForms | The alternate forms of the name. | List of [`http://gedcomx.org/v1/NameForm`](#name-form). Order is preserved.
 
 <a id="known-name-types"/>
 
@@ -813,23 +741,23 @@ the nature of a relationship. The `Fact` data type extends the `Conclusion` data
 
 The identifier for the `Fact` data type is:
 
-`http://gedcomx.org/conclusion/v1/Fact`
+`http://gedcomx.org/v1/Fact`
 
 ### extension
 
 This data type extends the following data type:
 
-`http://gedcomx.org/conclusion/v1/Conclusion`
+`http://gedcomx.org/v1/Conclusion`
 
 ### properties
 
 name | description | data type
 -----|-------------|----------
 type | URI identifying the type of the fact. | [URI](#uri) - MUST resolve to a fact type. See the list of [known fact types](#known-fact-types).
-date | The date of applicability of the fact. | [`http://gedcomx.org/conclusion/v1/Date`](#conclusion-date)
-place | The place of applicability of the fact. | [`http://gedcomx.org/conclusion/v1/Place`](#conclusion-place)
+date | The date of applicability of the fact. | [`http://gedcomx.org/v1/Date`](#conclusion-date)
+place | The place of applicability of the fact. | [`http://gedcomx.org/v1/Place`](#conclusion-place)
 original | The value of the fact as supplied by the contributor. | string
-formal | The formal value of the fact. | [`http://gedcomx.org/conclusion/v1/FormalValue`](#formal-value)
+formal | The formal value of the fact. | [`http://gedcomx.org/v1/FormalValue`](#formal-value)
 
 <a id="known-fact-types"/>
 
@@ -839,99 +767,73 @@ The following fact types are defined by GEDCOM X:
 
 URI | description | scope
 ----|-------------|------
-`http://gedcomx.org/Adoption`| | person
-`http://gedcomx.org/AdultChristening`| | person
-`http://gedcomx.org/Affiliation`| | person
-`http://gedcomx.org/Age`| | person
-`http://gedcomx.org/Baptism`| | person
-`http://gedcomx.org/BarMitzvah`| | person
-`http://gedcomx.org/BatMitzvah`| | person
-`http://gedcomx.org/Birth`| | person
-`http://gedcomx.org/Blessing`| | person
-`http://gedcomx.org/Burial`| | person
-`http://gedcomx.org/CasteName`| | person
-`http://gedcomx.org/Census`| | person
-`http://gedcomx.org/Christening`| | person
-`http://gedcomx.org/Circumcision`| | person
-`http://gedcomx.org/Citizenship`| | person
-`http://gedcomx.org/ClanName`| | person
-`http://gedcomx.org/Confirmation`| | person
-`http://gedcomx.org/CountOfChildren`| | person
-`http://gedcomx.org/CountOfMarriages`| | person
-`http://gedcomx.org/Cremation`| | person
-`http://gedcomx.org/Death`| | person
-`http://gedcomx.org/DiedBeforeEight`| | person
-`http://gedcomx.org/Dwelling`| | person
-`http://gedcomx.org/Education`| | person
-`http://gedcomx.org/Emigration`| | person
-`http://gedcomx.org/Ethnicity`| | person
-`http://gedcomx.org/Excommunication`| | person
-`http://gedcomx.org/FirstCommunion`| | person
-`http://gedcomx.org/Flourish`| | person
-`http://gedcomx.org/Funeral`| | person
-`http://gedcomx.org/GedcomUUID`| | person
-`http://gedcomx.org/Illness`| | person
-`http://gedcomx.org/Immigration`| | person
-`http://gedcomx.org/Interment`| | person
-`http://gedcomx.org/Living`| | person
-`http://gedcomx.org/MaritalStatus`| | person
-`http://gedcomx.org/MilitaryAward`| | person
-`http://gedcomx.org/MilitaryCompany`| | person
-`http://gedcomx.org/MilitaryDischarge`| | person
-`http://gedcomx.org/MilitaryRank`| | person
-`http://gedcomx.org/MilitaryRegiment`| | person
-`http://gedcomx.org/MilitaryService`| | person
-`http://gedcomx.org/MilitaryServiceBranch`| | person
-`http://gedcomx.org/Mission`| | person
-`http://gedcomx.org/Move`| | person
-`http://gedcomx.org/NameOfShip`| | person
-`http://gedcomx.org/Naturalization`| | person
-`http://gedcomx.org/Namesake`| | person
-`http://gedcomx.org/NationalId`| | person
-`http://gedcomx.org/Nationality`| | person
-`http://gedcomx.org/NeverHadChildren`| | person
-`http://gedcomx.org/NeverMarried`| | person
-`http://gedcomx.org/NotAccountable`| | person
-`http://gedcomx.org/Occupation`| | person
-`http://gedcomx.org/Ordinance`| | person
-`http://gedcomx.org/Ordination`| | person
-`http://gedcomx.org/PhysicalDescription`| | person
-`http://gedcomx.org/PortOfDeparture`| | person
-`http://gedcomx.org/PreviousResidence`| | person
-`http://gedcomx.org/Probate`| | person
-`http://gedcomx.org/Property`| | person
-`http://gedcomx.org/Race`| | person
-`http://gedcomx.org/RelationshipToHead`| | person
-`http://gedcomx.org/Religion`| | person
-`http://gedcomx.org/Residence`| | person
-`http://gedcomx.org/Retirement`| | person
-`http://gedcomx.org/SocialSecurityNumber`| | person
-`http://gedcomx.org/Stillborn`| | person
-`http://gedcomx.org/TitleOfNobility`| | person
-`http://gedcomx.org/TribeName`| | person
-`http://gedcomx.org/Twin`| | person
-`http://gedcomx.org/Will`| | person
-`http://gedcomx.org/Annulment`| | couple relationship
-`http://gedcomx.org/CommonLawMarriage`| | couple relationship
-`http://gedcomx.org/CurrentlySpouses`| | couple relationship
-`http://gedcomx.org/Divorce`| | couple relationship
-`http://gedcomx.org/DivorceFiling`| | couple relationship
-`http://gedcomx.org/Engagement`| | couple relationship
-`http://gedcomx.org/Marriage`| | couple relationship
-`http://gedcomx.org/MarriageBanns`| | couple relationship
-`http://gedcomx.org/MarriageContract`| | couple relationship
-`http://gedcomx.org/MarriageIntent`| | couple relationship
-`http://gedcomx.org/MarriageLicense`| | couple relationship
-`http://gedcomx.org/MarriageNotice`| | couple relationship
-`http://gedcomx.org/MarriageSettlement`| | couple relationship
-`http://gedcomx.org/NumberOfChildren`| | couple relationship
-`http://gedcomx.org/Separation`| | couple relationship
-`http://gedcomx.org/UniversalId`| | couple relationship
-`http://gedcomx.org/Biological`| | parent-child relationship
-`http://gedcomx.org/Adopted`| | parent-child relationship
-`http://gedcomx.org/Step`| | parent-child relationship
-`http://gedcomx.org/Foster`| | parent-child relationship
-`http://gedcomx.org/Guardianship`| | parent-child relationship
+`http://gedcomx.org/Adoption`| A fact of a person's adoption. In the context of a parent-child relationship, it describes a fact of the adoption of a child by a parent. | person
+`http://gedcomx.org/AdultChristening`| A fact of a person's christening or baptism as an adult. | person
+`http://gedcomx.org/Baptism`| A fact of a person's baptism. | person
+`http://gedcomx.org/BarMitzvah`| A fact of a person's bar mitzvah. | person
+`http://gedcomx.org/BatMitzvah`| A fact of a person's bat mitzvah. | person
+`http://gedcomx.org/Birth`| A fact of a person's birth. | person
+`http://gedcomx.org/Blessing`| A fact of an official blessing received by a person, such as at the hands of a clergy member or at another religious rite. | person
+`http://gedcomx.org/Burial`| A fact of the burial of person's body after death. | person
+`http://gedcomx.org/Caste`| A fact of a person's caste. | person
+`http://gedcomx.org/Census`| A fact of a person's participation in a census. | person
+`http://gedcomx.org/Christening`| A fact of a person's christening *at birth*. Note: use `AdultChristening` for the christening as an adult. | person
+`http://gedcomx.org/Circumcision`| A fact of a person's circumcision. | person
+`http://gedcomx.org/Clan`| A fact of a person's clan. | person
+`http://gedcomx.org/Confirmation`| A fact of a person's confirmation (or other rite of initiation) in a church or religion. | person
+`http://gedcomx.org/Cremation`| A fact of the cremation of person's body after death. | person
+`http://gedcomx.org/Death`| A fact of the death of a person. | person
+`http://gedcomx.org/Education`| A fact of an education or an educational achievement (e.g. diploma, graduation, scholarship, etc.) of a person. | person
+`http://gedcomx.org/Emigration`| A fact of the emigration of a person. | person
+`http://gedcomx.org/Ethnicity`| A fact of a person's ethnicity or race. | person
+`http://gedcomx.org/Excommunication`| A fact of a person's excommunication from a church. | person
+`http://gedcomx.org/FirstCommunion`| A fact of a person's first communion in a church. | person
+`http://gedcomx.org/Funeral`| A fact of a person's funeral. | person
+`http://gedcomx.org/Immigration`| A fact of a person's immigration. | person
+`http://gedcomx.org/LandTransation`| A fact of a land transaction enacted by a person. | person
+`http://gedcomx.org/Living`| A fact of a record of a person's living for a specific period. This is designed to include "flourish", defined to mean the time period in an adult's life where he was most productive, perhaps as a writer or member of the state assembly. It does not reflect the person's birth and death dates. | person
+`http://gedcomx.org/MaritalStatus`| A fact of a person's marital status. | person
+`http://gedcomx.org/Medical`| A fact of a person's medical record, such as for an illness or hospital stay. | person
+`http://gedcomx.org/MilitaryAward`| A fact of a person's military award. | person
+`http://gedcomx.org/MilitaryDischarge`| A fact of a person's military discharge. | person
+`http://gedcomx.org/MilitaryService`| A fact of a person's militray service. | person
+`http://gedcomx.org/Mission`| A fact of a person's church mission. | person
+`http://gedcomx.org/MoveTo`| A fact of a person's move (i.e. change of residence) to a new location. | person
+`http://gedcomx.org/MoveFrom`| A fact of a person's move (i.e. change of residence) from a location. | person
+`http://gedcomx.org/MultipleBirth`| A fact that a person was born as part of a multiple birth (e.g. twin, triplet, etc.) | person
+`http://gedcomx.org/NationalId`| A fact of a person's national id (e.g. social security number). | person
+`http://gedcomx.org/Nationality`| A fact of a person's nationality. | person
+`http://gedcomx.org/Naturalization`| A fact of a person's naturalization (i.e. acquisition of citizenship and nationality). | person
+`http://gedcomx.org/NumberOfChildren`| A fact of the number of children of a person or relationship. | person
+`http://gedcomx.org/NumberOfMarriages`| A fact of a person's number of marriages. | person
+`http://gedcomx.org/Occupation`| A fact of a person's occupation or employment. | person
+`http://gedcomx.org/Ordination`| A fact of a person's ordination to a stewardship in a church. | person
+`http://gedcomx.org/PhysicalDescription`| A fact of a person's physical description. | person
+`http://gedcomx.org/Probate`| A fact of a receipt of probate of a person's property. | person
+`http://gedcomx.org/Property`| A fact of a person's property or possessions. | person
+`http://gedcomx.org/Religion`| A fact of a person's religion. | person
+`http://gedcomx.org/Residence`| A fact of a person's residence. | person
+`http://gedcomx.org/Retirement`| A fact of a person's retirement. | person
+`http://gedcomx.org/Stillbirth`| A fact of a person's stillbirth. | person
+`http://gedcomx.org/Will`| A fact of a person's will. | person
+`http://gedcomx.org/Visit`| A fact of a person's visit to a place different from the person's residence. | person
+`http://gedcomx.org/Annulment`| The fact of an annulment of a marriage. | couple relationship
+`http://gedcomx.org/CommonLawMarriage`| The fact of a marriage by common law. | couple relationship
+`http://gedcomx.org/Divorce`| The fact of a divorce of a couple. | couple relationship
+`http://gedcomx.org/DivorceFiling`| The fact of a filing for divorce. | couple relationship
+`http://gedcomx.org/Engagement`| The fact of an engagement to be married. | couple relationship
+`http://gedcomx.org/Marriage`| The fact of a marriage. | couple relationship
+`http://gedcomx.org/MarriageBanns`| The fact of a marriage banns. | couple relationship
+`http://gedcomx.org/MarriageContract`| The fact of a marriage contract. | couple relationship
+`http://gedcomx.org/MarriageLicense`| The fact of a marriage license. | couple relationship
+`http://gedcomx.org/MarriageNotice`| The fact of a marriage notice. | couple relationship
+`http://gedcomx.org/NumberOfChildren`| A fact of the number of children of a person or relationship. | couple relationship
+`http://gedcomx.org/Separation`| A fact of a couple's separation. | couple relationship
+`http://gedcomx.org/BiologicalLineage`| A fact about the biological lineage of a child to a parent. | parent-child relationship
+`http://gedcomx.org/Adoption`| A fact of a person's adoption. In the context of a parent-child relationship, it describes a fact of the adoption of a child by a parent. | parent-child relationship
+`http://gedcomx.org/Foster`| A fact about a foster relationship between a foster parent and a child. | parent-child relationship
+`http://gedcomx.org/Guardianship`| A fact about a legal guardianship between a parent and a child. | parent-child relationship
+`http://gedcomx.org/Step`| A fact about the step relationship between a parent and a child. | parent-child relationship
 
 
 <a id="person"/>
@@ -945,23 +847,23 @@ extends the `Conclusion` data type.
 
 The identifier for the `Person` data type is:
 
-`http://gedcomx.org/conclusion/v1/Person`
+`http://gedcomx.org/v1/Person`
 
 ### extension
 
 This data type extends the following data type:
 
-`http://gedcomx.org/conclusion/v1/Conclusion`
+`http://gedcomx.org/v1/Conclusion`
 
 ### properties
 
 name | description | data type
 -----|-------------|----------
-identifiers | Identifiers for the person. | List of [`http://gedcomx.org/conclusion/v1/Identifier`](#identifier-type). Order is preserved.
+identifiers | Identifiers for the person. | List of [`http://gedcomx.org/v1/Identifier`](#identifier-type). Order is preserved.
 living | Whether the person is considered living. | boolean
-gender | The conclusion about the gender of the person. | [`http://gedcomx.org/conclusion/v1/Gender`](#gender)
-names | The conclusions about the names of the person. | List of [`http://gedcomx.org/conclusion/v1/Name`](#name-conclusion). Order is preserved.
-facts | The conclusions about the facts of the life of the person. | List of [`http://gedcomx.org/conclusion/v1/Fact`](#fact-conclusion). Order is preserved.
+gender | The conclusion about the gender of the person. | [`http://gedcomx.org/v1/Gender`](#gender)
+names | The conclusions about the names of the person. | List of [`http://gedcomx.org/v1/Name`](#name-conclusion). Order is preserved.
+facts | The conclusions about the facts of the life of the person. | List of [`http://gedcomx.org/v1/Fact`](#fact-conclusion). Order is preserved.
 
 
 <a id="relationship"/>
@@ -975,22 +877,22 @@ extends the `Conclusion` data type.
 
 The identifier for the `Relationship` data type is:
 
-`http://gedcomx.org/conclusion/v1/Relationship`
+`http://gedcomx.org/v1/Relationship`
 
 ### extension
 
 This data type extends the following data type:
 
-`http://gedcomx.org/conclusion/v1/Conclusion`
+`http://gedcomx.org/v1/Conclusion`
 
 ### properties
 
 name | description | data type
 -----|-------------|----------
 type | URI identifying the type of the relationship. | [URI](#uri) - MUST resolve to a relationship type. Refer to the list of [known relationship types](#known-relationship-types)
-person1 | Reference to the first person in the relationship. | [URI](#uri) - MUST resolve to an instance of [`http://gedcomx.org/conclusion/v1/Person`](#person)
-person2 | Reference to the second person in the relationship. | [URI](#uri) - MUST resolve to an instance of [`http://gedcomx.org/conclusion/v1/Person`](#person)
-facts | The conclusions about the facts of the life of the relationship. | List of [`http://gedcomx.org/conclusion/v1/Fact`](#fact-conclusion). Order is preserved.
+person1 | Reference to the first person in the relationship. | [URI](#uri) - MUST resolve to an instance of [`http://gedcomx.org/v1/Person`](#person)
+person2 | Reference to the second person in the relationship. | [URI](#uri) - MUST resolve to an instance of [`http://gedcomx.org/v1/Person`](#person)
+facts | The conclusions about the facts of the life of the relationship. | List of [`http://gedcomx.org/v1/Fact`](#fact-conclusion). Order is preserved.
 
 Note: when a relationship type implies direction, the relationship is said to
 be *from* person1 *to* person2. For example, in a parent-child relationship, the
@@ -1019,19 +921,19 @@ The `EventRole` data type defines a role played in an event by a person.  The `E
 
 The identifier for the `EventRole` data type is:
 
-`http://gedcomx.org/conclusion/v1/EventRole`
+`http://gedcomx.org/v1/EventRole`
 
 ### extension
 
 This data type extends the following data type:
 
-`http://gedcomx.org/conclusion/v1/Conclusion`
+`http://gedcomx.org/v1/Conclusion`
 
 ### properties
 
 name | description | data type
 -----|-------------|----------
-person | Reference to the person playing the role in the event. | [`URI`](#uri) - MUST resolve to an instance of [`http://gedcomx.org/conclusion/v1/Person`](#person)
+person | Reference to the person playing the role in the event. | [`URI`](#uri) - MUST resolve to an instance of [`http://gedcomx.org/v1/Person`](#person)
 type | Reference to the role type. | [`URI`](#uri) - MUST resolve to a role type. Refer to the list of [known role types](#known-roles).
 details | Details about the role of the person in the event. | string
 
@@ -1060,22 +962,22 @@ extends the `Conclusion` data type.
 
 The identifier for the `Event` data type is:
 
-`http://gedcomx.org/conclusion/v1/Event`
+`http://gedcomx.org/v1/Event`
 
 ### extension
 
 This data type extends the following data type:
 
-`http://gedcomx.org/conclusion/v1/Conclusion`
+`http://gedcomx.org/v1/Conclusion`
 
 ### properties
 
 name | description | data type
 -----|-------------|----------
 type | URI identifying the type of the event. | [URI](#uri). MUST resolve to an event type. Refer to the list of [known event types](#known-event-types)
-date | The date of the event. | [`http://gedcomx.org/conclusion/v1/Date`](#conclusion-date)
-place | The place of the event. | [`http://gedcomx.org/conclusion/v1/Place`](#conclusion-place)
-roles | The roles of the persons in the event. | List of [`http://gedcomx.org/conclusion/v1/EventRole`](#conclusion-event-role). Order is preserved.
+date | The date of the event. | [`http://gedcomx.org/v1/Date`](#conclusion-date)
+place | The place of the event. | [`http://gedcomx.org/v1/Place`](#conclusion-place)
+roles | The roles of the persons in the event. | List of [`http://gedcomx.org/v1/EventRole`](#conclusion-event-role). Order is preserved.
 
 <a id="known-event-types"/>
 
@@ -1085,43 +987,40 @@ The following event types are defined by GEDCOM X:
 
 URI | description
 ----|------------
-`http://gedcomx.org/Adoption`|
-`http://gedcomx.org/AdultChristening`|
-`http://gedcomx.org/Annulment`|
-`http://gedcomx.org/Arrival`|
-`http://gedcomx.org/Baptism`|
-`http://gedcomx.org/BarMitzvah`|
-`http://gedcomx.org/BatMitzvah`|
-`http://gedcomx.org/Birth`|
-`http://gedcomx.org/Blessing`|
-`http://gedcomx.org/Burial`|
-`http://gedcomx.org/Census`|
-`http://gedcomx.org/Christening`|
-`http://gedcomx.org/Circumcision`|
-`http://gedcomx.org/Confirmation`|
-`http://gedcomx.org/Cremation`|
-`http://gedcomx.org/Death`|
-`http://gedcomx.org/Departure`|
-`http://gedcomx.org/Divorce`|
-`http://gedcomx.org/DivorceFiling`|
-`http://gedcomx.org/Education`|
-`http://gedcomx.org/Engagement`|
-`http://gedcomx.org/Emigration`|
-`http://gedcomx.org/Excommunication`|
-`http://gedcomx.org/FirstCommunion`|
-`http://gedcomx.org/Funeral`|
-`http://gedcomx.org/Graduation`|
-`http://gedcomx.org/Immigration`|
-`http://gedcomx.org/Interment`|
-`http://gedcomx.org/Marriage`|
-`http://gedcomx.org/MilitaryAward`|
-`http://gedcomx.org/MilitaryDischarge`|
-`http://gedcomx.org/Mission`|
-`http://gedcomx.org/Move`|
-`http://gedcomx.org/Ordinance`|
-`http://gedcomx.org/Ordination`|
-`http://gedcomx.org/Retirement`|
-
+`http://gedcomx.org/Adoption` | An adoption event.
+`http://gedcomx.org/AdultChristening` | An adult christening event.
+`http://gedcomx.org/Annulment` | An annulment event of a marriage.
+`http://gedcomx.org/Baptism` | A baptism event.
+`http://gedcomx.org/BarMitzvah` | A bar mitzvah event.
+`http://gedcomx.org/BatMitzvah` | A bat mitzvah event.
+`http://gedcomx.org/Birth` | A birth event.
+`http://gedcomx.org/Blessing` | A an official blessing event, such as at the hands of a clergy member or at another religious rite.
+`http://gedcomx.org/Burial` | A burial event.
+`http://gedcomx.org/Census` | A census event.
+`http://gedcomx.org/Christening` | A christening event *at birth*. Note: use `AdultChristening` for a christening event as an adult.
+`http://gedcomx.org/Circumcision` | A circumcision event.
+`http://gedcomx.org/Confirmation` | A confirmation event (or other rite of initiation) in a church or religion.
+`http://gedcomx.org/Cremation` | A cremation event after death.
+`http://gedcomx.org/Death` | A death event.
+`http://gedcomx.org/Divorce` | A divorce event.
+`http://gedcomx.org/DivorceFiling` | A divorce filing event.
+`http://gedcomx.org/Education` | A education or an educational achievement event (e.g. diploma, graduation, scholarship, etc.).
+`http://gedcomx.org/Engagement` | An engagement to be married event.
+`http://gedcomx.org/Emigration` | An emigration event.
+`http://gedcomx.org/Excommunication` | An excommunication event from a church.
+`http://gedcomx.org/FirstCommunion` | A first communion event.
+`http://gedcomx.org/Funeral` | A funeral event.
+`http://gedcomx.org/Immigration` | An immigration event.
+`http://gedcomx.org/LandTransation` | A land transaction event.
+`http://gedcomx.org/Marriage` | A marriage event.
+`http://gedcomx.org/MilitaryAward` | A military award event.
+`http://gedcomx.org/MilitaryDischarge` | A military discharge event.
+`http://gedcomx.org/Mission` | A mission event.
+`http://gedcomx.org/MoveFrom` | An event of a move (i.e. change of residence) from a location.
+`http://gedcomx.org/MoveTo` | An event of a move (i.e. change of residence) to a location.
+`http://gedcomx.org/Naturalization` | A naturalization event (i.e. acquisition of citizenship and nationality).
+`http://gedcomx.org/Ordination` | An ordination event.
+`http://gedcomx.org/Retirement` | A retirement event.
 
 <a id="conclusion-date"/>
 
@@ -1133,7 +1032,7 @@ The `Date` data type defines the value of a genealogical date.
 
 The identifier for the `Date` data type is:
 
-`http://gedcomx.org/conclusion/v1/Date`
+`http://gedcomx.org/v1/Date`
 
 ### properties
 
@@ -1162,7 +1061,7 @@ The `Place` data type defines the value of a genealogical place.
 
 The identifier for the `Place` data type is:
 
-`http://gedcomx.org/conclusion/v1/Place`
+`http://gedcomx.org/v1/Place`
 
 ### properties
 
@@ -1178,11 +1077,13 @@ formal | The formal value of the place. | [`http://gedcomx.org/FormalValue`](#fo
 
 The `NamePart` data type defines a part of a name of a person.
 
+The `NamePart` data type does NOT support extension properties (see [Extension Properties](#extension-properties)).
+
 ### identifier
 
 The identifier for the `NamePart` data type is:
 
-`http://gedcomx.org/conclusion/v1/NamePart`
+`http://gedcomx.org/v1/NamePart`
 
 ### properties
 
@@ -1214,14 +1115,14 @@ The `NameForm` data type defines a form of a name of a person.
 
 The identifier for the `NameForm` data type is:
 
-`http://gedcomx.org/conclusion/v1/NameForm`
+`http://gedcomx.org/v1/NameForm`
 
 ### properties
 
 name | description | data type
 -----|-------------|----------
 fullText | The full text of the name form. | string
-parts | The parts of the name form. | List of [`http://gedcomx.org/conclusion/v1/NamePart`](#name-part). Order is preserved.
+parts | The parts of the name form. | List of [`http://gedcomx.org/v1/NamePart`](#name-part). Order is preserved.
 
 
 # 6. Extensibility

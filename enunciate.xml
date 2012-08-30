@@ -4,10 +4,6 @@
 
   <api-import pattern="org.gedcomx.**"/>
 
-  <namespaces>
-    <namespace uri="http://record.gedcomx.org/" id="gxr"/>
-  </namespaces>
-
   <modules>
     <!--disable the standard docs module, we're using the gedcomx-support module to generate docs.-->
     <docs disabled="true"/>

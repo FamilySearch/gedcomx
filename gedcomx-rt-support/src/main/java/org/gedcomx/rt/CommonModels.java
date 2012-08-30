@@ -24,54 +24,21 @@ import javax.xml.bind.annotation.XmlTransient;
 @Models ( {
   @Model (
     id = "gx",
-    namespace = CommonModels.GEDCOMX_COMMON_NAMESPACE,
+    namespace = CommonModels.GEDCOMX_NAMESPACE,
     projectId = CommonModels.GEDCOMX_PROJECT_ID,
-    label = "Common Model",
-    description = "The common model defines the types and elements that are common to all model.",
+    label = "GEDCOM X Model",
+    description = "The core model for all GEDCOM X data types and elements.",
     version = "v1",
-    xmlMediaType = CommonModels.GEDCOMX_COMMON_XML_MEDIA_TYPE,
-    jsonMediaType = CommonModels.GEDCOMX_COMMON_JSON_MEDIA_TYPE,
-    definesRDFSchema = true
+    xmlMediaType = CommonModels.GEDCOMX_XML_MEDIA_TYPE,
+    jsonMediaType = CommonModels.GEDCOMX_JSON_MEDIA_TYPE
   ),
   @Model (
-    id = "rdf",
-    namespace = CommonModels.RDF_NAMESPACE,
+    id = "types",
+    namespace = CommonModels.GEDCOMX_TYPES_NAMESPACE,
     projectId = CommonModels.GEDCOMX_PROJECT_ID,
-    label = "RDF Model",
-    description = "The RDF model defines metadata in RDF format.",
-    version = "1999-02-22",
-    xmlMediaType = CommonModels.RDF_XML_MEDIA_TYPE,
-    jsonMediaType = CommonModels.RDF_JSON_MEDIA_TYPE,
-    definesRDFSchema = true
-  ),
-  @Model (
-    id = "dctypes",
-    projectId = CommonModels.GEDCOMX_PROJECT_ID,
-    namespace = CommonModels.DUBLIN_CORE_TYPE_NAMESPACE,
-    label = "Dublin Core Types Model",
-    description = "The Dublin Core Types model defines the types of Dublin Core metadata.",
-    version = "2010-10-11",
-    definesRDFSchema = true
-  ),
-  @Model (
-    id = "foaf",
-    projectId = CommonModels.GEDCOMX_PROJECT_ID,
-    namespace = CommonModels.FOAF_NAMESPACE,
-    label = "FOAF Model",
-    description = "The FOAF model defines the types and elements used to represent metadata about users, organizations, and projects.",
-    version = "0.1",
-    xmlMediaType = CommonModels.RDF_XML_MEDIA_TYPE,
-    jsonMediaType = CommonModels.RDF_JSON_MEDIA_TYPE,
-    definesRDFSchema = true
-  ),
-  @Model (
-    id = "contact",
-    projectId = CommonModels.GEDCOMX_PROJECT_ID,
-    namespace = CommonModels.CONTACT_NAMESPACE,
-    label = "Contact Model",
-    description = "The contact model defines the vocabulary for contact information, e.g. for users or organizations.",
-    version = "2000-10",
-    definesRDFSchema = true
+    label = "GEDCOM X Types",
+    description = "The types model contains all of the types and constrained vocabulary for GEDCOM X data.",
+    version = "v1"
   )
 } )
 public class CommonModels {
@@ -81,17 +48,8 @@ public class CommonModels {
   public static final String GEDCOMX_DOMAIN = "http://gedcomx.org/";
   public static final String GEDCOMX_PROJECT_ID = "gedcomx";
 
-  public static final String GEDCOMX_COMMON_NAMESPACE = "http://gedcomx.org/";
-  public static final String GEDCOMX_COMMON_XML_MEDIA_TYPE = "application/x-gedcom+xml";
-  public static final String GEDCOMX_COMMON_JSON_MEDIA_TYPE = "application/x-gedcom+json";
-
-  public static final String RDF_NAMESPACE = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
-  public static final String RDFS_NAMESPACE    = "http://www.w3.org/2000/01/rdf-schema#";
-  public static final String RDF_XML_MEDIA_TYPE = "application/rdf+xml";
-  public static final String RDF_JSON_MEDIA_TYPE = "application/rdf+json";
-
-  public static final String DUBLIN_CORE_NAMESPACE = "http://purl.org/dc/terms/";
-  public static final String DUBLIN_CORE_TYPE_NAMESPACE = "http://purl.org/dc/dcmitype/";
-  public static final String FOAF_NAMESPACE = "http://xmlns.com/foaf/0.1/";
-  public static final String CONTACT_NAMESPACE = "http://www.w3.org/2000/10/swap/pim/contact#";
+  public static final String GEDCOMX_TYPES_NAMESPACE = "http://gedcomx.org/"; //the constrained vocabulary isn't versioned.
+  public static final String GEDCOMX_NAMESPACE = "http://gedcomx.org/v1/";
+  public static final String GEDCOMX_XML_MEDIA_TYPE = "application/x-gedcom-v1+xml";
+  public static final String GEDCOMX_JSON_MEDIA_TYPE = "application/x-gedcom-v1+json";
 }
