@@ -264,7 +264,7 @@ When any time of day is specified, there are three options for specifying its re
 example | description, textual equivalent
 --------|--------------------------------
 +1752-01-18T22:14:3Z | January 18, 1752 CE 10:14 and 3 seconds PM UTC
-+1964-11-14T10-0700 | November 14, 1964 CE 10 AM, Mountain Standard Time
++1964-11-14T10-07:00 | November 14, 1964 CE 10 AM, Mountain Standard Time
 +1889-05-17T14:23 | May 17, 1889 CE 2:23 PM
 +1492-07-27 | July 27, 1492 CE (presumed to be "local time", honoring the International Date Line)
 +0186-03 | March 186 CE
@@ -411,28 +411,24 @@ A+2014-08-19 | days | about August 19, 2014 CE
 
 The following summary may be beneficial in parsing and composing GEDCOM X Dates using this specification:
 
-* Any value that begins with a [+] or a [-] **must** be a `simple date`
+## 7.1 Parsing GEDCOM X Dates
+
+1. Any value that begins with a [+] or a [-] **must** be a `simple date`
     * The [-] will **only** affect the *year* component
-    * A negative `simple date` can **always** be converted to a BCE Gregorian year by adding 1 to the absolute value
-* Any value that begins with a [P] **must** be a `duration`
-* A leading [A] is **always** an `approximate date`, and **must** be followed by a `simple date`
-* A leading [R] is **always** a `recurring date range
-* A slash [/] **always** separates values, and its presence **always** indicates a `date range`
+    * A negative `simple date` year component can **always** be converted to a BCE Gregorian year by adding 1 to the absolute value
+2. Any value that begins with a [P] **must** be a `duration`
+3. A leading [A] is **always** an `approximate date`, and **must** be followed by a `simple date`
+4. A leading [R] is **always** a `recurring date range
+5. A slash [/] **always** separates values, and its presence **always** indicates a `date range`
 (including *open-ended* and *recurring* date ranges)
-* A [T] **always** separates the `calendar date` or *calendar units* from the `time of day` or *time units*
-* Each component of a `simple date` has a fixed width, **always** preceded by a designated character in the set [±,-,T,:]
-    * All components, except `year` and `offset` have length of 3, including the prefixed character
-    * `year` and `offset` both have length of 5
-* The above implies the *string length* of a `simple date` can be used to identify it precision
-    * The length of a `simple date` has the discrete valid lengths of {5,8,11,14,17,21,22,26}
-    * 5  - year only
-    * 8  - year and month
-    * 11 - year, month, day (NOTE: only a `calendar date`)
-    * 14 - year, month, day, hour
-    * 17 - year, month, day, hour, minute
-    * 21 - year, month, day, hour, minute, second ... **local time**
-    * 22 - year, month, day, hour, minute, second ... **UTC**
-    * 26 - year, month, day, hour, minute, second, offset ... **specific time zone**
+6. A [T] **always** separates the `calendar date` or *calendar units* from the `time of day` or *time units*
+7. Each component of a `simple date` has a fixed width, **always** preceded by a designated character in the set [±,-,T,:]
+    * All components, except `year` have length of 3, including the delimiting prefix character
+    * `year` has length of 5 (and the prefix is **always** a [+] or [-])
+    * When provided, local time `offset` has a length of 6, or two components (hours and minutes) each of length 3
+
+
+## 7.2 Composing GEDCOM X Dates
 
 # 8. Outstanding Concerns and Questions
 
