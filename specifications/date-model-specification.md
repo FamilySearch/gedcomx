@@ -251,12 +251,11 @@ When any time of day is specified, there are three options for specifying its re
 
 * No specifier implies `local time`
 * [Z] specifies UTC
-* four digits, preceded by a [+] or [-] indicates the shift of local time from UTC
+* four digits (with a colon separator), preceded by a [+] or [-] indicates the shift of local time from UTC
    * This is usually referred to as the local *time zone*
    * The [+] or [-] character is required
    * The first 2 digits represent the hours
-   * The last 2 digits represent minutes
-   * All four digits are required in this format
+   * The last 2 digits represent minutes, and can be omitted if zero
 
 
 ### 6.2.3 Examples
@@ -319,11 +318,11 @@ P1000Y18M72DT56H10M1S | 1000 years 18 months 72 days 56 hours 10 minutes 1 secon
 ### 6.4.1 Representation
 The format for a complete `date range` shall either use 2 `simple dates`:
 
-    ±YYYY-MM-DDThh:mm:ss[±hhmm|Z]**/**±YYYY-MM-DDThh:mm:ss[±hhmm|Z]
+    ±YYYY-MM-DDThh:mm:ss[±hh:mm|Z]**/**±YYYY-MM-DDThh:mm:ss[±hh:mm|Z]
 
 or a `simple date` and a `duration`:
 
-    ±YYYY-MM-DDThh:mm:ss[±hhmm|Z]**/**PnnnnYnnMnnDTTnnHnnMnnS
+    ±YYYY-MM-DDThh:mm:ss[±hh:mm|Z]**/**PnnnnYnnMnnDTTnnHnnMnnS
 
 In either format, the presence of the slash character [/] indicates the date is a `date range`.
 
