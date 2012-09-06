@@ -16,9 +16,13 @@
 package org.gedcomx.conclusion;
 
 import org.codehaus.enunciate.json.JsonName;
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.gedcomx.rt.LocaleBuilder;
 
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 import java.util.List;
 
@@ -32,6 +36,7 @@ public class NameForm {
 
   private String fullText;
   private List<NamePart> parts;
+  private String locale;
 
   /**
    * The full text of the name form.
@@ -72,4 +77,34 @@ public class NameForm {
   public void setParts(List<NamePart> parts) {
     this.parts = parts;
   }
+
+  /**
+   * The cultural context of the name form.
+   *
+   * @return The cultural context or locale of the name form.
+   */
+  @XmlAttribute
+  public String getLocale() {
+    return locale;
+  }
+
+  /**
+   * The cultural context of the name form.
+   *
+   * @param locale The cultural context or locale of the name form.
+   */
+  public void setLocale(String locale) {
+    this.locale = locale;
+  }
+
+  /**
+   * The <code>LocaleBuilder</code> object for accessing the parts of the cultural context or locale
+   * @return
+   */
+  @XmlTransient
+  @JsonIgnore
+  public LocaleBuilder parseLocale() {
+    return new LocaleBuilder().setByLanguageTag(locale);
+  }
+
 }
