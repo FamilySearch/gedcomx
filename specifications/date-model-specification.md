@@ -208,7 +208,7 @@ NOTE 1: If no recurrence count is provided, the recurrences are considered *perp
 An *approximate date* is represented by providing:
 
 * date, and
-* an indicator that the date as *approximate*
+* an indicator that the date is *approximate*
 
 
 # 5. Calendaring System
@@ -325,7 +325,7 @@ meaning, are literal, and represent the following units:
 
 The format for a complete duration shall be:
 ```
-PnnnnYnnMnnDTTnnHnnMnnS
+PnnnnYnnMnnDTnnHnnMnnS
 ```
 
 ### 6.3.2 Description
@@ -360,13 +360,13 @@ P1000Y18M72DT56H10M1S | 1000 years 18 months 72 days 56 hours 10 minutes 1 secon
 The format for a complete `date range` shall either use 2 `simple dates`, separated by a [/]:
 
 ```
-±YYYY-MM-DDThh:mm:ss[±hh:mm|Z]/±YYYY-MM-DDThh:mm:ss[±hh:mm|Z]
+±YYYY-MM-DDThh:mm:ss[±hh[:mm]|Z]/±YYYY-MM-DDThh:mm:ss[±hh[:mm]|Z]
 ```
 
 or a `simple date` and a `duration`, separated by a [/]:
 
 ```
-±YYYY-MM-DDThh:mm:ss[±hh[:mm]|Z]/PnnnnYnnMnnDTTnnHnnMnnS
+±YYYY-MM-DDThh:mm:ss[±hh[:mm]|Z]/PnnnnYnnMnnDTnnHnnMnnS
 ```
 
 In either format, the presence of the slash character [/] indicates the date is a `date range`.
@@ -434,7 +434,7 @@ R[n]/±YYYY-MM-DDThh:mm:ss[±hh[:mm]|Z]/±YYYY-MM-DDThh:mm:ss[±hh[:mm]|Z]
 or
 
 ```
-R[n]/±YYYY-MM-DDThh:mm:ss[±hh[:mm]|Z]/PnnnnYnnMnnDTTnnHnnMnnS
+R[n]/±YYYY-MM-DDThh:mm:ss[±hh[:mm]|Z]/PnnnnYnnMnnDTnnHnnMnnS
 ```
 
 ### 6.6.2 Description
