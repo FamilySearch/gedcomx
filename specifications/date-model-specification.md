@@ -464,9 +464,9 @@ A-1400 | year | about 1401 BCE
 A+1980-05-18T18:53Z | minutes | about 4:53 PM [UTC], May 18, 1980
 A+2014-08-19 | days | about August 19, 2014 CE
 
-# 7. URI Representation
+# 7. URI Type Representation
 
-TODO: Add the URI representation...
+ The URI defined for the GEDCOM X Date type is `http://gedcomx.org/v1/Date`
 
 # 8. Implementation Hints and Observations
 
