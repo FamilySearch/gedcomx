@@ -30,6 +30,15 @@ This specification is heavily based on [ISO 8601](http://en.wikipedia.org/wiki/I
 Each of these specifications has limitations or omissions that do not fulfill [the requirements](https://github.com/FamilySearch/gedcomx/wiki/Date-Model)
 for genealogical date representations.
 
+## 1.1 Identifier and Version
+
+The identifier for this specification is:
+
+`http://gedcomx.org/date-model/v1`
+
+For convenience, the GEDCOM X date model may be referred to as "GEDCOM X Date 1.0".
+This specification uses "GEDCOM X Date" internally.
+
 # 2. Terms and Definitions
 
 For the purpose of this document, the following terms and definitions apply.
@@ -464,9 +473,25 @@ A-1400 | year | about 1401 BCE
 A+1980-05-18T18:53Z | minutes | about 4:53 PM [UTC], May 18, 1980
 A+2014-08-19 | days | about August 19, 2014 CE
 
-# 7. URI Type Representation
+# 7. URI Representation
 
- The URI defined for the GEDCOM X Date type is `http://gedcomx.org/v1/Date`
+A GEDCOM X Date MAY be identified using a Uniform Resource Identifier (*URI*) as defined by [RFC-2396](http://www.ietf.org/rfc/rfc2396.txt). A URI
+that identfies a GEDCOM X Date SHALL have the format:
+
+```
+gedcomx-date:<GEDCOM X Date value>
+```
+
+NOTE 1: The URI scheme is `gedcomx-date` and the scheme-specific part is the representation of the date as defined
+by this specification.
+
+## 7.1 Examples
+
+example type | description | applicable URI
+-------------|-------------|----
+simple date | Sept 14, 1863 | `gedcomx-date:+1863-09-14`
+approx. date | about 1742 | `gedcomx-date:A+1742`
+date range | between October 1834 and May 1835 | `gedcomx-date:R+1834-10/+1835-05`
 
 # 8. Implementation Hints and Observations
 

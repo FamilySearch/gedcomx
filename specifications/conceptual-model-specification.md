@@ -190,24 +190,19 @@ The identifier for the "FormalValue" data type is:
 name  | description | data type
 ------|-------------|----------
 value | A string supplying the value of the formal value. If the value has been standardized, a datatype will be supplied to identify how the string is to be parsed. | string
-datatype  | URI identifying the way the value is to be processed according to a specific standard. | [URI](#uri)
 resource | URI identifying the resource to which the formal value has been standardized. | [URI](#uri)
-
-If a value is supplied for the `datatype` property, a value SHALL NOT be supplied for the `resource` property.
-If a value is supplied for the `resource` property, a value SHALL NOT be supplied for the `datatype` property.
 
 ### examples
 
 * A user supplies the text "jan 1 1890" as the value of a genealogical date. If a process
   (either automated or by user-interaction) normalizes this text to "1 January 1890", the formal
   value containing the results of this normalization will have a value of "1 January 1890"
-  and no values specified for either the datatype or the resource.
+  and no value specified for the resource.
 * A user supplies the text "jan 1 1890" as the value of a genealogical date. If a process
   (either automated or by user-interaction) standardizes this text to a specific date such as
   midnight UTC of the first day of January of the year 1890 A.D. of the Gregorian calendar,
-  the formal value containing the results of this standardization might have a value of
-  "1890-01-01T00:00:00Z" and a datatype of "http://www.w3.org/2001/XMLSchema#dateTime" and no value
-  specified for the resource.
+  the formal value containing the results of this standardization might have a specified
+  resource value of "gedcomx-date:+1890-01-01T00:00:00Z".
 * A user supplies "boston, MA" as the value for a genealogical place. If a process (either
   automated or by user-interaction) standardizes this place to a unique resource (e.g. the
   actual city know today as Boston, Massachusetts) identified by a specific URI (e.g.
@@ -258,7 +253,7 @@ The identifier for the "TextValue" data type is:
 name  | description | data type
 ------|-------------|----------
 lang | The language of the literal value. | `http://www.w3.org/XML/1998/namespace#lang`
-value | The literal value. A datatype MAY be supplied to identify how the string is to be parsed. | string
+value | The literal value. | string
 
 
 
@@ -1042,15 +1037,6 @@ name | description | data type
 -----|-------------|----------
 original | The original value of the date as supplied by the contributor. | string
 formal | The formal value of the date. | [`http://gedcomx.org/FormalValue`](#formal-value)
-
-### known date formats
-
-The following date formats are recognized by GEDCOM X:
-
-URI | description
-----|-------------
-`http://gedcomx.org/GEDCOM_5_5` | The date format specified by the GEDCOM 5.5 specification.
-`iso:8601` | The date format specified by [ISO 8601](http://en.wikipedia.org/wiki/ISO_8601).
 
 
 <a id="conclusion-place"/>
