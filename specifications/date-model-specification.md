@@ -20,14 +20,13 @@ http://creativecommons.org/licenses/by-sa/3.0/
 
 The GEDCOM X Date specification defines a way of representing dates associated with genealogical data.
 
-This specification is heavliy based on the ISO 8601 standard, W3C's *profile* of ISO 8601, and the
-Dublin Core Date and Time Requirements \[DCMI\]. Each of these standards has limitations or omissions that
-do not fulfill the requirements of the GEDCOM X Date Model.
+This specification is heavliy based on the [ISO 8601](http://dotat.at/tmp/ISO_8601-2004_E.pdf)
+standard, the [RFC 3339](http://tools.ietf.org/html/rfc3339) proposal, and [W3C's *profile*]
+(http://www.w3.org/TR/NOTE-datetime) of ISO 8601. Concepts from the
+[Dublin Core Date and Time Requirements Wiki](http://www.w3.org/TR/NOTE-datetime) were also leveraged.
 
-This specification is heavily based on [ISO 8601](http://en.wikipedia.org/wiki/ISO_8601),
-[RFC 3339](http://tools.ietf.org/html/rfc3339), and the
-[Dublin Core Date and Time Representation Requirements](http://dublincore.org/datewiki/DateRequirements).
-Each of these specifications has limitations or omissions that do not fulfill [the requirements](https://github.com/FamilySearch/gedcomx/wiki/Date-Model)
+Each of these standards or proposals individually has limitations or omissions that do not
+fulfill the [requirements](https://github.com/FamilySearch/gedcomx/wiki/Date-Model)
 for genealogical date representations.
 
 ## 1.1 Identifier and Version
@@ -41,133 +40,81 @@ This specification uses "GEDCOM X Date" internally.
 
 # 2. Terms and Definitions
 
-For the purpose of this document, the following terms and definitions apply.
+For the purpose of this document, the following terms and definitions apply *in addition to
+those defined by [ISO 8601](http://dotat.at/tmp/ISO_8601-2004_E.pdf)*.
 
-## 2.1 Basic Concepts
+## 2.1 Basic Terms
 
-### 2.1.1 time axis
+### 2.1.1 calendar date
 
-mathematical representation of the succession in time of instantaneous events along a unique axis
+Portion of a date representing a particular day by specifying its calendar year, its calendar
+month and the ordinal number of the day within its calendar month.
 
-\[IEC 60050-111]
+### 2.1.2 time of day
 
-### 2.1.2 instant
-
-point on the time axis
-
-\[IEC 60050-111]
-
-### 2.1.3 time interval
-
-part of the time axis limited by *two* instants
-
-\[IEC 60050-111]
-
-### 2.1.4 time scale
-
-system of ordered marks which can be attributed to instants on the time axis, one instant being
-chosen as the origin
-
-\[IEC 60050-111]
-
-NOTE 1: A time scale may use various units of measurement in combination to specify the instant or interval
-and its precision. Such units might include calendar year, calendar month, calendar day, hour,
-minutes, and second.
-
-### 2.1.5 date
-
-mark attributed to an instant by means of a specified time scale
-
-\[IEC 60050-111]
-
-NOTE 1: In ISO 8601:2004 this definition corresponds with the term "time point".
-
-### 2.1.6 duration
-
-non-negative, quantitative value expressing the difference between the final instant and the initial instant of
-a time interval
-
-\[IEC 60050-111]
-
-### 2.1.7 calendar date
-
-date representing a particular calendar day by its calendar year, its calendar month and its ordinal number
-within its calendar month
-
-### 2.1.8 time of day
-
-portion remaining from a date if the calendar date portion is ignored, represented in
-units of *hours*, *minutes*, and *seconds*
+Portion remaining from a date if the calendar date portion is ignored, represented in
+units of *hours*, *minutes*, and *seconds*.
 
 NOTE 1: By implication, time of day must be less than 24 hours
 
-### 2.1.9 Coordinated Universal Time, or UTC
-
-time scale which forms a basis of a coordinated radio dissemination of a time of day signal,
-independent of the geographical location
-
-\[IEC 60050-713]
-
-### 2.1.10 local time
-
-time scale relative to the geographical location
-
-\[IEC 60050-713]
-
-### 2.1.11 recurring time interval
-
-series of consecutive time intervals of the same duration
-
-## 2.2 Terms
-
-### 2.2.1 CE
+### 2.1.3 CE
 
 Abbreviation of *Common Era*, *Current Era*, or *Christian Era*. Equivalent to *Anno Domini*, or *AD*
 
-### 2.2.2 BCE
+### 2.1.4 BCE
 
 Abbreviation for *Before the Common Era*, *Before the Current Era*, or *Before the Christian Era*.
 The designation *BCE* is to *CE*, as *BC* is to *AD*
 
 NOTE 1: The year preceding **1 CE** is identified as **1 BCE**. Neither designation uses a year zero.
 
-### 2.2.3 Gregorian calendar
+### 2.1.5 Gregorian calendar
 
 A calendar introduced in 1582 by Pope Gregory XIII that enhanced the Julian calendar with improved leap year rules.
 
 NOTE 1: The **proleptic** *Gregorian calendar* includes dates prior to 1582 using this calendaring system.
 
-### 2.2.4 simple date
+### 2.1.6 simple date
 
-A date representing either a calendar date, possibly including a time of day. This term is used to clarify
-the distinction between *date* (2.1.5) and the aggregation of *date* (2.1.5), *date range* (2.2.5),
-*open-ended date range* (2.2.6), and *approximate date* (2.2.7).
+A date representing a single calendar date, and optionally including a time of day. This term is used
+to clarify the distinction between a generic *date*  and the aggregation of the Gedcom X Date types
+of values (i.e. *simple date*), *date range*, *open-ended date range*, and *approximate date*).
 
-### 2.2.5 date range
+### 2.1.5 date range
 
-A time interval specified by a start date and an ending date. Equivalent to a start date and a duration.
+A time interval specified by a starting simple date and an ending simple date. Equivalent to a
+starting simple date and a duration.
 
-### 2.2.6 open-ended date range
+### 2.1.6 open-ended date range
 
-A date range in which either the beginning date or ending date are unspecified, but not both.
+A date range in which either the beginning simple date or ending simple date are unspecified, but not both.
 Examples are *Before January 1863 CE*, or *After December 14, 1642 CE*
 
 NOTE 1: To differentiate, a date range where both beginning and ending instances are
-specified is a *closed time interval*.
+specified is referred to as a *closed date range*.
 
-### 2.2.7 approximate date
+### 2.1.7 recurring date
 
-An undetermined date range roughly centered on a specified simple date, with the time interval
-limited to be within one order of magnitude of the smallest specified unit of measurement.
+A series of discrete dates, separated by a specified and consistent duration.
+Examples:
+
+* 10 leap years beginning 1924 CE
+* at the same time every day for a week starting at June 18, 1937 CE 10 AM local time*
+* census is taken in the US every 10 years starting 1820 CE
+
+
+### 2.1.8 approximate date
+
+An undetermined date range roughly centered on a specified simple date, with the range
+limited to be within one order of magnitude of the smallest specified unit of measurement
+in the simple date.
 
 
 # 3. Notational Conventions
 
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-"SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
-document are to be interpreted as described in BCP 14,
-[RFC2119](http://tools.ietf.org/html/rfc2119), as scoped to those conformance
-targets.
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT",
+"RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in
+Best Common Practices #14, [RFC2119](http://tools.ietf.org/html/rfc2119).
 
 # 4. Scope
 
@@ -223,14 +170,14 @@ An *approximate date* is represented by providing:
 # 5. Calendaring System
 
 In order to provide consistency in interpretation of a date, a common calendaring and
-time system shall be used. Specifically:
+time system SHALL be used. Specifically:
 
-* Dates shall be specified using the proleptic Gregorian calendar.
+* Dates SHALL be specified using the proleptic Gregorian calendar.
 * The earliest representable date is January 1, 10000 BCE.
 * The latest representable date is December 31, 9999 CE.
-* The supported year range shall include
-    * The year prior to 1 CE (*Common Era* or AD) shall be represented as the year 0.
-    * Any year prior to year 0 shall be represented as a **negative** number.
+* The supported year range SHALL include
+    * The year prior to 1 CE (*Common Era* or AD) SHALL be represented as the year 0.
+    * Any year prior to year 0 SHALL be represented as a **negative** number.
 
 # 6. Format
 
@@ -264,7 +211,7 @@ In the format for a `simple date`, letters are used to represent digits of the d
 * [s] - digit used in the second
 * [z] - digit used in the local time offset
 * [±] represents a plus sign [+] if the following element's value is positive or zero, or a minus sign
-[-] if the following element's value is negative. Where specified, its presence is mandatory.
+[-] if the following element's value is negative. Where specified, its presence SHALL be mandatory.
 
 The format for a complete `simple date` shall be
 ```
@@ -272,39 +219,40 @@ The format for a complete `simple date` shall be
 ```
 
 ### 6.2.2 Description
-The *complete* `simple date` format specifies the format of all components and their order (largets to
-smallest units). Unit components may be **truncated**, right-to-left, to indicate precision
+The *complete* `simple date` format specifies the format of all components and their order (largest to
+smallest units). Unit components MAY be **truncated**, right-to-left, to indicate precision
 level of the date.
 
 #### 6.2.2.1 Calendar date part
 
 The `year` component MUST consist of a [+] or [-] and four digits, left-padded with zeros.
-Values may range from -9999 to +9999. The `year` component must always be present as part of a
+Valid values range from -9999 to +9999. The `year` component MUST always be present as part of a
 simple date, and is the maximal unit of precision.
 
-The `month` component must be 2 digits, with values of 01-12.
+The `month` component MUST be 2 digits when present, with values of 01-12.
 
-The `day of month` component must be 2 digits. The range of valid values is determined by the number
-of days in that proleptic Gregorian calendar month, with the first day of the month designated as 01.
+The `day of month` component MUST be 2 digits when present. The range of valid values is
+determined by the number of days in that proleptic Gregorian calendar month, with the
+first day of the month designated as 01.
 
 #### 6.2.2.2 Time of day part
 
-If any time component is present, the character [T] must precede the `time of day` part.
+If any time component is present, the character [T] MUST precede the `time of day` part.
 
-Hours are based on a 24-hour day, and shall have a value between 00 and 23. In the special case where the
-`minute` and `second` components have zero values, the value 24 shall be valid, representing midnight at
+Hours are based on a 24-hour day, and SHALL have a value between 00 and 23. In the special case where the
+`minute` and `second` components have zero values, the value 24 SHALL be valid, representing midnight at
 the end of the calendar day. Likewise, if all three components have the value 00, it represents midnight
 at the beginning of the specified calendar day.
  
-When any time of day is specified, there are three options for specifying its reference:
+When any time of day is specified, there are three options for specifying its geographical reference:
 
 * No specifier implies `local time`
 * [Z] specifies UTC
 * four digits (with a colon separator), preceded by a [+] or [-] indicates the shift of local time from UTC
    * This is usually referred to as the local *time zone*
-   * The [+] or [-] character is required
+   * The [+] or [-] character is REQUIRED
    * The first 2 digits represent the hours
-   * The last 2 digits represent minutes, and can be omitted if zero
+   * The last 2 digits represent minutes, and MAY be omitted if zero
 
 ### 6.2.3 Examples
 
@@ -321,7 +269,7 @@ example | description, textual equivalent
 
 ### 6.3.1 Representation
 
-The initial [P] designates the value is a `duration`. The part including time components shall be preceded by [T].
+The initial [P] designates the value is a `duration`. The part including time components SHALL be preceded by [T].
 
 In the format representations for a `duration`, a digit is represented by the letter [n]. Letters have specific
 meaning, are literal, and represent the following units:
@@ -332,7 +280,7 @@ meaning, are literal, and represent the following units:
 * [H] The number of `hours`
 * [S] The number of `seconds`
 
-The format for a complete duration shall be:
+The format for a complete duration SHALL be:
 ```
 PnnnnYnnMnnDTnnHnnMnnS
 ```
@@ -342,16 +290,16 @@ PnnnnYnnMnnDTnnHnnMnnS
 `Duration` can be represented by a combination of components/units with designators, with the following
 guidelines and restrictions:
 
-1. Each component is optional, and may be omitted.
-    1. However, if any time component is present, the [T] must precede the time of day part.
-2. All components present must appear in hierarchical order, largest to smallest units.
-3. Components are **not** required to be normalized
-    1. Any *non-normalized* unit may be represented with up to **four** digits.
+1. Each component is OPTIONAL, and MAY be omitted.
+    1. However, if any time component is present, the [T] MUST precede the time of day part.
+2. All components present MUST appear in hierarchical order, largest to smallest units.
+3. Components are **NOT** REQUIRED to be normalized
+    1. Any *non-normalized* unit MAY be represented with up to **four** digits.
     2. For example, the descriptive values **13 months** and **2 years, 52 days** are each acceptable.
 
 NOTE 1: For a duration, local time and UTC distinction is meaningless.
 
-NOTE 2: A GEDCOM X Date may *contain* a `duration`, but may not solely represent a `duration` itself.
+NOTE 2: A GEDCOM X Date MAY *contain* a `duration`, but SHALL NOT solely represent a `duration` itself.
  
 ### 6.3.3 Examples
 
@@ -366,7 +314,7 @@ P1000Y18M72DT56H10M1S | 1000 years 18 months 72 days 56 hours 10 minutes 1 secon
 
 ### 6.4.1 Representation
 
-The format for a complete `date range` shall either use 2 `simple dates`, separated by a [/]:
+The format for a complete `date range` SHALL either use 2 `simple dates`, separated by a [/]:
 
 ```
 ±YYYY-MM-DDThh:mm:ss[±hh[:mm]|Z]/±YYYY-MM-DDThh:mm:ss[±hh[:mm]|Z]
@@ -382,17 +330,17 @@ In either format, the presence of the slash character [/] indicates the date is 
 
 ### 6.4.1 Two Dates
 
-The `simple date` preceding the slash must be earlier than or equivalent to the `simple date`
+The `simple date` preceding the slash MUST be earlier than or equivalent to the `simple date`
 following the slash.
 
-NOTE 1: It is **not** a requirement that the precision of the two `simple dates` are the same.
+NOTE 1: It is **NOT** REQUIRED that the precision of the two `simple dates` are the same.
 
 ### 6.4.2 Date and Duration
 
-The instance referenced by the calculated end date must be earlier or equivalent to
+The instance referenced by the calculated end date MUST be earlier or equivalent to
 the maximum `simple date`: +9999-12-31T23:59:59
 
-NOTE 1: It is **not** required that the precision of the `simple date` and the `duration` be the same.
+NOTE 1: It is **NOT** REQUIRED that the precision of the `simple date` and the `duration` be the same.
 The precision of the equivalent final date is the coarser precision of the `simple date` and the `duration`.
 
 ### 6.4.3 Examples
@@ -407,7 +355,7 @@ example | description, textual equivalent
 
 ### 6.5.1 Representation
 
-The format for an `open-ended date range` shall be a single `simple date` preceded or followed by
+The format for an `open-ended date range` SHALL be a single `simple date` preceded or followed by
 a slash character [/]:
 
 ```
@@ -434,7 +382,7 @@ example | description, textual equivalent
 
 ### 6.6.1 Representation
 
-The format for a `recurring date` shall be either:
+The format for a `recurring date` SHALL be either:
 
 ```
 R[n]/±YYYY-MM-DDThh:mm:ss[±hh[:mm]|Z]/±YYYY-MM-DDThh:mm:ss[±hh[:mm]|Z]
@@ -448,9 +396,9 @@ R[n]/±YYYY-MM-DDThh:mm:ss[±hh[:mm]|Z]/PnnnnYnnMnnDTnnHnnMnnS
 
 ### 6.6.2 Description
 
-The recurring date shall be a `date range` prepended with an [R], an optional recurrence count, and a slash [/].
+The recurring date SHALL be a `date range` prepended with an [R], an OPTIONAL recurrence count, and a slash [/].
 
-NOTE 1: A recurring date must reference a *closed* `date range`
+NOTE 1: A recurring date MUST reference a *starting date* in the `date range`
 
 ### 6.6.3 Examples
 
@@ -462,7 +410,7 @@ R100/+1830/+1840 | the US census occurs every 10 years starting in 1830, for 100
 
 ## 6.7 Approximate Date
 
-The format for an `approximate date` shall be a `simple date` prepended by the character [A].
+The format for an `approximate date` SHALL be a `simple date` prepended by the character [A].
 
 ### 6.7.1 Examples
 
@@ -519,6 +467,6 @@ The following summary may be beneficial in parsing and composing GEDCOM X Dates 
 # 9. Outstanding Concerns and Questions
 
 1. Does this model sufficiently allow representation of the cyclic years of the Chinese nominal year?
- (I.e., every 60 years is named the same.)
+ (I.e. every 60 years is named the same.)
 
 2. Is the concept of a *recurring date* sufficiently useful to provide this functionality?
