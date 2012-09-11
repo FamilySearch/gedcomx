@@ -34,6 +34,7 @@ This specification uses "GEDCOM X" internally.
 
 ## 1.2 Notational Conventions
 
+### 1.2.1 Data Types
 This specification uses the term "data type" to refer to a formal description of
 a data structure, including the properties that define valid instances of the
 data type. For example, information about a person might be contained within a 
@@ -54,12 +55,23 @@ Data types are defined by the following sections:
 3. The *properties* of the data type, which define the information the data type
    encapsulates.
 
+<a id="formal-values" />
+
+### 1.2.2 Formal Values
+A property may be identified as a "formal value". The *formal value* supplies a formal
+interpretation of a value that has been supplied by a user:
+
+1. If the value has been reformatted for the purpose of easier processing (e.g. for
+display purposes), it is said to be "normalized".
+2. If the value has been resolved to a discrete, machine-identifiable value based on
+a specific standard, it is said to be "standardized".
+
+### 1.2.3 Keywords
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
 "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
 document are to be interpreted as described in BCP 14, 
 [RFC2119](http://tools.ietf.org/html/rfc2119), as scoped to those conformance 
 targets.
-
 
 
 # 2. Common Data Types
@@ -708,7 +720,7 @@ type | URI identifying the type of the fact. | [URI](#uri) - MUST resolve to a f
 date | The date of applicability of the fact. | [`http://gedcomx.org/v1/Date`](#conclusion-date)
 place | The place of applicability of the fact. | [`http://gedcomx.org/v1/Place`](#conclusion-place)
 original | The value of the fact as supplied by the contributor. | string
-formal | The formal value of the fact. | string - MAY be in the form of a [URI](#uri)
+formal | The standardized and/or normalized [formal value](#formal-values) of the fact. | string - MAY be in the form of a [URI](#uri)
 
 <a id="known-fact-types"/>
 
@@ -990,7 +1002,7 @@ The identifier for the `Date` data type is:
 name | description | data type
 -----|-------------|----------
 original | The original value of the date as supplied by the contributor. | string
-formal | The formal value of the date, formatted per GEDCOM X Date Format specification. | string
+formal | The standardized [formal value](#formal-values) of the date, formatted per GEDCOM X Date Format specification. | string
 
 
 <a id="conclusion-place"/>
@@ -1010,7 +1022,7 @@ The identifier for the `Place` data type is:
 name | description | data type
 -----|-------------|----------
 original | The original value of the place as supplied by the contributor. | string
-formal | The formal value of the place. | string
+formal | The standardized, normalized [formal value](#formal-values) of the place. | string
 
 
 <a id="name-part"/>
