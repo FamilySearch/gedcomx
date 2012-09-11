@@ -328,6 +328,8 @@ or a `simple date` and a `duration`, separated by a [/]:
 
 In either format, the presence of the slash character [/] indicates the date is a `date range`.
 
+<a id="range-two-dates" />
+
 ### 6.4.1 Two Dates
 
 The `simple date` preceding the slash MUST be earlier than or equivalent to the `simple date`
@@ -355,14 +357,16 @@ example | description, textual equivalent
 
 ### 6.5.1 Representation
 
-The format for an `open-ended date range` SHALL be a single `simple date` preceded or followed by
-a slash character [/]:
+An `open-ended date range` is an extension of the [two-date `date range` format](#range-two-dates), where
+either the starting date or ending date are left blank.
+
+A leading slash character [/] SHALL define a date range *before* the specified date:
 
 ```
 /±YYYY-MM-DDThh:mm:ss[±hh[:mm]|Z]
 ```
 
-or
+A trainling slash character [/] SHALL define a date range *after* the specified date:
 
 ```
 ±YYYY-MM-DDThh:mm:ss[±hh[:mm]|Z]/
