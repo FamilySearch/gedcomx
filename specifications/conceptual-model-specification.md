@@ -166,55 +166,9 @@ URI | description
 todo:
 
 
-<a id="formal-value"/>
-
-## 2.4 The "FormalValue" Data Type
-
-The `FormalValue` data type defines the data structure used to supply a normalized and/or
-standardized value. The formal value is used to supply a formal interpretation of a
-value that has been supplied by a user. If the value has been reformatted for the purpose of easier
-processing (e.g. for display purposes), it is said to be "normalized". If the value has
-been resolved to a discrete, machine-identifiable value based on a specific standard, it is
-said to be "standardized".
-
-The `FormalValue` data type does NOT support extension properties (see [Extension Properties](#extension-properties)).
-
-### identifier
-
-The identifier for the "FormalValue" data type is:
-
-`http://gedcomx.org/v1/FormalValue`
-
-### properties
-
-name  | description | data type
-------|-------------|----------
-value | A string supplying the value of the formal value. If the value has been standardized, a datatype will be supplied to identify how the string is to be parsed. | string
-resource | URI identifying the resource to which the formal value has been standardized. | [URI](#uri)
-
-### examples
-
-* A user supplies the text "jan 1 1890" as the value of a genealogical date. If a process
-  (either automated or by user-interaction) normalizes this text to "1 January 1890", the formal
-  value containing the results of this normalization will have a value of "1 January 1890"
-  and no value specified for the resource.
-* A user supplies the text "jan 1 1890" as the value of a genealogical date. If a process
-  (either automated or by user-interaction) standardizes this text to a specific date such as
-  midnight UTC of the first day of January of the year 1890 A.D. of the Gregorian calendar,
-  the formal value containing the results of this standardization might have a specified
-  resource value of "gedcomx-date:+1890-01-01T00:00:00Z".
-* A user supplies "boston, MA" as the value for a genealogical place. If a process (either
-  automated or by user-interaction) standardizes this place to a unique resource (e.g. the
-  actual city know today as Boston, Massachusetts) identified by a specific URI (e.g.
-  "http://places.com/12345"), the formal value containing the results of this standardization
-  will have "http://places.com/12345" as the value of its "resource" property. The formal value
-  MAY also supply a value for the "value" property that contains the results of normalizing
-  the user-supplied text (e.g. "Boston, Suffolk, Massachusetts, United States").
-
-
 <a id="note"/>
 
-## 2.5 The "Note" Data Type
+## 2.4 The "Note" Data Type
 
 The `Note` data type defines a note that was contributed from genealogical research.
 
@@ -236,7 +190,7 @@ attribution | The attribution of this note. | [`http://gedcomx.org/Attribution`]
 
 <a id="text-value"/>
 
-## 2.7 The "TextValue" Data Type
+## 2.5 The "TextValue" Data Type
 
 The `TextValue` data type defines a literal value.
 
@@ -754,7 +708,7 @@ type | URI identifying the type of the fact. | [URI](#uri) - MUST resolve to a f
 date | The date of applicability of the fact. | [`http://gedcomx.org/v1/Date`](#conclusion-date)
 place | The place of applicability of the fact. | [`http://gedcomx.org/v1/Place`](#conclusion-place)
 original | The value of the fact as supplied by the contributor. | string
-formal | The formal value of the fact. | [`http://gedcomx.org/v1/FormalValue`](#formal-value)
+formal | The formal value of the fact. | string - MAY be in the form of a [URI](#uri)
 
 <a id="known-fact-types"/>
 
@@ -1036,7 +990,7 @@ The identifier for the `Date` data type is:
 name | description | data type
 -----|-------------|----------
 original | The original value of the date as supplied by the contributor. | string
-formal | The formal value of the date. | [`http://gedcomx.org/FormalValue`](#formal-value)
+formal | The formal value of the date, formatted per GEDCOM X Date Format specification. | string
 
 
 <a id="conclusion-place"/>
@@ -1056,7 +1010,7 @@ The identifier for the `Place` data type is:
 name | description | data type
 -----|-------------|----------
 original | The original value of the place as supplied by the contributor. | string
-formal | The formal value of the place. | [`http://gedcomx.org/FormalValue`](#formal-value)
+formal | The formal value of the place. | string
 
 
 <a id="name-part"/>
