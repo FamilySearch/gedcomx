@@ -80,17 +80,11 @@ public class PersonRecipesTest extends RecipeTest {
     fact.getAttribution().getContributor().setResource(URI.create("https://familysearch.org/platform/contributors/BCD-FGHJ"));
     fact.setDate(new Date());
     fact.getDate().setOriginal("February 22, 1732");
-    FormalValue normalized = new FormalValue();
-    normalized.setText("1732-02-22");
-    normalized.setDatatype(URI.create("http://www.w3.org/2001/XMLSchema#date"));
-    fact.getDate().setFormal(normalized);
+    fact.getDate().setFormal("+1732-02-22");
 
     fact.setPlace(new Place());
     fact.getPlace().setOriginal("Pope's Creek, Westmoreland, Virginia");
-    normalized = new FormalValue();
-    normalized.setText("Pope's Creek, Westmoreland, Virginia");
-    normalized.setResource(URI.create("https://familysearch.org/platform/places/12345"));
-    fact.getPlace().setFormal(normalized);
+    fact.getPlace().setResource(URI.create("https://familysearch.org/platform/places/12345"));
 
     person.addFact(fact);
 
@@ -103,17 +97,12 @@ public class PersonRecipesTest extends RecipeTest {
     fact.getAttribution().getContributor().setResource(URI.create("https://familysearch.org/platform/contributors/KLM-NPQR"));
     fact.setDate(new Date());
     fact.getDate().setOriginal("December 14, 1799");
-    normalized = new FormalValue();
-    normalized.setText("1799-12-14T22:00:00");
-    normalized.setDatatype(URI.create("http://www.w3.org/2001/XMLSchema#dateTime"));
-    fact.getDate().setFormal(normalized);
+    fact.getDate().setFormal("+1799-12-14T22:00:00");
 
     fact.setPlace(new Place());
     fact.getPlace().setOriginal("Mount Vernon, Virginia");
-    normalized = new FormalValue();
-    normalized.setText("Mount Vernon, Fairfax County, Virginia");
-    normalized.setResource(URI.create("https://familysearch.org/platform/places/67890"));
-    fact.getPlace().setFormal(normalized);
+    fact.getPlace().setNormal("Mount Vernon, Fairfax County, Virginia");
+    fact.getPlace().setResource(URI.create("https://familysearch.org/platform/places/67890"));
 
     person.addFact(fact);
 

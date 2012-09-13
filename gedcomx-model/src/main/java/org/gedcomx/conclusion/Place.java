@@ -15,6 +15,7 @@
  */
 package org.gedcomx.conclusion;
 
+import org.gedcomx.common.URI;
 import org.gedcomx.rt.RDFSubClassOf;
 
 import javax.xml.bind.annotation.XmlType;
@@ -24,19 +25,18 @@ import javax.xml.bind.annotation.XmlType;
  *
  * @author Ryan Heaton
  */
-@XmlType ( name = "Place", propOrder = { "original", "formal" } )
-@RDFSubClassOf ( "http://purl.org/dc/terms/Location" )
-public class Place implements Formalizeable {
+@XmlType ( name = "Place", propOrder = { "original", "normal", "resource" } )
+public class Place {
 
   private String original;
-  private FormalValue formal;
+  private String normal;
+  private URI resource;
 
   /**
    * The original text as supplied by the user.
    *
    * @return The original text as supplied by the user.
    */
-  @Override
   public String getOriginal() {
     return original;
   }
@@ -46,33 +46,45 @@ public class Place implements Formalizeable {
    *
    * @param original The original value as supplied by the user.
    */
-  @Override
   public void setOriginal(String original) {
     this.original = original;
   }
 
   /**
-   * The formal value.
+   * The standardized and/or normalized resource value.
    *
-   * @return The formal value.
+   * @return The resource value.
    */
-  @Override
-  public FormalValue getFormal() {
-    return formal;
+  public URI getResource() {
+    return resource;
   }
 
   /**
-   * The formal value.
+   * The standardized and/or normalized resource value.
    *
-   * @param formal The formal value.
+   * @param resource The resource value.
    */
-  @Override
-  public void setFormal(FormalValue formal) {
-    this.formal = formal;
+  public void setResource(URI resource) {
+    this.resource = resource;
   }
 
-  @Override
+  /**
+   * The normalized value of the place
+   * @return the normalized value
+   */
+  public String getNormal() {
+    return normal;
+  }
+
+  /**
+   * The normalized value of the place
+   * @param normal the normalized value
+   */
+  public void setNormal(String normal) {
+    this.normal = normal;
+  }
+
   public String toString() {
-    return "Place{" + "original='" + original + '\'' + ", formal=" + formal + '}';
+    return "Place{" + "original='" + original + '\'' + "normal='" + normal + '\'' + ", resource=" + resource + '}';
   }
 }

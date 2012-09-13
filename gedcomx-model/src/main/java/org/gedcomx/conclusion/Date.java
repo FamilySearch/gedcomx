@@ -25,49 +25,44 @@ import javax.xml.bind.annotation.XmlType;
  */
 @ClientName ("DateInfo")
 @XmlType ( name = "Date", propOrder = { "original", "formal" })
-@RDFSubClassOf ( "http://purl.org/dc/terms/PeriodOfTime" )
-public class Date implements Formalizeable {
+public class Date {
 
   private String original;
-  private FormalValue formal;
+  private String formal;
 
   /**
    * The original text as supplied by the user.
    *
    * @return The original text as supplied by the user.
    */
-  @Override
   public String getOriginal() {
     return original;
   }
 
   /**
-   * The original value as supplied by the user.
+   * The original text as supplied by the user.
    *
-   * @param original The original value as supplied by the user.
+   * @param original The original text as supplied by the user.
    */
-  @Override
   public void setOriginal(String original) {
     this.original = original;
   }
 
   /**
-   * The formal value.
+   * The standardized and/or normalized formal value.
    *
    * @return The formal value.
    */
-  @Override
-  public FormalValue getFormal() {
+  public String getFormal() {
     return formal;
   }
 
   /**
-   * The formal value.
+   * The standardized and/or normalized formal value.
    *
    * @param formal The formal value.
    */
-  @Override
-  public void setFormal(FormalValue formal) {
+  public void setFormal(String formal) {
     this.formal = formal;
   }
 

@@ -1022,7 +1022,8 @@ The identifier for the `Place` data type is:
 name | description | data type
 -----|-------------|----------
 original | The original value of the place as supplied by the contributor. | string
-formal | The standardized, normalized [formal value](#formal-values) of the place. | string
+normal | The normalized value of the place. | string
+resource | The standardized, normalized [formal value](#formal-values) of the place. | string
 
 
 <a id="name-part"/>
