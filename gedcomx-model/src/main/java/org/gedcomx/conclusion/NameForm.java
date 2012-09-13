@@ -101,8 +101,9 @@ public class NameForm {
    * The <code>LocaleBuilder</code> object for accessing the parts of the cultural context or locale
    * @return
    */
-  @XmlTransient
-  @JsonIgnore
+// TODO - These JAXB annotations will not work on this "non-JAXB" property. OK - whatever...
+//  @XmlTransient
+//  @JsonIgnore
   public LocaleBuilder parseLocale() {
     return new LocaleBuilder().setByLanguageTag(locale);
   }
