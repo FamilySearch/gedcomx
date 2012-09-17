@@ -16,13 +16,10 @@
 package org.gedcomx.conclusion;
 
 import org.codehaus.enunciate.json.JsonName;
-import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
-import org.gedcomx.rt.LocaleBuilder;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 import java.util.List;
 
@@ -96,16 +93,4 @@ public class NameForm {
   public void setLocale(String locale) {
     this.locale = locale;
   }
-
-  /**
-   * The <code>LocaleBuilder</code> object for accessing the parts of the cultural context or locale
-   * @return
-   */
-// TODO - These JAXB annotations will not work on this "non-JAXB" property. OK - whatever...
-//  @XmlTransient
-//  @JsonIgnore
-  public LocaleBuilder parseLocale() {
-    return new LocaleBuilder().setByLanguageTag(locale);
-  }
-
 }
