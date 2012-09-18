@@ -71,14 +71,20 @@ reference by the other data type definitions.
 
 <a id="uri"/>
 
-## 2.1 The URI
+## 2.1 The URI Reference
 
 The Uniform Resource Identifier ("URI") is fundamental to the GEDCOM X conceptual model.
 The URI is used to identify specific resources, such as persons, relationships, and 
 sources. The URI is also used to identify the data structures that describe those resources
 and even the data types that define those data structures. The URI is specified by
-[RFC3986](http://tools.ietf.org/html/rfc3986).
+[RFC 3986](http://tools.ietf.org/html/rfc3986).
 
+GEDCOM X entities use the URI to reference other entities. For example, a GEDCOM X `Relationship`
+identifies a person in the relationship by referencing a URI to the person. When a property
+(such as the `person1` property of `Relationship`) is of type `URI`, the value of the property
+is interpreted as a "URI Reference" as defined by [RFC 3986, section 4](http://tools.ietf.org/html/rfc3986#section-4).
+This specification uses the term "URI" to refer to both a "URI" and a "URI Reference" as
+defined by [RFC 3986](http://tools.ietf.org/html/rfc3986).
 
 <a id="identifier-type"/>
 
