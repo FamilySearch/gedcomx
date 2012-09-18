@@ -41,6 +41,7 @@ public class SourceDescription implements Attributable, HasNotes, ReferencesSour
   private URI about;
   private ResourceReference mediator;
   private List<SourceReference> sources;
+  private List<ResourceReference> extractedConclusions;
   private SourceReference componentOf;
   private String displayName;
   private List<TextValue> alternateNames;
@@ -154,6 +155,28 @@ public class SourceDescription implements Attributable, HasNotes, ReferencesSour
   @JsonProperty ("sources")
   public void setSources(List<SourceReference> sources) {
     this.sources = sources;
+  }
+
+  /**
+   * References to any conclusions extracted from the source description, analyzed and evaluated atomically within on context of the source..
+   *
+   * @return References to any conclusions extracted from the source description, analyzed and evaluated atomically within on context of the source..
+   */
+  @XmlElement (name="extractedConclusion")
+  @JsonProperty ("extractedConclusions")
+  @JsonName ("extractedConclusions")
+  public List<ResourceReference> getExtractedConclusions() {
+    return extractedConclusions;
+  }
+
+  /**
+   * References to any conclusions extracted from the source description, analyzed and evaluated atomically within on context of the source..
+   *
+   * @param extractedConclusions References to any conclusions extracted from the source description, analyzed and evaluated atomically within on context of the source..
+   */
+  @JsonProperty ("extractedConclusions")
+  public void setExtractedConclusions(List<ResourceReference> extractedConclusions) {
+    this.extractedConclusions = extractedConclusions;
   }
 
   /**
