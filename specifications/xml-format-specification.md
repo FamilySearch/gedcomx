@@ -325,7 +325,6 @@ The `gx:SourceDescription` XML type is used to (de)serialize the
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
-id | A local, transient identifier for the resource being described. | id (attribute) | xsd:string
 citation | The citation for this source | gx:citation | [`gx:SourceCitation`](#source-citation)
 about | A uniform resource identifier (URI) for the resource being described. | about (attribute) | [anyURI](#uri)
 mediator | A reference to the entity that mediates access to the described source. | gx:mediator | [`gx:ResourceReference`](#resource-reference)
@@ -517,7 +516,6 @@ data type.
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
-id | A local, transient identifier for the resource being described. | id (attribute) | xsd:string
 identifiers | Identifiers for the agent. | gx:identifier | [`gx:Identifier`](#identifier-type)
 name | The name of the person or organization. | gx:name | xsd:string
 homepage | The homepage of the person or organization. | gx:homepage | [`gx:ResourceReference`](#resource-reference)
@@ -566,7 +564,6 @@ data type.
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
-id | A local, transient identifier for the resource being described. | id (attribute) | xsd:string
 sources | A list of references to the sources of the conclusion. | gx:source | [`gx:SourceReference`](#source-reference)
 notes | A list of notes about this conclusion. | gx:note | [`gx:Note`](#note)
 attribution | The attribution of this conclusion. | gx:attribution | [`gx:Attribution`](#attribution)
@@ -985,7 +982,6 @@ parts | The parts of the name form. | gx:part | [`gx:NamePart`](#name-part)
 ```
 
 
-
 # 6. XML Elements
 
 XML types are not enough to provide an XML serialization format for a data model. XML requires elements to be defined
@@ -1010,6 +1006,15 @@ gx:transcriptionDocument | [`gx:TranscriptionDocument`](#transcription-document)
 gx:translationDocument | [`gx:TranslationDocument`](#translation-document)
 gx:analysisDocument | [`gx:AnalysisDocument`](#analysis-document)
 
-# 7. Miscellaneous To Do
+
+7. Fragment Identifiers
+
+Fragment identifiers are used to identify specific elements (i.e. "fragments") within an XML document. The GEDCOM X
+XML serialization format specifies the use of the "id" attribute as the fragment identifier for any element in
+a given XML document.
+
+For more information about fragment identifiers, see [RFC 3986, Section 3.5](http://tools.ietf.org/html/rfc3986#section-3.5).
+
+# 8. Miscellaneous To Do
 
 todo: provide the normative XML schema (inline)?

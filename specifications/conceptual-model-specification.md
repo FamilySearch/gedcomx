@@ -287,7 +287,6 @@ The identifier for the "SourceDescription" data type is:
 
 name | description | data type
 -----|-------------|----------
-id | A local, transient identifier for the resource being described. Note that as a local, transient identifier, the id may only be used to resolve references to the resource within a well-defined scope (such as a single web service request or a single file). | string
 citation | The citation for this source. | [`http://gedcomx.org/v1/SourceCitation`](#source-citation) - REQUIRED
 about | A uniform resource identifier (URI) for the resource being described. | [URI](#uri) - OPTIONAL
 mediator | A reference to the entity that mediates access to the described source. | [URI](#uri) - OPTIONAL; MUST resolve to an instance of [`http://gedcomx.org/v1/Agent`](#agent).
@@ -488,7 +487,6 @@ The identifier for the `Agent` data type is:
 
 name | description | data type
 -----|-------------|----------
-id | A local identifier for the agent. Note that this id MUST NOT be processed as an identifier for the resource being referenced, but instead as a transient identifier for the reference itself. | string
 identifiers | Identifiers for the agent. When an identifier for an agent is also an identifier for a person, the data in the person describes the agent. | List of [`http://gedcomx.org/v1/Identifier`](#identifier-type). Order is preserved.
 name | The name of the person or organization. | string
 homepage | The homepage of the person or organization. | [URI](#uri)
@@ -521,7 +519,6 @@ The identifier for the `Conclusion` data type is:
 
 name | description | data type
 -----|-------------|----------
-id | A local identifier for the conclusion. Note that this id MUST NOT be processed as an identifier for the resource being referenced, but instead as a transient identifier for the reference itself. | string
 sources | The list of references to the sources of related to this conclusion. The sources of a conclusion MUST also be sources of the conclusion's containing entity (i.e. [`Person`](#person) or [`Relationship`](#relationship) ).| List of [`http://gedcomx.org/v1/SourceReference`](#source-reference). Order is preserved.
 notes  | A list of notes about a conclusion. | List of [`http://gedcomx.org/Note`](#note) - OPTIONAL
 attribution | The attribution of this conclusion. | [`http://gedcomx.org/Attribution`](#attribution)

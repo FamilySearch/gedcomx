@@ -333,7 +333,6 @@ data type is defined as follows:
 
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
-id | A local, transient identifier for the source description. | id | string
 citation | The citation for this source | citation | [`SourceCitation`](#source-citation)
 about | A uniform resource identifier (URI) for the resource being described. | about | [`URI`](#uri)
 mediator | A reference to the entity that mediates access to the described source. | mediator | [`URI`](#uri)
@@ -502,7 +501,6 @@ The JSON object used to (de)serialize the `http://gedcomx.org/v1/Agent` data typ
 
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
-id | A local, transient identifier for the resource being described. | id | string
 name | The name of the person or organization. | name | string
 identifiers | Identifiers for the agent. | identifiers | [`Identifier`](#identifier-type)
 homepage | The homepage of the person or organization. | homepage | [`URI`](#uri)
@@ -544,7 +542,6 @@ The JSON object used to (de)serialize the `http://gedcomx.org/v1/Conclusion` dat
 
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
-id | A local, transient identifier for the resource being described. | id | string
 sources | The list of references to the sources of the conclusion. | sources | array of [`SourceReference`](#source-reference).
 notes | A list of notes about this conclusion. | note | array of [`gx:Note`](#note)
 attribution | The attribution of this conclusion. | attribution | [`gx:Attribution`](#attribution)
@@ -938,6 +935,15 @@ source-references | array of [`SourceReference`](#source-reference)
 source-descriptions | array of [`SourceDescription`](#rdf-description)
 agents | array of [`Agent`](#agent)
 
-# 7. Miscellaneous To Do
+
+7. Fragment Identifiers
+
+Fragment identifiers are used to identify specific objects (i.e. "fragments") within a JSON document. The GEDCOM X
+JSON serialization format specifies the use of the "id" member as the fragment identifier for any object in
+a given JSON document.
+
+For more information about fragment identifiers, see [RFC 3986, Section 3.5](http://tools.ietf.org/html/rfc3986#section-3.5).
+
+# 8. Miscellaneous To Do
 
 todo:
