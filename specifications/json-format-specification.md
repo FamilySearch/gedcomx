@@ -338,6 +338,7 @@ citation | The citation for this source | citation | [`SourceCitation`](#source-
 about | A uniform resource identifier (URI) for the resource being described. | about | [`URI`](#uri)
 mediator | A reference to the entity that mediates access to the described source. | mediator | [`URI`](#uri)
 sources | A list of references to any sources from which this source is derived. | sources | array of [`SourceReference`](#source-reference)
+extractedConclusions | A list of references to any conclusions that were extracted from this source, to be analyzed and evaluated atomically within on context of the source. | extractedConclusions | [`URI`](#uri)
 componentOf | A reference to the source that contains this source. | componentOf | [`SourceReference`](#source-reference)
 displayName | A display name for this source. | displayName | string
 alternateNames | A list of alternate display names for this source. | alternateNames | array of [`TextValue`](#text-value)
@@ -353,6 +354,7 @@ attribution | The attribution of this source. | attribution | [`Attribution`](#a
   "about" : "http://identifier/for/the/source/being/described",
   "mediator" : "http://identifier/for/the/mediator/of/source/being/described",
   "sources" : [ { ... }, { ... } ],
+  "extractedConclusions" : [ "...", "..." ],
   "componentOf" : { ... },
   "displayName" : "...display name...",
   "alternateNames" : [ { ... }, { ... } ],
