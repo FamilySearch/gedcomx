@@ -141,25 +141,7 @@ name  | description | data type
 ------|-------------|----------
 contributor | Reference to the contributor to whom the attributed data is attributed. | [URI](#uri) - MUST resolve to an instance of [`http://gedcomx.org/v1/Agent`](#agent).
 modified | Timestamp of when the attributed data was contributed. | timestamp
-confidence  | Reference to the confidence level of the contributor of the attributed data. | [URI](#uri) - MUST resolve to a confidence level. Refer to the list of [known confidence levels](#known-confidence-levels).
 changeMessage | A statement of why the attributed data is being provided by the contributor. | string
-
-<a id="known-confidence-levels"/>
-
-### known confidence levels
-
-The following confidence levels are defined by GEDCOM X. For more information, refer to 
-Mills, Elizabeth Shown. "Fundamentals of Evidence Analysis." <i>Evidence Explained.</i> 2nd ed. 
-(Baltimore, Maryland: Genealogical Publishing Company, 2009), 19-20 (Section 1.6).
-
-URI | description
-----|------------
-`http://gedcomx.org/Certainly`|The contributor has no reasonable doubt about the assertion, based upon sound research and good evidence.
-`http://gedcomx.org/Probably`|The contributor feels the assertion is more likely than not, based upon sound research and good evidence.
-`http://gedcomx.org/Possibly`|The contributor feels some evidence supports the assertion, but the assertion is far from proved.
-`http://gedcomx.org/Likely`|The contributor feels the odds weigh at least slightly in favor of the assertion.
-`http://gedcomx.org/Apparently`|The contributor has formed an impression or presumption, typically based upon common experience, but has not tested the matter.
-`http://gedcomx.org/Perhaps`|The contributor suggests that an idea is plausible, although it remains to be tested.
 
 ### examples
 
@@ -524,10 +506,28 @@ The identifier for the `Conclusion` data type is:
 name | description | data type
 -----|-------------|----------
 id | A local identifier for the conclusion. Note that this id MUST NOT be processed as an identifier for the resource being referenced, but instead as a transient identifier for the reference itself. | string
+confidence  | Reference to the confidence level of the conclusion. | [URI](#uri) - MUST resolve to a confidence level. Refer to the list of [known confidence levels](#known-confidence-levels).
 sources | The list of references to the sources of related to this conclusion. The sources of a conclusion MUST also be sources of the conclusion's containing entity (i.e. [`Person`](#person) or [`Relationship`](#relationship) ).| List of [`http://gedcomx.org/v1/SourceReference`](#source-reference). Order is preserved.
 notes  | A list of notes about a conclusion. | List of [`http://gedcomx.org/Note`](#note) - OPTIONAL
 attribution | The attribution of this conclusion. | [`http://gedcomx.org/Attribution`](#attribution)
 
+
+<a id="known-confidence-levels"/>
+
+### known confidence levels
+
+The following confidence levels are defined by GEDCOM X. For more information, refer to
+Mills, Elizabeth Shown. "Fundamentals of Evidence Analysis." <i>Evidence Explained.</i> 2nd ed.
+(Baltimore, Maryland: Genealogical Publishing Company, 2009), 19-20 (Section 1.6).
+
+URI | description
+----|------------
+`http://gedcomx.org/Certainly`|The contributor has no reasonable doubt about the assertion, based upon sound research and good evidence.
+`http://gedcomx.org/Probably`|The contributor feels the assertion is more likely than not, based upon sound research and good evidence.
+`http://gedcomx.org/Possibly`|The contributor feels some evidence supports the assertion, but the assertion is far from proved.
+`http://gedcomx.org/Likely`|The contributor feels the odds weigh at least slightly in favor of the assertion.
+`http://gedcomx.org/Apparently`|The contributor has formed an impression or presumption, typically based upon common experience, but has not tested the matter.
+`http://gedcomx.org/Perhaps`|The contributor suggests that an idea is plausible, although it remains to be tested.
 
 <a id="document"/>
 

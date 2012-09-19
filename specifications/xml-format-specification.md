@@ -209,7 +209,6 @@ name | description | XML property | XML type
 -----|-------------|--------------|---------
 contributor | Reference to the contributor to whom the attributed data is attributed. | gx:contributor | [`gx:ResourceReference`](#resource-reference)
 modified | Timestamp of when the attributed data was contributed. | gx:modified | xsd:dateTime
-confidence  | Reference to the confidence level of the contributor of the attributed data. | gx:confidence | [`gx:ResourceReference`](#resource-reference)
 changeMessage | A statement of why the attributed data is being provided by the contributor. | gx:changeMessage | xsd:string
 
 ### examples
@@ -218,7 +217,6 @@ changeMessage | A statement of why the attributed data is being provided by the 
   <...>
     <gx:contributor resource="http://identifier/for/contributor"/>
     <gx:modified>2012-05-29T00:00:00</gx:modified>
-    <gx:confidence resource="http://gedcomx.org/Certainly"/>
     <gx:changeMessage>...change message here...</gx:changeMessage>
   </...>
 ```
@@ -567,6 +565,7 @@ data type.
 name | description | XML property | XML type
 -----|-------------|--------------|---------
 id | A local, transient identifier for the resource being described. | id (attribute) | xsd:string
+confidence  | Reference to the confidence level of the contributor of the attributed data. | confidence (attribute) | [`URI`](#uri)
 sources | A list of references to the sources of the conclusion. | gx:source | [`gx:SourceReference`](#source-reference)
 notes | A list of notes about this conclusion. | gx:note | [`gx:Note`](#note)
 attribution | The attribution of this conclusion. | gx:attribution | [`gx:Attribution`](#attribution)
@@ -574,7 +573,7 @@ attribution | The attribution of this conclusion. | gx:attribution | [`gx:Attrib
 ### examples
 
 ```xml
-  <... id="local_id">
+  <... id="local_id" confidence="http://gedcomx.org/Certainly">
     <gx:source>
       ...
     </gx:source>

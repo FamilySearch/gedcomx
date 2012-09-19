@@ -209,7 +209,6 @@ name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 contributor | Reference to the contributor to whom the attributed data is attributed. | contributor | [`URI`](#uri)
 modified | Timestamp of when the attributed data was contributed. | modified | number (milliseconds since epoch)
-confidence  | Reference to the confidence level of the contributor of the attributed data. | confidence | [`URI`](#uri)
 changeMessage | A statement of why the attributed data is being provided by the contributor. | changeMessage | string
 
 ### examples
@@ -218,7 +217,6 @@ changeMessage | A statement of why the attributed data is being provided by the 
 {
   "contributor" : "http://identifier/for/contributor",
   "modified" : "1338394969",
-  "confidence" : "http://gedcomx.org/Certainly",
   "changeMessage" : "...change message here..."
 }
 ```
@@ -545,6 +543,7 @@ The JSON object used to (de)serialize the `http://gedcomx.org/v1/Conclusion` dat
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 id | A local, transient identifier for the resource being described. | id | string
+confidence  | Reference to the confidence level of the contributor of the attributed data. | confidence | [`URI`](#uri)
 sources | The list of references to the sources of the conclusion. | sources | array of [`SourceReference`](#source-reference).
 notes | A list of notes about this conclusion. | note | array of [`gx:Note`](#note)
 attribution | The attribution of this conclusion. | attribution | [`gx:Attribution`](#attribution)
@@ -554,6 +553,7 @@ attribution | The attribution of this conclusion. | attribution | [`gx:Attributi
 ```json
 {
   "id" : "local_id",
+  "confidence" : "http://gedcomx.org/Certainly",
   "sources" : [ { ... }, { ... } ],
   "notes" : [ { ... }, { ... } ],
   "attribution" : { ... },
