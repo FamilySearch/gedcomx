@@ -124,10 +124,24 @@ todo: fill in some examples.
 
 ## 2.3 The "Attribution" Data Type
 
-The `Attribution` data type defines the data structure used to supply the attribution (including
-who, when, and why) of genealogical data.
+The `Attribution` data type defines the data structure used to attribute _who_, _when_, and _why_ to
+genealogical data. Data is attributed to the agent who made the _latest significant change_ to the nature
+of the data being attributed. The definition of a "significant change" is outside the scope of this specification
+and is left to the implementer of the application.
 
-The `Attribution` data type does NOT support extension properties (see [Extension Properties](#extension-properties)).
+#### The Granularity of Attribution
+
+The granularity of data that is attributed varies widely from application to application. Some highly collaborative applications
+might take a fine-grained approach, tracking attribution at the level of names, facts, and source references. Single-user
+applications might simply provide attribution for a large set of data, such as an entire data tree. GEDCOM X explicitly
+defines attribution for top-level entities such as persons, relationships, and documents, but also recognizes attribution
+as an extension property that can be applied at a finer level of granularity. (For more information about extension properties,
+see Section 6). For all data types where attribution explicitly recognized, it is an OPTIONAL property.
+
+If data is not explicitly attributed, the attribution for the data is assumed to be the attribution for the containing
+data. For example, if no attribution is provided for the name of a person (as an extension property of the name), then the
+attribution for the name is assumed to be the attribution of the person that contains the name. If no attribution for the
+person is provided, the attribution is assumed to be the attribution for the data set that contains the person.
 
 ### identifier
 
@@ -345,7 +359,6 @@ The identifier for the "SourceReference" data type is:
 name | description | data type
 -----|-------------|----------
 sourceDescription  | Reference to a _description_ of the target source. | [URI](#uri) - MUST resolve to an instance of [`http://gedcomx.org/v1/SourceDescription`](#source-description)
-attribution | The attribution of this source reference. | [`http://gedcomx.org/Attribution`](#attribution)
 
 ### examples
 
@@ -509,8 +522,6 @@ id | A local identifier for the conclusion. Note that this id MUST NOT be proces
 confidence  | Reference to the confidence level of the conclusion. | [URI](#uri) - MUST resolve to a confidence level. Refer to the list of [known confidence levels](#known-confidence-levels).
 sources | The list of references to the sources of related to this conclusion. The sources of a conclusion MUST also be sources of the conclusion's containing entity (i.e. [`Person`](#person) or [`Relationship`](#relationship) ).| List of [`http://gedcomx.org/v1/SourceReference`](#source-reference). Order is preserved.
 notes  | A list of notes about a conclusion. | List of [`http://gedcomx.org/Note`](#note) - OPTIONAL
-attribution | The attribution of this conclusion. | [`http://gedcomx.org/Attribution`](#attribution)
-
 
 <a id="known-confidence-levels"/>
 
@@ -552,7 +563,7 @@ This data type extends the following data type:
 name | description | data type
 -----|-------------|----------
 text | The text of the document. | [`http://gedcomx.org/TextValue`](#text-value)
-
+attribution | The attribution of the document. | [`http://gedcomx.org/Attribution`](#attribution)
 
 <a id="abstract-document"/>
 
@@ -866,6 +877,7 @@ living | Whether the person is considered living. | boolean
 gender | The conclusion about the gender of the person. | [`http://gedcomx.org/v1/Gender`](#gender)
 names | The conclusions about the names of the person. | List of [`http://gedcomx.org/v1/Name`](#name-conclusion). Order is preserved.
 facts | The conclusions about the facts of the life of the person. | List of [`http://gedcomx.org/v1/Fact`](#fact-conclusion). Order is preserved.
+attribution | The attribution of the person. | [`http://gedcomx.org/Attribution`](#attribution)
 
 
 <a id="relationship"/>
@@ -895,6 +907,7 @@ type | URI identifying the type of the relationship. | [URI](#uri) - MUST resolv
 person1 | Reference to the first person in the relationship. | [URI](#uri) - MUST resolve to an instance of [`http://gedcomx.org/v1/Person`](#person)
 person2 | Reference to the second person in the relationship. | [URI](#uri) - MUST resolve to an instance of [`http://gedcomx.org/v1/Person`](#person)
 facts | The conclusions about the facts of the life of the relationship. | List of [`http://gedcomx.org/v1/Fact`](#fact-conclusion). Order is preserved.
+attribution | The attribution of the relationship. | [`http://gedcomx.org/Attribution`](#attribution)
 
 Note: when a relationship type implies direction, the relationship is said to
 be *from* person1 *to* person2. For example, in a parent-child relationship, the
@@ -980,6 +993,7 @@ type | URI identifying the type of the event. | [URI](#uri). MUST resolve to an 
 date | The date of the event. | [`http://gedcomx.org/v1/Date`](#conclusion-date)
 place | The place of the event. | [`http://gedcomx.org/v1/Place`](#conclusion-place)
 roles | The roles of the persons in the event. | List of [`http://gedcomx.org/v1/EventRole`](#conclusion-event-role). Order is preserved.
+attribution | The attribution of the event. | [`http://gedcomx.org/Attribution`](#attribution)
 
 <a id="known-event-types"/>
 
