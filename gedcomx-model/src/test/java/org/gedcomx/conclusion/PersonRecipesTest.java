@@ -75,9 +75,6 @@ public class PersonRecipesTest extends RecipeTest {
     fact.setId("123");
     fact.setKnownType(FactType.Birth);
 
-    fact.setAttribution(new Attribution());
-    fact.getAttribution().setContributor(new ResourceReference());
-    fact.getAttribution().getContributor().setResource(URI.create("https://familysearch.org/platform/contributors/BCD-FGHJ"));
     fact.setDate(new Date());
     fact.getDate().setOriginal("February 22, 1732");
     FormalValue normalized = new FormalValue();
@@ -98,9 +95,6 @@ public class PersonRecipesTest extends RecipeTest {
     fact.setId("456");
     fact.setKnownType(FactType.Death);
 
-    fact.setAttribution(new Attribution());
-    fact.getAttribution().setContributor(new ResourceReference());
-    fact.getAttribution().getContributor().setResource(URI.create("https://familysearch.org/platform/contributors/KLM-NPQR"));
     fact.setDate(new Date());
     fact.getDate().setOriginal("December 14, 1799");
     normalized = new FormalValue();
@@ -133,21 +127,9 @@ public class PersonRecipesTest extends RecipeTest {
     parts.add(part);
     nameForm.setParts(parts);
     name.setPrimaryForm(nameForm);
-    name.setAttribution(new Attribution());
-    name.getAttribution().setContributor(new ResourceReference());
-    name.getAttribution().getContributor().setResource(URI.create("https://familysearch.org/platform/contributors/STV-WXZY"));
     name.setId("789");
     names.add(name);
     person.setNames(names);
-
-    ArrayList<SourceReference> sources = new ArrayList<SourceReference>();
-    SourceReference attributedSourceReference = new SourceReference();
-    Attribution attribution = new Attribution();
-    attribution.setContributor(new ResourceReference());
-    attribution.getContributor().setResource(URI.create("https://familysearch.org/platform/contributors/STV-WXZY"));
-    attributedSourceReference.setAttribution(attribution);
-    sources.add(attributedSourceReference);
-    person.setSources(sources);
 
     person.setId("BBB-BBBB");
 

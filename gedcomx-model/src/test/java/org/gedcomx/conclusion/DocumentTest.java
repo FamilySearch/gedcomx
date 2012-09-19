@@ -38,7 +38,6 @@ public class DocumentTest {
     document.addExtensionElement(new CustomEntity("1234"));
     document.addExtensionElement(new CustomEntity("2345"));
 
-    assertEquals(document.toString(), "DDDD-DDD: urn:contributor-id");
     assertEquals(document.getId(), "DDDD-DDD");
     assertEquals(document.getText().getLang(), "en-US");
     assertEquals(document.getText().getValue(), "(The text of the document abstract goes here.)");

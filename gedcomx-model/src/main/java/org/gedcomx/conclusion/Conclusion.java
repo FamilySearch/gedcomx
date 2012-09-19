@@ -35,13 +35,12 @@ import java.util.List;
  * @author Ryan Heaton
  */
 @XmlType ( name = "Conclusion" )
-public abstract class Conclusion implements Attributable, ReferencesSources, HasNotes, SupportsExtensionElements {
+public abstract class Conclusion implements ReferencesSources, HasNotes, SupportsExtensionElements {
 
   private String id;
   private URI confidence;
   private List<SourceReference> sources;
   private List<Note> notes;
-  private Attribution attribution;
   protected List<Object> extensionElements;
 
   /**
@@ -176,26 +175,6 @@ public abstract class Conclusion implements Attributable, ReferencesSources, Has
   }
 
   /**
-   * Attribution metadata for a conclusion.
-   *
-   * @return Attribution metadata for a conclusion.
-   */
-  @Override
-  public Attribution getAttribution() {
-    return attribution;
-  }
-
-  /**
-   * Attribution metadata for a conclusion.
-   *
-   * @param attribution Attribution metadata for a conclusion.
-   */
-  @Override
-  public void setAttribution(Attribution attribution) {
-    this.attribution = attribution;
-  }
-
-  /**
    * Custom extension elements for a conclusion.
    *
    * @return Custom extension elements for a conclusion.
@@ -273,13 +252,7 @@ public abstract class Conclusion implements Attributable, ReferencesSources, Has
    */
   @Override
   public String toString() {
-    StringBuilder s = new StringBuilder((getId() == null) ? "" : getId());
-
-    if (getAttribution() != null) {
-      s.append(": ").append(getAttribution().toString());
-    }
-
-    return s.toString();
+    return (getId() == null) ? "" : getId();
   }
 
 }

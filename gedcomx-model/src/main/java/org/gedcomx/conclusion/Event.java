@@ -18,6 +18,8 @@ package org.gedcomx.conclusion;
 import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.gedcomx.common.Attributable;
+import org.gedcomx.common.Attribution;
 import org.gedcomx.common.URI;
 import org.gedcomx.rt.json.JsonElementWrapper;
 import org.gedcomx.types.EventType;
@@ -33,10 +35,11 @@ import java.util.List;
  */
 @XmlRootElement
 @JsonElementWrapper (name = "events")
-@XmlType ( name = "Event", propOrder = { "date", "place", "roles" } )
-public class Event extends Conclusion implements HasDateAndPlace {
+@XmlType ( name = "Event", propOrder = { "attribution", "date", "place", "roles" } )
+public class Event extends Conclusion implements HasDateAndPlace, Attributable {
 
   private URI type;
+  private Attribution attribution;
   private Date date;
   private Place place;
   private List<EventRole> roles;
@@ -107,6 +110,26 @@ public class Event extends Conclusion implements HasDateAndPlace {
   @JsonIgnore
   public void setKnownType(org.gedcomx.types.EventType knownType) {
     setType(knownType == null ? null : URI.create(org.codehaus.enunciate.XmlQNameEnumUtil.toURIValue(knownType)));
+  }
+
+  /**
+   * Attribution metadata for a conclusion.
+   *
+   * @return Attribution metadata for a conclusion.
+   */
+  @Override
+  public Attribution getAttribution() {
+    return attribution;
+  }
+
+  /**
+   * Attribution metadata for a conclusion.
+   *
+   * @param attribution Attribution metadata for a conclusion.
+   */
+  @Override
+  public void setAttribution(Attribution attribution) {
+    this.attribution = attribution;
   }
 
   /**

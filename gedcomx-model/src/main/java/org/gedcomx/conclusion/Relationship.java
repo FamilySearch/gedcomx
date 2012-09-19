@@ -18,6 +18,8 @@ package org.gedcomx.conclusion;
 import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.gedcomx.common.Attributable;
+import org.gedcomx.common.Attribution;
 import org.gedcomx.common.ResourceReference;
 import org.gedcomx.common.URI;
 import org.gedcomx.rt.RDFRange;
@@ -37,10 +39,11 @@ import java.util.List;
  */
 @XmlRootElement
 @JsonElementWrapper ( name = "relationships" )
-@XmlType ( name = "Relationship", propOrder = { "person1", "person2", "facts" } )
-public class Relationship extends Conclusion implements HasFacts {
+@XmlType ( name = "Relationship", propOrder = { "attribution", "person1", "person2", "facts" } )
+public class Relationship extends Conclusion implements HasFacts, Attributable {
 
   private URI type;
+  private Attribution attribution;
   private ResourceReference person1;
   private ResourceReference person2;
   private List<Fact> facts;
@@ -83,6 +86,26 @@ public class Relationship extends Conclusion implements HasFacts {
   @JsonIgnore
   public void setKnownType(RelationshipType type) {
     setType(type == null ? null : URI.create(org.codehaus.enunciate.XmlQNameEnumUtil.toURIValue(type)));
+  }
+
+  /**
+   * Attribution metadata for a conclusion.
+   *
+   * @return Attribution metadata for a conclusion.
+   */
+  @Override
+  public Attribution getAttribution() {
+    return attribution;
+  }
+
+  /**
+   * Attribution metadata for a conclusion.
+   *
+   * @param attribution Attribution metadata for a conclusion.
+   */
+  @Override
+  public void setAttribution(Attribution attribution) {
+    this.attribution = attribution;
   }
 
   /**
