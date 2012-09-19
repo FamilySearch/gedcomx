@@ -54,6 +54,7 @@ public class PersonTest {
     person.setIdentifiers(identifiers);
 
     Fact fact = new Fact();
+    fact.setKnownConfidenceLevel(ConfidenceLevel.Certainly);
     fact.setAttribution(new Attribution());
     fact.getAttribution().setContributor(new ResourceReference());
     fact.getAttribution().getContributor().setResource(URI.create("urn:fact-attribution"));
@@ -171,6 +172,7 @@ public class PersonTest {
 
     assertEquals(2, person.getFacts().size());
     fact = person.getFirstFactOfType(FactType.Occupation);
+    assertEquals(ConfidenceLevel.Certainly, fact.getKnownConfidenceLevel());
     assertEquals("urn:fact-attribution", fact.getAttribution().getContributor().getResource().toString());
     assertEquals("original date", fact.getDate().getOriginal());
     assertEquals("normalized date", fact.getDate().getFormal().getText());
