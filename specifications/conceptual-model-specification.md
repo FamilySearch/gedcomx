@@ -712,7 +712,7 @@ name | description | data type
 type | URI identifying the type of the name. | [URI](#uri) - MUST resolve to a name type. Refer to the list of [known name types](#known-name-types).
 preferred | Whether this name is preferred above the other `Name` conclusions of a person. | boolean
 primaryForm | The primary form of the name. | `http://gedcomx.org/v1/NameForm` - REQUIRED
-alternateForms | The alternate forms (renderings) of the primary name. This is *not* for name variants (e.g., nicknames, spelling variations). | List of [`http://gedcomx.org/v1/NameForm`](#name-form). Order is preserved.
+alternateForms | The alternate forms (renderings) of the primary name. This is *not* for name variants (e.g., nicknames, spelling variations) | List of [`http://gedcomx.org/v1/NameForm`](#name-form). Order is preserved.
 
 ### examples
 
@@ -1098,9 +1098,7 @@ formal | The formal value of the place. | [`http://gedcomx.org/FormalValue`](#fo
 
 ## 5.12 The "NamePart" Data Type
 
-The `NamePart` data type is used to model a portion of a full name -- the term(s) that makes up that portion, and perhaps a name part classifier (e.g., "given name" or "surname").
-
-A name part `value` may contain more than one term from the name -- as in the given names "John Fitzgerald" from the name "John Fitzgerald Kennedy".  If multiple terms are detailed in a single `NamePart`, these terms are separated using the name separator appropriate to the `locale` specified in the enclosing `NameForm`.
+The `NamePart` data type defines a part of a name of a person.
 
 The `NamePart` data type does NOT support extension properties (see [Extension Properties](#extension-properties)).
 
@@ -1115,7 +1113,7 @@ The identifier for the `NamePart` data type is:
 name | description | data type
 -----|-------------|----------
 type | URI identifying the type of the name part. | [URI](#uri) - MUST resolve to a name part type. Refer to the list of [known name part types](#known-name-part-types).
-value | The term(s) from the name that make up this name part. | string
+value | The value of the name part. | string
 
 <a id="known-name-part-types"/>
 
@@ -1130,18 +1128,11 @@ URI | description
 `http://gedcomx.org/Given`|
 `http://gedcomx.org/Surname`|
 
-
 <a id="name-form"/>
 
 ## 5.13 The "NameForm" Data Type
 
 The `NameForm` data type defines a rendition of a name (a "name form") within a given cultural context (e.g., in a given language and script).
-
-As names are captured (in records or in applications), the terms in the name are sometimes classified by type.  For example, a certificate of death might prompt for "given name(s)" and "surname". The `parts` list can be used to represent the terms in the name that have been classified.
-
-If both a full rendering of the name and a list of parts are provided, there is no requirement that every term in the fully rendered name appear in the list of parts.
-
-If a full rendering of the name is not provided (i.e., the name exists only in `parts`), the name parts in the `parts` list are to be ordered in the natural order they would be spoken in the given cultural context.  Given this, a full rendering of the name can be derived (sans punctuation) by concatenating in order each `NamePart.value` in the `parts` list, separating each part with the name separator appropriate for the given `locale`.
 
 ### identifier
 
@@ -1154,12 +1145,12 @@ The identifier for the `NameForm` data type is:
 name | description | data type
 -----|-------------|----------
 locale | An [IETF BCP 47 language tag](http://tools.ietf.org/html/bcp47) specifying the cultural context (language, script, etc.) to be used to understand, interpret and render this name form. | string
-fullText | A full rendering of the name (or as much of the name as is known) with the terms in the name given in the natural order they would be spoken in the given cultural context. | string
-parts | Any identified name parts from the name represented in this instance. | List of [`http://gedcomx.org/v1/NamePart`](#name-part). Order is preserved.
+fullText | A full rendering of the name (or as much of the name as is known) with name parts given in the order they would be spoken. | string
+parts | Any identified name parts from the name represented in this instance. | List of [`http://gedcomx.org/v1/NamePart`](#name-part).  The list of parts may not contain every term contained in the fully rendered name; said another way, an algorithm that concatenates the parts is not garuanteed to produce the name as it is found in the fully rendered name.
 
 ### examples
 
-Consider the following: the name "Alexander" and its Russian rendering "Александр" in the Cyrillic script.  Using an informal pseudo code, these name forms might be modeled as follows:
+Consider the following: the name "Alexander" and its Russian rendering "Александр" in the cyrillic script.  Using an informal pseudo code, these name forms might be modeled as follows:
 
 ```
 NameForm1.locale=en-Latn
