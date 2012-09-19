@@ -124,10 +124,24 @@ todo: fill in some examples.
 
 ## 2.3 The "Attribution" Data Type
 
-The `Attribution` data type defines the data structure used to supply the attribution (including
-who, when, and why) of genealogical data.
+The `Attribution` data type defines the data structure used to attribute _who_, _when_, and _why_ to
+genealogical data. Data is attributed to the agent who made the _latest significant change_ to the nature
+of the data being attributed. The definition of a "significant change" is outside the scope of this specification
+and is left to the implementer of the application.
 
-The `Attribution` data type does NOT support extension properties (see [Extension Properties](#extension-properties)).
+#### The Granularity of Attribution
+
+The granularity of data that is attributed varies widely from application to application. Some highly collaborative applications
+might take a fine-grained approach, tracking attribution at the level of names, facts, and source references. Single-user
+applications might simply provide attribution for a large set of data, such as an entire data tree. GEDCOM X explicitly
+defines attribution for top-level entities such as persons, relationships, and documents, but also recognizes attribution
+as an extension property that can be applied at a finer level of granularity. (For more information about extension properties,
+see Section 6). For all data types where attribution explicitly recognized, it is an OPTIONAL property.
+
+If data is not explicitly attributed, the attribution for the data is assumed to be the attribution for the containing
+data. For example, if no attribution is provided for the name of a person (as an extension property of the name), then the
+attribution for the name is assumed to be the attribution of the person that contains the name. If no attribution for the
+person is provided, the attribution is assumed to be the attribution for the data set that contains the person.
 
 ### identifier
 
@@ -141,25 +155,7 @@ name  | description | data type
 ------|-------------|----------
 contributor | Reference to the contributor to whom the attributed data is attributed. | [URI](#uri) - MUST resolve to an instance of [`http://gedcomx.org/v1/Agent`](#agent).
 modified | Timestamp of when the attributed data was contributed. | timestamp
-confidence  | Reference to the confidence level of the contributor of the attributed data. | [URI](#uri) - MUST resolve to a confidence level. Refer to the list of [known confidence levels](#known-confidence-levels).
 changeMessage | A statement of why the attributed data is being provided by the contributor. | string
-
-<a id="known-confidence-levels"/>
-
-### known confidence levels
-
-The following confidence levels are defined by GEDCOM X. For more information, refer to 
-Mills, Elizabeth Shown. "Fundamentals of Evidence Analysis." <i>Evidence Explained.</i> 2nd ed. 
-(Baltimore, Maryland: Genealogical Publishing Company, 2009), 19-20 (Section 1.6).
-
-URI | description
-----|------------
-`http://gedcomx.org/Certainly`|The contributor has no reasonable doubt about the assertion, based upon sound research and good evidence.
-`http://gedcomx.org/Probably`|The contributor feels the assertion is more likely than not, based upon sound research and good evidence.
-`http://gedcomx.org/Possibly`|The contributor feels some evidence supports the assertion, but the assertion is far from proved.
-`http://gedcomx.org/Likely`|The contributor feels the odds weigh at least slightly in favor of the assertion.
-`http://gedcomx.org/Apparently`|The contributor has formed an impression or presumption, typically based upon common experience, but has not tested the matter.
-`http://gedcomx.org/Perhaps`|The contributor suggests that an idea is plausible, although it remains to be tested.
 
 ### examples
 
@@ -363,7 +359,6 @@ The identifier for the "SourceReference" data type is:
 name | description | data type
 -----|-------------|----------
 sourceDescription  | Reference to a _description_ of the target source. | [URI](#uri) - MUST resolve to an instance of [`http://gedcomx.org/v1/SourceDescription`](#source-description)
-attribution | The attribution of this source reference. | [`http://gedcomx.org/Attribution`](#attribution)
 
 ### examples
 
@@ -524,10 +519,26 @@ The identifier for the `Conclusion` data type is:
 name | description | data type
 -----|-------------|----------
 id | A local identifier for the conclusion. Note that this id MUST NOT be processed as an identifier for the resource being referenced, but instead as a transient identifier for the reference itself. | string
+confidence  | Reference to the confidence level of the conclusion. | [URI](#uri) - MUST resolve to a confidence level. Refer to the list of [known confidence levels](#known-confidence-levels).
 sources | The list of references to the sources of related to this conclusion. The sources of a conclusion MUST also be sources of the conclusion's containing entity (i.e. [`Person`](#person) or [`Relationship`](#relationship) ).| List of [`http://gedcomx.org/v1/SourceReference`](#source-reference). Order is preserved.
 notes  | A list of notes about a conclusion. | List of [`http://gedcomx.org/Note`](#note) - OPTIONAL
-attribution | The attribution of this conclusion. | [`http://gedcomx.org/Attribution`](#attribution)
 
+<a id="known-confidence-levels"/>
+
+### known confidence levels
+
+The following confidence levels are defined by GEDCOM X. For more information, refer to
+Mills, Elizabeth Shown. "Fundamentals of Evidence Analysis." <i>Evidence Explained.</i> 2nd ed.
+(Baltimore, Maryland: Genealogical Publishing Company, 2009), 19-20 (Section 1.6).
+
+URI | description
+----|------------
+`http://gedcomx.org/Certainly`|The contributor has no reasonable doubt about the assertion, based upon sound research and good evidence.
+`http://gedcomx.org/Probably`|The contributor feels the assertion is more likely than not, based upon sound research and good evidence.
+`http://gedcomx.org/Possibly`|The contributor feels some evidence supports the assertion, but the assertion is far from proved.
+`http://gedcomx.org/Likely`|The contributor feels the odds weigh at least slightly in favor of the assertion.
+`http://gedcomx.org/Apparently`|The contributor has formed an impression or presumption, typically based upon common experience, but has not tested the matter.
+`http://gedcomx.org/Perhaps`|The contributor suggests that an idea is plausible, although it remains to be tested.
 
 <a id="document"/>
 
@@ -552,7 +563,7 @@ This data type extends the following data type:
 name | description | data type
 -----|-------------|----------
 text | The text of the document. | [`http://gedcomx.org/TextValue`](#text-value)
-
+attribution | The attribution of the document. | [`http://gedcomx.org/Attribution`](#attribution)
 
 <a id="abstract-document"/>
 
@@ -866,6 +877,7 @@ living | Whether the person is considered living. | boolean
 gender | The conclusion about the gender of the person. | [`http://gedcomx.org/v1/Gender`](#gender)
 names | The conclusions about the names of the person. | List of [`http://gedcomx.org/v1/Name`](#name-conclusion). Order is preserved.
 facts | The conclusions about the facts of the life of the person. | List of [`http://gedcomx.org/v1/Fact`](#fact-conclusion). Order is preserved.
+attribution | The attribution of the person. | [`http://gedcomx.org/Attribution`](#attribution)
 
 
 <a id="relationship"/>
@@ -895,6 +907,7 @@ type | URI identifying the type of the relationship. | [URI](#uri) - MUST resolv
 person1 | Reference to the first person in the relationship. | [URI](#uri) - MUST resolve to an instance of [`http://gedcomx.org/v1/Person`](#person)
 person2 | Reference to the second person in the relationship. | [URI](#uri) - MUST resolve to an instance of [`http://gedcomx.org/v1/Person`](#person)
 facts | The conclusions about the facts of the life of the relationship. | List of [`http://gedcomx.org/v1/Fact`](#fact-conclusion). Order is preserved.
+attribution | The attribution of the relationship. | [`http://gedcomx.org/Attribution`](#attribution)
 
 Note: when a relationship type implies direction, the relationship is said to
 be *from* person1 *to* person2. For example, in a parent-child relationship, the
@@ -980,6 +993,7 @@ type | URI identifying the type of the event. | [URI](#uri). MUST resolve to an 
 date | The date of the event. | [`http://gedcomx.org/v1/Date`](#conclusion-date)
 place | The place of the event. | [`http://gedcomx.org/v1/Place`](#conclusion-place)
 roles | The roles of the persons in the event. | List of [`http://gedcomx.org/v1/EventRole`](#conclusion-event-role). Order is preserved.
+attribution | The attribution of the event. | [`http://gedcomx.org/Attribution`](#attribution)
 
 <a id="known-event-types"/>
 

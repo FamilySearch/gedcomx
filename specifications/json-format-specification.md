@@ -209,7 +209,6 @@ name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 contributor | Reference to the contributor to whom the attributed data is attributed. | contributor | [`URI`](#uri)
 modified | Timestamp of when the attributed data was contributed. | modified | number (milliseconds since epoch)
-confidence  | Reference to the confidence level of the contributor of the attributed data. | confidence | [`URI`](#uri)
 changeMessage | A statement of why the attributed data is being provided by the contributor. | changeMessage | string
 
 ### examples
@@ -218,7 +217,6 @@ changeMessage | A statement of why the attributed data is being provided by the 
 {
   "contributor" : "http://identifier/for/contributor",
   "modified" : "1338394969",
-  "confidence" : "http://gedcomx.org/Certainly",
   "changeMessage" : "...change message here..."
 }
 ```
@@ -421,14 +419,12 @@ data type is defined as follows:
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 sourceDescription  | Reference to a _description_ of the source being referenced. | sourceDescription | [`URI`](#uri)
-attribution | The attribution of this source reference. | attribution | [`Attribution`](#attribution)
 
 ### examples
 
 ```json
 {
-  "sourceDescription" : "http://identifier/for/description/of/source/being/referenced",
-  "attribution" : { ... }
+  "sourceDescription" : "http://identifier/for/description/of/source/being/referenced"
 }
 ```
 
@@ -545,18 +541,18 @@ The JSON object used to (de)serialize the `http://gedcomx.org/v1/Conclusion` dat
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 id | A local, transient identifier for the resource being described. | id | string
+confidence  | Reference to the confidence level of the contributor of the attributed data. | confidence | [`URI`](#uri)
 sources | The list of references to the sources of the conclusion. | sources | array of [`SourceReference`](#source-reference).
 notes | A list of notes about this conclusion. | note | array of [`gx:Note`](#note)
-attribution | The attribution of this conclusion. | attribution | [`gx:Attribution`](#attribution)
 
 ### examples
 
 ```json
 {
   "id" : "local_id",
+  "confidence" : "http://gedcomx.org/Certainly",
   "sources" : [ { ... }, { ... } ],
   "notes" : [ { ... }, { ... } ],
-  "attribution" : { ... },
 
   ...possibility of extension elements...
 
@@ -571,6 +567,7 @@ The JSON object used to (de)serialize the `http://gedcomx.org/v1/Document` data 
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
+attribution | The attribution of this document. | attribution | [`gx:Attribution`](#attribution)
 text | The text of the document. | gxc:text | [`TextValue`](#text-value)
 
 ### examples
@@ -580,6 +577,7 @@ text | The text of the document. | gxc:text | [`TextValue`](#text-value)
 
   ...the members of gxc:Conclusion...,
 
+  "attribution" : { ... },
   "text" : {
     "lang" : "en",
     "value" : "...text of the document..."
@@ -721,6 +719,7 @@ The JSON object used to (de)serialize the `http://gedcomx.org/v1/Person` data ty
 
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
+attribution | The attribution of this conclusion. | attribution | [`gx:Attribution`](#attribution)
 identifiers | Identifiers for the person. | identifiers | array of [`Identifier`](#identifier-type)
 living | Whether the person is considered living. | living | boolean
 gender | The conclusion about the gender of the person. | gender | [`Gender`](#gender)
@@ -734,6 +733,7 @@ facts | The conclusions about the facts of the life of the person. | facts | arr
 
   ...the members of gxc:Conclusion...,
 
+  "attribution" : { ... },
   "identifiers" : [ { ... }, { ... } ],
   "living" : true,
   "gender" : { ... },
@@ -752,6 +752,7 @@ The JSON object used to (de)serialize the `http://gedcomx.org/v1/Relationship` d
 
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
+attribution | The attribution of this conclusion. | attribution | [`gx:Attribution`](#attribution)
 type | URI identifying the type of the relationship. | type | [`URI`](#uri)
 person1 | Reference to the first person in the relationship. | person1 | [`URI`](#uri)
 person2 | Reference to the second person in the relationship. | person2 | [`URI`](#uri)
@@ -764,6 +765,7 @@ facts | The conclusions about the facts of the life of the relationship. | facts
 
   ...the members of gxc:Conclusion...,
 
+  "attribution" : { ... },
   "type" : "http://gedcomx.org/Couple",
   "person1" : "http://identifier/for/person/1",
   "person2" : "http://identifier/for/person/2",
@@ -810,6 +812,7 @@ is defined as follows:
 
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
+attribution | The attribution of this conclusion. | attribution | [`gx:Attribution`](#attribution)
 type | URI identifying the type of the event. | type | [`URI`](#uri)
 date | The date of the event. | date | [`Date`](#conclusion-date)
 place | The place the event. | place | [`Place`](#conclusion-place)
@@ -822,6 +825,7 @@ roles | The roles of the persons in the event. | roles | array of [`EventRole`](
 
   ...the members of gxc:Conclusion...,
 
+  "attribution" : { ... },
   "type" : "http://gedcomx.org/Marriage",
   "date" : { ... },
   "place" : { ... },

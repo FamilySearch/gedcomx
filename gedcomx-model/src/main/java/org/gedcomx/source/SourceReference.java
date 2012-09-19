@@ -41,29 +41,10 @@ import java.util.List;
 @XmlRootElement ( name = "sourceReference" )
 @JsonElementWrapper ( name = "source-references" )
 @XmlType ( name = "SourceReference" )
-public class SourceReference implements Attributable, SupportsExtensionElements {
+public class SourceReference implements SupportsExtensionElements {
 
   private ResourceReference sourceDescription;
-  private Attribution attribution;
   private List<Object> extensionElements;
-
-  /**
-   * The attribution metadata for this source reference.
-   *
-   * @return The attribution metadata for this source reference.
-   */
-  public Attribution getAttribution() {
-    return attribution;
-  }
-
-  /**
-   * The attribution metadata for this source reference.
-   *
-   * @param attribution The attribution metadata for this source reference.
-   */
-  public void setAttribution(Attribution attribution) {
-    this.attribution = attribution;
-  }
 
   /**
    * A reference to a description of the source being referenced.

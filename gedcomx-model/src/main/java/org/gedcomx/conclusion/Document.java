@@ -15,6 +15,8 @@
  */
 package org.gedcomx.conclusion;
 
+import org.gedcomx.common.Attributable;
+import org.gedcomx.common.Attribution;
 import org.gedcomx.common.HasText;
 import org.gedcomx.common.TextValue;
 
@@ -24,9 +26,31 @@ import javax.xml.bind.annotation.XmlType;
 /**
  * An abstract document that contains derived (conclusionary) text -- for example, a transcription or researcher analysis.
  */
-@XmlType(name = "Document")
-public abstract class Document extends Conclusion implements HasText {
+@XmlType(name = "Document", propOrder = { "attribution", "text" })
+public abstract class Document extends Conclusion implements HasText, Attributable {
+
+  private Attribution attribution;
   private TextValue text;
+
+  /**
+   * Attribution metadata for a conclusion.
+   *
+   * @return Attribution metadata for a conclusion.
+   */
+  @Override
+  public Attribution getAttribution() {
+    return attribution;
+  }
+
+  /**
+   * Attribution metadata for a conclusion.
+   *
+   * @param attribution Attribution metadata for a conclusion.
+   */
+  @Override
+  public void setAttribution(Attribution attribution) {
+    this.attribution = attribution;
+  }
 
   /**
    * The document text.

@@ -167,7 +167,6 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
     srcDesc2.setAttribution(new Attribution());
     srcDesc2.getAttribution().setContributor(new ResourceReference(URI.create(CONTRIBUTOR_1_ID)));
     srcDesc2.getAttribution().setModified(new Date(MODIFIED_20111111_11_11_11_111)); // 11 Nov 2011 11:11:11.111
-    srcDesc2.getAttribution().setKnownConfidenceLevel(ConfidenceLevel.Certainly);
     srcDesc2.getAttribution().setChangeMessage(CHANGE_MESSAGE);
 
     ResourceSet resourceSet = new ResourceSet();
@@ -273,7 +272,6 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
     assertNotNull(srcDesc2.getAttribution());
     assertEquals(srcDesc2.getAttribution().getContributor().getResource().toURI().toString(), CONTRIBUTOR_1_ID);
     assertEquals(srcDesc2.getAttribution().getModified().getTime(), MODIFIED_20111111_11_11_11_111);
-    assertEquals(srcDesc2.getAttribution().getKnownConfidenceLevel(), ConfidenceLevel.Certainly);
     assertEquals(srcDesc2.getAttribution().getChangeMessage(), CHANGE_MESSAGE);
 
     assertNotNull(orgFamilySearch);

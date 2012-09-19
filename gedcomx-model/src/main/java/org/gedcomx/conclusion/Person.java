@@ -18,6 +18,8 @@ package org.gedcomx.conclusion;
 import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.gedcomx.common.Attributable;
+import org.gedcomx.common.Attribution;
 import org.gedcomx.common.URI;
 import org.gedcomx.rt.json.JsonElementWrapper;
 import org.gedcomx.types.FactType;
@@ -40,14 +42,35 @@ import java.util.List;
  */
 @XmlRootElement
 @JsonElementWrapper (name = "persons")
-@XmlType ( name = "Person", propOrder = { "identifiers", "living", "gender", "names", "facts" } )
-public class Person extends Conclusion implements HasFacts {
+@XmlType ( name = "Person", propOrder = { "attribution", "identifiers", "living", "gender", "names", "facts" } )
+public class Person extends Conclusion implements HasFacts, Attributable {
 
+  private Attribution attribution;
   private List<Identifier> identifiers;
   private Boolean living;
   private Gender gender;
   private List<Name> names;
   private List<Fact> facts;
+
+  /**
+   * Attribution metadata for a conclusion.
+   *
+   * @return Attribution metadata for a conclusion.
+   */
+  @Override
+  public Attribution getAttribution() {
+    return attribution;
+  }
+
+  /**
+   * Attribution metadata for a conclusion.
+   *
+   * @param attribution Attribution metadata for a conclusion.
+   */
+  @Override
+  public void setAttribution(Attribution attribution) {
+    this.attribution = attribution;
+  }
 
   /**
    * Find the long-term, persistent identifier for this person from the list of identifiers.
