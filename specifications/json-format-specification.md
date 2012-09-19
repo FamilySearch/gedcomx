@@ -661,9 +661,9 @@ The JSON object used to (de)serialize the `http://gedcomx.org/v1/Name` data type
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 type | URI identifying the type of the name. | type | [`URI`](#uri)
-preferred | Whether this name is preferred above the other names of a person. | preferred | boolean
+preferred | Whether this name is preferred above the other `Name` conclusions of a person. | preferred | boolean
 primaryForm | The primary form of the name. | primaryForm | [`NameForm`](#name-form)
-alternateForms | The alternate forms of the name. | alternateForms | array of [`NameForm`](#name-form)
+alternateForms | The alternate forms (renderings) of the primary name. This is *not* for name variants (e.g., nicknames, spelling variations). | alternateForms | array of [`NameForm`](#name-form)
 
 ### examples
 
@@ -903,6 +903,7 @@ The JSON object used to (de)serialize the `http://gedcomx.org/v1/NameForm` data 
 
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
+locale | An [IETF BCP 47 language tag](http://tools.ietf.org/html/bcp47) specifying the cultural context (language, script, etc.) to be used to understand, interpret and render this name form. | locale | string
 fullText | The full text of the name form. | fullText | string
 parts | The parts of the name form. | parts | array of [`NamePart`](#name-part)
 
@@ -910,6 +911,7 @@ parts | The parts of the name form. | parts | array of [`NamePart`](#name-part)
 
 ```json
 {
+  "locale" : "...an IETF BCP 47 language tag...",
   "fullText" : "...full text of the name form...",
   "parts" : [ { ... }, { ... } ]
 }

@@ -691,9 +691,9 @@ data type.
 name | description | XML property | XML type
 -----|-------------|--------------|---------
 type | The name type. | type (attribute) | [`URI`](#uri)
-preferred | Whether this name is preferred above the other names of a person. | gx:preferred | xsd:boolean
+preferred | Whether this name is preferred above the other `Name` conclusions of a person. | gx:preferred | xsd:boolean
 primaryForm | The primary form of the name. | gx:primaryForm | [`gx:NameForm`](#name-form)
-alternateForms | A list of alternate forms of the name. | gx:alternateForm | [`gx:NameForm`](#name-form)
+alternateForms | The alternate forms (renderings) of the primary name. This is *not* for name variants (e.g., nicknames, spelling variations). | gx:alternateForm | [`gx:NameForm`](#name-form)
 
 ### examples
 
@@ -969,6 +969,7 @@ data type.
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
+locale | An [IETF BCP 47 language tag](http://tools.ietf.org/html/bcp47) specifying the cultural context (language, script, etc.) to be used to understand, interpret and render this name form. | gx:locale | xsd:string
 fullText | The full text of the name form. | gx:fullText | xsd:string
 parts | The parts of the name form. | gx:part | [`gx:NamePart`](#name-part)
 
@@ -976,6 +977,7 @@ parts | The parts of the name form. | gx:part | [`gx:NamePart`](#name-part)
 
 ```xml
   <...>
+    <gx:locale>...an IETF BCP 47 language tag...</gx:locale>
     <gx:fullText>...full text of the name form...</gx:fullText>
     <gx:part>
       ...
