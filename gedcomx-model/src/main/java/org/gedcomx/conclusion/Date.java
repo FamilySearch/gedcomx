@@ -16,7 +16,6 @@
 package org.gedcomx.conclusion;
 
 import org.codehaus.enunciate.ClientName;
-import org.gedcomx.rt.RDFSubClassOf;
 
 import javax.xml.bind.annotation.XmlType;
 

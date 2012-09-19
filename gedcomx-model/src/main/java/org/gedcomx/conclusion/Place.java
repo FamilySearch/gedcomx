@@ -16,8 +16,8 @@
 package org.gedcomx.conclusion;
 
 import org.gedcomx.common.URI;
-import org.gedcomx.rt.RDFSubClassOf;
 
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
 /**
@@ -25,12 +25,31 @@ import javax.xml.bind.annotation.XmlType;
  *
  * @author Ryan Heaton
  */
-@XmlType ( name = "Place", propOrder = { "original", "normal", "resource" } )
+@XmlType ( name = "Place", propOrder = { "original", "normalized" } )
 public class Place {
 
-  private String original;
-  private String normal;
   private URI resource;
+  private String original;
+  private String normalized;
+
+  /**
+   * The standardized and/or normalized resource value.
+   *
+   * @return The resource value.
+   */
+  @XmlAttribute
+  public URI getResource() {
+    return resource;
+  }
+
+  /**
+   * The standardized and/or normalized resource value.
+   *
+   * @param resource The resource value.
+   */
+  public void setResource(URI resource) {
+    this.resource = resource;
+  }
 
   /**
    * The original text as supplied by the user.
@@ -51,40 +70,24 @@ public class Place {
   }
 
   /**
-   * The standardized and/or normalized resource value.
-   *
-   * @return The resource value.
-   */
-  public URI getResource() {
-    return resource;
-  }
-
-  /**
-   * The standardized and/or normalized resource value.
-   *
-   * @param resource The resource value.
-   */
-  public void setResource(URI resource) {
-    this.resource = resource;
-  }
-
-  /**
    * The normalized value of the place
+   *
    * @return the normalized value
    */
-  public String getNormal() {
-    return normal;
+  public String getNormalized() {
+    return normalized;
   }
 
   /**
    * The normalized value of the place
-   * @param normal the normalized value
+   *
+   * @param normalized the normalized value
    */
-  public void setNormal(String normal) {
-    this.normal = normal;
+  public void setNormalized(String normalized) {
+    this.normalized = normalized;
   }
 
   public String toString() {
-    return "Place{" + "original='" + original + '\'' + "normal='" + normal + '\'' + ", resource=" + resource + '}';
+    return "Place{" + "original='" + original + '\'' + "normal='" + normalized + '\'' + ", resource=" + resource + '}';
   }
 }

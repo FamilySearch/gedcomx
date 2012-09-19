@@ -101,7 +101,7 @@ public class PersonRecipesTest extends RecipeTest {
 
     fact.setPlace(new Place());
     fact.getPlace().setOriginal("Mount Vernon, Virginia");
-    fact.getPlace().setNormal("Mount Vernon, Fairfax County, Virginia");
+    fact.getPlace().setNormalized("Mount Vernon, Fairfax County, Virginia");
     fact.getPlace().setResource(URI.create("https://familysearch.org/platform/places/67890"));
 
     person.addFact(fact);

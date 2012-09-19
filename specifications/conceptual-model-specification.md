@@ -23,7 +23,7 @@ that are used to provide a standard model and vocabulary for describing genealog
 data. Genealogical data is structured by data types such as persons, 
 relationships, and sources.
 
-## 1.1 Identifier and Version
+## 1.1 Identifier, Version, and Dependencies
 
 The identifier for this specification is:
 
@@ -32,9 +32,13 @@ The identifier for this specification is:
 For convenience, the GEDCOM X conceptual model may be referred to as "GEDCOM X 1.0".
 This specification uses "GEDCOM X" internally.
 
+This specification is depends on the GEDCOM X Date Model specification identified
+by [`http://gedcomx.org/date-model/v1`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/date-model-specification.md).
+
 ## 1.2 Notational Conventions
 
 ### 1.2.1 Data Types
+
 This specification uses the term "data type" to refer to a formal description of
 a data structure, including the properties that define valid instances of the
 data type. For example, information about a person might be contained within a 
@@ -57,16 +61,17 @@ Data types are defined by the following sections:
 
 <a id="formal-values" />
 
-### 1.2.2 Formal Values
-A property may be identified as a "formal value". The *formal value* supplies a formal
-interpretation of a value that has been supplied by a user:
+### 1.2.2 Original, Normalized, and Standardized Values
 
-1. If the value has been reformatted for the purpose of easier processing (e.g. for
-display purposes), it is said to be "normalized".
-2. If the value has been resolved to a discrete, machine-identifiable value based on
-a specific standard, it is said to be "standardized".
+When a property is identified as an "original value", the value of the property
+is interpreted as the literal value supplied by a user. If a property is identified as a
+"normalized value", the value of the property is assumed to be formally formatted, either by
+a user or by the application, for the purpose of easier processing, such as for display
+purposes. When a property has been identified as a "standardized value", the value of the
+property resolves a discrete, machine-identifiable value based on a specific standard.
 
 ### 1.2.3 Keywords
+
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
 "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
 document are to be interpreted as described in BCP 14, 
@@ -719,8 +724,7 @@ name | description | data type
 type | URI identifying the type of the fact. | [URI](#uri) - MUST resolve to a fact type. See the list of [known fact types](#known-fact-types).
 date | The date of applicability of the fact. | [`http://gedcomx.org/v1/Date`](#conclusion-date)
 place | The place of applicability of the fact. | [`http://gedcomx.org/v1/Place`](#conclusion-place)
-original | The value of the fact as supplied by the contributor. | string
-formal | The standardized and/or normalized [formal value](#formal-values) of the fact. | string - MAY be in the form of a [URI](#uri)
+value | The original value of the fact as supplied by the contributor. | string
 
 <a id="known-fact-types"/>
 
@@ -1002,7 +1006,7 @@ The identifier for the `Date` data type is:
 name | description | data type
 -----|-------------|----------
 original | The original value of the date as supplied by the contributor. | string
-formal | The standardized [formal value](#formal-values) of the date, formatted per GEDCOM X Date Format specification. | string
+formal | The standardized [formal value](#formal-values) of the date, formatted per GEDCOM X Date Format specification. | [GEDCOM X Date](https://github.com/FamilySearch/gedcomx/blob/master/specifications/date-model-specification.md)
 
 
 <a id="conclusion-place"/>
@@ -1023,7 +1027,7 @@ name | description | data type
 -----|-------------|----------
 original | The original value of the place as supplied by the contributor. | string
 normal | The normalized value of the place. | string
-resource | The standardized, normalized [formal value](#formal-values) of the place. | string
+resource | Reference to the standardized resource describing the place. | [URI](#uri)
 
 
 <a id="name-part"/>
