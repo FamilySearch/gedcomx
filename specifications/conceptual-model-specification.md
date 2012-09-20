@@ -305,7 +305,7 @@ citation | The citation for this source. | [`http://gedcomx.org/v1/SourceCitatio
 about | A uniform resource identifier (URI) for the resource being described. | [URI](#uri) - OPTIONAL
 mediator | A reference to the entity that mediates access to the described source. | [URI](#uri) - OPTIONAL; MUST resolve to an instance of [`http://gedcomx.org/v1/Agent`](#agent).
 sources | A list of references to any sources from which this source is derived. | List of [`http://gedcomx.org/v1/SourceReference`](#source-reference) - OPTIONAL
-extractedConclusions | A list of references to any conclusions that were extracted from this source, to be analyzed and evaluated atomically within on context of the source. | [URI](#uri) - OPTIONAL
+extractedConclusions | A list of references to conclusions that were extracted from this source, to be analyzed and evaluated atomically within the context of the source. | [URI](#uri) - OPTIONAL
 componentOf | A reference to the source that contains this source -- its parent context; this is for cases where this description is not complete without the description of its parent context | [`http://gedcomx.org/v1/SourceReference`](#source-reference) - OPTIONAL
 displayName | A display name for this source. | string - OPTIONAL
 alternateNames | A list of alternate display names for this source. | List of [`http://gedcomx.org/TextValue`](#text-value) - OPTIONAL

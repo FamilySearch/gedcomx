@@ -158,9 +158,9 @@ public class SourceDescription implements Attributable, HasNotes, ReferencesSour
   }
 
   /**
-   * References to any conclusions extracted from the source description, analyzed and evaluated atomically within on context of the source..
+   * References to any conclusions extracted from the described source, analyzed and evaluated atomically within on context of the source..
    *
-   * @return References to any conclusions extracted from the source description, analyzed and evaluated atomically within on context of the source..
+   * @return References to any conclusions extracted from the described source, analyzed and evaluated atomically within on context of the source..
    */
   @XmlElement (name="extractedConclusion")
   @JsonProperty ("extractedConclusions")
@@ -170,9 +170,9 @@ public class SourceDescription implements Attributable, HasNotes, ReferencesSour
   }
 
   /**
-   * References to any conclusions extracted from the source description, analyzed and evaluated atomically within on context of the source..
+   * References to any conclusions extracted from the described source, analyzed and evaluated atomically within on context of the source..
    *
-   * @param extractedConclusions References to any conclusions extracted from the source description, analyzed and evaluated atomically within on context of the source..
+   * @param extractedConclusions References to any conclusions extracted from the described source, analyzed and evaluated atomically within on context of the source..
    */
   @JsonProperty ("extractedConclusions")
   public void setExtractedConclusions(List<ResourceReference> extractedConclusions) {
