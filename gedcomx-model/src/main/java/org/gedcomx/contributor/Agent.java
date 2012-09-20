@@ -16,15 +16,13 @@
 package org.gedcomx.contributor;
 
 import org.codehaus.enunciate.json.JsonName;
-import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.gedcomx.common.ExtensibleData;
 import org.gedcomx.common.ResourceReference;
 import org.gedcomx.conclusion.Identifier;
-import org.gedcomx.rt.SupportsExtensionElements;
 import org.gedcomx.rt.json.JsonElementWrapper;
 
 import javax.xml.bind.annotation.*;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -38,7 +36,7 @@ import java.util.List;
 @XmlRootElement
 @XmlType ( name = "Agent" )
 @JsonElementWrapper ( name = "agents" )
-public class Agent implements SupportsExtensionElements {
+public class Agent extends ExtensibleData {
 
   private String id;
   private String name;
@@ -49,7 +47,6 @@ public class Agent implements SupportsExtensionElements {
   private List<ResourceReference> emails;
   private List<ResourceReference> phones;
   private List<Address> addresses;
-  private List<Object> extensionElements;
 
   /**
    * The id of this piece of metadata.
@@ -238,76 +235,4 @@ public class Agent implements SupportsExtensionElements {
     this.addresses = addresses;
   }
 
-  /**
-   * Add an extension element.
-   *
-   * @param element The extension element to add.
-   */
-  public void addExtensionElement(Object element) {
-    if (this.extensionElements == null) {
-      this.extensionElements = new ArrayList<Object>();
-    }
-
-    this.extensionElements.add(element);
-  }
-
-  /**
-   * Finds the first extension of a specified type.
-   *
-   * @param clazz The type.
-   * @return The extension, or null if none found.
-   */
-  @SuppressWarnings ( {"unchecked"} )
-  public <E> E findExtensionOfType(Class<E> clazz) {
-    if (this.extensionElements != null) {
-      for (Object extension : extensionElements) {
-        if (clazz.isInstance(extension)) {
-          return (E) extension;
-        }
-      }
-    }
-
-    return null;
-  }
-
-  /**
-   * Find the extensions of a specified type.
-   *
-   * @param clazz The type.
-   * @return The extensions, possibly empty but not null.
-   */
-  @SuppressWarnings ( {"unchecked"} )
-  public <E> List<E> findExtensionsOfType(Class<E> clazz) {
-    List<E> ext = new ArrayList<E>();
-    if (this.extensionElements != null) {
-      for (Object extension : extensionElements) {
-        if (clazz.isInstance(extension)) {
-          ext.add((E) extension);
-        }
-      }
-    }
-
-    return ext;
-  }
-
-  /**
-   * Custom elements applicable as part of this metadata.
-   *
-   * @return Custom elements applicable as part of this metadata.
-   */
-  @XmlAnyElement ( lax = true )
-  @JsonIgnore
-  public List<Object> getExtensionElements() {
-    return extensionElements;
-  }
-
-  /**
-   * Custom elements applicable as part of this metadata.
-   *
-   * @param extensionElements Custom elements applicable as part of this metadata.
-   */
-  @JsonIgnore
-  public void setExtensionElements(List<Object> extensionElements) {
-    this.extensionElements = extensionElements;
-  }
 }
