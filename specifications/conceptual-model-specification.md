@@ -23,7 +23,7 @@ that are used to provide a standard model and vocabulary for describing genealog
 data. Genealogical data is structured by data types such as persons, 
 relationships, and sources.
 
-## 1.1 Identifier and Version
+## 1.1 Identifier, Version, and Dependencies
 
 The identifier for this specification is:
 
@@ -32,7 +32,12 @@ The identifier for this specification is:
 For convenience, the GEDCOM X conceptual model may be referred to as "GEDCOM X 1.0".
 This specification uses "GEDCOM X" internally.
 
+This specification is depends on the GEDCOM X Date Model specification identified
+by [`http://gedcomx.org/date-model/v1`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/date-model-specification.md).
+
 ## 1.2 Notational Conventions
+
+### 1.2.1 Data Types
 
 This specification uses the term "data type" to refer to a formal description of
 a data structure, including the properties that define valid instances of the
@@ -54,12 +59,24 @@ Data types are defined by the following sections:
 3. The *properties* of the data type, which define the information the data type
    encapsulates.
 
+<a id="formal-values" />
+
+### 1.2.2 Original, Normalized, and Standardized Values
+
+When a property is identified as an "original value", the value of the property
+is interpreted as the literal value supplied by a user. If a property is identified as a
+"normalized value", the value of the property is assumed to be formally formatted, either by
+a user or by the application, for the purpose of easier processing, such as for display
+purposes. When a property has been identified as a "standardized value", the value of the
+property resolves a discrete, machine-identifiable value based on a specific standard.
+
+### 1.2.3 Keywords
+
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
 "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
 document are to be interpreted as described in BCP 14, 
 [RFC2119](http://tools.ietf.org/html/rfc2119), as scoped to those conformance 
 targets.
-
 
 
 # 2. Common Data Types
@@ -166,60 +183,9 @@ URI | description
 todo:
 
 
-<a id="formal-value"/>
-
-## 2.4 The "FormalValue" Data Type
-
-The `FormalValue` data type defines the data structure used to supply a normalized and/or
-standardized value. The formal value is used to supply a formal interpretation of a
-value that has been supplied by a user. If the value has been reformatted for the purpose of easier
-processing (e.g. for display purposes), it is said to be "normalized". If the value has
-been resolved to a discrete, machine-identifiable value based on a specific standard, it is
-said to be "standardized".
-
-The `FormalValue` data type does NOT support extension properties (see [Extension Properties](#extension-properties)).
-
-### identifier
-
-The identifier for the "FormalValue" data type is:
-
-`http://gedcomx.org/v1/FormalValue`
-
-### properties
-
-name  | description | data type
-------|-------------|----------
-value | A string supplying the value of the formal value. If the value has been standardized, a datatype will be supplied to identify how the string is to be parsed. | string
-datatype  | URI identifying the way the value is to be processed according to a specific standard. | [URI](#uri)
-resource | URI identifying the resource to which the formal value has been standardized. | [URI](#uri)
-
-If a value is supplied for the `datatype` property, a value SHALL NOT be supplied for the `resource` property.
-If a value is supplied for the `resource` property, a value SHALL NOT be supplied for the `datatype` property.
-
-### examples
-
-* A user supplies the text "jan 1 1890" as the value of a genealogical date. If a process
-  (either automated or by user-interaction) normalizes this text to "1 January 1890", the formal
-  value containing the results of this normalization will have a value of "1 January 1890"
-  and no values specified for either the datatype or the resource.
-* A user supplies the text "jan 1 1890" as the value of a genealogical date. If a process
-  (either automated or by user-interaction) standardizes this text to a specific date such as
-  midnight UTC of the first day of January of the year 1890 A.D. of the Gregorian calendar,
-  the formal value containing the results of this standardization might have a value of
-  "1890-01-01T00:00:00Z" and a datatype of "http://www.w3.org/2001/XMLSchema#dateTime" and no value
-  specified for the resource.
-* A user supplies "boston, MA" as the value for a genealogical place. If a process (either
-  automated or by user-interaction) standardizes this place to a unique resource (e.g. the
-  actual city know today as Boston, Massachusetts) identified by a specific URI (e.g.
-  "http://places.com/12345"), the formal value containing the results of this standardization
-  will have "http://places.com/12345" as the value of its "resource" property. The formal value
-  MAY also supply a value for the "value" property that contains the results of normalizing
-  the user-supplied text (e.g. "Boston, Suffolk, Massachusetts, United States").
-
-
 <a id="note"/>
 
-## 2.5 The "Note" Data Type
+## 2.4 The "Note" Data Type
 
 The `Note` data type defines a note that was contributed from genealogical research.
 
@@ -241,7 +207,7 @@ attribution | The attribution of this note. | [`http://gedcomx.org/Attribution`]
 
 <a id="text-value"/>
 
-## 2.7 The "TextValue" Data Type
+## 2.5 The "TextValue" Data Type
 
 The `TextValue` data type defines a literal value.
 
@@ -258,7 +224,7 @@ The identifier for the "TextValue" data type is:
 name  | description | data type
 ------|-------------|----------
 lang | The language of the literal value. | `http://www.w3.org/XML/1998/namespace#lang`
-value | The literal value. A datatype MAY be supplied to identify how the string is to be parsed. | string
+value | The literal value. | string
 
 
 
@@ -758,8 +724,7 @@ name | description | data type
 type | URI identifying the type of the fact. | [URI](#uri) - MUST resolve to a fact type. See the list of [known fact types](#known-fact-types).
 date | The date of applicability of the fact. | [`http://gedcomx.org/v1/Date`](#conclusion-date)
 place | The place of applicability of the fact. | [`http://gedcomx.org/v1/Place`](#conclusion-place)
-original | The value of the fact as supplied by the contributor. | string
-formal | The formal value of the fact. | [`http://gedcomx.org/v1/FormalValue`](#formal-value)
+value | The original value of the fact as supplied by the contributor. | string
 
 <a id="known-fact-types"/>
 
@@ -1041,16 +1006,7 @@ The identifier for the `Date` data type is:
 name | description | data type
 -----|-------------|----------
 original | The original value of the date as supplied by the contributor. | string
-formal | The formal value of the date. | [`http://gedcomx.org/FormalValue`](#formal-value)
-
-### known date formats
-
-The following date formats are recognized by GEDCOM X:
-
-URI | description
-----|-------------
-`http://gedcomx.org/GEDCOM_5_5` | The date format specified by the GEDCOM 5.5 specification.
-`iso:8601` | The date format specified by [ISO 8601](http://en.wikipedia.org/wiki/ISO_8601).
+formal | The standardized [formal value](#formal-values) of the date, formatted per GEDCOM X Date Format specification. | [GEDCOM X Date](https://github.com/FamilySearch/gedcomx/blob/master/specifications/date-model-specification.md)
 
 
 <a id="conclusion-place"/>
@@ -1070,7 +1026,8 @@ The identifier for the `Place` data type is:
 name | description | data type
 -----|-------------|----------
 original | The original value of the place as supplied by the contributor. | string
-formal | The formal value of the place. | [`http://gedcomx.org/FormalValue`](#formal-value)
+normal | The normalized value of the place. | string
+resource | Reference to the standardized resource describing the place. | [URI](#uri)
 
 
 <a id="name-part"/>

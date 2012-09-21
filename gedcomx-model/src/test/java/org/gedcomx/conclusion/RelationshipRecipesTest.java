@@ -53,10 +53,7 @@ public class RelationshipRecipesTest extends RecipeTest {
     fact.getAttribution().getContributor().setResource(URI.create("https://familysearch.org/platform/contributors/HHH-HHHH"));
     fact.setDate(new Date());
     fact.getDate().setOriginal("January 6, 1759");
-    FormalValue normalized = new FormalValue();
-    normalized.setText("1759-01-06");
-    normalized.setDatatype(URI.create("http://www.w3.org/2001/XMLSchema#date"));
-    fact.getDate().setFormal(normalized);
+    fact.getDate().setFormal("+1759-01-06");
 
     relationship.addFact(fact);
     relationship.setPerson1(new ResourceReference());
