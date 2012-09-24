@@ -64,7 +64,7 @@ public class RelationshipRecipesTest extends RecipeTest {
     relationship.setPerson2(new ResourceReference());
     relationship.getPerson2().setResource(URI.create("https://familysearch.org/platform/persons/FFF-FFFF"));
     SourceReference sourceReference = new SourceReference();
-    sourceReference.setSourceDescriptionURI(URI.create("urn:srcDescId"));
+    sourceReference.setDescription(URI.create("urn:srcDescId"));
     relationship.addSource(sourceReference);
     return relationship;
   }

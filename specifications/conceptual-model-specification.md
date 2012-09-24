@@ -362,7 +362,7 @@ The identifier for the "SourceReference" data type is:
 
 name | description | data type
 -----|-------------|----------
-sourceDescription  | Reference to a _description_ of the target source. | [URI](#uri) - MUST resolve to an instance of [`http://gedcomx.org/v1/SourceDescription`](#source-description)
+description  | Reference to a _description_ of the target source. | [URI](#uri) - MUST resolve to an instance of [`http://gedcomx.org/v1/SourceDescription`](#source-description)
 attribution | The attribution of this source reference. | [`http://gedcomx.org/Attribution`](#attribution)
 
 ### examples

@@ -15,14 +15,11 @@
  */
 package org.gedcomx.source;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.annotate.JsonProperty;
 import org.gedcomx.common.*;
-import org.gedcomx.rt.RDFRange;
 import org.gedcomx.rt.json.JsonElementWrapper;
 
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 
@@ -36,7 +33,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType ( name = "SourceReference" )
 public class SourceReference extends ExtensibleData implements Attributable {
 
-  private ResourceReference sourceDescription;
+  private URI description;
   private Attribution attribution;
 
   /**
@@ -62,30 +59,17 @@ public class SourceReference extends ExtensibleData implements Attributable {
    *
    * @return A reference to a description of the source being referenced.
    */
-  @JsonProperty
-  @RDFRange( external = "org.gedcomx.source.SourceDescription" )
-  public ResourceReference getSourceDescription() {
-    return sourceDescription;
+  @XmlAttribute
+  public URI getDescription() {
+    return description;
   }
 
   /**
    * A reference to a description of the source being referenced.
    *
-   * @param sourceDescription A reference to a description of the source being referenced.
+   * @param description A reference to a description of the source being referenced.
    */
-  public void setSourceDescription(ResourceReference sourceDescription) {
-    this.sourceDescription = sourceDescription;
+  public void setDescription(URI description) {
+    this.description = description;
   }
-
-  /**
-   * A reference to a description of the source being referenced.
-   *
-   * @param descriptionRef A reference to a description of the source being referenced.
-   */
-  @XmlTransient
-  @JsonIgnore
-  public void setSourceDescriptionURI(URI descriptionRef) {
-    this.sourceDescription = descriptionRef != null ? new ResourceReference(descriptionRef) : null;
-  }
-
 }
