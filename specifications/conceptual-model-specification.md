@@ -1115,6 +1115,7 @@ The identifier for the `NamePart` data type is:
 name | description | data type
 -----|-------------|----------
 type | URI identifying the type of the name part. | [URI](#uri) - MUST resolve to a name part type. Refer to the list of [known name part types](#known-name-part-types).
+qualifiers | Type qualifiers to further describe the type of the name part. | List of [URI](#uri) - MUST resolve to a name part type. Refer to the list of [known name part types qualifiers](#known-name-part-type-qualifiers).
 value | The term(s) from the name that make up this name part. | string
 
 <a id="known-name-part-types"/>
@@ -1129,6 +1130,30 @@ URI | description
 `http://gedcomx.org/Suffix`|
 `http://gedcomx.org/Given`|
 `http://gedcomx.org/Surname`|
+
+<a id="known-name-part-type-qualifiers"/>
+
+### known name part type qualifiers
+
+The following name part type qualifiers are defined by GEDCOM X:
+
+URI | description
+----|-------------
+`http://gedcomx.org/Title`|
+`http://gedcomx.org/Diminutive`|
+`http://gedcomx.org/First`|
+`http://gedcomx.org/Middle`|
+`http://gedcomx.org/Familiar`|
+`http://gedcomx.org/Religious`|
+`http://gedcomx.org/Family`|
+`http://gedcomx.org/Maiden`|
+`http://gedcomx.org/Patronymic`|
+`http://gedcomx.org/Article`|
+`http://gedcomx.org/And`|
+`http://gedcomx.org/Matronymic`|
+`http://gedcomx.org/Geographic`|
+`http://gedcomx.org/Occupational`|
+`http://gedcomx.org/Postnom`|
 
 
 <a id="name-form"/>
