@@ -17,6 +17,7 @@ package org.gedcomx.conclusion;
 
 import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.gedcomx.common.ExtensibleData;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
@@ -29,7 +30,7 @@ import java.util.List;
  * @author Ryan Heaton
  */
 @XmlType ( name = "NameForm" )
-public class NameForm {
+public class NameForm extends ExtensibleData {
 
   private String fullText;
   private List<NamePart> parts;

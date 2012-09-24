@@ -420,14 +420,14 @@ data type is defined as follows:
 
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
-sourceDescription  | Reference to a _description_ of the source being referenced. | sourceDescription | [`URI`](#uri)
+description  | Reference to a _description_ of the source being referenced. | description | [`URI`](#uri)
 attribution | The attribution of this source reference. | attribution | [`Attribution`](#attribution)
 
 ### examples
 
 ```json
 {
-  "sourceDescription" : "http://identifier/for/description/of/source/being/referenced",
+  "description" : "http://identifier/for/description/of/source/being/referenced",
   "attribution" : { ... }
 }
 ```

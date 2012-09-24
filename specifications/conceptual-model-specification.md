@@ -111,7 +111,9 @@ The following identifier types are defined by GEDCOM X.
 
 URI | description
 ----|------------
-`http://gedcomx.org/Forwarded` |
+`http://gedcomx.org/Primary` | The primary identifier for the resource.
+`http://gedcomx.org/Deprecated` | An identifier that has been relegated, deprecated, or otherwise downgraded. This identifier is commonly used as the result of a merge when what was once a primary identifier for a person is no longer primary.
+`http://gedcomx.org/Persistent` | An identifier that is considered to be a long-term persistent identifier. Applications that provide persistent identifiers are claiming that links to the resource using the identifier won't break.
 
 ### examples
 
@@ -360,7 +362,7 @@ The identifier for the "SourceReference" data type is:
 
 name | description | data type
 -----|-------------|----------
-sourceDescription  | Reference to a _description_ of the target source. | [URI](#uri) - MUST resolve to an instance of [`http://gedcomx.org/v1/SourceDescription`](#source-description)
+description  | Reference to a _description_ of the target source. | [URI](#uri) - MUST resolve to an instance of [`http://gedcomx.org/v1/SourceDescription`](#source-description)
 attribution | The attribution of this source reference. | [`http://gedcomx.org/Attribution`](#attribution)
 
 ### examples

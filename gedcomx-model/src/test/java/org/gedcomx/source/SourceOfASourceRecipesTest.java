@@ -159,7 +159,7 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
     srcDesc2.setAbout(URI.create(RECORD_PAL_LYNDON_B_JOHNSON));
     srcDesc2.setSources(new ArrayList<SourceReference>());
     srcDesc2.getSources().add(new SourceReference());
-    srcDesc2.getSources().get(0).setSourceDescriptionURI(URI.create(SRCDESC_URI_PREFIX + SRC_OF_SRC_ID));
+    srcDesc2.getSources().get(0).setDescription(URI.create(SRCDESC_URI_PREFIX + SRC_OF_SRC_ID));
     srcDesc2.setDisplayName(PRESIDENT_LYNDON_B_JOHNSON_DEATH_CERTIFICATE);
     srcDesc2.setMediatorURI(URI.create(MEDIATOR_URI_PREFIX + ORG_FS_ID));
     srcDesc2.setNotes(new ArrayList<Note>());
@@ -242,7 +242,7 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
     assertEquals(srcDesc2.getAbout().toURI().toString(), RECORD_PAL_LYNDON_B_JOHNSON);
     assertNotNull(srcDesc2.getSources());
     assertEquals(srcDesc2.getSources().size(), 1);
-    assertEquals(srcDesc2.getSources().get(0).getSourceDescription().getResource().toURI().toString(), SRCDESC_URI_PREFIX + SRC_OF_SRC_ID);
+    assertEquals(srcDesc2.getSources().get(0).getDescription().toURI().toString(), SRCDESC_URI_PREFIX + SRC_OF_SRC_ID);
     assertNotNull(srcDesc2.getCitation());
     assertEquals(srcDesc2.getCitation().getValue(), DEATH_IDX_FULL_CITATION);
     assertEquals(srcDesc2.getCitation().getCitationTemplate().getResource().toURI().toString(), FS_INDEX_DEATHRECORD_CITATION_TEMPLATE);
@@ -374,7 +374,7 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
     srcDesc1.getCitation().getFields().add(new CitationField("fhl-film", "FHL US/CAN Census Area Film 2340258"));
     srcDesc1.setSources(new ArrayList<SourceReference>());
     srcDesc1.getSources().add(new SourceReference());
-    srcDesc1.getSources().get(0).setSourceDescriptionURI(URI.create("#" + sourceS3));
+    srcDesc1.getSources().get(0).setDescription(URI.create("#" + sourceS3));
     srcDesc1.setMediatorURI(URI.create("repository#" + ORG_FHL_ID));
 
     SourceDescription srcDesc2 = new SourceDescription();
@@ -389,7 +389,7 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
     srcDesc2.setAbout(URI.create("https://www.familysearch.org/search/collection/show#uri=http://www.familysearch.org/searchapi/search/collection/1810731"));
     srcDesc2.setSources(new ArrayList<SourceReference>());
     srcDesc2.getSources().add(new SourceReference());
-    srcDesc2.getSources().get(0).setSourceDescriptionURI(URI.create("#" + sourceOfS2));
+    srcDesc2.getSources().get(0).setDescription(URI.create("#" + sourceOfS2));
     srcDesc2.setDisplayName("1930 US Census");
     srcDesc2.setMediatorURI(URI.create("repository#" + ORG_FS_ID));
     srcDesc2.setNotes(new ArrayList<Note>());
@@ -415,7 +415,7 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
     srcDesc3.getCitation().getFields().add(new CitationField("accessed", "12 July 2012"));
     srcDesc3.setAbout(URI.create("https://familysearch.org/pal:/MM9.1.1/XSYY-Q6P"));
     srcDesc3.setComponentOf(new SourceReference());
-    srcDesc3.getComponentOf().setSourceDescriptionURI(URI.create("#" + sourceOfS1));
+    srcDesc3.getComponentOf().setDescription(URI.create("#" + sourceOfS1));
     srcDesc3.setDisplayName("President Ronald Reagan with his parents in 1830 census");
     srcDesc3.setNotes(new ArrayList<Note>());
     srcDesc3.getNotes().add(note);

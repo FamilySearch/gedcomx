@@ -425,14 +425,13 @@ data type.
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
-sourceDescription  | Reference to a _description_ of the source being referenced. | gx:sourceDescription | [`gx:ResourceReference`](#resource-reference)
+description  | Reference to a _description_ of the source being referenced. | description (attribute) | [`URI`](#uri)
 attribution | The attribution of this source reference. | gx:attribution | [`gx:Attribution`](#attribution)
 
 ### examples
 
 ```xml
-  <...>
-    <gx:sourceDescription resource="http://identifier/for/description/of/source/being/referenced"/>
+  <... description="http://identifier/for/description/of/source/being/referenced">
     <gx:attribution>
       ...
     </gx:attribution>

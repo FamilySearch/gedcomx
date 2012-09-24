@@ -16,17 +16,15 @@
 package org.gedcomx.conclusion;
 
 import org.codehaus.enunciate.json.JsonName;
-import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
-import org.gedcomx.common.Attributable;
-import org.gedcomx.common.Attribution;
-import org.gedcomx.common.HasNotes;
-import org.gedcomx.common.Note;
-import org.gedcomx.rt.SupportsExtensionElements;
+import org.gedcomx.common.*;
 import org.gedcomx.source.ReferencesSources;
 import org.gedcomx.source.SourceReference;
 
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlType;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,13 +35,12 @@ import java.util.List;
  * @author Ryan Heaton
  */
 @XmlType ( name = "Conclusion" )
-public abstract class Conclusion implements Attributable, ReferencesSources, HasNotes, SupportsExtensionElements {
+public abstract class Conclusion extends ExtensibleData implements Attributable, ReferencesSources, HasNotes {
 
   private String id;
   private List<SourceReference> sources;
   private List<Note> notes;
   private Attribution attribution;
-  protected List<Object> extensionElements;
 
   /**
    * A local, context-specific id for the data.
@@ -155,79 +152,6 @@ public abstract class Conclusion implements Attributable, ReferencesSources, Has
   @Override
   public void setAttribution(Attribution attribution) {
     this.attribution = attribution;
-  }
-
-  /**
-   * Custom extension elements for a conclusion.
-   *
-   * @return Custom extension elements for a conclusion.
-   */
-  @XmlAnyElement (lax = true)
-  @JsonIgnore
-  public List<Object> getExtensionElements() {
-    return extensionElements;
-  }
-
-  /**
-   * Custom extension elements for a conclusion.
-   *
-   * @param extensionElements Custom extension elements for a conclusion.
-   */
-  @JsonIgnore
-  public void setExtensionElements(List<Object> extensionElements) {
-    this.extensionElements = extensionElements;
-  }
-
-  /**
-   * Add an extension element.
-   *
-   * @param element The extension element to add.
-   */
-  public void addExtensionElement(Object element) {
-    if (this.extensionElements == null) {
-      this.extensionElements = new ArrayList<Object>();
-    }
-
-    this.extensionElements.add(element);
-  }
-
-  /**
-   * Finds the first extension of a specified type.
-   *
-   * @param clazz The type.
-   * @return The extension, or null if none found.
-   */
-  @SuppressWarnings ( {"unchecked"} )
-  public <E> E findExtensionOfType(Class<E> clazz) {
-    if (this.extensionElements != null) {
-      for (Object extension : extensionElements) {
-        if (clazz.isInstance(extension)) {
-          return (E) extension;
-        }
-      }
-    }
-
-    return null;
-  }
-
-  /**
-   * Find the extensions of a specified type.
-   *
-   * @param clazz The type.
-   * @return The extensions, possibly empty but not null.
-   */
-  @SuppressWarnings ( {"unchecked"} )
-  public <E> List<E> findExtensionsOfType(Class<E> clazz) {
-    List<E> ext = new ArrayList<E>();
-    if (this.extensionElements != null) {
-      for (Object extension : extensionElements) {
-        if (clazz.isInstance(extension)) {
-          ext.add((E) extension);
-        }
-      }
-    }
-
-    return ext;
   }
 
   /**

@@ -15,7 +15,6 @@
  */
 package org.gedcomx.rt.json;
 
-import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider;
 import org.codehaus.jackson.map.AnnotationIntrospector;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -84,8 +83,19 @@ public class GedcomJsonProvider extends JacksonJaxbJsonProvider {
     try {
       return super.readFrom(type, genericType, annotations, mediaType, httpHeaders, entityStream);
     }
-    catch (JsonProcessingException e) {
-      throw new WebApplicationException(e, Response.Status.BAD_REQUEST);
+    catch (IOException e) {
+      Response rsp;
+
+      if(dataType == null) {
+        rsp = Response.status(Response.Status.BAD_REQUEST).
+          header("Warning", "299 GedcomX An X-type header must be specified").
+          build();
+      }
+      else {
+        rsp = Response.status(Response.Status.BAD_REQUEST).build();
+      }
+
+      throw new WebApplicationException(e, rsp);
     }
   }
 }

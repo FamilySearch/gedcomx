@@ -26,9 +26,9 @@ public class DocumentTest {
     document.setText(new TextValue("(The text of the document abstract goes here.)"));
     document.getText().setLang("en-US");
     document.addSource(new SourceReference());
-    document.getSources().get(0).setSourceDescriptionURI(URI.create("urn:original-source1"));
+    document.getSources().get(0).setDescription(URI.create("urn:original-source1"));
     document.addSource(new SourceReference());
-    document.getSources().get(1).setSourceDescriptionURI(URI.create("urn:original-source2"));
+    document.getSources().get(1).setDescription(URI.create("urn:original-source2"));
     document.setAttribution(new Attribution());
     document.getAttribution().setContributor(new ResourceReference(URI.create("urn:contributor-id")));
     document.addNote(new Note());
@@ -43,8 +43,8 @@ public class DocumentTest {
     assertEquals(document.getText().getLang(), "en-US");
     assertEquals(document.getText().getValue(), "(The text of the document abstract goes here.)");
     assertEquals(document.getSources().size(), 2);
-    assertEquals(document.getSources().get(0).getSourceDescription().getResource().toURI().toString(), "urn:original-source1");
-    assertEquals(document.getSources().get(1).getSourceDescription().getResource().toURI().toString(), "urn:original-source2");
+    assertEquals(document.getSources().get(0).getDescription().toURI().toString(), "urn:original-source1");
+    assertEquals(document.getSources().get(1).getDescription().toURI().toString(), "urn:original-source2");
     assertEquals(document.getNotes().size(), 2);
     assertEquals(document.getNotes().get(0).getText().getValue(), "(This is an example note #1, though not one to be emulated too closely.)");
     assertEquals(document.getNotes().get(1).getText().getValue(), "(This is an example note #2, though not one to be emulated too closely.)");

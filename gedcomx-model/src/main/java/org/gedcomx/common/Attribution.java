@@ -34,15 +34,14 @@ import java.util.List;
  * when they contributited it, why they are making the contribution/modification, and a statement about their confidence
  * in the information being provided.
  */
-@XmlType ( name = "Attribution", propOrder = { "contributor", "modified", "confidence", "changeMessage", "extensionElements" } )
+@XmlType ( name = "Attribution", propOrder = { "contributor", "modified", "confidence", "changeMessage" } )
 @SuppressWarnings("gedcomx:no_id")
-public final class Attribution implements SupportsExtensionElements {
+public final class Attribution extends ExtensibleData {
 
   private ResourceReference contributor;
   private URI confidence;
   private Date modified;
   private String changeMessage;
-  private List<Object> extensionElements;
 
   /**
    * Reference to the contributor of the attributed data.
@@ -139,79 +138,6 @@ public final class Attribution implements SupportsExtensionElements {
    */
   public void setChangeMessage(String changeMessage) {
     this.changeMessage = changeMessage;
-  }
-
-  /**
-   * Custom attributes applicable to this resource reference.
-   *
-   * @return Custom attributes applicable to this resource reference.
-   */
-  @XmlAnyElement ( lax = true )
-  @JsonIgnore
-  public List<Object> getExtensionElements() {
-    return extensionElements;
-  }
-
-  /**
-   * Custom attributes applicable to this resource reference.
-   *
-   * @param extensionElements Custom attributes applicable to this resource reference.
-   */
-  @JsonIgnore
-  public void setExtensionElements(List<Object> extensionElements) {
-    this.extensionElements = extensionElements;
-  }
-
-  /**
-   * Add an extension element.
-   *
-   * @param element The extension element to add.
-   */
-  public void addExtensionElement(Object element) {
-    if (this.extensionElements == null) {
-      this.extensionElements = new ArrayList<Object>();
-    }
-
-    this.extensionElements.add(element);
-  }
-
-  /**
-   * Finds the first extension of a specified type.
-   *
-   * @param clazz The type.
-   * @return The extension, or null if none found.
-   */
-  @SuppressWarnings ( {"unchecked"} )
-  public <E> E findExtensionOfType(Class<E> clazz) {
-    if (this.extensionElements != null) {
-      for (Object extension : extensionElements) {
-        if (clazz.isInstance(extension)) {
-          return (E) extension;
-        }
-      }
-    }
-
-    return null;
-  }
-
-  /**
-   * Find the extensions of a specified type.
-   *
-   * @param clazz The type.
-   * @return The extensions, possibly empty but not null.
-   */
-  @SuppressWarnings ( {"unchecked"} )
-  public <E> List<E> findExtensionsOfType(Class<E> clazz) {
-    List<E> ext = new ArrayList<E>();
-    if (this.extensionElements != null) {
-      for (Object extension : extensionElements) {
-        if (clazz.isInstance(extension)) {
-          ext.add((E) extension);
-        }
-      }
-    }
-
-    return ext;
   }
 
   /**
