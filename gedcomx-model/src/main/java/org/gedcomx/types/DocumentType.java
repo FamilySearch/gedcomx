@@ -20,24 +20,34 @@ import org.codehaus.enunciate.qname.XmlUnknownQNameEnumValue;
 import org.gedcomx.common.URI;
 
 /**
- * Enumeration of standard age part types.
+ * Enumeration of document types.
  *
  * @author Ryan Heaton
  */
 @XmlQNameEnum (
   base = XmlQNameEnum.BaseType.URI
 )
-public enum AgePartType {
+public enum DocumentType {
 
-  Years,
+  /**
+   * The document is an abstract of a record or document.
+   */
+  Abstract,
 
-  Months,
+  /**
+   * The document is a translation of a record or document.
+   */
+  Translation,
 
-  Days,
+  /**
+   * The document is a transcription (full or partial) of a record or document.
+   */
+  Transcription,
 
-  Hours,
-
-  Minutes,
+  /**
+   * The document is an analysis done by a researcher, often used as a genealogical proof statement.
+   */
+  Analysis,
 
   @XmlUnknownQNameEnumValue
   OTHER;
@@ -57,8 +67,8 @@ public enum AgePartType {
    * @param qname The qname.
    * @return The enumeration.
    */
-  public static AgePartType fromQNameURI(URI qname) {
-    return org.codehaus.enunciate.XmlQNameEnumUtil.fromURIValue(qname.toString(), AgePartType.class);
+  public static DocumentType fromQNameURI(URI qname) {
+    return org.codehaus.enunciate.XmlQNameEnumUtil.fromURIValue(qname.toString(), DocumentType.class);
   }
 
 }

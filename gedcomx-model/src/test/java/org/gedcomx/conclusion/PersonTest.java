@@ -60,7 +60,7 @@ public class PersonTest {
     FormalValue normalized = new FormalValue();
     normalized.setText("normalized date");
     normalized.setDatatype(URI.create("urn:date"));
-    normalized.setKnownValue(DatePartType.Years);
+    normalized.setKnownValue(EventType.Baptism);
     fact.getDate().setFormal(normalized);
     fact.setId("fact-id");
     fact.setKnownType(FactType.Occupation);
@@ -69,7 +69,7 @@ public class PersonTest {
     normalized = new FormalValue();
     normalized.setText("normalized place");
     normalized.setDatatype(URI.create("urn:place"));
-    normalized.setKnownValue(PlacePartType.Cemetery);
+    normalized.setKnownValue(EventType.Baptism);
     fact.getPlace().setFormal(normalized);
     fact.setOriginal("fact-value");
     person.addFact(fact);
@@ -80,7 +80,7 @@ public class PersonTest {
     normalized = new FormalValue();
     normalized.setText("normalized date");
     normalized.setDatatype(URI.create("urn:date"));
-    normalized.setKnownValue(DatePartType.Years);
+    normalized.setKnownValue(EventType.Baptism);
     event.getDate().setFormal(normalized);
     event.setId("event-id");
     event.setKnownType(FactType.Adoption);
@@ -89,7 +89,7 @@ public class PersonTest {
     normalized = new FormalValue();
     normalized.setText("normalized place");
     normalized.setDatatype(URI.create("urn:place"));
-    normalized.setKnownValue(PlacePartType.Cemetery);
+    normalized.setKnownValue(EventType.BarMitzvah);
     event.getPlace().setFormal(normalized);
     event.setSources(new ArrayList<SourceReference>());
     SourceReference eventSource = new SourceReference();
@@ -165,26 +165,26 @@ public class PersonTest {
     assertEquals(ConfidenceLevel.Certainly, fact.getKnownConfidenceLevel());
     assertEquals("original date", fact.getDate().getOriginal());
     assertEquals("normalized date", fact.getDate().getFormal().getText());
-    assertEquals(DatePartType.Years, fact.getDate().getFormal().getKnownValue(DatePartType.class));
+    assertEquals(EventType.Baptism, fact.getDate().getFormal().getKnownValue(EventType.class));
     assertEquals("urn:date", fact.getDate().getFormal().getDatatype().toString());
     assertEquals("fact-id", fact.getId());
     assertEquals(FactType.Occupation, fact.getKnownType());
     assertEquals("original place", fact.getPlace().getOriginal());
     assertEquals("normalized place", fact.getPlace().getFormal().getText());
-    assertEquals(PlacePartType.Cemetery, fact.getPlace().getFormal().getKnownValue(PlacePartType.class));
+    assertEquals(EventType.Baptism, fact.getPlace().getFormal().getKnownValue(EventType.class));
     assertEquals("urn:date", fact.getDate().getFormal().getDatatype().toString());
     assertEquals("fact-value", fact.getOriginal());
 
     event = person.getFirstFactOfType(FactType.Adoption);
     assertEquals("original date", event.getDate().getOriginal());
     assertEquals("normalized date", event.getDate().getFormal().getText());
-    assertEquals(DatePartType.Years, event.getDate().getFormal().getKnownValue(DatePartType.class));
+    assertEquals(EventType.Baptism, event.getDate().getFormal().getKnownValue(EventType.class));
     assertEquals("urn:date", event.getDate().getFormal().getDatatype().toString());
     assertEquals("event-id", event.getId());
     assertEquals(FactType.Adoption, event.getKnownType());
     assertEquals("original place", event.getPlace().getOriginal());
     assertEquals("normalized place", event.getPlace().getFormal().getText());
-    assertEquals(PlacePartType.Cemetery, event.getPlace().getFormal().getKnownValue(PlacePartType.class));
+    assertEquals(EventType.BarMitzvah, event.getPlace().getFormal().getKnownValue(EventType.class));
     assertEquals("urn:date", event.getDate().getFormal().getDatatype().toString());
 
     assertEquals(1, person.getNames().size());
