@@ -118,7 +118,7 @@ public class EvidenceRecipesTest extends RecipeTest {
     attribution.setContributor(new ResourceReference());
     attribution.getContributor().setResource(URI.create("https://familysearch.org/platform/contributors/STV-WXZY"));
     attributedSourceReference.setAttribution(attribution);
-    attributedSourceReference.setDescription(URI.create("https://familysearch.org/platform/sources/GGG-GGGG"));
+    attributedSourceReference.setDescriptionRef(URI.create("https://familysearch.org/platform/sources/GGG-GGGG"));
     sources.add(attributedSourceReference);
     person.setSources(sources);
 
@@ -223,7 +223,7 @@ public class EvidenceRecipesTest extends RecipeTest {
     attribution.setContributor(new ResourceReference());
     attribution.getContributor().setResource(URI.create("https://familysearch.org/platform/contributors/STV-WXZY"));
     attributedSourceReference.setAttribution(attribution);
-    attributedSourceReference.setDescription(URI.create("https://familysearch.org/platform/sources/KKK-KKKK"));
+    attributedSourceReference.setDescriptionRef(URI.create("https://familysearch.org/platform/sources/KKK-KKKK"));
     sources.add(attributedSourceReference);
     person.setSources(sources);
 
@@ -356,7 +356,7 @@ public class EvidenceRecipesTest extends RecipeTest {
     attribution.setContributor(new ResourceReference());
     attribution.getContributor().setResource(URI.create("https://familysearch.org/platform/contributors/ZZZ-ZZZZ"));
     attributedSourceReference.setAttribution(attribution);
-    attributedSourceReference.setDescription(URI.create("https://familysearch.org/platform/sources/JJJ-JJJJ"));
+    attributedSourceReference.setDescriptionRef(URI.create("https://familysearch.org/platform/sources/JJJ-JJJJ"));
     sources.add(attributedSourceReference);
     person.setSources(sources);
 

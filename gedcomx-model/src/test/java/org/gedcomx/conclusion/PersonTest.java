@@ -98,7 +98,7 @@ public class PersonTest {
     event.getPlace().setFormal(normalized);
     event.setSources(new ArrayList<SourceReference>());
     SourceReference eventSource = new SourceReference();
-    eventSource.setDescription(URI.create("urn:event-source"));
+    eventSource.setDescriptionRef(URI.create("urn:event-source"));
     eventSource.setAttribution(new Attribution());
     event.getSources().add(eventSource);
 
@@ -142,7 +142,7 @@ public class PersonTest {
     attribution.setContributor(new ResourceReference());
     attribution.getContributor().setResource(URI.create("urn:source-reference-attribution"));
     attributedSourceReference.setAttribution(attribution);
-    attributedSourceReference.setDescription(URI.create("urn:source-description"));
+    attributedSourceReference.setDescriptionRef(URI.create("urn:source-description"));
     sources.add(attributedSourceReference);
     person.setSources(sources);
 
@@ -217,7 +217,7 @@ public class PersonTest {
     assertEquals(1, person.getSources().size());
     attributedSourceReference = person.getSources().iterator().next();
     assertEquals("urn:source-reference-attribution", attributedSourceReference.getAttribution().getContributor().getResource().toString());
-    assertEquals("urn:source-description", attributedSourceReference.getDescription().toString());
+    assertEquals("urn:source-description", attributedSourceReference.getDescriptionRef().toString());
 
     assertEquals("pid", person.getId());
     assertEquals("this person existed.", person.getAttribution().getChangeMessage());
