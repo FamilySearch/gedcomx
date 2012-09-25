@@ -600,13 +600,14 @@ The `gx:Document` XML type is used to (de)serialize the `http://gedcomx.org/v1/D
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
+type | The type of the document. | type (attribute) | [`URI`](#uri)
 attribution | The attribution of this document. | gx:attribution | [`gx:Attribution`](#attribution)
 text | The text of the document. | gx:text | [`gx:TextValue`](#text-value)
 
 ### examples
 
 ```xml
-  <...>
+  <... type="http://gedcomx.org/Analysis">
     <!-- ...the members of gx:Conclusion... -->
 
     <gx:attribution>
@@ -615,46 +616,6 @@ text | The text of the document. | gx:text | [`gx:TextValue`](#text-value)
     <gx:text xml:lang="en">...text of the document...</gx:text>
   </...>
 ```
-
-<a id="abstract-document"/>
-
-## 5.2.1 The "AbstractDocument" Data Type
-
-The `gx:AbstractDocument` XML type is used to (de)serialize the `http://gedcomx.org/v1/AbstractDocument` data type.
-
-### properties
-
-The `gx:AbstractDocument` data type defines no additional properties beyond those defined by its extended type.
-
-<a id="transcription-document"/>
-
-## 5.2.2 The "TranscriptionDocument" Data Type
-
-The `gx:TranscriptionDocument` XML type is used to (de)serialize the `http://gedcomx.org/v1/TranscriptionDocument` data type.
-
-### properties
-
-The `gx:TranscriptionDocument` data type defines no additional properties beyond those defined by its extended type.
-
-<a id="translation-document"/>
-
-## 5.2.3 The "TranslationDocument" Data Type
-
-The `gx:TranslationDocument` XML type is used to (de)serialize the `http://gedcomx.org/v1/TranslationDocument` data type.
-
-### properties
-
-The `gx:TranslationDocument` data type defines no additional properties beyond those defined by its extended type.
-
-<a id="analysis-document"/>
-
-## 5.2.4 The "AnalysisDocument" Data Type
-
-The `gx:AnalysisDocument` XML type is used to (de)serialize the `http://gedcomx.org/v1/AnalysisDocument` data type.
-
-### properties
-
-The `gx:AnalysisDocument` data type defines no additional properties beyond those defined by its extended type.
 
 <a id="gender-conclusion"/>
 
@@ -1017,9 +978,7 @@ gx:gender | [`gx:Gender`](#gender-conclusion)
 gx:agent| [`gx:Agent`](#agent)
 gx:sourceReference | [`gx:SourceReference`](#source-reference)
 gx:sourceDescription | [`gx:SourceDescription`](#source-description)
-gx:transcriptionDocument | [`gx:TranscriptionDocument`](#transcription-document)
-gx:translationDocument | [`gx:TranslationDocument`](#translation-document)
-gx:analysisDocument | [`gx:AnalysisDocument`](#analysis-document)
+gx:document | [`gx:Document`](#document)
 
 
 <a id="fragment-ids"/>
