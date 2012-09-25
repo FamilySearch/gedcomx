@@ -80,22 +80,19 @@ A date representing a single calendar date, and optionally including a time of d
 to clarify the distinction between a generic *date*  and the aggregation of the Gedcom X Date types
 of values (i.e. *simple date*), *date range*, *open-ended date range*, and *approximate date*).
 
-### 2.1.5 date range
+### 2.1.7 date range
 
 A time interval specified by a starting simple date and an ending simple date. Equivalent to a
-starting simple date and a duration.
+starting simple date and a duration. Date ranges MAY be either *closed* (both end points are specified
+or can be calculated) or *open-ended* (only one end-point is specified).
 
-### 2.1.6 open-ended date range
+Examples of `closed date range`: *Between January 1863 CE and December 14, 1642 CE*,
 
-A date range in which either the beginning simple date or ending simple date are unspecified, but not both.
-Examples are *Before January 1863 CE*, or *After December 14, 1642 CE*
+Examples of `open-ended date range`: *Before January 1863 CE*, or *After December 14, 1642 CE*
 
-NOTE 1: To differentiate, a date range where both beginning and ending instances are
-specified is referred to as a *closed date range*.
+### 2.1.8 recurring date
 
-### 2.1.7 recurring date
-
-A series of discrete dates, separated by a specified and consistent duration.
+A series of discrete dates, separated by a specified duration.
 Examples:
 
 * 10 leap years beginning 1924 CE
@@ -103,9 +100,9 @@ Examples:
 * census is taken in the US every 10 years starting 1820 CE
 
 
-### 2.1.8 approximate date
+### 2.1.9 approximate date
 
-An undetermined date range roughly centered on a specified simple date, with the range
+An indeterminate date range roughly centered on a specified simple date, with the range
 limited to be within one order of magnitude of the smallest specified unit of measurement
 in the simple date.
 
@@ -445,11 +442,20 @@ simple date | Sept 14, 1863 | `gedcomx-date:+1863-09-14`
 approx. date | about 1742 | `gedcomx-date:A+1742`
 date range | between October 1834 and May 1835 | `gedcomx-date:R+1834-10/+1835-05`
 
-# 8. Implementation Hints and Observations
+# 8. Outstanding Concerns and Questions
 
-The following summary may be beneficial in parsing and composing GEDCOM X Dates using this specification:
+1. Does this specification sufficiently model the ambiguously cyclic years of the Chinese nominal year?
+ (I.e. every 60 years is named the same.)
 
-## 8.1 Parsing GEDCOM X Dates
+2. Is the concept of a *recurring date* sufficiently useful to provide this functionality?
+    * This functionality is included as part of the [ISO 8601](http://dotat.at/tmp/ISO_8601-2004_E.pdf) standard.
+
+
+# APPENDIX A. Implementation Hints and Observations
+
+The following summaries may be beneficial in parsing and composing GEDCOM X Dates using this specification:
+
+## 1. Parsing GEDCOM X Dates
 
 1. Any value that begins with a [+] or a [-] **must** be a `simple date`
     * The [-] will **only** affect the *year* component
@@ -466,11 +472,5 @@ The following summary may be beneficial in parsing and composing GEDCOM X Dates 
     * When provided, local time `offset` has a length of 6, or two components (hours and minutes) each of length 3
 
 
-## 8.2 Composing GEDCOM X Dates
+## 2. Composing GEDCOM X Dates
 
-# 9. Outstanding Concerns and Questions
-
-1. Does this model sufficiently allow representation of the cyclic years of the Chinese nominal year?
- (I.e. every 60 years is named the same.)
-
-2. Is the concept of a *recurring date* sufficiently useful to provide this functionality?
