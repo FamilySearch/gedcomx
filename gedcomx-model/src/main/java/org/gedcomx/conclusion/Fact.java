@@ -28,16 +28,15 @@ import javax.xml.bind.annotation.XmlType;
 /**
  * A conclusion about a fact applicable to a person or relationship.
  */
-@XmlType ( name = "Fact", propOrder = { "date", "place", "original", "formal" })
+@XmlType ( name = "Fact", propOrder = { "date", "place", "value" })
 @XmlRootElement
 @JsonElementWrapper ( name = "facts" )
-public class Fact extends Conclusion implements Formalizeable, HasDateAndPlace {
+public class Fact extends Conclusion implements HasDateAndPlace {
 
   private URI type;
   private Date date;
   private Place place;
-  private String original;
-  private FormalValue formal;
+  private String value;
 
   /**
    * Create a fact.
@@ -49,11 +48,11 @@ public class Fact extends Conclusion implements Formalizeable, HasDateAndPlace {
    * Create a fact with the passed in type and values.
    *
    * @param factType the fact type.
-   * @param original The original value as supplied by the user.
+   * @param value The value as supplied by the user.
    */
-  public Fact(FactType factType, String original) {
+  public Fact(FactType factType, String value) {
     setKnownType(factType);
-    setOriginal(original);
+    setValue(value);
   }
 
   /**
@@ -62,13 +61,13 @@ public class Fact extends Conclusion implements Formalizeable, HasDateAndPlace {
    * @param factType the fact type.
    * @param date The date of applicability of this fact.
    * @param place The place of applicability of this fact.
-   * @param original The original value as supplied by the user.
+   * @param value The value as supplied by the user.
    */
-  public Fact(FactType factType, Date date, Place place, String original) {
+  public Fact(FactType factType, Date date, Place place, String value) {
     setKnownType(factType);
     setDate(date);
     setPlace(place);
-    setOriginal(original);
+    setValue(value);
   }
 
   /**
@@ -148,47 +147,26 @@ public class Fact extends Conclusion implements Formalizeable, HasDateAndPlace {
   }
 
   /**
-   * The original text as supplied by the user.
+   * The value as supplied by the user.
    *
-   * @return The original text as supplied by the user.
+   * @return The value as supplied by the user.
    */
-  @Override
-  public String getOriginal() {
-    return original;
+  public String getValue() {
+    return value;
   }
 
   /**
-   * The original value as supplied by the user.
+   * The value as supplied by the user.
    *
-   * @param original The original value as supplied by the user.
+   * @param value The value as supplied by the user.
    */
-  @Override
-  public void setOriginal(String original) {
-    this.original = original;
+  public void setValue(String value) {
+    this.value = value;
   }
 
-  /**
-   * The formal value.
-   *
-   * @return The formal value.
-   */
-  @Override
-  public FormalValue getFormal() {
-    return formal;
-  }
-
-  /**
-   * The formal value.
-   *
-   * @param formal The formal value.
-   */
-  @Override
-  public void setFormal(FormalValue formal) {
-    this.formal = formal;
-  }
 
   @Override
   public String toString() {
-    return "type=" + getKnownType() + ",orig=" + getOriginal() + ",date=" + getDate() + ",place=" + getPlace();
+    return "type=" + getKnownType() + ",value=" + getValue() + ",date=" + getDate() + ",place=" + getPlace();
   }
 }

@@ -50,8 +50,7 @@ in JSON according to this specification:
       "parts" : [ {
         "value" : "George",
         "type" : "http://gedcomx.org/Given"
-      },
-      {
+      }, {
         "value" : "Washington",
         "type" : "http://gedcomx.org/Surname"
       } ]
@@ -69,17 +68,11 @@ in JSON according to this specification:
     "type" : "http://gedcomx.org/Birth",
     "date" : {
       "original" : "February 22, 1732",
-      "formal" : {
-        "text" : "1732-02-22",
-        "datatype" : "http://www.w3.org/2001/XMLSchema#date"
-      }
+      "formal" : "+1732-02-22"
     },
     "place" : {
-      "original" : "Pope's Creek, Westmoreland, Virginia",
-      "formal" : {
-        "resource" : "https://familysearch.org/platform/places/12345",
-        "text" : "Pope's Creek, Westmoreland, Virginia"
-      }
+      "resource" : "https://familysearch.org/platform/places/12345",
+      "original" : "Pope's Creek, Westmoreland, Virginia"
     },
     "id" : "123",
     "attribution" : {
@@ -89,17 +82,12 @@ in JSON according to this specification:
     "type" : "http://gedcomx.org/Death",
     "date" : {
       "original" : "December 14, 1799",
-      "formal" : {
-        "text" : "1799-12-14T22:00:00",
-        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime"
-      }
+      "formal" : "+1799-12-14T22:00:00"
     },
     "place" : {
+      "resource" : "https://familysearch.org/platform/places/67890",
       "original" : "Mount Vernon, Virginia",
-      "formal" : {
-        "resource" : "https://familysearch.org/platform/places/67890",
-        "text" : "Mount Vernon, Fairfax County, Virginia"
-      }
+      "normalized" : "Mount Vernon, Fairfax County, Virginia"
     },
     "id" : "456",
     "attribution" : {
@@ -127,10 +115,7 @@ JSON according to this specification:
     "type" : "http://gedcomx.org/Marriage",
     "date" : {
       "original" : "January 6, 1759",
-      "formal" : {
-        "text" : "1759-01-06",
-        "datatype" : "http://www.w3.org/2001/XMLSchema#date"
-      }
+      "formal" : "+1759-01-06"
     },
     "id" : "123",
     "attribution" : {
@@ -221,58 +206,9 @@ changeMessage | A statement of why the attributed data is being provided by the 
 }
 ```
 
-<a id="formal-value"/>
-
-## 2.4 The "FormalValue" Data Type
-
-The JSON object used to (de)serialize the `http://gedcomx.org/v1/FormalValue` data type is defined as follows:
-
-### properties
-
-name | description | JSON member | JSON object type
------|-------------|--------------|---------
-value | A string supplying the value of the formal value. If the value has been standardized, a datatype will be supplied to identify how the string is to be parsed. | value | string
-datatype  | URI identifying the way the value is to be processed according to a specific standard. | datatype | [`URI`](#uri)
-resource | URI identifying the resource to which the formal value has been standardized. | resource | [`URI`](#uri)
-
-### examples
-
-Standardized value with a specified datatype:
-
-```json
-{
-  "datatype" : "http://www.w3.org/2001/XMLSchema#date",
-  "value" : "1732-02-22"
-}
-```
-
-Normalized value:
-
-```json
-{
-  "value" : "...text of the normalized value..."
-}
-```
-Standardized value:
-
-```json
-{
-  "resource" : "http://identifier/for/standardized/value"
-}
-```
-
-Standardized and normalized value:
-
-```json
-{
-  "resource" : "http://identifier/for/standardized/value",
-  "value" : "...text of the normalized value..."
-}
-```
-
 <a id="note"/>
 
-## 2.5 The "Note" Data Type
+## 2.4 The "Note" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/v1/Note` data type is defined as follows:
 
@@ -292,7 +228,7 @@ attribution | The attribution of this note. | attribution | [`Attribution`](#att
 }
 ```
 
-## 2.7 The "TextValue" Data Type
+## 2.5 The "TextValue" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/v1/TextValue` data type is defined as follows:
 
@@ -694,8 +630,7 @@ name | description | JSON member | JSON object type
 type | URI identifying the type of the fact. | type | [`URI`](#uri)
 date | The date of applicability of the fact. | date | [`Date`](#conclusion-date)
 place | The place of applicability of the fact. | place | [`Place`](#conclusion-place)
-original | The value of the fact as supplied by the contributor. | original | string
-formal | The formal value of the fact. | formal | [`FormalValue`](#formal-value)
+value | The original value of the fact as supplied by the contributor. | original | string
 
 ### examples
 
@@ -707,8 +642,7 @@ formal | The formal value of the fact. | formal | [`FormalValue`](#formal-value)
   "type" : "http://gedcomx.org/Birth",
   "date" : { ... },
   "place" : { ... },
-  "original" : "...the original value of the fact...",
-  "formal" : { ... }
+  "value" : "...the original value of the fact...",
 }
 ```
 
@@ -848,14 +782,14 @@ The JSON object used to (de)serialize the `http://gedcomx.org/v1/Date` data type
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 original | The original value of the date as supplied by the contributor. | original | string
-formal | The formal value of the date. | formal | [`FormalValue`](#formal-value)
+formal | The formal value of the date. | gx:formal | [GEDCOM X Date](https://github.com/FamilySearch/gedcomx/blob/master/specifications/date-model-specification.md)
 
 ### examples
 
 ```json
 {
   "original" : "...the original text...",
-  "formal" : { ... }
+  "formal" : "..."
 }
 ```
 
@@ -869,15 +803,17 @@ The JSON object used to (de)serialize the `http://gedcomx.org/v1/Place` data typ
 
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
+resource | Reference to the standardized resource describing the place. | resource | [`URI`](#uri)
 original | The original value of the place as supplied by the contributor. | original | string
-formal | The formal value of the place. | formal | [`FormalValue`](#formal-value)
+normalized | The normalized text value of the place. | normalized | string
 
 ### examples
 
 ```json
 {
+  "resource" : "/path/to/place/resource",
   "original" : "...the original text...",
-  "formal" : { ... }
+  "normalized" : "...the normalized value..."
 }
 ```
 

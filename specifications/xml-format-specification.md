@@ -68,11 +68,10 @@ in XML according to this specification:
         </attribution>
         <date>
             <original>February 22, 1732</original>
-            <formal datatype="http://www.w3.org/2001/XMLSchema#date">1732-02-22</formal>
+            <formal>+1732-02-22</formal>
         </date>
-        <place>
+        <place resource="https://familysearch.org/platform/places/12345">
             <original>Pope's Creek, Westmoreland, Virginia</original>
-            <formal resource="https://familysearch.org/platform/places/12345">Pope's Creek, Westmoreland, Virginia</formal>
         </place>
     </fact>
     <fact type="http://gedcomx.org/Death" id="456">
@@ -81,11 +80,11 @@ in XML according to this specification:
         </attribution>
         <date>
             <original>December 14, 1799</original>
-            <formal datatype="http://www.w3.org/2001/XMLSchema#dateTime">1799-12-14T22:00:00</formal>
+            <formal>+1799-12-14T22:00:00</formal>
         </date>
-        <place>
+        <place resource="https://familysearch.org/platform/places/67890">
             <original>Mount Vernon, Virginia</original>
-            <formal resource="https://familysearch.org/platform/places/67890">Mount Vernon, Fairfax County, Virginia</formal>
+            <normalized>Mount Vernon, Fairfax County, Virginia</normalized>
         </place>
     </fact>
 </person>
@@ -112,7 +111,7 @@ XML according to this specification:
         </attribution>
         <date>
             <original>January 6, 1759</original>
-            <formal datatype="http://www.w3.org/2001/XMLSchema#date">1759-01-06</formal>
+            <formal>+1759-01-06</formal>
         </date>
     </fact>
 </relationship>
@@ -221,50 +220,9 @@ changeMessage | A statement of why the attributed data is being provided by the 
   </...>
 ```
 
-<a id="formal-value"/>
-
-## 2.5 The "FormalValue" Data Type
-
-The `gx:FormalValue` XML type is used to (de)serialize the `http://gedcomx.org/v1/FormalValue`
-data type.
-
-### properties
-
-name | description | XML property | XML type
------|-------------|--------------|---------
-value | A string supplying the value of the formal value. If the value has been standardized, a datatype will be supplied to identify how the string is to be parsed. | (child text) | xsd:string
-datatype  | URI identifying the way the value is to be processed according to a specific standard. | datatype (attribute) | [anyURI](#uri)
-resource | URI identifying the resource to which the formal value has been standardized. | resource (attribute) | [anyURI](#uri)
-
-### examples
-
-Standardized value with a specified datatype:
-
-```xml
-  <... datatype="http://www.w3.org/2001/XMLSchema#date">1732-02-22</...>
-```
-
-Normalized value:
-
-```xml
-  <...>...text of the normalized value...</...>
-```
-Standardized value:
-
-```xml
-  <... resource="http://identifier/for/standardized/value"/>
-```
-
-Standardized and normalized value:
-
-```xml
-  <... resource="http://identifier/for/standardized/value">...text of the normalized value...</...>
-```
-
-
 <a id="note"/>
 
-## 2.6 The "Note" Data Type
+## 2.5 The "Note" Data Type
 
 The `gx:Note` XML type is used to (de)serialize the `http://gedcomx.org/Note` data type.
 
@@ -288,7 +246,7 @@ attribution | The attribution of this note. | gx:attribution | [`gx:Attribution`
 
 <a id="text-value"/>
 
-## 2.8 The "TextValue" Data Type
+## 2.6 The "TextValue" Data Type
 
 The `gx:TextValue` XML type is used to (de)serialize the `http://gedcomx.org/TextValue`
 data type.
@@ -727,8 +685,7 @@ name | description | XML property | XML type
 type | URI identifying the type of the fact. | type (attribute) | [`URI`](#uri)
 date | The date of applicability of the fact. | gx:date | [`gx:Date`](#conclusion-date)
 place | The place of applicability of the fact. | gx:place | [`gx:Place`](#conclusion-place)
-original | The value of the fact as supplied by the contributor. | gx:original | xsd:string
-formal | The formal value of the fact. | gx:formal | [`gx:FormalValue`](#formal-value)
+value | The original value of the fact as supplied by the contributor. | gx:value | xsd:string
 
 ### examples
 
@@ -744,9 +701,9 @@ formal | The formal value of the fact. | gx:formal | [`gx:FormalValue`](#formal-
       ...
     </gx:place>
     <gx:original>...original value of the fact...</gx:original>
-    <gx:formal>
+    <gx:value>
       ...
-    </gx:formal>
+    </gx:value>
   </...>
 ```
 
@@ -912,16 +869,14 @@ data type.
 name | description | XML property | XML type
 -----|-------------|--------------|---------
 original | The original value of the date as supplied by the contributor. | gx:original | xsd:string
-formal | The formal value of the date. | gx:formal | [`gx:FormalValue`](#formal-value)
+formal | The formal value of the date. | gx:formal | [GEDCOM X Date](https://github.com/FamilySearch/gedcomx/blob/master/specifications/date-model-specification.md)
 
 ### examples
 
 ```xml
   <...>
     <gx:original>...the original text...</gx:original>
-    <gx:formal>
-      ...
-    </gx:formal>
+    <gx:formal>...</gx:formal>
   </...>
 ```
 
@@ -936,17 +891,16 @@ data type.
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
+resource | Reference to the standardized resource describing the place. | resource (attribute) | [`URI`](#uri)
 original | The original value of the place as supplied by the contributor. | gx:original | xsd:string
-formal | The formal value of the place. | gx:formal | [`gx:FormalValue`](#formal-value)
+normalized | The normalized text value of the place. | gx:normalized | xsd:string
 
 ### examples
 
 ```xml
-  <...>
+  <... resource="/path/to/place/resource">
     <gx:original>...the original text...</gx:original>
-    <gx:formal>
-      ...
-    </gx:formal>
+    <gx:normalized>...</gx:normalized>
   </...>
 ```
 
