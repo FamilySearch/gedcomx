@@ -593,10 +593,10 @@ The following gender types are defined by GEDCOM X:
 
 URI | description
 ----|-------------
-`http://gedcomx.org/Abstract`|
-`http://gedcomx.org/Transcription`|
-`http://gedcomx.org/Translation`|
-`http://gedcomx.org/Analysis`|
+`http://gedcomx.org/Abstract` | The document is an abstract of a record or document.
+`http://gedcomx.org/Transcription` | The document is a transcription of a record or document.
+`http://gedcomx.org/Translation` | The document is a translation of a record or document.
+`http://gedcomx.org/Analysis` | The document is an analysis done by a researcher, often used as a genealogical proof statement.
 
 <a id="gender-conclusion"/>
 

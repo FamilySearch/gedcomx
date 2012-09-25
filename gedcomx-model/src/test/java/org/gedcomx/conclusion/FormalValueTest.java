@@ -1,8 +1,7 @@
 package org.gedcomx.conclusion;
 
 import org.gedcomx.common.URI;
-import org.gedcomx.types.DatePartType;
-import org.gedcomx.types.PlacePartType;
+import org.gedcomx.types.EventType;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
@@ -21,14 +20,13 @@ public class FormalValueTest {
 
     // set some values
     formalValue.setDatatype(URI.create("#myDataType"));
-    formalValue.setKnownValue(DatePartType.Months); // sets the resource property
+    formalValue.setKnownValue(EventType.Baptism); // sets the resource property
     formalValue.setText("Mayo");
 
     // validate values
     assertEquals(formalValue.getDatatype().toString(), "#myDataType");
-    assertEquals(formalValue.getResource().toString(), DatePartType.Months.toQNameURI().toString());
-    assertEquals(formalValue.getKnownValue(DatePartType.class), DatePartType.Months);
-    assertEquals(formalValue.getKnownValue(PlacePartType.class), PlacePartType.OTHER);
+    assertEquals(formalValue.getResource().toString(), EventType.Baptism.toQNameURI().toString());
+    assertEquals(formalValue.getKnownValue(EventType.class), EventType.Baptism);
     assertEquals(formalValue.getText(), "Mayo");
     assertEquals(formalValue.toString(), "Mayo");
 
@@ -40,7 +38,7 @@ public class FormalValueTest {
     // test null state
     assertNull(formalValue.getDatatype());
     assertNull(formalValue.getResource());
-    assertNull(formalValue.getKnownValue(DatePartType.class));
+    assertNull(formalValue.getKnownValue(EventType.class));
     assertNull(formalValue.getText());
     assertEquals(formalValue.toString(), "");
   }
