@@ -118,12 +118,23 @@ The following identifier types are defined by GEDCOM X.
 URI | description
 ----|------------
 `http://gedcomx.org/Primary` | The primary identifier for the resource.
+`http://gedcomx.org/Evidence` | An identifier for the evidence that supports the resource. For example, when a conclusion about a person is extracted, analyzed and evaluated atomically within the context of a single source, it takes the form of a (extracted) person conclusion, and the extracted conclusion may supply an identifier for the person. As all evidence for the person is gathered, the (working) person conclusion identifies the evidence used to support the conclusion by including each evidence identifier in the list of identifiers for the person.
 `http://gedcomx.org/Deprecated` | An identifier that has been relegated, deprecated, or otherwise downgraded. This identifier is commonly used as the result of a merge when what was once a primary identifier for a person is no longer primary.
 `http://gedcomx.org/Persistent` | An identifier that is considered to be a long-term persistent identifier. Applications that provide persistent identifiers are claiming that links to the resource using the identifier won't break.
 
 ### examples
 
-todo: fill in some examples.
+* Person "12345" merges into Person "67890". Person "67890" assumes identifier "12345". Identifier "12345" is of type `http://gedcomx.org/Deprecated`
+  because the merged person "12345" now uses identifier "67890".
+* An online web application issues a persistent identifier of value `https://familysearch.org/pal:/12345` to a `Person` and the same identifier
+  is used as the primary identifier for the `Person`. The list of identifiers for the `Person` contains two identifiers with value `https://familysearch.org/pal:/12345`,
+  one of type `http://gedcomx.org/Primary` and one of type `http://gedcomx.org/Persistent`.
+* An application allows a researcher to extract information from a single census record about a person. The application assigns an identifier "abcde" to the
+  `Person` extracted from the census record. The researcher extracts additional information about the person from a birth certificate and the application
+  assigns identifier "fghij" to the `Person` extracted from the birth certificate. As the researcher gathers and analyzes the evidence for the person, the
+  application creates a (working) `Person` conclusion that references the census record and the birth certificate as a source. When the researcher concludes
+  that person "abcde" and person "fghij" are the same person, the list of identifiers for the working `Person` includes two identifiers of type
+  `http://gedcomx.org/Evidence`: "abcde" and "fghij".
 
 
 <a id="attribution"/>
@@ -296,6 +307,7 @@ citation | The citation for this source. | [`http://gedcomx.org/v1/SourceCitatio
 about | A uniform resource identifier (URI) for the resource being described. | [URI](#uri) - OPTIONAL
 mediator | A reference to the entity that mediates access to the described source. | [URI](#uri) - OPTIONAL; MUST resolve to an instance of [`http://gedcomx.org/v1/Agent`](#agent).
 sources | A list of references to any sources from which this source is derived. | List of [`http://gedcomx.org/v1/SourceReference`](#source-reference) - OPTIONAL
+extractedConclusions | A list of references to any conclusions that were extracted from this source, to be analyzed and evaluated atomically within on context of the source. | [URI](#uri) - OPTIONAL
 componentOf | A reference to the source that contains this source -- its parent context; this is for cases where this description is not complete without the description of its parent context | [`http://gedcomx.org/v1/SourceReference`](#source-reference) - OPTIONAL
 displayName | A display name for this source. | string - OPTIONAL
 alternateNames | A list of alternate display names for this source. | List of [`http://gedcomx.org/TextValue`](#text-value) - OPTIONAL
