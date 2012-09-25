@@ -54,9 +54,7 @@ public class PersonTest {
     person.setIdentifiers(identifiers);
 
     Fact fact = new Fact();
-    fact.setAttribution(new Attribution());
-    fact.getAttribution().setContributor(new ResourceReference());
-    fact.getAttribution().getContributor().setResource(URI.create("urn:fact-attribution"));
+    fact.setKnownConfidenceLevel(ConfidenceLevel.Certainly);
     fact.setDate(new Date());
     fact.getDate().setOriginal("original date");
     FormalValue normalized = new FormalValue();
@@ -77,9 +75,6 @@ public class PersonTest {
     person.addFact(fact);
 
     Fact event = new Fact();
-    event.setAttribution(new Attribution());
-    event.getAttribution().setContributor(new ResourceReference());
-    event.getAttribution().getContributor().setResource(URI.create("urn:event-attribution"));
     event.setDate(new Date());
     event.getDate().setOriginal("original date");
     normalized = new FormalValue();
@@ -120,9 +115,6 @@ public class PersonTest {
     nameForm.setParts(parts);
     alternateForms.add(nameForm);
     name.setAlternateForms(alternateForms);
-    name.setAttribution(new Attribution());
-    name.getAttribution().setContributor(new ResourceReference());
-    name.getAttribution().getContributor().setResource(URI.create("urn:name-attribution"));
     name.setId("name-id");
     name.setKnownType(NameType.Formal);
     NameForm primaryForm = new NameForm();
@@ -159,7 +151,7 @@ public class PersonTest {
     Fact fact;
     Fact event;
     Name name;
-    SourceReference attributedSourceReference;
+    SourceReference sr;
     assertEquals(GenderType.Male, person.getGender().getKnownType());
 
     assertEquals(2, person.getIdentifiers().size());
@@ -170,7 +162,7 @@ public class PersonTest {
 
     assertEquals(2, person.getFacts().size());
     fact = person.getFirstFactOfType(FactType.Occupation);
-    assertEquals("urn:fact-attribution", fact.getAttribution().getContributor().getResource().toString());
+    assertEquals(ConfidenceLevel.Certainly, fact.getKnownConfidenceLevel());
     assertEquals("original date", fact.getDate().getOriginal());
     assertEquals("normalized date", fact.getDate().getFormal().getText());
     assertEquals(DatePartType.Years, fact.getDate().getFormal().getKnownValue(DatePartType.class));
@@ -184,7 +176,6 @@ public class PersonTest {
     assertEquals("fact-value", fact.getOriginal());
 
     event = person.getFirstFactOfType(FactType.Adoption);
-    assertEquals("urn:event-attribution", event.getAttribution().getContributor().getResource().toString());
     assertEquals("original date", event.getDate().getOriginal());
     assertEquals("normalized date", event.getDate().getFormal().getText());
     assertEquals(DatePartType.Years, event.getDate().getFormal().getKnownValue(DatePartType.class));
@@ -204,7 +195,6 @@ public class PersonTest {
     assertEquals(1, name.getAlternateForms().get(0).getParts().size());
     assertEquals("alternate name part", name.getAlternateForms().get(0).getParts().get(0).getValue());
     assertEquals(NamePartType.Given, name.getAlternateForms().get(0).getParts().get(0).getKnownType());
-    assertEquals("urn:name-attribution", name.getAttribution().getContributor().getResource().toString());
     assertEquals("name-id", name.getId());
     assertEquals(NameType.Formal, name.getKnownType());
     assertEquals("primary form", name.getPrimaryForm().getFullText());
@@ -215,9 +205,9 @@ public class PersonTest {
     assertEquals("pal", person.getPersistentId().toString());
 
     assertEquals(1, person.getSources().size());
-    attributedSourceReference = person.getSources().iterator().next();
-    assertEquals("urn:source-reference-attribution", attributedSourceReference.getAttribution().getContributor().getResource().toString());
-    assertEquals("urn:source-description", attributedSourceReference.getDescriptionRef().toString());
+    sr = person.getSources().iterator().next();
+    assertEquals("urn:source-reference-attribution", sr.getAttribution().getContributor().getResource().toString());
+    assertEquals("urn:source-description", sr.getDescriptionRef().toString());
 
     assertEquals("pid", person.getId());
     assertEquals("this person existed.", person.getAttribution().getChangeMessage());

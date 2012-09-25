@@ -209,7 +209,6 @@ name | description | XML property | XML type
 -----|-------------|--------------|---------
 contributor | Reference to the contributor to whom the attributed data is attributed. | gx:contributor | [`gx:ResourceReference`](#resource-reference)
 modified | Timestamp of when the attributed data was contributed. | gx:modified | xsd:dateTime
-confidence  | Reference to the confidence level of the contributor of the attributed data. | gx:confidence | [`gx:ResourceReference`](#resource-reference)
 changeMessage | A statement of why the attributed data is being provided by the contributor. | gx:changeMessage | xsd:string
 
 ### examples
@@ -218,7 +217,6 @@ changeMessage | A statement of why the attributed data is being provided by the 
   <...>
     <gx:contributor resource="http://identifier/for/contributor"/>
     <gx:modified>2012-05-29T00:00:00</gx:modified>
-    <gx:confidence resource="http://gedcomx.org/Certainly"/>
     <gx:changeMessage>...change message here...</gx:changeMessage>
   </...>
 ```
@@ -566,14 +564,14 @@ data type.
 name | description | XML property | XML type
 -----|-------------|--------------|---------
 id | An identifier for the XML element holding the conclusion data. The id attribute MUST conform to the constraints defined in [Section 7, "Fragment Identifiers"](#fragment-ids). | id (attribute) | xsd:string
+confidence  | Reference to the confidence level of the contributor of the attributed data. | confidence (attribute) | [`URI`](#uri)
 sources | A list of references to the sources of the conclusion. | gx:source | [`gx:SourceReference`](#source-reference)
 notes | A list of notes about this conclusion. | gx:note | [`gx:Note`](#note)
-attribution | The attribution of this conclusion. | gx:attribution | [`gx:Attribution`](#attribution)
 
 ### examples
 
 ```xml
-  <... id="local_id">
+  <... id="local_id" confidence="http://gedcomx.org/Certainly">
     <gx:source>
       ...
     </gx:source>
@@ -582,9 +580,6 @@ attribution | The attribution of this conclusion. | gx:attribution | [`gx:Attrib
       ...
     </gx:note>
     ...
-    <gx:attribution>
-      ...
-    </gx:attribution>
 
     <!-- possibility of extension elements -->
 
@@ -602,15 +597,18 @@ The `gx:Document` XML type is used to (de)serialize the `http://gedcomx.org/v1/D
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
+attribution | The attribution of this document. | gx:attribution | [`gx:Attribution`](#attribution)
 text | The text of the document. | gx:text | [`gx:TextValue`](#text-value)
 
 ### examples
 
 ```xml
   <...>
-
     <!-- ...the members of gx:Conclusion... -->
 
+    <gx:attribution>
+      ...
+    </gx:attribution>
     <gx:text xml:lang="en">...text of the document...</gx:text>
   </...>
 ```
@@ -760,6 +758,7 @@ data type.
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
+attribution | The attribution of this person. | gx:attribution | [`gx:Attribution`](#attribution)
 identifiers | Identifiers for the person. | gx:identifier | [`gx:Identifier`](#identifier-type)
 living | Whether the person is considered living. | gx:living | xsd:boolean
 gender | The conclusion about the gender of the person. | gx:gender | [`gx:Gender`](#gender)
@@ -773,6 +772,9 @@ facts | The conclusions about the facts of the life of the person. | gx:fact | [
 
     <!-- ...the members of gx:Conclusion... -->
 
+    <gx:attribution>
+      ...
+    </gx:attribution>
     <gx:identifier>
       ...
     </gx:identifier>
@@ -803,6 +805,7 @@ data type.
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
+attribution | The attribution of this relationship. | gx:attribution | [`gx:Attribution`](#attribution)
 type | URI identifying the type of the relationship. | type (attribute) | [`URI`](#uri)
 person1 | Reference to the first person in the relationship. | gx:person1 | [`gx:ResourceReference`](#resource-reference)
 person2 | Reference to the second person in the relationship. | gx:person2 | [`gx:ResourceReference`](#resource-reference)
@@ -815,6 +818,9 @@ facts | The conclusions about the facts of the life of the relationship. | gx:fa
 
     <!-- ...the members of gx:Conclusion... -->
 
+    <gx:attribution>
+      ...
+    </gx:attribution>
     <gx:person1 resource="http://identifier/for/person/1"/>
     <gx:person2 resource="http://identifier/for/person/2"/>
     <gx:fact>
@@ -862,6 +868,7 @@ data type.
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
+attribution | The attribution of this event. | gx:attribution | [`gx:Attribution`](#attribution)
 type | URI identifying the type of the event. | type (attribute) | [`URI`](#uri)
 date | The date of the event. | gx:date | [`gx:Date`](#conclusion-date)
 place | The place the event. | gx:place | [`gx:Place`](#conclusion-place)
@@ -874,6 +881,9 @@ roles | The roles of the persons in the event. | gx:role | [`gx:EventRole`](#con
 
     <!-- ...the members of gx:Conclusion... -->
 
+    <gx:attribution>
+      ...
+    </gx:attribution>
     <gx:date>
       ...
     </gx:date>

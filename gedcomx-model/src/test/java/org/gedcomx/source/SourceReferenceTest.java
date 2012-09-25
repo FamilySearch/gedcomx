@@ -1,9 +1,9 @@
 package org.gedcomx.source;
 
+import org.gedcomx.CustomEntity;
 import org.gedcomx.common.Attribution;
 import org.gedcomx.common.ResourceReference;
 import org.gedcomx.common.URI;
-import org.gedcomx.CustomEntity;
 import org.gedcomx.rt.SerializationUtil;
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;

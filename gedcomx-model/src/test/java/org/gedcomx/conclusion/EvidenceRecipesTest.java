@@ -73,9 +73,6 @@ public class EvidenceRecipesTest extends RecipeTest {
     fact.setId("123");
     fact.setKnownType(FactType.Birth);
 
-    fact.setAttribution(new Attribution());
-    fact.getAttribution().setContributor(new ResourceReference());
-    fact.getAttribution().getContributor().setResource(URI.create("https://familysearch.org/platform/contributors/BCD-FGHJ"));
     fact.setDate(new Date());
     fact.getDate().setOriginal("30 January 1880");
 
@@ -88,9 +85,6 @@ public class EvidenceRecipesTest extends RecipeTest {
     fact.setId("456");
     fact.setKnownType(FactType.Death);
 
-    fact.setAttribution(new Attribution());
-    fact.getAttribution().setContributor(new ResourceReference());
-    fact.getAttribution().getContributor().setResource(URI.create("https://familysearch.org/platform/contributors/KLM-NPQR"));
     fact.setDate(new Date());
     fact.getDate().setOriginal("29 August 1936");
 
@@ -105,9 +99,6 @@ public class EvidenceRecipesTest extends RecipeTest {
     NameForm nameForm = new NameForm();
     nameForm.setFullText("Israel Hoyt Heaton");
     name.setPrimaryForm(nameForm);
-    name.setAttribution(new Attribution());
-    name.getAttribution().setContributor(new ResourceReference());
-    name.getAttribution().getContributor().setResource(URI.create("https://familysearch.org/platform/contributors/STV-WXZY"));
     name.setId("789");
     names.add(name);
     person.setNames(names);
@@ -178,9 +169,6 @@ public class EvidenceRecipesTest extends RecipeTest {
     fact.setId("123");
     fact.setKnownType(FactType.Birth);
 
-    fact.setAttribution(new Attribution());
-    fact.getAttribution().setContributor(new ResourceReference());
-    fact.getAttribution().getContributor().setResource(URI.create("https://familysearch.org/platform/contributors/BCD-FGHJ"));
     fact.setDate(new Date());
     fact.getDate().setOriginal("1793");
 
@@ -193,9 +181,6 @@ public class EvidenceRecipesTest extends RecipeTest {
     fact.setId("456");
     fact.setKnownType(FactType.Death);
 
-    fact.setAttribution(new Attribution());
-    fact.getAttribution().setContributor(new ResourceReference());
-    fact.getAttribution().getContributor().setResource(URI.create("https://familysearch.org/platform/contributors/KLM-NPQR"));
     fact.setDate(new Date());
     fact.getDate().setOriginal("1844");
 
@@ -210,9 +195,6 @@ public class EvidenceRecipesTest extends RecipeTest {
     NameForm nameForm = new NameForm();
     nameForm.setFullText("Asa Phillips");
     name.setPrimaryForm(nameForm);
-    name.setAttribution(new Attribution());
-    name.getAttribution().setContributor(new ResourceReference());
-    name.getAttribution().getContributor().setResource(URI.create("https://familysearch.org/platform/contributors/STV-WXZY"));
     name.setId("789");
     names.add(name);
     person.setNames(names);
@@ -265,9 +247,6 @@ public class EvidenceRecipesTest extends RecipeTest {
     fact.setId("123");
     fact.setKnownType(FactType.Birth);
 
-    fact.setAttribution(new Attribution());
-    fact.getAttribution().setContributor(new ResourceReference());
-    fact.getAttribution().getContributor().setResource(URI.create("https://familysearch.org/platform/contributors/BCD-FGHJ"));
     fact.setDate(new Date());
     fact.getDate().setOriginal("30 January 1880");
 
@@ -280,9 +259,6 @@ public class EvidenceRecipesTest extends RecipeTest {
     fact.setId("456");
     fact.setKnownType(FactType.Death);
 
-    fact.setAttribution(new Attribution());
-    fact.getAttribution().setContributor(new ResourceReference());
-    fact.getAttribution().getContributor().setResource(URI.create("https://familysearch.org/platform/contributors/KLM-NPQR"));
     fact.setDate(new Date());
     fact.getDate().setOriginal("29 August 1936");
 
@@ -297,21 +273,9 @@ public class EvidenceRecipesTest extends RecipeTest {
     NameForm nameForm = new NameForm();
     nameForm.setFullText("Israel Hoyt Heaton");
     name.setPrimaryForm(nameForm);
-    name.setAttribution(new Attribution());
-    name.getAttribution().setContributor(new ResourceReference());
-    name.getAttribution().getContributor().setResource(URI.create("https://familysearch.org/platform/contributors/STV-WXZY"));
     name.setId("789");
     names.add(name);
     person.setNames(names);
-
-    ArrayList<SourceReference> sources = new ArrayList<SourceReference>();
-    SourceReference attributedSourceReference = new SourceReference();
-    Attribution attribution = new Attribution();
-    attribution.setContributor(new ResourceReference());
-    attribution.getContributor().setResource(URI.create("https://familysearch.org/platform/contributors/STV-WXZY"));
-    attributedSourceReference.setAttribution(attribution);
-    sources.add(attributedSourceReference);
-    person.setSources(sources);
 
     person.setId("KWCD-QBC");
 
@@ -326,9 +290,6 @@ public class EvidenceRecipesTest extends RecipeTest {
     fact.setId("123");
     fact.setKnownType(FactType.Birth);
 
-    fact.setAttribution(new Attribution());
-    fact.getAttribution().setContributor(new ResourceReference());
-    fact.getAttribution().getContributor().setResource(URI.create("https://familysearch.org/platform/contributors/YYY-YYYY"));
     fact.setDate(new Date());
     fact.getDate().setOriginal("1880");
 
@@ -343,9 +304,6 @@ public class EvidenceRecipesTest extends RecipeTest {
     NameForm nameForm = new NameForm();
     nameForm.setFullText("Israel H. Heaton");
     name.setPrimaryForm(nameForm);
-    name.setAttribution(new Attribution());
-    name.getAttribution().setContributor(new ResourceReference());
-    name.getAttribution().getContributor().setResource(URI.create("https://familysearch.org/platform/contributors/XXX-XXXX"));
     name.setId("789");
     names.add(name);
     person.setNames(names);
