@@ -33,7 +33,6 @@ public class AttributionTest {
     attribution.setContributor(new ResourceReference());
     attribution.getContributor().setResource(URI.create("urn:someid"));
     attribution.setModified(ts);
-    attribution.setKnownConfidenceLevel(ConfidenceLevel.Possibly);
     attribution.setChangeMessage("hello, there.");
     attribution.addExtensionElement(new CustomEntity("alt1"));
     attribution.addExtensionElement(new CustomEntity("alt2"));
@@ -41,7 +40,6 @@ public class AttributionTest {
     attribution = processThroughXml(attribution, Attribution.class, JAXBContext.newInstance(Attribution.class, CustomEntity.class));
     assertEquals("urn:someid", attribution.getContributor().getResource().toString());
     assertEquals(ts, attribution.getModified());
-    assertEquals(ConfidenceLevel.Possibly, attribution.getKnownConfidenceLevel());
     assertEquals("hello, there.", attribution.getChangeMessage());
     assertEquals(((CustomEntity) attribution.getExtensionElements().get(0)).getId(), "alt1");
     assertEquals(((CustomEntity) attribution.getExtensionElements().get(1)).getId(), "alt2");
@@ -66,8 +64,6 @@ public class AttributionTest {
     attribution.setContributor(new ResourceReference());
     attribution.getContributor().setResource(URI.create("urn:someid"));
     attribution.setModified(ts);
-    attribution.setKnownConfidenceLevel(ConfidenceLevel.Possibly);
-    attribution.setKnownConfidenceLevel(null);
     attribution.setChangeMessage("hello, there.");
     attribution.addExtensionElement(new CustomEntity("alt1"));
     attribution.addExtensionElement(new CustomEntity("alt2"));
@@ -75,7 +71,6 @@ public class AttributionTest {
     attribution = processThroughJson(attribution);
     assertEquals("urn:someid", attribution.getContributor().getResource().toString());
     assertEquals(ts, attribution.getModified());
-    assertNull(attribution.getKnownConfidenceLevel());
     assertEquals("hello, there.", attribution.getChangeMessage());
     assertEquals(((CustomEntity) attribution.getExtensionElements().get(0)).getId(), "alt1");
     assertEquals(((CustomEntity) attribution.getExtensionElements().get(1)).getId(), "alt2");

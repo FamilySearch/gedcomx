@@ -25,19 +25,19 @@ import org.gedcomx.types.NameType;
 import javax.xml.bind.annotation.*;
 import java.util.List;
 
+
 /**
  * A name conclusion.
  *
  * @author Ryan Heaton
  */
-@XmlType ( name = "Name", propOrder = { "preferred", "primaryForm", "alternateForms" } )
+@XmlType ( name = "Name", propOrder = { "preferred", "nameForms"} )
 @XmlRootElement
 @JsonElementWrapper ( name = "names" )
 public class Name extends Conclusion {
 
   private URI type;
-  private NameForm primaryForm;
-  private List<NameForm> alternateForms;
+  private List<NameForm> nameForms;
   private Boolean preferred;
 
   /**
@@ -81,43 +81,25 @@ public class Name extends Conclusion {
   }
 
   /**
-   * The primary form of the name.
-   *
-   * @return The primary form of the name.
-   */
-  public NameForm getPrimaryForm() {
-    return primaryForm;
-  }
-
-  /**
-   * The primary form of the name.
-   *
-   * @param primaryForm The primary form of the name.
-   */
-  public void setPrimaryForm(NameForm primaryForm) {
-    this.primaryForm = primaryForm;
-  }
-
-  /**
    * Alternate forms of the name, such as the romanized form of a non-latin name.
    *
    * @return Alternate forms of the name, such as the romanized form of a non-latin name.
    */
-  @XmlElement (name = "alternateForm")
-  @JsonName ("alternateForms")
-  @JsonProperty ("alternateForms")
-  public List<NameForm> getAlternateForms() {
-    return alternateForms;
+  @XmlElement (name = "nameForm")
+  @JsonName ("nameForms")
+  @JsonProperty ("nameForms")
+  public List<NameForm> getNameForms() {
+    return nameForms;
   }
 
   /**
    * Alternate forms of the name, such as the romanized form of a non-latin name.
    *
-   * @param alternateForms Alternate forms of the name, such as the romanized form of a non-latin name.
+   * @param nameForms Alternate forms of the name, such as the romanized form of a non-latin name.
    */
-  @JsonProperty ("alternateForms")
-  public void setAlternateForms(List<NameForm> alternateForms) {
-    this.alternateForms = alternateForms;
+  @JsonProperty ("nameForms")
+  public void setNameForms(List<NameForm> nameForms) {
+    this.nameForms = nameForms;
   }
 
   /**
@@ -140,6 +122,6 @@ public class Name extends Conclusion {
 
   @Override
   public String toString() {
-    return "type=" + getKnownType() + ",primaryform=" + (primaryForm == null?"null":primaryForm.getFullText()) + ",pref=" + getPreferred();
+    return "type=" + getKnownType() + ",nameForms[0]=" + (nameForms == null ? "null" : nameForms.get(0).getFullText()) + ",pref=" + getPreferred();
   }
 }

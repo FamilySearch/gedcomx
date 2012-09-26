@@ -2,7 +2,6 @@ package org.gedcomx.conclusion;
 
 import org.gedcomx.test.RecipeTest;
 import org.gedcomx.test.Snippet;
-import org.gedcomx.types.DateFormatType;
 import org.gedcomx.types.FactType;
 import org.testng.annotations.Test;
 
@@ -31,10 +30,7 @@ public class DateRecipesTest extends RecipeTest {
     person.getFacts().add(fact);
     Date date = new Date();
     date.setOriginal("1 July 1980");
-    FormalValue formal = new FormalValue();
-    formal.setKnownValue(DateFormatType.ISO8601);
-    formal.setText("1980-07-01");
-    date.setFormal(formal);
+    date.setFormal("+1980-07-01");
     fact.setDate(date);
 
     Snippet snippet = new Snippet();
@@ -61,10 +57,7 @@ public class DateRecipesTest extends RecipeTest {
     person.getFacts().add(fact);
     Date date = new Date();
     date.setOriginal("About July 1, 1980");
-    FormalValue formal = new FormalValue();
-    formal.setKnownValue(DateFormatType.GEDCOM_5_5);
-    formal.setText("ABT 01 JUL 1980");
-    date.setFormal(formal);
+    date.setFormal("A+1980-07-01");
     fact.setDate(date);
 
     Snippet snippet = new Snippet();

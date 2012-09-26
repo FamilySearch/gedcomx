@@ -48,15 +48,9 @@ public class RelationshipRecipesTest extends RecipeTest {
     fact.setId("123");
     fact.setKnownType(FactType.Marriage);
 
-    fact.setAttribution(new Attribution());
-    fact.getAttribution().setContributor(new ResourceReference());
-    fact.getAttribution().getContributor().setResource(URI.create("https://familysearch.org/platform/contributors/HHH-HHHH"));
     fact.setDate(new Date());
     fact.getDate().setOriginal("January 6, 1759");
-    FormalValue normalized = new FormalValue();
-    normalized.setText("1759-01-06");
-    normalized.setDatatype(URI.create("http://www.w3.org/2001/XMLSchema#date"));
-    fact.getDate().setFormal(normalized);
+    fact.getDate().setFormal("+1759-01-06");
 
     relationship.addFact(fact);
     relationship.setPerson1(new ResourceReference());
@@ -64,7 +58,7 @@ public class RelationshipRecipesTest extends RecipeTest {
     relationship.setPerson2(new ResourceReference());
     relationship.getPerson2().setResource(URI.create("https://familysearch.org/platform/persons/FFF-FFFF"));
     SourceReference sourceReference = new SourceReference();
-    sourceReference.setDescription(URI.create("urn:srcDescId"));
+    sourceReference.setDescriptionRef(URI.create("urn:srcDescId"));
     relationship.addSource(sourceReference);
     return relationship;
   }

@@ -45,47 +45,47 @@ in XML according to this specification:
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <person xmlns="http://gedcomx.org/v1/" id="BBB-BBBB">
-    <source>
-        <attribution>
-            <contributor resource="https://familysearch.org/platform/contributors/STV-WXZY"/>
-        </attribution>
-    </source>
     <gender type="http://gedcomx.org/Male"/>
     <name id="789">
-        <attribution>
-            <contributor resource="https://familysearch.org/platform/contributors/STV-WXZY"/>
-        </attribution>
         <preferred>true</preferred>
-        <primaryForm>
-            <fullText>George Washington</fullText>
-            <part type="http://gedcomx.org/Given">George</part>
-            <part type="http://gedcomx.org/Surname">Washington</part>
-        </primaryForm>
+        <nameForm locale="ru-Cyrl">
+            <fullText>Никола́й Андре́евич Ри́мский-Ко́рсаков</fullText>
+            <part type="http://gedcomx.org/Given" value="Никола́й">
+                <qualifier resource="http://gedcomx.org/First"/>
+            </part>
+            <part type="http://gedcomx.org/Given" value="Андре́евич">
+                <qualifier resource="http://gedcomx.org/Middle"/>
+            </part>
+            <part type="http://gedcomx.org/Surname" value="Ри́мский-Ко́рсаков"/>
+        </nameForm>
+        <nameForm locale="ru-Latn">
+            <fullText>Nikolai Andreyevich Rimsky-Korsakov</fullText>
+            <part type="http://gedcomx.org/Given" value="Nikolai">
+                <qualifier resource="http://gedcomx.org/First"/>
+            </part>
+            <part type="http://gedcomx.org/Given" value="Andreyevich">
+                <qualifier resource="http://gedcomx.org/Middle"/>
+            </part>
+            <part type="http://gedcomx.org/Surname" value="Rimsky-Korsakov"/>
+        </nameForm>
     </name>
     <fact type="http://gedcomx.org/Birth" id="123">
-        <attribution>
-            <contributor resource="https://familysearch.org/platform/contributors/BCD-FGHJ"/>
-        </attribution>
         <date>
-            <original>February 22, 1732</original>
-            <formal datatype="http://www.w3.org/2001/XMLSchema#date">1732-02-22</formal>
+            <original>March 18, 1844</original>
+            <formal>+1844-03-18</formal>
         </date>
-        <place>
-            <original>Pope's Creek, Westmoreland, Virginia</original>
-            <formal resource="https://familysearch.org/platform/places/12345">Pope's Creek, Westmoreland, Virginia</formal>
+        <place resource="https://familysearch.org/platform/places/12345">
+            <original>Tikhvin, Leningradskaya Oblast', Russia</original>
         </place>
     </fact>
     <fact type="http://gedcomx.org/Death" id="456">
-        <attribution>
-            <contributor resource="https://familysearch.org/platform/contributors/KLM-NPQR"/>
-        </attribution>
         <date>
-            <original>December 14, 1799</original>
-            <formal datatype="http://www.w3.org/2001/XMLSchema#dateTime">1799-12-14T22:00:00</formal>
+            <original>June 21, 1908</original>
+            <formal>+1908-06-21T12:34:56</formal>
         </date>
-        <place>
-            <original>Mount Vernon, Virginia</original>
-            <formal resource="https://familysearch.org/platform/places/67890">Mount Vernon, Fairfax County, Virginia</formal>
+        <place resource="https://familysearch.org/platform/places/67890">
+            <original>Luga, Russia</original>
+            <normalized>Luga, Novgorodskaya Oblast', Russia</normalized>
         </place>
     </fact>
 </person>
@@ -112,7 +112,7 @@ XML according to this specification:
         </attribution>
         <date>
             <original>January 6, 1759</original>
-            <formal datatype="http://www.w3.org/2001/XMLSchema#date">1759-01-06</formal>
+            <formal>+1759-01-06</formal>
         </date>
     </fact>
 </relationship>
@@ -209,7 +209,6 @@ name | description | XML property | XML type
 -----|-------------|--------------|---------
 contributor | Reference to the contributor to whom the attributed data is attributed. | gx:contributor | [`gx:ResourceReference`](#resource-reference)
 modified | Timestamp of when the attributed data was contributed. | gx:modified | xsd:dateTime
-confidence  | Reference to the confidence level of the contributor of the attributed data. | gx:confidence | [`gx:ResourceReference`](#resource-reference)
 changeMessage | A statement of why the attributed data is being provided by the contributor. | gx:changeMessage | xsd:string
 
 ### examples
@@ -218,55 +217,13 @@ changeMessage | A statement of why the attributed data is being provided by the 
   <...>
     <gx:contributor resource="http://identifier/for/contributor"/>
     <gx:modified>2012-05-29T00:00:00</gx:modified>
-    <gx:confidence resource="http://gedcomx.org/Certainly"/>
     <gx:changeMessage>...change message here...</gx:changeMessage>
   </...>
 ```
 
-<a id="formal-value"/>
-
-## 2.5 The "FormalValue" Data Type
-
-The `gx:FormalValue` XML type is used to (de)serialize the `http://gedcomx.org/v1/FormalValue`
-data type.
-
-### properties
-
-name | description | XML property | XML type
------|-------------|--------------|---------
-value | A string supplying the value of the formal value. If the value has been standardized, a datatype will be supplied to identify how the string is to be parsed. | (child text) | xsd:string
-datatype  | URI identifying the way the value is to be processed according to a specific standard. | datatype (attribute) | [anyURI](#uri)
-resource | URI identifying the resource to which the formal value has been standardized. | resource (attribute) | [anyURI](#uri)
-
-### examples
-
-Standardized value with a specified datatype:
-
-```xml
-  <... datatype="http://www.w3.org/2001/XMLSchema#date">1732-02-22</...>
-```
-
-Normalized value:
-
-```xml
-  <...>...text of the normalized value...</...>
-```
-Standardized value:
-
-```xml
-  <... resource="http://identifier/for/standardized/value"/>
-```
-
-Standardized and normalized value:
-
-```xml
-  <... resource="http://identifier/for/standardized/value">...text of the normalized value...</...>
-```
-
-
 <a id="note"/>
 
-## 2.6 The "Note" Data Type
+## 2.5 The "Note" Data Type
 
 The `gx:Note` XML type is used to (de)serialize the `http://gedcomx.org/Note` data type.
 
@@ -290,7 +247,7 @@ attribution | The attribution of this note. | gx:attribution | [`gx:Attribution`
 
 <a id="text-value"/>
 
-## 2.8 The "TextValue" Data Type
+## 2.6 The "TextValue" Data Type
 
 The `gx:TextValue` XML type is used to (de)serialize the `http://gedcomx.org/TextValue`
 data type.
@@ -325,11 +282,12 @@ The `gx:SourceDescription` XML type is used to (de)serialize the
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
-id | A local, transient identifier for the resource being described. | id (attribute) | xsd:string
+id | An identifier for the XML element holding the source description data. The id attribute MUST conform to the constraints defined in [Section 7, "Fragment Identifiers"](#fragment-ids). | id (attribute) | xsd:string
 citation | The citation for this source | gx:citation | [`gx:SourceCitation`](#source-citation)
 about | A uniform resource identifier (URI) for the resource being described. | about (attribute) | [anyURI](#uri)
 mediator | A reference to the entity that mediates access to the described source. | gx:mediator | [`gx:ResourceReference`](#resource-reference)
 sources | A list of references to any sources from which this source is derived. | gx:source | [`gx:SourceReference`](#source-reference)
+extractedConclusions | A list of references to any conclusions that were extracted from this source, to be analyzed and evaluated atomically within on context of the source. | gx:extractedConclusion | [`gx:ResourceReference`](#resource-reference)
 componentOf | A reference to the source that contains this source. | gx:componentOf | [`gx:SourceReference`](#source-reference)
 displayName | A display name for this source. | gx:displayName | xsd:string
 alternateNames | A list of alternate display names for this source. | gx:alternateName | [`gx:TextValue`](#text-value)
@@ -347,6 +305,8 @@ attribution | The attribution of this source. | gx:attribution | [`gx:Attributio
     <gx:source>
       ...
     </gx:source>
+    ...
+    <gx:extractedConclusion resource="http://identifier/for/the/extracted/conclusion"/>
     ...
     <gx:componentOf>
       ...
@@ -516,7 +476,7 @@ data type.
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
-id | A local, transient identifier for the resource being described. | id (attribute) | xsd:string
+id | An identifier for the XML element holding the agent data. The id attribute MUST conform to the constraints defined in [Section 7, "Fragment Identifiers"](#fragment-ids). | id (attribute) | xsd:string
 identifiers | Identifiers for the agent. | gx:identifier | [`gx:Identifier`](#identifier-type)
 name | The name of the person or organization. | gx:name | xsd:string
 homepage | The homepage of the person or organization. | gx:homepage | [`gx:ResourceReference`](#resource-reference)
@@ -565,15 +525,15 @@ data type.
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
-id | A local, transient identifier for the resource being described. | id (attribute) | xsd:string
+id | An identifier for the XML element holding the conclusion data. The id attribute MUST conform to the constraints defined in [Section 7, "Fragment Identifiers"](#fragment-ids). | id (attribute) | xsd:string
+confidence  | Reference to the confidence level of the contributor of the attributed data. | confidence (attribute) | [`URI`](#uri)
 sources | A list of references to the sources of the conclusion. | gx:source | [`gx:SourceReference`](#source-reference)
 notes | A list of notes about this conclusion. | gx:note | [`gx:Note`](#note)
-attribution | The attribution of this conclusion. | gx:attribution | [`gx:Attribution`](#attribution)
 
 ### examples
 
 ```xml
-  <... id="local_id">
+  <... id="local_id" confidence="http://gedcomx.org/Certainly">
     <gx:source>
       ...
     </gx:source>
@@ -582,9 +542,6 @@ attribution | The attribution of this conclusion. | gx:attribution | [`gx:Attrib
       ...
     </gx:note>
     ...
-    <gx:attribution>
-      ...
-    </gx:attribution>
 
     <!-- possibility of extension elements -->
 
@@ -602,15 +559,18 @@ The `gx:Document` XML type is used to (de)serialize the `http://gedcomx.org/v1/D
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
+attribution | The attribution of this document. | gx:attribution | [`gx:Attribution`](#attribution)
 text | The text of the document. | gx:text | [`gx:TextValue`](#text-value)
 
 ### examples
 
 ```xml
   <...>
-
     <!-- ...the members of gx:Conclusion... -->
 
+    <gx:attribution>
+      ...
+    </gx:attribution>
     <gx:text xml:lang="en">...text of the document...</gx:text>
   </...>
 ```
@@ -691,8 +651,7 @@ name | description | XML property | XML type
 -----|-------------|--------------|---------
 type | The name type. | type (attribute) | [`URI`](#uri)
 preferred | Whether this name is preferred above the other `Name` conclusions of a person. | gx:preferred | xsd:boolean
-primaryForm | The primary form of the name. | gx:primaryForm | [`gx:NameForm`](#name-form)
-alternateForms | The alternate forms (renderings) of the primary name. This is *not* for name variants (e.g., nicknames, spelling variations). | gx:alternateForm | [`gx:NameForm`](#name-form)
+nameForms | The name form(s) that best represents this name `NameForm` -- usually representations considered proper and well formed in the person's native, historical cultural context. All included name forms should be representations of the same name -- __*not*__ name variants (e.g., nicknames, spelling variations). | gx:nameForm | [`gx:NameForm`](#name-form)
 
 ### examples
 
@@ -702,12 +661,9 @@ alternateForms | The alternate forms (renderings) of the primary name. This is *
     <!-- ...the members of gx:Conclusion... -->
 
     <gx:preferred>true</gx:preferred>
-    <gx:primaryForm>
+    <gx:nameForm>
       ...
-    </gx:primaryForm>
-    <gx:alternateForm>
-      ...
-    </gx:alternateForm>
+    </gx:nameForm>
     ...
   </...>
 ```
@@ -726,8 +682,7 @@ name | description | XML property | XML type
 type | URI identifying the type of the fact. | type (attribute) | [`URI`](#uri)
 date | The date of applicability of the fact. | gx:date | [`gx:Date`](#conclusion-date)
 place | The place of applicability of the fact. | gx:place | [`gx:Place`](#conclusion-place)
-original | The value of the fact as supplied by the contributor. | gx:original | xsd:string
-formal | The formal value of the fact. | gx:formal | [`gx:FormalValue`](#formal-value)
+value | The original value of the fact as supplied by the contributor. | gx:value | xsd:string
 
 ### examples
 
@@ -743,9 +698,9 @@ formal | The formal value of the fact. | gx:formal | [`gx:FormalValue`](#formal-
       ...
     </gx:place>
     <gx:original>...original value of the fact...</gx:original>
-    <gx:formal>
+    <gx:value>
       ...
-    </gx:formal>
+    </gx:value>
   </...>
 ```
 
@@ -760,6 +715,7 @@ data type.
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
+attribution | The attribution of this person. | gx:attribution | [`gx:Attribution`](#attribution)
 identifiers | Identifiers for the person. | gx:identifier | [`gx:Identifier`](#identifier-type)
 living | Whether the person is considered living. | gx:living | xsd:boolean
 gender | The conclusion about the gender of the person. | gx:gender | [`gx:Gender`](#gender)
@@ -773,6 +729,9 @@ facts | The conclusions about the facts of the life of the person. | gx:fact | [
 
     <!-- ...the members of gx:Conclusion... -->
 
+    <gx:attribution>
+      ...
+    </gx:attribution>
     <gx:identifier>
       ...
     </gx:identifier>
@@ -803,6 +762,7 @@ data type.
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
+attribution | The attribution of this relationship. | gx:attribution | [`gx:Attribution`](#attribution)
 type | URI identifying the type of the relationship. | type (attribute) | [`URI`](#uri)
 person1 | Reference to the first person in the relationship. | gx:person1 | [`gx:ResourceReference`](#resource-reference)
 person2 | Reference to the second person in the relationship. | gx:person2 | [`gx:ResourceReference`](#resource-reference)
@@ -815,6 +775,9 @@ facts | The conclusions about the facts of the life of the relationship. | gx:fa
 
     <!-- ...the members of gx:Conclusion... -->
 
+    <gx:attribution>
+      ...
+    </gx:attribution>
     <gx:person1 resource="http://identifier/for/person/1"/>
     <gx:person2 resource="http://identifier/for/person/2"/>
     <gx:fact>
@@ -862,6 +825,7 @@ data type.
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
+attribution | The attribution of this event. | gx:attribution | [`gx:Attribution`](#attribution)
 type | URI identifying the type of the event. | type (attribute) | [`URI`](#uri)
 date | The date of the event. | gx:date | [`gx:Date`](#conclusion-date)
 place | The place the event. | gx:place | [`gx:Place`](#conclusion-place)
@@ -874,6 +838,9 @@ roles | The roles of the persons in the event. | gx:role | [`gx:EventRole`](#con
 
     <!-- ...the members of gx:Conclusion... -->
 
+    <gx:attribution>
+      ...
+    </gx:attribution>
     <gx:date>
       ...
     </gx:date>
@@ -899,16 +866,14 @@ data type.
 name | description | XML property | XML type
 -----|-------------|--------------|---------
 original | The original value of the date as supplied by the contributor. | gx:original | xsd:string
-formal | The formal value of the date. | gx:formal | [`gx:FormalValue`](#formal-value)
+formal | The formal value of the date. | gx:formal | [GEDCOM X Date](https://github.com/FamilySearch/gedcomx/blob/master/specifications/date-model-specification.md)
 
 ### examples
 
 ```xml
   <...>
     <gx:original>...the original text...</gx:original>
-    <gx:formal>
-      ...
-    </gx:formal>
+    <gx:formal>...</gx:formal>
   </...>
 ```
 
@@ -923,17 +888,16 @@ data type.
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
+resource | Reference to the standardized resource describing the place. | resource (attribute) | [`URI`](#uri)
 original | The original value of the place as supplied by the contributor. | gx:original | xsd:string
-formal | The formal value of the place. | gx:formal | [`gx:FormalValue`](#formal-value)
+normalized | The normalized text value of the place. | gx:normalized | xsd:string
 
 ### examples
 
 ```xml
-  <...>
+  <... resource="/path/to/place/resource">
     <gx:original>...the original text...</gx:original>
-    <gx:formal>
-      ...
-    </gx:formal>
+    <gx:normalized>...</gx:normalized>
   </...>
 ```
 
@@ -949,12 +913,19 @@ data type.
 name | description | XML property | XML type
 -----|-------------|--------------|---------
 type | URI identifying the type of the name part. | type (attribute) | [`URI`](#uri)
-value | The text of the name part. | (child text) | xsd:string
+value | The text of the name part. | value (attribute) | xsd:string
+qualifiers | Type qualifiers to further describe the type of the name part. | gx:qualifier | [`gx:ResourceReference`](#resource-reference)
 
 ### examples
 
 ```xml
-  <... type="http://gedcomx.org/Prefix">...value of the name part...</...>
+  <... type="http://gedcomx.org/Prefix" value="...value of the name part...">
+    <qualifier resource="http://gedcomx.org/First"/>
+    ...
+
+    <!-- possibility of extension elements -->
+
+  </...>
 ```
 
  <a id="name-form"/>
@@ -970,7 +941,7 @@ name | description | XML property | XML type
 -----|-------------|--------------|---------
 locale | An [IETF BCP 47 language tag](http://tools.ietf.org/html/bcp47) specifying the cultural context (language, script, etc.) to be used to understand, interpret and render this name form. | gx:locale | xsd:string
 fullText | The full text of the name form. | gx:fullText | xsd:string
-parts | The parts of the name form. | gx:part | [`gx:NamePart`](#name-part)
+parts | Any identified name parts from the name represented in this instance, ordered in the natural order they would be spoken in the given cultural context. | gx:part | [`gx:NamePart`](#name-part)
 
 ### examples
 
@@ -982,9 +953,11 @@ parts | The parts of the name form. | gx:part | [`gx:NamePart`](#name-part)
       ...
     </gx:part>
     ...
+
+    <!-- possibility of extension elements -->
+
   </...>
 ```
-
 
 
 # 6. XML Elements
@@ -1011,6 +984,19 @@ gx:transcriptionDocument | [`gx:TranscriptionDocument`](#transcription-document)
 gx:translationDocument | [`gx:TranslationDocument`](#translation-document)
 gx:analysisDocument | [`gx:AnalysisDocument`](#analysis-document)
 
-# 7. Miscellaneous To Do
+
+<a id="fragment-ids"/>
+
+7. Fragment Identifiers
+
+Fragment identifiers are used to identify specific elements (i.e. "fragments") within an XML document. The GEDCOM X
+XML serialization format specifies the use of the "id" attribute as the fragment identifier for any element in
+a given XML document. Note that some data types explicitly define an "id" attribute, but the XML serialization format
+allows the option of an "id" attribute on _all_ elements for the purpose of identifying fragments of the XML document.
+The values of all fragment identifiers within a single XML document MUST be unique.
+
+For more information about fragment identifiers, see [RFC 3986, Section 3.5](http://tools.ietf.org/html/rfc3986#section-3.5).
+
+# 8. Miscellaneous To Do
 
 todo: provide the normative XML schema (inline)?

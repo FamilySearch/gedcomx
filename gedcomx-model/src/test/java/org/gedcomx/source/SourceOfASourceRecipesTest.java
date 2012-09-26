@@ -159,7 +159,7 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
     srcDesc2.setAbout(URI.create(RECORD_PAL_LYNDON_B_JOHNSON));
     srcDesc2.setSources(new ArrayList<SourceReference>());
     srcDesc2.getSources().add(new SourceReference());
-    srcDesc2.getSources().get(0).setDescription(URI.create(SRCDESC_URI_PREFIX + SRC_OF_SRC_ID));
+    srcDesc2.getSources().get(0).setDescriptionRef(URI.create(SRCDESC_URI_PREFIX + SRC_OF_SRC_ID));
     srcDesc2.setDisplayName(PRESIDENT_LYNDON_B_JOHNSON_DEATH_CERTIFICATE);
     srcDesc2.setMediatorURI(URI.create(MEDIATOR_URI_PREFIX + ORG_FS_ID));
     srcDesc2.setNotes(new ArrayList<Note>());
@@ -167,7 +167,6 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
     srcDesc2.setAttribution(new Attribution());
     srcDesc2.getAttribution().setContributor(new ResourceReference(URI.create(CONTRIBUTOR_1_ID)));
     srcDesc2.getAttribution().setModified(new Date(MODIFIED_20111111_11_11_11_111)); // 11 Nov 2011 11:11:11.111
-    srcDesc2.getAttribution().setKnownConfidenceLevel(ConfidenceLevel.Certainly);
     srcDesc2.getAttribution().setChangeMessage(CHANGE_MESSAGE);
 
     ResourceSet resourceSet = new ResourceSet();
@@ -242,7 +241,7 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
     assertEquals(srcDesc2.getAbout().toURI().toString(), RECORD_PAL_LYNDON_B_JOHNSON);
     assertNotNull(srcDesc2.getSources());
     assertEquals(srcDesc2.getSources().size(), 1);
-    assertEquals(srcDesc2.getSources().get(0).getDescription().toURI().toString(), SRCDESC_URI_PREFIX + SRC_OF_SRC_ID);
+    assertEquals(srcDesc2.getSources().get(0).getDescriptionRef().toURI().toString(), SRCDESC_URI_PREFIX + SRC_OF_SRC_ID);
     assertNotNull(srcDesc2.getCitation());
     assertEquals(srcDesc2.getCitation().getValue(), DEATH_IDX_FULL_CITATION);
     assertEquals(srcDesc2.getCitation().getCitationTemplate().getResource().toURI().toString(), FS_INDEX_DEATHRECORD_CITATION_TEMPLATE);
@@ -273,7 +272,6 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
     assertNotNull(srcDesc2.getAttribution());
     assertEquals(srcDesc2.getAttribution().getContributor().getResource().toURI().toString(), CONTRIBUTOR_1_ID);
     assertEquals(srcDesc2.getAttribution().getModified().getTime(), MODIFIED_20111111_11_11_11_111);
-    assertEquals(srcDesc2.getAttribution().getKnownConfidenceLevel(), ConfidenceLevel.Certainly);
     assertEquals(srcDesc2.getAttribution().getChangeMessage(), CHANGE_MESSAGE);
 
     assertNotNull(orgFamilySearch);
@@ -374,7 +372,7 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
     srcDesc1.getCitation().getFields().add(new CitationField("fhl-film", "FHL US/CAN Census Area Film 2340258"));
     srcDesc1.setSources(new ArrayList<SourceReference>());
     srcDesc1.getSources().add(new SourceReference());
-    srcDesc1.getSources().get(0).setDescription(URI.create("#" + sourceS3));
+    srcDesc1.getSources().get(0).setDescriptionRef(URI.create("#" + sourceS3));
     srcDesc1.setMediatorURI(URI.create("repository#" + ORG_FHL_ID));
 
     SourceDescription srcDesc2 = new SourceDescription();
@@ -389,7 +387,7 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
     srcDesc2.setAbout(URI.create("https://www.familysearch.org/search/collection/show#uri=http://www.familysearch.org/searchapi/search/collection/1810731"));
     srcDesc2.setSources(new ArrayList<SourceReference>());
     srcDesc2.getSources().add(new SourceReference());
-    srcDesc2.getSources().get(0).setDescription(URI.create("#" + sourceOfS2));
+    srcDesc2.getSources().get(0).setDescriptionRef(URI.create("#" + sourceOfS2));
     srcDesc2.setDisplayName("1930 US Census");
     srcDesc2.setMediatorURI(URI.create("repository#" + ORG_FS_ID));
     srcDesc2.setNotes(new ArrayList<Note>());
@@ -415,7 +413,7 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
     srcDesc3.getCitation().getFields().add(new CitationField("accessed", "12 July 2012"));
     srcDesc3.setAbout(URI.create("https://familysearch.org/pal:/MM9.1.1/XSYY-Q6P"));
     srcDesc3.setComponentOf(new SourceReference());
-    srcDesc3.getComponentOf().setDescription(URI.create("#" + sourceOfS1));
+    srcDesc3.getComponentOf().setDescriptionRef(URI.create("#" + sourceOfS1));
     srcDesc3.setDisplayName("President Ronald Reagan with his parents in 1830 census");
     srcDesc3.setNotes(new ArrayList<Note>());
     srcDesc3.getNotes().add(note);

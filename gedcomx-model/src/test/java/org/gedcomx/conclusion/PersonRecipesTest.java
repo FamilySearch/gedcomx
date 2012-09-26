@@ -1,18 +1,16 @@
 package org.gedcomx.conclusion;
 
-import org.gedcomx.common.Attribution;
 import org.gedcomx.common.ResourceReference;
-import org.gedcomx.source.SourceReference;
 import org.gedcomx.common.URI;
 import org.gedcomx.test.RecipeTest;
 import org.gedcomx.test.Snippet;
 import org.gedcomx.types.FactType;
 import org.gedcomx.types.GenderType;
+import org.gedcomx.types.NamePartQualifierType;
 import org.gedcomx.types.NamePartType;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static org.gedcomx.rt.SerializationUtil.processThroughJson;
 import static org.gedcomx.rt.SerializationUtil.processThroughXml;
@@ -75,22 +73,13 @@ public class PersonRecipesTest extends RecipeTest {
     fact.setId("123");
     fact.setKnownType(FactType.Birth);
 
-    fact.setAttribution(new Attribution());
-    fact.getAttribution().setContributor(new ResourceReference());
-    fact.getAttribution().getContributor().setResource(URI.create("https://familysearch.org/platform/contributors/BCD-FGHJ"));
     fact.setDate(new Date());
-    fact.getDate().setOriginal("February 22, 1732");
-    FormalValue normalized = new FormalValue();
-    normalized.setText("1732-02-22");
-    normalized.setDatatype(URI.create("http://www.w3.org/2001/XMLSchema#date"));
-    fact.getDate().setFormal(normalized);
+    fact.getDate().setOriginal("March 18, 1844");
+    fact.getDate().setFormal("+1844-03-18");
 
     fact.setPlace(new Place());
-    fact.getPlace().setOriginal("Pope's Creek, Westmoreland, Virginia");
-    normalized = new FormalValue();
-    normalized.setText("Pope's Creek, Westmoreland, Virginia");
-    normalized.setResource(URI.create("https://familysearch.org/platform/places/12345"));
-    fact.getPlace().setFormal(normalized);
+    fact.getPlace().setOriginal("Tikhvin, Leningradskaya Oblast', Russia");
+    fact.getPlace().setResource(URI.create("https://familysearch.org/platform/places/12345"));
 
     person.addFact(fact);
 
@@ -98,56 +87,58 @@ public class PersonRecipesTest extends RecipeTest {
     fact.setId("456");
     fact.setKnownType(FactType.Death);
 
-    fact.setAttribution(new Attribution());
-    fact.getAttribution().setContributor(new ResourceReference());
-    fact.getAttribution().getContributor().setResource(URI.create("https://familysearch.org/platform/contributors/KLM-NPQR"));
     fact.setDate(new Date());
-    fact.getDate().setOriginal("December 14, 1799");
-    normalized = new FormalValue();
-    normalized.setText("1799-12-14T22:00:00");
-    normalized.setDatatype(URI.create("http://www.w3.org/2001/XMLSchema#dateTime"));
-    fact.getDate().setFormal(normalized);
+    fact.getDate().setOriginal("June 21, 1908");
+    fact.getDate().setFormal("+1908-06-21T12:34:56");
 
     fact.setPlace(new Place());
-    fact.getPlace().setOriginal("Mount Vernon, Virginia");
-    normalized = new FormalValue();
-    normalized.setText("Mount Vernon, Fairfax County, Virginia");
-    normalized.setResource(URI.create("https://familysearch.org/platform/places/67890"));
-    fact.getPlace().setFormal(normalized);
+    fact.getPlace().setOriginal("Luga, Russia");
+    fact.getPlace().setNormalized("Luga, Novgorodskaya Oblast', Russia");
+    fact.getPlace().setResource(URI.create("https://familysearch.org/platform/places/67890"));
 
     person.addFact(fact);
 
-    List<Name> names = new ArrayList<Name>();
     Name name = new Name();
-    name.setPreferred(true);
-    NameForm nameForm = new NameForm();
-    nameForm.setFullText("George Washington");
-    ArrayList<NamePart> parts = new ArrayList<NamePart>();
-    NamePart part = new NamePart();
-    part.setKnownType(NamePartType.Given);
-    part.setValue("George");
-    parts.add(part);
-    part = new NamePart();
-    part.setKnownType(NamePartType.Surname);
-    part.setValue("Washington");
-    parts.add(part);
-    nameForm.setParts(parts);
-    name.setPrimaryForm(nameForm);
-    name.setAttribution(new Attribution());
-    name.getAttribution().setContributor(new ResourceReference());
-    name.getAttribution().getContributor().setResource(URI.create("https://familysearch.org/platform/contributors/STV-WXZY"));
     name.setId("789");
-    names.add(name);
-    person.setNames(names);
+    name.setPreferred(true);
+    name.setNameForms(new ArrayList<NameForm>());
+    name.getNameForms().add(new NameForm());
+    name.getNameForms().get(0).setLocale("ru-Cyrl");
+    name.getNameForms().get(0).setFullText("Никола́й Андре́евич Ри́мский-Ко́рсаков");
+    name.getNameForms().get(0).setParts(new ArrayList<NamePart>());
+    name.getNameForms().get(0).getParts().add(new NamePart());
+    name.getNameForms().get(0).getParts().get(0).setKnownType(NamePartType.Given);
+    name.getNameForms().get(0).getParts().get(0).setValue("Никола́й");
+    name.getNameForms().get(0).getParts().get(0).setQualifiers(new ArrayList<ResourceReference>());
+    name.getNameForms().get(0).getParts().get(0).getQualifiers().add(new ResourceReference(NamePartQualifierType.First.toQNameURI()));
+    name.getNameForms().get(0).getParts().add(new NamePart());
+    name.getNameForms().get(0).getParts().get(1).setKnownType(NamePartType.Given);
+    name.getNameForms().get(0).getParts().get(1).setValue("Андре́евич");
+    name.getNameForms().get(0).getParts().get(1).setQualifiers(new ArrayList<ResourceReference>());
+    name.getNameForms().get(0).getParts().get(1).getQualifiers().add(new ResourceReference(NamePartQualifierType.Middle.toQNameURI()));
+    name.getNameForms().get(0).getParts().add(new NamePart());
+    name.getNameForms().get(0).getParts().get(2).setKnownType(NamePartType.Surname);
+    name.getNameForms().get(0).getParts().get(2).setValue("Ри́мский-Ко́рсаков");
+    name.getNameForms().add(new NameForm());
+    name.getNameForms().get(1).setLocale("ru-Latn");
+    name.getNameForms().get(1).setFullText("Nikolai Andreyevich Rimsky-Korsakov");
+    name.getNameForms().get(1).setParts(new ArrayList<NamePart>());
+    name.getNameForms().get(1).getParts().add(new NamePart());
+    name.getNameForms().get(1).getParts().get(0).setKnownType(NamePartType.Given);
+    name.getNameForms().get(1).getParts().get(0).setValue("Nikolai");
+    name.getNameForms().get(1).getParts().get(0).setQualifiers(new ArrayList<ResourceReference>());
+    name.getNameForms().get(1).getParts().get(0).getQualifiers().add(new ResourceReference(NamePartQualifierType.First.toQNameURI()));
+    name.getNameForms().get(1).getParts().add(new NamePart());
+    name.getNameForms().get(1).getParts().get(1).setKnownType(NamePartType.Given);
+    name.getNameForms().get(1).getParts().get(1).setValue("Andreyevich");
+    name.getNameForms().get(1).getParts().get(1).setQualifiers(new ArrayList<ResourceReference>());
+    name.getNameForms().get(1).getParts().get(1).getQualifiers().add(new ResourceReference(NamePartQualifierType.Middle.toQNameURI()));
+    name.getNameForms().get(1).getParts().add(new NamePart());
+    name.getNameForms().get(1).getParts().get(2).setKnownType(NamePartType.Surname);
+    name.getNameForms().get(1).getParts().get(2).setValue("Rimsky-Korsakov");
 
-    ArrayList<SourceReference> sources = new ArrayList<SourceReference>();
-    SourceReference attributedSourceReference = new SourceReference();
-    Attribution attribution = new Attribution();
-    attribution.setContributor(new ResourceReference());
-    attribution.getContributor().setResource(URI.create("https://familysearch.org/platform/contributors/STV-WXZY"));
-    attributedSourceReference.setAttribution(attribution);
-    sources.add(attributedSourceReference);
-    person.setSources(sources);
+    person.setNames(new ArrayList<Name>());
+    person.getNames().add(name);
 
     person.setId("BBB-BBBB");
 

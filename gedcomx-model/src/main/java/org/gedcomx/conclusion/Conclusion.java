@@ -16,15 +16,14 @@
 package org.gedcomx.conclusion;
 
 import org.codehaus.enunciate.json.JsonName;
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.gedcomx.common.*;
 import org.gedcomx.source.ReferencesSources;
 import org.gedcomx.source.SourceReference;
+import org.gedcomx.types.ConfidenceLevel;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,10 +33,11 @@ import java.util.List;
  *
  * @author Ryan Heaton
  */
-@XmlType ( name = "Conclusion" )
+@XmlType ( name = "Conclusion", propOrder = { "attribution", "sources", "notes" })
 public abstract class Conclusion extends ExtensibleData implements Attributable, ReferencesSources, HasNotes {
 
   private String id;
+  private URI confidence;
   private List<SourceReference> sources;
   private List<Note> notes;
   private Attribution attribution;
@@ -60,6 +60,46 @@ public abstract class Conclusion extends ExtensibleData implements Attributable,
    */
   public void setId(String id) {
     this.id = id;
+  }
+
+  /**
+   * The level of confidence the contributor has about the data.
+   *
+   * @return The level of confidence the contributor has about the data.
+   */
+  @XmlAttribute
+  public URI getConfidence() {
+    return confidence;
+  }
+
+  /**
+   * The level of confidence the contributor has about the data.
+   *
+   * @param confidence The level of confidence the contributor has about the data.
+   */
+  public void setConfidence(URI confidence) {
+    this.confidence = confidence;
+  }
+
+  /**
+   * The value of a the known confidence level, or {@link org.gedcomx.types.ConfidenceLevel#OTHER} if not known.
+   *
+   * @return The value of a the known confidence level, or {@link org.gedcomx.types.ConfidenceLevel#OTHER} if not known.
+   */
+  @XmlTransient
+  @JsonIgnore
+  public ConfidenceLevel getKnownConfidenceLevel() {
+    return getConfidence() == null ? null : ConfidenceLevel.fromQNameURI(getConfidence());
+  }
+
+  /**
+   * Set the confidence level from a known enumeration of confidence levels.
+   *
+   * @param level The known level.
+   */
+  @JsonIgnore
+  public void setKnownConfidenceLevel(ConfidenceLevel level) {
+    setConfidence(level == null ? null : URI.create(org.codehaus.enunciate.XmlQNameEnumUtil.toURIValue(level)));
   }
 
   /**
@@ -159,13 +199,7 @@ public abstract class Conclusion extends ExtensibleData implements Attributable,
    */
   @Override
   public String toString() {
-    StringBuilder s = new StringBuilder((getId() == null) ? "" : getId());
-
-    if (getAttribution() != null) {
-      s.append(": ").append(getAttribution().toString());
-    }
-
-    return s.toString();
+    return (getId() == null) ? "" : getId();
   }
 
 }

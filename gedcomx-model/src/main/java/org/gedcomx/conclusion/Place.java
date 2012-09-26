@@ -15,8 +15,9 @@
  */
 package org.gedcomx.conclusion;
 
-import org.gedcomx.rt.RDFSubClassOf;
+import org.gedcomx.common.URI;
 
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
 /**
@@ -24,19 +25,37 @@ import javax.xml.bind.annotation.XmlType;
  *
  * @author Ryan Heaton
  */
-@XmlType ( name = "Place", propOrder = { "original", "formal" } )
-@RDFSubClassOf ( "http://purl.org/dc/terms/Location" )
-public class Place implements Formalizeable {
+@XmlType ( name = "Place", propOrder = { "original", "normalized" } )
+public class Place {
 
+  private URI resource;
   private String original;
-  private FormalValue formal;
+  private String normalized;
+
+  /**
+   * The standardized and/or normalized resource value.
+   *
+   * @return The resource value.
+   */
+  @XmlAttribute
+  public URI getResource() {
+    return resource;
+  }
+
+  /**
+   * The standardized and/or normalized resource value.
+   *
+   * @param resource The resource value.
+   */
+  public void setResource(URI resource) {
+    this.resource = resource;
+  }
 
   /**
    * The original text as supplied by the user.
    *
    * @return The original text as supplied by the user.
    */
-  @Override
   public String getOriginal() {
     return original;
   }
@@ -46,33 +65,29 @@ public class Place implements Formalizeable {
    *
    * @param original The original value as supplied by the user.
    */
-  @Override
   public void setOriginal(String original) {
     this.original = original;
   }
 
   /**
-   * The formal value.
+   * The normalized value of the place
    *
-   * @return The formal value.
+   * @return the normalized value
    */
-  @Override
-  public FormalValue getFormal() {
-    return formal;
+  public String getNormalized() {
+    return normalized;
   }
 
   /**
-   * The formal value.
+   * The normalized value of the place
    *
-   * @param formal The formal value.
+   * @param normalized the normalized value
    */
-  @Override
-  public void setFormal(FormalValue formal) {
-    this.formal = formal;
+  public void setNormalized(String normalized) {
+    this.normalized = normalized;
   }
 
-  @Override
   public String toString() {
-    return "Place{" + "original='" + original + '\'' + ", formal=" + formal + '}';
+    return "Place{" + "original='" + original + '\'' + "normal='" + normalized + '\'' + ", resource=" + resource + '}';
   }
 }

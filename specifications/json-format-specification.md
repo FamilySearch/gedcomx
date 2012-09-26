@@ -45,73 +45,68 @@ in JSON according to this specification:
 ```json
 {
   "names" : [ {
-    "primaryForm" : {
-      "fullText" : "George Washington",
+    "nameForms" : [ {
+      "locale" : "ru-Cyrl",
       "parts" : [ {
-        "value" : "George",
-        "type" : "http://gedcomx.org/Given"
-      },
-      {
-        "value" : "Washington",
+        "value" : "Никола́й",
+        "type" : "http://gedcomx.org/Given",
+        "qualifiers" : [ "http://gedcomx.org/First" ]
+      }, {
+        "value" : "Андре́евич",
+        "type" : "http://gedcomx.org/Given",
+        "qualifiers" : [ "http://gedcomx.org/Middle" ]
+      }, {
+        "value" : "Ри́мский-Ко́рсаков",
         "type" : "http://gedcomx.org/Surname"
-      } ]
-    },
+      } ],
+      "fullText" : "Никола́й Андре́евич Ри́мский-Ко́рсаков"
+    }, {
+      "locale" : "ru-Latn",
+      "parts" : [ {
+        "value" : "Nikolai",
+        "type" : "http://gedcomx.org/Given",
+        "qualifiers" : [ "http://gedcomx.org/First" ]
+      }, {
+        "value" : "Andreyevich",
+        "type" : "http://gedcomx.org/Given",
+        "qualifiers" : [ "http://gedcomx.org/Middle" ]
+      }, {
+        "value" : "Rimsky-Korsakov",
+        "type" : "http://gedcomx.org/Surname"
+      } ],
+      "fullText" : "Nikolai Andreyevich Rimsky-Korsakov"
+    } ],
     "preferred" : true,
-    "id" : "789",
-    "attribution" : {
-      "contributor" : "https://familysearch.org/platform/contributors/STV-WXZY"
-    }
+    "id" : "789"
+  } ],
+  "facts" : [ {
+    "type" : "http://gedcomx.org/Birth",
+    "date" : {
+      "original" : "March 18, 1844",
+      "formal" : "+1844-03-18"
+    },
+    "place" : {
+      "resource" : "https://familysearch.org/platform/places/12345",
+      "original" : "Tikhvin, Leningradskaya Oblast', Russia"
+    },
+    "id" : "123"
+  }, {
+    "type" : "http://gedcomx.org/Death",
+    "date" : {
+      "original" : "June 21, 1908",
+      "formal" : "+1908-06-21T12:34:56"
+    },
+    "place" : {
+      "resource" : "https://familysearch.org/platform/places/67890",
+      "original" : "Luga, Russia",
+      "normalized" : "Luga, Novgorodskaya Oblast', Russia"
+    },
+    "id" : "456"
   } ],
   "gender" : {
     "type" : "http://gedcomx.org/Male"
   },
-  "facts" : [ {
-    "type" : "http://gedcomx.org/Birth",
-    "date" : {
-      "original" : "February 22, 1732",
-      "formal" : {
-        "text" : "1732-02-22",
-        "datatype" : "http://www.w3.org/2001/XMLSchema#date"
-      }
-    },
-    "place" : {
-      "original" : "Pope's Creek, Westmoreland, Virginia",
-      "formal" : {
-        "resource" : "https://familysearch.org/platform/places/12345",
-        "text" : "Pope's Creek, Westmoreland, Virginia"
-      }
-    },
-    "id" : "123",
-    "attribution" : {
-      "contributor" : "https://familysearch.org/platform/contributors/BCD-FGHJ"
-    }
-  }, {
-    "type" : "http://gedcomx.org/Death",
-    "date" : {
-      "original" : "December 14, 1799",
-      "formal" : {
-        "text" : "1799-12-14T22:00:00",
-        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime"
-      }
-    },
-    "place" : {
-      "original" : "Mount Vernon, Virginia",
-      "formal" : {
-        "resource" : "https://familysearch.org/platform/places/67890",
-        "text" : "Mount Vernon, Fairfax County, Virginia"
-      }
-    },
-    "id" : "456",
-    "attribution" : {
-      "contributor" : "https://familysearch.org/platform/contributors/KLM-NPQR"
-    }
-  } ],
-  "id" : "BBB-BBBB",
-  "sources" : [ {
-    "attribution" : {
-      "contributor" : "https://familysearch.org/platform/contributors/STV-WXZY"
-    }
-  } ]
+  "id" : "BBB-BBBB"
 }
 ```
 
@@ -127,10 +122,7 @@ JSON according to this specification:
     "type" : "http://gedcomx.org/Marriage",
     "date" : {
       "original" : "January 6, 1759",
-      "formal" : {
-        "text" : "1759-01-06",
-        "datatype" : "http://www.w3.org/2001/XMLSchema#date"
-      }
+      "formal" : "+1759-01-06"
     },
     "id" : "123",
     "attribution" : {
@@ -209,7 +201,6 @@ name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 contributor | Reference to the contributor to whom the attributed data is attributed. | contributor | [`URI`](#uri)
 modified | Timestamp of when the attributed data was contributed. | modified | number (milliseconds since epoch)
-confidence  | Reference to the confidence level of the contributor of the attributed data. | confidence | [`URI`](#uri)
 changeMessage | A statement of why the attributed data is being provided by the contributor. | changeMessage | string
 
 ### examples
@@ -218,63 +209,13 @@ changeMessage | A statement of why the attributed data is being provided by the 
 {
   "contributor" : "http://identifier/for/contributor",
   "modified" : "1338394969",
-  "confidence" : "http://gedcomx.org/Certainly",
   "changeMessage" : "...change message here..."
-}
-```
-
-<a id="formal-value"/>
-
-## 2.4 The "FormalValue" Data Type
-
-The JSON object used to (de)serialize the `http://gedcomx.org/v1/FormalValue` data type is defined as follows:
-
-### properties
-
-name | description | JSON member | JSON object type
------|-------------|--------------|---------
-value | A string supplying the value of the formal value. If the value has been standardized, a datatype will be supplied to identify how the string is to be parsed. | value | string
-datatype  | URI identifying the way the value is to be processed according to a specific standard. | datatype | [`URI`](#uri)
-resource | URI identifying the resource to which the formal value has been standardized. | resource | [`URI`](#uri)
-
-### examples
-
-Standardized value with a specified datatype:
-
-```json
-{
-  "datatype" : "http://www.w3.org/2001/XMLSchema#date",
-  "value" : "1732-02-22"
-}
-```
-
-Normalized value:
-
-```json
-{
-  "value" : "...text of the normalized value..."
-}
-```
-Standardized value:
-
-```json
-{
-  "resource" : "http://identifier/for/standardized/value"
-}
-```
-
-Standardized and normalized value:
-
-```json
-{
-  "resource" : "http://identifier/for/standardized/value",
-  "value" : "...text of the normalized value..."
 }
 ```
 
 <a id="note"/>
 
-## 2.5 The "Note" Data Type
+## 2.4 The "Note" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/v1/Note` data type is defined as follows:
 
@@ -294,7 +235,7 @@ attribution | The attribution of this note. | attribution | [`Attribution`](#att
 }
 ```
 
-## 2.7 The "TextValue" Data Type
+## 2.5 The "TextValue" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/v1/TextValue` data type is defined as follows:
 
@@ -333,11 +274,12 @@ data type is defined as follows:
 
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
-id | A local, transient identifier for the source description. | id | string
+id | An identifier for the JSON object holding the source description data. The id attribute MUST conform to the constraints defined in [Section 7, "Fragment Identifiers"](#fragment-ids). | id | string
 citation | The citation for this source | citation | [`SourceCitation`](#source-citation)
 about | A uniform resource identifier (URI) for the resource being described. | about | [`URI`](#uri)
 mediator | A reference to the entity that mediates access to the described source. | mediator | [`URI`](#uri)
 sources | A list of references to any sources from which this source is derived. | sources | array of [`SourceReference`](#source-reference)
+extractedConclusions | A list of references to any conclusions that were extracted from this source, to be analyzed and evaluated atomically within on context of the source. | extractedConclusions | [`URI`](#uri)
 componentOf | A reference to the source that contains this source. | componentOf | [`SourceReference`](#source-reference)
 displayName | A display name for this source. | displayName | string
 alternateNames | A list of alternate display names for this source. | alternateNames | array of [`TextValue`](#text-value)
@@ -353,6 +295,7 @@ attribution | The attribution of this source. | attribution | [`Attribution`](#a
   "about" : "http://identifier/for/the/source/being/described",
   "mediator" : "http://identifier/for/the/mediator/of/source/being/described",
   "sources" : [ { ... }, { ... } ],
+  "extractedConclusions" : [ "...", "..." ],
   "componentOf" : { ... },
   "displayName" : "...display name...",
   "alternateNames" : [ { ... }, { ... } ],
@@ -502,7 +445,7 @@ The JSON object used to (de)serialize the `http://gedcomx.org/v1/Agent` data typ
 
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
-id | A local, transient identifier for the resource being described. | id | string
+id | An identifier for the JSON object holding the agent data. The id attribute MUST conform to the constraints defined in [Section 7, "Fragment Identifiers"](#fragment-ids). | id | string
 name | The name of the person or organization. | name | string
 identifiers | Identifiers for the agent. | identifiers | [`Identifier`](#identifier-type)
 homepage | The homepage of the person or organization. | homepage | [`URI`](#uri)
@@ -544,19 +487,19 @@ The JSON object used to (de)serialize the `http://gedcomx.org/v1/Conclusion` dat
 
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
-id | A local, transient identifier for the resource being described. | id | string
+id | An identifier for the JSON object holding the conclusion data. The id attribute MUST conform to the constraints defined in [Section 7, "Fragment Identifiers"](#fragment-ids). | id | string
+confidence  | Reference to the confidence level of the contributor of the attributed data. | confidence | [`URI`](#uri)
 sources | The list of references to the sources of the conclusion. | sources | array of [`SourceReference`](#source-reference).
 notes | A list of notes about this conclusion. | note | array of [`gx:Note`](#note)
-attribution | The attribution of this conclusion. | attribution | [`gx:Attribution`](#attribution)
 
 ### examples
 
 ```json
 {
   "id" : "local_id",
+  "confidence" : "http://gedcomx.org/Certainly",
   "sources" : [ { ... }, { ... } ],
   "notes" : [ { ... }, { ... } ],
-  "attribution" : { ... },
 
   ...possibility of extension elements...
 
@@ -571,6 +514,7 @@ The JSON object used to (de)serialize the `http://gedcomx.org/v1/Document` data 
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
+attribution | The attribution of this document. | attribution | [`gx:Attribution`](#attribution)
 text | The text of the document. | gxc:text | [`TextValue`](#text-value)
 
 ### examples
@@ -580,6 +524,7 @@ text | The text of the document. | gxc:text | [`TextValue`](#text-value)
 
   ...the members of gxc:Conclusion...,
 
+  "attribution" : { ... },
   "text" : {
     "lang" : "en",
     "value" : "...text of the document..."
@@ -662,8 +607,7 @@ name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 type | URI identifying the type of the name. | type | [`URI`](#uri)
 preferred | Whether this name is preferred above the other `Name` conclusions of a person. | preferred | boolean
-primaryForm | The primary form of the name. | primaryForm | [`NameForm`](#name-form)
-alternateForms | The alternate forms (renderings) of the primary name. This is *not* for name variants (e.g., nicknames, spelling variations). | alternateForms | array of [`NameForm`](#name-form)
+nameForms | The name form(s) that best represents this name `NameForm` -- usually representations considered proper and well formed in the person's native, historical cultural context. All included name forms should be representations of the same name -- __*not*__ name variants (e.g., nicknames, spelling variations). | nameForms | array of [`NameForm`](#name-form)
 
 ### examples
 
@@ -674,8 +618,7 @@ alternateForms | The alternate forms (renderings) of the primary name. This is *
 
   "type" : "http://gedcomx.org/BirthName",
   "preferred" : true,
-  "primaryForm" : { ... },
-  "alternateForms" : [ { ... }, { ... } ]
+  "nameForms" : [ { ... }, { ... } ]
 }
 ```
 
@@ -692,8 +635,7 @@ name | description | JSON member | JSON object type
 type | URI identifying the type of the fact. | type | [`URI`](#uri)
 date | The date of applicability of the fact. | date | [`Date`](#conclusion-date)
 place | The place of applicability of the fact. | place | [`Place`](#conclusion-place)
-original | The value of the fact as supplied by the contributor. | original | string
-formal | The formal value of the fact. | formal | [`FormalValue`](#formal-value)
+value | The original value of the fact as supplied by the contributor. | original | string
 
 ### examples
 
@@ -705,8 +647,7 @@ formal | The formal value of the fact. | formal | [`FormalValue`](#formal-value)
   "type" : "http://gedcomx.org/Birth",
   "date" : { ... },
   "place" : { ... },
-  "original" : "...the original value of the fact...",
-  "formal" : { ... }
+  "value" : "...the original value of the fact...",
 }
 ```
 
@@ -721,6 +662,7 @@ The JSON object used to (de)serialize the `http://gedcomx.org/v1/Person` data ty
 
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
+attribution | The attribution of this conclusion. | attribution | [`gx:Attribution`](#attribution)
 identifiers | Identifiers for the person. | identifiers | array of [`Identifier`](#identifier-type)
 living | Whether the person is considered living. | living | boolean
 gender | The conclusion about the gender of the person. | gender | [`Gender`](#gender)
@@ -734,6 +676,7 @@ facts | The conclusions about the facts of the life of the person. | facts | arr
 
   ...the members of gxc:Conclusion...,
 
+  "attribution" : { ... },
   "identifiers" : [ { ... }, { ... } ],
   "living" : true,
   "gender" : { ... },
@@ -752,6 +695,7 @@ The JSON object used to (de)serialize the `http://gedcomx.org/v1/Relationship` d
 
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
+attribution | The attribution of this conclusion. | attribution | [`gx:Attribution`](#attribution)
 type | URI identifying the type of the relationship. | type | [`URI`](#uri)
 person1 | Reference to the first person in the relationship. | person1 | [`URI`](#uri)
 person2 | Reference to the second person in the relationship. | person2 | [`URI`](#uri)
@@ -764,6 +708,7 @@ facts | The conclusions about the facts of the life of the relationship. | facts
 
   ...the members of gxc:Conclusion...,
 
+  "attribution" : { ... },
   "type" : "http://gedcomx.org/Couple",
   "person1" : "http://identifier/for/person/1",
   "person2" : "http://identifier/for/person/2",
@@ -810,6 +755,7 @@ is defined as follows:
 
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
+attribution | The attribution of this conclusion. | attribution | [`gx:Attribution`](#attribution)
 type | URI identifying the type of the event. | type | [`URI`](#uri)
 date | The date of the event. | date | [`Date`](#conclusion-date)
 place | The place the event. | place | [`Place`](#conclusion-place)
@@ -822,6 +768,7 @@ roles | The roles of the persons in the event. | roles | array of [`EventRole`](
 
   ...the members of gxc:Conclusion...,
 
+  "attribution" : { ... },
   "type" : "http://gedcomx.org/Marriage",
   "date" : { ... },
   "place" : { ... },
@@ -840,14 +787,14 @@ The JSON object used to (de)serialize the `http://gedcomx.org/v1/Date` data type
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 original | The original value of the date as supplied by the contributor. | original | string
-formal | The formal value of the date. | formal | [`FormalValue`](#formal-value)
+formal | The formal value of the date. | gx:formal | [GEDCOM X Date](https://github.com/FamilySearch/gedcomx/blob/master/specifications/date-model-specification.md)
 
 ### examples
 
 ```json
 {
   "original" : "...the original text...",
-  "formal" : { ... }
+  "formal" : "..."
 }
 ```
 
@@ -861,15 +808,17 @@ The JSON object used to (de)serialize the `http://gedcomx.org/v1/Place` data typ
 
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
+resource | Reference to the standardized resource describing the place. | resource | [`URI`](#uri)
 original | The original value of the place as supplied by the contributor. | original | string
-formal | The formal value of the place. | formal | [`FormalValue`](#formal-value)
+normalized | The normalized text value of the place. | normalized | string
 
 ### examples
 
 ```json
 {
+  "resource" : "/path/to/place/resource",
   "original" : "...the original text...",
-  "formal" : { ... }
+  "normalized" : "...the normalized value..."
 }
 ```
 
@@ -885,6 +834,7 @@ name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 type | URI identifying the type of the name part. | type | [`URI`](#uri)
 value | The text of the name part. | value | string
+qualifiers | Type qualifiers to further describe the type of the name part. | qualifiers | array of [`URI`](#uri)
 
 ### examples
 
@@ -892,6 +842,10 @@ value | The text of the name part. | value | string
 {
   "type" : "http://gedcomx.org/Prefix",
   "value" : "...value of the name part..."
+  "qualifiers" : [ "http://gedcomx.org/Family", "http://gedcomx.org/Patronymic" ]
+
+  ...possibility of extension elements...
+
 }
 ```
 
@@ -914,6 +868,9 @@ parts | The parts of the name form. | parts | array of [`NamePart`](#name-part)
   "locale" : "...an IETF BCP 47 language tag...",
   "fullText" : "...full text of the name form...",
   "parts" : [ { ... }, { ... } ]
+
+  ...possibility of extension elements...
+
 }
 ```
 
@@ -940,6 +897,17 @@ source-references | array of [`SourceReference`](#source-reference)
 source-descriptions | array of [`SourceDescription`](#rdf-description)
 agents | array of [`Agent`](#agent)
 
-# 7. Miscellaneous To Do
+
+7. Fragment Identifiers
+
+Fragment identifiers are used to identify specific objects (i.e. "fragments") within a JSON document. The GEDCOM X
+JSON serialization format specifies the use of the "id" member as the fragment identifier for any object in
+a given JSON document. Note that some data types explicitly define an "id" property, but the JSON serialization format
+allows the option of an "id" property on _all_ objects for the purpose of identifying fragments of the JSON document.
+The values of all fragment identifiers within a single JSON document MUST be unique.
+
+For more information about fragment identifiers, see [RFC 3986, Section 3.5](http://tools.ietf.org/html/rfc3986#section-3.5).
+
+# 8. Miscellaneous To Do
 
 todo:

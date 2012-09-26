@@ -1,9 +1,9 @@
 package org.gedcomx.source;
 
+import org.gedcomx.CustomEntity;
 import org.gedcomx.common.Attribution;
 import org.gedcomx.common.ResourceReference;
 import org.gedcomx.common.URI;
-import org.gedcomx.CustomEntity;
 import org.gedcomx.rt.SerializationUtil;
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
@@ -27,14 +27,14 @@ public class SourceReferenceTest {
     SourceReference reference = new SourceReference();
     reference.setAttribution(new Attribution());
     reference.getAttribution().setContributor(new ResourceReference(URI.create("urn:contributorid")));
-    reference.setDescription(URI.create("urn:srcDescInstance"));
+    reference.setDescriptionRef(URI.create("urn:srcDescInstance"));
     reference.addExtensionElement(new CustomEntity("alt1"));
     reference.addExtensionElement(new CustomEntity("alt2"));
     CustomEntity custom = new CustomEntity();
     custom.setSource(reference);
     custom = SerializationUtil.processThroughXml(custom);
     assertEquals("urn:contributorid", custom.getSource().getAttribution().toString());
-    assertEquals("urn:srcDescInstance", custom.getSource().getDescription().toString());
+    assertEquals("urn:srcDescInstance", custom.getSource().getDescriptionRef().toString());
     AssertJUnit.assertEquals("alt1", ((CustomEntity) custom.getSource().getExtensionElements().get(0)).getId());
     AssertJUnit.assertEquals("alt2", ((CustomEntity) custom.getSource().getExtensionElements().get(1)).getId());
     assertNull(custom.getSource().findExtensionOfType(String.class));
@@ -43,10 +43,10 @@ public class SourceReferenceTest {
     assertEquals(2, custom.getSource().findExtensionsOfType(CustomEntity.class).size());
     assertEquals("alt2", custom.getSource().findExtensionsOfType(CustomEntity.class).get(1).getId());
 
-    reference.setDescription((URI) null);
+    reference.setDescriptionRef((URI) null);
     reference.setAttribution(null);
     reference.setExtensionElements(null);
-    assertNull(reference.getDescription());
+    assertNull(reference.getDescriptionRef());
     assertNull(reference.getAttribution());
     assertNull(reference.findExtensionOfType(CustomEntity.class));
     assertEquals(0, reference.findExtensionsOfType(CustomEntity.class).size());
@@ -57,13 +57,13 @@ public class SourceReferenceTest {
    */
   public void testSourceReferenceJson() throws Exception {
     SourceReference reference = new SourceReference();
-    reference.setDescription(URI.create("urn:srcDescInstance"));
+    reference.setDescriptionRef(URI.create("urn:srcDescInstance"));
     reference.setExtensionElements(new ArrayList<Object>());
     reference.getExtensionElements().add(new CustomEntity("alt"));
     CustomEntity custom = new CustomEntity();
     custom.setSource(reference);
     custom = SerializationUtil.processThroughJson(custom);
-    assertEquals("urn:srcDescInstance", custom.getSource().getDescription().toString());
+    assertEquals("urn:srcDescInstance", custom.getSource().getDescriptionRef().toString());
     AssertJUnit.assertEquals("alt", ((CustomEntity) custom.getSource().getExtensionElements().get(0)).getId());
   }
 

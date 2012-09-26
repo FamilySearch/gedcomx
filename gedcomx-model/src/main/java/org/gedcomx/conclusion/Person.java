@@ -18,6 +18,8 @@ package org.gedcomx.conclusion;
 import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.gedcomx.common.Attributable;
+import org.gedcomx.common.Attribution;
 import org.gedcomx.common.URI;
 import org.gedcomx.rt.json.JsonElementWrapper;
 import org.gedcomx.types.FactType;
@@ -41,7 +43,7 @@ import java.util.List;
 @XmlRootElement
 @JsonElementWrapper (name = "persons")
 @XmlType ( name = "Person", propOrder = { "identifiers", "living", "gender", "names", "facts" } )
-public class Person extends Conclusion implements HasFacts {
+public class Person extends Conclusion implements HasFacts, Attributable {
 
   private List<Identifier> identifiers;
   private Boolean living;

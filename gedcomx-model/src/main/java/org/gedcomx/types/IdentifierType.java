@@ -35,6 +35,16 @@ public enum IdentifierType {
   Primary,
 
   /**
+   * An identifier for the evidence that supports the resource. For example, when a conclusion
+   * about a person is extracted, analyzed and evaluated atomically within the context of a
+   * single source, it takes the form of a (extracted) person conclusion, and the extracted conclusion
+   * may supply an identifier for the person. As all evidence for the person is gathered, the
+   * (working) person conclusion identifies the evidence used to support the conclusion by including
+   * each evidence identifier in the list of identifiers for the person.
+   */
+  Evidence,
+
+  /**
    * An identifier that has been relegated, deprecated, or otherwise downgraded. This
    * identifier is commonly used as the result of a merge when what was once a primary
    * identifier for a person is no longer primary.

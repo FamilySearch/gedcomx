@@ -15,6 +15,8 @@
  */
 package org.gedcomx.source;
 
+import org.codehaus.enunciate.json.JsonName;
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.gedcomx.common.*;
 import org.gedcomx.rt.json.JsonElementWrapper;
 
@@ -33,7 +35,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType ( name = "SourceReference" )
 public class SourceReference extends ExtensibleData implements Attributable {
 
-  private URI description;
+  private URI descriptionRef;
   private Attribution attribution;
 
   /**
@@ -59,17 +61,20 @@ public class SourceReference extends ExtensibleData implements Attributable {
    *
    * @return A reference to a description of the source being referenced.
    */
-  @XmlAttribute
-  public URI getDescription() {
-    return description;
+  @XmlAttribute ( name = "description" )
+  @JsonName ( "description" )
+  @JsonProperty ( "description" )
+  public URI getDescriptionRef() {
+    return descriptionRef;
   }
 
   /**
    * A reference to a description of the source being referenced.
    *
-   * @param description A reference to a description of the source being referenced.
+   * @param descriptionRef A reference to a description of the source being referenced.
    */
-  public void setDescription(URI description) {
-    this.description = description;
+  @JsonProperty ( "description" )
+  public void setDescriptionRef(URI descriptionRef) {
+    this.descriptionRef = descriptionRef;
   }
 }

@@ -346,10 +346,7 @@ public enum FactType {
   // facts generally applicable within the scope of a parent-child relationship.
   // Adoption, (applicable on a person, too).
 
-  /**
-   * A fact about the biological lineage of a child to a parent.
-   */
-  BiologicalLineage,
+  // Birth, (applicable on a person, too).
 
   /**
    * A fact about a foster relationship between a foster parent and a child.
@@ -532,7 +529,7 @@ public enum FactType {
       return type;
     }
     
-    public static final FactType Biological = include(FactType.BiologicalLineage);
+    public static final FactType Birth = include(FactType.Birth);
     public static final FactType Adopted = include(FactType.Adoption);
     public static final FactType Step = include(FactType.Step);
     public static final FactType Foster = include(FactType.Foster);

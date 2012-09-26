@@ -15,31 +15,27 @@
  */
 package org.gedcomx.common;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
 import org.gedcomx.rt.RDFRange;
 import org.gedcomx.rt.RDFSubPropertyOf;
-import org.gedcomx.rt.SupportsExtensionElements;
-import org.gedcomx.types.ConfidenceLevel;
+import org.gedcomx.rt.json.JsonElementWrapper;
 
-import javax.xml.bind.annotation.XmlAnyElement;
-import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 
 /**
- * Attribution for genealogical information. Attribution is used to model the who is contributing/modifying information,
- * when they contributited it, why they are making the contribution/modification, and a statement about their confidence
- * in the information being provided.
+ * Attribution for genealogical information. Attribution is used to model <strong>who</strong> is contributing/modifying
+ * information, <strong>when</strong> they contributed it, and <strong>why</strong> they are making the
+ * contribution/modification.
  */
-@XmlType ( name = "Attribution", propOrder = { "contributor", "modified", "confidence", "changeMessage" } )
+@XmlRootElement
+@JsonElementWrapper (name = "attribution")
+@XmlType ( name = "Attribution", propOrder = { "contributor", "modified", "changeMessage" } )
 @SuppressWarnings("gedcomx:no_id")
 public final class Attribution extends ExtensibleData {
 
   private ResourceReference contributor;
-  private URI confidence;
   private Date modified;
   private String changeMessage;
 
@@ -61,45 +57,6 @@ public final class Attribution extends ExtensibleData {
    */
   public void setContributor(ResourceReference contributor) {
     this.contributor = contributor;
-  }
-
-  /**
-   * The level of confidence the contributor has about the data.
-   *
-   * @return The level of confidence the contributor has about the data.
-   */
-  public URI getConfidence() {
-    return confidence;
-  }
-
-  /**
-   * The level of confidence the contributor has about the data.
-   *
-   * @param confidence The level of confidence the contributor has about the data.
-   */
-  public void setConfidence(URI confidence) {
-    this.confidence = confidence;
-  }
-
-  /**
-   * The value of a the known confidence level, or {@link org.gedcomx.types.ConfidenceLevel#OTHER} if not known.
-   *
-   * @return The value of a the known confidence level, or {@link org.gedcomx.types.ConfidenceLevel#OTHER} if not known.
-   */
-  @XmlTransient
-  @JsonIgnore
-  public ConfidenceLevel getKnownConfidenceLevel() {
-    return getConfidence() == null ? null : ConfidenceLevel.fromQNameURI(getConfidence());
-  }
-
-  /**
-   * Set the confidence level from a known enumeration of confidence levels.
-   *
-   * @param level The known level.
-   */
-  @JsonIgnore
-  public void setKnownConfidenceLevel(ConfidenceLevel level) {
-    setConfidence(level == null ? null : URI.create(org.codehaus.enunciate.XmlQNameEnumUtil.toURIValue(level)));
   }
 
   /**
