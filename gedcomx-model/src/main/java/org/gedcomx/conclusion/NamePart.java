@@ -15,14 +15,19 @@
  */
 package org.gedcomx.conclusion;
 
+import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonProperty;
+import org.gedcomx.common.ExtensibleData;
+import org.gedcomx.common.ResourceReference;
 import org.gedcomx.common.URI;
 import org.gedcomx.types.NamePartType;
 
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.XmlValue;
+import java.util.List;
 
 
 /**
@@ -31,10 +36,11 @@ import javax.xml.bind.annotation.XmlValue;
  * @author Ryan Heaton
  */
 @XmlType ( name = "NamePart" )
-public final class NamePart {
+public final class NamePart extends ExtensibleData {
 
   private URI type;
   private String value;
+  private List<ResourceReference> qualifiers;
 
   /**
    * The type of the name part.
@@ -81,7 +87,7 @@ public final class NamePart {
    *
    * @return The value of the name part.
    */
-  @XmlValue
+  @XmlAttribute
   public String getValue() {
     return value;
   }
@@ -93,5 +99,26 @@ public final class NamePart {
    */
   public void setValue(String value) {
     this.value = value;
+  }
+
+  /**
+   * The qualifiers associated with this name part.
+   *
+   * @return The qualifiers associated with this name part.
+   */
+  @XmlElement (name = "qualifier")
+  @JsonName ("qualifiers")
+  @JsonProperty ("qualifiers")
+  public List<ResourceReference> getQualifiers() {
+    return qualifiers;
+  }
+
+  /**
+   * Set the qualifiers associated with this name part.
+   * @param qualifiers qualifiers to associate with this name part
+   */
+  @JsonProperty ("qualifiers")
+  public void setQualifiers(List<ResourceReference> qualifiers) {
+    this.qualifiers = qualifiers;
   }
 }

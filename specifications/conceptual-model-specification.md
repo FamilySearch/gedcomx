@@ -688,12 +688,13 @@ URI | description
 
 ## 5.4 The "Name" Data Type
 
-The `Name` data type defines a conclusion about a name of a person. The `Name` data type
-extends the `Conclusion` data type.
+The `Name` data type defines a conclusion about a name of a person. The `Name` data type extends the `Conclusion` data type.
 
-A `Name` is intended to represent a single variant of a person's name.  This means that nicknames, spelling variations, or other name variants (usually distinguished by a `Name.type` value) should be modeled with separate instances of `Name`.
+A `Name` is intended to represent a single variant of a person's name.  This means that nicknames, spelling variations, or other name variants (usually distinguishable by a `Name.type` value) should be modeled with separate instances of `Name`.
 
-The `Name.alternateNames` property is not for name variants. Instead, it is for cases where a name has alternate renderings that are considered to be equivalent to the primary name -- typically in an alternate language and/or script.  For example, a Korean name typically has a rendering in the Korean script, a Chinese script and can also be rendered in a Roman script -- three different "forms" (or renderings) of the name, but each form repesenting the exactly same name.
+The `Name.nameForms` property contains representations of this name.  `nameForms` should contain at least one `NameForm` -- usually a representation of the name that is considered proper and well formed in the person's native, historical cultural context.  It may also contain alternate representations of this same name -- name forms considered to be equivalent to the other name forms in the list, __*not*__ variations of this name (as stated above).  These alternate forms can be used to represent this name in contexts where the native name form is not easily recognized and interpreted.  Alternate forms are more likely in situations where conclusions are being shared across cultural context boundaries that have both language and writing script differences.  For example, a Korean name has a native Korean representation, but can also have a Chinese representation and a Roman/Latin representation -- three different name "forms", but each representing the same name.
+
+If more than one name form is provided, included name forms are assumed to be given in order of preference, with the most preferred name form in the first position in the list.
 
 ### identifier
 
@@ -713,27 +714,26 @@ name | description | data type
 -----|-------------|----------
 type | URI identifying the type of the name. | [URI](#uri) - MUST resolve to a name type. Refer to the list of [known name types](#known-name-types).
 preferred | Whether this name is preferred above the other `Name` conclusions of a person. | boolean
-primaryForm | The primary form of the name. | `http://gedcomx.org/v1/NameForm` - REQUIRED
-alternateForms | The alternate forms (renderings) of the primary name. This is *not* for name variants (e.g., nicknames, spelling variations). | List of [`http://gedcomx.org/v1/NameForm`](#name-form). Order is preserved.
+nameForms | The name form(s) that best represents this name `NameForm` -- usually representations considered proper and well formed in the person's native, historical cultural context. All included name forms should be representations of the same name -- __*not*__ name variants (e.g., nicknames, spelling variations). | List of [`http://gedcomx.org/v1/NameForm`](#name-form). Order is preserved.
 
 ### examples
 
-Consider the following: a person with a birth name of "Alexander" (rendered as "Александр" in Russian cyrillic script) that also went by this name's common nickname "Sasha" (rendered as "Саша" in Russian cyrillic script).
+Consider the following: a Russian person with the birth name "Александр" (rendered as "Alexander" in English and in a Latin script) that also went by this name's common nickname, "Саша" (rendered as "Sasha" in English).
 
-It is tempting to think that this situation should be modeled with one `Name` instance that has several alternate `NameForm`s.  The model is __*not*__ intended to be used in this way. Instead, this person's names ought to be modeled as follows:
+It is tempting to think that this situation should be modeled with one `Name` instance that has several alternate `NameForm`s.  The model is __*not*__ intended to be used in this way. Instead, this person's names ought to be modeled as follows.
 
-The birth name and nickname are modeled as two separate `Name` instances: one instance for the birth name, and one for the nickname.  The `type` property is set so that one can distinguish the birth name from the nickname.  Each `Name` instance would designate one rendering of its name as the "primary" name form and the other rendering of its name is included as an "alternate" name form.  Using an informal pseudo code, it might look something like the following:
+The birth name and the nickname are modeled as two separate `Name` instances: one instance for the birth name, and one for the nickname.  The `type` property is set so that one can distinguish the birth name from the nickname.  Each `Name` instance would two `NameForm` instances: one with the native form of the name and another with the alternate form.  Using an informal pseudo code, it might look something like the following:
 
 ```
 Name1.type=http://gedcomx.org/BirthName
 Name1.preferred=true
-Name1.primaryForm.fullText=Alexander
-Name1.alternateForms[0].fullText=Александр
+Name1.nameForms[0].fullText=Александр
+Name1.nameForms[1].fullText=Alexander
 
 Name2.type=http://gedcomx.org/Nickname
 Name2.preferred=false
-Name2.primaryForm.fullText=Sasha
-Name2.alternateForm[0].fullText=Саша
+Name2.nameForms[0].fullText=Саша
+Name2.nameForms[1].fullText=Sasha
 ```
 <a id="known-name-types"/>
 
@@ -1104,8 +1104,6 @@ The `NamePart` data type is used to model a portion of a full name -- the term(s
 
 A name part `value` may contain more than one term from the name -- as in the given names "John Fitzgerald" from the name "John Fitzgerald Kennedy".  If multiple terms are detailed in a single `NamePart`, these terms are separated using the name separator appropriate to the `locale` specified in the enclosing `NameForm`.
 
-The `NamePart` data type does NOT support extension properties (see [Extension Properties](#extension-properties)).
-
 ### identifier
 
 The identifier for the `NamePart` data type is:
@@ -1116,9 +1114,9 @@ The identifier for the `NamePart` data type is:
 
 name | description | data type
 -----|-------------|----------
-type | URI identifying the type of the name part. | [URI](#uri) - MUST resolve to a name part type. Refer to the list of [known name part types](#known-name-part-types).
-qualifiers | Type qualifiers to further describe the type of the name part. | List of [URI](#uri) - MUST resolve to a name part type. Refer to the list of [known name part types qualifiers](#known-name-part-type-qualifiers).
+type | URI identifying the type of the name part. | [URI](#uri) - If present, MUST resolve to a name part type. Refer to the list of [known name part types](#known-name-part-types).
 value | The term(s) from the name that make up this name part. | string
+qualifiers | Type qualifiers to further describe the type of the name part. | List of [URI](#uri) - If present, MUST resolve to a name part type. Refer to the list of [known name part types qualifiers](#known-name-part-qualifier-types).
 
 <a id="known-name-part-types"/>
 
@@ -1133,29 +1131,29 @@ URI | description
 `http://gedcomx.org/Given`|
 `http://gedcomx.org/Surname`|
 
-<a id="known-name-part-type-qualifiers"/>
+<a id="known-name-part-qualifier-types"/>
 
-### known name part type qualifiers
+### known name part qualifier types
 
-The following name part type qualifiers are defined by GEDCOM X:
+The following name part qualifier types are defined by GEDCOM X:
 
 URI | description
 ----|-------------
-`http://gedcomx.org/Title`|
-`http://gedcomx.org/Diminutive`|
-`http://gedcomx.org/First`|
-`http://gedcomx.org/Middle`|
-`http://gedcomx.org/Familiar`|
-`http://gedcomx.org/Religious`|
-`http://gedcomx.org/Family`|
-`http://gedcomx.org/Maiden`|
-`http://gedcomx.org/Patronymic`|
-`http://gedcomx.org/Article`|
-`http://gedcomx.org/And`|
-`http://gedcomx.org/Matronymic`|
-`http://gedcomx.org/Geographic`|
-`http://gedcomx.org/Occupational`|
-`http://gedcomx.org/Postnom`|
+`http://gedcomx.org/Title`|A designation for honorifics (e.g. Dr., Rev., His Majesty, Haji), ranks (e.g. Colonel, General, Knight, Esquire), positions (e.g. Count, Chief, Father, King) or other titles (e.g., PhD, MD)
+`http://gedcomx.org/First`|A designation for the first given name (or the name most prominent in importance).
+`http://gedcomx.org/Middle`|A designation for a middle given name (or a name of lesser importance).
+`http://gedcomx.org/Diminutive`|A disignation for a name that represents a diminutive form of one's given name.
+`http://gedcomx.org/Familiar`|A designation for one's familiar name.
+`http://gedcomx.org/Religious`|A designation for a name given for religious purposes.
+`http://gedcomx.org/Namesake`|A name part included for its namesake value.
+`http://gedcomx.org/Family`|A name that associates a person with a group, such as a clan, tribe, or patriarchal hierarchy.
+`http://gedcomx.org/Maiden`|A designation given by women to their original surname after they adopt a new surname upon marriage.
+`http://gedcomx.org/Patronymic`|A name derived from a father or paternal ancestor.
+`http://gedcomx.org/Matronymic`|A name derived from a mother or maternal ancestor.
+`http://gedcomx.org/Geographic`|A name derived from associated geography.
+`http://gedcomx.org/Occupational`|A name derived from one's occupation.
+`http://gedcomx.org/Postnom`|A name mandedated by law populations from Congo Free State / Belgian Congo / Congo / Democratic Republic of Congo (formerly Zaire).
+`http://gedcomx.org/Particle`|A grammatical designation for articles (a, the, dem, las, el, etc.), prepositions (of, from, aus, zu, op, etc.), initials (e.g. PhD, MD), annotations (e.g. twin, wife of, infant, unknown), comparators (e.g. Junior, Senior, younger, little), ordinals (e.g. III, eighth), conjunctions (e.g. and, or, nee, ou, y, o, ne, &amp;).
 
 
 <a id="name-form"/>
@@ -1168,7 +1166,9 @@ As names are captured (in records or in applications), the terms in the name are
 
 If both a full rendering of the name and a list of parts are provided, there is no requirement that every term in the fully rendered name appear in the list of parts.
 
-If a full rendering of the name is not provided (i.e., the name exists only in `parts`), the name parts in the `parts` list are to be ordered in the natural order they would be spoken in the given cultural context.  Given this, a full rendering of the name can be derived (sans punctuation) by concatenating in order each `NamePart.value` in the `parts` list, separating each part with the name separator appropriate for the given `locale`.
+Name parts in the `parts` list are to be ordered in the natural order they would be spoken in the given cultural context.
+
+If a full rendering of the name is not provided (i.e., the name has only been expressed in `parts`), a full rendering of the name can be derived (sans punctuation) by concatenating, in order, each `NamePart.value` in the `parts` list, separating each part with the name part delimiter appropriate for the given `locale`.
 
 ### identifier
 
@@ -1182,22 +1182,45 @@ name | description | data type
 -----|-------------|----------
 locale | An [IETF BCP 47 language tag](http://tools.ietf.org/html/bcp47) specifying the cultural context (language, script, etc.) to be used to understand, interpret and render this name form. | string
 fullText | A full rendering of the name (or as much of the name as is known) with the terms in the name given in the natural order they would be spoken in the given cultural context. | string
-parts | Any identified name parts from the name represented in this instance. | List of [`http://gedcomx.org/v1/NamePart`](#name-part). Order is preserved.
+parts | Any identified name parts from the name represented in this instance, ordered in the natural order they would be spoken in the given cultural context. | List of [`http://gedcomx.org/v1/NamePart`](#name-part). Order is preserved.
 
 ### examples
 
-Consider the following: the name "Alexander" and its Russian rendering "Александр" in the Cyrillic script.  Using an informal pseudo code, these name forms might be modeled as follows:
+Consider the following: the Russian name "Пётр Ильи́ч Чайко́вский" in the Cyrillic script, its Latin-script equivalent "Pyotr Ilyich Tchaikovsky", and its anglicised equivalent "Peter Ilyich Tchaikovsky".  Using an informal pseudo code, these name forms might be modeled as follows:
 
 ```
-NameForm1.locale=en-Latn
-NameForm1.fullText=Alexander
+NameForm1.locale=ru-Cyrl
+NameForm1.fullText=Пётр Ильи́ч Чайко́вский
 NameForm1.parts[0].type=http://gedcomx.org/Given
-NameForm1.parts[0].value=Alexander
+NameForm1.parts[0].value=Пётр
+NameForm1.parts[0].qualifiers[0]=http://gedcomx.org/First
+NameForm1.parts[1].type=http://gedcomx.org/Middle
+NameForm1.parts[1].value=Ильи́ч
+NameForm1.parts[1].qualifiers[0]=http://gedcomx.org/Middle
+NameForm1.parts[2].type=http://gedcomx.org/Surname
+NameForm1.parts[2].value=Чайко́вский
 
-NameForm2.locale=ru-Cyrl
-NameForm2.fullText=Александр
+NameForm2.locale=ru-Latn
+NameForm2.fullText=Pyotr Ilyich Tchaikovsky
 NameForm2.parts[0].type=http://gedcomx.org/Given
-NameForm2.parts[0].value=Александр
+NameForm2.parts[0].value=Pyotr
+NameForm2.parts[0].qualifiers[0]=http://gedcomx.org/First
+NameForm2.parts[1].type=http://gedcomx.org/Given
+NameForm2.parts[1].value=Ilyich
+NameForm2.parts[1].qualifiers[0]=http://gedcomx.org/Middle
+NameForm2.parts[2].type=http://gedcomx.org/Surname
+NameForm2.parts[2].value=Tchaikovsky
+
+NameForm3.locale=en-Latn
+NameForm3.fullText=Peter Ilyich Tchaikovsky
+NameForm3.parts[0].type=http://gedcomx.org/Given
+NameForm3.parts[0].value=Peter
+NameForm3.parts[0].qualifiers[0]=http://gedcomx.org/First
+NameForm3.parts[1].type=http://gedcomx.org/Given
+NameForm3.parts[1].value=Ilyich
+NameForm3.parts[1].qualifiers[0]=http://gedcomx.org/Middle
+NameForm3.parts[2].type=http://gedcomx.org/Surname
+NameForm3.parts[2].value=Tchaikovsky
 ```
 
 
