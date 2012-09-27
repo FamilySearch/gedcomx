@@ -2,6 +2,7 @@ package org.gedcomx.conclusion;
 
 import org.gedcomx.common.ResourceReference;
 import org.gedcomx.common.URI;
+import org.gedcomx.rt.json.GedcomJsonProvider;
 import org.gedcomx.test.RecipeTest;
 import org.gedcomx.test.Snippet;
 import org.gedcomx.types.FactType;
@@ -10,6 +11,9 @@ import org.gedcomx.types.NamePartQualifierType;
 import org.gedcomx.types.NamePartType;
 import org.testng.annotations.Test;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 
 import static org.gedcomx.rt.SerializationUtil.processThroughJson;
@@ -22,6 +26,25 @@ import static org.gedcomx.rt.SerializationUtil.processThroughXml;
 @Test
 public class PersonRecipesTest extends RecipeTest {
 
+  @XmlRootElement ( namespace = "http://familysearch.org/v1/" )
+  public static class CustomMarker {
+
+    private boolean userProvided;
+
+    public CustomMarker() {
+      userProvided = true;
+    }
+
+    @XmlAttribute ( name = "userProvided" )
+    public boolean isUserProvided() {
+      return userProvided;
+    }
+
+    public void setUserProvided(boolean userProvided) {
+      this.userProvided = userProvided;
+    }
+  }
+
   /**
    * tests processing a WWW person through xml...
    */
@@ -33,8 +56,8 @@ public class PersonRecipesTest extends RecipeTest {
     Person person = create();
 
     Snippet snippet = new Snippet();
-    Person personThurXml = processThroughXml(person, snippet);
-    Person personThurJson = processThroughJson(person, snippet);
+    Person personThurXml = processThroughXml(person, Person.class, JAXBContext.newInstance(Person.class, CustomMarker.class), snippet);
+    Person personThurJson = processThroughJson(person, Person.class, GedcomJsonProvider.createObjectMapper(Person.class, CustomMarker.class), snippet);
     addSnippet(snippet);
 
     verifyPerson(personThurXml);
@@ -119,6 +142,7 @@ public class PersonRecipesTest extends RecipeTest {
     name.getNameForms().get(0).getParts().add(new NamePart());
     name.getNameForms().get(0).getParts().get(2).setKnownType(NamePartType.Surname);
     name.getNameForms().get(0).getParts().get(2).setValue("Ри́мский-Ко́рсаков");
+    name.getNameForms().get(0).addExtensionElement(new CustomMarker());
     name.getNameForms().add(new NameForm());
     name.getNameForms().get(1).setLocale("ru-Latn");
     name.getNameForms().get(1).setFullText("Nikolai Andreyevich Rimsky-Korsakov");

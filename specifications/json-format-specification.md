@@ -59,7 +59,10 @@ in JSON according to this specification:
         "value" : "Ри́мский-Ко́рсаков",
         "type" : "http://gedcomx.org/Surname"
       } ],
-      "fullText" : "Никола́й Андре́евич Ри́мский-Ко́рсаков"
+      "fullText" : "Никола́й Андре́евич Ри́мский-Ко́рсаков",
+      "http://familysearch.org/v1/customMarker" : [ {
+        "userProvided" : true
+      } ]
     }, {
       "locale" : "ru-Latn",
       "parts" : [ {

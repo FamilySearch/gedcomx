@@ -44,11 +44,12 @@ in XML according to this specification:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<person xmlns="http://gedcomx.org/v1/" id="BBB-BBBB">
+<person xmlns="http://gedcomx.org/v1/" xmlns:ns2="http://familysearch.org/v1/" id="BBB-BBBB">
     <gender type="http://gedcomx.org/Male"/>
     <name id="789">
         <preferred>true</preferred>
         <nameForm locale="ru-Cyrl">
+            <ns2:customMarker userProvided="true"/>
             <fullText>Никола́й Андре́евич Ри́мский-Ко́рсаков</fullText>
             <part type="http://gedcomx.org/Given" value="Никола́й">
                 <qualifier resource="http://gedcomx.org/First"/>
