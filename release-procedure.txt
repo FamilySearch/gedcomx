@@ -1,6 +1,7 @@
 To cut a new version:
 
 1. mvn release:prepare -Dtag=$RELEASE_VERSION -DreleaseVersion=$RELEASE_VERSION -DdevelopmentVersion=$NEXT_SNAPSHOT_VERSION
+  a. (you may need to disable the use-argouml profile: -P\!use-argouml)
 2. mvn release:clean
 3. Configure the release build[1] with a branch specifier of $RELEASE_VERSION (todo: make this step easier)
 4. Build[2]
