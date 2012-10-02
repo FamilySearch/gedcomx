@@ -213,6 +213,9 @@ changeMessage | A statement of why the attributed data is being provided by the 
   "contributor" : "http://identifier/for/contributor",
   "modified" : "1338394969",
   "changeMessage" : "...change message here..."
+
+  ...possibility of extension elements...
+
 }
 ```
 
@@ -235,6 +238,9 @@ attribution | The attribution of this note. | attribution | [`Attribution`](#att
 {
   "text" : { ... }
   "attribution" : { ... }
+
+  ...possibility of extension elements...
+
 }
 ```
 
@@ -304,6 +310,9 @@ attribution | The attribution of this source. | attribution | [`Attribution`](#a
   "alternateNames" : [ { ... }, { ... } ],
   "notes" : [ { ... }, { ... } ],
   "attribution" : { ... }
+
+  ...possibility of extension elements...
+
 }
 ```
 
@@ -375,6 +384,9 @@ attribution | The attribution of this source reference. | attribution | [`Attrib
 {
   "description" : "http://identifier/for/description/of/source/being/referenced",
   "attribution" : { ... }
+
+  ...possibility of extension elements...
+
 }
 ```
 

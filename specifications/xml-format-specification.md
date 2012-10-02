@@ -219,6 +219,9 @@ changeMessage | A statement of why the attributed data is being provided by the 
     <gx:contributor resource="http://identifier/for/contributor"/>
     <gx:modified>2012-05-29T00:00:00</gx:modified>
     <gx:changeMessage>...change message here...</gx:changeMessage>
+
+    <!-- possibility of extension elements -->
+
   </...>
 ```
 
@@ -243,6 +246,9 @@ attribution | The attribution of this note. | gx:attribution | [`gx:Attribution`
     <gx:attribution>
       ...
     </gx:attribution>
+
+    <!-- possibility of extension elements -->
+
   </...>
 ```
 
@@ -324,6 +330,9 @@ attribution | The attribution of this source. | gx:attribution | [`gx:Attributio
     <gx:attribution>
       ...
     </gx:attribution>
+
+    <!-- possibility of extension elements -->
+
   </...>
 ```
 
