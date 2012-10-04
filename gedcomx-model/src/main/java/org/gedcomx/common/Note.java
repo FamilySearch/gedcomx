@@ -19,9 +19,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import org.gedcomx.rt.SupportsExtensionElements;
 import org.gedcomx.rt.json.JsonElementWrapper;
 
-import javax.xml.bind.annotation.XmlAnyElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,9 +34,30 @@ import java.util.List;
 @XmlType ( name = "Note", propOrder = { "subject", "text", "attribution" } )
 public class Note extends ExtensibleData implements Attributable, HasText {
 
+  private String id;
   private TextValue subject;
   private TextValue text;
   private Attribution attribution;
+
+  /**
+   * A local, context-specific id for the data.
+   *
+   * @return A local, context-specific id for the data.
+   */
+  @XmlID
+  @XmlAttribute
+  public String getId() {
+    return id;
+  }
+
+  /**
+   * A local, context-specific id for the data.
+   *
+   * @param id A local, context-specific id for the data.
+   */
+  public void setId(String id) {
+    this.id = id;
+  }
 
   /**
    * The subject of the note. This is a short title describing the contents of the note text.
