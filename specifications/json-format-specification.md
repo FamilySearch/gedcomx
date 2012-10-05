@@ -229,14 +229,18 @@ The JSON object used to (de)serialize the `http://gedcomx.org/v1/Note` data type
 
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
-text | The text of the note. | text | [`TextValue`](#text-value)
+lang | The locale identifier for the note. | lang | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag
+subject | A subject or title for the note. | subject | string
+text | The text of the note. | text | string
 attribution | The attribution of this note. | attribution | [`Attribution`](#attribution)
 
 ### examples
 
 ```json
 {
-  "text" : { ... }
+  "lang" : "en",
+  "subject" : "...",
+  "text" : "...",
   "attribution" : { ... }
 
   ...possibility of extension elements...
@@ -252,7 +256,7 @@ The JSON object used to (de)serialize the `http://gedcomx.org/v1/TextValue` data
 
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
-lang | The language of the string form of the value. | lang | string
+lang | The locale identifier for the value of the text. | lang | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag
 value | The string form of the value. | value | string
 
 ### examples
@@ -284,14 +288,13 @@ data type is defined as follows:
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 id | An identifier for the JSON object holding the source description data. The id attribute MUST conform to the constraints defined in [Section 7, "Fragment Identifiers"](#fragment-ids). | id | string
-citation | The citation for this source | citation | [`SourceCitation`](#source-citation)
+citations | The citation for this source. | citations | array of [`SourceCitation`](#source-citation)
 about | A uniform resource identifier (URI) for the resource being described. | about | [`URI`](#uri)
 mediator | A reference to the entity that mediates access to the described source. | mediator | [`URI`](#uri)
 sources | A list of references to any sources from which this source is derived. | sources | array of [`SourceReference`](#source-reference)
 extractedConclusions | A list of references to any conclusions that were extracted from this source, to be analyzed and evaluated atomically within on context of the source. | extractedConclusions | [`URI`](#uri)
 componentOf | A reference to the source that contains this source. | componentOf | [`SourceReference`](#source-reference)
-displayName | A display name for this source. | displayName | string
-alternateNames | A list of alternate display names for this source. | alternateNames | array of [`TextValue`](#text-value)
+titles | The display names for this source. | titles | array of [`TextValue`](#text-value)
 notes | A list of notes about a source | notes | array of [`Note`](#note)
 attribution | The attribution of this source. | attribution | [`Attribution`](#attribution)
 
@@ -300,14 +303,13 @@ attribution | The attribution of this source. | attribution | [`Attribution`](#a
 ```json
 {
   "id" : "local_id",
-  "citation" : { ... },
+  "citations" : [ { ... }, { ... } ],
   "about" : "http://identifier/for/the/source/being/described",
   "mediator" : "http://identifier/for/the/mediator/of/source/being/described",
   "sources" : [ { ... }, { ... } ],
   "extractedConclusions" : [ "...", "..." ],
   "componentOf" : { ... },
-  "displayName" : "...display name...",
-  "alternateNames" : [ { ... }, { ... } ],
+  "titles" : [ { ... }, { ... } ],
   "notes" : [ { ... }, { ... } ],
   "attribution" : { ... }
 
@@ -327,6 +329,7 @@ The JSON object used to (de)serialize the `http://gedcomx.org/v1/SourceCitation`
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
+lang | The locale identifier for the citation. | lang | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag
 value | A rendering of the full (working) citation as a string. | value | string
 citationTemplate | The identifier of the citation template by which this citation may be interpreted. | citationTemplate | [`URI`](#uri)
 fields | A list of citation fields about a source. | field | array of [`CitationField`](#citation-field)
@@ -335,6 +338,7 @@ fields | A list of citation fields about a source. | field | array of [`Citation
 
 ```json
 {
+  "lang" : "en",
   "value" : "...a rendering of the full (working) citation as a string...",
   "citationTemplate" : "http://identifier/for/ciation/template",
   "fields" : [ { ... }, { ... } ]
@@ -461,7 +465,7 @@ The JSON object used to (de)serialize the `http://gedcomx.org/v1/Agent` data typ
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 id | An identifier for the JSON object holding the agent data. The id attribute MUST conform to the constraints defined in [Section 7, "Fragment Identifiers"](#fragment-ids). | id | string
-name | The name of the person or organization. | name | string
+names | The names of the person or organization. | names | array of [`TextValue`](#text-value)
 identifiers | Identifiers for the agent. | identifiers | [`Identifier`](#identifier-type)
 homepage | The homepage of the person or organization. | homepage | [`URI`](#uri)
 openid  | The [openid](http://openid.net/) of the person or organization. | openid | [`URI`](#uri)
@@ -475,7 +479,7 @@ addresses  | The addresses of the person or organization. | addresses | array of
 ```json
 {
   "id" : "local_id",
-  "name" : "...",
+  "names" : [ { ... }, { ... } ],
   "homepage" : "...",
   "openid" : "...",
   "accounts" : [ { ... }, { ... } ],
@@ -503,6 +507,7 @@ The JSON object used to (de)serialize the `http://gedcomx.org/v1/Conclusion` dat
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 id | An identifier for the JSON object holding the conclusion data. The id attribute MUST conform to the constraints defined in [Section 7, "Fragment Identifiers"](#fragment-ids). | id | string
+lang | The locale identifier for the conclusion. | lang | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag
 confidence  | Reference to the confidence level of the contributor of the attributed data. | confidence | [`URI`](#uri)
 sources | The list of references to the sources of the conclusion. | sources | array of [`SourceReference`](#source-reference).
 notes | A list of notes about this conclusion. | note | array of [`gx:Note`](#note)
@@ -512,6 +517,7 @@ notes | A list of notes about this conclusion. | note | array of [`gx:Note`](#no
 ```json
 {
   "id" : "local_id",
+  "lang" : "en",
   "confidence" : "http://gedcomx.org/Certainly",
   "sources" : [ { ... }, { ... } ],
   "notes" : [ { ... }, { ... } ],
@@ -529,8 +535,9 @@ The JSON object used to (de)serialize the `http://gedcomx.org/v1/Document` data 
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
+lang | The locale identifier for the document. | lang | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag
 attribution | The attribution of this document. | attribution | [`gx:Attribution`](#attribution)
-text | The text of the document. | gxc:text | [`TextValue`](#text-value)
+text | The text of the document. | text | string
 
 ### examples
 
@@ -539,11 +546,9 @@ text | The text of the document. | gxc:text | [`TextValue`](#text-value)
 
   ...the members of gxc:Conclusion...,
 
+  "lang" : "en",
   "attribution" : { ... },
-  "text" : {
-    "lang" : "en",
-    "value" : "...text of the document..."
-  }
+  "text" : "...text of the document..."
 }
 ```
 
@@ -872,7 +877,7 @@ The JSON object used to (de)serialize the `http://gedcomx.org/v1/NameForm` data 
 
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
-locale | An [IETF BCP 47 language tag](http://tools.ietf.org/html/bcp47) specifying the cultural context (language, script, etc.) to be used to understand, interpret and render this name form. | locale | string
+lang | The locale identifier for the name form. | lang | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag
 fullText | The full text of the name form. | fullText | string
 parts | The parts of the name form. | parts | array of [`NamePart`](#name-part)
 
@@ -880,7 +885,7 @@ parts | The parts of the name form. | parts | array of [`NamePart`](#name-part)
 
 ```json
 {
-  "locale" : "...an IETF BCP 47 language tag...",
+  "lang" : "en",
   "fullText" : "...full text of the name form...",
   "parts" : [ { ... }, { ... } ]
 
