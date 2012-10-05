@@ -686,9 +686,11 @@ URI | description
 
 The `Name` data type defines a conclusion about a name of a person. The `Name` data type extends the `Conclusion` data type.
 
-A `Name` is intended to represent a single variant of a person's name.  This means that nicknames, spelling variations, or other name variants (usually distinguishable by a `Name.type` value) should be modeled with separate instances of `Name`.
+A `Name` is intended to represent a single variant of a person's name.  This means that nicknames, spelling variations, or other name variants (often distinguishable by a name type) should be modeled with separate instances of `Name`.
 
-The `Name.nameForms` property contains representations of this name.  `nameForms` should contain at least one `NameForm` -- usually a representation of the name that is considered proper and well formed in the person's native, historical cultural context.  It may also contain alternate representations of this same name -- name forms considered to be equivalent to the other name forms in the list, __*not*__ variations of this name (as stated above).  These alternate forms can be used to represent this name in contexts where the native name form is not easily recognized and interpreted.  Alternate forms are more likely in situations where conclusions are being shared across cultural context boundaries that have both language and writing script differences.  For example, a Korean name has a native Korean representation, but can also have a Chinese representation and a Roman/Latin representation -- three different name "forms", but each representing the same name.
+The name forms of a name contain representations of this name.  A `Name` MUST contain at least one name form, usually a representation of the name that is considered proper and well formed in the person's native, historical cultural context.  Other name forms MAY be included, which can be used to represent this name in contexts where the native name form is not easily recognized and interpreted.  Alternate forms are more likely in situations where conclusions are being analyzed across cultural context boundaries that have both language and writing script differences.
+
+For example, a Korean name has a native Korean form, but can also have a Chinese form and a Roman/Latin form -- three different name forms, but each representing the same name.
 
 If more than one name form is provided, included name forms are assumed to be given in order of preference, with the most preferred name form in the first position in the list.
 
@@ -716,9 +718,9 @@ nameForms | The name form(s) that best represents this name `NameForm` -- usuall
 
 Consider the following: a Russian person with the birth name "Александр" (rendered as "Alexander" in English and in a Latin script) that also went by this name's common nickname, "Саша" (rendered as "Sasha" in English).
 
-It is tempting to think that this situation should be modeled with one `Name` instance that has several alternate `NameForm`s.  The model is __*not*__ intended to be used in this way. Instead, this person's names ought to be modeled as follows.
-
-The birth name and the nickname are modeled as two separate `Name` instances: one instance for the birth name, and one for the nickname.  The `type` property is set so that one can distinguish the birth name from the nickname.  Each `Name` instance would two `NameForm` instances: one with the native form of the name and another with the alternate form.  Using an informal pseudo code, it might look something like the following:
+It is tempting to think that this situation should be modeled with one `Name` instance that has several alternate `NameForm`s.  The model is __*not*__ intended to be used in this way. Instead, this person's names ought to be modeled such that the
+birth name and the nickname are modeled as two separate `Name` instances: one instance for the birth name, and one for the nickname.  The `type` property MAY be provided to distinguish the birth name from the nickname.
+Each `Name` instance MAY have two `NameForm` instances: one with the native form of the name and another with the alternate form.  Using an informal pseudo code, it might look something like the following:
 
 ```
 Name1.type=http://gedcomx.org/BirthName
@@ -739,16 +741,14 @@ The following name types are defined by GEDCOM X:
 
 URI | description
 ----|-------------
-`http://gedcomx.org/Name`|
-`http://gedcomx.org/BirthName`|
-`http://gedcomx.org/DeathName`|
-`http://gedcomx.org/MarriedName`|
-`http://gedcomx.org/AlsoKnownAs`|
-`http://gedcomx.org/MaidenName`|
-`http://gedcomx.org/Nickname`|
-`http://gedcomx.org/Adoptive`|
-`http://gedcomx.org/Formal`|
-`http://gedcomx.org/Religious`|
+`http://gedcomx.org/BirthName` | Name given at birth.
+`http://gedcomx.org/DeathName` | Name used at the time of death.
+`http://gedcomx.org/MarriedName` | Name accepted at marriage.
+`http://gedcomx.org/AlsoKnownAs` | "Also known as" name.
+`http://gedcomx.org/Nickname`| Nickname.
+`http://gedcomx.org/AdoptiveName` | Name given at adoption.
+`http://gedcomx.org/FormalName` | A formal name, usually given to distinguish it from a name more commonly used.
+`http://gedcomx.org/ReligiousName` | A name given at a religious rite or ceremony.
 
 
 <a id="fact-conclusion"/>

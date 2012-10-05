@@ -94,7 +94,7 @@ public class PersonTest {
     Name name = new Name();
     name.setId("name-id");
     name.setPreferred(true);
-    name.setKnownType(NameType.Formal);
+    name.setKnownType(NameType.FormalName);
     name.setNameForms(new ArrayList<NameForm>());
     name.getNameForms().add(new NameForm());
     name.getNameForms().get(0).setFullText("primary form");
@@ -179,7 +179,7 @@ public class PersonTest {
     assertEquals("alternate name part", name.getNameForms().get(1).getParts().get(0).getValue());
     assertEquals(NamePartType.Given, name.getNameForms().get(1).getParts().get(0).getKnownType());
     assertEquals("name-id", name.getId());
-    assertEquals(NameType.Formal, name.getKnownType());
+    assertEquals(NameType.FormalName, name.getKnownType());
     assertEquals("primary form", name.getNameForms().get(0).getFullText());
     assertEquals(1, name.getNameForms().get(0).getParts().size());
     assertEquals("primary surname", name.getNameForms().get(0).getParts().get(0).getValue());
