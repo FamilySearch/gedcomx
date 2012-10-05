@@ -1090,9 +1090,10 @@ resource | Reference to the standardized resource describing the place. | [URI](
 
 ## 5.12 The "NamePart" Data Type
 
-The `NamePart` data type is used to model a portion of a full name -- the term(s) that makes up that portion, and perhaps a name part classifier (e.g., "given name" or "surname").
+The `NamePart` data type is used to model a portion of a full name, including the terms that make up that portion, and perhaps a name part qualifier (e.g., "given name" or "surname").
 
-A name part `value` may contain more than one term from the name -- as in the given names "John Fitzgerald" from the name "John Fitzgerald Kennedy".  If multiple terms are detailed in a single `NamePart`, these terms are separated using the name separator appropriate to the `locale` specified in the enclosing `NameForm`.
+A name part value MAY contain more than one term from the full name, such as in the name part "John Fitzgerald" from the full name "John Fitzgerald Kennedy".  If multiple terms are
+detailed in a single `NamePart`, these terms are separated using the name separator appropriate to the locale of the name form.
 
 ### identifier
 
@@ -1148,7 +1149,7 @@ URI | description
 
 ## 5.13 The "NameForm" Data Type
 
-The `NameForm` data type defines a rendition of a name (a "name form") within a given cultural context (e.g., in a given language and script).
+The `NameForm` data type defines a representation of a name (a "name form") within a given cultural context, such as a given language and script.
 
 As names are captured (in records or in applications), the terms in the name are sometimes classified by type.  For example, a certificate of death might prompt for "given name(s)" and "surname". The `parts` list can be used to represent the terms in the name that have been classified.
 
@@ -1168,9 +1169,8 @@ The identifier for the `NameForm` data type is:
 
 name | description | data type
 -----|-------------|----------
-locale | An [IETF BCP 47 language tag](http://tools.ietf.org/html/bcp47) specifying the cultural context (language, script, etc.) to be used to understand, interpret and render this name form. | string
-fullText | A full rendering of the name (or as much of the name as is known) with the terms in the name given in the natural order they would be spoken in the given cultural context. | string
-parts | Any identified name parts from the name represented in this instance, ordered in the natural order they would be spoken in the given cultural context. | List of [`http://gedcomx.org/v1/NamePart`](#name-part). Order is preserved.
+fullText | A full rendering of the name (or as much of the name as is known) with the terms in the name given in the natural order they would be spoken in the applicable cultural context. | string
+parts | The parts of the name form, ordered in the natural order they would be spoken in the given cultural context. | List of [`http://gedcomx.org/v1/NamePart`](#name-part). Order is preserved.
 
 ### examples
 

@@ -126,7 +126,6 @@ public class PersonRecipesTest extends RecipeTest {
     name.setPreferred(true);
     name.setNameForms(new ArrayList<NameForm>());
     name.getNameForms().add(new NameForm());
-    name.getNameForms().get(0).setLocale("ru-Cyrl");
     name.getNameForms().get(0).setFullText("Никола́й Андре́евич Ри́мский-Ко́рсаков");
     name.getNameForms().get(0).setParts(new ArrayList<NamePart>());
     name.getNameForms().get(0).getParts().add(new NamePart());
@@ -144,7 +143,6 @@ public class PersonRecipesTest extends RecipeTest {
     name.getNameForms().get(0).getParts().get(2).setValue("Ри́мский-Ко́рсаков");
     name.getNameForms().get(0).addExtensionElement(new CustomMarker());
     name.getNameForms().add(new NameForm());
-    name.getNameForms().get(1).setLocale("ru-Latn");
     name.getNameForms().get(1).setFullText("Nikolai Andreyevich Rimsky-Korsakov");
     name.getNameForms().get(1).setParts(new ArrayList<NamePart>());
     name.getNameForms().get(1).getParts().add(new NamePart());

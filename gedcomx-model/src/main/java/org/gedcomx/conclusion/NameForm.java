@@ -32,28 +32,8 @@ import java.util.List;
 @XmlType ( name = "NameForm", propOrder = { "fullText", "parts" })
 public class NameForm extends ExtensibleData {
 
-  private String locale;
   private String fullText;
   private List<NamePart> parts;
-
-  /**
-   * The cultural context of the name form.
-   *
-   * @return The cultural context or locale of the name form.
-   */
-  @XmlAttribute
-  public String getLocale() {
-    return locale;
-  }
-
-  /**
-   * The cultural context of the name form.
-   *
-   * @param locale The cultural context or locale of the name form.
-   */
-  public void setLocale(String locale) {
-    this.locale = locale;
-  }
 
   /**
    * The full text of the name form.
