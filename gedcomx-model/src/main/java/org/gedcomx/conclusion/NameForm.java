@@ -19,6 +19,7 @@ import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.gedcomx.common.ExtensibleData;
 
+import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
@@ -32,8 +33,28 @@ import java.util.List;
 @XmlType ( name = "NameForm", propOrder = { "fullText", "parts" })
 public class NameForm extends ExtensibleData {
 
+  private String lang;
   private String fullText;
   private List<NamePart> parts;
+
+  /**
+   * The language of the conclusion. See <a href="http://www.w3.org/International/articles/language-tags/>http://www.w3.org/International/articles/language-tags/</a>
+   *
+   * @return The language of the conclusion.
+   */
+  @XmlAttribute ( namespace = XMLConstants.XML_NS_URI )
+  public String getLang() {
+    return lang;
+  }
+
+  /**
+   * The language of the conclusion. See <a href="http://www.w3.org/International/articles/language-tags/>http://www.w3.org/International/articles/language-tags/</a>
+   *
+   * @param lang The language of the conclusion.
+   */
+  public void setLang(String lang) {
+    this.lang = lang;
+  }
 
   /**
    * The full text of the name form.

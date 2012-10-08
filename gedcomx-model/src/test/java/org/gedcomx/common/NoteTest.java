@@ -18,20 +18,20 @@ public class NoteTest {
    */
   public void testNoteXml() throws Exception {
     Note note = new Note();
-    note.setText(new TextValue("hello, there"));
+    note.setText("hello, there");
     note.setAttribution(new Attribution());
     note.getAttribution().setChangeMessage("note statement");
     Note otherNote = new Note();
-    otherNote.setText(new TextValue("note of a note"));
+    otherNote.setText("note of a note");
     Note otherNote2 = new Note();
-    otherNote2.setText(new TextValue("note2 of a note"));
-    note.getText().setLang("en");
+    otherNote2.setText("note2 of a note");
+    note.setLang("en");
 
     note = processThroughXml(note);
 
-    assertEquals("hello, there", note.getText().getValue());
+    assertEquals("hello, there", note.getText());
     assertEquals("note statement", note.getAttribution().getChangeMessage());
-    assertEquals("en", note.getText().getLang());
+    assertEquals("en", note.getLang());
   }
 
   /**
@@ -39,16 +39,16 @@ public class NoteTest {
    */
   public void testNoteJson() throws Exception {
     Note note = new Note();
-    note.setText(new TextValue("hello, there"));
+    note.setText("hello, there");
     note.setAttribution(new Attribution());
     note.getAttribution().setChangeMessage("note statement");
-    note.getText().setLang("en");
+    note.setLang("en");
 
     note = processThroughJson(note);
 
-    assertEquals("hello, there", note.getText().getValue());
+    assertEquals("hello, there", note.getText());
     assertEquals("note statement", note.getAttribution().getChangeMessage());
-    assertEquals("en", note.getText().getLang());
+    assertEquals("en", note.getLang());
   }
 
 }
