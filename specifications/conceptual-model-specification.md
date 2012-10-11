@@ -1077,8 +1077,9 @@ The following name part qualifier types are defined by GEDCOM X:
 URI | description
 ----|-------------
 `http://gedcomx.org/Title`|A designation for honorifics (e.g. Dr., Rev., His Majesty, Haji), ranks (e.g. Colonel, General, Knight, Esquire), positions (e.g. Count, Chief, Father, King) or other titles (e.g., PhD, MD)
-`http://gedcomx.org/First`|A designation for the first given name (or the name most prominent in importance).
-`http://gedcomx.org/Middle`|A designation for a middle given name (or a name of lesser importance).
+`http://gedcomx.org/PrimaryGiven`|A designation for the given name most prominent in importance.
+`http://gedcomx.org/SecondaryGiven`|A designation for a given name that is not primary in its importance.
+`http://gedcomx.org/Middle`|A designation useful for cultures that designate a middle name that is distinct from a given name and a surname.
 `http://gedcomx.org/Familiar`|A designation for one's familiar name.
 `http://gedcomx.org/Religious`|A designation for a name given for religious purposes.
 `http://gedcomx.org/Family`|A name that associates a person with a group, such as a clan, tribe, or patriarchal hierarchy.
@@ -1087,8 +1088,9 @@ URI | description
 `http://gedcomx.org/Matronymic`|A name derived from a mother or maternal ancestor.
 `http://gedcomx.org/Geographic`|A name derived from associated geography.
 `http://gedcomx.org/Occupational`|A name derived from one's occupation.
+`http://gedcomx.org/Characteristic`|A name derived from a characteristic.
 `http://gedcomx.org/Postnom`|A name mandedated by law populations from Congo Free State / Belgian Congo / Congo / Democratic Republic of Congo (formerly Zaire).
-`http://gedcomx.org/Particle`|A grammatical designation for articles (a, the, dem, las, el, etc.), prepositions (of, from, aus, zu, op, etc.), initials (e.g. PhD, MD), annotations (e.g. twin, wife of, infant, unknown), comparators (e.g. Junior, Senior, younger, little), ordinals (e.g. III, eighth), conjunctions (e.g. and, or, nee, ou, y, o, ne, &amp;).
+`http://gedcomx.org/Particle`|A grammatical designation for articles (a, the, dem, las, el, etc.), prepositions (of, from, aus, zu, op, etc.), initials (e.g. PhD, MD), annotations (e.g. twin, wife of, infant, unknown), comparators (e.g. Junior, Senior, younger, little), ordinals (e.g. III, eighth), and conjunctions (e.g. and, or, nee, ou, y, o, ne, &amp;).
 
 
 <a id="name-form"/>
