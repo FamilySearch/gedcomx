@@ -571,7 +571,6 @@ This data type extends the following data type:
 
 name | description | data type
 -----|-------------|----------
-lang | The locale identifier for the document. | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag
 text | The text of the document. | string
 attribution | The attribution of the document. | [`http://gedcomx.org/Attribution`](#attribution)
 

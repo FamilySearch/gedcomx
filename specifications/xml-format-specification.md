@@ -572,7 +572,6 @@ The `gx:Document` XML type is used to (de)serialize the `http://gedcomx.org/v1/D
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
-lang | The locale identifier for the document. | xml:lang (attribute) | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag
 attribution | The attribution of this document. | gx:attribution | [`gx:Attribution`](#attribution)
 text | The text of the document. | gx:text | xsd:string
 
@@ -585,7 +584,7 @@ text | The text of the document. | gx:text | xsd:string
     <gx:attribution>
       ...
     </gx:attribution>
-    <gx:text xml:lang="en">...text of the document...</gx:text>
+    <gx:text>...text of the document...</gx:text>
   </...>
 ```
 

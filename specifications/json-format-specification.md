@@ -535,7 +535,6 @@ The JSON object used to (de)serialize the `http://gedcomx.org/v1/Document` data 
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
-lang | The locale identifier for the document. | lang | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag
 attribution | The attribution of this document. | attribution | [`gx:Attribution`](#attribution)
 text | The text of the document. | text | string
 
@@ -546,7 +545,6 @@ text | The text of the document. | text | string
 
   ...the members of gxc:Conclusion...,
 
-  "lang" : "en",
   "attribution" : { ... },
   "text" : "...text of the document..."
 }
