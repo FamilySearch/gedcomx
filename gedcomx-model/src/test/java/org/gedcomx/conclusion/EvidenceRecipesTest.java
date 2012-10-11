@@ -2,6 +2,7 @@ package org.gedcomx.conclusion;
 
 import org.gedcomx.common.Attribution;
 import org.gedcomx.common.ResourceReference;
+import org.gedcomx.common.TextValue;
 import org.gedcomx.source.SourceReference;
 import org.gedcomx.common.URI;
 import org.gedcomx.source.CitationField;
@@ -14,6 +15,7 @@ import org.gedcomx.types.GenderType;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.gedcomx.rt.SerializationUtil.processThroughJson;
@@ -58,9 +60,9 @@ public class EvidenceRecipesTest extends RecipeTest {
 
   static SourceDescription createDescriptionOfOnlineArtifact() {
     SourceDescription sourceDescription = new SourceDescription();
-    sourceDescription.setCitation(new SourceCitation());
+    sourceDescription.setCitations(Arrays.asList(new SourceCitation()));
     sourceDescription.getCitation().setValue("\"United States Census, 1920,\" index and images, FamilySearch (https://familysearch.org/pal:/MM9.1.1/M8PT-4GN : accessed 31 May 2012), Israel H Heaton, , Kane, Utah.");
-    sourceDescription.setDisplayName("\"United States Census, 1920,\" Israel H Heaton, , Kane, Utah");
+    sourceDescription.setTitles(Arrays.asList(new TextValue("\"United States Census, 1920,\" Israel H Heaton, , Kane, Utah")));
     sourceDescription.setAbout(URI.create("https://familysearch.org/pal:/MM9.1.1/M8PT-4GN"));
     return sourceDescription;
   }
@@ -151,7 +153,7 @@ public class EvidenceRecipesTest extends RecipeTest {
   static SourceDescription createDescriptionOfPhysicalArtifact() {
     SourceDescription sourceDescription = new SourceDescription();
     sourceDescription.setId("KKK-KKKK");
-    sourceDescription.setCitation(new SourceCitation());
+    sourceDescription.setCitations(Arrays.asList(new SourceCitation()));
     sourceDescription.getCitation().setValue("Helen Kelly Brink, Some of the Descendants of Asa Phillips (1793-1844); Who were Born in Vermont and Who Settled in Steuben County, New York in 1802, (Marco Island, Florida, By the Author, 1992) p.34");
     sourceDescription.getCitation().setFields(new ArrayList<CitationField>());
     sourceDescription.getCitation().getFields().add(new CitationField("title", "Some of the Descendants of Asa Phillips (1793-1844); Who were Born in Vermont and Who Settled in Steuben County, New York in 1802"));

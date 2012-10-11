@@ -16,9 +16,11 @@
 package org.gedcomx.contributor;
 
 import org.codehaus.enunciate.json.JsonName;
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.gedcomx.common.ExtensibleData;
 import org.gedcomx.common.ResourceReference;
+import org.gedcomx.common.TextValue;
 import org.gedcomx.conclusion.Identifier;
 import org.gedcomx.rt.json.JsonElementWrapper;
 
@@ -39,7 +41,7 @@ import java.util.List;
 public class Agent extends ExtensibleData {
 
   private String id;
-  private String name;
+  private List<TextValue> names;
   private List<Identifier> identifiers;
   private ResourceReference homepage;
   private ResourceReference openid;
@@ -69,21 +71,36 @@ public class Agent extends ExtensibleData {
   }
 
   /**
-   * The name of the person or organization.
+   * The preferred name for this agent.
    *
-   * @return The name of the person or organization.
+   * @return The preferred name for this agent.
    */
-  public String getName() {
-    return name;
+  @XmlTransient
+  @JsonIgnore
+  public TextValue getName() {
+    return this.names == null || this.names.isEmpty() ? null : this.names.get(0);
   }
 
   /**
-   * The name of the person or organization.
+   * The list of names for the agent.
    *
-   * @param name The name of the person or organization.
+   * @return The list of names for the agent.
    */
-  public void setName(String name) {
-    this.name = name;
+  @XmlElement (name="name")
+  @JsonProperty ("names")
+  @JsonName ("names")
+  public List<TextValue> getNames() {
+    return names;
+  }
+
+  /**
+   * The list of names for the agent.
+   *
+   * @param names The list of names for the agent.
+   */
+  @JsonProperty ("names")
+  public void setNames(List<TextValue> names) {
+    this.names = names;
   }
 
   /**

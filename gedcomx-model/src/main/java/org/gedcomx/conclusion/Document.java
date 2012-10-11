@@ -17,7 +17,6 @@ package org.gedcomx.conclusion;
 
 import org.gedcomx.common.Attributable;
 import org.gedcomx.common.HasText;
-import org.gedcomx.common.TextValue;
 
 import javax.xml.bind.annotation.XmlType;
 
@@ -28,14 +27,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "Document", propOrder = { "text" })
 public abstract class Document extends Conclusion implements HasText, Attributable {
 
-  private TextValue text;
+  private String text;
 
   /**
    * The document text.
    *
    * @return The document text.
    */
-  public TextValue getText() {
+  public String getText() {
     return text;
   }
 
@@ -44,7 +43,7 @@ public abstract class Document extends Conclusion implements HasText, Attributab
    *
    * @param text The document text.
    */
-  public void setText(TextValue text) {
+  public void setText(String text) {
     this.text = text;
   }
 }
