@@ -18,6 +18,7 @@ package org.gedcomx.common;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.gedcomx.rt.SupportsExtensionElements;
 
+import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlType;
 import java.util.ArrayList;
@@ -75,12 +76,10 @@ public abstract class ExtensibleData implements SupportsExtensionElements {
    */
   @SuppressWarnings ( {"unchecked"} )
   public <E> E findExtensionOfType(Class<E> clazz) {
-    if (this.extensionElements != null) {
-      for (Object extension : extensionElements) {
-        if (clazz.isInstance(extension)) {
-          return (E) extension;
-        }
-      }
+    List<E> candidates = findExtensionsOfType(clazz);
+
+    if (candidates.size() > 0) {
+      return candidates.get(0);
     }
 
     return null;
@@ -99,6 +98,50 @@ public abstract class ExtensibleData implements SupportsExtensionElements {
       for (Object extension : extensionElements) {
         if (clazz.isInstance(extension)) {
           ext.add((E) extension);
+        }
+      }
+    }
+
+    return ext;
+  }
+
+  /**
+   * Finds the first extension of a specified type in the given name and namespace.
+   *
+   * @param clazz The type.
+   * @param name The name of the extension element.
+   * @param namespace The namespace of the extension element.
+   * @return The extension, or null if none found.
+   */
+  @SuppressWarnings ( {"unchecked"} )
+  public <E> E findExtensionOfType(Class<E> clazz, String name, String namespace) {
+    List<E> candidates = findExtensionsOfType(clazz, name, namespace);
+
+    if (candidates.size() > 0) {
+      return candidates.get(0);
+    }
+
+    return null;
+  }
+
+  /**
+   * Find the extension elements of a specified type in the given name and namespace.
+   *
+   * @param clazz The type of the extension element.
+   * @param name The name of the extension element.
+   * @param namespace The namespace of the extension element.
+   * @return The extensions, possibly empty but not null.
+   */
+  @SuppressWarnings ( {"unchecked"} )
+  public <E> List<E> findExtensionsOfType(Class<E> clazz, String name, String namespace) {
+    List<E> ext = new ArrayList<E>();
+    if (this.extensionElements != null) {
+      for (Object extension : extensionElements) {
+        if (JAXBElement.class.isInstance(extension)) {
+          JAXBElement<E> element = (JAXBElement<E>) extension;
+          if (clazz.isInstance(element.getValue()) && element.getName().getLocalPart().equals(name) && element.getName().getNamespaceURI().equals(namespace)) {
+            ext.add(element.getValue());
+          }
         }
       }
     }

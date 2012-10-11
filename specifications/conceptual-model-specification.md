@@ -571,100 +571,22 @@ This data type extends the following data type:
 
 name | description | data type
 -----|-------------|----------
+type | URI identifying the type of the document. | [URI](#uri) - MUST resolve to a document type. Refer to the list of [known document types](#known-document-types).
 text | The text of the document. | string
 attribution | The attribution of the document. | [`http://gedcomx.org/Attribution`](#attribution)
 
-<a id="abstract-document"/>
+<a id="known-document-types"/>
 
-## 5.2.1 The "AbstractDocument" Data Type
+### known document types
 
-The `AbstractDocument` data type is used to represent document abstracts.  The `AbstractDocument` data type extends the `Document` data type.
+The following gender types are defined by GEDCOM X:
 
-### identifier
-
-The identifier for the `AbstractDocument` data type is:
-
-`http://gedcomx.org/v1/AbstractDocument`
-
-### extension
-
-This data type extends the following data type:
-
-`http://gedcomx.org/v1/Document`
-
-### properties
-
-The `AbstractDocument` data type defines no additional properties beyond those defined by its extended type.
-
-
-<a id="transcription-document"/>
-
-## 5.2.2 The "TranscriptionDocument" Data Type
-
-The `TranscriptionDocument` data type is used to represent document transcriptions -- to include partial transcriptions (also called extracts).  The `TranscriptionDocument` data type extends the `Document` data type.
-
-### identifier
-
-The identifier for the `TranscriptionDocument` data type is:
-
-`http://gedcomx.org/v1/TranscriptionDocument`
-
-### extension
-
-This data type extends the following data type:
-
-`http://gedcomx.org/v1/Document`
-
-### properties
-
-The `TranscriptionDocument` data type defines no additional properties beyond those defined by its extended type.
-
-
-<a id="translation-document"/>
-
-## 5.2.3 The "TranslationDocument" Data Type
-
-The `TranslationDocument` data type is used to represent document translations.  The `TranslationDocument` data type extends the `Document` data type.
-
-### identifier
-
-The identifier for the `TranslationDocument` data type is:
-
-`http://gedcomx.org/v1/TranslationDocument`
-
-### extension
-
-This data type extends the following data type:
-
-`http://gedcomx.org/v1/Document`
-
-### properties
-
-The `TranslationDocument` data type defines no additional properties beyond those defined by its extended type.
-
-
-<a id="analysis-document"/>
-
-## 5.2.4 The "AnalysisDocument" Data Type
-
-The `AnalysisDocument` data type is used to represent documents with evidence analysis -- e.g., a genealogical proof statement.  The `AnalysisDocument` data type extends the `Document` data type.
-
-### identifier
-
-The identifier for the `AnalysisDocument` data type is:
-
-`http://gedcomx.org/v1/AnalysisDocument`
-
-### extension
-
-This data type extends the following data type:
-
-`http://gedcomx.org/v1/Document`
-
-### properties
-
-The `AnalysisDocument` data type defines no additional properties beyond those defined by its extended type.
-
+URI | description
+----|-------------
+`http://gedcomx.org/Abstract` | The document is an abstract of a record or document.
+`http://gedcomx.org/Transcription` | The document is a transcription of a record or document.
+`http://gedcomx.org/Translation` | The document is a translation of a record or document.
+`http://gedcomx.org/Analysis` | The document is an analysis done by a researcher, often used as a genealogical proof statement.
 
 <a id="gender-conclusion"/>
 

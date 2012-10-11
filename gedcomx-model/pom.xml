@@ -7,7 +7,7 @@
   <parent>
     <groupId>org.gedcomx</groupId>
     <artifactId>gedcomx-parent</artifactId>
-    <version>0.21.0-SNAPSHOT</version>
+    <version>0.22.0-SNAPSHOT</version>
   </parent>
 
   <properties>
@@ -88,10 +88,10 @@
             <phase>process-resources</phase>
             <configuration>
               <tasks>
-                <mkdir dir="${project.build.directory}/uml/"/>
-                <touch file="${project.build.directory}/uml/Class Diagram.png"/>
-                <move file="${project.build.directory}/uml/Class Diagram.png" tofile="${project.build.directory}/uml/model.png" failonerror="false"/>
-                <zip destfile="${project.build.directory}/uml.zip" basedir="${project.build.directory}/uml"/>
+                <mkdir dir="${project.build.directory}/uml/" />
+                <touch file="${project.build.directory}/uml/Class Diagram.png" />
+                <move file="${project.build.directory}/uml/Class Diagram.png" tofile="${project.build.directory}/uml/model.png" failonerror="false" />
+                <zip destfile="${project.build.directory}/uml.zip" basedir="${project.build.directory}/uml" />
               </tasks>
             </configuration>
             <goals>

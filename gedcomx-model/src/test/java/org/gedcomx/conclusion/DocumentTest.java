@@ -1,8 +1,12 @@
 package org.gedcomx.conclusion;
 
 import org.gedcomx.CustomEntity;
-import org.gedcomx.common.*;
+import org.gedcomx.common.Attribution;
+import org.gedcomx.common.Note;
+import org.gedcomx.common.ResourceReference;
+import org.gedcomx.common.URI;
 import org.gedcomx.source.SourceReference;
+import org.gedcomx.types.DocumentType;
 import org.testng.annotations.Test;
 
 import static org.testng.AssertJUnit.assertEquals;
@@ -12,8 +16,9 @@ import static org.testng.AssertJUnit.assertNull;
 
 public class DocumentTest {
   @Test
-  public void testAbstractDocument() throws Exception {
-    Document document = new AbstractDocument();
+  public void testDocument() throws Exception {
+    Document document = new Document();
+    document.setKnownType(DocumentType.Abstract);
 
     assertNull(document.getId());
     assertNull(document.getText());
@@ -38,6 +43,7 @@ public class DocumentTest {
     document.addExtensionElement(new CustomEntity("1234"));
     document.addExtensionElement(new CustomEntity("2345"));
 
+    assertEquals(DocumentType.Abstract, document.getKnownType());
     assertEquals(document.getId(), "DDDD-DDD");
     assertEquals(document.getLang(), "en-US");
     assertEquals(document.getText(), "(The text of the document abstract goes here.)");
@@ -68,39 +74,4 @@ public class DocumentTest {
     assertEquals(document.findExtensionsOfType(CustomEntity.class).size(), 0);
   }
 
-  @Test
-  public void testAnalysisDocument() throws Exception {
-    Document document = new AnalysisDocument();
-
-    assertNull(document.getId());
-    assertNull(document.getText());
-    assertNull(document.getSources());
-    assertNull(document.getAttribution());
-    assertNull(document.getNotes());
-    assertNull(document.getExtensionElements());
-  }
-
-  @Test
-  public void testTranscriptionDocument() throws Exception {
-    Document document = new TranscriptionDocument();
-
-    assertNull(document.getId());
-    assertNull(document.getText());
-    assertNull(document.getSources());
-    assertNull(document.getAttribution());
-    assertNull(document.getNotes());
-    assertNull(document.getExtensionElements());
-  }
-
-  @Test
-  public void testTranslationDocument() throws Exception {
-    Document document = new TranslationDocument();
-
-    assertNull(document.getId());
-    assertNull(document.getText());
-    assertNull(document.getSources());
-    assertNull(document.getAttribution());
-    assertNull(document.getNotes());
-    assertNull(document.getExtensionElements());
-  }
 }

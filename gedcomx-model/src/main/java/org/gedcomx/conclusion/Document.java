@@ -15,19 +15,70 @@
  */
 package org.gedcomx.conclusion;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.gedcomx.common.Attributable;
 import org.gedcomx.common.HasText;
+import org.gedcomx.common.URI;
+import org.gedcomx.rt.json.JsonElementWrapper;
+import org.gedcomx.types.DocumentType;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
  * An abstract document that contains derived (conclusionary) text -- for example, a transcription or researcher analysis.
  */
+@XmlRootElement (name = "abstract")
+@JsonElementWrapper (name = "abstracts")
 @XmlType(name = "Document", propOrder = { "text" })
-public abstract class Document extends Conclusion implements HasText, Attributable {
+public class Document extends Conclusion implements HasText, Attributable {
 
+  private URI type;
   private String text;
+
+
+  /**
+   * The type of the document.
+   *
+   * @return The type of the document.
+   */
+  @XmlAttribute
+  public URI getType() {
+    return type;
+  }
+
+  /**
+   * The type of the document.
+   *
+   * @param type The type of the document.
+   */
+  public void setType(URI type) {
+    this.type = type;
+  }
+
+  /**
+   * The enum referencing the known type of the document, or {@link org.gedcomx.types.DocumentType#OTHER} if not known.
+   *
+   * @return The enum referencing the known type of the document, or {@link org.gedcomx.types.DocumentType#OTHER} if not known.
+   */
+  @XmlTransient
+  @JsonIgnore
+  public org.gedcomx.types.DocumentType getKnownType() {
+    return getType() == null ? null : DocumentType.fromQNameURI(getType());
+  }
+
+  /**
+   * Set the type of this document from a known enumeration of document types.
+   *
+   * @param knownType the document type.
+   */
+  @JsonIgnore
+  public void setKnownType(org.gedcomx.types.DocumentType knownType) {
+    setType(knownType == null ? null : URI.create(org.codehaus.enunciate.XmlQNameEnumUtil.toURIValue(knownType)));
+  }
 
   /**
    * The document text.

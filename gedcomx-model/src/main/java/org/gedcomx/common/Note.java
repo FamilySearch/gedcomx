@@ -19,6 +19,7 @@ import org.gedcomx.rt.json.JsonElementWrapper;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
@@ -33,10 +34,31 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType ( name = "Note", propOrder = { "subject", "text", "attribution" } )
 public class Note extends ExtensibleData implements Attributable, HasText {
 
+  private String id;
   private String lang;
   private String subject;
   private String text;
   private Attribution attribution;
+
+  /**
+   * A local, context-specific id for the data.
+   *
+   * @return A local, context-specific id for the data.
+   */
+  @XmlID
+  @XmlAttribute
+  public String getId() {
+    return id;
+  }
+
+  /**
+   * A local, context-specific id for the data.
+   *
+   * @param id A local, context-specific id for the data.
+   */
+  public void setId(String id) {
+    this.id = id;
+  }
 
   /**
    * The language of the note. See <a href="http://www.w3.org/International/articles/language-tags/>http://www.w3.org/International/articles/language-tags/</a>
@@ -118,9 +140,20 @@ public class Note extends ExtensibleData implements Attributable, HasText {
   @Override
   public String toString() {
     return "Note{" +
-      "subject=" + subject +
-      ", text=" + text +
+      "subject=" + getTextBrief(subject) +
+      ", text=" + getTextBrief(text) +
       ", attribution=" + attribution +
       '}';
   }
+
+  private String getTextBrief( String text ) {
+    if (text != null && text != null) {
+      final int substrLen = 40;
+      if (text.length() > substrLen)
+        return text.substring(0, substrLen) + "...";
+      return text;
+    }
+    return null;
+  }
+
 }

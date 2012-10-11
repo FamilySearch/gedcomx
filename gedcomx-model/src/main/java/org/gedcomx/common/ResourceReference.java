@@ -23,7 +23,6 @@ import org.codehaus.jackson.map.SerializerProvider;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.gedcomx.rt.json.JsonSimpleValue;
-import org.gedcomx.types.ResourceFragmentParameter;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -38,7 +37,6 @@ import java.io.IOException;
  * @author Ryan Heaton
  */
 @XmlType ( name = "ResourceReference" )
-@XmlSeeAlso(ResourceFragmentParameter.class)
 @JsonSerialize (using = ResourceReference.JsonSerializer.class)
 @JsonDeserialize (using = ResourceReference.JsonDeserializer.class)
 @JsonSimpleValue ( example = "http://path/to/resource" )

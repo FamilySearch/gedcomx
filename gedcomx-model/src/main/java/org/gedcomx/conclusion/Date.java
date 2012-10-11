@@ -16,6 +16,7 @@
 package org.gedcomx.conclusion;
 
 import org.codehaus.enunciate.ClientName;
+import org.gedcomx.common.ExtensibleData;
 
 import javax.xml.bind.annotation.XmlType;
 
@@ -24,7 +25,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @ClientName ("DateInfo")
 @XmlType ( name = "Date", propOrder = { "original", "formal" })
-public class Date {
+public class Date extends ExtensibleData {
 
   private String original;
   private String formal;

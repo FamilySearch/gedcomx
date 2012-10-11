@@ -19,6 +19,7 @@ public class NoteTest {
   public void testNoteXml() throws Exception {
     Note note = new Note();
     note.setText("hello, there");
+    note.setSubject("subject");
     note.setAttribution(new Attribution());
     note.getAttribution().setChangeMessage("note statement");
     Note otherNote = new Note();
@@ -30,6 +31,7 @@ public class NoteTest {
     note = processThroughXml(note);
 
     assertEquals("hello, there", note.getText());
+    assertEquals("subject", note.getSubject());
     assertEquals("note statement", note.getAttribution().getChangeMessage());
     assertEquals("en", note.getLang());
   }
@@ -39,6 +41,7 @@ public class NoteTest {
    */
   public void testNoteJson() throws Exception {
     Note note = new Note();
+    note.setSubject("subject");
     note.setText("hello, there");
     note.setAttribution(new Attribution());
     note.getAttribution().setChangeMessage("note statement");
@@ -46,6 +49,7 @@ public class NoteTest {
 
     note = processThroughJson(note);
 
+    assertEquals("subject", note.getSubject());
     assertEquals("hello, there", note.getText());
     assertEquals("note statement", note.getAttribution().getChangeMessage());
     assertEquals("en", note.getLang());

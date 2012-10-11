@@ -535,6 +535,7 @@ The JSON object used to (de)serialize the `http://gedcomx.org/v1/Document` data 
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
+type | URI identifying the type of the document. | type | [`URI`](#uri)
 attribution | The attribution of this document. | attribution | [`gx:Attribution`](#attribution)
 text | The text of the document. | text | string
 
@@ -545,52 +546,11 @@ text | The text of the document. | text | string
 
   ...the members of gxc:Conclusion...,
 
+  "type" : "http://gedcomx.org/Analysis",
   "attribution" : { ... },
   "text" : "...text of the document..."
 }
 ```
-
-<a id="abstract-document"/>
-
-## 5.2.1 The "AbstractDocument" Data Type
-
-The JSON object used to (de)serialize the `http://gedcomx.org/v1/AbstractDocument` data type is defined as follows:
-
-### properties
-
-The `AbstractDocument` data type defines no additional properties beyond those defined by its extended type.
-
-<a id="transcription-document"/>
-
-## 5.2.2 The "TranscriptionDocument" Data Type
-
-The JSON object used to (de)serialize the `http://gedcomx.org/v1/TranscriptionDocument` data type is defined as follows:
-
-### properties
-
-The `TranscriptionDocument` data type defines no additional properties beyond those defined by its extended type.
-
-<a id="translation-document"/>
-
-## 5.2.3 The "TranslationDocument" Data Type
-
-The JSON object used to (de)serialize the `http://gedcomx.org/v1/TranslationDocument` data type is defined as follows:
-
-### properties
-
-The `TranslationDocument` data type defines no additional properties beyond those defined by its extended type.
-
-<a id="analysis-document"/>
-
-## 5.2.4 The "AnalysisDocument" Data Type
-
-The JSON object used to (de)serialize the `http://gedcomx.org/v1/AnalysisDocument` data type is defined as follows:
-
-### properties
-
-The `AnalysisDocument` data type defines no additional properties beyond those defined by its extended type.
-
-<a id="gender-conclusion"/>
 
 ## 5.3 The "Gender" Data Type
 
@@ -914,6 +874,7 @@ genders | array of [`Gender`](#gender-conclusion)
 source-references | array of [`SourceReference`](#source-reference)
 source-descriptions | array of [`SourceDescription`](#rdf-description)
 agents | array of [`Agent`](#agent)
+documents | array of [`Document`](#document)
 
 
 7. Fragment Identifiers

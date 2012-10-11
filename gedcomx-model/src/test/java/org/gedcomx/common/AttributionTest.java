@@ -1,7 +1,6 @@
 package org.gedcomx.common;
 
 import org.gedcomx.rt.GedcomNamespaceManager;
-import org.gedcomx.types.ConfidenceLevel;
 import org.testng.annotations.Test;
 
 import javax.xml.bind.JAXBContext;
