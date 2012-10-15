@@ -7,14 +7,10 @@ import org.gedcomx.rt.GedcomNamespaceManager;
 import org.gedcomx.rt.SerializationProcessListener;
 import org.gedcomx.test.RecipeTest;
 import org.gedcomx.test.Snippet;
-import org.gedcomx.types.ConfidenceLevel;
 import org.testng.annotations.Test;
 
 import javax.xml.bind.JAXBContext;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import static org.gedcomx.rt.SerializationUtil.processThroughJson;
 import static org.gedcomx.rt.SerializationUtil.processThroughXml;
@@ -95,12 +91,12 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
   {
     orgFamilySearch = new Agent();
     orgFamilySearch.setId(ORG_FS_ID);
-    orgFamilySearch.setName(FAMILY_SEARCH_INTERNATIONAL);
+    orgFamilySearch.setNames(Arrays.asList(new TextValue(FAMILY_SEARCH_INTERNATIONAL)));
     orgFamilySearch.setHomepage(new ResourceReference(URI.create(FAMILYSEARCH_HOME_PAGE)));
 
     orgFhl = new Agent();
     orgFhl.setId(ORG_FHL_ID);
-    orgFhl.setName(FAMILY_HISTORY_LIBRARY);
+    orgFhl.setNames(Arrays.asList(new TextValue(FAMILY_HISTORY_LIBRARY)));
     orgFhl.setHomepage(new ResourceReference(URI.create(FAMILY_HISTORY_LIBRARY_HOME_PAGE)));
     orgFhl.setAddresses(new ArrayList<Address>());
     orgFhl.getAddresses().add(new Address());
@@ -121,15 +117,15 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
       .applicableTo(SourceDescription.class);
 
     Note note = new Note();
-    note.setText(new TextValue(NOTE_TEXT_1));
-    note.getText().setLang(LANG_EN_US);
+    note.setText(NOTE_TEXT_1);
+    note.setLang(LANG_EN_US);
     note.setAttribution(new Attribution());
     note.getAttribution().setContributor(new ResourceReference(URI.create(CONTRIBUTOR_1_ID)));
     note.getAttribution().setModified(new Date(MODIFIED_20111111_11_11_11_111)); // 11 Nov 2011 11:11:11.111
 
     SourceDescription srcDesc1 = new SourceDescription();
     srcDesc1.setId(SRC_OF_SRC_ID);
-    srcDesc1.setCitation(new SourceCitation());
+    srcDesc1.setCitations(Arrays.asList(new SourceCitation()));
     srcDesc1.getCitation().setValue(DEATH_CERT_FULL_CITATION);
     srcDesc1.getCitation().setCitationTemplate(new ResourceReference(new URI(FHL_FILM_COLLECTION_CITATION_TEMPLATE)));
     srcDesc1.getCitation().setFields(new ArrayList<CitationField>());
@@ -145,7 +141,7 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
 
     SourceDescription srcDesc2 = new SourceDescription();
     srcDesc2.setId(SRC_ID);
-    srcDesc2.setCitation(new SourceCitation());
+    srcDesc2.setCitations(Arrays.asList(new SourceCitation()));
     srcDesc2.getCitation().setValue(DEATH_IDX_FULL_CITATION);
     srcDesc2.getCitation().setCitationTemplate(new ResourceReference(new URI(FS_INDEX_DEATHRECORD_CITATION_TEMPLATE)));
     srcDesc2.getCitation().setFields(new ArrayList<CitationField>());
@@ -160,7 +156,7 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
     srcDesc2.setSources(new ArrayList<SourceReference>());
     srcDesc2.getSources().add(new SourceReference());
     srcDesc2.getSources().get(0).setDescriptionRef(URI.create(SRCDESC_URI_PREFIX + SRC_OF_SRC_ID));
-    srcDesc2.setDisplayName(PRESIDENT_LYNDON_B_JOHNSON_DEATH_CERTIFICATE);
+    srcDesc2.setTitles(Arrays.asList(new TextValue((PRESIDENT_LYNDON_B_JOHNSON_DEATH_CERTIFICATE))));
     srcDesc2.setMediatorURI(URI.create(MEDIATOR_URI_PREFIX + ORG_FS_ID));
     srcDesc2.setNotes(new ArrayList<Note>());
     srcDesc2.getNotes().add(note);
@@ -189,9 +185,9 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
 
     // the following adds code coverage for SourceDescription
     srcDesc1.setMediatorURI((URI)null);
-    srcDesc1.setAlternateNames(new ArrayList<TextValue>());
+    srcDesc1.setTitles(new ArrayList<TextValue>());
     assertNull(srcDesc1.getMediator());
-    assertEquals(srcDesc1.getAlternateNames().size(), 0);
+    assertEquals(srcDesc1.getTitles().size(), 0);
   }
 
   private void verifyDeathCertExample(ResourceSet resourceSet) {
@@ -259,13 +255,12 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
     assertEquals(fieldNameValuePairs.get(FLDNM_DEATH_YEAR), FLDVAL_DEATH_YEAR2);
     assertEquals(fieldNameValuePairs.get(FLDNM_DATE_ACCESSED), FLDVAL_DATE_ACCESSED2);
     assertEquals(srcDesc2.getMediator().getResource().toURI().toString(), MEDIATOR_URI_PREFIX + ORG_FS_ID);
-    assertEquals(srcDesc2.getDisplayName(), PRESIDENT_LYNDON_B_JOHNSON_DEATH_CERTIFICATE);
-    assertNull(srcDesc2.getAlternateNames());
+    assertEquals(srcDesc2.getTitle().getValue(), PRESIDENT_LYNDON_B_JOHNSON_DEATH_CERTIFICATE);
 
     assertNotNull(srcDesc2.getNotes());
     assertEquals(srcDesc2.getNotes().size(), 1);
-    assertEquals(srcDesc2.getNotes().get(0).getText().getLang(), LANG_EN_US);
-    assertEquals(srcDesc2.getNotes().get(0).getText().getValue(), NOTE_TEXT_1);
+    assertEquals(srcDesc2.getNotes().get(0).getLang(), LANG_EN_US);
+    assertEquals(srcDesc2.getNotes().get(0).getText(), NOTE_TEXT_1);
     assertEquals(srcDesc2.getNotes().get(0).getAttribution().getContributor().getResource().toURI().toString(), CONTRIBUTOR_1_ID);
     assertEquals(srcDesc2.getNotes().get(0).getAttribution().getModified().getTime(), MODIFIED_20111111_11_11_11_111);
 
@@ -276,7 +271,7 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
 
     assertNotNull(orgFamilySearch);
     assertEquals(orgFamilySearch.getId(), ORG_FS_ID);
-    assertEquals(orgFamilySearch.getName(), FAMILY_SEARCH_INTERNATIONAL);
+    assertEquals(orgFamilySearch.getName().getValue(), FAMILY_SEARCH_INTERNATIONAL);
     assertEquals(orgFamilySearch.getHomepage().getResource().toString(), FAMILYSEARCH_HOME_PAGE);
     assertNull(orgFamilySearch.getAddresses());
     assertNull(orgFamilySearch.getAccounts());
@@ -287,7 +282,7 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
 
     assertNotNull(orgFhl);
     assertEquals(orgFhl.getId(), ORG_FHL_ID);
-    assertEquals(orgFhl.getName(), FAMILY_HISTORY_LIBRARY);
+    assertEquals(orgFhl.getName().getValue(), FAMILY_HISTORY_LIBRARY);
     assertEquals(orgFhl.getHomepage().getResource().toString(), FAMILY_HISTORY_LIBRARY_HOME_PAGE);
     assertNotNull(orgFhl.getAddresses());
     assertEquals(orgFhl.getAddresses().size(), 1);
@@ -317,7 +312,7 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
 
     Agent orgNara = new Agent();
     orgNara.setId(orgIdNara);
-    orgNara.setName("National Archives and Records Administration");
+    orgNara.setNames(Arrays.asList(new TextValue("National Archives and Records Administration")));
     orgNara.setHomepage(new ResourceReference(URI.create("http://www.archives.gov/")));
     orgNara.setAddresses(new ArrayList<Address>());
     orgNara.getAddresses().add(new Address());
@@ -332,9 +327,8 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
     orgNara.getPhones().add(new ResourceReference(URI.create("fax:+1-301-837-0483")));
 
     Note note = new Note();
-    note.setText(new TextValue());
-    note.getText().setLang("en-US");
-    note.getText().setValue("Image available with record.");
+    note.setLang("en-US");
+    note.setText("Image available with record.");
     note.setAttribution(new Attribution());
     note.getAttribution().setContributor(new ResourceReference(URI.create("#contributorid")));
     note.getAttribution().setModified(new Date(1321027871111L)); // 11 Nov 2011 11:11:11.111
@@ -346,7 +340,7 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
 
     SourceDescription srcDesc0 = new SourceDescription();
     srcDesc0.setId(sourceS3);
-    srcDesc0.setCitation(new SourceCitation());
+    srcDesc0.setCitations(Arrays.asList(new SourceCitation()));
     srcDesc0.getCitation().setValue("Bureau of the Census. \"Population Schedules for the 1930 Census.\" NARA microfilm publication T626, roll 523. National Archives and Records Administration, Washington D.C.");
     srcDesc0.getCitation().setCitationTemplate(new ResourceReference(new URI("http:/source-template-authority/nara-microfilm-pub-template")));
     srcDesc0.getCitation().setFields(new ArrayList<CitationField>());
@@ -360,7 +354,7 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
 
     SourceDescription srcDesc1 = new SourceDescription();
     srcDesc1.setId(sourceOfS2);
-    srcDesc1.setCitation(new SourceCitation());
+    srcDesc1.setCitations(Arrays.asList(new SourceCitation()));
     srcDesc1.getCitation().setValue("United States. Bureau of the Census. 15th census, 1930. United States, 1930 federal census : population schedules; NARA microfilm publication T626. National Archives and Records Administration, Washington D.C. FHL US/CAN Census Area Film 2340258. Family History Library, Salt Lake City, Utah");
     srcDesc1.getCitation().setCitationTemplate(new ResourceReference(new URI("http:/source-template-authority/fhl-film-collection-template")));
     srcDesc1.getCitation().setFields(new ArrayList<CitationField>());
@@ -377,7 +371,7 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
 
     SourceDescription srcDesc2 = new SourceDescription();
     srcDesc2.setId(sourceOfS1);
-    srcDesc2.setCitation(new SourceCitation());
+    srcDesc2.setCitations(Arrays.asList(new SourceCitation()));
     srcDesc2.getCitation().setValue("\"United States Census, 1930,\" index and images, FamilySearch (https://familysearch.org/pal:/MM9.1.1/XSYY-Q6P : accessed 12 July 2012), Ronald Reagan in household of John E Reagan, Dixon, Lee, Illinois.");
     srcDesc2.getCitation().setCitationTemplate(new ResourceReference(new URI("http://source-template-authority/fsindex-uscensus-template")));
     srcDesc2.getCitation().setFields(new ArrayList<CitationField>());
@@ -388,7 +382,7 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
     srcDesc2.setSources(new ArrayList<SourceReference>());
     srcDesc2.getSources().add(new SourceReference());
     srcDesc2.getSources().get(0).setDescriptionRef(URI.create("#" + sourceOfS2));
-    srcDesc2.setDisplayName("1930 US Census");
+    srcDesc2.setTitles(Arrays.asList(new TextValue("1930 US Census")));
     srcDesc2.setMediatorURI(URI.create("repository#" + ORG_FS_ID));
     srcDesc2.setNotes(new ArrayList<Note>());
     srcDesc2.getNotes().add(note);
@@ -396,7 +390,7 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
 
     SourceDescription srcDesc3 = new SourceDescription();
     srcDesc3.setId(sourceS1);
-    srcDesc3.setCitation(new SourceCitation());
+    srcDesc3.setCitations(Arrays.asList(new SourceCitation()));
     srcDesc3.getCitation().setValue("(https://familysearch.org/pal:/MM9.1.1/XSYY-Q6P : accessed 12 July 2012), Ronald Reagan in household of John E Reagan, Dixon, Lee, Illinois.");
     srcDesc3.getCitation().setCitationTemplate(new ResourceReference(new URI("http://source-template-authority/fsindex-uscensus-template/details")));
     srcDesc3.getCitation().setFields(new ArrayList<CitationField>());
@@ -414,7 +408,7 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
     srcDesc3.setAbout(URI.create("https://familysearch.org/pal:/MM9.1.1/XSYY-Q6P"));
     srcDesc3.setComponentOf(new SourceReference());
     srcDesc3.getComponentOf().setDescriptionRef(URI.create("#" + sourceOfS1));
-    srcDesc3.setDisplayName("President Ronald Reagan with his parents in 1830 census");
+    srcDesc3.setTitles(Arrays.asList(new TextValue("President Ronald Reagan with his parents in 1830 census")));
     srcDesc3.setNotes(new ArrayList<Note>());
     srcDesc3.getNotes().add(note);
 

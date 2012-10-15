@@ -1,6 +1,7 @@
 package org.gedcomx.contributor;
 
 import org.gedcomx.common.ResourceReference;
+import org.gedcomx.common.TextValue;
 import org.gedcomx.common.URI;
 import org.gedcomx.CustomEntity;
 import org.gedcomx.conclusion.Identifier;
@@ -104,7 +105,7 @@ public class AgentTest {
     email.setResource(URI.create("mailto:heatonra@familysearch.org"));
     person.getEmails().add(email);
     person.setHomepage(new ResourceReference(URI.create("http://familysearch.org/heatonra")));
-    person.setName("Ryan Heaton");
+    person.setNames(Arrays.asList(new TextValue("Ryan Heaton")));
     person.setOpenid(new ResourceReference(URI.create("openid")));
     person.setPhones(new ArrayList<ResourceReference>());
     Identifier identifier = new Identifier();
@@ -132,7 +133,7 @@ public class AgentTest {
     AssertJUnit.assertEquals(1, person.getEmails().size());
     AssertJUnit.assertEquals("mailto:heatonra@familysearch.org", person.getEmails().get(0).getResource().toString());
     AssertJUnit.assertEquals("http://familysearch.org/heatonra", person.getHomepage().getResource().toString());
-    AssertJUnit.assertEquals("Ryan Heaton", person.getName());
+    AssertJUnit.assertEquals("Ryan Heaton", person.getName().getValue());
     AssertJUnit.assertEquals("openid", person.getOpenid().getResource().toString());
     AssertJUnit.assertEquals(1, person.getPhones().size());
     AssertJUnit.assertEquals("tel:+18012401000", person.getPhones().get(0).getResource().toString());

@@ -30,18 +30,17 @@ import java.util.List;
  * Represents a description of a source.
  */
 @XmlRootElement
-@XmlType ( name = "SourceDescription", propOrder = { "citation", "mediator", "sources", "extractedConclusions", "componentOf", "displayName", "alternateNames", "notes", "attribution" } )
+@XmlType ( name = "SourceDescription", propOrder = { "citations", "mediator", "sources", "extractedConclusions", "componentOf", "titles", "notes", "attribution" } )
 @JsonElementWrapper ( name = "source-descriptions" )
 public class SourceDescription extends ExtensibleData implements Attributable, HasNotes, ReferencesSources {
   private String id;
-  private SourceCitation citation;
+  private List<SourceCitation> citations;
   private URI about;
   private ResourceReference mediator;
   private List<SourceReference> sources;
   private List<ResourceReference> extractedConclusions;
   private SourceReference componentOf;
-  private String displayName;
-  private List<TextValue> alternateNames;
+  private List<TextValue> titles;
   private List<Note> notes;
   private Attribution attribution;
 
@@ -65,21 +64,36 @@ public class SourceDescription extends ExtensibleData implements Attributable, H
   }
 
   /**
-   * The bibliographic citation for this source.
+   * The preferred bibliographic citation for this source.
    *
-   * @return The bibliographic citation for this source.
+   * @return The preferred bibliographic citation for this source.
    */
+  @XmlTransient
+  @JsonIgnore
   public SourceCitation getCitation() {
-    return citation;
+    return citations == null || citations.isEmpty() ? null : citations.get(0);
   }
 
   /**
-   * The bibliographic citation for this source.
+   * The bibliographic citations for this source.
    *
-   * @param citation The bibliographic citation for this source.
+   * @return The bibliographic citations for this source.
    */
-  public void setCitation(SourceCitation citation) {
-    this.citation = citation;
+  @XmlElement (name="citation")
+  @JsonProperty ("citations")
+  @JsonName ("citations")
+  public List<SourceCitation> getCitations() {
+    return citations;
+  }
+
+  /**
+   * The bibliographic citations for this source.
+   *
+   * @param citations The bibliographic citations for this source.
+   */
+  @JsonProperty ("citations")
+  public void setCitations(List<SourceCitation> citations) {
+    this.citations = citations;
   }
 
   /**
@@ -194,43 +208,36 @@ public class SourceDescription extends ExtensibleData implements Attributable, H
   }
 
   /**
-   * A display name for this source.
+   * The preferred title for this source description.
    *
-   * @return A display name for this source.
+   * @return The preferred title for this source description.
    */
-  public String getDisplayName() {
-    return displayName;
+  @XmlTransient
+  @JsonIgnore
+  public TextValue getTitle() {
+    return this.titles == null || this.titles.isEmpty() ? null : this.titles.get(0);
   }
 
   /**
-   * A display name for this source.
+   * A list of titles for this source.
    *
-   * @param displayName A display name for this source.
+   * @return A list of titles for this source.
    */
-  public void setDisplayName(String displayName) {
-    this.displayName = displayName;
+  @XmlElement (name="title")
+  @JsonProperty ("titles")
+  @JsonName ("titles")
+  public List<TextValue> getTitles() {
+    return titles;
   }
 
   /**
-   * A list of alternate display names for this source.
+   * A list of titles for this source.
    *
-   * @return A list of alternate display names for this source.
+   * @param titles A list of titles for this source.
    */
-  @XmlElement (name="alternateName")
-  @JsonProperty ("alternateNames")
-  @JsonName ("alternateNames")
-  public List<TextValue> getAlternateNames() {
-    return alternateNames;
-  }
-
-  /**
-   * A list of alternate display names for this source.
-   *
-   * @param alternateNames A list of alternate display names for this source.
-   */
-  @JsonProperty ("alternateNames")
-  public void setAlternateNames(List<TextValue> alternateNames) {
-    this.alternateNames = alternateNames;
+  @JsonProperty ("titles")
+  public void setTitles(List<TextValue> titles) {
+    this.titles = titles;
   }
 
   /**

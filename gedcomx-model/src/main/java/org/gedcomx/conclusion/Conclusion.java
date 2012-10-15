@@ -23,6 +23,7 @@ import org.gedcomx.source.ReferencesSources;
 import org.gedcomx.source.SourceReference;
 import org.gedcomx.types.ConfidenceLevel;
 
+import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +38,7 @@ import java.util.List;
 public abstract class Conclusion extends ExtensibleData implements Attributable, ReferencesSources, HasNotes {
 
   private String id;
+  private String lang;
   private URI confidence;
   private List<SourceReference> sources;
   private List<Note> notes;
@@ -60,6 +62,25 @@ public abstract class Conclusion extends ExtensibleData implements Attributable,
    */
   public void setId(String id) {
     this.id = id;
+  }
+
+  /**
+   * The language of the conclusion. See <a href="http://www.w3.org/International/articles/language-tags/>http://www.w3.org/International/articles/language-tags/</a>
+   *
+   * @return The language of the conclusion.
+   */
+  @XmlAttribute ( namespace = XMLConstants.XML_NS_URI )
+  public String getLang() {
+    return lang;
+  }
+
+  /**
+   * The language of the conclusion. See <a href="http://www.w3.org/International/articles/language-tags/>http://www.w3.org/International/articles/language-tags/</a>
+   *
+   * @param lang The language of the conclusion.
+   */
+  public void setLang(String lang) {
+    this.lang = lang;
   }
 
   /**

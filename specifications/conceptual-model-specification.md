@@ -78,6 +78,27 @@ document are to be interpreted as described in BCP 14,
 [RFC2119](http://tools.ietf.org/html/rfc2119), as scoped to those conformance 
 targets.
 
+## 1.3 Internationalization Considerations
+
+GEDCOM X must be designed to accommodate users and software of different languages and locales.
+To this end, a property named `lang` is supported on relevant GEDCOM X data types. This
+attribute is used to identify the locale of the user who provided the data. This property
+is optional, and when it is not provided, a processor MAY process the data as if it were
+provided in the default locale of the processor. When this property is provided, it overrides
+the value of the property supplied by any containing data elements.
+
+The values of the attribute are language identifiers as defined by [IETF BCP 47](http://tools.ietf.org/html/bcp47),
+_Tags for the Identification of Languages_; in addition, the empty string may be specified to
+explicitly state a processor may process the data as if it were provided in the default locale
+of the processor.
+
+In order to prevent undue burden on producers and consumers of GEDCOM X data, not all data types
+provide multiple values for properties that are used for user input. For example, the text of
+a note is _not_ defined as a list of language-identified strings. However, some cases have been
+identified where multi-valued input is needed for the benefit of exchanging genealogical data
+across cultural boundaries. Such cases include the need to input multiple name forms and the need
+to identify multiple titles for a source.
+
 
 # 2. Common Data Types
 
@@ -214,7 +235,9 @@ The identifier for the "Note" data type is:
 
 name  | description | data type
 ------|-------------|----------
-text | The text of the note. | [`http://gedcomx.org/TextValue`](#text-value)
+lang | The locale identifier for the note. | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag
+subject | A subject or title for the note. | string
+text | The text of the note. | string
 attribution | The attribution of this note. | [`http://gedcomx.org/Attribution`](#attribution)
 
 
@@ -236,7 +259,7 @@ The identifier for the "TextValue" data type is:
 
 name  | description | data type
 ------|-------------|----------
-lang | The language of the literal value. | `http://www.w3.org/XML/1998/namespace#lang`
+lang | The locale identifier for the value of the text. | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag
 value | The literal value. | string
 
 
@@ -269,14 +292,13 @@ The identifier for the "SourceDescription" data type is:
 name | description | data type
 -----|-------------|----------
 id | An identifier for the data structure holding the source description data. The id is to be used as a "fragment identifier" as defined by [RFC 3986, Section 3.5](http://tools.ietf.org/html/rfc3986#section-3.5). As such, the constraints of the id are provided in the definition of the media type (e.g. XML, JSON) of the data structure. | string
-citation | The citation for this source. | [`http://gedcomx.org/v1/SourceCitation`](#source-citation) - REQUIRED
+citations | The citations for this source. At least one citation MUST be provided. If more than one citation is provided, citations are assumed to be given in order of preference, with the most preferred citation in the first position in the list. | [`http://gedcomx.org/v1/SourceCitation`](#source-citation) - REQUIRED
 about | A uniform resource identifier (URI) for the resource being described. | [URI](#uri) - OPTIONAL
 mediator | A reference to the entity that mediates access to the described source. | [URI](#uri) - OPTIONAL; MUST resolve to an instance of [`http://gedcomx.org/v1/Agent`](#agent).
 sources | A list of references to any sources from which this source is derived. | List of [`http://gedcomx.org/v1/SourceReference`](#source-reference) - OPTIONAL
 extractedConclusions | A list of references to any conclusions that were extracted from this source, to be analyzed and evaluated atomically within on context of the source. | [URI](#uri) - OPTIONAL
 componentOf | A reference to the source that contains this source -- its parent context; this is for cases where this description is not complete without the description of its parent context | [`http://gedcomx.org/v1/SourceReference`](#source-reference) - OPTIONAL
-displayName | A display name for this source. | string - OPTIONAL
-alternateNames | A list of alternate display names for this source. | List of [`http://gedcomx.org/TextValue`](#text-value) - OPTIONAL
+titles | The display names for this source. If more than one title is provided, titles are assumed to be given in order of preference, with the most preferred title in the first position in the list. | List of [`http://gedcomx.org/TextValue`](#text-value) - OPTIONAL
 notes  | A list of notes about a source. | List of [`http://gedcomx.org/Note`](#note) - OPTIONAL
 attribution | The attribution of this source description. | [`http://gedcomx.org/Attribution`](#attribution)
 
@@ -297,6 +319,7 @@ The identifier for the "SourceCitation" data type is:
 
 name | description | data type
 -----|-------------|----------
+lang | The locale identifier for the citation. | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag
 value | A rendering of the full (working) citation as a string. | string - REQUIRED
 citationTemplate | The identifier of the citation template by which this citation may be interpreted. | [URI](#uri) - OPTIONAL;  MUST resolve to an instance of [`http://gedcomx.org/v1/CitationTemplate`](#citation-template).
 fields  | A list of citation fields about a source. | List of [`http://gedcomx.org/v1/CitationField`](#citation-field) - OPTIONAL
@@ -472,7 +495,7 @@ name | description | data type
 -----|-------------|----------
 id | An identifier for the data structure holding the agent data. The id is to be used as a "fragment identifier" as defined by [RFC 3986, Section 3.5](http://tools.ietf.org/html/rfc3986#section-3.5). As such, the constraints of the id are provided in the definition of the media type (e.g. XML, JSON) of the data structure. | string
 identifiers | Identifiers for the agent. When an identifier for an agent is also an identifier for a person, the data in the person describes the agent. | List of [`http://gedcomx.org/v1/Identifier`](#identifier-type). Order is preserved.
-name | The name of the person or organization. | string
+names | The names of the person or organization. If more than one name is provided, names are assumed to be given in order of preference, with the most preferred name in the first position in the list. | List of [`http://gedcomx.org/TextValue`](#text-value)
 homepage | The homepage of the person or organization. | [URI](#uri)
 openid  | The [openid](http://openid.net/) of the person or organization. | [URI](#uri)
 accounts  | The online accounts of the person or organization. | List of [`http://gedcomx.org/v1/OnlineAccount`](#online-account). Order is preserved.
@@ -504,6 +527,7 @@ The identifier for the `Conclusion` data type is:
 name | description | data type
 -----|-------------|----------
 id | An identifier for the data structure holding the conclusion data. The id is to be used as a "fragment identifier" as defined by [RFC 3986, Section 3.5](http://tools.ietf.org/html/rfc3986#section-3.5). As such, the constraints of the id are provided in the definition of the media type (e.g. XML, JSON) of the data structure. | string
+lang | The locale identifier for the conclusion. | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag
 confidence  | Reference to the confidence level of the conclusion. | [URI](#uri) - MUST resolve to a confidence level. Refer to the list of [known confidence levels](#known-confidence-levels).
 sources | The list of references to the sources of related to this conclusion. The sources of a conclusion MUST also be sources of the conclusion's containing entity (i.e. [`Person`](#person) or [`Relationship`](#relationship) ).| List of [`http://gedcomx.org/v1/SourceReference`](#source-reference). Order is preserved.
 notes  | A list of notes about a conclusion. | List of [`http://gedcomx.org/Note`](#note) - OPTIONAL
@@ -548,7 +572,7 @@ This data type extends the following data type:
 name | description | data type
 -----|-------------|----------
 type | URI identifying the type of the document. | [URI](#uri) - MUST resolve to a document type. Refer to the list of [known document types](#known-document-types).
-text | The text of the document. | [`http://gedcomx.org/TextValue`](#text-value)
+text | The text of the document. | string
 attribution | The attribution of the document. | [`http://gedcomx.org/Attribution`](#attribution)
 
 <a id="known-document-types"/>
@@ -606,8 +630,15 @@ URI | description
 
 ## 5.4 The "Name" Data Type
 
-The `Name` data type defines a conclusion about a name of a person. The `Name` data type
-extends the `Conclusion` data type.
+The `Name` data type defines a conclusion about a name of a person. The `Name` data type extends the `Conclusion` data type.
+
+A `Name` is intended to represent a single variant of a person's name.  This means that nicknames, spelling variations, or other name variants (often distinguishable by a name type) should be modeled with separate instances of `Name`.
+
+The name forms of a name contain representations of this name.  A `Name` MUST contain at least one name form, usually a representation of the name that is considered proper and well formed in the person's native, historical cultural context.  Other name forms MAY be included, which can be used to represent this name in contexts where the native name form is not easily recognized and interpreted.  Alternate forms are more likely in situations where conclusions are being analyzed across cultural context boundaries that have both language and writing script differences.
+
+For example, a Korean name has a native Korean form, but can also have a Chinese form and a Roman/Latin form -- three different name forms, but each representing the same name.
+
+If more than one name form is provided, included name forms are assumed to be given in order of preference, with the most preferred name form in the first position in the list.
 
 ### identifier
 
@@ -626,10 +657,28 @@ This data type extends the following data type:
 name | description | data type
 -----|-------------|----------
 type | URI identifying the type of the name. | [URI](#uri) - MUST resolve to a name type. Refer to the list of [known name types](#known-name-types).
-preferred | Whether this name is preferred above the other names of a person. | boolean
-primaryForm | The primary form of the name. | `http://gedcomx.org/v1/NameForm`
-alternateForms | The alternate forms of the name. | List of [`http://gedcomx.org/v1/NameForm`](#name-form). Order is preserved.
+preferred | Whether this name is preferred above the other `Name` conclusions of a person. | boolean
+nameForms | The name form(s) that best represents this name `NameForm` -- usually representations considered proper and well formed in the person's native, historical cultural context. All included name forms should be representations of the same name -- __*not*__ name variants (e.g., nicknames, spelling variations). | List of [`http://gedcomx.org/v1/NameForm`](#name-form). Order is preserved.
 
+### examples
+
+Consider the following: a Russian person with the birth name "Александр" (rendered as "Alexander" in English and in a Latin script) that also went by this name's common nickname, "Саша" (rendered as "Sasha" in English).
+
+It is tempting to think that this situation should be modeled with one `Name` instance that has several alternate `NameForm`s.  The model is __*not*__ intended to be used in this way. Instead, this person's names ought to be modeled such that the
+birth name and the nickname are modeled as two separate `Name` instances: one instance for the birth name, and one for the nickname.  The `type` property MAY be provided to distinguish the birth name from the nickname.
+Each `Name` instance MAY have two `NameForm` instances: one with the native form of the name and another with the alternate form.  Using an informal pseudo code, it might look something like the following:
+
+```
+Name1.type=http://gedcomx.org/BirthName
+Name1.preferred=true
+Name1.nameForms[0].fullText=Александр
+Name1.nameForms[1].fullText=Alexander
+
+Name2.type=http://gedcomx.org/Nickname
+Name2.preferred=false
+Name2.nameForms[0].fullText=Саша
+Name2.nameForms[1].fullText=Sasha
+```
 <a id="known-name-types"/>
 
 ### known name types
@@ -638,16 +687,14 @@ The following name types are defined by GEDCOM X:
 
 URI | description
 ----|-------------
-`http://gedcomx.org/Name`|
-`http://gedcomx.org/BirthName`|
-`http://gedcomx.org/DeathName`|
-`http://gedcomx.org/MarriedName`|
-`http://gedcomx.org/AlsoKnownAs`|
-`http://gedcomx.org/MaidenName`|
-`http://gedcomx.org/Nickname`|
-`http://gedcomx.org/Adoptive`|
-`http://gedcomx.org/Formal`|
-`http://gedcomx.org/Religious`|
+`http://gedcomx.org/BirthName` | Name given at birth.
+`http://gedcomx.org/DeathName` | Name used at the time of death.
+`http://gedcomx.org/MarriedName` | Name accepted at marriage.
+`http://gedcomx.org/AlsoKnownAs` | "Also known as" name.
+`http://gedcomx.org/Nickname`| Nickname.
+`http://gedcomx.org/AdoptiveName` | Name given at adoption.
+`http://gedcomx.org/FormalName` | A formal name, usually given to distinguish it from a name more commonly used.
+`http://gedcomx.org/ReligiousName` | A name given at a religious rite or ceremony.
 
 
 <a id="fact-conclusion"/>
@@ -989,9 +1036,10 @@ resource | Reference to the standardized resource describing the place. | [URI](
 
 ## 5.12 The "NamePart" Data Type
 
-The `NamePart` data type defines a part of a name of a person.
+The `NamePart` data type is used to model a portion of a full name, including the terms that make up that portion, and perhaps a name part qualifier (e.g., "given name" or "surname").
 
-The `NamePart` data type does NOT support extension properties (see [Extension Properties](#extension-properties)).
+A name part value MAY contain more than one term from the full name, such as in the name part "John Fitzgerald" from the full name "John Fitzgerald Kennedy".  If multiple terms are
+detailed in a single `NamePart`, these terms are separated using the name separator appropriate to the locale of the name form.
 
 ### identifier
 
@@ -1003,8 +1051,9 @@ The identifier for the `NamePart` data type is:
 
 name | description | data type
 -----|-------------|----------
-type | URI identifying the type of the name part. | [URI](#uri) - MUST resolve to a name part type. Refer to the list of [known name part types](#known-name-part-types).
-value | The value of the name part. | string
+type | URI identifying the type of the name part. | [URI](#uri) - If present, MUST resolve to a name part type. Refer to the list of [known name part types](#known-name-part-types).
+value | The term(s) from the name that make up this name part. | string
+qualifiers | Type qualifiers to further describe the type of the name part. | List of [URI](#uri) - If present, MUST resolve to a name part type. Refer to the list of [known name part types qualifiers](#known-name-part-qualifier-types).
 
 <a id="known-name-part-types"/>
 
@@ -1019,11 +1068,44 @@ URI | description
 `http://gedcomx.org/Given`|
 `http://gedcomx.org/Surname`|
 
+<a id="known-name-part-qualifier-types"/>
+
+### known name part qualifier types
+
+The following name part qualifier types are defined by GEDCOM X:
+
+URI | description
+----|-------------
+`http://gedcomx.org/Title`|A designation for honorifics (e.g. Dr., Rev., His Majesty, Haji), ranks (e.g. Colonel, General, Knight, Esquire), positions (e.g. Count, Chief, Father, King) or other titles (e.g., PhD, MD)
+`http://gedcomx.org/Primary`|A designation for the name of most prominent in importance among the names of that type (e.g., the primary given name).
+`http://gedcomx.org/Secondary`|A designation for a name that is not primary in its importance among the names of that type (e.g., a secondary given name).
+`http://gedcomx.org/Middle`|A designation useful for cultures that designate a middle name that is distinct from a given name and a surname.
+`http://gedcomx.org/Familiar`|A designation for one's familiar name.
+`http://gedcomx.org/Religious`|A designation for a name given for religious purposes.
+`http://gedcomx.org/Family`|A name that associates a person with a group, such as a clan, tribe, or patriarchal hierarchy.
+`http://gedcomx.org/Maiden`|A designation given by women to their original surname after they adopt a new surname upon marriage.
+`http://gedcomx.org/Patronymic`|A name derived from a father or paternal ancestor.
+`http://gedcomx.org/Matronymic`|A name derived from a mother or maternal ancestor.
+`http://gedcomx.org/Geographic`|A name derived from associated geography.
+`http://gedcomx.org/Occupational`|A name derived from one's occupation.
+`http://gedcomx.org/Characteristic`|A name derived from a characteristic.
+`http://gedcomx.org/Postnom`|A name mandedated by law populations from Congo Free State / Belgian Congo / Congo / Democratic Republic of Congo (formerly Zaire).
+`http://gedcomx.org/Particle`|A grammatical designation for articles (a, the, dem, las, el, etc.), prepositions (of, from, aus, zu, op, etc.), initials (e.g. PhD, MD), annotations (e.g. twin, wife of, infant, unknown), comparators (e.g. Junior, Senior, younger, little), ordinals (e.g. III, eighth), and conjunctions (e.g. and, or, nee, ou, y, o, ne, &amp;).
+
+
 <a id="name-form"/>
 
 ## 5.13 The "NameForm" Data Type
 
-The `NameForm` data type defines a form of a name of a person.
+The `NameForm` data type defines a representation of a name (a "name form") within a given cultural context, such as a given language and script.
+
+As names are captured (in records or in applications), the terms in the name are sometimes classified by type.  For example, a certificate of death might prompt for "given name(s)" and "surname". The `parts` list can be used to represent the terms in the name that have been classified.
+
+If both a full rendering of the name and a list of parts are provided, there is no requirement that every term in the fully rendered name appear in the list of parts.
+
+Name parts in the `parts` list are to be ordered in the natural order they would be spoken in the given cultural context.
+
+If a full rendering of the name is not provided (i.e., the name has only been expressed in `parts`), a full rendering of the name can be derived (sans punctuation) by concatenating, in order, each `NamePart.value` in the `parts` list, separating each part with the name part delimiter appropriate for the given `locale`.
 
 ### identifier
 
@@ -1035,8 +1117,48 @@ The identifier for the `NameForm` data type is:
 
 name | description | data type
 -----|-------------|----------
-fullText | The full text of the name form. | string
-parts | The parts of the name form. | List of [`http://gedcomx.org/v1/NamePart`](#name-part). Order is preserved.
+lang | The locale identifier for the name form. | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag
+fullText | A full rendering of the name (or as much of the name as is known) with the terms in the name given in the natural order they would be spoken in the applicable cultural context. | string
+parts | The parts of the name form, ordered in the natural order they would be spoken in the given cultural context. | List of [`http://gedcomx.org/v1/NamePart`](#name-part). Order is preserved.
+
+### examples
+
+Consider the following: the Russian name "Пётр Ильи́ч Чайко́вский" in the Cyrillic script, its Latin-script equivalent "Pyotr Ilyich Tchaikovsky", and its anglicised equivalent "Peter Ilyich Tchaikovsky".  Using an informal pseudo code, these name forms might be modeled as follows:
+
+```
+NameForm1.locale=ru-Cyrl
+NameForm1.fullText=Пётр Ильи́ч Чайко́вский
+NameForm1.parts[0].type=http://gedcomx.org/Given
+NameForm1.parts[0].value=Пётр
+NameForm1.parts[0].qualifiers[0]=http://gedcomx.org/First
+NameForm1.parts[1].type=http://gedcomx.org/Middle
+NameForm1.parts[1].value=Ильи́ч
+NameForm1.parts[1].qualifiers[0]=http://gedcomx.org/Middle
+NameForm1.parts[2].type=http://gedcomx.org/Surname
+NameForm1.parts[2].value=Чайко́вский
+
+NameForm2.locale=ru-Latn
+NameForm2.fullText=Pyotr Ilyich Tchaikovsky
+NameForm2.parts[0].type=http://gedcomx.org/Given
+NameForm2.parts[0].value=Pyotr
+NameForm2.parts[0].qualifiers[0]=http://gedcomx.org/First
+NameForm2.parts[1].type=http://gedcomx.org/Given
+NameForm2.parts[1].value=Ilyich
+NameForm2.parts[1].qualifiers[0]=http://gedcomx.org/Middle
+NameForm2.parts[2].type=http://gedcomx.org/Surname
+NameForm2.parts[2].value=Tchaikovsky
+
+NameForm3.locale=en-Latn
+NameForm3.fullText=Peter Ilyich Tchaikovsky
+NameForm3.parts[0].type=http://gedcomx.org/Given
+NameForm3.parts[0].value=Peter
+NameForm3.parts[0].qualifiers[0]=http://gedcomx.org/First
+NameForm3.parts[1].type=http://gedcomx.org/Given
+NameForm3.parts[1].value=Ilyich
+NameForm3.parts[1].qualifiers[0]=http://gedcomx.org/Middle
+NameForm3.parts[2].type=http://gedcomx.org/Surname
+NameForm3.parts[2].value=Tchaikovsky
+```
 
 
 # 6. Extensibility

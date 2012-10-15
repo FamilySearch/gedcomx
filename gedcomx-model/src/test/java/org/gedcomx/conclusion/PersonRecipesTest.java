@@ -1,18 +1,20 @@
 package org.gedcomx.conclusion;
 
-import org.gedcomx.common.Attribution;
 import org.gedcomx.common.ResourceReference;
-import org.gedcomx.source.SourceReference;
 import org.gedcomx.common.URI;
+import org.gedcomx.rt.json.GedcomJsonProvider;
 import org.gedcomx.test.RecipeTest;
 import org.gedcomx.test.Snippet;
 import org.gedcomx.types.FactType;
 import org.gedcomx.types.GenderType;
+import org.gedcomx.types.NamePartQualifierType;
 import org.gedcomx.types.NamePartType;
 import org.testng.annotations.Test;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
-import java.util.List;
 
 import static org.gedcomx.rt.SerializationUtil.processThroughJson;
 import static org.gedcomx.rt.SerializationUtil.processThroughXml;
@@ -23,6 +25,25 @@ import static org.gedcomx.rt.SerializationUtil.processThroughXml;
  */
 @Test
 public class PersonRecipesTest extends RecipeTest {
+
+  @XmlRootElement ( namespace = "http://familysearch.org/v1/" )
+  public static class CustomMarker {
+
+    private boolean userProvided;
+
+    public CustomMarker() {
+      userProvided = true;
+    }
+
+    @XmlAttribute ( name = "userProvided" )
+    public boolean isUserProvided() {
+      return userProvided;
+    }
+
+    public void setUserProvided(boolean userProvided) {
+      this.userProvided = userProvided;
+    }
+  }
 
   /**
    * tests processing a WWW person through xml...
@@ -35,8 +56,8 @@ public class PersonRecipesTest extends RecipeTest {
     Person person = create();
 
     Snippet snippet = new Snippet();
-    Person personThurXml = processThroughXml(person, snippet);
-    Person personThurJson = processThroughJson(person, snippet);
+    Person personThurXml = processThroughXml(person, Person.class, JAXBContext.newInstance(Person.class, CustomMarker.class), snippet);
+    Person personThurJson = processThroughJson(person, Person.class, GedcomJsonProvider.createObjectMapper(Person.class, CustomMarker.class), snippet);
     addSnippet(snippet);
 
     verifyPerson(personThurXml);
@@ -76,11 +97,11 @@ public class PersonRecipesTest extends RecipeTest {
     fact.setKnownType(FactType.Birth);
 
     fact.setDate(new Date());
-    fact.getDate().setOriginal("February 22, 1732");
-    fact.getDate().setFormal("+1732-02-22");
+    fact.getDate().setOriginal("March 18, 1844");
+    fact.getDate().setFormal("+1844-03-18");
 
     fact.setPlace(new Place());
-    fact.getPlace().setOriginal("Pope's Creek, Westmoreland, Virginia");
+    fact.getPlace().setOriginal("Tikhvin, Leningradskaya Oblast', Russia");
     fact.getPlace().setResource(URI.create("https://familysearch.org/platform/places/12345"));
 
     person.addFact(fact);
@@ -90,35 +111,58 @@ public class PersonRecipesTest extends RecipeTest {
     fact.setKnownType(FactType.Death);
 
     fact.setDate(new Date());
-    fact.getDate().setOriginal("December 14, 1799");
-    fact.getDate().setFormal("+1799-12-14T22:00:00");
+    fact.getDate().setOriginal("June 21, 1908");
+    fact.getDate().setFormal("+1908-06-21T12:34:56");
 
     fact.setPlace(new Place());
-    fact.getPlace().setOriginal("Mount Vernon, Virginia");
-    fact.getPlace().setNormalized("Mount Vernon, Fairfax County, Virginia");
+    fact.getPlace().setOriginal("Luga, Russia");
+    fact.getPlace().setNormalized("Luga, Novgorodskaya Oblast', Russia");
     fact.getPlace().setResource(URI.create("https://familysearch.org/platform/places/67890"));
 
     person.addFact(fact);
 
-    List<Name> names = new ArrayList<Name>();
     Name name = new Name();
-    name.setPreferred(true);
-    NameForm nameForm = new NameForm();
-    nameForm.setFullText("George Washington");
-    ArrayList<NamePart> parts = new ArrayList<NamePart>();
-    NamePart part = new NamePart();
-    part.setKnownType(NamePartType.Given);
-    part.setValue("George");
-    parts.add(part);
-    part = new NamePart();
-    part.setKnownType(NamePartType.Surname);
-    part.setValue("Washington");
-    parts.add(part);
-    nameForm.setParts(parts);
-    name.setPrimaryForm(nameForm);
     name.setId("789");
-    names.add(name);
-    person.setNames(names);
+    name.setPreferred(true);
+    name.setNameForms(new ArrayList<NameForm>());
+    name.getNameForms().add(new NameForm());
+    name.getNameForms().get(0).setLang("ru-Cyrl");
+    name.getNameForms().get(0).setFullText("Никола́й Андре́евич Ри́мский-Ко́рсаков");
+    name.getNameForms().get(0).setParts(new ArrayList<NamePart>());
+    name.getNameForms().get(0).getParts().add(new NamePart());
+    name.getNameForms().get(0).getParts().get(0).setKnownType(NamePartType.Given);
+    name.getNameForms().get(0).getParts().get(0).setValue("Никола́й");
+    name.getNameForms().get(0).getParts().get(0).setQualifiers(new ArrayList<ResourceReference>());
+    name.getNameForms().get(0).getParts().get(0).getQualifiers().add(new ResourceReference(NamePartQualifierType.Primary.toQNameURI()));
+    name.getNameForms().get(0).getParts().add(new NamePart());
+    name.getNameForms().get(0).getParts().get(1).setKnownType(NamePartType.Given);
+    name.getNameForms().get(0).getParts().get(1).setValue("Андре́евич");
+    name.getNameForms().get(0).getParts().get(1).setQualifiers(new ArrayList<ResourceReference>());
+    name.getNameForms().get(0).getParts().get(1).getQualifiers().add(new ResourceReference(NamePartQualifierType.Secondary.toQNameURI()));
+    name.getNameForms().get(0).getParts().add(new NamePart());
+    name.getNameForms().get(0).getParts().get(2).setKnownType(NamePartType.Surname);
+    name.getNameForms().get(0).getParts().get(2).setValue("Ри́мский-Ко́рсаков");
+    name.getNameForms().get(0).addExtensionElement(new CustomMarker());
+    name.getNameForms().add(new NameForm());
+    name.getNameForms().get(1).setLang("ru-Latn");
+    name.getNameForms().get(1).setFullText("Nikolai Andreyevich Rimsky-Korsakov");
+    name.getNameForms().get(1).setParts(new ArrayList<NamePart>());
+    name.getNameForms().get(1).getParts().add(new NamePart());
+    name.getNameForms().get(1).getParts().get(0).setKnownType(NamePartType.Given);
+    name.getNameForms().get(1).getParts().get(0).setValue("Nikolai");
+    name.getNameForms().get(1).getParts().get(0).setQualifiers(new ArrayList<ResourceReference>());
+    name.getNameForms().get(1).getParts().get(0).getQualifiers().add(new ResourceReference(NamePartQualifierType.Primary.toQNameURI()));
+    name.getNameForms().get(1).getParts().add(new NamePart());
+    name.getNameForms().get(1).getParts().get(1).setKnownType(NamePartType.Given);
+    name.getNameForms().get(1).getParts().get(1).setValue("Andreyevich");
+    name.getNameForms().get(1).getParts().get(1).setQualifiers(new ArrayList<ResourceReference>());
+    name.getNameForms().get(1).getParts().get(1).getQualifiers().add(new ResourceReference(NamePartQualifierType.Secondary.toQNameURI()));
+    name.getNameForms().get(1).getParts().add(new NamePart());
+    name.getNameForms().get(1).getParts().get(2).setKnownType(NamePartType.Surname);
+    name.getNameForms().get(1).getParts().get(2).setValue("Rimsky-Korsakov");
+
+    person.setNames(new ArrayList<Name>());
+    person.getNames().add(name);
 
     person.setId("BBB-BBBB");
 

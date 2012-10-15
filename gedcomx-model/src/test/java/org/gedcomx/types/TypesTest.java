@@ -25,8 +25,9 @@ public class TypesTest {
     assertEquals(FactType.fromQNameURI(FactType.Baptism.toQNameURI()).toQNameURI().toString(), "http://gedcomx.org/Baptism");
     assertEquals(GenderType.fromQNameURI(GenderType.Male.toQNameURI()).toQNameURI().toString(), "http://gedcomx.org/Male");
     assertEquals(IdentifierType.fromQNameURI(IdentifierType.Primary.toQNameURI()).toQNameURI().toString(), "http://gedcomx.org/Primary");
+    assertEquals(NamePartQualifierType.fromQNameURI(NamePartQualifierType.Primary.toQNameURI()).toQNameURI().toString(), "http://gedcomx.org/Primary");
     assertEquals(NamePartType.fromQNameURI(NamePartType.Given.toQNameURI()).toQNameURI().toString(), "http://gedcomx.org/Given");
-    assertEquals(NameType.fromQNameURI(NameType.Formal.toQNameURI()).toQNameURI().toString(), "http://gedcomx.org/Formal");
+    assertEquals(NameType.fromQNameURI(NameType.FormalName.toQNameURI()).toQNameURI().toString(), "http://gedcomx.org/FormalName");
     assertEquals(RelationshipType.fromQNameURI(RelationshipType.Couple.toQNameURI()).toQNameURI().toString(), "http://gedcomx.org/Couple");
   }
 

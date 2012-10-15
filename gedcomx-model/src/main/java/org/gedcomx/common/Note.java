@@ -15,13 +15,13 @@
  */
 package org.gedcomx.common;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
-import org.gedcomx.rt.SupportsExtensionElements;
 import org.gedcomx.rt.json.JsonElementWrapper;
 
-import javax.xml.bind.annotation.*;
-import java.util.ArrayList;
-import java.util.List;
+import javax.xml.XMLConstants;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 
 /**
@@ -35,8 +35,9 @@ import java.util.List;
 public class Note extends ExtensibleData implements Attributable, HasText {
 
   private String id;
-  private TextValue subject;
-  private TextValue text;
+  private String lang;
+  private String subject;
+  private String text;
   private Attribution attribution;
 
   /**
@@ -60,11 +61,30 @@ public class Note extends ExtensibleData implements Attributable, HasText {
   }
 
   /**
+   * The language of the note. See <a href="http://www.w3.org/International/articles/language-tags/>http://www.w3.org/International/articles/language-tags/</a>
+   *
+   * @return The language of the note.
+   */
+  @XmlAttribute ( namespace = XMLConstants.XML_NS_URI )
+  public String getLang() {
+    return lang;
+  }
+
+  /**
+   * The language of the note. See <a href="http://www.w3.org/International/articles/language-tags/>http://www.w3.org/International/articles/language-tags/</a>
+   *
+   * @param lang The language of the note.
+   */
+  public void setLang(String lang) {
+    this.lang = lang;
+  }
+
+  /**
    * The subject of the note. This is a short title describing the contents of the note text.
    *
    * @return The subject of the note.
    */
-  public TextValue getSubject() {
+  public String getSubject() {
     return subject;
   }
 
@@ -73,7 +93,7 @@ public class Note extends ExtensibleData implements Attributable, HasText {
    *
    * @param text The subject of the note.
    */
-  public void setSubject(TextValue text) {
+  public void setSubject(String text) {
     this.subject = text;
   }
 
@@ -83,7 +103,7 @@ public class Note extends ExtensibleData implements Attributable, HasText {
    * @return The text of the note.
    */
   @Override
-  public TextValue getText() {
+  public String getText() {
     return text;
   }
 
@@ -93,7 +113,7 @@ public class Note extends ExtensibleData implements Attributable, HasText {
    * @param text The text of the note.
    */
   @Override
-  public void setText(TextValue text) {
+  public void setText(String text) {
     this.text = text;
   }
 
@@ -117,16 +137,6 @@ public class Note extends ExtensibleData implements Attributable, HasText {
     this.attribution = attribution;
   }
 
-  private String getTextBrief( TextValue text ) {
-    if (text != null && text.getValue() != null) {
-      final int substrLen = 40;
-      if (text.getValue().length() > substrLen)
-        return text.getValue().substring(0, substrLen) + "...";
-      return text.getValue();
-    }
-    return null;
-  }
-
   @Override
   public String toString() {
     return "Note{" +
@@ -135,4 +145,15 @@ public class Note extends ExtensibleData implements Attributable, HasText {
       ", attribution=" + attribution +
       '}';
   }
+
+  private String getTextBrief( String text ) {
+    if (text != null && text != null) {
+      final int substrLen = 40;
+      if (text.length() > substrLen)
+        return text.substring(0, substrLen) + "...";
+      return text;
+    }
+    return null;
+  }
+
 }
