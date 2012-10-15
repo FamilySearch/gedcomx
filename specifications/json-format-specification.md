@@ -46,37 +46,37 @@ in JSON according to this specification:
 {
   "names" : [ {
     "nameForms" : [ {
-      "locale" : "ru-Cyrl",
       "parts" : [ {
         "value" : "Никола́й",
         "type" : "http://gedcomx.org/Given",
-        "qualifiers" : [ "http://gedcomx.org/First" ]
+        "qualifiers" : [ "http://gedcomx.org/Primary" ]
       }, {
         "value" : "Андре́евич",
         "type" : "http://gedcomx.org/Given",
-        "qualifiers" : [ "http://gedcomx.org/Middle" ]
+        "qualifiers" : [ "http://gedcomx.org/Secondary" ]
       }, {
         "value" : "Ри́мский-Ко́рсаков",
         "type" : "http://gedcomx.org/Surname"
       } ],
+      "lang" : "ru-Cyrl",
       "fullText" : "Никола́й Андре́евич Ри́мский-Ко́рсаков",
       "http://familysearch.org/v1/customMarker" : [ {
         "userProvided" : true
       } ]
     }, {
-      "locale" : "ru-Latn",
       "parts" : [ {
         "value" : "Nikolai",
         "type" : "http://gedcomx.org/Given",
-        "qualifiers" : [ "http://gedcomx.org/First" ]
+        "qualifiers" : [ "http://gedcomx.org/Primary" ]
       }, {
         "value" : "Andreyevich",
         "type" : "http://gedcomx.org/Given",
-        "qualifiers" : [ "http://gedcomx.org/Middle" ]
+        "qualifiers" : [ "http://gedcomx.org/Secondary" ]
       }, {
         "value" : "Rimsky-Korsakov",
         "type" : "http://gedcomx.org/Surname"
       } ],
+      "lang" : "ru-Latn",
       "fullText" : "Nikolai Andreyevich Rimsky-Korsakov"
     } ],
     "preferred" : true,

@@ -48,24 +48,24 @@ in XML according to this specification:
     <gender type="http://gedcomx.org/Male"/>
     <name id="789">
         <preferred>true</preferred>
-        <nameForm locale="ru-Cyrl">
+        <nameForm xml:lang="ru-Cyrl">
             <ns2:customMarker userProvided="true"/>
             <fullText>Никола́й Андре́евич Ри́мский-Ко́рсаков</fullText>
             <part type="http://gedcomx.org/Given" value="Никола́й">
-                <qualifier resource="http://gedcomx.org/First"/>
+                <qualifier resource="http://gedcomx.org/Primary"/>
             </part>
             <part type="http://gedcomx.org/Given" value="Андре́евич">
-                <qualifier resource="http://gedcomx.org/Middle"/>
+                <qualifier resource="http://gedcomx.org/Secondary"/>
             </part>
             <part type="http://gedcomx.org/Surname" value="Ри́мский-Ко́рсаков"/>
         </nameForm>
-        <nameForm locale="ru-Latn">
+        <nameForm xml:lang="ru-Latn">
             <fullText>Nikolai Andreyevich Rimsky-Korsakov</fullText>
             <part type="http://gedcomx.org/Given" value="Nikolai">
-                <qualifier resource="http://gedcomx.org/First"/>
+                <qualifier resource="http://gedcomx.org/Primary"/>
             </part>
             <part type="http://gedcomx.org/Given" value="Andreyevich">
-                <qualifier resource="http://gedcomx.org/Middle"/>
+                <qualifier resource="http://gedcomx.org/Secondary"/>
             </part>
             <part type="http://gedcomx.org/Surname" value="Rimsky-Korsakov"/>
         </nameForm>
