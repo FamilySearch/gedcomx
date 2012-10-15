@@ -19,7 +19,6 @@ import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.gedcomx.common.Attributable;
-import org.gedcomx.common.Attribution;
 import org.gedcomx.common.URI;
 import org.gedcomx.rt.json.JsonElementWrapper;
 import org.gedcomx.types.FactType;

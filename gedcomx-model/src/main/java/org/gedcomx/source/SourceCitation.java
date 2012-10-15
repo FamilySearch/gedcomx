@@ -19,6 +19,8 @@ import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.gedcomx.common.ResourceReference;
 
+import javax.xml.XMLConstants;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 import java.util.List;
@@ -29,9 +31,30 @@ import java.util.List;
  */
 @XmlType ( name = "SourceCitation" )
 public class SourceCitation {
+
+  private String lang;
   private String value;
   private ResourceReference citationTemplate;
   private List<CitationField> fields;
+
+  /**
+   * The language of the citation. See <a href="http://www.w3.org/International/articles/language-tags/>http://www.w3.org/International/articles/language-tags/</a>
+   *
+   * @return The language of the note.
+   */
+  @XmlAttribute ( namespace = XMLConstants.XML_NS_URI )
+  public String getLang() {
+    return lang;
+  }
+
+  /**
+   * The language of the citation. See <a href="http://www.w3.org/International/articles/language-tags/>http://www.w3.org/International/articles/language-tags/</a>
+   *
+   * @param lang The language of the citation.
+   */
+  public void setLang(String lang) {
+    this.lang = lang;
+  }
 
   /**
    * A rendering (as a string) of a source citation.  This rendering should be the most complete rendering available.

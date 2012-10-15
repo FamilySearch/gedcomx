@@ -18,11 +18,9 @@ package org.gedcomx.conclusion;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.gedcomx.common.Attributable;
 import org.gedcomx.common.HasText;
-import org.gedcomx.common.TextValue;
 import org.gedcomx.common.URI;
 import org.gedcomx.rt.json.JsonElementWrapper;
 import org.gedcomx.types.DocumentType;
-import org.gedcomx.types.EventType;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -39,7 +37,7 @@ import javax.xml.bind.annotation.XmlType;
 public class Document extends Conclusion implements HasText, Attributable {
 
   private URI type;
-  private TextValue text;
+  private String text;
 
 
   /**
@@ -87,7 +85,7 @@ public class Document extends Conclusion implements HasText, Attributable {
    *
    * @return The document text.
    */
-  public TextValue getText() {
+  public String getText() {
     return text;
   }
 
@@ -96,7 +94,7 @@ public class Document extends Conclusion implements HasText, Attributable {
    *
    * @param text The document text.
    */
-  public void setText(TextValue text) {
+  public void setText(String text) {
     this.text = text;
   }
 }
