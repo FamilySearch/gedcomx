@@ -1077,8 +1077,8 @@ The following name part qualifier types are defined by GEDCOM X:
 URI | description
 ----|-------------
 `http://gedcomx.org/Title`|A designation for honorifics (e.g. Dr., Rev., His Majesty, Haji), ranks (e.g. Colonel, General, Knight, Esquire), positions (e.g. Count, Chief, Father, King) or other titles (e.g., PhD, MD)
-`http://gedcomx.org/PrimaryGiven`|A designation for the given name most prominent in importance.
-`http://gedcomx.org/SecondaryGiven`|A designation for a given name that is not primary in its importance.
+`http://gedcomx.org/Primary`|A designation for the name of most prominent in importance among the names of that type (e.g., the primary given name).
+`http://gedcomx.org/Secondary`|A designation for a name that is not primary in its importance among the names of that type (e.g., a secondary given name).
 `http://gedcomx.org/Middle`|A designation useful for cultures that designate a middle name that is distinct from a given name and a surname.
 `http://gedcomx.org/Familiar`|A designation for one's familiar name.
 `http://gedcomx.org/Religious`|A designation for a name given for religious purposes.

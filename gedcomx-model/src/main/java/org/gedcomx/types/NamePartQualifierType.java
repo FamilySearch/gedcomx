@@ -36,14 +36,14 @@ public enum NamePartQualifierType {
   Title,
 
   /**
-   * A designation for the given name most prominent in importance.
+   * A designation for the name of most prominent in importance among the names of that type (e.g., the primary given name).
    */
-  PrimaryGiven,
+  Primary,
 
   /**
-   * A designation for a given name that is not primary in its importance.
+   * A designation for a name that is not primary in its importance among the names of that type (e.g., a secondary given name).
    */
-  SecondaryGiven,
+  Secondary,
 
   /**
    * A designation useful for cultures that designate a middle name that is distinct from a given name and a surname.
