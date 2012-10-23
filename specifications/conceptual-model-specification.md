@@ -658,6 +658,7 @@ name | description | data type
 -----|-------------|----------
 type | URI identifying the type of the name. | [URI](#uri) - MUST resolve to a name type. Refer to the list of [known name types](#known-name-types).
 preferred | Whether this name is preferred above the other `Name` conclusions of a person. | boolean
+date | The date of applicability of the name. | [`http://gedcomx.org/v1/Date`](#conclusion-date)
 nameForms | The name form(s) that best represents this name `NameForm` -- usually representations considered proper and well formed in the person's native, historical cultural context. All included name forms should be representations of the same name -- __*not*__ name variants (e.g., nicknames, spelling variations). | List of [`http://gedcomx.org/v1/NameForm`](#name-form). Order is preserved.
 
 ### examples

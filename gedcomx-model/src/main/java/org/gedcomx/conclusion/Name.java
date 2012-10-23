@@ -37,6 +37,7 @@ import java.util.List;
 public class Name extends Conclusion {
 
   private URI type;
+  private Date date;
   private List<NameForm> nameForms;
   private Boolean preferred;
 
@@ -78,6 +79,24 @@ public class Name extends Conclusion {
   @JsonIgnore
   public void setKnownType(NameType knownType) {
     setType(knownType == null ? null : URI.create(org.codehaus.enunciate.XmlQNameEnumUtil.toURIValue(knownType)));
+  }
+
+  /**
+   * The date the name was first applied or adopted.
+   *
+   * @return The date the name was first applied or adopted.
+   */
+  public Date getDate() {
+    return date;
+  }
+
+  /**
+   * The date the name was first applied or adopted.
+   *
+   * @param date The date the name was first applied or adopted.
+   */
+  public void setDate(Date date) {
+    this.date = date;
   }
 
   /**

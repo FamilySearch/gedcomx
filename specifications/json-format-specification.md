@@ -585,6 +585,7 @@ name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 type | URI identifying the type of the name. | type | [`URI`](#uri)
 preferred | Whether this name is preferred above the other `Name` conclusions of a person. | preferred | boolean
+date | The date of applicability of the name. | date | [`Date`](#conclusion-date)
 nameForms | The name form(s) that best represents this name `NameForm` -- usually representations considered proper and well formed in the person's native, historical cultural context. All included name forms should be representations of the same name -- __*not*__ name variants (e.g., nicknames, spelling variations). | nameForms | array of [`NameForm`](#name-form)
 
 ### examples
@@ -596,6 +597,7 @@ nameForms | The name form(s) that best represents this name `NameForm` -- usuall
 
   "type" : "http://gedcomx.org/BirthName",
   "preferred" : true,
+  "date" : { ... },
   "nameForms" : [ { ... }, { ... } ]
 }
 ```
