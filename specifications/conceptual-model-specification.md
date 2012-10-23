@@ -142,10 +142,10 @@ The identifier for the "Identifier" data type is:
 
 ### properties
 
-name  | description | data type
-------|-------------|----------
-value | The value of the identifier. | string (possibly interpreted as a URI, depending on the type of the identifier).
-type  | URI identifying the type of the identifier. | [URI](#uri) - MUST resolve to an identifier type. Refer to the list of [known identifier types](#known-identifier-types).
+name  | description | data type | constraints
+------|-------------|-----------|------------
+value | The value of the identifier. | [URI](#uri) | REQUIRED.
+type  | URI identifying the type of the identifier. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to an identifier type, and use of a [known identifier type](#known-identifier-types) is RECOMMENDED.
 
 <a id="known-identifier-types"/>
 
@@ -206,11 +206,11 @@ The identifier for the "Attribution" data type is:
 
 ### properties
 
-name  | description | data type
-------|-------------|----------
-contributor | Reference to the contributor to whom the attributed data is attributed. | [URI](#uri) - MUST resolve to an instance of [`http://gedcomx.org/v1/Agent`](#agent).
-modified | Timestamp of when the attributed data was contributed. | timestamp
-changeMessage | A statement of why the attributed data is being provided by the contributor. | string
+name  | description | data type | constraints
+------|-------------|-----------|------------
+contributor | Reference to the contributor to whom the attributed data is attributed. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to an instance of [`http://gedcomx.org/v1/Agent`](#agent).
+modified | Timestamp of when the attributed data was contributed. | timestamp | OPTIONAL.
+changeMessage | A statement of why the attributed data is being provided by the contributor. | string | OPTIONAL.
 
 ### examples
 
@@ -233,12 +233,12 @@ The identifier for the "Note" data type is:
 
 ### properties
 
-name  | description | data type
-------|-------------|----------
-lang | The locale identifier for the note. | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag
-subject | A subject or title for the note. | string
-text | The text of the note. | string
-attribution | The attribution of this note. | [`http://gedcomx.org/Attribution`](#attribution)
+name  | description | data type | constraints
+------|-------------|-----------|------------
+lang | The locale identifier for the note. | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag | OPTIONAL. If not provided, the locale of the containing resource of the note is assumed.
+subject | A subject or title for the note. | string | OPTIONAL.
+text | The text of the note. | string | REQUIRED.
+attribution | The attribution of this note. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing resource of the note is assumed.
 
 
 <a id="text-value"/>
@@ -257,10 +257,10 @@ The identifier for the "TextValue" data type is:
 
 ### properties
 
-name  | description | data type
-------|-------------|----------
-lang | The locale identifier for the value of the text. | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag
-value | The literal value. | string
+name  | description | data type | constraints
+------|-------------|-----------|------------
+lang | The locale identifier for the value of the text. | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag | OPTIONAL. If not provided, the locale of the current user of the data is assumed.
+value | The literal value. | string | REQUIRED.
 
 
 
@@ -289,18 +289,18 @@ The identifier for the "SourceDescription" data type is:
 
 ### properties
 
-name | description | data type
------|-------------|----------
-id | An identifier for the data structure holding the source description data. The id is to be used as a "fragment identifier" as defined by [RFC 3986, Section 3.5](http://tools.ietf.org/html/rfc3986#section-3.5). As such, the constraints of the id are provided in the definition of the media type (e.g. XML, JSON) of the data structure. | string
-citations | The citations for this source. At least one citation MUST be provided. If more than one citation is provided, citations are assumed to be given in order of preference, with the most preferred citation in the first position in the list. | [`http://gedcomx.org/v1/SourceCitation`](#source-citation) - REQUIRED
-about | A uniform resource identifier (URI) for the resource being described. | [URI](#uri) - OPTIONAL
-mediator | A reference to the entity that mediates access to the described source. | [URI](#uri) - OPTIONAL; MUST resolve to an instance of [`http://gedcomx.org/v1/Agent`](#agent).
-sources | A list of references to any sources from which this source is derived. | List of [`http://gedcomx.org/v1/SourceReference`](#source-reference) - OPTIONAL
-extractedConclusions | A list of references to any conclusions that were extracted from this source, to be analyzed and evaluated atomically within on context of the source. | [URI](#uri) - OPTIONAL
-componentOf | A reference to the source that contains this source -- its parent context; this is for cases where this description is not complete without the description of its parent context | [`http://gedcomx.org/v1/SourceReference`](#source-reference) - OPTIONAL
-titles | The display names for this source. If more than one title is provided, titles are assumed to be given in order of preference, with the most preferred title in the first position in the list. | List of [`http://gedcomx.org/TextValue`](#text-value) - OPTIONAL
-notes  | A list of notes about a source. | List of [`http://gedcomx.org/Note`](#note) - OPTIONAL
-attribution | The attribution of this source description. | [`http://gedcomx.org/Attribution`](#attribution)
+name  | description | data type | constraints
+------|-------------|-----------|------------
+id | An identifier for the data structure holding the source description data. The id is to be used as a "fragment identifier" as defined by [RFC 3986, Section 3.5](http://tools.ietf.org/html/rfc3986#section-3.5). As such, the constraints of the id are provided in the definition of the media type (e.g. XML, JSON) of the data structure. | string | OPTIONAL.
+citations | The citations for this source. At least one citation MUST be provided. If more than one citation is provided, citations are assumed to be given in order of preference, with the most preferred citation in the first position in the list. | [`http://gedcomx.org/v1/SourceCitation`](#source-citation) | REQUIRED.
+about | A uniform resource identifier (URI) for the resource being described. | [URI](#uri) | OPTIONAL.
+mediator | A reference to the entity that mediates access to the described source. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to an instance of [`http://gedcomx.org/v1/Agent`](#agent).
+sources | A list of references to any sources from which this source is derived. | List of [`http://gedcomx.org/v1/SourceReference`](#source-reference) | OPTIONAL.
+extractedConclusions | A list of references to any conclusions that were extracted from this source, to be analyzed and evaluated atomically within on context of the source. | [URI](#uri) | OPTIONAL.
+componentOf | A reference to the source that contains this source, i.e. its parent context. Used when the description of a source is not complete without the description of its parent (or containing) source. | [`http://gedcomx.org/v1/SourceReference`](#source-reference) | OPTIONAL.
+titles | The display names for this source. If more than one title is provided, titles are assumed to be given in order of preference, with the most preferred title in the first position in the list. | List of [`http://gedcomx.org/TextValue`](#text-value) | OPTIONAL.
+notes  | A list of notes about a source. | List of [`http://gedcomx.org/Note`](#note) | OPTIONAL.
+attribution | The attribution of this source description. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing data set (e.g. file) of the source description is assumed.
 
 <a id="source-citation"/>
 
@@ -317,12 +317,12 @@ The identifier for the "SourceCitation" data type is:
 
 ### properties
 
-name | description | data type
------|-------------|----------
-lang | The locale identifier for the citation. | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag
-value | A rendering of the full (working) citation as a string. | string - REQUIRED
-citationTemplate | The identifier of the citation template by which this citation may be interpreted. | [URI](#uri) - OPTIONAL;  MUST resolve to an instance of [`http://gedcomx.org/v1/CitationTemplate`](#citation-template).
-fields  | A list of citation fields about a source. | List of [`http://gedcomx.org/v1/CitationField`](#citation-field) - OPTIONAL
+name  | description | data type | constraints
+------|-------------|-----------|------------
+lang | The locale identifier for the citation. | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag | OPTIONAL. If not provided, the locale of the current user of the data is assumed.
+value | A rendering of the full (working) citation as a string. | string | REQUIRED.
+citationTemplate | The identifier of the citation template by which this citation may be interpreted. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to an instance of [`http://gedcomx.org/v1/CitationTemplate`](#citation-template).
+fields  | A list of citation fields about a source. | List of [`http://gedcomx.org/v1/CitationField`](#citation-field) | OPTIONAL.
 
 <a id="citation-field"/>
 
@@ -341,10 +341,10 @@ The identifier for the "CitationField" data type is:
 
 ### properties
 
-name | description | data type
------|-------------|----------
-name | The identifier for the citation detail -- defined by a citation template or a citation template library. | [URI](#uri) - REQUIRED
-value | The value of the citation detail. | string - OPTIONAL
+name  | description | data type | constraints
+------|-------------|-----------|------------
+name | The identifier for the citation detail -- defined by a citation template or a citation template library. | [URI](#uri) | REQUIRED.
+value | The value of the citation detail. | string | REQUIRED.
 
 
 <a id="source-reference"/>
@@ -363,10 +363,10 @@ The identifier for the "SourceReference" data type is:
 
 ### properties
 
-name | description | data type
------|-------------|----------
-description  | Reference to a _description_ of the target source. | [URI](#uri) - MUST resolve to an instance of [`http://gedcomx.org/v1/SourceDescription`](#source-description)
-attribution | The attribution of this source reference. | [`http://gedcomx.org/Attribution`](#attribution)
+name  | description | data type | constraints
+------|-------------|-----------|------------
+description  | Reference to a _description_ of the target source. | [URI](#uri) | REQUIRED. MUST resolve to an instance of [`http://gedcomx.org/v1/SourceDescription`](#source-description).
+attribution | The attribution of this source reference. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing resource of the source reference is assumed.
 
 ### examples
 
@@ -446,10 +446,10 @@ The identifier for the `OnlineAccount` data type is:
 
 ### properties
 
-name | description | data type
------|-------------|----------
-serviceHomepage  | The home page of the service. | [URI](#uri)
-accountName | The name, label, or id associating the owner of the account with the account. | string
+name  | description | data type | constraints
+------|-------------|-----------|------------
+serviceHomepage  | The home page of the service. | [URI](#uri) | REQUIRED.
+accountName | The name, label, or id associating the owner of the account with the account. | REQUIRED.
 
 <a id="address"/>
 
@@ -465,16 +465,16 @@ The identifier for the `Address` data type is:
 
 ### properties
 
-name | description | data type
------|-------------|----------
-value | A string representation of the value. Used when the address isn't separated into its constituent parts. | string
-city | The city. | string
-country | The country. | string
-postalCode | The postal code. | string
-stateOrProvince | The state or province. | string
-street | The street. | string
-street2 | The street (second line). | string
-street3 | The street (third line). | string
+name  | description | data type | constraints
+------|-------------|-----------|------------
+value | A string representation of the value. Used when the address isn't separated into its constituent parts. | string | OPTIONAL.
+city | The city. | string | OPTIONAL.
+country | The country. | string | OPTIONAL.
+postalCode | The postal code. | string | OPTIONAL.
+stateOrProvince | The state or province. | string | OPTIONAL.
+street | The street. | string | OPTIONAL.
+street2 | The street (second line). | string | OPTIONAL.
+street3 | The street (third line). | string | OPTIONAL.
 
 
 <a id="agent"/>
@@ -491,17 +491,17 @@ The identifier for the `Agent` data type is:
 
 ### properties
 
-name | description | data type
------|-------------|----------
-id | An identifier for the data structure holding the agent data. The id is to be used as a "fragment identifier" as defined by [RFC 3986, Section 3.5](http://tools.ietf.org/html/rfc3986#section-3.5). As such, the constraints of the id are provided in the definition of the media type (e.g. XML, JSON) of the data structure. | string
-identifiers | Identifiers for the agent. When an identifier for an agent is also an identifier for a person, the data in the person describes the agent. | List of [`http://gedcomx.org/v1/Identifier`](#identifier-type). Order is preserved.
-names | The names of the person or organization. If more than one name is provided, names are assumed to be given in order of preference, with the most preferred name in the first position in the list. | List of [`http://gedcomx.org/TextValue`](#text-value)
-homepage | The homepage of the person or organization. | [URI](#uri)
-openid  | The [openid](http://openid.net/) of the person or organization. | [URI](#uri)
-accounts  | The online accounts of the person or organization. | List of [`http://gedcomx.org/v1/OnlineAccount`](#online-account). Order is preserved.
-emails  | The email addresses of the person or organization. | List of [URI](#uri) - MUST resolve to a valid e-mail address (e.g. "mailto:someone@gedcomx.org"). Order is preserved.
-phones  | The phones (voice, fax, mobile) of the person or organization. | List of [URI](#uri) - MUST resolve to a valid phone number (e.g. "tel:+1-201-555-0123"). Order is preserved.
-addresses  | The addresses of the person or organization. | List of [`http://gedcomx.org/v1/Address`](#address). Order is preserved.
+name  | description | data type | constraints
+------|-------------|-----------|------------
+id | An identifier for the data structure holding the agent data. The id is to be used as a "fragment identifier" as defined by [RFC 3986, Section 3.5](http://tools.ietf.org/html/rfc3986#section-3.5). As such, the constraints of the id are provided in the definition of the media type (e.g. XML, JSON) of the data structure. | string | OPTIONAL.
+identifiers | Identifiers for the agent. When an identifier for an agent is also an identifier for a person, the data in the person describes the agent. | List of [`http://gedcomx.org/v1/Identifier`](#identifier-type). Order is preserved. | OPTIONAL.
+names | The names of the person or organization. If more than one name is provided, names are assumed to be given in order of preference, with the most preferred name in the first position in the list. | List of [`http://gedcomx.org/TextValue`](#text-value) | OPTIONAL.
+homepage | The homepage of the person or organization. | [URI](#uri) | OPTIONAL.
+openid  | The [openid](http://openid.net/) of the person or organization. | [URI](#uri) | OPTIONAL.
+accounts  | The online accounts of the person or organization. | List of [`http://gedcomx.org/v1/OnlineAccount`](#online-account). Order is preserved. | OPTIONAL.
+emails  | The email addresses of the person or organization. | List of [URI](#uri) - MUST resolve to a valid e-mail address (e.g. "mailto:someone@gedcomx.org"). Order is preserved. | OPTIONAL.
+phones  | The phones (voice, fax, mobile) of the person or organization. | List of [URI](#uri) - MUST resolve to a valid phone number (e.g. "tel:+1-201-555-0123"). Order is preserved. | OPTIONAL.
+addresses  | The addresses of the person or organization. | List of [`http://gedcomx.org/v1/Address`](#address). Order is preserved. | OPTIONAL.
 
 
 
@@ -524,13 +524,13 @@ The identifier for the `Conclusion` data type is:
 
 ### properties
 
-name | description | data type
------|-------------|----------
-id | An identifier for the data structure holding the conclusion data. The id is to be used as a "fragment identifier" as defined by [RFC 3986, Section 3.5](http://tools.ietf.org/html/rfc3986#section-3.5). As such, the constraints of the id are provided in the definition of the media type (e.g. XML, JSON) of the data structure. | string
-lang | The locale identifier for the conclusion. | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag
-confidence  | Reference to the confidence level of the conclusion. | [URI](#uri) - MUST resolve to a confidence level. Refer to the list of [known confidence levels](#known-confidence-levels).
-sources | The list of references to the sources of related to this conclusion. The sources of a conclusion MUST also be sources of the conclusion's containing entity (i.e. [`Person`](#person) or [`Relationship`](#relationship) ).| List of [`http://gedcomx.org/v1/SourceReference`](#source-reference). Order is preserved.
-notes  | A list of notes about a conclusion. | List of [`http://gedcomx.org/Note`](#note) - OPTIONAL
+name  | description | data type | constraints
+------|-------------|-----------|------------
+id | An identifier for the data structure holding the conclusion data. The id is to be used as a "fragment identifier" as defined by [RFC 3986, Section 3.5](http://tools.ietf.org/html/rfc3986#section-3.5). As such, the constraints of the id are provided in the definition of the media type (e.g. XML, JSON) of the data structure. | string | OPTIONAL.
+lang | The locale identifier for the conclusion. | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag | OPTIONAL. If not provided, the locale of the current user of the data is assumed.
+confidence  | Reference to the confidence level of the conclusion. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to a confidence level, and use of a [known confidence level](#known-confidence-levels) is RECOMMENDED.
+sources | The list of references to the sources of related to this conclusion. The sources of a conclusion MUST also be sources of the conclusion's containing entity (i.e. [`Person`](#person) or [`Relationship`](#relationship) ).| List of [`http://gedcomx.org/v1/SourceReference`](#source-reference). Order is preserved. | OPTIONAL.
+notes  | A list of notes about a conclusion. | List of [`http://gedcomx.org/Note`](#note) | OPTIONAL.
 
 <a id="known-confidence-levels"/>
 
@@ -569,11 +569,11 @@ This data type extends the following data type:
 
 ### properties
 
-name | description | data type
------|-------------|----------
-type | URI identifying the type of the document. | [URI](#uri) - MUST resolve to a document type. Refer to the list of [known document types](#known-document-types).
-text | The text of the document. | string
-attribution | The attribution of the document. | [`http://gedcomx.org/Attribution`](#attribution)
+name  | description | data type | constraints
+------|-------------|-----------|------------
+type | URI identifying the type of the document. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to a document type, and use of a [known document type](#known-document-types) is RECOMMENDED.
+text | The text of the document. | string | REQUIRED.
+attribution | The attribution of the document. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing data set (e.g. file) of the document is assumed.
 
 <a id="known-document-types"/>
 
@@ -609,9 +609,9 @@ This data type extends the following data type:
 
 ### properties
 
-name | description | data type
------|-------------|----------
-type | URI identifying the type of the gender. | [URI](#uri) - MUST resolve to a gender type. Refer to the list of [known gender types](#known-gender-types).
+name  | description | data type | constraints
+------|-------------|-----------|------------
+type | URI identifying the type of the gender. | [URI](#uri) | REQUIRED. MUST resolve to a gender type, and use of a [known gender type](#known-gender-types) is RECOMMENDED.
 
 <a id="known-gender-types"/>
 
@@ -621,9 +621,9 @@ The following gender types are defined by GEDCOM X:
 
 URI | description
 ----|-------------
-`http://gedcomx.org/Male`|
-`http://gedcomx.org/Female`|
-`http://gedcomx.org/Unknown`|
+`http://gedcomx.org/Male`| Male gender.
+`http://gedcomx.org/Female`| Female gender.
+`http://gedcomx.org/Unknown`| Unknown gender.
 
 
 <a id="name-conclusion"/>
@@ -654,12 +654,12 @@ This data type extends the following data type:
 
 ### properties
 
-name | description | data type
------|-------------|----------
-type | URI identifying the type of the name. | [URI](#uri) - MUST resolve to a name type. Refer to the list of [known name types](#known-name-types).
-preferred | Whether this name is preferred above the other `Name` conclusions of a person. | boolean
-date | The date of applicability of the name. | [`http://gedcomx.org/v1/Date`](#conclusion-date)
-nameForms | The name form(s) that best represents this name `NameForm` -- usually representations considered proper and well formed in the person's native, historical cultural context. All included name forms should be representations of the same name -- __*not*__ name variants (e.g., nicknames, spelling variations). | List of [`http://gedcomx.org/v1/NameForm`](#name-form). Order is preserved.
+name  | description | data type | constraints
+------|-------------|-----------|------------
+type | URI identifying the type of the name. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to a name type, and use of a [known name type](#known-name-types) is RECOMMENDED.
+preferred | Whether this name is preferred above the other `Name` conclusions of a person. | boolean | OPTIONAL.
+date | The date of applicability of the name. | [`http://gedcomx.org/v1/Date`](#conclusion-date) | OPTIONAL.
+nameForms | The name form(s) that best express this name, usually representations considered proper and well formed in the person's native, historical cultural context. All included name forms SHOULD be representations of the same name, and NOT variants of the name (e.g., nicknames, spelling variations). | List of [`http://gedcomx.org/v1/NameForm`](#name-form). Order is preserved. | REQUIRED. At least one name form MUST be provided.
 
 ### examples
 
@@ -719,12 +719,12 @@ This data type extends the following data type:
 
 ### properties
 
-name | description | data type
------|-------------|----------
-type | URI identifying the type of the fact. | [URI](#uri) - MUST resolve to a fact type. See the list of [known fact types](#known-fact-types).
-date | The date of applicability of the fact. | [`http://gedcomx.org/v1/Date`](#conclusion-date)
-place | The place of applicability of the fact. | [`http://gedcomx.org/v1/Place`](#conclusion-place)
-value | The original value of the fact as supplied by the contributor. | string
+name  | description | data type | constraints
+------|-------------|-----------|------------
+type | URI identifying the type of the fact. | [URI](#uri) | REQUIRED. MUST resolve to a fact type, and use of a [known fact type](#known-fact-types) is RECOMMENDED.
+date | The date of applicability of the fact. | [`http://gedcomx.org/v1/Date`](#conclusion-date) | OPTIONAL.
+place | The place of applicability of the fact. | [`http://gedcomx.org/v1/Place`](#conclusion-place) | OPTIONAL.
+value | The original value of the fact as supplied by the contributor. | string | OPTIONAL.
 
 <a id="known-fact-types"/>
 
@@ -826,12 +826,12 @@ This data type extends the following data type:
 
 name | description | data type
 -----|-------------|----------
-identifiers | Identifiers for the person. | List of [`http://gedcomx.org/v1/Identifier`](#identifier-type). Order is preserved.
-living | Whether the person is considered living. | boolean
-gender | The conclusion about the gender of the person. | [`http://gedcomx.org/v1/Gender`](#gender)
-names | The conclusions about the names of the person. | List of [`http://gedcomx.org/v1/Name`](#name-conclusion). Order is preserved.
-facts | The conclusions about the facts of the life of the person. | List of [`http://gedcomx.org/v1/Fact`](#fact-conclusion). Order is preserved.
-attribution | The attribution of the person. | [`http://gedcomx.org/Attribution`](#attribution)
+identifiers | Identifiers for the person. | List of [`http://gedcomx.org/v1/Identifier`](#identifier-type). Order is preserved. | OPTIONAL.
+living | Whether the person is considered living. | boolean | OPTIONAL.
+gender | The conclusion about the gender of the person. | [`http://gedcomx.org/v1/Gender`](#gender) | OPTIONAL.
+names | The conclusions about the names of the person. | List of [`http://gedcomx.org/v1/Name`](#name-conclusion). Order is preserved. | OPTIONAL.
+facts | The conclusions about the facts of the life of the person. | List of [`http://gedcomx.org/v1/Fact`](#fact-conclusion). Order is preserved. | OPTIONAL.
+attribution | The attribution of the person. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing data set (e.g. file) of the person is assumed.
 
 
 <a id="relationship"/>
@@ -855,13 +855,13 @@ This data type extends the following data type:
 
 ### properties
 
-name | description | data type
------|-------------|----------
-type | URI identifying the type of the relationship. | [URI](#uri) - MUST resolve to a relationship type. Refer to the list of [known relationship types](#known-relationship-types)
-person1 | Reference to the first person in the relationship. | [URI](#uri) - MUST resolve to an instance of [`http://gedcomx.org/v1/Person`](#person)
-person2 | Reference to the second person in the relationship. | [URI](#uri) - MUST resolve to an instance of [`http://gedcomx.org/v1/Person`](#person)
-facts | The conclusions about the facts of the life of the relationship. | List of [`http://gedcomx.org/v1/Fact`](#fact-conclusion). Order is preserved.
-attribution | The attribution of the relationship. | [`http://gedcomx.org/Attribution`](#attribution)
+name  | description | data type | constraints
+------|-------------|-----------|------------
+type | URI identifying the type of the relationship. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to a relationship type, and use of a [known relationship type](#known-relationship-types) is RECOMMENDED.
+person1 | Reference to the first person in the relationship. | [URI](#uri) | REQUIRED. MUST resolve to an instance of [`http://gedcomx.org/v1/Person`](#person)
+person2 | Reference to the second person in the relationship. | [URI](#uri) | REQUIRED. MUST resolve to an instance of [`http://gedcomx.org/v1/Person`](#person)
+facts | The conclusions about the facts of the life of the relationship. | List of [`http://gedcomx.org/v1/Fact`](#fact-conclusion). Order is preserved. | OPTIONAL.
+attribution | The attribution of the relationship. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing data set (e.g. file) of the relationship is assumed.
 
 Note: when a relationship type implies direction, the relationship is said to
 be *from* person1 *to* person2. For example, in a parent-child relationship, the
@@ -876,8 +876,8 @@ The following relationship types are defined by GEDCOM X:
 
 URI | description
 ----|-------------
-`http://gedcomx.org/Couple`|
-`http://gedcomx.org/ParentChild`|
+`http://gedcomx.org/Couple`| A relationship of a couple.
+`http://gedcomx.org/ParentChild`| A relationship from a parent to a child.
 
 
 <a id="conclusion-event-role"/>
@@ -900,11 +900,11 @@ This data type extends the following data type:
 
 ### properties
 
-name | description | data type
------|-------------|----------
-person | Reference to the person playing the role in the event. | [`URI`](#uri) - MUST resolve to an instance of [`http://gedcomx.org/v1/Person`](#person)
-type | Reference to the role type. | [`URI`](#uri) - MUST resolve to a role type. Refer to the list of [known role types](#known-roles).
-details | Details about the role of the person in the event. | string
+name  | description | data type | constraints
+------|-------------|-----------|------------
+person | Reference to the person playing the role in the event. | [`URI`](#uri) | REQUIRED. MUST resolve to an instance of [`http://gedcomx.org/v1/Person`](#person).
+type | Reference to the role type. | [`URI`](#uri) | OPTIONAL. If provided, MUST resolve to a role type, and use of a [known role types](#known-roles) is RECOMMENDED.
+details | Details about the role of the person in the event. | string | OPTIONAL.
 
 <a id="known-roles"/>
 
@@ -914,10 +914,10 @@ The following role types are defined by GEDCOM X:
 
 URI | description
 ----|------------
-`http://gedcomx.org/Principal`|
-`http://gedcomx.org/Participant`|
-`http://gedcomx.org/Official`|
-`http://gedcomx.org/Witness`|
+`http://gedcomx.org/Principal`| The person is the principal person of the event. The principal of a birth event is the person that was born.
+`http://gedcomx.org/Participant`| A participant in the event.
+`http://gedcomx.org/Official`| An person officiating the event.
+`http://gedcomx.org/Witness`| A witness of the event.
 
 
 <a id="event"/>
@@ -941,13 +941,13 @@ This data type extends the following data type:
 
 ### properties
 
-name | description | data type
------|-------------|----------
-type | URI identifying the type of the event. | [URI](#uri). MUST resolve to an event type. Refer to the list of [known event types](#known-event-types)
-date | The date of the event. | [`http://gedcomx.org/v1/Date`](#conclusion-date)
-place | The place of the event. | [`http://gedcomx.org/v1/Place`](#conclusion-place)
-roles | The roles of the persons in the event. | List of [`http://gedcomx.org/v1/EventRole`](#conclusion-event-role). Order is preserved.
-attribution | The attribution of the event. | [`http://gedcomx.org/Attribution`](#attribution)
+name  | description | data type | constraints
+------|-------------|-----------|------------
+type | URI identifying the type of the event. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to an event type, and use of a [known event type](#known-event-types) is RECOMMENDED.
+date | The date of the event. | [`http://gedcomx.org/v1/Date`](#conclusion-date) | OPTIONAL.
+place | The place of the event. | [`http://gedcomx.org/v1/Place`](#conclusion-place) | OPTIONAL.
+roles | The roles of the persons in the event. | List of [`http://gedcomx.org/v1/EventRole`](#conclusion-event-role). Order is preserved. | OPTIONAL.
+attribution | The attribution of the event. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing data set (e.g. file) of the event is assumed.
 
 <a id="known-event-types"/>
 
@@ -1008,8 +1008,8 @@ The identifier for the `Date` data type is:
 
 name | description | data type
 -----|-------------|----------
-original | The original value of the date as supplied by the contributor. | string
-formal | The standardized [formal value](#formal-values) of the date, formatted per GEDCOM X Date Format specification. | [GEDCOM X Date](https://github.com/FamilySearch/gedcomx/blob/master/specifications/date-model-specification.md)
+original | The original value of the date as supplied by the contributor. | string | OPTIONAL.
+formal | The standardized [formal value](#formal-values) of the date, formatted per GEDCOM X Date Format specification. | [GEDCOM X Date](https://github.com/FamilySearch/gedcomx/blob/master/specifications/date-model-specification.md) | OPTIONAL.
 
 
 <a id="conclusion-place"/>
@@ -1026,11 +1026,11 @@ The identifier for the `Place` data type is:
 
 ### properties
 
-name | description | data type
------|-------------|----------
-original | The original value of the place as supplied by the contributor. | string
-normal | The normalized value of the place. | string
-resource | Reference to the standardized resource describing the place. | [URI](#uri)
+name  | description | data type | constraints
+------|-------------|-----------|------------
+original | The original value of the place as supplied by the contributor. | string | OPTIONAL.
+normal | The normalized value of the place. | string | OPTIONAL.
+resource | Reference to the standardized resource describing the place. | [URI](#uri) | OPTIONAL.
 
 
 <a id="name-part"/>
@@ -1050,11 +1050,11 @@ The identifier for the `NamePart` data type is:
 
 ### properties
 
-name | description | data type
------|-------------|----------
-type | URI identifying the type of the name part. | [URI](#uri) - If present, MUST resolve to a name part type. Refer to the list of [known name part types](#known-name-part-types).
-value | The term(s) from the name that make up this name part. | string
-qualifiers | Type qualifiers to further describe the type of the name part. | List of [URI](#uri) - If present, MUST resolve to a name part type. Refer to the list of [known name part types qualifiers](#known-name-part-qualifier-types).
+name  | description | data type | constraints
+------|-------------|-----------|------------
+type | URI identifying the type of the name part. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to a name part type, and use of a [known name part type](#known-name-part-types) is RECOMMENDED.
+value | The term(s) from the name that make up this name part. | string | REQUIRED.
+qualifiers | Type qualifiers to further describe the type of the name part. | List of [URI](#uri) | OPTIONAL. If present, each qualifier MUST resolve to a name part type, and use of a [known name part type qualifier](#known-name-part-qualifier-types) is RECOMMENDED.
 
 <a id="known-name-part-types"/>
 
@@ -1116,11 +1116,11 @@ The identifier for the `NameForm` data type is:
 
 ### properties
 
-name | description | data type
------|-------------|----------
-lang | The locale identifier for the name form. | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag
-fullText | A full rendering of the name (or as much of the name as is known) with the terms in the name given in the natural order they would be spoken in the applicable cultural context. | string
-parts | The parts of the name form, ordered in the natural order they would be spoken in the given cultural context. | List of [`http://gedcomx.org/v1/NamePart`](#name-part). Order is preserved.
+name  | description | data type | constraints
+------|-------------|-----------|------------
+lang | The locale identifier for the name form. | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag | OPTIONAL. If not provided, the locale of the current user of the data is assumed.
+fullText | A full rendering of the name (or as much of the name as is known) with the terms in the name given in the natural order they would be spoken in the applicable cultural context. | string | OPTIONAL.
+parts | The parts of the name form, ordered in the natural order they would be spoken in the given cultural context. | List of [`http://gedcomx.org/v1/NamePart`](#name-part). Order is preserved. | OPTIONAL.
 
 ### examples
 
