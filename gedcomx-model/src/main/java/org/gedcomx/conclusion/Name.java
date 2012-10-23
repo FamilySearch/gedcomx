@@ -31,7 +31,7 @@ import java.util.List;
  *
  * @author Ryan Heaton
  */
-@XmlType ( name = "Name", propOrder = { "preferred", "nameForms"} )
+@XmlType ( name = "Name", propOrder = { "preferred", "date", "nameForms"} )
 @XmlRootElement
 @JsonElementWrapper ( name = "names" )
 public class Name extends Conclusion {
