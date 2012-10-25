@@ -4,12 +4,10 @@ import org.gedcomx.common.*;
 import org.gedcomx.contributor.Address;
 import org.gedcomx.contributor.Agent;
 import org.gedcomx.rt.GedcomNamespaceManager;
-import org.gedcomx.rt.SerializationProcessListener;
 import org.gedcomx.test.RecipeTest;
 import org.gedcomx.test.Snippet;
 import org.testng.annotations.Test;
 
-import javax.xml.bind.JAXBContext;
 import java.util.*;
 
 import static org.gedcomx.rt.SerializationUtil.processThroughJson;
@@ -165,19 +163,21 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
     srcDesc2.getAttribution().setModified(new Date(MODIFIED_20111111_11_11_11_111)); // 11 Nov 2011 11:11:11.111
     srcDesc2.getAttribution().setChangeMessage(CHANGE_MESSAGE);
 
-    ResourceSet resourceSet = new ResourceSet();
-    resourceSet.addExtensionElement(srcDesc2);
-    resourceSet.addExtensionElement(srcDesc1);
-    resourceSet.addExtensionElement(orgFamilySearch);
-    resourceSet.addExtensionElement(orgFhl);
+    Gedcomx gedcomx = new Gedcomx();
+    gedcomx.setSourceDescriptions(new ArrayList<SourceDescription>());
+    gedcomx.getSourceDescriptions().add(srcDesc2);
+    gedcomx.getSourceDescriptions().add(srcDesc1);
+    gedcomx.setAgents(new ArrayList<Agent>());
+    gedcomx.getAgents().add(orgFamilySearch);
+    gedcomx.getAgents().add(orgFhl);
 
     Snippet snippet = new Snippet();
-    ResourceSet resourceSetThurXml = processThroughXml(resourceSet, ResourceSet.class, JAXBContext.newInstance(ResourceSet.class, SourceDescription.class, Agent.class, Note.class), (SerializationProcessListener)snippet);
-    ResourceSet resourceSetThurJson = processThroughJson(resourceSet, (SerializationProcessListener) snippet);
+    Gedcomx gedcomxThurXml = processThroughXml(gedcomx, snippet);
+    Gedcomx gedcomxThruJson = processThroughJson(gedcomx, snippet);
     addSnippet(snippet);
 
-    verifyDeathCertExample(resourceSetThurXml);
-    verifyDeathCertExample(resourceSetThurJson);
+    verifyDeathCertExample(gedcomxThurXml);
+    verifyDeathCertExample(gedcomxThruJson);
 
     // the following adds code coverage for CitationField
     srcDesc1.getCitation().getFields().get(5).setNameValue((String) null); // for branch coverage on setName
@@ -190,11 +190,11 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
     assertEquals(srcDesc1.getTitles().size(), 0);
   }
 
-  private void verifyDeathCertExample(ResourceSet resourceSet) {
+  private void verifyDeathCertExample(Gedcomx gedcomx) {
     SourceDescription srcDesc2 = null;
     SourceDescription srcDesc1 = null;
-    assertEquals(resourceSet.findExtensionsOfType(SourceDescription.class).size(), 2);
-    for (SourceDescription srcDesc : resourceSet.findExtensionsOfType(SourceDescription.class)) {
+    assertEquals(gedcomx.getSourceDescriptions().size(), 2);
+    for (SourceDescription srcDesc : gedcomx.getSourceDescriptions()) {
       if (srcDesc.getId().equals(SRC_OF_SRC_ID)) {
         srcDesc1 = srcDesc;
       } else {
@@ -204,8 +204,8 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
 
     Agent orgFamilySearch = null;
     Agent orgFhl = null;
-    assertEquals(resourceSet.findExtensionsOfType(Agent.class).size(), 2);
-    for (Agent organization : resourceSet.findExtensionsOfType(Agent.class)) {
+    assertEquals(gedcomx.getAgents().size(), 2);
+    for (Agent organization : gedcomx.getAgents()) {
       if (organization.getId().equals(ORG_FHL_ID)) {
         orgFhl = organization;
       } else {
@@ -412,26 +412,27 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
     srcDesc3.setNotes(new ArrayList<Note>());
     srcDesc3.getNotes().add(note);
 
-    ResourceSet resourceSet = new ResourceSet();
-    resourceSet.addExtensionElement(srcDesc3);
-    resourceSet.addExtensionElement(srcDesc2);
-    resourceSet.addExtensionElement(srcDesc1);
-    resourceSet.addExtensionElement(srcDesc0);
-    resourceSet.addExtensionElement(orgFamilySearch);
-    resourceSet.addExtensionElement(orgFhl);
-    resourceSet.addExtensionElement(orgNara);
-    resourceSet.addExtensionElement(note);
+    Gedcomx gedcomx = new Gedcomx();
+    gedcomx.setSourceDescriptions(new ArrayList<SourceDescription>());
+    gedcomx.getSourceDescriptions().add(srcDesc3);
+    gedcomx.getSourceDescriptions().add(srcDesc2);
+    gedcomx.getSourceDescriptions().add(srcDesc1);
+    gedcomx.getSourceDescriptions().add(srcDesc0);
+    gedcomx.setAgents(new ArrayList<Agent>());
+    gedcomx.getAgents().add(orgFamilySearch);
+    gedcomx.getAgents().add(orgFhl);
+    gedcomx.getAgents().add(orgNara);
 
     Snippet snippet = new Snippet();
-    ResourceSet resourceSetThruXml = processThroughXml(resourceSet, ResourceSet.class, JAXBContext.newInstance(ResourceSet.class, SourceDescription.class, Agent.class, Note.class), (SerializationProcessListener)snippet);
-    ResourceSet resourceSetThruJson = processThroughJson(resourceSet, (SerializationProcessListener) snippet);
+    Gedcomx gedcomxThruXml = processThroughXml(gedcomx, snippet);
+    Gedcomx gedcomxThruJson = processThroughJson(gedcomx, snippet);
     addSnippet(snippet);
 
-    verify1930CensusExample(resourceSetThruXml);
-    verify1930CensusExample(resourceSetThruJson);
+    verify1930CensusExample(gedcomxThruXml);
+    verify1930CensusExample(gedcomxThruJson);
   }
 
-  void verify1930CensusExample(ResourceSet resourceSet) {
+  void verify1930CensusExample(Gedcomx gedcomx) {
     // TODO: verify contents of resource set
   }
 }

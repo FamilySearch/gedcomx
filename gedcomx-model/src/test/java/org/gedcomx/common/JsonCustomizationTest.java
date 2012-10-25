@@ -132,7 +132,7 @@ public class JsonCustomizationTest {
   }
 
   public void testKeyedItemsAsExtensionsXml() throws Exception {
-    ResourceSet set = new ResourceSet();
+    Gedcomx set = new Gedcomx();
     UniqueCustomKeyedItem item1 = new UniqueCustomKeyedItem();
     item1.setVal1("1");
     item1.setVal2("2");
@@ -156,7 +156,7 @@ public class JsonCustomizationTest {
     item4.setKey(key3);
     set.addExtensionElement(item4);
 
-    set = processThroughXml(set, ResourceSet.class, JAXBContext.newInstance(ResourceSet.class, UniqueCustomKeyedItem.class, CustomKeyedItem.class));
+    set = processThroughXml(set, Gedcomx.class, JAXBContext.newInstance(Gedcomx.class, UniqueCustomKeyedItem.class, CustomKeyedItem.class));
     List<UniqueCustomKeyedItem> keyedItems = set.findExtensionsOfType(UniqueCustomKeyedItem.class);
     assertEquals(2, keyedItems.size());
     assertEquals("1", keyedItems.get(0).getVal1());
@@ -175,7 +175,7 @@ public class JsonCustomizationTest {
   }
 
   public void testKeyedItemsAsExtensionsJson() throws Exception {
-    ResourceSet set = new ResourceSet();
+    Gedcomx set = new Gedcomx();
     UniqueCustomKeyedItem item1 = new UniqueCustomKeyedItem();
     item1.setVal1("1");
     item1.setVal2("2");
