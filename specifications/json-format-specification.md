@@ -2,8 +2,9 @@
 
 ## Status
 
-This document specifies a JSON serialization format for the [GEDCOM X standard conceptual
-model](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md), and requests discussion and suggestions for improvements.
+This document specifies a JSON media type for the [GEDCOM X standard conceptual
+model](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md),
+and requests discussion and suggestions for improvements.
 
 ## Copyright Notice
 
@@ -22,8 +23,8 @@ The GEDCOM X conceptual model is a specification of formal concepts and types
 that are used to provide a standard model and vocabulary for describing genealogical
 data.
 
-The GEDCOM X JSON Serialization Format is a specification that defines the way that
-the GEDCOM X conceptual model is serialized to and deserialized from
+The GEDCOM X XML Serialization Format is a specification that defines the media type used
+to serialize and deserialize the GEDCOM X conceptual model to and from
 [JSON](http://json.org).
 
 ## 1.1 Identifier, Version, and Dependencies
@@ -170,6 +171,12 @@ The following example shows an instance of a GEDCOM X serialization in accordanc
       "value" : "\"Martha Washington.\" Wikipedia, The Free Encyclopedia. Wikimedia Foundation, Inc. 24 October 2012."
     } ],
     "about" : "http://en.wikipedia.org/wiki/Martha_washington"
+  } ],
+  "agents" : [ {
+    "id" : "GGG-GGGG",
+    "names" : [ {
+      "value" : "Ryan Heaton"
+    } ]
   } ]
 }
 ```
@@ -177,17 +184,21 @@ The following example shows an instance of a GEDCOM X serialization in accordanc
 
 ## 1.3 Notational Conventions
 
-For each data type specified by the GEDCOM X conceptual model, a
-JSON data format is supplied which specifies how each of the
-properties of the data type are to be serialized in JSON. Each instance
-of a data type is serialized as a JSON object. The properties
-of each data type are serialized as members of the JSON object.
+### 1.3.1 Keywords
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
 "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
 document are to be interpreted as described in BCP 14, 
 [RFC2119](http://tools.ietf.org/html/rfc2119), as scoped to those conformance 
 targets.
+
+### Data Types
+
+For each data type specified by the GEDCOM X conceptual model, a
+JSON data format is supplied which specifies how each of the
+properties of the data type are to be serialized in JSON. Each instance
+of a data type is serialized as a JSON object. The properties
+of each data type are serialized as members of the JSON object.
 
 ## 1.4 Compliance
 
@@ -202,127 +213,78 @@ provided by the GEDCOM X Conceptual Model identified by
 [`http://gedcomx.org/conceptual-model/v1`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md)
 are inherited.
 
-# 2. Common Data Types
+# 2. Top-Level Data Types
 
-This section provides JSON object definitions for each data type defined
-under the "Common Data Types" section of the conceptual model specification.
+This section specifies JSON types for each top-level data type defined by the
+conceptual model specification.
 
-<a id="uri"/>
+<a id="person"/>
 
-## 2.1 The URI
+# 2.1 The "Person" Data Type
 
-URIs are supplied as JSON strings and are interpreted according to
-[RFC 3986: Uniform Resource Identifier (URI): Generic Syntax](http://www.ietf.org/rfc/rfc3986.txt).
-
-<a id="identifier-type"/>
-
-## 2.2 The "Identifier" Data Type
-
-The JSON object used to (de)serialize the `http://gedcomx.org/v1/Identifier` data type is defined as follows:
+The JSON object used to (de)serialize the `http://gedcomx.org/v1/Person` data type is defined as follows:
 
 ### properties
 
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
-value | The value of the identifier. | value | string
-type  | URI identifying the type of the identifier. | type | [`URI`](#uri)
+attribution | The attribution of this conclusion. | attribution | [`gx:Attribution`](#attribution)
+identifiers | Identifiers for the person. | identifiers | array of [`Identifier`](#identifier-type)
+living | Whether the person is considered living. | living | boolean
+gender | The conclusion about the gender of the person. | gender | [`Gender`](#gender)
+names | The conclusions about the names of the person. | names | array of [`Name`](#name-conclusion)
+facts | The conclusions about the facts of the life of the person. | facts | array of [`Fact`](#fact-conclusion)
 
 ### examples
 
 ```json
 {
-  "value" : "value_of_identifier",
-  "type" : "http://gedcomx.org/IdentifierType"
+
+  ...the members of gxc:Conclusion...,
+
+  "attribution" : { ... },
+  "identifiers" : [ { ... }, { ... } ],
+  "living" : true,
+  "gender" : { ... },
+  "names" : [ { ... }, { ... } ],
+  "facts" : [ { ... }, { ... } ]
 }
 ```
 
-<a id="attribution"/>
+<a id="relationship"/>
 
-## 2.3 The "Attribution" Data Type
+## 2.2 The "Relationship" Data Type
 
-The JSON object used to (de)serialize the `http://gedcomx.org/v1/Attribution` data type is defined as follows:
+The JSON object used to (de)serialize the `http://gedcomx.org/v1/Relationship` data type is defined as follows:
 
 ### properties
 
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
-contributor | Reference to the contributor to whom the attributed data is attributed. | contributor | [`URI`](#uri)
-modified | Timestamp of when the attributed data was contributed. | modified | number (milliseconds since epoch)
-changeMessage | A statement of why the attributed data is being provided by the contributor. | changeMessage | string
+attribution | The attribution of this conclusion. | attribution | [`gx:Attribution`](#attribution)
+type | URI identifying the type of the relationship. | type | [`URI`](#uri)
+person1 | Reference to the first person in the relationship. | person1 | [`URI`](#uri)
+person2 | Reference to the second person in the relationship. | person2 | [`URI`](#uri)
+facts | The conclusions about the facts of the life of the relationship. | facts | array of [`Fact`](#fact-conclusion)
 
 ### examples
 
 ```json
 {
-  "contributor" : "http://identifier/for/contributor",
-  "modified" : "1338394969",
-  "changeMessage" : "...change message here..."
 
-  ...possibility of extension elements...
+  ...the members of gxc:Conclusion...,
 
+  "attribution" : { ... },
+  "type" : "http://gedcomx.org/Couple",
+  "person1" : "http://identifier/for/person/1",
+  "person2" : "http://identifier/for/person/2",
+  "facts" : [ { ... }, { ... } ]
 }
 ```
-
-<a id="note"/>
-
-## 2.4 The "Note" Data Type
-
-The JSON object used to (de)serialize the `http://gedcomx.org/v1/Note` data type is defined as follows:
-
-### properties
-
-name | description | JSON member | JSON object type
------|-------------|--------------|---------
-lang | The locale identifier for the note. | lang | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag
-subject | A subject or title for the note. | subject | string
-text | The text of the note. | text | string
-attribution | The attribution of this note. | attribution | [`Attribution`](#attribution)
-
-### examples
-
-```json
-{
-  "lang" : "en",
-  "subject" : "...",
-  "text" : "...",
-  "attribution" : { ... }
-
-  ...possibility of extension elements...
-
-}
-```
-
-## 2.5 The "TextValue" Data Type
-
-The JSON object used to (de)serialize the `http://gedcomx.org/v1/TextValue` data type is defined as follows:
-
-### properties
-
-name | description | JSON member | JSON object type
------|-------------|--------------|---------
-lang | The locale identifier for the value of the text. | lang | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag
-value | The string form of the value. | value | string
-
-### examples
-
-A value that can be specified as a string:
-
-```json
-{
-  "lang" : "en",
-  "value" : "...text of the value..."
-}
-```
-
-
-# 3. Data Types for Describing Sources
-
-This section defines JSON types for each of the data types specified by the
-"Data Types for Describing Sources" section of the conceptual model specification.
 
 <a id="source-description"/>
 
-## 3.1 The "SourceDescription" Data Type
+## 2.3 The "SourceDescription" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/v1/SourceDescription`
 data type is defined as follows:
@@ -362,145 +324,9 @@ attribution | The attribution of this source. | attribution | [`Attribution`](#a
 }
 ```
 
-
-<a id="source-citation"/>
-
-## 3.2 The "SourceCitation" Data Type
-
-The JSON object used to (de)serialize the `http://gedcomx.org/v1/SourceCitation` data type is defined as follows:
-
-### properties
-
-name | description | XML property | XML type
------|-------------|--------------|---------
-lang | The locale identifier for the citation. | lang | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag
-value | A rendering of the full (working) citation as a string. | value | string
-citationTemplate | The identifier of the citation template by which this citation may be interpreted. | citationTemplate | [`URI`](#uri)
-fields | A list of citation fields about a source. | field | array of [`CitationField`](#citation-field)
-
-### examples
-
-```json
-{
-  "lang" : "en",
-  "value" : "...a rendering of the full (working) citation as a string...",
-  "citationTemplate" : "http://identifier/for/ciation/template",
-  "fields" : [ { ... }, { ... } ]
-}
-```
-
-<a id="citation-field"/>
-
-## 3.3 The "CitationField" Data Type
-
-The JSON object used to (de)serialize the
-`http://gedcomx.org/v1/CitationField` data type is defined as follows:
-
-### properties
-
-name | description | XML property | XML type
------|-------------|--------------|---------
-name | The identifier for the citation detail -- defined by a citation template or a citation template library. | name | [URI](#uri)
-value | The value of the citation detail. | value | string
-
-### examples
-
-```json
-{
-  "name" : "...a citation field name..."
-  "value" : "...a citation field value..."
-}
-```
-
-<a id="source-reference"/>
-
-## 3.4 The "SourceReference" Data Type
-
-The JSON object used to (de)serialize the `http://gedcomx.org/v1/SourceReference`
-data type is defined as follows:
-
-### properties
-
-name | description | JSON member | JSON object type
------|-------------|--------------|---------
-description  | Reference to a _description_ of the source being referenced. | description | [`URI`](#uri)
-attribution | The attribution of this source reference. | attribution | [`Attribution`](#attribution)
-
-### examples
-
-```json
-{
-  "description" : "http://identifier/for/description/of/source/being/referenced",
-  "attribution" : { ... }
-
-  ...possibility of extension elements...
-
-}
-```
-
-# 4. Data Types for Describing Contributors
-
-This section defines JSON types for each of the data types specified by the
-"Data Types for Describing Contributors" section of the conceptual model specification.
-
-<a id="online-account"/>
-
-## 4.1 The "OnlineAccount" Data Type
-
-The JSON object used to (de)serialize the `http://gedcomx.org/v1/OnlineAccount` data type is defined as follows:
-
-### properties
-
-name | description | JSON member | JSON object type
------|-------------|--------------|---------
-serviceHomepage  | The home page of the service. | serviceHomepage | [`URI`](#uri)
-accountName | The name, label, or id associating the owner of the account with the account. | accountName | string
-
-### examples
-
-```json
-{
-  "serviceHomepage" : "http://familysearch.org/",
-  "accountName" : "...",
-}
-```
-
-<a id="address"/>
-
-## 4.2 The "Address" Data Type
-
-The JSON object used to (de)serialize the `http://gedcomx.org/v1/Address` data type is defined as follows:
-
-### properties
-
-name | description | JSON member | JSON object type
------|-------------|--------------|---------
-value | A string representation of the value. Used when the address isn't separated into its constituent parts. | value | string
-city | The city. | city | string
-country | The country. | country | string
-postalCode | The postal code. | postalCode | string
-stateOrProvince | The state or province. | stateOrProvince | string
-street | The street. | street | string
-street2 | The street (second line). | street2 | string
-street3 | The street (third line). | street3 | string
-
-### examples
-
-```json
-{
-  "city" : "...",
-  "country" : "...",
-  "postalCode" : "...",
-  "stateOrProvince" : "...",
-  "street" : "...",
-  "street2" : "...",
-  "street3" : "...",
-  "value" : "..."
-}
-```
 <a id="agent"/>
 
-## 4.3 The "Agent" Data Type
+## 2.4 The "Agent" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/v1/Agent` data type is defined as follows:
 
@@ -536,241 +362,9 @@ addresses  | The addresses of the person or organization. | addresses | array of
 }
 ```
 
-
-# 5. Data Types for Describing Conclusions
-
-This section defines JSON types for each of the data types specified by the
-"Data Types for Describing Conclusions" section of the conceptual model specification.
-
-## 5.1 The "Conclusion" Data Type
-
-The JSON object used to (de)serialize the `http://gedcomx.org/v1/Conclusion` data type is defined as follows:
-
-### properties
-
-name | description | JSON member | JSON object type
------|-------------|--------------|---------
-id | An identifier for the JSON object holding the conclusion data. The id attribute MUST conform to the constraints defined in [Section 7, "Fragment Identifiers"](#fragment-ids). | id | string
-lang | The locale identifier for the conclusion. | lang | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag
-confidence  | Reference to the confidence level of the contributor of the attributed data. | confidence | [`URI`](#uri)
-sources | The list of references to the sources of the conclusion. | sources | array of [`SourceReference`](#source-reference).
-notes | A list of notes about this conclusion. | note | array of [`gx:Note`](#note)
-
-### examples
-
-```json
-{
-  "id" : "local_id",
-  "lang" : "en",
-  "confidence" : "http://gedcomx.org/Certainly",
-  "sources" : [ { ... }, { ... } ],
-  "notes" : [ { ... }, { ... } ],
-
-  ...possibility of extension elements...
-
-}
-```
-
-## 5.2 The "Document" Data Type
-
-The JSON object used to (de)serialize the `http://gedcomx.org/v1/Document` data type is defined as follows:
-
-### properties
-
-name | description | XML property | XML type
------|-------------|--------------|---------
-type | URI identifying the type of the document. | type | [`URI`](#uri)
-attribution | The attribution of this document. | attribution | [`gx:Attribution`](#attribution)
-text | The text of the document. | text | string
-
-### examples
-
-```json
-{
-
-  ...the members of gxc:Conclusion...,
-
-  "type" : "http://gedcomx.org/Analysis",
-  "attribution" : { ... },
-  "text" : "...text of the document..."
-}
-```
-
-## 5.3 The "Gender" Data Type
-
-The JSON object used to (de)serialize the `http://gedcomx.org/v1/Gender` data type is defined as follows:
-
-### properties
-
-name | description | JSON member | JSON object type
------|-------------|--------------|---------
-type | URI identifying the type of the gender. | type | [`URI`](#uri)
-
-### examples
-
-```json
-{
-
-  ...the members of gxc:Conclusion...,
-
-  "type" : "http://gedcomx.org/Male"
-}
-```
-
-<a id="name-conclusion"/>
-
-## 5.4 The "Name" Data Type
-
-The JSON object used to (de)serialize the `http://gedcomx.org/v1/Name` data type is defined as follows:
-
-### properties
-
-name | description | JSON member | JSON object type
------|-------------|--------------|---------
-type | URI identifying the type of the name. | type | [`URI`](#uri)
-preferred | Whether this name is preferred above the other `Name` conclusions of a person. | preferred | boolean
-date | The date of applicability of the name. | date | [`Date`](#conclusion-date)
-nameForms | The name form(s) that best represents this name `NameForm` -- usually representations considered proper and well formed in the person's native, historical cultural context. All included name forms should be representations of the same name -- __*not*__ name variants (e.g., nicknames, spelling variations). | nameForms | array of [`NameForm`](#name-form)
-
-### examples
-
-```json
-{
-
-  ...the members of gxc:Conclusion...,
-
-  "type" : "http://gedcomx.org/BirthName",
-  "preferred" : true,
-  "date" : { ... },
-  "nameForms" : [ { ... }, { ... } ]
-}
-```
-
-<a id="fact-conclusion"/>
-
-## 5.5 The "Fact" Data Type
-
-The JSON object used to (de)serialize the `http://gedcomx.org/v1/Fact` data type is defined as follows:
-
-### properties
-
-name | description | JSON member | JSON object type
------|-------------|--------------|---------
-type | URI identifying the type of the fact. | type | [`URI`](#uri)
-date | The date of applicability of the fact. | date | [`Date`](#conclusion-date)
-place | The place of applicability of the fact. | place | [`Place`](#conclusion-place)
-value | The original value of the fact as supplied by the contributor. | original | string
-
-### examples
-
-```json
-{
-
-  ...the members of gxc:Conclusion...,
-
-  "type" : "http://gedcomx.org/Birth",
-  "date" : { ... },
-  "place" : { ... },
-  "value" : "...the original value of the fact...",
-}
-```
-
-<a id="person"/>
-
-
-# 5.6 The "Person" Data Type
-
-The JSON object used to (de)serialize the `http://gedcomx.org/v1/Person` data type is defined as follows:
-
-### properties
-
-name | description | JSON member | JSON object type
------|-------------|--------------|---------
-attribution | The attribution of this conclusion. | attribution | [`gx:Attribution`](#attribution)
-identifiers | Identifiers for the person. | identifiers | array of [`Identifier`](#identifier-type)
-living | Whether the person is considered living. | living | boolean
-gender | The conclusion about the gender of the person. | gender | [`Gender`](#gender)
-names | The conclusions about the names of the person. | names | array of [`Name`](#name-conclusion)
-facts | The conclusions about the facts of the life of the person. | facts | array of [`Fact`](#fact-conclusion)
-
-### examples
-
-```json
-{
-
-  ...the members of gxc:Conclusion...,
-
-  "attribution" : { ... },
-  "identifiers" : [ { ... }, { ... } ],
-  "living" : true,
-  "gender" : { ... },
-  "names" : [ { ... }, { ... } ],
-  "facts" : [ { ... }, { ... } ]
-}
-```
-
-<a id="relationship"/>
-
-## 5.7 The "Relationship" Data Type
-
-The JSON object used to (de)serialize the `http://gedcomx.org/v1/Relationship` data type is defined as follows:
-
-### properties
-
-name | description | JSON member | JSON object type
------|-------------|--------------|---------
-attribution | The attribution of this conclusion. | attribution | [`gx:Attribution`](#attribution)
-type | URI identifying the type of the relationship. | type | [`URI`](#uri)
-person1 | Reference to the first person in the relationship. | person1 | [`URI`](#uri)
-person2 | Reference to the second person in the relationship. | person2 | [`URI`](#uri)
-facts | The conclusions about the facts of the life of the relationship. | facts | array of [`Fact`](#fact-conclusion)
-
-### examples
-
-```json
-{
-
-  ...the members of gxc:Conclusion...,
-
-  "attribution" : { ... },
-  "type" : "http://gedcomx.org/Couple",
-  "person1" : "http://identifier/for/person/1",
-  "person2" : "http://identifier/for/person/2",
-  "facts" : [ { ... }, { ... } ]
-}
-```
-
-<a id="conclusion-event-role"/>
-
-## 5.8 The "EventRole" Data Type
-
-The JSON object used to (de)serialize the `http://gedcomx.org/v1/EventRole`
-data type is defined as follows:
-
-### properties
-
-name | description | JSON member | JSON object type
------|-------------|--------------|---------
-person | Reference to the person playing the role in the event. | person | [`URI`](#uri)
-type | Reference to the role type. | type | [`URI`](#uri)
-details | Details about the role of the person in the event. | details | string
-
-### examples
-
-```json
-{
-
-  ...the members of gxc:Conclusion...,
-
-  "person" : "http://identifier/for/person/1",
-  "type" : "http://gedcomx.org/Witness",
-  "details" : "..."
-}
-```
-
 <a id="event"/>
 
-# 5.9 The "Event" Data Type
+# 2.5 The "Event" Data Type
 
 the JSON object used to (de)serialize the `http://gedcomx.org/v1/Event` data type
 is defined as follows:
@@ -800,9 +394,410 @@ roles | The roles of the persons in the event. | roles | array of [`EventRole`](
 }
 ```
 
+## 2.6 The "Document" Data Type
+
+The JSON object used to (de)serialize the `http://gedcomx.org/v1/Document` data type is defined as follows:
+
+### properties
+
+name | description | XML property | XML type
+-----|-------------|--------------|---------
+type | URI identifying the type of the document. | type | [`URI`](#uri)
+attribution | The attribution of this document. | attribution | [`gx:Attribution`](#attribution)
+text | The text of the document. | text | string
+
+### examples
+
+```json
+{
+
+  ...the members of gxc:Conclusion...,
+
+  "type" : "http://gedcomx.org/Analysis",
+  "attribution" : { ... },
+  "text" : "...text of the document..."
+}
+```
+
+# 3. Component-Level Data Types
+
+This section specifies JSON types for each component-level data type defined by the
+conceptual model specification.
+
+<a id="identifier-type"/>
+
+## 3.1 The "Identifier" Data Type
+
+The JSON object used to (de)serialize the `http://gedcomx.org/v1/Identifier` data type is defined as follows:
+
+### properties
+
+name | description | JSON member | JSON object type
+-----|-------------|--------------|---------
+value | The value of the identifier. | value | string
+type  | URI identifying the type of the identifier. | type | [`URI`](#uri)
+
+### examples
+
+```json
+{
+  "value" : "value_of_identifier",
+  "type" : "http://gedcomx.org/IdentifierType"
+}
+```
+
+<a id="attribution"/>
+
+## 3.2 The "Attribution" Data Type
+
+The JSON object used to (de)serialize the `http://gedcomx.org/v1/Attribution` data type is defined as follows:
+
+### properties
+
+name | description | JSON member | JSON object type
+-----|-------------|--------------|---------
+contributor | Reference to the contributor to whom the attributed data is attributed. | contributor | [`URI`](#uri)
+modified | Timestamp of when the attributed data was contributed. | modified | number (milliseconds since epoch)
+changeMessage | A statement of why the attributed data is being provided by the contributor. | changeMessage | string
+
+### examples
+
+```json
+{
+  "contributor" : "http://identifier/for/contributor",
+  "modified" : "1338394969",
+  "changeMessage" : "...change message here..."
+
+  ...possibility of extension elements...
+
+}
+```
+
+<a id="note"/>
+
+## 3.3 The "Note" Data Type
+
+The JSON object used to (de)serialize the `http://gedcomx.org/v1/Note` data type is defined as follows:
+
+### properties
+
+name | description | JSON member | JSON object type
+-----|-------------|--------------|---------
+lang | The locale identifier for the note. | lang | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag
+subject | A subject or title for the note. | subject | string
+text | The text of the note. | text | string
+attribution | The attribution of this note. | attribution | [`Attribution`](#attribution)
+
+### examples
+
+```json
+{
+  "lang" : "en",
+  "subject" : "...",
+  "text" : "...",
+  "attribution" : { ... }
+
+  ...possibility of extension elements...
+
+}
+```
+
+## 3.4 The "TextValue" Data Type
+
+The JSON object used to (de)serialize the `http://gedcomx.org/v1/TextValue` data type is defined as follows:
+
+### properties
+
+name | description | JSON member | JSON object type
+-----|-------------|--------------|---------
+lang | The locale identifier for the value of the text. | lang | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag
+value | The string form of the value. | value | string
+
+### examples
+
+A value that can be specified as a string:
+
+```json
+{
+  "lang" : "en",
+  "value" : "...text of the value..."
+}
+```
+
+<a id="source-citation"/>
+
+## 3.5 The "SourceCitation" Data Type
+
+The JSON object used to (de)serialize the `http://gedcomx.org/v1/SourceCitation` data type is defined as follows:
+
+### properties
+
+name | description | XML property | XML type
+-----|-------------|--------------|---------
+lang | The locale identifier for the citation. | lang | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag
+value | A rendering of the full (working) citation as a string. | value | string
+citationTemplate | The identifier of the citation template by which this citation may be interpreted. | citationTemplate | [`URI`](#uri)
+fields | A list of citation fields about a source. | field | array of [`CitationField`](#citation-field)
+
+### examples
+
+```json
+{
+  "lang" : "en",
+  "value" : "...a rendering of the full (working) citation as a string...",
+  "citationTemplate" : "http://identifier/for/ciation/template",
+  "fields" : [ { ... }, { ... } ]
+}
+```
+
+<a id="citation-field"/>
+
+## 3.6 The "CitationField" Data Type
+
+The JSON object used to (de)serialize the
+`http://gedcomx.org/v1/CitationField` data type is defined as follows:
+
+### properties
+
+name | description | XML property | XML type
+-----|-------------|--------------|---------
+name | The identifier for the citation detail -- defined by a citation template or a citation template library. | name | [URI](#uri)
+value | The value of the citation detail. | value | string
+
+### examples
+
+```json
+{
+  "name" : "...a citation field name..."
+  "value" : "...a citation field value..."
+}
+```
+
+<a id="source-reference"/>
+
+## 3.7 The "SourceReference" Data Type
+
+The JSON object used to (de)serialize the `http://gedcomx.org/v1/SourceReference`
+data type is defined as follows:
+
+### properties
+
+name | description | JSON member | JSON object type
+-----|-------------|--------------|---------
+description  | Reference to a _description_ of the source being referenced. | description | [`URI`](#uri)
+attribution | The attribution of this source reference. | attribution | [`Attribution`](#attribution)
+
+### examples
+
+```json
+{
+  "description" : "http://identifier/for/description/of/source/being/referenced",
+  "attribution" : { ... }
+
+  ...possibility of extension elements...
+
+}
+```
+
+## 3.8 The "CitationTemplate" Data Type
+
+TBD
+
+<a id="online-account"/>
+
+## 3.9 The "OnlineAccount" Data Type
+
+The JSON object used to (de)serialize the `http://gedcomx.org/v1/OnlineAccount` data type is defined as follows:
+
+### properties
+
+name | description | JSON member | JSON object type
+-----|-------------|--------------|---------
+serviceHomepage  | The home page of the service. | serviceHomepage | [`URI`](#uri)
+accountName | The name, label, or id associating the owner of the account with the account. | accountName | string
+
+### examples
+
+```json
+{
+  "serviceHomepage" : "http://familysearch.org/",
+  "accountName" : "...",
+}
+```
+
+<a id="address"/>
+
+## 3.10 The "Address" Data Type
+
+The JSON object used to (de)serialize the `http://gedcomx.org/v1/Address` data type is defined as follows:
+
+### properties
+
+name | description | JSON member | JSON object type
+-----|-------------|--------------|---------
+value | A string representation of the value. Used when the address isn't separated into its constituent parts. | value | string
+city | The city. | city | string
+country | The country. | country | string
+postalCode | The postal code. | postalCode | string
+stateOrProvince | The state or province. | stateOrProvince | string
+street | The street. | street | string
+street2 | The street (second line). | street2 | string
+street3 | The street (third line). | street3 | string
+
+### examples
+
+```json
+{
+  "city" : "...",
+  "country" : "...",
+  "postalCode" : "...",
+  "stateOrProvince" : "...",
+  "street" : "...",
+  "street2" : "...",
+  "street3" : "...",
+  "value" : "..."
+}
+```
+
+## 3.11 The "Conclusion" Data Type
+
+The JSON object used to (de)serialize the `http://gedcomx.org/v1/Conclusion` data type is defined as follows:
+
+### properties
+
+name | description | JSON member | JSON object type
+-----|-------------|--------------|---------
+id | An identifier for the JSON object holding the conclusion data. The id attribute MUST conform to the constraints defined in [Section 7, "Fragment Identifiers"](#fragment-ids). | id | string
+lang | The locale identifier for the conclusion. | lang | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag
+confidence  | Reference to the confidence level of the contributor of the attributed data. | confidence | [`URI`](#uri)
+sources | The list of references to the sources of the conclusion. | sources | array of [`SourceReference`](#source-reference).
+notes | A list of notes about this conclusion. | note | array of [`gx:Note`](#note)
+
+### examples
+
+```json
+{
+  "id" : "local_id",
+  "lang" : "en",
+  "confidence" : "http://gedcomx.org/Certainly",
+  "sources" : [ { ... }, { ... } ],
+  "notes" : [ { ... }, { ... } ],
+
+  ...possibility of extension elements...
+
+}
+```
+
+## 3.12 The "Gender" Data Type
+
+The JSON object used to (de)serialize the `http://gedcomx.org/v1/Gender` data type is defined as follows:
+
+### properties
+
+name | description | JSON member | JSON object type
+-----|-------------|--------------|---------
+type | URI identifying the type of the gender. | type | [`URI`](#uri)
+
+### examples
+
+```json
+{
+
+  ...the members of gxc:Conclusion...,
+
+  "type" : "http://gedcomx.org/Male"
+}
+```
+
+<a id="name-conclusion"/>
+
+## 3.13 The "Name" Data Type
+
+The JSON object used to (de)serialize the `http://gedcomx.org/v1/Name` data type is defined as follows:
+
+### properties
+
+name | description | JSON member | JSON object type
+-----|-------------|--------------|---------
+type | URI identifying the type of the name. | type | [`URI`](#uri)
+preferred | Whether this name is preferred above the other `Name` conclusions of a person. | preferred | boolean
+date | The date of applicability of the name. | date | [`Date`](#conclusion-date)
+nameForms | The name form(s) that best represents this name `NameForm` -- usually representations considered proper and well formed in the person's native, historical cultural context. All included name forms should be representations of the same name -- __*not*__ name variants (e.g., nicknames, spelling variations). | nameForms | array of [`NameForm`](#name-form)
+
+### examples
+
+```json
+{
+
+  ...the members of gxc:Conclusion...,
+
+  "type" : "http://gedcomx.org/BirthName",
+  "preferred" : true,
+  "date" : { ... },
+  "nameForms" : [ { ... }, { ... } ]
+}
+```
+
+<a id="fact-conclusion"/>
+
+## 3.14 The "Fact" Data Type
+
+The JSON object used to (de)serialize the `http://gedcomx.org/v1/Fact` data type is defined as follows:
+
+### properties
+
+name | description | JSON member | JSON object type
+-----|-------------|--------------|---------
+type | URI identifying the type of the fact. | type | [`URI`](#uri)
+date | The date of applicability of the fact. | date | [`Date`](#conclusion-date)
+place | The place of applicability of the fact. | place | [`Place`](#conclusion-place)
+value | The original value of the fact as supplied by the contributor. | original | string
+
+### examples
+
+```json
+{
+
+  ...the members of gxc:Conclusion...,
+
+  "type" : "http://gedcomx.org/Birth",
+  "date" : { ... },
+  "place" : { ... },
+  "value" : "...the original value of the fact...",
+}
+```
+
+<a id="conclusion-event-role"/>
+
+## 3.15 The "EventRole" Data Type
+
+The JSON object used to (de)serialize the `http://gedcomx.org/v1/EventRole`
+data type is defined as follows:
+
+### properties
+
+name | description | JSON member | JSON object type
+-----|-------------|--------------|---------
+person | Reference to the person playing the role in the event. | person | [`URI`](#uri)
+type | Reference to the role type. | type | [`URI`](#uri)
+details | Details about the role of the person in the event. | details | string
+
+### examples
+
+```json
+{
+
+  ...the members of gxc:Conclusion...,
+
+  "person" : "http://identifier/for/person/1",
+  "type" : "http://gedcomx.org/Witness",
+  "details" : "..."
+}
+```
+
 <a id="conclusion-date"/>
 
-## 5.10 The "Date" Data Type
+## 3.16 The "Date" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/v1/Date` data type is defined as follows:
 
@@ -824,7 +819,7 @@ formal | The formal value of the date. | gx:formal | [GEDCOM X Date](https://git
 
 <a id="conclusion-place"/>
 
-## 5.11 The "Place" Data Type
+## 3.17 The "Place" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/v1/Place` data type is defined as follows:
 
@@ -848,7 +843,7 @@ normalized | The normalized text value of the place. | normalized | string
 
 <a id="name-part"/>
 
-## 5.12 The "NamePart" Data Type
+## 3.18 The "NamePart" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/v1/NamePart` data type is defined as follows:
 
@@ -873,14 +868,14 @@ qualifiers | Type qualifiers to further describe the type of the name part. | qu
 }
 ```
 
-## 5.13 The "NameForm" Data Type
+## 3.19 The "NameForm" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/v1/NameForm` data type is defined as follows:
 
 ### properties
 
 name | description | JSON member | JSON object type
------|-------------|--------------|---------
+-----|-------------|-------------|---------
 lang | The locale identifier for the name form. | lang | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag
 fullText | The full text of the name form. | fullText | string
 parts | The parts of the name form. | parts | array of [`NamePart`](#name-part)
@@ -898,6 +893,78 @@ parts | The parts of the name form. | parts | array of [`NamePart`](#name-part)
 }
 ```
 
+# 4 JSON-Specific Data Types
+
+This section describes a set of data types that are specific to the GEDCOM X JSON media
+type, used for the convenience of serialization.
+
+<a id="uri"/>
+
+## 4.1 The URI
+
+URIs are supplied as JSON strings and are interpreted according to
+[RFC 3986: Uniform Resource Identifier (URI): Generic Syntax](http://www.ietf.org/rfc/rfc3986.txt).
+
+## 4.2 The "Gedcomx" Data Type
+
+The `gx:Gedcomx` JSON type is used as a container for a set of GEDCOM X data.
+
+### properties
+
+name | description | JSON member | JSON object type
+-----|-------------|-------------|---------
+id | An identifier for the data set. The id attribute MUST conform to the constraints defined in [Section 7, "Fragment Identifiers"](#fragment-ids). | id | string
+lang | The locale identifier for the data set. | lang | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag
+attribution | The attribution of this data set. | attribution | [`Attribution`](#attribution)
+persons | The list of persons contained in the data set. | persons | array of [`Person`](#person)
+relationships | The list of relationships contained in the data set. | relationships | array of [`Relationship`](#relationship)
+sourceDescriptions | The list of source descriptions contained in the data set. | sourceDescriptions | array of [`SourceDescription`](#source-description)
+agents | The list of agents contained in the data set. | agents | array of [`Agent`](#agent)
+events | The list of events contained in the data set. | events | array of [`Event`](#event)
+documents | The list of documents contained in the data set. | documents | array of [`Document`](#document)
+
+### examples
+
+```json
+{
+  "id" : "local_id",
+  "attribution" : { ... },
+  "persons" : [ { ... }, { ... } ],
+  "relationships" : [ { ... }, { ... }, ],
+  "sourceDescriptions" : [ { ... }, { ... } ],
+  "agents" : [ { ... } , { ... } ],
+  "events" : [ { ... } , { ... } ],
+  "documents" : [ { ... } , { ... } ],
+
+    ...possibility of extension elements...
+
+}
+```
+
+# 5. The GEDCOM X Object
+
+The body of a document compliant with the GEDCOM X JSON media type MUST be an instance of the
+GEDCOM X Object, which is defined by an JSON object of the `Gedcomx` data type.
+
+## Example
+
+The following is an example of the structure of a GEDCOM X XML Element:
+
+```json
+{
+  "id" : "local_id",
+  "attribution" : { ... },
+  "persons" : [ { ... }, { ... } ],
+  "relationships" : [ { ... }, { ... }, ],
+  "sourceDescriptions" : [ { ... }, { ... } ],
+  "agents" : [ { ... } , { ... } ],
+  "events" : [ { ... } , { ... } ],
+  "documents" : [ { ... } , { ... } ],
+
+    ...possibility of extension elements...
+
+}
+```
 
 
 # 6. Known JSON Extension Members

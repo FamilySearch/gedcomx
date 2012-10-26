@@ -32,6 +32,7 @@ public class GedcomxExamplesTest {
     gx.setPersons(Arrays.asList(george, martha));
     gx.setRelationships(Arrays.asList(marriage));
     gx.setSourceDescriptions(sources);
+    gx.setAgents(Arrays.asList(contributor));
     gx.setAttribution(new Attribution());
     gx.getAttribution().setContributor(new ResourceReference());
     gx.getAttribution().getContributor().setResource(URI.create("#" + contributor.getId()));

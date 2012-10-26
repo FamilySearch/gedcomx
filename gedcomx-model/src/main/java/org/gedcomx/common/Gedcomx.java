@@ -36,7 +36,7 @@ import java.util.List;
  */
 @XmlRootElement
 @JsonElementWrapper (name = "gedcomx")
-@XmlType ( name = "Gedcomx" )
+@XmlType ( name = "Gedcomx" , propOrder = { "attribution", "persons", "relationships", "sourceDescriptions", "agents", "events", "documents" })
 public class Gedcomx extends ExtensibleData {
 
   private String id;

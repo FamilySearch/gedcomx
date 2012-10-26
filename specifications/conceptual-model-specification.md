@@ -37,7 +37,15 @@ by [`http://gedcomx.org/date-model/v1`](https://github.com/FamilySearch/gedcomx/
 
 ## 1.2 Notational Conventions
 
-### 1.2.1 Data Types
+### 1.2.1 Keywords
+
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+"SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+document are to be interpreted as described in BCP 14,
+[RFC2119](http://tools.ietf.org/html/rfc2119), as scoped to those conformance
+targets.
+
+### 1.2.2 Data Types and Data Instances
 
 This specification uses the term "data type" to refer to a formal description of
 a data structure, including the properties that define valid instances of the
@@ -59,24 +67,45 @@ Data types are defined by the following sections:
 3. The *properties* of the data type, which define the information the data type
    encapsulates.
 
+This specification uses the term "data instance" to refer to the notion of a particular
+instance, or instantiation, of a data type.
+
+<a id="uri"/>
+
+### 1.2.3 Controlled Vocabularies
+
+GEDCOM X defines a set of controlled vocabularies for the purposes of identifying the semantic
+context of data instances. A controlled vocabulary is often defined to create a set
+of "known types" of data instances such as facts, names, genders, etc. For example, a controlled
+vocabulary is specified to identify the set of known types of events so applications
+can share semantic context of the event.
+
+Elements of a controlled vocabulary are identified by URI.
+
+## 1.2.4 The URI Reference
+
+The Uniform Resource Identifier ("URI") is fundamental to the GEDCOM X conceptual model.
+The URI is used to identify both the data types and data instances. The
+URI is also used to identify elements of the controlled vocabularies defined by GEDCOM X.
+The URI is specified by [RFC 3986](http://tools.ietf.org/html/rfc3986).
+
+GEDCOM X resources use the URI to reference other entities. For example, a GEDCOM X `Relationship`
+identifies a person in the relationship by referencing a URI that identifies the person. When a property
+(such as the `person1` property of `Relationship`) is of type `URI`, the value of the property
+is interpreted as a "URI Reference" as defined by [RFC 3986, section 4](http://tools.ietf.org/html/rfc3986#section-4).
+This specification uses the term "URI" to refer to both a "URI" and a "URI Reference" as
+defined by [RFC 3986](http://tools.ietf.org/html/rfc3986).
+
 <a id="formal-values" />
 
-### 1.2.2 Original, Normalized, and Standardized Values
+### 1.2.5 Original, Normalized, and Standardized Values
 
 When a property is identified as an "original value", the value of the property
 is interpreted as the literal value supplied by a user. If a property is identified as a
-"normalized value", the value of the property is assumed to be formally formatted, either by
-a user or by the application, for the purpose of easier processing, such as for display
+"normalized value", the value of the property is assumed to be formally formatted (either by
+a user or by the application) for the purpose of easier processing, such as for display
 purposes. When a property has been identified as a "standardized value", the value of the
-property resolves a discrete, machine-identifiable value based on a specific standard.
-
-### 1.2.3 Keywords
-
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-"SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
-document are to be interpreted as described in BCP 14, 
-[RFC2119](http://tools.ietf.org/html/rfc2119), as scoped to those conformance 
-targets.
+property resolves to a discrete, machine-identifiable value based on a specific standard.
 
 ## 1.3 Internationalization Considerations
 
@@ -107,34 +136,266 @@ the  MUST or REQUIRED and all of the SHOULD level requirements is said to be "un
 compliant"; and implementation that satisfies all of the MUST level requirements but not all of the
 SHOULD level requirements is said to be "conditionally compliant".
 
-# 2. Common Data Types
+# 2. Top-Level Data Types
 
-Many data types of the GEDCOM X conceptual model share common structures. This section
-defines the data types of those shared structures and their requirements for convenient
-reference by the other data type definitions.
+The data types in this section are designated as "top-level" data types because they define the
+top-level units of genealogical data. A GEDCOM X data set is defined as a collection of instances
+of top-level data types. The definitions of top-level data types stand separately
+from the definitions of other top-level data types and the lifecycle of instances of these data
+types is distinct from the lifecycle of instances of the other top-level data types.
+
+<a id="person"/>
+
+## 2.1 The "Person" Data Type
+
+The `Person` data type defines a description of a person.
+
+### identifier
+
+The identifier for the `Person` data type is:
+
+`http://gedcomx.org/v1/Person`
+
+### extension
+
+This data type extends the following data type:
+
+`http://gedcomx.org/v1/Conclusion`
+
+### properties
+
+name | description | data type
+-----|-------------|----------
+identifiers | Identifiers for the person. | List of [`http://gedcomx.org/v1/Identifier`](#identifier-type). Order is preserved. | OPTIONAL.
+living | Whether the person is considered living. | boolean | OPTIONAL.
+gender | The conclusion about the gender of the person. | [`http://gedcomx.org/v1/Gender`](#gender) | OPTIONAL.
+names | The conclusions about the names of the person. | List of [`http://gedcomx.org/v1/Name`](#name-conclusion). Order is preserved. | OPTIONAL.
+facts | The conclusions about the facts of the life of the person. | List of [`http://gedcomx.org/v1/Fact`](#fact-conclusion). Order is preserved. | OPTIONAL.
+attribution | The attribution of the person. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing data set (e.g. file) of the person is assumed.
 
 
-<a id="uri"/>
+<a id="relationship"/>
 
-## 2.1 The URI Reference
+## 2.2 The "Relationship" Data Type
 
-The Uniform Resource Identifier ("URI") is fundamental to the GEDCOM X conceptual model.
-The URI is used to identify specific resources, such as persons, relationships, and 
-sources. The URI is also used to identify the data structures that describe those resources
-and even the data types that define those data structures. The URI is specified by
-[RFC 3986](http://tools.ietf.org/html/rfc3986).
+The `Relationship` data type describes the relationship between two persons.
 
-GEDCOM X entities use the URI to reference other entities. For example, a GEDCOM X `Relationship`
-identifies a person in the relationship by referencing a URI to the person. When a property
-(such as the `person1` property of `Relationship`) is of type `URI`, the value of the property
-is interpreted as a "URI Reference" as defined by [RFC 3986, section 4](http://tools.ietf.org/html/rfc3986#section-4).
-This specification uses the term "URI" to refer to both a "URI" and a "URI Reference" as
-defined by [RFC 3986](http://tools.ietf.org/html/rfc3986).
+### identifier
+
+The identifier for the `Relationship` data type is:
+
+`http://gedcomx.org/v1/Relationship`
+
+### extension
+
+This data type extends the following data type:
+
+`http://gedcomx.org/v1/Conclusion`
+
+### properties
+
+name  | description | data type | constraints
+------|-------------|-----------|------------
+type | URI identifying the type of the relationship. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to a relationship type, and use of a [known relationship type](#known-relationship-types) is RECOMMENDED.
+person1 | Reference to the first person in the relationship. | [URI](#uri) | REQUIRED. MUST resolve to an instance of [`http://gedcomx.org/v1/Person`](#person)
+person2 | Reference to the second person in the relationship. | [URI](#uri) | REQUIRED. MUST resolve to an instance of [`http://gedcomx.org/v1/Person`](#person)
+facts | The conclusions about the facts of the life of the relationship. | List of [`http://gedcomx.org/v1/Fact`](#fact-conclusion). Order is preserved. | OPTIONAL.
+attribution | The attribution of the relationship. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing data set (e.g. file) of the relationship is assumed.
+
+Note: when a relationship type implies direction, the relationship is said to
+be *from* person1 *to* person2. For example, in a parent-child relationship, the
+`person1` property refers to the parent and the `person2` property refers to the
+child.
+
+<a id="known-relationship-types"/>
+
+### 2.2.1 Known Relationship Types
+
+The following relationship types are defined by GEDCOM X:
+
+URI | description
+----|-------------
+`http://gedcomx.org/Couple`| A relationship of a pair of persons.
+`http://gedcomx.org/ParentChild`| A relationship from a parent to a child.
+
+
+<a id="source-description"/>
+
+## 2.3 The "SourceDescription" Data Type
+
+The `SourceDescription` data type defines a description of a source of genealogical information.
+
+### identifier
+
+The identifier for the "SourceDescription" data type is:
+
+`http://gedcomx.org/v1/SourceDescription`
+
+### properties
+
+name  | description | data type | constraints
+------|-------------|-----------|------------
+id | An identifier for the data structure holding the source description data. The id is to be used as a "fragment identifier" as defined by [RFC 3986, Section 3.5](http://tools.ietf.org/html/rfc3986#section-3.5). As such, the constraints of the id are provided in the definition of the media type (e.g. XML, JSON) of the data structure. | string | OPTIONAL.
+citations | The citations for this source. At least one citation MUST be provided. If more than one citation is provided, citations are assumed to be given in order of preference, with the most preferred citation in the first position in the list. | [`http://gedcomx.org/v1/SourceCitation`](#source-citation) | REQUIRED.
+about | A uniform resource identifier (URI) for the resource being described. | [URI](#uri) | OPTIONAL.
+mediator | A reference to the entity that mediates access to the described source. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to an instance of [`http://gedcomx.org/v1/Agent`](#agent).
+sources | A list of references to any sources from which this source is derived. | List of [`http://gedcomx.org/v1/SourceReference`](#source-reference) | OPTIONAL.
+extractedConclusions | A list of references to any conclusions that were extracted from this source, to be analyzed and evaluated atomically within on context of the source. | [URI](#uri) | OPTIONAL.
+componentOf | A reference to the source that contains this source, i.e. its parent context. Used when the description of a source is not complete without the description of its parent (or containing) source. | [`http://gedcomx.org/v1/SourceReference`](#source-reference) | OPTIONAL.
+titles | The display names for this source. If more than one title is provided, titles are assumed to be given in order of preference, with the most preferred title in the first position in the list. | List of [`http://gedcomx.org/TextValue`](#text-value) | OPTIONAL.
+notes  | A list of notes about a source. | List of [`http://gedcomx.org/Note`](#note) | OPTIONAL.
+attribution | The attribution of this source description. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing data set (e.g. file) of the source description is assumed.
+
+<a id="agent"/>
+
+## 2.4 The "Agent" Data Type
+
+The `Agent` data type defines a living entity, such as a genealogical researcher, user of software, or organization.
+
+### identifier
+
+The identifier for the `Agent` data type is:
+
+`http://gedcomx.org/v1/Agent`
+
+### properties
+
+name  | description | data type | constraints
+------|-------------|-----------|------------
+id | An identifier for the data structure holding the agent data. The id is to be used as a "fragment identifier" as defined by [RFC 3986, Section 3.5](http://tools.ietf.org/html/rfc3986#section-3.5). As such, the constraints of the id are provided in the definition of the media type (e.g. XML, JSON) of the data structure. | string | OPTIONAL.
+identifiers | Identifiers for the agent. When an identifier for an agent is also an identifier for a person, the data in the person describes the agent. | List of [`http://gedcomx.org/v1/Identifier`](#identifier-type). Order is preserved. | OPTIONAL.
+names | The names of the person or organization. If more than one name is provided, names are assumed to be given in order of preference, with the most preferred name in the first position in the list. | List of [`http://gedcomx.org/TextValue`](#text-value) | OPTIONAL.
+homepage | The homepage of the person or organization. | [URI](#uri) | OPTIONAL.
+openid  | The [openid](http://openid.net/) of the person or organization. | [URI](#uri) | OPTIONAL.
+accounts  | The online accounts of the person or organization. | List of [`http://gedcomx.org/v1/OnlineAccount`](#online-account). Order is preserved. | OPTIONAL.
+emails  | The email addresses of the person or organization. | List of [URI](#uri) - MUST resolve to a valid e-mail address (e.g. "mailto:someone@gedcomx.org"). Order is preserved. | OPTIONAL.
+phones  | The phones (voice, fax, mobile) of the person or organization. | List of [URI](#uri) - MUST resolve to a valid phone number (e.g. "tel:+1-201-555-0123"). Order is preserved. | OPTIONAL.
+addresses  | The addresses of the person or organization. | List of [`http://gedcomx.org/v1/Address`](#address). Order is preserved. | OPTIONAL.
+
+
+<a id="event"/>
+
+## 2.5 The "Event" Data Type
+
+The `Event` data type defines a description of a historical event.
+
+### identifier
+
+The identifier for the `Event` data type is:
+
+`http://gedcomx.org/v1/Event`
+
+### extension
+
+This data type extends the following data type:
+
+`http://gedcomx.org/v1/Conclusion`
+
+### properties
+
+name  | description | data type | constraints
+------|-------------|-----------|------------
+type | URI identifying the type of the event. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to an event type, and use of a [known event type](#known-event-types) is RECOMMENDED.
+date | The date of the event. | [`http://gedcomx.org/v1/Date`](#conclusion-date) | OPTIONAL.
+place | The place of the event. | [`http://gedcomx.org/v1/Place`](#conclusion-place) | OPTIONAL.
+roles | The roles of the persons in the event. | List of [`http://gedcomx.org/v1/EventRole`](#conclusion-event-role). Order is preserved. | OPTIONAL.
+attribution | The attribution of the event. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing data set (e.g. file) of the event is assumed.
+
+<a id="known-event-types"/>
+
+### 2.5.1 Known Event Types
+
+The following event types are defined by GEDCOM X:
+
+URI | description
+----|------------
+`http://gedcomx.org/Adoption` | An adoption event.
+`http://gedcomx.org/AdultChristening` | An adult christening event.
+`http://gedcomx.org/Annulment` | An annulment event of a marriage.
+`http://gedcomx.org/Baptism` | A baptism event.
+`http://gedcomx.org/BarMitzvah` | A bar mitzvah event.
+`http://gedcomx.org/BatMitzvah` | A bat mitzvah event.
+`http://gedcomx.org/Birth` | A birth event.
+`http://gedcomx.org/Blessing` | A an official blessing event, such as at the hands of a clergy member or at another religious rite.
+`http://gedcomx.org/Burial` | A burial event.
+`http://gedcomx.org/Census` | A census event.
+`http://gedcomx.org/Christening` | A christening event *at birth*. Note: use `AdultChristening` for a christening event as an adult.
+`http://gedcomx.org/Circumcision` | A circumcision event.
+`http://gedcomx.org/Confirmation` | A confirmation event (or other rite of initiation) in a church or religion.
+`http://gedcomx.org/Cremation` | A cremation event after death.
+`http://gedcomx.org/Death` | A death event.
+`http://gedcomx.org/Divorce` | A divorce event.
+`http://gedcomx.org/DivorceFiling` | A divorce filing event.
+`http://gedcomx.org/Education` | A education or an educational achievement event (e.g. diploma, graduation, scholarship, etc.).
+`http://gedcomx.org/Engagement` | An engagement to be married event.
+`http://gedcomx.org/Emigration` | An emigration event.
+`http://gedcomx.org/Excommunication` | An excommunication event from a church.
+`http://gedcomx.org/FirstCommunion` | A first communion event.
+`http://gedcomx.org/Funeral` | A funeral event.
+`http://gedcomx.org/Immigration` | An immigration event.
+`http://gedcomx.org/LandTransation` | A land transaction event.
+`http://gedcomx.org/Marriage` | A marriage event.
+`http://gedcomx.org/MilitaryAward` | A military award event.
+`http://gedcomx.org/MilitaryDischarge` | A military discharge event.
+`http://gedcomx.org/Mission` | A mission event.
+`http://gedcomx.org/MoveFrom` | An event of a move (i.e. change of residence) from a location.
+`http://gedcomx.org/MoveTo` | An event of a move (i.e. change of residence) to a location.
+`http://gedcomx.org/Naturalization` | A naturalization event (i.e. acquisition of citizenship and nationality).
+`http://gedcomx.org/Ordination` | An ordination event.
+`http://gedcomx.org/Retirement` | A retirement event.
+
+
+<a id="document"/>
+
+## 2.6 The "Document" Data Type
+
+The `Document` data type defines the base conceptual model for genealogical conclusions that are managed as textual documents.
+
+### identifier
+
+The identifier for the `Document` data type is:
+
+`http://gedcomx.org/v1/Document`
+
+### extension
+
+This data type extends the following data type:
+
+`http://gedcomx.org/v1/Conclusion`
+
+### properties
+
+name  | description | data type | constraints
+------|-------------|-----------|------------
+type | URI identifying the type of the document. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to a document type, and use of a [known document type](#known-document-types) is RECOMMENDED.
+text | The text of the document. | string | REQUIRED.
+attribution | The attribution of the document. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing data set (e.g. file) of the document is assumed.
+
+<a id="known-document-types"/>
+
+### 2.6.1 Known Document Types
+
+The following gender types are defined by GEDCOM X:
+
+URI | description
+----|-------------
+`http://gedcomx.org/Abstract` | The document is an abstract of a record or document.
+`http://gedcomx.org/Transcription` | The document is a transcription of a record or document.
+`http://gedcomx.org/Translation` | The document is a translation of a record or document.
+`http://gedcomx.org/Analysis` | The document is an analysis done by a researcher, often used as a genealogical proof statement.
+
+
+# 3. Component-Level Data Types
+
+The data types in this section are designated as "component-level" data types because they are
+designed to be referenced and re-used by other data types, most notably the top-level data types.
+The lifecycle of instances of these data types is generally tied to the lifecycle of instances of
+a top-level data type.
 
 <a id="identifier-type"/>
 
 
-## 2.2 The "Identifier" Data Type
+## 3.1 The "Identifier" Data Type
 
 The `Identifier` data type defines the data structure used to supply an identifier of a 
 genealogical resource in a specific data set.
@@ -184,7 +445,7 @@ URI | description
 
 <a id="attribution"/>
 
-## 2.3 The "Attribution" Data Type
+## 3.2 The "Attribution" Data Type
 
 The `Attribution` data type defines the data structure used to attribute _who_, _when_, and _why_ to
 genealogical data. Data is attributed to the agent who made the _latest significant change_ to the nature
@@ -198,7 +459,7 @@ might take a fine-grained approach, tracking attribution at the level of names, 
 applications might simply provide attribution for a large set of data, such as an entire data tree. GEDCOM X explicitly
 defines attribution for top-level entities such as persons, relationships, and documents, but also recognizes attribution
 as an extension property that can be applied at a finer level of granularity. (For more information about extension properties,
-see Section 6). For all data types where attribution explicitly recognized, it is an OPTIONAL property.
+see Section 6). For all data types where attribution is explicitly recognized, it is an OPTIONAL property.
 
 If data is not explicitly attributed, the attribution for the data is assumed to be the attribution for the containing
 data. For example, if no attribution is provided for the name of a person (as an extension property of the name), then the
@@ -215,7 +476,7 @@ The identifier for the "Attribution" data type is:
 
 name  | description | data type | constraints
 ------|-------------|-----------|------------
-contributor | Reference to the contributor to whom the attributed data is attributed. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to an instance of [`http://gedcomx.org/v1/Agent`](#agent).
+contributor | Reference to the agent to whom the attributed data is attributed. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to an instance of [`http://gedcomx.org/v1/Agent`](#agent).
 modified | Timestamp of when the attributed data was contributed. | timestamp | OPTIONAL.
 changeMessage | A statement of why the attributed data is being provided by the contributor. | string | OPTIONAL.
 
@@ -226,7 +487,7 @@ todo:
 
 <a id="note"/>
 
-## 2.4 The "Note" Data Type
+## 3.3 The "Note" Data Type
 
 The `Note` data type defines a note that was contributed from genealogical research.
 
@@ -250,9 +511,9 @@ attribution | The attribution of this note. | [`http://gedcomx.org/Attribution`]
 
 <a id="text-value"/>
 
-## 2.5 The "TextValue" Data Type
+## 3.4 The "TextValue" Data Type
 
-The `TextValue` data type defines a literal value.
+The `TextValue` data type defines a literal text value.
 
 The `TextValue` data type does NOT support extension properties (see [Extension Properties](#extension-properties)).
 
@@ -266,52 +527,13 @@ The identifier for the "TextValue" data type is:
 
 name  | description | data type | constraints
 ------|-------------|-----------|------------
-lang | The locale identifier for the value of the text. | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag | OPTIONAL. If not provided, the locale of the current user of the data is assumed.
+lang | The locale identifier for the value of the text. | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag | OPTIONAL. If not provided, the local of the containing resource (or containing data set) of the text value the data is assumed.
 value | The literal value. | string | REQUIRED.
 
 
-
-# 3. Data Types for Describing Sources
-
-Citing sound evidence is a critical component to the exchange of genealogical data. The source of
-a piece of genealogical data has to be completely and accurately described in order to be
-consistently evaluated by other genealogical researchers. Many sources do not have a digital
-representation (e.g. books or other physical artifacts). Sources are instead _described_
-and their _description_ is provided as the digital representation of a source.
-
-This section defines the data types that are used for describing and referencing sources.
-
-
-<a id="source-description"/>
-
-## 3.1 The "SourceDescription" Data Type
-
-The `SourceDescription` data type defines a description of a source.
-
-### identifier
-
-The identifier for the "SourceDescription" data type is:
-
-`http://gedcomx.org/v1/SourceDescription`
-
-### properties
-
-name  | description | data type | constraints
-------|-------------|-----------|------------
-id | An identifier for the data structure holding the source description data. The id is to be used as a "fragment identifier" as defined by [RFC 3986, Section 3.5](http://tools.ietf.org/html/rfc3986#section-3.5). As such, the constraints of the id are provided in the definition of the media type (e.g. XML, JSON) of the data structure. | string | OPTIONAL.
-citations | The citations for this source. At least one citation MUST be provided. If more than one citation is provided, citations are assumed to be given in order of preference, with the most preferred citation in the first position in the list. | [`http://gedcomx.org/v1/SourceCitation`](#source-citation) | REQUIRED.
-about | A uniform resource identifier (URI) for the resource being described. | [URI](#uri) | OPTIONAL.
-mediator | A reference to the entity that mediates access to the described source. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to an instance of [`http://gedcomx.org/v1/Agent`](#agent).
-sources | A list of references to any sources from which this source is derived. | List of [`http://gedcomx.org/v1/SourceReference`](#source-reference) | OPTIONAL.
-extractedConclusions | A list of references to any conclusions that were extracted from this source, to be analyzed and evaluated atomically within on context of the source. | [URI](#uri) | OPTIONAL.
-componentOf | A reference to the source that contains this source, i.e. its parent context. Used when the description of a source is not complete without the description of its parent (or containing) source. | [`http://gedcomx.org/v1/SourceReference`](#source-reference) | OPTIONAL.
-titles | The display names for this source. If more than one title is provided, titles are assumed to be given in order of preference, with the most preferred title in the first position in the list. | List of [`http://gedcomx.org/TextValue`](#text-value) | OPTIONAL.
-notes  | A list of notes about a source. | List of [`http://gedcomx.org/Note`](#note) | OPTIONAL.
-attribution | The attribution of this source description. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing data set (e.g. file) of the source description is assumed.
-
 <a id="source-citation"/>
 
-## 3.2 The "SourceCitation" Data Type
+## 3.5 The "SourceCitation" Data Type
 
 The `SourceCitation` data type defines a container for the metadata necessary to identify a source(s)
 and from which bibliographic citation strings may be rendered.
@@ -326,14 +548,14 @@ The identifier for the "SourceCitation" data type is:
 
 name  | description | data type | constraints
 ------|-------------|-----------|------------
-lang | The locale identifier for the citation. | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag | OPTIONAL. If not provided, the locale of the current user of the data is assumed.
+lang | The locale identifier for the citation. | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag | OPTIONAL. If not provided, the locale of the data set containing the citation is assumed.
 value | A rendering of the full (working) citation as a string. | string | REQUIRED.
 citationTemplate | The identifier of the citation template by which this citation may be interpreted. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to an instance of [`http://gedcomx.org/v1/CitationTemplate`](#citation-template).
 fields  | A list of citation fields about a source. | List of [`http://gedcomx.org/v1/CitationField`](#citation-field) | OPTIONAL.
 
 <a id="citation-field"/>
 
-## 3.3 The "CitationField" Data Type
+## 3.6 The "CitationField" Data Type
 
 The `CitationField` data type defines a piece of metadata (e.g., author, volume, page, publisher, etc.)
 necessary to identify a source.
@@ -356,11 +578,11 @@ value | The value of the citation detail. | string | REQUIRED.
 
 <a id="source-reference"/>
 
-## 3.4 The "SourceReference" Data Type
+## 3.7 The "SourceReference" Data Type
 
-The `SourceReference` data type defines a reference to a source.  A genealogical conclusion or a
-derivate source [the referring object -- the object holding the `SourceReference` instance] cites
-its supporting source(s) [the target source(s)] using an instance(s) of `SourceReference`.
+The `SourceReference` data type defines a reference to a source.  For example a genealogical conclusion
+or a derivative source is the referring object (i.e. the object holding the `SourceReference` instance),
+that cites its supporting source(s) (i.e. the target source(s)) using an instance(s) of `SourceReference`.
 
 ### identifier
 
@@ -381,7 +603,9 @@ todo:
 
 <a id="citation-template"/>
 
-## 3.5 The "CitationTemplate" Data Type
+## 3.8 The "CitationTemplate" Data Type
+
+TBD
 
 todo: define citation templates and any associated infrastructure
 
@@ -432,16 +656,9 @@ at http://sourcetemplates.org/ when we define this portion of the specification.
 </table>
 
 
-
-# 4. Data Types for Describing Contributors
-
-Genealogical research is performed and data is gathered by a living person or organization.
-This section describes the data types that are used to provide information about
-contributors of genealogical data.
-
 <a id="online-account"/>
 
-## 4.1 The "OnlineAccount" Data Type
+## 3.9 The "OnlineAccount" Data Type
 
 The `OnlineAccount` data type defines a description of an account in an online web application.
 
@@ -460,7 +677,7 @@ accountName | The name, label, or id associating the owner of the account with t
 
 <a id="address"/>
 
-## 4.2 The "Address" Data Type
+## 3.10 The "Address" Data Type
 
 The `Address` data type defines a street address of a person or organization.
 
@@ -484,42 +701,9 @@ street2 | The street (second line). | string | OPTIONAL.
 street3 | The street (third line). | string | OPTIONAL.
 
 
-<a id="agent"/>
-
-## 4.3 The "Agent" Data Type
-
-The `Agent` data type defines a living entity, such as a person (user) or organization.
-
-### identifier
-
-The identifier for the `Agent` data type is:
-
-`http://gedcomx.org/v1/Agent`
-
-### properties
-
-name  | description | data type | constraints
-------|-------------|-----------|------------
-id | An identifier for the data structure holding the agent data. The id is to be used as a "fragment identifier" as defined by [RFC 3986, Section 3.5](http://tools.ietf.org/html/rfc3986#section-3.5). As such, the constraints of the id are provided in the definition of the media type (e.g. XML, JSON) of the data structure. | string | OPTIONAL.
-identifiers | Identifiers for the agent. When an identifier for an agent is also an identifier for a person, the data in the person describes the agent. | List of [`http://gedcomx.org/v1/Identifier`](#identifier-type). Order is preserved. | OPTIONAL.
-names | The names of the person or organization. If more than one name is provided, names are assumed to be given in order of preference, with the most preferred name in the first position in the list. | List of [`http://gedcomx.org/TextValue`](#text-value) | OPTIONAL.
-homepage | The homepage of the person or organization. | [URI](#uri) | OPTIONAL.
-openid  | The [openid](http://openid.net/) of the person or organization. | [URI](#uri) | OPTIONAL.
-accounts  | The online accounts of the person or organization. | List of [`http://gedcomx.org/v1/OnlineAccount`](#online-account). Order is preserved. | OPTIONAL.
-emails  | The email addresses of the person or organization. | List of [URI](#uri) - MUST resolve to a valid e-mail address (e.g. "mailto:someone@gedcomx.org"). Order is preserved. | OPTIONAL.
-phones  | The phones (voice, fax, mobile) of the person or organization. | List of [URI](#uri) - MUST resolve to a valid phone number (e.g. "tel:+1-201-555-0123"). Order is preserved. | OPTIONAL.
-addresses  | The addresses of the person or organization. | List of [`http://gedcomx.org/v1/Address`](#address). Order is preserved. | OPTIONAL.
-
-
-
-# 5. Data Types for Describing Conclusions
-
-This section describes the data types that are used to define genealogical conclusions.
-
-
 <a id="conclusion"/>
 
-## 5.1 The "Conclusion" Data Type
+## 3.11 The "Conclusion" Data Type
 
 The `Conclusion` data type defines the base conceptual model for basic genealogical conclusions.
 
@@ -541,7 +725,7 @@ notes  | A list of notes about a conclusion. | List of [`http://gedcomx.org/Note
 
 <a id="known-confidence-levels"/>
 
-### known confidence levels
+### 3.11.1 Known Confidence Levels
 
 The following confidence levels are defined by GEDCOM X. For more information, refer to
 Mills, Elizabeth Shown. "Fundamentals of Evidence Analysis." <i>Evidence Explained.</i> 2nd ed.
@@ -556,51 +740,12 @@ URI | description
 `http://gedcomx.org/Apparently`|The contributor has formed an impression or presumption, typically based upon common experience, but has not tested the matter.
 `http://gedcomx.org/Perhaps`|The contributor suggests that an idea is plausible, although it remains to be tested.
 
-<a id="document"/>
-
-## 5.2 The "Document" Data Type
-
-The `Document` data type defines the base conceptual model for genealogical conclusions that are managed as textual documents.  The `Document` data type extends the `Conclusion` data type.
-
-### identifier
-
-The identifier for the `Document` data type is:
-
-`http://gedcomx.org/v1/Document`
-
-### extension
-
-This data type extends the following data type:
-
-`http://gedcomx.org/v1/Conclusion`
-
-### properties
-
-name  | description | data type | constraints
-------|-------------|-----------|------------
-type | URI identifying the type of the document. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to a document type, and use of a [known document type](#known-document-types) is RECOMMENDED.
-text | The text of the document. | string | REQUIRED.
-attribution | The attribution of the document. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing data set (e.g. file) of the document is assumed.
-
-<a id="known-document-types"/>
-
-### known document types
-
-The following gender types are defined by GEDCOM X:
-
-URI | description
-----|-------------
-`http://gedcomx.org/Abstract` | The document is an abstract of a record or document.
-`http://gedcomx.org/Transcription` | The document is a transcription of a record or document.
-`http://gedcomx.org/Translation` | The document is a translation of a record or document.
-`http://gedcomx.org/Analysis` | The document is an analysis done by a researcher, often used as a genealogical proof statement.
 
 <a id="gender-conclusion"/>
 
-## 5.3 The "Gender" Data Type
+## 3.12 The "Gender" Data Type
 
-The `Gender` data type defines a conclusion about the gender of a person. the `Gender` data type
-extends the `Conclusion` data type.
+The `Gender` data type defines a conclusion about the gender of a person.
 
 ### identifier
 
@@ -618,11 +763,12 @@ This data type extends the following data type:
 
 name  | description | data type | constraints
 ------|-------------|-----------|------------
-type | URI identifying the type of the gender. | [URI](#uri) | REQUIRED. MUST resolve to a gender type, and use of a [known gender type](#known-gender-types) is RECOMMENDED.
+type  | URI identifying the type of the gender. | [URI](#uri) | REQUIRED. MUST resolve to a gender type, and use of a [known gender type](#known-gender-types) is RECOMMENDED.
+
 
 <a id="known-gender-types"/>
 
-### known gender types
+### 3.12.1 Known Gender Types
 
 The following gender types are defined by GEDCOM X:
 
@@ -635,17 +781,24 @@ URI | description
 
 <a id="name-conclusion"/>
 
-## 5.4 The "Name" Data Type
+## 3.13 The "Name" Data Type
 
-The `Name` data type defines a conclusion about a name of a person. The `Name` data type extends the `Conclusion` data type.
+The `Name` data type defines a conclusion about a name of a person.
 
-A `Name` is intended to represent a single variant of a person's name.  This means that nicknames, spelling variations, or other name variants (often distinguishable by a name type) should be modeled with separate instances of `Name`.
+A `Name` is intended to represent a single variant of a person's name.  This means that nicknames, spelling variations,
+or other name variants (often distinguishable by a name type) should be modeled with separate instances of `Name`.
 
-The name forms of a name contain representations of this name.  A `Name` MUST contain at least one name form, usually a representation of the name that is considered proper and well formed in the person's native, historical cultural context.  Other name forms MAY be included, which can be used to represent this name in contexts where the native name form is not easily recognized and interpreted.  Alternate forms are more likely in situations where conclusions are being analyzed across cultural context boundaries that have both language and writing script differences.
+The name forms of a name contain representations of this name.  A `Name` MUST contain at least one name form, presumably
+a representation of the name that is considered proper and well formed in the person's native, historical cultural context.
+Other name forms MAY be included, which can be used to represent this name in contexts where the native name form is not
+easily recognized and interpreted.  Alternate forms are more likely in situations where conclusions are being analyzed
+across cultural context boundaries that have both language and writing script differences.
 
-For example, a Korean name has a native Korean form, but can also have a Chinese form and a Roman/Latin form -- three different name forms, but each representing the same name.
+For example, a Korean name has a native Korean form, but can also have a Chinese form and a Roman/Latin form -- three
+different name forms, but each representing the same name.
 
-If more than one name form is provided, included name forms are assumed to be given in order of preference, with the most preferred name form in the first position in the list.
+If more than one name form is provided, included name forms are assumed to be given in order of preference, with the
+most preferred name form in the first position in the list.
 
 ### identifier
 
@@ -670,11 +823,14 @@ nameForms | The name form(s) that best express this name, usually representation
 
 ### examples
 
-Consider the following: a Russian person with the birth name "Александр" (rendered as "Alexander" in English and in a Latin script) that also went by this name's common nickname, "Саша" (rendered as "Sasha" in English).
+Consider the following: a Russian person with the birth name "Александр" (rendered as "Alexander" in English and in a Latin script) that
+also went by this name's common nickname, "Саша" (rendered as "Sasha" in English).
 
-It is tempting to think that this situation should be modeled with one `Name` instance that has several alternate `NameForm`s.  The model is __*not*__ intended to be used in this way. Instead, this person's names ought to be modeled such that the
-birth name and the nickname are modeled as two separate `Name` instances: one instance for the birth name, and one for the nickname.  The `type` property MAY be provided to distinguish the birth name from the nickname.
-Each `Name` instance MAY have two `NameForm` instances: one with the native form of the name and another with the alternate form.  Using an informal pseudo code, it might look something like the following:
+It is tempting to think that this situation should be modeled with one `Name` instance that has several alternate `NameForm`s.  The model is
+__*not*__ intended to be used in this way. Instead, this person's names ought to be modeled such that the birth name and the nickname are modeled
+as two separate `Name` instances: one instance for the birth name, and one for the nickname.  The `type` property MAY be provided to distinguish
+the birth name from the nickname. Each `Name` instance MAY have two `NameForm` instances: one with the native form of the name and another with
+the alternate form.  Using an informal pseudo code, it might look something like the following:
 
 ```
 Name1.type=http://gedcomx.org/BirthName
@@ -689,7 +845,7 @@ Name2.nameForms[1].fullText=Sasha
 ```
 <a id="known-name-types"/>
 
-### known name types
+### 3.13.1 Known Name Types
 
 The following name types are defined by GEDCOM X:
 
@@ -707,7 +863,7 @@ URI | description
 
 <a id="fact-conclusion"/>
 
-## 5.5 The "Fact" Data Type
+## 3.14 The "Fact" Data Type
 
 The `Fact` data type defines a conclusion about a fact of the life of a person or
 the nature of a relationship. The `Fact` data type extends the `Conclusion` data type.
@@ -735,7 +891,7 @@ value | The original value of the fact as supplied by the contributor. | string 
 
 <a id="known-fact-types"/>
 
-### known fact types
+### 3.14.1 Known Fact Types
 
 The following fact types are defined by GEDCOM X:
 
@@ -810,86 +966,9 @@ URI | description | scope
 `http://gedcomx.org/Step`| A fact about the step relationship between a parent and a child. | parent-child relationship
 
 
-<a id="person"/>
-
-## 5.6 The "Person" Data Type
-
-The `Person` data type defines a description of a person. The `Person` data type
-extends the `Conclusion` data type.
-
-### identifier
-
-The identifier for the `Person` data type is:
-
-`http://gedcomx.org/v1/Person`
-
-### extension
-
-This data type extends the following data type:
-
-`http://gedcomx.org/v1/Conclusion`
-
-### properties
-
-name | description | data type
------|-------------|----------
-identifiers | Identifiers for the person. | List of [`http://gedcomx.org/v1/Identifier`](#identifier-type). Order is preserved. | OPTIONAL.
-living | Whether the person is considered living. | boolean | OPTIONAL.
-gender | The conclusion about the gender of the person. | [`http://gedcomx.org/v1/Gender`](#gender) | OPTIONAL.
-names | The conclusions about the names of the person. | List of [`http://gedcomx.org/v1/Name`](#name-conclusion). Order is preserved. | OPTIONAL.
-facts | The conclusions about the facts of the life of the person. | List of [`http://gedcomx.org/v1/Fact`](#fact-conclusion). Order is preserved. | OPTIONAL.
-attribution | The attribution of the person. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing data set (e.g. file) of the person is assumed.
-
-
-<a id="relationship"/>
-
-## 5.7 The "Relationship" Data Type
-
-The `Relationship` data type describes the relationship between two persons. The `Relationship` data type
-extends the `Conclusion` data type.
-
-### identifier
-
-The identifier for the `Relationship` data type is:
-
-`http://gedcomx.org/v1/Relationship`
-
-### extension
-
-This data type extends the following data type:
-
-`http://gedcomx.org/v1/Conclusion`
-
-### properties
-
-name  | description | data type | constraints
-------|-------------|-----------|------------
-type | URI identifying the type of the relationship. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to a relationship type, and use of a [known relationship type](#known-relationship-types) is RECOMMENDED.
-person1 | Reference to the first person in the relationship. | [URI](#uri) | REQUIRED. MUST resolve to an instance of [`http://gedcomx.org/v1/Person`](#person)
-person2 | Reference to the second person in the relationship. | [URI](#uri) | REQUIRED. MUST resolve to an instance of [`http://gedcomx.org/v1/Person`](#person)
-facts | The conclusions about the facts of the life of the relationship. | List of [`http://gedcomx.org/v1/Fact`](#fact-conclusion). Order is preserved. | OPTIONAL.
-attribution | The attribution of the relationship. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing data set (e.g. file) of the relationship is assumed.
-
-Note: when a relationship type implies direction, the relationship is said to
-be *from* person1 *to* person2. For example, in a parent-child relationship, the
-`person1` property refers to the parent and the `person2` property refers to the
-child.
-
-<a id="known-relationship-types"/>
-
-### known relationship types
-
-The following relationship types are defined by GEDCOM X:
-
-URI | description
-----|-------------
-`http://gedcomx.org/Couple`| A relationship of a couple.
-`http://gedcomx.org/ParentChild`| A relationship from a parent to a child.
-
-
 <a id="conclusion-event-role"/>
 
-## 5.8 The "EventRole" Data Type
+## 3.15 The "EventRole" Data Type
 
 The `EventRole` data type defines a role played in an event by a person.  The `EventRole` data type extends the `Conclusion` data type.
 
@@ -915,7 +994,7 @@ details | Details about the role of the person in the event. | string | OPTIONAL
 
 <a id="known-roles"/>
 
-### known role types
+### 3.15.1 Known Role Types
 
 The following role types are defined by GEDCOM X:
 
@@ -927,81 +1006,9 @@ URI | description
 `http://gedcomx.org/Witness`| A witness of the event.
 
 
-<a id="event"/>
-
-## 5.9 The "Event" Data Type
-
-The `Event` data type defines a description of a historical event. The `Event` data type
-extends the `Conclusion` data type.
-
-### identifier
-
-The identifier for the `Event` data type is:
-
-`http://gedcomx.org/v1/Event`
-
-### extension
-
-This data type extends the following data type:
-
-`http://gedcomx.org/v1/Conclusion`
-
-### properties
-
-name  | description | data type | constraints
-------|-------------|-----------|------------
-type | URI identifying the type of the event. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to an event type, and use of a [known event type](#known-event-types) is RECOMMENDED.
-date | The date of the event. | [`http://gedcomx.org/v1/Date`](#conclusion-date) | OPTIONAL.
-place | The place of the event. | [`http://gedcomx.org/v1/Place`](#conclusion-place) | OPTIONAL.
-roles | The roles of the persons in the event. | List of [`http://gedcomx.org/v1/EventRole`](#conclusion-event-role). Order is preserved. | OPTIONAL.
-attribution | The attribution of the event. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing data set (e.g. file) of the event is assumed.
-
-<a id="known-event-types"/>
-
-### known event types
-
-The following event types are defined by GEDCOM X:
-
-URI | description
-----|------------
-`http://gedcomx.org/Adoption` | An adoption event.
-`http://gedcomx.org/AdultChristening` | An adult christening event.
-`http://gedcomx.org/Annulment` | An annulment event of a marriage.
-`http://gedcomx.org/Baptism` | A baptism event.
-`http://gedcomx.org/BarMitzvah` | A bar mitzvah event.
-`http://gedcomx.org/BatMitzvah` | A bat mitzvah event.
-`http://gedcomx.org/Birth` | A birth event.
-`http://gedcomx.org/Blessing` | A an official blessing event, such as at the hands of a clergy member or at another religious rite.
-`http://gedcomx.org/Burial` | A burial event.
-`http://gedcomx.org/Census` | A census event.
-`http://gedcomx.org/Christening` | A christening event *at birth*. Note: use `AdultChristening` for a christening event as an adult.
-`http://gedcomx.org/Circumcision` | A circumcision event.
-`http://gedcomx.org/Confirmation` | A confirmation event (or other rite of initiation) in a church or religion.
-`http://gedcomx.org/Cremation` | A cremation event after death.
-`http://gedcomx.org/Death` | A death event.
-`http://gedcomx.org/Divorce` | A divorce event.
-`http://gedcomx.org/DivorceFiling` | A divorce filing event.
-`http://gedcomx.org/Education` | A education or an educational achievement event (e.g. diploma, graduation, scholarship, etc.).
-`http://gedcomx.org/Engagement` | An engagement to be married event.
-`http://gedcomx.org/Emigration` | An emigration event.
-`http://gedcomx.org/Excommunication` | An excommunication event from a church.
-`http://gedcomx.org/FirstCommunion` | A first communion event.
-`http://gedcomx.org/Funeral` | A funeral event.
-`http://gedcomx.org/Immigration` | An immigration event.
-`http://gedcomx.org/LandTransation` | A land transaction event.
-`http://gedcomx.org/Marriage` | A marriage event.
-`http://gedcomx.org/MilitaryAward` | A military award event.
-`http://gedcomx.org/MilitaryDischarge` | A military discharge event.
-`http://gedcomx.org/Mission` | A mission event.
-`http://gedcomx.org/MoveFrom` | An event of a move (i.e. change of residence) from a location.
-`http://gedcomx.org/MoveTo` | An event of a move (i.e. change of residence) to a location.
-`http://gedcomx.org/Naturalization` | A naturalization event (i.e. acquisition of citizenship and nationality).
-`http://gedcomx.org/Ordination` | An ordination event.
-`http://gedcomx.org/Retirement` | A retirement event.
-
 <a id="conclusion-date"/>
 
-## 5.10 The "Date" Data Type
+## 3.16 The "Date" Data Type
 
 The `Date` data type defines the value of a genealogical date.
 
@@ -1021,7 +1028,7 @@ formal | The standardized [formal value](#formal-values) of the date, formatted 
 
 <a id="conclusion-place"/>
 
-## 5.11 The "Place" Data Type
+## 3.17 The "Place" Data Type
 
 The `Place` data type defines the value of a genealogical place.
 
@@ -1042,7 +1049,7 @@ resource | Reference to the standardized resource describing the place. | [URI](
 
 <a id="name-part"/>
 
-## 5.12 The "NamePart" Data Type
+## 3.18 The "NamePart" Data Type
 
 The `NamePart` data type is used to model a portion of a full name, including the terms that make up that portion, and perhaps a name part qualifier (e.g., "given name" or "surname").
 
@@ -1065,7 +1072,7 @@ qualifiers | Type qualifiers to further describe the type of the name part. | Li
 
 <a id="known-name-part-types"/>
 
-### known name part types
+### 3.18.1 Known Name Part Types
 
 The following name part types are defined by GEDCOM X:
 
@@ -1103,17 +1110,24 @@ URI | description
 
 <a id="name-form"/>
 
-## 5.13 The "NameForm" Data Type
+## 3.19 The "NameForm" Data Type
 
-The `NameForm` data type defines a representation of a name (a "name form") within a given cultural context, such as a given language and script.
+The `NameForm` data type defines a representation of a name (a "name form") within a given cultural context,
+such as a given language and script.
 
-As names are captured (in records or in applications), the terms in the name are sometimes classified by type.  For example, a certificate of death might prompt for "given name(s)" and "surname". The `parts` list can be used to represent the terms in the name that have been classified.
+As names are captured (in records or in applications), the terms in the name are sometimes classified by type.
+For example, a certificate of death might prompt for "given name(s)" and "surname". The `parts` list can be
+used to represent the terms in the name that have been classified.
 
-If both a full rendering of the name and a list of parts are provided, there is no requirement that every term in the fully rendered name appear in the list of parts.
+If both a full rendering of the name and a list of parts are provided, it NOT REQUIRED that every
+term in the fully rendered name appear in the list of parts.
 
-Name parts in the `parts` list are to be ordered in the natural order they would be spoken in the given cultural context.
+Name parts in the `parts` list are presumed to be ordered in the natural order they would be spoken in the given
+cultural context.
 
-If a full rendering of the name is not provided (i.e., the name has only been expressed in `parts`), a full rendering of the name can be derived (sans punctuation) by concatenating, in order, each `NamePart.value` in the `parts` list, separating each part with the name part delimiter appropriate for the given `locale`.
+If a full rendering of the name is not provided (i.e., the name has only been expressed in `part`s), a full
+rendering of the name can be derived (sans punctuation) by concatenating, in order, each `NamePart.value` in the
+`parts` list, separating each part with the name part delimiter appropriate for the given `locale`.
 
 ### identifier
 
@@ -1131,7 +1145,9 @@ parts | The parts of the name form, ordered in the natural order they would be s
 
 ### examples
 
-Consider the following: the Russian name "Пётр Ильи́ч Чайко́вский" in the Cyrillic script, its Latin-script equivalent "Pyotr Ilyich Tchaikovsky", and its anglicised equivalent "Peter Ilyich Tchaikovsky".  Using an informal pseudo code, these name forms might be modeled as follows:
+Consider the following: the Russian name "Пётр Ильи́ч Чайко́вский" in the Cyrillic script, its Latin-scr
+ipt equivalent "Pyotr Ilyich Tchaikovsky", and its anglicised equivalent "Peter Ilyich Tchaikovsky".
+Using an informal pseudo code, these name forms might be modeled as follows:
 
 ```
 NameForm1.locale=ru-Cyrl
@@ -1169,7 +1185,7 @@ NameForm3.parts[2].value=Tchaikovsky
 ```
 
 
-# 6. Extensibility
+# 4. Extensibility
 
 ## Extensions from Non-GEDCOM X Vocabularies
 
@@ -1227,6 +1243,6 @@ a known data type, GEDCOM X recognizes the data URI scheme as defined by
 
 todo: data uri example
 
-# 7. Miscellaneous To Do
+# 5. Miscellaneous To Do
 
 todo: supply details about how GEDCOM X defines its evidence model.
