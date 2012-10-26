@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlType;
  * @author Ryan Heaton
  */
 @XmlRootElement ( name = "sourceReference" )
-@JsonElementWrapper ( name = "source-references" )
+@JsonElementWrapper ( name = "sourceReferences" )
 @XmlType ( name = "SourceReference" )
 public class SourceReference extends ExtensibleData implements Attributable {
 

@@ -31,7 +31,7 @@ import java.util.List;
  */
 @XmlRootElement
 @XmlType ( name = "SourceDescription", propOrder = { "citations", "mediator", "sources", "extractedConclusions", "componentOf", "titles", "notes", "attribution" } )
-@JsonElementWrapper ( name = "source-descriptions" )
+@JsonElementWrapper ( name = "sourceDescriptions" )
 public class SourceDescription extends ExtensibleData implements Attributable, HasNotes, ReferencesSources {
   private String id;
   private List<SourceCitation> citations;

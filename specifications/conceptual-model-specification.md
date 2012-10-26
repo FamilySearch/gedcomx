@@ -99,6 +99,13 @@ identified where multi-valued input is needed for the benefit of exchanging gene
 across cultural boundaries. Such cases include the need to input multiple name forms and the need
 to identify multiple titles for a source.
 
+## 1.4 Compliance
+
+An implementation of the GEDCOM X conceptual model is "non-compliant" if it fails to satisfy
+one or more of the MUST or REQUIRED level requirements. An implementation that satisfies all of
+the  MUST or REQUIRED and all of the SHOULD level requirements is said to be "unconditionally
+compliant"; and implementation that satisfies all of the MUST level requirements but not all of the
+SHOULD level requirements is said to be "conditionally compliant".
 
 # 2. Common Data Types
 
@@ -1218,8 +1225,8 @@ In the case where a user has supplied a title or description instead of selectin
 a known data type, GEDCOM X recognizes the data URI scheme as defined by
 [RFC 2397](http://tools.ietf.org/html/rfc2397).
 
-# 7. Miscellaneous To Do
+todo: data uri example
 
-todo: add details about which properties are required.
+# 7. Miscellaneous To Do
 
 todo: supply details about how GEDCOM X defines its evidence model.

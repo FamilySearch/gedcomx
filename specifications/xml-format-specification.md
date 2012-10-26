@@ -34,89 +34,112 @@ The identifier for this specification is:
 
 For convenience, the GEDCOM X XML Format may be referred to as "GEDCOM X XML 1.0".
 
+The media type defined by this specification is:
+
+`application/x-gedcom-v1+xml`
+
 This specification is depends on the conceptual model specification identified
 by [`http://gedcomx.org/conceptual-model/v1`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md).
 
 ## 1.2 Examples
 
-The following example shows the serialization of a [person data type](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md#person)
-in XML according to this specification:
+The following example shows an instance of a GEDCOM X serialization in accordance with this specification:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<person xmlns="http://gedcomx.org/v1/" xmlns:ns2="http://familysearch.org/v1/" id="BBB-BBBB">
-    <gender type="http://gedcomx.org/Male"/>
-    <name id="789">
-        <preferred>true</preferred>
-        <nameForm xml:lang="ru-Cyrl">
-            <ns2:customMarker userProvided="true"/>
-            <fullText>Никола́й Андре́евич Ри́мский-Ко́рсаков</fullText>
-            <part type="http://gedcomx.org/Given" value="Никола́й">
-                <qualifier resource="http://gedcomx.org/Primary"/>
-            </part>
-            <part type="http://gedcomx.org/Given" value="Андре́евич">
-                <qualifier resource="http://gedcomx.org/Secondary"/>
-            </part>
-            <part type="http://gedcomx.org/Surname" value="Ри́мский-Ко́рсаков"/>
-        </nameForm>
-        <nameForm xml:lang="ru-Latn">
-            <fullText>Nikolai Andreyevich Rimsky-Korsakov</fullText>
-            <part type="http://gedcomx.org/Given" value="Nikolai">
-                <qualifier resource="http://gedcomx.org/Primary"/>
-            </part>
-            <part type="http://gedcomx.org/Given" value="Andreyevich">
-                <qualifier resource="http://gedcomx.org/Secondary"/>
-            </part>
-            <part type="http://gedcomx.org/Surname" value="Rimsky-Korsakov"/>
-        </nameForm>
-    </name>
-    <fact type="http://gedcomx.org/Birth" id="123">
-        <date>
-            <original>March 18, 1844</original>
-            <formal>+1844-03-18</formal>
-        </date>
-        <place resource="https://familysearch.org/platform/places/12345">
-            <original>Tikhvin, Leningradskaya Oblast', Russia</original>
-        </place>
-    </fact>
-    <fact type="http://gedcomx.org/Death" id="456">
-        <date>
-            <original>June 21, 1908</original>
-            <formal>+1908-06-21T12:34:56</formal>
-        </date>
-        <place resource="https://familysearch.org/platform/places/67890">
-            <original>Luga, Russia</original>
-            <normalized>Luga, Novgorodskaya Oblast', Russia</normalized>
-        </place>
-    </fact>
-</person>
-```
-
-The following example shows the serialization of a relationship between two persons in
-XML according to this specification:
-
-```xml
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<relationship xmlns="http://gedcomx.org/v1/" type="http://gedcomx.org/Couple" id="CCC-CCCC">
+<gedcomx xmlns="http://gedcomx.org/v1/">
     <attribution>
-        <contributor resource="https://familysearch.org/platform/contributors/BCD-FGHJ"/>
-        <changeMessage>(justification here)</changeMessage>
+        <contributor resource="#GGG-GGGG"/>
     </attribution>
-    <source>
-        <sourceDescription resource="urn:srcDescId"/>
-    </source>
-    <person1 resource="https://familysearch.org/platform/persons/DDD-DDDD"/>
-    <person2 resource="https://familysearch.org/platform/persons/FFF-FFFF"/>
-    <fact type="http://gedcomx.org/Marriage" id="123">
-        <attribution>
-            <contributor resource="https://familysearch.org/platform/contributors/HHH-HHHH"/>
-        </attribution>
-        <date>
-            <original>January 6, 1759</original>
-            <formal>+1759-01-06</formal>
-        </date>
-    </fact>
-</relationship>
+    <person id="BBB-BBBB">
+        <source description="#EEE-EEEE"/>
+        <gender type="http://gedcomx.org/Male"/>
+        <name id="789">
+            <preferred>true</preferred>
+            <nameForm>
+                <fullText>George Washington</fullText>
+                <part type="http://gedcomx.org/Given" value="George"/>
+                <part type="http://gedcomx.org/Surname" value="Washington"/>
+            </nameForm>
+        </name>
+        <fact type="http://gedcomx.org/Birth" id="123">
+            <date>
+                <original>February 22, 1732</original>
+                <formal>+1732-02-22</formal>
+            </date>
+            <place>
+                <original>Pope's Creek, Westmoreland, Virginia, United States</original>
+                <normalized>Pope's Creek, Westmoreland, Virginia, United States</normalized>
+            </place>
+        </fact>
+        <fact type="http://gedcomx.org/Death" id="456">
+            <date>
+                <original>December 14, 1799</original>
+                <formal>+1799-12-14T22:00:00</formal>
+            </date>
+            <place>
+                <original>Mount Vernon, Virginia</original>
+                <normalized>Mount Vernon, Fairfax County, Virginia, United States</normalized>
+            </place>
+        </fact>
+    </person>
+    <person id="CCC-CCCC">
+        <source description="#FFF-FFFF"/>
+        <gender type="http://gedcomx.org/Male"/>
+        <name id="987">
+            <preferred>true</preferred>
+            <nameForm>
+                <fullText>Martha Dandridge Custis</fullText>
+                <part type="http://gedcomx.org/Given" value="Martha Dandridge"/>
+                <part type="http://gedcomx.org/Surname" value="Custis"/>
+            </nameForm>
+        </name>
+        <fact type="http://gedcomx.org/Birth" id="321">
+            <date>
+                <original>June 2, 1731</original>
+                <formal>+1731-06-02</formal>
+            </date>
+            <place>
+                <original>Chestnut Grove, Virginia</original>
+                <normalized>Chestnut Grove, New Kent, Virginia, United States</normalized>
+            </place>
+        </fact>
+        <fact type="http://gedcomx.org/Death" id="654">
+            <date>
+                <original>May 22, 1802</original>
+                <formal>+1802-05-22</formal>
+            </date>
+            <place>
+                <original>Mount Vernon, Virginia</original>
+                <normalized>Mount Vernon, Fairfax County, Virginia, United States</normalized>
+            </place>
+        </fact>
+    </person>
+    <relationship id="DDD-DDDD">
+        <source description="#FFF-FFFF"/>
+        <person1 resource="#BBB-BBBB"/>
+        <person2 resource="#CCC-CCCC"/>
+        <fact>
+            <date>
+                <original>January 6, 1759</original>
+                <formal>+01-06-1759</formal>
+            </date>
+            <place>
+                <original>White House Plantation</original>
+            </place>
+        </fact>
+    </relationship>
+    <sourceDescription about="http://en.wikipedia.org/wiki/George_washington" id="EEE-EEEE">
+        <citation>
+            <value>&quot;George Washington.&quot; Wikipedia, The Free Encyclopedia. Wikimedia Foundation, Inc. 24 October 2012.</value>
+        </citation>
+    </sourceDescription>
+    <sourceDescription about="http://en.wikipedia.org/wiki/Martha_washington" id="FFF-FFFF">
+        <citation>
+            <value>&quot;Martha Washington.&quot; Wikipedia, The Free Encyclopedia. Wikimedia Foundation, Inc. 24 October 2012.</value>
+        </citation>
+    </sourceDescription>
+</gedcomx>
 ```
 
 
@@ -145,6 +168,19 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
 document are to be interpreted as described in BCP 14,
 [RFC2119](http://tools.ietf.org/html/rfc2119), as scoped to those conformance
 targets.
+
+## 1.4 Compliance
+
+An implementation of the GEDCOM X conceptual model is "non-compliant" if it fails to satisfy
+one or more of the MUST or REQUIRED level requirements. An implementation that satisfies all of
+the  MUST or REQUIRED and all of the SHOULD level requirements is said to be "unconditionally
+compliant"; and implementation that satisfies all of the MUST level requirements but not all of the
+SHOULD level requirements is said to be "conditionally compliant".
+
+In addition to the compliance requirements provided by this specification, all compliance requirements
+provided by the GEDCOM X Conceptual Model identified by
+[`http://gedcomx.org/conceptual-model/v1`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md)
+are inherited.
 
 
 # 2. Common Data Types
@@ -958,7 +994,10 @@ gx:gender | [`gx:Gender`](#gender-conclusion)
 gx:agent| [`gx:Agent`](#agent)
 gx:sourceReference | [`gx:SourceReference`](#source-reference)
 gx:sourceDescription | [`gx:SourceDescription`](#source-description)
+gx:event | [`gx:Event`](#event)
 gx:document | [`gx:Document`](#document)
+gx:attribution | [`gx:Attribution`](#attribution)
+gx:note | [`gx:Note`](#note)
 
 
 <a id="fragment-ids"/>

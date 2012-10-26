@@ -34,112 +34,143 @@ The identifier for this specification is:
 
 For convenience, the GEDCOM X JSON Format may be referred to as "GEDCOM X JSON 1.0".
 
+The media type defined by this specification is:
+
+`application/x-gedcom-v1+json`
+
 This specification is depends on the conceptual model specification identified
 by [`http://gedcomx.org/conceptual-model/v1`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md).
 
 ## 1.2 Examples
 
-The following example shows the serialization of a [person data type](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md#person)
-in JSON according to this specification:
+The following example shows an instance of a GEDCOM X serialization in accordance with this specification:
 
 ```json
 {
-  "names" : [ {
-    "nameForms" : [ {
-      "parts" : [ {
-        "value" : "Никола́й",
-        "type" : "http://gedcomx.org/Given",
-        "qualifiers" : [ "http://gedcomx.org/Primary" ]
-      }, {
-        "value" : "Андре́евич",
-        "type" : "http://gedcomx.org/Given",
-        "qualifiers" : [ "http://gedcomx.org/Secondary" ]
-      }, {
-        "value" : "Ри́мский-Ко́рсаков",
-        "type" : "http://gedcomx.org/Surname"
-      } ],
-      "lang" : "ru-Cyrl",
-      "fullText" : "Никола́й Андре́евич Ри́мский-Ко́рсаков",
-      "http://familysearch.org/v1/customMarker" : [ {
-        "userProvided" : true
-      } ]
-    }, {
-      "parts" : [ {
-        "value" : "Nikolai",
-        "type" : "http://gedcomx.org/Given",
-        "qualifiers" : [ "http://gedcomx.org/Primary" ]
-      }, {
-        "value" : "Andreyevich",
-        "type" : "http://gedcomx.org/Given",
-        "qualifiers" : [ "http://gedcomx.org/Secondary" ]
-      }, {
-        "value" : "Rimsky-Korsakov",
-        "type" : "http://gedcomx.org/Surname"
-      } ],
-      "lang" : "ru-Latn",
-      "fullText" : "Nikolai Andreyevich Rimsky-Korsakov"
-    } ],
-    "preferred" : true,
-    "id" : "789"
-  } ],
-  "facts" : [ {
-    "type" : "http://gedcomx.org/Birth",
-    "date" : {
-      "original" : "March 18, 1844",
-      "formal" : "+1844-03-18"
-    },
-    "place" : {
-      "resource" : "https://familysearch.org/platform/places/12345",
-      "original" : "Tikhvin, Leningradskaya Oblast', Russia"
-    },
-    "id" : "123"
-  }, {
-    "type" : "http://gedcomx.org/Death",
-    "date" : {
-      "original" : "June 21, 1908",
-      "formal" : "+1908-06-21T12:34:56"
-    },
-    "place" : {
-      "resource" : "https://familysearch.org/platform/places/67890",
-      "original" : "Luga, Russia",
-      "normalized" : "Luga, Novgorodskaya Oblast', Russia"
-    },
-    "id" : "456"
-  } ],
-  "gender" : {
-    "type" : "http://gedcomx.org/Male"
-  },
-  "id" : "BBB-BBBB"
-}
-```
-
-The following example shows the serialization of a relationship between two persons in
-JSON according to this specification:
-
-```json
-{
-  "type" : "http://gedcomx.org/Couple",
-  "person1" : "https://familysearch.org/platform/persons/DDD-DDDD",
-  "person2" : "https://familysearch.org/platform/persons/FFF-FFFF",
-  "facts" : [ {
-    "type" : "http://gedcomx.org/Marriage",
-    "date" : {
-      "original" : "January 6, 1759",
-      "formal" : "+1759-01-06"
-    },
-    "id" : "123",
-    "attribution" : {
-      "contributor" : "https://familysearch.org/platform/contributors/HHH-HHHH"
-    }
-  } ],
-  "id" : "CCC-CCCC",
-  "sources" : [ {
-    "sourceDescription" : "urn:srcDescId"
-  } ],
   "attribution" : {
-    "contributor" : "https://familysearch.org/platform/contributors/BCD-FGHJ",
-    "changeMessage" : "(justification here)"
-  }
+    "contributor" : "#GGG-GGGG"
+  },
+  "persons" : [ {
+    "names" : [ {
+      "nameForms" : [ {
+        "fullText" : "George Washington",
+        "parts" : [ {
+          "value" : "George",
+          "type" : "http://gedcomx.org/Given"
+        }, {
+          "value" : "Washington",
+          "type" : "http://gedcomx.org/Surname"
+        } ]
+      } ],
+      "preferred" : true,
+      "id" : "789"
+    } ],
+    "gender" : {
+      "type" : "http://gedcomx.org/Male"
+    },
+    "facts" : [ {
+      "type" : "http://gedcomx.org/Birth",
+      "date" : {
+        "original" : "February 22, 1732",
+        "formal" : "+1732-02-22"
+      },
+      "place" : {
+        "original" : "Pope's Creek, Westmoreland, Virginia, United States",
+        "normalized" : "Pope's Creek, Westmoreland, Virginia, United States"
+      },
+      "id" : "123"
+    }, {
+      "type" : "http://gedcomx.org/Death",
+      "date" : {
+        "original" : "December 14, 1799",
+        "formal" : "+1799-12-14T22:00:00"
+      },
+      "place" : {
+        "original" : "Mount Vernon, Virginia",
+        "normalized" : "Mount Vernon, Fairfax County, Virginia, United States"
+      },
+      "id" : "456"
+    } ],
+    "id" : "BBB-BBBB",
+    "sources" : [ {
+      "description" : "#EEE-EEEE"
+    } ]
+  }, {
+    "names" : [ {
+      "nameForms" : [ {
+        "fullText" : "Martha Dandridge Custis",
+        "parts" : [ {
+          "value" : "Martha Dandridge",
+          "type" : "http://gedcomx.org/Given"
+        }, {
+          "value" : "Custis",
+          "type" : "http://gedcomx.org/Surname"
+        } ]
+      } ],
+      "preferred" : true,
+      "id" : "987"
+    } ],
+    "gender" : {
+      "type" : "http://gedcomx.org/Male"
+    },
+    "facts" : [ {
+      "type" : "http://gedcomx.org/Birth",
+      "date" : {
+        "original" : "June 2, 1731",
+        "formal" : "+1731-06-02"
+      },
+      "place" : {
+        "original" : "Chestnut Grove, Virginia",
+        "normalized" : "Chestnut Grove, New Kent, Virginia, United States"
+      },
+      "id" : "321"
+    }, {
+      "type" : "http://gedcomx.org/Death",
+      "date" : {
+        "original" : "May 22, 1802",
+        "formal" : "+1802-05-22"
+      },
+      "place" : {
+        "original" : "Mount Vernon, Virginia",
+        "normalized" : "Mount Vernon, Fairfax County, Virginia, United States"
+      },
+      "id" : "654"
+    } ],
+    "id" : "CCC-CCCC",
+    "sources" : [ {
+      "description" : "#FFF-FFFF"
+    } ]
+  } ],
+  "relationships" : [ {
+    "facts" : [ {
+      "date" : {
+        "original" : "January 6, 1759",
+        "formal" : "+01-06-1759"
+      },
+      "place" : {
+        "original" : "White House Plantation"
+      }
+    } ],
+    "person1" : "#BBB-BBBB",
+    "person2" : "#CCC-CCCC",
+    "id" : "DDD-DDDD",
+    "sources" : [ {
+      "description" : "#FFF-FFFF"
+    } ]
+  } ],
+  "sourceDescriptions" : [ {
+    "id" : "EEE-EEEE",
+    "citations" : [ {
+      "value" : "\"George Washington.\" Wikipedia, The Free Encyclopedia. Wikimedia Foundation, Inc. 24 October 2012."
+    } ],
+    "about" : "http://en.wikipedia.org/wiki/George_washington"
+  }, {
+    "id" : "FFF-FFFF",
+    "citations" : [ {
+      "value" : "\"Martha Washington.\" Wikipedia, The Free Encyclopedia. Wikimedia Foundation, Inc. 24 October 2012."
+    } ],
+    "about" : "http://en.wikipedia.org/wiki/Martha_washington"
+  } ]
 }
 ```
 
@@ -157,6 +188,19 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
 document are to be interpreted as described in BCP 14, 
 [RFC2119](http://tools.ietf.org/html/rfc2119), as scoped to those conformance 
 targets.
+
+## 1.4 Compliance
+
+An implementation of the GEDCOM X conceptual model is "non-compliant" if it fails to satisfy
+one or more of the MUST or REQUIRED level requirements. An implementation that satisfies all of
+the  MUST or REQUIRED and all of the SHOULD level requirements is said to be "unconditionally
+compliant"; and implementation that satisfies all of the MUST level requirements but not all of the
+SHOULD level requirements is said to be "conditionally compliant".
+
+In addition to the compliance requirements provided by this specification, all compliance requirements
+provided by the GEDCOM X Conceptual Model identified by
+[`http://gedcomx.org/conceptual-model/v1`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md)
+are inherited.
 
 # 2. Common Data Types
 
@@ -861,7 +905,7 @@ parts | The parts of the name form. | parts | array of [`NamePart`](#name-part)
 GEDCOM X defines the notion of extension properties, and the JSON serialization
 supports the extensibility requirements detailed in the GEDCOM X conceptual model
 specification. When an extension property is provided in a JSON object, the type
-of the object can be determined by the value of thesection 1.3 above.
+of the object can be determined by the name of the JSON member.
 
 For convenience, GEDCOM X reserves the use of the following member names as
 "known" extension members:
@@ -870,13 +914,16 @@ name | JSON object type
 -----|-----------------
 persons | array of [`Person`](#person)
 relationships | array of [`Relationship`](#relationship)
+events | array of [`Event`](#event)
 facts | array of [`Fact`](#fact-conclusion)
 names | array of [`Name`](#name-conclusion)
 genders | array of [`Gender`](#gender-conclusion)
-source-references | array of [`SourceReference`](#source-reference)
-source-descriptions | array of [`SourceDescription`](#rdf-description)
+sourceReferences | array of [`SourceReference`](#source-reference)
+sourceDescriptions | array of [`SourceDescription`](#rdf-description)
 agents | array of [`Agent`](#agent)
 documents | array of [`Document`](#document)
+attribution | array of [`Attribution`](#attribution)
+notes | array of [`Note`](#note)
 
 
 7. Fragment Identifiers

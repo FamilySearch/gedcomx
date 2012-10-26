@@ -31,8 +31,8 @@ import javax.xml.bind.annotation.XmlType;
 /**
  * An abstract document that contains derived (conclusionary) text -- for example, a transcription or researcher analysis.
  */
-@XmlRootElement (name = "abstract")
-@JsonElementWrapper (name = "abstracts")
+@XmlRootElement
+@JsonElementWrapper (name = "documents")
 @XmlType(name = "Document", propOrder = { "text" })
 public class Document extends Conclusion implements HasText, Attributable {
 
