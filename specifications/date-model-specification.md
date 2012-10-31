@@ -5,6 +5,10 @@
 This document specifies a date representation for exchanging dates associated with genealogical data,
 and requests discussion and suggestions for improvements.
 
+The current state of this document is as a DRAFT, and as such, the document
+may be subject to changes, including backwards-incompatible changes, according to the
+discussion and suggestions for improvement.
+
 ## Copyright Notice
 
 Copyright 2012 Intellectual Reserve, Inc.
