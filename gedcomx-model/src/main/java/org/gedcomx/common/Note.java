@@ -15,6 +15,7 @@
  */
 package org.gedcomx.common;
 
+import org.gedcomx.links.HypermediaControllableData;
 import org.gedcomx.rt.json.JsonElementWrapper;
 
 import javax.xml.XMLConstants;
@@ -32,7 +33,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement
 @JsonElementWrapper(name = "notes")
 @XmlType ( name = "Note", propOrder = { "subject", "text", "attribution" } )
-public class Note extends ExtensibleData implements Attributable, HasText {
+public class Note extends HypermediaControllableData implements Attributable, HasText {
 
   private String id;
   private String lang;

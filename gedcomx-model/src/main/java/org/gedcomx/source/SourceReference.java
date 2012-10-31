@@ -18,6 +18,7 @@ package org.gedcomx.source;
 import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.gedcomx.common.*;
+import org.gedcomx.links.HypermediaControllableData;
 import org.gedcomx.rt.json.JsonElementWrapper;
 
 import javax.xml.bind.annotation.XmlAttribute;
@@ -33,7 +34,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement ( name = "sourceReference" )
 @JsonElementWrapper ( name = "sourceReferences" )
 @XmlType ( name = "SourceReference" )
-public class SourceReference extends ExtensibleData implements Attributable {
+public class SourceReference extends HypermediaControllableData implements Attributable {
 
   private URI descriptionRef;
   private Attribution attribution;

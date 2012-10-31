@@ -19,6 +19,7 @@ import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.gedcomx.common.*;
+import org.gedcomx.links.HypermediaControllableData;
 import org.gedcomx.rt.json.JsonElementWrapper;
 
 import javax.xml.XMLConstants;
@@ -32,7 +33,7 @@ import java.util.List;
 @XmlRootElement
 @XmlType ( name = "SourceDescription", propOrder = { "citations", "mediator", "sources", "extractedConclusions", "componentOf", "titles", "notes", "attribution" } )
 @JsonElementWrapper ( name = "sourceDescriptions" )
-public class SourceDescription extends ExtensibleData implements Attributable, HasNotes, ReferencesSources {
+public class SourceDescription extends HypermediaControllableData implements Attributable, HasNotes, ReferencesSources {
   private String id;
   private List<SourceCitation> citations;
   private URI about;

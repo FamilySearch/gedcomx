@@ -19,6 +19,7 @@ import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.gedcomx.common.*;
+import org.gedcomx.links.HypermediaControllableData;
 import org.gedcomx.source.ReferencesSources;
 import org.gedcomx.source.SourceReference;
 import org.gedcomx.types.ConfidenceLevel;
@@ -35,7 +36,7 @@ import java.util.List;
  * @author Ryan Heaton
  */
 @XmlType ( name = "Conclusion", propOrder = { "attribution", "sources", "notes" })
-public abstract class Conclusion extends ExtensibleData implements Attributable, ReferencesSources, HasNotes {
+public abstract class Conclusion extends HypermediaControllableData implements Attributable, ReferencesSources, HasNotes {
 
   private String id;
   private String lang;

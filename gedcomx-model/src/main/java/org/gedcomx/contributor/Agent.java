@@ -22,6 +22,7 @@ import org.gedcomx.common.ExtensibleData;
 import org.gedcomx.common.ResourceReference;
 import org.gedcomx.common.TextValue;
 import org.gedcomx.conclusion.Identifier;
+import org.gedcomx.links.HypermediaControllableData;
 import org.gedcomx.rt.json.JsonElementWrapper;
 
 import javax.xml.bind.annotation.*;
@@ -38,7 +39,7 @@ import java.util.List;
 @XmlRootElement
 @XmlType ( name = "Agent" )
 @JsonElementWrapper ( name = "agents" )
-public class Agent extends ExtensibleData {
+public class Agent extends HypermediaControllableData {
 
   private String id;
   private List<TextValue> names;

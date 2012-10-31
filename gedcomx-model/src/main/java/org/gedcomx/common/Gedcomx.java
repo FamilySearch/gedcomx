@@ -22,6 +22,7 @@ import org.gedcomx.conclusion.Event;
 import org.gedcomx.conclusion.Person;
 import org.gedcomx.conclusion.Relationship;
 import org.gedcomx.contributor.Agent;
+import org.gedcomx.links.HypermediaControllableData;
 import org.gedcomx.rt.json.JsonElementWrapper;
 import org.gedcomx.source.SourceDescription;
 
@@ -37,7 +38,7 @@ import java.util.List;
 @XmlRootElement
 @JsonElementWrapper (name = "gedcomx")
 @XmlType ( name = "Gedcomx" , propOrder = { "attribution", "persons", "relationships", "sourceDescriptions", "agents", "events", "documents" })
-public class Gedcomx extends ExtensibleData {
+public class Gedcomx extends HypermediaControllableData {
 
   private String id;
   private String lang;
