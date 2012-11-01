@@ -44,6 +44,12 @@
       <artifactId>jackson-xc</artifactId>
       <version>1.8.0</version>
     </dependency>
+    <dependency>
+      <groupId>com.sun.jersey</groupId>
+      <artifactId>jersey-core</artifactId>
+      <version>1.11</version>
+      <scope>provided</scope>
+    </dependency>
   </dependencies>
 
   <scm>
