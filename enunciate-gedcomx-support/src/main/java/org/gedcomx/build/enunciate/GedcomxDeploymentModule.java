@@ -217,6 +217,9 @@ public class GedcomxDeploymentModule extends FreemarkerDeploymentModule implemen
   public void init(Enunciate enunciate) throws EnunciateException {
     super.init(enunciate);
 
+    enunciate.getConfig().getContentTypesToIds().put(CommonModels.GEDCOMX_XML_MEDIA_TYPE, "gedcomx-xml");
+    enunciate.getConfig().getContentTypesToIds().put(CommonModels.GEDCOMX_JSON_MEDIA_TYPE, "gedcomx-json");
+
     SortedSet<DeploymentModule> modules = enunciate.getConfig().getAllModules();
     for (DeploymentModule module : modules) {
       if (module instanceof ObjCDeploymentModule) {

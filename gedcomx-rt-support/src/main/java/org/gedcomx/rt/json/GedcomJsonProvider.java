@@ -20,17 +20,13 @@ import org.codehaus.jackson.map.AnnotationIntrospector;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.introspect.JacksonAnnotationIntrospector;
 import org.codehaus.jackson.xc.JaxbAnnotationIntrospector;
+import org.gedcomx.rt.CommonModels;
 import org.gedcomx.rt.GedcomNamespaceManager;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
-import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.MultivaluedMap;
-import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
-import java.io.IOException;
-import java.io.InputStream;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 
@@ -40,16 +36,42 @@ import java.lang.reflect.Type;
  * @author Ryan Heaton
  */
 @Provider
-@Consumes ({MediaType.WILDCARD}) //wildcard to support our custom "+json" media types.
-@Produces ({MediaType.WILDCARD}) //wildcard to support our custom "+json" media types.
+@Produces ( CommonModels.GEDCOMX_JSON_MEDIA_TYPE )
+@Consumes ( CommonModels.GEDCOMX_JSON_MEDIA_TYPE )
 public class GedcomJsonProvider extends JacksonJaxbJsonProvider {
+
+  private final Class<?> rootClass;
 
   public GedcomJsonProvider() {
     super(createObjectMapper(), DEFAULT_ANNOTATIONS);
+
+    try {
+      this.rootClass = Class.forName("org.gedcomx.common.Gedcomx");
+    }
+    catch (ClassNotFoundException e) {
+      throw new RuntimeException(e);
+    }
   }
 
   public GedcomJsonProvider(Class<?>... classes) {
     super(createObjectMapper(classes), DEFAULT_ANNOTATIONS);
+
+    try {
+      this.rootClass = Class.forName("org.gedcomx.common.Gedcomx");
+    }
+    catch (ClassNotFoundException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  @Override
+  public boolean isReadable(Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType) {
+    return this.rootClass.isAssignableFrom(type);
+  }
+
+  @Override
+  public boolean isWriteable(Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType) {
+    return this.rootClass.isAssignableFrom(type);
   }
 
   /**
@@ -70,32 +92,4 @@ public class GedcomJsonProvider extends JacksonJaxbJsonProvider {
     return mapper;
   }
 
-  @Override
-  public Object readFrom(Class<Object> type, Type genericType, Annotation[] annotations, MediaType mediaType, MultivaluedMap<String, String> httpHeaders, InputStream entityStream) throws IOException {
-    String dataType = httpHeaders.getFirst("X-type");
-    if (dataType != null) {
-      Class<Object> knownType = (Class<Object>) GedcomNamespaceManager.getKnownTypeById(dataType);
-      if (type != null && knownType != null && type.isAssignableFrom(knownType)) {
-        type = knownType;
-        genericType = knownType;
-      }
-    }
-    try {
-      return super.readFrom(type, genericType, annotations, mediaType, httpHeaders, entityStream);
-    }
-    catch (IOException e) {
-      Response rsp;
-
-      if(dataType == null) {
-        rsp = Response.status(Response.Status.BAD_REQUEST).
-          header("Warning", "299 GedcomX An X-type header must be specified").
-          build();
-      }
-      else {
-        rsp = Response.status(Response.Status.BAD_REQUEST).build();
-      }
-
-      throw new WebApplicationException(e, rsp);
-    }
-  }
 }
