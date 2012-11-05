@@ -15,6 +15,7 @@
  */
 package org.gedcomx.rt.json;
 
+import org.codehaus.jackson.jaxrs.Annotations;
 import org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider;
 import org.codehaus.jackson.map.AnnotationIntrospector;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -43,18 +44,15 @@ public class GedcomJsonProvider extends JacksonJaxbJsonProvider {
   private final Class<?> rootClass;
 
   public GedcomJsonProvider() {
-    super(createObjectMapper(), DEFAULT_ANNOTATIONS);
-
-    try {
-      this.rootClass = Class.forName("org.gedcomx.common.Gedcomx");
-    }
-    catch (ClassNotFoundException e) {
-      throw new RuntimeException(e);
-    }
+    this(createObjectMapper(), DEFAULT_ANNOTATIONS);
   }
 
   public GedcomJsonProvider(Class<?>... classes) {
-    super(createObjectMapper(classes), DEFAULT_ANNOTATIONS);
+    this(createObjectMapper(classes), DEFAULT_ANNOTATIONS);
+  }
+
+  protected GedcomJsonProvider(ObjectMapper mapper, Annotations[] annotationsToUse) {
+    super(mapper, annotationsToUse);
 
     try {
       this.rootClass = Class.forName("org.gedcomx.common.Gedcomx");
