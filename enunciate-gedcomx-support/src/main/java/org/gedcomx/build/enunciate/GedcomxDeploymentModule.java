@@ -279,17 +279,11 @@ public class GedcomxDeploymentModule extends FreemarkerDeploymentModule implemen
           if ("".equals(xmlMediaType)) {
             xmlMediaType = null;
           }
-          if (!schemaInfo.getGlobalElements().isEmpty() && xmlMediaType == null) {
-            warn("Model %s is missing an xml media type for its root elements.", schemaInfo.getNamespace());
-          }
           schemaInfo.setProperty("xmlMediaType", xmlMediaType);
 
           String jsonMediaType = m.jsonMediaType();
           if ("".equals(jsonMediaType)) {
             jsonMediaType = null;
-          }
-          if (!schemaInfo.getGlobalElements().isEmpty() && jsonMediaType == null) {
-            warn("Metadata for model %s is missing an json media type for its root elements.", schemaInfo.getNamespace());
           }
           schemaInfo.setProperty("jsonMediaType", jsonMediaType);
 
