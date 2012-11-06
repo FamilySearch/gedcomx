@@ -47,6 +47,7 @@ import java.nio.charset.Charset;
 public class GedcomxXmlProvider extends AbstractRootElementProvider {
 
   private final Class<?> rootClass;
+  private final MediaType mt;
 
   public GedcomxXmlProvider(@Context Providers ps) {
     super(ps, MediaType.valueOf(CommonModels.GEDCOMX_XML_MEDIA_TYPE));
@@ -57,16 +58,18 @@ public class GedcomxXmlProvider extends AbstractRootElementProvider {
     catch (ClassNotFoundException e) {
       throw new RuntimeException(e);
     }
+
+    this.mt = MediaType.valueOf(CommonModels.GEDCOMX_XML_MEDIA_TYPE);
   }
 
   @Override
   public boolean isReadable(Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType) {
-    return this.rootClass.isAssignableFrom(type);
+    return this.rootClass.isAssignableFrom(type) && this.mt.isCompatible(mediaType);
   }
 
   @Override
   public boolean isWriteable(Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType) {
-    return this.rootClass.isAssignableFrom(type);
+    return this.rootClass.isAssignableFrom(type) && this.mt.isCompatible(mediaType);
   }
 
   @Override

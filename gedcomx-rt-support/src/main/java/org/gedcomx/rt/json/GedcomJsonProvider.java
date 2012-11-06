@@ -42,6 +42,7 @@ import java.lang.reflect.Type;
 public class GedcomJsonProvider extends JacksonJaxbJsonProvider {
 
   private final Class<?> rootClass;
+  private final MediaType mt;
 
   public GedcomJsonProvider() {
     this(createObjectMapper(), DEFAULT_ANNOTATIONS);
@@ -60,16 +61,18 @@ public class GedcomJsonProvider extends JacksonJaxbJsonProvider {
     catch (ClassNotFoundException e) {
       throw new RuntimeException(e);
     }
+
+    this.mt = MediaType.valueOf(CommonModels.GEDCOMX_JSON_MEDIA_TYPE);
   }
 
   @Override
   public boolean isReadable(Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType) {
-    return this.rootClass.isAssignableFrom(type);
+    return this.rootClass.isAssignableFrom(type) && this.mt.isCompatible(mediaType);
   }
 
   @Override
   public boolean isWriteable(Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType) {
-    return this.rootClass.isAssignableFrom(type);
+    return this.rootClass.isAssignableFrom(type) && this.mt.isCompatible(mediaType);
   }
 
   /**
