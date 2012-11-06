@@ -15,9 +15,9 @@
  */
 package org.gedcomx.conclusion;
 
-import org.gedcomx.common.URI;
+import org.gedcomx.common.ResourceReference;
+import org.gedcomx.rt.RDFRange;
 
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
 /**
@@ -25,31 +25,11 @@ import javax.xml.bind.annotation.XmlType;
  *
  * @author Ryan Heaton
  */
-@XmlType ( name = "Place", propOrder = { "original", "normalized" } )
-public class Place {
+@XmlType ( name = "PlaceReference", propOrder = { "original", "standardPlace" } )
+public class PlaceReference {
 
-  private URI resource;
   private String original;
-  private String normalized;
-
-  /**
-   * The standardized and/or normalized resource value.
-   *
-   * @return The resource value.
-   */
-  @XmlAttribute
-  public URI getResource() {
-    return resource;
-  }
-
-  /**
-   * The standardized and/or normalized resource value.
-   *
-   * @param resource The resource value.
-   */
-  public void setResource(URI resource) {
-    this.resource = resource;
-  }
+  private ResourceReference standardPlace;
 
   /**
    * The original text as supplied by the user.
@@ -70,24 +50,25 @@ public class Place {
   }
 
   /**
-   * The normalized value of the place
+   * A reference to the standard place.
    *
-   * @return the normalized value
+   * @return A reference to the standard place.
    */
-  public String getNormalized() {
-    return normalized;
+  //@RDFRange (Place.class)
+  public ResourceReference getStandardPlace() {
+    return standardPlace;
   }
 
   /**
-   * The normalized value of the place
+   * A reference to the standard place.
    *
-   * @param normalized the normalized value
+   * @param standardPlace A reference to the standard place.
    */
-  public void setNormalized(String normalized) {
-    this.normalized = normalized;
+  public void setStandardPlace(ResourceReference standardPlace) {
+    this.standardPlace = standardPlace;
   }
 
   public String toString() {
-    return "Place{" + "original='" + original + '\'' + "normal='" + normalized + '\'' + ", resource=" + resource + '}';
+    return "PlaceReference{" + "original='" + original + '\'' + "standardPlace='" + standardPlace + '\'' + '}';
   }
 }
