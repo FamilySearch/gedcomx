@@ -38,7 +38,7 @@ public class SourceCitation {
   private List<CitationField> fields;
 
   /**
-   * The language of the citation. See <a href="http://www.w3.org/International/articles/language-tags/>http://www.w3.org/International/articles/language-tags/</a>
+   * The language of the citation. See <a href="http://www.w3.org/International/articles/language-tags/">http://www.w3.org/International/articles/language-tags/</a>
    *
    * @return The language of the note.
    */
@@ -48,7 +48,7 @@ public class SourceCitation {
   }
 
   /**
-   * The language of the citation. See <a href="http://www.w3.org/International/articles/language-tags/>http://www.w3.org/International/articles/language-tags/</a>
+   * The language of the citation. See <a href="http://www.w3.org/International/articles/language-tags/">http://www.w3.org/International/articles/language-tags/</a>
    *
    * @param lang The language of the citation.
    */

@@ -38,7 +38,7 @@ public class NameForm extends ExtensibleData {
   private List<NamePart> parts;
 
   /**
-   * The language of the conclusion. See <a href="http://www.w3.org/International/articles/language-tags/>http://www.w3.org/International/articles/language-tags/</a>
+   * The language of the conclusion. See <a href="http://www.w3.org/International/articles/language-tags/">http://www.w3.org/International/articles/language-tags/</a>
    *
    * @return The language of the conclusion.
    */
@@ -48,7 +48,7 @@ public class NameForm extends ExtensibleData {
   }
 
   /**
-   * The language of the conclusion. See <a href="http://www.w3.org/International/articles/language-tags/>http://www.w3.org/International/articles/language-tags/</a>
+   * The language of the conclusion. See <a href="http://www.w3.org/International/articles/language-tags/">http://www.w3.org/International/articles/language-tags/</a>
    *
    * @param lang The language of the conclusion.
    */
