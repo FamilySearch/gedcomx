@@ -102,7 +102,7 @@ public class PersonRecipesTest extends RecipeTest {
 
     fact.setPlace(new PlaceReference());
     fact.getPlace().setOriginal("Tikhvin, Leningradskaya Oblast', Russia");
-    fact.getPlace().setStandardPlace(new ResourceReference(URI.create("#tikhvinDesc1")));
+    fact.getPlace().setDescriptionRef(URI.create("#tikhvinDesc1"));
     // Tikhvin, Leningradskaya Oblast', Russia
     // https://labs.familysearch.org/stdfinder/PlaceDetail.jsp?placeId=3262902
 
@@ -118,7 +118,7 @@ public class PersonRecipesTest extends RecipeTest {
 
     fact.setPlace(new PlaceReference());
     fact.getPlace().setOriginal("Luga, Russia");
-    fact.getPlace().setStandardPlace(new ResourceReference(URI.create("#lugaDesc1")));
+    fact.getPlace().setDescriptionRef(URI.create("#lugaDesc1"));
     // Luga, Leningradskaya Oblast', Russia
     // https://labs.familysearch.org/stdfinder/PlaceDetail.jsp?placeId=3314013
 

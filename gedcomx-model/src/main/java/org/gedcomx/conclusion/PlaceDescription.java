@@ -15,12 +15,18 @@
  */
 package org.gedcomx.conclusion;
 
+import org.codehaus.enunciate.json.JsonName;
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.gedcomx.common.Attribution;
 import org.gedcomx.common.ResourceReference;
 import org.gedcomx.common.TextValue;
 import org.gedcomx.common.URI;
 import org.gedcomx.rt.RDFRange;
 
+import javax.xml.XMLConstants;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import java.util.List;
 
@@ -30,10 +36,10 @@ import java.util.List;
  * and possibly its type, time period, and/or a geospatial description -- a description
  * of a place as a snapshot in time.
  */
-@XmlType ( name = "PlaceDescription", propOrder = { "about", "names", "type", "temporalDescription", "spatialDescription", "identifiers", "attribution" } )
+@XmlType ( name = "PlaceDescription", propOrder = { "names", "type", "temporalDescription", "spatialDescription", "identifiers", "attribution" } )
 public class PlaceDescription extends Conclusion {
 
-  private ResourceReference about;
+  private URI about;
   private List<TextValue> names;
   private URI type;
   private Date temporalDescription;
@@ -46,8 +52,10 @@ public class PlaceDescription extends Conclusion {
    *
    * @return A reference to the Place that this description is about.
    */
+  @XmlAttribute
+  @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
   @RDFRange (Place.class)
-  public ResourceReference getAbout() {
+  public URI getAbout() {
     return about;
   }
 
@@ -56,32 +64,36 @@ public class PlaceDescription extends Conclusion {
    *
    * @param about A reference to the Place that this description is about.
    */
-  public void setAbout(ResourceReference about) {
+  public void setAbout(URI about) {
     this.about = about;
   }
 
   /**
-   * An ordered list of normalized/standardized, fully-qualified (in terms of what is known of the applicable jurisdictional hierarchy) names for this place applicable to this description.
+   * An ordered list of standardized (or normalized), fully-qualified (in terms of what is known of the applicable jurisdictional hierarchy) names for this place that are applicable to this description of this place.
    *
    * The list MUST include at least one value. It is RECOMMENDED that instances include a single name and any equivalents from other cultural contexts;
    * name variants should more typically be described in separate PlaceDescription instances.  The list is assumed to be given in order of preference,
    * with the most preferred value in the first position in the list.
    *
-   * @return An ordered list of normalized/standardized, fully-qualified (in terms of what is known of the applicable jurisdictional hierarchy) names for this place applicable to this description.
+   * @return An ordered list of standardized (or normalized), fully-qualified (in terms of what is known of the applicable jurisdictional hierarchy) names for this place that are applicable to this description of this place.
    */
+  @XmlElement (name = "name")
+  @JsonName ("names")
+  @JsonProperty ("names")
   public List<TextValue> getNames() {
     return names;
   }
 
   /**
-   * An ordered list of normalized/standardized, fully-qualified (in terms of what is known of the applicable jurisdictional hierarchy) names for this place applicable to this description.
+   * An ordered list of standardized (or normalized), fully-qualified (in terms of what is known of the applicable jurisdictional hierarchy) names for this place that are applicable to this description of this place.
    *
    * The list MUST include at least one value. It is RECOMMENDED that instances include a single name and any equivalents from other cultural contexts;
    * name variants should more typically be described in separate PlaceDescription instances.  The list is assumed to be given in order of preference,
    * with the most preferred value in the first position in the list.
    *
-   * @param names An ordered list of normalized/standardized, fully-qualified (in terms of what is known of the applicable jurisdictional hierarchy) names for this place applicable to this description.
+   * @param names An ordered list of standardized (or normalized), fully-qualified (in terms of what is known of the applicable jurisdictional hierarchy) names for this place that are applicable to this description of this place.
    */
+  @JsonProperty ("names")
   public void setNames(List<TextValue> names) {
     this.names = names;
   }
@@ -91,6 +103,7 @@ public class PlaceDescription extends Conclusion {
    *
    * @return An implementation-specify type identifier (e.g., address, city, county, province, state, country, etc.).
    */
+  @XmlAttribute
   public URI getType() {
     return type;
   }
@@ -105,18 +118,18 @@ public class PlaceDescription extends Conclusion {
   }
 
   /**
-   * A genealogical date describing of the time period to which this place description is relevant.
+   * A description of the time period to which this place description is relevant.
    *
-   * @return A genealogical date describing of the time period to which this place description is relevant.
+   * @return A description of the time period to which this place description is relevant.
    */
   public Date getTemporalDescription() {
     return temporalDescription;
   }
 
   /**
-   *  A genealogical date describing of the time period to which this place description is relevant.
+   *  A description of the time period to which this place description is relevant.
    *
-   * @param temporalDescription A genealogical date describing of the time period to which this place description is relevant.
+   * @param temporalDescription A description of the time period to which this place description is relevant.
    */
   public void setTemporalDescription(Date temporalDescription) {
     this.temporalDescription = temporalDescription;
@@ -124,6 +137,8 @@ public class PlaceDescription extends Conclusion {
 
   /**
    * A reference to a geospatial description of this place.
+   *
+   * It is RECOMMENDED that this description resolve to a KML document.
    *
    * @return  A reference to a geospatial description of this place.
    */
@@ -133,6 +148,8 @@ public class PlaceDescription extends Conclusion {
 
   /**
    *  A reference to a geospatial description of this place.
+   *
+   *  It is RECOMMENDED that this description resolve to a KML document.
    *
    * @param spatialDescription A reference to a geospatial description of this place.
    */
@@ -145,6 +162,9 @@ public class PlaceDescription extends Conclusion {
    *
    * @return A list of known identifiers for this place description.
    */
+  @XmlElement (name = "identifier")
+  @JsonName ("identifiers")
+  @JsonProperty ("identifiers")
   public List<Identifier> getIdentifiers() {
     return identifiers;
   }
@@ -154,6 +174,7 @@ public class PlaceDescription extends Conclusion {
    *
    * @param identifiers A list of known identifiers for this place description.
    */
+  @JsonProperty ("identifiers")
   public void setIdentifiers(List<Identifier> identifiers) {
     this.identifiers = identifiers;
   }

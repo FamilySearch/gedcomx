@@ -15,9 +15,12 @@
  */
 package org.gedcomx.conclusion;
 
+import org.codehaus.enunciate.json.JsonName;
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.gedcomx.common.Attribution;
 import org.gedcomx.common.TextValue;
 
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 import java.util.List;
 
@@ -35,23 +38,27 @@ public class Place extends Conclusion {
   private Attribution attribution;
 
   /**
-   * A list of normalized/standardized names associated with this place.
+   * A list of standardized (or normalized) names associated with this place.
    *
    * It is RECOMMENDED that instances provide at least one name.
    *
-   * @return A list of normalized/standardized names associated with this place.
+   * @return A list of standardized (or normalized) names associated with this place.
    */
+  @XmlElement (name = "name")
+  @JsonName ("names")
+  @JsonProperty ("names")
   public List<TextValue> getNames() {
     return names;
   }
 
   /**
-   * A list of normalized/standardized names associated with this place.
+   * A list of standardized (or normalized) names associated with this place.
    *
    * It is RECOMMENDED that instances provide at least one name.
    *
-   * @param names A list of normalized/standardized names associated with this place.
+   * @param names A list of standardized (or normalized) names associated with this place.
    */
+  @JsonProperty ("names")
   public void setNames(List<TextValue> names) {
     this.names = names;
   }
@@ -97,6 +104,9 @@ public class Place extends Conclusion {
    *
    * @return A list of known identifiers for this place.
    */
+  @XmlElement (name = "identifier")
+  @JsonName ("identifiers")
+  @JsonProperty ("identifiers")
   public List<Identifier> getIdentifiers() {
     return identifiers;
   }
@@ -106,6 +116,7 @@ public class Place extends Conclusion {
    *
    * @param identifiers A list of known identifiers for this place.
    */
+  @JsonProperty ("identifiers")
   public void setIdentifiers(List<Identifier> identifiers) {
     this.identifiers = identifiers;
   }

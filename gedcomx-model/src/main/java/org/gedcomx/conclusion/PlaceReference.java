@@ -15,26 +15,29 @@
  */
 package org.gedcomx.conclusion;
 
+import org.codehaus.enunciate.json.JsonName;
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.gedcomx.common.ExtensibleData;
-import org.gedcomx.common.ResourceReference;
+import org.gedcomx.common.URI;
 import org.gedcomx.rt.RDFRange;
 
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
  * A reference to genealogical place.
  */
-@XmlType ( name = "PlaceReference", propOrder = { "original", "standardPlace" } )
+@XmlType ( name = "PlaceReference" )
 public class PlaceReference extends ExtensibleData {
 
   private String original;
-  private ResourceReference standardPlace;
+  private URI descriptionRef;
 
   /**
-   * The original text as supplied by the user.
+   * The original value as supplied by the user.
    *
-   * @return The original text as supplied by the user.
+   * @return The original value as supplied by the user.
    */
   public String getOriginal() {
     return original;
@@ -50,25 +53,29 @@ public class PlaceReference extends ExtensibleData {
   }
 
   /**
-   * A reference to a normalize and/or standard place.
+   * A reference to a description of the place being referenced.
    *
-   * @return A reference to the standard place.
+   * @return A reference to a description of the place being referenced.
    */
+  @XmlAttribute ( name = "description" )
+  @JsonName ( "description" )
+  @JsonProperty ( "description" )
   @RDFRange (PlaceDescription.class)
-  public ResourceReference getStandardPlace() {
-    return standardPlace;
+  public URI getDescriptionRef() {
+    return descriptionRef;
   }
 
   /**
-   * A reference to the normalize and/or standard place.
+   * A reference to a description of the place being referenced.
    *
-   * @param standardPlace A reference to the standard place.
+   * @param descriptionRef A reference to a description of the place being referenced.
    */
-  public void setStandardPlace(ResourceReference standardPlace) {
-    this.standardPlace = standardPlace;
+  @JsonProperty ( "description" )
+  public void setDescriptionRef(URI descriptionRef) {
+    this.descriptionRef = descriptionRef;
   }
 
   public String toString() {
-    return "PlaceReference{" + "original='" + original + "', " + "standardPlace='" + standardPlace + '\'' + '}';
+    return "PlaceReference{" + "original='" + original + "', " + "descriptionRef='" + descriptionRef + '\'' + '}';
   }
 }

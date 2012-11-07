@@ -62,7 +62,7 @@ public class PersonTest {
     fact.setKnownType(FactType.Occupation);
     fact.setPlace(new PlaceReference());
     fact.getPlace().setOriginal("original place");
-    fact.getPlace().setStandardPlace(new ResourceReference(URI.create("urn:place")));
+    fact.getPlace().setDescriptionRef(URI.create("urn:place"));
     fact.setValue("fact-value");
     person.addFact(fact);
 
@@ -74,7 +74,7 @@ public class PersonTest {
     event.setKnownType(FactType.Adoption);
     event.setPlace(new PlaceReference());
     event.getPlace().setOriginal("original place");
-    event.getPlace().setStandardPlace(new ResourceReference(URI.create("urn:place")));
+    event.getPlace().setDescriptionRef(URI.create("urn:place"));
     event.setSources(new ArrayList<SourceReference>());
     SourceReference eventSource = new SourceReference();
     eventSource.setDescriptionRef(URI.create("urn:event-source"));
@@ -147,7 +147,7 @@ public class PersonTest {
     assertEquals("fact-id", fact.getId());
     assertEquals(FactType.Occupation, fact.getKnownType());
     assertEquals("original place", fact.getPlace().getOriginal());
-    assertEquals("urn:place", fact.getPlace().getStandardPlace().getResource().toURI().toString());
+    assertEquals("urn:place", fact.getPlace().getDescriptionRef().toURI().toString());
     assertEquals("fact-value", fact.getValue());
 
     event = person.getFirstFactOfType(FactType.Adoption);
@@ -156,7 +156,7 @@ public class PersonTest {
     assertEquals("event-id", event.getId());
     assertEquals(FactType.Adoption, event.getKnownType());
     assertEquals("original place", event.getPlace().getOriginal());
-    assertEquals("urn:place", event.getPlace().getStandardPlace().getResource().toURI().toString());
+    assertEquals("urn:place", event.getPlace().getDescriptionRef().toURI().toString());
 
     assertEquals(1, person.getNames().size());
     name = person.getNames().iterator().next();

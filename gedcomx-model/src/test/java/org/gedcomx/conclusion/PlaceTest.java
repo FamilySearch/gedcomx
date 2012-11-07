@@ -73,7 +73,7 @@ public class PlaceTest {
     assertNull(tikhvinDesc.getAttribution());
     assertNull(tikhvinDesc.getExtensionElements());
 
-    tikhvinDesc.setAbout(new ResourceReference(URI.create("#tikhvin")));
+    tikhvinDesc.setAbout(URI.create("#tikhvin"));
     tikhvinDesc.setNames(new ArrayList<TextValue>());
     tikhvinDesc.getNames().add(new TextValue());
     tikhvinDesc.getNames().add(new TextValue());
@@ -108,7 +108,7 @@ public class PlaceTest {
     tikhvinDesc.getAttribution().setModified(new java.util.Date(1321027871111L)); // 11 Nov 2011 11:11:11.111
     tikhvinDesc.addExtensionElement("tikhvinDesc-junkExtensionElement");
 
-    assertEquals(tikhvinDesc.getAbout().getResource().toURI().toString(), "#tikhvin");
+    assertEquals(tikhvinDesc.getAbout().toURI().toString(), "#tikhvin");
     assertEquals(tikhvinDesc.getNames().get(0).getLang(), "ru-Cyrl");
     assertEquals(tikhvinDesc.getNames().get(0).getValue(), "Ти́хвин, Ленингра́дская о́бласть, Россия");
     assertEquals(tikhvinDesc.getNames().get(1).getLang(), "ru-Latn");
@@ -141,17 +141,17 @@ public class PlaceTest {
     PlaceReference tikhvinRef = new PlaceReference();
 
     assertNull(tikhvinRef.getOriginal());
-    assertNull(tikhvinRef.getStandardPlace());
+    assertNull(tikhvinRef.getDescriptionRef());
     assertNull(tikhvinRef.getExtensionElements());
 
     tikhvinRef.setOriginal("Tikhvin, Leningradskaya Oblast, Russia");
-    tikhvinRef.setStandardPlace(new ResourceReference(URI.create("#tikhvinDesc1")));
+    tikhvinRef.setDescriptionRef(URI.create("#tikhvinDesc1"));
     tikhvinRef.addExtensionElement("tikhvinRef-junkExtensionElement");
 
     assertEquals(tikhvinRef.getOriginal(), "Tikhvin, Leningradskaya Oblast, Russia");
-    assertEquals(tikhvinRef.getStandardPlace().getResource().toURI().toString(), "#tikhvinDesc1");
+    assertEquals(tikhvinRef.getDescriptionRef().toURI().toString(), "#tikhvinDesc1");
     assertEquals(tikhvinRef.findExtensionOfType(String.class), "tikhvinRef-junkExtensionElement");
-    assertEquals(tikhvinRef.toString(), "PlaceReference{original='Tikhvin, Leningradskaya Oblast, Russia', standardPlace='#tikhvinDesc1'}");
+    assertEquals(tikhvinRef.toString(), "PlaceReference{original='Tikhvin, Leningradskaya Oblast, Russia', descriptionRef='#tikhvinDesc1'}");
   }
 
   @Test
@@ -213,7 +213,7 @@ public class PlaceTest {
     assertNull(lugaDesc.getAttribution());
     assertNull(lugaDesc.getExtensionElements());
 
-    lugaDesc.setAbout(new ResourceReference(URI.create("#luga")));
+    lugaDesc.setAbout(URI.create("#luga"));
     lugaDesc.setNames(new ArrayList<TextValue>());
     lugaDesc.getNames().add(new TextValue());
     lugaDesc.getNames().add(new TextValue());
@@ -248,7 +248,7 @@ public class PlaceTest {
     lugaDesc.getAttribution().setModified(new java.util.Date(1321027871111L)); // 11 Nov 2011 11:11:11.111
     lugaDesc.addExtensionElement("lugaDesc-junkExtensionElement");
 
-    assertEquals(lugaDesc.getAbout().getResource().toURI().toString(), "#luga");
+    assertEquals(lugaDesc.getAbout().toURI().toString(), "#luga");
     assertEquals(lugaDesc.getNames().get(0).getLang(), "ru-Cyrl");
     assertEquals(lugaDesc.getNames().get(0).getValue(), "Лу́га, Новгоро́дская о́бласть, Россия");
     assertEquals(lugaDesc.getNames().get(1).getLang(), "ru-Latn");
@@ -281,16 +281,16 @@ public class PlaceTest {
     PlaceReference lugaRef = new PlaceReference();
 
     assertNull(lugaRef.getOriginal());
-    assertNull(lugaRef.getStandardPlace());
+    assertNull(lugaRef.getDescriptionRef());
     assertNull(lugaRef.getExtensionElements());
 
     lugaRef.setOriginal("Luga, Leningradskaya Oblast', Russia");
-    lugaRef.setStandardPlace(new ResourceReference(URI.create("#lugaDesc1")));
+    lugaRef.setDescriptionRef(URI.create("#lugaDesc1"));
     lugaRef.addExtensionElement("lugaRef-junkExtensionElement");
 
     assertEquals(lugaRef.getOriginal(), "Luga, Leningradskaya Oblast', Russia");
-    assertEquals(lugaRef.getStandardPlace().getResource().toURI().toString(), "#lugaDesc1");
+    assertEquals(lugaRef.getDescriptionRef().toURI().toString(), "#lugaDesc1");
     assertEquals(lugaRef.findExtensionOfType(String.class), "lugaRef-junkExtensionElement");
-    assertEquals(lugaRef.toString(), "PlaceReference{original='Luga, Leningradskaya Oblast', Russia', standardPlace='#lugaDesc1'}");
+    assertEquals(lugaRef.toString(), "PlaceReference{original='Luga, Leningradskaya Oblast', Russia', descriptionRef='#lugaDesc1'}");
   }
 }
