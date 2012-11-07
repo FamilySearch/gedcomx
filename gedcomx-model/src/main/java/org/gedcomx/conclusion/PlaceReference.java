@@ -15,18 +15,18 @@
  */
 package org.gedcomx.conclusion;
 
+import org.gedcomx.common.ExtensibleData;
 import org.gedcomx.common.ResourceReference;
 import org.gedcomx.rt.RDFRange;
 
 import javax.xml.bind.annotation.XmlType;
 
+
 /**
- * A concluded genealogical place.
- *
- * @author Ryan Heaton
+ * A reference to genealogical place.
  */
 @XmlType ( name = "PlaceReference", propOrder = { "original", "standardPlace" } )
-public class PlaceReference {
+public class PlaceReference extends ExtensibleData {
 
   private String original;
   private ResourceReference standardPlace;
@@ -50,17 +50,17 @@ public class PlaceReference {
   }
 
   /**
-   * A reference to the standard place.
+   * A reference to a normalize and/or standard place.
    *
    * @return A reference to the standard place.
    */
-  //@RDFRange (Place.class)
+  @RDFRange (PlaceDescription.class)
   public ResourceReference getStandardPlace() {
     return standardPlace;
   }
 
   /**
-   * A reference to the standard place.
+   * A reference to the normalize and/or standard place.
    *
    * @param standardPlace A reference to the standard place.
    */
@@ -69,6 +69,6 @@ public class PlaceReference {
   }
 
   public String toString() {
-    return "PlaceReference{" + "original='" + original + '\'' + "standardPlace='" + standardPlace + '\'' + '}';
+    return "PlaceReference{" + "original='" + original + "', " + "standardPlace='" + standardPlace + '\'' + '}';
   }
 }

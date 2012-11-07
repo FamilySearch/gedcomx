@@ -1,7 +1,6 @@
 package org.gedcomx.conclusion;
 
 import org.gedcomx.common.ResourceReference;
-import org.gedcomx.common.TextValue;
 import org.gedcomx.common.URI;
 import org.gedcomx.rt.json.GedcomJsonProvider;
 import org.gedcomx.test.RecipeTest;
@@ -90,16 +89,6 @@ public class PersonRecipesTest extends RecipeTest {
 
 
   static Person create() {
-    PlaceDescription tikhvin = new PlaceDescription();
-    tikhvin.setNames(new ArrayList<TextValue>());
-    tikhvin.getNames().add(new TextValue("Tikhvin, Leningradskaya Oblast', Russia"));
-    //URI.create("https://labs.familysearch.org/stdfinder/PlaceDetail.jsp?placeId=3262902");
-
-    PlaceDescription luga = new PlaceDescription();
-    luga.setNames(new ArrayList<TextValue>());
-    luga.getNames().add(new TextValue("Luga, Novgorodskaya Oblast', Russia"));
-    //URI.create("https://labs.familysearch.org/stdfinder/PlaceDetail.jsp?placeId=3314012");
-
     Person person = new Person();
     person.setGender(new Gender(GenderType.Male));
 
@@ -114,6 +103,8 @@ public class PersonRecipesTest extends RecipeTest {
     fact.setPlace(new PlaceReference());
     fact.getPlace().setOriginal("Tikhvin, Leningradskaya Oblast', Russia");
     fact.getPlace().setStandardPlace(new ResourceReference(URI.create("#tikhvinDesc1")));
+    // Tikhvin, Leningradskaya Oblast', Russia
+    // https://labs.familysearch.org/stdfinder/PlaceDetail.jsp?placeId=3262902
 
     person.addFact(fact);
 
@@ -128,6 +119,8 @@ public class PersonRecipesTest extends RecipeTest {
     fact.setPlace(new PlaceReference());
     fact.getPlace().setOriginal("Luga, Russia");
     fact.getPlace().setStandardPlace(new ResourceReference(URI.create("#lugaDesc1")));
+    // Luga, Leningradskaya Oblast', Russia
+    // https://labs.familysearch.org/stdfinder/PlaceDetail.jsp?placeId=3314013
 
     person.addFact(fact);
 
