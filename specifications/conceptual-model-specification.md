@@ -1045,7 +1045,7 @@ This data type extends the following data type:
 
 name  | description | data type | constraints
 ------|-------------|-----------|------------
-about | A uniform resource identifier (URI) for the place being described. | [URI](#uri) | OPTIONAL.
+about | A uniform resource identifier (URI) for the place being described. | [URI](#uri) | OPTIONAL.  If provided, MUST resolve to a [Place](#conclusion-place).
 names | A list of standardized (or normalized), fully-qualified (in terms of what is known of the applicable jurisdictional hierarchy) names for this place that are applicable to this description of this place. | List of [http://gedcomx.org/v1/TextValue](#text-value). Order is preserved. | REQUIRED. The list MUST contain at least one name.
 type | A uniform resource identifier (URI) identifying the type of the place as it is applicable to this description. | [URI](#uri) | OPTIONAL.
 temporalDescription | A description of the time period to which this place description is relevant. | [`http://gedcomx.org/v1/Date`](#conclusion-date) | OPTIONAL.
