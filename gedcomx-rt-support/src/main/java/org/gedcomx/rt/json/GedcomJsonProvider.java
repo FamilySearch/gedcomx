@@ -27,7 +27,11 @@ import org.gedcomx.rt.GedcomNamespaceManager;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.ext.Provider;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 
@@ -42,17 +46,18 @@ import java.lang.reflect.Type;
 public class GedcomJsonProvider extends JacksonJaxbJsonProvider {
 
   private final Class<?> rootClass;
+  private final Class<?> instanceClass;
   private final MediaType mt;
 
   public GedcomJsonProvider() {
-    this(createObjectMapper(), DEFAULT_ANNOTATIONS);
+    this(createObjectMapper(), DEFAULT_ANNOTATIONS, null, MediaType.valueOf(CommonModels.GEDCOMX_JSON_MEDIA_TYPE));
   }
 
   public GedcomJsonProvider(Class<?>... classes) {
-    this(createObjectMapper(classes), DEFAULT_ANNOTATIONS);
+    this(createObjectMapper(classes), DEFAULT_ANNOTATIONS, null, MediaType.valueOf(CommonModels.GEDCOMX_JSON_MEDIA_TYPE));
   }
 
-  protected GedcomJsonProvider(ObjectMapper mapper, Annotations[] annotationsToUse) {
+  protected GedcomJsonProvider(ObjectMapper mapper, Annotations[] annotationsToUse, Class<?> instanceClass, MediaType mt) {
     super(mapper, annotationsToUse);
 
     try {
@@ -62,7 +67,8 @@ public class GedcomJsonProvider extends JacksonJaxbJsonProvider {
       throw new RuntimeException(e);
     }
 
-    this.mt = MediaType.valueOf(CommonModels.GEDCOMX_JSON_MEDIA_TYPE);
+    this.mt = mt;
+    this.instanceClass = instanceClass == null ? this.rootClass : instanceClass;
   }
 
   @Override
@@ -73,6 +79,16 @@ public class GedcomJsonProvider extends JacksonJaxbJsonProvider {
   @Override
   public boolean isWriteable(Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType) {
     return this.rootClass.isAssignableFrom(type) && this.mt.isCompatible(mediaType);
+  }
+
+  @Override
+  public Object readFrom(Class<Object> type, Type genericType, Annotation[] annotations, MediaType mediaType, MultivaluedMap<String, String> httpHeaders, InputStream entityStream) throws IOException {
+    return super.readFrom((Class<Object>) this.instanceClass, genericType, annotations, mediaType, httpHeaders, entityStream);
+  }
+
+  @Override
+  public void writeTo(Object value, Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType, MultivaluedMap<String, Object> httpHeaders, OutputStream entityStream) throws IOException {
+    super.writeTo(value, value.getClass(), genericType, annotations, mediaType, httpHeaders, entityStream);
   }
 
   /**

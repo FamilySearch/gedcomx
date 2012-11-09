@@ -47,11 +47,16 @@ import java.nio.charset.Charset;
 public class GedcomxXmlProvider extends AbstractRootElementProvider {
 
   private final Class<?> rootClass;
+  private final Class<?> instanceClass;
   private final MediaType mt;
+  private final QName qName;
 
   public GedcomxXmlProvider(@Context Providers ps) {
-    super(ps, MediaType.valueOf(CommonModels.GEDCOMX_XML_MEDIA_TYPE));
+    this(ps, MediaType.valueOf(CommonModels.GEDCOMX_XML_MEDIA_TYPE), null, new QName(CommonModels.GEDCOMX_NAMESPACE, "gedcomx"));
+  }
 
+  protected GedcomxXmlProvider(Providers ps, MediaType mt, Class<?> instanceClass, QName qName) {
+    super(ps);
     try {
       this.rootClass = Class.forName("org.gedcomx.common.Gedcomx");
     }
@@ -59,7 +64,9 @@ public class GedcomxXmlProvider extends AbstractRootElementProvider {
       throw new RuntimeException(e);
     }
 
-    this.mt = MediaType.valueOf(CommonModels.GEDCOMX_XML_MEDIA_TYPE);
+    this.mt = mt;
+    this.qName = qName;
+    this.instanceClass = instanceClass == null ? this.rootClass : instanceClass;
   }
 
   @Override
@@ -74,11 +81,11 @@ public class GedcomxXmlProvider extends AbstractRootElementProvider {
 
   @Override
   protected Object readFrom(Class<Object> type, MediaType mediaType, Unmarshaller u, InputStream entityStream) throws JAXBException {
-    return u.unmarshal(new StreamSource(entityStream), type).getValue();
+    return u.unmarshal(new StreamSource(entityStream), this.instanceClass).getValue();
   }
 
   @Override
   protected void writeTo(Object t, MediaType mediaType, Charset c, Marshaller m, OutputStream entityStream) throws JAXBException {
-    m.marshal(new JAXBElement(new QName(CommonModels.GEDCOMX_NAMESPACE, "gedcomx"), t.getClass(), t), entityStream);
+    m.marshal(new JAXBElement(qName, t.getClass(), t), entityStream);
   }
 }
