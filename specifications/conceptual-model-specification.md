@@ -1071,7 +1071,7 @@ The identifier for the `PlaceReference` data type is:
 name  | description | data type | constraints
 ------|-------------|-----------|------------
 original | The original place name text as supplied by the contributor. | string | OPTIONAL.
-descriptionRef | A reference to a description of a place. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to a [PlaceDescription](#conclusion-place-description).
+descriptionRef | A reference to a _description_ of this place. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to a [PlaceDescription](#conclusion-place-description).
 
 
 <a id="conclusion-date"/>
