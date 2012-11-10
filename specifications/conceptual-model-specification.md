@@ -1015,8 +1015,8 @@ This data type extends the following data type:
 name  | description | data type | constraints
 ------|-------------|-----------|------------
 names | A list of standardized (or normalized) names associated with this place. | List of [http://gedcomx.org/v1/TextValue](#text-value). Order is preserved. | OPTIONAL. It is RECOMMENDED that this list contain at least one name value.
-latitude | Degrees north or south of the Equator (0 degrees). | IEEE 754 binary64 value | OPTIONAL.  If provided, MUST provide `longitude` also.  Values range from −90 degrees (south) to 90 degrees (north).
-longitude | Angular distance in degrees, relative to the Prime Meridian. | IEEE 754 binary64 value | OPTIONAL.  If provided, MUST provide `latitude` also.  Values west of the Meridian range from −180 to 0 degrees.  Values east of the Meridian range from 0 to 180 degrees.
+latitude | Degrees north or south of the Equator (0 degrees). | IEEE 754 binary64 value | OPTIONAL.  If provided, MUST provide `longitude` also.  Values range from −90.0 degrees (south) to 90.0 degrees (north).
+longitude | Angular distance in degrees, relative to the Prime Meridian. | IEEE 754 binary64 value | OPTIONAL.  If provided, MUST provide `latitude` also.  Values range from −180.0 degrees (west of the Meridian) to 180.0 degrees (east of the Meridian).
 identifiers | A list of known identifiers for this place (e.g., place authority identifiers). | List of [`http://gedcomx.org/v1/Identifier`](#identifier-type). Order is preserved. | OPTIONAL.
 attribution | Attribution metadata for this place. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing data set (e.g. file) of the place is assumed.
 
