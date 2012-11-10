@@ -48,12 +48,12 @@ public interface HasDateAndPlace {
    *
    * @return The place.
    */
-  Place getPlace();
+  PlaceReference getPlace();
 
   /**
    * The place.
    *
    * @param place The place.
    */
-  void setPlace(Place place);
+  void setPlace(PlaceReference place);
 }

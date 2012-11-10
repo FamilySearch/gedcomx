@@ -15,79 +15,127 @@
  */
 package org.gedcomx.conclusion;
 
-import org.gedcomx.common.URI;
+import org.codehaus.enunciate.json.JsonName;
+import org.codehaus.jackson.annotate.JsonProperty;
+import org.gedcomx.common.Attribution;
+import org.gedcomx.common.TextValue;
 
-import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.util.List;
+
 
 /**
- * A concluded genealogical place.
- *
- * @author Ryan Heaton
+ * An abstraction of place independent of its potential jurisdictional hierarchies.
  */
-@XmlType ( name = "Place", propOrder = { "original", "normalized" } )
-public class Place {
+@XmlType ( name = "Place", propOrder = { "names", "latitude", "longitude", "identifiers", "attribution" } )
+public class Place extends Conclusion {
 
-  private URI resource;
-  private String original;
-  private String normalized;
+  private List<TextValue> names;
+  private double latitude;
+  private double longitude;
+  private List<Identifier> identifiers;
+  private Attribution attribution;
 
   /**
-   * The standardized and/or normalized resource value.
+   * A list of standardized (or normalized) names associated with this place.
    *
-   * @return The resource value.
+   * It is RECOMMENDED that instances provide at least one name.
+   *
+   * @return A list of standardized (or normalized) names associated with this place.
    */
-  @XmlAttribute
-  public URI getResource() {
-    return resource;
+  @XmlElement (name = "name")
+  @JsonName ("names")
+  @JsonProperty ("names")
+  public List<TextValue> getNames() {
+    return names;
   }
 
   /**
-   * The standardized and/or normalized resource value.
+   * A list of standardized (or normalized) names associated with this place.
    *
-   * @param resource The resource value.
+   * It is RECOMMENDED that instances provide at least one name.
+   *
+   * @param names A list of standardized (or normalized) names associated with this place.
    */
-  public void setResource(URI resource) {
-    this.resource = resource;
+  @JsonProperty ("names")
+  public void setNames(List<TextValue> names) {
+    this.names = names;
   }
 
   /**
-   * The original text as supplied by the user.
+   * Degrees north or south of the Equator (0 degrees).  Values range from −90 degrees (south) to 90 degrees (north).
    *
-   * @return The original text as supplied by the user.
+   * @return Degrees north or south of the Equator.
    */
-  public String getOriginal() {
-    return original;
+  public double getLatitude() {
+    return latitude;
   }
 
   /**
-   * The original value as supplied by the user.
+   * Degrees north or south of the Equator (0 degrees).  Values range from −90 degrees (south) to 90 degrees (north).
    *
-   * @param original The original value as supplied by the user.
+   * @param latitude Degrees north or south of the Equator.
    */
-  public void setOriginal(String original) {
-    this.original = original;
+  public void setLatitude(double latitude) {
+    this.latitude = latitude;
   }
 
   /**
-   * The normalized value of the place
+   * Angular distance in degrees, relative to the Prime Meridian.  Values west of the Meridian range from −180 to 0 degrees.  Values east of the Meridian range from 0 to 180 degrees.
    *
-   * @return the normalized value
+   * @return Angular distance in degrees, relative to the Prime Meridian.
    */
-  public String getNormalized() {
-    return normalized;
+  public double getLongitude() {
+    return longitude;
   }
 
   /**
-   * The normalized value of the place
+   * Angular distance in degrees, relative to the Prime Meridian.  Values west of the Meridian range from −180 to 0 degrees.  Values east of the Meridian range from 0 to 180 degrees.
    *
-   * @param normalized the normalized value
+   * @param longitude Angular distance in degrees, relative to the Prime Meridian.
    */
-  public void setNormalized(String normalized) {
-    this.normalized = normalized;
+  public void setLongitude(double longitude) {
+    this.longitude = longitude;
   }
 
-  public String toString() {
-    return "Place{" + "original='" + original + '\'' + "normal='" + normalized + '\'' + ", resource=" + resource + '}';
+  /**
+   * A list of known identifiers for this place (e.g., place authority identifiers).
+   *
+   * @return A list of known identifiers for this place.
+   */
+  @XmlElement (name = "identifier")
+  @JsonName ("identifiers")
+  @JsonProperty ("identifiers")
+  public List<Identifier> getIdentifiers() {
+    return identifiers;
+  }
+
+  /**
+   * A list of known identifiers for this place (e.g., place authority identifiers).
+   *
+   * @param identifiers A list of known identifiers for this place.
+   */
+  @JsonProperty ("identifiers")
+  public void setIdentifiers(List<Identifier> identifiers) {
+    this.identifiers = identifiers;
+  }
+
+  /**
+   * Attribution metadata for this place.
+   *
+   * @return Attribution metadata for this place.
+   */
+  public Attribution getAttribution() {
+    return attribution;
+  }
+
+  /**
+   * Attribution metadata for this place.
+   *
+   * @param attribution Attribution metadata for this place.
+   */
+  public void setAttribution(Attribution attribution) {
+    this.attribution = attribution;
   }
 }
