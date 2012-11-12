@@ -60,12 +60,9 @@ public class PersonTest {
     fact.getDate().setFormal("normalized date");
     fact.setId("fact-id");
     fact.setKnownType(FactType.Occupation);
-    fact.setPlace(new Place());
+    fact.setPlace(new PlaceReference());
     fact.getPlace().setOriginal("original place");
-    fact.getPlace().setNormalized("normalized place");
-    // TODO - support the place type concept
-    //fact.getPlace().setKnownValue(PlacePartType.Cemetery);
-    fact.getPlace().setResource(URI.create("urn:place"));
+    fact.getPlace().setDescriptionRef(URI.create("urn:place"));
     fact.setValue("fact-value");
     person.addFact(fact);
 
@@ -75,12 +72,9 @@ public class PersonTest {
     event.getDate().setFormal("normalized date");
     event.setId("event-id");
     event.setKnownType(FactType.Adoption);
-    event.setPlace(new Place());
+    event.setPlace(new PlaceReference());
     event.getPlace().setOriginal("original place");
-    event.getPlace().setNormalized("normalized place");
-    // TODO - support the place type concept
-    //event.getPlace().setKnownValue(PlacePartType.Cemetery);
-    event.getPlace().setResource(URI.create("urn:place"));
+    event.getPlace().setDescriptionRef(URI.create("urn:place"));
     event.setSources(new ArrayList<SourceReference>());
     SourceReference eventSource = new SourceReference();
     eventSource.setDescriptionRef(URI.create("urn:event-source"));
@@ -153,10 +147,7 @@ public class PersonTest {
     assertEquals("fact-id", fact.getId());
     assertEquals(FactType.Occupation, fact.getKnownType());
     assertEquals("original place", fact.getPlace().getOriginal());
-    assertEquals("normalized place", fact.getPlace().getNormalized());
-    assertEquals("urn:place", fact.getPlace().getResource().toString());
-    // TODO - allow check when the functionality is provided
-    //assertEquals(PlacePartType.Cemetery, fact.getPlace().getKnownValue(PlacePartType.class));
+    assertEquals("urn:place", fact.getPlace().getDescriptionRef().toURI().toString());
     assertEquals("fact-value", fact.getValue());
 
     event = person.getFirstFactOfType(FactType.Adoption);
@@ -165,10 +156,7 @@ public class PersonTest {
     assertEquals("event-id", event.getId());
     assertEquals(FactType.Adoption, event.getKnownType());
     assertEquals("original place", event.getPlace().getOriginal());
-    assertEquals("normalized place", event.getPlace().getNormalized());
-    // TODO - allow check when the functionality is provided
-    //assertEquals(PlacePartType.Cemetery, event.getPlace().getKnownValue(PlacePartType.class));
-    assertEquals("urn:place", event.getPlace().getResource().toString());
+    assertEquals("urn:place", event.getPlace().getDescriptionRef().toURI().toString());
 
     assertEquals(1, person.getNames().size());
     name = person.getNames().iterator().next();

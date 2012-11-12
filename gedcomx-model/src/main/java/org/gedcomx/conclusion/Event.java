@@ -39,7 +39,7 @@ public class Event extends Conclusion implements HasDateAndPlace, Attributable {
 
   private URI type;
   private Date date;
-  private Place place;
+  private PlaceReference place;
   private List<EventRole> roles;
 
   /**
@@ -64,7 +64,7 @@ public class Event extends Conclusion implements HasDateAndPlace, Attributable {
    * @param date The date of applicability of this event.
    * @param place The place of applicability of this event.
    */
-  public Event(EventType EventType, Date date, Place place) {
+  public Event(EventType EventType, Date date, PlaceReference place) {
     setKnownType(EventType);
     setDate(date);
     setPlace(place);
@@ -136,7 +136,7 @@ public class Event extends Conclusion implements HasDateAndPlace, Attributable {
    * @return The place of this event.
    */
   @Override
-  public Place getPlace() {
+  public PlaceReference getPlace() {
     return place;
   }
 
@@ -146,7 +146,7 @@ public class Event extends Conclusion implements HasDateAndPlace, Attributable {
    * @param place The place of this event.
    */
   @Override
-  public void setPlace(Place place) {
+  public void setPlace(PlaceReference place) {
     this.place = place;
   }
 

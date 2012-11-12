@@ -85,24 +85,23 @@ in JSON according to this specification:
   "facts" : [ {
     "type" : "http://gedcomx.org/Birth",
     "date" : {
-      "original" : "March 18, 1844",
-      "formal" : "+1844-03-18"
+      "formal" : "+1844-03-18",
+      "original" : "March 18, 1844"
     },
     "place" : {
-      "resource" : "https://familysearch.org/platform/places/12345",
-      "original" : "Tikhvin, Leningradskaya Oblast', Russia"
+      "original" : "Tikhvin, Leningradskaya Oblast', Russia",
+      "description" : "#tikhvinDesc1"
     },
     "id" : "123"
   }, {
     "type" : "http://gedcomx.org/Death",
     "date" : {
-      "original" : "June 21, 1908",
-      "formal" : "+1908-06-21T12:34:56"
+      "formal" : "+1908-06-21T12:34:56",
+      "original" : "June 21, 1908"
     },
     "place" : {
-      "resource" : "https://familysearch.org/platform/places/67890",
       "original" : "Luga, Russia",
-      "normalized" : "Luga, Novgorodskaya Oblast', Russia"
+      "description" : "#lugaDesc1"
     },
     "id" : "456"
   } ],
@@ -379,7 +378,7 @@ data type is defined as follows:
 
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
-description  | Reference to a _description_ of the source being referenced. | description | [`URI`](#uri)
+descriptionRef  | Reference to a _description_ of the source being referenced. | description | [`URI`](#uri)
 attribution | The attribution of this source reference. | attribution | [`Attribution`](#attribution)
 
 ### examples
@@ -466,7 +465,7 @@ name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 id | An identifier for the JSON object holding the agent data. The id attribute MUST conform to the constraints defined in [Section 7, "Fragment Identifiers"](#fragment-ids). | id | string
 names | The names of the person or organization. | names | array of [`TextValue`](#text-value)
-identifiers | Identifiers for the agent. | identifiers | [`Identifier`](#identifier-type)
+identifiers | Identifiers for the agent. | identifiers | array of [`Identifier`](#identifier-type)
 homepage | The homepage of the person or organization. | homepage | [`URI`](#uri)
 openid  | The [openid](http://openid.net/) of the person or organization. | openid | [`URI`](#uri)
 accounts  | The online accounts of the person or organization. | accounts | array of [`OnlineAccount`](#online-account)
@@ -510,7 +509,7 @@ id | An identifier for the JSON object holding the conclusion data. The id attri
 lang | The locale identifier for the conclusion. | lang | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag
 confidence  | Reference to the confidence level of the contributor of the attributed data. | confidence | [`URI`](#uri)
 sources | The list of references to the sources of the conclusion. | sources | array of [`SourceReference`](#source-reference).
-notes | A list of notes about this conclusion. | note | array of [`gx:Note`](#note)
+notes | A list of notes about this conclusion. | note | array of [`Note`](#note)
 
 ### examples
 
@@ -536,7 +535,7 @@ The JSON object used to (de)serialize the `http://gedcomx.org/v1/Document` data 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
 type | URI identifying the type of the document. | type | [`URI`](#uri)
-attribution | The attribution of this document. | attribution | [`gx:Attribution`](#attribution)
+attribution | The attribution of this document. | attribution | [`Attribution`](#attribution)
 text | The text of the document. | text | string
 
 ### examples
@@ -544,7 +543,7 @@ text | The text of the document. | text | string
 ```json
 {
 
-  ...the members of gxc:Conclusion...,
+  ...the members of Conclusion...,
 
   "type" : "http://gedcomx.org/Analysis",
   "attribution" : { ... },
@@ -567,7 +566,7 @@ type | URI identifying the type of the gender. | type | [`URI`](#uri)
 ```json
 {
 
-  ...the members of gxc:Conclusion...,
+  ...the members of Conclusion...,
 
   "type" : "http://gedcomx.org/Male"
 }
@@ -593,7 +592,7 @@ nameForms | The name form(s) that best represents this name `NameForm` -- usuall
 ```json
 {
 
-  ...the members of gxc:Conclusion...,
+  ...the members of Conclusion...,
 
   "type" : "http://gedcomx.org/BirthName",
   "preferred" : true,
@@ -622,7 +621,7 @@ value | The original value of the fact as supplied by the contributor. | origina
 ```json
 {
 
-  ...the members of gxc:Conclusion...,
+  ...the members of Conclusion...,
 
   "type" : "http://gedcomx.org/Birth",
   "date" : { ... },
@@ -642,7 +641,7 @@ The JSON object used to (de)serialize the `http://gedcomx.org/v1/Person` data ty
 
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
-attribution | The attribution of this conclusion. | attribution | [`gx:Attribution`](#attribution)
+attribution | The attribution of this conclusion. | attribution | [`Attribution`](#attribution)
 identifiers | Identifiers for the person. | identifiers | array of [`Identifier`](#identifier-type)
 living | Whether the person is considered living. | living | boolean
 gender | The conclusion about the gender of the person. | gender | [`Gender`](#gender)
@@ -654,7 +653,7 @@ facts | The conclusions about the facts of the life of the person. | facts | arr
 ```json
 {
 
-  ...the members of gxc:Conclusion...,
+  ...the members of Conclusion...,
 
   "attribution" : { ... },
   "identifiers" : [ { ... }, { ... } ],
@@ -675,7 +674,7 @@ The JSON object used to (de)serialize the `http://gedcomx.org/v1/Relationship` d
 
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
-attribution | The attribution of this conclusion. | attribution | [`gx:Attribution`](#attribution)
+attribution | The attribution of this conclusion. | attribution | [`Attribution`](#attribution)
 type | URI identifying the type of the relationship. | type | [`URI`](#uri)
 person1 | Reference to the first person in the relationship. | person1 | [`URI`](#uri)
 person2 | Reference to the second person in the relationship. | person2 | [`URI`](#uri)
@@ -686,7 +685,7 @@ facts | The conclusions about the facts of the life of the relationship. | facts
 ```json
 {
 
-  ...the members of gxc:Conclusion...,
+  ...the members of Conclusion...,
 
   "attribution" : { ... },
   "type" : "http://gedcomx.org/Couple",
@@ -716,7 +715,7 @@ details | Details about the role of the person in the event. | details | string
 ```json
 {
 
-  ...the members of gxc:Conclusion...,
+  ...the members of Conclusion...,
 
   "person" : "http://identifier/for/person/1",
   "type" : "http://gedcomx.org/Witness",
@@ -735,7 +734,7 @@ is defined as follows:
 
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
-attribution | The attribution of this conclusion. | attribution | [`gx:Attribution`](#attribution)
+attribution | The attribution of this conclusion. | attribution | [`Attribution`](#attribution)
 type | URI identifying the type of the event. | type | [`URI`](#uri)
 date | The date of the event. | date | [`Date`](#conclusion-date)
 place | The place the event. | place | [`Place`](#conclusion-place)
@@ -746,7 +745,7 @@ roles | The roles of the persons in the event. | roles | array of [`EventRole`](
 ```json
 {
 
-  ...the members of gxc:Conclusion...,
+  ...the members of Conclusion...,
 
   "attribution" : { ... },
   "type" : "http://gedcomx.org/Marriage",
@@ -756,9 +755,107 @@ roles | The roles of the persons in the event. | roles | array of [`EventRole`](
 }
 ```
 
+
+<a id="conclusion-place"/>
+
+# 5.10 The "Place" Data Type
+
+the JSON object used to (de)serialize the `http://gedcomx.org/v1/Place` data type
+is defined as follows:
+
+### properties
+
+name | description | JSON member | JSON object type
+-----|-------------|--------------|---------
+names | A list of standardized (or normalized) names associated with this place. | names | array of [`TextValue`](#text-value)
+latitude | Degrees north or south of the Equator (0 degrees). | latitude | number
+longitude | Angular distance in degrees, relative to the Prime Meridian. | longitude | number
+identifiers | A list of known identifiers for this place (e.g., place authority identifiers). | identifiers | array of [`Identifier`](#identifier-type)
+attribution | The attribution of this conclusion. | attribution | [`Attribution`](#attribution)
+
+### examples
+
+```json
+{
+
+  ...the members of Conclusion...,
+
+  "names" : [ { ... }, { ... } ],
+  "latitude" : "27.9883575",
+  "latitude" : "86.9252014",
+  "identifiers" : [ { ... }, { ... } ],
+  "attribution" : { ... }
+}
+```
+
+
+<a id="conclusion-place-description"/>
+
+# 5.11 The "PlaceDescription" Data Type
+
+the JSON object used to (de)serialize the `http://gedcomx.org/v1/PlaceDescription` data type
+is defined as follows:
+
+### properties
+
+name | description | JSON member | JSON object type
+-----|-------------|--------------|---------
+about | A uniform resource identifier (URI) for the place being described. | about | [`URI`](#uri)
+names | A list of standardized (or normalized), fully-qualified (in terms of what is known of the applicable jurisdictional hierarchy) names for this place that are applicable to this description of this place. | names | array of [`TextValue`](#text-value)
+type | A uniform resource identifier (URI) identifying the type of the place as it is applicable to this description. | type | [`URI`](#uri)
+temporalDescription | A description of the time period to which this place description is relevant. | temporalDescription | [`Date`](#conclusion-date)
+spatialDescription | A reference to a geospatial description of this place. | spatialDescription | [`URI`](#uri)
+identifiers | A list of known identifiers for this place description (e.g., place authority identifiers). | identifiers | array of [`Identifier`](#identifier-type)
+attribution | The attribution of this conclusion. | attribution | [`Attribution`](#attribution)
+
+### examples
+
+```json
+{
+
+  ...the members of Conclusion...,
+
+  "about" : "http://identifier/of/the/place/being/described",
+  "names" : [ { ... }, { ... } ],
+  "type" : "http://identifier/for/the/place/type",
+  "temporalDescription" : { ... },
+  "spatialDescription" : "http://uri/for/KML/document",
+  "identifiers" : [ { ... }, { ... } ],
+  "attribution" : { ... }
+}
+```
+
+
+<a id="conclusion-place-reference"/>
+
+# 5.12 The "PlaceReference" Data Type
+
+the JSON object used to (de)serialize the `http://gedcomx.org/v1/PlaceReference` data type
+is defined as follows:
+
+### properties
+
+name | description | JSON member | JSON object type
+-----|-------------|--------------|---------
+original | The original place name text as supplied by the contributor. | string | OPTIONAL.
+descriptionRef | A reference to a _description_ of this place. | description | [`URI`](#uri)
+
+### examples
+
+```json
+{
+  "original" : "...the original text...",
+  "description" : "http://identifier/of/place-description/being/referenced",
+
+  ...possibility of extension elements...
+
+}
+```
+
+
 <a id="conclusion-date"/>
 
-## 5.10 The "Date" Data Type
+## 5.13 The "Date" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/v1/Date` data type is defined as follows:
 
@@ -767,7 +864,7 @@ The JSON object used to (de)serialize the `http://gedcomx.org/v1/Date` data type
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 original | The original value of the date as supplied by the contributor. | original | string
-formal | The formal value of the date. | gx:formal | [GEDCOM X Date](https://github.com/FamilySearch/gedcomx/blob/master/specifications/date-model-specification.md)
+formal | The formal value of the date. | formal | [GEDCOM X Date](https://github.com/FamilySearch/gedcomx/blob/master/specifications/date-model-specification.md)
 
 ### examples
 
@@ -778,33 +875,10 @@ formal | The formal value of the date. | gx:formal | [GEDCOM X Date](https://git
 }
 ```
 
-<a id="conclusion-place"/>
-
-## 5.11 The "Place" Data Type
-
-The JSON object used to (de)serialize the `http://gedcomx.org/v1/Place` data type is defined as follows:
-
-### properties
-
-name | description | JSON member | JSON object type
------|-------------|--------------|---------
-resource | Reference to the standardized resource describing the place. | resource | [`URI`](#uri)
-original | The original value of the place as supplied by the contributor. | original | string
-normalized | The normalized text value of the place. | normalized | string
-
-### examples
-
-```json
-{
-  "resource" : "/path/to/place/resource",
-  "original" : "...the original text...",
-  "normalized" : "...the normalized value..."
-}
-```
 
 <a id="name-part"/>
 
-## 5.12 The "NamePart" Data Type
+## 5.14 The "NamePart" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/v1/NamePart` data type is defined as follows:
 
@@ -829,7 +903,7 @@ qualifiers | Type qualifiers to further describe the type of the name part. | qu
 }
 ```
 
-## 5.13 The "NameForm" Data Type
+## 5.15 The "NameForm" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/v1/NameForm` data type is defined as follows:
 

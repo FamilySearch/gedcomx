@@ -75,7 +75,7 @@ in XML according to this specification:
             <original>March 18, 1844</original>
             <formal>+1844-03-18</formal>
         </date>
-        <place resource="https://familysearch.org/platform/places/12345">
+        <place description="#tikhvinDesc1">
             <original>Tikhvin, Leningradskaya Oblast', Russia</original>
         </place>
     </fact>
@@ -84,9 +84,8 @@ in XML according to this specification:
             <original>June 21, 1908</original>
             <formal>+1908-06-21T12:34:56</formal>
         </date>
-        <place resource="https://familysearch.org/platform/places/67890">
+        <place description="#lugaDesc1">
             <original>Luga, Russia</original>
-            <normalized>Luga, Novgorodskaya Oblast', Russia</normalized>
         </place>
     </fact>
 </person>
@@ -396,7 +395,7 @@ data type.
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
-description  | Reference to a _description_ of the source being referenced. | description (attribute) | [`URI`](#uri)
+descriptionRef  | Reference to a _description_ of the source being referenced. | description (attribute) | [`URI`](#uri)
 attribution | The attribution of this source reference. | gx:attribution | [`gx:Attribution`](#attribution)
 
 ### examples
@@ -659,7 +658,7 @@ name | description | XML property | XML type
 -----|-------------|--------------|---------
 type | URI identifying the type of the fact. | type (attribute) | [`URI`](#uri)
 date | The date of applicability of the fact. | gx:date | [`gx:Date`](#conclusion-date)
-place | The place of applicability of the fact. | gx:place | [`gx:Place`](#conclusion-place)
+place | The place of applicability of the fact. | gx:place | [`gx:PlaceReference`](#conclusion-place-reference)
 value | The original value of the fact as supplied by the contributor. | gx:value | xsd:string
 
 ### examples
@@ -806,7 +805,7 @@ name | description | XML property | XML type
 attribution | The attribution of this event. | gx:attribution | [`gx:Attribution`](#attribution)
 type | URI identifying the type of the event. | type (attribute) | [`URI`](#uri)
 date | The date of the event. | gx:date | [`gx:Date`](#conclusion-date)
-place | The place the event. | gx:place | [`gx:Place`](#conclusion-place)
+place | The place the event. | gx:place | [`gx:PlaceReference`](#conclusion-place-reference)
 roles | The roles of the persons in the event. | gx:role | [`gx:EventRole`](#conclusion-event-role)
 
 ### examples
@@ -832,9 +831,123 @@ roles | The roles of the persons in the event. | gx:role | [`gx:EventRole`](#con
   </...>
 ```
 
+
+<a id="conclusion-place"/>
+
+## 5.10 The "Place" Data Type
+
+The `gx:Place` is used to (de)serialize the `http://gedcomx.org/v1/Place` data type.
+
+### properties
+
+name | description | XML property | XML type
+-----|-------------|--------------|---------
+names | A list of standardized (or normalized) names associated with this place. | gx:name | [`gx:TextValue`](#text-value)
+latitude | Degrees north or south of the Equator (0 degrees). | gx:latitude | xsd:double
+longitude | Angular distance in degrees, relative to the Prime Meridian. | gx:latitude | xsd:double
+identifiers | A list of known identifiers for this place (e.g., place authority identifiers). | gx:identifier | [`gx:Identifier`](#identifier-type)
+attribution | Attribution metadata for this place. | gx:attribution | [`gx:Attribution`](#attribution)
+
+### examples
+
+```xml
+  <... id="local_id">
+
+    <!-- ...the members of gx:Conclusion... -->
+
+    <gx:name>
+      ...
+    </gx:name>
+    ...
+    <gx:latitude>
+      ...
+    </gx:latitude>
+    <gx:longitude>
+      ...
+    </gx:longitude>
+    <gx:identifier>
+      ...
+    </gx:identifier>
+    ...
+    <gx:attribution>
+      ...
+    </gx:attribution>
+  </...>
+```
+
+
+<a id="conclusion-place-description"/>
+
+## 5.11 The "PlaceDescription" Data Type
+
+The `gx:PlaceDescription` is used to (de)serialize the `http://gedcomx.org/v1/PlaceDescription` data type.
+
+### properties
+
+name | description | XML property | XML type
+-----|-------------|--------------|---------
+about | A uniform resource identifier (URI) for the place being described. | about (attribute) | [anyURI](#uri)
+names | A list of standardized (or normalized), fully-qualified (in terms of what is known of the applicable jurisdictional hierarchy) names for this place that are applicable to this description of this place. | gx:name | [`gx:TextValue`](#text-value)
+type | A uniform resource identifier (URI) identifying the type of the place as it is applicable to this description. | type (attribute) | [`URI`](#uri)
+temporalDescription | A description of the time period to which this place description is relevant. | gx:temporalDescription | [`gx:Date`](#conclusion-date)
+spatialDescription | A reference to a geospatial description of this place. | gx:spatialDescription | [`gx:ResourceReference`](#resource-reference)
+identifiers | A list of known identifiers for this place description (e.g., place authority identifiers). | gx:identifier | [`gx:Identifier`](#identifier-type)
+attribution | Attribution metadata for this place description. | gx:attribution | [`gx:Attribution`](#attribution)
+
+### examples
+
+```xml
+  <... id="local_id" about="http://identifier/of/the/place/being/described" type="http://identifier/for/the/place/type">
+
+    <!-- ...the members of gx:Conclusion... -->
+
+    <gx:name>
+      ...
+    </gx:name>
+    ...
+    <gx:temporalDescription>
+      ...
+    </gx:temporalDescription>
+    <gx:spatialDescription resource="http://uri/for/KML/document"/>
+    <gx:identifier>
+      ...
+    </gx:identifier>
+    ...
+    <gx:attribution>
+      ...
+    </gx:attribution>
+  </...>
+```
+
+
+<a id="conclusion-place-reference"/>
+
+## 5.12 The "PlaceReference" Data Type
+
+The `gx:PlaceDescription` is used to (de)serialize the `http://gedcomx.org/v1/PlaceReference` data type.
+
+### properties
+
+name | description | XML property | XML type
+-----|-------------|--------------|---------
+original | The original place name text as supplied by the contributor. | gx:original | xsd:string
+descriptionRef | A reference to a _description_ of this place. | description (attribute) | [`URI`](#uri)
+
+### examples
+
+```xml
+  <... description="http://identifier/of/place/description/being/referenced">
+    <gx:original>...the original text...</gx:original>
+
+    <!-- possibility of extension elements -->
+
+  </...>
+```
+
+
 <a id="conclusion-date"/>
 
-## 5.10 The "Date" Data Type
+## 5.13 The "Date" Data Type
 
 The `gx:Date` XML type is used to (de)serialize the `http://gedcomx.org/v1/Date`
 data type.
@@ -855,33 +968,10 @@ formal | The formal value of the date. | gx:formal | [GEDCOM X Date](https://git
   </...>
 ```
 
-<a id="conclusion-place"/>
-
-## 5.11 The "Place" Data Type
-
-The `gx:Place` XML type is used to (de)serialize the `http://gedcomx.org/v1/Place`
-data type.
-
-### properties
-
-name | description | XML property | XML type
------|-------------|--------------|---------
-resource | Reference to the standardized resource describing the place. | resource (attribute) | [`URI`](#uri)
-original | The original value of the place as supplied by the contributor. | gx:original | xsd:string
-normalized | The normalized text value of the place. | gx:normalized | xsd:string
-
-### examples
-
-```xml
-  <... resource="/path/to/place/resource">
-    <gx:original>...the original text...</gx:original>
-    <gx:normalized>...</gx:normalized>
-  </...>
-```
 
 <a id="name-part"/>
 
-## 5.12 The "NamePart" Data Type
+## 5.14 The "NamePart" Data Type
 
 The `gx:NamePart` XML type is used to (de)serialize the `http://gedcomx.org/v1/NamePart`
 data type.
@@ -908,7 +998,7 @@ qualifiers | Type qualifiers to further describe the type of the name part. | gx
 
  <a id="name-form"/>
 
-## 5.13 The "NameForm" Data Type
+## 5.15 The "NameForm" Data Type
 
 The `NameForm` XML type is used to (de)serialize the `http://gedcomx.org/v1/NameForm`
 data type.

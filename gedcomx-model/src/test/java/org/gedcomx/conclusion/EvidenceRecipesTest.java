@@ -78,7 +78,7 @@ public class EvidenceRecipesTest extends RecipeTest {
     fact.setDate(new Date());
     fact.getDate().setOriginal("30 January 1880");
 
-    fact.setPlace(new Place());
+    fact.setPlace(new PlaceReference());
     fact.getPlace().setOriginal("Orderville, Utah");
 
     person.addFact(fact);
@@ -90,7 +90,7 @@ public class EvidenceRecipesTest extends RecipeTest {
     fact.setDate(new Date());
     fact.getDate().setOriginal("29 August 1936");
 
-    fact.setPlace(new Place());
+    fact.setPlace(new PlaceReference());
     fact.getPlace().setOriginal("Kanab, Kane, UT");
 
     person.addFact(fact);
@@ -175,7 +175,7 @@ public class EvidenceRecipesTest extends RecipeTest {
     fact.setDate(new Date());
     fact.getDate().setOriginal("1793");
 
-    fact.setPlace(new Place());
+    fact.setPlace(new PlaceReference());
     fact.getPlace().setOriginal("Vermont");
 
     person.addFact(fact);
@@ -187,7 +187,7 @@ public class EvidenceRecipesTest extends RecipeTest {
     fact.setDate(new Date());
     fact.getDate().setOriginal("1844");
 
-    fact.setPlace(new Place());
+    fact.setPlace(new PlaceReference());
     fact.getPlace().setOriginal("Steuben County, New York");
 
     person.addFact(fact);
@@ -254,7 +254,7 @@ public class EvidenceRecipesTest extends RecipeTest {
     fact.setDate(new Date());
     fact.getDate().setOriginal("30 January 1880");
 
-    fact.setPlace(new Place());
+    fact.setPlace(new PlaceReference());
     fact.getPlace().setOriginal("Orderville, Utah");
 
     person.addFact(fact);
@@ -266,7 +266,7 @@ public class EvidenceRecipesTest extends RecipeTest {
     fact.setDate(new Date());
     fact.getDate().setOriginal("29 August 1936");
 
-    fact.setPlace(new Place());
+    fact.setPlace(new PlaceReference());
     fact.getPlace().setOriginal("Kanab, Kane, UT");
 
     person.addFact(fact);
@@ -298,7 +298,7 @@ public class EvidenceRecipesTest extends RecipeTest {
     fact.setDate(new Date());
     fact.getDate().setOriginal("1880");
 
-    fact.setPlace(new Place());
+    fact.setPlace(new PlaceReference());
     fact.getPlace().setOriginal("Orderville, Utah");
 
     person.addFact(fact);
