@@ -107,7 +107,7 @@ public class Gedcomx extends HypermediaControllableData {
   }
 
   /**
-   * The language of this genealogical data set. See <a href="http://www.w3.org/International/articles/language-tags/>http://www.w3.org/International/articles/language-tags/</a>.
+   * The language of this genealogical data set. See <a href="http://www.w3.org/International/articles/language-tags/">http://www.w3.org/International/articles/language-tags/</a>.
    * Note that some language-enabled elements MAY override the language. 
    *
    * @return The language of the genealogical data.
@@ -118,7 +118,7 @@ public class Gedcomx extends HypermediaControllableData {
   }
 
   /**
-   * The language of this genealogical data set. See <a href="http://www.w3.org/International/articles/language-tags/>http://www.w3.org/International/articles/language-tags/</a>.
+   * The language of this genealogical data set. See <a href="http://www.w3.org/International/articles/language-tags/">http://www.w3.org/International/articles/language-tags/</a>.
    * Note that some language-enabled elements MAY override the language.
    *
    * @param lang The language of this genealogical data.
