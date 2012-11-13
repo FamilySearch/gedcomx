@@ -21,6 +21,7 @@ import org.gedcomx.common.ExtensibleData;
 import org.gedcomx.common.URI;
 
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +30,7 @@ import java.util.List;
  *
  * @author Ryan Heaton
  */
+@XmlType ( name = "HypermediaControllableData" )
 public abstract class HypermediaControllableData extends ExtensibleData implements SupportsLinks {
 
   private List<Link> links;

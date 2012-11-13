@@ -19,7 +19,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.SerializationConfig;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.node.ObjectNode;
-import org.gedcomx.rt.json.GedcomJsonProvider;
+import org.gedcomx.rt.json.GedcomJacksonModule;
 import org.w3c.dom.Document;
 
 import javax.xml.bind.JAXBContext;
@@ -137,7 +137,7 @@ public class SerializationUtil {
 
   @SuppressWarnings ( {"unchecked"} )
   public static <C> C processThroughJson(Object reference, Class<? extends C> instanceClass, SerializationProcessListener... listeners) throws IOException {
-    return processThroughJson(reference, instanceClass, new GedcomJsonProvider().locateMapper(instanceClass, null), listeners);
+    return processThroughJson(reference, instanceClass, GedcomJacksonModule.createObjectMapper(instanceClass), listeners);
   }
 
   @SuppressWarnings ( {"unchecked"} )
@@ -152,7 +152,7 @@ public class SerializationUtil {
   }
 
   public static <C> byte[] toJsonStream(Object reference, Class<? extends C> instanceClass, SerializationProcessListener... listeners) throws IOException {
-    return toJsonStream(reference, instanceClass, new GedcomJsonProvider().locateMapper(instanceClass, null), listeners);
+    return toJsonStream(reference, instanceClass, GedcomJacksonModule.createObjectMapper(instanceClass), listeners);
   }
 
   protected static <C> byte[] toJsonStream(Object reference, Class<? extends C> instanceClass, ObjectMapper mapper, SerializationProcessListener... listeners) throws IOException {
@@ -180,7 +180,7 @@ public class SerializationUtil {
   }
 
   public static ObjectNode toJsonNode(Object reference, Class<?> instanceClass) throws IOException {
-    return toJsonNode(reference, instanceClass, new GedcomJsonProvider().locateMapper(instanceClass, null));
+    return toJsonNode(reference, instanceClass, GedcomJacksonModule.createObjectMapper(instanceClass));
   }
 
   public static ObjectNode toJsonNode(Object reference, Class<?> instanceClass, ObjectMapper mapper) throws IOException {

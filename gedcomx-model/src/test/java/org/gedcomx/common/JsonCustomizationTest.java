@@ -1,5 +1,6 @@
 package org.gedcomx.common;
 
+import org.gedcomx.Gedcomx;
 import org.gedcomx.rt.GedcomNamespaceManager;
 import org.testng.annotations.Test;
 

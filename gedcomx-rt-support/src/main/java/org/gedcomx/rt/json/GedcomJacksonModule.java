@@ -17,7 +17,10 @@ package org.gedcomx.rt.json;
 
 import org.codehaus.jackson.Version;
 import org.codehaus.jackson.map.*;
+import org.codehaus.jackson.map.introspect.JacksonAnnotationIntrospector;
 import org.codehaus.jackson.map.type.CollectionType;
+import org.codehaus.jackson.xc.JaxbAnnotationIntrospector;
+import org.gedcomx.rt.GedcomNamespaceManager;
 
 /**
  * GEDCOM Jackson module for Jackson customizations.
@@ -25,6 +28,24 @@ import org.codehaus.jackson.map.type.CollectionType;
  * @author Ryan Heaton
  */
 public class GedcomJacksonModule extends Module {
+
+  /**
+   * Creates an object mapper given the specified context classes.
+   *
+   * @param classes the context classes.
+   * @return The object mapper.
+   */
+  public static ObjectMapper createObjectMapper(Class<?>... classes) {
+    ObjectMapper mapper = new ObjectMapper();
+    AnnotationIntrospector introspector = AnnotationIntrospector.pair(new JacksonAnnotationIntrospector(), new JaxbAnnotationIntrospector());
+    mapper.getSerializationConfig().withAnnotationIntrospector(introspector);
+    mapper.getDeserializationConfig().withAnnotationIntrospector(introspector);
+    mapper.registerModule(new GedcomJacksonModule());
+    for (Class<?> contextClass : classes) {
+      GedcomNamespaceManager.registerKnownJsonType(contextClass);
+    }
+    return mapper;
+  }
 
   @Override
   public String getModuleName() {

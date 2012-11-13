@@ -1,5 +1,6 @@
 package org.gedcomx.common;
 
+import org.gedcomx.Gedcomx;
 import org.gedcomx.conclusion.Document;
 import org.gedcomx.conclusion.Event;
 import org.gedcomx.conclusion.Person;

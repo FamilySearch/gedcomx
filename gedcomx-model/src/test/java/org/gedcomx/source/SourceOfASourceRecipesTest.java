@@ -1,5 +1,6 @@
 package org.gedcomx.source;
 
+import org.gedcomx.Gedcomx;
 import org.gedcomx.common.*;
 import org.gedcomx.contributor.Address;
 import org.gedcomx.contributor.Agent;

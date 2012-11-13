@@ -104,8 +104,8 @@ public class GedcomxValidator extends BaseValidator {
     }
 
     JsonElementWrapper elementWrapper = rootElementDeclaration.getAnnotation(JsonElementWrapper.class);
-    if (namespace.startsWith(CommonModels.GEDCOMX_DOMAIN) && elementWrapper == null) {
-      result.addWarning(rootElementDeclaration, "Root elements in the '" + CommonModels.GEDCOMX_DOMAIN + "' namespace should probably be annotated with @" + JsonElementWrapper.class.getSimpleName() + ".");
+    if (namespace.startsWith(GedcomxConstants.GEDCOMX_DOMAIN) && elementWrapper == null) {
+      result.addWarning(rootElementDeclaration, "Root elements in the '" + GedcomxConstants.GEDCOMX_DOMAIN + "' namespace should probably be annotated with @" + JsonElementWrapper.class.getSimpleName() + ".");
     }
 
     if (elementWrapper != null) {

@@ -18,13 +18,13 @@
  * The contributor model.
  */
 @XmlSchema(
-  namespace = CommonModels.GEDCOMX_NAMESPACE,
+  namespace = GedcomxConstants.GEDCOMX_NAMESPACE,
   elementFormDefault = XmlNsForm.QUALIFIED
 )
 @XmlAccessorOrder( XmlAccessOrder.ALPHABETICAL )
 package org.gedcomx.contributor;
 
-import org.gedcomx.rt.CommonModels;
+import org.gedcomx.rt.GedcomxConstants;
 
 import javax.xml.bind.annotation.XmlAccessOrder;
 import javax.xml.bind.annotation.XmlAccessorOrder;

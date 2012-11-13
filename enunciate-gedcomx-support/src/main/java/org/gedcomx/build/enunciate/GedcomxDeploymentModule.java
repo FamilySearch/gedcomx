@@ -16,13 +16,11 @@
 package org.gedcomx.build.enunciate;
 
 import com.sun.mirror.apt.Messager;
-import com.sun.mirror.declaration.TypeDeclaration;
 import freemarker.template.TemplateException;
 import net.sf.jelly.apt.Context;
 import org.apache.commons.digester.RuleSet;
 import org.codehaus.enunciate.EnunciateException;
 import org.codehaus.enunciate.apt.EnunciateFreemarkerModel;
-import org.codehaus.enunciate.apt.EnunciateTypeDeclarationListener;
 import org.codehaus.enunciate.config.SchemaInfo;
 import org.codehaus.enunciate.config.WsdlInfo;
 import org.codehaus.enunciate.contract.jaxb.RootElementDeclaration;
@@ -58,13 +56,11 @@ import java.util.*;
  *
  * @author Ryan Heaton
  */
-public class GedcomxDeploymentModule extends FreemarkerDeploymentModule implements DocumentationAwareModule, EnunciateTypeDeclarationListener {
+public class GedcomxDeploymentModule extends FreemarkerDeploymentModule implements DocumentationAwareModule {
 
-  private String projectId = CommonModels.GEDCOMX_PROJECT_ID;
+  private String projectId = GedcomxConstants.GEDCOMX_PROJECT_ID;
   private String projectLabelModifier = null;
   private final Map<String, String> baseProjectUris = new HashMap<String, String>();
-  private final Map<String, TypeDeclaration> knownModelDeclarations = new HashMap<String, TypeDeclaration>();
-  private final Map<String, TypeDeclaration> knownRsdDeclarations = new HashMap<String, TypeDeclaration>();
   private RDFProcessor rdfProcessor;
   private final Map<String, String> primaryNav = new LinkedHashMap<String, String>();
   private boolean disableProcessing = false;
@@ -191,12 +187,6 @@ public class GedcomxDeploymentModule extends FreemarkerDeploymentModule implemen
     this.stylesheet = stylesheet;
   }
 
-  public void onTypeDeclarationInspected(TypeDeclaration typeDeclaration) {
-    if (typeDeclaration.getAnnotation(Models.class) != null) {
-      this.knownModelDeclarations.put(typeDeclaration.getQualifiedName(), typeDeclaration);
-    }
-  }
-
   protected URL getDocsTemplateURL() {
     return GedcomxDeploymentModule.class.getResource("docs.fmt");
   }
@@ -217,8 +207,8 @@ public class GedcomxDeploymentModule extends FreemarkerDeploymentModule implemen
   public void init(Enunciate enunciate) throws EnunciateException {
     super.init(enunciate);
 
-    enunciate.getConfig().getContentTypesToIds().put(CommonModels.GEDCOMX_XML_MEDIA_TYPE, "gedcomx-xml");
-    enunciate.getConfig().getContentTypesToIds().put(CommonModels.GEDCOMX_JSON_MEDIA_TYPE, "gedcomx-json");
+    enunciate.getConfig().getContentTypesToIds().put(GedcomxConstants.GEDCOMX_XML_MEDIA_TYPE, "gedcomx-xml");
+    enunciate.getConfig().getContentTypesToIds().put(GedcomxConstants.GEDCOMX_JSON_MEDIA_TYPE, "gedcomx-json");
 
     SortedSet<DeploymentModule> modules = enunciate.getConfig().getAllModules();
     for (DeploymentModule module : modules) {
@@ -261,39 +251,25 @@ public class GedcomxDeploymentModule extends FreemarkerDeploymentModule implemen
       }
     }
 
-    Collection<TypeDeclaration> modelDeclarations = gatherModelDeclarations();
+    List<MediaTypeDeclaration> mediaTypeDeclarations = new ArrayList<MediaTypeDeclaration>();
+    Collection<RootElementDeclaration> mediaTypeRoots = gatherMediaTypeRoots(model);
     Map<String, String> prefix_version_to_ns = new HashMap<String, String>();
-    for (TypeDeclaration modelDeclaration : modelDeclarations) {
-      info("Found model declaration at %s.", modelDeclaration.getQualifiedName());
-      Models modelsInfo = modelDeclaration.getAnnotation(Models.class);
-      for (Model m : modelsInfo.value()) {
+    for (RootElementDeclaration rootElement : mediaTypeRoots) {
+      info("Found media type root declaration at %s.", rootElement.getQualifiedName());
+      MediaTypeDefinition mediaTypeInfo = rootElement.getAnnotation(MediaTypeDefinition.class);
+      MediaTypeDeclaration decl = new MediaTypeDeclaration(mediaTypeInfo.id(), mediaTypeInfo.name(), mediaTypeInfo.description(), mediaTypeInfo.version(), mediaTypeInfo.xmlMediaType(), mediaTypeInfo.jsonMediaType(), mediaTypeInfo.projectId(), rootElement, mediaTypeDeclarations);
+      for (Model m : mediaTypeInfo.models()) {
         String id = m.id();
         SchemaInfo schemaInfo = model.getNamespacesToSchemas().get(m.namespace());
         model.getNamespacesToPrefixes().put(m.namespace(), id);
         if (schemaInfo != null) {
-          String version = m.version();
-
-          schemaInfo.setProperty("version", version);
-
-          String xmlMediaType = m.xmlMediaType();
-          if ("".equals(xmlMediaType)) {
-            xmlMediaType = null;
-          }
-          schemaInfo.setProperty("xmlMediaType", xmlMediaType);
-
-          String jsonMediaType = m.jsonMediaType();
-          if ("".equals(jsonMediaType)) {
-            jsonMediaType = null;
-          }
-          schemaInfo.setProperty("jsonMediaType", jsonMediaType);
-
           schemaInfo.setId(id);
-          String previousNamespace = prefix_version_to_ns.put(id + version, schemaInfo.getNamespace());
+          String previousNamespace = prefix_version_to_ns.put(id, schemaInfo.getNamespace());
           if (previousNamespace != null && !previousNamespace.equals(schemaInfo.getNamespace())) {
-            String message = modelDeclaration.getPosition() == null ?
-              String.format("%s version %s is already being used by model %s.", id, version, previousNamespace) :
-              String.format("%s: %s version %s is already being used by model %s.", modelDeclaration.getQualifiedName(), id, version, previousNamespace);
-            throw new ValidationException(modelDeclaration.getPosition(), message);
+            String message = rootElement.getPosition() == null ?
+              String.format("Id '%s' is already being used by model %s.", id, previousNamespace) :
+              String.format("%s: Id '%s' is already being used by model %s.", rootElement.getQualifiedName(), id, previousNamespace);
+            throw new ValidationException(rootElement.getPosition(), message);
           }
 
           String label = m.label();
@@ -308,15 +284,19 @@ public class GedcomxDeploymentModule extends FreemarkerDeploymentModule implemen
           }
           schemaInfo.setProperty("description", description);
           schemaInfo.setProperty("definesRDFSchema", m.definesRDFSchema());
-
-          schemaInfo.setProperty("projectId", m.projectId());
+          schemaInfo.setProperty("projectId", mediaTypeInfo.projectId());
+          schemaInfo.setProperty("mediaType", decl);
 
           //ensure the correct filenames are used for the schemas.
-          schemaInfo.setProperty("filename", id + "-" + version + ".xsd");
-          schemaInfo.setProperty("location", id + "-" + version + ".xsd");
+          schemaInfo.setProperty("filename", id + ".xsd");
+          schemaInfo.setProperty("location", id + ".xsd");
+
+          decl.getSchemas().add(schemaInfo);
         }
       }
+      mediaTypeDeclarations.add(decl);
     }
+    model.put("mediaTypeDeclarations", mediaTypeDeclarations);
 
     ValidationResult validationResult = this.rdfProcessor.processModel(model);
     Messager messager = Context.getCurrentEnvironment().getMessager();
@@ -358,8 +338,16 @@ public class GedcomxDeploymentModule extends FreemarkerDeploymentModule implemen
     }
   }
 
-  protected Collection<TypeDeclaration> gatherModelDeclarations() {
-    return this.knownModelDeclarations.values();
+  protected Collection<RootElementDeclaration> gatherMediaTypeRoots(EnunciateFreemarkerModel model) {
+    ArrayList<RootElementDeclaration> mediaTypeDecls = new ArrayList<RootElementDeclaration>();
+    for (SchemaInfo schemaInfo : model.getNamespacesToSchemas().values()) {
+      for (RootElementDeclaration declaration : schemaInfo.getGlobalElements()) {
+        if (declaration.getAnnotation(MediaTypeDefinition.class) != null) {
+          mediaTypeDecls.add(declaration);
+        }
+      }
+    }
+    return mediaTypeDecls;
   }
 
   public void doFreemarkerGenerate() throws EnunciateException, IOException, TemplateException {

@@ -5,7 +5,7 @@ import org.gedcomx.common.TextValue;
 import org.gedcomx.common.URI;
 import org.gedcomx.CustomEntity;
 import org.gedcomx.conclusion.Identifier;
-import org.gedcomx.rt.json.GedcomJsonProvider;
+import org.gedcomx.rt.json.GedcomJacksonModule;
 import org.testng.Assert;
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
@@ -50,7 +50,7 @@ public class AgentTest {
     agent.addExtensionElement(new CustomEntity("4321"));
     agent.addExtensionElement(new CustomEntity("5432"));
     agent.getExtensionElements().add(new CustomEntity("6543"));
-    agent = processThroughJson(agent, Agent.class, GedcomJsonProvider.createObjectMapper(Agent.class, CustomEntity.class));
+    agent = processThroughJson(agent, Agent.class, GedcomJacksonModule.createObjectMapper(Agent.class, CustomEntity.class));
     assertEquals(agent.getExtensionElements().size(), 3);
     assertEquals(agent.findExtensionOfType(CustomEntity.class).getId(), "4321");
     assertEquals(agent.findExtensionsOfType(String.class).size(), 0);

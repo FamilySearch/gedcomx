@@ -1,94 +1,110 @@
 [#ftl]
 [#-- @ftlvariable name="schema" type="org.codehaus.enunciate.config.SchemaInfo" --]
-[#import "model.fmt" as libModel/]
+[#import "mediatype.fmt" as libMediaType/]
 [#import "element.fmt" as libElement/]
 [#import "type.fmt" as libType/]
 [#import "boilerplate.fmt" as libBoilerplate/]
 [@forEachSchema]
   [#if (isOfProject(schema) && ((schema.typeDefinitions?size > 0) || (schema.globalElements?size > 0)))]
-    [@file name=(schema.id + ".html") charset="utf-8"]
-      [@libModel.writeModelPage schema=schema/]
-    [/@file]
     [#list schema.globalElements as element]
-      [@file name=(schema.id + "_el_" + element.name + ".html") charset="utf-8"]
-        [@libElement.writeElementPage element=element/]
+      [@file name=(schema.id + "_el_" + element.name + "_xml.html") charset="utf-8"]
+        [@libElement.writeXmlElementPage element=element/]
+      [/@file]
+      [@file name=(schema.id + "_el_" + element.name + "_json.html") charset="utf-8"]
+        [@libElement.writeJsonElementPage element=element/]
       [/@file]
     [/#list]
     [#list schema.typeDefinitions as type]
-      [@file name=(schema.id + "_" + type.name + ".html") charset="utf-8"]
-        [@libType.writeTypePage type=type/]
+      [@file name=(schema.id + "_" + type.name + "_xml.html") charset="utf-8"]
+        [@libType.writeXmlTypePage type=type/]
+      [/@file]
+      [@file name=(schema.id + "_" + type.name + "_json.html") charset="utf-8"]
+        [@libType.writeJsonTypePage type=type/]
       [/@file]
     [/#list]
   [/#if]
 [/@forEachSchema]
-[@file name="models.html" charset="utf-8"]
-  [@libBoilerplate.writeStartBody label="Models"/]
+[#list mediaTypeDeclarations as mt]
+  [#if (mt.projectId = projectId)]
+    [#if mt.jsonMediaType??]
+      [@file name="mt_" + mt.id + "_json.html"]
+        [@libMediaType.writeJsonMediaTypePage mt=mt/]
+      [/@file]
+    [/#if]
+    [#if mt.xmlMediaType??]
+      [@file name="mt_" + mt.id + "_xml.html"]
+        [@libMediaType.writeXmlMediaTypePage mt=mt/]
+      [/@file]
+    [/#if]
+  [/#if]
+[/#list]
+[@file name="media-types.html" charset="utf-8"]
+  [@libBoilerplate.writeStartBody label="Media Types"/]
   <div class="container">
     [@libBoilerplate.writeHeader]
       <ul class="xbreadcrumbs" id="breadcrumbs">
         <li><a href="Home.html" class="home">Home</a></li>
         <li class="current">
-          <a href="models.html">Models</a>
+          <a href="media-types.html">Media Types</a>
           <ul>
-            <li><a href="#">Models</a></li>
+            <li><a href="#">Media Types</a></li>
             <li><a href="recipes.html">Recipes</a></li>
           </ul>
         </li>
       </ul>
     [/@libBoilerplate.writeHeader]
     <div id="main" class="column first last span-20">
-      <h1>GEDCOM X[#if projectLabelModifier??] ${projectLabelModifier}[/#if] Models</h1>
+      <h1>GEDCOM X[#if projectLabelModifier??] ${projectLabelModifier}[/#if] Media Types</h1>
 
       <hr/>
+    [#list mediaTypeDeclarations as mt]
+      [#if (mt.projectId = projectId)]
+        [#if mt.jsonMediaType??]
 
-    [#list ns2schema?values?sort_by("id") as schema]
-      [#if (isOfProject(schema) && ((schema.typeDefinitions?size > 0) || (schema.globalElements?size > 0)))]
-      <h3><a href="${schema.id}.html">${schema.properties.label!("\"" + schema.id + "\" Model")}</a></h3>
-        [#if schema.properties.description??]<p>${schema.properties.description}</p>[/#if]
+      <h3><a href="mt_${mt.id}_json.html">${mt.name} (JSON)</a></h3>
+
+      <p>${mt.description}</p>
+
       <table>
-        <tr>
-          <td align="right">Model ID:</td>
-          <td>${schema.id}</td>
-        </tr>
-        <tr>
-          <td align="right">Namespace URI:</td>
-          <td>${schema.namespace}</td>
-        </tr>
-        [#if schema.properties.version??]
+        [#if mt.version??]
         <tr>
           <td align="right">Version:</td>
-          <td>${schema.properties.version}</td>
+          <td>${mt.version}</td>
         </tr>
         [/#if]
         <tr>
-          <td align="right">XML Schema:</td>
-          <td><a href="${schema.properties.filename!"#"}">${schema.properties.filename!"n/a"}</a></td>
+          <td align="right">Media Type:</td>
+          <td>${mt.jsonMediaType}</td>
         </tr>
-        [#if schema.properties.rdfSchemaLocation??]
         <tr>
-          <td align="right">RDF Schema:</td>
-          <td><a href="${schema.properties.rdfSchemaLocation}">${schema.properties.rdfSchemaLocation}</a></td>
+          <td align="right">Root Element:</td>
+          <td><a href="${ns2prefix[mt.rootElement.namespace]}_el_${mt.rootElement.name}_json.html">${mt.rootElement.name}</a></td>
         </tr>
-        [/#if]
-        [#if schema.properties.xmlMediaType??]
-        <tr>
-          <td align="right">XML Media Type:</td>
-          <td>${schema.properties.xmlMediaType}</td>
-        </tr>
-        [/#if]
-        [#if schema.properties.jsonMediaType??]
-        <tr>
-          <td align="right">JSON Media Type:</td>
-          <td>${schema.properties.jsonMediaType}</td>
-        </tr>
-        [/#if]
-        [#if schema.globalElements?size > 0]
-        <tr>
-          <td align="right">Elements:</td>
-          <td>[#list schema.globalElements as element] [#if !element_has_next && (element_index > 0)]and [/#if]<a href="${schema.id}_el_${element.name}.html">${element.name}</a>[#if element_has_next && schema.globalElements?size > 2],[/#if][/#list]</td>
-        </tr>
-        [/#if]
       </table>
+        [/#if]
+        [#if mt.xmlMediaType??]
+
+      <h3><a href="mt_${mt.id}_xml.html">${mt.name} (XML)</a></h3>
+
+      <p>${mt.description}</p>
+
+      <table>
+        [#if mt.version??]
+        <tr>
+          <td align="right">Version:</td>
+          <td>${mt.version}</td>
+        </tr>
+        [/#if]
+        <tr>
+          <td align="right">Media Type:</td>
+          <td>${mt.xmlMediaType}</td>
+        </tr>
+        <tr>
+          <td align="right">Root Element:</td>
+          <td><a href="${ns2prefix[mt.rootElement.namespace]}_el_${mt.rootElement.name}_xml.html">${mt.rootElement.name}</a></td>
+        </tr>
+      </table>
+        [/#if]
       [/#if]
     [/#list]
 

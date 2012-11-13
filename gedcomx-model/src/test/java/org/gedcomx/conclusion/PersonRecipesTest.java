@@ -2,7 +2,7 @@ package org.gedcomx.conclusion;
 
 import org.gedcomx.common.ResourceReference;
 import org.gedcomx.common.URI;
-import org.gedcomx.rt.json.GedcomJsonProvider;
+import org.gedcomx.rt.json.GedcomJacksonModule;
 import org.gedcomx.test.RecipeTest;
 import org.gedcomx.test.Snippet;
 import org.gedcomx.types.FactType;
@@ -57,7 +57,7 @@ public class PersonRecipesTest extends RecipeTest {
 
     Snippet snippet = new Snippet();
     Person personThurXml = processThroughXml(person, Person.class, JAXBContext.newInstance(Person.class, CustomMarker.class), snippet);
-    Person personThurJson = processThroughJson(person, Person.class, GedcomJsonProvider.createObjectMapper(Person.class, CustomMarker.class), snippet);
+    Person personThurJson = processThroughJson(person, Person.class, GedcomJacksonModule.createObjectMapper(Person.class, CustomMarker.class), snippet);
     addSnippet(snippet);
 
     verifyPerson(personThurXml);

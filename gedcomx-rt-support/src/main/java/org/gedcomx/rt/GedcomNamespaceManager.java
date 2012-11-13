@@ -34,7 +34,7 @@ import java.net.URL;
 import java.util.*;
 
 /**
- * A nice namespace prefix mapper that can be used to make XML output as pretty as it can be.
+ * A nice namespace prefix mapper that can be used to make XML and JSON output as pretty as it can be.
  *
  * @author Ryan Heaton
  */
@@ -133,7 +133,6 @@ public class GedcomNamespaceManager extends NamespacePrefixMapper {
     Map<String, Class<?>> wrappedJsonTypes = new HashMap<String, Class<?>>();
 
     Set<Class<?>> modelClasses = new HashSet<Class<?>>();
-    modelClasses.add(CommonModels.class);
 
     try {
       Enumeration<URL> resources = loader.getResources("META-INF/gedcomx.models");
@@ -157,8 +156,8 @@ public class GedcomNamespaceManager extends NamespacePrefixMapper {
     }
 
     for (Class<?> modelClass : modelClasses) {
-      Models modelsInfo = modelClass.getAnnotation(Models.class);
-      for (Model model : modelsInfo.value()) {
+      MediaTypeDefinition mediaTypeInfo = modelClass.getAnnotation(MediaTypeDefinition.class);
+      for (Model model : mediaTypeInfo.models()) {
         namespacePrefixes.put(model.namespace(), model.id());
 
         for (Class objectFactory : model.objectFactory()) {

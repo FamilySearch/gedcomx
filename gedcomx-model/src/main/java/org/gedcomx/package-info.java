@@ -15,16 +15,18 @@
  */
 
 /**
- * The types model defines the standard set of types of genealogical data.
+ * The base GEDCOM X media type.
  */
 @XmlSchema(
-  namespace = GedcomxConstants.GEDCOMX_TYPES_NAMESPACE,
+  namespace = GedcomxConstants.GEDCOMX_NAMESPACE,
   elementFormDefault = XmlNsForm.QUALIFIED
 )
-package org.gedcomx.types;
+@XmlAccessorOrder ( XmlAccessOrder.ALPHABETICAL )
+package org.gedcomx;
 
-//todo: figure out all the valid types
 import org.gedcomx.rt.GedcomxConstants;
 
+import javax.xml.bind.annotation.XmlAccessOrder;
+import javax.xml.bind.annotation.XmlAccessorOrder;
 import javax.xml.bind.annotation.XmlNsForm;
 import javax.xml.bind.annotation.XmlSchema;

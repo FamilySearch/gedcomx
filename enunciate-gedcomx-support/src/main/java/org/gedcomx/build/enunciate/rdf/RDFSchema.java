@@ -16,7 +16,6 @@
 package org.gedcomx.build.enunciate.rdf;
 
 import com.sun.mirror.declaration.Declaration;
-import org.gedcomx.rt.CommonModels;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;

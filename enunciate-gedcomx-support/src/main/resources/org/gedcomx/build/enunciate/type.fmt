@@ -2,36 +2,45 @@
 [#--macro for writing a type page--]
 [#-- @ftlvariable name="type" type="org.codehaus.enunciate.contract.jaxb.TypeDefinition" --]
 [#import "boilerplate.fmt" as libBoilerplate/]
-[#macro writeTypePage type]
+[#macro writeXmlTypePage type]
   [#assign schema=schemaForNamespace(type)/]
   [#assign typeLabel=type.javaDoc["label"]!type.name!"Anonymous"/]
   [@libBoilerplate.writeStartBody label=typeLabel/]
   <div class="container">
     [@libBoilerplate.writeHeader]
-      <ul class="xbreadcrumbs" id="breadcrumbs">
-        <li><a href="Home.html" class="home">Home</a></li>
-        <li>
-          <a href="index.html">Models</a>
-          <ul>
-            <li><a href="models.html">Models</a></li>
-            <li><a href="recipes.html">Recipes</a></li>
-          </ul>
-        </li>
-        <li>
-          <a href="${schema.id}.html">${schema.properties.label!("\"" + schema.id + "\" Model")}</a>
-          <ul>
-      [@forEachSchema var="sch"]
-        [#if (sch.typeDefinitions?size > 0) || (sch.globalElements?size > 0)]
-            <li><a href="${baseProjectUri(sch)}${sch.id}.html">${sch.properties.label!("\"" + sch.id + "\" Model")}</a></li>
-        [/#if]
-      [/@forEachSchema]
-          </ul>
-        </li>
-        <li class="current">
+    <ul class="xbreadcrumbs" id="breadcrumbs">
+      <li><a href="Home.html" class="home">Home</a></li>
+      <li>
+        <a href="media-types.html">Media Types</a>
+        <ul>
+          <li><a href="media-types.html">Media Types</a></li>
+          <li><a href="recipes.html">Recipes</a></li>
+        </ul>
+      </li>
+      [#if schema.properties.mediaType??]
+      <li>
+        <a href="mt_${schema.properties.mediaType.id}_xml.html">${schema.properties.mediaType.name} XML</a>
+        <ul>
+          [#list mediaTypeDeclarations as mt]
+            [#if mt.xmlMediaType??]
+              <li><a href="${baseProjectUri(sch)}mt_${mt.id}_xml.html">${mt.name} XML</a></li>
+            [/#if]
+            [#if mt.jsonMediaType??]
+              <li><a href="${baseProjectUri(sch)}mt_${mt.id}_json.html">${mt.name} JSON</a></li>
+            [/#if]
+          [/#list]
+        </ul>
+      </li>
+      [/#if]
+      <li class="current">
           <a href="#">${typeLabel}</a>
           <ul>
-      [#list schema.typeDefinitions as td]
-            <li><a href="${schema.id}_${td.name}.html">${td.javaDoc["label"]!td.name!"Anonymous"}</a></li>
+      [#assign typeList=schema.typeDefinitions/]
+      [#if schema.properties.mediaType??]
+        [#assign typeList=schema.properties.mediaType.dataTypes/]
+      [/#if]
+      [#list typeList as td]
+            <li><a href="${schema.id}_${td.name}_xml.html">${td.javaDoc["label"]!td.name!"Anonymous"}</a></li>
       [/#list]
           </ul>
         </li>
@@ -44,21 +53,13 @@
 
       <table>
         <tr>
-          <td align="right">Name:</td>
-          <td>${type.name}</td>
-        </tr>
-        <tr>
-          <td align="right">Namespace:</td>
-          <td>${type.namespace}</td>
-        </tr>
-        <tr>
-          <td align="right">URI:</td>
+          <td align="right">Identifier:</td>
           <td>${type.namespace}${type.name}</td>
         </tr>
         [#if !type.baseObject]
         <tr>
           <td align="right">Extends:</td>
-          <td><a href="${baseProjectUri(type.baseType)}${schemaForNamespace(type.baseType).id}_${type.baseType.name}.html">${typeName(type.baseType, type.namespace)}</a></td>
+          <td><a href="${baseProjectUri(type.baseType)}${schemaForNamespace(type.baseType).id}_${type.baseType.name}_xml.html">${typeName(type.baseType, type.namespace)}</a></td>
         </tr>
         [/#if]
       </table>
@@ -71,7 +72,7 @@
       <h3>Enumerated Values</h3>
       <table>
         <tr>
-          <th align="center">[#if type.QNameEnum!false]qname[#else]value[/#if]</th>
+          <th align="center">value</th>
           <th align="center">description</th>
         </tr>
       [#assign enumValueMap=type.enumValues/]
@@ -89,16 +90,6 @@
       [/#list]
       </table>
     [#else]
-      <h3>Media Types</h3>
-
-      <p>Pick your favorite representation format.</p>
-
-      <div id="mediatype-selection">
-        <input type="radio" id="select-xml" name="mediatype" checked="checked"/><label for="select-xml">XML</label>
-        <input type="radio" id="select-json" name="mediatype" /><label for="select-json">JSON</label>
-      </div>
-
-      <div class="xml-docs">
       [#if type.value??]
         [#assign hasSchema=schemaForNamespace(type.value)??/]
         <h3>Value</h3>
@@ -108,7 +99,7 @@
             <th align="center">description</th>
           </tr>
           <tr>
-            <td>[#if hasSchema]<a href="${baseProjectUri(type.value)}${schemaForNamespace(type.value).id}_${type.value.baseType.qname.localPart}.html">[/#if]${typeName(type.value, type.namespace)}[#if hasSchema]</a>[/#if]</td>
+            <td>[#if hasSchema]<a href="${baseProjectUri(type.value)}${schemaForNamespace(type.value).id}_${type.value.baseType.qname.localPart}_xml.html">[/#if]${typeName(type.value, type.namespace)}[#if hasSchema]</a>[/#if]</td>
             <td>${type.value.docValue!""}</td>
           </tr>
         </table>
@@ -126,7 +117,7 @@
           [#assign hasSchema=schemaForNamespace(attribute)??/]
           <tr>
             <td>${attribute.name}</td>
-            <td>[#if hasSchema]<a href="${baseProjectUri(attribute)}${schemaForNamespace(attribute).id}_${attribute.baseType.qname.localPart}.html">[/#if]${typeName(attribute, type.namespace)}[#if hasSchema]</a>[/#if]</td>
+            <td>[#if hasSchema]<a href="${baseProjectUri(attribute)}${schemaForNamespace(attribute).id}_${attribute.baseType.qname.localPart}_xml.html">[/#if]${typeName(attribute, type.namespace)}[#if hasSchema]</a>[/#if]</td>
             <td>${attribute.docValue!""}</td>
           </tr>
         [/#list]
@@ -153,7 +144,7 @@
           [#assign hasSchema=schemaForNamespace(element)??/]
           <tr>
             <td>${element.name}[#if element.wrapped!false] (wrapped in "${element.wrapperName}" element)[/#if]</td>
-            <td>[#if hasSchema]<a href="${baseProjectUri(element)}${schemaForNamespace(element).id}_[#if element.ref??]${element.ref.localPart}[#else]${element.baseType.qname.localPart}[/#if].html">[/#if]${typeName(element, type.namespace)}[#if hasSchema]</a>[/#if]</td>
+            <td>[#if hasSchema]<a href="${baseProjectUri(element)}${schemaForNamespace(element).id}_[#if element.ref??]${element.ref.localPart}[#else]${element.baseType.qname.localPart}[/#if]_xml.html">[/#if]${typeName(element, type.namespace)}[#if hasSchema]</a>[/#if]</td>
             <td>${element.minOccurs}..[#if "unbounded" = element.maxOccurs]*[#else]${element.maxOccurs}[/#if]</td>
             <td>${element.docValue!""}</td>
           </tr>
@@ -173,9 +164,102 @@
         <pre class="prettyprint lang-xml">
 ${generateExampleXml(type)?html}
         </pre>
-      </div>
+    [/#if]
 
-      <div class="json-docs">
+    <div class="clear" />
+    [@libBoilerplate.writeFooter/]
+  </div> <!--! end of #container -->
+
+  [@libBoilerplate.writeEndBody/]
+[/#macro]
+[#macro writeJsonTypePage type]
+  [#assign schema=schemaForNamespace(type)/]
+  [#assign typeLabel=type.javaDoc["label"]!type.name!"Anonymous"/]
+  [@libBoilerplate.writeStartBody label=typeLabel/]
+  <div class="container">
+    [@libBoilerplate.writeHeader]
+    <ul class="xbreadcrumbs" id="breadcrumbs">
+      <li><a href="Home.html" class="home">Home</a></li>
+      <li>
+        <a href="media-types.html">Media Types</a>
+        <ul>
+          <li><a href="media-types.html">Media Types</a></li>
+          <li><a href="recipes.html">Recipes</a></li>
+        </ul>
+      </li>
+      [#if schema.properties.mediaType??]
+      <li>
+        <a href="mt_${schema.properties.mediaType.id}_xml.html">${schema.properties.mediaType.name} XML</a>
+        <ul>
+          [#list mediaTypeDeclarations as mt]
+            [#if mt.xmlMediaType??]
+              <li><a href="${baseProjectUri(sch)}mt_${mt.id}_xml.html">${mt.name} XML</a></li>
+            [/#if]
+            [#if mt.jsonMediaType??]
+              <li><a href="${baseProjectUri(sch)}mt_${mt.id}_json.html">${mt.name} JSON</a></li>
+            [/#if]
+          [/#list]
+        </ul>
+      </li>
+      [/#if]
+      <li class="current">
+          <a href="#">${typeLabel}</a>
+          <ul>
+      [#assign typeList=schema.typeDefinitions/]
+      [#if schema.properties.mediaType??]
+        [#assign typeList=schema.properties.mediaType.dataTypes/]
+      [/#if]
+      [#list typeList as td]
+            <li><a href="${schema.id}_${td.name}_json.html">${td.javaDoc["label"]!td.name!"Anonymous"}</a></li>
+      [/#list]
+          </ul>
+        </li>
+      </ul>
+    [/@libBoilerplate.writeHeader]
+    <div id="main" class="column first last span-20">
+      <h1>${typeLabel}</h1>
+
+      <hr/>
+
+      <table>
+        <tr>
+          <td align="right">Identifier:</td>
+          <td>${type.namespace}${type.name}</td>
+        </tr>
+        [#if !type.baseObject]
+        <tr>
+          <td align="right">Extends:</td>
+          <td><a href="${baseProjectUri(type.baseType)}${schemaForNamespace(type.baseType).id}_${type.baseType.name}_json.html">${typeName(type.baseType, type.namespace)}</a></td>
+        </tr>
+        [/#if]
+      </table>
+
+      <h3>Description</h3>
+
+      <p>${type.docValue!""}</p>
+
+    [#if type.enum!false]
+      <h3>Enumerated Values</h3>
+      <table>
+        <tr>
+          <th align="center">value</th>
+          <th align="center">description</th>
+        </tr>
+      [#assign enumValueMap=type.enumValues/]
+      [#list type.enumConstants as constant]
+        [#if enumValueMap[constant.simpleName]??]
+        <tr>
+          [#if type.QNameEnum!false]
+          <td>${enumValueMap[constant.simpleName].namespaceURI}${enumValueMap[constant.simpleName].localPart}</td>
+          [#else]
+          <td>${enumValueMap[constant.simpleName]}</td>
+          [/#if]
+          <td>${constant.docComment!""}</td>
+        </tr>
+        [/#if]
+      [/#list]
+      </table>
+    [#else]
         <h3>Properties</h3>
         <table>
           <tr>
@@ -187,7 +271,7 @@ ${generateExampleXml(type)?html}
           [#assign hasSchema=schemaForNamespace(attribute)??/]
           <tr>
             <td>${attribute.jsonMemberName}</td>
-            <td>[#if hasSchema]<a href="${baseProjectUri(attribute)}${schemaForNamespace(attribute).id}_${attribute.baseType.qname.localPart}.html">[/#if]${typeName(attribute, type.namespace)}[#if hasSchema]</a>[/#if]</td>
+            <td>[#if hasSchema]<a href="${baseProjectUri(attribute)}${schemaForNamespace(attribute).id}_${attribute.baseType.qname.localPart}_json.html">[/#if]${typeName(attribute, type.namespace)}[#if hasSchema]</a>[/#if]</td>
             <td>${attribute.docValue!""}</td>
           </tr>
         [/#list]
@@ -195,7 +279,7 @@ ${generateExampleXml(type)?html}
           [#assign hasSchema=schemaForNamespace(element)??/]
           <tr>
             <td>${element.jsonMemberName}</td>
-            <td>[#if element.collectionType!false]array of [/#if][#if hasSchema]<a href="${baseProjectUri(element)}${schemaForNamespace(element).id}_[#if element.ref??]${element.ref.localPart}[#else]${element.baseType.qname.localPart}[/#if].html">[/#if]${typeName(element, type.namespace)}[#if hasSchema]</a>[/#if]</td>
+            <td>[#if element.collectionType!false]array of [/#if][#if hasSchema]<a href="${baseProjectUri(element)}${schemaForNamespace(element).id}_[#if element.ref??]${element.ref.localPart}[#else]${element.baseType.qname.localPart}[/#if]_json.html">[/#if]${typeName(element, type.namespace)}[#if hasSchema]</a>[/#if]</td>
             <td>${element.docValue!""}</td>
           </tr>
         [/#list]
@@ -203,7 +287,7 @@ ${generateExampleXml(type)?html}
           [#assign hasSchema=schemaForNamespace(type.value)??/]
           <tr>
             <td>${type.value.jsonMemberName}</td>
-            <td>[#if hasSchema]<a href="${baseProjectUri(type.value)}${schemaForNamespace(type.value).id}_${type.value.baseType.qname.localPart}.html">[/#if]${typeName(type.value, type.namespace)}[#if hasSchema]</a>[/#if]</td>
+            <td>[#if hasSchema]<a href="${baseProjectUri(type.value)}${schemaForNamespace(type.value).id}_${type.value.baseType.qname.localPart}_json.html">[/#if]${typeName(type.value, type.namespace)}[#if hasSchema]</a>[/#if]</td>
             <td>${type.value.docValue!""}</td>
           </tr>
         [/#if]
@@ -213,7 +297,6 @@ ${generateExampleXml(type)?html}
         <pre class="prettyprint lang-js">
 ${generateExampleJson(type)}
         </pre>
-      </div>
     [/#if]
 
     <div class="clear" />

@@ -1,8 +1,8 @@
 [#ftl]
 [#--macro for writing a element page--]
 [#import "boilerplate.fmt" as libBoilerplate/]
-[#macro writeElementPage element]
-  [#assign schema=schemaForNamespace(element)/]
+[#macro writeXmlElementPage element]
+  [#assign schema=schemaForNamespace(element) /]
   [#assign elementLabel=element.name?cap_first + " Element"/]
   [@libBoilerplate.writeStartBody label=elementLabel/]
   <div class="container">
@@ -10,27 +10,36 @@
       <ul class="xbreadcrumbs" id="breadcrumbs">
         <li><a href="Home.html" class="home">Home</a></li>
         <li>
-          <a href="models.html">Models</a>
+          <a href="media-types.html">Media Types</a>
           <ul>
-            <li><a href="models.html">Models</a></li>
+            <li><a href="media-types.html">Media Types</a></li>
             <li><a href="recipes.html">Recipes</a></li>
           </ul>
         </li>
+      [#if schema.properties.mediaType??]
         <li>
-          <a href="${schema.id}.html">${schema.properties.label!("\"" + schema.id + "\" Model")}</a>
+          <a href="mt_${schema.properties.mediaType.id}_xml.html">${schema.properties.mediaType.name} XML</a>
           <ul>
-      [@forEachSchema var="sch"]
-        [#if (sch.typeDefinitions?size > 0) || (sch.globalElements?size > 0)]
-            <li><a href="${baseProjectUri(sch)}${sch.id}.html">${sch.properties.label!("\"" + sch.id + "\" Model")}</a></li>
-        [/#if]
-      [/@forEachSchema]
+        [#list mediaTypeDeclarations as mt]
+          [#if mt.xmlMediaType??]
+          <li><a href="${baseProjectUri(sch)}mt_${mt.id}_xml.html">${mt.name} XML</a></li>
+          [/#if]
+          [#if mt.jsonMediaType??]
+          <li><a href="${baseProjectUri(sch)}mt_${mt.id}_json.html">${mt.name} JSON</a></li>
+          [/#if]
+        [/#list]
           </ul>
         </li>
+      [/#if]
         <li class="current">
           <a href="#">${elementLabel}</a>
           <ul>
-      [#list schema.globalElements as el]
-            <li><a href="${schema.id}_el_${el.name}.html">${el.name?cap_first} Element</a></li>
+      [#assign elementList=schema.globalElements/]
+      [#if schema.properties.mediaType??]
+        [#assign elementList=schema.properties.mediaType.elements/]
+      [/#if]
+      [#list elementList as el]
+            <li><a href="${schema.id}_el_${el.name}_xml.html">${el.name?cap_first} Element</a></li>
       [/#list]
           </ul>
         </li>
@@ -43,8 +52,8 @@
 
       <table>
         <tr>
-          <td align="right">Type:</td>
-          <td><a href="${baseProjectUri(element.typeDefinition)}${schemaForNamespace(element.typeDefinition).id}_${element.typeDefinition.name}.html">${element.typeDefinition.namespace}${element.typeDefinition.name}</a></td>
+          <td align="right">Data Type:</td>
+          <td><a href="${baseProjectUri(element.typeDefinition)}${schemaForNamespace(element.typeDefinition).id}_${element.typeDefinition.name}_xml.html">${element.typeDefinition.namespace}${element.typeDefinition.name}</a></td>
         </tr>
         <tr>
           <td align="right">Name:</td>
@@ -53,6 +62,78 @@
         <tr>
           <td align="right">Namespace:</td>
           <td>${element.namespace}</td>
+        </tr>
+      </table>
+
+      <h3>Description</h3>
+
+      <p>${element.docValue!""}</p>
+
+      <h3>Example</h3>
+      <pre class="prettyprint lang-xml">
+${generateExampleXml(element)?html}
+      </pre>
+    </div>
+
+    <div class="clear" />
+    [@libBoilerplate.writeFooter/]
+  </div> <!--! end of #container -->
+
+  [@libBoilerplate.writeEndBody/]
+[/#macro]
+[#macro writeJsonElementPage element]
+  [#assign schema=schemaForNamespace(element) /]
+  [#assign elementLabel=element.name?cap_first + " Element"/]
+  [@libBoilerplate.writeStartBody label=elementLabel/]
+  <div class="container">
+    [@libBoilerplate.writeHeader]
+      <ul class="xbreadcrumbs" id="breadcrumbs">
+        <li><a href="Home.html" class="home">Home</a></li>
+        <li>
+          <a href="media-types.html">Media Types</a>
+          <ul>
+            <li><a href="media-types.html">Media Types</a></li>
+            <li><a href="recipes.html">Recipes</a></li>
+          </ul>
+        </li>
+      [#if schema.properties.mediaType??]
+        <li>
+          <a href="mt_${schema.properties.mediaType.id}_json.html">${schema.properties.mediaType.name} JSON</a>
+          <ul>
+        [#list mediaTypeDeclarations as mt]
+          [#if mt.jsonMediaType??]
+          <li><a href="${baseProjectUri(sch)}mt_${mt.id}_xml.html">${mt.name} XML</a></li>
+          [/#if]
+          [#if mt.jsonMediaType??]
+          <li><a href="${baseProjectUri(sch)}mt_${mt.id}_json.html">${mt.name} JSON</a></li>
+          [/#if]
+        [/#list]
+          </ul>
+        </li>
+      [/#if]
+        <li class="current">
+          <a href="#">${elementLabel}</a>
+          <ul>
+      [#assign elementList=schema.globalElements/]
+      [#if schema.properties.mediaType??]
+        [#assign elementList=schema.properties.mediaType.elements/]
+      [/#if]
+      [#list elementList as el]
+            <li><a href="${schema.id}_el_${el.name}_json.html">${el.name?cap_first} Element</a></li>
+      [/#list]
+          </ul>
+        </li>
+      </ul>
+    [/@libBoilerplate.writeHeader]
+    <div id="main" class="column first last span-20">
+      <h1>${elementLabel}</h1>
+
+      <hr/>
+
+      <table>
+        <tr>
+          <td align="right">Data Type:</td>
+          <td><a href="${baseProjectUri(element.typeDefinition)}${schemaForNamespace(element.typeDefinition).id}_${element.typeDefinition.name}_json.html">${element.typeDefinition.namespace}${element.typeDefinition.name}</a></td>
         </tr>
         <tr>
           <td align="right">JSON Name:</td>
@@ -64,33 +145,16 @@
 
       <p>${element.docValue!""}</p>
 
-      <h3>Media Types</h3>
+      <h3>Example</h3>
 
-      <p>Pick your favorite representation format.</p>
-
-      <div id="mediatype-selection">
-        <input type="radio" id="select-xml" name="mediatype" checked="checked"/><label for="select-xml">XML</label>
-        <input type="radio" id="select-json" name="mediatype" /><label for="select-json">JSON</label>
-      </div>
-
-      <div class="xml-docs">
-        <h3>Example</h3>
-        <pre class="prettyprint lang-xml">
-${generateExampleXml(element)?html}
-        </pre>
-      </div>
-
-      <div class="json-docs">
-        <h3>Example</h3>
-        <pre class="prettyprint lang-js">
+      <pre class="prettyprint lang-js">
 ${generateExampleJson(element)}
-        </pre>
-      </div>
+      </pre>
     </div>
 
-      <div class="clear" />
+    <div class="clear" />
     [@libBoilerplate.writeFooter/]
-    </div> <!--! end of #container -->
+  </div> <!--! end of #container -->
 
   [@libBoilerplate.writeEndBody/]
 [/#macro]

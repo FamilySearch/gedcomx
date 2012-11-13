@@ -25,8 +25,22 @@ import java.lang.annotation.Target;
  */
 @Retention( RetentionPolicy.RUNTIME )
 @Target( ElementType.TYPE )
-public @interface Models {
+public @interface MediaTypeDefinition {
 
-  Model[] value();
+  String id();
+
+  String name();
+
+  String version();
+
+  String description();
+
+  String projectId();
+
+  String xmlMediaType();
+
+  String jsonMediaType();
+
+  Model[] models();
 
 }

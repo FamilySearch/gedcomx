@@ -43,13 +43,6 @@ public @interface Model {
   String namespace();
 
   /**
-   * An identifier for a project to which this model belongs.
-   *
-   * @return An identifier for a project to which this model belongs.
-   */
-  String projectId();
-
-  /**
    * A label associated with the model, used to identify the model in the user documentation.
    *
    * @return A label associated with the model.
@@ -57,32 +50,11 @@ public @interface Model {
   String label() default "";
 
   /**
-   * An identifier for the version of the model.
-   *
-   * @return An identifier for the version of the model.
-   */
-  String version();
-
-  /**
    * A description of the model, used for user documentation.
    *
    * @return A description of the model, used for user documentation.
    */
   String description() default "";
-
-  /**
-   * The XML media type for representations that use this model.
-   *
-   * @return The XML media type for representations that use this model.
-   */
-  String xmlMediaType() default "";
-
-  /**
-   * The JSON media type for representations that use this model.
-   *
-   * @return The JSON media type for representations that use this model.
-   */
-  String jsonMediaType() default "";
 
   /**
    * Whether the model defines an RDF schema.

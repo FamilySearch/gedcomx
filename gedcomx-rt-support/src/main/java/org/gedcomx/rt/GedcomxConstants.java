@@ -21,29 +21,9 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Ryan Heaton
  */
 @XmlTransient
-@Models ( {
-  @Model (
-    id = "gx",
-    namespace = CommonModels.GEDCOMX_NAMESPACE,
-    projectId = CommonModels.GEDCOMX_PROJECT_ID,
-    label = "GEDCOM X Model",
-    description = "The core model for all GEDCOM X data types and elements.",
-    version = "v1",
-    xmlMediaType = CommonModels.GEDCOMX_XML_MEDIA_TYPE,
-    jsonMediaType = CommonModels.GEDCOMX_JSON_MEDIA_TYPE
-  ),
-  @Model (
-    id = "types",
-    namespace = CommonModels.GEDCOMX_TYPES_NAMESPACE,
-    projectId = CommonModels.GEDCOMX_PROJECT_ID,
-    label = "GEDCOM X Types",
-    description = "The types model contains all of the types and constrained vocabulary for GEDCOM X data.",
-    version = "v1"
-  )
-} )
-public class CommonModels {
+public class GedcomxConstants {
 
-  private CommonModels() {}
+  private GedcomxConstants() {}
 
   public static final String GEDCOMX_DOMAIN = "http://gedcomx.org/";
   public static final String GEDCOMX_PROJECT_ID = "gedcomx";

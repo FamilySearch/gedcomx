@@ -13,16 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.common;
+package org.gedcomx;
 
 import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.gedcomx.common.Attribution;
 import org.gedcomx.conclusion.Document;
 import org.gedcomx.conclusion.Event;
 import org.gedcomx.conclusion.Person;
 import org.gedcomx.conclusion.Relationship;
 import org.gedcomx.contributor.Agent;
 import org.gedcomx.links.HypermediaControllableData;
+import org.gedcomx.rt.GedcomxConstants;
+import org.gedcomx.rt.MediaTypeDefinition;
+import org.gedcomx.rt.Model;
 import org.gedcomx.rt.json.JsonElementWrapper;
 import org.gedcomx.source.SourceDescription;
 
@@ -31,10 +35,42 @@ import javax.xml.bind.annotation.*;
 import java.util.List;
 
 /**
- * The root document of the GEDCOM X media type. A container for all data of type GEDCOM X.
+ * <p>The GEDCOM X media types define the serialization formats of the GEDCOM X conceptual model. The canonical documentation
+ * is provided by the formal specification documents:</p>
+ *
+ * <ul>
+ *   <li><a href="https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md">The GEDCOM X Conceptual Model, Version 1.0</a></li>
+ *   <li><a href="https://github.com/FamilySearch/gedcomx/blob/master/specifications/json-format-specification.md">The GEDCOM X JSON Format, Version 1.0</a></li>
+ *   <li><a href="https://github.com/FamilySearch/gedcomx/blob/master/specifications/xml-format-specification.md">The GEDCOM X XML Format, Version 1.0</a></li>
+ * </ul>
+ *
+ * <p>This documentation is provided as a non-normative reference guide.</p>
  *
  * @author Ryan Heaton
  */
+@MediaTypeDefinition (
+  id = "gx",
+  name = "GEDCOM X",
+  description = "The GEDCOM X media types define the serialization formats of the GEDCOM X conceptual model.",
+  version = "1.0",
+  xmlMediaType = GedcomxConstants.GEDCOMX_XML_MEDIA_TYPE,
+  jsonMediaType = GedcomxConstants.GEDCOMX_JSON_MEDIA_TYPE,
+  projectId = GedcomxConstants.GEDCOMX_PROJECT_ID,
+  models = {
+    @Model (
+      id = "gx",
+      namespace = GedcomxConstants.GEDCOMX_NAMESPACE,
+      label = "GEDCOM X Model",
+      description = "The core model for all GEDCOM X data types and elements."
+    ),
+    @Model (
+      id = "types",
+      namespace = GedcomxConstants.GEDCOMX_TYPES_NAMESPACE,
+      label = "GEDCOM X Types",
+      description = "The types model contains all of the types and constrained vocabulary for GEDCOM X data."
+    )
+  }
+)
 @XmlRootElement
 @JsonElementWrapper (name = "gedcomx")
 @XmlType ( name = "Gedcomx" , propOrder = { "attribution", "persons", "relationships", "sourceDescriptions", "agents", "events", "documents" })
