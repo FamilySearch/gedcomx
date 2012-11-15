@@ -992,38 +992,10 @@ URI | description
 `http://gedcomx.org/Ordination` | An ordination event.
 `http://gedcomx.org/Retirement` | A retirement event.
 
-<a id="conclusion-place"/>
-
-## 5.10 The "Place" Data Type
-
-The `Place` data type describes a place independent of its potential jurisdictional hierarchies.  The `Place` data type extends the `Conclusion` data type.
-
-### identifier
-
-The identifier for the `Place` data type is:
-
-`http://gedcomx.org/v1/Place`
-
-### extension
-
-This data type extends the following data type:
-
-`http://gedcomx.org/v1/Conclusion`
-
-### properties
-
-name  | description | data type | constraints
-------|-------------|-----------|------------
-names | A list of standardized (or normalized) names associated with this place. | List of [http://gedcomx.org/v1/TextValue](#text-value). Order is preserved. | OPTIONAL. It is RECOMMENDED that this list contain at least one name value.
-latitude | Degrees north or south of the Equator (0 degrees). | IEEE 754 binary64 value | OPTIONAL.  If provided, MUST provide `longitude` also.  Values range from −90.0 degrees (south) to 90.0 degrees (north).
-longitude | Angular distance in degrees, relative to the Prime Meridian. | IEEE 754 binary64 value | OPTIONAL.  If provided, MUST provide `latitude` also.  Values range from −180.0 degrees (west of the Meridian) to 180.0 degrees (east of the Meridian).
-identifiers | A list of known identifiers for this place (e.g., place authority identifiers). | List of [`http://gedcomx.org/v1/Identifier`](#identifier-type). Order is preserved. | OPTIONAL.
-attribution | Attribution metadata for this place. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing data set (e.g. file) of the place is assumed.
-
 
 <a id="conclusion-place-description"/>
 
-## 5.11 The "PlaceDescription" Data Type
+## 5.10 The "PlaceDescription" Data Type
 
 The `PlaceDescription` data type describes the details of a place in terms of its name
 and possibly its type, time period, and/or a geospatial description -- functioning as a description
@@ -1045,10 +1017,12 @@ This data type extends the following data type:
 
 name  | description | data type | constraints
 ------|-------------|-----------|------------
-about | A uniform resource identifier (URI) for the place being described. | [URI](#uri) | OPTIONAL.  If provided, MUST resolve to a [Place](#conclusion-place).
+about | A uniform resource identifier (URI) for the place being described. This can be used for associating descriptions of the same place. | [URI](#uri) | OPTIONAL.
 names | A list of standardized (or normalized), fully-qualified (in terms of what is known of the applicable jurisdictional hierarchy) names for this place that are applicable to this description of this place. | List of [http://gedcomx.org/v1/TextValue](#text-value). Order is preserved. | REQUIRED. The list MUST contain at least one name.
 type | A uniform resource identifier (URI) identifying the type of the place as it is applicable to this description. | [URI](#uri) | OPTIONAL.
 temporalDescription | A description of the time period to which this place description is relevant. | [`http://gedcomx.org/v1/Date`](#conclusion-date) | OPTIONAL.
+latitude | Degrees north or south of the Equator (0.0 degrees). | IEEE 754 binary64 value | OPTIONAL.  If provided, MUST provide `longitude` also.  Values range from −90.0 degrees (south) to 90.0 degrees (north).
+longitude | Angular distance in degrees, relative to the Prime Meridian. | IEEE 754 binary64 value | OPTIONAL.  If provided, MUST provide `latitude` also.  Values range from −180.0 degrees (west of the Meridian) to 180.0 degrees (east of the Meridian).
 spatialDescription | A reference to a geospatial description of this place. | [`URI`](#uri) | OPTIONAL. It is RECOMMENDED that this geospatial description resolve to a KML document.
 identifiers | A list of known identifiers for this place description (e.g., place authority identifiers). | List of [`http://gedcomx.org/v1/Identifier`](#identifier-type). Order is preserved. | OPTIONAL.
 attribution | Attribution metadata for this place description. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing data set (e.g. file) of the place description is assumed.
@@ -1056,7 +1030,7 @@ attribution | Attribution metadata for this place description. | [`http://gedcom
 
 <a id="conclusion-place-reference"/>
 
-## 5.12 The "PlaceReference" Data Type
+## 5.11 The "PlaceReference" Data Type
 
 The `PlaceReference` data type defines a reference to a description of a place.
 
@@ -1076,7 +1050,7 @@ descriptionRef | A reference to a _description_ of this place. | [URI](#uri) | O
 
 <a id="conclusion-date"/>
 
-## 5.13 The "Date" Data Type
+## 5.12 The "Date" Data Type
 
 The `Date` data type defines the value of a genealogical date.
 
@@ -1096,7 +1070,7 @@ formal | The standardized [formal value](#formal-values) of the date, formatted 
 
 <a id="name-part"/>
 
-## 5.14 The "NamePart" Data Type
+## 5.13 The "NamePart" Data Type
 
 The `NamePart` data type is used to model a portion of a full name, including the terms that make up that portion, and perhaps a name part qualifier (e.g., "given name" or "surname").
 
@@ -1157,7 +1131,7 @@ URI | description
 
 <a id="name-form"/>
 
-## 5.15 The "NameForm" Data Type
+## 5.14 The "NameForm" Data Type
 
 The `NameForm` data type defines a representation of a name (a "name form") within a given cultural context, such as a given language and script.
 

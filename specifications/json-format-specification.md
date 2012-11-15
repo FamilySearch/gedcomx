@@ -756,42 +756,9 @@ roles | The roles of the persons in the event. | roles | array of [`EventRole`](
 ```
 
 
-<a id="conclusion-place"/>
-
-# 5.10 The "Place" Data Type
-
-the JSON object used to (de)serialize the `http://gedcomx.org/v1/Place` data type
-is defined as follows:
-
-### properties
-
-name | description | JSON member | JSON object type
------|-------------|--------------|---------
-names | A list of standardized (or normalized) names associated with this place. | names | array of [`TextValue`](#text-value)
-latitude | Degrees north or south of the Equator (0 degrees). | latitude | number
-longitude | Angular distance in degrees, relative to the Prime Meridian. | longitude | number
-identifiers | A list of known identifiers for this place (e.g., place authority identifiers). | identifiers | array of [`Identifier`](#identifier-type)
-attribution | The attribution of this conclusion. | attribution | [`Attribution`](#attribution)
-
-### examples
-
-```json
-{
-
-  ...the members of Conclusion...,
-
-  "names" : [ { ... }, { ... } ],
-  "latitude" : "27.9883575",
-  "latitude" : "86.9252014",
-  "identifiers" : [ { ... }, { ... } ],
-  "attribution" : { ... }
-}
-```
-
-
 <a id="conclusion-place-description"/>
 
-# 5.11 The "PlaceDescription" Data Type
+# 5.10 The "PlaceDescription" Data Type
 
 the JSON object used to (de)serialize the `http://gedcomx.org/v1/PlaceDescription` data type
 is defined as follows:
@@ -804,6 +771,8 @@ about | A uniform resource identifier (URI) for the place being described. | abo
 names | A list of standardized (or normalized), fully-qualified (in terms of what is known of the applicable jurisdictional hierarchy) names for this place that are applicable to this description of this place. | names | array of [`TextValue`](#text-value)
 type | A uniform resource identifier (URI) identifying the type of the place as it is applicable to this description. | type | [`URI`](#uri)
 temporalDescription | A description of the time period to which this place description is relevant. | temporalDescription | [`Date`](#conclusion-date)
+latitude | Degrees north or south of the Equator (0.0 degrees). | latitude | number
+longitude | Angular distance in degrees, relative to the Prime Meridian. | longitude | number
 spatialDescription | A reference to a geospatial description of this place. | spatialDescription | [`URI`](#uri)
 identifiers | A list of known identifiers for this place description (e.g., place authority identifiers). | identifiers | array of [`Identifier`](#identifier-type)
 attribution | The attribution of this conclusion. | attribution | [`Attribution`](#attribution)
@@ -819,6 +788,8 @@ attribution | The attribution of this conclusion. | attribution | [`Attribution`
   "names" : [ { ... }, { ... } ],
   "type" : "http://identifier/for/the/place/type",
   "temporalDescription" : { ... },
+  "latitude" : "27.9883575",
+  "latitude" : "86.9252014",
   "spatialDescription" : "http://uri/for/KML/document",
   "identifiers" : [ { ... }, { ... } ],
   "attribution" : { ... }
@@ -828,7 +799,7 @@ attribution | The attribution of this conclusion. | attribution | [`Attribution`
 
 <a id="conclusion-place-reference"/>
 
-# 5.12 The "PlaceReference" Data Type
+# 5.11 The "PlaceReference" Data Type
 
 the JSON object used to (de)serialize the `http://gedcomx.org/v1/PlaceReference` data type
 is defined as follows:
@@ -855,7 +826,7 @@ descriptionRef | A reference to a _description_ of this place. | description | [
 
 <a id="conclusion-date"/>
 
-## 5.13 The "Date" Data Type
+## 5.12 The "Date" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/v1/Date` data type is defined as follows:
 
@@ -878,7 +849,7 @@ formal | The formal value of the date. | formal | [GEDCOM X Date](https://github
 
 <a id="name-part"/>
 
-## 5.14 The "NamePart" Data Type
+## 5.13 The "NamePart" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/v1/NamePart` data type is defined as follows:
 
@@ -903,7 +874,7 @@ qualifiers | Type qualifiers to further describe the type of the name part. | qu
 }
 ```
 
-## 5.15 The "NameForm" Data Type
+## 5.14 The "NameForm" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/v1/NameForm` data type is defined as follows:
 

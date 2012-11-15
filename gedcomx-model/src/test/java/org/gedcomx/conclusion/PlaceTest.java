@@ -15,53 +15,6 @@ import static org.testng.Assert.assertNull;
 
 public class PlaceTest {
   @Test
-  public void testPlace_Tikhvin() throws Exception {
-    Place tikhvin = new Place();
-
-    assertNull(tikhvin.getNames());
-    assertEquals(tikhvin.getLatitude(), 0d);
-    assertEquals(tikhvin.getLongitude(), 0d);
-    assertNull(tikhvin.getIdentifiers());
-    assertNull(tikhvin.getAttribution());
-    assertNull(tikhvin.getExtensionElements());
-
-    tikhvin.setNames(new ArrayList<TextValue>());
-    tikhvin.getNames().add(new TextValue());
-    tikhvin.getNames().add(new TextValue());
-    tikhvin.getNames().add(new TextValue());
-    tikhvin.getNames().get(0).setLang("ru-Cyrl");
-    tikhvin.getNames().get(0).setValue("Ти́хвин");
-    tikhvin.getNames().get(1).setLang("ru-Latn");
-    tikhvin.getNames().get(1).setValue("Tikhvin");
-    tikhvin.getNames().get(2).setLang("en-Latn");
-    tikhvin.getNames().get(2).setValue("Tikhvin");
-    tikhvin.setLatitude(59.6436111d);
-    tikhvin.setLongitude(33.5094444d);
-    tikhvin.setIdentifiers(new ArrayList<Identifier>());
-    tikhvin.getIdentifiers().add(new Identifier());
-    tikhvin.getIdentifiers().get(0).setKnownType(IdentifierType.Primary);
-    tikhvin.getIdentifiers().get(0).setValue(URI.create("https://labs.familysearch.org/stdfinder/PlaceDetail.jsp?placeId=3262902"));
-    tikhvin.setAttribution(new Attribution());
-    tikhvin.getAttribution().setContributor(new ResourceReference(URI.create("urn:contributorId")));
-    tikhvin.getAttribution().setModified(new java.util.Date(1321027871111L)); // 11 Nov 2011 11:11:11.111
-    tikhvin.addExtensionElement("tikhvin-junkExtensionElement");
-
-    assertEquals(tikhvin.getNames().get(0).getLang(), "ru-Cyrl");
-    assertEquals(tikhvin.getNames().get(0).getValue(), "Ти́хвин");
-    assertEquals(tikhvin.getNames().get(1).getLang(), "ru-Latn");
-    assertEquals(tikhvin.getNames().get(1).getValue(), "Tikhvin");
-    assertEquals(tikhvin.getNames().get(2).getLang(), "en-Latn");
-    assertEquals(tikhvin.getNames().get(2).getValue(), "Tikhvin");
-    assertEquals(tikhvin.getLatitude(), 59.6436111d);
-    assertEquals(tikhvin.getLongitude(), 33.5094444d);
-    assertEquals(tikhvin.getIdentifiers().get(0).getKnownType(), IdentifierType.Primary);
-    assertEquals(tikhvin.getIdentifiers().get(0).getValue().toURI().toString(), "https://labs.familysearch.org/stdfinder/PlaceDetail.jsp?placeId=3262902");
-    assertEquals(tikhvin.getAttribution().getContributor().getResource().toURI().toString(), "urn:contributorId");
-    assertEquals(tikhvin.getAttribution().getModified().getTime(), 1321027871111L);
-    assertEquals(tikhvin.findExtensionOfType(String.class), "tikhvin-junkExtensionElement");
-  }
-
-  @Test
   public void testPlaceDescription_Tikhvin() throws Exception {
     PlaceDescription tikhvinDesc = new PlaceDescription();
 
@@ -69,6 +22,8 @@ public class PlaceTest {
     assertNull(tikhvinDesc.getNames());
     assertNull(tikhvinDesc.getType());
     assertNull(tikhvinDesc.getTemporalDescription());
+    assertEquals(tikhvinDesc.getLatitude(), 0d);
+    assertEquals(tikhvinDesc.getLongitude(), 0d);
     assertNull(tikhvinDesc.getSpatialDescription());
     assertNull(tikhvinDesc.getAttribution());
     assertNull(tikhvinDesc.getExtensionElements());
@@ -87,6 +42,8 @@ public class PlaceTest {
     tikhvinDesc.setType(URI.create("urn:place-authority/city"));
     tikhvinDesc.setTemporalDescription(new Date());
     tikhvinDesc.getTemporalDescription().setFormal("A+1383/");
+    tikhvinDesc.setLatitude(59.6436111d);
+    tikhvinDesc.setLongitude(33.5094444d);
     tikhvinDesc.setSpatialDescription(new ResourceReference(URI.create("data:application/vnd.google-earth.kml+xml;base64," +
                                                                          "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjxrbWwgeG1sbnM9Imh0dHA6" +
                                                                          "Ly93d3cub3Blbmdpcy5uZXQva21sLzIuMiIgeG1sbnM6Z3g9Imh0dHA6Ly93d3cuZ29vZ2xlLmNv" +
@@ -117,6 +74,8 @@ public class PlaceTest {
     assertEquals(tikhvinDesc.getNames().get(2).getValue(), "Tikhvin, Leningrad Oblast, Russia");
     assertEquals(tikhvinDesc.getType().toURI().toString(), "urn:place-authority/city");
     assertEquals(tikhvinDesc.getTemporalDescription().getFormal(), "A+1383/");
+    assertEquals(tikhvinDesc.getLatitude(), 59.6436111d);
+    assertEquals(tikhvinDesc.getLongitude(), 33.5094444d);
     assertEquals(tikhvinDesc.getSpatialDescription().getResource().toURI().toString(), "data:application/vnd.google-earth.kml+xml;base64," +
       "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjxrbWwgeG1sbnM9Imh0dHA6" +
       "Ly93d3cub3Blbmdpcy5uZXQva21sLzIuMiIgeG1sbnM6Z3g9Imh0dHA6Ly93d3cuZ29vZ2xlLmNv" +
@@ -155,53 +114,6 @@ public class PlaceTest {
   }
 
   @Test
-  public void testPlace_Luga() throws Exception {
-    Place luga = new Place();
-
-    assertNull(luga.getNames());
-    assertEquals(luga.getLatitude(), 0d);
-    assertEquals(luga.getLongitude(), 0d);
-    assertNull(luga.getIdentifiers());
-    assertNull(luga.getAttribution());
-    assertNull(luga.getExtensionElements());
-
-    luga.setNames(new ArrayList<TextValue>());
-    luga.getNames().add(new TextValue());
-    luga.getNames().add(new TextValue());
-    luga.getNames().add(new TextValue());
-    luga.getNames().get(0).setLang("ru-Cyrl");
-    luga.getNames().get(0).setValue("Лу́га");
-    luga.getNames().get(1).setLang("ru-Latn");
-    luga.getNames().get(1).setValue("Luga");
-    luga.getNames().get(2).setLang("en-Latn");
-    luga.getNames().get(2).setValue("Luga");
-    luga.setLatitude(58.7372222d);
-    luga.setLongitude(29.8452778d);
-    luga.setIdentifiers(new ArrayList<Identifier>());
-    luga.getIdentifiers().add(new Identifier());
-    luga.getIdentifiers().get(0).setKnownType(IdentifierType.Primary);
-    luga.getIdentifiers().get(0).setValue(URI.create("https://labs.familysearch.org/stdfinder/PlaceDetail.jsp?placeId=3314013"));
-    luga.setAttribution(new Attribution());
-    luga.getAttribution().setContributor(new ResourceReference(URI.create("urn:contributorId")));
-    luga.getAttribution().setModified(new java.util.Date(1321027871111L)); // 11 Nov 2011 11:11:11.111
-    luga.addExtensionElement("luga-junkExtensionElement");
-
-    assertEquals(luga.getNames().get(0).getLang(), "ru-Cyrl");
-    assertEquals(luga.getNames().get(0).getValue(), "Лу́га");
-    assertEquals(luga.getNames().get(1).getLang(), "ru-Latn");
-    assertEquals(luga.getNames().get(1).getValue(), "Luga");
-    assertEquals(luga.getNames().get(2).getLang(), "en-Latn");
-    assertEquals(luga.getNames().get(2).getValue(), "Luga");
-    assertEquals(luga.getLatitude(), 58.7372222d);
-    assertEquals(luga.getLongitude(), 29.8452778d);
-    assertEquals(luga.getIdentifiers().get(0).getKnownType(), IdentifierType.Primary);
-    assertEquals(luga.getIdentifiers().get(0).getValue().toURI().toString(), "https://labs.familysearch.org/stdfinder/PlaceDetail.jsp?placeId=3314013");
-    assertEquals(luga.getAttribution().getContributor().getResource().toURI().toString(), "urn:contributorId");
-    assertEquals(luga.getAttribution().getModified().getTime(), 1321027871111L);
-    assertEquals(luga.findExtensionOfType(String.class), "luga-junkExtensionElement");
-  }
-
-  @Test
   public void testPlaceDescription_Luga() throws Exception {
     PlaceDescription lugaDesc = new PlaceDescription();
 
@@ -209,6 +121,8 @@ public class PlaceTest {
     assertNull(lugaDesc.getNames());
     assertNull(lugaDesc.getType());
     assertNull(lugaDesc.getTemporalDescription());
+    assertEquals(lugaDesc.getLatitude(), 0d);
+    assertEquals(lugaDesc.getLongitude(), 0d);
     assertNull(lugaDesc.getSpatialDescription());
     assertNull(lugaDesc.getAttribution());
     assertNull(lugaDesc.getExtensionElements());
@@ -227,6 +141,8 @@ public class PlaceTest {
     lugaDesc.setType(URI.create("urn:place-authority/city"));
     lugaDesc.setTemporalDescription(new Date());
     lugaDesc.getTemporalDescription().setFormal("+1777-08-03/");
+    lugaDesc.setLatitude(58.7372222d);
+    lugaDesc.setLongitude(29.8452778d);
     lugaDesc.setSpatialDescription(new ResourceReference(URI.create("data:application/vnd.google-earth.kml+xml;base64," +
                                                                       "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjxrbWwgeG1sbnM9Imh0dHA6" +
                                                                       "Ly93d3cub3Blbmdpcy5uZXQva21sLzIuMiIgeG1sbnM6Z3g9Imh0dHA6Ly93d3cuZ29vZ2xlLmNv" +
@@ -257,6 +173,8 @@ public class PlaceTest {
     assertEquals(lugaDesc.getNames().get(2).getValue(), "Luga, Leningrad Oblast, Russia");
     assertEquals(lugaDesc.getType().toURI().toString(), "urn:place-authority/city");
     assertEquals(lugaDesc.getTemporalDescription().getFormal(), "+1777-08-03/");
+    assertEquals(lugaDesc.getLatitude(), 58.7372222d);
+    assertEquals(lugaDesc.getLongitude(), 29.8452778d);
     assertEquals(lugaDesc.getSpatialDescription().getResource().toURI().toString(), "data:application/vnd.google-earth.kml+xml;base64," +
       "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjxrbWwgeG1sbnM9Imh0dHA6" +
       "Ly93d3cub3Blbmdpcy5uZXQva21sLzIuMiIgeG1sbnM6Z3g9Imh0dHA6Ly93d3cuZ29vZ2xlLmNv" +

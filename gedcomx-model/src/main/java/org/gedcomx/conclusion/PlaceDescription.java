@@ -21,7 +21,6 @@ import org.gedcomx.common.Attribution;
 import org.gedcomx.common.ResourceReference;
 import org.gedcomx.common.TextValue;
 import org.gedcomx.common.URI;
-import org.gedcomx.rt.RDFRange;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -36,33 +35,34 @@ import java.util.List;
  * and possibly its type, time period, and/or a geospatial description -- a description
  * of a place as a snapshot in time.
  */
-@XmlType ( name = "PlaceDescription", propOrder = { "names", "type", "temporalDescription", "spatialDescription", "identifiers", "attribution" } )
+@XmlType ( name = "PlaceDescription", propOrder = { "names", "type", "temporalDescription", "latitude", "longitude", "spatialDescription", "identifiers", "attribution" } )
 public class PlaceDescription extends Conclusion {
 
   private URI about;
   private List<TextValue> names;
   private URI type;
   private Date temporalDescription;
+  private double latitude;
+  private double longitude;
   private ResourceReference spatialDescription;
   private List<Identifier> identifiers;
   private Attribution attribution;
 
   /**
-   * A reference to the Place that this description is about.
+   * The identifier of the place that this description is about.
    *
-   * @return A reference to the Place that this description is about.
+   * @return The identifier of the place that this description is about.
    */
   @XmlAttribute
   @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
-  @RDFRange (Place.class)
   public URI getAbout() {
     return about;
   }
 
   /**
-   * A reference to the Place that this description is about.
+   * The identifier of the place that this description is about.
    *
-   * @param about A reference to the Place that this description is about.
+   * @param about The identifier of the place that this description is about.
    */
   public void setAbout(URI about) {
     this.about = about;
@@ -133,6 +133,42 @@ public class PlaceDescription extends Conclusion {
    */
   public void setTemporalDescription(Date temporalDescription) {
     this.temporalDescription = temporalDescription;
+  }
+
+  /**
+   * Degrees north or south of the Equator (0.0 degrees).   Values range from −90.0 degrees (south) to 90.0 degrees (north).
+   *
+   * @return Degrees north or south of the Equator.
+   */
+  public double getLatitude() {
+    return latitude;
+  }
+
+  /**
+   * Degrees north or south of the Equator (0.0 degrees).   Values range from −90.0 degrees (south) to 90.0 degrees (north).
+   *
+   * @param latitude Degrees north or south of the Equator.
+   */
+  public void setLatitude(double latitude) {
+    this.latitude = latitude;
+  }
+
+  /**
+   * Angular distance in degrees, relative to the Prime Meridian.   Values range from −180.0 degrees (west of the Meridian) to 180.0 degrees (east of the Meridian).
+   *
+   * @return Angular distance in degrees, relative to the Prime Meridian.
+   */
+  public double getLongitude() {
+    return longitude;
+  }
+
+  /**
+   * Angular distance in degrees, relative to the Prime Meridian.   Values range from −180.0 degrees (west of the Meridian) to 180.0 degrees (east of the Meridian).
+   *
+   * @param longitude Angular distance in degrees, relative to the Prime Meridian.
+   */
+  public void setLongitude(double longitude) {
+    this.longitude = longitude;
   }
 
   /**

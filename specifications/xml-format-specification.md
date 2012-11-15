@@ -832,53 +832,9 @@ roles | The roles of the persons in the event. | gx:role | [`gx:EventRole`](#con
 ```
 
 
-<a id="conclusion-place"/>
-
-## 5.10 The "Place" Data Type
-
-The `gx:Place` is used to (de)serialize the `http://gedcomx.org/v1/Place` data type.
-
-### properties
-
-name | description | XML property | XML type
------|-------------|--------------|---------
-names | A list of standardized (or normalized) names associated with this place. | gx:name | [`gx:TextValue`](#text-value)
-latitude | Degrees north or south of the Equator (0 degrees). | gx:latitude | xsd:double
-longitude | Angular distance in degrees, relative to the Prime Meridian. | gx:latitude | xsd:double
-identifiers | A list of known identifiers for this place (e.g., place authority identifiers). | gx:identifier | [`gx:Identifier`](#identifier-type)
-attribution | Attribution metadata for this place. | gx:attribution | [`gx:Attribution`](#attribution)
-
-### examples
-
-```xml
-  <... id="local_id">
-
-    <!-- ...the members of gx:Conclusion... -->
-
-    <gx:name>
-      ...
-    </gx:name>
-    ...
-    <gx:latitude>
-      ...
-    </gx:latitude>
-    <gx:longitude>
-      ...
-    </gx:longitude>
-    <gx:identifier>
-      ...
-    </gx:identifier>
-    ...
-    <gx:attribution>
-      ...
-    </gx:attribution>
-  </...>
-```
-
-
 <a id="conclusion-place-description"/>
 
-## 5.11 The "PlaceDescription" Data Type
+## 5.10 The "PlaceDescription" Data Type
 
 The `gx:PlaceDescription` is used to (de)serialize the `http://gedcomx.org/v1/PlaceDescription` data type.
 
@@ -890,6 +846,8 @@ about | A uniform resource identifier (URI) for the place being described. | abo
 names | A list of standardized (or normalized), fully-qualified (in terms of what is known of the applicable jurisdictional hierarchy) names for this place that are applicable to this description of this place. | gx:name | [`gx:TextValue`](#text-value)
 type | A uniform resource identifier (URI) identifying the type of the place as it is applicable to this description. | type (attribute) | [`URI`](#uri)
 temporalDescription | A description of the time period to which this place description is relevant. | gx:temporalDescription | [`gx:Date`](#conclusion-date)
+latitude | Degrees north or south of the Equator (0.0 degrees). | gx:latitude | xsd:double
+longitude | Angular distance in degrees, relative to the Prime Meridian. | gx:latitude | xsd:double
 spatialDescription | A reference to a geospatial description of this place. | gx:spatialDescription | [`gx:ResourceReference`](#resource-reference)
 identifiers | A list of known identifiers for this place description (e.g., place authority identifiers). | gx:identifier | [`gx:Identifier`](#identifier-type)
 attribution | Attribution metadata for this place description. | gx:attribution | [`gx:Attribution`](#attribution)
@@ -908,6 +866,8 @@ attribution | Attribution metadata for this place description. | gx:attribution 
     <gx:temporalDescription>
       ...
     </gx:temporalDescription>
+    <gx:latitude>27.9883575</gx:latitude>
+    <gx:longitude>86.9252014</gx:longitude>
     <gx:spatialDescription resource="http://uri/for/KML/document"/>
     <gx:identifier>
       ...
@@ -922,7 +882,7 @@ attribution | Attribution metadata for this place description. | gx:attribution 
 
 <a id="conclusion-place-reference"/>
 
-## 5.12 The "PlaceReference" Data Type
+## 5.11 The "PlaceReference" Data Type
 
 The `gx:PlaceDescription` is used to (de)serialize the `http://gedcomx.org/v1/PlaceReference` data type.
 
@@ -947,7 +907,7 @@ descriptionRef | A reference to a _description_ of this place. | description (at
 
 <a id="conclusion-date"/>
 
-## 5.13 The "Date" Data Type
+## 5.12 The "Date" Data Type
 
 The `gx:Date` XML type is used to (de)serialize the `http://gedcomx.org/v1/Date`
 data type.
@@ -971,7 +931,7 @@ formal | The formal value of the date. | gx:formal | [GEDCOM X Date](https://git
 
 <a id="name-part"/>
 
-## 5.14 The "NamePart" Data Type
+## 5.13 The "NamePart" Data Type
 
 The `gx:NamePart` XML type is used to (de)serialize the `http://gedcomx.org/v1/NamePart`
 data type.
@@ -998,7 +958,7 @@ qualifiers | Type qualifiers to further describe the type of the name part. | gx
 
  <a id="name-form"/>
 
-## 5.15 The "NameForm" Data Type
+## 5.14 The "NameForm" Data Type
 
 The `NameForm` XML type is used to (de)serialize the `http://gedcomx.org/v1/NameForm`
 data type.
