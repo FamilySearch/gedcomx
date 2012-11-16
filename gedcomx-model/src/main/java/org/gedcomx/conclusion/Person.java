@@ -41,7 +41,7 @@ import java.util.List;
  */
 @XmlRootElement
 @JsonElementWrapper (name = "persons")
-@XmlType ( name = "Person", propOrder = { "identifiers", "living", "gender", "names", "facts" } )
+@XmlType ( name = "Person", propOrder = { "identifiers", "living", "gender", "names", "facts", "display" } )
 public class Person extends Conclusion implements HasFacts, Attributable {
 
   private List<Identifier> identifiers;
@@ -49,6 +49,7 @@ public class Person extends Conclusion implements HasFacts, Attributable {
   private Gender gender;
   private List<Name> names;
   private List<Fact> facts;
+  private DisplayProperties display;
 
   /**
    * Find the long-term, persistent identifier for this person from the list of identifiers.
@@ -274,5 +275,23 @@ public class Person extends Conclusion implements HasFacts, Attributable {
       }
       facts.add(fact);
     }
+  }
+
+  /**
+   * Display properties for the person.
+   *
+   * @return Display properties for the person.
+   */
+  public DisplayProperties getDisplay() {
+    return display;
+  }
+
+  /**
+   * Display properties for the person.
+   *
+   * @param display Display properties for the person.
+   */
+  public void setDisplay(DisplayProperties display) {
+    this.display = display;
   }
 }

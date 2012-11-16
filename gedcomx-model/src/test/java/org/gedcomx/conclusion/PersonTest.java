@@ -23,7 +23,7 @@ public class PersonTest {
   /**
    * tests processing a WWW person through xml...
    */
-  static public void testPersonXml() throws Exception {
+  public void testPersonXml() throws Exception {
     Person person = create();
     person = processThroughXml(person);
     assertPersonEquals(person);
@@ -32,10 +32,36 @@ public class PersonTest {
   /**
    * tests processing a WWW person through json...
    */
-  static public void testPersonJson() throws Exception {
+  public void testPersonJson() throws Exception {
     Person person = create();
     person = processThroughJson(person);
     assertPersonEquals(person);
+  }
+
+  public void testDisplayProperties() throws Exception {
+    Person person = new Person();
+    DisplayProperties display = new DisplayProperties();
+    display.setAscendancyNumber("1");
+    display.setBirthDate("2");
+    display.setBirthPlace("3");
+    display.setDeathDate("4");
+    display.setDeathPlace("5");
+    display.setDescendancyNumber("6");
+    display.setGender("7");
+    display.setLifespan("8");
+    display.setName("9");
+    person.setDisplay(display);
+    person = processThroughXml(person);
+    assertEquals("1", person.getDisplay().getAscendancyNumber());
+    assertEquals("2", person.getDisplay().getBirthDate());
+    assertEquals("3", person.getDisplay().getBirthPlace());
+    assertEquals("4", person.getDisplay().getDeathDate());
+    assertEquals("5", person.getDisplay().getDeathPlace());
+    assertEquals("6", person.getDisplay().getDescendancyNumber());
+    assertEquals("7", person.getDisplay().getGender());
+    assertEquals("8", person.getDisplay().getLifespan());
+    assertEquals("9", person.getDisplay().getName());
+
   }
 
   static Person create() {
