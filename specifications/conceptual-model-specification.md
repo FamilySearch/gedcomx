@@ -168,8 +168,8 @@ This data type extends the following data type:
 
 ### properties
 
-name | description | data type
------|-------------|----------
+name  | description | data type | constraints
+------|-------------|-----------|------------
 identifiers | Identifiers for the person. | List of [`http://gedcomx.org/v1/Identifier`](#identifier-type). Order is preserved. | OPTIONAL.
 living | Whether the person is considered living. | boolean | OPTIONAL.
 gender | The conclusion about the gender of the person. | [`http://gedcomx.org/v1/Gender`](#gender) | OPTIONAL.
