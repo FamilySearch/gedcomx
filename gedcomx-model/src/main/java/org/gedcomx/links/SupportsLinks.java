@@ -31,21 +31,21 @@ public interface SupportsLinks {
    *
    * @return The list of hypermedia links.
    */
-  List<Link> getLinks();
+  List<Link> getLinkExtensions();
 
   /**
    * The list of hypermedia links.
    *
    * @param links The list of hypermedia links.
    */
-  void setLinks(List<Link> links);
+  void setLinkExtensions(List<Link> links);
 
   /**
    * Add a hypermedia link.
    *
    * @param link The hypermedia link.
    */
-  void addLink(Link link);
+  void addLinkExtension(Link link);
 
   /**
    * Add a hypermedia link.
@@ -53,7 +53,7 @@ public interface SupportsLinks {
    * @param rel The link rel.
    * @param href The target URI.
    */
-  void addLink(String rel, URI href);
+  void addLinkExtension(String rel, URI href);
 
   /**
    * Add a templated link.
@@ -61,7 +61,7 @@ public interface SupportsLinks {
    * @param rel The link rel.
    * @param template The link template.
    */
-  void addTemplatedLink(String rel, String template);
+  void addTemplatedLinkExtension(String rel, String template);
 
   /**
    * Get a link by its rel.
@@ -69,7 +69,7 @@ public interface SupportsLinks {
    * @param rel The link rel.
    * @return The link by rel.
    */
-  Link getLink(String rel);
+  Link getLinkExtension(String rel);
 
   /**
    * Get a list of links by rel.
@@ -77,5 +77,5 @@ public interface SupportsLinks {
    * @param rel The rel of the links.
    * @return The link.
    */
-  List<Link> getLinks(String rel);
+  List<Link> getLinkExtensions(String rel);
 }

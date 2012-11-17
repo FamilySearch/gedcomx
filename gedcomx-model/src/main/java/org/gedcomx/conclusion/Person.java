@@ -41,7 +41,7 @@ import java.util.List;
  */
 @XmlRootElement
 @JsonElementWrapper (name = "persons")
-@XmlType ( name = "Person", propOrder = { "identifiers", "living", "gender", "names", "facts", "display" } )
+@XmlType ( name = "Person", propOrder = { "identifiers", "living", "gender", "names", "facts", "displayExtension"} )
 public class Person extends Conclusion implements HasFacts, Attributable {
 
   private List<Identifier> identifiers;
@@ -278,20 +278,23 @@ public class Person extends Conclusion implements HasFacts, Attributable {
   }
 
   /**
-   * Display properties for the person.
+   * Display properties for the person. Display properties are not specified by GEDCOM X core, but as extension elements by GEDCOM X RS.
    *
-   * @return Display properties for the person.
+   * @return Display properties for the person. Display properties are not specified by GEDCOM X core, but as extension elements by GEDCOM X RS.
    */
-  public DisplayProperties getDisplay() {
+  @XmlElement(name = "display")
+  @JsonProperty("display")
+  public DisplayProperties getDisplayExtension() {
     return display;
   }
 
   /**
-   * Display properties for the person.
+   * Display properties for the person. Display properties are not specified by GEDCOM X core, but as extension elements by GEDCOM X RS.
    *
-   * @param display Display properties for the person.
+   * @param display Display properties for the person. Display properties are not specified by GEDCOM X core, but as extension elements by GEDCOM X RS.
    */
-  public void setDisplay(DisplayProperties display) {
+  @JsonProperty("display")
+  public void setDisplayExtension(DisplayProperties display) {
     this.display = display;
   }
 }

@@ -16,19 +16,24 @@
 package org.gedcomx.conclusion;
 
 import org.codehaus.enunciate.ClientName;
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.gedcomx.common.ExtensibleData;
+import org.gedcomx.common.TextValue;
 
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.util.List;
 
 /**
  * A concluded genealogical date.
  */
 @ClientName ("DateInfo")
-@XmlType ( name = "Date", propOrder = { "original", "formal" })
+@XmlType ( name = "Date", propOrder = { "original", "formal", "normalizedExtensions" })
 public class Date extends ExtensibleData {
 
   private String original;
   private String formal;
+  private List<TextValue> normalized;
 
   /**
    * The original text as supplied by the user.
@@ -64,6 +69,31 @@ public class Date extends ExtensibleData {
    */
   public void setFormal(String formal) {
     this.formal = formal;
+  }
+
+  /**
+   * The list of normalized values for the date, provided for display purposes by the application. Normalized values are
+   * not specified by GEDCOM X core, but as extension elements by GEDCOM X RS.
+   *
+   * @return The list of normalized values for the date, provided for display purposes by the application. Normalized values
+   * are not specified by GEDCOM X core, but as extension elements by GEDCOM X RS.
+   */
+  @XmlElement ( name = "normalized" )
+  @JsonProperty ("normalized")
+  public List<TextValue> getNormalizedExtensions() {
+    return normalized;
+  }
+
+  /**
+   * The list of normalized values for the date, provided for display purposes by the application. Normalized values are
+   * not specified by GEDCOM X core, but as extension elements by GEDCOM X RS.
+   *
+   * @param normalized The list of normalized values for the date, provided for display purposes by the application. Normalized values are
+   * not specified by GEDCOM X core, but as extension elements by GEDCOM X RS.
+   */
+  @JsonProperty ("normalized")
+  public void setNormalizedExtensions(List<TextValue> normalized) {
+    this.normalized = normalized;
   }
 
   @Override

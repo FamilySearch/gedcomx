@@ -6,6 +6,7 @@ import org.gedcomx.types.*;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.gedcomx.rt.SerializationUtil.processThroughJson;
@@ -50,17 +51,17 @@ public class PersonTest {
     display.setGender("7");
     display.setLifespan("8");
     display.setName("9");
-    person.setDisplay(display);
+    person.setDisplayExtension(display);
     person = processThroughXml(person);
-    assertEquals("1", person.getDisplay().getAscendancyNumber());
-    assertEquals("2", person.getDisplay().getBirthDate());
-    assertEquals("3", person.getDisplay().getBirthPlace());
-    assertEquals("4", person.getDisplay().getDeathDate());
-    assertEquals("5", person.getDisplay().getDeathPlace());
-    assertEquals("6", person.getDisplay().getDescendancyNumber());
-    assertEquals("7", person.getDisplay().getGender());
-    assertEquals("8", person.getDisplay().getLifespan());
-    assertEquals("9", person.getDisplay().getName());
+    assertEquals("1", person.getDisplayExtension().getAscendancyNumber());
+    assertEquals("2", person.getDisplayExtension().getBirthDate());
+    assertEquals("3", person.getDisplayExtension().getBirthPlace());
+    assertEquals("4", person.getDisplayExtension().getDeathDate());
+    assertEquals("5", person.getDisplayExtension().getDeathPlace());
+    assertEquals("6", person.getDisplayExtension().getDescendancyNumber());
+    assertEquals("7", person.getDisplayExtension().getGender());
+    assertEquals("8", person.getDisplayExtension().getLifespan());
+    assertEquals("9", person.getDisplayExtension().getName());
 
   }
 
@@ -83,7 +84,8 @@ public class PersonTest {
     fact.setKnownConfidenceLevel(ConfidenceLevel.Certainly);
     fact.setDate(new Date());
     fact.getDate().setOriginal("original date");
-    fact.getDate().setFormal("normalized date");
+    fact.getDate().setFormal("formal");
+    fact.getDate().setNormalizedExtensions(Arrays.asList(new TextValue("normalized date")));
     fact.setId("fact-id");
     fact.setKnownType(FactType.Occupation);
     fact.setPlace(new Place());
@@ -175,7 +177,8 @@ public class PersonTest {
     fact = person.getFirstFactOfType(FactType.Occupation);
     assertEquals(ConfidenceLevel.Certainly, fact.getKnownConfidenceLevel());
     assertEquals("original date", fact.getDate().getOriginal());
-    assertEquals("normalized date", fact.getDate().getFormal());
+    assertEquals("formal", fact.getDate().getFormal());
+    assertEquals("normalized date", fact.getDate().getNormalizedExtensions().get(0).getValue());
     assertEquals("fact-id", fact.getId());
     assertEquals(FactType.Occupation, fact.getKnownType());
     assertEquals("original place", fact.getPlace().getOriginal());
