@@ -31,7 +31,7 @@ import java.util.List;
  * @author Ryan Heaton
  */
 @XmlType ( name = "HypermediaControllableData" )
-public abstract class HypermediaControllableData extends ExtensibleData implements SupportsLinks {
+public abstract class HypermediaControllableData extends ExtensibleData {
 
   private List<Link> links;
 
@@ -40,7 +40,6 @@ public abstract class HypermediaControllableData extends ExtensibleData implemen
    *
    * @return The list of hypermedia links. Links are not specified by GEDCOM X core, but as extension elements by GEDCOM X RS.
    */
-  @Override
   @XmlElement (name = "link")
   @JsonName ("links")
   @JsonProperty ("links")
@@ -53,7 +52,6 @@ public abstract class HypermediaControllableData extends ExtensibleData implemen
    *
    * @param links The list of hypermedia links. Links are not specified by GEDCOM X core, but as extension elements by GEDCOM X RS.
    */
-  @Override
   @JsonProperty ("links")
   public void setLinkExtensions(List<Link> links) {
     this.links = links;
@@ -64,7 +62,6 @@ public abstract class HypermediaControllableData extends ExtensibleData implemen
    *
    * @param link The hypermedia link. Links are not specified by GEDCOM X core, but as extension elements by GEDCOM X RS.
    */
-  @Override
   public void addLinkExtension(Link link) {
     if (this.links == null) {
       setLinkExtensions(new ArrayList<Link>());
@@ -79,7 +76,6 @@ public abstract class HypermediaControllableData extends ExtensibleData implemen
    * @param rel The link rel.
    * @param href The target URI.
    */
-  @Override
   public void addLinkExtension(String rel, URI href) {
     addLinkExtension(new Link(rel, href));
   }
@@ -90,7 +86,6 @@ public abstract class HypermediaControllableData extends ExtensibleData implemen
    * @param rel The link rel.
    * @param template The link template.
    */
-  @Override
   public void addTemplatedLinkExtension(String rel, String template) {
     Link link = new Link();
     link.setRel(rel);
@@ -104,7 +99,6 @@ public abstract class HypermediaControllableData extends ExtensibleData implemen
    * @param rel The link rel.
    * @return The link by rel.
    */
-  @Override
   public Link getLinkExtension(String rel) {
     List<Link> links = getLinkExtensions(rel);
     Link link = null;
@@ -120,7 +114,6 @@ public abstract class HypermediaControllableData extends ExtensibleData implemen
    * @param rel The rel of the links.
    * @return The link.
    */
-  @Override
   public List<Link> getLinkExtensions(String rel) {
     ArrayList<Link> links = new ArrayList<Link>();
     if (this.links != null) {
