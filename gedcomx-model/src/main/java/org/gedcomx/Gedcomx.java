@@ -18,10 +18,7 @@ package org.gedcomx;
 import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.gedcomx.common.Attribution;
-import org.gedcomx.conclusion.Document;
-import org.gedcomx.conclusion.Event;
-import org.gedcomx.conclusion.Person;
-import org.gedcomx.conclusion.Relationship;
+import org.gedcomx.conclusion.*;
 import org.gedcomx.contributor.Agent;
 import org.gedcomx.links.HypermediaControllableData;
 import org.gedcomx.rt.GedcomxConstants;
@@ -73,7 +70,7 @@ import java.util.List;
 )
 @XmlRootElement
 @JsonElementWrapper (name = "gedcomx")
-@XmlType ( name = "Gedcomx" , propOrder = { "attribution", "persons", "relationships", "sourceDescriptions", "agents", "events", "documents" })
+@XmlType ( name = "Gedcomx" , propOrder = { "attribution", "persons", "relationships", "sourceDescriptions", "agents", "events", "places", "documents" })
 public class Gedcomx extends HypermediaControllableData {
 
   private String id;
@@ -84,6 +81,7 @@ public class Gedcomx extends HypermediaControllableData {
   private List<SourceDescription> sourceDescriptions;
   private List<Agent> agents;
   private List<Event> events;
+  private List<PlaceDescription> places;
   private List<Document> documents;
 
   /**
@@ -253,6 +251,28 @@ public class Gedcomx extends HypermediaControllableData {
   @JsonProperty ("events")
   public void setEvents(List<Event> events) {
     this.events = events;
+  }
+
+  /**
+   * The places included in this genealogical data set.
+   *
+   * @return The places included in this genealogical data set.
+   */
+  @XmlElement (name="place")
+  @JsonProperty ("places")
+  @JsonName ("places")
+  public List<PlaceDescription> getPlaces() {
+    return places;
+  }
+
+  /**
+   * The places included in this genealogical data set.
+   *
+   * @param places The places included in this genealogical data set.
+   */
+  @JsonProperty ("places")
+  public void setPlaces(List<PlaceDescription> places) {
+    this.places = places;
   }
 
   /**

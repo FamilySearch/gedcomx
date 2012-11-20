@@ -72,9 +72,8 @@ The following example shows an instance of a GEDCOM X serialization in accordanc
                 <original>February 22, 1732</original>
                 <formal>+1732-02-22</formal>
             </date>
-            <place>
-                <original>Pope's Creek, Westmoreland, Virginia, United States</original>
-                <normalized>Pope's Creek, Westmoreland, Virginia, United States</normalized>
+            <place description="#888">
+                <original>pope's creek, westmoreland, virginia, united states</original>
             </place>
         </fact>
         <fact type="http://gedcomx.org/Death" id="456">
@@ -82,9 +81,8 @@ The following example shows an instance of a GEDCOM X serialization in accordanc
                 <original>December 14, 1799</original>
                 <formal>+1799-12-14T22:00:00</formal>
             </date>
-            <place>
-                <original>Mount Vernon, Virginia</original>
-                <normalized>Mount Vernon, Fairfax County, Virginia, United States</normalized>
+            <place description="#999">
+                <original>mount vernon, fairfax county, virginia, united states</original>
             </place>
         </fact>
     </person>
@@ -104,9 +102,8 @@ The following example shows an instance of a GEDCOM X serialization in accordanc
                 <original>June 2, 1731</original>
                 <formal>+1731-06-02</formal>
             </date>
-            <place>
-                <original>Chestnut Grove, Virginia</original>
-                <normalized>Chestnut Grove, New Kent, Virginia, United States</normalized>
+            <place description="#KKK">
+                <original>chestnut grove, new kent, virginia, united states</original>
             </place>
         </fact>
         <fact type="http://gedcomx.org/Death" id="654">
@@ -114,9 +111,8 @@ The following example shows an instance of a GEDCOM X serialization in accordanc
                 <original>May 22, 1802</original>
                 <formal>+1802-05-22</formal>
             </date>
-            <place>
-                <original>Mount Vernon, Virginia</original>
-                <normalized>Mount Vernon, Fairfax County, Virginia, United States</normalized>
+            <place description="#999">
+                <original>mount vernon, fairfax county, virginia, united states</original>
             </place>
         </fact>
     </person>
@@ -147,6 +143,21 @@ The following example shows an instance of a GEDCOM X serialization in accordanc
     <agent id="GGG-GGGG">
         <name>Ryan Heaton</name>
     </agent>
+    <place id="888">
+        <name>Pope's Creek, Westmoreland, Virginia, United States</name>
+        <latitude>38.192353</latitude>
+        <longitude>-76.904069</longitude>
+    </place>
+    <place id="999">
+        <name>Mount Vernon, Fairfax County, Virginia, United States</name>
+        <latitude>38.721144</latitude>
+        <longitude>-77.109461</longitude>
+    </place>
+    <place id="KKK">
+        <name>Chestnut Grove, New Kent, Virginia, United States</name>
+        <latitude>37.518304</latitude>
+        <longitude>-76.984148</longitude>
+    </place>
 </gedcomx>
 ```
 
@@ -449,6 +460,51 @@ text | The text of the document. | gx:text | xsd:string
   </...>
 ```
 
+## 2.7 The "PlaceDescription" Data Type
+
+The `gx:PlaceDescription` is used to (de)serialize the `http://gedcomx.org/v1/PlaceDescription` data type.
+
+### properties
+
+name | description | XML property | XML type
+-----|-------------|--------------|---------
+about | A uniform resource identifier (URI) for the place being described. | about (attribute) | [anyURI](#uri)
+names | A list of standardized (or normalized), fully-qualified (in terms of what is known of the applicable jurisdictional hierarchy) names for this place that are applicable to this description of this place. | gx:name | [`gx:TextValue`](#text-value)
+type | A uniform resource identifier (URI) identifying the type of the place as it is applicable to this description. | type (attribute) | [`URI`](#uri)
+temporalDescription | A description of the time period to which this place description is relevant. | gx:temporalDescription | [`gx:Date`](#conclusion-date)
+latitude | Degrees north or south of the Equator (0.0 degrees). | gx:latitude | xsd:double
+longitude | Angular distance in degrees, relative to the Prime Meridian. | gx:latitude | xsd:double
+spatialDescription | A reference to a geospatial description of this place. | gx:spatialDescription | [`gx:ResourceReference`](#resource-reference)
+identifiers | A list of known identifiers for this place description (e.g., place authority identifiers). | gx:identifier | [`gx:Identifier`](#identifier-type)
+attribution | Attribution metadata for this place description. | gx:attribution | [`gx:Attribution`](#attribution)
+
+### examples
+
+```xml
+  <... id="local_id" about="http://identifier/of/the/place/being/described" type="http://identifier/for/the/place/type">
+
+    <!-- ...the members of gx:Conclusion... -->
+
+    <gx:name>
+      ...
+    </gx:name>
+    ...
+    <gx:temporalDescription>
+      ...
+    </gx:temporalDescription>
+    <gx:latitude>27.9883575</gx:latitude>
+    <gx:longitude>86.9252014</gx:longitude>
+    <gx:spatialDescription resource="http://uri/for/KML/document"/>
+    <gx:identifier>
+      ...
+    </gx:identifier>
+    ...
+    <gx:attribution>
+      ...
+    </gx:attribution>
+  </...>
+```
+
 # 3. Component-Level Data Types
 
 This section specifies XML types for each component-level data type defined by the
@@ -613,7 +669,7 @@ data type.
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
-description  | Reference to a _description_ of the source being referenced. | description (attribute) | [`URI`](#uri)
+descriptionRef  | Reference to a _description_ of the source being referenced. | description (attribute) | [`URI`](#uri)
 attribution | The attribution of this source reference. | gx:attribution | [`gx:Attribution`](#attribution)
 
 ### examples
@@ -797,7 +853,7 @@ name | description | XML property | XML type
 -----|-------------|--------------|---------
 type | URI identifying the type of the fact. | type (attribute) | [`URI`](#uri)
 date | The date of applicability of the fact. | gx:date | [`gx:Date`](#conclusion-date)
-place | The place of applicability of the fact. | gx:place | [`gx:Place`](#conclusion-place)
+place | The place of applicability of the fact. | gx:place | [`gx:PlaceReference`](#conclusion-place-reference)
 value | The original value of the fact as supplied by the contributor. | gx:value | xsd:string
 
 ### examples
@@ -870,29 +926,30 @@ formal | The formal value of the date. | gx:formal | [GEDCOM X Date](https://git
   </...>
 ```
 
-<a id="conclusion-place"/>
+<a id="conclusion-place-reference"/>
 
-## 3.17 The "Place" Data Type
+## 3.17 The "PlaceReference" Data Type
 
-The `gx:Place` XML type is used to (de)serialize the `http://gedcomx.org/v1/Place`
-data type.
+The `gx:PlaceDescription` is used to (de)serialize the `http://gedcomx.org/v1/PlaceReference` data type.
 
 ### properties
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
-resource | Reference to the standardized resource describing the place. | resource (attribute) | [`URI`](#uri)
-original | The original value of the place as supplied by the contributor. | gx:original | xsd:string
-normalized | The normalized text value of the place. | gx:normalized | xsd:string
+original | The original place name text as supplied by the contributor. | gx:original | xsd:string
+descriptionRef | A reference to a _description_ of this place. | description (attribute) | [`URI`](#uri)
 
 ### examples
 
 ```xml
-  <... resource="/path/to/place/resource">
+  <... description="http://identifier/of/place/description/being/referenced">
     <gx:original>...the original text...</gx:original>
-    <gx:normalized>...</gx:normalized>
+
+    <!-- possibility of extension elements -->
+
   </...>
 ```
+
 
 <a id="name-part"/>
 

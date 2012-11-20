@@ -74,7 +74,7 @@ public class PersonRecipesTest extends RecipeTest {
     fact.setKnownType(FactType.Marriage);
     fact.setDate(new Date());
     fact.getDate().setOriginal("January 6, 1759");
-    fact.setPlace(new Place());
+    fact.setPlace(new PlaceReference());
     fact.getPlace().setOriginal("New Kent, Virginia");
     person.addFact(fact);
 
@@ -100,9 +100,11 @@ public class PersonRecipesTest extends RecipeTest {
     fact.getDate().setOriginal("March 18, 1844");
     fact.getDate().setFormal("+1844-03-18");
 
-    fact.setPlace(new Place());
+    fact.setPlace(new PlaceReference());
     fact.getPlace().setOriginal("Tikhvin, Leningradskaya Oblast', Russia");
-    fact.getPlace().setResource(URI.create("https://familysearch.org/platform/places/12345"));
+    fact.getPlace().setDescriptionRef(URI.create("#tikhvinDesc1"));
+    // Tikhvin, Leningradskaya Oblast', Russia
+    // https://labs.familysearch.org/stdfinder/PlaceDetail.jsp?placeId=3262902
 
     person.addFact(fact);
 
@@ -114,10 +116,11 @@ public class PersonRecipesTest extends RecipeTest {
     fact.getDate().setOriginal("June 21, 1908");
     fact.getDate().setFormal("+1908-06-21T12:34:56");
 
-    fact.setPlace(new Place());
+    fact.setPlace(new PlaceReference());
     fact.getPlace().setOriginal("Luga, Russia");
-    fact.getPlace().setNormalized("Luga, Novgorodskaya Oblast', Russia");
-    fact.getPlace().setResource(URI.create("https://familysearch.org/platform/places/67890"));
+    fact.getPlace().setDescriptionRef(URI.create("#lugaDesc1"));
+    // Luga, Leningradskaya Oblast', Russia
+    // https://labs.familysearch.org/stdfinder/PlaceDetail.jsp?placeId=3314013
 
     person.addFact(fact);
 

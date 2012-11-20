@@ -45,7 +45,7 @@ public class EventTest {
     event.getAttribution().setChangeMessage("explanation");
     event.setDate(new Date());
     event.getDate().setOriginal("date");
-    event.setPlace(new Place());
+    event.setPlace(new PlaceReference());
     event.getPlace().setOriginal("place");
     event.setRoles(new ArrayList<EventRole>());
     EventRole role = new EventRole();

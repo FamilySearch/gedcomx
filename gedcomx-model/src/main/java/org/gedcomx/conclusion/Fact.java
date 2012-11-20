@@ -35,7 +35,7 @@ public class Fact extends Conclusion implements HasDateAndPlace {
 
   private URI type;
   private Date date;
-  private Place place;
+  private PlaceReference place;
   private String value;
 
   /**
@@ -63,7 +63,7 @@ public class Fact extends Conclusion implements HasDateAndPlace {
    * @param place The place of applicability of this fact.
    * @param value The value as supplied by the user.
    */
-  public Fact(FactType factType, Date date, Place place, String value) {
+  public Fact(FactType factType, Date date, PlaceReference place, String value) {
     setKnownType(factType);
     setDate(date);
     setPlace(place);
@@ -133,7 +133,7 @@ public class Fact extends Conclusion implements HasDateAndPlace {
    *
    * @return The place of applicability of this fact.
    */
-  public Place getPlace() {
+  public PlaceReference getPlace() {
     return place;
   }
 
@@ -142,7 +142,7 @@ public class Fact extends Conclusion implements HasDateAndPlace {
    *
    * @param place The place of applicability of this fact.
    */
-  public void setPlace(Place place) {
+  public void setPlace(PlaceReference place) {
     this.place = place;
   }
 

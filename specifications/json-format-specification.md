@@ -80,8 +80,8 @@ The following example shows an instance of a GEDCOM X serialization in accordanc
         "formal" : "+1732-02-22"
       },
       "place" : {
-        "original" : "Pope's Creek, Westmoreland, Virginia, United States",
-        "normalized" : "Pope's Creek, Westmoreland, Virginia, United States"
+        "original" : "pope's creek, westmoreland, virginia, united states",
+        "description" : "#888"
       },
       "id" : "123"
     }, {
@@ -91,8 +91,8 @@ The following example shows an instance of a GEDCOM X serialization in accordanc
         "formal" : "+1799-12-14T22:00:00"
       },
       "place" : {
-        "original" : "Mount Vernon, Virginia",
-        "normalized" : "Mount Vernon, Fairfax County, Virginia, United States"
+        "original" : "mount vernon, fairfax county, virginia, united states",
+        "description" : "#999"
       },
       "id" : "456"
     } ],
@@ -125,8 +125,8 @@ The following example shows an instance of a GEDCOM X serialization in accordanc
         "formal" : "+1731-06-02"
       },
       "place" : {
-        "original" : "Chestnut Grove, Virginia",
-        "normalized" : "Chestnut Grove, New Kent, Virginia, United States"
+        "original" : "chestnut grove, new kent, virginia, united states",
+        "description" : "#KKK"
       },
       "id" : "321"
     }, {
@@ -136,8 +136,8 @@ The following example shows an instance of a GEDCOM X serialization in accordanc
         "formal" : "+1802-05-22"
       },
       "place" : {
-        "original" : "Mount Vernon, Virginia",
-        "normalized" : "Mount Vernon, Fairfax County, Virginia, United States"
+        "original" : "mount vernon, fairfax county, virginia, united states",
+        "description" : "#999"
       },
       "id" : "654"
     } ],
@@ -165,22 +165,44 @@ The following example shows an instance of a GEDCOM X serialization in accordanc
   } ],
   "sourceDescriptions" : [ {
     "id" : "EEE-EEEE",
+    "about" : "http://en.wikipedia.org/wiki/George_washington",
     "citations" : [ {
       "value" : "\"George Washington.\" Wikipedia, The Free Encyclopedia. Wikimedia Foundation, Inc. 24 October 2012."
-    } ],
-    "about" : "http://en.wikipedia.org/wiki/George_washington"
+    } ]
   }, {
     "id" : "FFF-FFFF",
+    "about" : "http://en.wikipedia.org/wiki/Martha_washington",
     "citations" : [ {
       "value" : "\"Martha Washington.\" Wikipedia, The Free Encyclopedia. Wikimedia Foundation, Inc. 24 October 2012."
-    } ],
-    "about" : "http://en.wikipedia.org/wiki/Martha_washington"
+    } ]
   } ],
   "agents" : [ {
     "id" : "GGG-GGGG",
     "names" : [ {
       "value" : "Ryan Heaton"
     } ]
+  } ],
+  "places" : [ {
+    "names" : [ {
+      "value" : "Pope's Creek, Westmoreland, Virginia, United States"
+    } ],
+    "latitude" : 38.192353,
+    "longitude" : -76.904069,
+    "id" : "888"
+  }, {
+    "names" : [ {
+      "value" : "Mount Vernon, Fairfax County, Virginia, United States"
+    } ],
+    "latitude" : 38.721144,
+    "longitude" : -77.109461,
+    "id" : "999"
+  }, {
+    "names" : [ {
+      "value" : "Chestnut Grove, New Kent, Virginia, United States"
+    } ],
+    "latitude" : 37.518304,
+    "longitude" : -76.984148,
+    "id" : "KKK"
   } ]
 }
 ```
@@ -232,7 +254,7 @@ The JSON object used to (de)serialize the `http://gedcomx.org/v1/Person` data ty
 
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
-attribution | The attribution of this conclusion. | attribution | [`gx:Attribution`](#attribution)
+attribution | The attribution of this conclusion. | attribution | [`Attribution`](#attribution)
 identifiers | Identifiers for the person. | identifiers | array of [`Identifier`](#identifier-type)
 living | Whether the person is considered living. | living | boolean
 gender | The conclusion about the gender of the person. | gender | [`Gender`](#gender)
@@ -265,7 +287,7 @@ The JSON object used to (de)serialize the `http://gedcomx.org/v1/Relationship` d
 
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
-attribution | The attribution of this conclusion. | attribution | [`gx:Attribution`](#attribution)
+attribution | The attribution of this conclusion. | attribution | [`Attribution`](#attribution)
 type | URI identifying the type of the relationship. | type | [`URI`](#uri)
 person1 | Reference to the first person in the relationship. | person1 | [`URI`](#uri)
 person2 | Reference to the second person in the relationship. | person2 | [`URI`](#uri)
@@ -377,7 +399,7 @@ is defined as follows:
 
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
-attribution | The attribution of this conclusion. | attribution | [`gx:Attribution`](#attribution)
+attribution | The attribution of this conclusion. | attribution | [`Attribution`](#attribution)
 type | URI identifying the type of the event. | type | [`URI`](#uri)
 date | The date of the event. | date | [`Date`](#conclusion-date)
 place | The place the event. | place | [`Place`](#conclusion-place)
@@ -407,7 +429,7 @@ The JSON object used to (de)serialize the `http://gedcomx.org/v1/Document` data 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
 type | URI identifying the type of the document. | type | [`URI`](#uri)
-attribution | The attribution of this document. | attribution | [`gx:Attribution`](#attribution)
+attribution | The attribution of this document. | attribution | [`Attribution`](#attribution)
 text | The text of the document. | text | string
 
 ### examples
@@ -420,6 +442,44 @@ text | The text of the document. | text | string
   "type" : "http://gedcomx.org/Analysis",
   "attribution" : { ... },
   "text" : "...text of the document..."
+}
+```
+
+# 2.7 The "PlaceDescription" Data Type
+
+the JSON object used to (de)serialize the `http://gedcomx.org/v1/PlaceDescription` data type
+is defined as follows:
+
+### properties
+
+name | description | JSON member | JSON object type
+-----|-------------|--------------|---------
+about | A uniform resource identifier (URI) for the place being described. | about | [`URI`](#uri)
+names | A list of standardized (or normalized), fully-qualified (in terms of what is known of the applicable jurisdictional hierarchy) names for this place that are applicable to this description of this place. | names | array of [`TextValue`](#text-value)
+type | A uniform resource identifier (URI) identifying the type of the place as it is applicable to this description. | type | [`URI`](#uri)
+temporalDescription | A description of the time period to which this place description is relevant. | temporalDescription | [`Date`](#conclusion-date)
+latitude | Degrees north or south of the Equator (0.0 degrees). | latitude | number
+longitude | Angular distance in degrees, relative to the Prime Meridian. | longitude | number
+spatialDescription | A reference to a geospatial description of this place. | spatialDescription | [`URI`](#uri)
+identifiers | A list of known identifiers for this place description (e.g., place authority identifiers). | identifiers | array of [`Identifier`](#identifier-type)
+attribution | The attribution of this conclusion. | attribution | [`Attribution`](#attribution)
+
+### examples
+
+```json
+{
+
+  ...the members of Conclusion...,
+
+  "about" : "http://identifier/of/the/place/being/described",
+  "names" : [ { ... }, { ... } ],
+  "type" : "http://identifier/for/the/place/type",
+  "temporalDescription" : { ... },
+  "latitude" : "27.9883575",
+  "latitude" : "86.9252014",
+  "spatialDescription" : "http://uri/for/KML/document",
+  "identifiers" : [ { ... }, { ... } ],
+  "attribution" : { ... }
 }
 ```
 
@@ -588,7 +648,7 @@ data type is defined as follows:
 
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
-description  | Reference to a _description_ of the source being referenced. | description | [`URI`](#uri)
+descriptionRef  | Reference to a _description_ of the source being referenced. | description | [`URI`](#uri)
 attribution | The attribution of this source reference. | attribution | [`Attribution`](#attribution)
 
 ### examples
@@ -675,7 +735,7 @@ id | An identifier for the JSON object holding the conclusion data. The id attri
 lang | The locale identifier for the conclusion. | lang | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag
 confidence  | Reference to the confidence level of the contributor of the attributed data. | confidence | [`URI`](#uri)
 sources | The list of references to the sources of the conclusion. | sources | array of [`SourceReference`](#source-reference).
-notes | A list of notes about this conclusion. | note | array of [`gx:Note`](#note)
+notes | A list of notes about this conclusion. | note | array of [`Note`](#note)
 
 ### examples
 
@@ -707,7 +767,7 @@ type | URI identifying the type of the gender. | type | [`URI`](#uri)
 ```json
 {
 
-  ...the members of gxc:Conclusion...,
+  ...the members of Conclusion...,
 
   "type" : "http://gedcomx.org/Male"
 }
@@ -733,7 +793,7 @@ nameForms | The name form(s) that best represents this name `NameForm` -- usuall
 ```json
 {
 
-  ...the members of gxc:Conclusion...,
+  ...the members of Conclusion...,
 
   "type" : "http://gedcomx.org/BirthName",
   "preferred" : true,
@@ -762,7 +822,7 @@ value | The original value of the fact as supplied by the contributor. | origina
 ```json
 {
 
-  ...the members of gxc:Conclusion...,
+  ...the members of Conclusion...,
 
   "type" : "http://gedcomx.org/Birth",
   "date" : { ... },
@@ -791,7 +851,7 @@ details | Details about the role of the person in the event. | details | string
 ```json
 {
 
-  ...the members of gxc:Conclusion...,
+  ...the members of Conclusion...,
 
   "person" : "http://identifier/for/person/1",
   "type" : "http://gedcomx.org/Witness",
@@ -810,7 +870,7 @@ The JSON object used to (de)serialize the `http://gedcomx.org/v1/Date` data type
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 original | The original value of the date as supplied by the contributor. | original | string
-formal | The formal value of the date. | gx:formal | [GEDCOM X Date](https://github.com/FamilySearch/gedcomx/blob/master/specifications/date-model-specification.md)
+formal | The formal value of the date. | formal | [GEDCOM X Date](https://github.com/FamilySearch/gedcomx/blob/master/specifications/date-model-specification.md)
 
 ### examples
 
@@ -821,27 +881,29 @@ formal | The formal value of the date. | gx:formal | [GEDCOM X Date](https://git
 }
 ```
 
-<a id="conclusion-place"/>
+<a id="conclusion-place-reference"/>
 
-## 3.17 The "Place" Data Type
+# 3.17 The "PlaceReference" Data Type
 
-The JSON object used to (de)serialize the `http://gedcomx.org/v1/Place` data type is defined as follows:
+the JSON object used to (de)serialize the `http://gedcomx.org/v1/PlaceReference` data type
+is defined as follows:
 
 ### properties
 
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
-resource | Reference to the standardized resource describing the place. | resource | [`URI`](#uri)
-original | The original value of the place as supplied by the contributor. | original | string
-normalized | The normalized text value of the place. | normalized | string
+original | The original place name text as supplied by the contributor. | string | OPTIONAL.
+descriptionRef | A reference to a _description_ of this place. | description | [`URI`](#uri)
 
 ### examples
 
 ```json
 {
-  "resource" : "/path/to/place/resource",
   "original" : "...the original text...",
-  "normalized" : "...the normalized value..."
+  "description" : "http://identifier/of/place-description/being/referenced",
+
+  ...possibility of extension elements...
+
 }
 ```
 
@@ -911,7 +973,7 @@ URIs are supplied as JSON strings and are interpreted according to
 
 ## 4.2 The "Gedcomx" Data Type
 
-The `gx:Gedcomx` JSON type is used as a container for a set of GEDCOM X data.
+The `Gedcomx` JSON type is used as a container for a set of GEDCOM X data.
 
 ### properties
 

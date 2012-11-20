@@ -23,8 +23,11 @@ import java.util.List;
 public class GedcomxExamplesTest {
 
   public void testExample() throws Exception {
-    Person george = createGeorge();
-    Person martha = createMartha();
+    PlaceDescription popesCreek = createPopesCreek();
+    PlaceDescription mountVernon = createMountVernon();
+    PlaceDescription chestnutGrove = createChestnutGrove();
+    Person george = createGeorge(popesCreek, mountVernon);
+    Person martha = createMartha(chestnutGrove, mountVernon);
     Relationship marriage = createMarriage(george, martha);
     List<SourceDescription> sources = citeGeorgeMarthaAndMarriage(george, martha, marriage);
     Agent contributor = createContributor();
@@ -36,9 +39,37 @@ public class GedcomxExamplesTest {
     gx.setAttribution(new Attribution());
     gx.getAttribution().setContributor(new ResourceReference());
     gx.getAttribution().getContributor().setResource(URI.create("#" + contributor.getId()));
+    gx.setPlaces(Arrays.asList(popesCreek, mountVernon, chestnutGrove));
 
     SerializationUtil.processThroughXml(gx);
     SerializationUtil.processThroughJson(gx);
+  }
+
+  private PlaceDescription createPopesCreek() {
+    PlaceDescription place = new PlaceDescription();
+    place.setId("888");
+    place.setLatitude(38.192353);
+    place.setLongitude(-76.904069);
+    place.setNames(Arrays.asList(new TextValue("Pope's Creek, Westmoreland, Virginia, United States")));
+    return place;
+  }
+
+  private PlaceDescription createMountVernon() {
+    PlaceDescription place = new PlaceDescription();
+    place.setId("999");
+    place.setLatitude(38.721144);
+    place.setLongitude(-77.109461);
+    place.setNames(Arrays.asList(new TextValue("Mount Vernon, Fairfax County, Virginia, United States")));
+    return place;
+  }
+
+  private PlaceDescription createChestnutGrove() {
+    PlaceDescription place = new PlaceDescription();
+    place.setId("KKK");
+    place.setLatitude(37.518304);
+    place.setLongitude(-76.984148);
+    place.setNames(Arrays.asList(new TextValue("Chestnut Grove, New Kent, Virginia, United States")));
+    return place;
   }
 
   private Agent createContributor() {
@@ -48,7 +79,7 @@ public class GedcomxExamplesTest {
     return agent;
   }
 
-  private Person createGeorge() {
+  private Person createGeorge(PlaceDescription birthPlace, PlaceDescription deathPlace) {
     Person person = new Person();
     person.setGender(new Gender(GenderType.Male));
 
@@ -60,9 +91,9 @@ public class GedcomxExamplesTest {
     fact.getDate().setOriginal("February 22, 1732");
     fact.getDate().setFormal("+1732-02-22");
 
-    fact.setPlace(new Place());
-    fact.getPlace().setOriginal("Pope's Creek, Westmoreland, Virginia, United States");
-    fact.getPlace().setNormalized("Pope's Creek, Westmoreland, Virginia, United States");
+    fact.setPlace(new PlaceReference());
+    fact.getPlace().setOriginal(birthPlace.getNames().get(0).getValue().toLowerCase());
+    fact.getPlace().setDescriptionRef(URI.create("#" + birthPlace.getId()));
 
     person.addFact(fact);
 
@@ -74,9 +105,9 @@ public class GedcomxExamplesTest {
     fact.getDate().setOriginal("December 14, 1799");
     fact.getDate().setFormal("+1799-12-14T22:00:00");
 
-    fact.setPlace(new Place());
-    fact.getPlace().setOriginal("Mount Vernon, Virginia");
-    fact.getPlace().setNormalized("Mount Vernon, Fairfax County, Virginia, United States");
+    fact.setPlace(new PlaceReference());
+    fact.getPlace().setOriginal(deathPlace.getNames().get(0).getValue().toLowerCase());
+    fact.getPlace().setDescriptionRef(URI.create("#" + deathPlace.getId()));
 
     person.addFact(fact);
 
@@ -105,7 +136,7 @@ public class GedcomxExamplesTest {
     return person;
   }
 
-  private Person createMartha() {
+  private Person createMartha(PlaceDescription birthPlace, PlaceDescription deathPlace) {
     Person person = new Person();
     person.setGender(new Gender(GenderType.Male));
 
@@ -117,9 +148,9 @@ public class GedcomxExamplesTest {
     fact.getDate().setOriginal("June 2, 1731");
     fact.getDate().setFormal("+1731-06-02");
 
-    fact.setPlace(new Place());
-    fact.getPlace().setOriginal("Chestnut Grove, Virginia");
-    fact.getPlace().setNormalized("Chestnut Grove, New Kent, Virginia, United States");
+    fact.setPlace(new PlaceReference());
+    fact.getPlace().setOriginal(birthPlace.getNames().get(0).getValue().toLowerCase());
+    fact.getPlace().setDescriptionRef(URI.create("#" + birthPlace.getId()));
 
     person.addFact(fact);
 
@@ -131,9 +162,9 @@ public class GedcomxExamplesTest {
     fact.getDate().setOriginal("May 22, 1802");
     fact.getDate().setFormal("+1802-05-22");
 
-    fact.setPlace(new Place());
-    fact.getPlace().setOriginal("Mount Vernon, Virginia");
-    fact.getPlace().setNormalized("Mount Vernon, Fairfax County, Virginia, United States");
+    fact.setPlace(new PlaceReference());
+    fact.getPlace().setOriginal(deathPlace.getNames().get(0).getValue().toLowerCase());
+    fact.getPlace().setDescriptionRef(URI.create("#" + deathPlace.getId()));
 
     person.addFact(fact);
 
@@ -171,7 +202,7 @@ public class GedcomxExamplesTest {
     marriage.setDate(new Date());
     marriage.getDate().setOriginal("January 6, 1759");
     marriage.getDate().setFormal("+01-06-1759");
-    marriage.setPlace(new Place());
+    marriage.setPlace(new PlaceReference());
     marriage.getPlace().setOriginal("White House Plantation");
     relationship.setFacts(Arrays.asList(marriage));
     return relationship;
