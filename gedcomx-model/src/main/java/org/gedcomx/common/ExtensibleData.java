@@ -23,6 +23,8 @@ import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlType;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * A set of data that supports extension elements.
@@ -33,6 +35,7 @@ import java.util.List;
 public abstract class ExtensibleData implements SupportsExtensionElements {
 
   protected List<Object> extensionElements;
+  protected Map<String, Object> transientProperties;
 
   /**
    * Custom extension elements for a conclusion.
@@ -147,5 +150,29 @@ public abstract class ExtensibleData implements SupportsExtensionElements {
     }
 
     return ext;
+  }
+
+  /**
+   * Get a transient (non-serialized) property.
+   *
+   * @param name The name of the property.
+   * @return The property.
+   */
+  public Object getTransientProperty(String name) {
+    return this.transientProperties == null ? null : this.transientProperties.get(name);
+  }
+
+  /**
+   * Set a transient (non-serialized) property.
+   *
+   * @param name the name of the property.
+   * @param value the property value.
+   */
+  public void setTransientProperty(String name, Object value) {
+    if (this.transientProperties == null) {
+      this.transientProperties = new TreeMap<String, Object>();
+    }
+
+    this.transientProperties.put(name, value);
   }
 }
