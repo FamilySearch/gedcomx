@@ -2,8 +2,7 @@ package org.gedcomx.common;
 
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNull;
+import static org.testng.Assert.*;
 
 
 public class TextValueTest {
@@ -23,5 +22,27 @@ public class TextValueTest {
 
     assertNull(literal.getLang());
     assertEquals(literal.getValue(), "value");
+  }
+
+  @Test
+  public void testEqualsAndHash() throws Exception {
+    TextValue literal1 = new TextValue("value");
+    literal1.setLang("lang");
+    TextValue literal2 = new TextValue("value");
+    literal2.setLang("lang");
+    TextValue literal3 = new TextValue("not-matching");
+    TextValue literal4 = new TextValue("not-matching");
+    literal4.setLang("lang");
+
+    assertTrue(literal1.equals(literal1));
+    assertFalse(literal1.equals(null));
+    assertTrue(literal1.equals(literal1));
+    assertTrue(literal1.equals(literal2));
+    assertEquals(literal1.hashCode(), literal2.hashCode());
+    assertFalse(literal1.equals(literal3));
+    assertFalse(literal1.equals(literal4));
+
+    assertTrue(literal1.toString().contains("value"));
+    assertTrue(literal2.toString().contains("lang"));
   }
 }
