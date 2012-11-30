@@ -4,7 +4,7 @@ import org.testng.annotations.Test;
 
 import static org.gedcomx.rt.SerializationUtil.processThroughJson;
 import static org.gedcomx.rt.SerializationUtil.processThroughXml;
-import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.*;
 
 
 /**
@@ -19,6 +19,7 @@ public class NoteTest {
   public void testNoteXml() throws Exception {
     Note note = new Note();
     note.setText("hello, there");
+    note.setId("id");
     note.setSubject("subject");
     note.setAttribution(new Attribution());
     note.getAttribution().setChangeMessage("note statement");
@@ -34,6 +35,13 @@ public class NoteTest {
     assertEquals("subject", note.getSubject());
     assertEquals("note statement", note.getAttribution().getChangeMessage());
     assertEquals("en", note.getLang());
+    assertEquals("id", note.getId());
+
+    assertTrue(note.toString().contains("hello, there"));
+    note.setText("long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long note");
+    assertTrue(note.toString().contains("..."));
+    note.setText(null);
+    assertNotNull(note.toString());
   }
 
   /**
