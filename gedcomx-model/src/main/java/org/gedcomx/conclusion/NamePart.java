@@ -21,6 +21,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
 import org.gedcomx.common.ExtensibleData;
 import org.gedcomx.common.ResourceReference;
 import org.gedcomx.common.URI;
+import org.gedcomx.rt.GedcomxModelVisitor;
 import org.gedcomx.types.NamePartType;
 
 import javax.xml.bind.annotation.XmlAttribute;
@@ -120,5 +121,14 @@ public final class NamePart extends ExtensibleData {
   @JsonProperty ("qualifiers")
   public void setQualifiers(List<ResourceReference> qualifiers) {
     this.qualifiers = qualifiers;
+  }
+
+  /**
+   * Accept a visitor.
+   *
+   * @param visitor The visitor.
+   */
+  public void accept(GedcomxModelVisitor visitor) {
+    visitor.visitNamePart(this);
   }
 }

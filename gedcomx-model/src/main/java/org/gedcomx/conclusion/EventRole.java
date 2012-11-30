@@ -18,6 +18,7 @@ package org.gedcomx.conclusion;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.gedcomx.common.ResourceReference;
 import org.gedcomx.common.URI;
+import org.gedcomx.rt.GedcomxModelVisitor;
 import org.gedcomx.rt.RDFRange;
 import org.gedcomx.types.EventRoleType;
 
@@ -120,5 +121,14 @@ public class EventRole extends Conclusion {
   @Override
   public String toString() {
     return (person == null) ? "" : person.toString();
+  }
+
+  /**
+   * Accept a visitor.
+   *
+   * @param visitor The visitor.
+   */
+  public void accept(GedcomxModelVisitor visitor) {
+    visitor.visitEventRole(this);
   }
 }

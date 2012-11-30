@@ -20,6 +20,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.gedcomx.common.Attributable;
 import org.gedcomx.common.URI;
+import org.gedcomx.rt.GedcomxModelVisitor;
 import org.gedcomx.rt.json.JsonElementWrapper;
 import org.gedcomx.types.FactType;
 import org.gedcomx.types.IdentifierType;
@@ -296,5 +297,14 @@ public class Person extends Conclusion implements HasFacts, Attributable {
   @JsonProperty("display")
   public void setDisplayExtension(DisplayProperties display) {
     this.display = display;
+  }
+
+  /**
+   * Accept a visitor.
+   *
+   * @param visitor The visitor.
+   */
+  public void accept(GedcomxModelVisitor visitor) {
+    visitor.visitPerson(this);
   }
 }

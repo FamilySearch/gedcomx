@@ -19,6 +19,7 @@ import org.codehaus.enunciate.ClientName;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.gedcomx.common.ExtensibleData;
 import org.gedcomx.common.TextValue;
+import org.gedcomx.rt.GedcomxModelVisitor;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
@@ -99,5 +100,14 @@ public class Date extends ExtensibleData {
   @Override
   public String toString() {
     return "Date{" + "original='" + original + '\'' + ", formal=" + formal + '}';
+  }
+
+  /**
+   * Accept a visitor.
+   *
+   * @param visitor The visitor.
+   */
+  public void accept(GedcomxModelVisitor visitor) {
+    visitor.visitDate(this);
   }
 }

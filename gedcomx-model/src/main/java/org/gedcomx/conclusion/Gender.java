@@ -17,6 +17,7 @@ package org.gedcomx.conclusion;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.gedcomx.common.URI;
+import org.gedcomx.rt.GedcomxModelVisitor;
 import org.gedcomx.rt.json.JsonElementWrapper;
 import org.gedcomx.types.GenderType;
 
@@ -95,5 +96,14 @@ public class Gender extends Conclusion {
   @Override
   public String toString() {
     return "type=" + getKnownType();
+  }
+
+  /**
+   * Accept a visitor.
+   *
+   * @param visitor The visitor.
+   */
+  public void accept(GedcomxModelVisitor visitor) {
+    visitor.visitGender(this);
   }
 }

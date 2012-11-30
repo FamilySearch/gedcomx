@@ -17,6 +17,7 @@ package org.gedcomx.conclusion;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.gedcomx.common.URI;
+import org.gedcomx.rt.GedcomxModelVisitor;
 import org.gedcomx.rt.json.JsonElementWrapper;
 import org.gedcomx.types.FactType;
 
@@ -168,5 +169,14 @@ public class Fact extends Conclusion implements HasDateAndPlace {
   @Override
   public String toString() {
     return "type=" + getKnownType() + ",value=" + getValue() + ",date=" + getDate() + ",place=" + getPlace();
+  }
+
+  /**
+   * Accept a visitor.
+   *
+   * @param visitor The visitor.
+   */
+  public void accept(GedcomxModelVisitor visitor) {
+    visitor.visitFact(this);
   }
 }

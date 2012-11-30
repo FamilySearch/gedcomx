@@ -23,6 +23,7 @@ import org.gedcomx.common.ResourceReference;
 import org.gedcomx.common.TextValue;
 import org.gedcomx.conclusion.Identifier;
 import org.gedcomx.links.HypermediaControllableData;
+import org.gedcomx.rt.GedcomxModelVisitor;
 import org.gedcomx.rt.json.JsonElementWrapper;
 
 import javax.xml.bind.annotation.*;
@@ -253,4 +254,12 @@ public class Agent extends HypermediaControllableData {
     this.addresses = addresses;
   }
 
+  /**
+   * Accept a visitor.
+   *
+   * @param visitor The visitor.
+   */
+  public void accept(GedcomxModelVisitor visitor) {
+    visitor.visitAgent(this);
+  }
 }

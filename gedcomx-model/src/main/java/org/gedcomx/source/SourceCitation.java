@@ -18,6 +18,7 @@ package org.gedcomx.source;
 import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.gedcomx.common.ResourceReference;
+import org.gedcomx.rt.GedcomxModelVisitor;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -113,5 +114,14 @@ public class SourceCitation {
   @JsonProperty ("fields")
   public void setFields(List<CitationField> fields) {
     this.fields = fields;
+  }
+
+  /**
+   * Accept a visitor.
+   *
+   * @param visitor The visitor.
+   */
+  public void accept(GedcomxModelVisitor visitor) {
+    visitor.visitSourceCitation(this);
   }
 }
