@@ -19,6 +19,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import org.gedcomx.common.Attributable;
 import org.gedcomx.common.HasText;
 import org.gedcomx.common.URI;
+import org.gedcomx.rt.GedcomxModelVisitor;
 import org.gedcomx.rt.json.JsonElementWrapper;
 import org.gedcomx.types.DocumentType;
 
@@ -96,5 +97,14 @@ public class Document extends Conclusion implements HasText, Attributable {
    */
   public void setText(String text) {
     this.text = text;
+  }
+
+  /**
+   * Accept a visitor.
+   *
+   * @param visitor The visitor.
+   */
+  public void accept(GedcomxModelVisitor visitor) {
+    visitor.visitDocument(this);
   }
 }

@@ -22,6 +22,7 @@ import org.gedcomx.conclusion.*;
 import org.gedcomx.contributor.Agent;
 import org.gedcomx.links.HypermediaControllableData;
 import org.gedcomx.rt.GedcomxConstants;
+import org.gedcomx.rt.GedcomxModelVisitor;
 import org.gedcomx.rt.MediaTypeDefinition;
 import org.gedcomx.rt.Model;
 import org.gedcomx.rt.json.JsonElementWrapper;
@@ -295,6 +296,15 @@ public class Gedcomx extends HypermediaControllableData {
   @JsonProperty ("documents")
   public void setDocuments(List<Document> documents) {
     this.documents = documents;
+  }
+
+  /**
+   * Accept a visitor.
+   *
+   * @param visitor The visitor.
+   */
+  public void accept(GedcomxModelVisitor visitor) {
+    visitor.visitGedcomx(this);
   }
 
 }

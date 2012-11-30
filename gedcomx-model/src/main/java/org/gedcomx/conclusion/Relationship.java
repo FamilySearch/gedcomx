@@ -21,6 +21,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
 import org.gedcomx.common.Attributable;
 import org.gedcomx.common.ResourceReference;
 import org.gedcomx.common.URI;
+import org.gedcomx.rt.GedcomxModelVisitor;
 import org.gedcomx.rt.RDFRange;
 import org.gedcomx.rt.RDFSubPropertyOf;
 import org.gedcomx.rt.json.JsonElementWrapper;
@@ -176,5 +177,14 @@ public class Relationship extends Conclusion implements HasFacts, Attributable {
       }
       facts.add(fact);
     }
+  }
+
+  /**
+   * Accept a visitor.
+   *
+   * @param visitor The visitor.
+   */
+  public void accept(GedcomxModelVisitor visitor) {
+    visitor.visitRelationship(this);
   }
 }

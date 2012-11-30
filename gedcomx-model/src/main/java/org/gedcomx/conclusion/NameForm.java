@@ -18,6 +18,7 @@ package org.gedcomx.conclusion;
 import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.gedcomx.common.ExtensibleData;
+import org.gedcomx.rt.GedcomxModelVisitor;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -94,5 +95,14 @@ public class NameForm extends ExtensibleData {
   @JsonProperty ("parts")
   public void setParts(List<NamePart> parts) {
     this.parts = parts;
+  }
+
+  /**
+   * Accept a visitor.
+   *
+   * @param visitor The visitor.
+   */
+  public void accept(GedcomxModelVisitor visitor) {
+    visitor.visitNameForm(this);
   }
 }

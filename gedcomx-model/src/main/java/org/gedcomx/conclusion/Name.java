@@ -19,6 +19,7 @@ import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.gedcomx.common.URI;
+import org.gedcomx.rt.GedcomxModelVisitor;
 import org.gedcomx.rt.json.JsonElementWrapper;
 import org.gedcomx.types.NameType;
 
@@ -142,5 +143,14 @@ public class Name extends Conclusion {
   @Override
   public String toString() {
     return "type=" + getKnownType() + ",nameForms[0]=" + (nameForms == null ? "null" : nameForms.get(0).getFullText()) + ",pref=" + getPreferred();
+  }
+
+  /**
+   * Accept a visitor.
+   *
+   * @param visitor The visitor.
+   */
+  public void accept(GedcomxModelVisitor visitor) {
+    visitor.visitName(this);
   }
 }

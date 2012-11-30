@@ -20,6 +20,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.gedcomx.common.*;
 import org.gedcomx.links.HypermediaControllableData;
+import org.gedcomx.rt.GedcomxModelVisitor;
 import org.gedcomx.rt.json.JsonElementWrapper;
 
 import javax.xml.XMLConstants;
@@ -281,4 +282,12 @@ public class SourceDescription extends HypermediaControllableData implements Att
     this.attribution = attribution;
   }
 
+  /**
+   * Accept a visitor.
+   *
+   * @param visitor The visitor.
+   */
+  public void accept(GedcomxModelVisitor visitor) {
+    visitor.visitSourceDescription(this);
+  }
 }

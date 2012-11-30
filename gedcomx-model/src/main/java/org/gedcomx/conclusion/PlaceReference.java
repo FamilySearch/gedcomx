@@ -19,6 +19,7 @@ import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.gedcomx.common.ExtensibleData;
 import org.gedcomx.common.URI;
+import org.gedcomx.rt.GedcomxModelVisitor;
 import org.gedcomx.rt.RDFRange;
 
 import javax.xml.bind.annotation.XmlAttribute;
@@ -77,5 +78,14 @@ public class PlaceReference extends ExtensibleData {
 
   public String toString() {
     return "PlaceReference{" + "original='" + original + "', " + "descriptionRef='" + descriptionRef + '\'' + '}';
+  }
+
+  /**
+   * Accept a visitor.
+   *
+   * @param visitor The visitor.
+   */
+  public void accept(GedcomxModelVisitor visitor) {
+    visitor.visitPlaceReference(this);
   }
 }

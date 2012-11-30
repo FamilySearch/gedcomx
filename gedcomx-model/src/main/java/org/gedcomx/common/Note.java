@@ -16,6 +16,7 @@
 package org.gedcomx.common;
 
 import org.gedcomx.links.HypermediaControllableData;
+import org.gedcomx.rt.GedcomxModelVisitor;
 import org.gedcomx.rt.json.JsonElementWrapper;
 
 import javax.xml.XMLConstants;
@@ -157,4 +158,12 @@ public class Note extends HypermediaControllableData implements Attributable, Ha
     return null;
   }
 
+  /**
+   * Accept a visitor.
+   *
+   * @param visitor The visitor.
+   */
+  public void accept(GedcomxModelVisitor visitor) {
+    visitor.visitNote(this);
+  }
 }

@@ -20,6 +20,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.gedcomx.common.Attributable;
 import org.gedcomx.common.URI;
+import org.gedcomx.rt.GedcomxModelVisitor;
 import org.gedcomx.rt.json.JsonElementWrapper;
 import org.gedcomx.types.EventType;
 
@@ -171,4 +172,12 @@ public class Event extends Conclusion implements HasDateAndPlace, Attributable {
     this.roles = roles;
   }
 
+  /**
+   * Accept a visitor.
+   *
+   * @param visitor The visitor.
+   */
+  public void accept(GedcomxModelVisitor visitor) {
+    visitor.visitEvent(this);
+  }
 }

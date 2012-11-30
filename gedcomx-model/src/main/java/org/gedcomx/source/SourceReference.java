@@ -19,6 +19,7 @@ import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.gedcomx.common.*;
 import org.gedcomx.links.HypermediaControllableData;
+import org.gedcomx.rt.GedcomxModelVisitor;
 import org.gedcomx.rt.json.JsonElementWrapper;
 
 import javax.xml.bind.annotation.XmlAttribute;
@@ -77,5 +78,14 @@ public class SourceReference extends HypermediaControllableData implements Attri
   @JsonProperty ( "description" )
   public void setDescriptionRef(URI descriptionRef) {
     this.descriptionRef = descriptionRef;
+  }
+
+  /**
+   * Accept a visitor.
+   *
+   * @param visitor The visitor.
+   */
+  public void accept(GedcomxModelVisitor visitor) {
+    visitor.visitSourceReference(this);
   }
 }
