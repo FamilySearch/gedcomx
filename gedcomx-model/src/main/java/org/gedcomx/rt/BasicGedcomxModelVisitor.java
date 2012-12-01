@@ -40,7 +40,7 @@ public class BasicGedcomxModelVisitor implements GedcomxModelVisitor {
     if (persons != null) {
       for (Person person : persons) {
         if (person != null) {
-          visitPerson(person);
+          person.accept(this);
         }
       }
     }
@@ -49,7 +49,7 @@ public class BasicGedcomxModelVisitor implements GedcomxModelVisitor {
     if (relationships != null) {
       for (Relationship relationship : relationships) {
         if (relationship != null) {
-          visitRelationship(relationship);
+          relationship.accept(this);
         }
       }
     }
@@ -58,7 +58,7 @@ public class BasicGedcomxModelVisitor implements GedcomxModelVisitor {
     if (sourceDescriptions != null) {
       for (SourceDescription sourceDescription : sourceDescriptions) {
         if (sourceDescription != null) {
-          visitSourceDescription(sourceDescription);
+          sourceDescription.accept(this);
         }
       }
     }
@@ -67,7 +67,7 @@ public class BasicGedcomxModelVisitor implements GedcomxModelVisitor {
     if (agents != null) {
       for (Agent agent : agents) {
         if (agent != null) {
-          visitAgent(agent);
+          agent.accept(this);
         }
       }
     }
@@ -76,7 +76,7 @@ public class BasicGedcomxModelVisitor implements GedcomxModelVisitor {
     if (events != null) {
       for (Event event : events) {
         if (event != null) {
-          visitEvent(event);
+          event.accept(this);
         }
       }
     }
@@ -85,7 +85,7 @@ public class BasicGedcomxModelVisitor implements GedcomxModelVisitor {
     if (places != null) {
       for (PlaceDescription place : places) {
         if (place != null) {
-          visitPlaceDescription(place);
+          place.accept(this);
         }
       }
     }
@@ -94,7 +94,7 @@ public class BasicGedcomxModelVisitor implements GedcomxModelVisitor {
     if (documents != null) {
       for (Document document : documents) {
         if (document != null) {
-          visitDocument(document);
+          document.accept(this);
         }
       }
     }
@@ -107,35 +107,41 @@ public class BasicGedcomxModelVisitor implements GedcomxModelVisitor {
 
   @Override
   public void visitPlaceDescription(PlaceDescription place) {
+    visitConclusion(place);
+
     List<SourceReference> sources = place.getSources();
     if (sources != null) {
       for (SourceReference source : sources) {
-        visitSourceReference(source);
+        source.accept(this);
       }
     }
   }
 
   @Override
   public void visitEvent(Event event) {
+    visitConclusion(event);
+
     Date date = event.getDate();
     if (date != null) {
-      visitDate(date);
+      date.accept(this);
     }
 
     PlaceReference place = event.getPlace();
     if (place != null) {
-      visitPlaceReference(place);
+      place.accept(this);
     }
 
     List<EventRole> roles = event.getRoles();
-    for (EventRole role : roles) {
-      visitEventRole(role);
+    if (roles != null) {
+      for (EventRole role : roles) {
+        role.accept(this);
+      }
     }
   }
 
   @Override
   public void visitEventRole(EventRole role) {
-    //no-op.
+    visitConclusion(role);
   }
 
   @Override
@@ -148,20 +154,22 @@ public class BasicGedcomxModelVisitor implements GedcomxModelVisitor {
     List<SourceReference> sources = sourceDescription.getSources();
     if (sources != null) {
       for (SourceReference source : sources) {
-        visitSourceReference(source);
+        source.accept(this);
       }
     }
 
     List<Note> notes = sourceDescription.getNotes();
     if (notes != null) {
       for (Note note : notes) {
-        visitNote(note);
+        note.accept(this);
       }
     }
 
-    SourceCitation citation = sourceDescription.getCitation();
-    if (citation != null) {
-      visitSourceCitation(citation);
+    List<SourceCitation> citations = sourceDescription.getCitations();
+    if (citations != null) {
+      for (SourceCitation citation : citations) {
+        citation.accept(this);
+      }
     }
   }
 
@@ -177,7 +185,7 @@ public class BasicGedcomxModelVisitor implements GedcomxModelVisitor {
     List<Fact> facts = relationship.getFacts();
     if (facts != null) {
       for (Fact fact : facts) {
-        visitFact(fact);
+        fact.accept(this);
       }
     }
   }
@@ -186,14 +194,14 @@ public class BasicGedcomxModelVisitor implements GedcomxModelVisitor {
     List<SourceReference> sourceReferences = conclusion.getSources();
     if (sourceReferences != null) {
       for (SourceReference sourceReference : sourceReferences) {
-        visitSourceReference(sourceReference);
+        sourceReference.accept(this);
       }
     }
 
     List<Note> notes = conclusion.getNotes();
     if (notes != null) {
       for (Note note : notes) {
-        visitNote(note);
+        note.accept(this);
       }
     }
   }
@@ -203,34 +211,36 @@ public class BasicGedcomxModelVisitor implements GedcomxModelVisitor {
     visitConclusion(person);
 
     if (person.getGender() != null) {
-      visitGender(person.getGender());
+      person.getGender().accept(this);
     }
 
     List<Name> names = person.getNames();
     if (names != null) {
       for (Name name : names) {
-        visitName(name);
+        name.accept(this);
       }
     }
 
     List<Fact> facts = person.getFacts();
     if (facts != null) {
       for (Fact fact : facts) {
-        visitFact(fact);
+        fact.accept(this);
       }
     }
   }
 
   @Override
   public void visitFact(Fact fact) {
+    visitConclusion(fact);
+
     Date date = fact.getDate();
     if (date != null) {
-      visitDate(date);
+      date.accept(this);
     }
 
     PlaceReference place = fact.getPlace();
     if (place != null) {
-      visitPlaceReference(place);
+      place.accept(this);
     }
   }
 
@@ -247,10 +257,11 @@ public class BasicGedcomxModelVisitor implements GedcomxModelVisitor {
   @Override
   public void visitName(Name name) {
     visitConclusion(name);
+
     List<NameForm> forms = name.getNameForms();
     if (forms != null) {
       for (NameForm form : forms) {
-        visitNameForm(form);
+        form.accept(this);
       }
     }
   }
@@ -260,7 +271,7 @@ public class BasicGedcomxModelVisitor implements GedcomxModelVisitor {
     List<NamePart> parts = form.getParts();
     if (parts != null) {
       for (NamePart part : parts) {
-        visitNamePart(part);
+        part.accept(this);
       }
     }
   }
@@ -284,5 +295,4 @@ public class BasicGedcomxModelVisitor implements GedcomxModelVisitor {
   public void visitNote(Note note) {
     //no-op.
   }
-
 }
