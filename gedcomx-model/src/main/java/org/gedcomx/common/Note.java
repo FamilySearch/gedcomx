@@ -149,7 +149,7 @@ public class Note extends HypermediaControllableData implements Attributable, Ha
   }
 
   private String getTextBrief( String text ) {
-    if (text != null && text != null) {
+    if (text != null) {
       final int substrLen = 40;
       if (text.length() > substrLen)
         return text.substring(0, substrLen) + "...";
