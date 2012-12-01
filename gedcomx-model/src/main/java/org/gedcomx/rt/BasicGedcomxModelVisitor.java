@@ -16,6 +16,7 @@
 package org.gedcomx.rt;
 
 import org.gedcomx.Gedcomx;
+import org.gedcomx.common.ExtensibleData;
 import org.gedcomx.common.Note;
 import org.gedcomx.conclusion.*;
 import org.gedcomx.contributor.Agent;
@@ -24,6 +25,7 @@ import org.gedcomx.source.SourceDescription;
 import org.gedcomx.source.SourceReference;
 
 import javax.xml.bind.annotation.XmlTransient;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -33,9 +35,13 @@ import java.util.List;
  */
 @XmlTransient
 public class BasicGedcomxModelVisitor implements GedcomxModelVisitor {
+
+  protected final LinkedList<? super ExtensibleData> contextStack = new LinkedList<ExtensibleData>();
   
   @Override
   public void visitGedcomx(Gedcomx gx) {
+    this.contextStack.push(gx);
+
     List<Person> persons = gx.getPersons();
     if (persons != null) {
       for (Person person : persons) {
@@ -98,29 +104,28 @@ public class BasicGedcomxModelVisitor implements GedcomxModelVisitor {
         }
       }
     }
+
+    this.contextStack.pop();
   }
 
   @Override
   public void visitDocument(Document document) {
+    this.contextStack.push(document);
     visitConclusion(document);
+    this.contextStack.pop();
   }
 
   @Override
   public void visitPlaceDescription(PlaceDescription place) {
+    this.contextStack.push(place);
     visitConclusion(place);
-
-    List<SourceReference> sources = place.getSources();
-    if (sources != null) {
-      for (SourceReference source : sources) {
-        source.accept(this);
-      }
-    }
+    this.contextStack.pop();
   }
 
   @Override
   public void visitEvent(Event event) {
+    this.contextStack.push(event);
     visitConclusion(event);
-
     Date date = event.getDate();
     if (date != null) {
       date.accept(this);
@@ -137,6 +142,7 @@ public class BasicGedcomxModelVisitor implements GedcomxModelVisitor {
         role.accept(this);
       }
     }
+    this.contextStack.pop();
   }
 
   @Override
@@ -151,6 +157,7 @@ public class BasicGedcomxModelVisitor implements GedcomxModelVisitor {
 
   @Override
   public void visitSourceDescription(SourceDescription sourceDescription) {
+    this.contextStack.push(sourceDescription);
     List<SourceReference> sources = sourceDescription.getSources();
     if (sources != null) {
       for (SourceReference source : sources) {
@@ -171,6 +178,7 @@ public class BasicGedcomxModelVisitor implements GedcomxModelVisitor {
         citation.accept(this);
       }
     }
+    this.contextStack.pop();
   }
 
   @Override
@@ -180,6 +188,7 @@ public class BasicGedcomxModelVisitor implements GedcomxModelVisitor {
 
   @Override
   public void visitRelationship(Relationship relationship) {
+    this.contextStack.push(relationship);
     visitConclusion(relationship);
 
     List<Fact> facts = relationship.getFacts();
@@ -188,6 +197,7 @@ public class BasicGedcomxModelVisitor implements GedcomxModelVisitor {
         fact.accept(this);
       }
     }
+    this.contextStack.pop();
   }
 
   protected void visitConclusion(Conclusion conclusion) {
@@ -208,6 +218,7 @@ public class BasicGedcomxModelVisitor implements GedcomxModelVisitor {
 
   @Override
   public void visitPerson(Person person) {
+    this.contextStack.push(person);
     visitConclusion(person);
 
     if (person.getGender() != null) {
@@ -227,12 +238,13 @@ public class BasicGedcomxModelVisitor implements GedcomxModelVisitor {
         fact.accept(this);
       }
     }
+    this.contextStack.pop();
   }
 
   @Override
   public void visitFact(Fact fact) {
+    this.contextStack.push(fact);
     visitConclusion(fact);
-
     Date date = fact.getDate();
     if (date != null) {
       date.accept(this);
@@ -242,6 +254,7 @@ public class BasicGedcomxModelVisitor implements GedcomxModelVisitor {
     if (place != null) {
       place.accept(this);
     }
+    this.contextStack.pop();
   }
 
   @Override
@@ -256,6 +269,7 @@ public class BasicGedcomxModelVisitor implements GedcomxModelVisitor {
 
   @Override
   public void visitName(Name name) {
+    this.contextStack.push(name);
     visitConclusion(name);
 
     List<NameForm> forms = name.getNameForms();
@@ -264,16 +278,19 @@ public class BasicGedcomxModelVisitor implements GedcomxModelVisitor {
         form.accept(this);
       }
     }
+    this.contextStack.pop();
   }
 
   @Override
   public void visitNameForm(NameForm form) {
+    this.contextStack.push(form);
     List<NamePart> parts = form.getParts();
     if (parts != null) {
       for (NamePart part : parts) {
         part.accept(this);
       }
     }
+    this.contextStack.pop();
   }
 
   @Override
@@ -283,7 +300,9 @@ public class BasicGedcomxModelVisitor implements GedcomxModelVisitor {
 
   @Override
   public void visitGender(Gender gender) {
+    this.contextStack.push(gender);
     visitConclusion(gender);
+    this.contextStack.pop();
   }
 
   @Override
@@ -294,5 +313,9 @@ public class BasicGedcomxModelVisitor implements GedcomxModelVisitor {
   @Override
   public void visitNote(Note note) {
     //no-op.
+  }
+
+  public LinkedList<? super ExtensibleData> getContextStack() {
+    return contextStack;
   }
 }
