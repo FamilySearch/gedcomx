@@ -16,7 +16,6 @@
 package org.gedcomx.rt;
 
 import org.gedcomx.Gedcomx;
-import org.gedcomx.common.ExtensibleData;
 import org.gedcomx.common.Note;
 import org.gedcomx.conclusion.*;
 import org.gedcomx.contributor.Agent;
@@ -36,7 +35,7 @@ import java.util.List;
 @XmlTransient
 public class BasicGedcomxModelVisitor implements GedcomxModelVisitor {
 
-  protected final LinkedList<? super ExtensibleData> contextStack = new LinkedList<ExtensibleData>();
+  protected final LinkedList<Object> contextStack = new LinkedList<Object>();
   
   @Override
   public void visitGedcomx(Gedcomx gx) {
@@ -315,7 +314,7 @@ public class BasicGedcomxModelVisitor implements GedcomxModelVisitor {
     //no-op.
   }
 
-  public LinkedList<? super ExtensibleData> getContextStack() {
+  public LinkedList<Object> getContextStack() {
     return contextStack;
   }
 }
