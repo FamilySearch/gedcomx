@@ -12,6 +12,8 @@ import java.util.List;
 import static org.gedcomx.rt.SerializationUtil.processThroughJson;
 import static org.gedcomx.rt.SerializationUtil.processThroughXml;
 import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertNotNull;
+import static org.testng.AssertJUnit.assertNull;
 import static org.testng.AssertJUnit.assertTrue;
 
 
@@ -63,6 +65,62 @@ public class PersonTest {
     assertEquals("8", person.getDisplayExtension().getLifespan());
     assertEquals("9", person.getDisplayExtension().getName());
 
+  }
+
+  public void testPersonPersistentIdHelpers() throws Exception {
+    Person person = create();
+    assertPersonEquals(person);
+    assertEquals(2, person.getIdentifiers().size());
+    assertEquals("pal", person.getPersistentId().toURI().toString());
+
+    person.setPersistentId(URI.create("urn:pal"));
+    assertEquals("urn:pal", person.getPersistentId().toURI().toString());
+
+    person.getIdentifiers().clear();
+    assertNull(person.getPersistentId());
+
+    person.setIdentifiers(null);
+    assertNull(person.getPersistentId());
+
+    person.setPersistentId(URI.create("urn:pal"));
+    assertEquals("urn:pal", person.getPersistentId().toURI().toString());
+  }
+
+  public void testPersonGetFirstNameOfType() throws Exception {
+    Person person = create();
+    assertPersonEquals(person);
+    assertEquals("type=FormalName,nameForms[0]=primary form,pref=true", person.getFirstNameOfType(NameType.FormalName).toString());
+    assertNull(person.getFirstNameOfType(NameType.BirthName));
+    person.setNames(null);
+    assertNull(person.getFirstNameOfType(NameType.FormalName));
+  }
+
+  public void testFactHelpers() throws Exception {
+    Fact fact = new Fact();
+
+    Person person = create();
+    assertPersonEquals(person);
+    person.addFact(fact);
+    assertEquals(3, person.getFacts().size());
+    assertEquals(1, person.getFacts(FactType.Adoption).size());
+    assertEquals("type=Adoption,value=null,date=Date{original='original date', formal=normalized date},place=PlaceReference{original='original place', descriptionRef='urn:place'}", person.getFacts(FactType.Adoption).get(0).toString());
+    assertEquals("type=Adoption,value=null,date=Date{original='original date', formal=normalized date},place=PlaceReference{original='original place', descriptionRef='urn:place'}", person.getFirstFactOfType(FactType.Adoption).toString());
+    assertEquals(1, person.getFacts(FactType.Occupation).size());
+    assertEquals("type=Occupation,value=fact-value,date=Date{original='original date', formal=formal},place=PlaceReference{original='original place', descriptionRef='urn:place'}", person.getFacts(FactType.Occupation).get(0).toString());
+    assertEquals("type=Occupation,value=fact-value,date=Date{original='original date', formal=formal},place=PlaceReference{original='original place', descriptionRef='urn:place'}", person.getFirstFactOfType(FactType.Occupation).toString());
+
+    person.getFacts().clear();
+    assertNotNull(person.getFacts());
+    assertEquals(0, person.getFacts(FactType.Adoption).size());
+    assertEquals(0, person.getFacts(null).size());
+    assertNull(person.getFirstFactOfType(FactType.Adoption));
+    person.setFacts(null);
+    assertNull(person.getFacts());
+    assertEquals(0, person.getFacts(FactType.Adoption).size());
+    assertNull(person.getFirstFactOfType(FactType.Adoption));
+
+    person.addFact(null);
+    assertNull(person.getFacts());
   }
 
   static Person create() {
