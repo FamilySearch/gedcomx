@@ -22,6 +22,8 @@ public class LinkTest {
     assertLink(link);
     assertEquals("rel", link.getRel());
     assertEquals("rel", link.getJsonKey());
+    assertEquals("<urn:link>; rel=\"rel\"; template=\"template\"; type=\"application/xml\"; accept=\"text/plain\"; allow=\"GET\"; hreflang=\"en\"; title=\"title\"", link.getHttpHeaderValue());
+    assertEquals("<urn:link>; rel=\"rel\"; template=\"template\"; type=\"application/xml\"; accept=\"text/plain\"; allow=\"GET\"; hreflang=\"en\"; title=\"title\"", link.toString());
   }
 
   /**
@@ -31,6 +33,16 @@ public class LinkTest {
     Link link = createLink();
     link = processThroughJson(link);
     assertLink(link);
+    assertEquals("<urn:link>; template=\"template\"; type=\"application/xml\"; accept=\"text/plain\"; allow=\"GET\"; hreflang=\"en\"; title=\"title\"", link.getHttpHeaderValue());
+    assertEquals("<urn:link>; template=\"template\"; type=\"application/xml\"; accept=\"text/plain\"; allow=\"GET\"; hreflang=\"en\"; title=\"title\"", link.toString());
+  }
+
+  /**
+   * tests link json
+   */
+  public void testHeaderValueForUninitializedLink() throws Exception {
+    Link link = new Link();
+    assertEquals("<>", link.getHttpHeaderValue());
   }
 
   private void assertLink(Link link) {
