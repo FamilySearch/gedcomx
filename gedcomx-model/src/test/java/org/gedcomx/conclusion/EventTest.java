@@ -13,12 +13,81 @@ import java.util.ArrayList;
 import static org.gedcomx.rt.SerializationUtil.processThroughJson;
 import static org.gedcomx.rt.SerializationUtil.processThroughXml;
 import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertNull;
 
 /**
  * @author Ryan Heaton
  */
 @Test
 public class EventTest {
+
+  public void testCtors() throws Exception {
+    Event event;
+
+    event = new Event();
+    assertNull(event.getAttribution());
+    assertNull(event.getConfidence());
+    assertNull(event.getDate());
+    assertNull(event.getExtensionElements());
+    assertNull(event.getId());
+    assertNull(event.getKnownType());
+    assertNull(event.getLang());
+    assertNull(event.getLinkExtension("junkRel"));
+    assertNull(event.getLinkExtensions());
+    assertEquals(0, event.getLinkExtensions("junkRel").size());
+    assertNull(event.getNotes());
+    assertNull(event.getPlace());
+    assertNull(event.getRoles());
+    assertNull(event.getSources());
+    assertNull(event.getType());
+    assertNull(event.getTransientProperty("junkProp"));
+
+    event = new Event(EventType.Birth);
+    assertEquals(EventType.Birth, event.getKnownType());
+    assertEquals("http://gedcomx.org/Birth", event.getType().toURI().toString());
+    assertNull(event.getAttribution());
+    assertNull(event.getConfidence());
+    assertNull(event.getDate());
+    assertNull(event.getExtensionElements());
+    assertNull(event.getId());
+    assertNull(event.getLang());
+    assertNull(event.getLinkExtension("junkRel"));
+    assertNull(event.getLinkExtensions());
+    assertEquals(0, event.getLinkExtensions("junkRel").size());
+    assertNull(event.getNotes());
+    assertNull(event.getPlace());
+    assertNull(event.getRoles());
+    assertNull(event.getSources());
+    assertNull(event.getTransientProperty("junkProp"));
+
+    Date date = new Date();
+    date.setOriginal("junkDate");
+    PlaceReference place = new PlaceReference();
+    place.setOriginal("junkPlace");
+    event = new Event(EventType.Birth, date, place);
+    assertEquals(EventType.Birth, event.getKnownType());
+    assertEquals("http://gedcomx.org/Birth", event.getType().toURI().toString());
+    assertEquals("junkDate", event.getDate().getOriginal());
+    assertEquals("junkPlace", event.getPlace().getOriginal());
+    assertNull(event.getAttribution());
+    assertNull(event.getConfidence());
+    assertNull(event.getExtensionElements());
+    assertNull(event.getId());
+    assertNull(event.getLang());
+    assertNull(event.getLinkExtension("junkRel"));
+    assertNull(event.getLinkExtensions());
+    assertEquals(0, event.getLinkExtensions("junkRel").size());
+    assertNull(event.getNotes());
+    assertNull(event.getRoles());
+    assertNull(event.getSources());
+    assertNull(event.getTransientProperty("junkProp"));
+  }
+
+  public void testSetKnownTypeWithNull() throws Exception {
+    Event event = new Event();
+    event.setKnownType(null);
+    assertNull(event.getKnownType());
+  }
 
   /**
    * tests processing a event through xml...
