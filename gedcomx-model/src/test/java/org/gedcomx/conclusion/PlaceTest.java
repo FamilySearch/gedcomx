@@ -22,8 +22,8 @@ public class PlaceTest {
     assertNull(tikhvinDesc.getNames());
     assertNull(tikhvinDesc.getType());
     assertNull(tikhvinDesc.getTemporalDescription());
-    assertEquals(tikhvinDesc.getLatitude(), 0d);
-    assertEquals(tikhvinDesc.getLongitude(), 0d);
+    assertNull(tikhvinDesc.getLatitude());
+    assertNull(tikhvinDesc.getLongitude());
     assertNull(tikhvinDesc.getSpatialDescription());
     assertNull(tikhvinDesc.getAttribution());
     assertNull(tikhvinDesc.getExtensionElements());
@@ -121,8 +121,8 @@ public class PlaceTest {
     assertNull(lugaDesc.getNames());
     assertNull(lugaDesc.getType());
     assertNull(lugaDesc.getTemporalDescription());
-    assertEquals(lugaDesc.getLatitude(), 0d);
-    assertEquals(lugaDesc.getLongitude(), 0d);
+    assertNull(lugaDesc.getLatitude());
+    assertNull(lugaDesc.getLongitude());
     assertNull(lugaDesc.getSpatialDescription());
     assertNull(lugaDesc.getAttribution());
     assertNull(lugaDesc.getExtensionElements());

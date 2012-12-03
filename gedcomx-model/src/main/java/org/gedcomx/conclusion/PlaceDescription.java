@@ -42,8 +42,8 @@ public class PlaceDescription extends Conclusion {
   private List<TextValue> names;
   private URI type;
   private Date temporalDescription;
-  private double latitude;
-  private double longitude;
+  private Double latitude;
+  private Double longitude;
   private ResourceReference spatialDescription;
   private List<Identifier> identifiers;
 
@@ -139,7 +139,7 @@ public class PlaceDescription extends Conclusion {
    *
    * @return Degrees north or south of the Equator.
    */
-  public double getLatitude() {
+  public Double getLatitude() {
     return latitude;
   }
 
@@ -148,7 +148,7 @@ public class PlaceDescription extends Conclusion {
    *
    * @param latitude Degrees north or south of the Equator.
    */
-  public void setLatitude(double latitude) {
+  public void setLatitude(Double latitude) {
     this.latitude = latitude;
   }
 
@@ -157,7 +157,7 @@ public class PlaceDescription extends Conclusion {
    *
    * @return Angular distance in degrees, relative to the Prime Meridian.
    */
-  public double getLongitude() {
+  public Double getLongitude() {
     return longitude;
   }
 
@@ -166,7 +166,7 @@ public class PlaceDescription extends Conclusion {
    *
    * @param longitude Angular distance in degrees, relative to the Prime Meridian.
    */
-  public void setLongitude(double longitude) {
+  public void setLongitude(Double longitude) {
     this.longitude = longitude;
   }
 
