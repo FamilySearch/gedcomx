@@ -24,6 +24,9 @@ import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
+
 
 public class BasicGedcomxModelVisitorTest {
   @Test (expectedExceptions = NullPointerException.class)
@@ -34,7 +37,10 @@ public class BasicGedcomxModelVisitorTest {
 
   @Test
   public void testVisitGedcomx() throws Exception {
-    GedcomxModelVisitor visitor = new BasicGedcomxModelVisitor();
+    BasicGedcomxModelVisitor visitor = new BasicGedcomxModelVisitor();
+    assertNotNull(visitor.getContextStack());
+    assertEquals(visitor.getContextStack().size(), 0);
+
     Gedcomx gedcomxDocument = new Gedcomx();
 
     // visit empty document
@@ -158,5 +164,8 @@ public class BasicGedcomxModelVisitorTest {
     // re-visit document, now name form element has single-element name part list
     names.get(0).getNameForms().get(0).getParts().add(new NamePart());
     gedcomxDocument.accept(visitor);
+
+    assertNotNull(visitor.getContextStack());
+    assertEquals(visitor.getContextStack().size(), 0);
   }
 }

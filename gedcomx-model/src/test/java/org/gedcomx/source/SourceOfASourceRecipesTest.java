@@ -125,6 +125,7 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
     SourceDescription srcDesc1 = new SourceDescription();
     srcDesc1.setId(SRC_OF_SRC_ID);
     srcDesc1.setCitations(Arrays.asList(new SourceCitation()));
+    srcDesc1.getCitation().setLang(LANG_EN_US);
     srcDesc1.getCitation().setValue(DEATH_CERT_FULL_CITATION);
     srcDesc1.getCitation().setCitationTemplate(new ResourceReference(new URI(FHL_FILM_COLLECTION_CITATION_TEMPLATE)));
     srcDesc1.getCitation().setFields(new ArrayList<CitationField>());
@@ -185,10 +186,23 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
     assertNull(srcDesc1.getCitation().getFields().get(5).getName()); // for branch coverage on setName
 
     // the following adds code coverage for SourceDescription
-    srcDesc1.setMediatorURI((URI)null);
+    srcDesc1.setCitations(new ArrayList<SourceCitation>());
+    srcDesc1.setExtractedConclusions(new ArrayList<ResourceReference>());
+    srcDesc1.setMediatorURI((URI) null);
     srcDesc1.setTitles(new ArrayList<TextValue>());
+    assertNotNull(srcDesc1.getExtractedConclusions());
+    assertEquals(srcDesc1.getExtractedConclusions().size(), 0);
+    assertNull(srcDesc1.getCitation());
     assertNull(srcDesc1.getMediator());
     assertEquals(srcDesc1.getTitles().size(), 0);
+    assertNull(srcDesc1.getTitle());
+    srcDesc1.setExtractedConclusions(null);
+    srcDesc1.setCitations(null);
+    srcDesc1.setTitles(null);
+    assertNull(srcDesc1.getExtractedConclusions());
+    assertNull(srcDesc1.getCitation());
+    assertNull(srcDesc1.getTitles());
+    assertNull(srcDesc1.getTitle());
   }
 
   private void verifyDeathCertExample(Gedcomx gedcomx) {
@@ -216,7 +230,10 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
 
     assertNotNull(srcDesc1);
     assertEquals(srcDesc1.getId(), SRC_OF_SRC_ID);
+    assertNull(srcDesc1.getSources());
+    assertNull(srcDesc1.getExtractedConclusions());
     assertNotNull(srcDesc1.getCitation());
+    assertEquals(srcDesc1.getCitation().getLang(), LANG_EN_US);
     assertEquals(srcDesc1.getCitation().getValue(), DEATH_CERT_FULL_CITATION);
     assertEquals(srcDesc1.getCitation().getCitationTemplate().getResource().toURI().toString(), FHL_FILM_COLLECTION_CITATION_TEMPLATE);
     assertNotNull(srcDesc1.getCitation().getFields());
@@ -239,6 +256,7 @@ public class SourceOfASourceRecipesTest extends RecipeTest {
     assertNotNull(srcDesc2.getSources());
     assertEquals(srcDesc2.getSources().size(), 1);
     assertEquals(srcDesc2.getSources().get(0).getDescriptionRef().toURI().toString(), SRCDESC_URI_PREFIX + SRC_OF_SRC_ID);
+    assertNull(srcDesc2.getExtractedConclusions());
     assertNotNull(srcDesc2.getCitation());
     assertEquals(srcDesc2.getCitation().getValue(), DEATH_IDX_FULL_CITATION);
     assertEquals(srcDesc2.getCitation().getCitationTemplate().getResource().toURI().toString(), FS_INDEX_DEATHRECORD_CITATION_TEMPLATE);
