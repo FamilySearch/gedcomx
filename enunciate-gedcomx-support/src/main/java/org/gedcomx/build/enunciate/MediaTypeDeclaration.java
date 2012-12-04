@@ -19,6 +19,8 @@ import org.codehaus.enunciate.config.SchemaInfo;
 import org.codehaus.enunciate.contract.jaxb.ElementDeclaration;
 import org.codehaus.enunciate.contract.jaxb.RootElementDeclaration;
 import org.codehaus.enunciate.contract.jaxb.TypeDefinition;
+import org.codehaus.enunciate.contract.jaxb.types.XmlClassType;
+import org.codehaus.enunciate.contract.jaxb.types.XmlType;
 
 import java.util.*;
 
@@ -89,9 +91,13 @@ public class MediaTypeDeclaration {
   }
 
   public MediaTypeDeclaration getExtension() {
-    for (MediaTypeDeclaration other : others) {
-      if (getRootElement().getTypeDefinition().getQualifiedName().equals(other.getRootElement().getQualifiedName())) {
-        return other;
+    XmlType baseType = getRootElement().getTypeDefinition().getBaseType();
+    if (baseType instanceof XmlClassType) {
+      String extfqn = ((XmlClassType) baseType).getTypeDefinition().getQualifiedName();
+      for (MediaTypeDeclaration other : others) {
+        if (extfqn.equals(other.getRootElement().getQualifiedName())) {
+          return other;
+        }
       }
     }
 
