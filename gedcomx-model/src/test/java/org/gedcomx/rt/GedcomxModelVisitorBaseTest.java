@@ -28,7 +28,7 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
 
-public class BasicGedcomxModelVisitorTest {
+public class GedcomxModelVisitorBaseTest {
   @Test (expectedExceptions = NullPointerException.class)
   public void testNullVisitor() throws Exception {
     Gedcomx gedcomxDocument = new Gedcomx();
@@ -37,7 +37,7 @@ public class BasicGedcomxModelVisitorTest {
 
   @Test
   public void testVisitGedcomx() throws Exception {
-    BasicGedcomxModelVisitor visitor = new BasicGedcomxModelVisitor();
+    GedcomxModelVisitorBase visitor = new GedcomxModelVisitorBase();
     assertNotNull(visitor.getContextStack());
     assertEquals(visitor.getContextStack().size(), 0);
 

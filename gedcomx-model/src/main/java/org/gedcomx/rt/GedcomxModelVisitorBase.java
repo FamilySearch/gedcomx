@@ -33,7 +33,7 @@ import java.util.List;
  * @author Ryan Heaton
  */
 @XmlTransient
-public class BasicGedcomxModelVisitor implements GedcomxModelVisitor {
+public class GedcomxModelVisitorBase implements GedcomxModelVisitor {
 
   protected final LinkedList<Object> contextStack = new LinkedList<Object>();
   
