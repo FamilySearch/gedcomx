@@ -10,7 +10,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <enunciate.version>1.25</enunciate.version>
+    <enunciate.version>1.26.2</enunciate.version>
     <root.basedir>${project.basedir}</root.basedir>
     <year>${inceptionYear}</year>
   </properties>
