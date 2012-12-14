@@ -444,7 +444,7 @@ example type | description | applicable URI
 -------------|-------------|----
 simple date | Sept 14, 1863 | `gedcomx-date:+1863-09-14`
 approx. date | about 1742 | `gedcomx-date:A+1742`
-date range | between October 1834 and May 1835 | `gedcomx-date:R+1834-10/+1835-05`
+date range | between October 1834 and May 1835 | `gedcomx-date:+1834-10/+1835-05`
 
 # 8. Outstanding Concerns and Questions
 
