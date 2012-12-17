@@ -48,9 +48,9 @@ public class PlaceDescription extends Conclusion {
   private List<Identifier> identifiers;
 
   /**
-   * The identifier of the place that this description is about.
+   * A uniform resource identifier (URI) for the place being described. This can be used for associating descriptions of the same place.  OPTIONAL.
    *
-   * @return The identifier of the place that this description is about.
+   * @return A uniform resource identifier (URI) for the place being described.
    */
   @XmlAttribute
   @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
@@ -59,9 +59,9 @@ public class PlaceDescription extends Conclusion {
   }
 
   /**
-   * The identifier of the place that this description is about.
+   * A uniform resource identifier (URI) for the place being described. This can be used for associating descriptions of the same place.  OPTIONAL.
    *
-   * @param about The identifier of the place that this description is about.
+   * @param about A uniform resource identifier (URI) for the place being described.
    */
   public void setAbout(URI about) {
     this.about = about;
@@ -98,9 +98,9 @@ public class PlaceDescription extends Conclusion {
   }
 
   /**
-   * An implementation-specify type identifier (e.g., address, city, county, province, state, country, etc.).
+   * An implementation-specific uniform resource identifier (URI) used to identify the type of a place (e.g., address, city, county, province, state, country, etc.).
    *
-   * @return An implementation-specify type identifier (e.g., address, city, county, province, state, country, etc.).
+   * @return An implementation-specific uniform resource identifier (URI) used to identify the type of a place (e.g., address, city, county, province, state, country, etc.).
    */
   @XmlAttribute
   public URI getType() {
@@ -108,9 +108,9 @@ public class PlaceDescription extends Conclusion {
   }
 
   /**
-   * An implementation-specify type identifier (e.g., address, city, county, province, state, country, etc.).
+   * An implementation-specific uniform resource identifier (URI) used to identify the type of a place (e.g., address, city, county, province, state, country, etc.).
    *
-   * @param type An implementation-specify type identifier (e.g., address, city, county, province, state, country, etc.).
+   * @param type An implementation-specific uniform resource identifier (URI) used to identify the type of a place (e.g., address, city, county, province, state, country, etc.).
    */
   public void setType(URI type) {
     this.type = type;
