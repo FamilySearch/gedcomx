@@ -301,7 +301,7 @@ name  | description | data type | constraints
 ------|-------------|-----------|------------
 type | URI identifying the type of the event. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to an event type, and use of a [known event type](#known-event-types) is RECOMMENDED.
 date | The date of the event. | [`http://gedcomx.org/v1/Date`](#conclusion-date) | OPTIONAL.
-place | The place of the event. | [`http://gedcomx.org/v1/Place`](#conclusion-place) | OPTIONAL.
+place | A reference to the place applicable to this event. | [`http://gedcomx.org/v1/PlaceReference`](#conclusion-place-reference) | OPTIONAL.
 roles | The roles of the persons in the event. | List of [`http://gedcomx.org/v1/EventRole`](#conclusion-event-role). Order is preserved. | OPTIONAL.
 attribution | The attribution of the event. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing data set (e.g. file) of the event is assumed.
 
