@@ -54,7 +54,7 @@ public class GedcomxModelVisitorBaseTest {
     gedcomxDocument.setPlaces(new ArrayList<PlaceDescription>());
     gedcomxDocument.setRelationships(new ArrayList<Relationship>());
     gedcomxDocument.setSourceDescriptions(new ArrayList<SourceDescription>());
-    gedcomxDocument.addLinkExtension("junkRel", URI.create("urn:junkUri"));
+    gedcomxDocument.addLink("junkRel", URI.create("urn:junkUri"));
     gedcomxDocument.addExtensionElement("junkExtensionElement");
     gedcomxDocument.accept(visitor);
 

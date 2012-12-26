@@ -18,11 +18,10 @@ package org.gedcomx.contributor;
 import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
-import org.gedcomx.common.ExtensibleData;
 import org.gedcomx.common.ResourceReference;
 import org.gedcomx.common.TextValue;
 import org.gedcomx.conclusion.Identifier;
-import org.gedcomx.links.HypermediaControllableData;
+import org.gedcomx.links.HypermediaEnabledData;
 import org.gedcomx.rt.GedcomxModelVisitor;
 import org.gedcomx.rt.json.JsonElementWrapper;
 
@@ -40,7 +39,7 @@ import java.util.List;
 @XmlRootElement
 @XmlType ( name = "Agent" )
 @JsonElementWrapper ( name = "agents" )
-public class Agent extends HypermediaControllableData {
+public class Agent extends HypermediaEnabledData {
 
   private String id;
   private List<TextValue> names;

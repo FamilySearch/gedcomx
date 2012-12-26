@@ -26,12 +26,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * An object that is potentially hypermedia-controlled.
+ * An data type that supports hypermedia controls (i.e. links).
  *
  * @author Ryan Heaton
  */
-@XmlType ( name = "HypermediaControllableData" )
-public abstract class HypermediaControllableData extends ExtensibleData {
+@XmlType ( name = "HypermediaEnabledData" )
+public abstract class HypermediaEnabledData extends ExtensibleData implements SupportsLinks {
 
   private List<Link> links;
 
@@ -40,10 +40,11 @@ public abstract class HypermediaControllableData extends ExtensibleData {
    *
    * @return The list of hypermedia links. Links are not specified by GEDCOM X core, but as extension elements by GEDCOM X RS.
    */
+  @Override
   @XmlElement (name = "link")
   @JsonName ("links")
   @JsonProperty ("links")
-  public List<Link> getLinkExtensions() {
+  public List<Link> getLinks() {
     return links;
   }
 
@@ -52,8 +53,9 @@ public abstract class HypermediaControllableData extends ExtensibleData {
    *
    * @param links The list of hypermedia links. Links are not specified by GEDCOM X core, but as extension elements by GEDCOM X RS.
    */
+  @Override
   @JsonProperty ("links")
-  public void setLinkExtensions(List<Link> links) {
+  public void setLinks(List<Link> links) {
     this.links = links;
   }
 
@@ -62,9 +64,10 @@ public abstract class HypermediaControllableData extends ExtensibleData {
    *
    * @param link The hypermedia link. Links are not specified by GEDCOM X core, but as extension elements by GEDCOM X RS.
    */
-  public void addLinkExtension(Link link) {
+  @Override
+  public void addLink(Link link) {
     if (this.links == null) {
-      setLinkExtensions(new ArrayList<Link>());
+      setLinks(new ArrayList<Link>());
     }
 
     this.links.add(link);
@@ -76,8 +79,9 @@ public abstract class HypermediaControllableData extends ExtensibleData {
    * @param rel The link rel.
    * @param href The target URI.
    */
-  public void addLinkExtension(String rel, URI href) {
-    addLinkExtension(new Link(rel, href));
+  @Override
+  public void addLink(String rel, URI href) {
+    addLink(new Link(rel, href));
   }
 
   /**
@@ -86,11 +90,12 @@ public abstract class HypermediaControllableData extends ExtensibleData {
    * @param rel The link rel.
    * @param template The link template.
    */
-  public void addTemplatedLinkExtension(String rel, String template) {
+  @Override
+  public void addTemplatedLink(String rel, String template) {
     Link link = new Link();
     link.setRel(rel);
     link.setTemplate(template);
-    addLinkExtension(link);
+    addLink(link);
   }
 
   /**
@@ -99,8 +104,9 @@ public abstract class HypermediaControllableData extends ExtensibleData {
    * @param rel The link rel.
    * @return The link by rel.
    */
-  public Link getLinkExtension(String rel) {
-    List<Link> links = getLinkExtensions(rel);
+  @Override
+  public Link getLink(String rel) {
+    List<Link> links = getLinks(rel);
     Link link = null;
     if (!links.isEmpty()) {
       link = links.get(0);
@@ -114,10 +120,11 @@ public abstract class HypermediaControllableData extends ExtensibleData {
    * @param rel The rel of the links.
    * @return The link.
    */
-  public List<Link> getLinkExtensions(String rel) {
+  @Override
+  public List<Link> getLinks(String rel) {
     ArrayList<Link> links = new ArrayList<Link>();
     if (this.links != null) {
-      for (Link link : getLinkExtensions()) {
+      for (Link link : getLinks()) {
         if (rel.equals(link.getRel())) {
           links.add(link);
         }

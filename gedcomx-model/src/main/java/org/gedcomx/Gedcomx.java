@@ -20,7 +20,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
 import org.gedcomx.common.Attribution;
 import org.gedcomx.conclusion.*;
 import org.gedcomx.contributor.Agent;
-import org.gedcomx.links.HypermediaControllableData;
+import org.gedcomx.links.HypermediaEnabledData;
 import org.gedcomx.rt.GedcomxConstants;
 import org.gedcomx.rt.GedcomxModelVisitor;
 import org.gedcomx.rt.MediaTypeDefinition;
@@ -72,7 +72,7 @@ import java.util.List;
 @XmlRootElement
 @JsonElementWrapper (name = "gedcomx")
 @XmlType ( name = "Gedcomx" , propOrder = { "attribution", "persons", "relationships", "sourceDescriptions", "agents", "events", "places", "documents" })
-public class Gedcomx extends HypermediaControllableData {
+public class Gedcomx extends HypermediaEnabledData {
 
   private String id;
   private String lang;

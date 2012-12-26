@@ -19,9 +19,9 @@ public class FactTest {
     assertNull(fact.getId());
     assertNull(fact.getKnownType());
     assertNull(fact.getLang());
-    assertNull(fact.getLinkExtension("junkRel"));
-    assertNull(fact.getLinkExtensions());
-    assertEquals(0, fact.getLinkExtensions("junkRel").size());
+    assertNull(fact.getLink("junkRel"));
+    assertNull(fact.getLinks());
+    assertEquals(0, fact.getLinks("junkRel").size());
     assertNull(fact.getNotes());
     assertNull(fact.getPlace());
     assertNull(fact.getSources());
@@ -39,9 +39,9 @@ public class FactTest {
     assertNull(fact.getExtensionElements());
     assertNull(fact.getId());
     assertNull(fact.getLang());
-    assertNull(fact.getLinkExtension("junkRel"));
-    assertNull(fact.getLinkExtensions());
-    assertEquals(0, fact.getLinkExtensions("junkRel").size());
+    assertNull(fact.getLink("junkRel"));
+    assertNull(fact.getLinks());
+    assertEquals(0, fact.getLinks("junkRel").size());
     assertNull(fact.getNotes());
     assertNull(fact.getPlace());
     assertNull(fact.getSources());
@@ -62,9 +62,9 @@ public class FactTest {
     assertNull(fact.getExtensionElements());
     assertNull(fact.getId());
     assertNull(fact.getLang());
-    assertNull(fact.getLinkExtension("junkRel"));
-    assertNull(fact.getLinkExtensions());
-    assertEquals(0, fact.getLinkExtensions("junkRel").size());
+    assertNull(fact.getLink("junkRel"));
+    assertNull(fact.getLinks());
+    assertEquals(0, fact.getLinks("junkRel").size());
     assertNull(fact.getNotes());
     assertNull(fact.getSources());
     assertNull(fact.getTransientProperty("junkProp"));

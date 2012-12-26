@@ -32,9 +32,9 @@ public class EventTest {
     assertNull(event.getId());
     assertNull(event.getKnownType());
     assertNull(event.getLang());
-    assertNull(event.getLinkExtension("junkRel"));
-    assertNull(event.getLinkExtensions());
-    assertEquals(0, event.getLinkExtensions("junkRel").size());
+    assertNull(event.getLink("junkRel"));
+    assertNull(event.getLinks());
+    assertEquals(0, event.getLinks("junkRel").size());
     assertNull(event.getNotes());
     assertNull(event.getPlace());
     assertNull(event.getRoles());
@@ -51,9 +51,9 @@ public class EventTest {
     assertNull(event.getExtensionElements());
     assertNull(event.getId());
     assertNull(event.getLang());
-    assertNull(event.getLinkExtension("junkRel"));
-    assertNull(event.getLinkExtensions());
-    assertEquals(0, event.getLinkExtensions("junkRel").size());
+    assertNull(event.getLink("junkRel"));
+    assertNull(event.getLinks());
+    assertEquals(0, event.getLinks("junkRel").size());
     assertNull(event.getNotes());
     assertNull(event.getPlace());
     assertNull(event.getRoles());
@@ -74,9 +74,9 @@ public class EventTest {
     assertNull(event.getExtensionElements());
     assertNull(event.getId());
     assertNull(event.getLang());
-    assertNull(event.getLinkExtension("junkRel"));
-    assertNull(event.getLinkExtensions());
-    assertEquals(0, event.getLinkExtensions("junkRel").size());
+    assertNull(event.getLink("junkRel"));
+    assertNull(event.getLinks());
+    assertEquals(0, event.getLinks("junkRel").size());
     assertNull(event.getNotes());
     assertNull(event.getRoles());
     assertNull(event.getSources());
