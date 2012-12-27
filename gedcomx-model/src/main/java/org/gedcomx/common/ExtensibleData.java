@@ -32,7 +32,7 @@ import java.util.TreeMap;
  * @author Ryan Heaton
  */
 @XmlType( name = "ExtensibleData" )
-public abstract class ExtensibleData implements SupportsExtensionElements {
+public abstract class ExtensibleData implements SupportsExtensionElements, HasTransientProperties {
 
   protected List<Object> extensionElements;
   protected Map<String, Object> transientProperties;
@@ -158,6 +158,7 @@ public abstract class ExtensibleData implements SupportsExtensionElements {
    * @param name The name of the property.
    * @return The property.
    */
+  @Override
   public Object getTransientProperty(String name) {
     return this.transientProperties == null ? null : this.transientProperties.get(name);
   }
@@ -168,6 +169,7 @@ public abstract class ExtensibleData implements SupportsExtensionElements {
    * @param name the name of the property.
    * @param value the property value.
    */
+  @Override
   public void setTransientProperty(String name, Object value) {
     if (this.transientProperties == null) {
       this.transientProperties = new TreeMap<String, Object>();
