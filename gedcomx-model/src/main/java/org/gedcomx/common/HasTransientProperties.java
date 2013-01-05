@@ -15,10 +15,19 @@
  */
 package org.gedcomx.common;
 
+import java.util.Map;
+
 /**
  * @author Ryan Heaton
  */
 public interface HasTransientProperties {
+
+  /**
+   * Get the transient properties.
+   *
+   * @return the transient properties.
+   */
+  Map<String, Object> getTransientProperties();
 
   /**
    * Get a transient (non-serialized) property.

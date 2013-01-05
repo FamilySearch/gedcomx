@@ -20,11 +20,9 @@ import org.gedcomx.rt.SupportsExtensionElements;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlAnyElement;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 /**
  * A set of data that supports extension elements.
@@ -150,6 +148,18 @@ public abstract class ExtensibleData implements SupportsExtensionElements, HasTr
     }
 
     return ext;
+  }
+
+  /**
+   * Get the transient properties.
+   *
+   * @return the transient properties.
+   */
+  @JsonIgnore
+  @XmlTransient
+  @Override
+  public Map<String, Object> getTransientProperties() {
+    return Collections.unmodifiableMap(transientProperties);
   }
 
   /**
