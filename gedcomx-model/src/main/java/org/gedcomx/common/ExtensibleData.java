@@ -33,7 +33,7 @@ import java.util.*;
 public abstract class ExtensibleData implements SupportsExtensionElements, HasTransientProperties {
 
   protected List<Object> extensionElements;
-  protected Map<String, Object> transientProperties;
+  protected final Map<String, Object> transientProperties = new TreeMap<String, Object>();
 
   /**
    * Custom extension elements for a conclusion.
@@ -170,7 +170,7 @@ public abstract class ExtensibleData implements SupportsExtensionElements, HasTr
    */
   @Override
   public Object getTransientProperty(String name) {
-    return this.transientProperties == null ? null : this.transientProperties.get(name);
+    return this.transientProperties.get(name);
   }
 
   /**
@@ -181,10 +181,6 @@ public abstract class ExtensibleData implements SupportsExtensionElements, HasTr
    */
   @Override
   public void setTransientProperty(String name, Object value) {
-    if (this.transientProperties == null) {
-      this.transientProperties = new TreeMap<String, Object>();
-    }
-
     this.transientProperties.put(name, value);
   }
 }
