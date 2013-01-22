@@ -223,9 +223,38 @@ URI | description
 `http://gedcomx.org/ParentChild`| A relationship from a parent to a child.
 
 
+<a id="couple-child-relationship"/>
+
+## 2.3 The "CoupleChildRelationship" Data Type
+
+The `CoupleChildRelationship` data type describes the relationship between two parents and a child.
+
+### identifier
+
+The identifier for the `CoupleChildRelationship` data type is:
+
+`http://gedcomx.org/v1/CoupleChildRelationship`
+
+### extension
+
+This data type extends the following data type:
+
+`http://gedcomx.org/v1/Conclusion`
+
+### properties
+
+name  | description | data type | constraints
+------|-------------|-----------|------------
+relationshipToParent1 | Reference to the `Relationship` that represents the relationship between parent 1 and the child. | [URI](#uri) | REQUIRED. MUST resolve to an instance of [`http://gedcomx.org/v1/Relationship`](#relationship) of type `http://gedcomx.org/ParentChild`.
+relationshipToParent2 | Reference to the `Relationship` that represents the relationship between parent 2 and the child. | [URI](#uri) | REQUIRED. MUST resolve to an instance of [`http://gedcomx.org/v1/Relationship`](#relationship) of type `http://gedcomx.org/ParentChild`.
+attribution | The attribution of the relationship. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing data set (e.g. file) of the relationship is assumed.
+
+Note: All instances of CoupleChildRelationship MUST contain at least one Relationship (either relationshipToParent1 or relationshipToParent2 MUST have a value).  If an instance of CoupleChildRelationship refers to two `Relationship` values, both relationships MUST refer to the same child.
+
+
 <a id="source-description"/>
 
-## 2.3 The "SourceDescription" Data Type
+## 2.4 The "SourceDescription" Data Type
 
 The `SourceDescription` data type defines a description of a source of genealogical information.
 
@@ -252,7 +281,7 @@ attribution | The attribution of this source description. | [`http://gedcomx.org
 
 <a id="agent"/>
 
-## 2.4 The "Agent" Data Type
+## 2.5 The "Agent" Data Type
 
 The `Agent` data type defines a living entity, such as a genealogical researcher, user of software, or organization.
 
@@ -279,7 +308,7 @@ addresses  | The addresses of the person or organization. | List of [`http://ged
 
 <a id="event"/>
 
-## 2.5 The "Event" Data Type
+## 2.6 The "Event" Data Type
 
 The `Event` data type defines a description of a historical event.
 
@@ -307,7 +336,7 @@ attribution | The attribution of the event. | [`http://gedcomx.org/Attribution`]
 
 <a id="known-event-types"/>
 
-### 2.5.1 Known Event Types
+### 2.6.1 Known Event Types
 
 The following event types are defined by GEDCOM X:
 
@@ -351,7 +380,7 @@ URI | description
 
 <a id="document"/>
 
-## 2.6 The "Document" Data Type
+## 2.7 The "Document" Data Type
 
 The `Document` data type defines the base conceptual model for genealogical conclusions that are managed as textual documents.
 
@@ -377,7 +406,7 @@ attribution | The attribution of the document. | [`http://gedcomx.org/Attributio
 
 <a id="known-document-types"/>
 
-### 2.6.1 Known Document Types
+### 2.7.1 Known Document Types
 
 The following gender types are defined by GEDCOM X:
 
@@ -391,7 +420,7 @@ URI | description
 <a id="conclusion-place"/>
 
 
-## 2.7 The "PlaceDescription" Data Type
+## 2.8 The "PlaceDescription" Data Type
 
 The `PlaceDescription` data type describes the details of a place in terms of its name
 and possibly its type, time period, and/or a geospatial description -- functioning as a description
