@@ -21,6 +21,7 @@ import org.gedcomx.common.Attribution;
 import org.gedcomx.conclusion.*;
 import org.gedcomx.contributor.Agent;
 import org.gedcomx.links.HypermediaEnabledData;
+import org.gedcomx.records.Record;
 import org.gedcomx.rt.GedcomxConstants;
 import org.gedcomx.rt.GedcomxModelVisitor;
 import org.gedcomx.rt.MediaTypeDefinition;
@@ -71,7 +72,7 @@ import java.util.List;
 )
 @XmlRootElement
 @JsonElementWrapper (name = "gedcomx")
-@XmlType ( name = "Gedcomx" , propOrder = { "attribution", "persons", "relationships", "sourceDescriptions", "agents", "events", "places", "documents" })
+@XmlType ( name = "Gedcomx" , propOrder = { "attribution", "persons", "relationships", "sourceDescriptions", "agents", "events", "places", "documents", "records" })
 public class Gedcomx extends HypermediaEnabledData {
 
   private String id;
@@ -84,6 +85,7 @@ public class Gedcomx extends HypermediaEnabledData {
   private List<Event> events;
   private List<PlaceDescription> places;
   private List<Document> documents;
+  private List<Record> records; //todo: getter/setter, visitor
 
   /**
    * The id of this genealogical data set.
@@ -296,6 +298,28 @@ public class Gedcomx extends HypermediaEnabledData {
   @JsonProperty ("documents")
   public void setDocuments(List<Document> documents) {
     this.documents = documents;
+  }
+
+  /**
+   * The records included in this genealogical data set.
+   *
+   * @return The records included in this genealogical data set.
+   */
+  @XmlElement (name="record")
+  @JsonProperty ("records")
+  @JsonName ("records")
+  public List<Record> getRecords() {
+    return records;
+  }
+
+  /**
+   * The records included in this genealogical data set.
+   *
+   * @param records The records included in this genealogical data set.
+   */
+  @JsonProperty ("records")
+  public void setRecords(List<Record> records) {
+    this.records = records;
   }
 
   /**

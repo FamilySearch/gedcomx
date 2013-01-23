@@ -19,6 +19,8 @@ import org.gedcomx.Gedcomx;
 import org.gedcomx.common.Note;
 import org.gedcomx.conclusion.*;
 import org.gedcomx.contributor.Agent;
+import org.gedcomx.records.Field;
+import org.gedcomx.records.Record;
 import org.gedcomx.source.SourceCitation;
 import org.gedcomx.source.SourceDescription;
 import org.gedcomx.source.SourceReference;
@@ -104,6 +106,15 @@ public class GedcomxModelVisitorBase implements GedcomxModelVisitor {
       }
     }
 
+    List<Record> records = gx.getRecords();
+    if (records != null) {
+      for (Record record : records) {
+        if (record != null) {
+          record.accept(this);
+        }
+      }
+    }
+
     this.contextStack.pop();
   }
 
@@ -183,6 +194,32 @@ public class GedcomxModelVisitorBase implements GedcomxModelVisitor {
   @Override
   public void visitSourceCitation(SourceCitation citation) {
     //no-op.
+  }
+
+  @Override
+  public void visitRecord(Record record) {
+    this.contextStack.push(record);
+
+    List<Field> fields = record.getFields();
+    if (fields != null) {
+      for (Field field : fields) {
+        field.accept(this);
+      }
+    }
+
+    List<Note> notes = record.getNotes();
+    if (notes != null) {
+      for (Note note : notes) {
+        note.accept(this);
+      }
+    }
+  }
+
+  @Override
+  public void visitField(Field field) {
+    this.contextStack.push(this);
+    visitConclusion(field);
+    this.contextStack.pop();
   }
 
   @Override
