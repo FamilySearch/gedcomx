@@ -3,6 +3,7 @@ package org.gedcomx.rt;
 import org.gedcomx.Gedcomx;
 import org.gedcomx.common.Note;
 import org.gedcomx.common.URI;
+import org.gedcomx.conclusion.CoupleChildRelationship;
 import org.gedcomx.conclusion.Date;
 import org.gedcomx.conclusion.Document;
 import org.gedcomx.conclusion.Event;
@@ -53,6 +54,7 @@ public class GedcomxModelVisitorBaseTest {
     gedcomxDocument.setPersons(new ArrayList<Person>());
     gedcomxDocument.setPlaces(new ArrayList<PlaceDescription>());
     gedcomxDocument.setRelationships(new ArrayList<Relationship>());
+    gedcomxDocument.setCoupleChildRelationships(new ArrayList<CoupleChildRelationship>());
     gedcomxDocument.setSourceDescriptions(new ArrayList<SourceDescription>());
     gedcomxDocument.addLink("junkRel", URI.create("urn:junkUri"));
     gedcomxDocument.addExtensionElement("junkExtensionElement");
@@ -65,6 +67,7 @@ public class GedcomxModelVisitorBaseTest {
     gedcomxDocument.getPersons().add(null);
     gedcomxDocument.getPlaces().add(null);
     gedcomxDocument.getRelationships().add(null);
+    gedcomxDocument.getCoupleChildRelationships().add(null);
     gedcomxDocument.getSourceDescriptions().add(null);
     gedcomxDocument.accept(visitor);
 
@@ -75,6 +78,7 @@ public class GedcomxModelVisitorBaseTest {
     gedcomxDocument.getPersons().clear();
     gedcomxDocument.getPlaces().clear();
     gedcomxDocument.getRelationships().clear();
+    gedcomxDocument.getCoupleChildRelationships().clear();
     gedcomxDocument.getSourceDescriptions().clear();
 
     // re-visit document that now has single element lists -- the elements are newly constructed and otherwise uninitialized
@@ -84,6 +88,7 @@ public class GedcomxModelVisitorBaseTest {
     gedcomxDocument.getPersons().add(new Person());
     gedcomxDocument.getPlaces().add(new PlaceDescription());
     gedcomxDocument.getRelationships().add(new Relationship());
+    gedcomxDocument.getCoupleChildRelationships().add(new CoupleChildRelationship());
     gedcomxDocument.getSourceDescriptions().add(new SourceDescription());
     gedcomxDocument.accept(visitor);
 
@@ -103,6 +108,8 @@ public class GedcomxModelVisitorBaseTest {
     gedcomxDocument.getPlaces().get(0).setNotes(notes);
     gedcomxDocument.getRelationships().get(0).setSources(sourceReferences);
     gedcomxDocument.getRelationships().get(0).setNotes(notes);
+    gedcomxDocument.getCoupleChildRelationships().get(0).setSources(sourceReferences);
+    gedcomxDocument.getCoupleChildRelationships().get(0).setNotes(notes);
     gedcomxDocument.getSourceDescriptions().get(0).setSources(sourceReferences);
     gedcomxDocument.getSourceDescriptions().get(0).setNotes(notes);
     gedcomxDocument.accept(visitor);

@@ -48,6 +48,8 @@ public interface GedcomxModelVisitor {
 
   void visitRelationship(Relationship relationship);
 
+  void visitCoupleChildRelationship(CoupleChildRelationship coupleChildRelationship);
+
   void visitPerson(Person person);
 
   void visitFact(Fact fact);
