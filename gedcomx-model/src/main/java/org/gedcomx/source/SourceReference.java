@@ -22,8 +22,10 @@ import org.gedcomx.links.HypermediaEnabledData;
 import org.gedcomx.rt.GedcomxModelVisitor;
 import org.gedcomx.rt.json.JsonElementWrapper;
 
+import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 
 
@@ -37,6 +39,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType ( name = "SourceReference" )
 public class SourceReference extends HypermediaEnabledData implements Attributable {
 
+  private URI resource;
   private URI descriptionRef;
   private Attribution attribution;
 
@@ -56,6 +59,32 @@ public class SourceReference extends HypermediaEnabledData implements Attributab
    */
   public void setAttribution(Attribution attribution) {
     this.attribution = attribution;
+  }
+
+  /**
+   * The URI to the source (as opposed to a description of the source). This attribute is OPTIONAL. If provided,
+   * it MUST resolve to the same resource being described by the source description, or to a fragment
+   * of that resource. This reference is intended to provide additional refinements of what specific aspects of the
+   * source are being referenced.
+   *
+   * @return The URI to the source, or a fragment of the source.
+   */
+  @XmlAttribute
+  @XmlSchemaType (name = "anyURI", namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI)
+  public URI getResource() {
+    return resource;
+  }
+
+  /**
+   * The URI to the source (as opposed to a description of the source). This attribute is OPTIONAL. If provided,
+   * it MUST resolve to the same resource being described by the source description, or to a fragment
+   * of that resource. This reference is intended to provide additional refinements of what specific aspects of the
+   * source are being referenced.
+   *
+   * @param resource The URI to the source, or a fragment of the source.
+   */
+  public void setResource(URI resource) {
+    this.resource = resource;
   }
 
   /**
