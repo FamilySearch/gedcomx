@@ -16,9 +16,9 @@
 package org.gedcomx.rt;
 
 import org.gedcomx.Gedcomx;
+import org.gedcomx.agent.Agent;
 import org.gedcomx.common.Note;
 import org.gedcomx.conclusion.*;
-import org.gedcomx.contributor.Agent;
 import org.gedcomx.source.SourceCitation;
 import org.gedcomx.source.SourceDescription;
 import org.gedcomx.source.SourceReference;

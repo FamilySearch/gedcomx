@@ -1,7 +1,7 @@
 package org.gedcomx.source;
 
-import org.gedcomx.CustomEntity;
 import org.gedcomx.common.Attribution;
+import org.gedcomx.common.CustomEntity;
 import org.gedcomx.common.ResourceReference;
 import org.gedcomx.common.URI;
 import org.gedcomx.rt.SerializationUtil;

@@ -1,8 +1,11 @@
 package org.gedcomx;
 
-import org.gedcomx.common.*;
+import org.gedcomx.agent.Agent;
+import org.gedcomx.common.Attribution;
+import org.gedcomx.common.ResourceReference;
+import org.gedcomx.common.TextValue;
+import org.gedcomx.common.URI;
 import org.gedcomx.conclusion.*;
-import org.gedcomx.contributor.Agent;
 import org.gedcomx.rt.SerializationUtil;
 import org.gedcomx.source.SourceCitation;
 import org.gedcomx.source.SourceDescription;
