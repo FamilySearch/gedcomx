@@ -1,6 +1,7 @@
 package org.gedcomx.common;
 
 import org.gedcomx.rt.json.JsonElementWrapper;
+import org.gedcomx.source.SourceReference;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -12,17 +13,19 @@ import java.util.List;
  */
 @XmlRootElement
 @JsonElementWrapper (name = "customEntities")
-public class CustomEntity {
+public class CustomEntity
+{
 
   private String id;
   private URI refToSomething;
   private List<UniqueCustomKeyedItem> uniqueKeyedItems;
   private List<CustomKeyedItem> keyedItems;
+  private SourceReference source;
 
   public CustomEntity() {
   }
 
-  public CustomEntity(String id) {
+  public CustomEntity( String id ) {
     this.id = id;
   }
 
@@ -58,5 +61,13 @@ public class CustomEntity {
 
   public void setUniqueKeyedItems(List<UniqueCustomKeyedItem> uniqueKeyedItems) {
     this.uniqueKeyedItems = uniqueKeyedItems;
+  }
+
+  public SourceReference getSource() {
+    return source;
+  }
+
+  public void setSource(SourceReference source) {
+    this.source = source;
   }
 }

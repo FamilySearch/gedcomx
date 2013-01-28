@@ -1,23 +1,10 @@
 package org.gedcomx.rt;
 
 import org.gedcomx.Gedcomx;
+import org.gedcomx.agent.Agent;
 import org.gedcomx.common.Note;
 import org.gedcomx.common.URI;
-import org.gedcomx.conclusion.CoupleChildRelationship;
-import org.gedcomx.conclusion.Date;
-import org.gedcomx.conclusion.Document;
-import org.gedcomx.conclusion.Event;
-import org.gedcomx.conclusion.EventRole;
-import org.gedcomx.conclusion.Fact;
-import org.gedcomx.conclusion.Gender;
-import org.gedcomx.conclusion.Name;
-import org.gedcomx.conclusion.NameForm;
-import org.gedcomx.conclusion.NamePart;
-import org.gedcomx.conclusion.Person;
-import org.gedcomx.conclusion.PlaceDescription;
-import org.gedcomx.conclusion.PlaceReference;
-import org.gedcomx.conclusion.Relationship;
-import org.gedcomx.contributor.Agent;
+import org.gedcomx.conclusion.*;
 import org.gedcomx.source.SourceCitation;
 import org.gedcomx.source.SourceDescription;
 import org.gedcomx.source.SourceReference;

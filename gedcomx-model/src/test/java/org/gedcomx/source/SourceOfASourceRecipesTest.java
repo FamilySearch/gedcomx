@@ -1,9 +1,9 @@
 package org.gedcomx.source;
 
 import org.gedcomx.Gedcomx;
+import org.gedcomx.agent.Address;
+import org.gedcomx.agent.Agent;
 import org.gedcomx.common.*;
-import org.gedcomx.contributor.Address;
-import org.gedcomx.contributor.Agent;
 import org.gedcomx.rt.GedcomNamespaceManager;
 import org.gedcomx.test.RecipeTest;
 import org.gedcomx.test.Snippet;
