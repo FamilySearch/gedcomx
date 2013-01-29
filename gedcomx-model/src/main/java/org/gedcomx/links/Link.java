@@ -22,6 +22,9 @@ import org.gedcomx.rt.json.JsonElementWrapper;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.*;
+import java.util.Arrays;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * A hypermedia link, used to drive the state of a hypermedia-enabled genealogical data application.
@@ -35,6 +38,12 @@ import javax.xml.bind.annotation.*;
 @JsonElementWrapper ( name = "links" )
 @SuppressWarnings("gedcomx:no_id")
 public class Link implements HasJsonKey {
+
+  /**
+   * The list of link rels that support multi-valued links. Be careful about editing this because
+   * it might break backwards-compatibility with JSON clients.
+   */
+  public static final Set<String> NON_UNIQUE_RELS = new TreeSet<String>(Arrays.asList("alternate", "bookmark", "related", "item"));
 
   private String rel;
   private URI href;
@@ -51,6 +60,14 @@ public class Link implements HasJsonKey {
   }
 
   public Link() {
+  }
+
+  @XmlTransient
+  @JsonIgnore
+  @org.codehaus.enunciate.json.JsonIgnore
+  @Override
+  public boolean isHasUniqueKey() {
+    return this.rel != null && !NON_UNIQUE_RELS.contains(this.rel);
   }
 
   /**

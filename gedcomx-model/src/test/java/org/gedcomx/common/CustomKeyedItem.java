@@ -21,6 +21,13 @@ public class CustomKeyedItem implements HasJsonKey {
   @JsonIgnore
   @XmlTransient
   @Override
+  public boolean isHasUniqueKey() {
+    return false;
+  }
+
+  @JsonIgnore
+  @XmlTransient
+  @Override
   public String getJsonKey() {
     return getKey();
   }
