@@ -27,7 +27,7 @@ that are used to provide a standard model and vocabulary for describing genealog
 data. Genealogical data is structured by data types such as persons, 
 relationships, and sources.
 
-[](http://google.com.au/)
+[![Conceptual Model Graph](https://github.com/atomkirk/gedcomx/blob/master/specifications/support/conceptual-model-graph.png?raw=true)](https://github.com/atomkirk/gedcomx/blob/master/specifications/support/conceptual-model-graph.pdf?raw=true)
 
 ## 1.1 Identifier, Version, and Dependencies
 
