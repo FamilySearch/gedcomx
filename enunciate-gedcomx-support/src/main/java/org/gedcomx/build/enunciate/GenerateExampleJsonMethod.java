@@ -31,7 +31,6 @@ import org.codehaus.jackson.node.ArrayNode;
 import org.codehaus.jackson.node.JsonNodeFactory;
 import org.codehaus.jackson.node.ObjectNode;
 import org.gedcomx.rt.json.HasJsonKey;
-import org.gedcomx.rt.json.HasUniqueJsonKey;
 import org.gedcomx.rt.json.JsonSimpleValue;
 
 /**
@@ -50,7 +49,7 @@ public class GenerateExampleJsonMethod extends org.codehaus.enunciate.modules.do
       ObjectNode on = JsonNodeFactory.instance.objectNode();
       JsonNode val = generateExampleJson(element.getBaseType(), "...", maxDepth);
       JsonNode ex;
-      boolean isUnique = ((DecoratedTypeMirror)element.getBareAccessorType()).isInstanceOf(HasUniqueJsonKey.class.getName());
+      boolean isUnique = false; //todo: better way to determine link rel uniqueness?
       if (!isUnique) {
         ArrayNode exs = JsonNodeFactory.instance.arrayNode();
         exs.add(val);
