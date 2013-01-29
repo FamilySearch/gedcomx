@@ -17,6 +17,7 @@ package org.gedcomx.rt.json;
 
 import org.codehaus.jackson.Version;
 import org.codehaus.jackson.map.*;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.introspect.JacksonAnnotationIntrospector;
 import org.codehaus.jackson.map.type.CollectionType;
 import org.codehaus.jackson.xc.JaxbAnnotationIntrospector;
@@ -39,6 +40,8 @@ public class GedcomJacksonModule extends Module {
     ObjectMapper mapper = new ObjectMapper();
     AnnotationIntrospector introspector = AnnotationIntrospector.pair(new JacksonAnnotationIntrospector(), new JaxbAnnotationIntrospector());
     mapper.getSerializationConfig().withAnnotationIntrospector(introspector);
+    mapper.getSerializationConfig().enable(SerializationConfig.Feature.INDENT_OUTPUT);
+    mapper.getSerializationConfig().setSerializationInclusion(JsonSerialize.Inclusion.NON_NULL);
     mapper.getDeserializationConfig().withAnnotationIntrospector(introspector);
     mapper.registerModule(new GedcomJacksonModule());
     for (Class<?> contextClass : classes) {
