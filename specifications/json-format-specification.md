@@ -41,7 +41,7 @@ For convenience, the GEDCOM X JSON Format may be referred to as "GEDCOM X JSON 1
 
 The media type defined by this specification is:
 
-`application/x-gedcom-v1+json`
+`application/x-gedcomx-v1+json`
 
 This specification is depends on the conceptual model specification identified
 by [`http://gedcomx.org/conceptual-model/v1`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md).
