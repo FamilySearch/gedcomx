@@ -59,6 +59,15 @@ public class GedcomxModelVisitorBase implements GedcomxModelVisitor {
       }
     }
 
+    List<CoupleChildRelationship> coupleChildRelationships = gx.getCoupleChildRelationships();
+    if (coupleChildRelationships != null) {
+      for (CoupleChildRelationship coupleChildRelationship : coupleChildRelationships) {
+        if (coupleChildRelationship != null) {
+          coupleChildRelationship.accept(this);
+        }
+      }
+    }
+
     List<SourceDescription> sourceDescriptions = gx.getSourceDescriptions();
     if (sourceDescriptions != null) {
       for (SourceDescription sourceDescription : sourceDescriptions) {
@@ -146,7 +155,9 @@ public class GedcomxModelVisitorBase implements GedcomxModelVisitor {
 
   @Override
   public void visitEventRole(EventRole role) {
+    this.contextStack.push(role);
     visitConclusion(role);
+    this.contextStack.pop();
   }
 
   @Override
@@ -196,6 +207,13 @@ public class GedcomxModelVisitorBase implements GedcomxModelVisitor {
         fact.accept(this);
       }
     }
+    this.contextStack.pop();
+  }
+
+  @Override
+  public void visitCoupleChildRelationship(CoupleChildRelationship coupleChildRelationship) {
+    this.contextStack.push(coupleChildRelationship);
+    visitConclusion(coupleChildRelationship);
     this.contextStack.pop();
   }
 

@@ -71,7 +71,7 @@ import java.util.List;
 )
 @XmlRootElement
 @JsonElementWrapper (name = "gedcomx")
-@XmlType ( name = "Gedcomx" , propOrder = { "attribution", "persons", "relationships", "sourceDescriptions", "agents", "events", "places", "documents" })
+@XmlType ( name = "Gedcomx" , propOrder = { "attribution", "persons", "relationships", "coupleChildRelationships", "sourceDescriptions", "agents", "events", "places", "documents" })
 public class Gedcomx extends HypermediaEnabledData {
 
   private String id;
@@ -79,6 +79,7 @@ public class Gedcomx extends HypermediaEnabledData {
   private Attribution attribution;
   private List<Person> persons;
   private List<Relationship> relationships;
+  private List<CoupleChildRelationship> coupleChildRelationships;
   private List<SourceDescription> sourceDescriptions;
   private List<Agent> agents;
   private List<Event> events;
@@ -187,7 +188,29 @@ public class Gedcomx extends HypermediaEnabledData {
   public void setRelationships(List<Relationship> relationships) {
     this.relationships = relationships;
   }
-  
+
+  /**
+   * The relationships included in this genealogical data set.
+   *
+   * @return The relationships included in this genealogical data set.
+   */
+  @XmlElement (name="coupleChildRelationship")
+  @JsonProperty ("coupleChildRelationships")
+  @JsonName ("coupleChildRelationships")
+  public List<CoupleChildRelationship> getCoupleChildRelationships() {
+    return coupleChildRelationships;
+  }
+
+  /**
+   * The relationships included in this genealogical data set.
+   *
+   * @param coupleChildRelationships The relationships included in this genealogical data set.
+   */
+  @JsonProperty ("coupleChildRelationships")
+  public void setCoupleChildRelationships(List<CoupleChildRelationship> coupleChildRelationships) {
+    this.coupleChildRelationships = coupleChildRelationships;
+  }
+
   /**
    * The descriptions of sources included in this genealogical data set.
    * 
