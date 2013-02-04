@@ -49,7 +49,7 @@ public class TypesTest {
 
     assertTrue(FactType.Person.isApplicable(FactType.Will));
     assertTrue(FactType.Couple.isApplicable(FactType.Separation));
-    assertTrue(FactType.ParentChild.isApplicable(FactType.Guardianship));
+    assertTrue(FactType.ParentChild.isApplicable(FactType.GuardianParent));
   }
 
 }

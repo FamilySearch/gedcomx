@@ -943,7 +943,7 @@ URI | description | scope
 `http://gedcomx.org/Baptism`| A fact of a person's baptism. | person
 `http://gedcomx.org/BarMitzvah`| A fact of a person's bar mitzvah. | person
 `http://gedcomx.org/BatMitzvah`| A fact of a person's bat mitzvah. | person
-`http://gedcomx.org/Birth`| A fact of a person's birth. In the context of a parent-child relationship, it describes a fact of the biological birth of a child to a parent. | person
+`http://gedcomx.org/Birth`| A fact of a person's birth. | person
 `http://gedcomx.org/Blessing`| A fact of an official blessing received by a person, such as at the hands of a clergy member or at another religious rite. | person
 `http://gedcomx.org/Burial`| A fact of the burial of person's body after death. | person
 `http://gedcomx.org/Caste`| A fact of a person's caste. | person
@@ -1000,11 +1000,12 @@ URI | description | scope
 `http://gedcomx.org/MarriageNotice`| The fact of a marriage notice. | couple relationship
 `http://gedcomx.org/NumberOfChildren`| A fact of the number of children of a person or relationship. | couple relationship
 `http://gedcomx.org/Separation`| A fact of a couple's separation. | couple relationship
-`http://gedcomx.org/Adoption`| A fact of a person's adoption. In the context of a parent-child relationship, it describes a fact of the adoption of a child by a parent. | parent-child relationship
-`http://gedcomx.org/Birth`| A fact of a person's birth. In the context of a parent-child relationship, it describes a fact of the biological birth of a child to a parent. | parent-child relationship
-`http://gedcomx.org/Foster`| A fact about a foster relationship between a foster parent and a child. | parent-child relationship
-`http://gedcomx.org/Guardianship`| A fact about a legal guardianship between a parent and a child. | parent-child relationship
-`http://gedcomx.org/Step`| A fact about the step relationship between a parent and a child. | parent-child relationship
+`http://gedcomx.org/AdoptiveParent`| A fact about an adoptive relationship between a parent an a child. | parent-child relationship
+`http://gedcomx.org/BiologicalParent`| A fact the biological relationship between a parent and a child. | parent-child relationship
+`http://gedcomx.org/FosterParent`| A fact about a foster relationship between a foster parent and a child. | parent-child relationship
+`http://gedcomx.org/GuardianParent`| A fact about a legal guardianship between a parent and a child. | parent-child relationship
+`http://gedcomx.org/StepParent`| A fact about the step relationship between a parent and a child. | parent-child relationship
+`http://gedcomx.org/SociologicalParent`| A fact about a sociological relationship between a parent and a child, but not definable in typical legal or biological terms. | parent-child relationship
 
 
 <a id="conclusion-event-role"/>
