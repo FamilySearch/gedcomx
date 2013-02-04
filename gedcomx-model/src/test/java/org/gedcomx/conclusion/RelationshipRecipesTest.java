@@ -8,8 +8,12 @@ import org.gedcomx.types.FactType;
 import org.gedcomx.types.RelationshipType;
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
+
 import static org.gedcomx.rt.SerializationUtil.processThroughJson;
 import static org.gedcomx.rt.SerializationUtil.processThroughXml;
+import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertNotNull;
 
 
 /**
@@ -36,35 +40,61 @@ public class RelationshipRecipesTest extends RecipeTest {
 
   private Relationship createTestRelationship() {
     Relationship relationship = new Relationship();
+
     relationship.setId("CCC-CCCC");
-    relationship.setKnownType(RelationshipType.Couple);
+    relationship.addSource(new SourceReference());
+    relationship.getSources().get(0).setDescriptionRef(URI.create("urn:srcDescId"));
+
+    relationship.setKnownType(RelationshipType.ParentChild);
+
+    relationship.setPerson1(new ResourceReference(URI.create("https://familysearch.org/platform/persons/DDD-D001")));
+    relationship.setPerson2(new ResourceReference(URI.create("https://familysearch.org/platform/persons/DDD-D002")));
+
+    relationship.addFact(new Fact());
+    relationship.getFacts().get(0).setId("F123");
+    relationship.getFacts().get(0).setKnownType(FactType.AdoptiveParent);
+    relationship.getFacts().get(0).setDate(new Date());
+    relationship.getFacts().get(0).getDate().setOriginal("January 6, 1759");
+    relationship.getFacts().get(0).getDate().setFormal("+1759-01-06");
+
+    relationship.setIdentifiers(Arrays.asList(new Identifier()));
+    relationship.getIdentifiers().get(0).setType(URI.create("http://familysearch.org/v1/ParentPairing"));
+    relationship.getIdentifiers().get(0).setValue(URI.create("https://familysearch.org/platform/parent-relationships/FFF-FFFF"));
 
     relationship.setAttribution(new Attribution());
     relationship.getAttribution().setChangeMessage("(justification here)");
-    ResourceReference contributor = new ResourceReference();
-    contributor.setResource(URI.create("https://familysearch.org/platform/contributors/BCD-FGHJ"));
-    relationship.getAttribution().setContributor(contributor);
-    Fact fact = new Fact();
-    fact.setId("123");
-    fact.setKnownType(FactType.Marriage);
+    relationship.getAttribution().setContributor(new ResourceReference(URI.create("https://familysearch.org/platform/contributors/BCD-FGHJ")));
 
-    fact.setDate(new Date());
-    fact.getDate().setOriginal("January 6, 1759");
-    fact.getDate().setFormal("+1759-01-06");
-
-    relationship.addFact(fact);
-    relationship.setPerson1(new ResourceReference());
-    relationship.getPerson1().setResource(URI.create("https://familysearch.org/platform/persons/DDD-DDDD"));
-    relationship.setPerson2(new ResourceReference());
-    relationship.getPerson2().setResource(URI.create("https://familysearch.org/platform/persons/FFF-FFFF"));
-    SourceReference sourceReference = new SourceReference();
-    sourceReference.setDescriptionRef(URI.create("urn:srcDescId"));
-    relationship.addSource(sourceReference);
     return relationship;
   }
 
   private void verifyRelationship(Relationship relationship) {
-    //todo
+    assertEquals("CCC-CCCC", relationship.getId());
+    assertNotNull(relationship.getSources());
+    assertEquals(1, relationship.getSources().size());
+    assertEquals(URI.create("urn:srcDescId"), relationship.getSources().get(0).getDescriptionRef());
+
+    assertEquals(RelationshipType.ParentChild, relationship.getKnownType());
+
+    assertEquals(URI.create("https://familysearch.org/platform/persons/DDD-D001"), relationship.getPerson1().getResource());
+    assertEquals(URI.create("https://familysearch.org/platform/persons/DDD-D002"), relationship.getPerson2().getResource());
+
+    assertNotNull(relationship.getFacts());
+    assertEquals(1, relationship.getFacts().size());
+    assertEquals("F123", relationship.getFacts().get(0).getId());
+    assertEquals(FactType.AdoptiveParent, relationship.getFacts().get(0).getKnownType());
+    assertNotNull(relationship.getFacts().get(0).getDate());
+    assertNotNull("January 6, 1759", relationship.getFacts().get(0).getDate().getOriginal());
+    assertNotNull("+1759-01-06", relationship.getFacts().get(0).getDate().getFormal());
+
+    assertNotNull(relationship.getIdentifiers());
+    assertEquals(1, relationship.getIdentifiers().size());
+    assertEquals(URI.create("http://familysearch.org/v1/ParentPairing"), relationship.getIdentifiers().get(0).getType());
+    assertEquals(URI.create("https://familysearch.org/platform/parent-relationships/FFF-FFFF"), relationship.getIdentifiers().get(0).getValue());
+
+    assertNotNull(relationship.getAttribution());
+    assertEquals("(justification here)", relationship.getAttribution().getChangeMessage());
+    assertEquals(URI.create("https://familysearch.org/platform/contributors/BCD-FGHJ"), relationship.getAttribution().getContributor().getResource());
   }
 
 }
