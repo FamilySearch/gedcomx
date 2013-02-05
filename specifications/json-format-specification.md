@@ -292,6 +292,7 @@ type | URI identifying the type of the relationship. | type | [`URI`](#uri)
 person1 | Reference to the first person in the relationship. | person1 | [`URI`](#uri)
 person2 | Reference to the second person in the relationship. | person2 | [`URI`](#uri)
 facts | The conclusions about the facts of the life of the relationship. | facts | array of [`Fact`](#fact-conclusion)
+identifiers | Identifiers for the relationship. | identifiers | [`Identifier`](#identifier-type)
 
 ### examples
 

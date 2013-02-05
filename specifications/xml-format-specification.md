@@ -270,6 +270,7 @@ type | URI identifying the type of the relationship. | type (attribute) | [`URI`
 person1 | Reference to the first person in the relationship. | gx:person1 | [`gx:ResourceReference`](#resource-reference)
 person2 | Reference to the second person in the relationship. | gx:person2 | [`gx:ResourceReference`](#resource-reference)
 facts | The conclusions about the facts of the life of the relationship. | gx:fact | [`gx:Fact`](#fact-conclusion)
+identifiers | Identifiers for the relationship. | gx:identifier | [`gx:Identifier`](#identifier-type)
 
 ### examples
 
