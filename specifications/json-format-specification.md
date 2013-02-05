@@ -255,7 +255,7 @@ The JSON object used to (de)serialize the `http://gedcomx.org/v1/Person` data ty
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 attribution | The attribution of this conclusion. | attribution | [`Attribution`](#attribution)
-identifiers | Identifiers for the person. | identifiers | array of [`Identifier`](#identifier-type)
+identifiers | Identifiers for the person. | identifiers | [`Identifier`](#identifier-type)
 living | Whether the person is considered living. | living | boolean
 gender | The conclusion about the gender of the person. | gender | [`Gender`](#gender)
 names | The conclusions about the names of the person. | names | array of [`Name`](#name-conclusion)
@@ -269,7 +269,7 @@ facts | The conclusions about the facts of the life of the person. | facts | arr
   ...the members of gxc:Conclusion...,
 
   "attribution" : { ... },
-  "identifiers" : [ { ... }, { ... } ],
+  "identifiers" : { ... },
   "living" : true,
   "gender" : { ... },
   "names" : [ { ... }, { ... } ],
@@ -376,6 +376,7 @@ addresses  | The addresses of the person or organization. | addresses | array of
 {
   "id" : "local_id",
   "names" : [ { ... }, { ... } ],
+  "identifiers" : { ... },
   "homepage" : "...",
   "openid" : "...",
   "accounts" : [ { ... }, { ... } ],
@@ -461,7 +462,7 @@ temporalDescription | A description of the time period to which this place descr
 latitude | Degrees north or south of the Equator (0.0 degrees). | latitude | number
 longitude | Angular distance in degrees, relative to the Prime Meridian. | longitude | number
 spatialDescription | A reference to a geospatial description of this place. | spatialDescription | [`URI`](#uri)
-identifiers | A list of known identifiers for this place description (e.g., place authority identifiers). | identifiers | array of [`Identifier`](#identifier-type)
+identifiers | A list of known identifiers for this place description (e.g., place authority identifiers). | identifiers | [`Identifier`](#identifier-type)
 attribution | The attribution of this conclusion. | attribution | [`Attribution`](#attribution)
 
 ### examples
@@ -478,7 +479,7 @@ attribution | The attribution of this conclusion. | attribution | [`Attribution`
   "latitude" : "27.9883575",
   "latitude" : "86.9252014",
   "spatialDescription" : "http://uri/for/KML/document",
-  "identifiers" : [ { ... }, { ... } ],
+  "identifiers" : { ... },
   "attribution" : { ... }
 }
 ```
@@ -492,21 +493,25 @@ conceptual model specification.
 
 ## 3.1 The "Identifier" Data Type
 
-The JSON object used to (de)serialize the `http://gedcomx.org/v1/Identifier` data type is defined as follows:
+In JSON the `http://gedcomx.org/v1/Identifier` data type is always serialized in the context of a set
+of identifiers, which is represented using a JSON object. The name of each member of the object is
+the identifier `type`. The value of each member carries the string values of the identifiers of that type.
+All known GEDCOM X identifier types MAY carry multiple values, so the value of the member for each
+known identifier type MUST be an array of `string`s.
 
-### properties
+Some custom identifier types MAY specify that the identifier type is "single-valued", meaning
+there MUST NOT be more than one value of the specified identifier type, per entity. If an identifier
+type is specified as a "single-valued" identifier type, the value of the member named by that identifier
+type MAY forgo the array and use a single string.
 
-name | description | JSON member | JSON object type
------|-------------|--------------|---------
-value | The value of the identifier. | value | string
-type  | URI identifying the type of the identifier. | type | [`URI`](#uri)
-
-### examples
+### example: set of identifiers
 
 ```json
 {
-  "value" : "value_of_identifier",
-  "type" : "http://gedcomx.org/IdentifierType"
+  "http://gedcomx.org/IdentifierType" : [ "value_of_identifier" ],
+  "http://gedcomx.org/OtherIdentifierType" : [ "value_of_identifier" ],
+  "http://custom.org/SingleValuedIdentifierType" : "value_of_identifier",
+  ...
 }
 ```
 

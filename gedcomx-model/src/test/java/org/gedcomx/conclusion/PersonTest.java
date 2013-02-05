@@ -220,10 +220,15 @@ public class PersonTest {
     assertEquals(GenderType.Male, person.getGender().getKnownType());
 
     assertEquals(2, person.getIdentifiers().size());
-    assertEquals(IdentifierType.Deprecated, person.getIdentifiers().get(0).getKnownType());
-    assertEquals("forward-value", person.getIdentifiers().get(0).getValue().toString());
-    assertEquals(IdentifierType.Persistent, person.getIdentifiers().get(1).getKnownType());
-    assertEquals("pal", person.getIdentifiers().get(1).getValue().toString());
+    Identifier identifier1 = person.getIdentifiers().get(0);
+    Identifier identifier2 = person.getIdentifiers().get(1);
+    Identifier deprecatedIdentifier = identifier1.getKnownType() == IdentifierType.Deprecated ? identifier1 : identifier2;
+    Identifier persistentIdentifier = identifier1.getKnownType() == IdentifierType.Persistent ? identifier1 : identifier2;
+
+    assertEquals(IdentifierType.Deprecated, deprecatedIdentifier.getKnownType());
+    assertEquals("forward-value", deprecatedIdentifier.getValue().toString());
+    assertEquals(IdentifierType.Persistent, persistentIdentifier.getKnownType());
+    assertEquals("pal", persistentIdentifier.getValue().toString());
 
     assertEquals(2, person.getFacts().size());
     fact = person.getFirstFactOfType(FactType.Occupation);

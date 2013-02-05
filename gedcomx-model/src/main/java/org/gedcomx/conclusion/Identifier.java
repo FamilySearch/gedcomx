@@ -15,8 +15,11 @@
  */
 package org.gedcomx.conclusion;
 
+import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonValue;
 import org.gedcomx.common.URI;
+import org.gedcomx.rt.json.HasJsonKey;
 import org.gedcomx.types.IdentifierType;
 
 import javax.xml.bind.annotation.XmlAttribute;
@@ -30,16 +33,27 @@ import javax.xml.bind.annotation.XmlValue;
  * @author Ryan Heaton
  */
 @XmlType ( name = "Identifier" )
-public final class Identifier {
+public final class Identifier implements HasJsonKey {
 
+  private boolean hasUniqueKey = false;
   private URI value;
   private URI type;
+
+  public Identifier() {
+  }
+
+  @JsonCreator
+  public Identifier(URI value) {
+    this.value = value;
+  }
 
   /**
    * The id value.
    *
    * @return The id value.
    */
+  @XmlValue
+  @JsonValue
   public URI getValue() {
     return value;
   }
@@ -49,7 +63,7 @@ public final class Identifier {
    *
    * @param value The id value.
    */
-  @XmlValue
+  @JsonValue
   public void setValue(URI value) {
     this.value = value;
   }
@@ -60,6 +74,8 @@ public final class Identifier {
    * @return The type of the id.
    */
   @XmlAttribute
+  @JsonIgnore
+  @org.codehaus.enunciate.json.JsonIgnore
   public URI getType() {
     return type;
   }
@@ -69,8 +85,20 @@ public final class Identifier {
    *
    * @param type The type of the id.
    */
+  @JsonIgnore
   public void setType(URI type) {
     this.type = type;
+  }
+
+  /**
+   * The type of the id.
+   *
+   * @param type The type of the id.
+   * @param unique Whether the type of this identifier implies that the value is unique among all other identifiers of the same type.
+   */
+  public void setType(URI type, boolean unique) {
+    this.type = type;
+    this.hasUniqueKey = unique;
   }
 
   /**
@@ -94,6 +122,27 @@ public final class Identifier {
     setType(knownType == null ? null : URI.create(org.codehaus.enunciate.XmlQNameEnumUtil.toURIValue(knownType)));
   }
 
+  @XmlTransient
+  @JsonIgnore
+  @org.codehaus.enunciate.json.JsonIgnore
+  @Override
+  public boolean isHasUniqueKey() {
+    return this.hasUniqueKey;
+  }
+
+  @XmlTransient
+  @JsonIgnore
+  @Override
+  public String getJsonKey() {
+    return this.type == null ? null : this.type.toString();
+  }
+
+  @JsonIgnore
+  @Override
+  public void setJsonKey(String jsonKey) {
+    this.type = new URI(jsonKey);
+  }
+
   /**
    * Provide a simple toString() method.
    */
@@ -101,4 +150,5 @@ public final class Identifier {
   public String toString() {
     return (value == null) ? "" : value.toString();
   }
+
 }
