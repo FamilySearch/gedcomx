@@ -337,6 +337,20 @@
 
   <distributionManagement>
     <repository>
+      <id>approved</id>
+      <name>Approved Artifact Repository</name>
+      <url>${maven.repository.approved.url}</url>
+    </repository>
+    <snapshotRepository>
+      <id>approved-snapshots</id>
+      <name>Approved Artifact Repository</name>
+      <url>${maven.repository.approved-snapshots.url}</url>
+    </snapshotRepository>
+  </distributionManagement>
+
+  <!--
+  <distributionManagement>
+    <repository>
       <id>gedcomx-release-repo</id>
       <name>GEDCOM X Release Repository</name>
       <url>https://repository-gedcom.forge.cloudbees.com/release/</url>
@@ -347,5 +361,5 @@
       <url>https://repository-gedcom.forge.cloudbees.com/snapshot/</url>
     </snapshotRepository>
   </distributionManagement>
-
+  -->
 </project>
