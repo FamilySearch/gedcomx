@@ -13,6 +13,8 @@
     <enunciate.version>1.26.2</enunciate.version>
     <root.basedir>${project.basedir}</root.basedir>
     <year>${inceptionYear}</year>
+    <maven.repository.approved.url>https://mvn.fsglobal.net/content/repositories/approved</maven.repository.approved.url>
+    <maven.repository.approved-snapshots.url>https://mvn.fsglobal.net/content/repositories/approved-snapshots</maven.repository.approved-snapshots.url>
   </properties>
 
   <modules>
