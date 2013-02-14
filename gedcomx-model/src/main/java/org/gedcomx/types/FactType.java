@@ -343,24 +343,36 @@ public enum FactType {
   Separation,
 
   // facts generally applicable within the scope of a parent-child relationship.
-  // Adoption, (applicable on a person, too).
 
-  // Birth, (applicable on a person, too).
+  /**
+   * A fact about an adoptive relationship between a parent an a child.
+   */
+  AdoptiveParent,
+
+  /**
+   * A fact the biological relationship between a parent and a child.
+   */
+  BiologicalParent,
 
   /**
    * A fact about a foster relationship between a foster parent and a child.
    */
-  Foster,
+  FosterParent,
 
   /**
    * A fact about a legal guardianship between a parent and a child.
    */
-  Guardianship,
+  GuardianParent,
 
   /**
    * A fact about the step relationship between a parent and a child.
    */
-  Step,
+  StepParent,
+
+  /**
+   * A fact about a sociological relationship between a parent and a child, but not definable in typical legal or biological terms.
+   */
+  SociologicalParent,
 
   @XmlUnknownQNameEnumValue
   OTHER;
@@ -528,11 +540,12 @@ public enum FactType {
       return type;
     }
     
-    public static final FactType Birth = include(FactType.Birth);
-    public static final FactType Adopted = include(FactType.Adoption);
-    public static final FactType Step = include(FactType.Step);
-    public static final FactType Foster = include(FactType.Foster);
-    public static final FactType Guardianship = include(FactType.Guardianship);
+    public static final FactType BiologicalParent = include(FactType.BiologicalParent);
+    public static final FactType AdoptiveParent = include(FactType.AdoptiveParent);
+    public static final FactType StepParent = include(FactType.StepParent);
+    public static final FactType FosterParent = include(FactType.FosterParent);
+    public static final FactType GuardianParent = include(FactType.GuardianParent);
+    public static final FactType SociologicalParent = include(FactType.SociologicalParent);
 
     /**
      * Whether the given fact type is applicable to a parent-child relationship.

@@ -13,13 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.rt.json;
 
 /**
- * Marker interface used as an indicator that each of these objects in a list have a unique json key.
- *
- * @author Ryan Heaton
+ * The contributor model.
  */
-public interface HasUniqueJsonKey extends HasJsonKey {
+@XmlSchema(
+  namespace = GedcomxConstants.GEDCOMX_NAMESPACE,
+  elementFormDefault = XmlNsForm.QUALIFIED
+)
+@XmlAccessorOrder( XmlAccessOrder.ALPHABETICAL )
+package org.gedcomx.agent;
 
-}
+import org.gedcomx.rt.GedcomxConstants;
+
+import javax.xml.bind.annotation.XmlAccessOrder;
+import javax.xml.bind.annotation.XmlAccessorOrder;
+import javax.xml.bind.annotation.XmlNsForm;
+import javax.xml.bind.annotation.XmlSchema;

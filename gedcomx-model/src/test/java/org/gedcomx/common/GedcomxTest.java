@@ -1,11 +1,11 @@
 package org.gedcomx.common;
 
 import org.gedcomx.Gedcomx;
+import org.gedcomx.agent.Agent;
 import org.gedcomx.conclusion.Document;
 import org.gedcomx.conclusion.Event;
 import org.gedcomx.conclusion.Person;
 import org.gedcomx.conclusion.Relationship;
-import org.gedcomx.contributor.Agent;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;

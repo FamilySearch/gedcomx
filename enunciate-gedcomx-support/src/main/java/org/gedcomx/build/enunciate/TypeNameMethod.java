@@ -19,63 +19,76 @@ import freemarker.ext.beans.BeansWrapper;
 import freemarker.template.TemplateMethodModelEx;
 import freemarker.template.TemplateModel;
 import freemarker.template.TemplateModelException;
-import org.codehaus.enunciate.contract.jaxb.Accessor;
-import org.codehaus.enunciate.contract.jaxb.RootElementDeclaration;
+import org.codehaus.enunciate.config.SchemaInfo;
+import org.codehaus.enunciate.contract.jaxb.*;
 import org.codehaus.enunciate.contract.jaxb.types.XmlType;
 
-import javax.xml.XMLConstants;
 import javax.xml.namespace.QName;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Ryan Heaton
  */
 public class TypeNameMethod implements TemplateMethodModelEx {
 
+  private final Map<String, SchemaInfo> namespacesToSchemas;
+
+  public TypeNameMethod(Map<String, SchemaInfo> namespacesToSchemas) {
+    this.namespacesToSchemas = namespacesToSchemas;
+  }
+
   public Object exec(List list) throws TemplateModelException {
     if (list.size() < 1) {
-      throw new TemplateModelException("The typeName method must have an accessor and a default ns as a parameter.");
+      throw new TemplateModelException("The typeName method must have an accessor as a parameter.");
     }
 
     Object object = BeansWrapper.getDefaultInstance().unwrap((TemplateModel) list.get(0));
-    String namespace;
     String name;
-    String defaultNs = "";
-    if (list.size() > 1) {
-      defaultNs = BeansWrapper.getDefaultInstance().unwrap((TemplateModel) list.get(1)).toString();
-    }
 
     if (object instanceof Accessor) {
       Accessor accessor = (Accessor) object;
       QName ref = accessor.getRef();
       if (ref != null) {
-        namespace = ref.getNamespaceURI();
-        name = ref.getLocalPart();
+        name = null;
+        SchemaInfo schemaInfo = this.namespacesToSchemas.get(ref.getNamespaceURI());
+        if (schemaInfo != null) {
+          for (ImplicitSchemaElement implicitElement : schemaInfo.getImplicitSchemaElements()) {
+            if (implicitElement.getElementName().equals(ref.getLocalPart())) {
+              name = implicitElement.getTypeQName().getLocalPart();
+              break;
+            }
+          }
+
+          if (name == null) {
+            for (ImplicitSchemaAttribute implicitElement : schemaInfo.getImplicitSchemaAttributes()) {
+              if (implicitElement.getAttributeName().equals(ref.getLocalPart())) {
+                name = implicitElement.getTypeQName().getLocalPart();
+                break;
+              }
+            }
+          }
+
+          if (name == null) {
+            name = ref.getLocalPart();
+          }
+        }
       }
       else {
-        namespace = accessor.getBaseType().getNamespace();
         name = accessor.getBaseType().getName();
       }
     }
     else if (object instanceof RootElementDeclaration) {
-      namespace = ((RootElementDeclaration) object).getTypeDefinition().getNamespace();
       name = ((RootElementDeclaration) object).getTypeDefinition().getName();
     }
     else if (object instanceof XmlType) {
-      namespace = ((XmlType) object).getNamespace();
       name = ((XmlType) object).getName();
     }
     else {
       throw new TemplateModelException("The typeName method must have an accessor as a parameter.");
     }
 
-    StringBuilder builder = new StringBuilder();
-    if (!defaultNs.equals(namespace) && !XMLConstants.W3C_XML_SCHEMA_NS_URI.equals(namespace)) {
-      builder.append(namespace);
-    }
-    builder.append(name);
-
-    return builder.toString();
+    return name;
   }
 
 }

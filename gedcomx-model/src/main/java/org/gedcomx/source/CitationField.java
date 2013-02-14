@@ -17,7 +17,7 @@ package org.gedcomx.source;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.gedcomx.common.URI;
-import org.gedcomx.rt.json.HasUniqueJsonKey;
+import org.gedcomx.rt.json.HasJsonKey;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlTransient;
@@ -29,7 +29,8 @@ import javax.xml.bind.annotation.XmlValue;
  * Represents a citation field -- its name and value.
  */
 @XmlType ( name = "CitationField" )
-public class CitationField implements HasUniqueJsonKey {
+public class CitationField implements HasJsonKey {
+
   private URI name;
   private String value;
 
@@ -44,6 +45,14 @@ public class CitationField implements HasUniqueJsonKey {
   public CitationField(String name, String value) {
     setNameValue(name);
     setValue(value);
+  }
+
+  @XmlTransient
+  @JsonIgnore
+  @org.codehaus.enunciate.json.JsonIgnore
+  @Override
+  public boolean isHasUniqueKey() {
+    return true;
   }
 
   /**

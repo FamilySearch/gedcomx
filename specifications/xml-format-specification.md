@@ -41,7 +41,7 @@ For convenience, the GEDCOM X XML Format may be referred to as "GEDCOM X XML 1.0
 
 The media type defined by this specification is:
 
-`application/x-gedcom-v1+xml`
+`application/x-gedcomx-v1+xml`
 
 This specification is depends on the conceptual model specification identified
 by [`http://gedcomx.org/conceptual-model/v1`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md).
@@ -270,6 +270,7 @@ type | URI identifying the type of the relationship. | type (attribute) | [`URI`
 person1 | Reference to the first person in the relationship. | gx:person1 | [`gx:ResourceReference`](#resource-reference)
 person2 | Reference to the second person in the relationship. | gx:person2 | [`gx:ResourceReference`](#resource-reference)
 facts | The conclusions about the facts of the life of the relationship. | gx:fact | [`gx:Fact`](#fact-conclusion)
+identifiers | Identifiers for the relationship. | gx:identifier | [`gx:Identifier`](#identifier-type)
 
 ### examples
 

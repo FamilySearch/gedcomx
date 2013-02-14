@@ -30,6 +30,6 @@ public class GedcomxConstants {
 
   public static final String GEDCOMX_TYPES_NAMESPACE = "http://gedcomx.org/"; //the constrained vocabulary isn't versioned.
   public static final String GEDCOMX_NAMESPACE = "http://gedcomx.org/v1/";
-  public static final String GEDCOMX_XML_MEDIA_TYPE = "application/x-gedcom-v1+xml";
-  public static final String GEDCOMX_JSON_MEDIA_TYPE = "application/x-gedcom-v1+json";
+  public static final String GEDCOMX_XML_MEDIA_TYPE = "application/x-gedcomx-v1+xml";
+  public static final String GEDCOMX_JSON_MEDIA_TYPE = "application/x-gedcomx-v1+json";
 }

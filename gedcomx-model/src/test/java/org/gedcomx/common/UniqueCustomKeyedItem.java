@@ -1,7 +1,7 @@
 package org.gedcomx.common;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
-import org.gedcomx.rt.json.HasUniqueJsonKey;
+import org.gedcomx.rt.json.HasJsonKey;
 import org.gedcomx.rt.json.JsonElementWrapper;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -12,11 +12,18 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @XmlRootElement
 @JsonElementWrapper(name = "ucustomkeys")
-public class UniqueCustomKeyedItem implements HasUniqueJsonKey {
+public class UniqueCustomKeyedItem implements HasJsonKey {
 
   private String key = String.valueOf(hashCode());
   private String val1;
   private String val2;
+
+  @XmlTransient
+  @JsonIgnore
+  @Override
+  public boolean isHasUniqueKey() {
+    return true;
+  }
 
   @JsonIgnore
   @XmlTransient

@@ -17,9 +17,9 @@ package org.gedcomx;
 
 import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.gedcomx.agent.Agent;
 import org.gedcomx.common.Attribution;
 import org.gedcomx.conclusion.*;
-import org.gedcomx.contributor.Agent;
 import org.gedcomx.links.HypermediaEnabledData;
 import org.gedcomx.records.Record;
 import org.gedcomx.rt.GedcomxConstants;

@@ -39,13 +39,14 @@ import java.util.List;
  */
 @XmlRootElement
 @JsonElementWrapper ( name = "relationships" )
-@XmlType ( name = "Relationship", propOrder = { "person1", "person2", "facts" } )
+@XmlType ( name = "Relationship", propOrder = { "person1", "person2", "facts", "identifiers" } )
 public class Relationship extends Conclusion implements HasFacts, Attributable {
 
   private URI type;
   private ResourceReference person1;
   private ResourceReference person2;
   private List<Fact> facts;
+  private List<Identifier> identifiers;
 
   /**
    * The type of this relationship.
@@ -177,6 +178,28 @@ public class Relationship extends Conclusion implements HasFacts, Attributable {
       }
       facts.add(fact);
     }
+  }
+
+  /**
+   * The list of identifiers for the relationship.
+   *
+   * @return The list of identifiers for the relationship.
+   */
+  @XmlElement (name="identifier")
+  @JsonProperty ("identifiers")
+  @JsonName ("identifiers")
+  public List<Identifier> getIdentifiers() {
+    return identifiers;
+  }
+
+  /**
+   * The list of identifiers of the relationship.
+   *
+   * @param identifiers The list of identifiers of the relationship.
+   */
+  @JsonProperty ("identifiers")
+  public void setIdentifiers(List<Identifier> identifiers) {
+    this.identifiers = identifiers;
   }
 
   /**

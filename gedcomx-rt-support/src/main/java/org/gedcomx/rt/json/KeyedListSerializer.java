@@ -17,6 +17,7 @@ package org.gedcomx.rt.json;
 
 import org.codehaus.jackson.JsonGenerator;
 import org.codehaus.jackson.JsonProcessingException;
+import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.JsonSerializer;
 import org.codehaus.jackson.map.SerializerProvider;
 
@@ -26,16 +27,16 @@ import java.util.*;
 /**
  * @author Ryan Heaton
  */
-public class KeyedListSerializer extends JsonSerializer<Collection<? extends HasUniqueJsonKey>> {
+public class KeyedListSerializer extends JsonSerializer<Collection<? extends HasJsonKey>> {
 
   public static final String JSON_DEFAULT_KEY = "$";
 
   @Override
-  public void serialize(Collection<? extends HasUniqueJsonKey> value, JsonGenerator jgen, SerializerProvider provider) throws IOException, JsonProcessingException {
+  public void serialize(Collection<? extends HasJsonKey> value, JsonGenerator jgen, SerializerProvider provider) throws IOException, JsonProcessingException {
     serializeGeneric(value, jgen, provider);
   }
 
-  static void serializeGeneric(Collection<?> value, JsonGenerator jgen, SerializerProvider provider) throws IOException {
+  static void serializeGeneric(Collection<?> value, JsonGenerator jgen, SerializerProvider provider) throws IOException, JsonProcessingException {
     if (value == null) {
       jgen.writeNull();
     }
@@ -54,12 +55,17 @@ public class KeyedListSerializer extends JsonSerializer<Collection<? extends Has
           bykey.put(jsonKey, keyedList);
         }
         keyedList.add(keyed);
+
+        boolean unique = ((HasJsonKey) keyed).isHasUniqueKey();
+        if (unique && keyedList.size() > 1) {
+          throw new JsonMappingException("Attempt to serialize " + keyed + " failed because it's key '" + jsonKey + "' is not unique.");
+        }
       }
 
       for (Map.Entry<String, List<Object>> keyedObjects : bykey.entrySet()) {
         String jsonKey = keyedObjects.getKey();
         jgen.writeFieldName(jsonKey);
-        boolean notUnique = keyedObjects.getValue().size() != 1 || (!(keyedObjects.getValue().get(0) instanceof HasUniqueJsonKey));
+        boolean notUnique = keyedObjects.getValue().size() != 1 || !((HasJsonKey)keyedObjects.getValue().get(0)).isHasUniqueKey();
         if (notUnique) {
           jgen.writeStartArray();
         }
