@@ -50,6 +50,7 @@ public class Record extends HypermediaEnabledData implements Attributable, HasNo
   private List<Field> fields;
   private List<Note> notes;
   private Attribution attribution;
+  private URI descriptionRef;
 
   /**
    * A local, context-specific id for the data.
@@ -269,6 +270,28 @@ public class Record extends HypermediaEnabledData implements Attributable, HasNo
    */
   public void setAttribution(Attribution attribution) {
     this.attribution = attribution;
+  }
+
+  /**
+   * A reference to a description of the record.
+   *
+   * @return A reference to a description of the record.
+   */
+  @XmlAttribute ( name = "description" )
+  @JsonName ( "description" )
+  @JsonProperty ( "description" )
+  public URI getDescriptionRef() {
+    return descriptionRef;
+  }
+
+  /**
+   * A reference to a description of the record.
+   *
+   * @param descriptionRef A reference to a description of the record.
+   */
+  @JsonProperty ( "description" )
+  public void setDescriptionRef(URI descriptionRef) {
+    this.descriptionRef = descriptionRef;
   }
 
   /**
