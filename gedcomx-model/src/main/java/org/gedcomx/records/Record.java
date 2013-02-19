@@ -43,6 +43,8 @@ import java.util.List;
 public class Record extends HypermediaEnabledData implements Attributable, HasNotes {
 
   private String id;
+  private ResourceReference principalPerson;
+  private ResourceReference primaryEvent;
   private List<SourceReference> sources;
   private List<Identifier> identifiers;
   private List<Field> fields;
@@ -66,6 +68,42 @@ public class Record extends HypermediaEnabledData implements Attributable, HasNo
    */
   public void setId(String id) {
     this.id = id;
+  }
+
+  /**
+   * The principal person of this record.
+   *
+   * @return The principal person of this record.
+   */
+  public ResourceReference getPrincipalPerson() {
+    return principalPerson;
+  }
+
+  /**
+   * The principal person of this record.
+   *
+   * @param principalPerson The principal person of this record.
+   */
+  public void setPrincipalPerson(ResourceReference principalPerson) {
+    this.principalPerson = principalPerson;
+  }
+
+  /**
+   * The primary event of this record.
+   *
+   * @return The primary event of this record.
+   */
+  public ResourceReference getPrimaryEvent() {
+    return primaryEvent;
+  }
+
+  /**
+   * The primary event of this record.
+   *
+   * @param primaryEvent The primary event of this record.
+   */
+  public void setPrimaryEvent(ResourceReference primaryEvent) {
+    this.primaryEvent = primaryEvent;
   }
 
   /**

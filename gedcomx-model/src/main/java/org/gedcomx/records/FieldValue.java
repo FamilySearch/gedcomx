@@ -16,6 +16,7 @@
 package org.gedcomx.records;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.gedcomx.common.ResourceReference;
 import org.gedcomx.common.URI;
 import org.gedcomx.conclusion.Conclusion;
 import org.gedcomx.types.FieldValueType;
@@ -31,10 +32,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType ( name = "FieldValue" )
 public final class FieldValue extends Conclusion {
 
+  /**
+   * @see FieldValueType
+   */
   private URI type;
   private String text;
   private URI datatype;
   private URI resource;
+  private ResourceReference derivation;
 
   public FieldValue() {
   }
@@ -140,4 +145,21 @@ public final class FieldValue extends Conclusion {
     this.resource = resource;
   }
 
+  /**
+   * Reference to the data that has been derived from this field value.
+   *
+   * @return Reference to the data that has been derived from this field value.
+   */
+  public ResourceReference getDerivation() {
+    return derivation;
+  }
+
+  /**
+   * Reference to the data that has been derived from this field value.
+   *
+   * @param derivation Reference to the data that has been derived from this field value.
+   */
+  public void setDerivation(ResourceReference derivation) {
+    this.derivation = derivation;
+  }
 }

@@ -85,7 +85,7 @@ public class Gedcomx extends HypermediaEnabledData {
   private List<Event> events;
   private List<PlaceDescription> places;
   private List<Document> documents;
-  private List<Record> records; //todo: getter/setter, visitor
+  private List<Record> records;
 
   /**
    * The id of this genealogical data set.
