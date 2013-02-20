@@ -19,9 +19,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import org.gedcomx.rt.SupportsExtensionElements;
 
 import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlAnyElement;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import java.util.*;
 
 /**
@@ -32,8 +30,29 @@ import java.util.*;
 @XmlType( name = "ExtensibleData" )
 public abstract class ExtensibleData implements SupportsExtensionElements, HasTransientProperties {
 
+  private String id;
   protected List<Object> extensionElements;
   protected final Map<String, Object> transientProperties = new TreeMap<String, Object>();
+
+  /**
+   * A local, context-specific id for the data.
+   *
+   * @return A local, context-specific id for the data.
+   */
+  @XmlID
+  @XmlAttribute
+  public String getId() {
+    return id;
+  }
+
+  /**
+   * A local, context-specific id for the data.
+   *
+   * @param id A local, context-specific id for the data.
+   */
+  public void setId(String id) {
+    this.id = id;
+  }
 
   /**
    * Custom extension elements for a conclusion.

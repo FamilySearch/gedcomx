@@ -7,9 +7,28 @@ package org.gedcomx.records;
  */
 public class FieldDescription {
 
+  private String text;
   private String systemLabel;
   private String originalLabel;
   private String displayLabel;
+
+  /**
+   * Human-readable text value of the description.
+   *
+   * @return Human-readable text value of the description.
+   */
+  public String getText() {
+    return text;
+  }
+
+  /**
+   * Human-readable text value of the description.
+   *
+   * @param text Human-readable text value of the description.
+   */
+  public void setText(String text) {
+    this.text = text;
+  }
 
   /**
    * The (system) label identifier for the field.

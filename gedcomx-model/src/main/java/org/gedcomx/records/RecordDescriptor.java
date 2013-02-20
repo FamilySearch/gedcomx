@@ -3,6 +3,7 @@ package org.gedcomx.records;
 import org.codehaus.enunciate.json.JsonName;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.gedcomx.Gedcomx;
+import org.gedcomx.links.HypermediaEnabledData;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -12,12 +13,11 @@ import java.util.List;
 /**
  * @author Ryan Heaton
  */
-public class RecordDescription {
+public class RecordDescriptor extends HypermediaEnabledData {
 
   private String lang;
   private String text;
   private List<FieldDescription> fields;
-  private Gedcomx structure;
 
   /**
    * The language of this record description. See <a href="http://www.w3.org/International/articles/language-tags/">http://www.w3.org/International/articles/language-tags/</a>
@@ -39,7 +39,7 @@ public class RecordDescription {
   }
 
   /**
-   * Human-readable text value of the description.
+   * Human-readable text value of this descriptor, used to describe the kinds of records associated with this descriptor.
    *
    * @return Human-readable text value of the description.
    */
@@ -48,7 +48,7 @@ public class RecordDescription {
   }
 
   /**
-   * Human-readable text value of the description.
+   * Human-readable text value of this descriptor, used to describe the kinds of records associated with this descriptor.
    *
    * @param text Human-readable text value of the description.
    */
@@ -76,23 +76,5 @@ public class RecordDescription {
   @JsonProperty ("fields")
   public void setFields(List<FieldDescription> fields) {
     this.fields = fields;
-  }
-
-  /**
-   * The expected (tree) structure of this record. The values within the structure may be used as replacement keys, e.g. for a templating engine.
-   *
-   * @return The expected structure of this record.
-   */
-  public Gedcomx getStructure() {
-    return structure;
-  }
-
-  /**
-   * The expected (tree) structure of this record. The values within the structure may be used as replacement keys, e.g. for a templating engine.
-   *
-   * @param structure The expected structure of this record.
-   */
-  public void setStructure(Gedcomx structure) {
-    this.structure = structure;
   }
 }

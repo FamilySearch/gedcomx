@@ -36,31 +36,10 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType ( name = "Note", propOrder = { "subject", "text", "attribution" } )
 public class Note extends HypermediaEnabledData implements Attributable, HasText {
 
-  private String id;
   private String lang;
   private String subject;
   private String text;
   private Attribution attribution;
-
-  /**
-   * A local, context-specific id for the data.
-   *
-   * @return A local, context-specific id for the data.
-   */
-  @XmlID
-  @XmlAttribute
-  public String getId() {
-    return id;
-  }
-
-  /**
-   * A local, context-specific id for the data.
-   *
-   * @param id A local, context-specific id for the data.
-   */
-  public void setId(String id) {
-    this.id = id;
-  }
 
   /**
    * The language of the note. See <a href="http://www.w3.org/International/articles/language-tags/">http://www.w3.org/International/articles/language-tags/</a>

@@ -38,11 +38,10 @@ import java.util.List;
  * of the sources from which the data is being extracted.
  */
 @XmlRootElement
-@XmlType ( name = "Record", propOrder = { "sources", "identifiers", "fields", "notes", "attribution" } )
+@XmlType ( name = "Record", propOrder = { "sources", "identifiers", "principalPerson", "primaryEvent", "fields", "notes", "attribution" } )
 @JsonElementWrapper ( name = "records" )
 public class Record extends HypermediaEnabledData implements Attributable, HasNotes {
 
-  private String id;
   private ResourceReference principalPerson;
   private ResourceReference primaryEvent;
   private List<SourceReference> sources;
@@ -51,25 +50,6 @@ public class Record extends HypermediaEnabledData implements Attributable, HasNo
   private List<Note> notes;
   private Attribution attribution;
   private URI descriptionRef;
-
-  /**
-   * A local, context-specific id for the data.
-   *
-   * @return A local, context-specific id for the data.
-   */
-  @XmlID
-  @XmlAttribute
-  public String getId() {
-    return id;
-  }
-
-  /**
-   * A local, context-specific id for the data.
-   * @param id A local, context-specific id for the data.
-   */
-  public void setId(String id) {
-    this.id = id;
-  }
 
   /**
    * The principal person of this record.

@@ -38,32 +38,11 @@ import java.util.List;
 @XmlType ( name = "Conclusion", propOrder = { "attribution", "sources", "notes" })
 public abstract class Conclusion extends HypermediaEnabledData implements Attributable, ReferencesSources, HasNotes {
 
-  private String id;
   private String lang;
   private URI confidence;
   private List<SourceReference> sources;
   private List<Note> notes;
   private Attribution attribution;
-
-  /**
-   * A local, context-specific id for the data.
-   *
-   * @return A local, context-specific id for the data.
-   */
-  @XmlID
-  @XmlAttribute
-  public String getId() {
-    return id;
-  }
-
-  /**
-   * A local, context-specific id for the data.
-   *
-   * @param id A local, context-specific id for the data.
-   */
-  public void setId(String id) {
-    this.id = id;
-  }
 
   /**
    * The language of the conclusion. See <a href="http://www.w3.org/International/articles/language-tags/">http://www.w3.org/International/articles/language-tags/</a>

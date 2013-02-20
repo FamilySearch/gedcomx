@@ -75,7 +75,6 @@ import java.util.List;
 @XmlType ( name = "Gedcomx" , propOrder = { "attribution", "persons", "relationships", "sourceDescriptions", "agents", "events", "places", "documents", "records" })
 public class Gedcomx extends HypermediaEnabledData {
 
-  private String id;
   private String lang;
   private Attribution attribution;
   private List<Person> persons;
@@ -86,26 +85,6 @@ public class Gedcomx extends HypermediaEnabledData {
   private List<PlaceDescription> places;
   private List<Document> documents;
   private List<Record> records;
-
-  /**
-   * The id of this genealogical data set.
-   *
-   * @return The id of this genealogical data set.
-   */
-  @XmlAttribute
-  @XmlID
-  public String getId() {
-    return id;
-  }
-
-  /**
-   * The id of this genealogical data set.
-   *
-   * @param id The id of this genealogical data set.
-   */
-  public void setId(String id) {
-    this.id = id;
-  }
 
   /**
    * The language of this genealogical data set. See <a href="http://www.w3.org/International/articles/language-tags/">http://www.w3.org/International/articles/language-tags/</a>.

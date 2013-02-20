@@ -41,7 +41,6 @@ import java.util.List;
 @JsonElementWrapper ( name = "agents" )
 public class Agent extends HypermediaEnabledData {
 
-  private String id;
   private List<TextValue> names;
   private List<Identifier> identifiers;
   private ResourceReference homepage;
@@ -50,26 +49,6 @@ public class Agent extends HypermediaEnabledData {
   private List<ResourceReference> emails;
   private List<ResourceReference> phones;
   private List<Address> addresses;
-
-  /**
-   * The id of this piece of metadata.
-   *
-   * @return The id of this piece of metadata.
-   */
-  @XmlAttribute
-  @XmlID
-  public String getId() {
-    return id;
-  }
-
-  /**
-   * The id of this piece of metadata.
-   *
-   * @param id The id of this piece of metadata.
-   */
-  public void setId(String id) {
-    this.id = id;
-  }
 
   /**
    * The preferred name for this agent.

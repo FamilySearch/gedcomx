@@ -39,7 +39,7 @@ public final class FieldValue extends Conclusion {
   private String text;
   private URI datatype;
   private URI resource;
-  private ResourceReference derivation;
+  private ResourceReference referenceToDataExtractedFromThisField;
 
   public FieldValue() {
   }
@@ -150,16 +150,16 @@ public final class FieldValue extends Conclusion {
    *
    * @return Reference to the data that has been derived from this field value.
    */
-  public ResourceReference getDerivation() {
-    return derivation;
+  public ResourceReference getReferenceToDataExtractedFromThisField() {
+    return referenceToDataExtractedFromThisField;
   }
 
   /**
    * Reference to the data that has been derived from this field value.
    *
-   * @param derivation Reference to the data that has been derived from this field value.
+   * @param referenceToDataExtractedFromThisField Reference to the data that has been derived from this field value.
    */
-  public void setDerivation(ResourceReference derivation) {
-    this.derivation = derivation;
+  public void setReferenceToDataExtractedFromThisField(ResourceReference referenceToDataExtractedFromThisField) {
+    this.referenceToDataExtractedFromThisField = referenceToDataExtractedFromThisField;
   }
 }
