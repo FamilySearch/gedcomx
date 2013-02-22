@@ -38,11 +38,11 @@ import java.util.List;
  * of the sources from which the data is being extracted.
  */
 @XmlRootElement
-@XmlType ( name = "Record", propOrder = { "sources", "identifiers", "principalPerson", "primaryEvent", "fields", "notes", "attribution" } )
+@XmlType ( name = "Record", propOrder = { "sources", "identifiers", "principalPersons", "primaryEvent", "fields", "notes", "attribution" } )
 @JsonElementWrapper ( name = "records" )
 public class Record extends HypermediaEnabledData implements Attributable, HasNotes {
 
-  private ResourceReference principalPerson;
+  private List<ResourceReference> principalPersons;
   private ResourceReference primaryEvent;
   private List<SourceReference> sources;
   private List<Identifier> identifiers;
@@ -52,21 +52,21 @@ public class Record extends HypermediaEnabledData implements Attributable, HasNo
   private URI descriptionRef;
 
   /**
-   * The principal person of this record.
+   * The principal person(s) of this record.
    *
-   * @return The principal person of this record.
+   * @return The principal person(s) of this record.
    */
-  public ResourceReference getPrincipalPerson() {
-    return principalPerson;
+  public List<ResourceReference> getPrincipalPersons() {
+    return principalPersons;
   }
 
   /**
-   * The principal person of this record.
+   * The principal person(s) of this record.
    *
-   * @param principalPerson The principal person of this record.
+   * @param principalPersons The principal person(s) of this record.
    */
-  public void setPrincipalPerson(ResourceReference principalPerson) {
-    this.principalPerson = principalPerson;
+  public void setPrincipalPersons(List<ResourceReference> principalPersons) {
+    this.principalPersons = principalPersons;
   }
 
   /**

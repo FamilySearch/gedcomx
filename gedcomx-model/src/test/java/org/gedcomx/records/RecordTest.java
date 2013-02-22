@@ -4,6 +4,7 @@ import org.gedcomx.Gedcomx;
 import org.gedcomx.common.ResourceReference;
 import org.gedcomx.common.URI;
 import org.gedcomx.conclusion.*;
+import org.gedcomx.types.FactType;
 import org.gedcomx.types.FieldValueType;
 import org.gedcomx.types.NamePartType;
 import org.gedcomx.types.RelationshipType;
@@ -48,6 +49,7 @@ public class RecordTest {
 
     //given name
     Field givenNameField = new Field();
+    givenNameField.setLabel("PR_NAME_GN");
     String givenNameId = "pr-gn";
     givenNameField.setType(NamePartType.Given.toQNameURI());
     givenNameField.setValues(new ArrayList<FieldValue>());
@@ -60,6 +62,7 @@ public class RecordTest {
 
     //surname
     Field surnameField = new Field();
+    surnameField.setLabel("PR_NAME_SURN");
     String surnameId = "pr-sn";
     surnameField.setType(NamePartType.Surname.toQNameURI());
     surnameField.setValues(new ArrayList<FieldValue>());
@@ -74,6 +77,7 @@ public class RecordTest {
 
     //death date: day
     Field deathDayField = new Field();
+    deathDayField.setLabel("PR_DEATH_DATE_DAY");
     deathDayField.setType(URI.create("/Identifier/For/Death/Day"));
     deathDayField.setValues(new ArrayList<FieldValue>());
     FieldValue deathDayValue = new FieldValue();
@@ -85,6 +89,7 @@ public class RecordTest {
 
     //death date: month
     Field deathMonthField = new Field();
+    deathMonthField.setLabel("PR_DEATH_DATE_MONTH");
     deathMonthField.setType(URI.create("/Identifier/For/Death/Month"));
     deathMonthField.setValues(new ArrayList<FieldValue>());
     FieldValue deathMonthValue = new FieldValue();
@@ -96,6 +101,7 @@ public class RecordTest {
 
     //death date: year
     Field deathYearField = new Field();
+    deathYearField.setLabel("PR_DEATH_DATE_YEAR");
     deathYearField.setType(URI.create("/Identifier/For/Death/Year"));
     deathYearField.setValues(new ArrayList<FieldValue>());
     FieldValue deathYearValue = new FieldValue();
@@ -107,6 +113,7 @@ public class RecordTest {
     
     //death date: place
     Field deathPlaceField = new Field();
+    deathPlaceField.setLabel("PR_DEATH_PLACE");
     String deathPlaceId = "pr-dp";
     deathPlaceField.setType(URI.create("/Identifier/For/Death/Place"));
     deathPlaceField.setValues(new ArrayList<FieldValue>());
@@ -121,6 +128,7 @@ public class RecordTest {
 
     //age
     Field ageField = new Field();
+    ageField.setLabel("PR_AGE");
     ageField.setType(URI.create("/Identifier/For/Age"));
     ageField.setValues(new ArrayList<FieldValue>());
     FieldValue ageValue = new FieldValue();
@@ -133,13 +141,14 @@ public class RecordTest {
     //wife full name
     String wifeNameId = "s-n";
     Field wifeNameField = new Field();
+    wifeNameField.setLabel("SP_NAME");
     wifeNameField.setType(URI.create("/Identifier/For/Wife/Name")); //todo: controlled vocabulary size?
     wifeNameField.setValues(new ArrayList<FieldValue>());
     FieldValue wifeNameValue = new FieldValue();
     wifeNameValue.setKnownType(FieldValueType.Original);
     wifeNameValue.setText("Marie Bishop");
     wifeNameValue.setReferenceToDataExtractedFromThisField(new ResourceReference(URI.create("#" + wifeNameId))); //todo: reference to relationship, too?
-    ageField.getValues().add(wifeNameValue);
+    wifeNameField.getValues().add(wifeNameValue);
     fields.add(wifeNameField);
 
     record.setFields(fields);
@@ -160,10 +169,12 @@ public class RecordTest {
     principalName.setNameForms(Arrays.asList(principalNameForm));
     principal.setNames(Arrays.asList(principalName));
     Fact birth = new Fact();
+    birth.setKnownType(FactType.Birth);
     birth.setDate(new Date());
     birth.getDate().setOriginal("1914");
     birth.getDate().setId(birthDateId);
     Fact death = new Fact();
+    death.setKnownType(FactType.Death);
     death.setDate(new Date());
     death.getDate().setOriginal("30 October 2002");
     death.getDate().setFormal("+2002-10-30");
@@ -186,6 +197,8 @@ public class RecordTest {
     coupleRelationship.setKnownType(RelationshipType.Couple);
     coupleRelationship.setPerson1(new ResourceReference(URI.create("#" + principalId)));
     coupleRelationship.setPerson2(new ResourceReference(URI.create("#" + spouseId)));
+
+    record.setPrincipalPersons(Arrays.asList(new ResourceReference(URI.create("#" + principalId))));
 
     Gedcomx gx = new Gedcomx();
     gx.setRecords(Arrays.asList(record));
