@@ -55,6 +55,12 @@
     </plugins>
   </build>
 
+  <scm>
+    <connection>scm:git:git@github.com:FamilySearch/gedcomx.git</connection>
+    <developerConnection>scm:git:git@github.com:FamilySearch/gedcomx.git</developerConnection>
+    <url>https://github.com/FamilySearch/gedcomx</url>
+  </scm>
+
   <dependencies>
     <!-- none -->
   </dependencies>
