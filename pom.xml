@@ -1,106 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-
   <modelVersion>4.0.0</modelVersion>
-  <artifactId>gedcomx-parent</artifactId>
   <groupId>org.gedcomx</groupId>
-  <name>GEDCOM X - Parent Project</name>
-  <version>0.30.0-SNAPSHOT</version>
-  <packaging>pom</packaging>
-
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <enunciate.version>1.26.2</enunciate.version>
-    <root.basedir>${project.basedir}</root.basedir>
-    <year>${inceptionYear}</year>
-  </properties>
-
-  <modules>
-    <module>gedcomx-rt-support</module>
-    <module>gedcomx-test-support</module>
-    <module>enunciate-gedcomx-support</module>
-    <module>gedcomx-model</module>
-  </modules>
-
-  <dependencies>
-    <dependency>
-      <groupId>org.testng</groupId>
-      <artifactId>testng</artifactId>
-      <version>5.14</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.codehaus.enunciate</groupId>
-      <artifactId>enunciate-core-rt</artifactId>
-      <version>${enunciate.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.codehaus.jackson</groupId>
-      <artifactId>jackson-jaxrs</artifactId>
-      <version>1.8.0</version>
-    </dependency>
-    <dependency>
-      <groupId>org.codehaus.jackson</groupId>
-      <artifactId>jackson-xc</artifactId>
-      <version>1.8.0</version>
-    </dependency>
-  </dependencies>
-
-  <scm>
-    <connection>scm:git:git@github.com:FamilySearch/gedcomx.git</connection>
-    <developerConnection>scm:git:git@github.com:FamilySearch/gedcomx.git</developerConnection>
-    <url>https://github.com/FamilySearch/gedcomx</url>
-  </scm>
+  <artifactId>gedcomx-specifications</artifactId>
+  <name>GEDCOM X - Specifications</name>
+  <version>0.33.0-SNAPSHOT</version>
 
   <build>
-    <resources>
-      <resource>
-        <directory>${basedir}/src/main/resources</directory>
-        <filtering>true</filtering>
-      </resource>
-    </resources>
     <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <encoding>UTF-8</encoding>
-          <source>1.6</source>
-          <target>1.6</target>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-release-plugin</artifactId>
-        <version>2.2.2</version>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-idea-plugin</artifactId>
-        <configuration>
-          <downloadSources>false</downloadSources>
-          <downloadJavadocs>false</downloadJavadocs>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <configuration>
-          <systemPropertyVariables>
-            <show.output>${show.output}</show.output>
-            <recipes.dir>${project.build.directory}/recipes</recipes.dir>
-          </systemPropertyVariables>
-        </configuration>
-      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-antrun-plugin</artifactId>
         <executions>
           <execution>
-            <phase>process-test-classes</phase>
+            <id>package-uml</id>
+            <phase>process-resources</phase>
             <configuration>
               <tasks>
-                <delete dir="${project.build.directory}/recipes" />
+                <mkdir dir="${project.build.directory}/uml/" />
+                <touch file="${project.build.directory}/uml/Class Diagram.png" />
+                <move file="${project.build.directory}/uml/Class Diagram.png" tofile="${project.build.directory}/uml/model.png" failonerror="false" />
+                <zip destfile="${project.build.directory}/uml.zip" basedir="${project.build.directory}/uml" />
               </tasks>
             </configuration>
             <goals>
@@ -110,241 +30,70 @@
         </executions>
       </plugin>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-source-plugin</artifactId>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <version>1.7</version>
         <executions>
           <execution>
-            <id>attach-sources</id>
+            <id>attach-uml</id>
             <phase>package</phase>
             <goals>
-              <goal>jar</goal>
+              <goal>attach-artifact</goal>
             </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>com.google.code.maven-license-plugin</groupId>
-        <artifactId>maven-license-plugin</artifactId>
-        <version>1.4.0</version>
-        <configuration>
-          <header>${root.basedir}/LICENSE-header.txt</header>
-          <includes>
-            <include>src/main/java/**</include>
-          </includes>
-          <properties>
-            <copyright.year>${inceptionYear}</copyright.year>
-          </properties>
-        </configuration>
-        <executions>
-          <execution>
-            <phase>verify</phase>
-            <goals>
-              <goal>check</goal>
-            </goals>
+            <configuration>
+              <artifacts>
+                <artifact>
+                  <file>${project.build.directory}/uml.zip</file>
+                  <type>zip</type>
+                  <classifier>uml</classifier>
+                </artifact>
+              </artifacts>
+            </configuration>
           </execution>
         </executions>
       </plugin>
     </plugins>
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <groupId>org.codehaus.enunciate</groupId>
-          <artifactId>maven-enunciate-plugin</artifactId>
-          <version>${enunciate.version}</version>
-
-          <configuration>
-            <configFile>${root.basedir}/enunciate.xml</configFile>
-          </configuration>
-
-          <dependencies>
-            <dependency>
-              <groupId>org.gedcomx</groupId>
-              <artifactId>enunciate-gedcomx-support</artifactId>
-              <version>0.30.0-SNAPSHOT</version>
-            </dependency>
-          </dependencies>
-        </plugin>
-        <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
-        <plugin>
-          <groupId>org.eclipse.m2e</groupId>
-          <artifactId>lifecycle-mapping</artifactId>
-          <version>1.0.0</version>
-          <configuration>
-            <lifecycleMappingMetadata>
-              <pluginExecutions>
-                <pluginExecution>
-                  <pluginExecutionFilter>
-                    <groupId>org.codehaus.enunciate</groupId>
-                    <artifactId>maven-enunciate-plugin</artifactId>
-                    <versionRange>[1.25,)</versionRange>
-                    <goals>
-                      <goal>assemble</goal>
-                    </goals>
-                  </pluginExecutionFilter>
-                  <action>
-                    <execute>
-                      <runOnIncremental>false</runOnIncremental>
-                    </execute>
-                  </action>
-                </pluginExecution>
-                <pluginExecution>
-                  <pluginExecutionFilter>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-antrun-plugin</artifactId>
-                    <versionRange>[1.3,)</versionRange>
-                    <goals>
-                      <goal>run</goal>
-                    </goals>
-                  </pluginExecutionFilter>
-                  <action>
-                    <execute>
-                      <runOnIncremental>false</runOnIncremental>
-                    </execute>
-                  </action>
-                </pluginExecution>
-              </pluginExecutions>
-            </lifecycleMappingMetadata>
-          </configuration>
-        </plugin>
-      </plugins>
-    </pluginManagement>
   </build>
+
+  <dependencies>
+    <!-- none -->
+  </dependencies>
 
   <profiles>
     <profile>
-      <!--activate some sugar for the jenkins build instance-->
-      <id>jenkins</id>
-      <activation>
-        <property>
-          <name>BUILD_NUMBER</name>
-        </property>
-      </activation>
+      <id>use-argouml</id>
       <build>
-        <pluginManagement>
-          <plugins>
-            <plugin>
-              <groupId>org.codehaus.mojo</groupId>
-              <artifactId>cobertura-maven-plugin</artifactId>
-              <version>2.5.1</version>
-              <configuration>
-                <formats>
-                  <format>xml</format>
-                  <format>html</format>
-                </formats>
-                <instrumentation>
-                  <ignores>
-                    <ignore>com.*</ignore>
-                    <ignore>net.*</ignore>
-                    <ignore>org.apache.*</ignore>
-                  </ignores>
-                </instrumentation>
-              </configuration>
-              <executions>
-                <execution>
-                  <phase>package</phase>
-                  <goals>
-                    <goal>cobertura</goal>
-                  </goals>
-                </execution>
-              </executions>
-            </plugin>
-            <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-pmd-plugin</artifactId>
-              <version>2.5</version>
-              <configuration>
-                <targetJdk>1.6</targetJdk>
-                <formats>
-                  <format>xml</format>
-                  <format>html</format>
-                </formats>
-                <excludes>
-                  <exclude>**/package-info.java</exclude>
-                </excludes>
-              </configuration>
-              <executions>
-                <execution>
-                  <phase>package</phase>
-                  <goals>
-                    <goal>pmd</goal>
-                  </goals>
-                </execution>
-              </executions>
-            </plugin>
-            <plugin>
-              <groupId>org.codehaus.mojo</groupId>
-              <artifactId>findbugs-maven-plugin</artifactId>
-              <version>2.4.0</version>
-              <configuration>
-                <findbugsXmlOutput>true</findbugsXmlOutput>
-              </configuration>
-              <executions>
-                <execution>
-                  <phase>package</phase>
-                  <goals>
-                    <goal>findbugs</goal>
-                  </goals>
-                </execution>
-              </executions>
-            </plugin>
-          </plugins>
-        </pluginManagement>
-      </build>
-      <reporting>
         <plugins>
           <plugin>
             <groupId>org.codehaus.mojo</groupId>
-            <artifactId>findbugs-maven-plugin</artifactId>
+            <artifactId>argouml-maven-plugin</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <executions>
+              <execution>
+                <phase>generate-resources</phase>
+                <goals>
+                  <goal>transform</goal>
+                </goals>
+              </execution>
+            </executions>
             <configuration>
-              <xmlOutput>true</xmlOutput>
-              <findbugsXmlOutput>true</findbugsXmlOutput>
-              <threshold>Normal</threshold>
-              <debug>false</debug>
-              <relaxed>true</relaxed>
-              <!--<excludeFilterFile>./findbugs-exclude-filter.xml</excludeFilterFile>-->
-            </configuration>
-          </plugin>
-          <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>cobertura-maven-plugin</artifactId>
-            <configuration>
-              <formats>
-                <format>xml</format>
-                <format>html</format>
-              </formats>
+              <inputFiles>
+                <inputFile>specifications/support/gedcomx.zargo</inputFile>
+              </inputFiles>
+              <outputDirectory>${project.build.directory}/uml</outputDirectory>
             </configuration>
           </plugin>
         </plugins>
-      </reporting>
+      </build>
+      <pluginRepositories>
+        <pluginRepository>
+          <id>codehaus</id>
+          <url>http://snapshots.repository.codehaus.org/</url>
+          <snapshots>
+            <enabled>true</enabled>
+          </snapshots>
+        </pluginRepository>
+      </pluginRepositories>
     </profile>
   </profiles>
-
-  <repositories>
-    <repository>
-      <id>codehaus-release-repo</id>
-      <name>Codehaus Release Repository</name>
-      <url>http://repository.codehaus.org/</url>
-    </repository>
-  </repositories>
-
-  <pluginRepositories>
-    <pluginRepository>
-      <id>codehaus-release-repo</id>
-      <name>Codehaus Release Repository</name>
-      <url>http://repository.codehaus.org/</url>
-    </pluginRepository>
-  </pluginRepositories>
-
-  <distributionManagement>
-    <repository>
-      <id>gedcomx-release-repo</id>
-      <name>GEDCOM X Release Repository</name>
-      <url>https://repository-gedcom.forge.cloudbees.com/release/</url>
-    </repository>
-    <snapshotRepository>
-      <id>gedcomx-snapshot-repo</id>
-      <name>GEDCOM X Snapshot Repository</name>
-      <url>https://repository-gedcom.forge.cloudbees.com/snapshot/</url>
-    </snapshotRepository>
-  </distributionManagement>
 </project>
