@@ -53,7 +53,9 @@ The following example shows an instance of a GEDCOM X serialization in accordanc
 ```json
 {
   "attribution" : {
-    "contributor" : "#GGG-GGGG"
+    "contributor" : {
+      "resource" : "#GGG-GGGG"
+    }
   },
   "persons" : [ {
     "names" : [ {
@@ -156,8 +158,12 @@ The following example shows an instance of a GEDCOM X serialization in accordanc
         "original" : "White House Plantation"
       }
     } ],
-    "person1" : "#BBB-BBBB",
-    "person2" : "#CCC-CCCC",
+    "person1" : {
+      "resource" : "#BBB-BBBB"
+    },
+    "person2" : {
+      "resource" : "#CCC-CCCC"
+    },
     "id" : "DDD-DDDD",
     "sources" : [ {
       "description" : "#FFF-FFFF"
