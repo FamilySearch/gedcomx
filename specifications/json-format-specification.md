@@ -289,8 +289,8 @@ name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 attribution | The attribution of this conclusion. | attribution | [`Attribution`](#attribution)
 type | URI identifying the type of the relationship. | type | [`URI`](#uri)
-person1 | Reference to the first person in the relationship. | person1 | [`URI`](#uri)
-person2 | Reference to the second person in the relationship. | person2 | [`URI`](#uri)
+person1 | Reference to the first person in the relationship. | person1 | [`ResourceReference`](#resource-reference)
+person2 | Reference to the second person in the relationship. | person2 | [`ResourceReference`](#resource-reference)
 facts | The conclusions about the facts of the life of the relationship. | facts | array of [`Fact`](#fact-conclusion)
 identifiers | Identifiers for the relationship. | identifiers | [`Identifier`](#identifier-type)
 
@@ -303,8 +303,12 @@ identifiers | Identifiers for the relationship. | identifiers | [`Identifier`](#
 
   "attribution" : { ... },
   "type" : "http://gedcomx.org/Couple",
-  "person1" : "http://identifier/for/person/1",
-  "person2" : "http://identifier/for/person/2",
+  "person1" : {
+    "resource" : "http://identifier/for/person/1"
+  },
+  "person2" : {
+    "resource" : "http://identifier/for/person/2"
+  },
   "facts" : [ { ... }, { ... } ]
 }
 ```
@@ -323,9 +327,9 @@ name | description | JSON member | JSON object type
 id | An identifier for the JSON object holding the source description data. The id attribute MUST conform to the constraints defined in [Section 7, "Fragment Identifiers"](#fragment-ids). | id | string
 citations | The citation for this source. | citations | array of [`SourceCitation`](#source-citation)
 about | A uniform resource identifier (URI) for the resource being described. | about | [`URI`](#uri)
-mediator | A reference to the entity that mediates access to the described source. | mediator | [`URI`](#uri)
+mediator | A reference to the entity that mediates access to the described source. | mediator | [`ResourceReference`](#resource-reference)
 sources | A list of references to any sources from which this source is derived. | sources | array of [`SourceReference`](#source-reference)
-extractedConclusions | A list of references to any conclusions that were extracted from this source, to be analyzed and evaluated atomically within on context of the source. | extractedConclusions | [`URI`](#uri)
+extractedConclusions | A list of references to any conclusions that were extracted from this source, to be analyzed and evaluated atomically within on context of the source. | extractedConclusions | [`ResourceReference`](#resource-reference)
 componentOf | A reference to the source that contains this source. | componentOf | [`SourceReference`](#source-reference)
 titles | The display names for this source. | titles | array of [`TextValue`](#text-value)
 notes | A list of notes about a source | notes | array of [`Note`](#note)
@@ -338,9 +342,11 @@ attribution | The attribution of this source. | attribution | [`Attribution`](#a
   "id" : "local_id",
   "citations" : [ { ... }, { ... } ],
   "about" : "http://identifier/for/the/source/being/described",
-  "mediator" : "http://identifier/for/the/mediator/of/source/being/described",
+  "mediator" : {
+    "resource" : "http://identifier/for/the/mediator/of/source/being/described"
+  },
   "sources" : [ { ... }, { ... } ],
-  "extractedConclusions" : [ "...", "..." ],
+  "extractedConclusions" : [ { ... }, { ... } ],
   "componentOf" : { ... },
   "titles" : [ { ... }, { ... } ],
   "notes" : [ { ... }, { ... } ],
@@ -364,11 +370,11 @@ name | description | JSON member | JSON object type
 id | An identifier for the JSON object holding the agent data. The id attribute MUST conform to the constraints defined in [Section 7, "Fragment Identifiers"](#fragment-ids). | id | string
 names | The names of the person or organization. | names | array of [`TextValue`](#text-value)
 identifiers | Identifiers for the agent. | identifiers | [`Identifier`](#identifier-type)
-homepage | The homepage of the person or organization. | homepage | [`URI`](#uri)
-openid  | The [openid](http://openid.net/) of the person or organization. | openid | [`URI`](#uri)
+homepage | The homepage of the person or organization. | homepage | [`ResourceReference`](#resource-reference)
+openid  | The [openid](http://openid.net/) of the person or organization. | openid | [`ResourceReference`](#resource-reference)
 accounts  | The online accounts of the person or organization. | accounts | array of [`OnlineAccount`](#online-account)
-emails  | The email addresses of the person or organization. | emails | array of [`URI`](#uri)
-phones  | The phones (voice, fax, mobile) of the person or organization. | phones | array of [`URI`](#uri)
+emails  | The email addresses of the person or organization. | emails | array of [`ResourceReference`](#resource-reference)
+phones  | The phones (voice, fax, mobile) of the person or organization. | phones | array of [`ResourceReference`](#resource-reference)
 addresses  | The addresses of the person or organization. | addresses | array of [`Address`](#address)
 
 ### examples
@@ -378,11 +384,15 @@ addresses  | The addresses of the person or organization. | addresses | array of
   "id" : "local_id",
   "names" : [ { ... }, { ... } ],
   "identifiers" : { ... },
-  "homepage" : "...",
-  "openid" : "...",
+  "homepage" : {
+    "resource" : "..."
+  },
+  "openid" : {
+    "resource" : "..."
+  },
   "accounts" : [ { ... }, { ... } ],
-  "emails" : [ "mailto:someone@gedcomx.org" , "mailto:someone@somewhere-else.org" ],
-  "phones" : [ "tel:+1-201-555-0123" , "fax:+1-201-555-5555" ],
+  "emails" : [ { "resource" : "mailto:someone@gedcomx.org" } , { "resource" : "mailto:someone@somewhere-else.org" } ],
+  "phones" : [ { "resource" : "tel:+1-201-555-0123" } , { "resource" : "fax:+1-201-555-5555" } ],
   "addresses" : [ { ... }, { ... } ],
 
   ...possibility of extension elements...
@@ -462,7 +472,7 @@ type | A uniform resource identifier (URI) identifying the type of the place as 
 temporalDescription | A description of the time period to which this place description is relevant. | temporalDescription | [`Date`](#conclusion-date)
 latitude | Degrees north or south of the Equator (0.0 degrees). | latitude | number
 longitude | Angular distance in degrees, relative to the Prime Meridian. | longitude | number
-spatialDescription | A reference to a geospatial description of this place. | spatialDescription | [`URI`](#uri)
+spatialDescription | A reference to a geospatial description of this place. | spatialDescription | [`ResourceReference`](#resource-reference)
 identifiers | A list of known identifiers for this place description (e.g., place authority identifiers). | identifiers | [`Identifier`](#identifier-type)
 attribution | The attribution of this conclusion. | attribution | [`Attribution`](#attribution)
 
@@ -479,7 +489,9 @@ attribution | The attribution of this conclusion. | attribution | [`Attribution`
   "temporalDescription" : { ... },
   "latitude" : "27.9883575",
   "latitude" : "86.9252014",
-  "spatialDescription" : "http://uri/for/KML/document",
+  "spatialDescription" : {
+    "resource" : "http://uri/for/KML/document"
+  },
   "identifiers" : { ... },
   "attribution" : { ... }
 }
@@ -526,7 +538,7 @@ The JSON object used to (de)serialize the `http://gedcomx.org/v1/Attribution` da
 
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
-contributor | Reference to the contributor to whom the attributed data is attributed. | contributor | [`URI`](#uri)
+contributor | Reference to the contributor to whom the attributed data is attributed. | contributor | [`ResourceReference`](#resource-reference)
 modified | Timestamp of when the attributed data was contributed. | modified | number (milliseconds since epoch)
 changeMessage | A statement of why the attributed data is being provided by the contributor. | changeMessage | string
 
@@ -534,7 +546,9 @@ changeMessage | A statement of why the attributed data is being provided by the 
 
 ```json
 {
-  "contributor" : "http://identifier/for/contributor",
+  "contributor" : {
+    "resource" : "http://identifier/for/contributor"
+  },
   "modified" : "1338394969",
   "changeMessage" : "...change message here..."
 
@@ -606,7 +620,7 @@ name | description | XML property | XML type
 -----|-------------|--------------|---------
 lang | The locale identifier for the citation. | lang | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag
 value | A rendering of the full (working) citation as a string. | value | string
-citationTemplate | The identifier of the citation template by which this citation may be interpreted. | citationTemplate | [`URI`](#uri)
+citationTemplate | The identifier of the citation template by which this citation may be interpreted. | citationTemplate | [`ResourceReference`](#resource-reference)
 fields | A list of citation fields about a source. | field | array of [`CitationField`](#citation-field)
 
 ### examples
@@ -615,7 +629,9 @@ fields | A list of citation fields about a source. | field | array of [`Citation
 {
   "lang" : "en",
   "value" : "...a rendering of the full (working) citation as a string...",
-  "citationTemplate" : "http://identifier/for/ciation/template",
+  "citationTemplate" : {
+    "resource" : "http://identifier/for/ciation/template"
+  },
   "fields" : [ { ... }, { ... } ]
 }
 ```
@@ -683,14 +699,16 @@ The JSON object used to (de)serialize the `http://gedcomx.org/v1/OnlineAccount` 
 
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
-serviceHomepage  | The home page of the service. | serviceHomepage | [`URI`](#uri)
+serviceHomepage  | The home page of the service. | serviceHomepage | [`ResourceReference`](#resource-reference)
 accountName | The name, label, or id associating the owner of the account with the account. | accountName | string
 
 ### examples
 
 ```json
 {
-  "serviceHomepage" : "http://familysearch.org/",
+  "serviceHomepage" : {
+    "resource" : "http://familysearch.org/"
+  },
   "accountName" : "...",
 }
 ```
@@ -848,7 +866,7 @@ data type is defined as follows:
 
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
-person | Reference to the person playing the role in the event. | person | [`URI`](#uri)
+person | Reference to the person playing the role in the event. | person | [`ResourceReference`](#resource-reference)
 type | Reference to the role type. | type | [`URI`](#uri)
 details | Details about the role of the person in the event. | details | string
 
@@ -859,7 +877,9 @@ details | Details about the role of the person in the event. | details | string
 
   ...the members of Conclusion...,
 
-  "person" : "http://identifier/for/person/1",
+  "person" : {
+    "resource" : "http://identifier/for/person/1"
+  },
   "type" : "http://gedcomx.org/Witness",
   "details" : "..."
 }
@@ -925,7 +945,7 @@ name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 type | URI identifying the type of the name part. | type | [`URI`](#uri)
 value | The text of the name part. | value | string
-qualifiers | Type qualifiers to further describe the type of the name part. | qualifiers | array of [`URI`](#uri)
+qualifiers | Type qualifiers to further describe the type of the name part. | qualifiers | array of [`ResourceReference`](#resource-reference)
 
 ### examples
 
@@ -933,7 +953,7 @@ qualifiers | Type qualifiers to further describe the type of the name part. | qu
 {
   "type" : "http://gedcomx.org/Prefix",
   "value" : "...value of the name part..."
-  "qualifiers" : [ "http://gedcomx.org/Family", "http://gedcomx.org/Patronymic" ]
+  "qualifiers" : [ { "resource" : "http://gedcomx.org/Family" }, { "resource" : "http://gedcomx.org/Patronymic" } ]
 
   ...possibility of extension elements...
 
@@ -977,7 +997,28 @@ type, used for the convenience of serialization.
 URIs are supplied as JSON strings and are interpreted according to
 [RFC 3986: Uniform Resource Identifier (URI): Generic Syntax](http://www.ietf.org/rfc/rfc3986.txt).
 
-## 4.2 The "Gedcomx" Data Type
+<a id="resource-reference"/>
+
+## 4.2 The "ResourceReference" Data Type
+
+The `ResourceReference` JSON type is used for properties that reference other resources.
+It uses the `resource` member to refer to other resources.
+
+### properties
+
+name | description | XML property | XML type
+-----|-------------|--------------|---------
+resource | The URI to the resource being referenced. | resource (attribute) | [`URI`](#uri)
+
+### examples
+
+```json
+{
+  "resource" : "http://uri/to/resource/being/referenced"
+}
+```
+
+## 4.3 The "Gedcomx" Data Type
 
 The `Gedcomx` JSON type is used as a container for a set of GEDCOM X data.
 
