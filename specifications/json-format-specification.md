@@ -737,6 +737,9 @@ stateOrProvince | The state or province. | stateOrProvince | string
 street | The street. | street | string
 street2 | The street (second line). | street2 | string
 street3 | The street (third line). | street3 | string
+street4 | The street (fourth line). | street4 | string
+street5 | The street (fifth line). | street5 | string
+street6 | The street (sixth line). | street6 | string
 
 ### examples
 
@@ -749,6 +752,9 @@ street3 | The street (third line). | street3 | string
   "street" : "...",
   "street2" : "...",
   "street3" : "...",
+  "street4" : "...",
+  "street5" : "...",
+  "street6" : "...",
   "value" : "..."
 }
 ```

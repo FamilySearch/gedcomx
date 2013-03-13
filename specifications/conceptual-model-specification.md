@@ -741,6 +741,9 @@ stateOrProvince | The state or province. | string | OPTIONAL.
 street | The street. | string | OPTIONAL.
 street2 | The street (second line). | string | OPTIONAL.
 street3 | The street (third line). | string | OPTIONAL.
+street4 | The street (fourth line). | string | OPTIONAL.
+street5 | The street (fifth line). | string | OPTIONAL.
+street6 | The street (sixth line). | string | OPTIONAL.
 
 
 <a id="conclusion"/>

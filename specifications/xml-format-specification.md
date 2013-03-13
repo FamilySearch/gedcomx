@@ -733,7 +733,9 @@ stateOrProvince | The state or province. | gx:stateOrProvince | xsd:string
 street | The street. | gx:street | xsd:string
 street2 | The street (second line). | gx:street2 | xsd:string
 street3 | The street (third line). | gx:street3 | xsd:string
-street3 | The street (third line). | gx:street3 | xsd:string
+street4 | The street (fourth line). | gx:street4 | xsd:string
+street5 | The street (fifth line). | gx:street5 | xsd:string
+street6 | The street (sixth line). | gx:street6 | xsd:string
 
 ### examples
 
@@ -747,6 +749,9 @@ street3 | The street (third line). | gx:street3 | xsd:string
     <gx:street>...</gx:street>
     <gx:street2>...</gx:street2>
     <gx:street3>...</gx:street3>
+    <gx:street4>...</gx:street4>
+    <gx:street5>...</gx:street5>
+    <gx:street6>...</gx:street6>
   </...>
 ```
 
