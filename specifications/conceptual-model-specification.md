@@ -944,6 +944,8 @@ URI | description | scope
 ----|-------------|------
 `http://gedcomx.org/Adoption`| A fact of a person's adoption. In the context of a parent-child relationship, it describes a fact of the adoption of a child by a parent. | person
 `http://gedcomx.org/AdultChristening`| A fact of a person's christening or baptism as an adult. | person
+`http://gedcomx.org/Amnesty`| A fact of a person's amnesty. | person
+`http://gedcomx.org/Apprenticeship`| A fact of a person's apprenticeship. | person
 `http://gedcomx.org/Baptism`| A fact of a person's baptism. | person
 `http://gedcomx.org/BarMitzvah`| A fact of a person's bar mitzvah. | person
 `http://gedcomx.org/BatMitzvah`| A fact of a person's bat mitzvah. | person
@@ -965,6 +967,7 @@ URI | description | scope
 `http://gedcomx.org/FirstCommunion`| A fact of a person's first communion in a church. | person
 `http://gedcomx.org/Funeral`| A fact of a person's funeral. | person
 `http://gedcomx.org/Immigration`| A fact of a person's immigration. | person
+`http://gedcomx.org/Imprisonment`| A fact of a person's imprisonment. | person
 `http://gedcomx.org/LandTransation`| A fact of a land transaction enacted by a person. | person
 `http://gedcomx.org/Living`| A fact of a record of a person's living for a specific period. This is designed to include "flourish", defined to mean the time period in an adult's life where he was most productive, perhaps as a writer or member of the state assembly. It does not reflect the person's birth and death dates. | person
 `http://gedcomx.org/MaritalStatus`| A fact of a person's marital status. | person
