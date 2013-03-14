@@ -266,6 +266,7 @@ living | Whether the person is considered living. | living | boolean
 gender | The conclusion about the gender of the person. | gender | [`Gender`](#gender)
 names | The conclusions about the names of the person. | names | array of [`Name`](#name-conclusion)
 facts | The conclusions about the facts of the life of the person. | facts | array of [`Fact`](#fact-conclusion)
+media | References to multimedia resources for this person, such as photos or videos. | media | [`SourceReference`](#source-reference)
 
 ### examples
 
@@ -279,7 +280,8 @@ facts | The conclusions about the facts of the life of the person. | facts | arr
   "living" : true,
   "gender" : { ... },
   "names" : [ { ... }, { ... } ],
-  "facts" : [ { ... }, { ... } ]
+  "facts" : [ { ... }, { ... } ],
+  "media" : [ { ... }, { ... } ]
 }
 ```
 
@@ -332,6 +334,7 @@ name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 id | An identifier for the JSON object holding the source description data. The id attribute MUST conform to the constraints defined in [Section 7, "Fragment Identifiers"](#fragment-ids). | id | string
 citations | The citation for this source. | citations | array of [`SourceCitation`](#source-citation)
+mediaType | A hint about the media type of the resource being described. | mediaType | string
 about | A uniform resource identifier (URI) for the resource being described. | about | [`URI`](#uri)
 mediator | A reference to the entity that mediates access to the described source. | mediator | [`ResourceReference`](#resource-reference)
 sources | A list of references to any sources from which this source is derived. | sources | array of [`SourceReference`](#source-reference)
@@ -347,6 +350,7 @@ attribution | The attribution of this source. | attribution | [`Attribution`](#a
 {
   "id" : "local_id",
   "citations" : [ { ... }, { ... } ],
+  "mediaType" : "...",
   "about" : "http://identifier/for/the/source/being/described",
   "mediator" : {
     "resource" : "http://identifier/for/the/mediator/of/source/being/described"
@@ -422,6 +426,7 @@ type | URI identifying the type of the event. | type | [`URI`](#uri)
 date | The date of the event. | date | [`Date`](#conclusion-date)
 place | The place the event. | place | [`Place`](#conclusion-place)
 roles | The roles of the persons in the event. | roles | array of [`EventRole`](#conclusion-event-role)
+media | References to multimedia resources for this event, such as photos or videos. | media | [`SourceReference`](#source-reference)
 
 ### examples
 
@@ -434,7 +439,8 @@ roles | The roles of the persons in the event. | roles | array of [`EventRole`](
   "type" : "http://gedcomx.org/Marriage",
   "date" : { ... },
   "place" : { ... },
-  "roles" : [ { ... }, { ... } ]
+  "roles" : [ { ... }, { ... } ],
+  "media" : [ { ... }, { ... } ]
 }
 ```
 
@@ -480,6 +486,7 @@ latitude | Degrees north or south of the Equator (0.0 degrees). | latitude | num
 longitude | Angular distance in degrees, relative to the Prime Meridian. | longitude | number
 spatialDescription | A reference to a geospatial description of this place. | spatialDescription | [`ResourceReference`](#resource-reference)
 identifiers | A list of known identifiers for this place description (e.g., place authority identifiers). | identifiers | [`Identifier`](#identifier-type)
+media | References to multimedia resources for this place, such as photos or videos. | media | [`SourceReference`](#source-reference)
 attribution | The attribution of this conclusion. | attribution | [`Attribution`](#attribution)
 
 ### examples
@@ -498,7 +505,8 @@ attribution | The attribution of this conclusion. | attribution | [`Attribution`
   "spatialDescription" : {
     "resource" : "http://uri/for/KML/document"
   },
-  "identifiers" : { ... },
+  "identifiers" : [ { ... }, { ... } ],
+  "media" : [ { ... }, { ... } ],
   "attribution" : { ... }
 }
 ```
