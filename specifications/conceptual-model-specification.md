@@ -933,6 +933,7 @@ type | URI identifying the type of the fact. | [URI](#uri) | REQUIRED. MUST reso
 date | The date of applicability of the fact. | [`http://gedcomx.org/v1/Date`](#conclusion-date) | OPTIONAL.
 place | A reference to the place applicable to this fact. | [`http://gedcomx.org/v1/PlaceReference`](#conclusion-place-reference) | OPTIONAL.
 value | The original value of the fact as supplied by the contributor. | string | OPTIONAL.
+qualifiers | Qualifiers to add additional details about the fact. | List of [http://gedcomx.org/v1/Qualifier](#qualifier) | OPTIONAL. If present, use of a [known fact qualifier](#known-fact-qualifier) is RECOMMENDED.
 
 <a id="known-fact-types"/>
 
@@ -1011,6 +1012,17 @@ URI | description | scope
 `http://gedcomx.org/StepParent`| A fact about the step relationship between a parent and a child. | parent-child relationship
 `http://gedcomx.org/SociologicalParent`| A fact about a sociological relationship between a parent and a child, but not definable in typical legal or biological terms. | parent-child relationship
 
+<a id="known-fact-qualifier"/>
+
+### 3.14.2 Known Fact Qualifiers
+
+The following fact qualifiers are defined by GEDCOM X:
+
+name | value
+-----|-------
+`http://gedcomx.org/Age`| The age of a person at the event described by the fact.
+`http://gedcomx.org/Cause`| The cause of the fact, such as the cause of death.
+`http://gedcomx.org/Religion`| The religion associated with a religious event such as a baptism or excommunication.
 
 <a id="conclusion-event-role"/>
 

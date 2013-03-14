@@ -861,6 +861,7 @@ type | URI identifying the type of the fact. | type (attribute) | [`URI`](#uri)
 date | The date of applicability of the fact. | gx:date | [`gx:Date`](#conclusion-date)
 place | The place of applicability of the fact. | gx:place | [`gx:PlaceReference`](#conclusion-place-reference)
 value | The original value of the fact as supplied by the contributor. | gx:value | xsd:string
+qualifiers | Qualifiers to add additional details about the fact. | gx:qualifier | [`gx:Qualifier`](#qualifier)
 
 ### examples
 
@@ -879,6 +880,8 @@ value | The original value of the fact as supplied by the contributor. | gx:valu
     <gx:value>
       ...
     </gx:value>
+    <gx:qualifier name="http://gedcomx.org/Age">...</gx:qualifier>
+    ...
   </...>
 ```
 

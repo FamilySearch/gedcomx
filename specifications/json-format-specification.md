@@ -852,6 +852,7 @@ type | URI identifying the type of the fact. | type | [`URI`](#uri)
 date | The date of applicability of the fact. | date | [`Date`](#conclusion-date)
 place | The place of applicability of the fact. | place | [`Place`](#conclusion-place)
 value | The original value of the fact as supplied by the contributor. | original | string
+qualifiers | Qualifiers to add additional details about the fact. | qualifiers | array of [`Qualifier`](#qualifier)
 
 ### examples
 
@@ -864,6 +865,7 @@ value | The original value of the fact as supplied by the contributor. | origina
   "date" : { ... },
   "place" : { ... },
   "value" : "...the original value of the fact...",
+  "qualifiers" : [ { "name" : "http://gedcomx.org/Age", "value" : "..." } ]
 }
 ```
 
