@@ -268,7 +268,6 @@ citations | The citations for this source. At least one citation MUST be provide
 about | A uniform resource identifier (URI) for the resource being described. | [URI](#uri) | OPTIONAL.
 mediator | A reference to the entity that mediates access to the described source. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to an instance of [`http://gedcomx.org/v1/Agent`](#agent).
 sources | A list of references to any sources from which this source is derived. | List of [`http://gedcomx.org/v1/SourceReference`](#source-reference) | OPTIONAL.
-extractedConclusions | A list of references to any conclusions that were extracted from this source, to be analyzed and evaluated atomically within on context of the source. | [URI](#uri) | OPTIONAL.
 componentOf | A reference to the source that contains this source, i.e. its parent context. Used when the description of a source is not complete without the description of its parent (or containing) source. | [`http://gedcomx.org/v1/SourceReference`](#source-reference) | OPTIONAL.
 titles | The display names for this source. If more than one title is provided, titles are assumed to be given in order of preference, with the most preferred title in the first position in the list. | List of [`http://gedcomx.org/TextValue`](#text-value) | OPTIONAL.
 notes  | A list of notes about a source. | List of [`http://gedcomx.org/Note`](#note) | OPTIONAL.
@@ -487,7 +486,7 @@ The following identifier types are defined by GEDCOM X.
 URI | description
 ----|------------
 `http://gedcomx.org/Primary` | The primary identifier for the resource.
-`http://gedcomx.org/Evidence` | An identifier for the evidence that supports the resource. For example, when a conclusion about a person is extracted, analyzed and evaluated atomically within the context of a single source, it takes the form of a (extracted) person conclusion, and the extracted conclusion may supply an identifier for the person. As all evidence for the person is gathered, the (working) person conclusion identifies the evidence used to support the conclusion by including each evidence identifier in the list of identifiers for the person.
+`http://gedcomx.org/Evidence` | An identifier for the evidence that supports the resource. For example, when a persona is extracted from a source, it MAY provide a unique identifier. As evidence for a person is gathered, the (working) person conclusion identifies the evidence used to support the conclusion by including each persona identifier in the list of identifiers for the person.
 `http://gedcomx.org/Deprecated` | An identifier that has been relegated, deprecated, or otherwise downgraded. This identifier is commonly used as the result of a merge when what was once a primary identifier for a person is no longer primary.
 `http://gedcomx.org/Persistent` | An identifier that is considered to be a long-term persistent identifier. Applications that provide persistent identifiers are claiming that links to the resource using the identifier won't break.
 
@@ -499,8 +498,8 @@ URI | description
   is used as the primary identifier for the `Person`. The list of identifiers for the `Person` contains two identifiers with value `https://familysearch.org/pal:/12345`,
   one of type `http://gedcomx.org/Primary` and one of type `http://gedcomx.org/Persistent`.
 * An application allows a researcher to extract information from a single census record about a person. The application assigns an identifier "abcde" to the
-  `Person` extracted from the census record. The researcher extracts additional information about the person from a birth certificate and the application
-  assigns identifier "fghij" to the `Person` extracted from the birth certificate. As the researcher gathers and analyzes the evidence for the person, the
+  `persona` extracted from the census record. The researcher extracts additional information about the person from a birth certificate and the application
+  assigns identifier "fghij" to the `persona` extracted from the birth certificate. As the researcher gathers and analyzes the evidence for the person, the
   application creates a (working) `Person` conclusion that references the census record and the birth certificate as a source. When the researcher concludes
   that person "abcde" and person "fghij" are the same person, the list of identifiers for the working `Person` includes two identifiers of type
   `http://gedcomx.org/Evidence`: "abcde" and "fghij".
