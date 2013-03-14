@@ -469,7 +469,6 @@ The `gx:PlaceDescription` is used to (de)serialize the `http://gedcomx.org/v1/Pl
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
-about | A uniform resource identifier (URI) for the place being described. | about (attribute) | [anyURI](#uri)
 names | A list of standardized (or normalized), fully-qualified (in terms of what is known of the applicable jurisdictional hierarchy) names for this place that are applicable to this description of this place. | gx:name | [`gx:TextValue`](#text-value)
 type | A uniform resource identifier (URI) identifying the type of the place as it is applicable to this description. | type (attribute) | [`URI`](#uri)
 temporalDescription | A description of the time period to which this place description is relevant. | gx:temporalDescription | [`gx:Date`](#conclusion-date)
