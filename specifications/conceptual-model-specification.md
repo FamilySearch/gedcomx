@@ -173,12 +173,33 @@ This data type extends the following data type:
 name  | description | data type | constraints
 ------|-------------|-----------|------------
 identifiers | Identifiers for the person. | List of [`http://gedcomx.org/v1/Identifier`](#identifier-type). Order is preserved. | OPTIONAL.
+persona | Whether this description of the person is to be constrained as a persona. | boolean | OPTIONAL. Default: `false`. Refer to [Persona Constraints](#persona-constraints).
 living | Whether the person is considered living. | boolean | OPTIONAL.
 gender | The conclusion about the gender of the person. | [`http://gedcomx.org/v1/Gender`](#gender) | OPTIONAL.
 names | The conclusions about the names of the person. | List of [`http://gedcomx.org/v1/Name`](#name-conclusion). Order is preserved. | OPTIONAL.
 facts | The conclusions about the facts of the life of the person. | List of [`http://gedcomx.org/v1/Fact`](#fact-conclusion). Order is preserved. | OPTIONAL.
 attribution | The attribution of the person. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing data set (e.g. file) of the person is assumed.
 
+<a id="persona-constraints"/>
+
+### Persona Constraints
+
+GEDCOM X provides a specific definition of the term "persona" that is used to refer to a set of constraints that MUST
+be applied to person data that is identified as a persona using the `persona` property.
+
+When person data is identified as a `persona`, it means that the data is to be treated as having been extracted from
+a single source or record. A persona is distinguished from a person by the notion that it is intended to describe what a specific source
+says about a person, as opposed to what a researcher or system believes to be true about a person. Applications MUST recognize the
+`persona` property and SHOULD ensure that any modifications to a persona are aligned with the information that is provided
+by the specific (single) source, even if the source provides information that may be incorrect. The concept of a `persona`
+is important for applications to be able to provide support for the genealogical research process whereby information (such
+as the `persona`) is gathered and analyzed to determine the available evidence.
+
+Person data that is identified as a persona MUST conform to the following constraints:
+
+* The persona (including any data it contains) MUST NOT refer to more than one source description.
+* All source references used by the persona MUST resolve to the same source description, although
+  each reference MAY contain distinct qualifying information such as attribution.
 
 <a id="relationship"/>
 
