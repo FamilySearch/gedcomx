@@ -970,13 +970,13 @@ name | description | XML property | XML type
 -----|-------------|--------------|---------
 type | URI identifying the type of the name part. | type (attribute) | [`URI`](#uri)
 value | The text of the name part. | value (attribute) | xsd:string
-qualifiers | Type qualifiers to further describe the type of the name part. | gx:qualifier | [`gx:ResourceReference`](#resource-reference)
+qualifiers | Qualifiers to add additional semantic meaning to the name part. | gx:qualifier | [`gx:Qualifier`](#qualifier)
 
 ### examples
 
 ```xml
   <... type="http://gedcomx.org/Prefix" value="...value of the name part...">
-    <qualifier resource="http://gedcomx.org/First"/>
+    <qualifier name="http://gedcomx.org/First"/>
     ...
 
     <!-- possibility of extension elements -->
@@ -1013,6 +1013,26 @@ parts | Any identified name parts from the name represented in this instance, or
     <!-- possibility of extension elements -->
 
   </...>
+```
+
+<a id="qualifier"/>
+
+## 3.20 The "Qualifier" Data Type
+
+The `Qualifier` XML type is used to (de)serialize the `http://gedcomx.org/v1/Qualifier`
+data type.
+
+### properties
+
+name | description | XML property | XML type
+-----|-------------|--------------|---------
+name | The name of the qualifier, used to determine the nature of the qualifier. | name (attribute) | [anyURI](#uri)
+value | The value of the qualifier. The semantic meaning of the value is determined by the qualifier name. | (child text) | xsd:string
+
+### examples
+
+```xml
+  <... name="http://gedcomx.org/QualifierName">...qualifier value...</...>
 ```
 
 # 4 XML-Specific Data Types
