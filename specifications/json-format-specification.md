@@ -678,13 +678,15 @@ name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 descriptionRef  | Reference to a _description_ of the source being referenced. | description | [`URI`](#uri)
 attribution | The attribution of this source reference. | attribution | [`Attribution`](#attribution)
+qualifiers | Qualifiers for the reference, used to identify specific fragments of the source that are being referenced. | qualifiers | array of [`Qualifier`](#qualifier)
 
 ### examples
 
 ```json
 {
   "description" : "http://identifier/for/description/of/source/being/referenced",
-  "attribution" : { ... }
+  "attribution" : { ... },
+  "qualifiers" : [ { "name" : "http://gedcomx.org/Page", "value" : "..." } , { "name" : "http://gedcomx.org/Paragraph", "value" : "..." } ],
 
   ...possibility of extension elements...
 
