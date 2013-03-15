@@ -218,6 +218,7 @@ data type.
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
+attribution | The attribution of this person. | gx:attribution | [`gx:Attribution`](#attribution)
 identifiers | Identifiers for the person. | gx:identifier | [`gx:Identifier`](#identifier-type)
 persona | Whether this description of the person is to be constrained as a persona. | persona (attribute) | xsd:boolean
 living | Whether the person is considered living. | gx:living | xsd:boolean
@@ -232,6 +233,9 @@ facts | The conclusions about the facts of the life of the person. | gx:fact | [
 
     <!-- ...the members of gx:Conclusion... -->
 
+    <gx:attribution>
+      ...
+    </gx:attribution>
     <gx:identifier>
       ...
     </gx:identifier>

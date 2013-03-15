@@ -260,6 +260,7 @@ The JSON object used to (de)serialize the `http://gedcomx.org/v1/Person` data ty
 
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
+attribution | The attribution of this conclusion. | attribution | [`Attribution`](#attribution)
 identifiers | Identifiers for the person. | identifiers | [`Identifier`](#identifier-type)
 persona | Whether this description of the person is to be constrained as a persona. | persona | boolean
 living | Whether the person is considered living. | living | boolean
@@ -274,6 +275,7 @@ facts | The conclusions about the facts of the life of the person. | facts | arr
 
   ...the members of gxc:Conclusion...,
 
+  "attribution" : { ... },
   "identifiers" : { ... },
   "persona" : false,
   "living" : true,
