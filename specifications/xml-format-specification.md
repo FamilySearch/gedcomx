@@ -220,6 +220,7 @@ name | description | XML property | XML type
 -----|-------------|--------------|---------
 attribution | The attribution of this person. | gx:attribution | [`gx:Attribution`](#attribution)
 identifiers | Identifiers for the person. | gx:identifier | [`gx:Identifier`](#identifier-type)
+persona | Whether this description of the person is to be constrained as a persona. | persona (attribute) | xsd:boolean
 living | Whether the person is considered living. | gx:living | xsd:boolean
 gender | The conclusion about the gender of the person. | gx:gender | [`gx:Gender`](#gender)
 names | The conclusions about the names of the person. | gx:name | [`gx:Name`](#name-conclusion)
@@ -228,7 +229,7 @@ facts | The conclusions about the facts of the life of the person. | gx:fact | [
 ### examples
 
 ```xml
-  <... id="local_id">
+  <... id="local_id" persona="false">
 
     <!-- ...the members of gx:Conclusion... -->
 
@@ -307,7 +308,6 @@ citations | The citations for this source. | gx:citation | [`gx:SourceCitation`]
 about | A uniform resource identifier (URI) for the resource being described. | about (attribute) | [anyURI](#uri)
 mediator | A reference to the entity that mediates access to the described source. | gx:mediator | [`gx:ResourceReference`](#resource-reference)
 sources | A list of references to any sources from which this source is derived. | gx:source | [`gx:SourceReference`](#source-reference)
-extractedConclusions | A list of references to any conclusions that were extracted from this source, to be analyzed and evaluated atomically within on context of the source. | gx:extractedConclusion | [`gx:ResourceReference`](#resource-reference)
 componentOf | A reference to the source that contains this source. | gx:componentOf | [`gx:SourceReference`](#source-reference)
 titles | The display names for this source. | gx:title | [`gx:TextValue`](#text-value)
 notes | A list of notes about a source | gx:note | [`gx:Note`](#note)
@@ -325,8 +325,6 @@ attribution | The attribution of this source. | gx:attribution | [`gx:Attributio
     <gx:source>
       ...
     </gx:source>
-    ...
-    <gx:extractedConclusion resource="(uri reference to the conclusion)"/>
     ...
     <gx:componentOf>
       ...
