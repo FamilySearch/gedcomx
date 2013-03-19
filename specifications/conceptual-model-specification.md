@@ -214,7 +214,7 @@ is referred to as an "upper-tier person".
 The N-Tier Evidence Architecture stipulates the following:
 
 * Personas MUST be maintained under the [Persona Constraints](#persona-constraints).
-* Upper-tier persons SHOULD NOT include the data of any of its associated personas except as to be used to resolve conflicts.
+* Upper-tier persons SHOULD NOT repeat the data of any of its associated personas unless necessary to resolve conflicts.
 * Upper-tier persons SHOULD NOT provide source references.
 * Upper-tier persons MAY join personas to personas, upper-tier persons to upper-tier persons, or upper-tier persons to personas.
 * When providing a consolidated view of the evidence gathered for a specific person, an application does so by assembling the data
@@ -226,7 +226,7 @@ The N-Tier Evidence Architecture stipulates the following:
 GEDCOM X defines the identifier type `http://gedcomx.org/ComponentEvidence` that is used to model upper-tier persons in
 an N-Tier Evidence Architecture. Each upper-tier person refers to its components by providing an identifier of type
 `http://gedcomx.org/ComponentEvidence` that resolves to each persona or upper-tier person being joined. Personas MUST be
-identified by a value of `true` assigned to the `persona` property.
+identified by setting the `persona` property to `true`.
 
 
 <a id="known-person-identifier-types"/>
