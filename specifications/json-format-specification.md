@@ -851,6 +851,7 @@ type | URI identifying the type of the fact. | type | [`URI`](#uri)
 date | The date of applicability of the fact. | date | [`Date`](#conclusion-date)
 place | The place of applicability of the fact. | place | [`Place`](#conclusion-place)
 value | The original value of the fact as supplied by the contributor. | original | string
+qualifiers | Qualifiers to add additional details about the fact. | qualifiers | array of [`Qualifier`](#qualifier)
 
 ### examples
 
@@ -863,6 +864,7 @@ value | The original value of the fact as supplied by the contributor. | origina
   "date" : { ... },
   "place" : { ... },
   "value" : "...the original value of the fact...",
+  "qualifiers" : [ { "name" : "http://gedcomx.org/Age", "value" : "..." } ]
 }
 ```
 
@@ -956,7 +958,7 @@ name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 type | URI identifying the type of the name part. | type | [`URI`](#uri)
 value | The text of the name part. | value | string
-qualifiers | Type qualifiers to further describe the type of the name part. | qualifiers | array of [`ResourceReference`](#resource-reference)
+qualifiers | Type qualifiers to further describe the type of the name part. | qualifiers | array of [`Qualifier`](#qualifier)
 
 ### examples
 
@@ -964,7 +966,7 @@ qualifiers | Type qualifiers to further describe the type of the name part. | qu
 {
   "type" : "http://gedcomx.org/Prefix",
   "value" : "...value of the name part..."
-  "qualifiers" : [ { "resource" : "http://gedcomx.org/Family" }, { "resource" : "http://gedcomx.org/Patronymic" } ]
+  "qualifiers" : [ { "name" : "http://gedcomx.org/Family" }, { "name" : "http://gedcomx.org/Patronymic" } ]
 
   ...possibility of extension elements...
 
@@ -993,6 +995,27 @@ parts | The parts of the name form. | parts | array of [`NamePart`](#name-part)
 
   ...possibility of extension elements...
 
+}
+```
+<a id="qualifier"/>
+
+## 3.20 The "Qualifier" Data Type
+
+The JSON object used to (de)serialize the `http://gedcomx.org/v1/Qualifier` data type is defined as follows:
+
+### properties
+
+name | description | JSON member | JSON object type
+-----|-------------|-------------|---------
+name | The name of the qualifier, used to determine the nature of the qualifier. | name | [`URI`](#uri)
+value | The value of the qualifier. The semantic meaning of the value is determined by the qualifier name. | value | string
+
+### examples
+
+```json
+{
+  "name" : "http://gedcomx.org/QualifierName",
+  "value" : "..."
 }
 ```
 
