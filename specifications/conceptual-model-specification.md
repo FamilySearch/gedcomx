@@ -201,33 +201,6 @@ Person data that is identified as a persona MUST conform to the following constr
 * All source references used by the persona MUST resolve to the same source description, although
   each reference MAY contain distinct qualifying information such as attribution.
 
-<a id="n-tier-architecture"/>
-
-### N-Tier Evidence Architecture
-
-GEDCOM X defines a concept called the "N-Tier Evidence Architecture" that is used to refer to a set of principles that
-an application MAY choose to implement in support of the genealogical research process. When a researcher decides that
-two or more personas describe the same person, an application that implements the N-Tier Evidence Architecture creates a
-new instance of `Person` that "joins" the personas. A person that is used to "join" personas and/or other persons
-is referred to as an "higher-tier person".
-
-The N-Tier Evidence Architecture stipulates the following:
-
-* Personas MUST be maintained under the [Persona Constraints](#persona-constraints).
-* A higher-tier person SHOULD NOT repeat the data of its associated personas unless necessary to resolve conflicts.
-* A higher-tier person SHOULD NOT have source references.
-* A higher-tier person MAY join personas to personas, higher-tier persons to higher-tier persons, or higher-tier persons to personas.
-* When providing a consolidated view of the evidence gathered for a specific person, an application does so by assembling the data
-  of each persona and using the data of each higher-tier person to resolve conflicts. The definition of the algorithms used to iterate
-  over each person, gather the data, and resolve conflicts are outside the scope of this specification. Such algorithms will be
-  subject to the constraints of the system and MAY include consideration of confidence levels, data types and evidence type
-  (e.g. direct, indirect, negative, etc.).
-
-GEDCOM X defines the identifier type `http://gedcomx.org/ComponentEvidence` that is used to model higher-tier persons in
-an N-Tier Evidence Architecture. Each higher-tier person refers to its components by providing an identifier of type
-`http://gedcomx.org/ComponentEvidence` that resolves to each persona or higher-tier person being joined. Personas MUST be
-identified by setting the `persona` property to `true`.
-
 
 <a id="known-person-identifier-types"/>
 
@@ -241,7 +214,6 @@ URI | description
 `http://gedcomx.org/Evidence` | An identifier for the evidence that supports the person. For example, when a persona is extracted from a source, it MAY provide a unique identifier. As evidence for a person is gathered, the (working) person conclusion identifies the evidence used to support the conclusion by including each persona identifier in the list of identifiers for the person.
 `http://gedcomx.org/Deprecated` | An identifier that has been relegated, deprecated, or otherwise downgraded. This identifier is commonly used as the result of a merge when what was once a primary identifier for a person is no longer primary.
 `http://gedcomx.org/Persistent` | An identifier that is considered to be a long-term persistent identifier. Applications that provide persistent identifiers are claiming that links to the person using the identifier won't break.
-`http://gedcomx.org/ComponentEvidence` | An identifier for the evidence that supports the person and MUST be considered a "component" of the person, as defined by an [N-Tier Evidence Architecture](#n-tier-architecture).
 
 #### identifier type examples
 
@@ -253,15 +225,10 @@ URI | description
 * An application allows a researcher to extract information from a single census record about a person. The application assigns an identifier "abcde" to the
   `persona` extracted from the census record. The researcher extracts additional information about a person from a birth certificate and the application
   assigns identifier "fghij" to the `persona` extracted from the birth certificate. As the researcher gathers and analyzes evidence, she concludes that
-  `persona` "abcde" and `persona` "fghij" apply to the same person.
-  * An application that does NOT implement the N-Tier Evidence Architecture creates a (working) `Person` conclusion that references the census record and
-    the birth certificate as a source. The list of identifiers for the working `Person` includes two identifiers of type `http://gedcomx.org/Evidence`:
-    one that resolves to `persona` "abcde" and another that resolves to `persona` "fghij". The working `Person` includes the gender, names, and facts
-    that the researcher believes to be true and applicable to the person.
-  * An application that implements the N-Tier Evidence Architecture creates a higher-tier person conclusion that includes two identifiers of type
-    `http://gedcomx.org/ComponentEvidence`: one that resolves to `persona` "abcde" and another that resolves to `persona` "fghij". The higher-tier person
-    MUST NOT cite any sources, and it SHOULD NOT contain any names, facts, or a gender except as to be used to resolve any conflicts between `persona`
-    "abcde" and `persona` "fghij".
+  `persona` "abcde" and `persona` "fghij" apply to the same person. An application creates a (working) `Person` conclusion that references the census record and
+  the birth certificate as a source. The list of identifiers for the working `Person` includes two identifiers of type `http://gedcomx.org/Evidence`:
+  one that resolves to `persona` "abcde" and another that resolves to `persona` "fghij". The working `Person` includes the gender, names, and facts
+  that the researcher believes to be true and applicable to the person.
 
 
 <a id="relationship"/>
