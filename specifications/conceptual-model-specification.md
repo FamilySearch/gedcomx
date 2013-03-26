@@ -209,23 +209,23 @@ GEDCOM X defines a concept called the "N-Tier Evidence Architecture" that is use
 an application MAY choose to implement in support of the genealogical research process. When a researcher decides that
 two or more personas describe the same person, an application that implements the N-Tier Evidence Architecture creates a
 new instance of `Person` that "joins" the personas. A person that is used to "join" personas and/or other persons
-is referred to as an "upper-tier person".
+is referred to as an "higher-tier person".
 
 The N-Tier Evidence Architecture stipulates the following:
 
 * Personas MUST be maintained under the [Persona Constraints](#persona-constraints).
-* Upper-tier persons SHOULD NOT repeat the data of any of its associated personas unless necessary to resolve conflicts.
-* Upper-tier persons SHOULD NOT provide source references.
-* Upper-tier persons MAY join personas to personas, upper-tier persons to upper-tier persons, or upper-tier persons to personas.
+* A higher-tier person SHOULD NOT repeat the data of its associated personas unless necessary to resolve conflicts.
+* A higher-tier person SHOULD NOT have source references.
+* A higher-tier person MAY join personas to personas, higher-tier persons to higher-tier persons, or higher-tier persons to personas.
 * When providing a consolidated view of the evidence gathered for a specific person, an application does so by assembling the data
-  of each persona and using the data of each upper-tier person to resolve conflicts. The definition of the algorithms used to iterate
+  of each persona and using the data of each higher-tier person to resolve conflicts. The definition of the algorithms used to iterate
   over each person, gather the data, and resolve conflicts are outside the scope of this specification. Such algorithms will be
-  subject to the constraints of the system and MAY include consideration of confidence levels and evidence type
+  subject to the constraints of the system and MAY include consideration of confidence levels, data types and evidence type
   (e.g. direct, indirect, negative, etc.).
 
-GEDCOM X defines the identifier type `http://gedcomx.org/ComponentEvidence` that is used to model upper-tier persons in
-an N-Tier Evidence Architecture. Each upper-tier person refers to its components by providing an identifier of type
-`http://gedcomx.org/ComponentEvidence` that resolves to each persona or upper-tier person being joined. Personas MUST be
+GEDCOM X defines the identifier type `http://gedcomx.org/ComponentEvidence` that is used to model higher-tier persons in
+an N-Tier Evidence Architecture. Each higher-tier person refers to its components by providing an identifier of type
+`http://gedcomx.org/ComponentEvidence` that resolves to each persona or higher-tier person being joined. Personas MUST be
 identified by setting the `persona` property to `true`.
 
 
