@@ -786,7 +786,7 @@ notes | A list of notes about this conclusion. | note | array of [`Note`](#note)
 {
   "id" : "local_id",
   "lang" : "en",
-  "confidence" : "http://gedcomx.org/Certainly",
+  "confidence" : "http://gedcomx.org/High",
   "sources" : [ { ... }, { ... } ],
   "notes" : [ { ... }, { ... } ],
 

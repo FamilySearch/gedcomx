@@ -775,18 +775,13 @@ notes  | A list of notes about a conclusion. | List of [`http://gedcomx.org/Note
 
 ### 3.11.1 Known Confidence Levels
 
-The following confidence levels are defined by GEDCOM X. For more information, refer to
-Mills, Elizabeth Shown. "Fundamentals of Evidence Analysis." <i>Evidence Explained.</i> 2nd ed.
-(Baltimore, Maryland: Genealogical Publishing Company, 2009), 19-20 (Section 1.6).
+The following confidence levels are defined by GEDCOM X.
 
 URI | description
 ----|------------
-`http://gedcomx.org/Certainly`|The contributor has no reasonable doubt about the assertion, based upon sound research and good evidence.
-`http://gedcomx.org/Probably`|The contributor feels the assertion is more likely than not, based upon sound research and good evidence.
-`http://gedcomx.org/Possibly`|The contributor feels some evidence supports the assertion, but the assertion is far from proved.
-`http://gedcomx.org/Likely`|The contributor feels the odds weigh at least slightly in favor of the assertion.
-`http://gedcomx.org/Apparently`|The contributor has formed an impression or presumption, typically based upon common experience, but has not tested the matter.
-`http://gedcomx.org/Perhaps`|The contributor suggests that an idea is plausible, although it remains to be tested.
+`http://gedcomx.org/High`|The contributor has a high degree of confidence that the assertion is true.
+`http://gedcomx.org/Medium`|The contributor has a medium degree of confidence that the assertion is true.
+`http://gedcomx.org/Low`|The contributor has a low degree of confidence that the assertion is true.
 
 
 <a id="gender-conclusion"/>

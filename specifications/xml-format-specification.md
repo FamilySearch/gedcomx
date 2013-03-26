@@ -788,7 +788,7 @@ notes | A list of notes about this conclusion. | gx:note | [`gx:Note`](#note)
 ### examples
 
 ```xml
-  <... id="local_id" confidence="http://gedcomx.org/Certainly" xml:lang="en">
+  <... id="local_id" confidence="http://gedcomx.org/High" xml:lang="en">
     <gx:source>
       ...
     </gx:source>
