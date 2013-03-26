@@ -224,6 +224,7 @@ living | Whether the person is considered living. | gx:living | xsd:boolean
 gender | The conclusion about the gender of the person. | gx:gender | [`gx:Gender`](#gender)
 names | The conclusions about the names of the person. | gx:name | [`gx:Name`](#name-conclusion)
 facts | The conclusions about the facts of the life of the person. | gx:fact | [`gx:Fact`](#fact-conclusion)
+media | References to multimedia resources for this person, such as photos or videos. | gx:media | [`gx:SourceReference`](#source-reference)
 
 ### examples
 
@@ -250,6 +251,10 @@ facts | The conclusions about the facts of the life of the person. | gx:fact | [
     <gx:fact>
       ...
     </gx:fact>
+    ...
+    <gx:media>
+      ...
+    </gx:media>
     ...
   </...>
 ```
@@ -304,6 +309,7 @@ name | description | XML property | XML type
 -----|-------------|--------------|---------
 id | An identifier for the XML element holding the source description data. The id attribute MUST conform to the constraints defined in [Section 7, "Fragment Identifiers"](#fragment-ids). | id (attribute) | xsd:string
 citations | The citations for this source. | gx:citation | [`gx:SourceCitation`](#source-citation)
+mediaType | A hint about the media type of the resource being described. | mediaType (attribute) | xsd:string
 about | A uniform resource identifier (URI) for the resource being described. | about (attribute) | [anyURI](#uri)
 mediator | A reference to the entity that mediates access to the described source. | gx:mediator | [`gx:ResourceReference`](#resource-reference)
 sources | A list of references to any sources from which this source is derived. | gx:source | [`gx:SourceReference`](#source-reference)
@@ -316,7 +322,7 @@ attribution | The attribution of this source. | gx:attribution | [`gx:Attributio
 ### examples
 
 ```xml
-  <... id="local_id" about="(uri reference to the source)">
+  <... id="local_id" about="(uri reference to the source)" mediaType="...">
     <gx:citation>
       ...
     </gx:citation>
@@ -409,6 +415,7 @@ type | URI identifying the type of the event. | type (attribute) | [`URI`](#uri)
 date | The date of the event. | gx:date | [`gx:Date`](#conclusion-date)
 place | The place the event. | gx:place | [`gx:Place`](#conclusion-place)
 roles | The roles of the persons in the event. | gx:role | [`gx:EventRole`](#conclusion-event-role)
+media | References to multimedia resources for this event, such as photos or videos. | gx:media | [`gx:SourceReference`](#source-reference)
 
 ### examples
 
@@ -429,6 +436,10 @@ roles | The roles of the persons in the event. | gx:role | [`gx:EventRole`](#con
     <gx:role>
       ...
     </gx:role>
+    ...
+    <gx:media>
+      ...
+    </gx:media>
     ...
   </...>
 ```
@@ -476,6 +487,7 @@ latitude | Degrees north or south of the Equator (0.0 degrees). | gx:latitude | 
 longitude | Angular distance in degrees, relative to the Prime Meridian. | gx:latitude | xsd:double
 spatialDescription | A reference to a geospatial description of this place. | gx:spatialDescription | [`gx:ResourceReference`](#resource-reference)
 identifiers | A list of known identifiers for this place description (e.g., place authority identifiers). | gx:identifier | [`gx:Identifier`](#identifier-type)
+media | References to multimedia resources for this place, such as photos or videos. | gx:media | [`gx:SourceReference`](#source-reference)
 attribution | Attribution metadata for this place description. | gx:attribution | [`gx:Attribution`](#attribution)
 
 ### examples
@@ -498,6 +510,10 @@ attribution | Attribution metadata for this place description. | gx:attribution 
     <gx:identifier>
       ...
     </gx:identifier>
+    ...
+    <gx:media>
+      ...
+    </gx:media>
     ...
     <gx:attribution>
       ...
