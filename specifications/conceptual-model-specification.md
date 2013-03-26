@@ -172,12 +172,63 @@ This data type extends the following data type:
 
 name  | description | data type | constraints
 ------|-------------|-----------|------------
-identifiers | Identifiers for the person. | List of [`http://gedcomx.org/v1/Identifier`](#identifier-type). Order is preserved. | OPTIONAL.
+identifiers | Identifiers for the person. | List of [`http://gedcomx.org/v1/Identifier`](#identifier-type). Order is preserved. | OPTIONAL. If provided, use of a [known person identifier type](#known-person-identifier-types) is RECOMMENDED.
+persona | Whether this description of the person is to be constrained as a persona. | boolean | OPTIONAL. Default: `false`. Refer to [Persona Constraints](#persona-constraints).
 living | Whether the person is considered living. | boolean | OPTIONAL.
 gender | The conclusion about the gender of the person. | [`http://gedcomx.org/v1/Gender`](#gender) | OPTIONAL.
 names | The conclusions about the names of the person. | List of [`http://gedcomx.org/v1/Name`](#name-conclusion). Order is preserved. | OPTIONAL.
 facts | The conclusions about the facts of the life of the person. | List of [`http://gedcomx.org/v1/Fact`](#fact-conclusion). Order is preserved. | OPTIONAL.
 attribution | The attribution of the person. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing data set (e.g. file) of the person is assumed.
+
+<a id="persona-constraints"/>
+
+### Persona Constraints
+
+GEDCOM X provides a specific definition of the term "persona" that is used to refer to a set of constraints that MUST
+be applied to person data that is identified as a persona using the `persona` property.
+
+When person data is identified as a `persona`, it means that the data is to be treated as having been extracted from
+a single source or record. A persona is distinguished from a person by the notion that it is intended to describe what a specific source
+says about a person, as opposed to what a researcher or system believes to be true about a person. Applications MUST recognize the
+`persona` property and SHOULD ensure that any modifications to a persona are aligned with the information that is provided
+by the specific (single) source, even if the source provides information that may be incorrect. The concept of a `persona`
+is important for applications to be able to provide support for the genealogical research process whereby information (such
+as the `persona`) is gathered and analyzed to determine the available evidence.
+
+Person data that is identified as a persona MUST conform to the following constraints:
+
+* The persona (including any data it contains) MUST NOT refer to more than one source description.
+* All source references used by the persona MUST resolve to the same source description, although
+  each reference MAY contain distinct qualifying information such as attribution.
+
+
+<a id="known-person-identifier-types"/>
+
+### known person identifier types
+
+The following identifier types are defined by GEDCOM X as applicable to the `Person` data type.
+
+URI | description
+----|------------
+`http://gedcomx.org/Primary` | The primary identifier for the person. A person SHOULD NOT have more than one `Primary` identifier.
+`http://gedcomx.org/Evidence` | An identifier for the evidence that supports the person. For example, when a persona is extracted from a source, it MAY provide a unique identifier. As evidence for a person is gathered, the (working) person conclusion identifies the evidence used to support the conclusion by including each persona identifier in the list of identifiers for the person.
+`http://gedcomx.org/Deprecated` | An identifier that has been relegated, deprecated, or otherwise downgraded. This identifier is commonly used as the result of a merge when what was once a primary identifier for a person is no longer primary.
+`http://gedcomx.org/Persistent` | An identifier that is considered to be a long-term persistent identifier. Applications that provide persistent identifiers are claiming that links to the person using the identifier won't break.
+
+#### identifier type examples
+
+* Person "12345" merges into Person "67890". Person "67890" assumes identifier "12345". Identifier "12345" is of type `http://gedcomx.org/Deprecated`
+  because the merged person "12345" now uses identifier "67890".
+* An online web application issues a persistent identifier of value `https://familysearch.org/pal:/12345` to a `Person` and the same identifier
+  is used as the primary identifier for the `Person`. The list of identifiers for the `Person` contains two identifiers with value `https://familysearch.org/pal:/12345`,
+  one of type `http://gedcomx.org/Primary` and one of type `http://gedcomx.org/Persistent`.
+* An application allows a researcher to extract information from a single census record about a person. The application assigns an identifier "abcde" to the
+  `persona` extracted from the census record. The researcher extracts additional information about a person from a birth certificate and the application
+  assigns identifier "fghij" to the `persona` extracted from the birth certificate. As the researcher gathers and analyzes evidence, she concludes that
+  `persona` "abcde" and `persona` "fghij" apply to the same person. An application creates a (working) `Person` conclusion that references the census record and
+  the birth certificate as a source. The list of identifiers for the working `Person` includes two identifiers of type `http://gedcomx.org/Evidence`:
+  one that resolves to `persona` "abcde" and another that resolves to `persona` "fghij". The working `Person` includes the gender, names, and facts
+  that the researcher believes to be true and applicable to the person.
 
 
 <a id="relationship"/>
@@ -247,7 +298,6 @@ citations | The citations for this source. At least one citation MUST be provide
 about | A uniform resource identifier (URI) for the resource being described. | [URI](#uri) | OPTIONAL.
 mediator | A reference to the entity that mediates access to the described source. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to an instance of [`http://gedcomx.org/v1/Agent`](#agent).
 sources | A list of references to any sources from which this source is derived. | List of [`http://gedcomx.org/v1/SourceReference`](#source-reference) | OPTIONAL.
-extractedConclusions | A list of references to any conclusions that were extracted from this source, to be analyzed and evaluated atomically within on context of the source. | [URI](#uri) | OPTIONAL.
 componentOf | A reference to the source that contains this source, i.e. its parent context. Used when the description of a source is not complete without the description of its parent (or containing) source. | [`http://gedcomx.org/v1/SourceReference`](#source-reference) | OPTIONAL.
 titles | The display names for this source. If more than one title is provided, titles are assumed to be given in order of preference, with the most preferred title in the first position in the list. | List of [`http://gedcomx.org/TextValue`](#text-value) | OPTIONAL.
 notes  | A list of notes about a source. | List of [`http://gedcomx.org/Note`](#note) | OPTIONAL.
@@ -270,7 +320,7 @@ The identifier for the `Agent` data type is:
 name  | description | data type | constraints
 ------|-------------|-----------|------------
 id | An identifier for the data structure holding the agent data. The id is to be used as a "fragment identifier" as defined by [RFC 3986, Section 3.5](http://tools.ietf.org/html/rfc3986#section-3.5). As such, the constraints of the id are provided in the definition of the media type (e.g. XML, JSON) of the data structure. | string | OPTIONAL.
-identifiers | Identifiers for the agent. When an identifier for an agent is also an identifier for a person, the data in the person describes the agent. | List of [`http://gedcomx.org/v1/Identifier`](#identifier-type). Order is preserved. | OPTIONAL.
+identifiers | Identifiers for the agent. | List of [`http://gedcomx.org/v1/Identifier`](#identifier-type). Order is preserved. | OPTIONAL. If provided, use of a [known agent identifier type](#known-agent-identifier-types) is RECOMMENDED.
 names | The names of the person or organization. If more than one name is provided, names are assumed to be given in order of preference, with the most preferred name in the first position in the list. | List of [`http://gedcomx.org/TextValue`](#text-value) | OPTIONAL.
 homepage | The homepage of the person or organization. | [URI](#uri) | OPTIONAL.
 openid  | The [openid](http://openid.net/) of the person or organization. | [URI](#uri) | OPTIONAL.
@@ -279,6 +329,15 @@ emails  | The email addresses of the person or organization. | List of [URI](#ur
 phones  | The phones (voice, fax, mobile) of the person or organization. | List of [URI](#uri) - MUST resolve to a valid phone number (e.g. "tel:+1-201-555-0123"). Order is preserved. | OPTIONAL.
 addresses  | The addresses of the person or organization. | List of [`http://gedcomx.org/v1/Address`](#address). Order is preserved. | OPTIONAL.
 
+<a id="known-agent-identifier-types"/>
+
+### known agent identifier types
+
+The following identifier types are defined by GEDCOM X as applicable to the `Agent` data type.
+
+URI | description
+----|------------
+`http://gedcomx.org/Person` | The agent's person identifier. Used to associate an `Agent` with a `Person`.
 
 <a id="event"/>
 
@@ -422,8 +481,20 @@ temporalDescription | A description of the time period to which this place descr
 latitude | Degrees north or south of the Equator (0.0 degrees). | IEEE 754 binary64 value | OPTIONAL.  If provided, MUST provide `longitude` also.  Values range from −90.0 degrees (south) to 90.0 degrees (north).  It is assumed that all instances of `PlaceDescription` that share an identical `Primary` identifier will also have identical `latitude` values.
 longitude | Angular distance in degrees, relative to the Prime Meridian. | IEEE 754 binary64 value | OPTIONAL.  If provided, MUST provide `latitude` also.  Values range from −180.0 degrees (west of the Meridian) to 180.0 degrees (east of the Meridian).  It is assumed that all instances of `PlaceDescription` that share an identical `Primary` identifier will also have identical `longitude` values.
 spatialDescription | A reference to a geospatial description of this place. | [`URI`](#uri) | OPTIONAL. It is RECOMMENDED that this geospatial description resolve to a KML document.
-identifiers | A list of known identifiers for this place description (e.g., place authority identifiers). Multiple descriptions of the same place MAY be correlated via the `http://gedcomx.org/Primary` identifier. | List of [`http://gedcomx.org/v1/Identifier`](#identifier-type). Order is preserved. | OPTIONAL.
+identifiers | A list of known identifiers for this place description. | List of [`http://gedcomx.org/v1/Identifier`](#identifier-type). Order is preserved. | OPTIONAL. If provided, use of a [known place identifier type](#known-place-identifier-types) is RECOMMENDED.
 attribution | Attribution metadata for this place description. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing data set (e.g. file) of the place description is assumed.
+
+<a id="known-place-identifier-types"/>
+
+### known place identifier types
+
+The following identifier types are defined by GEDCOM X as applicable to the `PlaceDescription` data type.
+
+URI | description
+----|------------
+`http://gedcomx.org/Primary` | The primary identifier for the place. A place SHOULD NOT have more than one `Primary` identifier. Place descriptions that share the same `Primary` identifier are considered alternate descriptions of the same place.
+`http://gedcomx.org/Authority` | An identifier for the place as provided by a separate authority, such as an authorities database.
+
 
 
 # 3. Component-Level Data Types
@@ -454,34 +525,7 @@ The identifier for the "Identifier" data type is:
 name  | description | data type | constraints
 ------|-------------|-----------|------------
 value | The value of the identifier. | [URI](#uri) | REQUIRED.
-type  | URI identifying the type of the identifier. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to an identifier type, and use of a [known identifier type](#known-identifier-types) is RECOMMENDED.
-
-<a id="known-identifier-types"/>
-
-### known identifier types
-
-The following identifier types are defined by GEDCOM X.
-
-URI | description
-----|------------
-`http://gedcomx.org/Primary` | The primary identifier for the resource.
-`http://gedcomx.org/Evidence` | An identifier for the evidence that supports the resource. For example, when a conclusion about a person is extracted, analyzed and evaluated atomically within the context of a single source, it takes the form of a (extracted) person conclusion, and the extracted conclusion may supply an identifier for the person. As all evidence for the person is gathered, the (working) person conclusion identifies the evidence used to support the conclusion by including each evidence identifier in the list of identifiers for the person.
-`http://gedcomx.org/Deprecated` | An identifier that has been relegated, deprecated, or otherwise downgraded. This identifier is commonly used as the result of a merge when what was once a primary identifier for a person is no longer primary.
-`http://gedcomx.org/Persistent` | An identifier that is considered to be a long-term persistent identifier. Applications that provide persistent identifiers are claiming that links to the resource using the identifier won't break.
-
-### examples
-
-* Person "12345" merges into Person "67890". Person "67890" assumes identifier "12345". Identifier "12345" is of type `http://gedcomx.org/Deprecated`
-  because the merged person "12345" now uses identifier "67890".
-* An online web application issues a persistent identifier of value `https://familysearch.org/pal:/12345` to a `Person` and the same identifier
-  is used as the primary identifier for the `Person`. The list of identifiers for the `Person` contains two identifiers with value `https://familysearch.org/pal:/12345`,
-  one of type `http://gedcomx.org/Primary` and one of type `http://gedcomx.org/Persistent`.
-* An application allows a researcher to extract information from a single census record about a person. The application assigns an identifier "abcde" to the
-  `Person` extracted from the census record. The researcher extracts additional information about the person from a birth certificate and the application
-  assigns identifier "fghij" to the `Person` extracted from the birth certificate. As the researcher gathers and analyzes the evidence for the person, the
-  application creates a (working) `Person` conclusion that references the census record and the birth certificate as a source. When the researcher concludes
-  that person "abcde" and person "fghij" are the same person, the list of identifiers for the working `Person` includes two identifiers of type
-  `http://gedcomx.org/Evidence`: "abcde" and "fghij".
+type  | URI identifying the type of the identifier. | [URI](#uri) | REQUIRED. MUST resolve to an identifier type, and use of a known identifier type is RECOMMENDED.
 
 
 <a id="attribution"/>
