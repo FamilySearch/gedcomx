@@ -251,11 +251,17 @@ URI | description
   is used as the primary identifier for the `Person`. The list of identifiers for the `Person` contains two identifiers with value `https://familysearch.org/pal:/12345`,
   one of type `http://gedcomx.org/Primary` and one of type `http://gedcomx.org/Persistent`.
 * An application allows a researcher to extract information from a single census record about a person. The application assigns an identifier "abcde" to the
-  `persona` extracted from the census record. The researcher extracts additional information about the person from a birth certificate and the application
-  assigns identifier "fghij" to the `persona` extracted from the birth certificate. As the researcher gathers and analyzes the evidence for the person, the
-  application creates a (working) `Person` conclusion that references the census record and the birth certificate as a source. When the researcher concludes
-  that person "abcde" and person "fghij" are the same person, the list of identifiers for the working `Person` includes two identifiers of type
-  `http://gedcomx.org/Evidence`: "abcde" and "fghij".
+  `persona` extracted from the census record. The researcher extracts additional information about a person from a birth certificate and the application
+  assigns identifier "fghij" to the `persona` extracted from the birth certificate. As the researcher gathers and analyzes evidence, she concludes that
+  `persona` "abcde" and `persona` "fghij" apply to the same person.
+  * An application that does NOT implement the N-Tier Evidence Architecture creates a (working) `Person` conclusion that references the census record and
+    the birth certificate as a source. The list of identifiers for the working `Person` includes two identifiers of type `http://gedcomx.org/Evidence`:
+    one that resolves to `persona` "abcde" and another that resolves to `persona` "fghij". The working `Person` includes the gender, names, and facts
+    that the researcher believes to be true and applicable to the person.
+  * An application that implements the N-Tier Evidence Architecture creates a higher-tier person conclusion that includes two identifiers of type
+    `http://gedcomx.org/ComponentEvidence`: one that resolves to `persona` "abcde" and another that resolves to `persona` "fghij". The higher-tier person
+    MUST NOT cite any sources, and it SHOULD NOT contain any names, facts, or a gender except as to be used to resolve any conflicts between `persona`
+    "abcde" and `persona` "fghij".
 
 
 <a id="relationship"/>
