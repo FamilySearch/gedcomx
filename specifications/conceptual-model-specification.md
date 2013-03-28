@@ -595,7 +595,7 @@ name  | description | data type | constraints
 ------|-------------|-----------|------------
 lang | The locale identifier for the citation. | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag | OPTIONAL. If not provided, the locale of the data set containing the citation is assumed.
 value | A rendering of the full (working) citation as a string. | string | REQUIRED.
-citationTemplate | The identifier of the citation template by which this citation may be interpreted. | [URI](#uri) | OPTIONAL. If provided, SHOULD resolve to an instance of a citation template that conforms to the specifications defined in [Section 3.5.1, Citation Templates](#citation-template).
+citationTemplate | The identifier of the citation template by which this citation may be interpreted. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to an instance of a citation template that conforms to the specifications defined in [Section 3.5.1, Citation Templates](#citation-template).
 fields  | A list of citation fields about a source. | List of [`http://gedcomx.org/v1/CitationField`](#citation-field) | OPTIONAL.
 
 ### 3.5.1 Citation Templates
