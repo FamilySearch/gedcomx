@@ -378,6 +378,7 @@ This data type extends the following data type:
 name  | description | data type | constraints
 ------|-------------|-----------|------------
 type | URI identifying the type of the document. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to a document type, and use of a [known document type](#known-document-types) is RECOMMENDED.
+textType | The type of text in the `text` field. | string | OPTIONAL. If provided, the value MUST be one of the following: "plain" or "xhtml".  If no value is provided, "plain" is assumed.
 text | The text of the document. | string | REQUIRED.
 attribution | The attribution of the document. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing data set (e.g. file) of the document is assumed.
 
