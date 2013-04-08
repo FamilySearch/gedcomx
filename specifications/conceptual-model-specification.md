@@ -173,33 +173,13 @@ This data type extends the following data type:
 name  | description | data type | constraints
 ------|-------------|-----------|------------
 identifiers | Identifiers for the person. | List of [`http://gedcomx.org/v1/Identifier`](#identifier-type). Order is preserved. | OPTIONAL.
-persona | Whether this description of the person is to be constrained as a persona. | boolean | OPTIONAL. Default: `false`. Refer to [Persona Constraints](#persona-constraints).
+extracted | Whether this person is to be constrained as *extracted information*. | boolean | OPTIONAL. Default: `false`. Refer to [Extracted Information Constraints](#4-extracted-information-constraints).
 living | Whether the person is considered living. | boolean | OPTIONAL.
 gender | The conclusion about the gender of the person. | [`http://gedcomx.org/v1/Gender`](#gender) | OPTIONAL.
 names | The conclusions about the names of the person. | List of [`http://gedcomx.org/v1/Name`](#name-conclusion). Order is preserved. | OPTIONAL.
 facts | The conclusions about the facts of the life of the person. | List of [`http://gedcomx.org/v1/Fact`](#fact-conclusion). Order is preserved. | OPTIONAL.
 attribution | The attribution of the person. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing data set (e.g. file) of the person is assumed.
 
-<a id="persona-constraints"/>
-
-### Persona Constraints
-
-GEDCOM X provides a specific definition of the term "persona" that is used to refer to a set of constraints that MUST
-be applied to person data that is identified as a persona using the `persona` property.
-
-When person data is identified as a `persona`, it means that the data is to be treated as having been extracted from
-a single source or record. A persona is distinguished from a person by the notion that it is intended to describe what a specific source
-says about a person, as opposed to what a researcher or system believes to be true about a person. Applications MUST recognize the
-`persona` property and SHOULD ensure that any modifications to a persona are aligned with the information that is provided
-by the specific (single) source, even if the source provides information that may be incorrect. The concept of a `persona`
-is important for applications to be able to provide support for the genealogical research process whereby information (such
-as the `persona`) is gathered and analyzed to determine the available evidence.
-
-Person data that is identified as a persona MUST conform to the following constraints:
-
-* The persona (including any data it contains) MUST NOT refer to more than one source description.
-* All source references used by the persona MUST resolve to the same source description, although
-  each reference MAY contain distinct qualifying information such as attribution.
 
 <a id="relationship"/>
 
@@ -224,6 +204,7 @@ This data type extends the following data type:
 name  | description | data type | constraints
 ------|-------------|-----------|------------
 type | URI identifying the type of the relationship. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to a relationship type, and use of a [known relationship type](#known-relationship-types) is RECOMMENDED.
+extracted | Whether this relationship is to be constrained as *extracted information*. | boolean | OPTIONAL. Default: `false`. Refer to [Extracted Information Constraints](#4-extracted-information-constraints).
 person1 | Reference to the first person in the relationship. | [URI](#uri) | REQUIRED. MUST resolve to an instance of [`http://gedcomx.org/v1/Person`](#person)
 person2 | Reference to the second person in the relationship. | [URI](#uri) | REQUIRED. MUST resolve to an instance of [`http://gedcomx.org/v1/Person`](#person)
 facts | The conclusions about the facts of the life of the relationship. | List of [`http://gedcomx.org/v1/Fact`](#fact-conclusion). Order is preserved. | OPTIONAL.
@@ -323,6 +304,7 @@ This data type extends the following data type:
 name  | description | data type | constraints
 ------|-------------|-----------|------------
 type | URI identifying the type of the event. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to an event type, and use of a [known event type](#known-event-types) is RECOMMENDED.
+extracted | Whether this event is to be constrained as *extracted information*. | boolean | OPTIONAL. Default: `false`. Refer to [Extracted Information Constraints](#4-extracted-information-constraints).
 date | The date of the event. | [`http://gedcomx.org/v1/Date`](#conclusion-date) | OPTIONAL.
 place | A reference to the place applicable to this event. | [`http://gedcomx.org/v1/PlaceReference`](#conclusion-place-reference) | OPTIONAL.
 roles | The roles of the persons in the event. | List of [`http://gedcomx.org/v1/EventRole`](#conclusion-event-role). Order is preserved. | OPTIONAL.
@@ -437,6 +419,7 @@ This data type extends the following data type:
 name  | description | data type | constraints
 ------|-------------|-----------|------------
 about | A uniform resource identifier (URI) for the place being described. This can be used for associating descriptions of the same place. | [URI](#uri) | OPTIONAL.
+extracted | Whether this place description is to be constrained as *extracted information*. | boolean | OPTIONAL. Default: `false`. Refer to [Extracted Information Constraints](#4-extracted-information-constraints).
 names | A list of standardized (or normalized), fully-qualified (in terms of what is known of the applicable jurisdictional hierarchy) names for this place that are applicable to this description of this place. | List of [http://gedcomx.org/v1/TextValue](#text-value). Order is preserved. | REQUIRED. The list MUST contain at least one name.
 type | An implementation-specific uniform resource identifier (URI) used to identify the type of a place (e.g., address, city, county, province, state, country, etc.). | [URI](#uri) | OPTIONAL.  There is no current plan to define a type vocabulary for place descriptions in GEDCOM X.
 temporalDescription | A description of the time period to which this place description is relevant. | [`http://gedcomx.org/v1/Date`](#conclusion-date) | OPTIONAL.
@@ -1250,7 +1233,28 @@ NameForm3.parts[2].value=Tchaikovsky
 ```
 
 
-# 4. Extensibility
+<a id="extracted-information-constraints"/>
+
+# 4. Extracted Information Constraints
+
+GEDCOM X provides a specific definition for __*extracted information*__ that is used to refer to a set of constraints that
+MUST be applied to conclusion data that is identified as extracted information using the `extracted` property.
+
+When a conclusion is identified as `extracted`, it means that the data is to be treated as having been extracted from a
+single source or record.  Extracted information is distinguished from typical conclusional data by the notion that it is
+intended to describe information contained in a single source, as opposed to what a researcher or system believes to be true
+about that conclusion.  Applications MUST recognize the `extracted` property and SHOULD ensure that any modifications to the
+extracted information are aligned with the information that is provided by the specific (single) source, even if the source
+provides information that may conflict with other information in other sources.
+
+Data in a conclusion that is identified as *extracted information* MUST conform to the following constraints:
+
+* The conclusion (including any data it contains) MUST NOT refer to more than one source description.
+* All source references used by the conclusion MUST resolve to the same source description, although
+  each reference MAY contain distinct qualifying information such as attribution.
+
+
+# 5. Extensibility
 
 ## Extensions from Non-GEDCOM X Vocabularies
 
@@ -1308,6 +1312,6 @@ a known data type, GEDCOM X recognizes the data URI scheme as defined by
 
 todo: data uri example
 
-# 5. Miscellaneous To Do
+# 6. Miscellaneous To Do
 
 todo: supply details about how GEDCOM X defines its evidence model.
