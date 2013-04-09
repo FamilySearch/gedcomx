@@ -595,35 +595,11 @@ name  | description | data type | constraints
 ------|-------------|-----------|------------
 lang | The locale identifier for the citation. | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag | OPTIONAL. If not provided, the locale of the data set containing the citation is assumed.
 value | A rendering of the full (working) citation as a string. | string | REQUIRED.
-citationTemplate | The identifier of the citation template by which this citation may be interpreted. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to an instance of [`http://gedcomx.org/v1/CitationTemplate`](#citation-template).
-fields  | A list of citation fields about a source. | List of [`http://gedcomx.org/v1/CitationField`](#citation-field) | OPTIONAL.
-
-<a id="citation-field"/>
-
-## 3.6 The "CitationField" Data Type
-
-The `CitationField` data type defines a piece of metadata (e.g., author, volume, page, publisher, etc.)
-necessary to identify a source.
-
-The `CitationField` data type does NOT support extension properties (see [Extension Properties](#extension-properties)).
-
-### identifier
-
-The identifier for the "CitationField" data type is:
-
-`http://gedcomx.org/v1/CitationField`
-
-### properties
-
-name  | description | data type | constraints
-------|-------------|-----------|------------
-name | The identifier for the citation detail -- defined by a citation template or a citation template library. | [URI](#uri) | REQUIRED.
-value | The value of the citation detail. | string | REQUIRED.
 
 
 <a id="source-reference"/>
 
-## 3.7 The "SourceReference" Data Type
+## 3.6 The "SourceReference" Data Type
 
 The `SourceReference` data type defines a reference to a source.  For example a genealogical conclusion
 or a derivative source is the referring object (i.e. the object holding the `SourceReference` instance),
@@ -646,64 +622,9 @@ attribution | The attribution of this source reference. | [`http://gedcomx.org/A
 
 todo:
 
-<a id="citation-template"/>
-
-## 3.8 The "CitationTemplate" Data Type
-
-TBD
-
-todo: define citation templates and any associated infrastructure
-
-<a id="note-about-citation-templates"/>
-<table>
-  <tr>
-    <td style="background:#F0F0FF;border-color:#F0F0FF; padding-bottom:0px; font-size:18px">
-<b>a note about citation templates (not part of this specification)</b>
-    </td>
-  </tr>
-  <tr>
-    <td style="background:#F0F0FF;border-color:#F0F0FF; padding-top:0px">
-<p>
-Building source citations is said to be an "art" and requires a great deal of flexibility.  While citation style
-guides exist (e.g. Chicago style, Turabian, Evidence Style -- see <i>Evidence Explained</i> by Elizabeth Shown Mills,
-etc.), they are considered guides and execution within their guidelines allows for flexibility.
-No one style has been universally accepted, nor will a style become universally accepted in the forseeable future.  Therefore,
-the approach to collecting citation metadata and the exchange of this data needs to support flexibility.
-</p><p/><p>
-The citation metadata is collected as a set of name-value pairs (see the CitationField data type), but there still remains
-a set of difficult questions, including:</p>
-<ul>
-  <li>What is the set of valid "names" (e.g. controlled vocabulary)?</li>
-  <li>What "values" are valid values for a given "name"?</li>
-  <li>What fields (name-value pairs) are required, and under what circumstances might they be optional?</li>
-  <li>What metadata needs to be collected to properly site data in a specific record?  For example, is a citation for the 1900 US Census
-different from a citation for the 1910 US Census and from a citation for the 1911 England and Wales Census?</li>
-</ul>
-<p/><p>
-Further questions remain about how to arrange the fields into citations. For example, given a set of metadata, can it be expressed
-in the Chicago style?  The Evidence style?  What about a lesser-used or custom style?
-</p><p/><p>
-To address these design issues, we define <b><i>citation templates</i></b>.  A citation template defines the metadata that should
-be collected for a given source and the semantics associated with that metadata.  Templates also specify how the metadata
-is rendered into specific citation styles, such as Chicago style or Evidence style.  Templates could be designed to
-address specific record types and may be grouped by type (e.g., a group of templates for census records, or newspapers, or
-US census records, or UK census records, etc.).  Templates could also be associated with other templates into libraries
-such that a specific piece of citation metadata (e.g., a citation field named "Volume") has a shared semantic meanign across the set
-of associated templates -- a template library. Perhaps a standard template library could be developed that would address the most
-common citation needs.
-</p><p/><p>
-Citation templates have not been fully specified and are therefore outlined here in broad terms.  For now, this
-section functions as a place holder for the needed specifications.  We will likely consider ideas like those expressed
-at http://sourcetemplates.org/ when we define this portion of the specification.
-</p>
-    </td>
-  </tr>
-</table>
-
-
 <a id="online-account"/>
 
-## 3.9 The "OnlineAccount" Data Type
+## 3.7 The "OnlineAccount" Data Type
 
 The `OnlineAccount` data type defines a description of an account in an online web application.
 
@@ -722,7 +643,7 @@ accountName | The name, label, or id associating the owner of the account with t
 
 <a id="address"/>
 
-## 3.10 The "Address" Data Type
+## 3.8 The "Address" Data Type
 
 The `Address` data type defines a street address of a person or organization.
 
@@ -751,7 +672,7 @@ street6 | The street (sixth line). | string | OPTIONAL.
 
 <a id="conclusion"/>
 
-## 3.11 The "Conclusion" Data Type
+## 3.9 The "Conclusion" Data Type
 
 The `Conclusion` data type defines the base conceptual model for basic genealogical conclusions.
 
@@ -773,7 +694,7 @@ notes  | A list of notes about a conclusion. | List of [`http://gedcomx.org/Note
 
 <a id="known-confidence-levels"/>
 
-### 3.11.1 Known Confidence Levels
+### 3.9.1 Known Confidence Levels
 
 The following confidence levels are defined by GEDCOM X.
 
@@ -786,7 +707,7 @@ URI | description
 
 <a id="gender-conclusion"/>
 
-## 3.12 The "Gender" Data Type
+## 3.10 The "Gender" Data Type
 
 The `Gender` data type defines a conclusion about the gender of a person.
 
@@ -811,7 +732,7 @@ type  | URI identifying the type of the gender. | [URI](#uri) | REQUIRED. MUST r
 
 <a id="known-gender-types"/>
 
-### 3.12.1 Known Gender Types
+### 3.10.1 Known Gender Types
 
 The following gender types are defined by GEDCOM X:
 
@@ -824,7 +745,7 @@ URI | description
 
 <a id="name-conclusion"/>
 
-## 3.13 The "Name" Data Type
+## 3.11 The "Name" Data Type
 
 The `Name` data type defines a conclusion about a name of a person.
 
@@ -888,7 +809,7 @@ Name2.nameForms[1].fullText=Sasha
 ```
 <a id="known-name-types"/>
 
-### 3.13.1 Known Name Types
+### 3.11.1 Known Name Types
 
 The following name types are defined by GEDCOM X:
 
@@ -906,7 +827,7 @@ URI | description
 
 <a id="fact-conclusion"/>
 
-## 3.14 The "Fact" Data Type
+## 3.12 The "Fact" Data Type
 
 The `Fact` data type defines a conclusion about a fact of the life of a person or
 the nature of a relationship. The `Fact` data type extends the `Conclusion` data type.
@@ -935,7 +856,7 @@ qualifiers | Qualifiers to add additional details about the fact. | List of [htt
 
 <a id="known-fact-types"/>
 
-### 3.14.1 Known Fact Types
+### 3.12.1 Known Fact Types
 
 The following fact types are defined by GEDCOM X:
 
@@ -1012,7 +933,7 @@ URI | description | scope
 
 <a id="known-fact-qualifier"/>
 
-### 3.14.2 Known Fact Qualifiers
+### 3.12.2 Known Fact Qualifiers
 
 The following fact qualifiers are defined by GEDCOM X:
 
@@ -1024,7 +945,7 @@ name | value
 
 <a id="conclusion-event-role"/>
 
-## 3.15 The "EventRole" Data Type
+## 3.13 The "EventRole" Data Type
 
 The `EventRole` data type defines a role played in an event by a person.  The `EventRole` data type extends the `Conclusion` data type.
 
@@ -1050,7 +971,7 @@ details | Details about the role of the person in the event. | string | OPTIONAL
 
 <a id="known-roles"/>
 
-### 3.15.1 Known Role Types
+### 3.13.1 Known Role Types
 
 The following role types are defined by GEDCOM X:
 
@@ -1064,7 +985,7 @@ URI | description
 
 <a id="conclusion-date"/>
 
-## 3.16 The "Date" Data Type
+## 3.14 The "Date" Data Type
 
 The `Date` data type defines the value of a genealogical date.
 
@@ -1084,7 +1005,7 @@ formal | The standardized [formal value](#formal-values) of the date, formatted 
 
 <a id="conclusion-place-reference"/>
 
-## 3.17 The "PlaceReference" Data Type
+## 3.15 The "PlaceReference" Data Type
 
 The `PlaceReference` data type defines a reference to a description of a place.
 
@@ -1104,7 +1025,7 @@ descriptionRef | A reference to a _description_ of this place. | [URI](#uri) | O
 
 <a id="name-part"/>
 
-## 3.18 The "NamePart" Data Type
+## 3.16 The "NamePart" Data Type
 
 The `NamePart` data type is used to model a portion of a full name, including the terms that make up that portion. Some name parts MAY have qualifiers
 to provide additional semantic meaning to the name part (e.g., "given name" or "surname").
@@ -1128,7 +1049,7 @@ qualifiers | Qualifiers to add additional semantic meaning to the name part. | L
 
 <a id="known-name-part-types"/>
 
-### 3.18.1 Known Name Part Types
+### 3.16.1 Known Name Part Types
 
 The following name part types are defined by GEDCOM X:
 
@@ -1166,7 +1087,7 @@ name | description
 
 <a id="name-form"/>
 
-## 3.19 The "NameForm" Data Type
+## 3.17 The "NameForm" Data Type
 
 The `NameForm` data type defines a representation of a name (a "name form") within a given cultural context,
 such as a given language and script.
@@ -1242,7 +1163,7 @@ NameForm3.parts[2].value=Tchaikovsky
 
 <a id="qualifier"/>
 
-## 3.20 The "Qualifier" Data Type
+## 3.18 The "Qualifier" Data Type
 
 The `Qualifier` data type defines the data structure used to supply additional details, annotations, tags, or other qualifying data
 to a specific data element.
