@@ -173,7 +173,7 @@ This data type extends the following data type:
 name  | description | data type | constraints
 ------|-------------|-----------|------------
 identifiers | Identifiers for the person. | List of [`http://gedcomx.org/v1/Identifier`](#identifier-type). Order is preserved. | OPTIONAL.
-extracted | Whether this person is to be constrained as *extracted information*. | boolean | OPTIONAL. Default: `false`. Refer to [Extracted Information Constraints](#4-extracted-information-constraints).
+extracted | Whether the person is to be constrained as *extracted information*. A person that is identified as extracted information MAY be referred to as a "persona". | boolean | OPTIONAL. Default: `false`. Refer to [Extracted Information Constraints](#4-extracted-information-constraints).
 living | Whether the person is considered living. | boolean | OPTIONAL.
 gender | The conclusion about the gender of the person. | [`http://gedcomx.org/v1/Gender`](#gender) | OPTIONAL.
 names | The conclusions about the names of the person. | List of [`http://gedcomx.org/v1/Name`](#name-conclusion). Order is preserved. | OPTIONAL.
@@ -1237,7 +1237,7 @@ NameForm3.parts[2].value=Tchaikovsky
 
 # 4. Extracted Information Constraints
 
-GEDCOM X provides a specific definition for __*extracted information*__ that is used to refer to a set of constraints that
+GEDCOM X provides a specific definition for "extracted information" that is used to refer to a set of constraints that
 MUST be applied to conclusion data that is identified as extracted information using the `extracted` property.
 
 When a conclusion is identified as `extracted`, it means that the data is to be treated as having been extracted from a
@@ -1247,11 +1247,16 @@ about that conclusion.  Applications MUST recognize the `extracted` property and
 extracted information are aligned with the information that is provided by the specific (single) source, even if the source
 provides information that may conflict with other information in other sources.
 
-Data in a conclusion that is identified as *extracted information* MUST conform to the following constraints:
+Data in a conclusion that is identified as "extracted information" MUST conform to the following constraints:
 
-* The conclusion (including any data it contains) MUST NOT refer to more than one source description.
+* The conclusion (including any data it encloses) MUST NOT refer to more than one source description.
 * All source references used by the conclusion MUST resolve to the same source description, although
   each reference MAY contain distinct qualifying information such as attribution.
+
+## 4.1 Persona
+
+GEDCOM X provides a specific definition for the term "persona" that is used to refer to an instance of
+`http://gedcomx.org/v1/Person` that has been identified as extracted information.
 
 
 # 5. Extensibility
