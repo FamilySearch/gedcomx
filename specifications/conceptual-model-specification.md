@@ -1249,7 +1249,7 @@ provides information that may conflict with other information in other sources.
 
 Data in a conclusion that is identified as "extracted information" MUST conform to the following constraints:
 
-* The conclusion (including any data it encloses) MUST NOT refer to more than one source description.
+* The conclusion (including any data it contains) MUST NOT refer to more than one source description.
 * All source references used by the conclusion MUST resolve to the same source description, although
   each reference MAY contain distinct qualifying information such as attribution.
 
