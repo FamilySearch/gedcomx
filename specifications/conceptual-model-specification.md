@@ -41,6 +41,10 @@ This specification uses "GEDCOM X" internally.
 This specification is depends on the GEDCOM X Date Model specification identified
 by [`http://gedcomx.org/date-model/v1`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/date-model-specification.md).
 
+This specification refers to the GEDCOM X Constrained Vocabulary specification identified
+by [`http://gedcomx.org/vocabulary/v1`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/constrained-vocabulary-specification.md)
+to recommend elements of a constrained vocabulary to be used where applicable.
+
 ## 1.2 Notational Conventions
 
 ### 1.2.1 Keywords
@@ -226,6 +230,9 @@ URI | description
 `http://gedcomx.org/Couple`| A relationship of a pair of persons.
 `http://gedcomx.org/ParentChild`| A relationship from a parent to a child.
 
+In addition to these elements, processors SHOULD support any other elements defined by section 3.1 (Relationship Subclasses) of
+the [GEDCOM X Constrained Vocabulary specification](https://github.com/FamilySearch/gedcomx/blob/master/specifications/constrained-vocabulary-specification.md).
+
 
 <a id="source-description"/>
 
@@ -320,39 +327,16 @@ The following event types are defined by GEDCOM X:
 URI | description
 ----|------------
 `http://gedcomx.org/Adoption` | An adoption event.
-`http://gedcomx.org/AdultChristening` | An adult christening event.
-`http://gedcomx.org/Annulment` | An annulment event of a marriage.
-`http://gedcomx.org/Baptism` | A baptism event.
-`http://gedcomx.org/BarMitzvah` | A bar mitzvah event.
-`http://gedcomx.org/BatMitzvah` | A bat mitzvah event.
 `http://gedcomx.org/Birth` | A birth event.
-`http://gedcomx.org/Blessing` | A an official blessing event, such as at the hands of a clergy member or at another religious rite.
 `http://gedcomx.org/Burial` | A burial event.
 `http://gedcomx.org/Census` | A census event.
 `http://gedcomx.org/Christening` | A christening event *at birth*. Note: use `AdultChristening` for a christening event as an adult.
-`http://gedcomx.org/Circumcision` | A circumcision event.
-`http://gedcomx.org/Confirmation` | A confirmation event (or other rite of initiation) in a church or religion.
-`http://gedcomx.org/Cremation` | A cremation event after death.
 `http://gedcomx.org/Death` | A death event.
 `http://gedcomx.org/Divorce` | A divorce event.
-`http://gedcomx.org/DivorceFiling` | A divorce filing event.
-`http://gedcomx.org/Education` | A education or an educational achievement event (e.g. diploma, graduation, scholarship, etc.).
-`http://gedcomx.org/Engagement` | An engagement to be married event.
-`http://gedcomx.org/Emigration` | An emigration event.
-`http://gedcomx.org/Excommunication` | An excommunication event from a church.
-`http://gedcomx.org/FirstCommunion` | A first communion event.
-`http://gedcomx.org/Funeral` | A funeral event.
-`http://gedcomx.org/Immigration` | An immigration event.
-`http://gedcomx.org/LandTransation` | A land transaction event.
 `http://gedcomx.org/Marriage` | A marriage event.
-`http://gedcomx.org/MilitaryAward` | A military award event.
-`http://gedcomx.org/MilitaryDischarge` | A military discharge event.
-`http://gedcomx.org/Mission` | A mission event.
-`http://gedcomx.org/MoveFrom` | An event of a move (i.e. change of residence) from a location.
-`http://gedcomx.org/MoveTo` | An event of a move (i.e. change of residence) to a location.
-`http://gedcomx.org/Naturalization` | A naturalization event (i.e. acquisition of citizenship and nationality).
-`http://gedcomx.org/Ordination` | An ordination event.
-`http://gedcomx.org/Retirement` | A retirement event.
+
+In addition to these elements, processors SHOULD support any other elements defined by section 3.2 (Event Subclasses) of
+the [GEDCOM X Constrained Vocabulary specification](https://github.com/FamilySearch/gedcomx/blob/master/specifications/constrained-vocabulary-specification.md).
 
 
 <a id="document"/>
@@ -393,6 +377,10 @@ URI | description
 `http://gedcomx.org/Transcription` | The document is a transcription of a record or document.
 `http://gedcomx.org/Translation` | The document is a translation of a record or document.
 `http://gedcomx.org/Analysis` | The document is an analysis done by a researcher, often used as a genealogical proof statement.
+
+In addition to these elements, processors SHOULD support any other elements defined by section 3.4 (Document Subclasses) of
+the [GEDCOM X Constrained Vocabulary specification](https://github.com/FamilySearch/gedcomx/blob/master/specifications/constrained-vocabulary-specification.md).
+
 
 <a id="conclusion-place"/>
 
@@ -742,6 +730,9 @@ URI | description
 `http://gedcomx.org/Female`| Female gender.
 `http://gedcomx.org/Unknown`| Unknown gender.
 
+In addition to these elements, processors SHOULD support any other elements defined by section 3.7 (Gender Subclasses) of
+the [GEDCOM X Constrained Vocabulary specification](https://github.com/FamilySearch/gedcomx/blob/master/specifications/constrained-vocabulary-specification.md).
+
 
 <a id="name-conclusion"/>
 
@@ -816,14 +807,10 @@ The following name types are defined by GEDCOM X:
 URI | description
 ----|-------------
 `http://gedcomx.org/BirthName` | Name given at birth.
-`http://gedcomx.org/DeathName` | Name used at the time of death.
-`http://gedcomx.org/MarriedName` | Name accepted at marriage.
 `http://gedcomx.org/AlsoKnownAs` | "Also known as" name.
-`http://gedcomx.org/Nickname`| Nickname.
-`http://gedcomx.org/AdoptiveName` | Name given at adoption.
-`http://gedcomx.org/FormalName` | A formal name, usually given to distinguish it from a name more commonly used.
-`http://gedcomx.org/ReligiousName` | A name given at a religious rite or ceremony.
 
+In addition to these elements, processors SHOULD support any other elements defined by section 3.8 (Name Subclasses) of
+the [GEDCOM X Constrained Vocabulary specification](https://github.com/FamilySearch/gedcomx/blob/master/specifications/constrained-vocabulary-specification.md).
 
 <a id="fact-conclusion"/>
 
@@ -863,76 +850,16 @@ The following fact types are defined by GEDCOM X:
 URI | description | scope
 ----|-------------|------
 `http://gedcomx.org/Adoption`| A fact of a person's adoption. In the context of a parent-child relationship, it describes a fact of the adoption of a child by a parent. | person
-`http://gedcomx.org/AdultChristening`| A fact of a person's christening or baptism as an adult. | person
-`http://gedcomx.org/Amnesty`| A fact of a person's amnesty. | person
-`http://gedcomx.org/Apprenticeship`| A fact of a person's apprenticeship. | person
-`http://gedcomx.org/Baptism`| A fact of a person's baptism. | person
-`http://gedcomx.org/BarMitzvah`| A fact of a person's bar mitzvah. | person
-`http://gedcomx.org/BatMitzvah`| A fact of a person's bat mitzvah. | person
 `http://gedcomx.org/Birth`| A fact of a person's birth. | person
-`http://gedcomx.org/Blessing`| A fact of an official blessing received by a person, such as at the hands of a clergy member or at another religious rite. | person
 `http://gedcomx.org/Burial`| A fact of the burial of person's body after death. | person
-`http://gedcomx.org/Caste`| A fact of a person's caste. | person
-`http://gedcomx.org/Census`| A fact of a person's participation in a census. | person
 `http://gedcomx.org/Christening`| A fact of a person's christening *at birth*. Note: use `AdultChristening` for the christening as an adult. | person
-`http://gedcomx.org/Circumcision`| A fact of a person's circumcision. | person
-`http://gedcomx.org/Clan`| A fact of a person's clan. | person
-`http://gedcomx.org/Confirmation`| A fact of a person's confirmation (or other rite of initiation) in a church or religion. | person
-`http://gedcomx.org/Cremation`| A fact of the cremation of person's body after death. | person
 `http://gedcomx.org/Death`| A fact of the death of a person. | person
-`http://gedcomx.org/Education`| A fact of an education or an educational achievement (e.g. diploma, graduation, scholarship, etc.) of a person. | person
-`http://gedcomx.org/Emigration`| A fact of the emigration of a person. | person
-`http://gedcomx.org/Ethnicity`| A fact of a person's ethnicity or race. | person
-`http://gedcomx.org/Excommunication`| A fact of a person's excommunication from a church. | person
-`http://gedcomx.org/FirstCommunion`| A fact of a person's first communion in a church. | person
-`http://gedcomx.org/Funeral`| A fact of a person's funeral. | person
-`http://gedcomx.org/Immigration`| A fact of a person's immigration. | person
-`http://gedcomx.org/Imprisonment`| A fact of a person's imprisonment. | person
-`http://gedcomx.org/LandTransation`| A fact of a land transaction enacted by a person. | person
-`http://gedcomx.org/Living`| A fact of a record of a person's living for a specific period. This is designed to include "flourish", defined to mean the time period in an adult's life where he was most productive, perhaps as a writer or member of the state assembly. It does not reflect the person's birth and death dates. | person
-`http://gedcomx.org/MaritalStatus`| A fact of a person's marital status. | person
-`http://gedcomx.org/Medical`| A fact of a person's medical record, such as for an illness or hospital stay. | person
-`http://gedcomx.org/MilitaryAward`| A fact of a person's military award. | person
-`http://gedcomx.org/MilitaryDischarge`| A fact of a person's military discharge. | person
-`http://gedcomx.org/MilitaryService`| A fact of a person's militray service. | person
-`http://gedcomx.org/Mission`| A fact of a person's church mission. | person
-`http://gedcomx.org/MoveTo`| A fact of a person's move (i.e. change of residence) to a new location. | person
-`http://gedcomx.org/MoveFrom`| A fact of a person's move (i.e. change of residence) from a location. | person
-`http://gedcomx.org/MultipleBirth`| A fact that a person was born as part of a multiple birth (e.g. twin, triplet, etc.) | person
-`http://gedcomx.org/NationalId`| A fact of a person's national id (e.g. social security number). | person
-`http://gedcomx.org/Nationality`| A fact of a person's nationality. | person
-`http://gedcomx.org/Naturalization`| A fact of a person's naturalization (i.e. acquisition of citizenship and nationality). | person
-`http://gedcomx.org/NumberOfChildren`| A fact of the number of children of a person or relationship. | person
-`http://gedcomx.org/NumberOfMarriages`| A fact of a person's number of marriages. | person
-`http://gedcomx.org/Occupation`| A fact of a person's occupation or employment. | person
-`http://gedcomx.org/Ordination`| A fact of a person's ordination to a stewardship in a church. | person
-`http://gedcomx.org/PhysicalDescription`| A fact of a person's physical description. | person
-`http://gedcomx.org/Probate`| A fact of a receipt of probate of a person's property. | person
-`http://gedcomx.org/Property`| A fact of a person's property or possessions. | person
-`http://gedcomx.org/Religion`| A fact of a person's religion. | person
 `http://gedcomx.org/Residence`| A fact of a person's residence. | person
-`http://gedcomx.org/Retirement`| A fact of a person's retirement. | person
-`http://gedcomx.org/Stillbirth`| A fact of a person's stillbirth. | person
-`http://gedcomx.org/Will`| A fact of a person's will. | person
-`http://gedcomx.org/Visit`| A fact of a person's visit to a place different from the person's residence. | person
-`http://gedcomx.org/Annulment`| The fact of an annulment of a marriage. | couple relationship
-`http://gedcomx.org/CommonLawMarriage`| The fact of a marriage by common law. | couple relationship
 `http://gedcomx.org/Divorce`| The fact of a divorce of a couple. | couple relationship
-`http://gedcomx.org/DivorceFiling`| The fact of a filing for divorce. | couple relationship
-`http://gedcomx.org/Engagement`| The fact of an engagement to be married. | couple relationship
 `http://gedcomx.org/Marriage`| The fact of a marriage. | couple relationship
-`http://gedcomx.org/MarriageBanns`| The fact of a marriage banns. | couple relationship
-`http://gedcomx.org/MarriageContract`| The fact of a marriage contract. | couple relationship
-`http://gedcomx.org/MarriageLicense`| The fact of a marriage license. | couple relationship
-`http://gedcomx.org/MarriageNotice`| The fact of a marriage notice. | couple relationship
-`http://gedcomx.org/NumberOfChildren`| A fact of the number of children of a person or relationship. | couple relationship
-`http://gedcomx.org/Separation`| A fact of a couple's separation. | couple relationship
-`http://gedcomx.org/AdoptiveParent`| A fact about an adoptive relationship between a parent an a child. | parent-child relationship
-`http://gedcomx.org/BiologicalParent`| A fact the biological relationship between a parent and a child. | parent-child relationship
-`http://gedcomx.org/FosterParent`| A fact about a foster relationship between a foster parent and a child. | parent-child relationship
-`http://gedcomx.org/GuardianParent`| A fact about a legal guardianship between a parent and a child. | parent-child relationship
-`http://gedcomx.org/StepParent`| A fact about the step relationship between a parent and a child. | parent-child relationship
-`http://gedcomx.org/SociologicalParent`| A fact about a sociological relationship between a parent and a child, but not definable in typical legal or biological terms. | parent-child relationship
+
+In addition to these elements, processors SHOULD support any other elements defined by section 3.11 (Fact Subclasses) of
+the [GEDCOM X Constrained Vocabulary specification](https://github.com/FamilySearch/gedcomx/blob/master/specifications/constrained-vocabulary-specification.md).
 
 <a id="known-fact-qualifier"/>
 
@@ -985,6 +912,8 @@ URI | description
 `http://gedcomx.org/Official`| An person officiating the event.
 `http://gedcomx.org/Witness`| A witness of the event.
 
+In addition to these elements, processors SHOULD support any other elements defined by section 3.3 (Event Role Subclasses) of
+the [GEDCOM X Constrained Vocabulary specification](https://github.com/FamilySearch/gedcomx/blob/master/specifications/constrained-vocabulary-specification.md).
 
 <a id="conclusion-date"/>
 
@@ -1058,35 +987,23 @@ The following name part types are defined by GEDCOM X:
 
 URI | description
 ----|-------------
-`http://gedcomx.org/Prefix`|
-`http://gedcomx.org/Suffix`|
-`http://gedcomx.org/Given`|
-`http://gedcomx.org/Surname`|
+`http://gedcomx.org/Prefix`| A name prefix.
+`http://gedcomx.org/Suffix`| A name suffix.
+`http://gedcomx.org/Given`| A given name.
+`http://gedcomx.org/Surname`| A surname.
+
+In addition to these elements, processors SHOULD support any other elements defined by section 3.10 (Name Part Subclasses) of
+the [GEDCOM X Constrained Vocabulary specification](https://github.com/FamilySearch/gedcomx/blob/master/specifications/constrained-vocabulary-specification.md).
 
 <a id="known-name-part-qualifier"/>
 
 ### Known Name Part Qualifiers
 
-The following name part qualifiers are defined by GEDCOM X:
-
-name | description
------|-------------
-`http://gedcomx.org/Title`|A designation for honorifics (e.g. Dr., Rev., His Majesty, Haji), ranks (e.g. Colonel, General, Knight, Esquire), positions (e.g. Count, Chief, Father, King) or other titles (e.g., PhD, MD). The qualifier value SHOULD NOT be used.
-`http://gedcomx.org/Primary`|A designation for the name of most prominent in importance among the names of that type (e.g., the primary given name). The qualifier value SHOULD NOT be used.
-`http://gedcomx.org/Secondary`|A designation for a name that is not primary in its importance among the names of that type (e.g., a secondary given name). The qualifier value SHOULD NOT be used.
-`http://gedcomx.org/Middle`|A designation useful for cultures that designate a middle name that is distinct from a given name and a surname. The qualifier value SHOULD NOT be used.
-`http://gedcomx.org/Familiar`|A designation for one's familiar name. The qualifier value SHOULD NOT be used.
-`http://gedcomx.org/Religious`|A designation for a name given for religious purposes. The qualifier value SHOULD NOT be used.
-`http://gedcomx.org/Family`|A name that associates a person with a group, such as a clan, tribe, or patriarchal hierarchy. The qualifier value SHOULD NOT be used.
-`http://gedcomx.org/Maiden`|A designation given by women to their original surname after they adopt a new surname upon marriage. The qualifier value SHOULD NOT be used.
-`http://gedcomx.org/Patronymic`|A name derived from a father or paternal ancestor. The qualifier value SHOULD NOT be used.
-`http://gedcomx.org/Matronymic`|A name derived from a mother or maternal ancestor. The qualifier value SHOULD NOT be used.
-`http://gedcomx.org/Geographic`|A name derived from associated geography. The qualifier value SHOULD NOT be used.
-`http://gedcomx.org/Occupational`|A name derived from one's occupation. The qualifier value SHOULD NOT be used.
-`http://gedcomx.org/Characteristic`|A name derived from a characteristic. The qualifier value SHOULD NOT be used.
-`http://gedcomx.org/Postnom`|A name mandedated by law populations from Congo Free State / Belgian Congo / Congo / Democratic Republic of Congo (formerly Zaire). The qualifier value SHOULD NOT be used.
-`http://gedcomx.org/Particle`|A grammatical designation for articles (a, the, dem, las, el, etc.), prepositions (of, from, aus, zu, op, etc.), initials (e.g. PhD, MD), annotations (e.g. twin, wife of, infant, unknown), comparators (e.g. Junior, Senior, younger, little), ordinals (e.g. III, eighth), and conjunctions (e.g. and, or, nee, ou, y, o, ne, &amp;). The qualifier value SHOULD NOT be used.
-
+A name part qualifier MAY be used to identify a subtype of a name part type by providing the identifier for the
+subtype in the `name` of the property. When a name part qualifier identifies a name part subtype, the qualifier
+value SHOULD NOT be used. Use of the elements defined by section 3.10.1 (Subclasses of Name Part Subclasses) of
+the [GEDCOM X Constrained Vocabulary specification](https://github.com/FamilySearch/gedcomx/blob/master/specifications/constrained-vocabulary-specification.md)
+is RECOMMENDED.
 
 <a id="name-form"/>
 
