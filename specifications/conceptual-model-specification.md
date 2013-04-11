@@ -230,7 +230,7 @@ URI | description
 `http://gedcomx.org/Couple`| A relationship of a pair of persons.
 `http://gedcomx.org/ParentChild`| A relationship from a parent to a child.
 
-In addition to these elements, processors SHOULD support any other elements defined by section 3.1 (Relationship Subclasses) of
+In addition to these elements, processors SHOULD support any other elements defined by section 3.2 (Relationship Subclasses) of
 the [GEDCOM X Constrained Vocabulary specification](https://github.com/FamilySearch/gedcomx/blob/master/specifications/constrained-vocabulary-specification.md).
 
 
@@ -335,7 +335,7 @@ URI | description
 `http://gedcomx.org/Divorce` | A divorce event.
 `http://gedcomx.org/Marriage` | A marriage event.
 
-In addition to these elements, processors SHOULD support any other elements defined by section 3.2 (Event Subclasses) of
+In addition to these elements, processors SHOULD support any other elements defined by section 3.3 (Event Subclasses) of
 the [GEDCOM X Constrained Vocabulary specification](https://github.com/FamilySearch/gedcomx/blob/master/specifications/constrained-vocabulary-specification.md).
 
 
@@ -378,7 +378,7 @@ URI | description
 `http://gedcomx.org/Translation` | The document is a translation of a record or document.
 `http://gedcomx.org/Analysis` | The document is an analysis done by a researcher, often used as a genealogical proof statement.
 
-In addition to these elements, processors SHOULD support any other elements defined by section 3.4 (Document Subclasses) of
+In addition to these elements, processors SHOULD support any other elements defined by section 3.5 (Document Subclasses) of
 the [GEDCOM X Constrained Vocabulary specification](https://github.com/FamilySearch/gedcomx/blob/master/specifications/constrained-vocabulary-specification.md).
 
 
@@ -730,7 +730,7 @@ URI | description
 `http://gedcomx.org/Female`| Female gender.
 `http://gedcomx.org/Unknown`| Unknown gender.
 
-In addition to these elements, processors SHOULD support any other elements defined by section 3.7 (Gender Subclasses) of
+In addition to these elements, processors SHOULD support any other elements defined by section 3.8 (Gender Subclasses) of
 the [GEDCOM X Constrained Vocabulary specification](https://github.com/FamilySearch/gedcomx/blob/master/specifications/constrained-vocabulary-specification.md).
 
 
@@ -809,7 +809,7 @@ URI | description
 `http://gedcomx.org/BirthName` | Name given at birth.
 `http://gedcomx.org/AlsoKnownAs` | "Also known as" name.
 
-In addition to these elements, processors SHOULD support any other elements defined by section 3.8 (Name Subclasses) of
+In addition to these elements, processors SHOULD support any other elements defined by section 3.9 (Name Subclasses) of
 the [GEDCOM X Constrained Vocabulary specification](https://github.com/FamilySearch/gedcomx/blob/master/specifications/constrained-vocabulary-specification.md).
 
 <a id="fact-conclusion"/>
@@ -858,7 +858,7 @@ URI | description | scope
 `http://gedcomx.org/Divorce`| The fact of a divorce of a couple. | couple relationship
 `http://gedcomx.org/Marriage`| The fact of a marriage. | couple relationship
 
-In addition to these elements, processors SHOULD support any other elements defined by section 3.11 (Fact Subclasses) of
+In addition to these elements, processors SHOULD support any other elements defined by section 3.12 (Fact Subclasses) of
 the [GEDCOM X Constrained Vocabulary specification](https://github.com/FamilySearch/gedcomx/blob/master/specifications/constrained-vocabulary-specification.md).
 
 <a id="known-fact-qualifier"/>
@@ -912,7 +912,7 @@ URI | description
 `http://gedcomx.org/Official`| An person officiating the event.
 `http://gedcomx.org/Witness`| A witness of the event.
 
-In addition to these elements, processors SHOULD support any other elements defined by section 3.3 (Event Role Subclasses) of
+In addition to these elements, processors SHOULD support any other elements defined by section 3.4 (Event Role Subclasses) of
 the [GEDCOM X Constrained Vocabulary specification](https://github.com/FamilySearch/gedcomx/blob/master/specifications/constrained-vocabulary-specification.md).
 
 <a id="conclusion-date"/>
@@ -992,7 +992,7 @@ URI | description
 `http://gedcomx.org/Given`| A given name.
 `http://gedcomx.org/Surname`| A surname.
 
-In addition to these elements, processors SHOULD support any other elements defined by section 3.10 (Name Part Subclasses) of
+In addition to these elements, processors SHOULD support any other elements defined by section 3.11 (Name Part Subclasses) of
 the [GEDCOM X Constrained Vocabulary specification](https://github.com/FamilySearch/gedcomx/blob/master/specifications/constrained-vocabulary-specification.md).
 
 <a id="known-name-part-qualifier"/>
@@ -1001,7 +1001,7 @@ the [GEDCOM X Constrained Vocabulary specification](https://github.com/FamilySea
 
 A name part qualifier MAY be used to identify a subtype of a name part type by providing the identifier for the
 subtype in the `name` of the property. When a name part qualifier identifies a name part subtype, the qualifier
-value SHOULD NOT be used. Use of the elements defined by section 3.10.1 (Subclasses of Name Part Subclasses) of
+value SHOULD NOT be used. Use of the elements defined by section 3.11.1 (Subclasses of Name Part Subclasses) of
 the [GEDCOM X Constrained Vocabulary specification](https://github.com/FamilySearch/gedcomx/blob/master/specifications/constrained-vocabulary-specification.md)
 is RECOMMENDED.
 

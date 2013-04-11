@@ -90,7 +90,7 @@ This section provides vocabulary elements for subclasses of genealogical data.
 
 There are no subclasses of `http://gedcomx.org/Person` defined.
 
-## 3.1 Relationship Subclasses
+## 3.2 Relationship Subclasses
 
 The following elements identify subclasses of the `http://gedcomx.org/Relationship` class:
 
@@ -99,7 +99,7 @@ URI | description
 `http://gedcomx.org/Couple`| A relationship between two persons for the purposes of companionship, often for the purpose of starting a family and raising children.
 `http://gedcomx.org/ParentChild`| A relationship from a parent to a child.
 
-## 3.2 Event Subclasses
+## 3.3 Event Subclasses
 
 The following elements identify subclasses of the `http://gedcomx.org/Event` class:
 
@@ -140,7 +140,7 @@ URI | description
 `http://gedcomx.org/Ordination` | An ordination event.
 `http://gedcomx.org/Retirement` | A retirement event.
 
-## 3.3 Event Role Subclasses
+## 3.4 Event Role Subclasses
 
 The following elements identify subclasses of the `http://gedcomx.org/EventRole` class:
 
@@ -151,7 +151,7 @@ URI | description
 `http://gedcomx.org/Official`| An person officiating the event.
 `http://gedcomx.org/Witness`| A witness of the event.
 
-## 3.4 Document Subclasses
+## 3.5 Document Subclasses
 
 The following elements identify subclasses of the `http://gedcomx.org/Document` class:
 
@@ -162,15 +162,15 @@ URI | description
 `http://gedcomx.org/Translation` | The document is a translation of a record or document.
 `http://gedcomx.org/Analysis` | The document is an analysis done by a researcher, often used as a genealogical proof statement.
 
-## 3.5 Date Subclasses
+## 3.6 Date Subclasses
 
 There are no subclasses of `http://gedcomx.org/Date` defined.
 
-## 3.6 Place Subclasses
+## 3.7 Place Subclasses
 
 There are no subclasses of `http://gedcomx.org/Place` defined.
 
-## 3.7 Gender Subclasses
+## 3.8 Gender Subclasses
 
 The following elements identify subclasses of the  `http://gedcomx.org/Gender` class:
 
@@ -180,7 +180,7 @@ URI | description
 `http://gedcomx.org/Female`| Female gender.
 `http://gedcomx.org/Unknown`| Unknown gender.
 
-## 3.8 Name Subclasses
+## 3.9 Name Subclasses
 
 The following elements identify subclasses of the `http://gedcomx.org/Name` class:
 
@@ -194,11 +194,11 @@ URI | description
 `http://gedcomx.org/FormalName` | A formal name, usually given to distinguish it from a name more commonly used.
 `http://gedcomx.org/ReligiousName` | A name given at a religious rite or ceremony.
 
-## 3.9 Name Form Subclasses
+## 3.10 Name Form Subclasses
 
 There are no subclasses of `http://gedcomx.org/NameForm` defined.
 
-## 3.10 Name Part Subclasses
+## 3.11 Name Part Subclasses
 
 The following elements identify subclasses of the `http://gedcomx.org/NamePart` class:
 
@@ -209,7 +209,7 @@ URI | description
 `http://gedcomx.org/Given`| A given name.
 `http://gedcomx.org/Surname`| A surname.
 
-### 3.10.1 Subclasses of Name Part Subclasses
+### 3.11.1 Subclasses of Name Part Subclasses
 
 The following elements identify subclasses of subclasses of the `http://gedcomx.org/NamePart` class:
 
@@ -231,7 +231,7 @@ URI | description | subclass of
 `http://gedcomx.org/Postnom`|A name mandedated by law populations from Congo Free State / Belgian Congo / Congo / Democratic Republic of Congo (formerly Zaire).| `http://gedcomx.org/Given`, `http://gedcomx.org/Surname`
 `http://gedcomx.org/Particle`|A grammatical designation for articles (a, the, dem, las, el, etc.), prepositions (of, from, aus, zu, op, etc.), initials (e.g. PhD, MD), annotations (e.g. twin, wife of, infant, unknown), comparators (e.g. Junior, Senior, younger, little), ordinals (e.g. III, eighth), and conjunctions (e.g. and, or, nee, ou, y, o, ne, &amp;). | `http://gedcomx.org/Prefix`, `http://gedcomx.org/Suffix`
 
-## 3.11 Fact Subclasses
+## 3.12 Fact Subclasses
 
 The following elements identify subclasses of the `http://gedcomx.org/Fact` class. Subclasses of `Fact` also
 specify a class as the value of the "scope" of the subclass. The subclass is only applicable within the context
