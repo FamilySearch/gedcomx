@@ -992,18 +992,38 @@ URI | description
 `http://gedcomx.org/Given`| A given name.
 `http://gedcomx.org/Surname`| A surname.
 
-In addition to these elements, processors SHOULD support any other elements defined by section 3.11 (Name Part Subclasses) of
+In addition to these elements, processors SHOULD support any other elements defined by section 3.10.1 (Context-Based Name Part Subclasses) of
 the [GEDCOM X Constrained Vocabulary specification](https://github.com/FamilySearch/gedcomx/blob/master/specifications/constrained-vocabulary-specification.md).
 
 <a id="known-name-part-qualifier"/>
 
 ### Known Name Part Qualifiers
 
-A name part qualifier MAY be used to identify a subtype of a name part type by providing the identifier for the
-subtype in the `name` of the property. When a name part qualifier identifies a name part subtype, the qualifier
-value SHOULD NOT be used. Use of the elements defined by section 3.11.1 (Subclasses of Name Part Subclasses) of
-the [GEDCOM X Constrained Vocabulary specification](https://github.com/FamilySearch/gedcomx/blob/master/specifications/constrained-vocabulary-specification.md)
-is RECOMMENDED.
+A name part qualifier MAY be used to identify how the name part was used by the person to which the name
+applies. For example, a name part qualifier my specify that a given `Suffix` was used by the person as a `Title`.
+When a name part qualifier identifies the usage of a name part, the qualifier `name` MUST be used
+to identify the usage, and the qualifier value SHOULD NOT be used. The following qualifier names are defined by GEDCOM X:
+
+URI | description
+----|-------------
+`http://gedcomx.org/Title`|A designation for honorifics (e.g. Dr., Rev., His Majesty, Haji), ranks (e.g. Colonel, General, Knight, Esquire), positions (e.g. Count, Chief, Father, King) or other titles (e.g., PhD, MD).
+`http://gedcomx.org/Primary`|A designation for the name of most prominent in importance among the names of that type (e.g., the primary given name).
+`http://gedcomx.org/Secondary`|A designation for a name that is not primary in its importance among the names of that type (e.g., a secondary given name).
+`http://gedcomx.org/Middle`|A designation useful for cultures that designate a middle name that is distinct from a given name and a surname.
+`http://gedcomx.org/Familiar`|A designation for one's familiar name. The qualifier value SHOULD NOT be used.
+`http://gedcomx.org/Religious`|A designation for a name given for religious purposes. The qualifier value SHOULD NOT be used.
+`http://gedcomx.org/Family`|A name that associates a person with a group, such as a clan, tribe, or patriarchal hierarchy.
+`http://gedcomx.org/Maiden`|A designation given by women to their original surname after they adopt a new surname upon marriage.
+`http://gedcomx.org/Patronymic`|A name derived from a father or paternal ancestor.
+`http://gedcomx.org/Matronymic`|A name derived from a mother or maternal ancestor.
+`http://gedcomx.org/Geographic`|A name derived from associated geography.
+`http://gedcomx.org/Occupational`|A name derived from one's occupation.
+`http://gedcomx.org/Characteristic`|A name derived from a characteristic.
+`http://gedcomx.org/Postnom`|A name mandedated by law populations from Congo Free State / Belgian Congo / Congo / Democratic Republic of Congo (formerly Zaire).
+`http://gedcomx.org/Particle`|A grammatical designation for articles (a, the, dem, las, el, etc.), prepositions (of, from, aus, zu, op, etc.), initials (e.g. PhD, MD), annotations (e.g. twin, wife of, infant, unknown), comparators (e.g. Junior, Senior, younger, little), ordinals (e.g. III, eighth), and conjunctions (e.g. and, or, nee, ou, y, o, ne, &amp;).
+
+In addition to these elements, processors SHOULD support any other elements defined by section 3.10.2 (Usage-Based Name Part Subclasses) of
+the [GEDCOM X Constrained Vocabulary specification](https://github.com/FamilySearch/gedcomx/blob/master/specifications/constrained-vocabulary-specification.md).
 
 <a id="name-form"/>
 

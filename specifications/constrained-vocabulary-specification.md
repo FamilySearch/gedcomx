@@ -200,7 +200,12 @@ There are no subclasses of `http://gedcomx.org/NameForm` defined.
 
 ## 3.11 Name Part Subclasses
 
-The following elements identify subclasses of the `http://gedcomx.org/NamePart` class:
+The following elements identify subclasses of the `http://gedcomx.org/NamePart` class.
+
+## 3.10.1 Context-Based Name Part Subclasses
+
+The following subclasses of `http://gedcomx.org/NamePart` are used to identify the context
+of the name part in relation to the (full) name.
 
 URI | description
 ----|-------------
@@ -209,27 +214,29 @@ URI | description
 `http://gedcomx.org/Given`| A given name.
 `http://gedcomx.org/Surname`| A surname.
 
-### 3.11.1 Subclasses of Name Part Subclasses
+## 3.10.2 Usage-Based Name Part Subclasses
 
-The following elements identify subclasses of subclasses of the `http://gedcomx.org/NamePart` class:
+The following subclasses of `http://gedcomx.org/NamePart` are used to identify how the name part
+was used by the person to which the name applies.
 
-URI | description | subclass of
-----|-------------|------------
-`http://gedcomx.org/Title`|A designation for honorifics (e.g. Dr., Rev., His Majesty, Haji), ranks (e.g. Colonel, General, Knight, Esquire), positions (e.g. Count, Chief, Father, King) or other titles (e.g., PhD, MD). | `http://gedcomx.org/Prefix`, `http://gedcomx.org/Suffix`
-`http://gedcomx.org/Primary`|A designation for the name of most prominent in importance among the names of that type (e.g., the primary given name). | `http://gedcomx.org/Given`, `http://gedcomx.org/Surname`
-`http://gedcomx.org/Secondary`|A designation for a name that is not primary in its importance among the names of that type (e.g., a secondary given name). | `http://gedcomx.org/Given`
-`http://gedcomx.org/Middle`|A designation useful for cultures that designate a middle name that is distinct from a given name and a surname. | `http://gedcomx.org/Given`
-`http://gedcomx.org/Familiar`|A designation for one's familiar name. The qualifier value SHOULD NOT be used.| `http://gedcomx.org/Given`, `http://gedcomx.org/Surname`
-`http://gedcomx.org/Religious`|A designation for a name given for religious purposes. The qualifier value SHOULD NOT be used.| `http://gedcomx.org/Given`, `http://gedcomx.org/Surname`
-`http://gedcomx.org/Family`|A name that associates a person with a group, such as a clan, tribe, or patriarchal hierarchy.| `http://gedcomx.org/Surname`
-`http://gedcomx.org/Maiden`|A designation given by women to their original surname after they adopt a new surname upon marriage.| `http://gedcomx.org/Surname`
-`http://gedcomx.org/Patronymic`|A name derived from a father or paternal ancestor. | `http://gedcomx.org/Surname`
-`http://gedcomx.org/Matronymic`|A name derived from a mother or maternal ancestor. | `http://gedcomx.org/Surname`
-`http://gedcomx.org/Geographic`|A name derived from associated geography. | `http://gedcomx.org/Surname`
-`http://gedcomx.org/Occupational`|A name derived from one's occupation | `http://gedcomx.org/Surname`
-`http://gedcomx.org/Characteristic`|A name derived from a characteristic.| `http://gedcomx.org/Given`, `http://gedcomx.org/Surname`
-`http://gedcomx.org/Postnom`|A name mandedated by law populations from Congo Free State / Belgian Congo / Congo / Democratic Republic of Congo (formerly Zaire).| `http://gedcomx.org/Given`, `http://gedcomx.org/Surname`
-`http://gedcomx.org/Particle`|A grammatical designation for articles (a, the, dem, las, el, etc.), prepositions (of, from, aus, zu, op, etc.), initials (e.g. PhD, MD), annotations (e.g. twin, wife of, infant, unknown), comparators (e.g. Junior, Senior, younger, little), ordinals (e.g. III, eighth), and conjunctions (e.g. and, or, nee, ou, y, o, ne, &amp;). | `http://gedcomx.org/Prefix`, `http://gedcomx.org/Suffix`
+URI | description
+----|-------------
+`http://gedcomx.org/Title`|A designation for honorifics (e.g. Dr., Rev., His Majesty, Haji), ranks (e.g. Colonel, General, Knight, Esquire), positions (e.g. Count, Chief, Father, King) or other titles (e.g., PhD, MD).
+`http://gedcomx.org/Primary`|A designation for the name of most prominent in importance among the names of that type (e.g., the primary given name).
+`http://gedcomx.org/Secondary`|A designation for a name that is not primary in its importance among the names of that type (e.g., a secondary given name).
+`http://gedcomx.org/Middle`|A designation useful for cultures that designate a middle name that is distinct from a given name and a surname.
+`http://gedcomx.org/Familiar`|A designation for one's familiar name. The qualifier value SHOULD NOT be used.
+`http://gedcomx.org/Religious`|A designation for a name given for religious purposes. The qualifier value SHOULD NOT be used.
+`http://gedcomx.org/Family`|A name that associates a person with a group, such as a clan, tribe, or patriarchal hierarchy.
+`http://gedcomx.org/Maiden`|A designation given by women to their original surname after they adopt a new surname upon marriage.
+`http://gedcomx.org/Patronymic`|A name derived from a father or paternal ancestor.
+`http://gedcomx.org/Matronymic`|A name derived from a mother or maternal ancestor.
+`http://gedcomx.org/Geographic`|A name derived from associated geography.
+`http://gedcomx.org/Occupational`|A name derived from one's occupation.
+`http://gedcomx.org/Characteristic`|A name derived from a characteristic.
+`http://gedcomx.org/Postnom`|A name mandedated by law populations from Congo Free State / Belgian Congo / Congo / Democratic Republic of Congo (formerly Zaire).
+`http://gedcomx.org/Particle`|A grammatical designation for articles (a, the, dem, las, el, etc.), prepositions (of, from, aus, zu, op, etc.), initials (e.g. PhD, MD), annotations (e.g. twin, wife of, infant, unknown), comparators (e.g. Junior, Senior, younger, little), ordinals (e.g. III, eighth), and conjunctions (e.g. and, or, nee, ou, y, o, ne, &amp;).
+
 
 ## 3.12 Fact Subclasses
 
