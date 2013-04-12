@@ -378,7 +378,7 @@ This data type extends the following data type:
 name  | description | data type | constraints
 ------|-------------|-----------|------------
 type | URI identifying the type of the document. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to a document type, and use of a [known document type](#known-document-types) is RECOMMENDED.
-textType | The type of text in the `text` field. | string | OPTIONAL. If provided, the value MUST be one of the following: "plain" or "xhtml".  If no value is provided, "plain" is assumed.
+textType | The type of text in the `text` field. | string | OPTIONAL. If provided, the value MUST be a [valid document text type](#document-text-types).  If no value is provided, "plain" is assumed.
 text | The text of the document. | string | REQUIRED.
 attribution | The attribution of the document. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing data set (e.g. file) of the document is assumed.
 
@@ -394,6 +394,30 @@ URI | description
 `http://gedcomx.org/Transcription` | The document is a transcription of a record or document.
 `http://gedcomx.org/Translation` | The document is a translation of a record or document.
 `http://gedcomx.org/Analysis` | The document is an analysis done by a researcher, often used as a genealogical proof statement.
+
+<a id="document-text-types"/>
+
+### 2.6.2 Document Text Types
+
+The following document text types are supported:
+
+#### plain
+
+The "plain" text type identifies the type the document text to be plain text. "plain" is the default value of a document.
+
+#### xhtml
+
+The "xhtml" text type identifies the type of the document text to be XHTML as defined by the [XHTML 1.0 W3C Recommendation](http://www.w3.org/TR/xhtml1/).
+To maximize compatibility and to minimize security risks, the set of XHTML modules (as defined by the
+[XHTML Modularization 1.1 W3C Recommendation](http://www.w3.org/TR/xhtml-modularization/)) REQUIRED to be supported is limited
+to the following:
+
+* [Core Modules](http://www.w3.org/TR/xhtml-modularization/abstract_modules.html#sec_5.2.)
+* [Text Extension Modules](http://www.w3.org/TR/xhtml-modularization/abstract_modules.html#s_text)
+* [Table Modules](http://www.w3.org/TR/xhtml-modularization/abstract_modules.html#sec_5.6.)
+* [Base Module](http://www.w3.org/TR/xhtml-modularization/abstract_modules.html#s_basemodule)
+
+Support for additional XHTML modules is OPTIONAL.
 
 <a id="conclusion-place"/>
 
