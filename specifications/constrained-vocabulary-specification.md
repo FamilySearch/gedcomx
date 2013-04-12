@@ -317,3 +317,19 @@ URI | description | scope
 `http://gedcomx.org/GuardianParent`| A fact about a legal guardianship between a parent and a child. | `http://gedcomx.org/ParentChild`
 `http://gedcomx.org/StepParent`| A fact about the step relationship between a parent and a child. | `http://gedcomx.org/ParentChild`
 `http://gedcomx.org/SociologicalParent`| A fact about a sociological relationship between a parent and a child, but not definable in typical legal or biological terms. | `http://gedcomx.org/ParentChild`
+
+# 4. Miscellaneous Classes
+
+This section provides vocabulary elements for other miscellaneous classes that are useful to the description of genealogical data.
+
+## 4.1 Classes of Confidence Levels
+
+The following elements of the GEDCOM X vocabulary identify classes used for providing a researcher's confidence level
+in certain genealogical data:
+
+URI | description
+----|------------
+`http://gedcomx.org/High`|The contributor has a high degree of confidence that the assertion is true.
+`http://gedcomx.org/Medium`|The contributor has a medium degree of confidence that the assertion is true.
+`http://gedcomx.org/Low`|The contributor has a low degree of confidence that the assertion is true.
+

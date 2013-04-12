@@ -692,6 +692,9 @@ URI | description
 `http://gedcomx.org/Medium`|The contributor has a medium degree of confidence that the assertion is true.
 `http://gedcomx.org/Low`|The contributor has a low degree of confidence that the assertion is true.
 
+In addition to these elements, processors SHOULD support any other elements defined by section 4.1 (Classes of Confidence Levels) of
+the [GEDCOM X Constrained Vocabulary specification](https://github.com/FamilySearch/gedcomx/blob/master/specifications/constrained-vocabulary-specification.md).
+
 
 <a id="gender-conclusion"/>
 
