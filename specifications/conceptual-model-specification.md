@@ -407,17 +407,17 @@ The "plain" text type identifies the type the document text to be plain text. "p
 
 #### xhtml
 
-The "xhtml" text type identifies the type of the document text to be XHTML as defined by the [XHTML 1.0 W3C Recommendation](http://www.w3.org/TR/xhtml1/).
-To maximize compatibility and to minimize security risks, the set of XHTML modules (as defined by the
-[XHTML Modularization 1.1 W3C Recommendation](http://www.w3.org/TR/xhtml-modularization/)) REQUIRED to be supported is limited
-to the following:
+The "xhtml" text type identifies XHTML documents complying with the 
+[XHTML 1.0 W3C Recommendation](http://www.w3.org/TR/xhtml1/). In order to maximize compatibility and 
+minimize security risks, support for the following subset of modules (defined by XHTML Modularization 
+1.1 W3C Recommendation](http://www.w3.org/TR/xhtml-modularization/)) is REQUIRED:
 
 * [Core Modules](http://www.w3.org/TR/xhtml-modularization/abstract_modules.html#sec_5.2.)
 * [Text Extension Modules](http://www.w3.org/TR/xhtml-modularization/abstract_modules.html#s_text)
 * [Table Modules](http://www.w3.org/TR/xhtml-modularization/abstract_modules.html#sec_5.6.)
 * [Base Module](http://www.w3.org/TR/xhtml-modularization/abstract_modules.html#s_basemodule)
 
-Support for additional XHTML modules is OPTIONAL.
+Support for other XHTML modules is OPTIONAL. Parsers may ignore elements from optional modules.
 
 <a id="conclusion-place"/>
 
