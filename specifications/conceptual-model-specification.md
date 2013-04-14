@@ -412,12 +412,12 @@ The "xhtml" text type identifies XHTML documents complying with the
 minimize security risks, support for the following subset of modules (defined by XHTML Modularization 
 1.1 W3C Recommendation](http://www.w3.org/TR/xhtml-modularization/)) is REQUIRED:
 
-* [Core Modules](http://www.w3.org/TR/xhtml-modularization/abstract_modules.html#sec_5.2.)
-* [Text Extension Modules](http://www.w3.org/TR/xhtml-modularization/abstract_modules.html#s_text)
-* [Table Modules](http://www.w3.org/TR/xhtml-modularization/abstract_modules.html#sec_5.6.)
+* [Core Modules](http://www.w3.org/TR/xhtml-modularization/abstract_modules.html#sec_5.2.), including the Structure Module, Text Module, Hypertext Module, and List Module.
+* [Text Extension Modules](http://www.w3.org/TR/xhtml-modularization/abstract_modules.html#s_text), including the Presentation Module, Edit Module, and Bi-directional Text Module.
+* [Table Modules](http://www.w3.org/TR/xhtml-modularization/abstract_modules.html#sec_5.6.), including the Basic Tables Module, and Tables Module.
 * [Base Module](http://www.w3.org/TR/xhtml-modularization/abstract_modules.html#s_basemodule)
 
-Support for other XHTML modules is OPTIONAL. Parsers may ignore elements from optional modules.
+Support for other XHTML modules is OPTIONAL. Parsers MAY ignore elements from optional modules.
 
 <a id="conclusion-place"/>
 
