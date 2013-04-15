@@ -220,7 +220,7 @@ name | description | XML property | XML type
 -----|-------------|--------------|---------
 attribution | The attribution of this person. | gx:attribution | [`gx:Attribution`](#attribution)
 identifiers | Identifiers for the person. | gx:identifier | [`gx:Identifier`](#identifier-type)
-persona | Whether this description of the person is to be constrained as a persona. | persona (attribute) | xsd:boolean
+extracted | Whether the person is to be constrained as an *extracted conclusion*. | extracted (attribute) | xsd:boolean
 living | Whether the person is considered living. | gx:living | xsd:boolean
 gender | The conclusion about the gender of the person. | gx:gender | [`gx:Gender`](#gender)
 names | The conclusions about the names of the person. | gx:name | [`gx:Name`](#name-conclusion)
@@ -229,7 +229,7 @@ facts | The conclusions about the facts of the life of the person. | gx:fact | [
 ### examples
 
 ```xml
-  <... id="local_id" persona="false">
+  <... id="local_id" extracted="false">
 
     <!-- ...the members of gx:Conclusion... -->
 
@@ -268,6 +268,7 @@ name | description | XML property | XML type
 -----|-------------|--------------|---------
 attribution | The attribution of this relationship. | gx:attribution | [`gx:Attribution`](#attribution)
 type | URI identifying the type of the relationship. | type (attribute) | [`URI`](#uri)
+extracted | Whether the relationship is to be constrained as an *extracted conclusion*. | extracted (attribute) | xsd:boolean
 person1 | Reference to the first person in the relationship. | gx:person1 | [`gx:ResourceReference`](#resource-reference)
 person2 | Reference to the second person in the relationship. | gx:person2 | [`gx:ResourceReference`](#resource-reference)
 facts | The conclusions about the facts of the life of the relationship. | gx:fact | [`gx:Fact`](#fact-conclusion)
@@ -276,7 +277,7 @@ identifiers | Identifiers for the relationship. | gx:identifier | [`gx:Identifie
 ### examples
 
 ```xml
-  <... id="local_id" type="http://gedcomx.org/Couple">
+  <... id="local_id" type="http://gedcomx.org/Couple" extracted="false">
 
     <!-- ...the members of gx:Conclusion... -->
 
@@ -404,6 +405,7 @@ name | description | XML property | XML type
 -----|-------------|--------------|---------
 attribution | The attribution of this event. | gx:attribution | [`gx:Attribution`](#attribution)
 type | URI identifying the type of the event. | type (attribute) | [`URI`](#uri)
+extracted | Whether the event is to be constrained as an *extracted conclusion*. | extracted (attribute) | xsd:boolean
 date | The date of the event. | gx:date | [`gx:Date`](#conclusion-date)
 place | The place the event. | gx:place | [`gx:Place`](#conclusion-place)
 roles | The roles of the persons in the event. | gx:role | [`gx:EventRole`](#conclusion-event-role)
@@ -411,7 +413,7 @@ roles | The roles of the persons in the event. | gx:role | [`gx:EventRole`](#con
 ### examples
 
 ```xml
-  <... id="local_id" type="http://gedcomx.org/Marriage">
+  <... id="local_id" type="http://gedcomx.org/Marriage" extracted="false">
 
     <!-- ...the members of gx:Conclusion... -->
 
@@ -470,6 +472,7 @@ name | description | XML property | XML type
 about | A uniform resource identifier (URI) for the place being described. | about (attribute) | [anyURI](#uri)
 names | A list of standardized (or normalized), fully-qualified (in terms of what is known of the applicable jurisdictional hierarchy) names for this place that are applicable to this description of this place. | gx:name | [`gx:TextValue`](#text-value)
 type | A uniform resource identifier (URI) identifying the type of the place as it is applicable to this description. | type (attribute) | [`URI`](#uri)
+extracted | Whether the place description is to be constrained as an *extracted conclusion*. | extracted (attribute) | xsd:boolean
 temporalDescription | A description of the time period to which this place description is relevant. | gx:temporalDescription | [`gx:Date`](#conclusion-date)
 latitude | Degrees north or south of the Equator (0.0 degrees). | gx:latitude | xsd:double
 longitude | Angular distance in degrees, relative to the Prime Meridian. | gx:latitude | xsd:double
@@ -480,7 +483,7 @@ attribution | Attribution metadata for this place description. | gx:attribution 
 ### examples
 
 ```xml
-  <... id="local_id" about="http://identifier/of/the/place/being/described" type="http://identifier/for/the/place/type">
+  <... id="local_id" about="http://identifier/of/the/place/being/described" type="http://identifier/for/the/place/type" extracted="false">
 
     <!-- ...the members of gx:Conclusion... -->
 

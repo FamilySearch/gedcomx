@@ -262,7 +262,7 @@ name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 attribution | The attribution of this conclusion. | attribution | [`Attribution`](#attribution)
 identifiers | Identifiers for the person. | identifiers | [`Identifier`](#identifier-type)
-persona | Whether this description of the person is to be constrained as a persona. | persona | boolean
+extracted | Whether the person is to be constrained as an *extracted conclusion* (i.e. "persona"). | extracted | boolean
 living | Whether the person is considered living. | living | boolean
 gender | The conclusion about the gender of the person. | gender | [`Gender`](#gender)
 names | The conclusions about the names of the person. | names | array of [`Name`](#name-conclusion)
@@ -277,7 +277,7 @@ facts | The conclusions about the facts of the life of the person. | facts | arr
 
   "attribution" : { ... },
   "identifiers" : { ... },
-  "persona" : false,
+  "extracted" : false,
   "living" : true,
   "gender" : { ... },
   "names" : [ { ... }, { ... } ],
@@ -297,6 +297,7 @@ name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 attribution | The attribution of this conclusion. | attribution | [`Attribution`](#attribution)
 type | URI identifying the type of the relationship. | type | [`URI`](#uri)
+extracted | Whether the relationship is to be constrained as an *extracted conclusion*. | extracted | boolean
 person1 | Reference to the first person in the relationship. | person1 | [`ResourceReference`](#resource-reference)
 person2 | Reference to the second person in the relationship. | person2 | [`ResourceReference`](#resource-reference)
 facts | The conclusions about the facts of the life of the relationship. | facts | array of [`Fact`](#fact-conclusion)
@@ -311,6 +312,7 @@ identifiers | Identifiers for the relationship. | identifiers | [`Identifier`](#
 
   "attribution" : { ... },
   "type" : "http://gedcomx.org/Couple",
+  "extracted" : false,
   "person1" : {
     "resource" : "http://identifier/for/person/1"
   },
@@ -419,6 +421,7 @@ name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 attribution | The attribution of this conclusion. | attribution | [`Attribution`](#attribution)
 type | URI identifying the type of the event. | type | [`URI`](#uri)
+extracted | Whether the event is to be constrained as an *extracted conclusion*. | extracted | boolean
 date | The date of the event. | date | [`Date`](#conclusion-date)
 place | The place the event. | place | [`Place`](#conclusion-place)
 roles | The roles of the persons in the event. | roles | array of [`EventRole`](#conclusion-event-role)
@@ -432,6 +435,7 @@ roles | The roles of the persons in the event. | roles | array of [`EventRole`](
 
   "attribution" : { ... },
   "type" : "http://gedcomx.org/Marriage",
+  "extracted" : false,
   "date" : { ... },
   "place" : { ... },
   "roles" : [ { ... }, { ... } ]
@@ -475,6 +479,7 @@ name | description | JSON member | JSON object type
 about | A uniform resource identifier (URI) for the place being described. | about | [`URI`](#uri)
 names | A list of standardized (or normalized), fully-qualified (in terms of what is known of the applicable jurisdictional hierarchy) names for this place that are applicable to this description of this place. | names | array of [`TextValue`](#text-value)
 type | A uniform resource identifier (URI) identifying the type of the place as it is applicable to this description. | type | [`URI`](#uri)
+extracted | Whether the place description is to be constrained as an *extracted conclusion*. | extracted | boolean
 temporalDescription | A description of the time period to which this place description is relevant. | temporalDescription | [`Date`](#conclusion-date)
 latitude | Degrees north or south of the Equator (0.0 degrees). | latitude | number
 longitude | Angular distance in degrees, relative to the Prime Meridian. | longitude | number
@@ -492,6 +497,7 @@ attribution | The attribution of this conclusion. | attribution | [`Attribution`
   "about" : "http://identifier/of/the/place/being/described",
   "names" : [ { ... }, { ... } ],
   "type" : "http://identifier/for/the/place/type",
+  "extracted" : false,
   "temporalDescription" : { ... },
   "latitude" : "27.9883575",
   "latitude" : "86.9252014",
