@@ -1004,8 +1004,8 @@ the [GEDCOM X Constrained Vocabulary specification](https://github.com/FamilySea
 
 A name part qualifier MAY be used to identify how the name part was used by the person to which the name
 applies. For example, a name part qualifier my specify that a given `Suffix` was used by the person as a `Title`.
-When a name part qualifier identifies the usage of a name part, the qualifier `name` MUST be used
-to identify the usage, and the qualifier value SHOULD NOT be used. The following qualifier names are defined by GEDCOM X:
+When a name part qualifier identifies the usage of a name part, the qualifier `name` property MUST be used
+to identify the usage, and the qualifier `value` property SHOULD NOT be used. The following name part qualifier names are defined by GEDCOM X:
 
 URI | description
 ----|-------------
