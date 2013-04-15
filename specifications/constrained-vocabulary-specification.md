@@ -202,7 +202,7 @@ There are no subclasses of `http://gedcomx.org/NameForm` defined.
 
 The following elements identify subclasses of the `http://gedcomx.org/NamePart` class.
 
-## 3.10.1 Context-Based Name Part Subclasses
+## 3.11.1 Context-Based Name Part Subclasses
 
 The following subclasses of `http://gedcomx.org/NamePart` are used to identify the context
 of the name part in relation to the (full) name.
@@ -214,7 +214,7 @@ URI | description
 `http://gedcomx.org/Given`| A given name.
 `http://gedcomx.org/Surname`| A surname.
 
-## 3.10.2 Usage-Based Name Part Subclasses
+## 3.11.2 Usage-Based Name Part Subclasses
 
 The following subclasses of `http://gedcomx.org/NamePart` are used to identify how the name part
 was used by the person to which the name applies.
@@ -322,7 +322,7 @@ URI | description | scope
 
 This section provides vocabulary elements for other miscellaneous classes that are useful to the description of genealogical data.
 
-## 4.1 Classes of Confidence Levels
+## 4.1 Confidence Level Subclasses
 
 The following elements of the GEDCOM X vocabulary identify classes used for providing a researcher's confidence level
 in certain genealogical data:

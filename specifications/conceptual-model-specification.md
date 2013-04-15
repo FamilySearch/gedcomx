@@ -369,7 +369,7 @@ attribution | The attribution of the document. | [`http://gedcomx.org/Attributio
 
 ### 2.6.1 Known Document Types
 
-The following gender types are defined by GEDCOM X:
+The following document types are defined by GEDCOM X:
 
 URI | description
 ----|-------------
@@ -995,7 +995,7 @@ URI | description
 `http://gedcomx.org/Given`| A given name.
 `http://gedcomx.org/Surname`| A surname.
 
-In addition to these elements, processors SHOULD support any other elements defined by section 3.10.1 (Context-Based Name Part Subclasses) of
+In addition to these elements, processors SHOULD support any other elements defined by section 3.11.1 (Context-Based Name Part Subclasses) of
 the [GEDCOM X Constrained Vocabulary specification](https://github.com/FamilySearch/gedcomx/blob/master/specifications/constrained-vocabulary-specification.md).
 
 <a id="known-name-part-qualifier"/>
@@ -1025,7 +1025,7 @@ URI | description
 `http://gedcomx.org/Postnom`|A name mandedated by law populations from Congo Free State / Belgian Congo / Congo / Democratic Republic of Congo (formerly Zaire).
 `http://gedcomx.org/Particle`|A grammatical designation for articles (a, the, dem, las, el, etc.), prepositions (of, from, aus, zu, op, etc.), initials (e.g. PhD, MD), annotations (e.g. twin, wife of, infant, unknown), comparators (e.g. Junior, Senior, younger, little), ordinals (e.g. III, eighth), and conjunctions (e.g. and, or, nee, ou, y, o, ne, &amp;).
 
-In addition to these elements, processors SHOULD support any other elements defined by section 3.10.2 (Usage-Based Name Part Subclasses) of
+In addition to these elements, processors SHOULD support any other elements defined by section 3.11.2 (Usage-Based Name Part Subclasses) of
 the [GEDCOM X Constrained Vocabulary specification](https://github.com/FamilySearch/gedcomx/blob/master/specifications/constrained-vocabulary-specification.md).
 
 <a id="name-form"/>
