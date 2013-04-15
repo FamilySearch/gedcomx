@@ -173,7 +173,7 @@ This data type extends the following data type:
 name  | description | data type | constraints
 ------|-------------|-----------|------------
 identifiers | Identifiers for the person. | List of [`http://gedcomx.org/v1/Identifier`](#identifier-type). Order is preserved. | OPTIONAL.
-extracted | Whether the person is to be constrained as *extracted information*. A person that is identified as extracted information MAY be referred to as a "persona". | boolean | OPTIONAL. Default: `false`. Refer to [Extracted Information Constraints](#4-extracted-information-constraints).
+extracted | Whether the person is to be constrained as an *extracted conclusion*. A person that is identified as extracted conclusion MAY be referred to as a "persona". | boolean | OPTIONAL. Default: `false`. Refer to [Extracted Conclusion Constraints](#4-extracted-conclusion-constraints).
 living | Whether the person is considered living. | boolean | OPTIONAL.
 gender | The conclusion about the gender of the person. | [`http://gedcomx.org/v1/Gender`](#gender) | OPTIONAL.
 names | The conclusions about the names of the person. | List of [`http://gedcomx.org/v1/Name`](#name-conclusion). Order is preserved. | OPTIONAL.
@@ -204,7 +204,7 @@ This data type extends the following data type:
 name  | description | data type | constraints
 ------|-------------|-----------|------------
 type | URI identifying the type of the relationship. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to a relationship type, and use of a [known relationship type](#known-relationship-types) is RECOMMENDED.
-extracted | Whether this relationship is to be constrained as *extracted information*. | boolean | OPTIONAL. Default: `false`. Refer to [Extracted Information Constraints](#4-extracted-information-constraints).
+extracted | Whether this relationship is to be constrained as an *extracted conclusion*. | boolean | OPTIONAL. Default: `false`. Refer to [Extracted Conclusion Constraints](#4-extracted-conclusion-constraints).
 person1 | Reference to the first person in the relationship. | [URI](#uri) | REQUIRED. MUST resolve to an instance of [`http://gedcomx.org/v1/Person`](#person)
 person2 | Reference to the second person in the relationship. | [URI](#uri) | REQUIRED. MUST resolve to an instance of [`http://gedcomx.org/v1/Person`](#person)
 facts | The conclusions about the facts of the life of the relationship. | List of [`http://gedcomx.org/v1/Fact`](#fact-conclusion). Order is preserved. | OPTIONAL.
@@ -304,7 +304,7 @@ This data type extends the following data type:
 name  | description | data type | constraints
 ------|-------------|-----------|------------
 type | URI identifying the type of the event. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to an event type, and use of a [known event type](#known-event-types) is RECOMMENDED.
-extracted | Whether this event is to be constrained as *extracted information*. | boolean | OPTIONAL. Default: `false`. Refer to [Extracted Information Constraints](#4-extracted-information-constraints).
+extracted | Whether this event is to be constrained as an *extracted conclusion*. | boolean | OPTIONAL. Default: `false`. Refer to [Extracted Conclusion Constraints](#4-extracted-conclusion-constraints).
 date | The date of the event. | [`http://gedcomx.org/v1/Date`](#conclusion-date) | OPTIONAL.
 place | A reference to the place applicable to this event. | [`http://gedcomx.org/v1/PlaceReference`](#conclusion-place-reference) | OPTIONAL.
 roles | The roles of the persons in the event. | List of [`http://gedcomx.org/v1/EventRole`](#conclusion-event-role). Order is preserved. | OPTIONAL.
@@ -419,7 +419,7 @@ This data type extends the following data type:
 name  | description | data type | constraints
 ------|-------------|-----------|------------
 about | A uniform resource identifier (URI) for the place being described. This can be used for associating descriptions of the same place. | [URI](#uri) | OPTIONAL.
-extracted | Whether this place description is to be constrained as *extracted information*. | boolean | OPTIONAL. Default: `false`. Refer to [Extracted Information Constraints](#4-extracted-information-constraints).
+extracted | Whether this place description is to be constrained as an *extracted conclusion*. | boolean | OPTIONAL. Default: `false`. Refer to [Extracted Conclusion Constraints](#4-extracted-conclusion-constraints).
 names | A list of standardized (or normalized), fully-qualified (in terms of what is known of the applicable jurisdictional hierarchy) names for this place that are applicable to this description of this place. | List of [http://gedcomx.org/v1/TextValue](#text-value). Order is preserved. | REQUIRED. The list MUST contain at least one name.
 type | An implementation-specific uniform resource identifier (URI) used to identify the type of a place (e.g., address, city, county, province, state, country, etc.). | [URI](#uri) | OPTIONAL.  There is no current plan to define a type vocabulary for place descriptions in GEDCOM X.
 temporalDescription | A description of the time period to which this place description is relevant. | [`http://gedcomx.org/v1/Date`](#conclusion-date) | OPTIONAL.
@@ -1233,21 +1233,21 @@ NameForm3.parts[2].value=Tchaikovsky
 ```
 
 
-<a id="extracted-information-constraints"/>
+<a id="extracted-conclusion-constraints"/>
 
-# 4. Extracted Information Constraints
+# 4. Extracted Conclusion Constraints
 
-GEDCOM X provides a specific definition for "extracted information" that is used to refer to a set of constraints that
-MUST be applied to conclusion data that is identified as extracted information using the `extracted` property.
+GEDCOM X provides a specific definition for the term "extracted conclusion" that is used to refer to a set of constraints
+that MUST be applied to conclusion data that is identified as "extracted" using the `extracted` property.
 
-When a conclusion is identified as `extracted`, it means that the data is to be treated as having been extracted from a
-single source or record.  Extracted information is distinguished from typical conclusional data by the notion that it is
+When a conclusion is identified as "extracted", it means that the data is to be treated as having been extracted from a
+single source or record.  An extracted conclusion is distinguished from other conclusion data by the notion that it is
 intended to describe information contained in a single source, as opposed to what a researcher or system believes to be true
-about that conclusion.  Applications MUST recognize the `extracted` property and SHOULD ensure that any modifications to the
-extracted information are aligned with the information that is provided by the specific (single) source, even if the source
-provides information that may conflict with other information in other sources.
+about the subject of the conclusion.  Applications MUST recognize the `extracted` property and SHOULD ensure that any modifications
+to the extracted conclusion are aligned with the information that is provided by the specific (single) source, even if the source
+provides information that may conflict with information in other sources.
 
-Data in a conclusion that is identified as "extracted information" MUST conform to the following constraints:
+Data in a conclusion that is identified as "extracted" MUST conform to the following constraints:
 
 * The conclusion (including any data it contains) MUST NOT refer to more than one source description.
 * All source references used by the conclusion MUST resolve to the same source description, although
@@ -1256,7 +1256,7 @@ Data in a conclusion that is identified as "extracted information" MUST conform 
 ## 4.1 Persona
 
 GEDCOM X provides a specific definition for the term "persona" that is used to refer to an instance of
-`http://gedcomx.org/v1/Person` that has been identified as extracted information.
+`http://gedcomx.org/v1/Person` that has been identified as an extracted conclusion.
 
 
 # 5. Extensibility
