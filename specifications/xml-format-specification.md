@@ -225,6 +225,7 @@ living | Whether the person is considered living. | gx:living | xsd:boolean
 gender | The conclusion about the gender of the person. | gx:gender | [`gx:Gender`](#gender)
 names | The conclusions about the names of the person. | gx:name | [`gx:Name`](#name-conclusion)
 facts | The conclusions about the facts of the life of the person. | gx:fact | [`gx:Fact`](#fact-conclusion)
+media | References to multimedia resources for this person, such as photos or videos. | gx:media | [`gx:SourceReference`](#source-reference)
 
 ### examples
 
@@ -251,6 +252,10 @@ facts | The conclusions about the facts of the life of the person. | gx:fact | [
     <gx:fact>
       ...
     </gx:fact>
+    ...
+    <gx:media>
+      ...
+    </gx:media>
     ...
   </...>
 ```
@@ -306,6 +311,7 @@ name | description | XML property | XML type
 -----|-------------|--------------|---------
 id | An identifier for the XML element holding the source description data. The id attribute MUST conform to the constraints defined in [Section 7, "Fragment Identifiers"](#fragment-ids). | id (attribute) | xsd:string
 citations | The citations for this source. | gx:citation | [`gx:SourceCitation`](#source-citation)
+mediaType | A hint about the media type of the resource being described. | mediaType (attribute) | xsd:string
 about | A uniform resource identifier (URI) for the resource being described. | about (attribute) | [anyURI](#uri)
 mediator | A reference to the entity that mediates access to the described source. | gx:mediator | [`gx:ResourceReference`](#resource-reference)
 sources | A list of references to any sources from which this source is derived. | gx:source | [`gx:SourceReference`](#source-reference)
@@ -317,7 +323,7 @@ attribution | The attribution of this source. | gx:attribution | [`gx:Attributio
 ### examples
 
 ```xml
-  <... id="local_id" about="(uri reference to the source)">
+  <... id="local_id" about="(uri reference to the source)" mediaType="...">
     <gx:citation>
       ...
     </gx:citation>
@@ -409,6 +415,7 @@ extracted | Whether the event is to be constrained as an *extracted conclusion*.
 date | The date of the event. | gx:date | [`gx:Date`](#conclusion-date)
 place | The place the event. | gx:place | [`gx:Place`](#conclusion-place)
 roles | The roles of the persons in the event. | gx:role | [`gx:EventRole`](#conclusion-event-role)
+media | References to multimedia resources for this event, such as photos or videos. | gx:media | [`gx:SourceReference`](#source-reference)
 
 ### examples
 
@@ -429,6 +436,10 @@ roles | The roles of the persons in the event. | gx:role | [`gx:EventRole`](#con
     <gx:role>
       ...
     </gx:role>
+    ...
+    <gx:media>
+      ...
+    </gx:media>
     ...
   </...>
 ```
@@ -469,7 +480,6 @@ The `gx:PlaceDescription` is used to (de)serialize the `http://gedcomx.org/v1/Pl
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
-about | A uniform resource identifier (URI) for the place being described. | about (attribute) | [anyURI](#uri)
 names | A list of standardized (or normalized), fully-qualified (in terms of what is known of the applicable jurisdictional hierarchy) names for this place that are applicable to this description of this place. | gx:name | [`gx:TextValue`](#text-value)
 type | A uniform resource identifier (URI) identifying the type of the place as it is applicable to this description. | type (attribute) | [`URI`](#uri)
 extracted | Whether the place description is to be constrained as an *extracted conclusion*. | extracted (attribute) | xsd:boolean
@@ -478,6 +488,7 @@ latitude | Degrees north or south of the Equator (0.0 degrees). | gx:latitude | 
 longitude | Angular distance in degrees, relative to the Prime Meridian. | gx:latitude | xsd:double
 spatialDescription | A reference to a geospatial description of this place. | gx:spatialDescription | [`gx:ResourceReference`](#resource-reference)
 identifiers | A list of known identifiers for this place description (e.g., place authority identifiers). | gx:identifier | [`gx:Identifier`](#identifier-type)
+media | References to multimedia resources for this place, such as photos or videos. | gx:media | [`gx:SourceReference`](#source-reference)
 attribution | Attribution metadata for this place description. | gx:attribution | [`gx:Attribution`](#attribution)
 
 ### examples
@@ -500,6 +511,10 @@ attribution | Attribution metadata for this place description. | gx:attribution 
     <gx:identifier>
       ...
     </gx:identifier>
+    ...
+    <gx:media>
+      ...
+    </gx:media>
     ...
     <gx:attribution>
       ...
@@ -624,45 +639,19 @@ name | description | XML property | XML type
 -----|-------------|--------------|---------
 lang | The locale identifier for the citation. | xml:lang (attribute) | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag
 value | A rendering of the full (working) citation as a string. | gx:value | xsd:string
-citationTemplate | The identifier of the citation template by which this citation may be interpreted. | gx:citationTemplate | [`gx:ResourceReference`](#resource-reference)
-fields | A list of citation fields about a source. | gx:field | [`gx:CitationField`](#citation-field)
 
 ### examples
 
 ```xml
   <... xml:lang="en">
     <gx:value>...a rendering of the full (working) citation as a string...</gx:value>
-    <gx:citationTemplate resource="http://identifier/for/ciation/template"/>
-    <gx:field>
-      ...
-    </gx:field>
     ...
   </...>
 ```
 
-<a id="citation-field"/>
-
-## 3.6 The "CitationField" Data Type
-
-The `gx:CitationField` XML type is used to (de)serialize the
-`http://gedcomx.org/v1/CitationField` data type.
-
-### properties
-
-name | description | XML property | XML type
------|-------------|--------------|---------
-name | The identifier for the citation detail -- defined by a citation template or a citation template library. | gx:name | [anyURI](#uri)
-value | A rendering of the full (working) citation as a string. | gx:value | xsd:string
-
-### examples
-
-```xml
-  <... name="...a citation field name...">...a citation field value...</...>
-```
-
 <a id="source-reference"/>
 
-## 3.7 The "SourceReference" Data Type
+## 3.6 The "SourceReference" Data Type
 
 The `gx:SourceReference` XML type is used to (de)serialized the `http://gedcomx.org/v1/SourceReference`
 data type.
@@ -687,14 +676,9 @@ attribution | The attribution of this source reference. | gx:attribution | [`gx:
   </...>
 ```
 
-## 3.8 The "CitationTemplate" Data Type
-
-TBD
-
-
 <a id="online-account"/>
 
-## 3.9 The "OnlineAccount" Data Type
+## 3.7 The "OnlineAccount" Data Type
 
 The `gx:OnlineAccount` XML type is used to (de)serialize the `http://gedcomx.org/v1/OnlineAccount`
 data type.
@@ -717,7 +701,7 @@ accountName | The name, label, or id associating the owner of the account with t
 
 <a id="address"/>
 
-## 3.10 The "Address" Data Type
+## 3.8 The "Address" Data Type
 
 The `gx:Address` XML type is used to (de)serialize the `http://gedcomx.org/v1/Address`
 data type.
@@ -756,7 +740,7 @@ street6 | The street (sixth line). | gx:street6 | xsd:string
   </...>
 ```
 
-## 3.11 The "Conclusion" Data Type
+## 3.9 The "Conclusion" Data Type
 
 The `gx:Conclusion` XML type is used to (de)serialize the `http://gedcomx.org/v1/Conclusion`
 data type.
@@ -774,7 +758,7 @@ notes | A list of notes about this conclusion. | gx:note | [`gx:Note`](#note)
 ### examples
 
 ```xml
-  <... id="local_id" confidence="http://gedcomx.org/Certainly" xml:lang="en">
+  <... id="local_id" confidence="http://gedcomx.org/High" xml:lang="en">
     <gx:source>
       ...
     </gx:source>
@@ -792,7 +776,7 @@ notes | A list of notes about this conclusion. | gx:note | [`gx:Note`](#note)
 
 <a id="gender-conclusion"/>
 
-## 3.12 The "Gender" Data Type
+## 3.10 The "Gender" Data Type
 
 The `gx:Gender` XML type is used to (de)serialize the `http://gedcomx.org/v1/Gender`
 data type.
@@ -815,7 +799,7 @@ type | The gender type. | type (attribute) | [`URI`](#uri)
 
 <a id="name-conclusion"/>
 
-## 3.13 The "Name" Data Type
+## 3.11 The "Name" Data Type
 
 The `gx:Name` XML type is used to (de)serialize the `http://gedcomx.org/v1/Name`
 data type.
@@ -849,7 +833,7 @@ nameForms | The name form(s) that best represents this name `NameForm` -- usuall
 
 <a id="fact-conclusion"/>
 
-## 3.14 The "Fact" Data Type
+## 3.12 The "Fact" Data Type
 
 The `gx:Fact` XML type is used to (de)serialize the `http://gedcomx.org/v1/Fact`
 data type.
@@ -862,6 +846,7 @@ type | URI identifying the type of the fact. | type (attribute) | [`URI`](#uri)
 date | The date of applicability of the fact. | gx:date | [`gx:Date`](#conclusion-date)
 place | The place of applicability of the fact. | gx:place | [`gx:PlaceReference`](#conclusion-place-reference)
 value | The original value of the fact as supplied by the contributor. | gx:value | xsd:string
+qualifiers | Qualifiers to add additional details about the fact. | gx:qualifier | [`gx:Qualifier`](#qualifier)
 
 ### examples
 
@@ -880,12 +865,14 @@ value | The original value of the fact as supplied by the contributor. | gx:valu
     <gx:value>
       ...
     </gx:value>
+    <gx:qualifier name="http://gedcomx.org/Age">...</gx:qualifier>
+    ...
   </...>
 ```
 
 <a id="conclusion-event-role"/>
 
-## 3.15 The "EventRole" Data Type
+## 3.13 The "EventRole" Data Type
 
 The `gx:EventRole` XML type is used to (de)serialize the `http://gedcomx.org/v1/EventRole`
 data type.
@@ -912,7 +899,7 @@ details | Details about the role of the person in the event. | gx:details | xs:s
 
 <a id="conclusion-date"/>
 
-## 3.16 The "Date" Data Type
+## 3.14 The "Date" Data Type
 
 The `gx:Date` XML type is used to (de)serialize the `http://gedcomx.org/v1/Date`
 data type.
@@ -935,7 +922,7 @@ formal | The formal value of the date. | gx:formal | [GEDCOM X Date](https://git
 
 <a id="conclusion-place-reference"/>
 
-## 3.17 The "PlaceReference" Data Type
+## 3.15 The "PlaceReference" Data Type
 
 The `gx:PlaceDescription` is used to (de)serialize the `http://gedcomx.org/v1/PlaceReference` data type.
 
@@ -960,7 +947,7 @@ descriptionRef | A reference to a _description_ of this place. | description (at
 
 <a id="name-part"/>
 
-## 3.18 The "NamePart" Data Type
+## 3.16 The "NamePart" Data Type
 
 The `gx:NamePart` XML type is used to (de)serialize the `http://gedcomx.org/v1/NamePart`
 data type.
@@ -971,13 +958,13 @@ name | description | XML property | XML type
 -----|-------------|--------------|---------
 type | URI identifying the type of the name part. | type (attribute) | [`URI`](#uri)
 value | The text of the name part. | value (attribute) | xsd:string
-qualifiers | Type qualifiers to further describe the type of the name part. | gx:qualifier | [`gx:ResourceReference`](#resource-reference)
+qualifiers | Qualifiers to add additional semantic meaning to the name part. | gx:qualifier | [`gx:Qualifier`](#qualifier)
 
 ### examples
 
 ```xml
   <... type="http://gedcomx.org/Prefix" value="...value of the name part...">
-    <qualifier resource="http://gedcomx.org/First"/>
+    <qualifier name="http://gedcomx.org/First"/>
     ...
 
     <!-- possibility of extension elements -->
@@ -987,7 +974,7 @@ qualifiers | Type qualifiers to further describe the type of the name part. | gx
 
  <a id="name-form"/>
 
-## 3.19 The "NameForm" Data Type
+## 3.17 The "NameForm" Data Type
 
 The `NameForm` XML type is used to (de)serialize the `http://gedcomx.org/v1/NameForm`
 data type.
@@ -1014,6 +1001,26 @@ parts | Any identified name parts from the name represented in this instance, or
     <!-- possibility of extension elements -->
 
   </...>
+```
+
+<a id="qualifier"/>
+
+## 3.18 The "Qualifier" Data Type
+
+The `Qualifier` XML type is used to (de)serialize the `http://gedcomx.org/v1/Qualifier`
+data type.
+
+### properties
+
+name | description | XML property | XML type
+-----|-------------|--------------|---------
+name | The name of the qualifier, used to determine the nature of the qualifier. | name (attribute) | [anyURI](#uri)
+value | The value of the qualifier. The semantic meaning of the value is determined by the qualifier name. | (child text) | xsd:string
+
+### examples
+
+```xml
+  <... name="http://gedcomx.org/QualifierName">...qualifier value...</...>
 ```
 
 # 4 XML-Specific Data Types

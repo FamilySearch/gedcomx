@@ -178,6 +178,7 @@ living | Whether the person is considered living. | boolean | OPTIONAL.
 gender | The conclusion about the gender of the person. | [`http://gedcomx.org/v1/Gender`](#gender) | OPTIONAL.
 names | The conclusions about the names of the person. | List of [`http://gedcomx.org/v1/Name`](#name-conclusion). Order is preserved. | OPTIONAL.
 facts | The conclusions about the facts of the life of the person. | List of [`http://gedcomx.org/v1/Fact`](#fact-conclusion). Order is preserved. | OPTIONAL.
+media | References to multimedia resources for this person, such as photos or videos. Media references are intended to provide additional context or illustration for the person and SHOULD NOT be considered as evidence for conclusions. Media references SHOULD be ordered by priority such that applications that wish to display a single media item (such as an image) MAY choose the first applicable media reference. | List of [`http://gedcomx.org/v1/SourceReference`](#source-reference). Order is preserved. | OPTIONAL. Note that the `SourceReference` is used for multimedia references and therefore MUST resolve to a `SourceDescription` of the resource, which in turn provides a reference to the resource itself.
 attribution | The attribution of the person. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing data set (e.g. file) of the person is assumed.
 
 
@@ -246,6 +247,7 @@ name  | description | data type | constraints
 ------|-------------|-----------|------------
 id | An identifier for the data structure holding the source description data. The id is to be used as a "fragment identifier" as defined by [RFC 3986, Section 3.5](http://tools.ietf.org/html/rfc3986#section-3.5). As such, the constraints of the id are provided in the definition of the media type (e.g. XML, JSON) of the data structure. | string | OPTIONAL.
 citations | The citations for this source. At least one citation MUST be provided. If more than one citation is provided, citations are assumed to be given in order of preference, with the most preferred citation in the first position in the list. | [`http://gedcomx.org/v1/SourceCitation`](#source-citation) | REQUIRED.
+mediaType | A hint about the media type of the resource being described. | string | OPTIONAL. If provided, MUST be a valid MIME (media) type as specified by [RFC 4288](http://tools.ietf.org/html/rfc4288).
 about | A uniform resource identifier (URI) for the resource being described. | [URI](#uri) | OPTIONAL.
 mediator | A reference to the entity that mediates access to the described source. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to an instance of [`http://gedcomx.org/v1/Agent`](#agent).
 sources | A list of references to any sources from which this source is derived. | List of [`http://gedcomx.org/v1/SourceReference`](#source-reference) | OPTIONAL.
@@ -308,6 +310,7 @@ extracted | Whether this event is to be constrained as an *extracted conclusion*
 date | The date of the event. | [`http://gedcomx.org/v1/Date`](#conclusion-date) | OPTIONAL.
 place | A reference to the place applicable to this event. | [`http://gedcomx.org/v1/PlaceReference`](#conclusion-place-reference) | OPTIONAL.
 roles | The roles of the persons in the event. | List of [`http://gedcomx.org/v1/EventRole`](#conclusion-event-role). Order is preserved. | OPTIONAL.
+media | References to multimedia resources for this event, such as photos or videos. Media references are intended to provide additional context or illustration for the event and SHOULD NOT be considered as evidence for conclusions. Media references SHOULD be ordered by priority such that applications that wish to display a single media item (such as an image) MAY choose the first applicable media reference. | List of [`http://gedcomx.org/v1/SourceReference`](#source-reference) | OPTIONAL. Note that the `SourceReference` is used for multimedia references and therefore MUST resolve to a `SourceDescription` of the resource, which in turn provides a reference to the resource itself.
 attribution | The attribution of the event. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing data set (e.g. file) of the event is assumed.
 
 <a id="known-event-types"/>
@@ -418,15 +421,15 @@ This data type extends the following data type:
 
 name  | description | data type | constraints
 ------|-------------|-----------|------------
-about | A uniform resource identifier (URI) for the place being described. This can be used for associating descriptions of the same place. | [URI](#uri) | OPTIONAL.
 extracted | Whether this place description is to be constrained as an *extracted conclusion*. | boolean | OPTIONAL. Default: `false`. Refer to [Extracted Conclusion Constraints](#4-extracted-conclusion-constraints).
 names | A list of standardized (or normalized), fully-qualified (in terms of what is known of the applicable jurisdictional hierarchy) names for this place that are applicable to this description of this place. | List of [http://gedcomx.org/v1/TextValue](#text-value). Order is preserved. | REQUIRED. The list MUST contain at least one name.
 type | An implementation-specific uniform resource identifier (URI) used to identify the type of a place (e.g., address, city, county, province, state, country, etc.). | [URI](#uri) | OPTIONAL.  There is no current plan to define a type vocabulary for place descriptions in GEDCOM X.
 temporalDescription | A description of the time period to which this place description is relevant. | [`http://gedcomx.org/v1/Date`](#conclusion-date) | OPTIONAL.
-latitude | Degrees north or south of the Equator (0.0 degrees). | IEEE 754 binary64 value | OPTIONAL.  If provided, MUST provide `longitude` also.  Values range from −90.0 degrees (south) to 90.0 degrees (north).  It is assumed that all instances of `PlaceDescription` that share identical `about` values will also have identical `latitude` values.
-longitude | Angular distance in degrees, relative to the Prime Meridian. | IEEE 754 binary64 value | OPTIONAL.  If provided, MUST provide `latitude` also.  Values range from −180.0 degrees (west of the Meridian) to 180.0 degrees (east of the Meridian).  It is assumed that all instances of `PlaceDescription` that share identical `about` values will also have identical `longitude` values.
+latitude | Degrees north or south of the Equator (0.0 degrees). | IEEE 754 binary64 value | OPTIONAL.  If provided, MUST provide `longitude` also.  Values range from −90.0 degrees (south) to 90.0 degrees (north).  It is assumed that all instances of `PlaceDescription` that share an identical `Primary` identifier will also have identical `latitude` values.
+longitude | Angular distance in degrees, relative to the Prime Meridian. | IEEE 754 binary64 value | OPTIONAL.  If provided, MUST provide `latitude` also.  Values range from −180.0 degrees (west of the Meridian) to 180.0 degrees (east of the Meridian).  It is assumed that all instances of `PlaceDescription` that share an identical `Primary` identifier will also have identical `longitude` values.
 spatialDescription | A reference to a geospatial description of this place. | [`URI`](#uri) | OPTIONAL. It is RECOMMENDED that this geospatial description resolve to a KML document.
-identifiers | A list of known identifiers for this place description (e.g., place authority identifiers). | List of [`http://gedcomx.org/v1/Identifier`](#identifier-type). Order is preserved. | OPTIONAL.
+identifiers | A list of known identifiers for this place description (e.g., place authority identifiers). Multiple descriptions of the same place MAY be correlated via the `http://gedcomx.org/Primary` identifier. | List of [`http://gedcomx.org/v1/Identifier`](#identifier-type). Order is preserved. | OPTIONAL.
+media | References to multimedia resources for this place, such as photos or videos. Media references are intended to provide additional context or illustration for the place and SHOULD NOT be considered as evidence for conclusions. Media references SHOULD be ordered by priority such that applications that wish to display a media item (such as an image) MAY choose the first applicable media reference. | List of [`http://gedcomx.org/v1/SourceReference`](#source-reference) | OPTIONAL. Note that the `SourceReference` is used for multimedia references and therefore MUST resolve to a `SourceDescription` of the resource, which in turn provides a reference to the resource itself.
 attribution | Attribution metadata for this place description. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing data set (e.g. file) of the place description is assumed.
 
 
@@ -595,35 +598,11 @@ name  | description | data type | constraints
 ------|-------------|-----------|------------
 lang | The locale identifier for the citation. | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag | OPTIONAL. If not provided, the locale of the data set containing the citation is assumed.
 value | A rendering of the full (working) citation as a string. | string | REQUIRED.
-citationTemplate | The identifier of the citation template by which this citation may be interpreted. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to an instance of [`http://gedcomx.org/v1/CitationTemplate`](#citation-template).
-fields  | A list of citation fields about a source. | List of [`http://gedcomx.org/v1/CitationField`](#citation-field) | OPTIONAL.
-
-<a id="citation-field"/>
-
-## 3.6 The "CitationField" Data Type
-
-The `CitationField` data type defines a piece of metadata (e.g., author, volume, page, publisher, etc.)
-necessary to identify a source.
-
-The `CitationField` data type does NOT support extension properties (see [Extension Properties](#extension-properties)).
-
-### identifier
-
-The identifier for the "CitationField" data type is:
-
-`http://gedcomx.org/v1/CitationField`
-
-### properties
-
-name  | description | data type | constraints
-------|-------------|-----------|------------
-name | The identifier for the citation detail -- defined by a citation template or a citation template library. | [URI](#uri) | REQUIRED.
-value | The value of the citation detail. | string | REQUIRED.
 
 
 <a id="source-reference"/>
 
-## 3.7 The "SourceReference" Data Type
+## 3.6 The "SourceReference" Data Type
 
 The `SourceReference` data type defines a reference to a source.  For example a genealogical conclusion
 or a derivative source is the referring object (i.e. the object holding the `SourceReference` instance),
@@ -646,64 +625,9 @@ attribution | The attribution of this source reference. | [`http://gedcomx.org/A
 
 todo:
 
-<a id="citation-template"/>
-
-## 3.8 The "CitationTemplate" Data Type
-
-TBD
-
-todo: define citation templates and any associated infrastructure
-
-<a id="note-about-citation-templates"/>
-<table>
-  <tr>
-    <td style="background:#F0F0FF;border-color:#F0F0FF; padding-bottom:0px; font-size:18px">
-<b>a note about citation templates (not part of this specification)</b>
-    </td>
-  </tr>
-  <tr>
-    <td style="background:#F0F0FF;border-color:#F0F0FF; padding-top:0px">
-<p>
-Building source citations is said to be an "art" and requires a great deal of flexibility.  While citation style
-guides exist (e.g. Chicago style, Turabian, Evidence Style -- see <i>Evidence Explained</i> by Elizabeth Shown Mills,
-etc.), they are considered guides and execution within their guidelines allows for flexibility.
-No one style has been universally accepted, nor will a style become universally accepted in the forseeable future.  Therefore,
-the approach to collecting citation metadata and the exchange of this data needs to support flexibility.
-</p><p/><p>
-The citation metadata is collected as a set of name-value pairs (see the CitationField data type), but there still remains
-a set of difficult questions, including:</p>
-<ul>
-  <li>What is the set of valid "names" (e.g. controlled vocabulary)?</li>
-  <li>What "values" are valid values for a given "name"?</li>
-  <li>What fields (name-value pairs) are required, and under what circumstances might they be optional?</li>
-  <li>What metadata needs to be collected to properly site data in a specific record?  For example, is a citation for the 1900 US Census
-different from a citation for the 1910 US Census and from a citation for the 1911 England and Wales Census?</li>
-</ul>
-<p/><p>
-Further questions remain about how to arrange the fields into citations. For example, given a set of metadata, can it be expressed
-in the Chicago style?  The Evidence style?  What about a lesser-used or custom style?
-</p><p/><p>
-To address these design issues, we define <b><i>citation templates</i></b>.  A citation template defines the metadata that should
-be collected for a given source and the semantics associated with that metadata.  Templates also specify how the metadata
-is rendered into specific citation styles, such as Chicago style or Evidence style.  Templates could be designed to
-address specific record types and may be grouped by type (e.g., a group of templates for census records, or newspapers, or
-US census records, or UK census records, etc.).  Templates could also be associated with other templates into libraries
-such that a specific piece of citation metadata (e.g., a citation field named "Volume") has a shared semantic meanign across the set
-of associated templates -- a template library. Perhaps a standard template library could be developed that would address the most
-common citation needs.
-</p><p/><p>
-Citation templates have not been fully specified and are therefore outlined here in broad terms.  For now, this
-section functions as a place holder for the needed specifications.  We will likely consider ideas like those expressed
-at http://sourcetemplates.org/ when we define this portion of the specification.
-</p>
-    </td>
-  </tr>
-</table>
-
-
 <a id="online-account"/>
 
-## 3.9 The "OnlineAccount" Data Type
+## 3.7 The "OnlineAccount" Data Type
 
 The `OnlineAccount` data type defines a description of an account in an online web application.
 
@@ -722,7 +646,7 @@ accountName | The name, label, or id associating the owner of the account with t
 
 <a id="address"/>
 
-## 3.10 The "Address" Data Type
+## 3.8 The "Address" Data Type
 
 The `Address` data type defines a street address of a person or organization.
 
@@ -751,7 +675,7 @@ street6 | The street (sixth line). | string | OPTIONAL.
 
 <a id="conclusion"/>
 
-## 3.11 The "Conclusion" Data Type
+## 3.9 The "Conclusion" Data Type
 
 The `Conclusion` data type defines the base conceptual model for basic genealogical conclusions.
 
@@ -773,25 +697,20 @@ notes  | A list of notes about a conclusion. | List of [`http://gedcomx.org/Note
 
 <a id="known-confidence-levels"/>
 
-### 3.11.1 Known Confidence Levels
+### 3.9.1 Known Confidence Levels
 
-The following confidence levels are defined by GEDCOM X. For more information, refer to
-Mills, Elizabeth Shown. "Fundamentals of Evidence Analysis." <i>Evidence Explained.</i> 2nd ed.
-(Baltimore, Maryland: Genealogical Publishing Company, 2009), 19-20 (Section 1.6).
+The following confidence levels are defined by GEDCOM X.
 
 URI | description
 ----|------------
-`http://gedcomx.org/Certainly`|The contributor has no reasonable doubt about the assertion, based upon sound research and good evidence.
-`http://gedcomx.org/Probably`|The contributor feels the assertion is more likely than not, based upon sound research and good evidence.
-`http://gedcomx.org/Possibly`|The contributor feels some evidence supports the assertion, but the assertion is far from proved.
-`http://gedcomx.org/Likely`|The contributor feels the odds weigh at least slightly in favor of the assertion.
-`http://gedcomx.org/Apparently`|The contributor has formed an impression or presumption, typically based upon common experience, but has not tested the matter.
-`http://gedcomx.org/Perhaps`|The contributor suggests that an idea is plausible, although it remains to be tested.
+`http://gedcomx.org/High`|The contributor has a high degree of confidence that the assertion is true.
+`http://gedcomx.org/Medium`|The contributor has a medium degree of confidence that the assertion is true.
+`http://gedcomx.org/Low`|The contributor has a low degree of confidence that the assertion is true.
 
 
 <a id="gender-conclusion"/>
 
-## 3.12 The "Gender" Data Type
+## 3.10 The "Gender" Data Type
 
 The `Gender` data type defines a conclusion about the gender of a person.
 
@@ -816,7 +735,7 @@ type  | URI identifying the type of the gender. | [URI](#uri) | REQUIRED. MUST r
 
 <a id="known-gender-types"/>
 
-### 3.12.1 Known Gender Types
+### 3.10.1 Known Gender Types
 
 The following gender types are defined by GEDCOM X:
 
@@ -829,7 +748,7 @@ URI | description
 
 <a id="name-conclusion"/>
 
-## 3.13 The "Name" Data Type
+## 3.11 The "Name" Data Type
 
 The `Name` data type defines a conclusion about a name of a person.
 
@@ -893,7 +812,7 @@ Name2.nameForms[1].fullText=Sasha
 ```
 <a id="known-name-types"/>
 
-### 3.13.1 Known Name Types
+### 3.11.1 Known Name Types
 
 The following name types are defined by GEDCOM X:
 
@@ -911,7 +830,7 @@ URI | description
 
 <a id="fact-conclusion"/>
 
-## 3.14 The "Fact" Data Type
+## 3.12 The "Fact" Data Type
 
 The `Fact` data type defines a conclusion about a fact of the life of a person or
 the nature of a relationship. The `Fact` data type extends the `Conclusion` data type.
@@ -936,10 +855,11 @@ type | URI identifying the type of the fact. | [URI](#uri) | REQUIRED. MUST reso
 date | The date of applicability of the fact. | [`http://gedcomx.org/v1/Date`](#conclusion-date) | OPTIONAL.
 place | A reference to the place applicable to this fact. | [`http://gedcomx.org/v1/PlaceReference`](#conclusion-place-reference) | OPTIONAL.
 value | The original value of the fact as supplied by the contributor. | string | OPTIONAL.
+qualifiers | Qualifiers to add additional details about the fact. | List of [http://gedcomx.org/v1/Qualifier](#qualifier) | OPTIONAL. If present, use of a [known fact qualifier](#known-fact-qualifier) is RECOMMENDED.
 
 <a id="known-fact-types"/>
 
-### 3.14.1 Known Fact Types
+### 3.12.1 Known Fact Types
 
 The following fact types are defined by GEDCOM X:
 
@@ -1014,10 +934,21 @@ URI | description | scope
 `http://gedcomx.org/StepParent`| A fact about the step relationship between a parent and a child. | parent-child relationship
 `http://gedcomx.org/SociologicalParent`| A fact about a sociological relationship between a parent and a child, but not definable in typical legal or biological terms. | parent-child relationship
 
+<a id="known-fact-qualifier"/>
+
+### 3.12.2 Known Fact Qualifiers
+
+The following fact qualifiers are defined by GEDCOM X:
+
+name | value
+-----|-------
+`http://gedcomx.org/Age`| The age of a person at the event described by the fact.
+`http://gedcomx.org/Cause`| The cause of the fact, such as the cause of death.
+`http://gedcomx.org/Religion`| The religion associated with a religious event such as a baptism or excommunication.
 
 <a id="conclusion-event-role"/>
 
-## 3.15 The "EventRole" Data Type
+## 3.13 The "EventRole" Data Type
 
 The `EventRole` data type defines a role played in an event by a person.  The `EventRole` data type extends the `Conclusion` data type.
 
@@ -1043,7 +974,7 @@ details | Details about the role of the person in the event. | string | OPTIONAL
 
 <a id="known-roles"/>
 
-### 3.15.1 Known Role Types
+### 3.13.1 Known Role Types
 
 The following role types are defined by GEDCOM X:
 
@@ -1057,7 +988,7 @@ URI | description
 
 <a id="conclusion-date"/>
 
-## 3.16 The "Date" Data Type
+## 3.14 The "Date" Data Type
 
 The `Date` data type defines the value of a genealogical date.
 
@@ -1077,7 +1008,7 @@ formal | The standardized [formal value](#formal-values) of the date, formatted 
 
 <a id="conclusion-place-reference"/>
 
-## 3.17 The "PlaceReference" Data Type
+## 3.15 The "PlaceReference" Data Type
 
 The `PlaceReference` data type defines a reference to a description of a place.
 
@@ -1097,9 +1028,10 @@ descriptionRef | A reference to a _description_ of this place. | [URI](#uri) | O
 
 <a id="name-part"/>
 
-## 3.18 The "NamePart" Data Type
+## 3.16 The "NamePart" Data Type
 
-The `NamePart` data type is used to model a portion of a full name, including the terms that make up that portion, and perhaps a name part qualifier (e.g., "given name" or "surname").
+The `NamePart` data type is used to model a portion of a full name, including the terms that make up that portion. Some name parts MAY have qualifiers
+to provide additional semantic meaning to the name part (e.g., "given name" or "surname").
 
 A name part value MAY contain more than one term from the full name, such as in the name part "John Fitzgerald" from the full name "John Fitzgerald Kennedy".  If multiple terms are
 detailed in a single `NamePart`, these terms are separated using the name separator appropriate to the locale of the name form.
@@ -1116,11 +1048,11 @@ name  | description | data type | constraints
 ------|-------------|-----------|------------
 type | URI identifying the type of the name part. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to a name part type, and use of a [known name part type](#known-name-part-types) is RECOMMENDED.
 value | The term(s) from the name that make up this name part. | string | REQUIRED.
-qualifiers | Type qualifiers to further describe the type of the name part. | List of [URI](#uri) | OPTIONAL. If present, each qualifier MUST resolve to a name part type, and use of a [known name part type qualifier](#known-name-part-qualifier-types) is RECOMMENDED.
+qualifiers | Qualifiers to add additional semantic meaning to the name part. | List of [http://gedcomx.org/v1/Qualifier](#qualifier) | OPTIONAL. If present, use of a [known name part qualifier](#known-name-part-qualifier) is RECOMMENDED.
 
 <a id="known-name-part-types"/>
 
-### 3.18.1 Known Name Part Types
+### 3.16.1 Known Name Part Types
 
 The following name part types are defined by GEDCOM X:
 
@@ -1131,34 +1063,34 @@ URI | description
 `http://gedcomx.org/Given`|
 `http://gedcomx.org/Surname`|
 
-<a id="known-name-part-qualifier-types"/>
+<a id="known-name-part-qualifier"/>
 
-### known name part qualifier types
+### Known Name Part Qualifiers
 
-The following name part qualifier types are defined by GEDCOM X:
+The following name part qualifiers are defined by GEDCOM X:
 
-URI | description
-----|-------------
-`http://gedcomx.org/Title`|A designation for honorifics (e.g. Dr., Rev., His Majesty, Haji), ranks (e.g. Colonel, General, Knight, Esquire), positions (e.g. Count, Chief, Father, King) or other titles (e.g., PhD, MD)
-`http://gedcomx.org/Primary`|A designation for the name of most prominent in importance among the names of that type (e.g., the primary given name).
-`http://gedcomx.org/Secondary`|A designation for a name that is not primary in its importance among the names of that type (e.g., a secondary given name).
-`http://gedcomx.org/Middle`|A designation useful for cultures that designate a middle name that is distinct from a given name and a surname.
-`http://gedcomx.org/Familiar`|A designation for one's familiar name.
-`http://gedcomx.org/Religious`|A designation for a name given for religious purposes.
-`http://gedcomx.org/Family`|A name that associates a person with a group, such as a clan, tribe, or patriarchal hierarchy.
-`http://gedcomx.org/Maiden`|A designation given by women to their original surname after they adopt a new surname upon marriage.
-`http://gedcomx.org/Patronymic`|A name derived from a father or paternal ancestor.
-`http://gedcomx.org/Matronymic`|A name derived from a mother or maternal ancestor.
-`http://gedcomx.org/Geographic`|A name derived from associated geography.
-`http://gedcomx.org/Occupational`|A name derived from one's occupation.
-`http://gedcomx.org/Characteristic`|A name derived from a characteristic.
-`http://gedcomx.org/Postnom`|A name mandedated by law populations from Congo Free State / Belgian Congo / Congo / Democratic Republic of Congo (formerly Zaire).
-`http://gedcomx.org/Particle`|A grammatical designation for articles (a, the, dem, las, el, etc.), prepositions (of, from, aus, zu, op, etc.), initials (e.g. PhD, MD), annotations (e.g. twin, wife of, infant, unknown), comparators (e.g. Junior, Senior, younger, little), ordinals (e.g. III, eighth), and conjunctions (e.g. and, or, nee, ou, y, o, ne, &amp;).
+name | description
+-----|-------------
+`http://gedcomx.org/Title`|A designation for honorifics (e.g. Dr., Rev., His Majesty, Haji), ranks (e.g. Colonel, General, Knight, Esquire), positions (e.g. Count, Chief, Father, King) or other titles (e.g., PhD, MD). The qualifier value SHOULD NOT be used.
+`http://gedcomx.org/Primary`|A designation for the name of most prominent in importance among the names of that type (e.g., the primary given name). The qualifier value SHOULD NOT be used.
+`http://gedcomx.org/Secondary`|A designation for a name that is not primary in its importance among the names of that type (e.g., a secondary given name). The qualifier value SHOULD NOT be used.
+`http://gedcomx.org/Middle`|A designation useful for cultures that designate a middle name that is distinct from a given name and a surname. The qualifier value SHOULD NOT be used.
+`http://gedcomx.org/Familiar`|A designation for one's familiar name. The qualifier value SHOULD NOT be used.
+`http://gedcomx.org/Religious`|A designation for a name given for religious purposes. The qualifier value SHOULD NOT be used.
+`http://gedcomx.org/Family`|A name that associates a person with a group, such as a clan, tribe, or patriarchal hierarchy. The qualifier value SHOULD NOT be used.
+`http://gedcomx.org/Maiden`|A designation given by women to their original surname after they adopt a new surname upon marriage. The qualifier value SHOULD NOT be used.
+`http://gedcomx.org/Patronymic`|A name derived from a father or paternal ancestor. The qualifier value SHOULD NOT be used.
+`http://gedcomx.org/Matronymic`|A name derived from a mother or maternal ancestor. The qualifier value SHOULD NOT be used.
+`http://gedcomx.org/Geographic`|A name derived from associated geography. The qualifier value SHOULD NOT be used.
+`http://gedcomx.org/Occupational`|A name derived from one's occupation. The qualifier value SHOULD NOT be used.
+`http://gedcomx.org/Characteristic`|A name derived from a characteristic. The qualifier value SHOULD NOT be used.
+`http://gedcomx.org/Postnom`|A name mandedated by law populations from Congo Free State / Belgian Congo / Congo / Democratic Republic of Congo (formerly Zaire). The qualifier value SHOULD NOT be used.
+`http://gedcomx.org/Particle`|A grammatical designation for articles (a, the, dem, las, el, etc.), prepositions (of, from, aus, zu, op, etc.), initials (e.g. PhD, MD), annotations (e.g. twin, wife of, infant, unknown), comparators (e.g. Junior, Senior, younger, little), ordinals (e.g. III, eighth), and conjunctions (e.g. and, or, nee, ou, y, o, ne, &amp;). The qualifier value SHOULD NOT be used.
 
 
 <a id="name-form"/>
 
-## 3.19 The "NameForm" Data Type
+## 3.17 The "NameForm" Data Type
 
 The `NameForm` data type defines a representation of a name (a "name form") within a given cultural context,
 such as a given language and script.
@@ -1231,6 +1163,30 @@ NameForm3.parts[1].qualifiers[0]=http://gedcomx.org/Middle
 NameForm3.parts[2].type=http://gedcomx.org/Surname
 NameForm3.parts[2].value=Tchaikovsky
 ```
+
+<a id="qualifier"/>
+
+## 3.18 The "Qualifier" Data Type
+
+The `Qualifier` data type defines the data structure used to supply additional details, annotations, tags, or other qualifying data
+to a specific data element.
+
+### identifier
+
+The identifier for the "Qualifier" data type is:
+
+`http://gedcomx.org/v1/Qualifier`
+
+### properties
+
+name  | description | data type | constraints
+------|-------------|-----------|------------
+name | The name of the qualifier, used to determine the nature of the qualifier. | [URI](#uri) | REQUIRED. It is RECOMMENDED that the qualifier name resolve to an element of a constrained vocabulary.
+value | The value of the qualifier. The semantic meaning of the value is determined by the qualifier name. | string | OPTIONAL.
+
+### examples
+
+todo:
 
 
 <a id="extracted-conclusion-constraints"/>

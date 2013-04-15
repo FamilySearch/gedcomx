@@ -267,6 +267,7 @@ living | Whether the person is considered living. | living | boolean
 gender | The conclusion about the gender of the person. | gender | [`Gender`](#gender)
 names | The conclusions about the names of the person. | names | array of [`Name`](#name-conclusion)
 facts | The conclusions about the facts of the life of the person. | facts | array of [`Fact`](#fact-conclusion)
+media | References to multimedia resources for this person, such as photos or videos. | media | [`SourceReference`](#source-reference)
 
 ### examples
 
@@ -281,7 +282,8 @@ facts | The conclusions about the facts of the life of the person. | facts | arr
   "living" : true,
   "gender" : { ... },
   "names" : [ { ... }, { ... } ],
-  "facts" : [ { ... }, { ... } ]
+  "facts" : [ { ... }, { ... } ],
+  "media" : [ { ... }, { ... } ]
 }
 ```
 
@@ -336,6 +338,7 @@ name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 id | An identifier for the JSON object holding the source description data. The id attribute MUST conform to the constraints defined in [Section 7, "Fragment Identifiers"](#fragment-ids). | id | string
 citations | The citation for this source. | citations | array of [`SourceCitation`](#source-citation)
+mediaType | A hint about the media type of the resource being described. | mediaType | string
 about | A uniform resource identifier (URI) for the resource being described. | about | [`URI`](#uri)
 mediator | A reference to the entity that mediates access to the described source. | mediator | [`ResourceReference`](#resource-reference)
 sources | A list of references to any sources from which this source is derived. | sources | array of [`SourceReference`](#source-reference)
@@ -350,6 +353,7 @@ attribution | The attribution of this source. | attribution | [`Attribution`](#a
 {
   "id" : "local_id",
   "citations" : [ { ... }, { ... } ],
+  "mediaType" : "...",
   "about" : "http://identifier/for/the/source/being/described",
   "mediator" : {
     "resource" : "http://identifier/for/the/mediator/of/source/being/described"
@@ -425,6 +429,7 @@ extracted | Whether the event is to be constrained as an *extracted conclusion*.
 date | The date of the event. | date | [`Date`](#conclusion-date)
 place | The place the event. | place | [`Place`](#conclusion-place)
 roles | The roles of the persons in the event. | roles | array of [`EventRole`](#conclusion-event-role)
+media | References to multimedia resources for this event, such as photos or videos. | media | [`SourceReference`](#source-reference)
 
 ### examples
 
@@ -438,7 +443,8 @@ roles | The roles of the persons in the event. | roles | array of [`EventRole`](
   "extracted" : false,
   "date" : { ... },
   "place" : { ... },
-  "roles" : [ { ... }, { ... } ]
+  "roles" : [ { ... }, { ... } ],
+  "media" : [ { ... }, { ... } ]
 }
 ```
 
@@ -476,7 +482,6 @@ is defined as follows:
 
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
-about | A uniform resource identifier (URI) for the place being described. | about | [`URI`](#uri)
 names | A list of standardized (or normalized), fully-qualified (in terms of what is known of the applicable jurisdictional hierarchy) names for this place that are applicable to this description of this place. | names | array of [`TextValue`](#text-value)
 type | A uniform resource identifier (URI) identifying the type of the place as it is applicable to this description. | type | [`URI`](#uri)
 extracted | Whether the place description is to be constrained as an *extracted conclusion*. | extracted | boolean
@@ -485,6 +490,7 @@ latitude | Degrees north or south of the Equator (0.0 degrees). | latitude | num
 longitude | Angular distance in degrees, relative to the Prime Meridian. | longitude | number
 spatialDescription | A reference to a geospatial description of this place. | spatialDescription | [`ResourceReference`](#resource-reference)
 identifiers | A list of known identifiers for this place description (e.g., place authority identifiers). | identifiers | [`Identifier`](#identifier-type)
+media | References to multimedia resources for this place, such as photos or videos. | media | [`SourceReference`](#source-reference)
 attribution | The attribution of this conclusion. | attribution | [`Attribution`](#attribution)
 
 ### examples
@@ -504,7 +510,8 @@ attribution | The attribution of this conclusion. | attribution | [`Attribution`
   "spatialDescription" : {
     "resource" : "http://uri/for/KML/document"
   },
-  "identifiers" : { ... },
+  "identifiers" : [ { ... }, { ... } ],
+  "media" : [ { ... }, { ... } ],
   "attribution" : { ... }
 }
 ```
@@ -632,8 +639,6 @@ name | description | XML property | XML type
 -----|-------------|--------------|---------
 lang | The locale identifier for the citation. | lang | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag
 value | A rendering of the full (working) citation as a string. | value | string
-citationTemplate | The identifier of the citation template by which this citation may be interpreted. | citationTemplate | [`ResourceReference`](#resource-reference)
-fields | A list of citation fields about a source. | field | array of [`CitationField`](#citation-field)
 
 ### examples
 
@@ -641,39 +646,15 @@ fields | A list of citation fields about a source. | field | array of [`Citation
 {
   "lang" : "en",
   "value" : "...a rendering of the full (working) citation as a string...",
-  "citationTemplate" : {
-    "resource" : "http://identifier/for/ciation/template"
-  },
-  "fields" : [ { ... }, { ... } ]
-}
-```
 
-<a id="citation-field"/>
+  ...possibility of extension elements...
 
-## 3.6 The "CitationField" Data Type
-
-The JSON object used to (de)serialize the
-`http://gedcomx.org/v1/CitationField` data type is defined as follows:
-
-### properties
-
-name | description | XML property | XML type
------|-------------|--------------|---------
-name | The identifier for the citation detail -- defined by a citation template or a citation template library. | name | [URI](#uri)
-value | The value of the citation detail. | value | string
-
-### examples
-
-```json
-{
-  "name" : "...a citation field name..."
-  "value" : "...a citation field value..."
 }
 ```
 
 <a id="source-reference"/>
 
-## 3.7 The "SourceReference" Data Type
+## 3.6 The "SourceReference" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/v1/SourceReference`
 data type is defined as follows:
@@ -697,13 +678,9 @@ attribution | The attribution of this source reference. | attribution | [`Attrib
 }
 ```
 
-## 3.8 The "CitationTemplate" Data Type
-
-TBD
-
 <a id="online-account"/>
 
-## 3.9 The "OnlineAccount" Data Type
+## 3.7 The "OnlineAccount" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/v1/OnlineAccount` data type is defined as follows:
 
@@ -727,7 +704,7 @@ accountName | The name, label, or id associating the owner of the account with t
 
 <a id="address"/>
 
-## 3.10 The "Address" Data Type
+## 3.8 The "Address" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/v1/Address` data type is defined as follows:
 
@@ -765,7 +742,7 @@ street6 | The street (sixth line). | street6 | string
 }
 ```
 
-## 3.11 The "Conclusion" Data Type
+## 3.9 The "Conclusion" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/v1/Conclusion` data type is defined as follows:
 
@@ -785,7 +762,7 @@ notes | A list of notes about this conclusion. | note | array of [`Note`](#note)
 {
   "id" : "local_id",
   "lang" : "en",
-  "confidence" : "http://gedcomx.org/Certainly",
+  "confidence" : "http://gedcomx.org/High",
   "sources" : [ { ... }, { ... } ],
   "notes" : [ { ... }, { ... } ],
 
@@ -794,7 +771,7 @@ notes | A list of notes about this conclusion. | note | array of [`Note`](#note)
 }
 ```
 
-## 3.12 The "Gender" Data Type
+## 3.10 The "Gender" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/v1/Gender` data type is defined as follows:
 
@@ -817,7 +794,7 @@ type | URI identifying the type of the gender. | type | [`URI`](#uri)
 
 <a id="name-conclusion"/>
 
-## 3.13 The "Name" Data Type
+## 3.11 The "Name" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/v1/Name` data type is defined as follows:
 
@@ -846,7 +823,7 @@ nameForms | The name form(s) that best represents this name `NameForm` -- usuall
 
 <a id="fact-conclusion"/>
 
-## 3.14 The "Fact" Data Type
+## 3.12 The "Fact" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/v1/Fact` data type is defined as follows:
 
@@ -858,6 +835,7 @@ type | URI identifying the type of the fact. | type | [`URI`](#uri)
 date | The date of applicability of the fact. | date | [`Date`](#conclusion-date)
 place | The place of applicability of the fact. | place | [`Place`](#conclusion-place)
 value | The original value of the fact as supplied by the contributor. | original | string
+qualifiers | Qualifiers to add additional details about the fact. | qualifiers | array of [`Qualifier`](#qualifier)
 
 ### examples
 
@@ -870,12 +848,13 @@ value | The original value of the fact as supplied by the contributor. | origina
   "date" : { ... },
   "place" : { ... },
   "value" : "...the original value of the fact...",
+  "qualifiers" : [ { "name" : "http://gedcomx.org/Age", "value" : "..." } ]
 }
 ```
 
 <a id="conclusion-event-role"/>
 
-## 3.15 The "EventRole" Data Type
+## 3.13 The "EventRole" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/v1/EventRole`
 data type is defined as follows:
@@ -905,7 +884,7 @@ details | Details about the role of the person in the event. | details | string
 
 <a id="conclusion-date"/>
 
-## 3.16 The "Date" Data Type
+## 3.14 The "Date" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/v1/Date` data type is defined as follows:
 
@@ -927,7 +906,7 @@ formal | The formal value of the date. | formal | [GEDCOM X Date](https://github
 
 <a id="conclusion-place-reference"/>
 
-# 3.17 The "PlaceReference" Data Type
+# 3.15 The "PlaceReference" Data Type
 
 the JSON object used to (de)serialize the `http://gedcomx.org/v1/PlaceReference` data type
 is defined as follows:
@@ -953,7 +932,7 @@ descriptionRef | A reference to a _description_ of this place. | description | [
 
 <a id="name-part"/>
 
-## 3.18 The "NamePart" Data Type
+## 3.16 The "NamePart" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/v1/NamePart` data type is defined as follows:
 
@@ -963,7 +942,7 @@ name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 type | URI identifying the type of the name part. | type | [`URI`](#uri)
 value | The text of the name part. | value | string
-qualifiers | Type qualifiers to further describe the type of the name part. | qualifiers | array of [`ResourceReference`](#resource-reference)
+qualifiers | Type qualifiers to further describe the type of the name part. | qualifiers | array of [`Qualifier`](#qualifier)
 
 ### examples
 
@@ -971,14 +950,14 @@ qualifiers | Type qualifiers to further describe the type of the name part. | qu
 {
   "type" : "http://gedcomx.org/Prefix",
   "value" : "...value of the name part..."
-  "qualifiers" : [ { "resource" : "http://gedcomx.org/Family" }, { "resource" : "http://gedcomx.org/Patronymic" } ]
+  "qualifiers" : [ { "name" : "http://gedcomx.org/Family" }, { "name" : "http://gedcomx.org/Patronymic" } ]
 
   ...possibility of extension elements...
 
 }
 ```
 
-## 3.19 The "NameForm" Data Type
+## 3.17 The "NameForm" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/v1/NameForm` data type is defined as follows:
 
@@ -1000,6 +979,27 @@ parts | The parts of the name form. | parts | array of [`NamePart`](#name-part)
 
   ...possibility of extension elements...
 
+}
+```
+<a id="qualifier"/>
+
+## 3.18 The "Qualifier" Data Type
+
+The JSON object used to (de)serialize the `http://gedcomx.org/v1/Qualifier` data type is defined as follows:
+
+### properties
+
+name | description | JSON member | JSON object type
+-----|-------------|-------------|---------
+name | The name of the qualifier, used to determine the nature of the qualifier. | name | [`URI`](#uri)
+value | The value of the qualifier. The semantic meaning of the value is determined by the qualifier name. | value | string
+
+### examples
+
+```json
+{
+  "name" : "http://gedcomx.org/QualifierName",
+  "value" : "..."
 }
 ```
 
