@@ -97,6 +97,7 @@ Examples of `open-ended date range`: *Before January 1863 CE*, or *After Decembe
 ### 2.1.8 recurring date
 
 A series of discrete dates, separated by a specified duration.
+
 Examples:
 
 * 10 leap years beginning 1924 CE
@@ -106,10 +107,21 @@ Examples:
 
 ### 2.1.9 approximate date
 
-An indeterminate date range roughly centered on a specified simple date, with the range
-limited to be within one order of magnitude of the smallest specified unit of measurement
-in the simple date.
+An indeterminate date with a single occurrence roughly centered on a specified simple date,
+with the range limited to be within one order of magnitude of the smallest specified unit of
+measurement in the simple date.
 
+Examples:
+
+* About January 1777
+* Around 1590
+* Sometime in 1920
+
+### 2.1.10 approximate date range
+
+An indeterminate date with a single occurrence within a specified range.
+
+* Sometime between December 6, 1940 and December 8, 1940
 
 # 3. Notational Conventions
 
@@ -165,6 +177,13 @@ NOTE 1: If no recurrence count is provided, the recurrences are considered *perp
 An *approximate date* is represented by providing:
 
 * date, and
+* an indicator that the date is *approximate*
+
+## 4.5 Approximate Date Range
+
+An *approximate date range* is represented by providing:
+
+* date range, and
 * an indicator that the date is *approximate*
 
 
@@ -350,9 +369,9 @@ The precision of the equivalent final date is the coarser precision of the `simp
 
 example | description, textual equivalent
 --------|--------------------------------
-+1752/+1823 | between 1752 CE and 1823 CE
-+1825-04-13/+1825-11-26 | between April 13, 1825 and November 26, 1825
-+1633-02-19/P74Y | 74 years, starting on February 19, 1933, i.e. between February 19, 1933 and 2007
++1752/+1823 | from 1752 CE to 1823 CE
++1825-04-13/+1825-11-26 | from April 13, 1825 to November 26, 1825
++1633-02-19/P74Y | 74 years, starting on February 19, 1933, i.e. from February 19, 1933 to February 19, 2007
 
 ## 6.5 Open-ended Date Range
 
@@ -377,11 +396,11 @@ A trainling slash character [/] SHALL define a date range *after* the specified 
 
 example | description, textual equivalent
 --------|--------------------------------
-/+1887-03 | before May, 1887 CE
-+1976-07-11/ | after July 11, 1976 CE
-/-1287 | earlier than 1288 BCE
-/+0000 | before 1 BCE
--0001-04/ | after May, 2 BCE
+/+1887-03 | until May, 1887 CE
++1976-07-11/ | since July 11, 1976 CE
+/-1287 | until 1288 BCE
+/+0000 | until 1 BCE
+-0001-04/ | since May, 2 BCE
 
 ## 6.6 Recurring Date
 
@@ -426,6 +445,23 @@ A-1400 | year | about 1401 BCE
 A+1980-05-18T18:53Z | minutes | about 4:53 PM [UTC], May 18, 1980
 A+2014-08-19 | days | about August 19, 2014 CE
 
+## 6.8 Approximate Date Range
+
+The format for an `approximate date range` SHALL be a `date range` prepended by the character [A].
+
+### 6.7.1 Examples
+
+example | description, textual equivalent
+--------|--------------------------------
+A+1752/+1823 | sometime between 1752 CE and 1823 CE
+A+1825-04-13/+1825-11-26 | sometime between April 13, 1825 and November 26, 1825
+A+1633-02-19/P74Y | sometime within 74 years after February 19, 1933
+A/+1887-03 | sometime before May, 1887 CE
+A+1976-07-11/ | sometime after July 11, 1976 CE
+A/-1287 | sometime before 1288 BCE
+A/+0000 | sometime before 1 BCE
+A-0001-04/ | sometime before May, 2 BCE
+
 # 7. URI Representation
 
 A GEDCOM X Date MAY be identified using a Uniform Resource Identifier (*URI*) as defined by [RFC-2396](http://www.ietf.org/rfc/rfc2396.txt). A URI
@@ -465,7 +501,7 @@ The following summaries may be beneficial in parsing and composing GEDCOM X Date
     * The [-] will **only** affect the *year* component
     * A negative `simple date` year component can **always** be converted to a BCE Gregorian year by adding 1 to the absolute value
 2. Any value that begins with a [P] **must** be a `duration`
-3. A leading [A] is **always** an `approximate date`, and **must** be followed by a `simple date`
+3. A leading [A] is **always** an `approximate date`, and **must** be followed by either a `simple date` or a `date range`.
 4. A leading [R] is **always** a `recurring date range
 5. A slash [/] **always** separates values, and its presence **always** indicates a `date range`
     (including *open-ended* and *recurring* date ranges)
