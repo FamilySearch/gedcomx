@@ -41,9 +41,17 @@ This specification uses "GEDCOM X" internally.
 This specification is depends on the GEDCOM X Date Model specification identified
 by [`http://gedcomx.org/date-model/v1`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/date-model-specification.md).
 
-This specification refers to the GEDCOM X Constrained Vocabulary specification identified
-by [`http://gedcomx.org/vocabulary/v1`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/constrained-vocabulary-specification.md)
-to recommend elements of a constrained vocabulary to be used where applicable.
+This specification refers to the GEDCOM X Event Types specification identified
+by [`http://gedcomx.org/event-types/v1`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/event-types-specification.md)
+to recommend event types to be used.
+
+This specification refers to the GEDCOM X Fact Types specification identified
+by [`http://gedcomx.org/fact-types/v1`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/fact-types-specification.md)
+to recommend fact types to be used.
+
+This specification refers to the GEDCOM X Name Part Qualifiers specification identified
+by [`http://gedcomx.org/name-part-qualifiers/v1`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/name-part-qualifiers-specification.md)
+to recommend name part qualifiers to be used.
 
 ## 1.2 Notational Conventions
 
@@ -230,9 +238,6 @@ URI | description
 `http://gedcomx.org/Couple`| A relationship of a pair of persons.
 `http://gedcomx.org/ParentChild`| A relationship from a parent to a child.
 
-In addition to these elements, processors SHOULD support any other elements defined by section 3.2 (Relationship Subclasses) of
-the [GEDCOM X Constrained Vocabulary specification](https://github.com/FamilySearch/gedcomx/blob/master/specifications/constrained-vocabulary-specification.md).
-
 
 <a id="source-description"/>
 
@@ -335,8 +340,8 @@ URI | description
 `http://gedcomx.org/Divorce` | A divorce event.
 `http://gedcomx.org/Marriage` | A marriage event.
 
-In addition to these elements, processors SHOULD support any other elements defined by section 3.3 (Event Subclasses) of
-the [GEDCOM X Constrained Vocabulary specification](https://github.com/FamilySearch/gedcomx/blob/master/specifications/constrained-vocabulary-specification.md).
+In addition to these elements, processors SHOULD support any other elements defined by the
+[GEDCOM X Event Types](https://github.com/FamilySearch/gedcomx/blob/master/specifications/event-types-specification.md) specification.
 
 
 <a id="document"/>
@@ -377,9 +382,6 @@ URI | description
 `http://gedcomx.org/Transcription` | The document is a transcription of a record or document.
 `http://gedcomx.org/Translation` | The document is a translation of a record or document.
 `http://gedcomx.org/Analysis` | The document is an analysis done by a researcher, often used as a genealogical proof statement.
-
-In addition to these elements, processors SHOULD support any other elements defined by section 3.5 (Document Subclasses) of
-the [GEDCOM X Constrained Vocabulary specification](https://github.com/FamilySearch/gedcomx/blob/master/specifications/constrained-vocabulary-specification.md).
 
 
 <a id="conclusion-place"/>
@@ -692,9 +694,6 @@ URI | description
 `http://gedcomx.org/Medium`|The contributor has a medium degree of confidence that the assertion is true.
 `http://gedcomx.org/Low`|The contributor has a low degree of confidence that the assertion is true.
 
-In addition to these elements, processors SHOULD support any other elements defined by section 4.1 (Classes of Confidence Levels) of
-the [GEDCOM X Constrained Vocabulary specification](https://github.com/FamilySearch/gedcomx/blob/master/specifications/constrained-vocabulary-specification.md).
-
 
 <a id="gender-conclusion"/>
 
@@ -732,9 +731,6 @@ URI | description
 `http://gedcomx.org/Male`| Male gender.
 `http://gedcomx.org/Female`| Female gender.
 `http://gedcomx.org/Unknown`| Unknown gender.
-
-In addition to these elements, processors SHOULD support any other elements defined by section 3.8 (Gender Subclasses) of
-the [GEDCOM X Constrained Vocabulary specification](https://github.com/FamilySearch/gedcomx/blob/master/specifications/constrained-vocabulary-specification.md).
 
 
 <a id="name-conclusion"/>
@@ -810,10 +806,13 @@ The following name types are defined by GEDCOM X:
 URI | description
 ----|-------------
 `http://gedcomx.org/BirthName` | Name given at birth.
+`http://gedcomx.org/MarriedName` | Name accepted at marriage.
 `http://gedcomx.org/AlsoKnownAs` | "Also known as" name.
+`http://gedcomx.org/Nickname`| Nickname.
+`http://gedcomx.org/AdoptiveName` | Name given at adoption.
+`http://gedcomx.org/FormalName` | A formal name, usually given to distinguish it from a name more commonly used.
+`http://gedcomx.org/ReligiousName` | A name given at a religious rite or ceremony.
 
-In addition to these elements, processors SHOULD support any other elements defined by section 3.9 (Name Subclasses) of
-the [GEDCOM X Constrained Vocabulary specification](https://github.com/FamilySearch/gedcomx/blob/master/specifications/constrained-vocabulary-specification.md).
 
 <a id="fact-conclusion"/>
 
@@ -861,8 +860,9 @@ URI | description | scope
 `http://gedcomx.org/Divorce`| The fact of a divorce of a couple. | couple relationship
 `http://gedcomx.org/Marriage`| The fact of a marriage. | couple relationship
 
-In addition to these elements, processors SHOULD support any other elements defined by section 3.12 (Fact Subclasses) of
-the [GEDCOM X Constrained Vocabulary specification](https://github.com/FamilySearch/gedcomx/blob/master/specifications/constrained-vocabulary-specification.md).
+In addition to these elements, processors SHOULD support any other elements defined by the
+[GEDCOM X Fact Types](https://github.com/FamilySearch/gedcomx/blob/master/specifications/fact-types-specification.md) specification.
+
 
 <a id="known-fact-qualifier"/>
 
@@ -915,8 +915,6 @@ URI | description
 `http://gedcomx.org/Official`| An person officiating the event.
 `http://gedcomx.org/Witness`| A witness of the event.
 
-In addition to these elements, processors SHOULD support any other elements defined by section 3.4 (Event Role Subclasses) of
-the [GEDCOM X Constrained Vocabulary specification](https://github.com/FamilySearch/gedcomx/blob/master/specifications/constrained-vocabulary-specification.md).
 
 <a id="conclusion-date"/>
 
@@ -980,7 +978,7 @@ name  | description | data type | constraints
 ------|-------------|-----------|------------
 type | URI identifying the type of the name part. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to a name part type, and use of a [known name part type](#known-name-part-types) is RECOMMENDED.
 value | The term(s) from the name that make up this name part. | string | REQUIRED.
-qualifiers | Qualifiers to add additional semantic meaning to the name part. | List of [http://gedcomx.org/v1/Qualifier](#qualifier) | OPTIONAL. If present, use of a [known name part qualifier](#known-name-part-qualifier) is RECOMMENDED.
+qualifiers | Qualifiers to add additional semantic meaning to the name part. | List of [http://gedcomx.org/v1/Qualifier](#qualifier) | OPTIONAL. If present, use of a name part qualifier defined by the [GEDCOM X Name Part Qualifiers](https://github.com/FamilySearch/gedcomx/blob/master/specifications/name-part-qualifiers-specification.md) specification is RECOMMENDED.
 
 <a id="known-name-part-types"/>
 
@@ -995,38 +993,6 @@ URI | description
 `http://gedcomx.org/Given`| A given name.
 `http://gedcomx.org/Surname`| A surname.
 
-In addition to these elements, processors SHOULD support any other elements defined by section 3.11.1 (Context-Based Name Part Subclasses) of
-the [GEDCOM X Constrained Vocabulary specification](https://github.com/FamilySearch/gedcomx/blob/master/specifications/constrained-vocabulary-specification.md).
-
-<a id="known-name-part-qualifier"/>
-
-### Known Name Part Qualifiers
-
-A name part qualifier MAY be used to identify how the name part was used by the person to which the name
-applies. For example, a name part qualifier my specify that a given `Suffix` was used by the person as a `Title`.
-When a name part qualifier identifies the usage of a name part, the qualifier `name` property MUST be used
-to identify the usage, and the qualifier `value` property SHOULD NOT be used. The following name part qualifier names are defined by GEDCOM X:
-
-URI | description
-----|-------------
-`http://gedcomx.org/Title`|A designation for honorifics (e.g. Dr., Rev., His Majesty, Haji), ranks (e.g. Colonel, General, Knight, Esquire), positions (e.g. Count, Chief, Father, King) or other titles (e.g., PhD, MD).
-`http://gedcomx.org/Primary`|A designation for the name of most prominent in importance among the names of that type (e.g., the primary given name).
-`http://gedcomx.org/Secondary`|A designation for a name that is not primary in its importance among the names of that type (e.g., a secondary given name).
-`http://gedcomx.org/Middle`|A designation useful for cultures that designate a middle name that is distinct from a given name and a surname.
-`http://gedcomx.org/Familiar`|A designation for one's familiar name. The qualifier value SHOULD NOT be used.
-`http://gedcomx.org/Religious`|A designation for a name given for religious purposes. The qualifier value SHOULD NOT be used.
-`http://gedcomx.org/Family`|A name that associates a person with a group, such as a clan, tribe, or patriarchal hierarchy.
-`http://gedcomx.org/Maiden`|A designation given by women to their original surname after they adopt a new surname upon marriage.
-`http://gedcomx.org/Patronymic`|A name derived from a father or paternal ancestor.
-`http://gedcomx.org/Matronymic`|A name derived from a mother or maternal ancestor.
-`http://gedcomx.org/Geographic`|A name derived from associated geography.
-`http://gedcomx.org/Occupational`|A name derived from one's occupation.
-`http://gedcomx.org/Characteristic`|A name derived from a characteristic.
-`http://gedcomx.org/Postnom`|A name mandedated by law populations from Congo Free State / Belgian Congo / Congo / Democratic Republic of Congo (formerly Zaire).
-`http://gedcomx.org/Particle`|A grammatical designation for articles (a, the, dem, las, el, etc.), prepositions (of, from, aus, zu, op, etc.), initials (e.g. PhD, MD), annotations (e.g. twin, wife of, infant, unknown), comparators (e.g. Junior, Senior, younger, little), ordinals (e.g. III, eighth), and conjunctions (e.g. and, or, nee, ou, y, o, ne, &amp;).
-
-In addition to these elements, processors SHOULD support any other elements defined by section 3.11.2 (Usage-Based Name Part Subclasses) of
-the [GEDCOM X Constrained Vocabulary specification](https://github.com/FamilySearch/gedcomx/blob/master/specifications/constrained-vocabulary-specification.md).
 
 <a id="name-form"/>
 
