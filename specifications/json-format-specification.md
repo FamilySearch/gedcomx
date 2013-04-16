@@ -262,6 +262,7 @@ name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 attribution | The attribution of this conclusion. | attribution | [`Attribution`](#attribution)
 identifiers | Identifiers for the person. | identifiers | [`Identifier`](#identifier-type)
+extracted | Whether the person is to be constrained as an *extracted conclusion* (i.e. "persona"). | extracted | boolean
 living | Whether the person is considered living. | living | boolean
 gender | The conclusion about the gender of the person. | gender | [`Gender`](#gender)
 names | The conclusions about the names of the person. | names | array of [`Name`](#name-conclusion)
@@ -277,6 +278,7 @@ media | References to multimedia resources for this person, such as photos or vi
 
   "attribution" : { ... },
   "identifiers" : { ... },
+  "extracted" : false,
   "living" : true,
   "gender" : { ... },
   "names" : [ { ... }, { ... } ],
@@ -297,6 +299,7 @@ name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 attribution | The attribution of this conclusion. | attribution | [`Attribution`](#attribution)
 type | URI identifying the type of the relationship. | type | [`URI`](#uri)
+extracted | Whether the relationship is to be constrained as an *extracted conclusion*. | extracted | boolean
 person1 | Reference to the first person in the relationship. | person1 | [`ResourceReference`](#resource-reference)
 person2 | Reference to the second person in the relationship. | person2 | [`ResourceReference`](#resource-reference)
 facts | The conclusions about the facts of the life of the relationship. | facts | array of [`Fact`](#fact-conclusion)
@@ -311,6 +314,7 @@ identifiers | Identifiers for the relationship. | identifiers | [`Identifier`](#
 
   "attribution" : { ... },
   "type" : "http://gedcomx.org/Couple",
+  "extracted" : false,
   "person1" : {
     "resource" : "http://identifier/for/person/1"
   },
@@ -338,7 +342,6 @@ mediaType | A hint about the media type of the resource being described. | media
 about | A uniform resource identifier (URI) for the resource being described. | about | [`URI`](#uri)
 mediator | A reference to the entity that mediates access to the described source. | mediator | [`ResourceReference`](#resource-reference)
 sources | A list of references to any sources from which this source is derived. | sources | array of [`SourceReference`](#source-reference)
-extractedConclusions | A list of references to any conclusions that were extracted from this source, to be analyzed and evaluated atomically within on context of the source. | extractedConclusions | [`ResourceReference`](#resource-reference)
 componentOf | A reference to the source that contains this source. | componentOf | [`SourceReference`](#source-reference)
 titles | The display names for this source. | titles | array of [`TextValue`](#text-value)
 notes | A list of notes about a source | notes | array of [`Note`](#note)
@@ -356,7 +359,6 @@ attribution | The attribution of this source. | attribution | [`Attribution`](#a
     "resource" : "http://identifier/for/the/mediator/of/source/being/described"
   },
   "sources" : [ { ... }, { ... } ],
-  "extractedConclusions" : [ { ... }, { ... } ],
   "componentOf" : { ... },
   "titles" : [ { ... }, { ... } ],
   "notes" : [ { ... }, { ... } ],
@@ -423,6 +425,7 @@ name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 attribution | The attribution of this conclusion. | attribution | [`Attribution`](#attribution)
 type | URI identifying the type of the event. | type | [`URI`](#uri)
+extracted | Whether the event is to be constrained as an *extracted conclusion*. | extracted | boolean
 date | The date of the event. | date | [`Date`](#conclusion-date)
 place | The place the event. | place | [`Place`](#conclusion-place)
 roles | The roles of the persons in the event. | roles | array of [`EventRole`](#conclusion-event-role)
@@ -437,6 +440,7 @@ media | References to multimedia resources for this event, such as photos or vid
 
   "attribution" : { ... },
   "type" : "http://gedcomx.org/Marriage",
+  "extracted" : false,
   "date" : { ... },
   "place" : { ... },
   "roles" : [ { ... }, { ... } ],
@@ -480,6 +484,7 @@ name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 names | A list of standardized (or normalized), fully-qualified (in terms of what is known of the applicable jurisdictional hierarchy) names for this place that are applicable to this description of this place. | names | array of [`TextValue`](#text-value)
 type | A uniform resource identifier (URI) identifying the type of the place as it is applicable to this description. | type | [`URI`](#uri)
+extracted | Whether the place description is to be constrained as an *extracted conclusion*. | extracted | boolean
 temporalDescription | A description of the time period to which this place description is relevant. | temporalDescription | [`Date`](#conclusion-date)
 latitude | Degrees north or south of the Equator (0.0 degrees). | latitude | number
 longitude | Angular distance in degrees, relative to the Prime Meridian. | longitude | number
@@ -498,6 +503,7 @@ attribution | The attribution of this conclusion. | attribution | [`Attribution`
   "about" : "http://identifier/of/the/place/being/described",
   "names" : [ { ... }, { ... } ],
   "type" : "http://identifier/for/the/place/type",
+  "extracted" : false,
   "temporalDescription" : { ... },
   "latitude" : "27.9883575",
   "latitude" : "86.9252014",

@@ -173,6 +173,7 @@ This data type extends the following data type:
 name  | description | data type | constraints
 ------|-------------|-----------|------------
 identifiers | Identifiers for the person. | List of [`http://gedcomx.org/v1/Identifier`](#identifier-type). Order is preserved. | OPTIONAL.
+extracted | Whether the person is to be constrained as an *extracted conclusion*. A person that is identified as extracted conclusion MAY be referred to as a "persona". | boolean | OPTIONAL. Default: `false`. Refer to [Extracted Conclusion Constraints](#4-extracted-conclusion-constraints).
 living | Whether the person is considered living. | boolean | OPTIONAL.
 gender | The conclusion about the gender of the person. | [`http://gedcomx.org/v1/Gender`](#gender) | OPTIONAL.
 names | The conclusions about the names of the person. | List of [`http://gedcomx.org/v1/Name`](#name-conclusion). Order is preserved. | OPTIONAL.
@@ -204,6 +205,7 @@ This data type extends the following data type:
 name  | description | data type | constraints
 ------|-------------|-----------|------------
 type | URI identifying the type of the relationship. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to a relationship type, and use of a [known relationship type](#known-relationship-types) is RECOMMENDED.
+extracted | Whether this relationship is to be constrained as an *extracted conclusion*. | boolean | OPTIONAL. Default: `false`. Refer to [Extracted Conclusion Constraints](#4-extracted-conclusion-constraints).
 person1 | Reference to the first person in the relationship. | [URI](#uri) | REQUIRED. MUST resolve to an instance of [`http://gedcomx.org/v1/Person`](#person)
 person2 | Reference to the second person in the relationship. | [URI](#uri) | REQUIRED. MUST resolve to an instance of [`http://gedcomx.org/v1/Person`](#person)
 facts | The conclusions about the facts of the life of the relationship. | List of [`http://gedcomx.org/v1/Fact`](#fact-conclusion). Order is preserved. | OPTIONAL.
@@ -249,7 +251,6 @@ mediaType | A hint about the media type of the resource being described. | strin
 about | A uniform resource identifier (URI) for the resource being described. | [URI](#uri) | OPTIONAL.
 mediator | A reference to the entity that mediates access to the described source. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to an instance of [`http://gedcomx.org/v1/Agent`](#agent).
 sources | A list of references to any sources from which this source is derived. | List of [`http://gedcomx.org/v1/SourceReference`](#source-reference) | OPTIONAL.
-extractedConclusions | A list of references to any conclusions that were extracted from this source, to be analyzed and evaluated atomically within on context of the source. | [URI](#uri) | OPTIONAL.
 componentOf | A reference to the source that contains this source, i.e. its parent context. Used when the description of a source is not complete without the description of its parent (or containing) source. | [`http://gedcomx.org/v1/SourceReference`](#source-reference) | OPTIONAL.
 titles | The display names for this source. If more than one title is provided, titles are assumed to be given in order of preference, with the most preferred title in the first position in the list. | List of [`http://gedcomx.org/TextValue`](#text-value) | OPTIONAL.
 notes  | A list of notes about a source. | List of [`http://gedcomx.org/Note`](#note) | OPTIONAL.
@@ -305,6 +306,7 @@ This data type extends the following data type:
 name  | description | data type | constraints
 ------|-------------|-----------|------------
 type | URI identifying the type of the event. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to an event type, and use of a [known event type](#known-event-types) is RECOMMENDED.
+extracted | Whether this event is to be constrained as an *extracted conclusion*. | boolean | OPTIONAL. Default: `false`. Refer to [Extracted Conclusion Constraints](#4-extracted-conclusion-constraints).
 date | The date of the event. | [`http://gedcomx.org/v1/Date`](#conclusion-date) | OPTIONAL.
 place | A reference to the place applicable to this event. | [`http://gedcomx.org/v1/PlaceReference`](#conclusion-place-reference) | OPTIONAL.
 roles | The roles of the persons in the event. | List of [`http://gedcomx.org/v1/EventRole`](#conclusion-event-role). Order is preserved. | OPTIONAL.
@@ -419,6 +421,7 @@ This data type extends the following data type:
 
 name  | description | data type | constraints
 ------|-------------|-----------|------------
+extracted | Whether this place description is to be constrained as an *extracted conclusion*. | boolean | OPTIONAL. Default: `false`. Refer to [Extracted Conclusion Constraints](#4-extracted-conclusion-constraints).
 names | A list of standardized (or normalized), fully-qualified (in terms of what is known of the applicable jurisdictional hierarchy) names for this place that are applicable to this description of this place. | List of [http://gedcomx.org/v1/TextValue](#text-value). Order is preserved. | REQUIRED. The list MUST contain at least one name.
 type | An implementation-specific uniform resource identifier (URI) used to identify the type of a place (e.g., address, city, county, province, state, country, etc.). | [URI](#uri) | OPTIONAL.  There is no current plan to define a type vocabulary for place descriptions in GEDCOM X.
 temporalDescription | A description of the time period to which this place description is relevant. | [`http://gedcomx.org/v1/Date`](#conclusion-date) | OPTIONAL.
@@ -469,7 +472,7 @@ The following identifier types are defined by GEDCOM X.
 URI | description
 ----|------------
 `http://gedcomx.org/Primary` | The primary identifier for the resource.
-`http://gedcomx.org/Evidence` | An identifier for the evidence that supports the resource. For example, when a conclusion about a person is extracted, analyzed and evaluated atomically within the context of a single source, it takes the form of a (extracted) person conclusion, and the extracted conclusion may supply an identifier for the person. As all evidence for the person is gathered, the (working) person conclusion identifies the evidence used to support the conclusion by including each evidence identifier in the list of identifiers for the person.
+`http://gedcomx.org/Evidence` | An identifier for the evidence that supports the resource. For example, when a persona is extracted from a source, it MAY provide a unique identifier. As evidence for a person is gathered, the (working) person conclusion identifies the evidence used to support the conclusion by including each persona identifier in the list of identifiers for the person.
 `http://gedcomx.org/Deprecated` | An identifier that has been relegated, deprecated, or otherwise downgraded. This identifier is commonly used as the result of a merge when what was once a primary identifier for a person is no longer primary.
 `http://gedcomx.org/Persistent` | An identifier that is considered to be a long-term persistent identifier. Applications that provide persistent identifiers are claiming that links to the resource using the identifier won't break.
 
@@ -481,8 +484,8 @@ URI | description
   is used as the primary identifier for the `Person`. The list of identifiers for the `Person` contains two identifiers with value `https://familysearch.org/pal:/12345`,
   one of type `http://gedcomx.org/Primary` and one of type `http://gedcomx.org/Persistent`.
 * An application allows a researcher to extract information from a single census record about a person. The application assigns an identifier "abcde" to the
-  `Person` extracted from the census record. The researcher extracts additional information about the person from a birth certificate and the application
-  assigns identifier "fghij" to the `Person` extracted from the birth certificate. As the researcher gathers and analyzes the evidence for the person, the
+  `persona` extracted from the census record. The researcher extracts additional information about the person from a birth certificate and the application
+  assigns identifier "fghij" to the `persona` extracted from the birth certificate. As the researcher gathers and analyzes the evidence for the person, the
   application creates a (working) `Person` conclusion that references the census record and the birth certificate as a source. When the researcher concludes
   that person "abcde" and person "fghij" are the same person, the list of identifiers for the working `Person` includes two identifiers of type
   `http://gedcomx.org/Evidence`: "abcde" and "fghij".
@@ -1186,7 +1189,33 @@ value | The value of the qualifier. The semantic meaning of the value is determi
 todo:
 
 
-# 4. Extensibility
+<a id="extracted-conclusion-constraints"/>
+
+# 4. Extracted Conclusion Constraints
+
+GEDCOM X provides a specific definition for the term "extracted conclusion" that is used to refer to a set of constraints
+that MUST be applied to conclusion data that is identified as "extracted" using the `extracted` property.
+
+When a conclusion is identified as "extracted", it means that the data is to be treated as having been extracted from a
+single source or record.  An extracted conclusion is distinguished from other conclusion data by the notion that it is
+intended to describe information contained in a single source, as opposed to what a researcher or system believes to be true
+about the subject of the conclusion.  Applications MUST recognize the `extracted` property and SHOULD ensure that any modifications
+to the extracted conclusion are aligned with the information that is provided by the specific (single) source, even if the source
+provides information that may conflict with information in other sources.
+
+Data in a conclusion that is identified as "extracted" MUST conform to the following constraints:
+
+* The conclusion (including any data it contains) MUST NOT refer to more than one source description.
+* All source references used by the conclusion MUST resolve to the same source description, although
+  each reference MAY contain distinct qualifying information such as attribution.
+
+## 4.1 Persona
+
+GEDCOM X provides a specific definition for the term "persona" that is used to refer to an instance of
+`http://gedcomx.org/v1/Person` that has been identified as an extracted conclusion.
+
+
+# 5. Extensibility
 
 ## Extensions from Non-GEDCOM X Vocabularies
 
@@ -1244,6 +1273,6 @@ a known data type, GEDCOM X recognizes the data URI scheme as defined by
 
 todo: data uri example
 
-# 5. Miscellaneous To Do
+# 6. Miscellaneous To Do
 
 todo: supply details about how GEDCOM X defines its evidence model.
