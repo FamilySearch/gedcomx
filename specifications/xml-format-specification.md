@@ -312,6 +312,7 @@ name | description | XML property | XML type
 id | An identifier for the XML element holding the source description data. The id attribute MUST conform to the constraints defined in [Section 7, "Fragment Identifiers"](#fragment-ids). | id (attribute) | xsd:string
 citations | The citations for this source. | gx:citation | [`gx:SourceCitation`](#source-citation)
 mediaType | A hint about the media type of the resource being described. | mediaType (attribute) | xsd:string
+resourceType | URI identifying the type of resource being described. | resourceType (attribute) | [anyURI](#uri)
 about | A uniform resource identifier (URI) for the resource being described. | about (attribute) | [anyURI](#uri)
 mediator | A reference to the entity that mediates access to the described source. | gx:mediator | [`gx:ResourceReference`](#resource-reference)
 sources | A list of references to any sources from which this source is derived. | gx:source | [`gx:SourceReference`](#source-reference)
@@ -323,7 +324,7 @@ attribution | The attribution of this source. | gx:attribution | [`gx:Attributio
 ### examples
 
 ```xml
-  <... id="local_id" about="(uri reference to the source)" mediaType="...">
+  <... id="local_id" about="(uri reference to the source)" mediaType="..." resourceType="...">
     <gx:citation>
       ...
     </gx:citation>

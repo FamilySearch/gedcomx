@@ -339,6 +339,7 @@ name | description | JSON member | JSON object type
 id | An identifier for the JSON object holding the source description data. The id attribute MUST conform to the constraints defined in [Section 7, "Fragment Identifiers"](#fragment-ids). | id | string
 citations | The citation for this source. | citations | array of [`SourceCitation`](#source-citation)
 mediaType | A hint about the media type of the resource being described. | mediaType | string
+resourceType | URI identifying the type of resource being described. | resourceType | [`URI`](#uri)
 about | A uniform resource identifier (URI) for the resource being described. | about | [`URI`](#uri)
 mediator | A reference to the entity that mediates access to the described source. | mediator | [`ResourceReference`](#resource-reference)
 sources | A list of references to any sources from which this source is derived. | sources | array of [`SourceReference`](#source-reference)
@@ -354,6 +355,7 @@ attribution | The attribution of this source. | attribution | [`Attribution`](#a
   "id" : "local_id",
   "citations" : [ { ... }, { ... } ],
   "mediaType" : "...",
+  "resourceType" : "...",
   "about" : "http://identifier/for/the/source/being/described",
   "mediator" : {
     "resource" : "http://identifier/for/the/mediator/of/source/being/described"
