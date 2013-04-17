@@ -280,7 +280,7 @@ URI | description
 `http://gedcomx.org/Collection` | A collection of genealogical resources. A collection may contain physical artifacts (such as a collection of books in a library), records (such as the 1940 U.S. Census), or digital artifacts (such as an online genealogical application).
 `http://gedcomx.org/PhysicalArtifact` | A physical artifact, such as a book.
 `http://gedcomx.org/DigitalArtifact` | A digital artifact, such as a digital image of a birth certificate or other record.
-`http://gedcomx.org/Record` | A genealogical record, such as a census record or a vital record.
+`http://gedcomx.org/Record` | A historical record, such as a census record or a vital record.
 
 
 <a id="agent"/>
