@@ -660,6 +660,8 @@ todo:
 
 The `OnlineAccount` data type defines a description of an account in an online web application.
 
+The `OnlineAccount` data type does NOT support extension properties (see [Extension Properties](#extension-properties)).
+
 ### identifier
 
 The identifier for the `OnlineAccount` data type is:
@@ -678,6 +680,8 @@ accountName | The name, label, or id associating the owner of the account with t
 ## 3.8 The "Address" Data Type
 
 The `Address` data type defines a street address of a person or organization.
+
+The `Address` data type does NOT support extension properties (see [Extension Properties](#extension-properties)).
 
 ### identifier
 
@@ -1118,6 +1122,8 @@ NameForm3.parts[2].value=Tchaikovsky
 
 The `Qualifier` data type defines the data structure used to supply additional details, annotations, tags, or other qualifying data
 to a specific data element.
+
+The `Qualifier` data type does NOT support extension properties (see [Extension Properties](#extension-properties)).
 
 ### identifier
 
