@@ -655,8 +655,8 @@ The identifier for the "EvidenceReference" data type is:
 
 name  | description | data type | constraints
 ------|-------------|-----------|------------
-resource  | Reference to data being used as evidence. | [URI](#uri) | REQUIRED. MUST resolve to an instance of conclusion [`http://gedcomx.org/v1/Conclusion`](#311-the-conclusion-data-type).
-analysis  | Reference to a document containing analysis that supports the use of the referenced data as evidence. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to an instance of [`http://gedcomx.org/v1/Document`](#26-the-document-data-type) of type `http://gedcomx.org/Analysis`.
+resource  | Reference to data being used as _evidence_. | [URI](#uri) | REQUIRED. MUST resolve to an instance of conclusion [`http://gedcomx.org/v1/Conclusion`](#311-the-conclusion-data-type).
+analysis  | Reference to a document containing analysis that supports the use of the referenced data as _evidence_. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to an instance of [`http://gedcomx.org/v1/Document`](#26-the-document-data-type) of type `http://gedcomx.org/Analysis`.
 attribution | The attribution of this source reference. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing resource of the source reference is assumed.
 
 ### examples

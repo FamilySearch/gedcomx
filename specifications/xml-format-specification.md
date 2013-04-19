@@ -676,9 +676,38 @@ attribution | The attribution of this source reference. | gx:attribution | [`gx:
   </...>
 ```
 
+<a id="evidence-reference"/>
+
+## 3.7 The "EvidenceReference" Data Type
+
+The `gx:EvidenceReference` XML type is used to (de)serialized the `http://gedcomx.org/v1/EvidenceReference`
+data type.
+
+### properties
+
+name | description | XML property | XML type
+-----|-------------|--------------|---------
+resource  | Reference to data being used as _evidence_. | description (attribute) | [`URI`](#uri)
+analysis  | Reference to a document containing analysis that supports the use of the referenced data as _evidence_. | gx:analysis | [`URI`](#uri)
+attribution | The attribution of this _evidence_ reference. | gx:attribution | [`gx:Attribution`](#attribution)
+
+### examples
+
+```xml
+  <... resource="http://identifier/for/data/being/referenced">
+    <gx:analysis resource="http://identifier/for/analysis/document"/>
+    <gx:attribution>
+      ...
+    </gx:attribution>
+
+    <!-- possibility of extension elements -->
+
+  </...>
+```
+
 <a id="online-account"/>
 
-## 3.7 The "OnlineAccount" Data Type
+## 3.8 The "OnlineAccount" Data Type
 
 The `gx:OnlineAccount` XML type is used to (de)serialize the `http://gedcomx.org/v1/OnlineAccount`
 data type.
@@ -701,7 +730,7 @@ accountName | The name, label, or id associating the owner of the account with t
 
 <a id="address"/>
 
-## 3.8 The "Address" Data Type
+## 3.9 The "Address" Data Type
 
 The `gx:Address` XML type is used to (de)serialize the `http://gedcomx.org/v1/Address`
 data type.
@@ -740,7 +769,7 @@ street6 | The street (sixth line). | gx:street6 | xsd:string
   </...>
 ```
 
-## 3.9 The "Conclusion" Data Type
+## 3.10 The "Conclusion" Data Type
 
 The `gx:Conclusion` XML type is used to (de)serialize the `http://gedcomx.org/v1/Conclusion`
 data type.
@@ -776,7 +805,7 @@ notes | A list of notes about this conclusion. | gx:note | [`gx:Note`](#note)
 
 <a id="gender-conclusion"/>
 
-## 3.10 The "Gender" Data Type
+## 3.11 The "Gender" Data Type
 
 The `gx:Gender` XML type is used to (de)serialize the `http://gedcomx.org/v1/Gender`
 data type.
@@ -799,7 +828,7 @@ type | The gender type. | type (attribute) | [`URI`](#uri)
 
 <a id="name-conclusion"/>
 
-## 3.11 The "Name" Data Type
+## 3.12 The "Name" Data Type
 
 The `gx:Name` XML type is used to (de)serialize the `http://gedcomx.org/v1/Name`
 data type.
@@ -833,7 +862,7 @@ nameForms | The name form(s) that best represents this name `NameForm` -- usuall
 
 <a id="fact-conclusion"/>
 
-## 3.12 The "Fact" Data Type
+## 3.13 The "Fact" Data Type
 
 The `gx:Fact` XML type is used to (de)serialize the `http://gedcomx.org/v1/Fact`
 data type.
@@ -872,7 +901,7 @@ qualifiers | Qualifiers to add additional details about the fact. | gx:qualifier
 
 <a id="conclusion-event-role"/>
 
-## 3.13 The "EventRole" Data Type
+## 3.14 The "EventRole" Data Type
 
 The `gx:EventRole` XML type is used to (de)serialize the `http://gedcomx.org/v1/EventRole`
 data type.
@@ -899,7 +928,7 @@ details | Details about the role of the person in the event. | gx:details | xs:s
 
 <a id="conclusion-date"/>
 
-## 3.14 The "Date" Data Type
+## 3.15 The "Date" Data Type
 
 The `gx:Date` XML type is used to (de)serialize the `http://gedcomx.org/v1/Date`
 data type.
@@ -922,7 +951,7 @@ formal | The formal value of the date. | gx:formal | [GEDCOM X Date](https://git
 
 <a id="conclusion-place-reference"/>
 
-## 3.15 The "PlaceReference" Data Type
+## 3.16 The "PlaceReference" Data Type
 
 The `gx:PlaceDescription` is used to (de)serialize the `http://gedcomx.org/v1/PlaceReference` data type.
 
@@ -947,7 +976,7 @@ descriptionRef | A reference to a _description_ of this place. | description (at
 
 <a id="name-part"/>
 
-## 3.16 The "NamePart" Data Type
+## 3.17 The "NamePart" Data Type
 
 The `gx:NamePart` XML type is used to (de)serialize the `http://gedcomx.org/v1/NamePart`
 data type.
@@ -974,7 +1003,7 @@ qualifiers | Qualifiers to add additional semantic meaning to the name part. | g
 
  <a id="name-form"/>
 
-## 3.17 The "NameForm" Data Type
+## 3.18 The "NameForm" Data Type
 
 The `NameForm` XML type is used to (de)serialize the `http://gedcomx.org/v1/NameForm`
 data type.
@@ -1005,7 +1034,7 @@ parts | Any identified name parts from the name represented in this instance, or
 
 <a id="qualifier"/>
 
-## 3.18 The "Qualifier" Data Type
+## 3.19 The "Qualifier" Data Type
 
 The `Qualifier` XML type is used to (de)serialize the `http://gedcomx.org/v1/Qualifier`
 data type.
