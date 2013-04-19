@@ -647,10 +647,7 @@ value | A rendering of the full (working) citation as a string. | value | string
 ```json
 {
   "lang" : "en",
-  "value" : "...a rendering of the full (working) citation as a string...",
-
-  ...possibility of extension elements...
-
+  "value" : "...a rendering of the full (working) citation as a string..."
 }
 ```
 
@@ -903,6 +900,9 @@ formal | The formal value of the date. | formal | [GEDCOM X Date](https://github
 {
   "original" : "...the original text...",
   "formal" : "..."
+
+  ...possibility of extension elements...
+
 }
 ```
 

@@ -646,7 +646,6 @@ value | A rendering of the full (working) citation as a string. | gx:value | xsd
 ```xml
   <... xml:lang="en">
     <gx:value>...a rendering of the full (working) citation as a string...</gx:value>
-    ...
   </...>
 ```
 
@@ -918,6 +917,9 @@ formal | The formal value of the date. | gx:formal | [GEDCOM X Date](https://git
   <...>
     <gx:original>...the original text...</gx:original>
     <gx:formal>...</gx:formal>
+
+    <!-- possibility of extension elements -->
+
   </...>
 ```
 
