@@ -656,7 +656,7 @@ The identifier for the `OnlineAccount` data type is:
 name  | description | data type | constraints
 ------|-------------|-----------|------------
 serviceHomepage  | The home page of the service. | [URI](#uri) | REQUIRED.
-accountName | The name, label, or id associating the owner of the account with the account. | REQUIRED.
+accountName | The name, label, or id associating the owner of the account with the account. | string | REQUIRED.
 
 <a id="address"/>
 
