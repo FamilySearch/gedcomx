@@ -588,7 +588,7 @@ name | description | XML property | XML type
 -----|-------------|--------------|---------
 lang | The locale identifier for the note. | xml:lang (attribute) | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag
 subject | A subject or title for the note. | gx:subject | xsd:string
-text | The text of the note. | gx:text | string
+text | The text of the note. | gx:text | xsd:string
 attribution | The attribution of this note. | gx:attribution | [`gx:Attribution`](#attribution)
 
 ### examples
