@@ -190,6 +190,7 @@ living | Whether the person is considered living. | boolean | OPTIONAL.
 gender | The conclusion about the gender of the person. | [`http://gedcomx.org/v1/Gender`](#gender) | OPTIONAL.
 names | The conclusions about the names of the person. | List of [`http://gedcomx.org/v1/Name`](#name-conclusion). Order is preserved. | OPTIONAL.
 facts | The conclusions about the facts of the life of the person. | List of [`http://gedcomx.org/v1/Fact`](#fact-conclusion). Order is preserved. | OPTIONAL.
+evidence | References to persons that support this conclusion. | List of [`http://gedcomx.org/v1/EvidenceReference`](#evidence-reference). Order is preserved. | OPTIONAL.  If provided, each reference MUST resolve to an instance of [`http://gedcomx.org/v1/Person`](#21-the-person-data-type).
 media | References to multimedia resources for this person, such as photos or videos. Media references are intended to provide additional context or illustration for the person and SHOULD NOT be considered as evidence for conclusions. Media references SHOULD be ordered by priority such that applications that wish to display a single media item (such as an image) MAY choose the first applicable media reference. | List of [`http://gedcomx.org/v1/SourceReference`](#source-reference). Order is preserved. | OPTIONAL. Note that the `SourceReference` is used for multimedia references and therefore MUST resolve to a `SourceDescription` of the resource, which in turn provides a reference to the resource itself.
 attribution | The attribution of the person. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing data set (e.g. file) of the person is assumed.
 
@@ -221,6 +222,7 @@ extracted | Whether this relationship is to be constrained as an *extracted conc
 person1 | Reference to the first person in the relationship. | [URI](#uri) | REQUIRED. MUST resolve to an instance of [`http://gedcomx.org/v1/Person`](#person)
 person2 | Reference to the second person in the relationship. | [URI](#uri) | REQUIRED. MUST resolve to an instance of [`http://gedcomx.org/v1/Person`](#person)
 facts | The conclusions about the facts of the life of the relationship. | List of [`http://gedcomx.org/v1/Fact`](#fact-conclusion). Order is preserved. | OPTIONAL.
+evidence | References to relationships that supports this conclusion. | List of [`http://gedcomx.org/v1/EvidenceReference`](#evidence-reference). Order is preserved. | OPTIONAL.  If provided, each reference MUST resolve to an instance of [`http://gedcomx.org/v1/Relationship`](#22-the-relationship-data-type).
 identifiers | Identifiers for the relationship. | List of [`http://gedcomx.org/v1/Identifier`](#identifier-type). Order is preserved. | OPTIONAL.
 attribution | The attribution of the relationship. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing data set (e.g. file) of the relationship is assumed.
 
@@ -337,6 +339,7 @@ extracted | Whether this event is to be constrained as an *extracted conclusion*
 date | The date of the event. | [`http://gedcomx.org/v1/Date`](#conclusion-date) | OPTIONAL.
 place | A reference to the place applicable to this event. | [`http://gedcomx.org/v1/PlaceReference`](#conclusion-place-reference) | OPTIONAL.
 roles | The roles of the persons in the event. | List of [`http://gedcomx.org/v1/EventRole`](#conclusion-event-role). Order is preserved. | OPTIONAL.
+evidence | References to events that supports this conclusion. | List of [`http://gedcomx.org/v1/EvidenceReference`](#evidence-reference). Order is preserved. | OPTIONAL.  If provided, each reference MUST resolve to an instance of [`http://gedcomx.org/v1/Event`](#25-the-event-data-type).
 media | References to multimedia resources for this event, such as photos or videos. Media references are intended to provide additional context or illustration for the event and SHOULD NOT be considered as evidence for conclusions. Media references SHOULD be ordered by priority such that applications that wish to display a single media item (such as an image) MAY choose the first applicable media reference. | List of [`http://gedcomx.org/v1/SourceReference`](#source-reference) | OPTIONAL. Note that the `SourceReference` is used for multimedia references and therefore MUST resolve to a `SourceDescription` of the resource, which in turn provides a reference to the resource itself.
 attribution | The attribution of the event. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing data set (e.g. file) of the event is assumed.
 
@@ -457,6 +460,7 @@ temporalDescription | A description of the time period to which this place descr
 latitude | Degrees north or south of the Equator (0.0 degrees). | IEEE 754 binary64 value | OPTIONAL.  If provided, MUST provide `longitude` also.  Values range from −90.0 degrees (south) to 90.0 degrees (north).  It is assumed that all instances of `PlaceDescription` that share an identical `Primary` identifier will also have identical `latitude` values.
 longitude | Angular distance in degrees, relative to the Prime Meridian. | IEEE 754 binary64 value | OPTIONAL.  If provided, MUST provide `latitude` also.  Values range from −180.0 degrees (west of the Meridian) to 180.0 degrees (east of the Meridian).  It is assumed that all instances of `PlaceDescription` that share an identical `Primary` identifier will also have identical `longitude` values.
 spatialDescription | A reference to a geospatial description of this place. | [`URI`](#uri) | OPTIONAL. It is RECOMMENDED that this geospatial description resolve to a KML document.
+evidence | References to place descriptions that supports this conclusion. | List of [`http://gedcomx.org/v1/EvidenceReference`](#evidence-reference). Order is preserved. | OPTIONAL.  If provided, each reference MUST resolve to an instance of [`http://gedcomx.org/v1/Person`](#27-the-placedescription-data-type).
 identifiers | A list of known identifiers for this place description (e.g., place authority identifiers). Multiple descriptions of the same place MAY be correlated via the `http://gedcomx.org/Primary` identifier. | List of [`http://gedcomx.org/v1/Identifier`](#identifier-type). Order is preserved. | OPTIONAL.
 media | References to multimedia resources for this place, such as photos or videos. Media references are intended to provide additional context or illustration for the place and SHOULD NOT be considered as evidence for conclusions. Media references SHOULD be ordered by priority such that applications that wish to display a media item (such as an image) MAY choose the first applicable media reference. | List of [`http://gedcomx.org/v1/SourceReference`](#source-reference) | OPTIONAL. Note that the `SourceReference` is used for multimedia references and therefore MUST resolve to a `SourceDescription` of the resource, which in turn provides a reference to the resource itself.
 attribution | Attribution metadata for this place description. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing data set (e.g. file) of the place description is assumed.
@@ -501,7 +505,6 @@ The following identifier types are defined by GEDCOM X.
 URI | description
 ----|------------
 `http://gedcomx.org/Primary` | The primary identifier for the resource.
-`http://gedcomx.org/Evidence` | An identifier for the evidence that supports the resource. For example, when a persona is extracted from a source, it MAY provide a unique identifier. As evidence for a person is gathered, the (working) person conclusion identifies the evidence used to support the conclusion by including each persona identifier in the list of identifiers for the person.
 `http://gedcomx.org/Deprecated` | An identifier that has been relegated, deprecated, or otherwise downgraded. This identifier is commonly used as the result of a merge when what was once a primary identifier for a person is no longer primary.
 `http://gedcomx.org/Persistent` | An identifier that is considered to be a long-term persistent identifier. Applications that provide persistent identifiers are claiming that links to the resource using the identifier won't break.
 
@@ -512,12 +515,6 @@ URI | description
 * An online web application issues a persistent identifier of value `https://familysearch.org/pal:/12345` to a `Person` and the same identifier
   is used as the primary identifier for the `Person`. The list of identifiers for the `Person` contains two identifiers with value `https://familysearch.org/pal:/12345`,
   one of type `http://gedcomx.org/Primary` and one of type `http://gedcomx.org/Persistent`.
-* An application allows a researcher to extract information from a single census record about a person. The application assigns an identifier "abcde" to the
-  `persona` extracted from the census record. The researcher extracts additional information about the person from a birth certificate and the application
-  assigns identifier "fghij" to the `persona` extracted from the birth certificate. As the researcher gathers and analyzes the evidence for the person, the
-  application creates a (working) `Person` conclusion that references the census record and the birth certificate as a source. When the researcher concludes
-  that person "abcde" and person "fghij" are the same person, the list of identifiers for the working `Person` includes two identifiers of type
-  `http://gedcomx.org/Evidence`: "abcde" and "fghij".
 
 
 <a id="attribution"/>
@@ -654,9 +651,42 @@ attribution | The attribution of this source reference. | [`http://gedcomx.org/A
 
 todo:
 
+
+<a id="evidence-reference"/>
+
+## 3.7 The "EvidenceReference" Data Type
+
+The `EvidenceReference` data type defines a reference to data that is being used as evidence to answer a research question.
+For example, a genealogical conclusion (i.e., the object holding the `EvidenceReference` instance) can refer to content extracted
+from a source (i.e., an ["extracted"](#4-extracted-conclusion-constraints) `Conclusion`) as *evidence* that supports the conclusion.
+
+### identifier
+
+The identifier for the "EvidenceReference" data type is:
+
+`http://gedcomx.org/v1/EvidenceReference`
+
+### properties
+
+name  | description | data type | constraints
+------|-------------|-----------|------------
+resource  | Reference to data being used as _evidence_. | [URI](#uri) | REQUIRED. MUST resolve to an instance of conclusion [`http://gedcomx.org/v1/Conclusion`](#311-the-conclusion-data-type).
+analysis  | Reference to a document containing analysis that supports the use of the referenced data as _evidence_. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to an instance of [`http://gedcomx.org/v1/Document`](#26-the-document-data-type) of type `http://gedcomx.org/Analysis`.
+attribution | The attribution of this source reference. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing resource of the source reference is assumed.
+
+### examples
+
+* An application allows a researcher to extract information from a single census record about a person, representing the
+  information as a [persona](#41-persona) with an identifier "abcde". The researcher extracts additional information about the
+  person from a birth certificate and the application assigns the resulting [persona](#41-persona) an identifier "fghij". As the
+  researcher gathers and analyzes the information, he will create a (working) `Person` conclusion. When the researcher concludes
+  that the person represented in "abcde" and in "fghij" are the same person, he will add two `EvidenceReference` instances to the
+  working `Person`: one for "abcde" and one for "fghij".
+
+
 <a id="online-account"/>
 
-## 3.7 The "OnlineAccount" Data Type
+## 3.8 The "OnlineAccount" Data Type
 
 The `OnlineAccount` data type defines a description of an account in an online web application.
 
@@ -675,7 +705,7 @@ accountName | The name, label, or id associating the owner of the account with t
 
 <a id="address"/>
 
-## 3.8 The "Address" Data Type
+## 3.9 The "Address" Data Type
 
 The `Address` data type defines a street address of a person or organization.
 
@@ -704,7 +734,7 @@ street6 | The street (sixth line). | string | OPTIONAL.
 
 <a id="conclusion"/>
 
-## 3.9 The "Conclusion" Data Type
+## 3.10 The "Conclusion" Data Type
 
 The `Conclusion` data type defines the base conceptual model for basic genealogical conclusions.
 
@@ -726,7 +756,7 @@ notes  | A list of notes about a conclusion. | List of [`http://gedcomx.org/Note
 
 <a id="known-confidence-levels"/>
 
-### 3.9.1 Known Confidence Levels
+### 3.10.1 Known Confidence Levels
 
 The following confidence levels are defined by GEDCOM X.
 
@@ -739,7 +769,7 @@ URI | description
 
 <a id="gender-conclusion"/>
 
-## 3.10 The "Gender" Data Type
+## 3.11 The "Gender" Data Type
 
 The `Gender` data type defines a conclusion about the gender of a person.
 
@@ -764,7 +794,7 @@ type  | URI identifying the type of the gender. | [URI](#uri) | REQUIRED. MUST r
 
 <a id="known-gender-types"/>
 
-### 3.10.1 Known Gender Types
+### 3.11.1 Known Gender Types
 
 The following gender types are defined by GEDCOM X:
 
@@ -777,7 +807,7 @@ URI | description
 
 <a id="name-conclusion"/>
 
-## 3.11 The "Name" Data Type
+## 3.12 The "Name" Data Type
 
 The `Name` data type defines a conclusion about a name of a person.
 
@@ -841,7 +871,7 @@ Name2.nameForms[1].fullText=Sasha
 ```
 <a id="known-name-types"/>
 
-### 3.11.1 Known Name Types
+### 3.12.1 Known Name Types
 
 The following name types are defined by GEDCOM X:
 
@@ -858,7 +888,7 @@ URI | description
 
 <a id="fact-conclusion"/>
 
-## 3.12 The "Fact" Data Type
+## 3.13 The "Fact" Data Type
 
 The `Fact` data type defines a conclusion about a fact of the life of a person or
 the nature of a relationship. The `Fact` data type extends the `Conclusion` data type.
@@ -887,7 +917,7 @@ qualifiers | Qualifiers to add additional details about the fact. | List of [htt
 
 <a id="known-fact-types"/>
 
-### 3.12.1 Known Fact Types
+### 3.13.1 Known Fact Types
 
 The following fact types are defined by GEDCOM X:
 
@@ -908,7 +938,7 @@ In addition to these elements, processors SHOULD support any other elements defi
 
 <a id="known-fact-qualifier"/>
 
-### 3.12.2 Known Fact Qualifiers
+### 3.13.2 Known Fact Qualifiers
 
 The following fact qualifiers are defined by GEDCOM X:
 
@@ -920,7 +950,7 @@ name | value
 
 <a id="conclusion-event-role"/>
 
-## 3.13 The "EventRole" Data Type
+## 3.14 The "EventRole" Data Type
 
 The `EventRole` data type defines a role played in an event by a person.  The `EventRole` data type extends the `Conclusion` data type.
 
@@ -946,7 +976,7 @@ details | Details about the role of the person in the event. | string | OPTIONAL
 
 <a id="known-roles"/>
 
-### 3.13.1 Known Role Types
+### 3.14.1 Known Role Types
 
 The following role types are defined by GEDCOM X:
 
@@ -960,7 +990,7 @@ URI | description
 
 <a id="conclusion-date"/>
 
-## 3.14 The "Date" Data Type
+## 3.15 The "Date" Data Type
 
 The `Date` data type defines the value of a genealogical date.
 
@@ -980,7 +1010,7 @@ formal | The standardized [formal value](#formal-values) of the date, formatted 
 
 <a id="conclusion-place-reference"/>
 
-## 3.15 The "PlaceReference" Data Type
+## 3.16 The "PlaceReference" Data Type
 
 The `PlaceReference` data type defines a reference to a description of a place.
 
@@ -1000,7 +1030,7 @@ descriptionRef | A reference to a _description_ of this place. | [URI](#uri) | O
 
 <a id="name-part"/>
 
-## 3.16 The "NamePart" Data Type
+## 3.17 The "NamePart" Data Type
 
 The `NamePart` data type is used to model a portion of a full name, including the terms that make up that portion. Some name parts MAY have qualifiers
 to provide additional semantic meaning to the name part (e.g., "given name" or "surname").
@@ -1024,7 +1054,7 @@ qualifiers | Qualifiers to add additional semantic meaning to the name part. | L
 
 <a id="known-name-part-types"/>
 
-### 3.16.1 Known Name Part Types
+### 3.17.1 Known Name Part Types
 
 The following name part types are defined by GEDCOM X:
 
@@ -1038,7 +1068,7 @@ URI | description
 
 <a id="name-form"/>
 
-## 3.17 The "NameForm" Data Type
+## 3.18 The "NameForm" Data Type
 
 The `NameForm` data type defines a representation of a name (a "name form") within a given cultural context,
 such as a given language and script.
@@ -1114,7 +1144,7 @@ NameForm3.parts[2].value=Tchaikovsky
 
 <a id="qualifier"/>
 
-## 3.18 The "Qualifier" Data Type
+## 3.19 The "Qualifier" Data Type
 
 The `Qualifier` data type defines the data structure used to supply additional details, annotations, tags, or other qualifying data
 to a specific data element.
