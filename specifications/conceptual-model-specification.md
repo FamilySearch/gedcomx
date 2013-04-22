@@ -419,7 +419,7 @@ minimize security risks, support for the following subset of modules (defined by
 Support for other XHTML modules is OPTIONAL. Parsers MAY ignore elements from optional modules.
 
 
-<a name="conclusion-place"/>
+<a name="place-description"/>
 
 ## 2.7 The "PlaceDescription" Data Type
 
@@ -797,7 +797,7 @@ identifiers | Identifiers for this _subject_. | List of [`http://gedcomx.org/v1/
 attribution | The attribution of this _subject_. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing data set (e.g. file) of the _subject_ is assumed.
 
 
-<a name="gender-conclusion"/>
+<a name="gender"/>
 
 ## 3.12 The "Gender" Data Type
 
@@ -1055,7 +1055,7 @@ The identifier for the `PlaceReference` data type is:
 name  | description | data type | constraints
 ------|-------------|-----------|------------
 original | The original place name text as supplied by the contributor. | string | OPTIONAL.
-descriptionRef | A reference to a _description_ of this place. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to a [PlaceDescription](#conclusion-place-description).
+descriptionRef | A reference to a _description_ of this place. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to a [PlaceDescription](#place-description).
 
 
 <a name="name-part"/>
