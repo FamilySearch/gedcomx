@@ -207,7 +207,7 @@ are inherited.
 This section specifies XML types for each top-level data type defined by the
 conceptual model specification.
 
-<a id="person"/>
+<a name="person"/>
 
 ## 2.1 The "Person" Data Type
 
@@ -260,7 +260,7 @@ media | References to multimedia resources for this person, such as photos or vi
   </...>
 ```
 
-<a id="relationship"/>
+<a name="relationship"/>
 
 ## 2.2 The "Relationship" Data Type
 
@@ -298,7 +298,7 @@ identifiers | Identifiers for the relationship. | gx:identifier | [`gx:Identifie
   </...>
 ```
 
-<a id="source-description"/>
+<a name="source-description"/>
 
 ## 2.3 The "SourceDescription" Data Type
 
@@ -352,7 +352,7 @@ attribution | The attribution of this source. | gx:attribution | [`gx:Attributio
   </...>
 ```
 
-<a id="agent"/>
+<a name="agent"/>
 
 ## 2.4 The "Agent" Data Type
 
@@ -399,7 +399,7 @@ addresses  | The addresses of the person or organization. | gx:address | [`gx:Ad
   </...>
 ```
 
-<a id="event"/>
+<a name="event"/>
 
 ## 2.5 The "Event" Data Type
 
@@ -445,7 +445,7 @@ media | References to multimedia resources for this event, such as photos or vid
   </...>
 ```
 
-<a id="document"/>
+<a name="document"/>
 
 ## 2.6 The "Document" Data Type
 
@@ -529,7 +529,7 @@ This section specifies XML types for each component-level data type defined by t
 conceptual model specification.
 
 
-<a id="identifier-type"/>
+<a name="identifier-type"/>
 
 ## 3.1 The "Identifier" Data Type
 
@@ -549,7 +549,7 @@ type  | URI identifying the type of the identifier. | type (attribute) | [`URI`]
   <... type="http://gedcomx.org/Primary">value_of_identifier</...>
 ```
 
-<a id="attribution"/>
+<a name="attribution"/>
 
 ## 3.2 The "Attribution" Data Type
 
@@ -577,7 +577,7 @@ changeMessage | A statement of why the attributed data is being provided by the 
   </...>
 ```
 
-<a id="note"/>
+<a name="note"/>
 
 ## 3.3 The "Note" Data Type
 
@@ -607,7 +607,7 @@ attribution | The attribution of this note. | gx:attribution | [`gx:Attribution`
   </...>
 ```
 
-<a id="text-value"/>
+<a name="text-value"/>
 
 ## 3.4 The "TextValue" Data Type
 
@@ -627,7 +627,7 @@ value | The text value. | (child text) | xsd:string
   <... xml:lang="en">...textual value...</...>
 ```
 
-<a id="source-citation"/>
+<a name="source-citation"/>
 
 ## 3.5 The "SourceCitation" Data Type
 
@@ -649,7 +649,7 @@ value | A rendering of the full (working) citation as a string. | gx:value | xsd
   </...>
 ```
 
-<a id="source-reference"/>
+<a name="source-reference"/>
 
 ## 3.6 The "SourceReference" Data Type
 
@@ -676,7 +676,7 @@ attribution | The attribution of this source reference. | gx:attribution | [`gx:
   </...>
 ```
 
-<a id="evidence-reference"/>
+<a name="evidence-reference"/>
 
 ## 3.7 The "EvidenceReference" Data Type
 
@@ -705,7 +705,7 @@ attribution | The attribution of this _evidence_ reference. | gx:attribution | [
   </...>
 ```
 
-<a id="online-account"/>
+<a name="online-account"/>
 
 ## 3.8 The "OnlineAccount" Data Type
 
@@ -728,7 +728,7 @@ accountName | The name, label, or id associating the owner of the account with t
   </...>
 ```
 
-<a id="address"/>
+<a name="address"/>
 
 ## 3.9 The "Address" Data Type
 
@@ -803,7 +803,7 @@ notes | A list of notes about this conclusion. | gx:note | [`gx:Note`](#note)
 ```
 
 
-<a id="gender-conclusion"/>
+<a name="gender-conclusion"/>
 
 ## 3.11 The "Gender" Data Type
 
@@ -826,7 +826,7 @@ type | The gender type. | type (attribute) | [`URI`](#uri)
 </...>
 ```
 
-<a id="name-conclusion"/>
+<a name="name-conclusion"/>
 
 ## 3.12 The "Name" Data Type
 
@@ -860,7 +860,7 @@ nameForms | The name form(s) that best represents this name `NameForm` -- usuall
   </...>
 ```
 
-<a id="fact-conclusion"/>
+<a name="fact-conclusion"/>
 
 ## 3.13 The "Fact" Data Type
 
@@ -899,7 +899,7 @@ qualifiers | Qualifiers to add additional details about the fact. | gx:qualifier
   </...>
 ```
 
-<a id="conclusion-event-role"/>
+<a name="conclusion-event-role"/>
 
 ## 3.14 The "EventRole" Data Type
 
@@ -926,7 +926,7 @@ details | Details about the role of the person in the event. | gx:details | xs:s
   </...>
 ```
 
-<a id="conclusion-date"/>
+<a name="conclusion-date"/>
 
 ## 3.15 The "Date" Data Type
 
@@ -952,7 +952,7 @@ formal | The formal value of the date. | gx:formal | [GEDCOM X Date](https://git
   </...>
 ```
 
-<a id="conclusion-place-reference"/>
+<a name="conclusion-place-reference"/>
 
 ## 3.16 The "PlaceReference" Data Type
 
@@ -977,7 +977,7 @@ descriptionRef | A reference to a _description_ of this place. | description (at
 ```
 
 
-<a id="name-part"/>
+<a name="name-part"/>
 
 ## 3.17 The "NamePart" Data Type
 
@@ -1004,7 +1004,7 @@ qualifiers | Qualifiers to add additional semantic meaning to the name part. | g
   </...>
 ```
 
- <a id="name-form"/>
+ <a name="name-form"/>
 
 ## 3.18 The "NameForm" Data Type
 
@@ -1035,7 +1035,7 @@ parts | Any identified name parts from the name represented in this instance, or
   </...>
 ```
 
-<a id="qualifier"/>
+<a name="qualifier"/>
 
 ## 3.19 The "Qualifier" Data Type
 
@@ -1060,14 +1060,14 @@ value | The value of the qualifier. The semantic meaning of the value is determi
 This section describes a set of data types that are specific to the GEDCOM X XML media
 type, used for the convenience of serialization.
 
-<a id="uri"/>
+<a name="uri"/>
 
 ## 4.1 The URI
 
 The [`xsd:anyURI`](http://www.w3.org/TR/2004/REC-xmlschema-2-20041028/datatypes.html#anyURI)
 XML type defined by the XML schema specification will be used to (de)serialize the URI.
 
-<a id="resource-reference"/>
+<a name="resource-reference"/>
 
 ## 4.2 The "ResourceReference" Data Type
 
@@ -1207,7 +1207,7 @@ gx:attribution | [`gx:Attribution`](#attribution)
 gx:note | [`gx:Note`](#note)
 
 
-<a id="fragment-ids"/>
+<a name="fragment-ids"/>
 
 7. Fragment Identifiers
 

@@ -250,7 +250,7 @@ are inherited.
 This section specifies JSON types for each top-level data type defined by the
 conceptual model specification.
 
-<a id="person"/>
+<a name="person"/>
 
 # 2.1 The "Person" Data Type
 
@@ -287,7 +287,7 @@ media | References to multimedia resources for this person, such as photos or vi
 }
 ```
 
-<a id="relationship"/>
+<a name="relationship"/>
 
 ## 2.2 The "Relationship" Data Type
 
@@ -325,7 +325,7 @@ identifiers | Identifiers for the relationship. | identifiers | [`Identifier`](#
 }
 ```
 
-<a id="source-description"/>
+<a name="source-description"/>
 
 ## 2.3 The "SourceDescription" Data Type
 
@@ -371,7 +371,7 @@ attribution | The attribution of this source. | attribution | [`Attribution`](#a
 }
 ```
 
-<a id="agent"/>
+<a name="agent"/>
 
 ## 2.4 The "Agent" Data Type
 
@@ -414,7 +414,7 @@ addresses  | The addresses of the person or organization. | addresses | array of
 }
 ```
 
-<a id="event"/>
+<a name="event"/>
 
 # 2.5 The "Event" Data Type
 
@@ -523,7 +523,7 @@ attribution | The attribution of this conclusion. | attribution | [`Attribution`
 This section specifies JSON types for each component-level data type defined by the
 conceptual model specification.
 
-<a id="identifier-type"/>
+<a name="identifier-type"/>
 
 ## 3.1 The "Identifier" Data Type
 
@@ -549,7 +549,7 @@ type MAY forgo the array and use a single string.
 }
 ```
 
-<a id="attribution"/>
+<a name="attribution"/>
 
 ## 3.2 The "Attribution" Data Type
 
@@ -578,7 +578,7 @@ changeMessage | A statement of why the attributed data is being provided by the 
 }
 ```
 
-<a id="note"/>
+<a name="note"/>
 
 ## 3.3 The "Note" Data Type
 
@@ -629,7 +629,7 @@ A value that can be specified as a string:
 }
 ```
 
-<a id="source-citation"/>
+<a name="source-citation"/>
 
 ## 3.5 The "SourceCitation" Data Type
 
@@ -651,7 +651,7 @@ value | A rendering of the full (working) citation as a string. | value | string
 }
 ```
 
-<a id="source-reference"/>
+<a name="source-reference"/>
 
 ## 3.6 The "SourceReference" Data Type
 
@@ -678,7 +678,7 @@ attribution | The attribution of this source reference. | attribution | [`Attrib
 ```
 
 
-<a id="evidence-reference"/>
+<a name="evidence-reference"/>
 
 ## 3.7 The "EvidenceReference" Data Type
 
@@ -707,7 +707,7 @@ attribution | The attribution of this _evidence_ reference. | attribution | [`At
 ```
 
 
-<a id="online-account"/>
+<a name="online-account"/>
 
 ## 3.8 The "OnlineAccount" Data Type
 
@@ -731,7 +731,7 @@ accountName | The name, label, or id associating the owner of the account with t
 }
 ```
 
-<a id="address"/>
+<a name="address"/>
 
 ## 3.9 The "Address" Data Type
 
@@ -821,7 +821,7 @@ type | URI identifying the type of the gender. | type | [`URI`](#uri)
 }
 ```
 
-<a id="name-conclusion"/>
+<a name="name-conclusion"/>
 
 ## 3.12 The "Name" Data Type
 
@@ -850,7 +850,7 @@ nameForms | The name form(s) that best represents this name `NameForm` -- usuall
 }
 ```
 
-<a id="fact-conclusion"/>
+<a name="fact-conclusion"/>
 
 ## 3.13 The "Fact" Data Type
 
@@ -881,7 +881,7 @@ qualifiers | Qualifiers to add additional details about the fact. | qualifiers |
 }
 ```
 
-<a id="conclusion-event-role"/>
+<a name="conclusion-event-role"/>
 
 ## 3.14 The "EventRole" Data Type
 
@@ -911,7 +911,7 @@ details | Details about the role of the person in the event. | details | string
 }
 ```
 
-<a id="conclusion-date"/>
+<a name="conclusion-date"/>
 
 ## 3.15 The "Date" Data Type
 
@@ -936,7 +936,7 @@ formal | The formal value of the date. | formal | [GEDCOM X Date](https://github
 }
 ```
 
-<a id="conclusion-place-reference"/>
+<a name="conclusion-place-reference"/>
 
 # 3.16 The "PlaceReference" Data Type
 
@@ -962,7 +962,7 @@ descriptionRef | A reference to a _description_ of this place. | description | [
 }
 ```
 
-<a id="name-part"/>
+<a name="name-part"/>
 
 ## 3.17 The "NamePart" Data Type
 
@@ -1013,7 +1013,7 @@ parts | The parts of the name form. | parts | array of [`NamePart`](#name-part)
 
 }
 ```
-<a id="qualifier"/>
+<a name="qualifier"/>
 
 ## 3.19 The "Qualifier" Data Type
 
@@ -1040,14 +1040,14 @@ value | The value of the qualifier. The semantic meaning of the value is determi
 This section describes a set of data types that are specific to the GEDCOM X JSON media
 type, used for the convenience of serialization.
 
-<a id="uri"/>
+<a name="uri"/>
 
 ## 4.1 The URI
 
 URIs are supplied as JSON strings and are interpreted according to
 [RFC 3986: Uniform Resource Identifier (URI): Generic Syntax](http://www.ietf.org/rfc/rfc3986.txt).
 
-<a id="resource-reference"/>
+<a name="resource-reference"/>
 
 ## 4.2 The "ResourceReference" Data Type
 
