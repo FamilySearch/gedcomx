@@ -88,7 +88,7 @@ Data types are defined by the following sections:
 This specification uses the term "data instance" to refer to the notion of a particular
 instance, or instantiation, of a data type.
 
-<a id="uri"/>
+<a name="uri"/>
 
 ### 1.2.3 Controlled Vocabularies
 
@@ -114,7 +114,7 @@ is interpreted as a "URI Reference" as defined by [RFC 3986, section 4](http://t
 This specification uses the term "URI" to refer to both a "URI" and a "URI Reference" as
 defined by [RFC 3986](http://tools.ietf.org/html/rfc3986).
 
-<a id="formal-values" />
+<a name="formal-values" />
 
 ### 1.2.5 Original, Normalized, and Standardized Values
 
@@ -163,7 +163,7 @@ from the definitions of other top-level data types and the lifecycle of instance
 types is distinct from the lifecycle of instances of the other top-level data types.
 
 
-<a id="person"/>
+<a name="person"/>
 
 ## 2.1 The "Person" Data Type
 
@@ -191,7 +191,7 @@ names | The conclusions about the names of the person. | List of [`http://gedcom
 facts | The conclusions about the facts of the life of the person. | List of [`http://gedcomx.org/v1/Fact`](#fact-conclusion). Order is preserved. | OPTIONAL.
 
 
-<a id="relationship"/>
+<a name="relationship"/>
 
 ## 2.2 The "Relationship" Data Type
 
@@ -223,7 +223,7 @@ be *from* person1 *to* person2. For example, in a parent-child relationship, the
 `person1` property refers to the parent and the `person2` property refers to the
 child.
 
-<a id="known-relationship-types"/>
+<a name="known-relationship-types"/>
 
 ### 2.2.1 Known Relationship Types
 
@@ -235,7 +235,7 @@ URI | description
 `http://gedcomx.org/ParentChild`| A relationship from a parent to a child.
 
 
-<a id="source-description"/>
+<a name="source-description"/>
 
 ## 2.3 The "SourceDescription" Data Type
 
@@ -258,13 +258,13 @@ mediaType | A hint about the media type of the resource being described. | strin
 about | A uniform resource identifier (URI) for the resource being described. | [URI](#uri) | OPTIONAL.
 mediator | A reference to the entity that mediates access to the described source. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to an instance of [`http://gedcomx.org/v1/Agent`](#agent).
 sources | A list of references to any sources from which this source is derived. | List of [`http://gedcomx.org/v1/SourceReference`](#source-reference) | OPTIONAL.
-analysis  | Reference to a document containing analysis about this source. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to an instance of [`http://gedcomx.org/v1/Document`](#26-the-document-data-type) of type `http://gedcomx.org/Analysis`.
+analysis  | Reference to a document containing analysis about this source. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to an instance of [`http://gedcomx.org/v1/Document`](#document) of type `http://gedcomx.org/Analysis`.
 componentOf | A reference to the source that contains this source, i.e. its parent context. Used when the description of a source is not complete without the description of its parent (or containing) source. | [`http://gedcomx.org/v1/SourceReference`](#source-reference) | OPTIONAL.
 titles | The display names for this source. If more than one title is provided, titles are assumed to be given in order of preference, with the most preferred title in the first position in the list. | List of [`http://gedcomx.org/TextValue`](#text-value) | OPTIONAL.
 notes  | A list of notes about a source. | List of [`http://gedcomx.org/Note`](#note) | OPTIONAL.
 attribution | The attribution of this source description. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing data set (e.g. file) of the source description is assumed.
 
-<a id="known-resource-types"/>
+<a name="known-resource-types"/>
 
 ### 2.3.1 Known Resource Types
 
@@ -278,7 +278,7 @@ URI | description
 `http://gedcomx.org/Record` | A historical record, such as a census record or a vital record.
 
 
-<a id="agent"/>
+<a name="agent"/>
 
 ## 2.4 The "Agent" Data Type
 
@@ -305,7 +305,7 @@ addresses  | The addresses of the person or organization. | List of [`http://ged
 identifiers | Identifiers for the agent. When an identifier for an agent is also an identifier for a person, the data in the person describes the agent. | List of [`http://gedcomx.org/v1/Identifier`](#identifier-type). Order is preserved. | OPTIONAL.
 
 
-<a id="event"/>
+<a name="event"/>
 
 ## 2.5 The "Event" Data Type
 
@@ -332,7 +332,7 @@ date | The date of the event. | [`http://gedcomx.org/v1/Date`](#conclusion-date)
 place | A reference to the place applicable to this event. | [`http://gedcomx.org/v1/PlaceReference`](#conclusion-place-reference) | OPTIONAL.
 roles | The roles of the persons in the event. | List of [`http://gedcomx.org/v1/EventRole`](#conclusion-event-role). Order is preserved. | OPTIONAL.
 
-<a id="known-event-types"/>
+<a name="known-event-types"/>
 
 ### 2.5.1 Known Event Types
 
@@ -353,7 +353,7 @@ In addition to these elements, processors SHOULD support any other elements defi
 [GEDCOM X Event Types](https://github.com/FamilySearch/gedcomx/blob/master/specifications/event-types-specification.md) specification.
 
 
-<a id="document"/>
+<a name="document"/>
 
 ## 2.6 The "Document" Data Type
 
@@ -376,12 +376,12 @@ This data type extends the following data type:
 name  | description | data type | constraints
 ------|-------------|-----------|------------
 type | URI identifying the type of the document. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to a document type, and use of a [known document type](#known-document-types) is RECOMMENDED.
-extracted | Whether this document is to be constrained as an _extracted conclusion_. | boolean | OPTIONAL. Default: `false`. Refer to [Extracted Conclusion Constraints](#4-extracted-conclusion-constraints).
+extracted | Whether this document is to be constrained as an _extracted conclusion_. | boolean | OPTIONAL. Default: `false`. Refer to [Extracted Conclusion Constraints](#extracted-conclusion-constraints).
 textType | The type of text in the `text` field. | string | OPTIONAL. If provided, the value MUST be a [valid document text type](#document-text-types).  If no value is provided, "plain" is assumed.
 text | The text of the document. | string | REQUIRED.
 attribution | The attribution of the document. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing data set (e.g. file) of the document is assumed.
 
-<a id="known-document-types"/>
+<a name="known-document-types"/>
 
 ### 2.6.1 Known Document Types
 
@@ -394,7 +394,7 @@ URI | description
 `http://gedcomx.org/Translation` | The document is a translation of a record or document.
 `http://gedcomx.org/Analysis` | The document is an analysis done by a researcher, often used as a genealogical proof statement.
 
-<a id="document-text-types"/>
+<a name="document-text-types"/>
 
 ### 2.6.2 Document Text Types
 
@@ -419,7 +419,7 @@ minimize security risks, support for the following subset of modules (defined by
 Support for other XHTML modules is OPTIONAL. Parsers MAY ignore elements from optional modules.
 
 
-<a id="conclusion-place"/>
+<a name="conclusion-place"/>
 
 ## 2.7 The "PlaceDescription" Data Type
 
@@ -461,7 +461,7 @@ The lifecycle of instances of these data types is generally tied to the lifecycl
 a top-level data type.
 
 
-<a id="identifier-type"></a>
+<a name="identifier-type"></a>
 
 ## 3.1 The "Identifier" Data Type
 
@@ -483,7 +483,7 @@ name  | description | data type | constraints
 value | The value of the identifier. | [URI](#uri) | REQUIRED.
 type  | URI identifying the type of the identifier. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to an identifier type, and use of a [known identifier type](#known-identifier-types) is RECOMMENDED.
 
-<a id="known-identifier-types"/>
+<a name="known-identifier-types"/>
 
 ### known identifier types
 
@@ -504,7 +504,7 @@ URI | description
   one of type `http://gedcomx.org/Primary` and one of type `http://gedcomx.org/Persistent`.
 
 
-<a id="attribution"/>
+<a name="attribution"/>
 
 ## 3.2 The "Attribution" Data Type
 
@@ -546,7 +546,7 @@ changeMessage | A statement of why the attributed data is being provided by the 
 todo:
 
 
-<a id="note"/>
+<a name="note"/>
 
 ## 3.3 The "Note" Data Type
 
@@ -570,7 +570,7 @@ text | The text of the note. | string | REQUIRED.
 attribution | The attribution of this note. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing resource of the note is assumed.
 
 
-<a id="text-value"/>
+<a name="text-value"/>
 
 ## 3.4 The "TextValue" Data Type
 
@@ -592,7 +592,7 @@ lang | The locale identifier for the value of the text. | [IETF BCP 47](http://t
 value | The literal value. | string | REQUIRED.
 
 
-<a id="source-citation"/>
+<a name="source-citation"/>
 
 ## 3.5 The "SourceCitation" Data Type
 
@@ -613,7 +613,7 @@ lang | The locale identifier for the citation. | [IETF BCP 47](http://tools.ietf
 value | A rendering of the full (working) citation as a string. | string | REQUIRED.
 
 
-<a id="source-reference"/>
+<a name="source-reference"/>
 
 ## 3.6 The "SourceReference" Data Type
 
@@ -639,13 +639,13 @@ attribution | The attribution of this source reference. | [`http://gedcomx.org/A
 todo:
 
 
-<a id="evidence-reference"/>
+<a name="evidence-reference"/>
 
 ## 3.7 The "EvidenceReference" Data Type
 
 The `EvidenceReference` data type defines a reference to data that is being used as evidence to answer a research question.
 For example, a genealogical conclusion (i.e., the object holding the `EvidenceReference` instance) can refer to content extracted
-from a source (i.e., an ["extracted"](#4-extracted-conclusion-constraints) `Conclusion`) as *evidence* that supports the conclusion.
+from a source (i.e., an ["extracted"](#extracted-conclusion-constraints) `Conclusion`) as *evidence* that supports the conclusion.
 
 ### identifier
 
@@ -657,21 +657,21 @@ The identifier for the "EvidenceReference" data type is:
 
 name  | description | data type | constraints
 ------|-------------|-----------|------------
-resource  | Reference to data being used as _evidence_. | [URI](#uri) | REQUIRED. MUST resolve to an instance of conclusion [`http://gedcomx.org/v1/Conclusion`](#310-the-conclusion-data-type).
+resource  | Reference to data being used as _evidence_. | [URI](#uri) | REQUIRED. MUST resolve to an instance of conclusion [`http://gedcomx.org/v1/Conclusion`](#conclusion).
 analysis  | Reference to a document containing analysis that supports the use of the referenced data as _evidence_. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to an instance of [`http://gedcomx.org/v1/Document`](#26-the-document-data-type) of type `http://gedcomx.org/Analysis`.
 attribution | The attribution of this source reference. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing resource of the source reference is assumed.
 
 ### examples
 
 * An application allows a researcher to extract information from a single census record about a person, representing the
-  information as a [persona](#41-persona) with an identifier "abcde". The researcher extracts additional information about the
-  person from a birth certificate and the application assigns the resulting [persona](#41-persona) an identifier "fghij". As the
+  information as a [persona](#persona) with an identifier "abcde". The researcher extracts additional information about the
+  person from a birth certificate and the application assigns the resulting [persona](#persona) an identifier "fghij". As the
   researcher gathers and analyzes the information, he will create a (working) `Person` conclusion. When the researcher concludes
   that the person represented in "abcde" and in "fghij" are the same person, he will add two `EvidenceReference` instances to the
   working `Person`: one for "abcde" and one for "fghij".
 
 
-<a id="online-account"/>
+<a name="online-account"/>
 
 ## 3.8 The "OnlineAccount" Data Type
 
@@ -691,7 +691,7 @@ serviceHomepage  | The home page of the service. | [URI](#uri) | REQUIRED.
 accountName | The name, label, or id associating the owner of the account with the account. | string | REQUIRED.
 
 
-<a id="address"/>
+<a name="address"/>
 
 ## 3.9 The "Address" Data Type
 
@@ -720,7 +720,7 @@ street5 | The street (fifth line). | string | OPTIONAL.
 street6 | The street (sixth line). | string | OPTIONAL.
 
 
-<a id="conclusion"/>
+<a name="conclusion"/>
 
 ## 3.10 The "Conclusion" Data Type
 
@@ -742,7 +742,7 @@ sources | The list of references to the sources of related to this conclusion. T
 notes  | A list of notes about a conclusion. | List of [`http://gedcomx.org/Note`](#note) | OPTIONAL.
 confidence  | Reference to the confidence level of the conclusion. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to a confidence level, and use of a [known confidence level](#known-confidence-levels) is RECOMMENDED.
 
-<a id="known-confidence-levels"/>
+<a name="known-confidence-levels"/>
 
 ### 3.10.1 Known Confidence Levels
 
@@ -755,7 +755,7 @@ URI | description
 `http://gedcomx.org/Low`|The contributor has a low degree of confidence that the assertion is true.
 
 
-<a id="subject"/>
+<a name="subject"/>
 
 ## 3.11 The "Subject" Data Type
 
@@ -789,15 +789,15 @@ This data type extends the following data type:
 
 name  | description | data type | constraints
 ------|-------------|-----------|------------
-extracted | Whether this _subject_ is to be constrained as an _extracted conclusion_. | boolean | OPTIONAL. Default: `false`. Refer to [Extracted Conclusion Constraints](#4-extracted-conclusion-constraints).
+extracted | Whether this _subject_ is to be constrained as an _extracted conclusion_. | boolean | OPTIONAL. Default: `false`. Refer to [Extracted Conclusion Constraints](#extracted-conclusion-constraints).
 evidence | References to _subject_ instances that support this _subject_. | List of [`http://gedcomx.org/v1/EvidenceReference`](#evidence-reference). Order is preserved. | OPTIONAL.  If provided, each reference MUST resolve to an instance of _subject_ of the same _subject_ type as this instance (e.g., if the _subject_ is a `Person`, all evidence references must resolve to instances of `Person`).
-analysis  | Reference to a document containing analysis supporting this _subject_ and its _conclusions_. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to an instance of [`http://gedcomx.org/v1/Document`](#26-the-document-data-type) of type `http://gedcomx.org/Analysis`.
+analysis  | Reference to a document containing analysis supporting this _subject_ and its _conclusions_. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to an instance of [`http://gedcomx.org/v1/Document`](#document) of type `http://gedcomx.org/Analysis`.
 media | References to multimedia resources for this _subject_, such as photos or videos. Media references are intended to provide additional context or illustration for the _subject_ and ARE NOT being considered as evidence supporting the _subject_ and its associated _conclusions_. Media references SHOULD be ordered by priority such that applications that wish to display a single media item (such as an image) MAY choose the first applicable media reference. | List of [`http://gedcomx.org/v1/SourceReference`](#source-reference) | OPTIONAL. Note that the `SourceReference` is used for multimedia references and therefore MUST resolve to a `SourceDescription` of the resource, which in turn provides a reference to the resource itself.
 identifiers | Identifiers for this _subject_. | List of [`http://gedcomx.org/v1/Identifier`](#identifier-type). Order is preserved. | OPTIONAL.
 attribution | The attribution of this _subject_. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing data set (e.g. file) of the _subject_ is assumed.
 
 
-<a id="gender-conclusion"/>
+<a name="gender-conclusion"/>
 
 ## 3.12 The "Gender" Data Type
 
@@ -822,7 +822,7 @@ name  | description | data type | constraints
 type  | URI identifying the type of the gender. | [URI](#uri) | REQUIRED. MUST resolve to a gender type, and use of a [known gender type](#known-gender-types) is RECOMMENDED.
 
 
-<a id="known-gender-types"/>
+<a name="known-gender-types"/>
 
 ### 3.12.1 Known Gender Types
 
@@ -835,7 +835,7 @@ URI | description
 `http://gedcomx.org/Unknown`| Unknown gender.
 
 
-<a id="name-conclusion"/>
+<a name="name-conclusion"/>
 
 ## 3.13 The "Name" Data Type
 
@@ -899,7 +899,7 @@ Name2.preferred=false
 Name2.nameForms[0].fullText=Саша
 Name2.nameForms[1].fullText=Sasha
 ```
-<a id="known-name-types"/>
+<a name="known-name-types"/>
 
 ### 3.13.1 Known Name Types
 
@@ -916,7 +916,7 @@ URI | description
 `http://gedcomx.org/ReligiousName` | A name given at a religious rite or ceremony.
 
 
-<a id="fact-conclusion"/>
+<a name="fact-conclusion"/>
 
 ## 3.14 The "Fact" Data Type
 
@@ -945,7 +945,7 @@ place | A reference to the place applicable to this fact. | [`http://gedcomx.org
 value | The original value of the fact as supplied by the contributor. | string | OPTIONAL.
 qualifiers | Qualifiers to add additional details about the fact. | List of [http://gedcomx.org/v1/Qualifier](#qualifier) | OPTIONAL. If present, use of a [known fact qualifier](#known-fact-qualifier) is RECOMMENDED.
 
-<a id="known-fact-types"/>
+<a name="known-fact-types"/>
 
 ### 3.14.1 Known Fact Types
 
@@ -965,7 +965,7 @@ URI | description | scope
 In addition to these elements, processors SHOULD support any other elements defined by the
 [GEDCOM X Fact Types](https://github.com/FamilySearch/gedcomx/blob/master/specifications/fact-types-specification.md) specification.
 
-<a id="known-fact-qualifier"/>
+<a name="known-fact-qualifier"/>
 
 ### 3.14.2 Known Fact Qualifiers
 
@@ -978,7 +978,7 @@ name | value
 `http://gedcomx.org/Religion`| The religion associated with a religious event such as a baptism or excommunication.
 
 
-<a id="conclusion-event-role"/>
+<a name="conclusion-event-role"/>
 
 ## 3.15 The "EventRole" Data Type
 
@@ -1004,7 +1004,7 @@ person | Reference to the person playing the role in the event. | [`URI`](#uri) 
 type | Reference to the role type. | [`URI`](#uri) | OPTIONAL. If provided, MUST resolve to a role type, and use of a [known role types](#known-roles) is RECOMMENDED.
 details | Details about the role of the person in the event. | string | OPTIONAL.
 
-<a id="known-roles"/>
+<a name="known-roles"/>
 
 ### 3.15.1 Known Role Types
 
@@ -1018,7 +1018,7 @@ URI | description
 `http://gedcomx.org/Witness`| A witness of the event.
 
 
-<a id="conclusion-date"/>
+<a name="conclusion-date"/>
 
 ## 3.16 The "Date" Data Type
 
@@ -1038,7 +1038,7 @@ original | The original value of the date as supplied by the contributor. | stri
 formal | The standardized [formal value](#formal-values) of the date, formatted per GEDCOM X Date Format specification. | [GEDCOM X Date](https://github.com/FamilySearch/gedcomx/blob/master/specifications/date-model-specification.md) | OPTIONAL.
 
 
-<a id="conclusion-place-reference"/>
+<a name="conclusion-place-reference"/>
 
 ## 3.17 The "PlaceReference" Data Type
 
@@ -1058,7 +1058,7 @@ original | The original place name text as supplied by the contributor. | string
 descriptionRef | A reference to a _description_ of this place. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to a [PlaceDescription](#conclusion-place-description).
 
 
-<a id="name-part"/>
+<a name="name-part"/>
 
 ## 3.18 The "NamePart" Data Type
 
@@ -1082,7 +1082,7 @@ type | URI identifying the type of the name part. | [URI](#uri) | OPTIONAL. If p
 value | The term(s) from the name that make up this name part. | string | REQUIRED.
 qualifiers | Qualifiers to add additional semantic meaning to the name part. | List of [http://gedcomx.org/v1/Qualifier](#qualifier) | OPTIONAL. If present, use of a name part qualifier defined by the [GEDCOM X Name Part Qualifiers](https://github.com/FamilySearch/gedcomx/blob/master/specifications/name-part-qualifiers-specification.md) specification is RECOMMENDED.
 
-<a id="known-name-part-types"/>
+<a name="known-name-part-types"/>
 
 ### 3.18.1 Known Name Part Types
 
@@ -1096,7 +1096,7 @@ URI | description
 `http://gedcomx.org/Surname`| A surname.
 
 
-<a id="name-form"/>
+<a name="name-form"/>
 
 ## 3.19 The "NameForm" Data Type
 
@@ -1172,7 +1172,7 @@ NameForm3.parts[2].type=http://gedcomx.org/Surname
 NameForm3.parts[2].value=Tchaikovsky
 ```
 
-<a id="qualifier"/>
+<a name="qualifier"/>
 
 ## 3.20 The "Qualifier" Data Type
 
@@ -1199,7 +1199,7 @@ value | The value of the qualifier. The semantic meaning of the value is determi
 todo:
 
 
-<a id="extracted-conclusion-constraints"/>
+<a name="extracted-conclusion-constraints"/>
 
 # 4. Extracted Conclusion Constraints
 
@@ -1218,6 +1218,9 @@ Data in a conclusion that is identified as "extracted" MUST conform to the follo
 * The conclusion (including any data it contains) MUST NOT refer to more than one source description.
 * All source references used by the conclusion MUST resolve to the same source description, although
   each reference MAY contain distinct qualifying information such as attribution.
+
+
+<a name="persona"/>
 
 ## 4.1 Persona
 
@@ -1255,7 +1258,7 @@ When unknown foreign vocabularies are encountered, GEDCOM X Processors MAY
 bypass the foreign properties, type references, and textual content and
 MUST NOT change their behavior as a result of the presence of the vocabulary.
 
-<a id="extension-properties"/>
+<a name="extension-properties"/>
 
 ## Extension Properties
 
