@@ -769,9 +769,9 @@ _subject_ from all other possible _subjects_.
 In all cases, it seems that a _subject_ can also be used as a supporting _conclusion_ for another _subject_. So a _subject_ can
 be a _subject_ in one context and an supporting _conclusion_ in another.
 
-On the other hand, it seems to me that not all supporting _conclusions_ are _subjects_. We may research and debate a `Fact`
-(where it took place, when it took place, the spelling of the name, etc.), but it is always within the context of a _subject_
-(where was _John_ born, when was _John_ born, how did _John_ spell his name).
+On the other hand, not all supporting _conclusions_ are _subjects_. We may research and debate a `Fact` (where it took place,
+when it took place, the spelling of the name, etc.), but it is always within the context of a _subject_ (where was _John_
+born, when was _John_ born, how should we spell _John_'s name).
 
 ### identifier
 
