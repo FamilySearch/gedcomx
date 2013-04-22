@@ -677,9 +677,39 @@ attribution | The attribution of this source reference. | attribution | [`Attrib
 }
 ```
 
+
+<a id="evidence-reference"/>
+
+## 3.7 The "EvidenceReference" Data Type
+
+The JSON object used to (de)serialize the `http://gedcomx.org/v1/EvidenceReference`
+data type is defined as follows:
+
+### properties
+
+name | description | JSON member | JSON object type
+-----|-------------|--------------|---------
+resource  | Reference to data being used as _evidence_. | resource | [`URI`](#uri)
+analysis  | Reference to a document containing analysis that supports the use of the referenced data as _evidence_. | resource | [`URI`](#uri)
+attribution | The attribution of this _evidence_ reference. | attribution | [`Attribution`](#attribution)
+
+### examples
+
+```json
+{
+  "resource" : "http://identifier/for/data/being/referenced",
+  "analysis" : "http://identifier/for/analysis/document",
+  "attribution" : { ... }
+
+  ...possibility of extension elements...
+
+}
+```
+
+
 <a id="online-account"/>
 
-## 3.7 The "OnlineAccount" Data Type
+## 3.8 The "OnlineAccount" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/v1/OnlineAccount` data type is defined as follows:
 
@@ -703,7 +733,7 @@ accountName | The name, label, or id associating the owner of the account with t
 
 <a id="address"/>
 
-## 3.8 The "Address" Data Type
+## 3.9 The "Address" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/v1/Address` data type is defined as follows:
 
@@ -741,7 +771,7 @@ street6 | The street (sixth line). | street6 | string
 }
 ```
 
-## 3.9 The "Conclusion" Data Type
+## 3.10 The "Conclusion" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/v1/Conclusion` data type is defined as follows:
 
@@ -770,7 +800,7 @@ notes | A list of notes about this conclusion. | note | array of [`Note`](#note)
 }
 ```
 
-## 3.10 The "Gender" Data Type
+## 3.11 The "Gender" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/v1/Gender` data type is defined as follows:
 
@@ -793,7 +823,7 @@ type | URI identifying the type of the gender. | type | [`URI`](#uri)
 
 <a id="name-conclusion"/>
 
-## 3.11 The "Name" Data Type
+## 3.12 The "Name" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/v1/Name` data type is defined as follows:
 
@@ -822,7 +852,7 @@ nameForms | The name form(s) that best represents this name `NameForm` -- usuall
 
 <a id="fact-conclusion"/>
 
-## 3.12 The "Fact" Data Type
+## 3.13 The "Fact" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/v1/Fact` data type is defined as follows:
 
@@ -853,7 +883,7 @@ qualifiers | Qualifiers to add additional details about the fact. | qualifiers |
 
 <a id="conclusion-event-role"/>
 
-## 3.13 The "EventRole" Data Type
+## 3.14 The "EventRole" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/v1/EventRole`
 data type is defined as follows:
@@ -883,7 +913,7 @@ details | Details about the role of the person in the event. | details | string
 
 <a id="conclusion-date"/>
 
-## 3.14 The "Date" Data Type
+## 3.15 The "Date" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/v1/Date` data type is defined as follows:
 
@@ -908,7 +938,7 @@ formal | The formal value of the date. | formal | [GEDCOM X Date](https://github
 
 <a id="conclusion-place-reference"/>
 
-# 3.15 The "PlaceReference" Data Type
+# 3.16 The "PlaceReference" Data Type
 
 the JSON object used to (de)serialize the `http://gedcomx.org/v1/PlaceReference` data type
 is defined as follows:
@@ -934,7 +964,7 @@ descriptionRef | A reference to a _description_ of this place. | description | [
 
 <a id="name-part"/>
 
-## 3.16 The "NamePart" Data Type
+## 3.17 The "NamePart" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/v1/NamePart` data type is defined as follows:
 
@@ -959,7 +989,7 @@ qualifiers | Type qualifiers to further describe the type of the name part. | qu
 }
 ```
 
-## 3.17 The "NameForm" Data Type
+## 3.18 The "NameForm" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/v1/NameForm` data type is defined as follows:
 
@@ -985,7 +1015,7 @@ parts | The parts of the name form. | parts | array of [`NamePart`](#name-part)
 ```
 <a id="qualifier"/>
 
-## 3.18 The "Qualifier" Data Type
+## 3.19 The "Qualifier" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/v1/Qualifier` data type is defined as follows:
 
