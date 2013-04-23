@@ -21,6 +21,7 @@ For details, see:
 
 http://creativecommons.org/licenses/by-sa/3.0/
 
+
 # 1. Introduction
 
 The GEDCOM X conceptual model is a specification of formal concepts and types
@@ -213,7 +214,6 @@ The following example shows an instance of a GEDCOM X serialization in accordanc
 }
 ```
 
-
 ## 1.3 Notational Conventions
 
 ### 1.3.1 Keywords
@@ -245,6 +245,7 @@ provided by the GEDCOM X Conceptual Model identified by
 [`http://gedcomx.org/conceptual-model/v1`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md)
 are inherited.
 
+
 # 2. Top-Level Data Types
 
 This section specifies JSON types for each top-level data type defined by the
@@ -260,30 +261,22 @@ The JSON object used to (de)serialize the `http://gedcomx.org/v1/Person` data ty
 
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
-attribution | The attribution of this conclusion. | attribution | [`Attribution`](#attribution)
-identifiers | Identifiers for the person. | identifiers | [`Identifier`](#identifier-type)
-extracted | Whether the person is to be constrained as an *extracted conclusion* (i.e. "persona"). | extracted | boolean
 living | Whether the person is considered living. | living | boolean
 gender | The conclusion about the gender of the person. | gender | [`Gender`](#gender)
 names | The conclusions about the names of the person. | names | array of [`Name`](#name-conclusion)
 facts | The conclusions about the facts of the life of the person. | facts | array of [`Fact`](#fact-conclusion)
-media | References to multimedia resources for this person, such as photos or videos. | media | [`SourceReference`](#source-reference)
 
 ### examples
 
 ```json
 {
 
-  ...the members of gxc:Conclusion...,
+  ...the members of [Subject](#subject)...,
 
-  "attribution" : { ... },
-  "identifiers" : { ... },
-  "extracted" : false,
   "living" : true,
   "gender" : { ... },
   "names" : [ { ... }, { ... } ],
-  "facts" : [ { ... }, { ... } ],
-  "media" : [ { ... }, { ... } ]
+  "facts" : [ { ... }, { ... } ]
 }
 ```
 
@@ -297,24 +290,19 @@ The JSON object used to (de)serialize the `http://gedcomx.org/v1/Relationship` d
 
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
-attribution | The attribution of this conclusion. | attribution | [`Attribution`](#attribution)
 type | URI identifying the type of the relationship. | type | [`URI`](#uri)
-extracted | Whether the relationship is to be constrained as an *extracted conclusion*. | extracted | boolean
 person1 | Reference to the first person in the relationship. | person1 | [`ResourceReference`](#resource-reference)
 person2 | Reference to the second person in the relationship. | person2 | [`ResourceReference`](#resource-reference)
 facts | The conclusions about the facts of the life of the relationship. | facts | array of [`Fact`](#fact-conclusion)
-identifiers | Identifiers for the relationship. | identifiers | [`Identifier`](#identifier-type)
 
 ### examples
 
 ```json
 {
 
-  ...the members of gxc:Conclusion...,
+  ...the members of [Subject](#subject)...,
 
-  "attribution" : { ... },
   "type" : "http://gedcomx.org/Couple",
-  "extracted" : false,
   "person1" : {
     "resource" : "http://identifier/for/person/1"
   },
@@ -337,12 +325,13 @@ data type is defined as follows:
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 id | An identifier for the JSON object holding the source description data. The id attribute MUST conform to the constraints defined in [Section 7, "Fragment Identifiers"](#fragment-ids). | id | string
+resourceType | URI identifying the type of resource being described. | resourceType | [`URI`](#uri)
 citations | The citation for this source. | citations | array of [`SourceCitation`](#source-citation)
 mediaType | A hint about the media type of the resource being described. | mediaType | string
-resourceType | URI identifying the type of resource being described. | resourceType | [`URI`](#uri)
 about | A uniform resource identifier (URI) for the resource being described. | about | [`URI`](#uri)
 mediator | A reference to the entity that mediates access to the described source. | mediator | [`ResourceReference`](#resource-reference)
 sources | A list of references to any sources from which this source is derived. | sources | array of [`SourceReference`](#source-reference)
+analysis | A reference to a document containing analysis about this source. | analysis | [`ResourceReference`](#resource-reference)
 componentOf | A reference to the source that contains this source. | componentOf | [`SourceReference`](#source-reference)
 titles | The display names for this source. | titles | array of [`TextValue`](#text-value)
 notes | A list of notes about a source | notes | array of [`Note`](#note)
@@ -353,14 +342,17 @@ attribution | The attribution of this source. | attribution | [`Attribution`](#a
 ```json
 {
   "id" : "local_id",
+  "resourceType" : "...",
   "citations" : [ { ... }, { ... } ],
   "mediaType" : "...",
-  "resourceType" : "...",
   "about" : "http://identifier/for/the/source/being/described",
   "mediator" : {
     "resource" : "http://identifier/for/the/mediator/of/source/being/described"
   },
   "sources" : [ { ... }, { ... } ],
+  "analysis" : {
+    "resource" : "http://identifier/for/analysis/document"
+  },
   "componentOf" : { ... },
   "titles" : [ { ... }, { ... } ],
   "notes" : [ { ... }, { ... } ],
@@ -383,13 +375,13 @@ name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 id | An identifier for the JSON object holding the agent data. The id attribute MUST conform to the constraints defined in [Section 7, "Fragment Identifiers"](#fragment-ids). | id | string
 names | The names of the person or organization. | names | array of [`TextValue`](#text-value)
-identifiers | Identifiers for the agent. | identifiers | [`Identifier`](#identifier-type)
 homepage | The homepage of the person or organization. | homepage | [`ResourceReference`](#resource-reference)
 openid  | The [openid](http://openid.net/) of the person or organization. | openid | [`ResourceReference`](#resource-reference)
 accounts  | The online accounts of the person or organization. | accounts | array of [`OnlineAccount`](#online-account)
 emails  | The email addresses of the person or organization. | emails | array of [`ResourceReference`](#resource-reference)
 phones  | The phones (voice, fax, mobile) of the person or organization. | phones | array of [`ResourceReference`](#resource-reference)
 addresses  | The addresses of the person or organization. | addresses | array of [`Address`](#address)
+identifiers | Identifiers for the agent. | identifiers | [`Identifier`](#identifier-type)
 
 ### examples
 
@@ -397,7 +389,6 @@ addresses  | The addresses of the person or organization. | addresses | array of
 {
   "id" : "local_id",
   "names" : [ { ... }, { ... } ],
-  "identifiers" : { ... },
   "homepage" : {
     "resource" : "..."
   },
@@ -408,6 +399,7 @@ addresses  | The addresses of the person or organization. | addresses | array of
   "emails" : [ { "resource" : "mailto:someone@gedcomx.org" } , { "resource" : "mailto:someone@somewhere-else.org" } ],
   "phones" : [ { "resource" : "tel:+1-201-555-0123" } , { "resource" : "fax:+1-201-555-5555" } ],
   "addresses" : [ { ... }, { ... } ],
+  "identifiers" : [ { ... }, { ... } ]
 
   ...possibility of extension elements...
 
@@ -425,30 +417,26 @@ is defined as follows:
 
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
-attribution | The attribution of this conclusion. | attribution | [`Attribution`](#attribution)
 type | URI identifying the type of the event. | type | [`URI`](#uri)
-extracted | Whether the event is to be constrained as an *extracted conclusion*. | extracted | boolean
 date | The date of the event. | date | [`Date`](#conclusion-date)
 place | The place the event. | place | [`Place`](#conclusion-place)
 roles | The roles of the persons in the event. | roles | array of [`EventRole`](#conclusion-event-role)
-media | References to multimedia resources for this event, such as photos or videos. | media | [`SourceReference`](#source-reference)
 
 ### examples
 
 ```json
 {
 
-  ...the members of gxc:Conclusion...,
+  ...the members of [Subject](#subject)...,
 
-  "attribution" : { ... },
   "type" : "http://gedcomx.org/Marriage",
-  "extracted" : false,
   "date" : { ... },
   "place" : { ... },
-  "roles" : [ { ... }, { ... } ],
-  "media" : [ { ... }, { ... } ]
+  "roles" : [ { ... }, { ... } ]
 }
 ```
+
+<a name="document"/>
 
 ## 2.6 The "Document" Data Type
 
@@ -460,6 +448,7 @@ name | description | XML property | XML type
 -----|-------------|--------------|---------
 type | URI identifying the type of the document. | type | [`URI`](#uri)
 attribution | The attribution of this document. | attribution | [`Attribution`](#attribution)
+textType | The type of text in the `text` field. | text | string
 text | The text of the document. | text | string
 
 ### examples
@@ -467,13 +456,16 @@ text | The text of the document. | text | string
 ```json
 {
 
-  ...the members of gxc:Conclusion...,
+  ...the members of [Conclusion](#conclusion)...,
 
   "type" : "http://gedcomx.org/Analysis",
   "attribution" : { ... },
+  "textType" : "plain",
   "text" : "...text of the document..."
 }
 ```
+
+<a name="place-description"/>
 
 # 2.7 The "PlaceDescription" Data Type
 
@@ -486,37 +478,29 @@ name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 names | A list of standardized (or normalized), fully-qualified (in terms of what is known of the applicable jurisdictional hierarchy) names for this place that are applicable to this description of this place. | names | array of [`TextValue`](#text-value)
 type | A uniform resource identifier (URI) identifying the type of the place as it is applicable to this description. | type | [`URI`](#uri)
-extracted | Whether the place description is to be constrained as an *extracted conclusion*. | extracted | boolean
 temporalDescription | A description of the time period to which this place description is relevant. | temporalDescription | [`Date`](#conclusion-date)
 latitude | Degrees north or south of the Equator (0.0 degrees). | latitude | number
 longitude | Angular distance in degrees, relative to the Prime Meridian. | longitude | number
 spatialDescription | A reference to a geospatial description of this place. | spatialDescription | [`ResourceReference`](#resource-reference)
-identifiers | A list of known identifiers for this place description (e.g., place authority identifiers). | identifiers | [`Identifier`](#identifier-type)
-media | References to multimedia resources for this place, such as photos or videos. | media | [`SourceReference`](#source-reference)
-attribution | The attribution of this conclusion. | attribution | [`Attribution`](#attribution)
 
 ### examples
 
 ```json
 {
 
-  ...the members of Conclusion...,
+  ...the members of [Subject](#subject)...,
 
-  "about" : "http://identifier/of/the/place/being/described",
   "names" : [ { ... }, { ... } ],
   "type" : "http://identifier/for/the/place/type",
-  "extracted" : false,
   "temporalDescription" : { ... },
   "latitude" : "27.9883575",
   "latitude" : "86.9252014",
   "spatialDescription" : {
     "resource" : "http://uri/for/KML/document"
-  },
-  "identifiers" : [ { ... }, { ... } ],
-  "media" : [ { ... }, { ... } ],
-  "attribution" : { ... }
+  }
 }
 ```
+
 
 # 3. Component-Level Data Types
 
@@ -607,6 +591,8 @@ attribution | The attribution of this note. | attribution | [`Attribution`](#att
 }
 ```
 
+<a name="text-value"/>
+
 ## 3.4 The "TextValue" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/v1/TextValue` data type is defined as follows:
@@ -648,6 +634,9 @@ value | A rendering of the full (working) citation as a string. | value | string
 {
   "lang" : "en",
   "value" : "...a rendering of the full (working) citation as a string..."
+
+  ...possibility of extension elements...
+
 }
 ```
 
@@ -677,7 +666,6 @@ attribution | The attribution of this source reference. | attribution | [`Attrib
 }
 ```
 
-
 <a name="evidence-reference"/>
 
 ## 3.7 The "EvidenceReference" Data Type
@@ -690,7 +678,7 @@ data type is defined as follows:
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 resource  | Reference to data being used as _evidence_. | resource | [`URI`](#uri)
-analysis  | Reference to a document containing analysis that supports the use of the referenced data as _evidence_. | resource | [`URI`](#uri)
+analysis  | Reference to a document containing analysis that supports the use of the referenced data as _evidence_. | resource | [`ResourceReference`](#resource-reference)
 attribution | The attribution of this _evidence_ reference. | attribution | [`Attribution`](#attribution)
 
 ### examples
@@ -698,14 +686,15 @@ attribution | The attribution of this _evidence_ reference. | attribution | [`At
 ```json
 {
   "resource" : "http://identifier/for/data/being/referenced",
-  "analysis" : "http://identifier/for/analysis/document",
+  "analysis" : {
+    "resource" : "http://identifier/for/analysis/document"
+  },
   "attribution" : { ... }
 
   ...possibility of extension elements...
 
 }
 ```
-
 
 <a name="online-account"/>
 
@@ -727,7 +716,10 @@ accountName | The name, label, or id associating the owner of the account with t
   "serviceHomepage" : {
     "resource" : "http://familysearch.org/"
   },
-  "accountName" : "...",
+  "accountName" : "..."
+
+  ...possibility of extension elements...
+
 }
 ```
 
@@ -757,6 +749,7 @@ street6 | The street (sixth line). | street6 | string
 
 ```json
 {
+  "value" : "...",
   "city" : "...",
   "country" : "...",
   "postalCode" : "...",
@@ -766,10 +759,14 @@ street6 | The street (sixth line). | street6 | string
   "street3" : "...",
   "street4" : "...",
   "street5" : "...",
-  "street6" : "...",
-  "value" : "..."
+  "street6" : "..."
+
+  ...possibility of extension elements...
+
 }
 ```
+
+<a name="conclusion"/>
 
 ## 3.10 The "Conclusion" Data Type
 
@@ -793,14 +790,51 @@ notes | A list of notes about this conclusion. | note | array of [`Note`](#note)
   "lang" : "en",
   "confidence" : "http://gedcomx.org/High",
   "sources" : [ { ... }, { ... } ],
-  "notes" : [ { ... }, { ... } ],
+  "notes" : [ { ... }, { ... } ]
 
   ...possibility of extension elements...
 
 }
 ```
 
-## 3.11 The "Gender" Data Type
+<a name="subject"/>
+
+## 3.11 The "Subject" Data Type
+
+The JSON object used to (de)serialize the `http://gedcomx.org/v1/Subject` data type is defined as follows:
+
+### properties
+
+name | description | JSON member | JSON object type
+-----|-------------|--------------|---------
+extracted | Whether this _subject_ is to be constrained as an _extracted conclusion_. | extracted | boolean
+evidence | References to _subject_ instances that support this _subject_. | evidence | [`EvidenceReference`](#evidence-reference)
+analysis  | Reference to a document containing analysis supporting this _subject_ and its _conclusions_. | analysis | [`ResourceReference`](#resource-reference)
+media | References to multimedia resources for this _subject_, such as photos or videos. | media | [`SourceReference`](#source-reference)
+identifiers | Identifiers for this _subject_. | identifiers | [`Identifier`](#identifier-type)
+attribution | The attribution of this _subject_. | attribution | [`Attribution`](#attribution)
+
+### examples
+
+```json
+{
+
+  ...the members of [Conclusion](#conclusion)...,
+
+  "extracted" : "true",
+  "evidence" : [ { ... }, { ... } ],
+  "analysis" : {
+    "resource" : "http://identifier/for/analysis/document"
+  },
+  "media" : [ { ... }, { ... } ],
+  "identifiers" : [ { ... }, { ... } ],
+  "attribution" : { ... }
+}
+```
+
+<a name="gender-conclusion"/>
+
+## 3.12 The "Gender" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/v1/Gender` data type is defined as follows:
 
@@ -815,7 +849,7 @@ type | URI identifying the type of the gender. | type | [`URI`](#uri)
 ```json
 {
 
-  ...the members of Conclusion...,
+  ...the members of [Conclusion](#conclusion)...,
 
   "type" : "http://gedcomx.org/Male"
 }
@@ -823,7 +857,7 @@ type | URI identifying the type of the gender. | type | [`URI`](#uri)
 
 <a name="name-conclusion"/>
 
-## 3.12 The "Name" Data Type
+## 3.13 The "Name" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/v1/Name` data type is defined as follows:
 
@@ -841,7 +875,7 @@ nameForms | The name form(s) that best represents this name `NameForm` -- usuall
 ```json
 {
 
-  ...the members of Conclusion...,
+  ...the members of [Conclusion](#conclusion)...,
 
   "type" : "http://gedcomx.org/BirthName",
   "preferred" : true,
@@ -852,7 +886,7 @@ nameForms | The name form(s) that best represents this name `NameForm` -- usuall
 
 <a name="fact-conclusion"/>
 
-## 3.13 The "Fact" Data Type
+## 3.14 The "Fact" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/v1/Fact` data type is defined as follows:
 
@@ -871,7 +905,7 @@ qualifiers | Qualifiers to add additional details about the fact. | qualifiers |
 ```json
 {
 
-  ...the members of Conclusion...,
+  ...the members of [Conclusion](#conclusion)...,
 
   "type" : "http://gedcomx.org/Birth",
   "date" : { ... },
@@ -883,7 +917,7 @@ qualifiers | Qualifiers to add additional details about the fact. | qualifiers |
 
 <a name="conclusion-event-role"/>
 
-## 3.14 The "EventRole" Data Type
+## 3.15 The "EventRole" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/v1/EventRole`
 data type is defined as follows:
@@ -901,7 +935,7 @@ details | Details about the role of the person in the event. | details | string
 ```json
 {
 
-  ...the members of Conclusion...,
+  ...the members of [Conclusion](#conclusion)...,
 
   "person" : {
     "resource" : "http://identifier/for/person/1"
@@ -913,7 +947,7 @@ details | Details about the role of the person in the event. | details | string
 
 <a name="conclusion-date"/>
 
-## 3.15 The "Date" Data Type
+## 3.16 The "Date" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/v1/Date` data type is defined as follows:
 
@@ -938,7 +972,7 @@ formal | The formal value of the date. | formal | [GEDCOM X Date](https://github
 
 <a name="conclusion-place-reference"/>
 
-# 3.16 The "PlaceReference" Data Type
+# 3.17 The "PlaceReference" Data Type
 
 the JSON object used to (de)serialize the `http://gedcomx.org/v1/PlaceReference` data type
 is defined as follows:
@@ -964,7 +998,7 @@ descriptionRef | A reference to a _description_ of this place. | description | [
 
 <a name="name-part"/>
 
-## 3.17 The "NamePart" Data Type
+## 3.18 The "NamePart" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/v1/NamePart` data type is defined as follows:
 
@@ -989,7 +1023,7 @@ qualifiers | Type qualifiers to further describe the type of the name part. | qu
 }
 ```
 
-## 3.18 The "NameForm" Data Type
+## 3.19 The "NameForm" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/v1/NameForm` data type is defined as follows:
 
@@ -1015,7 +1049,7 @@ parts | The parts of the name form. | parts | array of [`NamePart`](#name-part)
 ```
 <a name="qualifier"/>
 
-## 3.19 The "Qualifier" Data Type
+## 3.20 The "Qualifier" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/v1/Qualifier` data type is defined as follows:
 
@@ -1034,6 +1068,7 @@ value | The value of the qualifier. The semantic meaning of the value is determi
   "value" : "..."
 }
 ```
+
 
 # 4 JSON-Specific Data Types
 
@@ -1104,6 +1139,7 @@ documents | The list of documents contained in the data set. | documents | array
 }
 ```
 
+
 # 5. The GEDCOM X Object
 
 The body of a document compliant with the GEDCOM X JSON media type MUST be an instance of the
@@ -1165,6 +1201,7 @@ allows the option of an "id" property on _all_ objects for the purpose of identi
 The values of all fragment identifiers within a single JSON document MUST be unique.
 
 For more information about fragment identifiers, see [RFC 3986, Section 3.5](http://tools.ietf.org/html/rfc3986#section-3.5).
+
 
 # 8. Miscellaneous To Do
 
