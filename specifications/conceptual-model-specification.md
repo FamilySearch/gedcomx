@@ -98,7 +98,7 @@ of "known types" of data instances such as facts, names, genders, etc. For examp
 vocabulary is specified to identify the set of known types of events so applications
 can share semantic context of the event.
 
-Elements of a controlled vocabulary are identified by Standard Value.
+Elements of a controlled vocabulary are identified by an enumerated value.
 
 ## 1.2.4 The URI Reference
 
@@ -124,21 +124,19 @@ is interpreted as the literal value supplied by a user. If a property is identif
 a user or by the application) for the purpose of easier processing, such as for display
 purposes.
 
-<a id="standard-value"/>
+<a name="enumerated-value"/>
 
-### 1.2.6 Standard Values
+### 1.2.6 Enumerated Values
 
-Standard values are used throughout GedcomX to signify types or values of properties where a limited (though
-not necessarily small) number of possibilities is required to ensure portability and must be a discrete,
-machine-identifiable value based on a specific standard.  Following the XML practice for namespaces, they are
-presented in the form of a URI, but are not necessarily resolvable to an actual internet resource.
+Enumerated values are used throughout GEDCOM X to constrain values of properties to a limited (though
+not necessarily small) number of possibilities. Enumerated values are used to ensure portability and must
+be a discrete, machine-identifiable value based on a specific specification.  Enumerated values take the
+form of a URI. Members of controlled vocabularies are enumerated values.
 
-Members of Controlled Vocabularies are Standard Values
+The base URI for enumerated values defined by GEDCOM X is `http://gedcomx.org/`.
 
-The base URI for GedcomX's Standard Values is "http://gedcomx.org/"
-
-Standard values which are not drawn directly or indirectly from this specification MUST be declared in a
-freely-distributable list and MUST use a common base URI different from the one used in this spec.
+Enumerated values which are not defined directly or indirectly from this specification SHOULD be declared in a
+freely-distributable specification and MUST NOT use the value `http://gedcomx.org/` as a base URI.
 
 ## 1.3 Internationalization Considerations
 
@@ -232,7 +230,7 @@ This data type extends the following data type:
 
 name  | description | data type | constraints
 ------|-------------|-----------|------------
-type | Standard Value identifying the type of the relationship. | [Standard Value](#standard-value) | OPTIONAL. If provided, must be a relationship type, and use of a [known relationship type](#known-relationship-types) is RECOMMENDED.
+type | Enumerated value identifying the type of the relationship. | [Enumerated Value](#enumerated-value) | OPTIONAL. If provided, MUST identify a relationship type, and use of a [known relationship type](#known-relationship-types) is RECOMMENDED.
 extracted | Whether this relationship is to be constrained as an *extracted conclusion*. | boolean | OPTIONAL. Default: `false`. Refer to [Extracted Conclusion Constraints](#4-extracted-conclusion-constraints).
 person1 | Reference to the first person in the relationship. | [URI](#uri) | REQUIRED. MUST resolve to an instance of [`http://gedcomx.org/v1/Person`](#person)
 person2 | Reference to the second person in the relationship. | [URI](#uri) | REQUIRED. MUST resolve to an instance of [`http://gedcomx.org/v1/Person`](#person)
@@ -277,7 +275,7 @@ name  | description | data type | constraints
 id | An identifier for the data structure holding the source description data. The id is to be used as a "fragment identifier" as defined by [RFC 3986, Section 3.5](http://tools.ietf.org/html/rfc3986#section-3.5). As such, the constraints of the id are provided in the definition of the media type (e.g. XML, JSON) of the data structure. | string | OPTIONAL.
 citations | The citations for this source. At least one citation MUST be provided. If more than one citation is provided, citations are assumed to be given in order of preference, with the most preferred citation in the first position in the list. | [`http://gedcomx.org/v1/SourceCitation`](#source-citation) | REQUIRED.
 mediaType | A hint about the media type of the resource being described. | string | OPTIONAL. If provided, MUST be a valid MIME (media) type as specified by [RFC 4288](http://tools.ietf.org/html/rfc4288).
-resourceType | Standard Value identifying the type of resource being described. | [Standard Value](#standard-value) | OPTIONAL. If provided, must be a resource type, and use of a [known resource type](#known-resource-types) is RECOMMENDED.
+resourceType | Enumerated value identifying the type of resource being described. | [Enumerated Value](#enumerated-value) | OPTIONAL. If provided, MUST identify a resource type, and use of a [known resource type](#known-resource-types) is RECOMMENDED.
 about | A uniform resource identifier (URI) for the resource being described. | [URI](#uri) | OPTIONAL.
 mediator | A reference to the entity that mediates access to the described source. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to an instance of [`http://gedcomx.org/v1/Agent`](#agent).
 sources | A list of references to any sources from which this source is derived. | List of [`http://gedcomx.org/v1/SourceReference`](#source-reference) | OPTIONAL.
@@ -349,7 +347,7 @@ This data type extends the following data type:
 
 name  | description | data type | constraints
 ------|-------------|-----------|------------
-type | Standard Value identifying the type of the event. | [Standard Value](#standard-value) | OPTIONAL. If provided, must be an event type, and use of a [known event type](#known-event-types) is RECOMMENDED.
+type | Enumerated value identifying the type of the event. | [Enumerated Value](#enumerated-value) | OPTIONAL. If provided, MUST identify an event type, and use of a [known event type](#known-event-types) is RECOMMENDED.
 extracted | Whether this event is to be constrained as an *extracted conclusion*. | boolean | OPTIONAL. Default: `false`. Refer to [Extracted Conclusion Constraints](#4-extracted-conclusion-constraints).
 date | The date of the event. | [`http://gedcomx.org/v1/Date`](#conclusion-date) | OPTIONAL.
 place | A reference to the place applicable to this event. | [`http://gedcomx.org/v1/PlaceReference`](#conclusion-place-reference) | OPTIONAL.
@@ -401,7 +399,7 @@ This data type extends the following data type:
 
 name  | description | data type | constraints
 ------|-------------|-----------|------------
-type | Standard Value identifying the type of the document. | [Standard Value](#standard-value) | OPTIONAL. If provided, must be a document type, and use of a [known document type](#known-document-types) is RECOMMENDED.
+type | Enumerated value identifying the type of the document. | [Enumerated Value](#enumerated-value) | OPTIONAL. If provided, MUST identify a document type, and use of a [known document type](#known-document-types) is RECOMMENDED.
 textType | The type of text in the `text` field. | string | OPTIONAL. If provided, the value MUST be a [valid document text type](#document-text-types).  If no value is provided, "plain" is assumed.
 text | The text of the document. | string | REQUIRED.
 attribution | The attribution of the document. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing data set (e.g. file) of the document is assumed.
@@ -470,7 +468,7 @@ name  | description | data type | constraints
 ------|-------------|-----------|------------
 extracted | Whether this place description is to be constrained as an *extracted conclusion*. | boolean | OPTIONAL. Default: `false`. Refer to [Extracted Conclusion Constraints](#4-extracted-conclusion-constraints).
 names | A list of standardized (or normalized), fully-qualified (in terms of what is known of the applicable jurisdictional hierarchy) names for this place that are applicable to this description of this place. | List of [http://gedcomx.org/v1/TextValue](#text-value). Order is preserved. | REQUIRED. The list MUST contain at least one name.
-type | An implementation-specific uniform resource identifier (URI) used to identify the type of a place (e.g., address, city, county, province, state, country, etc.). | [Standard Value](#standard-value) | OPTIONAL.  There is no current plan to define a type vocabulary for place descriptions in GEDCOM X.
+type | An implementation-specific uniform resource identifier (URI) used to identify the type of a place (e.g., address, city, county, province, state, country, etc.). | [Enumerated Value](#enumerated-value) | OPTIONAL.  There is no current definition of a set of known place types.
 temporalDescription | A description of the time period to which this place description is relevant. | [`http://gedcomx.org/v1/Date`](#conclusion-date) | OPTIONAL.
 latitude | Degrees north or south of the Equator (0.0 degrees). | IEEE 754 binary64 value | OPTIONAL.  If provided, MUST provide `longitude` also.  Values range from −90.0 degrees (south) to 90.0 degrees (north).  It is assumed that all instances of `PlaceDescription` that share an identical `Primary` identifier will also have identical `latitude` values.
 longitude | Angular distance in degrees, relative to the Prime Meridian. | IEEE 754 binary64 value | OPTIONAL.  If provided, MUST provide `latitude` also.  Values range from −180.0 degrees (west of the Meridian) to 180.0 degrees (east of the Meridian).  It is assumed that all instances of `PlaceDescription` that share an identical `Primary` identifier will also have identical `longitude` values.
@@ -509,7 +507,7 @@ The identifier for the "Identifier" data type is:
 name  | description | data type | constraints
 ------|-------------|-----------|------------
 value | The value of the identifier. | [URI](#uri) | REQUIRED.
-type  | Standard Value identifying the type of the identifier. | [Standard Value](#standard-value) | OPTIONAL. If provided, must be an identifier type, and use of a [known identifier type](#known-identifier-types) is RECOMMENDED.
+type  | Enumerated value identifying the type of the identifier. | [Enumerated Value](#enumerated-value) | OPTIONAL. If provided, MUST identify an identifier type, and use of a [known identifier type](#known-identifier-types) is RECOMMENDED.
 
 <a id="known-identifier-types"/>
 
@@ -765,7 +763,7 @@ name  | description | data type | constraints
 ------|-------------|-----------|------------
 id | An identifier for the data structure holding the conclusion data. The id is to be used as a "fragment identifier" as defined by [RFC 3986, Section 3.5](http://tools.ietf.org/html/rfc3986#section-3.5). As such, the constraints of the id are provided in the definition of the media type (e.g. XML, JSON) of the data structure. | string | OPTIONAL.
 lang | The locale identifier for the conclusion. | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag | OPTIONAL. If not provided, the locale of the current user of the data is assumed.
-confidence  | Reference to the confidence level of the conclusion. | [Standard Value](#standard-value) | OPTIONAL. If provided, must be a confidence level, and use of a [known confidence level](#known-confidence-levels) is RECOMMENDED.
+confidence  | Reference to the confidence level of the conclusion. | [Enumerated Value](#enumerated-value) | OPTIONAL. If provided, MUST identify a confidence level, and use of a [known confidence level](#known-confidence-levels) is RECOMMENDED.
 sources | The list of references to the sources of related to this conclusion. The sources of a conclusion MUST also be sources of the conclusion's containing entity (i.e. [`Person`](#person) or [`Relationship`](#relationship) ).| List of [`http://gedcomx.org/v1/SourceReference`](#source-reference). Order is preserved. | OPTIONAL.
 notes  | A list of notes about a conclusion. | List of [`http://gedcomx.org/Note`](#note) | OPTIONAL.
 
@@ -804,7 +802,7 @@ This data type extends the following data type:
 
 name  | description | data type | constraints
 ------|-------------|-----------|------------
-type  | Standard Value identifying the type of the gender. | [Standard Value](#standard-value) | REQUIRED. must be a gender type, and use of a [known gender type](#known-gender-types) is RECOMMENDED.
+type  | Enumerated value identifying the type of the gender. | [Enumerated Value](#enumerated-value) | REQUIRED. MUST identify a gender type, and use of a [known gender type](#known-gender-types) is RECOMMENDED.
 
 
 <a id="known-gender-types"/>
@@ -857,7 +855,7 @@ This data type extends the following data type:
 
 name  | description | data type | constraints
 ------|-------------|-----------|------------
-type | Standard Value identifying the type of the name. | [Standard Value](#standard-value) | OPTIONAL. If provided, must be a name type, and use of a [known name type](#known-name-types) is RECOMMENDED.
+type | Enumerated value identifying the type of the name. | [Enumerated Value](#enumerated-value) | OPTIONAL. If provided, MUST identify a name type, and use of a [known name type](#known-name-types) is RECOMMENDED.
 preferred | Whether this name is preferred above the other `Name` conclusions of a person. | boolean | OPTIONAL.
 date | The date of applicability of the name. | [`http://gedcomx.org/v1/Date`](#conclusion-date) | OPTIONAL.
 nameForms | The name form(s) that best express this name, usually representations considered proper and well formed in the person's native, historical cultural context. All included name forms SHOULD be representations of the same name, and NOT variants of the name (e.g., nicknames, spelling variations). | List of [`http://gedcomx.org/v1/NameForm`](#name-form). Order is preserved. | REQUIRED. At least one name form MUST be provided.
@@ -924,7 +922,7 @@ This data type extends the following data type:
 
 name  | description | data type | constraints
 ------|-------------|-----------|------------
-type | Standard Value identifying the type of the fact. | [Standard Value](#standard-value) | REQUIRED. must be a fact type, and use of a [known fact type](#known-fact-types) is RECOMMENDED.
+type | Enumerated value identifying the type of the fact. | [Enumerated Value](#enumerated-value) | REQUIRED. MUST identify a fact type, and use of a [known fact type](#known-fact-types) is RECOMMENDED.
 date | The date of applicability of the fact. | [`http://gedcomx.org/v1/Date`](#conclusion-date) | OPTIONAL.
 place | A reference to the place applicable to this fact. | [`http://gedcomx.org/v1/PlaceReference`](#conclusion-place-reference) | OPTIONAL.
 value | The original value of the fact as supplied by the contributor. | string | OPTIONAL.
@@ -1063,7 +1061,7 @@ The identifier for the `NamePart` data type is:
 
 name  | description | data type | constraints
 ------|-------------|-----------|------------
-type | Standard Value identifying the type of the name part. | [Standard Value](#standard-value) | OPTIONAL. If provided, must be a name part type, and use of a [known name part type](#known-name-part-types) is RECOMMENDED.
+type | Enumerated value identifying the type of the name part. | [Enumerated Value](#enumerated-value) | OPTIONAL. If provided, MUST identify a name part type, and use of a [known name part type](#known-name-part-types) is RECOMMENDED.
 value | The term(s) from the name that make up this name part. | string | REQUIRED.
 qualifiers | Qualifiers to add additional semantic meaning to the name part. | List of [http://gedcomx.org/v1/Qualifier](#qualifier) | OPTIONAL. If present, use of a name part qualifier defined by the [GEDCOM X Name Part Qualifiers](https://github.com/FamilySearch/gedcomx/blob/master/specifications/name-part-qualifiers-specification.md) specification is RECOMMENDED.
 
@@ -1176,7 +1174,7 @@ The identifier for the "Qualifier" data type is:
 
 name  | description | data type | constraints
 ------|-------------|-----------|------------
-name | The name of the qualifier, used to determine the nature of the qualifier. | [Standard Value](#standard-value) | REQUIRED. It is RECOMMENDED that the qualifier name resolve to an element of a constrained vocabulary.
+name | The name of the qualifier, used to determine the nature of the qualifier. | [Enumerated Value](#enumerated-value) | REQUIRED. It is RECOMMENDED that the qualifier name resolve to an element of a constrained vocabulary.
 value | The value of the qualifier. The semantic meaning of the value is determined by the qualifier name. | string | OPTIONAL.
 
 ### examples
