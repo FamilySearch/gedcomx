@@ -757,9 +757,10 @@ name | description | XML property | XML type
 -----|-------------|--------------|---------
 id | An identifier for the XML element holding the conclusion data. The id attribute MUST conform to the constraints defined in [Section 7, "Fragment Identifiers"](#fragment-ids). | id (attribute) | xsd:string
 lang | The locale identifier for the conclusion. | xml:lang (attribute) | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag
-confidence  | Reference to the confidence level of the contributor of the attributed data. | confidence (attribute) | [`URI`](#uri)
 sources | A list of references to the sources of the conclusion. | gx:source | [`gx:SourceReference`](#source-reference)
+analysis  | Reference to a document containing analysis supporting this conclusion. | gx:analysis | [`gx:ResourceReference`](#resource-reference)
 notes | A list of notes about this conclusion. | gx:note | [`gx:Note`](#note)
+confidence  | Reference to the confidence level of the contributor of the attributed data. | confidence (attribute) | [`URI`](#uri)
 
 ### examples
 
@@ -769,6 +770,7 @@ notes | A list of notes about this conclusion. | gx:note | [`gx:Note`](#note)
       ...
     </gx:source>
     ...
+    <gx:analysis resource="http://identifier/for/analysis/document"/>
     <gx:note>
       ...
     </gx:note>
@@ -792,7 +794,6 @@ name | description | XML property | XML type
 -----|-------------|--------------|---------
 extracted | Whether this _subject_ is to be constrained as an _extracted conclusion_. | extracted (attribute) | xsd:boolean
 evidence | References to _subject_ instances that support this _subject_. | gx:evidence | [`gx:EvidenceReference`](#evidence-reference)
-analysis  | Reference to a document containing analysis supporting this _subject_ and its _conclusions_. | gx:analysis | [`gx:ResourceReference`](#resource-reference)
 media | References to multimedia resources for this _subject_, such as photos or videos. | gx:media | [`gx:SourceReference`](#source-reference)
 identifiers | Identifiers for this _subject_. | gx:identifier | [`gx:Identifier`](#identifier-type)
 attribution | The attribution of this _subject_. | gx:attribution | [`gx:Attribution`](#attribution)
@@ -808,7 +809,6 @@ attribution | The attribution of this _subject_. | gx:attribution | [`gx:Attribu
       ...
     </gx:evidence>
     ...
-    <gx:analysis resource="http://identifier/for/analysis/document"/>
     <gx:media>
       ...
     </gx:media>

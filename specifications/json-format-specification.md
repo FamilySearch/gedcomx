@@ -778,9 +778,10 @@ name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 id | An identifier for the JSON object holding the conclusion data. The id attribute MUST conform to the constraints defined in [Section 7, "Fragment Identifiers"](#fragment-ids). | id | string
 lang | The locale identifier for the conclusion. | lang | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag
-confidence  | Reference to the confidence level of the contributor of the attributed data. | confidence | [`URI`](#uri)
 sources | The list of references to the sources of the conclusion. | sources | array of [`SourceReference`](#source-reference).
+analysis  | Reference to a document containing analysis supporting this conclusion. | analysis | [`ResourceReference`](#resource-reference)
 notes | A list of notes about this conclusion. | note | array of [`Note`](#note)
+confidence  | Reference to the confidence level of the contributor of the attributed data. | confidence | [`URI`](#uri)
 
 ### examples
 
@@ -788,9 +789,12 @@ notes | A list of notes about this conclusion. | note | array of [`Note`](#note)
 {
   "id" : "local_id",
   "lang" : "en",
-  "confidence" : "http://gedcomx.org/High",
   "sources" : [ { ... }, { ... } ],
-  "notes" : [ { ... }, { ... } ]
+  "analysis" : {
+    "resource" : "http://identifier/for/analysis/document"
+  },
+  "notes" : [ { ... }, { ... } ],
+  "confidence" : "http://gedcomx.org/High"
 
   ...possibility of extension elements...
 
@@ -809,7 +813,6 @@ name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 extracted | Whether this _subject_ is to be constrained as an _extracted conclusion_. | extracted | boolean
 evidence | References to _subject_ instances that support this _subject_. | evidence | [`EvidenceReference`](#evidence-reference)
-analysis  | Reference to a document containing analysis supporting this _subject_ and its _conclusions_. | analysis | [`ResourceReference`](#resource-reference)
 media | References to multimedia resources for this _subject_, such as photos or videos. | media | [`SourceReference`](#source-reference)
 identifiers | Identifiers for this _subject_. | identifiers | [`Identifier`](#identifier-type)
 attribution | The attribution of this _subject_. | attribution | [`Attribution`](#attribution)
@@ -823,9 +826,6 @@ attribution | The attribution of this _subject_. | attribution | [`Attribution`]
 
   "extracted" : "true",
   "evidence" : [ { ... }, { ... } ],
-  "analysis" : {
-    "resource" : "http://identifier/for/analysis/document"
-  },
   "media" : [ { ... }, { ... } ],
   "identifiers" : [ { ... }, { ... } ],
   "attribution" : { ... }
