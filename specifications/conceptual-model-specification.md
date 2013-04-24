@@ -644,8 +644,8 @@ todo:
 ## 3.7 The "EvidenceReference" Data Type
 
 The `EvidenceReference` data type defines a reference to data that is being used as evidence to answer a research question.
-For example, a genealogical conclusion (i.e., the object holding the `EvidenceReference` instance) can refer to content extracted
-from a source (i.e., an ["extracted"](#extracted-conclusion-constraints) `Conclusion`) as *evidence* that supports the conclusion.
+For example, a `Subject` (i.e., the object holding the `EvidenceReference` instance) can refer to content extracted
+from a source (i.e., an ["extracted"](#extracted-conclusion-constraints) `Conclusion`) as *evidence* that supports the `Subject`.
 
 ### identifier
 
@@ -657,7 +657,7 @@ The identifier for the "EvidenceReference" data type is:
 
 name  | description | data type | constraints
 ------|-------------|-----------|------------
-resource  | Reference to data being used as _evidence_. | [URI](#uri) | REQUIRED. MUST resolve to an instance of conclusion [`http://gedcomx.org/v1/Conclusion`](#conclusion).
+resource  | Reference to data being used as _evidence_. | [URI](#uri) | REQUIRED. MUST resolve to an instance of [`http://gedcomx.org/v1/Subject`](#subject).
 analysis  | Reference to a document containing analysis that supports the use of the referenced data as _evidence_. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to an instance of [`http://gedcomx.org/v1/Document`](#26-the-document-data-type) of type `http://gedcomx.org/Analysis`.
 attribution | The attribution of this source reference. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing resource of the source reference is assumed.
 
@@ -1209,9 +1209,11 @@ that MUST be applied to conclusion data that is identified as "extracted" using 
 When a conclusion is identified as "extracted", it means that the data is to be treated as having been extracted from a
 single source or record.  An extracted conclusion is distinguished from other conclusion data by the notion that it is
 intended to describe information contained in a single source, as opposed to what a researcher or system believes to be true
-about the subject of the conclusion.  Applications MUST recognize the `extracted` property and SHOULD ensure that any modifications
-to the extracted conclusion are aligned with the information that is provided by the specific (single) source, even if the source
-provides information that may conflict with information in other sources.
+about the subject of the conclusion.
+
+Applications MUST recognize the `extracted` property and SHOULD ensure that any modifications to the extracted conclusion are
+aligned with the information that is provided by the specific (single) source, even if the source provides information that may
+conflict with information in other sources.
 
 Data in a conclusion that is identified as "extracted" MUST conform to the following constraints:
 
