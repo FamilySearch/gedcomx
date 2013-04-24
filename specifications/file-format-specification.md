@@ -43,7 +43,7 @@ This specification uses "GEDCOM X File Format" internally.
 
 This specification is depends on a variety of different standards and specifications.
 
-* The [ZIP file format](http://en.wikipedia.org/wiki/ZIP_file_format) is used to package
+* The [ZIP file format](http://www.pkware.com/documents/casestudies/APPNOTE.TXT) is used to package
   resources.
 * Processors are required to support genealogical resources provided in the GEDCOM X XML 1.0
   format identified by [`http://gedcomx.org/xml/v1`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/xml-format-specification.md).
@@ -72,7 +72,7 @@ SHOULD level requirements is said to be "conditionally compliant".
 
 # 2. Zip File
 
-The GEDCOM X File Format is an extension of the [ZIP file format](http://en.wikipedia.org/wiki/ZIP_file_format).
+The GEDCOM X File Format is an extension of the [ZIP file format](http://www.pkware.com/documents/casestudies/APPNOTE.TXT).
 Each resource in the GEDCOM X file is defined as an entry in the file.
 A GEDCOM X File must include a manifest file that provides metadata about the GEDCOM X file and resources
 contained in it.
