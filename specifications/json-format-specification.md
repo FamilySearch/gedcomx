@@ -678,7 +678,7 @@ data type is defined as follows:
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 resource  | Reference to data being used as _evidence_. | resource | [`URI`](#uri)
-analysis  | Reference to a document containing analysis that supports the use of the referenced data as _evidence_. | resource | [`ResourceReference`](#resource-reference)
+analysis  | Reference to a document containing analysis that supports the use of the referenced data as _evidence_. | analysis | [`ResourceReference`](#resource-reference)
 attribution | The attribution of this _evidence_ reference. | attribution | [`Attribution`](#attribution)
 
 ### examples

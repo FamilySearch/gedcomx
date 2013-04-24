@@ -656,7 +656,7 @@ data type.
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
-resource  | Reference to data being used as _evidence_. | description (attribute) | [`URI`](#uri)
+resource  | Reference to data being used as _evidence_. | resource (attribute) | [`URI`](#uri)
 analysis  | Reference to a document containing analysis that supports the use of the referenced data as _evidence_. | gx:analysis | [`gx:ResourceReference`](#resource-reference)
 attribution | The attribution of this _evidence_ reference. | gx:attribution | [`gx:Attribution`](#attribution)
 
