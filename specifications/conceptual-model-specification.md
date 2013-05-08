@@ -887,7 +887,6 @@ name  | description | data type | constraints
 ------|-------------|-----------|------------
 type | Enumerated value identifying the type of the name. | [Enumerated Value](#enumerated-value) | OPTIONAL. If provided, MUST identify a name type, and use of a [known name type](#known-name-types) is RECOMMENDED.
 nameForms | The name form(s) that best express this name, usually representations considered proper and well formed in the person's native, historical cultural context. All included name forms SHOULD be representations of the same name, and NOT variants of the name (e.g., not a nicknames or spelling variation). | List of [`http://gedcomx.org/v1/NameForm`](#name-form). Order is preserved. | REQUIRED. At least one name form MUST be provided.
-preferred | Whether this name is preferred above the other `Name` conclusions of a person. | boolean | OPTIONAL.
 date | The date of applicability of the name. | [`http://gedcomx.org/v1/Date`](#conclusion-date) | OPTIONAL.
 
 ### examples
@@ -903,12 +902,10 @@ the alternate form.  Using an informal pseudo code, it might look something like
 
 ```
 Name1.type=http://gedcomx.org/BirthName
-Name1.preferred=true
 Name1.nameForms[0].fullText=Александр
 Name1.nameForms[1].fullText=Alexander
 
 Name2.type=http://gedcomx.org/Nickname
-Name2.preferred=false
 Name2.nameForms[0].fullText=Саша
 Name2.nameForms[1].fullText=Sasha
 ```

@@ -70,7 +70,6 @@ The following example shows an instance of a GEDCOM X serialization in accordanc
           "type" : "http://gedcomx.org/Surname"
         } ]
       } ],
-      "preferred" : true,
       "id" : "789"
     } ],
     "gender" : {
@@ -115,7 +114,6 @@ The following example shows an instance of a GEDCOM X serialization in accordanc
           "type" : "http://gedcomx.org/Surname"
         } ]
       } ],
-      "preferred" : true,
       "id" : "987"
     } ],
     "gender" : {
@@ -866,7 +864,6 @@ The JSON object used to (de)serialize the `http://gedcomx.org/v1/Name` data type
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 type | URI identifying the type of the name. | type | [`URI`](#uri)
-preferred | Whether this name is preferred above the other `Name` conclusions of a person. | preferred | boolean
 date | The date of applicability of the name. | date | [`Date`](#conclusion-date)
 nameForms | The name form(s) that best represents this name `NameForm` -- usually representations considered proper and well formed in the person's native, historical cultural context. All included name forms should be representations of the same name -- __*not*__ name variants (e.g., nicknames, spelling variations). | nameForms | array of [`NameForm`](#name-form)
 
@@ -878,7 +875,6 @@ nameForms | The name form(s) that best represents this name `NameForm` -- usuall
   ...the members of [Conclusion](#conclusion)...,
 
   "type" : "http://gedcomx.org/BirthName",
-  "preferred" : true,
   "date" : { ... },
   "nameForms" : [ { ... }, { ... } ]
 }

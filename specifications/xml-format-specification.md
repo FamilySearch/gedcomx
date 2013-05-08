@@ -60,7 +60,6 @@ The following example shows an instance of a GEDCOM X serialization in accordanc
         <source description="#EEE-EEEE"/>
         <gender type="http://gedcomx.org/Male"/>
         <name id="789">
-            <preferred>true</preferred>
             <nameForm>
                 <fullText>George Washington</fullText>
                 <part type="http://gedcomx.org/Given" value="George"/>
@@ -90,7 +89,6 @@ The following example shows an instance of a GEDCOM X serialization in accordanc
         <source description="#FFF-FFFF"/>
         <gender type="http://gedcomx.org/Male"/>
         <name id="987">
-            <preferred>true</preferred>
             <nameForm>
                 <fullText>Martha Dandridge Custis</fullText>
                 <part type="http://gedcomx.org/Given" value="Martha Dandridge"/>
@@ -861,7 +859,6 @@ data type.
 name | description | XML property | XML type
 -----|-------------|--------------|---------
 type | The name type. | type (attribute) | [`URI`](#uri)
-preferred | Whether this name is preferred above the other `Name` conclusions of a person. | gx:preferred | xsd:boolean
 date | The date of applicability of the name. | gx:date | [`gx:Date`](#conclusion-date)
 nameForms | The name form(s) that best represents this name `NameForm` -- usually representations considered proper and well formed in the person's native, historical cultural context. All included name forms should be representations of the same name -- __*not*__ name variants (e.g., nicknames, spelling variations). | gx:nameForm | [`gx:NameForm`](#name-form)
 
@@ -872,7 +869,6 @@ nameForms | The name form(s) that best represents this name `NameForm` -- usuall
 
     <!-- ...the members of [gx:Conclusion](#conclusion)... -->
 
-    <gx:preferred>true</gx:preferred>
     <gx:date>
       ...
     </gx:date>
