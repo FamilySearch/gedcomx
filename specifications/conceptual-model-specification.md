@@ -63,34 +63,57 @@ document are to be interpreted as described in BCP 14,
 [RFC2119](http://tools.ietf.org/html/rfc2119), as scoped to those conformance
 targets.
 
-### 1.2.2 Data Types and Data Instances
+## 1.3 Definitions
 
-This specification uses the term "data type" to refer to a formal description of
-a data structure, including the properties that define valid instances of the
-data type. For example, information about a person might be contained within a 
-data structure that supplies the person's name, birth date, and gender. A "data 
-type" defines the formal properties of the data structure.
+### 1.3.1 Data Types and Properties
 
-When a property of a data type is specified as being of a particular data type, the
-property inherits the corresponding requirements from that data type's definition.
-When a data type is specified as an extension of another data type, the extending
-data type inherits the corresponding requirements from the extended data type's
-definition.
+The term "data type" is used to refer to a formal description of a data structure. The term "property" is used to refer to a
+distinct component or element of a data type. For example, information about a person might be contained within a
+data structure that supplies the person's name, birth date, gender, etc. A "data type" defines the formal "properties" of
+a data structure.
 
-Data types are defined by the following sections:
+When a property of a data type is specified as being of a particular data type, the value of the property inherits the
+corresponding requirements from that data type's definition. When a data type is specified as an "extension" of another data type,
+the extending data type inherits the corresponding requirements and properties from the extended data type's definition.
+
+Data type definitions provided by this specification use the following elements:
 
 1. The *identifier* for the data type, which takes the form of a URI.
-2. The *extension* of the data type (if any) which specifies which data type
-   is extended by the data type.
-3. The *properties* of the data type, which define the information the data type
-   encapsulates.
+2. The *extension* of the data type (if any) which specifies which data type is extended by the data type.
+3. The *properties* of the data type, which define the information the data type encapsulates.
 
-This specification uses the term "data instance" to refer to the notion of a particular
-instance, or instantiation, of a data type.
+### 1.3.2 Data Instances
+
+The term "data instance" to refer to a particular instance, or instantiation, of a data type.
+
+<a name="char-string-list"/>
+
+### 1.3.3 Characters, Strings and Lists
+
+A "character" is an atomic unit of text as specified by `ISO/IEC 10646`.
+
+A "string" is an atomic data type defined as a finite-length sequence of characters.
+
+A "list" is an atomic data type defined as a sequence of data instances. When a property is defined as
+of the "list" data type, the data type of the data instances in the list is also provided.
 
 <a name="uri"/>
 
-### 1.2.3 Controlled Vocabularies
+## 1.3.4 The URI Reference
+
+The Uniform Resource Identifier ("URI") is fundamental to the GEDCOM X conceptual model.
+The URI is used to identify both the data types and data instances. The
+URI is also used to identify elements of the controlled vocabularies defined by GEDCOM X.
+The URI is specified by [RFC 3986](http://tools.ietf.org/html/rfc3986).
+
+GEDCOM X resources use the URI to reference other entities. For example, a GEDCOM X `Relationship`
+identifies a person in the relationship by referencing a URI that identifies the person. When a property
+(such as the `person1` property of `Relationship`) is of data type `URI`, the value of the property
+is interpreted as a "URI Reference" as defined by [RFC 3986, section 4](http://tools.ietf.org/html/rfc3986#section-4).
+This specification uses the term "URI" to refer to both a "URI" and a "URI Reference" as
+defined by [RFC 3986](http://tools.ietf.org/html/rfc3986).
+
+### 1.3.5 Controlled Vocabularies
 
 GEDCOM X defines a set of controlled vocabularies for the purposes of identifying the semantic
 context of data instances. A controlled vocabulary is often defined to create a set
@@ -100,23 +123,9 @@ can share semantic context of the event.
 
 Elements of a controlled vocabulary are identified by an enumerated value.
 
-## 1.2.4 The URI Reference
-
-The Uniform Resource Identifier ("URI") is fundamental to the GEDCOM X conceptual model.
-The URI is used to identify both the data types and data instances. The
-URI is also used to identify elements of the controlled vocabularies defined by GEDCOM X.
-The URI is specified by [RFC 3986](http://tools.ietf.org/html/rfc3986).
-
-GEDCOM X resources use the URI to reference other entities. For example, a GEDCOM X `Relationship`
-identifies a person in the relationship by referencing a URI that identifies the person. When a property
-(such as the `person1` property of `Relationship`) is of type `URI`, the value of the property
-is interpreted as a "URI Reference" as defined by [RFC 3986, section 4](http://tools.ietf.org/html/rfc3986#section-4).
-This specification uses the term "URI" to refer to both a "URI" and a "URI Reference" as
-defined by [RFC 3986](http://tools.ietf.org/html/rfc3986).
-
 <a name="formal-values" />
 
-### 1.2.5 Original and Normalized Values
+### 1.3.6 Original and Normalized Values
 
 When a property is identified as an "original value", the value of the property
 is interpreted as the literal value supplied by a user. If a property is identified as a
@@ -126,7 +135,7 @@ purposes.
 
 <a name="enumerated-value"/>
 
-### 1.2.6 Enumerated Values
+### 1.3.7 Enumerated Values
 
 Enumerated values are used throughout GEDCOM X to constrain values of properties to a limited (though
 not necessarily small) number of possibilities. Enumerated values are used to ensure portability and must
@@ -138,7 +147,7 @@ The base URI for enumerated values defined by GEDCOM X is `http://gedcomx.org/`.
 Enumerated values which are not defined directly or indirectly from this specification SHOULD be declared in a
 freely-distributable specification and MUST NOT use the value `http://gedcomx.org/` as a base URI.
 
-## 1.3 Internationalization Considerations
+## 1.4 Internationalization Considerations
 
 GEDCOM X must be designed to accommodate users and software of different languages and locales.
 To this end, a property named `lang` is supported on relevant GEDCOM X data types. This
@@ -159,7 +168,7 @@ identified where multi-valued input is needed for the benefit of exchanging gene
 across cultural boundaries. Such cases include the need to input multiple name forms and the need
 to identify multiple titles for a source.
 
-## 1.4 Compliance
+## 1.5 Compliance
 
 An implementation of the GEDCOM X conceptual model is "non-compliant" if it fails to satisfy
 one or more of the MUST or REQUIRED level requirements. An implementation that satisfies all of
