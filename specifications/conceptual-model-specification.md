@@ -388,7 +388,7 @@ This data type extends the following data type:
 name  | description | data type | constraints
 ------|-------------|-----------|------------
 type | Enumerated value identifying the type of the document. | [Enumerated Value](#enumerated-value) | OPTIONAL. If provided, MUST identify a document type, and use of a [known document type](#known-document-types) is RECOMMENDED.
-extracted | Whether this document is to be constrained as an _extracted conclusion_. | boolean | OPTIONAL. Default: `false`. Refer to [Extracted Conclusion Constraints](#extracted-conclusion-constraints).
+researchState | The research state of this document. | [Enumerated Value](#enumerated-value) | OPTIONAL. If provided, MUST identify a research state, and use of a [known research state](#known-research-state) is RECOMMENDED.
 textType | The type of text in the `text` field. | string | OPTIONAL. If provided, the value MUST be a [valid document text type](#document-text-types).  If no value is provided, "plain" is assumed.
 text | The text of the document. | string | REQUIRED.
 attribution | The attribution of the document. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing data set (e.g. file) of the document is assumed.
@@ -802,7 +802,7 @@ This data type extends the following data type:
 
 name  | description | data type | constraints
 ------|-------------|-----------|------------
-extracted | Whether this _subject_ is to be constrained as an _extracted conclusion_. | boolean | OPTIONAL. Default: `false`. Refer to [Extracted Conclusion Constraints](#extracted-conclusion-constraints).
+researchState | The research state of this _subject_. | [Enumerated Value](#enumerated-value) | OPTIONAL. If provided, MUST identify a research state, and use of a [known research state](#known-research-state) is RECOMMENDED.
 evidence | References to _subject_ instances that support this _subject_. | List of [`http://gedcomx.org/v1/EvidenceReference`](#evidence-reference). Order is preserved. | OPTIONAL.  If provided, each reference MUST resolve to an instance of _subject_ of the same _subject_ type as this instance (e.g., if the _subject_ is a `Person`, all evidence references must resolve to instances of `Person`).
 media | References to multimedia resources for this _subject_, such as photos or videos. Media references are intended to provide additional context or illustration for the _subject_ and ARE NOT being considered as evidence supporting the _subject_ and its associated _conclusions_. Media references SHOULD be ordered by priority such that applications that wish to display a single media item (such as an image) MAY choose the first applicable media reference. | List of [`http://gedcomx.org/v1/SourceReference`](#source-reference) | OPTIONAL. Note that the `SourceReference` is used for multimedia references and therefore MUST resolve to a `SourceDescription` of the resource, which in turn provides a reference to the resource itself.
 identifiers | Identifiers for this _subject_. | List of [`http://gedcomx.org/v1/Identifier`](#identifier-type). Order is preserved. | OPTIONAL.
@@ -1208,9 +1208,28 @@ value | The value of the qualifier. The semantic meaning of the value is determi
 todo:
 
 
+# 4. Research States
+
+Genealogical researchers make conclusions at various steps in the research process. At times it may be useful to identify the state of
+the conclusion within the context of the genealogical research process. This section identifies a set of "research states" of a conclusion
+and provides the constraints that apply to a conclusion in each identified state.
+
+<a name="known-research-states"/>
+
+## 4.1 Known Research States
+
+The following research states are defined by GEDCOM X:
+
+URI | description
+----|-------------
+`http://gedcomx.org/Extracted` | The conclusion was extracted from a single source. The conclusion MUST conform to the [Extracted Conclusion Constraints](#extracted-conclusion-constraints).
+`http://gedcomx.org/Hypothetical` | The conclusion is a working hypothesis.
+`http://gedcomx.org/Accepted` | The conclusion has been formally accepted. The conclusion SHOULD provide a reference to an analysis document that is used to provide the genealogical proof statement.
+
+
 <a name="extracted-conclusion-constraints"/>
 
-# 4. Extracted Conclusion Constraints
+## 4.2. Extracted Conclusion Constraints
 
 GEDCOM X provides a specific definition for the term "extracted conclusion" that is used to refer to a set of constraints
 that MUST be applied to conclusion data that is identified as "extracted" using the `extracted` property.
@@ -1233,7 +1252,7 @@ Data in a conclusion that is identified as "extracted" MUST conform to the follo
 
 <a name="persona"/>
 
-## 4.1 Persona
+## 4.3 Persona
 
 GEDCOM X provides a specific definition for the term "persona" that is used to refer to an instance of
 `http://gedcomx.org/v1/Person` that has been identified as an extracted conclusion.
