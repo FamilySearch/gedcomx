@@ -35,8 +35,8 @@ The identifier for this specification is:
 
 `http://gedcomx.org/conceptual-model/v1`
 
-For convenience, the GEDCOM X conceptual model may be referred to as "GEDCOM X 1.0".
-This specification uses "GEDCOM X" internally.
+For convenience, the GEDCOM X conceptual model may be referred to as "GEDCOM X Conceptual Model 1.0".
+This specification uses "GEDCOM X" or "GEDCOM X Conceptual Model" internally.
 
 This specification is depends on the GEDCOM X Date Model specification identified
 by [`http://gedcomx.org/date-model/v1`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/date-model-specification.md).
@@ -102,7 +102,7 @@ Elements of a controlled vocabulary are identified by an enumerated value.
 
 ## 1.2.4 The URI Reference
 
-The Uniform Resource Identifier ("URI") is fundamental to the GEDCOM X conceptual model.
+The Uniform Resource Identifier ("URI") is fundamental to the GEDCOM X Conceptual Model.
 The URI is used to identify both the data types and data instances. The
 URI is also used to identify elements of the controlled vocabularies defined by GEDCOM X.
 The URI is specified by [RFC 3986](http://tools.ietf.org/html/rfc3986).
@@ -133,11 +133,6 @@ not necessarily small) number of possibilities. Enumerated values are used to en
 be a discrete, machine-identifiable value based on a specific specification.  Enumerated values take the
 form of a URI. Members of controlled vocabularies are enumerated values.
 
-The base URI for enumerated values defined by GEDCOM X is `http://gedcomx.org/`.
-
-Enumerated values which are not defined directly or indirectly from this specification SHOULD be declared in a
-freely-distributable specification and MUST NOT use the value `http://gedcomx.org/` as a base URI.
-
 ## 1.3 Internationalization Considerations
 
 GEDCOM X must be designed to accommodate users and software of different languages and locales.
@@ -161,7 +156,7 @@ to identify multiple titles for a source.
 
 ## 1.4 Compliance
 
-An implementation of the GEDCOM X conceptual model is "non-compliant" if it fails to satisfy
+An implementation of the GEDCOM X Conceptual Model is "non-compliant" if it fails to satisfy
 one or more of the MUST or REQUIRED level requirements. An implementation that satisfies all of
 the  MUST or REQUIRED and all of the SHOULD level requirements is said to be "unconditionally
 compliant"; and implementation that satisfies all of the MUST level requirements but not all of the
@@ -1241,62 +1236,81 @@ GEDCOM X provides a specific definition for the term "persona" that is used to r
 
 # 5. Extensibility
 
-## Extensions from Non-GEDCOM X Vocabularies
+Data types, properties, and enumerated values MAY be defined as extensions to GEDCOM X Conceptual Model by external
+specifications. New data types, properties, and enumerated values MAY also be added by future versions of the
+GEDCOM X Conceptual Model or by other GEDCOM X specifications. Implementations of this version of the specification
+will not be able to process such extensions correctly and, in fact, will not be able to distinguish such extensions
+from error.
 
-This specification provides the data types and properties that define GEDCOM X.
-Other data types and vocabularies ("foreign vocabularies") can be used in
-GEDCOM X data types.
+This section defines the constraints by which implementations of the GEDCOM X Conceptual Model SHOULD identify
+and process data types, properties, and enumerated values not defined by this version of GEDCOM X.
 
-## Extensions to the GEDCOM X Vocabulary
+## 5.1 Data Type Extensions
 
-The GEDCOM X namespaces are reserved for future forward-compatible revisions
-of GEDCOM X. Future versions of this specification could add new data types and
-properties to the GEDCOM X vocabulary.  Software written to conform to this
-version of the specification will not be able to process such extensions correctly
-and, in fact, will not be able to distinguish such extensions from error.  For
-the purposes of this discussion, unrecognized data types and properties from the
-GEDCOM X vocabulary will be considered "foreign vocabularies".
+New data types MAY be defined as extensions to GEDCOM X by providing the following:
 
-## Processing Foreign Vocabularies
+* A description of the data type.
+* An identifier for the data type.
+* The data type being extended by the data type, if any.
+* The properties of the data type.
+* Examples needed to clarify the usage of the data type, if any.
 
-GEDCOM X Processors that encounter foreign vocabularies in a location that is
-legal according to this specification MUST NOT stop processing or
-signal an error.  It might be the case that the GEDCOM X Processor is
-able to process the foreign vocabularies correctly and does so.  Otherwise,
-such vocabularies are termed "unknown foreign vocabularies".
+The base URI `http://gedcomx.org/` is reserved for identifiers of data types defined by the GEDCOM X specification
+set. Data types defined outside the scope of the GEDCOM X specification set MUST NOT use the value `http://gedcomx.org/`
+as a base URI for the data type identifier.
 
-When unknown foreign vocabularies are encountered, GEDCOM X Processors MAY
-bypass the foreign properties, type references, and textual content and
-MUST NOT change their behavior as a result of the presence of the vocabulary.
+Specifications that define new data types as GEDCOM X extensions MUST be published and made freely available and
+compatible with the terms and constraints that govern the GEDCOM X Conceptual Model.
 
-<a name="extension-properties"/>
+## 5.2 Enumerated Value Extensions
 
-## Extension Properties
+New enumerated values MAY be defined as extensions to GEDCOM X by providing the following:
 
-GEDCOM X allows properties of foreign vocabularies in any data type, except
-where it is explicitly forbidden.
+* An identifier for each enumerated value.
+* A description for each enumerated value.
+* An identification of which properties of which data types to which new enumerated value applies.
 
-## Extension Types
+The base URI for enumerated values defined by the GEDCOM X specification set is `http://gedcomx.org/`.
+Enumerated values defined outside the scope of the GEDCOM X specification set MUST NOT use the value `http://gedcomx.org/`
+as a base URI for the enumerated value identifier.
 
-GEDCOM X allows data types of foreign vocabularies to be referenced anywhere
-data types are defined to be referenced. Examples of data type references include
-name types, fact types, resource types, etc. GEDCOM X supplies its own set of
-"known" data types and implementors are encouraged to use the list of known data
-types as much as possible to preserve maximum compatibility.
+Specifications that define new enumerated values as GEDCOM X extensions MUST be published and made freely available and
+compatible with the terms and constraints that govern the GEDCOM X Conceptual Model.
 
-## User-Defined Types
+### 5.2.1 User-Defined Enumerated Values
 
-Some applications MAY allow data types to be provided. For example, a genealogy
-application may provide a feature that allows a user to supply a "custom" fact
-about the life of a person when the list of known fact types doesn't contain
-the type of fact the user may want to add.
+Some applications MAY allow enumerated values to be provided by a user. For example, a genealogy
+application may provide a feature that allows a user to describe a "custom" fact about a person
+when there doesn't exist a formally specified enumerated value.
 
 In the case where a user has supplied a title or description instead of selecting
-a known data type, GEDCOM X recognizes the data URI scheme as defined by
+a known enumerated value, GEDCOM X recognizes the data URI scheme as defined by
 [RFC 2397](http://tools.ietf.org/html/rfc2397).
 
 todo: data uri example
 
-# 6. Miscellaneous To Do
+<a name="extension-properties"/>
 
-todo: supply details about how GEDCOM X defines its evidence model.
+## 5.3 Extension Properties
+
+New properties MAY be defined as extensions to existing GEDCOM X data types by providing the following:
+
+* The data type to which the property applies.
+* A name of the property.
+* A description of the property.
+* The data type of the value of the property.
+* Any constraints that are applicable to the property.
+
+Extension properties MUST NOT be defined on data types that explicitly restrict extension properties.
+
+Extension properties MUST NOT be defined as "REQUIRED".
+
+Specifications that define new properties as GEDCOM X extensions MUST be published and made freely available and
+compatible with the terms and constraints that govern the GEDCOM X Conceptual Model.
+
+## 5.4 Processing Extensions
+
+GEDCOM X implementations that encounter extensions in a location that is legal according to this specification SHOULD NOT stop processing or
+signal an error, although implementations MAY signal nonfatal warnings. A GEDCOM X implementation MAY be able to process the extension
+correctly and choose to do so.  Otherwise, GEDCOM X implementations MAY bypass the extensions and MUST NOT change their behavior as a result
+of the presence of the extension.
