@@ -259,7 +259,6 @@ The JSON object used to (de)serialize the `http://gedcomx.org/v1/Person` data ty
 
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
-living | Whether the person is considered living. | living | boolean
 gender | The conclusion about the gender of the person. | gender | [`Gender`](#gender)
 names | The conclusions about the names of the person. | names | array of [`Name`](#name-conclusion)
 facts | The conclusions about the facts of the life of the person. | facts | array of [`Fact`](#fact-conclusion)
@@ -271,7 +270,6 @@ facts | The conclusions about the facts of the life of the person. | facts | arr
 
   ...the members of [Subject](#subject)...,
 
-  "living" : true,
   "gender" : { ... },
   "names" : [ { ... }, { ... } ],
   "facts" : [ { ... }, { ... } ]

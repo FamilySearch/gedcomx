@@ -216,7 +216,6 @@ data type.
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
-living | Whether the person is considered living. | gx:living | xsd:boolean
 gender | The conclusion about the gender of the person. | gx:gender | [`gx:Gender`](#gender)
 names | The conclusions about the names of the person. | gx:name | [`gx:Name`](#name-conclusion)
 facts | The conclusions about the facts of the life of the person. | gx:fact | [`gx:Fact`](#fact-conclusion)
@@ -228,7 +227,6 @@ facts | The conclusions about the facts of the life of the person. | gx:fact | [
 
     <!-- ...the members of [gx:Subject](#subject)... -->
 
-    <gx:living>true</gx:living>
     <gx:gender>
       ...
     </gx:gender>
