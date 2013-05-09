@@ -314,7 +314,7 @@ accounts  | The online accounts of the person or organization. | List of [`http:
 emails  | The email addresses of the person or organization. | List of [URI](#uri) - MUST resolve to a valid e-mail address (e.g. "mailto:someone@gedcomx.org"). Order is preserved. | OPTIONAL.
 phones  | The phones (voice, fax, mobile) of the person or organization. | List of [URI](#uri) - MUST resolve to a valid phone number (e.g. "tel:+1-201-555-0123"). Order is preserved. | OPTIONAL.
 addresses  | The addresses of the person or organization. | List of [`http://gedcomx.org/v1/Address`](#address). Order is preserved. | OPTIONAL.
-identifiers | Identifiers for the agent. When an identifier for an agent is also an identifier for a person, the data in the person describes the agent. | List of [`http://gedcomx.org/v1/Identifier`](#identifier-type). Order is preserved. | OPTIONAL.
+identifiers | Identifiers for the agent. | List of [`http://gedcomx.org/v1/Identifier`](#identifier-type). Order is preserved. | OPTIONAL.
 
 
 <a name="event"/>
@@ -462,8 +462,6 @@ latitude | Degrees north or south of the Equator (0.0 degrees). | IEEE 754 binar
 longitude | Angular distance in degrees, relative to the Prime Meridian. | IEEE 754 binary64 value | OPTIONAL.  If provided, MUST provide `latitude` also.  Values range from −180.0 degrees (west of the Meridian) to 180.0 degrees (east of the Meridian).  It is assumed that all instances of `PlaceDescription` that share an identical `Primary` identifier will also have identical `longitude` values.
 spatialDescription | A reference to a geospatial description of this place. | [`URI`](#uri) | OPTIONAL. It is RECOMMENDED that this geospatial description resolve to a KML document.
 
-Note:  Multiple descriptions of the same place MAY be correlated via the `http://gedcomx.org/Primary` identifier.
-
 
 # 3. Component-Level Data Types
 
@@ -477,8 +475,8 @@ a top-level data type.
 
 ## 3.1 The "Identifier" Data Type
 
-The `Identifier` data type defines the data structure used to supply an identifier of a 
-genealogical resource in a specific data set.
+The `Identifier` data type defines the data structure used to supply an identifier of a genealogical resource
+in a specific data set.
 
 The `Identifier` data type does NOT support extension properties (see [Extension Properties](#extension-properties)).
 
@@ -503,17 +501,26 @@ The following identifier types are defined by GEDCOM X.
 
 URI | description
 ----|------------
-`http://gedcomx.org/Primary` | The primary identifier for the resource.
-`http://gedcomx.org/Deprecated` | An identifier that has been relegated, deprecated, or otherwise downgraded. This identifier is commonly used as the result of a merge when what was once a primary identifier for a person is no longer primary.
-`http://gedcomx.org/Persistent` | An identifier that is considered to be a long-term persistent identifier. Applications that provide persistent identifiers are claiming that links to the resource using the identifier won't break.
+`http://gedcomx.org/Primary` | The primary identifier for the resource. When two resources each have an identifier of type `Primary` with the same value, it means that the two resources describe the same thing.
+`http://gedcomx.org/Authority` | An identifier for the resource in an external authority or other expert system.
+`http://gedcomx.org/Deprecated` | An identifier that has been relegated, deprecated, or otherwise downgraded. This identifier is commonly used as the result of a merge when what was once a primary identifier for a resource is no longer the primary identifier.
 
 ### examples
 
-* Person "12345" merges into Person "67890". Person "67890" assumes identifier "12345". Identifier "12345" is of type `http://gedcomx.org/Deprecated`
-  because the merged person "12345" now uses identifier "67890".
-* An online web application issues a persistent identifier of value `https://familysearch.org/pal:/12345` to a `Person` and the same identifier
-  is used as the primary identifier for the `Person`. The list of identifiers for the `Person` contains two identifiers with value `https://familysearch.org/pal:/12345`,
-  one of type `http://gedcomx.org/Primary` and one of type `http://gedcomx.org/Persistent`.
+* An instance of `Person` with an identifier of type `http://gedcomx.org/Primary` and value "12345" is merged into an
+  instance of `Person` with an identifier of type `http://gedcomx.org/Primary` and value "67890". Person "67890" assumes
+  an identifier of type `http://gedcomx.org/Deprecated` and value "12345". The identifier type `http://gedcomx.org/Deprecated`
+  is used because the merged person "12345" now has identifier of type `http://gedcomx.org/Primary` with value "67890".
+* A description of Salt Lake City, Utah, United States is provided using an instance of `PlaceDescription`. Salt Lake City is
+  maintained in the [Geographic Names Information System (GNIS)](http://geonames.usgs.gov/), an external place authority. The
+  description of Salt Lake City might identify the associated GNIS resource using an identifier of type `http://gedcomx.org/Authority`
+  with value "http://geonames.usgs.gov/pls/gnispublic/f?p=gnispq:3:::NO::P3_FID:2411771".
+* A user of a genealogical application is described using an instance of `Agent` that has an identifier of type `http://gedcomx.org/Primary`
+  and value "12345". The same user is also described using an instance of `Person` that also has an identifier of type
+  `http://gedcomx.org/Primary` and value "12345" that can be used to associate the two descriptions of the same user.
+* Two descriptions of Naples, Campania, Italy are provided to a describe Naples at different periods of history. Each description
+  might use different names, temporal descriptions, and spatial descriptions, but each description shares the same value for an identifier
+  of type `http://gedcomx.org/Primary`.
 
 
 <a name="attribution"/>
