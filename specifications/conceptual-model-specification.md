@@ -478,6 +478,8 @@ a top-level data type.
 The `Identifier` data type defines the data structure used to supply an identifier of a genealogical resource
 in a specific data set.
 
+When two resources contain identical identifiers (identifiers with the same `type` and `value`), it means that the two resources describe the same thing.
+
 The `Identifier` data type does NOT support extension properties (see [Extension Properties](#extension-properties)).
 
 ### identifier
@@ -501,7 +503,7 @@ The following identifier types are defined by GEDCOM X.
 
 URI | description
 ----|------------
-`http://gedcomx.org/Primary` | The primary identifier for the resource. When two resources each have an identifier of type `Primary` with the same value, it means that the two resources describe the same thing.
+`http://gedcomx.org/Primary` | The primary (published) identifier for the resource.
 `http://gedcomx.org/Authority` | An identifier for the resource in an external authority or other expert system.
 `http://gedcomx.org/Deprecated` | An identifier that has been relegated, deprecated, or otherwise downgraded. This identifier is commonly used as the result of a merge when what was once a primary identifier for a resource is no longer the primary identifier.
 
@@ -513,14 +515,14 @@ URI | description
   is used because the merged person "12345" now has identifier of type `http://gedcomx.org/Primary` with value "67890".
 * A description of Salt Lake City, Utah, United States is provided using an instance of `PlaceDescription`. Salt Lake City is
   maintained in the [Geographic Names Information System (GNIS)](http://geonames.usgs.gov/), an external place authority. The
-  description of Salt Lake City might identify the associated GNIS resource using an identifier of type `http://gedcomx.org/Authority`
-  with value "http://geonames.usgs.gov/pls/gnispublic/f?p=gnispq:3:::NO::P3_FID:2411771".
-* A user of a genealogical application is described using an instance of `Agent` that has an identifier of type `http://gedcomx.org/Primary`
-  and value "12345". The same user is also described using an instance of `Person` that also has an identifier of type
-  `http://gedcomx.org/Primary` and value "12345" that can be used to associate the two descriptions of the same user.
+  description of Salt Lake City might identify the associated GNIS resource using an identifier of type
+  `http://gedcomx.org/Authority` with value "http://geonames.usgs.gov/pls/gnispublic/f?p=gnispq:3:::NO::P3_FID:2411771".
+* A user of a genealogical application is described using an instance of `Agent`.  The same user is also described using an
+  instance of `Person`.  Both the `Agent` and the `Person` contain identifiers with identical (possibly missing) types and with
+  the value "12345" to associate them as describing the same user.
 * Two descriptions of Naples, Campania, Italy are provided to a describe Naples at different periods of history. Each description
-  might use different names, temporal descriptions, and spatial descriptions, but each description shares the same value for an identifier
-  of type `http://gedcomx.org/Primary`.
+  might use different names, temporal descriptions, and spatial descriptions, but each description contains an identifier with
+  identical `type` and `value` fields to indicate that the descriptions are describing the same place.
 
 
 <a name="attribution"/>
