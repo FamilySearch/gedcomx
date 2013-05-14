@@ -314,7 +314,7 @@ accounts  | The online accounts of the person or organization. | List of [`http:
 emails  | The email addresses of the person or organization. | List of [URI](#uri) - MUST resolve to a valid e-mail address (e.g. "mailto:someone@gedcomx.org"). Order is preserved. | OPTIONAL.
 phones  | The phones (voice, fax, mobile) of the person or organization. | List of [URI](#uri) - MUST resolve to a valid phone number (e.g. "tel:+1-201-555-0123"). Order is preserved. | OPTIONAL.
 addresses  | The addresses of the person or organization. | List of [`http://gedcomx.org/v1/Address`](#address). Order is preserved. | OPTIONAL.
-identifiers | Identifiers for the agent. | List of [`http://gedcomx.org/v1/Identifier`](#identifier-type). Order is preserved. | OPTIONAL.
+identifiers | The published identifiers for the agent, used to identify the agent from a global context. An identifier MAY be used to associate an agent with a person. | List of [`http://gedcomx.org/v1/Identifier`](#identifier-type). Order is preserved. | OPTIONAL.
 
 
 <a name="event"/>
@@ -814,7 +814,7 @@ name  | description | data type | constraints
 extracted | Whether this _subject_ is to be constrained as an _extracted conclusion_. | boolean | OPTIONAL. Default: `false`. Refer to [Extracted Conclusion Constraints](#extracted-conclusion-constraints).
 evidence | References to _subject_ instances that support this _subject_. | List of [`http://gedcomx.org/v1/EvidenceReference`](#evidence-reference). Order is preserved. | OPTIONAL.  If provided, each reference MUST resolve to an instance of _subject_ of the same _subject_ type as this instance (e.g., if the _subject_ is a `Person`, all evidence references must resolve to instances of `Person`).
 media | References to multimedia resources for this _subject_, such as photos or videos. Media references are intended to provide additional context or illustration for the _subject_ and ARE NOT being considered as evidence supporting the _subject_ and its associated _conclusions_. Media references SHOULD be ordered by priority such that applications that wish to display a single media item (such as an image) MAY choose the first applicable media reference. | List of [`http://gedcomx.org/v1/SourceReference`](#source-reference) | OPTIONAL. Note that the `SourceReference` is used for multimedia references and therefore MUST resolve to a `SourceDescription` of the resource, which in turn provides a reference to the resource itself.
-identifiers | Identifiers for this _subject_. | List of [`http://gedcomx.org/v1/Identifier`](#identifier-type). Order is preserved. | OPTIONAL.
+identifiers | The published identifiers for the _subject_, used to identify the _subject_ in a global context. | List of [`http://gedcomx.org/v1/Identifier`](#identifier-type). Order is preserved. | OPTIONAL.
 attribution | The attribution of this _subject_. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing data set (e.g. file) of the _subject_ is assumed.
 
 
