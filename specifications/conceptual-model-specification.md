@@ -518,8 +518,8 @@ URI | description
   description of Salt Lake City might identify the associated GNIS resource using an identifier of type
   `http://gedcomx.org/Authority` with value "http://geonames.usgs.gov/pls/gnispublic/f?p=gnispq:3:::NO::P3_FID:2411771".
 * A user of a genealogical application is described using an instance of `Agent`.  The same user is also described using an
-  instance of `Person`.  Both the `Agent` and the `Person` contain identifiers with identical (possibly missing) types and with
-  the value "12345" to associate them as describing the same user.
+  instance of `Person`.  Both the `Agent` instance and the `Person` instance contain an identifier with no type and with the
+  value "12345" to signify that the agent and the person each describe the same user.
 * Two descriptions of Naples, Campania, Italy are provided to a describe Naples at different periods of history. Each description
   might use different names, temporal descriptions, and spatial descriptions, but each description contains an identifier with
   identical `type` and `value` fields to indicate that the descriptions are describing the same place.
