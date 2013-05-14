@@ -1310,6 +1310,7 @@ compatible with the terms and constraints that govern the GEDCOM X Conceptual Mo
 
 ## 5.4 Processing Extensions
 
+If extensions are used, extensions MUST be provided such that GEDCOM X implementations can bypass the extension and continue processing.
 GEDCOM X implementations that encounter extensions in a location that is legal according to this specification SHOULD NOT stop processing or
 signal an error, although implementations MAY signal nonfatal warnings. A GEDCOM X implementation MAY be able to process the extension
 correctly and choose to do so.  Otherwise, GEDCOM X implementations MAY bypass the extensions and MUST NOT change their behavior as a result
