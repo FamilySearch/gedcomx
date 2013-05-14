@@ -1233,6 +1233,7 @@ Data in a conclusion that is identified as "extracted" MUST conform to the follo
 GEDCOM X provides a specific definition for the term "persona" that is used to refer to an instance of
 `http://gedcomx.org/v1/Person` that has been identified as an extracted conclusion.
 
+<a name="extensibility"/>
 
 # 5. Extensibility
 

@@ -1160,15 +1160,28 @@ The following is an example of the structure of a GEDCOM X XML Element:
 ```
 
 
-# 6. Known JSON Extension Members
+# 6. Extensibility
 
-GEDCOM X defines the notion of extension properties, and the JSON serialization
-supports the extensibility requirements detailed in the GEDCOM X conceptual model
-specification. When an extension property is provided in a JSON object, the type
-of the object can be determined by the name of the JSON member.
+In accordance with the [extensibility provisions](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md#extensibility)
+of the GEDCOM X Conceptual Model, extensions MAY be provided as JSON members on data types where extensions are not
+explicitly prohibited.
 
-For convenience, GEDCOM X reserves the use of the following member names as
-"known" extension members:
+## 6.1 Data Type Extensions
+
+New data types MAY be defined as extensions to the GEDCOM X XML Serialization Format by providing the following:
+
+* A conceptual data type definition as specified by the GEDCOM X Conceptual Model Section 5.1.
+* A JSON member name for each property of the data type.
+
+Specifications that define new data types as GEDCOM X JSON extensions MUST be published and made freely available and
+compatible with the terms and constraints that govern the GEDCOM X JSON Serialization Format.
+
+## 6.2 Known JSON Extension Members
+
+GEDCOM X defines a set of JSON members that are explicitly associated with a data type such that
+GEDCOM X JSON parsers MAY interpret the members correctly if they are included as an extension
+member in a valid data type as defined by the conceptual model. The following members are
+identified:
 
 name | JSON object type
 -----|-----------------
@@ -1179,7 +1192,8 @@ facts | array of [`Fact`](#fact-conclusion)
 names | array of [`Name`](#name-conclusion)
 genders | array of [`Gender`](#gender-conclusion)
 sourceReferences | array of [`SourceReference`](#source-reference)
-sourceDescriptions | array of [`SourceDescription`](#rdf-description)
+sourceDescriptions | array of [`SourceDescription`](#source-description)
+placeDescriptions | array of [`PlaceDescription`](#place-description)
 agents | array of [`Agent`](#agent)
 documents | array of [`Document`](#document)
 attribution | array of [`Attribution`](#attribution)

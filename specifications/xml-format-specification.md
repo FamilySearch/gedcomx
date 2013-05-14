@@ -1201,7 +1201,27 @@ The following is an example of the structure of a GEDCOM X XML Element:
 ```
 
 
-# 6. XML Extension Elements
+# 6. Extensibility
+
+In accordance with the [extensibility provisions](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md#extensibility)
+of the GEDCOM X Conceptual Model, extensions MAY be provided as XML elements or attributes on data types where
+extensions are not explicitly prohibited.
+
+## 6.1 Data Type Extensions
+
+New data types MAY be defined as extensions to the GEDCOM X XML Serialization Format by providing the following:
+
+* A conceptual data type definition as specified by the GEDCOM X Conceptual Model Section 5.1.
+* An XML name and namespace for each property of the data type, and whether the property is serialized as an XML element or attribute.
+
+The namespace `http://gedcomx.org/v1/` is reserved for elements and attributes defined by the GEDCOM X specification
+set. Data types defined outside the scope of the GEDCOM X specification set MUST NOT use the value `http://gedcomx.org/v1/`
+as a namespace for the XML element or attribute.
+
+Specifications that define new data types as GEDCOM X XML extensions MUST be published and made freely available and
+compatible with the terms and constraints that govern the GEDCOM X XML Serialization Format.
+
+## 6.2 Known XML Element Extensions
 
 GEDCOM X defines a set of elements that are explicitly associated with a data type such that
 GEDCOM X XML parsers MAY interpret the elements correctly if they are included as an extension
@@ -1218,6 +1238,7 @@ gx:gender | [`gx:Gender`](#gender-conclusion)
 gx:agent| [`gx:Agent`](#agent)
 gx:sourceReference | [`gx:SourceReference`](#source-reference)
 gx:sourceDescription | [`gx:SourceDescription`](#source-description)
+gx:placeDescription | [`gx:PlaceDescription`](#place-description)
 gx:event | [`gx:Event`](#event)
 gx:document | [`gx:Document`](#document)
 gx:attribution | [`gx:Attribution`](#attribution)
