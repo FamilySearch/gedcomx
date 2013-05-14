@@ -113,19 +113,9 @@ is interpreted as a "URI Reference" as defined by [RFC 3986, section 4](http://t
 This specification uses the term "URI" to refer to both a "URI" and a "URI Reference" as
 defined by [RFC 3986](http://tools.ietf.org/html/rfc3986).
 
-### 1.3.5 Controlled Vocabularies
-
-GEDCOM X defines a set of controlled vocabularies for the purposes of identifying the semantic
-context of data instances. A controlled vocabulary is often defined to create a set
-of "known types" of data instances such as facts, names, genders, etc. For example, a controlled
-vocabulary is specified to identify the set of known types of events so applications
-can share semantic context of the event.
-
-Elements of a controlled vocabulary are identified by an enumerated value.
-
 <a name="formal-values" />
 
-### 1.3.6 Original and Normalized Values
+### 1.3.5 Original and Normalized Values
 
 When a property is identified as an "original value", the value of the property
 is interpreted as the literal value supplied by a user. If a property is identified as a
@@ -135,7 +125,7 @@ purposes.
 
 <a name="enumerated-value"/>
 
-### 1.3.7 Enumerated Values
+### 1.3.6 Enumerated Values
 
 Enumerated values are used throughout GEDCOM X to constrain values of properties to a limited (though
 not necessarily small) number of possibilities. Enumerated values are used to ensure portability and must
@@ -146,6 +136,16 @@ The base URI for enumerated values defined by GEDCOM X is `http://gedcomx.org/`.
 
 Enumerated values which are not defined directly or indirectly from this specification SHOULD be declared in a
 freely-distributable specification and MUST NOT use the value `http://gedcomx.org/` as a base URI.
+
+### 1.3.7 Controlled Vocabularies
+
+GEDCOM X defines a set of controlled vocabularies for the purposes of identifying the semantic
+context of data instances. A controlled vocabulary is often defined to create a set
+of "known types" of data instances such as facts, names, genders, etc. For example, a controlled
+vocabulary is specified to identify the set of known types of events so applications
+can share semantic context of the event.
+
+Elements of a controlled vocabulary are identified by an enumerated value.
 
 ## 1.4 Internationalization Considerations
 
