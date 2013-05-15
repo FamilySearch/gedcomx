@@ -216,6 +216,7 @@ data type.
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
+private | Whether this instance of `Person` has been designated for limited distribution or display. | private (attribute) | xs:boolean
 gender | The conclusion about the gender of the person. | gx:gender | [`gx:Gender`](#gender)
 names | The conclusions about the names of the person. | gx:name | [`gx:Name`](#name-conclusion)
 facts | The conclusions about the facts of the life of the person. | gx:fact | [`gx:Fact`](#fact-conclusion)
@@ -223,7 +224,7 @@ facts | The conclusions about the facts of the life of the person. | gx:fact | [
 ### examples
 
 ```xml
-  <... id="local_id" extracted="false">
+  <... id="local_id" extracted="false" private="false">
 
     <!-- ...the members of [gx:Subject](#subject)... -->
 
