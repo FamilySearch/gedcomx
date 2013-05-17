@@ -351,7 +351,7 @@ accounts  | The online accounts of the person or organization. | gx:account | [`
 emails  | The email addresses of the person or organization. | gx:email | [`gx:ResourceReference`](#resource-reference)
 phones  | The phones (voice, fax, mobile) of the person or organization. | gx:phone | [`gx:ResourceReference`](#resource-reference)
 addresses  | The addresses of the person or organization. | gx:address | [`gx:Address`](#address)
-identifiers | Identifiers for the agent. | gx:identifier | [`gx:Identifier`](#identifier-type)
+person | A reference to the person that describes this agent. | gx:person | [`gx:ResourceReference`](#resource-reference)
 
 ### examples
 
@@ -373,9 +373,7 @@ identifiers | Identifiers for the agent. | gx:identifier | [`gx:Identifier`](#id
       ...
     </gx:address>
     ...
-    <gx:identifier>
-      ...
-    </gx:identifier>
+    <gx:person resource="..."/>
     ...
 
     <!-- possibility of extension elements -->
@@ -464,6 +462,7 @@ temporalDescription | A description of the time period to which this place descr
 latitude | Degrees north or south of the Equator (0.0 degrees). | gx:latitude | xsd:double
 longitude | Angular distance in degrees, relative to the Prime Meridian. | gx:latitude | xsd:double
 spatialDescription | A reference to a geospatial description of this place. | gx:spatialDescription | [`gx:ResourceReference`](#resource-reference)
+alternateDescriptions | A set of references to alternate descriptions of the place. | gx:alternate | [`gx:ResourceReference`](#resource-reference)
 
 ### examples
 
@@ -482,6 +481,8 @@ spatialDescription | A reference to a geospatial description of this place. | gx
     <gx:latitude>27.9883575</gx:latitude>
     <gx:longitude>86.9252014</gx:longitude>
     <gx:spatialDescription resource="http://uri/for/KML/document"/>
+    <gx:alternate resource="..."/>
+    ...
   </...>
 ```
 

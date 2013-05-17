@@ -377,7 +377,7 @@ accounts  | The online accounts of the person or organization. | accounts | arra
 emails  | The email addresses of the person or organization. | emails | array of [`ResourceReference`](#resource-reference)
 phones  | The phones (voice, fax, mobile) of the person or organization. | phones | array of [`ResourceReference`](#resource-reference)
 addresses  | The addresses of the person or organization. | addresses | array of [`Address`](#address)
-identifiers | Identifiers for the agent. | identifiers | [`Identifier`](#identifier-type)
+person | A reference to the person that describes this agent. | person | [`ResourceReference`](#resource-reference)
 
 ### examples
 
@@ -395,7 +395,7 @@ identifiers | Identifiers for the agent. | identifiers | [`Identifier`](#identif
   "emails" : [ { "resource" : "mailto:someone@gedcomx.org" } , { "resource" : "mailto:someone@somewhere-else.org" } ],
   "phones" : [ { "resource" : "tel:+1-201-555-0123" } , { "resource" : "fax:+1-201-555-5555" } ],
   "addresses" : [ { ... }, { ... } ],
-  "identifiers" : [ { ... }, { ... } ]
+  "person" : { "resource" : "..." }
 
   ...possibility of extension elements...
 
@@ -478,6 +478,7 @@ temporalDescription | A description of the time period to which this place descr
 latitude | Degrees north or south of the Equator (0.0 degrees). | latitude | number
 longitude | Angular distance in degrees, relative to the Prime Meridian. | longitude | number
 spatialDescription | A reference to a geospatial description of this place. | spatialDescription | [`ResourceReference`](#resource-reference)
+alternateDescriptions | A set of references to alternate descriptions of the place. | alternates | [`ResourceReference`](#resource-reference)
 
 ### examples
 
@@ -493,7 +494,8 @@ spatialDescription | A reference to a geospatial description of this place. | sp
   "latitude" : "86.9252014",
   "spatialDescription" : {
     "resource" : "http://uri/for/KML/document"
-  }
+  },
+  "alternates" : [ { "resource" : "..." } ]
 }
 ```
 
