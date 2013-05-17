@@ -47,11 +47,14 @@ The identifier for this specification is:
 For convenience, this specification may be referred to as "GEDCOM X Standard Header Set 1.0".
 This specification uses "GEDCOM X Headers" internally.
 
-This specification is depends on the following standards and specifications:
+This specification depends on [RFC 822](http://www.w3.org/Protocols/rfc822/) to define the mechanism
+for supplying headers.
 
-* [RFC 822](http://www.w3.org/Protocols/rfc822/) defines the mechanism for supplying headers.
-* Some of the [HTTP Standard Headers](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html) are
-  imported by the GEDCOM X Standard Header Set.
+This specification depends on the GEDCOM X Date Format identified
+by [`http://gedcomx.org/date-model/v1`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/date-model-specification.md).
+
+This specification imports some of the [HTTP Standard Headers](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html)
+as defined by [RFC 2616](http://tools.ietf.org/html/rfc2616).
 
 ## 1.2 Notational Conventions
 
@@ -93,7 +96,7 @@ encoded according to the data URI scheme defined by [RFC 2397](http://tools.ietf
 ## 3.3. Date Headers
 
 Values of headers designated as date headers are to be interpreted as dates
-according to [ISO 8601](http://en.wikipedia.org/wiki/ISO_8601).
+according to the [GEDCOM X Date Format](https://github.com/FamilySearch/gedcomx/blob/master/specifications/date-model-specification.md).
 
 # 4. The Standard Header Set
 
@@ -109,7 +112,6 @@ Content-Location | text | The location of the resource, as defined by [RFC 2616,
 Content-MD5 | text | The MD5 sum of the resource for integrity checks, as defined by [RFC 2616, Section 14](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html).
 ETag | text | Version of the resource, as defined by [RFC 2616, Section 14](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html).
 User-Agent | text | Information about the user agent originating the request or file, as defined by [RFC 2616, Section 14](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html).
-X-type | URI | Identifier for the data type of the resource.
 X-DC-created | date | Date of creation of the resource, as defined by [http://purl.org/dc/terms/created](http://dublincore.org/documents/dcmi-terms/#terms-created).
 X-DC-creator | URI | Identifier for an entity primarily responsible for making the resource, as defined by [http://purl.org/dc/terms/creator](http://dublincore.org/documents/dcmi-terms/#terms-creator).
 X-DC-conformsTo | URI | Identifier for an established standard to which the described resource conforms, as defined by [http://purl.org/dc/terms/conformsTo](http://dublincore.org/documents/dcmi-terms/#terms-conformsTo).

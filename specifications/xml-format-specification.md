@@ -1148,6 +1148,8 @@ documents | The list of documents contained in the data set. | gx:document | [`g
 </...>
 ```
 
+<a name="gedcomx-element"/>
+
 
 # 5. The GEDCOM X Element
 
