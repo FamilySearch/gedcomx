@@ -314,8 +314,7 @@ accounts  | The online accounts of the person or organization. | List of [`http:
 emails  | The email addresses of the person or organization. | List of [URI](#uri) - MUST resolve to a valid e-mail address (e.g. "mailto:someone@gedcomx.org"). Order is preserved. | OPTIONAL.
 phones  | The phones (voice, fax, mobile) of the person or organization. | List of [URI](#uri) - MUST resolve to a valid phone number (e.g. "tel:+1-201-555-0123"). Order is preserved. | OPTIONAL.
 addresses  | The addresses of the person or organization. | List of [`http://gedcomx.org/v1/Address`](#address). Order is preserved. | OPTIONAL.
-identifiers | The published identifiers for the agent, used to identify the agent from a global context. An identifier MAY be used to associate an agent with a person. | List of [`http://gedcomx.org/v1/Identifier`](#identifier-type). Order is preserved. | OPTIONAL.
-
+person | A reference to the person that describes this agent. | [URI](#uri) | OPTIONAL. MUST resolve to an instance of [`http://gedcomx.org/v1/Person`](#person).
 
 <a name="event"/>
 
@@ -458,9 +457,10 @@ name  | description | data type | constraints
 names | A list of standardized (or normalized), fully-qualified (in terms of what is known of the applicable jurisdictional hierarchy) names for this place that are applicable to this description of this place. | List of [http://gedcomx.org/v1/TextValue](#text-value). Order is preserved. | REQUIRED. The list MUST contain at least one name.
 type | An implementation-specific uniform resource identifier (URI) used to identify the type of a place (e.g., address, city, county, province, state, country, etc.). | [Enumerated Value](#enumerated-value) | OPTIONAL.  There is no current definition of a set of known place types.
 temporalDescription | A description of the time period to which this place description is relevant. | [`http://gedcomx.org/v1/Date`](#conclusion-date) | OPTIONAL.
-latitude | Degrees north or south of the Equator (0.0 degrees). | IEEE 754 binary64 value | OPTIONAL.  If provided, MUST provide `longitude` also.  Values range from −90.0 degrees (south) to 90.0 degrees (north).  It is assumed that all instances of `PlaceDescription` that share an identical `Primary` identifier will also have identical `latitude` values.
-longitude | Angular distance in degrees, relative to the Prime Meridian. | IEEE 754 binary64 value | OPTIONAL.  If provided, MUST provide `latitude` also.  Values range from −180.0 degrees (west of the Meridian) to 180.0 degrees (east of the Meridian).  It is assumed that all instances of `PlaceDescription` that share an identical `Primary` identifier will also have identical `longitude` values.
+latitude | Degrees north or south of the Equator (0.0 degrees). | IEEE 754 binary64 value | OPTIONAL.  If provided, MUST provide `longitude` also.  Values range from −90.0 degrees (south) to 90.0 degrees (north).
+longitude | Angular distance in degrees, relative to the Prime Meridian. | IEEE 754 binary64 value | OPTIONAL.  If provided, MUST provide `latitude` also.  Values range from −180.0 degrees (west of the Meridian) to 180.0 degrees (east of the Meridian).
 spatialDescription | A reference to a geospatial description of this place. | [`URI`](#uri) | OPTIONAL. It is RECOMMENDED that this geospatial description resolve to a KML document.
+alternateDescriptions | A set of references to alternate descriptions of the place; used, for example, to describe the same place at different periods of time. | OPTIONAL. If provided, MUST resolve to an instance of [`http://gedcomx.org/v1/PlaceDescription`](#place-description). It is RECOMMENDED that alternate descriptions of a place have identical `longitude` and `latitude` values.
 
 
 # 3. Component-Level Data Types
@@ -475,10 +475,7 @@ a top-level data type.
 
 ## 3.1 The "Identifier" Data Type
 
-The `Identifier` data type defines the data structure used to supply an identifier of a genealogical resource
-in a specific data set.
-
-When two resources contain identical identifiers (identifiers with the same `type` and `value`), it means that the two resources describe the same thing.
+The `Identifier` data type defines the data structure used to supply an identifier of a genealogical resource.
 
 The `Identifier` data type does NOT support extension properties (see [Extension Properties](#extension-properties)).
 
@@ -517,12 +514,6 @@ URI | description
   maintained in the [Geographic Names Information System (GNIS)](http://geonames.usgs.gov/), an external place authority. The
   description of Salt Lake City might identify the associated GNIS resource using an identifier of type
   `http://gedcomx.org/Authority` with value "http://geonames.usgs.gov/pls/gnispublic/f?p=gnispq:3:::NO::P3_FID:2411771".
-* A user of a genealogical application is described using an instance of `Agent`.  The same user is also described using an
-  instance of `Person`.  Both the `Agent` instance and the `Person` instance contain an identifier with no type and with the
-  value "12345" to signify that the agent and the person each describe the same user.
-* Two descriptions of Naples, Campania, Italy are provided to a describe Naples at different periods of history. Each description
-  might use different names, temporal descriptions, and spatial descriptions, but each description contains an identifier with
-  identical `type` and `value` fields to indicate that the descriptions are describing the same place.
 
 
 <a name="attribution"/>
@@ -814,7 +805,7 @@ name  | description | data type | constraints
 extracted | Whether this _subject_ is to be constrained as an _extracted conclusion_. | boolean | OPTIONAL. Default: `false`. Refer to [Extracted Conclusion Constraints](#extracted-conclusion-constraints).
 evidence | References to _subject_ instances that support this _subject_. | List of [`http://gedcomx.org/v1/EvidenceReference`](#evidence-reference). Order is preserved. | OPTIONAL.  If provided, each reference MUST resolve to an instance of _subject_ of the same _subject_ type as this instance (e.g., if the _subject_ is a `Person`, all evidence references must resolve to instances of `Person`).
 media | References to multimedia resources for this _subject_, such as photos or videos. Media references are intended to provide additional context or illustration for the _subject_ and ARE NOT being considered as evidence supporting the _subject_ and its associated _conclusions_. Media references SHOULD be ordered by priority such that applications that wish to display a single media item (such as an image) MAY choose the first applicable media reference. | List of [`http://gedcomx.org/v1/SourceReference`](#source-reference) | OPTIONAL. Note that the `SourceReference` is used for multimedia references and therefore MUST resolve to a `SourceDescription` of the resource, which in turn provides a reference to the resource itself.
-identifiers | The published identifiers for the _subject_, used to identify the _subject_ in a global context. | List of [`http://gedcomx.org/v1/Identifier`](#identifier-type). Order is preserved. | OPTIONAL.
+identifiers | A list of identifiers for the _subject_. | List of [`http://gedcomx.org/v1/Identifier`](#identifier-type). Order is preserved. | OPTIONAL.
 attribution | The attribution of this _subject_. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing data set (e.g. file) of the _subject_ is assumed.
 
 
