@@ -490,7 +490,7 @@ The identifier for the "Identifier" data type is:
 name  | description | data type | constraints
 ------|-------------|-----------|------------
 value | The value of the identifier. | [URI](#uri) | REQUIRED.
-type  | Enumerated value identifying the type of the identifier. | [Enumerated Value](#enumerated-value) | OPTIONAL. If provided, MUST identify an identifier type, and use of a [known identifier type](#known-identifier-types) is RECOMMENDED.
+type  | Enumerated value that identifies how the identifier is to be used and the nature of the resource to which the identifier resolves. | [Enumerated Value](#enumerated-value) | OPTIONAL. If provided, MUST identify an identifier type, and use of a [known identifier type](#known-identifier-types) is RECOMMENDED. If no type is provided, the usage and nature of the identifier is application-specific.
 
 <a name="known-identifier-types"/>
 
@@ -500,9 +500,9 @@ The following identifier types are defined by GEDCOM X.
 
 URI | description
 ----|------------
-`http://gedcomx.org/Primary` | The primary (published) identifier for the resource.
-`http://gedcomx.org/Authority` | An identifier for the resource in an external authority or other expert system.
-`http://gedcomx.org/Deprecated` | An identifier that has been relegated, deprecated, or otherwise downgraded. This identifier is commonly used as the result of a merge when what was once a primary identifier for a resource is no longer the primary identifier.
+`http://gedcomx.org/Primary` | The primary identifier for the resource. The value of the identifier MUST resolve to the instance of `Subject` to which the identifier applies.
+`http://gedcomx.org/Authority` | An identifier for the resource in an external authority or other expert system. The value of the identifier MUST resolve to a public, authoritative, source for information about the `Subject` to which the identifier applies.
+`http://gedcomx.org/Deprecated` | An identifier that has been relegated, deprecated, or otherwise downgraded. This identifier is commonly used as the result of a merge when what was once a primary identifier for a resource is no longer the primary identifier. The value of the identifier MUST resolve to the instance of `Subject` to which the identifier applies.
 
 ### examples
 
