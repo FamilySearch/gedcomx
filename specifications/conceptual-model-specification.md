@@ -456,11 +456,11 @@ name  | description | data type | constraints
 ------|-------------|-----------|------------
 names | A list of standardized (or normalized), fully-qualified (in terms of what is known of the applicable jurisdictional hierarchy) names for this place that are applicable to this description of this place. | List of [http://gedcomx.org/v1/TextValue](#text-value). Order is preserved. | REQUIRED. The list MUST contain at least one name.
 type | An implementation-specific uniform resource identifier (URI) used to identify the type of a place (e.g., address, city, county, province, state, country, etc.). | [Enumerated Value](#enumerated-value) | OPTIONAL.  There is no current definition of a set of known place types.
+place | An identifier for the place being described. Descriptions that provide the same value for `place` are interpreted as alternate descriptions of the same place. | [URI](#uri) | OPTIONAL. If provided, the nature of the resource to which the value resolves is application-specific and outside the scope of this specification.
+latitude | Degrees north or south of the Equator (0.0 degrees). | IEEE 754 binary64 value | OPTIONAL.  If provided, MUST provide `longitude` also.  Values range from −90.0 degrees (south) to 90.0 degrees (north). It is assumed that alternate descriptions of the same place share identical `longitude` values.
+longitude | Angular distance in degrees, relative to the Prime Meridian. | IEEE 754 binary64 value | OPTIONAL.  If provided, MUST provide `latitude` also.  Values range from −180.0 degrees (west of the Meridian) to 180.0 degrees (east of the Meridian). It is assumed that alternate descriptions of the same place share identical `latitude` values.
 temporalDescription | A description of the time period to which this place description is relevant. | [`http://gedcomx.org/v1/Date`](#conclusion-date) | OPTIONAL.
-latitude | Degrees north or south of the Equator (0.0 degrees). | IEEE 754 binary64 value | OPTIONAL.  If provided, MUST provide `longitude` also.  Values range from −90.0 degrees (south) to 90.0 degrees (north).
-longitude | Angular distance in degrees, relative to the Prime Meridian. | IEEE 754 binary64 value | OPTIONAL.  If provided, MUST provide `latitude` also.  Values range from −180.0 degrees (west of the Meridian) to 180.0 degrees (east of the Meridian).
 spatialDescription | A reference to a geospatial description of this place. | [`URI`](#uri) | OPTIONAL. It is RECOMMENDED that this geospatial description resolve to a KML document.
-alternateDescriptions | A set of references to alternate descriptions of the place; used, for example, to describe the same place at different periods of time. | OPTIONAL. If provided, MUST resolve to an instance of [`http://gedcomx.org/v1/PlaceDescription`](#place-description). It is RECOMMENDED that alternate descriptions of a place have identical `longitude` and `latitude` values.
 
 
 # 3. Component-Level Data Types
