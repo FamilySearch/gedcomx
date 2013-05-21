@@ -352,7 +352,7 @@ accounts  | The online accounts of the person or organization. | gx:account | [`
 emails  | The email addresses of the person or organization. | gx:email | [`gx:ResourceReference`](#resource-reference)
 phones  | The phones (voice, fax, mobile) of the person or organization. | gx:phone | [`gx:ResourceReference`](#resource-reference)
 addresses  | The addresses of the person or organization. | gx:address | [`gx:Address`](#address)
-identifiers | Identifiers for the agent. | gx:identifier | [`gx:Identifier`](#identifier-type)
+person | A reference to the person that describes this agent. | gx:person | [`gx:ResourceReference`](#resource-reference)
 
 ### examples
 
@@ -374,9 +374,7 @@ identifiers | Identifiers for the agent. | gx:identifier | [`gx:Identifier`](#id
       ...
     </gx:address>
     ...
-    <gx:identifier>
-      ...
-    </gx:identifier>
+    <gx:person resource="..."/>
     ...
 
     <!-- possibility of extension elements -->
@@ -461,9 +459,10 @@ name | description | XML property | XML type
 -----|-------------|--------------|---------
 names | A list of standardized (or normalized), fully-qualified (in terms of what is known of the applicable jurisdictional hierarchy) names for this place that are applicable to this description of this place. | gx:name | [`gx:TextValue`](#text-value)
 type | A uniform resource identifier (URI) identifying the type of the place as it is applicable to this description. | type (attribute) | [`URI`](#uri)
-temporalDescription | A description of the time period to which this place description is relevant. | gx:temporalDescription | [`gx:Date`](#conclusion-date)
+place | An identifier for the place being described. | gx:place | [`gx:ResourceReference`](#resource-reference)
 latitude | Degrees north or south of the Equator (0.0 degrees). | gx:latitude | xsd:double
 longitude | Angular distance in degrees, relative to the Prime Meridian. | gx:latitude | xsd:double
+temporalDescription | A description of the time period to which this place description is relevant. | gx:temporalDescription | [`gx:Date`](#conclusion-date)
 spatialDescription | A reference to a geospatial description of this place. | gx:spatialDescription | [`gx:ResourceReference`](#resource-reference)
 
 ### examples
@@ -477,12 +476,14 @@ spatialDescription | A reference to a geospatial description of this place. | gx
       ...
     </gx:name>
     ...
+    <gx:place resource="..."/>
+    <gx:latitude>27.9883575</gx:latitude>
+    <gx:longitude>86.9252014</gx:longitude>
     <gx:temporalDescription>
       ...
     </gx:temporalDescription>
-    <gx:latitude>27.9883575</gx:latitude>
-    <gx:longitude>86.9252014</gx:longitude>
     <gx:spatialDescription resource="http://uri/for/KML/document"/>
+    ...
   </...>
 ```
 

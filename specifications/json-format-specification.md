@@ -379,7 +379,7 @@ accounts  | The online accounts of the person or organization. | accounts | arra
 emails  | The email addresses of the person or organization. | emails | array of [`ResourceReference`](#resource-reference)
 phones  | The phones (voice, fax, mobile) of the person or organization. | phones | array of [`ResourceReference`](#resource-reference)
 addresses  | The addresses of the person or organization. | addresses | array of [`Address`](#address)
-identifiers | Identifiers for the agent. | identifiers | [`Identifier`](#identifier-type)
+person | A reference to the person that describes this agent. | person | [`ResourceReference`](#resource-reference)
 
 ### examples
 
@@ -397,7 +397,7 @@ identifiers | Identifiers for the agent. | identifiers | [`Identifier`](#identif
   "emails" : [ { "resource" : "mailto:someone@gedcomx.org" } , { "resource" : "mailto:someone@somewhere-else.org" } ],
   "phones" : [ { "resource" : "tel:+1-201-555-0123" } , { "resource" : "fax:+1-201-555-5555" } ],
   "addresses" : [ { ... }, { ... } ],
-  "identifiers" : [ { ... }, { ... } ]
+  "person" : { "resource" : "..." }
 
   ...possibility of extension elements...
 
@@ -476,9 +476,10 @@ name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 names | A list of standardized (or normalized), fully-qualified (in terms of what is known of the applicable jurisdictional hierarchy) names for this place that are applicable to this description of this place. | names | array of [`TextValue`](#text-value)
 type | A uniform resource identifier (URI) identifying the type of the place as it is applicable to this description. | type | [`URI`](#uri)
-temporalDescription | A description of the time period to which this place description is relevant. | temporalDescription | [`Date`](#conclusion-date)
+place | An identifier for the place being described. | place | [`ResourceReference`](#resource-reference)
 latitude | Degrees north or south of the Equator (0.0 degrees). | latitude | number
 longitude | Angular distance in degrees, relative to the Prime Meridian. | longitude | number
+temporalDescription | A description of the time period to which this place description is relevant. | temporalDescription | [`Date`](#conclusion-date)
 spatialDescription | A reference to a geospatial description of this place. | spatialDescription | [`ResourceReference`](#resource-reference)
 
 ### examples
@@ -490,9 +491,10 @@ spatialDescription | A reference to a geospatial description of this place. | sp
 
   "names" : [ { ... }, { ... } ],
   "type" : "http://identifier/for/the/place/type",
-  "temporalDescription" : { ... },
+  "place" : { "resource" : "..." },
   "latitude" : "27.9883575",
   "latitude" : "86.9252014",
+  "temporalDescription" : { ... },
   "spatialDescription" : {
     "resource" : "http://uri/for/KML/document"
   }
