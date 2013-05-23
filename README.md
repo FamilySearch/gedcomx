@@ -1,7 +1,7 @@
 Welcome
 -------
 
-GEDCOM X is an open source project providing specifications for exchanging genealogical data.
+GEDCOM X defines an open data model and an open serialization format for exchanging the genealogical data essential to the [genealogical research process](https://github.com/FamilySearch/gedcomx/wiki/GEDCOM-X-and-the-Genealogical-Research-Process).
 
 [See the wiki](https://github.com/FamilySearch/gedcomx/wiki) for more information.
 
