@@ -215,7 +215,7 @@ facts | The conclusions about the facts of the life of the person. | List of [`h
 
 ## 2.2 The "Relationship" Data Type
 
-The `Relationship` data type describes the relationship between two persons.
+The `Relationship` data type describes a relationship between two persons.
 
 ### identifier
 
@@ -240,8 +240,8 @@ facts | The conclusions about the facts of the life of the relationship. | List 
 
 Note: when a relationship type implies direction, the relationship is said to
 be *from* person1 *to* person2. For example, in a parent-child relationship, the
-`person1` property refers to the parent and the `person2` property refers to the
-child.
+relationship is said to be "from a parent to a child"; therefore, the `person1`
+property refers to the parent and the `person2` property refers to the child.
 
 <a name="known-relationship-types"/>
 
@@ -271,16 +271,16 @@ The identifier for the "SourceDescription" data type is:
 
 name  | description | data type | constraints
 ------|-------------|-----------|------------
-id | An identifier for the data structure holding the source description data. The id is to be used as a "fragment identifier" as defined by [RFC 3986, Section 3.5](http://tools.ietf.org/html/rfc3986#section-3.5). As such, the constraints of the id are provided in the definition of the media type (e.g. XML, JSON) of the data structure. | string | OPTIONAL.
+id | An identifier for the data structure holding the source description data. | string | OPTIONAL.  The id is to be used as a "fragment identifier" as defined by [RFC 3986, Section 3.5](http://tools.ietf.org/html/rfc3986#section-3.5). As such, the constraints of the id are provided in the definition of the media type (e.g. XML, JSON) of the data structure.
 resourceType | Enumerated value identifying the type of resource being described. | [Enumerated Value](#enumerated-value) | OPTIONAL. If provided, MUST identify a resource type, and use of a [known resource type](#known-resource-types) is RECOMMENDED.
-citations | The citations for this source. At least one citation MUST be provided. If more than one citation is provided, citations are assumed to be given in order of preference, with the most preferred citation in the first position in the list. | [`http://gedcomx.org/v1/SourceCitation`](#source-citation) | REQUIRED.
+citations | The citation(s) for this source. | [`http://gedcomx.org/v1/SourceCitation`](#source-citation). Order is preserved. | REQUIRED.  At least one citation MUST be provided. If more than one citation is provided, citations are assumed to be given in order of preference, with the most preferred citation in the first position in the list.
 mediaType | A hint about the media type of the resource being described. | string | OPTIONAL. If provided, MUST be a valid MIME (media) type as specified by [RFC 4288](http://tools.ietf.org/html/rfc4288).
 about | A uniform resource identifier (URI) for the resource being described. | [URI](#uri) | OPTIONAL.
 mediator | A reference to the entity that mediates access to the described source. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to an instance of [`http://gedcomx.org/v1/Agent`](#agent).
 sources | A list of references to any sources from which this source is derived. | List of [`http://gedcomx.org/v1/SourceReference`](#source-reference) | OPTIONAL.
 analysis  | Reference to a document containing analysis about this source. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to an instance of [`http://gedcomx.org/v1/Document`](#document) of type `http://gedcomx.org/Analysis`.
 componentOf | A reference to the source that contains this source, i.e. its parent context. Used when the description of a source is not complete without the description of its parent (or containing) source. | [`http://gedcomx.org/v1/SourceReference`](#source-reference) | OPTIONAL.
-titles | The display names for this source. If more than one title is provided, titles are assumed to be given in order of preference, with the most preferred title in the first position in the list. | List of [`http://gedcomx.org/TextValue`](#text-value) | OPTIONAL.
+titles | The display names for this source. | List of [`http://gedcomx.org/TextValue`](#text-value). Order is preserved. | OPTIONAL. If more than one title is provided, titles are assumed to be given in order of preference, with the most preferred title in the first position in the list.
 notes  | A list of notes about a source. | List of [`http://gedcomx.org/Note`](#note) | OPTIONAL.
 attribution | The attribution of this source description. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing data set (e.g. file) of the source description is assumed.
 
@@ -314,15 +314,16 @@ The identifier for the `Agent` data type is:
 
 name  | description | data type | constraints
 ------|-------------|-----------|------------
-id | An identifier for the data structure holding the agent data. The id is to be used as a "fragment identifier" as defined by [RFC 3986, Section 3.5](http://tools.ietf.org/html/rfc3986#section-3.5). As such, the constraints of the id are provided in the definition of the media type (e.g. XML, JSON) of the data structure. | string | OPTIONAL.
-names | The names of the person or organization. If more than one name is provided, names are assumed to be given in order of preference, with the most preferred name in the first position in the list. | List of [`http://gedcomx.org/TextValue`](#text-value) | OPTIONAL.
+id | An identifier for the data structure holding the agent data. | string | OPTIONAL.  The id is to be used as a "fragment identifier" as defined by [RFC 3986, Section 3.5](http://tools.ietf.org/html/rfc3986#section-3.5). As such, the constraints of the id are provided in the definition of the media type (e.g. XML, JSON) of the data structure.
+names | The name(s) of the person or organization.| List of [`http://gedcomx.org/TextValue`](#text-value).  Order is preserved. | OPTIONAL.   If more than one name is provided, names are assumed to be given in order of preference, with the most preferred name in the first position in the list.
 homepage | The homepage of the person or organization. | [URI](#uri) | OPTIONAL.
 openid  | The [openid](http://openid.net/) of the person or organization. | [URI](#uri) | OPTIONAL.
-accounts  | The online accounts of the person or organization. | List of [`http://gedcomx.org/v1/OnlineAccount`](#online-account). Order is preserved. | OPTIONAL.
-emails  | The email addresses of the person or organization. | List of [URI](#uri) - MUST resolve to a valid e-mail address (e.g. "mailto:someone@gedcomx.org"). Order is preserved. | OPTIONAL.
-phones  | The phones (voice, fax, mobile) of the person or organization. | List of [URI](#uri) - MUST resolve to a valid phone number (e.g. "tel:+1-201-555-0123"). Order is preserved. | OPTIONAL.
-addresses  | The addresses of the person or organization. | List of [`http://gedcomx.org/v1/Address`](#address). Order is preserved. | OPTIONAL.
+accounts  | The online account(s) of the person or organization. | List of [`http://gedcomx.org/v1/OnlineAccount`](#online-account). Order is preserved. | OPTIONAL.
+emails  | The email address(es) of the person or organization. | List of [URI](#uri). Order is preserved. | OPTIONAL.  If provided, MUST resolve to a valid e-mail address (e.g. "mailto:someone@gedcomx.org").
+phones  | The phone(s) (voice, fax, mobile) of the person or organization. | List of [URI](#uri). Order is preserved. | OPTIONAL. If provided, MUST resolve to a valid phone number (e.g. "tel:+1-201-555-0123").
+addresses  | The address(es) of the person or organization. | List of [`http://gedcomx.org/v1/Address`](#address). Order is preserved. | OPTIONAL.
 person | A reference to the person that describes this agent. | [URI](#uri) | OPTIONAL. MUST resolve to an instance of [`http://gedcomx.org/v1/Person`](#person).
+
 
 <a name="event"/>
 
@@ -397,11 +398,12 @@ Despite the occasional inference of facts from events and vice versa, this speci
 are described independently. This version of the specification does not provide a direct association between instances of the two
 data types, although an indirect association can be found via the event role.
 
+
 <a name="document"/>
 
 ## 2.6 The "Document" Data Type
 
-The `Document` data type defines the base conceptual model for genealogical conclusions that are managed as textual documents.
+The `Document` data type defines the base conceptual model for genealogical data that are managed as textual documents.
 
 ### identifier
 
@@ -436,7 +438,7 @@ URI | description
 `http://gedcomx.org/Abstract` | The document is an abstract of a record or document.
 `http://gedcomx.org/Transcription` | The document is a transcription of a record or document.
 `http://gedcomx.org/Translation` | The document is a translation of a record or document.
-`http://gedcomx.org/Analysis` | The document is an analysis done by a researcher, often used as a genealogical proof statement.
+`http://gedcomx.org/Analysis` | The document is an analysis done by a researcher; a genealogical proof statement is an example of one kind of analysis document.
 
 <a name="document-text-types"/>
 
@@ -469,7 +471,7 @@ Support for other XHTML modules is OPTIONAL. Parsers MAY ignore elements from op
 
 The `PlaceDescription` data type describes the details of a place in terms of its name
 and possibly its type, time period, and/or a geospatial description -- functioning as a description
-of a place as a snapshot in time. The `PlaceDescription` data type extends the `Conclusion` data type.
+of a place as a snapshot in time.
 
 ### identifier
 
@@ -487,13 +489,13 @@ This data type extends the following data type:
 
 name  | description | data type | constraints
 ------|-------------|-----------|------------
-names | A list of standardized (or normalized), fully-qualified (in terms of what is known of the applicable jurisdictional hierarchy) names for this place that are applicable to this description of this place. | List of [http://gedcomx.org/v1/TextValue](#text-value). Order is preserved. | REQUIRED. The list MUST contain at least one name.
+names | A list of standardized (or normalized), fully-qualified (in terms of what is known of the applicable jurisdictional hierarchy) names for this place that are applicable to this description of this place. | List of [`http://gedcomx.org/v1/TextValue`](#text-value). Order is preserved. | REQUIRED. The list MUST contain at least one name.
 type | An implementation-specific uniform resource identifier (URI) used to identify the type of a place (e.g., address, city, county, province, state, country, etc.). | [Enumerated Value](#enumerated-value) | OPTIONAL.  There is no current definition of a set of known place types.
-place | An identifier for the place being described. Descriptions that provide the same value for `place` are interpreted as alternate descriptions of the same place. | [URI](#uri) | OPTIONAL. If provided, MUST NOT use a base URI of `http://gedcomx.org/`. If provided, the value MAY resolve to an external resource that is application-specific and outside the scope of this specification.
+place | An identifier for the place being described. | [URI](#uri) | OPTIONAL. Descriptions that provide the same value for `place` are interpreted as alternate descriptions of the same place. If provided, MUST NOT use a base URI of `http://gedcomx.org/`. If provided, the value MAY resolve to an external resource that is application-specific and outside the scope of this specification.
 latitude | Degrees north or south of the Equator (0.0 degrees). | IEEE 754 binary64 value | OPTIONAL.  If provided, MUST provide `longitude` also.  Values range from −90.0 degrees (south) to 90.0 degrees (north). It is assumed that descriptions that provide the same value for the `place` property share identical `longitude` values.
-longitude | Angular distance in degrees, relative to the Prime Meridian. | IEEE 754 binary64 value | OPTIONAL.  If provided, MUST provide `latitude` also.  Values range from −180.0 degrees (west of the Meridian) to 180.0 degrees (east of the Meridian). It is assumed that descriptions that provide the same value for the `place` property share identical `latitude` values.
+longitude | Angular distance in degrees, relative to the Prime Meridian (0.0 degrees). | IEEE 754 binary64 value | OPTIONAL.  If provided, MUST provide `latitude` also.  Values range from −180.0 degrees (west of the Meridian) to 180.0 degrees (east of the Meridian). It is assumed that descriptions that provide the same value for the `place` property share identical `latitude` values.
 temporalDescription | A description of the time period to which this place description is relevant. | [`http://gedcomx.org/v1/Date`](#conclusion-date) | OPTIONAL.
-spatialDescription | A reference to a geospatial description of this place. | [`URI`](#uri) | OPTIONAL. It is RECOMMENDED that this geospatial description resolve to a KML document.
+spatialDescription | A reference to a geospatial description of this place. | [`URI`](#uri) | OPTIONAL. It is RECOMMENDED that this geospatial description resolve to a [KML](http://en.wikipedia.org/wiki/Keyhole_Markup_Language) document.
 
 
 # 3. Component-Level Data Types
