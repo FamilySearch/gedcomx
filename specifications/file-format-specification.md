@@ -107,12 +107,18 @@ of the entry for the resource in the GEDCOM X file.
 ## 4.1 Main Header Fields
 
 All of the headers defined by the [GEDCOM X Standard Header Set](https://github.com/FamilySearch/gedcomx/blob/master/specifications/standard-header-set-specification.md)
-MAY be used as header fields in the main section of the manifest. Use of the following headers is RECOMMENDED if the metadata is available:
+MAY be used as header fields in the main section of the manifest.
+
+Use of the following headers is REQUIRED:
+
+* `X-DC-conformsTo`, used to identify the specification(s) the file conforms to. There MUST be one `X-DC-conformsTo` header with the value `http://gedcomx.org/file/v1`
+  to identify the file's compliance with this specification. Other `X-DC-conformsTo` headers MAY be supplied to identify compliance with other specifications.
+
+Use of the following headers is RECOMMENDED if the metadata is available:
 
 * `User-Agent`, used to provide information about the software, program, or other application used to create the file.
 * `X-DC-created`, used to determine when the file was created.
 * `X-DC-creator`, used to identify the agent that created the file. The value of the header is interpreted as a URI Reference that resolves to the agent, possibly provided in the GEDCOM X file itself.
-* `X-DC-conformsTo`, used to identify the specification(s) this file conforms to. Conformance to `http://gedcomx.org/file/v1` is assumed for all GEDCOM X files.
 
 ## 4.2 Individual Resource Header Fields
 
