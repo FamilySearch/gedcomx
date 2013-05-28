@@ -188,12 +188,6 @@ of the containing XML element.
 
 ## 1.4 Compliance
 
-An implementation of the GEDCOM X conceptual model is "non-compliant" if it fails to satisfy
-one or more of the MUST or REQUIRED level requirements. An implementation that satisfies all of
-the  MUST or REQUIRED and all of the SHOULD level requirements is said to be "unconditionally
-compliant"; and implementation that satisfies all of the MUST level requirements but not all of the
-SHOULD level requirements is said to be "conditionally compliant".
-
 In addition to the compliance requirements provided by this specification, all compliance requirements
 provided by the GEDCOM X Conceptual Model identified by
 [`http://gedcomx.org/conceptual-model/v1`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md)

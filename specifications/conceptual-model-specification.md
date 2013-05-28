@@ -166,14 +166,6 @@ identified where multi-valued input is needed for the benefit of exchanging gene
 across cultural boundaries. Such cases include the need to input multiple name forms and the need
 to identify multiple titles for a source.
 
-## 1.5 Compliance
-
-An implementation of the GEDCOM X Conceptual Model is "non-compliant" if it fails to satisfy
-one or more of the MUST or REQUIRED level requirements. An implementation that satisfies all of
-the  MUST or REQUIRED and all of the SHOULD level requirements is said to be "unconditionally
-compliant"; and implementation that satisfies all of the MUST level requirements but not all of the
-SHOULD level requirements is said to be "conditionally compliant".
-
 # 2. Top-Level Data Types
 
 The data types in this section are designated as "top-level" data types because they define the

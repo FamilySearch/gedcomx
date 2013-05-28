@@ -61,14 +61,6 @@ document are to be interpreted as described in BCP 14,
 [RFC2119](http://tools.ietf.org/html/rfc2119), as scoped to those conformance
 targets.
 
-## 1.3 Compliance
-
-An implementation of the GEDCOM X File Format is "non-compliant" if it fails to satisfy
-one or more of the MUST or REQUIRED level requirements. An implementation that satisfies all of
-the  MUST or REQUIRED and all of the SHOULD level requirements is said to be "unconditionally
-compliant"; and implementation that satisfies all of the MUST level requirements but not all of the
-SHOULD level requirements is said to be "conditionally compliant".
-
 # 2. Zip File
 
 The GEDCOM X File Format is an extension of the [ZIP file format](http://www.pkware.com/documents/casestudies/APPNOTE.TXT).
