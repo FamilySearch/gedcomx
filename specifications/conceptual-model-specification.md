@@ -86,18 +86,26 @@ The term "data instance" to refer to a particular instance, or instantiation, of
 
 <a name="char-string-list"/>
 
-### 1.3.3 Characters, Strings and Lists
+### 1.3.3 Basic Data Types
+
+todo:
+A "boolean" is
 
 A "character" is an atomic unit of text as specified by `ISO/IEC 10646`.
 
 A "string" is an atomic data type defined as a finite-length sequence of characters.
+
+A "double" is an IEEE 754 binary64 value.
+
+todo:
+A "timestamp" is
 
 A "list" is an atomic data type defined as a sequence of data instances. When a property is defined as
 of the "list" data type, the data type of the data instances in the list is also provided.
 
 <a name="uri"/>
 
-## 1.3.4 The URI Reference
+### 1.3.4 The URI Reference
 
 The Uniform Resource Identifier ("URI") is fundamental to the GEDCOM X conceptual model.
 The URI is used to identify both the data types and data instances. The
@@ -489,8 +497,8 @@ name  | description | data type | constraints
 names | A list of standardized (or normalized), fully-qualified (in terms of what is known of the applicable jurisdictional hierarchy) names for this place that are applicable to this description of this place. | List of [`http://gedcomx.org/v1/TextValue`](#text-value). Order is preserved. | REQUIRED. The list MUST contain at least one name.
 type | An implementation-specific uniform resource identifier (URI) used to identify the type of a place (e.g., address, city, county, province, state, country, etc.). | [Enumerated Value](#enumerated-value) | OPTIONAL.  There is no current definition of a set of known place types.
 place | An identifier for the place being described. | [URI](#uri) | OPTIONAL. Descriptions that provide the same value for `place` are interpreted as alternate descriptions of the same place. If provided, MUST NOT use a base URI of `http://gedcomx.org/`. If provided, the value MAY resolve to an external resource that is application-specific and outside the scope of this specification.
-latitude | Degrees north or south of the Equator (0.0 degrees). | IEEE 754 binary64 value | OPTIONAL.  If provided, MUST provide `longitude` also.  Values range from −90.0 degrees (south) to 90.0 degrees (north). It is assumed that descriptions that provide the same value for the `place` property share identical `longitude` values.
-longitude | Angular distance in degrees, relative to the Prime Meridian (0.0 degrees). | IEEE 754 binary64 value | OPTIONAL.  If provided, MUST provide `latitude` also.  Values range from −180.0 degrees (west of the Meridian) to 180.0 degrees (east of the Meridian). It is assumed that descriptions that provide the same value for the `place` property share identical `latitude` values.
+latitude | Degrees north or south of the Equator (0.0 degrees). | double | OPTIONAL.  If provided, MUST provide `longitude` also.  Values range from −90.0 degrees (south) to 90.0 degrees (north). It is assumed that descriptions that provide the same value for the `place` property share identical `longitude` values.
+longitude | Angular distance in degrees, relative to the Prime Meridian (0.0 degrees). | double | OPTIONAL.  If provided, MUST provide `latitude` also.  Values range from −180.0 degrees (west of the Meridian) to 180.0 degrees (east of the Meridian). It is assumed that descriptions that provide the same value for the `place` property share identical `latitude` values.
 temporalDescription | A description of the time period to which this place description is relevant. | [`http://gedcomx.org/v1/Date`](#conclusion-date) | OPTIONAL.
 spatialDescription | A reference to a geospatial description of this place. | [`URI`](#uri) | OPTIONAL. It is RECOMMENDED that this geospatial description resolve to a [KML](http://en.wikipedia.org/wiki/Keyhole_Markup_Language) document.
 
@@ -585,10 +593,6 @@ contributor | Reference to the agent to whom the attributed data is attributed. 
 modified | Timestamp of when the attributed data was contributed. | timestamp | OPTIONAL.
 changeMessage | A statement of why the attributed data is being provided by the contributor. | string | OPTIONAL.
 
-### examples
-
-todo:
-
 
 <a name="note"/>
 
@@ -678,10 +682,6 @@ name  | description | data type | constraints
 description  | Reference to a _description_ of the target source. | [URI](#uri) | REQUIRED. MUST resolve to an instance of [`http://gedcomx.org/v1/SourceDescription`](#source-description).
 attribution | The attribution of this source reference. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing resource of the source reference is assumed.
 
-### examples
-
-todo:
-
 
 <a name="evidence-reference"/>
 
@@ -768,7 +768,12 @@ street6 | The street (sixth line). | string | OPTIONAL.
 
 ## 3.10 The "Conclusion" Data Type
 
-The `Conclusion` data type defines the abstract concept for a basic genealogical _conclusion_.
+The `Conclusion` data type defines the abstract concept for a basic genealogical data item.  In formal
+discussions of the genealogical research process, _conclusion_ usually has a more specific meaning.  In
+naming this data type, we are not trying to associate it with the genealogical research process in the
+formal sense; rather, we the name refers to the fact that any information taken from an original is, in
+some form or another, an interpretation&mdash;a "conclusion"&mdash;even if the interpreter was diligent
+in representing the information verbatim as it was found in the original.
 
 ### identifier
 
@@ -780,12 +785,12 @@ The identifier for the `Conclusion` data type is:
 
 name  | description | data type | constraints
 ------|-------------|-----------|------------
-id | An identifier for the data structure holding the conclusion data. The id is to be used as a "fragment identifier" as defined by [RFC 3986, Section 3.5](http://tools.ietf.org/html/rfc3986#section-3.5). As such, the constraints of the id are provided in the definition of the media type (e.g. XML, JSON) of the data structure. | string | OPTIONAL.
+id | An identifier for the data structure holding the conclusion data. | string | OPTIONAL.  The id is to be used as a "fragment identifier" as defined by [RFC 3986, Section 3.5](http://tools.ietf.org/html/rfc3986#section-3.5). As such, the constraints of the id are provided in the definition of the media type (e.g. XML, JSON) of the data structure.
 lang | The locale identifier for the conclusion. | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag | OPTIONAL. If not provided, the locale of the current user of the data is assumed.
-sources | The list of references to the sources of related to this conclusion. The sources of a conclusion MUST also be sources of the conclusion's containing entity (i.e. [`Person`](#person) or [`Relationship`](#relationship) ).| List of [`http://gedcomx.org/v1/SourceReference`](#source-reference). Order is preserved. | OPTIONAL.
+sources | The list of references to the sources of related to this conclusion. | List of [`http://gedcomx.org/v1/SourceReference`](#source-reference). Order is preserved. | OPTIONAL.<p/><p/>NOTE: The sources associated with subordinate conclusions are considered to be sources of the entities that contain them (i.e. a source associated with the [`Name`](#name-conclusion) of a [`Person`](#person) is a source for the [`Person`](#person)).
 analysis  | Reference to a document containing analysis supporting this conclusion. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to an instance of [`http://gedcomx.org/v1/Document`](#document) of type `http://gedcomx.org/Analysis`.
-notes  | A list of notes about a conclusion. | List of [`http://gedcomx.org/Note`](#note) | OPTIONAL.
-confidence  | Reference to the confidence level of the conclusion. | [Enumerated Value](#enumerated-value) | OPTIONAL. If provided, MUST identify a confidence level, and use of a [known confidence level](#known-confidence-levels) is RECOMMENDED.
+notes  | A list of notes about this conclusion. | List of [`http://gedcomx.org/Note`](#note) | OPTIONAL.
+confidence  | Reference to a confidence level for this conclusion. | [Enumerated Value](#enumerated-value) | OPTIONAL. If provided, MUST identify a confidence level, and use of a [known confidence level](#known-confidence-levels) is RECOMMENDED.
 
 <a name="known-confidence-levels"/>
 
