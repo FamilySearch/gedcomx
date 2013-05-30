@@ -665,9 +665,7 @@ value | A rendering of the full citation as a string. | string | REQUIRED.
 
 ## 3.6 The "SourceReference" Data Type
 
-The `SourceReference` data type defines a reference to a source.  For example a genealogical conclusion
-or a derivative source is the referring object (i.e. the object holding the `SourceReference` instance),
-that cites its supporting source(s) (i.e. the target source(s)) using an instance(s) of `SourceReference`.
+The `SourceReference` data type defines a reference to a source description.
 
 ### identifier
 
