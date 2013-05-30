@@ -211,9 +211,9 @@ data type.
 name | description | XML property | XML type
 -----|-------------|--------------|---------
 private | Whether this instance of `Person` has been designated for limited distribution or display. | private (attribute) | xs:boolean
-gender | The conclusion about the gender of the person. | gx:gender | [`gx:Gender`](#gender)
-names | The conclusions about the names of the person. | gx:name | [`gx:Name`](#name-conclusion)
-facts | The conclusions about the facts of the life of the person. | gx:fact | [`gx:Fact`](#fact-conclusion)
+gender | The gender of the person. | gx:gender | [`gx:Gender`](#gender)
+names | The names of the person. | gx:name | [`gx:Name`](#name-conclusion)
+facts | The facts of the person. | gx:fact | [`gx:Fact`](#fact-conclusion)
 
 ### examples
 
@@ -250,7 +250,7 @@ name | description | XML property | XML type
 type | URI identifying the type of the relationship. | type (attribute) | [`URI`](#uri)
 person1 | Reference to the first person in the relationship. | gx:person1 | [`gx:ResourceReference`](#resource-reference)
 person2 | Reference to the second person in the relationship. | gx:person2 | [`gx:ResourceReference`](#resource-reference)
-facts | The conclusions about the facts of the life of the relationship. | gx:fact | [`gx:Fact`](#fact-conclusion)
+facts | The facts about the relationship. | gx:fact | [`gx:Fact`](#fact-conclusion)
 
 ### examples
 

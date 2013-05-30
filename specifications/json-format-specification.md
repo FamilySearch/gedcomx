@@ -254,9 +254,9 @@ The JSON object used to (de)serialize the `http://gedcomx.org/v1/Person` data ty
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 private | Whether this instance of `Person` has been designated for limited distribution or display. | private | boolean
-gender | The conclusion about the gender of the person. | gender | [`Gender`](#gender)
-names | The conclusions about the names of the person. | names | array of [`Name`](#name-conclusion)
-facts | The conclusions about the facts of the life of the person. | facts | array of [`Fact`](#fact-conclusion)
+gender | The gender of the person. | gender | [`Gender`](#gender)
+names | The names of the person. | names | array of [`Name`](#name-conclusion)
+facts | The facts of the life of the person. | facts | array of [`Fact`](#fact-conclusion)
 
 ### examples
 
@@ -285,7 +285,7 @@ name | description | JSON member | JSON object type
 type | URI identifying the type of the relationship. | type | [`URI`](#uri)
 person1 | Reference to the first person in the relationship. | person1 | [`ResourceReference`](#resource-reference)
 person2 | Reference to the second person in the relationship. | person2 | [`ResourceReference`](#resource-reference)
-facts | The conclusions about the facts of the life of the relationship. | facts | array of [`Fact`](#fact-conclusion)
+facts | The facts about the relationship. | facts | array of [`Fact`](#fact-conclusion)
 
 ### examples
 
