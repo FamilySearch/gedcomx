@@ -594,10 +594,6 @@ contributor | Reference to the agent to whom the attributed data is attributed. 
 modified | Timestamp of when the attributed data was contributed. | timestamp | OPTIONAL.
 changeMessage | A statement of why the attributed data is being provided by the contributor. | string | OPTIONAL.
 
-### examples
-
-todo:
-
 
 <a name="note"/>
 
@@ -685,10 +681,6 @@ name  | description | data type | constraints
 ------|-------------|-----------|------------
 description  | Reference to a _description_ of the target source. | [URI](#uri) | REQUIRED. MUST resolve to an instance of [`http://gedcomx.org/v1/SourceDescription`](#source-description).
 attribution | The attribution of this source reference. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing resource of the source reference is assumed.
-
-### examples
-
-todo:
 
 
 <a name="evidence-reference"/>
@@ -1243,10 +1235,6 @@ name  | description | data type | constraints
 name | The name of the qualifier, used to determine the nature of the qualifier. | [Enumerated Value](#enumerated-value) | REQUIRED. It is RECOMMENDED that the qualifier name resolve to an element of a constrained vocabulary.
 value | The value of the qualifier. The semantic meaning of the value is determined by the qualifier name. | string | OPTIONAL.
 
-### examples
-
-todo:
-
 
 <a name="extracted-conclusion-constraints"/>
 
@@ -1333,7 +1321,6 @@ In the case where a user has supplied a title or description instead of selectin
 a known enumerated value, GEDCOM X recognizes the data URI scheme as defined by
 [RFC 2397](http://tools.ietf.org/html/rfc2397).
 
-todo: data uri example
 
 <a name="extension-properties"/>
 

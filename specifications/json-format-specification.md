@@ -1208,7 +1208,3 @@ The values of all fragment identifiers within a single JSON document MUST be uni
 
 For more information about fragment identifiers, see [RFC 3986, Section 3.5](http://tools.ietf.org/html/rfc3986#section-3.5).
 
-
-# 8. Miscellaneous To Do
-
-todo:
