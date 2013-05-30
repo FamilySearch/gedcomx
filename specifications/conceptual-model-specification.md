@@ -361,7 +361,7 @@ URI | description
 `http://gedcomx.org/Birth` | A birth event.
 `http://gedcomx.org/Burial` | A burial event.
 `http://gedcomx.org/Census` | A census event.
-`http://gedcomx.org/Christening` | A christening event *at birth*. Note: use `AdultChristening` for a christening event as an adult.
+`http://gedcomx.org/Christening` | A christening event *at birth*. Note that this enumerated value does not identify an adult christening.
 `http://gedcomx.org/Death` | A death event.
 `http://gedcomx.org/Divorce` | A divorce event.
 `http://gedcomx.org/Marriage` | A marriage event.
