@@ -97,7 +97,7 @@ of the "list" data type, the data type of the data instances in the list is also
 
 <a name="uri"/>
 
-## 1.3.4 The URI Reference
+### 1.3.4 The URI Reference
 
 The Uniform Resource Identifier ("URI") is fundamental to the GEDCOM X conceptual model.
 The URI is used to identify both the data types and data instances. The
@@ -154,10 +154,10 @@ Elements of a controlled vocabulary are identified by an enumerated value.
 
 GEDCOM X must be designed to accommodate users and software of different languages and locales.
 To this end, a property named `lang` is supported on relevant GEDCOM X data types. This
-attribute is used to identify the locale of the user who provided the data. This property
+property is used to identify the locale of the data being processed. This property
 is optional, and when it is not provided, a processor MAY process the data as if it were
 provided in the default locale of the processor. When this property is provided, it overrides
-the value of the property supplied by any containing data elements.
+the value of the property supplied by any containing data instances.
 
 The values of the attribute are language identifiers as defined by [IETF BCP 47](http://tools.ietf.org/html/bcp47),
 _Tags for the Identification of Languages_; in addition, the empty string may be specified to
