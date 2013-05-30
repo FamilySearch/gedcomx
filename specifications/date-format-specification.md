@@ -39,7 +39,7 @@ The identifier for this specification is:
 
 `http://gedcomx.org/date-model/v1`
 
-For convenience, the GEDCOM X date model may be referred to as "GEDCOM X Date 1.0".
+For convenience, the GEDCOM X date format may be referred to as "GEDCOM X Date 1.0".
 This specification uses "GEDCOM X Date" internally.
 
 ## 1.2 Notational Conventions

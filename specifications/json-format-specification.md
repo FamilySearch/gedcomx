@@ -948,7 +948,7 @@ The JSON object used to (de)serialize the `http://gedcomx.org/v1/Date` data type
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 original | The original value of the date as supplied by the contributor. | original | string
-formal | The formal value of the date. | formal | [GEDCOM X Date](https://github.com/FamilySearch/gedcomx/blob/master/specifications/date-model-specification.md)
+formal | The formal value of the date. | formal | [GEDCOM X Date](https://github.com/FamilySearch/gedcomx/blob/master/specifications/date-format-specification.md)
 
 ### examples
 

@@ -950,7 +950,7 @@ data type.
 name | description | XML property | XML type
 -----|-------------|--------------|---------
 original | The original value of the date as supplied by the contributor. | gx:original | xsd:string
-formal | The formal value of the date. | gx:formal | [GEDCOM X Date](https://github.com/FamilySearch/gedcomx/blob/master/specifications/date-model-specification.md)
+formal | The formal value of the date. | gx:formal | [GEDCOM X Date](https://github.com/FamilySearch/gedcomx/blob/master/specifications/date-format-specification.md)
 
 ### examples
 
