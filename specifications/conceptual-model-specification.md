@@ -100,6 +100,8 @@ A "character" is an atomic unit of text as specified by `ISO/IEC 10646`.
 
 A "string" is an atomic data type defined as a finite-length sequence of characters.
 
+A "double" is an IEEE 754 binary64 value.
+
 A "list" is an atomic data type defined as a sequence of data instances. When a property is defined as
 of the "list" data type, the data type of the data instances in the list is also provided.
 
@@ -766,7 +768,12 @@ street6 | The street (sixth line). | string | OPTIONAL.
 
 ## 3.10 The "Conclusion" Data Type
 
-The `Conclusion` data type defines the abstract concept for a basic genealogical _conclusion_.
+The `Conclusion` data type defines the abstract concept for a basic genealogical data item.  In formal
+discussions of the genealogical research process, _conclusion_ usually has a more specific meaning.  In
+naming this data type, we are not trying to associate it with the genealogical research process in the
+formal sense; rather, we the name refers to the fact that any information taken from an original is, in
+some form or another, an interpretation&mdash;a "conclusion"&mdash;even if the interpreter was diligent
+in representing the information verbatim as it was found in the original.
 
 ### identifier
 
@@ -778,12 +785,12 @@ The identifier for the `Conclusion` data type is:
 
 name  | description | data type | constraints
 ------|-------------|-----------|------------
-id | An identifier for the data structure holding the conclusion data. The id is to be used as a "fragment identifier" as defined by [RFC 3986, Section 3.5](http://tools.ietf.org/html/rfc3986#section-3.5). As such, the constraints of the id are provided in the definition of the media type (e.g. XML, JSON) of the data structure. | string | OPTIONAL.
+id | An identifier for the data structure holding the conclusion data. | string | OPTIONAL.  The id is to be used as a "fragment identifier" as defined by [RFC 3986, Section 3.5](http://tools.ietf.org/html/rfc3986#section-3.5). As such, the constraints of the id are provided in the definition of the media type (e.g. XML, JSON) of the data structure.
 lang | The locale identifier for the conclusion. | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag | OPTIONAL. If not provided, the locale of the current user of the data is assumed.
-sources | The list of references to the sources of related to this conclusion. The sources of a conclusion MUST also be sources of the conclusion's containing entity (i.e. [`Person`](#person) or [`Relationship`](#relationship) ).| List of [`http://gedcomx.org/v1/SourceReference`](#source-reference). Order is preserved. | OPTIONAL.
+sources | The list of references to the sources of related to this conclusion. | List of [`http://gedcomx.org/v1/SourceReference`](#source-reference). Order is preserved. | OPTIONAL.<p/><p/>NOTE: The sources associated with subordinate conclusions are considered to be sources of the entities that contain them (i.e. a source associated with the [`Name`](#name-conclusion) of a [`Person`](#person) is a source for the [`Person`](#person)).
 analysis  | Reference to a document containing analysis supporting this conclusion. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to an instance of [`http://gedcomx.org/v1/Document`](#document) of type `http://gedcomx.org/Analysis`.
-notes  | A list of notes about a conclusion. | List of [`http://gedcomx.org/Note`](#note) | OPTIONAL.
-confidence  | Reference to the confidence level of the conclusion. | [Enumerated Value](#enumerated-value) | OPTIONAL. If provided, MUST identify a confidence level, and use of a [known confidence level](#known-confidence-levels) is RECOMMENDED.
+notes  | A list of notes about this conclusion. | List of [`http://gedcomx.org/Note`](#note) | OPTIONAL.
+confidence  | Reference to a confidence level for this conclusion. | [Enumerated Value](#enumerated-value) | OPTIONAL. If provided, MUST identify a confidence level, and use of a [known confidence level](#known-confidence-levels) is RECOMMENDED.
 
 <a name="known-confidence-levels"/>
 
