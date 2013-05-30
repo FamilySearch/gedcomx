@@ -560,11 +560,12 @@ and is left to the implementer of the application.
 #### The Granularity of Attribution
 
 The granularity of data that is attributed varies widely from application to application. Some highly collaborative applications
-might take a fine-grained approach, tracking attribution at the level of names, facts, and source references. Single-user
+might take a fine-grained approach, tracking attribution at the level of names and facts. Single-user
 applications might simply provide attribution for a large set of data, such as an entire data tree. GEDCOM X explicitly
-defines attribution for top-level entities such as persons, relationships, and documents, but also recognizes attribution
-as an extension property that can be applied at a finer level of granularity. (For more information about extension properties,
-see Section 6). For all data types where attribution is explicitly recognized, it is an OPTIONAL property.
+defines attribution for top-level entities such as persons, relationships, and documents, as well as for some other specific
+data types such as notes and source references. However, GEDCOM X also recognizes attribution as an extension property that can
+be applied at a finer level of granularity. (For more information about extension properties, see Section 6). For all data types
+where attribution is explicitly recognized, it is an OPTIONAL property.
 
 If data is not explicitly attributed, the attribution for the data is assumed to be the attribution for the containing
 data. For example, if no attribution is provided for the name of a person (as an extension property of the name), then the
