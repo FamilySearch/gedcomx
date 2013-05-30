@@ -620,14 +620,14 @@ The JSON object used to (de)serialize the `http://gedcomx.org/v1/SourceCitation`
 name | description | XML property | XML type
 -----|-------------|--------------|---------
 lang | The locale identifier for the citation. | lang | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag
-value | A rendering of the full (working) citation as a string. | value | string
+value | A rendering of the full citation as a string. | value | string
 
 ### examples
 
 ```json
 {
   "lang" : "en",
-  "value" : "...a rendering of the full (working) citation as a string..."
+  "value" : "...a rendering of the full citation as a string..."
 
   ...possibility of extension elements...
 

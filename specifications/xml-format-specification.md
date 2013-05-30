@@ -597,13 +597,13 @@ The `gx:SourceCitation` XML type is used to (de)serialize the
 name | description | XML property | XML type
 -----|-------------|--------------|---------
 lang | The locale identifier for the citation. | xml:lang (attribute) | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag
-value | A rendering of the full (working) citation as a string. | gx:value | xsd:string
+value | A rendering of the full citation as a string. | gx:value | xsd:string
 
 ### examples
 
 ```xml
   <... xml:lang="en">
-    <gx:value>...a rendering of the full (working) citation as a string...</gx:value>
+    <gx:value>...a rendering of the full citation as a string...</gx:value>
 
     <!-- possibility of extension elements -->
 

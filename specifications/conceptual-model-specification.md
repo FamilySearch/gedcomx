@@ -649,8 +649,7 @@ value | The literal value. | string | REQUIRED.
 
 ## 3.5 The "SourceCitation" Data Type
 
-The `SourceCitation` data type defines a container for the metadata necessary to identify a source(s)
-and from which bibliographic citation strings may be rendered.
+The `SourceCitation` data type defines a container for the metadata necessary for an agent to identify a source(s).
 
 ### identifier
 
@@ -663,7 +662,7 @@ The identifier for the "SourceCitation" data type is:
 name  | description | data type | constraints
 ------|-------------|-----------|------------
 lang | The locale identifier for the citation. | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag | OPTIONAL. If not provided, the locale of the data set containing the citation is assumed.
-value | A rendering of the full (working) citation as a string. | string | REQUIRED.
+value | A rendering of the full citation as a string. | string | REQUIRED.
 
 
 <a name="source-reference"/>
