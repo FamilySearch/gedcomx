@@ -729,15 +729,15 @@ The identifier for the `OnlineAccount` data type is:
 
 name  | description | data type | constraints
 ------|-------------|-----------|------------
-serviceHomepage  | The home page of the service. | [URI](#uri) | REQUIRED.
-accountName | The name, label, or id associating the owner of the account with the account. | string | REQUIRED.
+serviceHomepage  | The URI identifying the online service provider that holds the account being described. | [URI](#uri) | REQUIRED.
+accountName | The name, label, or id that uniquely identifies the account maintained by the online service provider. | string | REQUIRED.
 
 
 <a name="address"/>
 
 ## 3.9 The "Address" Data Type
 
-The `Address` data type defines a street address of a person or organization.
+The `Address` data type defines a street or postal address of a person or organization.
 
 ### identifier
 
@@ -749,7 +749,7 @@ The identifier for the `Address` data type is:
 
 name  | description | data type | constraints
 ------|-------------|-----------|------------
-value | A string representation of the value. Used when the address isn't separated into its constituent parts. | string | OPTIONAL.
+value | A full representation of the complete address. | string | OPTIONAL.
 city | The city. | string | OPTIONAL.
 country | The country. | string | OPTIONAL.
 postalCode | The postal code. | string | OPTIONAL.

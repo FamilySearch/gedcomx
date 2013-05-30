@@ -700,8 +700,8 @@ The JSON object used to (de)serialize the `http://gedcomx.org/v1/OnlineAccount` 
 
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
-serviceHomepage  | The home page of the service. | serviceHomepage | [`ResourceReference`](#resource-reference)
-accountName | The name, label, or id associating the owner of the account with the account. | accountName | string
+serviceHomepage  | The URI identifying the online service provider that holds the account being described. | serviceHomepage | [`ResourceReference`](#resource-reference)
+accountName | The name, label, or id that uniquely identifies the account maintained by the online service provider. | accountName | string
 
 ### examples
 

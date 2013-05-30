@@ -677,8 +677,8 @@ data type.
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
-serviceHomepage  | The home page of the service. | gx:serviceHomepage | [`gx:ResourceReference`](#resource-reference)
-accountName | The name, label, or id associating the owner of the account with the account. | gx:accountName | xsd:string
+serviceHomepage  | The URI identifying the online service provider that holds the account being described. | gx:serviceHomepage | [`gx:ResourceReference`](#resource-reference)
+accountName | The name, label, or id that uniquely identifies the account maintained by the online service provider. | gx:accountName | xsd:string
 
 ### examples
 
