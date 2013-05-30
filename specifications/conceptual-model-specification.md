@@ -299,7 +299,7 @@ URI | description
 
 ## 2.4 The "Agent" Data Type
 
-The `Agent` data type defines a living entity, such as a genealogical researcher, user of software, or organization.
+The `Agent` data type defines someone or something that curates genealogical data, such as a genealogical researcher, user of software, or organization.
 
 ### identifier
 
