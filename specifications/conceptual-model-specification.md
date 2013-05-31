@@ -770,8 +770,9 @@ street6 | The street (sixth line). | string | OPTIONAL.
 
 The `Conclusion` data type defines the abstract concept for a basic genealogical data item.
 
-In formal discussions of the genealogical research process, _conclusion_ usually has a more specific meaning.
-The name of this data type does not imply a formal association with the term "conclusion" as described by the
+In formal discussions of the genealogical research process, the term "conclusion" usually has a more specific meaning
+and is used to refer to a fully "proven" conclusion in accordance with the [Genealogical Proof Standard](http://www.bcgcertification.org/resources/standard.html).
+The name of the `Conclusion` data type does not imply a formal association with the term "conclusion" as described by the
 genealogical research process. Rather, the name refers to the notion any information that is interpreted from an
 "original" is in some way a "conclusion"&mdash;even if the interpreter was diligent in representing the
 information verbatim as it was found in the original.
@@ -812,17 +813,15 @@ URI | description
 
 The `Subject` data type defines the abstract concept of a genealogical _subject_.
 
-A _subject_ is something with a unique and intrinsic identity&mdash;e.g., a person, a location on the surface of the earth. We
-identify that _subject_ in time and space using various supporting _conclusions_—for a person: things like name, birth date, age,
-address, etc. We aggregate these supporting _conclusions_ to form an apparently-unique identity by which we can distinguish our
-_subject_ from all other possible _subjects_.
+A "subject" is something with a unique and intrinsic identity, such as a person or a location on the surface of the earth. We
+identify that subject in time and space using various supporting conclusions. For example, a person is a subject with supporting
+conclusions such as name, birth, gender, etc. We aggregate these supporting conclusions to form an apparently-unique identity by
+which we can distinguish our subject from all other possible subjects.
 
-In all cases, it seems that a _subject_ can also be used as a supporting _conclusion_ for another _subject_. So a _subject_ can
-be a _subject_ in one context and an supporting _conclusion_ in another.
-
-On the other hand, not all supporting _conclusions_ are _subjects_. We may research and debate a `Fact` (where it took place,
-when it took place, the spelling of the name, etc.), but it is always within the context of a _subject_ (where was _John_
-born, when was _John_ born, how should we spell _John_'s name).
+Note that a subject is itself a conclusion and can be used as a supporting conclusion for other subjects (via the `evidence` property).
+However, not all supporting conclusions are subjects. Researchers may research and debate a fact (e.g. where it took place, when it took
+place, the spelling of the name, etc.), but it is always within the context of a subject (e.g. where was _the person_ born, when was _the person_
+born, how should _the person's_ name be spelled).
 
 ### identifier
 
@@ -840,9 +839,9 @@ This data type extends the following data type:
 
 name  | description | data type | constraints
 ------|-------------|-----------|------------
-extracted | Whether this _subject_ is to be constrained as an _extracted conclusion_. | boolean | OPTIONAL. Default: `false`. Refer to [Extracted Conclusion Constraints](#extracted-conclusion-constraints).
-evidence | References to _subject_ instances that support this _subject_. | List of [`http://gedcomx.org/v1/EvidenceReference`](#evidence-reference). Order is preserved. | OPTIONAL.  If provided, each reference MUST resolve to an instance of _subject_ of the same _subject_ type as this instance (e.g., if the _subject_ is a `Person`, all evidence references must resolve to instances of `Person`).
-media | References to multimedia resources for this _subject_, such as photos or videos. Media references are intended to provide additional context or illustration for the _subject_ and ARE NOT being considered as evidence supporting the _subject_ and its associated _conclusions_. Media references SHOULD be ordered by priority such that applications that wish to display a single media item (such as an image) MAY choose the first applicable media reference. | List of [`http://gedcomx.org/v1/SourceReference`](#source-reference) | OPTIONAL. Note that the `SourceReference` is used for multimedia references and therefore MUST resolve to a `SourceDescription` of the resource, which in turn provides a reference to the resource itself.
+extracted | Whether this subject is to be constrained as an _extracted conclusion_. | boolean | OPTIONAL. Default: `false`. Refer to [Extracted Conclusion Constraints](#extracted-conclusion-constraints).
+evidence | References to other subjects that support this subject. | List of [`http://gedcomx.org/v1/EvidenceReference`](#evidence-reference). Order is preserved. | OPTIONAL.  If provided, each reference MUST resolve to an instance of subject of the same type as this instance (e.g. if the subject is an instance of `Person`, all evidence references must resolve to instances of `Person`).
+media | References to multimedia resources for this _subject_, such as photos or videos. Media references are intended to provide additional context or illustration for the subject and are _not_ being considered as evidence that supports the subject or its supporting conclusions. Media references SHOULD be ordered by priority such that applications that wish to display a single media item (such as an image) MAY choose the first applicable media reference. | List of [`http://gedcomx.org/v1/SourceReference`](#source-reference) | OPTIONAL. Note that the `SourceReference` is used for multimedia references and therefore MUST resolve to a `SourceDescription` of the resource, which in turn provides a reference to the resource itself.
 identifiers | A list of identifiers for the _subject_. | List of [`http://gedcomx.org/v1/Identifier`](#identifier-type). Order is preserved. | OPTIONAL.
 attribution | The attribution of this _subject_. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing data set (e.g. file) of the _subject_ is assumed.
 

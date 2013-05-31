@@ -777,18 +777,17 @@ confidence  | Reference to the confidence level of the contributor of the attrib
 
 ## 3.11 The "Subject" Data Type
 
-The `gx:Subject` XML type is used to (de)serialize the `http://gedcomx.org/v1/Subject`
-data type.
+The `gx:Subject` XML type is used to (de)serialize the `http://gedcomx.org/v1/Subject` data type.
 
 ### properties
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
-extracted | Whether this _subject_ is to be constrained as an _extracted conclusion_. | extracted (attribute) | xsd:boolean
-evidence | References to _subject_ instances that support this _subject_. | gx:evidence | [`gx:EvidenceReference`](#evidence-reference)
-media | References to multimedia resources for this _subject_, such as photos or videos. | gx:media | [`gx:SourceReference`](#source-reference)
-identifiers | Identifiers for this _subject_. | gx:identifier | [`gx:Identifier`](#identifier-type)
-attribution | The attribution of this _subject_. | gx:attribution | [`gx:Attribution`](#attribution)
+extracted | Whether this subject is to be constrained as an _extracted conclusion_. | extracted (attribute) | xsd:boolean
+evidence | References to instances of `Subject` that support this subject_. | gx:evidence | [`gx:EvidenceReference`](#evidence-reference)
+media | References to multimedia resources for this subject, such as photos or videos. | gx:media | [`gx:SourceReference`](#source-reference)
+identifiers | Identifiers for this subject. | gx:identifier | [`gx:Identifier`](#identifier-type)
+attribution | The attribution of this subject. | gx:attribution | [`gx:Attribution`](#attribution)
 
 ### examples
 

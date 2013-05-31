@@ -805,11 +805,11 @@ The JSON object used to (de)serialize the `http://gedcomx.org/v1/Subject` data t
 
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
-extracted | Whether this _subject_ is to be constrained as an _extracted conclusion_. | extracted | boolean
-evidence | References to _subject_ instances that support this _subject_. | evidence | [`EvidenceReference`](#evidence-reference)
-media | References to multimedia resources for this _subject_, such as photos or videos. | media | [`SourceReference`](#source-reference)
-identifiers | Identifiers for this _subject_. | identifiers | [`Identifier`](#identifier-type)
-attribution | The attribution of this _subject_. | attribution | [`Attribution`](#attribution)
+extracted | Whether this subject is to be constrained as an _extracted conclusion_. | extracted | boolean
+evidence | References to instances of `Subject` that support this subject. | evidence | [`EvidenceReference`](#evidence-reference)
+media | References to multimedia resources for this subject, such as photos or videos. | media | [`SourceReference`](#source-reference)
+identifiers | Identifiers for this subject. | identifiers | [`Identifier`](#identifier-type)
+attribution | The attribution of this subject. | attribution | [`Attribution`](#attribution)
 
 ### examples
 
