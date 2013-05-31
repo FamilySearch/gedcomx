@@ -98,10 +98,10 @@ The following example shows an instance of a GEDCOM X serialization in accordanc
       },
       "id" : "456"
     } ],
-    "id" : "BBB-BBBB",
     "sources" : [ {
       "description" : "#EEE-EEEE"
-    } ]
+    } ],
+    "id" : "BBB-BBBB"
   }, {
     "names" : [ {
       "nameForms" : [ {
@@ -142,10 +142,10 @@ The following example shows an instance of a GEDCOM X serialization in accordanc
       },
       "id" : "654"
     } ],
-    "id" : "CCC-CCCC",
     "sources" : [ {
       "description" : "#FFF-FFFF"
-    } ]
+    } ],
+    "id" : "CCC-CCCC"
   } ],
   "relationships" : [ {
     "facts" : [ {
@@ -163,29 +163,29 @@ The following example shows an instance of a GEDCOM X serialization in accordanc
     "person2" : {
       "resource" : "#CCC-CCCC"
     },
-    "id" : "DDD-DDDD",
     "sources" : [ {
       "description" : "#FFF-FFFF"
-    } ]
+    } ],
+    "id" : "DDD-DDDD"
   } ],
   "sourceDescriptions" : [ {
-    "id" : "EEE-EEEE",
-    "about" : "http://en.wikipedia.org/wiki/George_washington",
     "citations" : [ {
       "value" : "\"George Washington.\" Wikipedia, The Free Encyclopedia. Wikimedia Foundation, Inc. 24 October 2012."
-    } ]
+    } ],
+    "about" : "http://en.wikipedia.org/wiki/George_washington",
+    "id" : "EEE-EEEE"
   }, {
-    "id" : "FFF-FFFF",
-    "about" : "http://en.wikipedia.org/wiki/Martha_washington",
     "citations" : [ {
       "value" : "\"Martha Washington.\" Wikipedia, The Free Encyclopedia. Wikimedia Foundation, Inc. 24 October 2012."
-    } ]
+    } ],
+    "about" : "http://en.wikipedia.org/wiki/Martha_washington",
+    "id" : "FFF-FFFF"
   } ],
   "agents" : [ {
-    "id" : "GGG-GGGG",
     "names" : [ {
       "value" : "Ryan Heaton"
-    } ]
+    } ],
+    "id" : "GGG-GGGG"
   } ],
   "places" : [ {
     "names" : [ {
@@ -224,16 +224,13 @@ targets.
 
 ### Data Types
 
-For each data type specified by the GEDCOM X conceptual model, a
-JSON data format is supplied which specifies how each of the
-properties of the data type are to be serialized in JSON. Each instance
-of a data type is serialized as a JSON object. The properties
+For each data type specified by the GEDCOM X conceptual model, a JSON data format is supplied which specifies how each of the
+properties of the data type are to be serialized in JSON. Each instance of a data type is serialized as a JSON object. The properties
 of each data type are serialized as members of the JSON object.
 
 ## 1.4 Compliance
 
-In addition to the compliance requirements provided by this specification, all compliance requirements
-provided by the GEDCOM X Conceptual Model identified by
+In addition to the compliance requirements provided by this specification, all compliance requirements provided by the GEDCOM X Conceptual Model identified by
 [`http://gedcomx.org/conceptual-model/v1`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md)
 are inherited.
 

@@ -43,7 +43,7 @@ The media type defined by this specification is:
 
 `application/x-gedcomx-v1+xml`
 
-This specification is depends on the conceptual model specification identified
+This specification depends on the conceptual model specification identified
 by [`http://gedcomx.org/conceptual-model/v1`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md).
 
 ## 1.2 Examples
@@ -130,12 +130,12 @@ The following example shows an instance of a GEDCOM X serialization in accordanc
     </relationship>
     <sourceDescription about="http://en.wikipedia.org/wiki/George_washington" id="EEE-EEEE">
         <citation>
-            <value>&quot;George Washington.&quot; Wikipedia, The Free Encyclopedia. Wikimedia Foundation, Inc. 24 October 2012.</value>
+            <value>"George Washington." Wikipedia, The Free Encyclopedia. Wikimedia Foundation, Inc. 24 October 2012.</value>
         </citation>
     </sourceDescription>
     <sourceDescription about="http://en.wikipedia.org/wiki/Martha_washington" id="FFF-FFFF">
         <citation>
-            <value>&quot;Martha Washington.&quot; Wikipedia, The Free Encyclopedia. Wikimedia Foundation, Inc. 24 October 2012.</value>
+            <value>"Martha Washington." Wikipedia, The Free Encyclopedia. Wikimedia Foundation, Inc. 24 October 2012.</value>
         </citation>
     </sourceDescription>
     <agent id="GGG-GGGG">
@@ -179,17 +179,13 @@ prefix | namespace
 gx | `http://gedcomx.org/v1/`
 xsd | `http://www.w3.org/2001/XMLSchema`
 
-For each data type specified by the GEDCOM X conceptual model, an
-associated [XML schema](http://www.w3.org/TR/xmlschema-0/) type is
-supplied, which specifies how each of the properties of the data
-type are to be serialized in XML. The properties of each data type
-are serialized as either an XML attribute or as an XML child element
-of the containing XML element.
+For each data type specified by the GEDCOM X conceptual model, an associated [XML schema](http://www.w3.org/TR/xmlschema-0/) type is
+supplied, which specifies how each of the properties of the data type are to be serialized in XML. The properties of each data type
+are serialized as either an XML attribute or as an XML child element of the containing XML element.
 
 ## 1.4 Compliance
 
-In addition to the compliance requirements provided by this specification, all compliance requirements
-provided by the GEDCOM X Conceptual Model identified by
+In addition to the compliance requirements provided by this specification, all compliance requirements provided by the GEDCOM X Conceptual Model identified by
 [`http://gedcomx.org/conceptual-model/v1`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md)
 are inherited.
 
