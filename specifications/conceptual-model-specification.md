@@ -850,7 +850,7 @@ attribution | The attribution of this _subject_. | [`http://gedcomx.org/Attribut
 
 ## 3.12 The "Gender" Data Type
 
-The `Gender` data type defines a conclusion about the gender of a person.
+The `Gender` data type defines a gender of a person.
 
 ### identifier
 
@@ -888,21 +888,21 @@ URI | description
 
 ## 3.13 The "Name" Data Type
 
-The `Name` data type defines a conclusion about a name of a person.
+The `Name` data type defines a name of a person.
 
 A `Name` is intended to represent a single variant of a person's name.  This means that nicknames, spelling variations,
 or other name variants (often distinguishable by a name type) should be modeled with separate instances of `Name`.
 
-The name forms of a name contain representations of this name.  A `Name` MUST contain at least one name form, presumably
+The name forms of a name contain alternate representations of the name.  A `Name` MUST contain at least one name form, presumably
 a representation of the name that is considered proper and well formed in the person's native, historical cultural context.
 Other name forms MAY be included, which can be used to represent this name in contexts where the native name form is not
 easily recognized and interpreted.  Alternate forms are more likely in situations where conclusions are being analyzed
 across cultural context boundaries that have both language and writing script differences.
 
-For example, a Korean name has a native Korean form, but can also have a Chinese form and a Roman/Latin form -- three
+For example, a Korean name has a native Korean form, but can also have a Chinese form and a Roman/Latin form&mdash;three
 different name forms, but each representing the same name.
 
-If more than one name form is provided, included name forms are assumed to be given in order of preference, with the
+If more than one name form is provided, included name forms are presumed to be given in order of preference, with the
 most preferred name form in the first position in the list.
 
 ### identifier
@@ -922,7 +922,7 @@ This data type extends the following data type:
 name  | description | data type | constraints
 ------|-------------|-----------|------------
 type | Enumerated value identifying the type of the name. | [Enumerated Value](#enumerated-value) | OPTIONAL. If provided, MUST identify a name type, and use of a [known name type](#known-name-types) is RECOMMENDED.
-nameForms | The name form(s) that best express this name, usually representations considered proper and well formed in the person's native, historical cultural context. All included name forms SHOULD be representations of the same name, and NOT variants of the name (e.g., not a nicknames or spelling variation). | List of [`http://gedcomx.org/v1/NameForm`](#name-form). Order is preserved. | REQUIRED. At least one name form MUST be provided.
+nameForms | The name form(s) that best express this name, usually representations considered proper and well formed in the person's native, historical cultural context. All included name forms SHOULD be representations of the same name, and NOT variants of the name (e.g. not nicknames or spelling variations). | List of [`http://gedcomx.org/v1/NameForm`](#name-form). Order is preserved. | REQUIRED. At least one name form MUST be provided.
 date | The date of applicability of the name. | [`http://gedcomx.org/v1/Date`](#conclusion-date) | OPTIONAL.
 
 ### examples
@@ -931,7 +931,7 @@ Consider the following: a Russian person with the birth name "Александр
 also went by this name's common nickname, "Саша" (rendered as "Sasha" in English).
 
 It is tempting to think that this situation should be modeled with one `Name` instance that has several alternate `NameForm`s.  The model is
-__*not*__ intended to be used in this way. Instead, this person's names ought to be modeled such that the birth name and the nickname are modeled
+_not_ designed to be used in this way. Instead, this person's names ought to be modeled such that the birth name and the nickname are modeled
 as two separate `Name` instances: one instance for the birth name, and one for the nickname.  The `type` property MAY be provided to distinguish
 the birth name from the nickname. Each `Name` instance MAY have two `NameForm` instances: one with the native form of the name and another with
 the alternate form.  Using an informal pseudo code, it might look something like the following:
@@ -999,10 +999,10 @@ The following fact types are defined by GEDCOM X:
 
 URI | description | scope
 ----|-------------|------
-`http://gedcomx.org/Adoption`| A fact of a person's adoption. In the context of a parent-child relationship, it describes a fact of the adoption of a child by a parent. | person
+`http://gedcomx.org/Adoption`| A fact of a person's adoption. | person
 `http://gedcomx.org/Birth`| A fact of a person's birth. | person
 `http://gedcomx.org/Burial`| A fact of the burial of person's body after death. | person
-`http://gedcomx.org/Christening`| A fact of a person's christening *at birth*. Note: use `AdultChristening` for the christening as an adult. | person
+`http://gedcomx.org/Christening`| A fact of a person's christening *at birth*. Note that this does not identify an adult christening. | person
 `http://gedcomx.org/Death`| A fact of the death of a person. | person
 `http://gedcomx.org/Residence`| A fact of a person's residence. | person
 `http://gedcomx.org/Divorce`| The fact of a divorce of a couple. | couple relationship
@@ -1028,7 +1028,7 @@ name | value
 
 ## 3.15 The "EventRole" Data Type
 
-The `EventRole` data type defines a role played in an event by a person.  The `EventRole` data type extends the `Conclusion` data type.
+The `EventRole` data type defines a role played in an event by a person.
 
 ### identifier
 
@@ -1047,7 +1047,7 @@ This data type extends the following data type:
 name  | description | data type | constraints
 ------|-------------|-----------|------------
 person | Reference to the person playing the role in the event. | [`URI`](#uri) | REQUIRED. MUST resolve to an instance of [`http://gedcomx.org/v1/Person`](#person).
-type | Reference to the role type. | [`URI`](#uri) | OPTIONAL. If provided, must be a role type, and use of a [known role types](#known-roles) is RECOMMENDED.
+type | Reference to the role type. | [`URI`](#uri) | OPTIONAL. If provided, must be a role type, and use of a [known role type](#known-roles) is RECOMMENDED.
 details | Details about the role of the person in the event. | string | OPTIONAL.
 
 <a name="known-roles"/>
@@ -1058,9 +1058,9 @@ The following role types are defined by GEDCOM X:
 
 URI | description
 ----|------------
-`http://gedcomx.org/Principal`| The person is the principal person of the event. The principal of a birth event is the person that was born.
+`http://gedcomx.org/Principal`| The person is the principal person of the event. For example, the principal of a birth event is the person that was born.
 `http://gedcomx.org/Participant`| A participant in the event.
-`http://gedcomx.org/Official`| An person officiating the event.
+`http://gedcomx.org/Official`| A person officiating the event.
 `http://gedcomx.org/Witness`| A witness of the event.
 
 
@@ -1068,7 +1068,7 @@ URI | description
 
 ## 3.16 The "Date" Data Type
 
-The `Date` data type defines the value of a genealogical date.
+The `Date` data type defines a genealogical date.
 
 ### identifier
 
@@ -1081,7 +1081,7 @@ The identifier for the `Date` data type is:
 name | description | data type
 -----|-------------|----------
 original | The original value of the date as supplied by the contributor. | string | OPTIONAL.
-formal | The standardized [formal value](#formal-values) of the date, formatted per GEDCOM X Date Format specification. | [GEDCOM X Date](https://github.com/FamilySearch/gedcomx/blob/master/specifications/date-format-specification.md) | OPTIONAL.
+formal | The standardized [formal value](#formal-values) of the date, formatted according to the GEDCOM X Date Format specification. | [GEDCOM X Date](https://github.com/FamilySearch/gedcomx/blob/master/specifications/date-format-specification.md) | OPTIONAL.
 
 
 <a name="conclusion-place-reference"/>
@@ -1111,8 +1111,8 @@ descriptionRef | A reference to a _description_ of this place. | [URI](#uri) | O
 The `NamePart` data type is used to model a portion of a full name, including the terms that make up that portion. Some name parts MAY have qualifiers
 to provide additional semantic meaning to the name part (e.g., "given name" or "surname").
 
-A name part value MAY contain more than one term from the full name, such as in the name part "John Fitzgerald" from the full name "John Fitzgerald Kennedy".  If multiple terms are
-detailed in a single `NamePart`, these terms are separated using the name separator appropriate to the locale of the name form.
+A name part value MAY contain more than one term from the full name, such as in the name part "John Fitzgerald" from the full name "John Fitzgerald Kennedy".
+If multiple terms are detailed in a single `NamePart`, these terms are separated using the name separator appropriate to the locale of the name form.
 
 ### identifier
 
@@ -1156,12 +1156,12 @@ used to represent the terms in the name that have been classified.
 If both a full rendering of the name and a list of parts are provided, it NOT REQUIRED that every
 term in the fully rendered name appear in the list of parts.
 
-Name parts in the `parts` list are presumed to be ordered in the natural order they would be spoken in the given
+Name parts in the `parts` list are presumed to be ordered in the natural order they would be used in the given
 cultural context.
 
-If a full rendering of the name is not provided (i.e., the name has only been expressed in `part`s), a full
-rendering of the name can be derived (sans punctuation) by concatenating, in order, each `NamePart.value` in the
-`parts` list, separating each part with the name part delimiter appropriate for the given `locale`.
+If a full rendering of the name is not provided (i.e., the name has only been expressed in parts), a full
+rendering of the name MAY be derived (sans punctuation) by concatenating, in order, each name part value in the
+list of parts, separating each part with the name part delimiter appropriate for the applicable locale.
 
 ### identifier
 
@@ -1179,9 +1179,9 @@ parts | The parts of the name form, ordered in the natural order they would be s
 
 ### examples
 
-Consider the following: the Russian name "Пётр Ильи́ч Чайко́вский" in the Cyrillic script, its Latin-scr
-ipt equivalent "Pyotr Ilyich Tchaikovsky", and its anglicised equivalent "Peter Ilyich Tchaikovsky".
-Using an informal pseudo code, these name forms might be modeled as follows:
+Consider the following: the Russian name "Пётр Ильи́ч Чайко́вский" in the Cyrillic script, its Latin-script 
+equivalent "Pyotr Ilyich Tchaikovsky", and its anglicised equivalent "Peter Ilyich Tchaikovsky". Using an 
+informal pseudo code, these name forms might be modeled as follows:
 
 ```
 NameForm1.locale=ru-Cyrl
@@ -1251,7 +1251,7 @@ that MUST be applied to conclusion data that is identified as "extracted" using 
 When a conclusion is identified as "extracted", it means that the data is to be treated as having been extracted from a
 single source or record.  An extracted conclusion is distinguished from other conclusion data by the notion that it is
 intended to describe information contained in a single source, as opposed to what a researcher or system believes to be true
-about the subject of the conclusion.
+about the subject.
 
 Applications MUST recognize the `extracted` property and SHOULD ensure that any modifications to the extracted conclusion are
 aligned with the information that is provided by the specific (single) source, even if the source provides information that may
@@ -1259,7 +1259,7 @@ conflict with information in other sources.
 
 Data in a conclusion that is identified as "extracted" MUST conform to the following constraints:
 
-* The conclusion (including any data it contains) MUST NOT refer to more than one source description.
+* The conclusion (including any supporting conclusion) MUST NOT refer to more than one source description.
 * All source references used by the conclusion MUST resolve to the same source description, although
   each reference MAY contain distinct qualifying information such as attribution.
 
@@ -1275,7 +1275,7 @@ GEDCOM X provides a specific definition for the term "persona" that is used to r
 
 # 5. Extensibility
 
-Data types, properties, and enumerated values MAY be defined as extensions to GEDCOM X Conceptual Model by external
+Data types, properties, and enumerated values MAY be defined as extensions to the GEDCOM X Conceptual Model by external
 specifications. New data types, properties, and enumerated values MAY also be added by future versions of the
 GEDCOM X Conceptual Model or by other GEDCOM X specifications. Implementations of this version of the specification
 will not be able to process such extensions correctly and, in fact, will not be able to distinguish such extensions
@@ -1307,7 +1307,7 @@ New enumerated values MAY be defined as extensions to GEDCOM X by providing the 
 
 * An identifier for each enumerated value.
 * A description for each enumerated value.
-* An identification of which properties of which data types to which new enumerated value applies.
+* An identification of which properties of which data types to which each enumerated value applies.
 
 The base URI for enumerated values defined by the GEDCOM X specification set is `http://gedcomx.org/`.
 Enumerated values defined outside the scope of the GEDCOM X specification set MUST NOT use the value `http://gedcomx.org/`
