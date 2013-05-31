@@ -51,7 +51,7 @@ This specification depends on [RFC 822](http://www.w3.org/Protocols/rfc822/) to 
 for supplying headers.
 
 This specification depends on the GEDCOM X Date Format identified
-by [`http://gedcomx.org/date-model/v1`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/date-format-specification.md).
+by [`http://gedcomx.org/date/v1`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/date-format-specification.md).
 
 This specification imports some of the [HTTP Standard Headers](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html)
 as defined by [RFC 2616](http://tools.ietf.org/html/rfc2616).

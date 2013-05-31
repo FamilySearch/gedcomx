@@ -29,15 +29,15 @@ standard, the [RFC 3339](http://tools.ietf.org/html/rfc3339) proposal, and [W3C'
 (http://www.w3.org/TR/NOTE-datetime) of ISO 8601. Concepts from the
 [Dublin Core Date and Time Requirements Wiki](http://www.w3.org/TR/NOTE-datetime) were also leveraged.
 
-Each of these standards or proposals individually has limitations or omissions that do not
-fulfill the [requirements](https://github.com/FamilySearch/gedcomx/wiki/Date-Model)
-for genealogical date representations.
+This specification has been provided because each of these standards or proposals individually has
+limitations or omissions that do not fulfill the requirements identified for genealogical date
+representations.
 
 ## 1.1 Identifier and Version
 
 The identifier for this specification is:
 
-`http://gedcomx.org/date-model/v1`
+`http://gedcomx.org/date/v1`
 
 For convenience, the GEDCOM X date format may be referred to as "GEDCOM X Date 1.0".
 This specification uses "GEDCOM X Date" internally.
@@ -135,16 +135,19 @@ Examples:
 
 An indeterminate date with a single occurrence within a specified `date range`.
 
+Examples:
+
 * Sometime between December 6, 1940 and December 8, 1940
 
 # 3. Scope
 
-The GEDCOM X Date MUST represent one of the following:
+The GEDCOM X Date represents one of the following:
 
 * a simple date
 * a date range
 * a recurring date
 * an approximate date
+* an approximate date range
 
 ## 3.1 Simple Date
 
@@ -369,7 +372,7 @@ following the slash.
 
 NOTE: It is not required that the precision of the two `simple dates` be the same.
 
-### 5.4.1.2 Date and Duration
+#### 5.4.1.2 Date and Duration
 
 The instance referenced by the calculated end date MUST be earlier or equivalent to
 the maximum `simple date`: +9999-12-31T23:59:59

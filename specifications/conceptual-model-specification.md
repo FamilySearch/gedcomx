@@ -37,7 +37,7 @@ For convenience, the GEDCOM X conceptual model may be referred to as "GEDCOM X C
 This specification uses "GEDCOM X" or "GEDCOM X Conceptual Model" internally.
 
 This specification is depends on the GEDCOM X Date Format specification identified
-by [`http://gedcomx.org/date-model/v1`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/date-format-specification.md).
+by [`http://gedcomx.org/date/v1`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/date-format-specification.md).
 
 This specification refers to the GEDCOM X Event Types specification identified
 by [`http://gedcomx.org/event-types/v1`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/event-types-specification.md)
