@@ -158,19 +158,32 @@ can share semantic context of the event.
 
 Elements of a controlled vocabulary are identified by an enumerated value.
 
+<a name="i18n"/>
+
 ## 1.4 Internationalization Considerations
 
-GEDCOM X must be designed to accommodate users and software of different languages and locales.
-To this end, a property named `lang` is supported on relevant GEDCOM X data types. This
-property is used to identify the locale of the data being processed. This property
-is optional, and when it is not provided, a processor MAY process the data as if it were
-provided in the default locale of the processor. When this property is provided, it overrides
-the value of the property supplied by any containing data instances.
+GEDCOM X is be designed to accommodate users and software of different languages and cultures.
+Genealogical data often needs to be interpreted from the perspective of its cultural context.
 
-The values of the attribute are language identifiers as defined by [IETF BCP 47](http://tools.ietf.org/html/bcp47),
-_Tags for the Identification of Languages_; in addition, the empty string may be specified to
-explicitly state a processor may process the data as if it were provided in the default locale
-of the processor.
+To this end, a property named `lang` is supported on relevant GEDCOM X data types. The value
+of this property is the locale of the data being processed. The locale is used to identify the
+cultural context of the data. The values of the `lang` property are language identifiers as
+defined by [IETF BCP 47](http://tools.ietf.org/html/bcp47), _Tags for the Identification of Languages_;
+in addition, the empty string may be specified to explicitly state a processor may process the data
+as if it were provided in the default locale of the processor.
+
+The `lang` property is optional. When a value for the `lang` property is provided, it is presumed to
+apply to the data instance and to any data it contains. The value of the `lang` property overrides the
+value of the `lang` property on any containing data. When a value for the `lang` property is neither
+provided on a data instance nor on any containing data instances, a processor MAY process the
+data as if it were provided in the default locale of the processor.
+
+For example, to determine the cultural context of a given name form, the value of the `lang` property
+on the name form is used. If the `lang` property is not provided on the name form, the value of the
+`lang` property on the name is used. If the `lang` property is not provided on the name, the value of
+the `lang` property on the person is used. If the `lang` property is not provided on the person, the
+value of the `lang` property on the containing dataset is used. If the `lang` property on the containing
+dataset is not provided, the default locale of the processor is used.
 
 In order to prevent undue burden on producers and consumers of GEDCOM X data, not all data types
 provide multiple values for properties that are used for user input. For example, the text of
@@ -613,7 +626,7 @@ The identifier for the "Note" data type is:
 
 name  | description | data type | constraints
 ------|-------------|-----------|------------
-lang | The locale identifier for the note. | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag | OPTIONAL. If not provided, the locale of the containing resource of the note is assumed.
+lang | The locale identifier for the note. | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag | OPTIONAL. If not provided, the locale is determined per [Internationalization Considerations](#i18n).
 subject | A subject or title for the note. | string | OPTIONAL.
 text | The text of the note. | string | REQUIRED.
 attribution | The attribution of this note. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing resource of the note is assumed.
@@ -637,7 +650,7 @@ The identifier for the "TextValue" data type is:
 
 name  | description | data type | constraints
 ------|-------------|-----------|------------
-lang | The locale identifier for the value of the text. | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag | OPTIONAL. If not provided, the local of the containing resource (or containing data set) of the text value the data is assumed.
+lang | The locale identifier for the value of the text. | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag | OPTIONAL. If not provided, the locale is determined per [Internationalization Considerations](#i18n).
 value | The literal value. | string | REQUIRED.
 
 
@@ -657,7 +670,7 @@ The identifier for the "SourceCitation" data type is:
 
 name  | description | data type | constraints
 ------|-------------|-----------|------------
-lang | The locale identifier for the citation. | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag | OPTIONAL. If not provided, the locale of the data set containing the citation is assumed.
+lang | The locale identifier for the citation. | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag | OPTIONAL. If not provided, the locale is determined per [Internationalization Considerations](#i18n).
 value | A rendering of the full citation as a string. | string | REQUIRED.
 
 
@@ -785,7 +798,7 @@ The identifier for the `Conclusion` data type is:
 name  | description | data type | constraints
 ------|-------------|-----------|------------
 id | An identifier for the data structure holding the conclusion data. | string | OPTIONAL.  The id is to be used as a "fragment identifier" as defined by [RFC 3986, Section 3.5](http://tools.ietf.org/html/rfc3986#section-3.5). As such, the constraints of the id are provided in the definition of the media type (e.g. XML, JSON) of the data structure.
-lang | The locale identifier for the conclusion. | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag | OPTIONAL. If not provided, the locale of the current user of the data is assumed.
+lang | The locale identifier for the conclusion. | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag | OPTIONAL. If not provided, the locale is determined per [Internationalization Considerations](#i18n).
 sources | The list of references to the sources of related to this conclusion. | List of [`http://gedcomx.org/v1/SourceReference`](#source-reference). Order is preserved. | OPTIONAL. Note that the sources referenced from conclusions are also considered to be sources of the entities that contain them. For example, a source associated with the [`Name`](#name-conclusion) of a [`Person`](#person) is also source for the [`Person`](#person).
 analysis  | Reference to a document containing analysis supporting this conclusion. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to an instance of [`http://gedcomx.org/v1/Document`](#document) of type `http://gedcomx.org/Analysis`.
 notes  | A list of notes about this conclusion. | List of [`http://gedcomx.org/Note`](#note) | OPTIONAL.
@@ -1168,7 +1181,7 @@ The identifier for the `NameForm` data type is:
 
 name  | description | data type | constraints
 ------|-------------|-----------|------------
-lang | The locale identifier for the name form. | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag | OPTIONAL. If not provided, the locale of the current user of the data is assumed.
+lang | The locale identifier for the name form. | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag | OPTIONAL. If not provided, the locale is determined per [Internationalization Considerations](#i18n).
 fullText | A full rendering of the name (or as much of the name as is known) with the terms in the name given in the natural order they would be spoken in the applicable cultural context. | string | OPTIONAL.
 parts | The parts of the name form, ordered in the natural order they would be spoken in the given cultural context. | List of [`http://gedcomx.org/v1/NamePart`](#name-part). Order is preserved. | OPTIONAL.
 
