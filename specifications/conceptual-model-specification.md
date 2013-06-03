@@ -88,22 +88,20 @@ The term "data instance" to refer to a particular instance, or instantiation, of
 
 ### 1.3.3 Basic Data Types
 
-This section defines a set of basic, atomic data types that are used by GEDCOM X.
+This section defines a set of basic data types that are used by GEDCOM X.
 
 A "boolean" refers to the mathematical concept of binary-valued logic: `true` or `false`.
 
-A "timestamp" refers to an instance of time, including values for year, month, date, hour, minute, second, and timezone.
+A "timestamp" refers to an instance of time, including values for year, month, date, hour, minute, second, milliseconds and timezone.
 
 A "double" refers to an `IEEE 754 binary64` value.
 
 A "character" is an atomic unit of text as specified by `ISO/IEC 10646`.
 
-A "string" is an atomic data type defined as a finite-length sequence of characters.
+A "string" is defined as a finite-length sequence of characters.
 
-A "double" is an IEEE 754 binary64 value.
-
-A "list" is an atomic data type defined as a sequence of data instances. When a property is defined as
-of the "list" data type, the data type of the data instances in the list is also provided.
+A "list" is defined as a sequence of data instances. When a property is defined in terms of a "list",
+the data type of the data instances in the list is also provided.
 
 <a name="uri"/>
 
@@ -770,12 +768,11 @@ street6 | The street (sixth line). | string | OPTIONAL.
 
 The `Conclusion` data type defines the abstract concept for a basic genealogical data item.
 
-In formal discussions of the genealogical research process, the term "conclusion" usually has a more specific meaning
-and is used to refer to a fully "proven" conclusion in accordance with the [Genealogical Proof Standard](http://www.bcgcertification.org/resources/standard.html).
-The name of the `Conclusion` data type does not imply a formal association with the term "conclusion" as described by the
-genealogical research process. Rather, the name refers to the notion any information that is interpreted from an
-"original" is in some way a "conclusion"&mdash;even if the interpreter was diligent in representing the
-information verbatim as it was found in the original.
+In formal discussions of the genealogical research process, the term "conclusion" usually has a more specific meaning and is used to refer
+to an "accepted" hypothesis in accordance with the [Genealogical Proof Standard](http://www.bcgcertification.org/resources/standard.html).
+The name of the `Conclusion` data type is not meant to be associated with the definition of the term "conclusion" as it is described in the
+genealogical research process. Rather, the name refers to the notion that any information that is interpreted from an "original" is in some way
+a "conclusion"&mdash;even if the interpreter was diligent in representing the information verbatim as it was found in the original.
 
 ### identifier
 
@@ -840,10 +837,10 @@ This data type extends the following data type:
 name  | description | data type | constraints
 ------|-------------|-----------|------------
 extracted | Whether this subject is to be constrained as an _extracted conclusion_. | boolean | OPTIONAL. Default: `false`. Refer to [Extracted Conclusion Constraints](#extracted-conclusion-constraints).
-evidence | References to other subjects that support this subject. | List of [`http://gedcomx.org/v1/EvidenceReference`](#evidence-reference). Order is preserved. | OPTIONAL.  If provided, each reference MUST resolve to an instance of subject of the same type as this instance (e.g. if the subject is an instance of `Person`, all evidence references must resolve to instances of `Person`).
-media | References to multimedia resources for this _subject_, such as photos or videos. Media references are intended to provide additional context or illustration for the subject and are _not_ being considered as evidence that supports the subject or its supporting conclusions. Media references SHOULD be ordered by priority such that applications that wish to display a single media item (such as an image) MAY choose the first applicable media reference. | List of [`http://gedcomx.org/v1/SourceReference`](#source-reference) | OPTIONAL. Note that the `SourceReference` is used for multimedia references and therefore MUST resolve to a `SourceDescription` of the resource, which in turn provides a reference to the resource itself.
-identifiers | A list of identifiers for the _subject_. | List of [`http://gedcomx.org/v1/Identifier`](#identifier-type). Order is preserved. | OPTIONAL.
-attribution | The attribution of this _subject_. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing data set (e.g. file) of the _subject_ is assumed.
+evidence | References to other subjects that support this subject. | List of [`http://gedcomx.org/v1/EvidenceReference`](#evidence-reference). Order is preserved. | OPTIONAL.  If provided, each reference MUST resolve to an instance of subject of the same type as this instance (e.g., if the subject is an instance of `Person`, all of its `evidence` references must resolve to instances of `Person`).
+media | References to multimedia resources for this subject, such as photos or videos, intended to provide additional context or illustration for the subject and _not_ considered evidence supporting the identity of the subject or its supporting conclusions. | List of [`http://gedcomx.org/v1/SourceReference`](#source-reference) | OPTIONAL. Media references SHOULD be ordered by priority such that applications that wish to display a single media item (such as an image) MAY choose the first applicable media reference. Note that the `SourceReference` is used for multimedia references and therefore MUST resolve to a `SourceDescription` of the resource, which in turn provides a reference to the resource itself.
+identifiers | A list of identifiers for the subject. | List of [`http://gedcomx.org/v1/Identifier`](#identifier-type). Order is preserved. | OPTIONAL.
+attribution | The attribution of this subject. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing data set (e.g. file) of the _subject_ is assumed.
 
 
 <a name="gender"/>
@@ -891,7 +888,7 @@ URI | description
 The `Name` data type defines a name of a person.
 
 A `Name` is intended to represent a single variant of a person's name.  This means that nicknames, spelling variations,
-or other name variants (often distinguishable by a name type) should be modeled with separate instances of `Name`.
+or other names (often distinguishable by a name `type`) should be modeled with separate instances of `Name`.
 
 The name forms of a name contain alternate representations of the name.  A `Name` MUST contain at least one name form, presumably
 a representation of the name that is considered proper and well formed in the person's native, historical cultural context.
@@ -922,7 +919,7 @@ This data type extends the following data type:
 name  | description | data type | constraints
 ------|-------------|-----------|------------
 type | Enumerated value identifying the type of the name. | [Enumerated Value](#enumerated-value) | OPTIONAL. If provided, MUST identify a name type, and use of a [known name type](#known-name-types) is RECOMMENDED.
-nameForms | The name form(s) that best express this name, usually representations considered proper and well formed in the person's native, historical cultural context. All included name forms SHOULD be representations of the same name, and NOT variants of the name (e.g. not nicknames or spelling variations). | List of [`http://gedcomx.org/v1/NameForm`](#name-form). Order is preserved. | REQUIRED. At least one name form MUST be provided.
+nameForms | The name form(s) that best express this name, usually representations considered proper and well formed in the person's native, historical cultural context. | List of [`http://gedcomx.org/v1/NameForm`](#name-form). Order is preserved. | REQUIRED. At least one name form MUST be provided. All included name forms SHOULD be representations of the same name, and NOT variants of the name (e.g. not nicknames or spelling variations).
 date | The date of applicability of the name. | [`http://gedcomx.org/v1/Date`](#conclusion-date) | OPTIONAL.
 
 ### examples
@@ -945,6 +942,7 @@ Name2.type=http://gedcomx.org/Nickname
 Name2.nameForms[0].fullText=Саша
 Name2.nameForms[1].fullText=Sasha
 ```
+
 <a name="known-name-types"/>
 
 ### 3.13.1 Known Name Types
@@ -988,7 +986,7 @@ name  | description | data type | constraints
 type | Enumerated value identifying the type of the fact. | [Enumerated Value](#enumerated-value) | REQUIRED. MUST identify a fact type, and use of a [known fact type](#known-fact-types) is RECOMMENDED.
 date | The date of applicability of the fact. | [`http://gedcomx.org/v1/Date`](#conclusion-date) | OPTIONAL.
 place | A reference to the place applicable to this fact. | [`http://gedcomx.org/v1/PlaceReference`](#conclusion-place-reference) | OPTIONAL.
-value | The original value of the fact as supplied by the contributor. | string | OPTIONAL.
+value | The value of the fact. | string | OPTIONAL.
 qualifiers | Qualifiers to add additional details about the fact. | List of [http://gedcomx.org/v1/Qualifier](#qualifier) | OPTIONAL. If present, use of a [known fact qualifier](#known-fact-qualifier) is RECOMMENDED.
 
 <a name="known-fact-types"/>
@@ -1047,7 +1045,7 @@ This data type extends the following data type:
 name  | description | data type | constraints
 ------|-------------|-----------|------------
 person | Reference to the person playing the role in the event. | [`URI`](#uri) | REQUIRED. MUST resolve to an instance of [`http://gedcomx.org/v1/Person`](#person).
-type | Reference to the role type. | [`URI`](#uri) | OPTIONAL. If provided, must be a role type, and use of a [known role type](#known-roles) is RECOMMENDED.
+type | Reference to the role type. | [`URI`](#uri) | OPTIONAL. If provided, MUST identify a role type, and use of a [known role type](#known-roles) is RECOMMENDED.
 details | Details about the role of the person in the event. | string | OPTIONAL.
 
 <a name="known-roles"/>
@@ -1108,11 +1106,8 @@ descriptionRef | A reference to a _description_ of this place. | [URI](#uri) | O
 
 ## 3.18 The "NamePart" Data Type
 
-The `NamePart` data type is used to model a portion of a full name, including the terms that make up that portion. Some name parts MAY have qualifiers
+The `NamePart` data type is used to model a portion of a full name, including the terms that make up that portion. Some name parts may have qualifiers
 to provide additional semantic meaning to the name part (e.g., "given name" or "surname").
-
-A name part value MAY contain more than one term from the full name, such as in the name part "John Fitzgerald" from the full name "John Fitzgerald Kennedy".
-If multiple terms are detailed in a single `NamePart`, these terms are separated using the name separator appropriate to the locale of the name form.
 
 ### identifier
 
@@ -1125,7 +1120,7 @@ The identifier for the `NamePart` data type is:
 name  | description | data type | constraints
 ------|-------------|-----------|------------
 type | Enumerated value identifying the type of the name part. | [Enumerated Value](#enumerated-value) | OPTIONAL. If provided, MUST identify a name part type, and use of a [known name part type](#known-name-part-types) is RECOMMENDED.
-value | The term(s) from the name that make up this name part. | string | REQUIRED.
+value | The term(s) from the name that make up this name part. | string | REQUIRED.  A name part value MAY contain more than one term from the full name, such as in the name part "John Fitzgerald" from the full name "John Fitzgerald Kennedy". If multiple terms are detailed in a single `NamePart`, these terms SHOULD be separated using the name separator appropriate to the locale applicable to the containing name form.
 qualifiers | Qualifiers to add additional semantic meaning to the name part. | List of [http://gedcomx.org/v1/Qualifier](#qualifier) | OPTIONAL. If present, use of a name part qualifier defined by the [GEDCOM X Name Part Qualifiers](https://github.com/FamilySearch/gedcomx/blob/master/specifications/name-part-qualifiers-specification.md) specification is RECOMMENDED.
 
 <a name="known-name-part-types"/>
@@ -1149,19 +1144,19 @@ URI | description
 The `NameForm` data type defines a representation of a name (a "name form") within a given cultural context,
 such as a given language and script.
 
-As names are captured (in records or in applications), the terms in the name are sometimes classified by type.
-For example, a certificate of death might prompt for "given name(s)" and "surname". The `parts` list can be
-used to represent the terms in the name that have been classified.
+As names are captured (both in records or in applications), the terms in the name are sometimes classified by type.
+For example, a certificate of death might prompt for "given name(s)" and "surname". The `parts` list can be used to
+represent the terms in the name that have been classified.
 
-If both a full rendering of the name and a list of parts are provided, it NOT REQUIRED that every
-term in the fully rendered name appear in the list of parts.
+If both a full rendering of the name and a list of parts are provided, it NOT REQUIRED that every term in the fully
+rendered name appear in the list of parts.
 
-Name parts in the `parts` list are presumed to be ordered in the natural order they would be used in the given
+Name parts in the `parts` list SHOULD be ordered in the natural order they would be used in the applicable
 cultural context.
 
 If a full rendering of the name is not provided (i.e., the name has only been expressed in parts), a full
 rendering of the name MAY be derived (sans punctuation) by concatenating, in order, each name part value in the
-list of parts, separating each part with the name part delimiter appropriate for the applicable locale.
+list of parts, separating each part with the name part separator appropriate for the applicable cultural context.
 
 ### identifier
 
@@ -1237,8 +1232,8 @@ The identifier for the "Qualifier" data type is:
 
 name  | description | data type | constraints
 ------|-------------|-----------|------------
-name | The name of the qualifier, used to determine the nature of the qualifier. | [Enumerated Value](#enumerated-value) | REQUIRED. It is RECOMMENDED that the qualifier name resolve to an element of a constrained vocabulary.
-value | The value of the qualifier. The semantic meaning of the value is determined by the qualifier name. | string | OPTIONAL.
+name | The name of the qualifier. | [Enumerated Value](#enumerated-value) | REQUIRED. It is RECOMMENDED that the qualifier name resolve to an element of a constrained vocabulary.
+value | The value of the qualifier. | string | OPTIONAL.  If provided, The semantic meaning of the value is determined by the qualifier name.
 
 
 <a name="extracted-conclusion-constraints"/>
@@ -1246,22 +1241,21 @@ value | The value of the qualifier. The semantic meaning of the value is determi
 # 4. Extracted Conclusion Constraints
 
 GEDCOM X provides a specific definition for the term "extracted conclusion" that is used to refer to a set of constraints
-that MUST be applied to conclusion data that is identified as "extracted" using the `extracted` property.
+that MUST be applied to conclusion data that is identified as "extracted" using the `extracted` property (see `Subject` and `Document`).
 
-When a conclusion is identified as "extracted", it means that the data is to be treated as having been extracted from a
-single source or record.  An extracted conclusion is distinguished from other conclusion data by the notion that it is
-intended to describe information contained in a single source, as opposed to what a researcher or system believes to be true
-about the subject.
+When data is identified as "extracted", it means that the data is to be treated as having been extracted from a single
+source or record.  Extracted data is distinguished from other data by the notion that it is intended to describe information
+about a subject found in a single source, as opposed to what a researcher or system believes to be true about the subject.
 
-Applications MUST recognize the `extracted` property and SHOULD ensure that any modifications to the extracted conclusion are
-aligned with the information that is provided by the specific (single) source, even if the source provides information that may
-conflict with information in other sources.
+Applications MUST recognize the `extracted` property and SHOULD ensure that any modifications to the extracted data are
+aligned with the information that is provided by the specific (single) source, even if the source provides information that
+may conflict with information in other sources.
 
-Data in a conclusion that is identified as "extracted" MUST conform to the following constraints:
+Data that is identified as "extracted" MUST conform to the following constraints:
 
-* The conclusion (including any supporting conclusion) MUST NOT refer to more than one source description.
-* All source references used by the conclusion MUST resolve to the same source description, although
-  each reference MAY contain distinct qualifying information such as attribution.
+* The `Subject` or `Document` MUST NOT refer to more than one source description, including any supporting conclusions on the `Subject`.
+* All source references, including those on supporting conclusions, MUST resolve to the same source description, although each reference
+MAY contain distinct qualifying information such as attribution.
 
 
 <a name="persona"/>
@@ -1270,6 +1264,7 @@ Data in a conclusion that is identified as "extracted" MUST conform to the follo
 
 GEDCOM X provides a specific definition for the term "persona" that is used to refer to an instance of
 `http://gedcomx.org/v1/Person` that has been identified as an extracted conclusion.
+
 
 <a name="extensibility"/>
 
