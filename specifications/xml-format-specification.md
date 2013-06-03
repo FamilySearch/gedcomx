@@ -335,13 +335,13 @@ data type.
 name | description | XML property | XML type
 -----|-------------|--------------|---------
 id | An identifier for the XML element holding the agent data. The id attribute MUST conform to the constraints defined in [Section 7, "Fragment Identifiers"](#fragment-ids). | id (attribute) | xsd:string
-names | The names of the person or organization. | gx:name | [`gx:TextValue`](#text-value)
+names | The name(s) of the person or organization. | gx:name | [`gx:TextValue`](#text-value)
 homepage | The homepage of the person or organization. | gx:homepage | [`gx:ResourceReference`](#resource-reference)
 openid  | The [openid](http://openid.net/) of the person or organization. | gx:openid | [`gx:ResourceReference`](#resource-reference)
-accounts  | The online accounts of the person or organization. | gx:account | [`gx:OnlineAccount`](#online-account)
-emails  | The email addresses of the person or organization. | gx:email | [`gx:ResourceReference`](#resource-reference)
-phones  | The phones (voice, fax, mobile) of the person or organization. | gx:phone | [`gx:ResourceReference`](#resource-reference)
-addresses  | The addresses of the person or organization. | gx:address | [`gx:Address`](#address)
+accounts  | The online account(s) of the person or organization. | gx:account | [`gx:OnlineAccount`](#online-account)
+emails  | The email address(es) of the person or organization. | gx:email | [`gx:ResourceReference`](#resource-reference)
+phones  | The phone(s) (voice, fax, mobile) of the person or organization. | gx:phone | [`gx:ResourceReference`](#resource-reference)
+addresses  | The address(es) of the person or organization. | gx:address | [`gx:Address`](#address)
 person | A reference to the person that describes this agent. | gx:person | [`gx:ResourceReference`](#resource-reference)
 
 ### examples
@@ -699,7 +699,7 @@ data type.
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
-value | A string representation of the value. Used when the address isn't separated into its constituent parts. | gx:value | xsd:string
+value | A full representation of the complete address. | gx:value | xsd:string
 city | The city. | gx:city | xsd:string
 country | The country. | gx:country | xsd:string
 postalCode | The postal code. | gx:postalCode | xsd:string
@@ -748,7 +748,7 @@ lang | The locale identifier for the conclusion. | xml:lang (attribute) | [IETF 
 sources | A list of references to the sources of the conclusion. | gx:source | [`gx:SourceReference`](#source-reference)
 analysis  | Reference to a document containing analysis supporting this conclusion. | gx:analysis | [`gx:ResourceReference`](#resource-reference)
 notes | A list of notes about this conclusion. | gx:note | [`gx:Note`](#note)
-confidence  | Reference to the confidence level of the contributor of the attributed data. | confidence (attribute) | [`URI`](#uri)
+confidence  | Reference to a confidence level for this conclusion. | confidence (attribute) | [`URI`](#uri)
 
 ### examples
 
@@ -780,7 +780,7 @@ The `gx:Subject` XML type is used to (de)serialize the `http://gedcomx.org/v1/Su
 name | description | XML property | XML type
 -----|-------------|--------------|---------
 extracted | Whether this subject is to be constrained as an _extracted conclusion_. | extracted (attribute) | xsd:boolean
-evidence | References to instances of `Subject` that support this subject_. | gx:evidence | [`gx:EvidenceReference`](#evidence-reference)
+evidence | References to other subjects that support this subject. | gx:evidence | [`gx:EvidenceReference`](#evidence-reference)
 media | References to multimedia resources for this subject, such as photos or videos. | gx:media | [`gx:SourceReference`](#source-reference)
 identifiers | Identifiers for this subject. | gx:identifier | [`gx:Identifier`](#identifier-type)
 attribution | The attribution of this subject. | gx:attribution | [`gx:Attribution`](#attribution)
@@ -882,7 +882,7 @@ name | description | XML property | XML type
 type | URI identifying the type of the fact. | type (attribute) | [`URI`](#uri)
 date | The date of applicability of the fact. | gx:date | [`gx:Date`](#conclusion-date)
 place | The place of applicability of the fact. | gx:place | [`gx:PlaceReference`](#conclusion-place-reference)
-value | The original value of the fact as supplied by the contributor. | gx:value | xsd:string
+value | The value of the fact. | gx:value | xsd:string
 qualifiers | Qualifiers to add additional details about the fact. | gx:qualifier | [`gx:Qualifier`](#qualifier)
 
 ### examples

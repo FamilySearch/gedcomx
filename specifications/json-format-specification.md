@@ -363,13 +363,13 @@ The JSON object used to (de)serialize the `http://gedcomx.org/v1/Agent` data typ
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 id | An identifier for the JSON object holding the agent data. The id attribute MUST conform to the constraints defined in [Section 7, "Fragment Identifiers"](#fragment-ids). | id | string
-names | The names of the person or organization. | names | array of [`TextValue`](#text-value)
+names | The name(s) of the person or organization. | names | array of [`TextValue`](#text-value)
 homepage | The homepage of the person or organization. | homepage | [`ResourceReference`](#resource-reference)
 openid  | The [openid](http://openid.net/) of the person or organization. | openid | [`ResourceReference`](#resource-reference)
-accounts  | The online accounts of the person or organization. | accounts | array of [`OnlineAccount`](#online-account)
-emails  | The email addresses of the person or organization. | emails | array of [`ResourceReference`](#resource-reference)
-phones  | The phones (voice, fax, mobile) of the person or organization. | phones | array of [`ResourceReference`](#resource-reference)
-addresses  | The addresses of the person or organization. | addresses | array of [`Address`](#address)
+accounts  | The online account(s) of the person or organization. | accounts | array of [`OnlineAccount`](#online-account)
+emails  | The email address(es) of the person or organization. | emails | array of [`ResourceReference`](#resource-reference)
+phones  | The phone(s) (voice, fax, mobile) of the person or organization. | phones | array of [`ResourceReference`](#resource-reference)
+addresses  | The address(es) of the person or organization. | addresses | array of [`Address`](#address)
 person | A reference to the person that describes this agent. | person | [`ResourceReference`](#resource-reference)
 
 ### examples
@@ -724,7 +724,7 @@ The JSON object used to (de)serialize the `http://gedcomx.org/v1/Address` data t
 
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
-value | A string representation of the value. Used when the address isn't separated into its constituent parts. | value | string
+value | A full representation of the complete address. | value | string
 city | The city. | city | string
 country | The country. | country | string
 postalCode | The postal code. | postalCode | string
@@ -772,7 +772,7 @@ lang | The locale identifier for the conclusion. | lang | [IETF BCP 47](http://t
 sources | The list of references to the sources of the conclusion. | sources | array of [`SourceReference`](#source-reference).
 analysis  | Reference to a document containing analysis supporting this conclusion. | analysis | [`ResourceReference`](#resource-reference)
 notes | A list of notes about this conclusion. | note | array of [`Note`](#note)
-confidence  | Reference to the confidence level of the contributor of the attributed data. | confidence | [`URI`](#uri)
+confidence  | Reference to a confidence level for this conclusion. | confidence | [`URI`](#uri)
 
 ### examples
 
@@ -803,7 +803,7 @@ The JSON object used to (de)serialize the `http://gedcomx.org/v1/Subject` data t
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 extracted | Whether this subject is to be constrained as an _extracted conclusion_. | extracted | boolean
-evidence | References to instances of `Subject` that support this subject. | evidence | [`EvidenceReference`](#evidence-reference)
+evidence | References to other subjects that support this subject. | evidence | [`EvidenceReference`](#evidence-reference)
 media | References to multimedia resources for this subject, such as photos or videos. | media | [`SourceReference`](#source-reference)
 identifiers | Identifiers for this subject. | identifiers | [`Identifier`](#identifier-type)
 attribution | The attribution of this subject. | attribution | [`Attribution`](#attribution)
@@ -886,7 +886,7 @@ name | description | JSON member | JSON object type
 type | URI identifying the type of the fact. | type | [`URI`](#uri)
 date | The date of applicability of the fact. | date | [`Date`](#conclusion-date)
 place | The place of applicability of the fact. | place | [`Place`](#conclusion-place)
-value | The original value of the fact as supplied by the contributor. | original | string
+value | The value of the fact. | original | string
 qualifiers | Qualifiers to add additional details about the fact. | qualifiers | array of [`Qualifier`](#qualifier)
 
 ### examples
