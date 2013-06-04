@@ -4,7 +4,7 @@
   <groupId>org.gedcomx</groupId>
   <artifactId>gedcomx-specifications</artifactId>
   <name>GEDCOM X - Specifications</name>
-  <version>0.37.0-SNAPSHOT</version>
+  <version>1.0.0.M1</version>
 
   <build>
     <plugins>
