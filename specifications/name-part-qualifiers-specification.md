@@ -66,8 +66,8 @@ URI | description
 `http://gedcomx.org/Primary`|A designation for the name of most prominent in importance among the names of that type (e.g., the primary given name).
 `http://gedcomx.org/Secondary`|A designation for a name that is not primary in its importance among the names of that type (e.g., a secondary given name).
 `http://gedcomx.org/Middle`|A designation useful for cultures that designate a middle name that is distinct from a given name and a surname.
-`http://gedcomx.org/Familiar`|A designation for one's familiar name. The qualifier value SHOULD NOT be used.
-`http://gedcomx.org/Religious`|A designation for a name given for religious purposes. The qualifier value SHOULD NOT be used.
+`http://gedcomx.org/Familiar`|A designation for one's familiar name.
+`http://gedcomx.org/Religious`|A designation for a name given for religious purposes.
 `http://gedcomx.org/Family`|A name that associates a person with a group, such as a clan, tribe, or patriarchal hierarchy.
 `http://gedcomx.org/Maiden`|A designation given by women to their original surname after they adopt a new surname upon marriage.
 `http://gedcomx.org/Patronymic`|A name derived from a father or paternal ancestor.
@@ -77,3 +77,6 @@ URI | description
 `http://gedcomx.org/Characteristic`|A name derived from a characteristic.
 `http://gedcomx.org/Postnom`|A name mandated by law for populations from Congo Free State / Belgian Congo / Congo / Democratic Republic of Congo (formerly Zaire).
 `http://gedcomx.org/Particle`|A grammatical designation for articles (a, the, dem, las, el, etc.), prepositions (of, from, aus, zu, op, etc.), initials, annotations (e.g. twin, wife of, infant, unknown), comparators (e.g. Junior, Senior, younger, little), ordinals (e.g. III, eighth), and conjunctions (e.g. and, or, nee, ou, y, o, ne, &amp;).
+
+Note that in addition to the name of the qualifier, the definition of a qualifier includes an
+optional `value` property. Name part qualifiers SHOULD NOT provide a value.
