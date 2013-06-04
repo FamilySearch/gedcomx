@@ -645,7 +645,6 @@ data type.
 name | description | XML property | XML type
 -----|-------------|--------------|---------
 resource  | Reference to the supporting data. | resource (attribute) | [`URI`](#uri)
-analysis  | Reference to a document containing analysis that supports the use of the referenced data. | gx:analysis | [`gx:ResourceReference`](#resource-reference)
 attribution | The attribution of this evidence reference. | gx:attribution | [`gx:Attribution`](#attribution)
 
 ### examples
