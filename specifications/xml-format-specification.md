@@ -2,8 +2,8 @@
 
 ## Status
 
-This document specifies an XML media type for the [GEDCOM X standard conceptual
-model](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md),
+This document specifies an XML media type for the [GEDCOM X Conceptual
+Model](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md),
 and requests discussion and suggestions for improvements.
 
 The current state of this document is as a DRAFT, and as such, the document
@@ -23,12 +23,12 @@ http://creativecommons.org/licenses/by-sa/3.0/
 
 # 1. Introduction
 
-The GEDCOM X conceptual model is a specification of formal concepts and types
+The GEDCOM X Conceptual Model is a specification of formal concepts and types
 that are used to provide a standard model and vocabulary for describing genealogical
 data.
 
 The GEDCOM X XML Serialization Format is a specification that defines the media type used
-to serialize and deserialize the GEDCOM X conceptual model to and from
+to serialize and deserialize the GEDCOM X Conceptual Model to and from
 [XML](http://www.w3.org/TR/REC-xml/).
 
 ## 1.1 Identifier, Version, and Dependencies
@@ -43,7 +43,7 @@ The media type defined by this specification is:
 
 `application/x-gedcomx-v1+xml`
 
-This specification depends on the conceptual model specification identified
+This specification depends on the GEDCOM X Conceptual Model specification identified
 by [`http://gedcomx.org/conceptual-model/v1`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md).
 
 ## 1.2 Examples
@@ -193,7 +193,7 @@ are inherited.
 # 2. Top-Level Data Types
 
 This section specifies XML types for each top-level data type defined by the
-conceptual model specification.
+GEDCOM X Conceptual Model specification.
 
 <a name="person"/>
 
@@ -278,16 +278,16 @@ The `gx:SourceDescription` XML type is used to (de)serialize the
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
-id | An identifier for the XML element holding the source description data. The id attribute MUST conform to the constraints defined in [Section 7, "Fragment Identifiers"](#fragment-ids). | id (attribute) | xsd:string
+id | The identifier for the XML element holding the source description data. The id attribute MUST conform to the constraints defined in [Section 7, "Fragment Identifiers"](#fragment-ids). | id (attribute) | xsd:string
 resourceType | URI identifying the type of resource being described. | resourceType (attribute) | [anyURI](#uri)
-citations | The citations for this source. | gx:citation | [`gx:SourceCitation`](#source-citation)
+citations | The citation(s) for this source. | gx:citation | [`gx:SourceCitation`](#source-citation)
 mediaType | A hint about the media type of the resource being described. | mediaType (attribute) | xsd:string
 about | A uniform resource identifier (URI) for the resource being described. | about (attribute) | [anyURI](#uri)
 mediator | A reference to the entity that mediates access to the described source. | gx:mediator | [`gx:ResourceReference`](#resource-reference)
 sources | A list of references to any sources from which this source is derived. | gx:source | [`gx:SourceReference`](#source-reference)
 analysis | A reference to a document containing analysis about this source. | gx:analysis | [`gx:ResourceReference`](#resource-reference)
 componentOf | A reference to the source that contains this source. | gx:componentOf | [`gx:SourceReference`](#source-reference)
-titles | The display names for this source. | gx:title | [`gx:TextValue`](#text-value)
+titles | The display name(s) for this source. | gx:title | [`gx:TextValue`](#text-value)
 notes | A list of notes about a source | gx:note | [`gx:Note`](#note)
 attribution | The attribution of this source. | gx:attribution | [`gx:Attribution`](#attribution)
 
@@ -365,7 +365,6 @@ person | A reference to the person that describes this agent. | gx:person | [`gx
     </gx:address>
     ...
     <gx:person resource="..."/>
-    ...
 
     <!-- possibility of extension elements -->
 
@@ -385,8 +384,8 @@ name | description | XML property | XML type
 -----|-------------|--------------|---------
 type | URI identifying the type of the event. | type (attribute) | [`URI`](#uri)
 date | The date of the event. | gx:date | [`gx:Date`](#conclusion-date)
-place | The place the event. | gx:place | [`gx:Place`](#conclusion-place)
-roles | The roles of the persons in the event. | gx:role | [`gx:EventRole`](#conclusion-event-role)
+place | The place of the event. | gx:place | [`gx:Place`](#conclusion-place)
+roles | Information about how persons participated in the event. | gx:role | [`gx:EventRole`](#conclusion-event-role)
 
 ### examples
 
@@ -419,14 +418,15 @@ The `gx:Document` XML type is used to (de)serialize the `http://gedcomx.org/v1/D
 name | description | XML property | XML type
 -----|-------------|--------------|---------
 type | The type of the document. | type (attribute) | [`URI`](#uri)
-attribution | The attribution of this document. | gx:attribution | [`gx:Attribution`](#attribution)
-textType | The type of text in the `text` field. | gx:textType | xsd:string
+extracted | Whether this document is to be constrained as an [_extracted conclusion_](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md#4-extracted-conclusion-constraints). | type (attribute) | xsd:boolean
+textType | The type of text in the `text` property. | gx:textType | xsd:string
 text | The text of the document. | gx:text | xsd:string
+attribution | The attribution of this document. | gx:attribution | [`gx:Attribution`](#attribution)
 
 ### examples
 
 ```xml
-  <... xml:lang="en" type="http://gedcomx.org/Analysis" textType="plain">
+  <... xml:lang="en" extracted="false" type="http://gedcomx.org/Analysis" textType="plain">
 
     <!-- ...the members of [gx:Conclusion](#conclusion)... -->
 
@@ -450,8 +450,8 @@ name | description | XML property | XML type
 names | A list of standardized (or normalized), fully-qualified (in terms of what is known of the applicable jurisdictional hierarchy) names for this place that are applicable to this description of this place. | gx:name | [`gx:TextValue`](#text-value)
 type | A uniform resource identifier (URI) identifying the type of the place as it is applicable to this description. | type (attribute) | [`URI`](#uri)
 place | An identifier for the place being described. | gx:place | [`gx:ResourceReference`](#resource-reference)
-latitude | Degrees north or south of the Equator (0.0 degrees). | gx:latitude | xsd:double
-longitude | Angular distance in degrees, relative to the Prime Meridian. | gx:latitude | xsd:double
+latitude | Angular distance, in degrees, north or south of the Equator. | gx:latitude | xsd:double
+longitude | Angular distance, in degrees, east or west of the Prime Meridian. | gx:latitude | xsd:double
 temporalDescription | A description of the time period to which this place description is relevant. | gx:temporalDescription | [`gx:Date`](#conclusion-date)
 spatialDescription | A reference to a geospatial description of this place. | gx:spatialDescription | [`gx:ResourceReference`](#resource-reference)
 
@@ -644,9 +644,9 @@ data type.
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
-resource  | Reference to data being used as _evidence_. | resource (attribute) | [`URI`](#uri)
-analysis  | Reference to a document containing analysis that supports the use of the referenced data as _evidence_. | gx:analysis | [`gx:ResourceReference`](#resource-reference)
-attribution | The attribution of this _evidence_ reference. | gx:attribution | [`gx:Attribution`](#attribution)
+resource  | Reference to the supporting data. | resource (attribute) | [`URI`](#uri)
+analysis  | Reference to a document containing analysis that supports the use of the referenced data. | gx:analysis | [`gx:ResourceReference`](#resource-reference)
+attribution | The attribution of this evidence reference. | gx:attribution | [`gx:Attribution`](#attribution)
 
 ### examples
 
@@ -743,9 +743,9 @@ data type.
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
-id | An identifier for the XML element holding the conclusion data. The id attribute MUST conform to the constraints defined in [Section 7, "Fragment Identifiers"](#fragment-ids). | id (attribute) | xsd:string
+id | An identifier for the XML element holding this conclusion's data. The id attribute MUST conform to the constraints defined in [Section 7, "Fragment Identifiers"](#fragment-ids). | id (attribute) | xsd:string
 lang | The locale identifier for the conclusion. | xml:lang (attribute) | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag
-sources | A list of references to the sources of the conclusion. | gx:source | [`gx:SourceReference`](#source-reference)
+sources | The list of references to sources related to this conclusion. | gx:source | [`gx:SourceReference`](#source-reference)
 analysis  | Reference to a document containing analysis supporting this conclusion. | gx:analysis | [`gx:ResourceReference`](#resource-reference)
 notes | A list of notes about this conclusion. | gx:note | [`gx:Note`](#note)
 confidence  | Reference to a confidence level for this conclusion. | confidence (attribute) | [`URI`](#uri)
@@ -779,7 +779,7 @@ The `gx:Subject` XML type is used to (de)serialize the `http://gedcomx.org/v1/Su
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
-extracted | Whether this subject is to be constrained as an _extracted conclusion_. | extracted (attribute) | xsd:boolean
+extracted | Whether this subject is to be constrained as an [_extracted conclusion_](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md#4-extracted-conclusion-constraints). | extracted (attribute) | xsd:boolean
 evidence | References to other subjects that support this subject. | gx:evidence | [`gx:EvidenceReference`](#evidence-reference)
 media | References to multimedia resources for this subject, such as photos or videos. | gx:media | [`gx:SourceReference`](#source-reference)
 identifiers | Identifiers for this subject. | gx:identifier | [`gx:Identifier`](#identifier-type)
@@ -824,7 +824,7 @@ data type.
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
-type | The gender type. | type (attribute) | [`URI`](#uri)
+type | URI identifying the gender. | type (attribute) | [`URI`](#uri)
 
 ### examples
 
@@ -847,9 +847,9 @@ data type.
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
-type | The name type. | type (attribute) | [`URI`](#uri)
+type | URI identifying the name type. | type (attribute) | [`URI`](#uri)
 date | The date of applicability of the name. | gx:date | [`gx:Date`](#conclusion-date)
-nameForms | The name form(s) that best represents this name `NameForm` -- usually representations considered proper and well formed in the person's native, historical cultural context. All included name forms should be representations of the same name -- __*not*__ name variants (e.g., nicknames, spelling variations). | gx:nameForm | [`gx:NameForm`](#name-form)
+nameForms | The name form(s) that best represents this name; representations of the same name&mdash;__*not*__ name variants (i.e., not nicknames or spelling variations). | gx:nameForm | [`gx:NameForm`](#name-form)
 
 ### examples
 
@@ -917,9 +917,9 @@ data type.
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
-person | Reference to the person playing the role in the event. | gx:person | [`gx:ResourceReference`](#resource-reference)
-type | Reference to the role type. | type (attribute) | [`URI`](#uri)
-details | Details about the role of the person in the event. | gx:details | xs:string
+person | Reference to the event participant. | gx:person | [`gx:ResourceReference`](#resource-reference)
+type | URI identifying the participant's role. | type (attribute) | [`URI`](#uri)
+details | Details about the role of participant in the event. | gx:details | xsd:string
 
 ### examples
 
@@ -945,7 +945,7 @@ data type.
 name | description | XML property | XML type
 -----|-------------|--------------|---------
 original | The original value of the date as supplied by the contributor. | gx:original | xsd:string
-formal | The formal value of the date. | gx:formal | [GEDCOM X Date](https://github.com/FamilySearch/gedcomx/blob/master/specifications/date-format-specification.md)
+formal | The standardized, formal representation of the date. | gx:formal | [GEDCOM X Date](https://github.com/FamilySearch/gedcomx/blob/master/specifications/date-format-specification.md)
 
 ### examples
 
@@ -963,7 +963,7 @@ formal | The formal value of the date. | gx:formal | [GEDCOM X Date](https://git
 
 ## 3.17 The "PlaceReference" Data Type
 
-The `gx:PlaceDescription` is used to (de)serialize the `http://gedcomx.org/v1/PlaceReference` data type.
+The `gx:PlaceReference` is used to (de)serialize the `http://gedcomx.org/v1/PlaceReference` data type.
 
 ### properties
 
@@ -995,7 +995,7 @@ data type.
 name | description | XML property | XML type
 -----|-------------|--------------|---------
 type | URI identifying the type of the name part. | type (attribute) | [`URI`](#uri)
-value | The text of the name part. | value (attribute) | xsd:string
+value | The term(s) from the name that make up this name part. | value (attribute) | xsd:string
 qualifiers | Qualifiers to add additional semantic meaning to the name part. | gx:qualifier | [`gx:Qualifier`](#qualifier)
 
 ### examples
@@ -1014,7 +1014,7 @@ qualifiers | Qualifiers to add additional semantic meaning to the name part. | g
 
 ## 3.19 The "NameForm" Data Type
 
-The `NameForm` XML type is used to (de)serialize the `http://gedcomx.org/v1/NameForm`
+The `gx:NameForm` XML type is used to (de)serialize the `http://gedcomx.org/v1/NameForm`
 data type.
 
 ### properties
@@ -1022,8 +1022,8 @@ data type.
 name | description | XML property | XML type
 -----|-------------|--------------|---------
 lang | The locale identifier for the name form. | xml:lang (attribute) | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag
-fullText | The full text of the name form. | gx:fullText | xsd:string
-parts | Any identified name parts from the name represented in this instance, ordered in the natural order they would be spoken in the given cultural context. | gx:part | [`gx:NamePart`](#name-part)
+fullText | A full rendering of the name. | gx:fullText | xsd:string
+parts | Any identified name parts from the name. | gx:part | [`gx:NamePart`](#name-part)
 
 ### examples
 
@@ -1044,15 +1044,15 @@ parts | Any identified name parts from the name represented in this instance, or
 
 ## 3.20 The "Qualifier" Data Type
 
-The `Qualifier` XML type is used to (de)serialize the `http://gedcomx.org/v1/Qualifier`
+The `gx:Qualifier` XML type is used to (de)serialize the `http://gedcomx.org/v1/Qualifier`
 data type.
 
 ### properties
 
 name | description | XML property | XML type
 -----|-------------|--------------|---------
-name | The name of the qualifier, used to determine the nature of the qualifier. | name (attribute) | [anyURI](#uri)
-value | The value of the qualifier. The semantic meaning of the value is determined by the qualifier name. | (child text) | xsd:string
+name | The name of the qualifier. | name (attribute) | [anyURI](#uri)
+value | The value of the qualifier. | (child text) | xsd:string
 
 ### examples
 
@@ -1098,17 +1098,17 @@ The `gx:Gedcomx` XML type is used as a container for a set of GEDCOM X data.
 
 ### properties
 
-name | description | XML property | XML type
------|-------------|--------------|---------
-id | An identifier for the data set. The id attribute MUST conform to the constraints defined in [Section 7, "Fragment Identifiers"](#fragment-ids). | id (attribute) | xsd:string
-lang | The locale identifier for the data set. | xml:lang (attribute) | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag
-attribution | The attribution of this data set. | gx:attribution | [`gx:Attribution`](#attribution)
-persons | The list of persons contained in the data set. | gx:person | [`gx:Person`](#person)
-relationships | The list of relationships contained in the data set. | gx:relationship | [`gx:Relationship`](#relationship)
-sourceDescriptions | The list of source descriptions contained in the data set. | gx:sourceDescription | [`gx:SourceDescription`](#source-description)
-agents | The list of agents contained in the data set. | gx:agent | [`gx:Agent`](#agent)
-events | The list of events contained in the data set. | gx:event | [`gx:Event`](#event)
-documents | The list of documents contained in the data set. | gx:document | [`gx:Document`](#document)
+name | description | XML property | XML type | constraints
+-----|-------------|--------------|----------|------------
+id | An identifier for the data set. | id (attribute) | xsd:string | OPTIONAL. If provided, the `id` attribute MUST conform to the constraints defined in [Section 7, "Fragment Identifiers"](#fragment-ids).
+lang | The locale identifier for the data set. | xml:lang (attribute) | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag | OPTIONAL. If not provided, the locale is determined per [Internationalization Considerations](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md#i18n).
+attribution | The attribution of this data set. | gx:attribution | [`gx:Attribution`](#attribution) | OPTIONAL.
+persons | The list of persons contained in the data set. | gx:person | [`gx:Person`](#person) | OPTIONAL.
+relationships | The list of relationships contained in the data set. | gx:relationship | [`gx:Relationship`](#relationship) | OPTIONAL.
+sourceDescriptions | The list of source descriptions contained in the data set. | gx:sourceDescription | [`gx:SourceDescription`](#source-description) | OPTIONAL.
+agents | The list of agents contained in the data set. | gx:agent | [`gx:Agent`](#agent) | OPTIONAL.
+events | The list of events contained in the data set. | gx:event | [`gx:Event`](#event) | OPTIONAL.
+documents | The list of documents contained in the data set. | gx:document | [`gx:Document`](#document) | OPTIONAL.
 
 ### examples
 
@@ -1204,7 +1204,7 @@ extensions are not explicitly prohibited.
 
 New data types MAY be defined as extensions to the GEDCOM X XML Serialization Format by providing the following:
 
-* A conceptual data type definition as specified by the GEDCOM X Conceptual Model Section 5.1.
+* A conceptual data type definition as specified by the GEDCOM X Conceptual Model [Section 5.1](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md#51-data-type-extensions).
 * An XML name and namespace for each property of the data type, and whether the property is serialized as an XML element or attribute.
 
 The namespace `http://gedcomx.org/v1/` is reserved for elements and attributes defined by the GEDCOM X specification
@@ -1225,17 +1225,17 @@ name | XML type
 -----|-----------------
 gx:person | [`gx:Person`](#person)
 gx:relationship | [`gx:Relationship`](#relationship)
-gx:fact | [`gx:Fact`](#fact-conclusion)
-gx:name | [`gx:Name`](#name-conclusion)
-gx:gender | [`gx:Gender`](#gender-conclusion)
-gx:agent| [`gx:Agent`](#agent)
-gx:sourceReference | [`gx:SourceReference`](#source-reference)
 gx:sourceDescription | [`gx:SourceDescription`](#source-description)
-gx:placeDescription | [`gx:PlaceDescription`](#place-description)
+gx:agent| [`gx:Agent`](#agent)
 gx:event | [`gx:Event`](#event)
 gx:document | [`gx:Document`](#document)
+gx:placeDescription | [`gx:PlaceDescription`](#place-description)
 gx:attribution | [`gx:Attribution`](#attribution)
 gx:note | [`gx:Note`](#note)
+gx:sourceReference | [`gx:SourceReference`](#source-reference)
+gx:gender | [`gx:Gender`](#gender-conclusion)
+gx:name | [`gx:Name`](#name-conclusion)
+gx:fact | [`gx:Fact`](#fact-conclusion)
 
 
 <a name="fragment-ids"/>

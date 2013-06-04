@@ -22,7 +22,7 @@ http://creativecommons.org/licenses/by-sa/3.0/
 
 # 1. Introduction
 
-The GEDCOM X conceptual model is a specification of formal concepts and types
+The GEDCOM X Conceptual Model is a specification of formal concepts and types
 that are used to provide a standard model and vocabulary for describing genealogical
 data. Genealogical data is structured by data types such as persons, 
 relationships, and sources.
@@ -92,7 +92,7 @@ This section defines a set of basic data types that are used by GEDCOM X.
 
 A "boolean" refers to the mathematical concept of binary-valued logic: `true` or `false`.
 
-A "timestamp" refers to an instance of time, including values for year, month, date, hour, minute, second, milliseconds and timezone.
+A "timestamp" refers to an instance of time, including values for year, month, date, hour, minute, second and timezone.
 
 A "double" refers to an `IEEE 754 binary64` value.
 
@@ -296,9 +296,9 @@ mediaType | A hint about the media type of the resource being described. | strin
 about | A uniform resource identifier (URI) for the resource being described. | [URI](#uri) | OPTIONAL.
 mediator | A reference to the entity that mediates access to the described source. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to an instance of [`http://gedcomx.org/v1/Agent`](#agent).
 sources | A list of references to any sources from which this source is derived. | List of [`http://gedcomx.org/v1/SourceReference`](#source-reference) | OPTIONAL.
-analysis  | Reference to a document containing analysis about this source. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to an instance of [`http://gedcomx.org/v1/Document`](#document) of type `http://gedcomx.org/Analysis`.
+analysis  | A reference to a document containing analysis about this source. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to an instance of [`http://gedcomx.org/v1/Document`](#document) of type `http://gedcomx.org/Analysis`.
 componentOf | A reference to the source that contains this source, i.e. its parent context. Used when the description of a source is not complete without the description of its parent (or containing) source. | [`http://gedcomx.org/v1/SourceReference`](#source-reference) | OPTIONAL.
-titles | The display names for this source. | List of [`http://gedcomx.org/TextValue`](#text-value). Order is preserved. | OPTIONAL. If more than one title is provided, titles are assumed to be given in order of preference, with the most preferred title in the first position in the list.
+titles | The display name(s) for this source. | List of [`http://gedcomx.org/TextValue`](#text-value). Order is preserved. | OPTIONAL. If more than one title is provided, titles are assumed to be given in order of preference, with the most preferred title in the first position in the list.
 notes  | A list of notes about a source. | List of [`http://gedcomx.org/Note`](#note) | OPTIONAL.
 attribution | The attribution of this source description. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing data set (e.g. file) of the source description is assumed.
 
@@ -368,7 +368,7 @@ name  | description | data type | constraints
 type | Enumerated value identifying the type of the event. | [Enumerated Value](#enumerated-value) | OPTIONAL. If provided, MUST identify an event type, and use of a [known event type](#known-event-types) is RECOMMENDED.
 date | The date of the event. | [`http://gedcomx.org/v1/Date`](#conclusion-date) | OPTIONAL.
 place | A reference to the place applicable to this event. | [`http://gedcomx.org/v1/PlaceReference`](#conclusion-place-reference) | OPTIONAL.
-roles | The roles of the persons in the event. | List of [`http://gedcomx.org/v1/EventRole`](#conclusion-event-role). Order is preserved. | OPTIONAL.
+roles | Information about how persons participated in the event. | List of [`http://gedcomx.org/v1/EventRole`](#conclusion-event-role). Order is preserved. | OPTIONAL.
 
 <a name="known-event-types"/>
 
@@ -441,7 +441,7 @@ name  | description | data type | constraints
 ------|-------------|-----------|------------
 type | Enumerated value identifying the type of the document. | [Enumerated Value](#enumerated-value) | OPTIONAL. If provided, MUST identify a document type, and use of a [known document type](#known-document-types) is RECOMMENDED.
 extracted | Whether this document is to be constrained as an _extracted conclusion_. | boolean | OPTIONAL. Default: `false`. Refer to [Extracted Conclusion Constraints](#extracted-conclusion-constraints).
-textType | The type of text in the `text` field. | string | OPTIONAL. If provided, the value MUST be a [valid document text type](#document-text-types).  If no value is provided, "plain" is assumed.
+textType | The type of text in the `text` property. | string | OPTIONAL. If provided, the value MUST be a [valid document text type](#document-text-types).  If no value is provided, "plain" is assumed.
 text | The text of the document. | string | REQUIRED.
 attribution | The attribution of the document. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing data set (e.g. file) of the document is assumed.
 
@@ -510,8 +510,8 @@ name  | description | data type | constraints
 names | A list of standardized (or normalized), fully-qualified (in terms of what is known of the applicable jurisdictional hierarchy) names for this place that are applicable to this description of this place. | List of [`http://gedcomx.org/v1/TextValue`](#text-value). Order is preserved. | REQUIRED. The list MUST contain at least one name.
 type | An implementation-specific uniform resource identifier (URI) used to identify the type of a place (e.g., address, city, county, province, state, country, etc.). | [Enumerated Value](#enumerated-value) | OPTIONAL.  There is no current definition of a set of known place types.
 place | An identifier for the place being described. | [URI](#uri) | OPTIONAL. Descriptions that provide the same value for `place` are interpreted as alternate descriptions of the same place. If provided, MUST NOT use a base URI of `http://gedcomx.org/`. If provided, the value MAY resolve to an external resource that is application-specific and outside the scope of this specification.
-latitude | Degrees north or south of the Equator (0.0 degrees). | double | OPTIONAL.  If provided, MUST provide `longitude` also.  Values range from −90.0 degrees (south) to 90.0 degrees (north). It is assumed that descriptions that provide the same value for the `place` property share identical `longitude` values.
-longitude | Angular distance in degrees, relative to the Prime Meridian (0.0 degrees). | double | OPTIONAL.  If provided, MUST provide `latitude` also.  Values range from −180.0 degrees (west of the Meridian) to 180.0 degrees (east of the Meridian). It is assumed that descriptions that provide the same value for the `place` property share identical `latitude` values.
+latitude | Angular distance, in degrees, north or south of the Equator (0.0 degrees). | double | OPTIONAL.  If provided, MUST provide `longitude` also.  Values range from −90.0 degrees (south of the equator) to 90.0 degrees (north of the equator). It is assumed that descriptions that provide the same value for the `place` property share identical `longitude` values.
+longitude | Angular distance, in degrees, east or west of the Prime Meridian (0.0 degrees). | double | OPTIONAL.  If provided, MUST provide `latitude` also.  Values range from −180.0 degrees (west of the Meridian) to 180.0 degrees (east of the Meridian). It is assumed that descriptions that provide the same value for the `place` property share identical `latitude` values.
 temporalDescription | A description of the time period to which this place description is relevant. | [`http://gedcomx.org/v1/Date`](#conclusion-date) | OPTIONAL.
 spatialDescription | A reference to a geospatial description of this place. | [`URI`](#uri) | OPTIONAL. It is RECOMMENDED that this geospatial description resolve to a [KML](http://en.wikipedia.org/wiki/Keyhole_Markup_Language) document.
 
@@ -651,7 +651,7 @@ The identifier for the "TextValue" data type is:
 name  | description | data type | constraints
 ------|-------------|-----------|------------
 lang | The locale identifier for the value of the text. | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag | OPTIONAL. If not provided, the locale is determined per [Internationalization Considerations](#i18n).
-value | The literal value. | string | REQUIRED.
+value | The text value. | string | REQUIRED.
 
 
 <a name="source-citation"/>
@@ -698,9 +698,10 @@ attribution | The attribution of this source reference. | [`http://gedcomx.org/A
 
 ## 3.7 The "EvidenceReference" Data Type
 
-The `EvidenceReference` data type defines a reference to data that is being used as evidence to answer a research question.
-For example, a `Subject` (i.e., the object holding the `EvidenceReference` instance) can refer to content extracted
-from a source (i.e., an ["extracted"](#extracted-conclusion-constraints) `Conclusion`) as *evidence* that supports the `Subject`.
+The `EvidenceReference` data type defines a reference to data being used to derive the given instance of `Subject`.
+For example, an "evidence" `Subject` (i.e., the object holding the `EvidenceReference` instance) can refer to content
+extracted from a source (i.e., an ["extracted"](#extracted-conclusion-constraints) `Subject`) as *information* being
+used to derive the *evidence* expressed in this `Subject`.
 
 ### identifier
 
@@ -712,9 +713,9 @@ The identifier for the "EvidenceReference" data type is:
 
 name  | description | data type | constraints
 ------|-------------|-----------|------------
-resource  | Reference to data being used as _evidence_. | [URI](#uri) | REQUIRED. MUST resolve to an instance of [`http://gedcomx.org/v1/Subject`](#subject).
-analysis  | Reference to a document containing analysis that supports the use of the referenced data as _evidence_. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to an instance of [`http://gedcomx.org/v1/Document`](#26-the-document-data-type) of type `http://gedcomx.org/Analysis`.
-attribution | The attribution of this source reference. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing resource of the source reference is assumed.
+resource  | Reference to the supporting data. | [URI](#uri) | REQUIRED. MUST resolve to an instance of [`http://gedcomx.org/v1/Subject`](#subject).
+analysis  | Reference to a document containing analysis that supports the use of the referenced data. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to an instance of [`http://gedcomx.org/v1/Document`](#26-the-document-data-type) of type `http://gedcomx.org/Analysis`.
+attribution | The attribution of this evidence reference. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing resource of the source reference is assumed.
 
 ### examples
 
@@ -730,7 +731,7 @@ attribution | The attribution of this source reference. | [`http://gedcomx.org/A
 
 ## 3.8 The "OnlineAccount" Data Type
 
-The `OnlineAccount` data type defines a description of an account in an online web application.
+The `OnlineAccount` data type defines a description of an account for an online service provider.
 
 ### identifier
 
@@ -797,7 +798,7 @@ The identifier for the `Conclusion` data type is:
 
 name  | description | data type | constraints
 ------|-------------|-----------|------------
-id | An identifier for the data structure holding the conclusion data. | string | OPTIONAL.  The id is to be used as a "fragment identifier" as defined by [RFC 3986, Section 3.5](http://tools.ietf.org/html/rfc3986#section-3.5). As such, the constraints of the id are provided in the definition of the media type (e.g. XML, JSON) of the data structure.
+id | An identifier for the conclusion data. | string | OPTIONAL.  The id is to be used as a "fragment identifier" as defined by [RFC 3986, Section 3.5](http://tools.ietf.org/html/rfc3986#section-3.5). As such, the constraints of the id are provided in the definition of the media type (e.g. XML, JSON) of the data structure.
 lang | The locale identifier for the conclusion. | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag | OPTIONAL. If not provided, the locale is determined per [Internationalization Considerations](#i18n).
 sources | The list of references to the sources of related to this conclusion. | List of [`http://gedcomx.org/v1/SourceReference`](#source-reference). Order is preserved. | OPTIONAL. Note that the sources referenced from conclusions are also considered to be sources of the entities that contain them. For example, a source associated with the [`Name`](#name-conclusion) of a [`Person`](#person) is also source for the [`Person`](#person).
 analysis  | Reference to a document containing analysis supporting this conclusion. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to an instance of [`http://gedcomx.org/v1/Document`](#document) of type `http://gedcomx.org/Analysis`.
@@ -878,7 +879,7 @@ This data type extends the following data type:
 
 name  | description | data type | constraints
 ------|-------------|-----------|------------
-type  | Enumerated value identifying the type of the gender. | [Enumerated Value](#enumerated-value) | REQUIRED. MUST identify a gender type, and use of a [known gender type](#known-gender-types) is RECOMMENDED.
+type  | Enumerated value identifying the gender. | [Enumerated Value](#enumerated-value) | REQUIRED. MUST identify a gender type, and use of a [known gender type](#known-gender-types) is RECOMMENDED.
 
 
 <a name="known-gender-types"/>
@@ -931,8 +932,8 @@ This data type extends the following data type:
 
 name  | description | data type | constraints
 ------|-------------|-----------|------------
-type | Enumerated value identifying the type of the name. | [Enumerated Value](#enumerated-value) | OPTIONAL. If provided, MUST identify a name type, and use of a [known name type](#known-name-types) is RECOMMENDED.
-nameForms | The name form(s) that best express this name, usually representations considered proper and well formed in the person's native, historical cultural context. | List of [`http://gedcomx.org/v1/NameForm`](#name-form). Order is preserved. | REQUIRED. At least one name form MUST be provided. All included name forms SHOULD be representations of the same name, and NOT variants of the name (e.g. not nicknames or spelling variations).
+type | Enumerated value identifying the name type. | [Enumerated Value](#enumerated-value) | OPTIONAL. If provided, MUST identify a name type, and use of a [known name type](#known-name-types) is RECOMMENDED.
+nameForms | The name form(s) that best express this name, usually representations considered proper and well formed in the person's native, historical cultural context. | List of [`http://gedcomx.org/v1/NameForm`](#name-form). Order is preserved. | REQUIRED. At least one name form MUST be provided. All included name forms SHOULD be representations of the same name, and NOT variants of the name (i.e., not nicknames or spelling variations).
 date | The date of applicability of the name. | [`http://gedcomx.org/v1/Date`](#conclusion-date) | OPTIONAL.
 
 ### examples
@@ -1057,9 +1058,9 @@ This data type extends the following data type:
 
 name  | description | data type | constraints
 ------|-------------|-----------|------------
-person | Reference to the person playing the role in the event. | [`URI`](#uri) | REQUIRED. MUST resolve to an instance of [`http://gedcomx.org/v1/Person`](#person).
-type | Reference to the role type. | [`URI`](#uri) | OPTIONAL. If provided, MUST identify a role type, and use of a [known role type](#known-roles) is RECOMMENDED.
-details | Details about the role of the person in the event. | string | OPTIONAL.
+person | Reference to the event participant. | [`URI`](#uri) | REQUIRED. MUST resolve to an instance of [`http://gedcomx.org/v1/Person`](#person).
+type | Enumerated value identifying the participant's role. | [Enumerated Value](#enumerated-value) | OPTIONAL. If provided, MUST identify a role type, and use of a [known role type](#known-roles) is RECOMMENDED.
+details | Details about the role of participant in the event. | string | OPTIONAL.
 
 <a name="known-roles"/>
 
@@ -1182,8 +1183,8 @@ The identifier for the `NameForm` data type is:
 name  | description | data type | constraints
 ------|-------------|-----------|------------
 lang | The locale identifier for the name form. | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag | OPTIONAL. If not provided, the locale is determined per [Internationalization Considerations](#i18n).
-fullText | A full rendering of the name (or as much of the name as is known) with the terms in the name given in the natural order they would be spoken in the applicable cultural context. | string | OPTIONAL.
-parts | The parts of the name form, ordered in the natural order they would be spoken in the given cultural context. | List of [`http://gedcomx.org/v1/NamePart`](#name-part). Order is preserved. | OPTIONAL.
+fullText | A full rendering of the name (or as much of the name as is known). | string | OPTIONAL. If provided, the name SHOULD be rendered as it would normally be spoken in the applicable cultural context.
+parts | Any identified name parts from the name. | List of [`http://gedcomx.org/v1/NamePart`](#name-part). Order is preserved. | OPTIONAL. If provided, the list SHOULD be ordered such that the parts are in the order they would normally be spoken in the applicable cultural context.
 
 ### examples
 
@@ -1246,7 +1247,7 @@ The identifier for the "Qualifier" data type is:
 name  | description | data type | constraints
 ------|-------------|-----------|------------
 name | The name of the qualifier. | [Enumerated Value](#enumerated-value) | REQUIRED. It is RECOMMENDED that the qualifier name resolve to an element of a constrained vocabulary.
-value | The value of the qualifier. | string | OPTIONAL.  If provided, The semantic meaning of the value is determined by the qualifier name.
+value | The value of the qualifier. | string | OPTIONAL. If provided, the name MAY give the semantic meaning of the value.
 
 
 <a name="extracted-conclusion-constraints"/>
