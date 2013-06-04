@@ -96,8 +96,8 @@ of values (e.g. `simple date`, `date range`, `open-ended date range`, and `appro
 
 ### 2.1.7 date range
 
-A time interval specified by a starting `simple date` and an ending `simple date`. Equivalent to a
-starting `simple date` and a duration. Date ranges MAY be either "closed" (both end points are specified
+A time interval can be specified by a _start date_ and an _end date_ (both instances of `simple date`) or by specifying a
+_start date_ (a `simple date`) and a _duration_.  Date ranges MAY be either "closed" (both end points are specified
 or can be calculated) or "open-ended" (only one end-point is specified).
 
 Examples of `closed date range`:
@@ -121,9 +121,7 @@ Examples:
 
 ### 2.1.9 approximate date
 
-An indeterminate date with a single occurrence roughly centered on a specified `simple date`,
-with the range limited to be within one order of magnitude of the smallest specified unit of
-measurement in the `simple date`.
+An indeterminate date with a single occurrence roughly centered on a specified `simple date`.
 
 Examples:
 
@@ -151,7 +149,7 @@ The GEDCOM X Date represents one of the following:
 
 ## 3.1 Simple Date
 
-The precision of a simple date is based on the smallest provided unit of measure.
+The precision of a `simple date` is based on the smallest provided unit of measure.
 
 The GEDCOM X Date units of measurement include, and are limited to `year`, `month`,
 `day`, `hour`, `minute`, and `second`.  For a given `simple date`, all units of measurement
@@ -159,27 +157,27 @@ larger than the smallest unit specified MUST be provided.
 
 ## 3.2 Date Range
 
-A `date range` can be either a `closed date range` or an `open-ended date range`.
+A `date range` MUST be either a `closed date range` or an `open-ended date range`.
 
 ### 3.2.1 Closed Date Range
 
-A `closed date range` may be represented by providing _either_ of the following:
+A `closed date range` MUST be _one_ of the following:
 
-* start date and end date
-* start date and duration
+* _start date_ and _end date_
+* _start date_ and `duration`
 
 ### 3.2.2 Open-Ended Date Range
 
-An `open-ended date range` may be represented by providing either the _start date_ or
-the _end date_, but not both.
+An `open-ended date range` MUST include either the _start date_ or
+the _end date_, but NOT both.
 
 ## 3.3 Recurring Date
 
-A `recurring date` is represented by providing the following:
+A `recurring date` is represented by a `closed date range` providing the following:
 
-* a start date (or reference date)
-* the time interval between occurrences
-* the number of recurrences (optional)
+* REQUIRED: a _start date_ (or reference date)
+* REQUIRED: the time interval between occurrences (calculated as the interval between the _start date_ and the _end date_, or as the interval specified by the `duration`)
+* OPTIONAL: the number of recurrences
 
 NOTE: If no recurrence count is provided, the recurrences are considered _perpetual_.
 
@@ -187,15 +185,15 @@ NOTE: If no recurrence count is provided, the recurrences are considered _perpet
 
 An `approximate date` is represented by providing _all_ of the following:
 
-* a date
 * an indicator that the date is _approximate_
+* a `simple date`
 
 ## 3.5 Approximate Date Range
 
 An `approximate date range` is represented by providing _all_ of the following:
 
-* a `date range`
 * an indicator that the date is _approximate_
+* a `date range`
 
 
 # 4. Calendaring System
@@ -329,7 +327,7 @@ guidelines and restrictions:
 * All components present MUST appear in hierarchical order, largest to smallest units.
 * Components are **NOT** REQUIRED to be normalized
     * Any non-normalized unit MAY be represented with up to four digits.
-    * For example, the descriptive values "13 months" and "2 years, 52 days" are each acceptable.
+    * For example, the descriptive values "13 months" and "2 years, 52 days" each contain non-normalized values and both are considered acceptable.
 
 NOTE: For a duration, local time and UTC distinction is meaningless.
 
@@ -344,17 +342,17 @@ P186D | duration of 186 days
 PT5H17M | lapsed time: 5 hours 17 minutes
 P1000Y18M72DT56H10M1S | 1000 years 18 months 72 days 56 hours 10 minutes 1 second
 
-## 5.4 Date Range
+## 5.4 Closed Date Range
 
 ### 5.4.1 Representation
 
-The format for a complete `date range` is defined as either 2 `simple dates`, separated by a [/]:
+The format for a complete `date range` is a _start date_ and an _end date_ (both `simple dates`), separated by a [/]:
 
 ```
 ±YYYY-MM-DDThh:mm:ss[±hh[:mm]|Z]/±YYYY-MM-DDThh:mm:ss[±hh[:mm]|Z]
 ```
 
-or a `simple date` and a `duration`, separated by a [/]:
+_or_ a _start date_ (a `simple date`) and a `duration`, separated by a [/]:
 
 ```
 ±YYYY-MM-DDThh:mm:ss[±hh[:mm]|Z]/PnnnnYnnMnnDTnnHnnMnnS
@@ -365,20 +363,19 @@ In either format, the presence of the slash character [/] indicates the date is 
 
 <a id="range-two-dates" />
 
-#### 5.4.1.1 Two Dates
+#### 5.4.1.1 Start Date Constraints
 
-The `simple date` preceding the slash MUST be earlier than or equivalent to the `simple date`
-following the slash.
+The _start date_ (the `simple date` preceding the slash) MUST NOT be greater than maximum `simple date` (+9999-12-31T23:59:59)
+and MUST be earlier than or equivalent to the _end date_ (the `simple date` following the slash).
 
 NOTE: It is not required that the precision of the two `simple dates` be the same.
 
-#### 5.4.1.2 Date and Duration
+#### 5.4.1.2 Duration Constraints
 
-The instance referenced by the calculated end date MUST be earlier or equivalent to
-the maximum `simple date`: +9999-12-31T23:59:59
+The `duration` MUST be such that the calculated _end date_ is earlier or equivalent to the maximum `simple date` (+9999-12-31T23:59:59)
 
-NOTE: It is not required that the precision of the `simple date` and the `duration` be the same.
-The precision of the equivalent final date is the coarser precision of the `simple date` and the
+NOTE: It is not required that the precision of the _start date_ and the `duration` be the same.
+The precision of the equivalent _end date_ is the coarser precision of the _start date_ and the
 `duration`.
 
 ### 5.4.2 Examples
@@ -393,16 +390,16 @@ example | textual description
 
 ### 5.5.1 Representation
 
-An `open-ended date range` is an extension of the [two-date `date range` format](#range-two-dates), where
-either the starting date or ending date are left blank.
+An `open-ended date range` MUST be a `date range` where
+either the _start date_ or _end date_ is explicitly missing.
 
-A leading slash character [/] is used to provide a date range *before* the specified date:
+A leading slash character [/] is used to specify a date range *before* the provided _end date_:
 
 ```
 /±YYYY-MM-DDThh:mm:ss[±hh[:mm]|Z]
 ```
 
-A trailing slash character [/] is used to provide a date range *after* the specified date:
+A trailing slash character [/] is used to specify a date range *after* the provided _start date_:
 
 ```
 ±YYYY-MM-DDThh:mm:ss[±hh[:mm]|Z]/
@@ -436,9 +433,9 @@ R[n]/±YYYY-MM-DDThh:mm:ss[±hh[:mm]|Z]/PnnnnYnnMnnDTnnHnnMnnS
 
 ### 5.6.2 Description
 
-The `recurring date` is defined as a `date range` prepended with an [R], an OPTIONAL recurrence count, and a slash [/].
-
-NOTE: A recurring date MUST reference a starting date in the `date range`
+The `recurring date` is defined in terms of a `closed date range`&mdash; where _start date_ is the _reference date_
+and the recurring _interval_ is calculated as the interval between the _start date_ and the _end date_ or the interval
+specified by the `duration`&mdash;prepended with an [R], an OPTIONAL recurrence count, and a slash [/].
 
 ### 5.6.3 Examples
 

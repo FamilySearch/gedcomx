@@ -63,7 +63,7 @@ Facts of the following types are applicable to a person:
 
 URI | description 
 ----|------------
-`http://gedcomx.org/Adoption`| A fact of a person's adoption. In the context of a parent-child relationship, it describes a fact of the adoption of a child by a parent.
+`http://gedcomx.org/Adoption`| A fact of a person's adoption.
 `http://gedcomx.org/AdultChristening`| A fact of a person's christening or baptism as an adult.
 `http://gedcomx.org/Amnesty`| A fact of a person's amnesty.
 `http://gedcomx.org/Apprenticeship`| A fact of a person's apprenticeship.
@@ -96,7 +96,7 @@ URI | description
 `http://gedcomx.org/Medical`| A fact of a person's medical record, such as for an illness or hospital stay.
 `http://gedcomx.org/MilitaryAward`| A fact of a person's military award.
 `http://gedcomx.org/MilitaryDischarge`| A fact of a person's military discharge.
-`http://gedcomx.org/MilitaryService`| A fact of a person's militray service.
+`http://gedcomx.org/MilitaryService`| A fact of a person's military service.
 `http://gedcomx.org/Mission`| A fact of a person's church mission.
 `http://gedcomx.org/MoveTo`| A fact of a person's move (i.e. change of residence) to a new location.
 `http://gedcomx.org/MoveFrom`| A fact of a person's move (i.e. change of residence) from a location.
