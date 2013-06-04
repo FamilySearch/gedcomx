@@ -387,7 +387,7 @@ example | textual description
 --------|--------------------
 +1752/+1823 | from 1752 CE to 1823 CE
 +1825-04-13/+1825-11-26 | from April 13, 1825 to November 26, 1825
-+1633-02-19/P74Y | 74 years, starting on February 19, 1933, i.e. from February 19, 1933 to February 19, 2007
++1933-02-19/P74Y | 74 years, starting on February 19, 1933, i.e. from February 19, 1933 to February 19, 2007
 
 ## 5.5 Open-ended Date Range
 
