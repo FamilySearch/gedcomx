@@ -7,13 +7,13 @@ genealogical resources such as those defined by the
 [GEDCOM X standard conceptual model](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md),
 and requests discussion and suggestions for improvements.
 
-The current state of this document is as a DRAFT, and as such, the document
-may be subject to changes, including backwards-incompatible changes, according to the
+The current state of this document is as a "stable draft", and as such, the document
+may be subject to limited changes, BUT NOT backwards-incompatible changes, according to the
 discussion and suggestions for improvement.
 
 ## Copyright Notice
 
-Copyright 2011-2012 Intellectual Reserve, Inc.
+Copyright 2011-2013 Intellectual Reserve, Inc.
 
 ## License
 
