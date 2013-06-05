@@ -67,6 +67,7 @@ URI | description
 `http://gedcomx.org/AdultChristening`| A fact of a person's christening or baptism as an adult.
 `http://gedcomx.org/Amnesty`| A fact of a person's amnesty.
 `http://gedcomx.org/Apprenticeship`| A fact of a person's apprenticeship.
+`http://gedcomx.org/Arrest`| A fact of a person's arrest.
 `http://gedcomx.org/Baptism`| A fact of a person's baptism.
 `http://gedcomx.org/BarMitzvah`| A fact of a person's bar mitzvah.
 `http://gedcomx.org/BatMitzvah`| A fact of a person's bat mitzvah.
@@ -87,15 +88,18 @@ URI | description
 `http://gedcomx.org/Excommunication`| A fact of a person's excommunication from a church.
 `http://gedcomx.org/FirstCommunion`| A fact of a person's first communion in a church.
 `http://gedcomx.org/Funeral`| A fact of a person's funeral.
+`http://gedcomx.org/Graduation`| A fact of a person's graduation from an educational institution.
 `http://gedcomx.org/Heimat`| A fact of a person's _heimat_. "Heimat" refers to a person's affiliation by birth to a specific geographic place. Distinct heimaten are often useful as indicators that two persons of the same name are not likely to be closely related genealogically. In English, "heimat" may be described using terms like "ancestral home", "homeland", or "place of origin".
 `http://gedcomx.org/Immigration`| A fact of a person's immigration.
 `http://gedcomx.org/Imprisonment`| A fact of a person's imprisonment.
 `http://gedcomx.org/LandTransation`| A fact of a land transaction enacted by a person.
+`http://gedcomx.org/Language`| A fact of a language spoken by a person.
 `http://gedcomx.org/Living`| A fact of a record of a person's living for a specific period. This is designed to include "flourish", defined to mean the time period in an adult's life where he was most productive, perhaps as a writer or member of the state assembly. It does not reflect the person's birth and death dates.
 `http://gedcomx.org/MaritalStatus`| A fact of a person's marital status.
 `http://gedcomx.org/Medical`| A fact of a person's medical record, such as for an illness or hospital stay.
 `http://gedcomx.org/MilitaryAward`| A fact of a person's military award.
 `http://gedcomx.org/MilitaryDischarge`| A fact of a person's military discharge.
+`http://gedcomx.org/MilitaryDraft`| A fact of a person's military draft.
 `http://gedcomx.org/MilitaryService`| A fact of a person's military service.
 `http://gedcomx.org/Mission`| A fact of a person's church mission.
 `http://gedcomx.org/MoveTo`| A fact of a person's move (i.e. change of residence) to a new location.
@@ -108,6 +112,7 @@ URI | description
 `http://gedcomx.org/NumberOfMarriages`| A fact of a person's number of marriages.
 `http://gedcomx.org/Occupation`| A fact of a person's occupation or employment.
 `http://gedcomx.org/Ordination`| A fact of a person's ordination to a stewardship in a church.
+`http://gedcomx.org/Pardon`| A fact of a person's legal pardon.
 `http://gedcomx.org/PhysicalDescription`| A fact of a person's physical description.
 `http://gedcomx.org/Probate`| A fact of a receipt of probate of a person's property.
 `http://gedcomx.org/Property`| A fact of a person's property or possessions.
@@ -115,8 +120,10 @@ URI | description
 `http://gedcomx.org/Residence`| A fact of a person's residence.
 `http://gedcomx.org/Retirement`| A fact of a person's retirement.
 `http://gedcomx.org/Stillbirth`| A fact of a person's stillbirth.
+`http://gedcomx.org/TransitionOfSex`| A fact of a person's transition from one sex to another.
 `http://gedcomx.org/Will`| A fact of a person's will.
 `http://gedcomx.org/Visit`| A fact of a person's visit to a place different from the person's residence.
+`http://gedcomx.org/Yahrzeit`| A fact of a person's _yahrzeit_ date.  A person's yahzeit is the anniversary of their death as measured by the Hebrew calendar.
 
 ## 2.2 Couple Relationship Fact Types
 
@@ -126,6 +133,8 @@ URI | description
 ----|------------
 `http://gedcomx.org/Annulment`| The fact of an annulment of a marriage. | couple
 `http://gedcomx.org/CommonLawMarriage`| The fact of a marriage by common law. | couple
+`http://gedcomx.org/CivilUnion`| The fact of a civil union of a couple. | couple
+`http://gedcomx.org/DomesticPartnership`| The fact of a domestic partnership of a couple. | couple
 `http://gedcomx.org/Divorce`| The fact of a divorce of a couple. | couple
 `http://gedcomx.org/DivorceFiling`| The fact of a filing for divorce. | couple
 `http://gedcomx.org/Engagement`| The fact of an engagement to be married. | couple
@@ -149,3 +158,4 @@ URI | description
 `http://gedcomx.org/GuardianParent`| A fact about a legal guardianship between a parent and a child.
 `http://gedcomx.org/StepParent`| A fact about the step relationship between a parent and a child.
 `http://gedcomx.org/SociologicalParent`| A fact about a sociological relationship between a parent and a child, but not definable in typical legal or biological terms.
+`http://gedcomx.org/SurrogateParent`| A fact about a pregnancy surrogate relationship between a parent and a child.
