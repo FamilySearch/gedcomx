@@ -1089,8 +1089,8 @@ The identifier for the `Date` data type is:
 
 ### properties
 
-name | description | data type
------|-------------|----------
+name  | description | data type | constraints
+------|-------------|-----------|------------
 original | The original value of the date as supplied by the contributor. | string | OPTIONAL.
 formal | The standardized [formal value](#formal-values) of the date, formatted according to the GEDCOM X Date Format specification. | [GEDCOM X Date](https://github.com/FamilySearch/gedcomx/blob/master/specifications/date-format-specification.md) | OPTIONAL.
 
