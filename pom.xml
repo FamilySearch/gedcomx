@@ -4,7 +4,7 @@
   <groupId>org.gedcomx</groupId>
   <artifactId>gedcomx-specifications</artifactId>
   <name>GEDCOM X - Specifications</name>
-  <version>1.0.1.M1-SNAPSHOT</version>
+  <version>1.0.1.M1</version>
 
   <build>
     <plugins>
@@ -35,8 +35,8 @@
             <phase>process-resources</phase>
             <configuration>
               <tasks>
-                <mkdir dir="${project.build.directory}"/>
-                <zip destfile="${project.build.directory}/support.zip" basedir="${basedir}/specifications/support" includes="*.png *.pdf"/>
+                <mkdir dir="${project.build.directory}" />
+                <zip destfile="${project.build.directory}/support.zip" basedir="${basedir}/specifications/support" includes="*.png *.pdf" />
               </tasks>
             </configuration>
             <goals>
