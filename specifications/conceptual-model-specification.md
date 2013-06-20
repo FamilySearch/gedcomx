@@ -671,7 +671,7 @@ The identifier for the "SourceCitation" data type is:
 name  | description | data type | constraints
 ------|-------------|-----------|------------
 lang | The locale identifier for the citation. | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag | OPTIONAL. If not provided, the locale is determined per [Internationalization Considerations](#i18n).
-value | A rendering of the full citation as a string. | string | REQUIRED.
+value | A rendering of the full citation. | string | REQUIRED.  This string is plain text, except when a text region needs to be italicized. If a proper citation requires a region of text to be italicized (e.g., a book title), surround the region with an xhtml `i` element.  An application rendering a citation `value` SHOULD render a region(s) surrounded by an xhtml `i` element in an _italic style_ without rendering the `i` element markup. If an application implements only a plain text rendering of the citation `value`, the `i` element markup SHOULD be included in the rendering.
 
 
 <a name="source-reference"/>
