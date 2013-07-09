@@ -158,6 +158,33 @@ can share semantic context of the event.
 
 Elements of a controlled vocabulary are identified by an enumerated value.
 
+<a name="text-types"/>
+
+### 1.3.8 Text Types
+
+In some cases, a text value must include styling or layout to fully convey its intended meaning.  Where such
+a requirement has been identified, implementers can designate that a text value may include such styling or
+layout by specifying an alternate text type. The following text types are supported:
+
+#### plain
+
+The "plain" text type identifies plain text. "plain" is the default text type for text without an explicitly specified type.
+
+#### xhtml
+
+The "xhtml" text type identifies XHTML text complying with the
+[XHTML 1.0 W3C Recommendation](http://www.w3.org/TR/xhtml1/). In order to maximize compatibility and
+minimize security risks, support for the following subset of modules (defined by XHTML Modularization
+1.1 W3C Recommendation](http://www.w3.org/TR/xhtml-modularization/)) is REQUIRED:
+
+* [Core Modules](http://www.w3.org/TR/xhtml-modularization/abstract_modules.html#sec_5.2.), including the Structure Module, Text Module, Hypertext Module, and List Module.
+* [Text Extension Modules](http://www.w3.org/TR/xhtml-modularization/abstract_modules.html#s_text), including the Presentation Module, Edit Module, and Bi-directional Text Module.
+* [Table Modules](http://www.w3.org/TR/xhtml-modularization/abstract_modules.html#sec_5.6.), including the Basic Tables Module, and Tables Module.
+* [Base Module](http://www.w3.org/TR/xhtml-modularization/abstract_modules.html#s_basemodule)
+
+Support for other XHTML modules is OPTIONAL. Parsers MAY ignore elements from optional modules.
+
+
 <a name="i18n"/>
 
 ## 1.4 Internationalization Considerations
@@ -441,7 +468,7 @@ name  | description | data type | constraints
 ------|-------------|-----------|------------
 type | Enumerated value identifying the type of the document. | [Enumerated Value](#enumerated-value) | OPTIONAL. If provided, MUST identify a document type, and use of a [known document type](#known-document-types) is RECOMMENDED.
 extracted | Whether this document is to be constrained as an _extracted conclusion_. | boolean | OPTIONAL. Default: `false`. Refer to [Extracted Conclusion Constraints](#extracted-conclusion-constraints).
-textType | The type of text in the `text` property. | string | OPTIONAL. If provided, the value MUST be a [valid document text type](#document-text-types).  If no value is provided, "plain" is assumed.
+textType | The type of text in the `text` property. | string | OPTIONAL. If provided, the value MUST be a [valid text type](#text-types).  If no value is provided, "plain" is assumed.
 text | The text of the document. | string | REQUIRED.
 attribution | The attribution of the document. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing data set (e.g. file) of the document is assumed.
 
@@ -457,30 +484,6 @@ URI | description
 `http://gedcomx.org/Transcription` | The document is a transcription of a record or document.
 `http://gedcomx.org/Translation` | The document is a translation of a record or document.
 `http://gedcomx.org/Analysis` | The document is an analysis done by a researcher; a genealogical proof statement is an example of one kind of analysis document.
-
-<a name="document-text-types"/>
-
-### 2.6.2 Document Text Types
-
-The following document text types are supported:
-
-#### plain
-
-The "plain" text type identifies the type the document text to be plain text. "plain" is the default value of a document.
-
-#### xhtml
-
-The "xhtml" text type identifies XHTML documents complying with the 
-[XHTML 1.0 W3C Recommendation](http://www.w3.org/TR/xhtml1/). In order to maximize compatibility and 
-minimize security risks, support for the following subset of modules (defined by XHTML Modularization 
-1.1 W3C Recommendation](http://www.w3.org/TR/xhtml-modularization/)) is REQUIRED:
-
-* [Core Modules](http://www.w3.org/TR/xhtml-modularization/abstract_modules.html#sec_5.2.), including the Structure Module, Text Module, Hypertext Module, and List Module.
-* [Text Extension Modules](http://www.w3.org/TR/xhtml-modularization/abstract_modules.html#s_text), including the Presentation Module, Edit Module, and Bi-directional Text Module.
-* [Table Modules](http://www.w3.org/TR/xhtml-modularization/abstract_modules.html#sec_5.6.), including the Basic Tables Module, and Tables Module.
-* [Base Module](http://www.w3.org/TR/xhtml-modularization/abstract_modules.html#s_basemodule)
-
-Support for other XHTML modules is OPTIONAL. Parsers MAY ignore elements from optional modules.
 
 
 <a name="place-description"/>
@@ -671,7 +674,8 @@ The identifier for the "SourceCitation" data type is:
 name  | description | data type | constraints
 ------|-------------|-----------|------------
 lang | The locale identifier for the citation. | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag | OPTIONAL. If not provided, the locale is determined per [Internationalization Considerations](#i18n).
-value | A rendering of the full citation. | string | REQUIRED.  This string is plain text, except when a text region needs to be italicized. If a proper citation requires a region of text to be italicized (e.g., a book title), surround the region with an xhtml `i` element.  An application rendering a citation `value` SHOULD render a region(s) surrounded by an xhtml `i` element in an _italic style_ without rendering the `i` element markup. If an application implements only a plain text rendering of the citation `value`, the `i` element markup SHOULD be included in the rendering.
+textType | The type of text in the `value` property. | string | OPTIONAL. If provided, the value MUST be a [valid text type](#text-types).  If no value is provided, "plain" is assumed.
+value | A rendering of the full citation. | string | REQUIRED.
 
 
 <a name="source-reference"/>
