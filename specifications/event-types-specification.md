@@ -81,7 +81,7 @@ URI | description
 `http://gedcomx.org/FirstCommunion` | A first communion event.
 `http://gedcomx.org/Funeral` | A funeral event.
 `http://gedcomx.org/Immigration` | An immigration event.
-`http://gedcomx.org/LandTransation` | A land transaction event.
+`http://gedcomx.org/LandTransaction` | A land transaction event.
 `http://gedcomx.org/Marriage` | A marriage event.
 `http://gedcomx.org/MilitaryAward` | A military award event.
 `http://gedcomx.org/MilitaryDischarge` | A military discharge event.

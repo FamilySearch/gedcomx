@@ -90,7 +90,7 @@ URI | description
 `http://gedcomx.org/Heimat`| A fact of a person's _heimat_. "Heimat" refers to a person's affiliation by birth to a specific geographic place. Distinct heimaten are often useful as indicators that two persons of the same name are not likely to be closely related genealogically. In English, "heimat" may be described using terms like "ancestral home", "homeland", or "place of origin".
 `http://gedcomx.org/Immigration`| A fact of a person's immigration.
 `http://gedcomx.org/Imprisonment`| A fact of a person's imprisonment.
-`http://gedcomx.org/LandTransation`| A fact of a land transaction enacted by a person.
+`http://gedcomx.org/LandTransaction`| A fact of a land transaction enacted by a person.
 `http://gedcomx.org/Living`| A fact of a record of a person's living for a specific period. This is designed to include "flourish", defined to mean the time period in an adult's life where he was most productive, perhaps as a writer or member of the state assembly. It does not reflect the person's birth and death dates.
 `http://gedcomx.org/MaritalStatus`| A fact of a person's marital status.
 `http://gedcomx.org/Medical`| A fact of a person's medical record, such as for an illness or hospital stay.
