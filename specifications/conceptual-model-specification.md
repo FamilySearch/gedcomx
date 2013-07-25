@@ -673,9 +673,8 @@ The identifier for the "SourceCitation" data type is:
 
 name  | description | data type | constraints
 ------|-------------|-----------|------------
-lang | The locale identifier for the citation. | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag | OPTIONAL. If not provided, the locale is determined per [Internationalization Considerations](#i18n).
-textType | The type of text in the `value` property. | string | OPTIONAL. If provided, the value MUST be a [valid text type](#text-types).  If no value is provided, "plain" is assumed.
-value | A rendering of the full citation. | string | REQUIRED.
+lang | The locale identifier for the bibliographic metadata. | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag | OPTIONAL. If not provided, the locale is determined per [Internationalization Considerations](#i18n).
+value | The bibliographic metadata rendered as a full citation. | string | REQUIRED.  This string is plain text, but MAY include an xhtml [`cite`](http://www.w3.org/TR/html5/text-level-semantics.html#the-cite-element) element.  If the `value` includes a [`cite`](http://www.w3.org/TR/html5/text-level-semantics.html#the-cite-element) element, the text-level semantics defined for [`cite`](http://www.w3.org/TR/html5/text-level-semantics.html#the-cite-element) MUST apply&mdash;i.e., the element MUST represent the title of a work.
 
 
 <a name="source-reference"/>
