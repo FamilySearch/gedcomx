@@ -440,7 +440,7 @@ name | description | JSON member | JSON object type
 -----|-------------|-------------|---------
 type | URI identifying the type of the document. | type | [`URI`](#uri)
 extracted | Whether this document is to be constrained as an [_extracted conclusion_](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md#4-extracted-conclusion-constraints). | extracted | boolean
-textType | The type of text in the `text` property. | text | string
+textType | The type of text in the `text` property. | textType | string
 text | The text of the document. | text | string
 attribution | The attribution of this document. | attribution | [`Attribution`](#attribution)
 
@@ -622,6 +622,7 @@ The JSON object used to (de)serialize the `http://gedcomx.org/v1/SourceCitation`
 name | description | JSON member | JSON object type
 -----|-------------|-------------|-----------------
 lang | The locale identifier for the citation. | lang | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag
+textType | The type of text in the `value` property. | textType | string
 value | A rendering of the full citation as a string. | value | string
 
 ### examples
@@ -629,6 +630,7 @@ value | A rendering of the full citation as a string. | value | string
 ```json
 {
   "lang" : "en",
+  "textType" : "plain",
   "value" : "...a rendering of the full citation as a string..."
 
   ...possibility of extension elements...
