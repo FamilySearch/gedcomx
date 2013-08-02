@@ -88,7 +88,6 @@ URI | description
 `http://gedcomx.org/Excommunication`| A fact of a person's excommunication from a church.
 `http://gedcomx.org/FirstCommunion`| A fact of a person's first communion in a church.
 `http://gedcomx.org/Funeral`| A fact of a person's funeral.
-`http://gedcomx.org/Graduation`| A fact of a person's graduation from an educational institution.
 `http://gedcomx.org/Heimat`| A fact of a person's _heimat_. "Heimat" refers to a person's affiliation by birth to a specific geographic place. Distinct heimaten are often useful as indicators that two persons of the same name are not likely to be closely related genealogically. In English, "heimat" may be described using terms like "ancestral home", "homeland", or "place of origin".
 `http://gedcomx.org/Immigration`| A fact of a person's immigration.
 `http://gedcomx.org/Imprisonment`| A fact of a person's imprisonment.
@@ -131,20 +130,20 @@ Facts of the following types are applicable to a couple relationship:
 
 URI | description
 ----|------------
-`http://gedcomx.org/Annulment`| The fact of an annulment of a marriage. | couple
-`http://gedcomx.org/CommonLawMarriage`| The fact of a marriage by common law. | couple
-`http://gedcomx.org/CivilUnion`| The fact of a civil union of a couple. | couple
-`http://gedcomx.org/DomesticPartnership`| The fact of a domestic partnership of a couple. | couple
-`http://gedcomx.org/Divorce`| The fact of a divorce of a couple. | couple
-`http://gedcomx.org/DivorceFiling`| The fact of a filing for divorce. | couple
-`http://gedcomx.org/Engagement`| The fact of an engagement to be married. | couple
-`http://gedcomx.org/Marriage`| The fact of a marriage. | couple
-`http://gedcomx.org/MarriageBanns`| The fact of a marriage banns. | couple
-`http://gedcomx.org/MarriageContract`| The fact of a marriage contract. | couple
-`http://gedcomx.org/MarriageLicense`| The fact of a marriage license. | couple
-`http://gedcomx.org/MarriageNotice`| The fact of a marriage notice. | couple
-`http://gedcomx.org/NumberOfChildren`| A fact of the number of children of a person or relationship. | couple
-`http://gedcomx.org/Separation`| A fact of a couple's separation. | couple
+`http://gedcomx.org/Annulment`| The fact of an annulment of a marriage.
+`http://gedcomx.org/CommonLawMarriage`| The fact of a marriage by common law.
+`http://gedcomx.org/CivilUnion`| The fact of a civil union of a couple.
+`http://gedcomx.org/DomesticPartnership`| The fact of a domestic partnership of a couple.
+`http://gedcomx.org/Divorce`| The fact of a divorce of a couple.
+`http://gedcomx.org/DivorceFiling`| The fact of a filing for divorce.
+`http://gedcomx.org/Engagement`| The fact of an engagement to be married.
+`http://gedcomx.org/Marriage`| The fact of a marriage.
+`http://gedcomx.org/MarriageBanns`| The fact of a marriage banns.
+`http://gedcomx.org/MarriageContract`| The fact of a marriage contract.
+`http://gedcomx.org/MarriageLicense`| The fact of a marriage license.
+`http://gedcomx.org/MarriageNotice`| The fact of a marriage notice.
+`http://gedcomx.org/NumberOfChildren`| A fact of the number of children of a person or relationship.
+`http://gedcomx.org/Separation`| A fact of a couple's separation.
 
 ## 2.3 Parent-Child Relationship Fact Types
 
@@ -159,3 +158,21 @@ URI | description
 `http://gedcomx.org/StepParent`| A fact about the step relationship between a parent and a child.
 `http://gedcomx.org/SociologicalParent`| A fact about a sociological relationship between a parent and a child, but not definable in typical legal or biological terms.
 `http://gedcomx.org/SurrogateParent`| A fact about a pregnancy surrogate relationship between a parent and a child.
+
+# 3. Criteria for New Fact Types
+
+This registry of fact types is intended to be extended as additional needs are identified. In order to ensure
+that the complexity, size, and manageability of this registry are maintained at reasonable levels, the following criteria
+are used to determine the viability of a new fact type candidate:
+
+* The new fact type should demonstrate a useful purpose within the context of genealogical research.
+* To minimize misuse, the new fact type should provide a clear and distinct definition that should not overlap
+  the definition of any existing fact type.
+* The new fact type should demonstrate reasonable applicability across a diverse set of use cases, including
+  use cases that cover automated analysis and end-user presentation.
+* The new fact type should demonstrate reasonable applicability across differing geographic, cultural, and
+  regional contexts and should be reasonably independent of specific legal definitions that vary between each
+  context.
+
+In addition to the above criteria, consideration will be given to fact types that were defined by
+earlier specifications.
