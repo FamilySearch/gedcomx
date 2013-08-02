@@ -119,7 +119,7 @@ URI | description
 `http://gedcomx.org/Residence`| A fact of a person's residence.
 `http://gedcomx.org/Retirement`| A fact of a person's retirement.
 `http://gedcomx.org/Stillbirth`| A fact of a person's stillbirth.
-`http://gedcomx.org/TransitionOfSex`| A fact of a person's transition from one sex to another.
+`http://gedcomx.org/GenderChange`| A fact of a person's gender change.
 `http://gedcomx.org/Will`| A fact of a person's will.
 `http://gedcomx.org/Visit`| A fact of a person's visit to a place different from the person's residence.
 `http://gedcomx.org/Yahrzeit`| A fact of a person's _yahrzeit_ date.  A person's yahzeit is the anniversary of their death as measured by the Hebrew calendar.
