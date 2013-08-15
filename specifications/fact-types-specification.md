@@ -98,7 +98,8 @@ URI | description
 `http://gedcomx.org/Medical`| A fact of a person's medical record, such as for an illness or hospital stay.
 `http://gedcomx.org/MilitaryAward`| A fact of a person's military award.
 `http://gedcomx.org/MilitaryDischarge`| A fact of a person's military discharge.
-`http://gedcomx.org/MilitaryDraft`| A fact of a person's military draft.
+`http://gedcomx.org/MilitaryDraftRegistration`| A fact of a person's registration for a military draft.
+`http://gedcomx.org/MilitaryInduction`| A fact of a person's military induction.
 `http://gedcomx.org/MilitaryService`| A fact of a person's military service.
 `http://gedcomx.org/Mission`| A fact of a person's church mission.
 `http://gedcomx.org/MoveTo`| A fact of a person's move (i.e. change of residence) to a new location.
