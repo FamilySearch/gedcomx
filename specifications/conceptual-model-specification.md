@@ -252,7 +252,7 @@ name  | description | data type | constraints
 ------|-------------|-----------|------------
 private | Whether this instance of `Person` has been designated for limited distribution or display. | boolean | OPTIONAL. A description of how implementations should use private data is outside the scope of this specification.
 gender | The gender of the person. | [`http://gedcomx.org/v1/Gender`](#gender) | OPTIONAL.
-names | The names of the person. | List of [`http://gedcomx.org/v1/Name`](#name-conclusion). Order is preserved. | OPTIONAL.
+names | The names of the person. | List of [`http://gedcomx.org/v1/Name`](#name-conclusion). Order is preserved. | OPTIONAL.  If more than one name is provided, names are assumed to be given in order of preference, with the most preferred name in the first position in the list.
 facts | The facts of the person. | List of [`http://gedcomx.org/v1/Fact`](#fact-conclusion). Order is preserved. | OPTIONAL.
 
 
