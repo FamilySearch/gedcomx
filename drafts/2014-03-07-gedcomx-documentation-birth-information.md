@@ -130,7 +130,7 @@ The following snippet demonstrates how a root document is initialized in both XM
 
 ###### XML
 
-<pre class="prettyprint lang-xml" style="max-height: 500px; overflow:scroll">
+<pre class="prettyprint lang-xml" style="max-height: 400px; overflow:auto">
 &lt;gedcomx xmlns="http://gedcomx.org/v1/">
     ...
     &lt;attribution>
@@ -148,7 +148,7 @@ The following snippet demonstrates how a root document is initialized in both XM
 
 ###### JSON
 
-<pre class="prettyprint lang-javascript" style="max-height: 500px; overflow:scroll">
+<pre class="prettyprint lang-javascript" style="max-height: 400px; overflow:auto">
 {
   "attribution" : {
     "contributor" : {
@@ -175,7 +175,7 @@ The source is represented by providing an instance of the [`SourceDescription`](
 
 ###### XML
 
-<pre class="prettyprint lang-xml" style="max-height: 500px; overflow:scroll">
+<pre class="prettyprint lang-xml" style="max-height: 400px; overflow:auto">
 &lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 &lt;gedcomx xmlns="http://gedcomx.org/v1/">
     ...
@@ -197,7 +197,7 @@ The source is represented by providing an instance of the [`SourceDescription`](
 
 ###### JSON
 
-<pre class="prettyprint lang-javascript" style="max-height: 500px; overflow:scroll">
+<pre class="prettyprint lang-javascript" style="max-height: 400px; overflow:auto">
 {
   ...
   "sourceDescriptions" : [ {
@@ -231,7 +231,7 @@ The following snippet demonstrates how the extracted information is represented 
 
 ###### XML
 
-<pre class="prettyprint lang-xml" style="max-height: 500px; overflow:scroll">
+<pre class="prettyprint lang-xml" style="max-height: 400px; overflow:auto">
 &lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 &lt;gedcomx xmlns="http://gedcomx.org/v1/">
     ...
@@ -286,7 +286,7 @@ The following snippet demonstrates how the extracted information is represented 
 
 ###### JSON
 
-<pre class="prettyprint lang-javascript" style="max-height: 500px; overflow:scroll">
+<pre class="prettyprint lang-javascript" style="max-height: 400px; overflow:auto">
 {
   ...
   "persons" : [ {
@@ -368,7 +368,7 @@ The aggregated analysis, including the text of the document, is represented with
 
 ###### XML
 
-<pre class="prettyprint lang-xml" style="max-height: 500px; overflow:scroll">
+<pre class="prettyprint lang-xml" style="max-height: 400px; overflow:auto">
 &lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 &lt;gedcomx xmlns="http://gedcomx.org/v1/">
     ...
@@ -389,7 +389,7 @@ The aggregated analysis, including the text of the document, is represented with
 
 ###### JSON
 
-<pre class="prettyprint lang-javascript" style="max-height: 500px; overflow:scroll">
+<pre class="prettyprint lang-javascript" style="max-height: 400px; overflow:auto">
 {
   "persons" : [ ... , {
     "evidence" : [ {
@@ -414,7 +414,7 @@ Here are the XML and JSON representations of the use case described above.
 
 ###### XML
 
-<pre class="prettyprint lang-xml" style="max-height: 500px; overflow:scroll">
+<pre class="prettyprint lang-xml" style="max-height: 400px; overflow:auto">
 &lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 &lt;gedcomx xmlns="http://gedcomx.org/v1/">
     &lt;attribution>
@@ -492,7 +492,7 @@ Here are the XML and JSON representations of the use case described above.
 
 ###### JSON
 
-<pre class="prettyprint lang-javascript" style="max-height: 500px; overflow:scroll">
+<pre class="prettyprint lang-javascript" style="max-height: 400px; overflow:auto">
 {
   "attribution" : {
     "contributor" : {
