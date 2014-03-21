@@ -131,6 +131,7 @@ The following snippet demonstrates how a root document is initialized in both XM
 #### XML
 
 <pre class="prettyprint lang-xml">
+```
 <gedcomx xmlns="http://gedcomx.org/v1/">
     ...
     <attribution>
@@ -144,6 +145,7 @@ The following snippet demonstrates how a root document is initialized in both XM
     </agent>
     ...
 </gedcomx>
+```
 </pre>
 
 #### JSON
