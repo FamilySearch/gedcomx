@@ -1,6 +1,6 @@
 ---
 title: GEDCOM X Representation of Birth Information
-date: 2014-03-07 15:00:00
+date: 2014-03-21 15:00:00
 layout: default
 author: Ryan Heaton
 ---
