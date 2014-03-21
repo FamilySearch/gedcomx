@@ -131,21 +131,19 @@ The following snippet demonstrates how a root document is initialized in both XM
 #### XML
 
 <pre class="prettyprint lang-xml">
-```
-<gedcomx xmlns="http://gedcomx.org/v1/">
+&lt;gedcomx xmlns="http://gedcomx.org/v1/">
     ...
-    <attribution>
-        <contributor resource="#A-1"/>
-        <modified>2014-03-07T00:00:00-07:00</modified>
-    </attribution>
+    &lt;attribution>
+        &lt;contributor resource="#A-1"/>
+        &lt;modified>2014-03-07T00:00:00-07:00&lt;/modified>
+    &lt;/attribution>
     ...
-    <agent id="A-1">
-        <email resource="mailto:example@example.org"/>
-        <name>Jane Doe</name>
-    </agent>
+    &lt;agent id="A-1">
+        &lt;email resource="mailto:example@example.org"/>
+        &lt;name>Jane Doe&lt;/name>
+    &lt;/agent>
     ...
-</gedcomx>
-```
+&lt;/gedcomx>
 </pre>
 
 #### JSON
@@ -178,23 +176,23 @@ The source is represented by providing an instance of the [`SourceDescription`](
 #### XML
 
 <pre class="prettyprint lang-xml">
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<gedcomx xmlns="http://gedcomx.org/v1/">
+&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+&lt;gedcomx xmlns="http://gedcomx.org/v1/">
     ...
-    <sourceDescription resourceType="http://gedcomx.org/PhysicalArtifact" id="S-1">
-        <citation>
-            <value>England, birth certificate for Emma Bocock, born 23 July 1843; citing 1843 Birth in District and Sub-district of Ecclesall-Bierlow in the County of York, 303; General Registry Office, Southport.</value>
-        </citation>
-        <title>Birth Certificate of Emma Bocock, 23 July 1843, General Registry Office</title>
-        <created>1843-07-27T00:00:00-07:00</created>
-        <repository resource="#A-2"/>
-    </sourceDescription>
+    &lt;sourceDescription resourceType="http://gedcomx.org/PhysicalArtifact" id="S-1">
+        &lt;citation>
+            &lt;value>England, birth certificate for Emma Bocock, born 23 July 1843; citing 1843 Birth in District and Sub-district of Ecclesall-Bierlow in the County of York, 303; General Registry Office, Southport.&lt;/value>
+        &lt;/citation>
+        &lt;title>Birth Certificate of Emma Bocock, 23 July 1843, General Registry Office&lt;/title>
+        &lt;created>1843-07-27T00:00:00-07:00&lt;/created>
+        &lt;repository resource="#A-2"/>
+    &lt;/sourceDescription>
     ...
-    <agent id="A-2">
-        <name>General Registry Office, Southport</name>
-    </agent>
+    &lt;agent id="A-2">
+        &lt;name>General Registry Office, Southport&lt;/name>
+    &lt;/agent>
     ...
-</gedcomx>
+&lt;/gedcomx>
 </pre>
 
 #### JSON
@@ -234,56 +232,56 @@ The following snippet demonstrates how the extracted information is represented 
 #### XML
 
 <pre class="prettyprint lang-xml">
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<gedcomx xmlns="http://gedcomx.org/v1/">
+&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+&lt;gedcomx xmlns="http://gedcomx.org/v1/">
     ...
-    <person extracted="true" id="P-1">
-        <source description="#S-1"/>
-        <gender type="http://gedcomx.org/Female"/>
-        <name>
-            <nameForm>
-                <fullText>Emma Bocock</fullText>
-            </nameForm>
-        </name>
-        <fact type="http://gedcomx.org/Birth">
-            <date>
-                <original>23 June 1843</original>
-            </date>
-            <place>
-                <original>Broadfield Bar, Abbeydale Road, Ecclesall-Bierlow, York, England, United Kingdom</original>
-            </place>
-        </fact>
-    </person>
-    <person extracted="true" id="P-2">
-        <source description="#S-1"/>
-        <name>
-            <nameForm>
-                <fullText>William Bocock</fullText>
-            </nameForm>
-        </name>
-        <fact type="http://gedcomx.org/Occupation">
-            <value>Toll Collector</value>
-        </fact>
-    </person>
-    <person extracted="true" id="P-3">
-        <source description="#S-1"/>
-        <name>
-            <nameForm>
-                <fullText>Sarah Bocock formerly Brough</fullText>
-            </nameForm>
-        </name>
-    </person>
+    &lt;person extracted="true" id="P-1">
+        &lt;source description="#S-1"/>
+        &lt;gender type="http://gedcomx.org/Female"/>
+        &lt;name>
+            &lt;nameForm>
+                &lt;fullText>Emma Bocock&lt;/fullText>
+            &lt;/nameForm>
+        &lt;/name>
+        &lt;fact type="http://gedcomx.org/Birth">
+            &lt;date>
+                &lt;original>23 June 1843&lt;/original>
+            &lt;/date>
+            &lt;place>
+                &lt;original>Broadfield Bar, Abbeydale Road, Ecclesall-Bierlow, York, England, United Kingdom&lt;/original>
+            &lt;/place>
+        &lt;/fact>
+    &lt;/person>
+    &lt;person extracted="true" id="P-2">
+        &lt;source description="#S-1"/>
+        &lt;name>
+            &lt;nameForm>
+                &lt;fullText>William Bocock&lt;/fullText>
+            &lt;/nameForm>
+        &lt;/name>
+        &lt;fact type="http://gedcomx.org/Occupation">
+            &lt;value>Toll Collector&lt;/value>
+        &lt;/fact>
+    &lt;/person>
+    &lt;person extracted="true" id="P-3">
+        &lt;source description="#S-1"/>
+        &lt;name>
+            &lt;nameForm>
+                &lt;fullText>Sarah Bocock formerly Brough&lt;/fullText>
+            &lt;/nameForm>
+        &lt;/name>
+    &lt;/person>
     ...
-    <relationship type="http://gedcomx.org/ParentChild">
-        <person1 resource="#P-2"/>
-        <person2 resource="#P-1"/>
-    </relationship>
-    <relationship type="http://gedcomx.org/ParentChild">
-        <person1 resource="#P-3"/>
-        <person2 resource="#P-1"/>
-    </relationship>
+    &lt;relationship type="http://gedcomx.org/ParentChild">
+        &lt;person1 resource="#P-2"/>
+        &lt;person2 resource="#P-1"/>
+    &lt;/relationship>
+    &lt;relationship type="http://gedcomx.org/ParentChild">
+        &lt;person1 resource="#P-3"/>
+        &lt;person2 resource="#P-1"/>
+    &lt;/relationship>
     ...
-</gedcomx>
+&lt;/gedcomx>
 </pre>
 
 #### JSON
@@ -371,22 +369,22 @@ The aggregated analysis, including the text of the document, is represented with
 #### XML
 
 <pre class="prettyprint lang-xml">
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<gedcomx xmlns="http://gedcomx.org/v1/">
+&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+&lt;gedcomx xmlns="http://gedcomx.org/v1/">
     ...
-    <person id="C-1">
+    &lt;person id="C-1">
         ...
-        <analysis resource="#D-1"/>
+        &lt;analysis resource="#D-1"/>
         ...
-        <evidence resource="#P-1"/>
+        &lt;evidence resource="#P-1"/>
         ...
-    </person>
+    &lt;/person>
     ...
-    <document id="D-1">
-        <text>...Jane Doe's analysis document...</text>
-    </document>
+    &lt;document id="D-1">
+        &lt;text>...Jane Doe's analysis document...&lt;/text>
+    &lt;/document>
     ...
-</gedcomx>
+&lt;/gedcomx>
 </pre>
 
 #### JSON
@@ -417,79 +415,79 @@ Here are the XML and JSON representations of the use case described above.
 #### XML
 
 <pre class="prettyprint lang-xml">
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<gedcomx xmlns="http://gedcomx.org/v1/">
-    <attribution>
-        <contributor resource="#A-1"/>
-        <modified>2014-03-07T00:00:00-07:00</modified>
-    </attribution>
-    <person extracted="true" id="P-1">
-        <source description="#S-1"/>
-        <gender type="http://gedcomx.org/Female"/>
-        <name>
-            <nameForm>
-                <fullText>Emma Bocock</fullText>
-            </nameForm>
-        </name>
-        <fact type="http://gedcomx.org/Birth">
-            <date>
-                <original>23 June 1843</original>
-            </date>
-            <place>
-                <original>Broadfield Bar, Abbeydale Road, Ecclesall-Bierlow, York, England, United Kingdom</original>
-            </place>
-        </fact>
-    </person>
-    <person extracted="true" id="P-2">
-        <source description="#S-1"/>
-        <name>
-            <nameForm>
-                <fullText>William Bocock</fullText>
-            </nameForm>
-        </name>
-        <fact type="http://gedcomx.org/Occupation">
-            <value>Toll Collector</value>
-        </fact>
-    </person>
-    <person extracted="true" id="P-3">
-        <source description="#S-1"/>
-        <name>
-            <nameForm>
-                <fullText>Sarah Bocock formerly Brough</fullText>
-            </nameForm>
-        </name>
-    </person>
-    <person id="C-1">
-        <analysis resource="#D-1"/>
-        <evidence resource="#P-1"/>
-    </person>
-    <relationship type="http://gedcomx.org/ParentChild">
-        <person1 resource="#P-2"/>
-        <person2 resource="#P-1"/>
-    </relationship>
-    <relationship type="http://gedcomx.org/ParentChild">
-        <person1 resource="#P-3"/>
-        <person2 resource="#P-1"/>
-    </relationship>
-    <sourceDescription resourceType="http://gedcomx.org/PhysicalArtifact" id="S-1">
-        <citation>
-            <value>England, birth certificate for Emma Bocock, born 23 July 1843; citing 1843 Birth in District and Sub-district of Ecclesall-Bierlow in the County of York, 303; General Registry Office, Southport.</value>
-        </citation>
-        <title>Birth Certificate of Emma Bocock, 23 July 1843, General Registry Office</title>
-        <created>1843-07-27T00:00:00-07:00</created>
-        <repository resource="#A-2"/>
-    </sourceDescription>
-    <agent id="A-1">
-        <email resource="mailto:example@example.org"/>
-        <name>Jane Doe</name>
-    </agent>
-    <agent id="A-2">
-        <name>General Registry Office, Southport</name>
-    </agent>
-    <document id="D-1">
-        <text>...Jane Doe's analysis document...</text>
-    </document>
-</gedcomx>
+&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+&lt;gedcomx xmlns="http://gedcomx.org/v1/">
+    &lt;attribution>
+        &lt;contributor resource="#A-1"/>
+        &lt;modified>2014-03-07T00:00:00-07:00&lt;/modified>
+    &lt;/attribution>
+    &lt;person extracted="true" id="P-1">
+        &lt;source description="#S-1"/>
+        &lt;gender type="http://gedcomx.org/Female"/>
+        &lt;name>
+            &lt;nameForm>
+                &lt;fullText>Emma Bocock&lt;/fullText>
+            &lt;/nameForm>
+        &lt;/name>
+        &lt;fact type="http://gedcomx.org/Birth">
+            &lt;date>
+                &lt;original>23 June 1843&lt;/original>
+            &lt;/date>
+            &lt;place>
+                &lt;original>Broadfield Bar, Abbeydale Road, Ecclesall-Bierlow, York, England, United Kingdom&lt;/original>
+            &lt;/place>
+        &lt;/fact>
+    &lt;/person>
+    &lt;person extracted="true" id="P-2">
+        &lt;source description="#S-1"/>
+        &lt;name>
+            &lt;nameForm>
+                &lt;fullText>William Bocock&lt;/fullText>
+            &lt;/nameForm>
+        &lt;/name>
+        &lt;fact type="http://gedcomx.org/Occupation">
+            &lt;value>Toll Collector&lt;/value>
+        &lt;/fact>
+    &lt;/person>
+    &lt;person extracted="true" id="P-3">
+        &lt;source description="#S-1"/>
+        &lt;name>
+            &lt;nameForm>
+                &lt;fullText>Sarah Bocock formerly Brough&lt;/fullText>
+            &lt;/nameForm>
+        &lt;/name>
+    &lt;/person>
+    &lt;person id="C-1">
+        &lt;analysis resource="#D-1"/>
+        &lt;evidence resource="#P-1"/>
+    &lt;/person>
+    &lt;relationship type="http://gedcomx.org/ParentChild">
+        &lt;person1 resource="#P-2"/>
+        &lt;person2 resource="#P-1"/>
+    &lt;/relationship>
+    &lt;relationship type="http://gedcomx.org/ParentChild">
+        &lt;person1 resource="#P-3"/>
+        &lt;person2 resource="#P-1"/>
+    &lt;/relationship>
+    &lt;sourceDescription resourceType="http://gedcomx.org/PhysicalArtifact" id="S-1">
+        &lt;citation>
+            &lt;value>England, birth certificate for Emma Bocock, born 23 July 1843; citing 1843 Birth in District and Sub-district of Ecclesall-Bierlow in the County of York, 303; General Registry Office, Southport.&lt;/value>
+        &lt;/citation>
+        &lt;title>Birth Certificate of Emma Bocock, 23 July 1843, General Registry Office&lt;/title>
+        &lt;created>1843-07-27T00:00:00-07:00&lt;/created>
+        &lt;repository resource="#A-2"/>
+    &lt;/sourceDescription>
+    &lt;agent id="A-1">
+        &lt;email resource="mailto:example@example.org"/>
+        &lt;name>Jane Doe&lt;/name>
+    &lt;/agent>
+    &lt;agent id="A-2">
+        &lt;name>General Registry Office, Southport&lt;/name>
+    &lt;/agent>
+    &lt;document id="D-1">
+        &lt;text>...Jane Doe's analysis document...&lt;/text>
+    &lt;/document>
+&lt;/gedcomx>
 </pre>
 
 #### JSON
