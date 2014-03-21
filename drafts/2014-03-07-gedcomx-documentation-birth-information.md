@@ -130,7 +130,7 @@ The following snippet demonstrates how a root document is initialized in both XM
 
 #### XML
 
-{% highlight xml %}
+<pre class="prettyprint lang-xml">
 <gedcomx xmlns="http://gedcomx.org/v1/">
     ...
     <attribution>
@@ -144,11 +144,11 @@ The following snippet demonstrates how a root document is initialized in both XM
     </agent>
     ...
 </gedcomx>
-{% endhighlight %}
+</pre>
 
 #### JSON
 
-{% highlight json %}
+<pre class="prettyprint lang-javascript">
 {
   "attribution" : {
     "contributor" : {
@@ -167,7 +167,7 @@ The following snippet demonstrates how a root document is initialized in both XM
     "id" : "A-1"
   }, ... ]
 }
-{% endhighlight %}
+</pre>
 
 ### The Source Description
 
@@ -175,7 +175,7 @@ The source is represented by providing an instance of the [`SourceDescription`](
 
 #### XML
 
-{% highlight xml %}
+<pre class="prettyprint lang-xml">
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <gedcomx xmlns="http://gedcomx.org/v1/">
     ...
@@ -193,11 +193,11 @@ The source is represented by providing an instance of the [`SourceDescription`](
     </agent>
     ...
 </gedcomx>
-{% endhighlight %}
+</pre>
 
 #### JSON
 
-{% highlight json %}
+<pre class="prettyprint lang-javascript">
 {
   ...
   "sourceDescriptions" : [ {
@@ -221,7 +221,7 @@ The source is represented by providing an instance of the [`SourceDescription`](
     "id" : "A-2"
   }, ... ]
 }
-{% endhighlight %}
+</pre>
 
 ### The Extracted Information
 
@@ -231,7 +231,7 @@ The following snippet demonstrates how the extracted information is represented 
 
 #### XML
 
-{% highlight xml %}
+<pre class="prettyprint lang-xml">
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <gedcomx xmlns="http://gedcomx.org/v1/">
     ...
@@ -282,11 +282,11 @@ The following snippet demonstrates how the extracted information is represented 
     </relationship>
     ...
 </gedcomx>
-{% endhighlight %}
+</pre>
 
 #### JSON
 
-{% highlight json %}
+<pre class="prettyprint lang-javascript">
 {
   ...
   "persons" : [ {
@@ -358,7 +358,7 @@ The following snippet demonstrates how the extracted information is represented 
   } ],
   ...
 }
-{% endhighlight %}
+</pre>
 
 ### The Analysis
 
@@ -368,7 +368,7 @@ The aggregated analysis, including the text of the document, is represented with
 
 #### XML
 
-{% highlight xml %}
+<pre class="prettyprint lang-xml">
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <gedcomx xmlns="http://gedcomx.org/v1/">
     ...
@@ -385,11 +385,11 @@ The aggregated analysis, including the text of the document, is represented with
     </document>
     ...
 </gedcomx>
-{% endhighlight %}
+</pre>
 
 #### JSON
 
-{% highlight json %}
+<pre class="prettyprint lang-javascript">
 {
   "persons" : [ ... , {
     "evidence" : [ {
@@ -406,7 +406,7 @@ The aggregated analysis, including the text of the document, is represented with
     "id" : "D-1"
   } ]
 }
-{% endhighlight %}
+</pre>
 
 ### The Result
 
@@ -414,7 +414,7 @@ Here are the XML and JSON representations of the use case described above.
 
 #### XML
 
-{% highlight xml %}
+<pre class="prettyprint lang-xml">
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <gedcomx xmlns="http://gedcomx.org/v1/">
     <attribution>
@@ -488,11 +488,11 @@ Here are the XML and JSON representations of the use case described above.
         <text>...Jane Doe's analysis document...</text>
     </document>
 </gedcomx>
-{% endhighlight %}
+</pre>
 
 #### JSON
 
-{% highlight json %}
+<pre class="prettyprint lang-javascript">
 {
   "attribution" : {
     "contributor" : {
@@ -608,7 +608,7 @@ Here are the XML and JSON representations of the use case described above.
     "id" : "D-1"
   } ]
 }
-{% endhighlight %}
+</pre>
 
 ## Code Examples
 
