@@ -17,7 +17,7 @@ A researcher receives a copy of a birth record from the General Registry Office 
 
 ![Birth Record, Emma Bocock, GRO](http://familysearch.github.io/gedcomx/img/gro-birth-record-emma-bocock.png)
 
-### Describing the Source
+#### Describing the Source
 
 The record is described as a source with the following information:
 
@@ -63,7 +63,7 @@ The record is described as a source with the following information:
 </tbody>
 </table>
 
-### Extracting the Information
+#### Extracting the Information
 
 The researcher extracts the following information from the source:
 
@@ -114,7 +114,7 @@ The researcher extracts the following information from the source:
 </tbody>
 </table>
 
-### Analyzing the Information
+#### Analyzing the Information
 
 The researcher analyzes the birth record within the context of the other records of Emma Bocock she has found. She writes an analysis document that details her conclusions of the identity of Emma Bocock.
 
@@ -122,13 +122,13 @@ The researcher analyzes the birth record within the context of the other records
 
 The information gathered is represented using GEDCOM X as follows:
 
-### Create the GEDCOM X Root Document
+#### Create the GEDCOM X Root Document
 
 All GEDCOM X information is contained within a "root" document. When the document is created, the software being used by the researcher provides information about who can be attributed the information.
 
 The following snippet demonstrates how a root document is initialized in both XML and JSON. The information within the document is dated March 7, 2014 and attributed to a user named "Jane Doe" with an e-mail address of "example@example.org". An instance of the [`Agent`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md#agent) data type is provided to describe the contributor, and an instance of the [`Attribution`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md#attribution) data type is provided to attribute the information to the contributor.
 
-#### XML
+###### XML
 
 <pre class="prettyprint lang-xml">
 &lt;gedcomx xmlns="http://gedcomx.org/v1/">
@@ -146,7 +146,7 @@ The following snippet demonstrates how a root document is initialized in both XM
 &lt;/gedcomx>
 </pre>
 
-#### JSON
+###### JSON
 
 <pre class="prettyprint lang-javascript">
 {
@@ -169,11 +169,11 @@ The following snippet demonstrates how a root document is initialized in both XM
 }
 </pre>
 
-### The Source Description
+#### The Source Description
 
 The source is represented by providing an instance of the [`SourceDescription`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md#source-description) data type in the root document. The following snippet demonstrates how the source is represented in both XML and JSON. The source description includes a title, a citation, a created date, and a reference to the General Registry Office, which is represented using an [`Agent`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md#agent).
 
-#### XML
+###### XML
 
 <pre class="prettyprint lang-xml">
 &lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?>
@@ -195,7 +195,7 @@ The source is represented by providing an instance of the [`SourceDescription`](
 &lt;/gedcomx>
 </pre>
 
-#### JSON
+###### JSON
 
 <pre class="prettyprint lang-javascript">
 {
@@ -223,13 +223,13 @@ The source is represented by providing an instance of the [`SourceDescription`](
 }
 </pre>
 
-### The Extracted Information
+#### The Extracted Information
 
 The information that is extracted from the source is represented as persons and relationships. An instance of the [`Person`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md#person) data type provides person information and an instance of the [`Relationship`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md#relationship) data type provides relationship information.
 
 The following snippet demonstrates how the extracted information is represented in both XML and JSON. Each person is designated as `extracted` because the information was extracted from a single source. Each person includes a name, an id, and a reference to the source. The birth information is included on the principal person, and the occupation information is included on the father.
 
-#### XML
+###### XML
 
 <pre class="prettyprint lang-xml">
 &lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?>
@@ -284,7 +284,7 @@ The following snippet demonstrates how the extracted information is represented 
 &lt;/gedcomx>
 </pre>
 
-#### JSON
+###### JSON
 
 <pre class="prettyprint lang-javascript">
 {
@@ -360,13 +360,13 @@ The following snippet demonstrates how the extracted information is represented 
 }
 </pre>
 
-### The Analysis
+#### The Analysis
 
 Following good research process practices, the researcher writes up a document that describes her analysis of the information about Emma Bocock that was discovered. Presumably, other sources in addition to the birth record were located and their analysis would be included in the document.
 
 The aggregated analysis, including the text of the document, is represented with another [`Person`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md#person) that references the extracted information as evidence using instances of [`EvidenceReference`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md#evidence-reference). The following snippet demonstrates how the analysis is represented in both XML and JSON.
 
-#### XML
+###### XML
 
 <pre class="prettyprint lang-xml">
 &lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?>
@@ -387,7 +387,7 @@ The aggregated analysis, including the text of the document, is represented with
 &lt;/gedcomx>
 </pre>
 
-#### JSON
+###### JSON
 
 <pre class="prettyprint lang-javascript">
 {
@@ -408,11 +408,11 @@ The aggregated analysis, including the text of the document, is represented with
 }
 </pre>
 
-### The Result
+#### The Result
 
 Here are the XML and JSON representations of the use case described above.
 
-#### XML
+###### XML
 
 <pre class="prettyprint lang-xml">
 &lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?>
@@ -490,7 +490,7 @@ Here are the XML and JSON representations of the use case described above.
 &lt;/gedcomx>
 </pre>
 
-#### JSON
+###### JSON
 
 <pre class="prettyprint lang-javascript">
 {
