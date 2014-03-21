@@ -9,7 +9,7 @@ This post is part of an initiative to improve the available documentation of GED
 
 ## Summary
 
-During research for Emma Bocock (born 1843, daughter of William and Sarah Bocock, in Sheffield, Yorkshire, England), a researcher uses Free BMD Birth Index, 1837-1915 to locate and order a birth record from the General Registry Office at Southport, England.  The record is described by providing a title, citation, and other metadata. Information about the birth, the name, father, mother, etc. is extracted from the record. The extracted information is assembled together with information extracted from other records to aggregate what is presumed to be known about Emma Bocock.
+During research for Emma Bocock (born 1843, daughter of William and Sarah Bocock, in Sheffield, Yorkshire, England), a researcher uses Free BMD Birth Index, 1837-1915 to locate and order a birth record from the General Registry Office at Southport, England.  The record is described by providing a title, citation, and other metadata. Information about the birth, the name, father, mother, etc., is extracted from the record. The extracted information is assembled together with information extracted from other records to aggregate what is presumed to be known about Emma Bocock.
 
 ## Gathering the Information
 
@@ -21,30 +21,98 @@ A researcher receives a copy of a birth record from the General Registry Office 
 
 The record is described as a source with the following information:
 
-name|value|provided by
-----|-----|-----
-Source Title|Birth Certificate of Emma Bocock, 23 July 1843, General Registry Office|User
-Source Citation|England, birth certificate for Emma Bocock, born 23 July 1843; citing 1843 Birth in District and Sub-district of Ecclesall-Bierlow in the County of York, 303; General Registry Office, Southport.|User, possibly aided by software.
-Repository Name|General Registry Office, Southport|User
-Source Type|Physical Artifact|User
-Source Creation Date|27 July 1843|User
-Source Id|S-1|Software
+<table class="table table-striped table-condensed">
+<thead>
+  <tr>
+    <th>name</th>
+    <th>value</th>
+    <th>provided by</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>Source Title</td>
+    <td>Birth Certificate of Emma Bocock, 23 July 1843, General Registry Office</td>
+    <td>User</td>
+  </tr>
+  <tr>
+    <td>Source Citation</td>
+    <td>England, birth certificate for Emma Bocock, born 23 July 1843; citing 1843 Birth in District and Sub-district of Ecclesall-Bierlow in the County of York, 303; General Registry Office, Southport.</td>
+    <td>User, possibly aided by software.</td>
+  </tr>
+  <tr>
+    <td>Repository Name</td>
+    <td>General Registry Office, Southport</td>
+    <td>User</td>
+  </tr>
+  <tr>
+    <td>Source Type</td>
+    <td>Physical Artifact</td>
+    <td>User</td>
+  </tr>
+  <tr>
+    <td>Source Creation Date</td>
+    <td>27 July 1843</td>
+    <td>User</td>
+  </tr>
+  <tr>
+    <td>Source Id</td>
+    <td>S-1</td>
+    <td>Software</td>
+  </tr>
+</tbody>
+</table>
 
 ### Extracting the Information
 
 The researcher extracts the following information from the source:
 
-description|value
------------|-----
-Event Type|Birth
-Event Date|23 June 1843
-Event Place|Broadfield Bar, Abbeydale Road, Ecclesall-Bierlow, York, England, United Kingdom
-Child’s Name|Emma Bocock
-Child's Gender|Female
-Father’s Name|William Bocock
-Mother’s Name|Sarah Bocock formerly Brough
-Father’s Occupation|Toll Collector
-Signature, Description and Residence of Informant|William Bocock, Father, Broadfield Bar, Abbeydale Road
+<table class="table table-striped table-condensed">
+<thead>
+  <tr>
+    <th>description</th>
+    <th>value</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>Event Type</td>
+    <td>Birth</td>
+  </tr>
+  <tr>
+    <td>Event Date</td>
+    <td>23 June 1843</td>
+  </tr>
+  <tr>
+    <td>Event Place</td>
+    <td>Broadfield Bar, Abbeydale Road, Ecclesall-Bierlow, York, England, United Kingdom</td>
+  </tr>
+  <tr>
+    <td>Child’s Name</td>
+    <td>Emma Bocock</td>
+  </tr>
+  <tr>
+    <td>Child's Gender</td>
+    <td>Female</td>
+  </tr>
+  <tr>
+    <td>Father’s Name</td>
+    <td>William Bocock</td>
+  </tr>
+  <tr>
+    <td>Mother’s Name</td>
+    <td>Sarah Bocock formerly Brough</td>
+  </tr>
+  <tr>
+    <td>Father’s Occupation</td>
+    <td>Toll Collector</td>
+  </tr>
+  <tr>
+    <td>Signature, Description and Residence of Informant</td>
+    <td>William Bocock, Father, Broadfield Bar, Abbeydale Road</td>
+  </tr>
+</tbody>
+</table>
 
 ### Analyzing the Information
 
@@ -62,7 +130,7 @@ The following snippet demonstrates how a root document is initialized in both XM
 
 #### XML
 
-```xml
+{% highlight xml %}
 <gedcomx xmlns="http://gedcomx.org/v1/">
     ...
     <attribution>
@@ -76,11 +144,11 @@ The following snippet demonstrates how a root document is initialized in both XM
     </agent>
     ...
 </gedcomx>
-```
+{% endhighlight %}
 
 #### JSON
 
-```json
+{% highlight json %}
 {
   "attribution" : {
     "contributor" : {
@@ -99,7 +167,7 @@ The following snippet demonstrates how a root document is initialized in both XM
     "id" : "A-1"
   }, ... ]
 }
-```
+{% endhighlight %}
 
 ### The Source Description
 
@@ -107,7 +175,7 @@ The source is represented by providing an instance of the [`SourceDescription`](
 
 #### XML
 
-```xml
+{% highlight xml %}
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <gedcomx xmlns="http://gedcomx.org/v1/">
     ...
@@ -125,11 +193,11 @@ The source is represented by providing an instance of the [`SourceDescription`](
     </agent>
     ...
 </gedcomx>
-```
+{% endhighlight %}
 
 #### JSON
 
-```json
+{% highlight json %}
 {
   ...
   "sourceDescriptions" : [ {
@@ -153,7 +221,7 @@ The source is represented by providing an instance of the [`SourceDescription`](
     "id" : "A-2"
   }, ... ]
 }
-```
+{% endhighlight %}
 
 ### The Extracted Information
 
@@ -163,7 +231,7 @@ The following snippet demonstrates how the extracted information is represented 
 
 #### XML
 
-```xml
+{% highlight xml %}
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <gedcomx xmlns="http://gedcomx.org/v1/">
     ...
@@ -214,11 +282,11 @@ The following snippet demonstrates how the extracted information is represented 
     </relationship>
     ...
 </gedcomx>
-```
+{% endhighlight %}
 
 #### JSON
 
-```json
+{% highlight json %}
 {
   ...
   "persons" : [ {
@@ -290,7 +358,7 @@ The following snippet demonstrates how the extracted information is represented 
   } ],
   ...
 }
-```
+{% endhighlight %}
 
 ### The Analysis
 
@@ -300,7 +368,7 @@ The aggregated analysis, including the text of the document, is represented with
 
 #### XML
 
-```xml
+{% highlight xml %}
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <gedcomx xmlns="http://gedcomx.org/v1/">
     ...
@@ -317,11 +385,11 @@ The aggregated analysis, including the text of the document, is represented with
     </document>
     ...
 </gedcomx>
-```
+{% endhighlight %}
 
 #### JSON
 
-```json
+{% highlight json %}
 {
   "persons" : [ ... , {
     "evidence" : [ {
@@ -338,7 +406,7 @@ The aggregated analysis, including the text of the document, is represented with
     "id" : "D-1"
   } ]
 }
-```
+{% endhighlight %}
 
 ### The Result
 
@@ -346,7 +414,7 @@ Here are the XML and JSON representations of the use case described above.
 
 #### XML
 
-```xml
+{% highlight xml %}
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <gedcomx xmlns="http://gedcomx.org/v1/">
     <attribution>
@@ -420,11 +488,11 @@ Here are the XML and JSON representations of the use case described above.
         <text>...Jane Doe's analysis document...</text>
     </document>
 </gedcomx>
-```
+{% endhighlight %}
 
 #### JSON
 
-```json
+{% highlight json %}
 {
   "attribution" : {
     "contributor" : {
@@ -540,7 +608,7 @@ Here are the XML and JSON representations of the use case described above.
     "id" : "D-1"
   } ]
 }
-```
+{% endhighlight %}
 
 ## Code Examples
 
