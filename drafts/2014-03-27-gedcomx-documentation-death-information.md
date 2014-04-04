@@ -103,12 +103,14 @@ The digital image of the grave marker is also described as a source with the fol
 
 The digital image is transcribed as as follows:
 
+<pre>
 WONG ALOIAU
 NOV. 22, 1848 – AUG. 3, 1920
 中山  大字都  泮沙鄉
 生  於  前  清 戊申 年 十一 月 廿二（日）子   時
 終  於  民國  庚申 年     七月    十二 (日)    午    時
 先考  諱 羅有  字 容康 王 府 君 之 墓
+</pre>
 
 #### Describing the Transcription of the Source
 
@@ -155,12 +157,14 @@ The transcription of the digital image is also described as a source with the fo
 
 The transcription is translated as as follows:
 
+<pre>
 WONG ALOIAU
 NOV. 22, 1848 – AUG. 3, 1920 \[lunar dates\]
 \[Birthplace\] \[China, Guandong, \]Chung Shan, See Dai Doo, Pun Sha village
 \[Date of birth\] Born at former Qing 1848 year 11th month 22nd day 23-1 hour.
 \[Life\] ended at Republic of China year 1920 year 7th mo. 12th day 11-13 hour.
 Deceased father avoid \[mention of\] Lo Yau also known as Young Hong Wong \[noble\]residence ruler’s grave.
+</pre>
 
 #### Describing the Translation of the Source
 
