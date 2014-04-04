@@ -291,124 +291,12 @@ The following snippet demonstrates how a root document is initialized in both XM
         &lt;contributor resource="#A-1"/>
         &lt;modified>2014-03-27T00:00:00-06:00&lt;/modified>
     &lt;/attribution>
-    &lt;person extracted="true" id="P-1">
-        &lt;source description="#S-4"/>
-        &lt;gender type="http://gedcomx.org/Male"/>
-        &lt;name>
-            &lt;nameForm>
-                &lt;fullText>WONG Aloiau&lt;/fullText>
-            &lt;/nameForm>
-        &lt;/name>
-        &lt;fact type="http://gedcomx.org/Birth">
-            &lt;date>
-                &lt;original>former Qing 1848 year 11th month 22nd day 23-1 hour&lt;/original>
-                &lt;formal>+1848-11-22&lt;/formal>
-            &lt;/date>
-            &lt;place>
-                &lt;original>Pun Sha Village, See Dai Doo, Chung Shan, Guangdong, China&lt;/original>
-            &lt;/place>
-        &lt;/fact>
-        &lt;fact type="http://gedcomx.org/Death">
-            &lt;date>
-                &lt;original>Republic of China year 1920 year 7th mo. 12th day 11-13 hour&lt;/original>
-                &lt;formal>+1920-08-03&lt;/formal>
-            &lt;/date>
-        &lt;/fact>
-        &lt;fact type="http://gedcomx.org/Burial">
-            &lt;place>
-                &lt;original>Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii&lt;/original>
-            &lt;/place>
-        &lt;/fact>
-    &lt;/person>
-    &lt;person extracted="true" id="P-2">
-        &lt;source description="#S-4"/>
-        &lt;name>
-            &lt;nameForm>
-                &lt;fullText>Lo Yau&lt;/fullText>
-            &lt;/nameForm>
-        &lt;/name>
-        &lt;name type="http://gedcomx.org/AlsoKnownAs">
-            &lt;nameForm>
-                &lt;fullText>Young Hong Wong&lt;/fullText>
-            &lt;/nameForm>
-        &lt;/name>
-    &lt;/person>
-    &lt;person id="C-1">
-        &lt;analysis resource="#D-3"/>
-        &lt;evidence resource="#P-1"/>
-    &lt;/person>
-    &lt;relationship type="http://gedcomx.org/ParentChild">
-        &lt;person1 resource="#P-2"/>
-        &lt;person2 resource="#P-1"/>
-    &lt;/relationship>
-    &lt;sourceDescription resourceType="http://gedcomx.org/PhysicalArtifact" id="S-1">
-        &lt;citation>
-            &lt;value>WONG Aloiau gravestone, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii; visited May 1975 by Jane Doe.&lt;/value>
-        &lt;/citation>
-        &lt;title>Grave Marker of WONG Aloiau, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii&lt;/title>
-        &lt;repository resource="#A-2"/>
-    &lt;/sourceDescription>
-    &lt;sourceDescription resourceType="http://gedcomx.org/DigitalArtifact" id="S-2">
-        &lt;citation>
-            &lt;value>WONG Aloiau gravestone (digital photograph), Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii; visited May 1975 by Jane Doe.&lt;/value>
-        &lt;/citation>
-        &lt;source description="#S-1"/>
-        &lt;title>Grave Marker of WONG Aloiau, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii&lt;/title>
-    &lt;/sourceDescription>
-    &lt;sourceDescription about="#D-1" resourceType="http://gedcomx.org/DigitalArtifact" id="S-3">
-        &lt;citation>
-            &lt;value>WONG Aloiau gravestone (transcription), Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii; visited May 1975 by Jane Doe.&lt;/value>
-        &lt;/citation>
-        &lt;source description="#S-2"/>
-        &lt;title>Transcription of Grave Marker of WONG Aloiau, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii&lt;/title>
-    &lt;/sourceDescription>
-    &lt;sourceDescription about="#D-2" resourceType="http://gedcomx.org/DigitalArtifact" id="S-4">
-        &lt;citation>
-            &lt;value>WONG Aloiau gravestone, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii; visited May 1975 by Jane Doe. Translation by HANYU Pinyin 王大年.&lt;/value>
-        &lt;/citation>
-        &lt;source description="#S-3"/>
-        &lt;title>Translation of Grave Marker of WONG Aloiau, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii&lt;/title>
-        &lt;attribution>
-            &lt;contributor resource="#A-3"/>
-            &lt;modified>2014-03-27T00:00:00-06:00&lt;/modified>
-        &lt;/attribution>
-    &lt;/sourceDescription>
+    ...
     &lt;agent id="A-1">
         &lt;email resource="mailto:example@example.org"/>
         &lt;name>Jane Doe&lt;/name>
     &lt;/agent>
-    &lt;agent id="A-3">
-        &lt;email resource="mailto:example@example.org"/>
-        &lt;name>HANYU Pinyin 王大年&lt;/name>
-    &lt;/agent>
-    &lt;agent id="A-2">
-        &lt;address>
-            &lt;city>Honolulu&lt;/city>
-            &lt;stateOrProvince>Hawaii&lt;/stateOrProvince>
-        &lt;/address>
-        &lt;name>Lin Yee Chung Cemetery&lt;/name>
-    &lt;/agent>
-    &lt;document xml:lang="zh" id="D-1">
-        &lt;source description="#S-2"/>
-        &lt;text>WONG ALOIAU
-NOV. 22, 1848 – AUG. 3, 1920
-中山  大字都  泮沙鄉
-生  於  前  清 戊申 年 十一 月 廿二（日）子   時
-終  於  民國  庚申 年     七月    十二 (日)    午    時
-先考  諱 羅有  字 容康 王 府 君 之 墓&lt;/text>
-    &lt;/document>
-    &lt;document id="D-2">
-        &lt;source description="#S-3"/>
-        &lt;text>WONG ALOIAU
-NOV. 22, 1848 – AUG. 3, 1920 \[lunar dates\]
-\[Birthplace\] \[China, Guandong, \]Chung Shan, See Dai Doo, Pun Sha village
-\[Date of birth\] Born at former Qing 1848 year 11th month 22nd day 23-1 hour.
-\[Life\] ended at Republic of China year 1920 year 7th mo. 12th day 11-13 hour.
-Deceased father avoid \[mention of\] Lo Yau also known as Young Hong Wong \[noble\]residence ruler’s grave.&lt;/text>
-    &lt;/document>
-    &lt;document id="D-3">
-        &lt;text>...Jane Doe's analysis document...&lt;/text>
-    &lt;/document>
+    ...
 &lt;/gedcomx>
 </pre>
 
@@ -422,132 +310,7 @@ Deceased father avoid \[mention of\] Lo Yau also known as Young Hong Wong \[nobl
     },
     "modified" : 1395900000000
   },
-  "persons" : [ {
-    "names" : [ {
-      "nameForms" : [ {
-        "fullText" : "WONG Aloiau"
-      } ]
-    } ],
-    "gender" : {
-      "type" : "http://gedcomx.org/Male"
-    },
-    "facts" : [ {
-      "type" : "http://gedcomx.org/Birth",
-      "date" : {
-        "original" : "former Qing 1848 year 11th month 22nd day 23-1 hour",
-        "formal" : "+1848-11-22"
-      },
-      "place" : {
-        "original" : "Pun Sha Village, See Dai Doo, Chung Shan, Guangdong, China"
-      }
-    }, {
-      "type" : "http://gedcomx.org/Death",
-      "date" : {
-        "original" : "Republic of China year 1920 year 7th mo. 12th day 11-13 hour",
-        "formal" : "+1920-08-03"
-      }
-    }, {
-      "type" : "http://gedcomx.org/Burial",
-      "place" : {
-        "original" : "Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii"
-      }
-    } ],
-    "extracted" : true,
-    "sources" : [ {
-      "description" : "#S-4"
-    } ],
-    "id" : "P-1"
-  }, {
-    "names" : [ {
-      "nameForms" : [ {
-        "fullText" : "Lo Yau"
-      } ]
-    }, {
-      "type" : "http://gedcomx.org/AlsoKnownAs",
-      "nameForms" : [ {
-        "fullText" : "Young Hong Wong"
-      } ]
-    } ],
-    "extracted" : true,
-    "sources" : [ {
-      "description" : "#S-4"
-    } ],
-    "id" : "P-2"
-  }, {
-    "evidence" : [ {
-      "resource" : "#P-1"
-    } ],
-    "analysis" : {
-      "resource" : "#D-3"
-    },
-    "id" : "C-1"
-  } ],
-  "relationships" : [ {
-    "type" : "http://gedcomx.org/ParentChild",
-    "person1" : {
-      "resource" : "#P-2"
-    },
-    "person2" : {
-      "resource" : "#P-1"
-    }
-  } ],
-  "sourceDescriptions" : [ {
-    "resourceType" : "http://gedcomx.org/PhysicalArtifact",
-    "citations" : [ {
-      "value" : "WONG Aloiau gravestone, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii; visited May 1975 by Jane Doe."
-    } ],
-    "titles" : [ {
-      "value" : "Grave Marker of WONG Aloiau, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii"
-    } ],
-    "repository" : {
-      "resource" : "#A-2"
-    },
-    "id" : "S-1"
-  }, {
-    "sources" : [ {
-      "description" : "#S-1"
-    } ],
-    "resourceType" : "http://gedcomx.org/DigitalArtifact",
-    "citations" : [ {
-      "value" : "WONG Aloiau gravestone (digital photograph), Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii; visited May 1975 by Jane Doe."
-    } ],
-    "titles" : [ {
-      "value" : "Grave Marker of WONG Aloiau, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii"
-    } ],
-    "id" : "S-2"
-  }, {
-    "sources" : [ {
-      "description" : "#S-2"
-    } ],
-    "resourceType" : "http://gedcomx.org/DigitalArtifact",
-    "citations" : [ {
-      "value" : "WONG Aloiau gravestone (transcription), Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii; visited May 1975 by Jane Doe."
-    } ],
-    "about" : "#D-1",
-    "titles" : [ {
-      "value" : "Transcription of Grave Marker of WONG Aloiau, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii"
-    } ],
-    "id" : "S-3"
-  }, {
-    "sources" : [ {
-      "description" : "#S-3"
-    } ],
-    "resourceType" : "http://gedcomx.org/DigitalArtifact",
-    "citations" : [ {
-      "value" : "WONG Aloiau gravestone, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii; visited May 1975 by Jane Doe. Translation by HANYU Pinyin 王大年."
-    } ],
-    "about" : "#D-2",
-    "titles" : [ {
-      "value" : "Translation of Grave Marker of WONG Aloiau, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii"
-    } ],
-    "attribution" : {
-      "contributor" : {
-        "resource" : "#A-3"
-      },
-      "modified" : 1395900000000
-    },
-    "id" : "S-4"
-  } ],
+  ...
   "agents" : [ {
     "names" : [ {
       "value" : "Jane Doe"
@@ -556,106 +319,20 @@ Deceased father avoid \[mention of\] Lo Yau also known as Young Hong Wong \[nobl
       "resource" : "mailto:example@example.org"
     } ],
     "id" : "A-1"
-  }, {
-    "names" : [ {
-      "value" : "HANYU Pinyin 王大年"
-    } ],
-    "emails" : [ {
-      "resource" : "mailto:example@example.org"
-    } ],
-    "id" : "A-3"
-  }, {
-    "names" : [ {
-      "value" : "Lin Yee Chung Cemetery"
-    } ],
-    "addresses" : [ {
-      "city" : "Honolulu",
-      "stateOrProvince" : "Hawaii"
-    } ],
-    "id" : "A-2"
-  } ],
-  "documents" : [ {
-    "text" : "WONG ALOIAU\nNOV. 22, 1848 – AUG. 3, 1920\n中山  大字都  泮沙鄉\n生  於  前  清 戊申 年 十一 月 廿二（日）子   時\n終  於  民國  庚申 年     七月    十二 (日)    午    時\n先考  諱 羅有  字 容康 王 府 君 之 墓",
-    "sources" : [ {
-      "description" : "#S-2"
-    } ],
-    "lang" : "zh",
-    "id" : "D-1"
-  }, {
-    "text" : "WONG ALOIAU\nNOV. 22, 1848 – AUG. 3, 1920 \\[lunar dates\\]\n\\[Birthplace\\] \\[China, Guandong, \\]Chung Shan, See Dai Doo, Pun Sha village\n\\[Date of birth\\] Born at former Qing 1848 year 11th month 22nd day 23-1 hour.\n\\[Life\\] ended at Republic of China year 1920 year 7th mo. 12th day 11-13 hour.\nDeceased father avoid \\[mention of\\] Lo Yau also known as Young Hong Wong \\[noble\\]residence ruler’s grave.",
-    "sources" : [ {
-      "description" : "#S-3"
-    } ],
-    "id" : "D-2"
-  }, {
-    "text" : "...Jane Doe's analysis document...",
-    "id" : "D-3"
-  } ]
+  }, ... ],
+  ...
 }
 </pre>
 
 #### The Grave Stone and Its Digital Image
 
-The gravestone and its digial image are deach described by providing an instance of the [`SourceDescription`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md#source-description) data type in the root document. The following snippet demonstrates how the sources are described in both XML and JSON. The source descriptions include a title, a citation, and a reference to the cemetery, which is represented using an [`Agent`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md#agent). Note that the digital image cites the physical grave stone as a source.
+The gravestone and its digial image are each described by providing an instance of the [`SourceDescription`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md#source-description) data type in the root document. The following snippet demonstrates how the sources are described in both XML and JSON. The source descriptions include a title, a citation, and a reference to the cemetery, which is represented using an [`Agent`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md#agent). Note that the digital image cites the physical grave stone as a source.
 
 ###### XML
 
 <pre class="prettyprint lang-xml" style="max-height: 400px; overflow:auto">
 &lt;gedcomx xmlns="http://gedcomx.org/v1/">
-    &lt;attribution>
-        &lt;contributor resource="#A-1"/>
-        &lt;modified>2014-03-27T00:00:00-06:00&lt;/modified>
-    &lt;/attribution>
-    &lt;person extracted="true" id="P-1">
-        &lt;source description="#S-4"/>
-        &lt;gender type="http://gedcomx.org/Male"/>
-        &lt;name>
-            &lt;nameForm>
-                &lt;fullText>WONG Aloiau&lt;/fullText>
-            &lt;/nameForm>
-        &lt;/name>
-        &lt;fact type="http://gedcomx.org/Birth">
-            &lt;date>
-                &lt;original>former Qing 1848 year 11th month 22nd day 23-1 hour&lt;/original>
-                &lt;formal>+1848-11-22&lt;/formal>
-            &lt;/date>
-            &lt;place>
-                &lt;original>Pun Sha Village, See Dai Doo, Chung Shan, Guangdong, China&lt;/original>
-            &lt;/place>
-        &lt;/fact>
-        &lt;fact type="http://gedcomx.org/Death">
-            &lt;date>
-                &lt;original>Republic of China year 1920 year 7th mo. 12th day 11-13 hour&lt;/original>
-                &lt;formal>+1920-08-03&lt;/formal>
-            &lt;/date>
-        &lt;/fact>
-        &lt;fact type="http://gedcomx.org/Burial">
-            &lt;place>
-                &lt;original>Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii&lt;/original>
-            &lt;/place>
-        &lt;/fact>
-    &lt;/person>
-    &lt;person extracted="true" id="P-2">
-        &lt;source description="#S-4"/>
-        &lt;name>
-            &lt;nameForm>
-                &lt;fullText>Lo Yau&lt;/fullText>
-            &lt;/nameForm>
-        &lt;/name>
-        &lt;name type="http://gedcomx.org/AlsoKnownAs">
-            &lt;nameForm>
-                &lt;fullText>Young Hong Wong&lt;/fullText>
-            &lt;/nameForm>
-        &lt;/name>
-    &lt;/person>
-    &lt;person id="C-1">
-        &lt;analysis resource="#D-3"/>
-        &lt;evidence resource="#P-1"/>
-    &lt;/person>
-    &lt;relationship type="http://gedcomx.org/ParentChild">
-        &lt;person1 resource="#P-2"/>
-        &lt;person2 resource="#P-1"/>
-    &lt;/relationship>
+    ...
     &lt;sourceDescription resourceType="http://gedcomx.org/PhysicalArtifact" id="S-1">
         &lt;citation>
             &lt;value>WONG Aloiau gravestone, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii; visited May 1975 by Jane Doe.&lt;/value>
@@ -670,32 +347,7 @@ The gravestone and its digial image are deach described by providing an instance
         &lt;source description="#S-1"/>
         &lt;title>Grave Marker of WONG Aloiau, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii&lt;/title>
     &lt;/sourceDescription>
-    &lt;sourceDescription about="#D-1" resourceType="http://gedcomx.org/DigitalArtifact" id="S-3">
-        &lt;citation>
-            &lt;value>WONG Aloiau gravestone (transcription), Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii; visited May 1975 by Jane Doe.&lt;/value>
-        &lt;/citation>
-        &lt;source description="#S-2"/>
-        &lt;title>Transcription of Grave Marker of WONG Aloiau, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii&lt;/title>
-    &lt;/sourceDescription>
-    &lt;sourceDescription about="#D-2" resourceType="http://gedcomx.org/DigitalArtifact" id="S-4">
-        &lt;citation>
-            &lt;value>WONG Aloiau gravestone, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii; visited May 1975 by Jane Doe. Translation by HANYU Pinyin 王大年.&lt;/value>
-        &lt;/citation>
-        &lt;source description="#S-3"/>
-        &lt;title>Translation of Grave Marker of WONG Aloiau, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii&lt;/title>
-        &lt;attribution>
-            &lt;contributor resource="#A-3"/>
-            &lt;modified>2014-03-27T00:00:00-06:00&lt;/modified>
-        &lt;/attribution>
-    &lt;/sourceDescription>
-    &lt;agent id="A-1">
-        &lt;email resource="mailto:example@example.org"/>
-        &lt;name>Jane Doe&lt;/name>
-    &lt;/agent>
-    &lt;agent id="A-3">
-        &lt;email resource="mailto:example@example.org"/>
-        &lt;name>HANYU Pinyin 王大年&lt;/name>
-    &lt;/agent>
+    ...
     &lt;agent id="A-2">
         &lt;address>
             &lt;city>Honolulu&lt;/city>
@@ -703,27 +355,7 @@ The gravestone and its digial image are deach described by providing an instance
         &lt;/address>
         &lt;name>Lin Yee Chung Cemetery&lt;/name>
     &lt;/agent>
-    &lt;document xml:lang="zh" id="D-1">
-        &lt;source description="#S-2"/>
-        &lt;text>WONG ALOIAU
-NOV. 22, 1848 – AUG. 3, 1920
-中山  大字都  泮沙鄉
-生  於  前  清 戊申 年 十一 月 廿二（日）子   時
-終  於  民國  庚申 年     七月    十二 (日)    午    時
-先考  諱 羅有  字 容康 王 府 君 之 墓&lt;/text>
-    &lt;/document>
-    &lt;document id="D-2">
-        &lt;source description="#S-3"/>
-        &lt;text>WONG ALOIAU
-NOV. 22, 1848 – AUG. 3, 1920 \[lunar dates\]
-\[Birthplace\] \[China, Guandong, \]Chung Shan, See Dai Doo, Pun Sha village
-\[Date of birth\] Born at former Qing 1848 year 11th month 22nd day 23-1 hour.
-\[Life\] ended at Republic of China year 1920 year 7th mo. 12th day 11-13 hour.
-Deceased father avoid \[mention of\] Lo Yau also known as Young Hong Wong \[noble\]residence ruler’s grave.&lt;/text>
-    &lt;/document>
-    &lt;document id="D-3">
-        &lt;text>...Jane Doe's analysis document...&lt;/text>
-    &lt;/document>
+    ...
 &lt;/gedcomx>
 </pre>
 
@@ -731,81 +363,7 @@ Deceased father avoid \[mention of\] Lo Yau also known as Young Hong Wong \[nobl
 
 <pre class="prettyprint lang-javascript" style="max-height: 400px; overflow:auto">
 {
-  "attribution" : {
-    "contributor" : {
-      "resource" : "#A-1"
-    },
-    "modified" : 1395900000000
-  },
-  "persons" : [ {
-    "names" : [ {
-      "nameForms" : [ {
-        "fullText" : "WONG Aloiau"
-      } ]
-    } ],
-    "gender" : {
-      "type" : "http://gedcomx.org/Male"
-    },
-    "facts" : [ {
-      "type" : "http://gedcomx.org/Birth",
-      "date" : {
-        "original" : "former Qing 1848 year 11th month 22nd day 23-1 hour",
-        "formal" : "+1848-11-22"
-      },
-      "place" : {
-        "original" : "Pun Sha Village, See Dai Doo, Chung Shan, Guangdong, China"
-      }
-    }, {
-      "type" : "http://gedcomx.org/Death",
-      "date" : {
-        "original" : "Republic of China year 1920 year 7th mo. 12th day 11-13 hour",
-        "formal" : "+1920-08-03"
-      }
-    }, {
-      "type" : "http://gedcomx.org/Burial",
-      "place" : {
-        "original" : "Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii"
-      }
-    } ],
-    "extracted" : true,
-    "sources" : [ {
-      "description" : "#S-4"
-    } ],
-    "id" : "P-1"
-  }, {
-    "names" : [ {
-      "nameForms" : [ {
-        "fullText" : "Lo Yau"
-      } ]
-    }, {
-      "type" : "http://gedcomx.org/AlsoKnownAs",
-      "nameForms" : [ {
-        "fullText" : "Young Hong Wong"
-      } ]
-    } ],
-    "extracted" : true,
-    "sources" : [ {
-      "description" : "#S-4"
-    } ],
-    "id" : "P-2"
-  }, {
-    "evidence" : [ {
-      "resource" : "#P-1"
-    } ],
-    "analysis" : {
-      "resource" : "#D-3"
-    },
-    "id" : "C-1"
-  } ],
-  "relationships" : [ {
-    "type" : "http://gedcomx.org/ParentChild",
-    "person1" : {
-      "resource" : "#P-2"
-    },
-    "person2" : {
-      "resource" : "#P-1"
-    }
-  } ],
+  ...
   "sourceDescriptions" : [ {
     "resourceType" : "http://gedcomx.org/PhysicalArtifact",
     "citations" : [ {
@@ -830,56 +388,9 @@ Deceased father avoid \[mention of\] Lo Yau also known as Young Hong Wong \[nobl
       "value" : "Grave Marker of WONG Aloiau, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii"
     } ],
     "id" : "S-2"
-  }, {
-    "sources" : [ {
-      "description" : "#S-2"
-    } ],
-    "resourceType" : "http://gedcomx.org/DigitalArtifact",
-    "citations" : [ {
-      "value" : "WONG Aloiau gravestone (transcription), Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii; visited May 1975 by Jane Doe."
-    } ],
-    "about" : "#D-1",
-    "titles" : [ {
-      "value" : "Transcription of Grave Marker of WONG Aloiau, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii"
-    } ],
-    "id" : "S-3"
-  }, {
-    "sources" : [ {
-      "description" : "#S-3"
-    } ],
-    "resourceType" : "http://gedcomx.org/DigitalArtifact",
-    "citations" : [ {
-      "value" : "WONG Aloiau gravestone, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii; visited May 1975 by Jane Doe. Translation by HANYU Pinyin 王大年."
-    } ],
-    "about" : "#D-2",
-    "titles" : [ {
-      "value" : "Translation of Grave Marker of WONG Aloiau, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii"
-    } ],
-    "attribution" : {
-      "contributor" : {
-        "resource" : "#A-3"
-      },
-      "modified" : 1395900000000
-    },
-    "id" : "S-4"
-  } ],
+  }, ... ],
+  ...
   "agents" : [ {
-    "names" : [ {
-      "value" : "Jane Doe"
-    } ],
-    "emails" : [ {
-      "resource" : "mailto:example@example.org"
-    } ],
-    "id" : "A-1"
-  }, {
-    "names" : [ {
-      "value" : "HANYU Pinyin 王大年"
-    } ],
-    "emails" : [ {
-      "resource" : "mailto:example@example.org"
-    } ],
-    "id" : "A-3"
-  }, {
     "names" : [ {
       "value" : "Lin Yee Chung Cemetery"
     } ],
@@ -888,24 +399,8 @@ Deceased father avoid \[mention of\] Lo Yau also known as Young Hong Wong \[nobl
       "stateOrProvince" : "Hawaii"
     } ],
     "id" : "A-2"
-  } ],
-  "documents" : [ {
-    "text" : "WONG ALOIAU\nNOV. 22, 1848 – AUG. 3, 1920\n中山  大字都  泮沙鄉\n生  於  前  清 戊申 年 十一 月 廿二（日）子   時\n終  於  民國  庚申 年     七月    十二 (日)    午    時\n先考  諱 羅有  字 容康 王 府 君 之 墓",
-    "sources" : [ {
-      "description" : "#S-2"
-    } ],
-    "lang" : "zh",
-    "id" : "D-1"
-  }, {
-    "text" : "WONG ALOIAU\nNOV. 22, 1848 – AUG. 3, 1920 \\[lunar dates\\]\n\\[Birthplace\\] \\[China, Guandong, \\]Chung Shan, See Dai Doo, Pun Sha village\n\\[Date of birth\\] Born at former Qing 1848 year 11th month 22nd day 23-1 hour.\n\\[Life\\] ended at Republic of China year 1920 year 7th mo. 12th day 11-13 hour.\nDeceased father avoid \\[mention of\\] Lo Yau also known as Young Hong Wong \\[noble\\]residence ruler’s grave.",
-    "sources" : [ {
-      "description" : "#S-3"
-    } ],
-    "id" : "D-2"
-  }, {
-    "text" : "...Jane Doe's analysis document...",
-    "id" : "D-3"
-  } ]
+  }, ... ],
+  ...
 }
 </pre>
 
@@ -917,74 +412,7 @@ The transcription of the digital image is provided as an instance of the [`Docum
 
 <pre class="prettyprint lang-xml" style="max-height: 400px; overflow:auto">
 &lt;gedcomx xmlns="http://gedcomx.org/v1/">
-    &lt;attribution>
-        &lt;contributor resource="#A-1"/>
-        &lt;modified>2014-03-27T00:00:00-06:00&lt;/modified>
-    &lt;/attribution>
-    &lt;person extracted="true" id="P-1">
-        &lt;source description="#S-4"/>
-        &lt;gender type="http://gedcomx.org/Male"/>
-        &lt;name>
-            &lt;nameForm>
-                &lt;fullText>WONG Aloiau&lt;/fullText>
-            &lt;/nameForm>
-        &lt;/name>
-        &lt;fact type="http://gedcomx.org/Birth">
-            &lt;date>
-                &lt;original>former Qing 1848 year 11th month 22nd day 23-1 hour&lt;/original>
-                &lt;formal>+1848-11-22&lt;/formal>
-            &lt;/date>
-            &lt;place>
-                &lt;original>Pun Sha Village, See Dai Doo, Chung Shan, Guangdong, China&lt;/original>
-            &lt;/place>
-        &lt;/fact>
-        &lt;fact type="http://gedcomx.org/Death">
-            &lt;date>
-                &lt;original>Republic of China year 1920 year 7th mo. 12th day 11-13 hour&lt;/original>
-                &lt;formal>+1920-08-03&lt;/formal>
-            &lt;/date>
-        &lt;/fact>
-        &lt;fact type="http://gedcomx.org/Burial">
-            &lt;place>
-                &lt;original>Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii&lt;/original>
-            &lt;/place>
-        &lt;/fact>
-    &lt;/person>
-    &lt;person extracted="true" id="P-2">
-        &lt;source description="#S-4"/>
-        &lt;name>
-            &lt;nameForm>
-                &lt;fullText>Lo Yau&lt;/fullText>
-            &lt;/nameForm>
-        &lt;/name>
-        &lt;name type="http://gedcomx.org/AlsoKnownAs">
-            &lt;nameForm>
-                &lt;fullText>Young Hong Wong&lt;/fullText>
-            &lt;/nameForm>
-        &lt;/name>
-    &lt;/person>
-    &lt;person id="C-1">
-        &lt;analysis resource="#D-3"/>
-        &lt;evidence resource="#P-1"/>
-    &lt;/person>
-    &lt;relationship type="http://gedcomx.org/ParentChild">
-        &lt;person1 resource="#P-2"/>
-        &lt;person2 resource="#P-1"/>
-    &lt;/relationship>
-    &lt;sourceDescription resourceType="http://gedcomx.org/PhysicalArtifact" id="S-1">
-        &lt;citation>
-            &lt;value>WONG Aloiau gravestone, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii; visited May 1975 by Jane Doe.&lt;/value>
-        &lt;/citation>
-        &lt;title>Grave Marker of WONG Aloiau, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii&lt;/title>
-        &lt;repository resource="#A-2"/>
-    &lt;/sourceDescription>
-    &lt;sourceDescription resourceType="http://gedcomx.org/DigitalArtifact" id="S-2">
-        &lt;citation>
-            &lt;value>WONG Aloiau gravestone (digital photograph), Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii; visited May 1975 by Jane Doe.&lt;/value>
-        &lt;/citation>
-        &lt;source description="#S-1"/>
-        &lt;title>Grave Marker of WONG Aloiau, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii&lt;/title>
-    &lt;/sourceDescription>
+    ...
     &lt;sourceDescription about="#D-1" resourceType="http://gedcomx.org/DigitalArtifact" id="S-3">
         &lt;citation>
             &lt;value>WONG Aloiau gravestone (transcription), Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii; visited May 1975 by Jane Doe.&lt;/value>
@@ -992,32 +420,7 @@ The transcription of the digital image is provided as an instance of the [`Docum
         &lt;source description="#S-2"/>
         &lt;title>Transcription of Grave Marker of WONG Aloiau, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii&lt;/title>
     &lt;/sourceDescription>
-    &lt;sourceDescription about="#D-2" resourceType="http://gedcomx.org/DigitalArtifact" id="S-4">
-        &lt;citation>
-            &lt;value>WONG Aloiau gravestone, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii; visited May 1975 by Jane Doe. Translation by HANYU Pinyin 王大年.&lt;/value>
-        &lt;/citation>
-        &lt;source description="#S-3"/>
-        &lt;title>Translation of Grave Marker of WONG Aloiau, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii&lt;/title>
-        &lt;attribution>
-            &lt;contributor resource="#A-3"/>
-            &lt;modified>2014-03-27T00:00:00-06:00&lt;/modified>
-        &lt;/attribution>
-    &lt;/sourceDescription>
-    &lt;agent id="A-1">
-        &lt;email resource="mailto:example@example.org"/>
-        &lt;name>Jane Doe&lt;/name>
-    &lt;/agent>
-    &lt;agent id="A-3">
-        &lt;email resource="mailto:example@example.org"/>
-        &lt;name>HANYU Pinyin 王大年&lt;/name>
-    &lt;/agent>
-    &lt;agent id="A-2">
-        &lt;address>
-            &lt;city>Honolulu&lt;/city>
-            &lt;stateOrProvince>Hawaii&lt;/stateOrProvince>
-        &lt;/address>
-        &lt;name>Lin Yee Chung Cemetery&lt;/name>
-    &lt;/agent>
+    ...
     &lt;document xml:lang="zh" id="D-1">
         &lt;source description="#S-2"/>
         &lt;text>WONG ALOIAU
@@ -1027,18 +430,7 @@ NOV. 22, 1848 – AUG. 3, 1920
 終  於  民國  庚申 年     七月    十二 (日)    午    時
 先考  諱 羅有  字 容康 王 府 君 之 墓&lt;/text>
     &lt;/document>
-    &lt;document id="D-2">
-        &lt;source description="#S-3"/>
-        &lt;text>WONG ALOIAU
-NOV. 22, 1848 – AUG. 3, 1920 \[lunar dates\]
-\[Birthplace\] \[China, Guandong, \]Chung Shan, See Dai Doo, Pun Sha village
-\[Date of birth\] Born at former Qing 1848 year 11th month 22nd day 23-1 hour.
-\[Life\] ended at Republic of China year 1920 year 7th mo. 12th day 11-13 hour.
-Deceased father avoid \[mention of\] Lo Yau also known as Young Hong Wong \[noble\]residence ruler’s grave.&lt;/text>
-    &lt;/document>
-    &lt;document id="D-3">
-        &lt;text>...Jane Doe's analysis document...&lt;/text>
-    &lt;/document>
+    ...
 &lt;/gedcomx>
 </pre>
 
@@ -1046,106 +438,8 @@ Deceased father avoid \[mention of\] Lo Yau also known as Young Hong Wong \[nobl
 
 <pre class="prettyprint lang-javascript" style="max-height: 400px; overflow:auto">
 {
-  "attribution" : {
-    "contributor" : {
-      "resource" : "#A-1"
-    },
-    "modified" : 1395900000000
-  },
-  "persons" : [ {
-    "names" : [ {
-      "nameForms" : [ {
-        "fullText" : "WONG Aloiau"
-      } ]
-    } ],
-    "gender" : {
-      "type" : "http://gedcomx.org/Male"
-    },
-    "facts" : [ {
-      "type" : "http://gedcomx.org/Birth",
-      "date" : {
-        "original" : "former Qing 1848 year 11th month 22nd day 23-1 hour",
-        "formal" : "+1848-11-22"
-      },
-      "place" : {
-        "original" : "Pun Sha Village, See Dai Doo, Chung Shan, Guangdong, China"
-      }
-    }, {
-      "type" : "http://gedcomx.org/Death",
-      "date" : {
-        "original" : "Republic of China year 1920 year 7th mo. 12th day 11-13 hour",
-        "formal" : "+1920-08-03"
-      }
-    }, {
-      "type" : "http://gedcomx.org/Burial",
-      "place" : {
-        "original" : "Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii"
-      }
-    } ],
-    "extracted" : true,
-    "sources" : [ {
-      "description" : "#S-4"
-    } ],
-    "id" : "P-1"
-  }, {
-    "names" : [ {
-      "nameForms" : [ {
-        "fullText" : "Lo Yau"
-      } ]
-    }, {
-      "type" : "http://gedcomx.org/AlsoKnownAs",
-      "nameForms" : [ {
-        "fullText" : "Young Hong Wong"
-      } ]
-    } ],
-    "extracted" : true,
-    "sources" : [ {
-      "description" : "#S-4"
-    } ],
-    "id" : "P-2"
-  }, {
-    "evidence" : [ {
-      "resource" : "#P-1"
-    } ],
-    "analysis" : {
-      "resource" : "#D-3"
-    },
-    "id" : "C-1"
-  } ],
-  "relationships" : [ {
-    "type" : "http://gedcomx.org/ParentChild",
-    "person1" : {
-      "resource" : "#P-2"
-    },
-    "person2" : {
-      "resource" : "#P-1"
-    }
-  } ],
+  ..
   "sourceDescriptions" : [ {
-    "resourceType" : "http://gedcomx.org/PhysicalArtifact",
-    "citations" : [ {
-      "value" : "WONG Aloiau gravestone, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii; visited May 1975 by Jane Doe."
-    } ],
-    "titles" : [ {
-      "value" : "Grave Marker of WONG Aloiau, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii"
-    } ],
-    "repository" : {
-      "resource" : "#A-2"
-    },
-    "id" : "S-1"
-  }, {
-    "sources" : [ {
-      "description" : "#S-1"
-    } ],
-    "resourceType" : "http://gedcomx.org/DigitalArtifact",
-    "citations" : [ {
-      "value" : "WONG Aloiau gravestone (digital photograph), Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii; visited May 1975 by Jane Doe."
-    } ],
-    "titles" : [ {
-      "value" : "Grave Marker of WONG Aloiau, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii"
-    } ],
-    "id" : "S-2"
-  }, {
     "sources" : [ {
       "description" : "#S-2"
     } ],
@@ -1158,52 +452,8 @@ Deceased father avoid \[mention of\] Lo Yau also known as Young Hong Wong \[nobl
       "value" : "Transcription of Grave Marker of WONG Aloiau, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii"
     } ],
     "id" : "S-3"
-  }, {
-    "sources" : [ {
-      "description" : "#S-3"
-    } ],
-    "resourceType" : "http://gedcomx.org/DigitalArtifact",
-    "citations" : [ {
-      "value" : "WONG Aloiau gravestone, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii; visited May 1975 by Jane Doe. Translation by HANYU Pinyin 王大年."
-    } ],
-    "about" : "#D-2",
-    "titles" : [ {
-      "value" : "Translation of Grave Marker of WONG Aloiau, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii"
-    } ],
-    "attribution" : {
-      "contributor" : {
-        "resource" : "#A-3"
-      },
-      "modified" : 1395900000000
-    },
-    "id" : "S-4"
-  } ],
-  "agents" : [ {
-    "names" : [ {
-      "value" : "Jane Doe"
-    } ],
-    "emails" : [ {
-      "resource" : "mailto:example@example.org"
-    } ],
-    "id" : "A-1"
-  }, {
-    "names" : [ {
-      "value" : "HANYU Pinyin 王大年"
-    } ],
-    "emails" : [ {
-      "resource" : "mailto:example@example.org"
-    } ],
-    "id" : "A-3"
-  }, {
-    "names" : [ {
-      "value" : "Lin Yee Chung Cemetery"
-    } ],
-    "addresses" : [ {
-      "city" : "Honolulu",
-      "stateOrProvince" : "Hawaii"
-    } ],
-    "id" : "A-2"
-  } ],
+  }, ... ],
+  ...
   "documents" : [ {
     "text" : "WONG ALOIAU\nNOV. 22, 1848 – AUG. 3, 1920\n中山  大字都  泮沙鄉\n生  於  前  清 戊申 年 十一 月 廿二（日）子   時\n終  於  民國  庚申 年     七月    十二 (日)    午    時\n先考  諱 羅有  字 容康 王 府 君 之 墓",
     "sources" : [ {
@@ -1211,16 +461,7 @@ Deceased father avoid \[mention of\] Lo Yau also known as Young Hong Wong \[nobl
     } ],
     "lang" : "zh",
     "id" : "D-1"
-  }, {
-    "text" : "WONG ALOIAU\nNOV. 22, 1848 – AUG. 3, 1920 \\[lunar dates\\]\n\\[Birthplace\\] \\[China, Guandong, \\]Chung Shan, See Dai Doo, Pun Sha village\n\\[Date of birth\\] Born at former Qing 1848 year 11th month 22nd day 23-1 hour.\n\\[Life\\] ended at Republic of China year 1920 year 7th mo. 12th day 11-13 hour.\nDeceased father avoid \\[mention of\\] Lo Yau also known as Young Hong Wong \\[noble\\]residence ruler’s grave.",
-    "sources" : [ {
-      "description" : "#S-3"
-    } ],
-    "id" : "D-2"
-  }, {
-    "text" : "...Jane Doe's analysis document...",
-    "id" : "D-3"
-  } ]
+  }, ... ]
 }
 </pre>
 
@@ -1232,81 +473,7 @@ The translation of the transcription is provided as a [`Document`](https://githu
 
 <pre class="prettyprint lang-xml" style="max-height: 400px; overflow:auto">
 &lt;gedcomx xmlns="http://gedcomx.org/v1/">
-    &lt;attribution>
-        &lt;contributor resource="#A-1"/>
-        &lt;modified>2014-03-27T00:00:00-06:00&lt;/modified>
-    &lt;/attribution>
-    &lt;person extracted="true" id="P-1">
-        &lt;source description="#S-4"/>
-        &lt;gender type="http://gedcomx.org/Male"/>
-        &lt;name>
-            &lt;nameForm>
-                &lt;fullText>WONG Aloiau&lt;/fullText>
-            &lt;/nameForm>
-        &lt;/name>
-        &lt;fact type="http://gedcomx.org/Birth">
-            &lt;date>
-                &lt;original>former Qing 1848 year 11th month 22nd day 23-1 hour&lt;/original>
-                &lt;formal>+1848-11-22&lt;/formal>
-            &lt;/date>
-            &lt;place>
-                &lt;original>Pun Sha Village, See Dai Doo, Chung Shan, Guangdong, China&lt;/original>
-            &lt;/place>
-        &lt;/fact>
-        &lt;fact type="http://gedcomx.org/Death">
-            &lt;date>
-                &lt;original>Republic of China year 1920 year 7th mo. 12th day 11-13 hour&lt;/original>
-                &lt;formal>+1920-08-03&lt;/formal>
-            &lt;/date>
-        &lt;/fact>
-        &lt;fact type="http://gedcomx.org/Burial">
-            &lt;place>
-                &lt;original>Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii&lt;/original>
-            &lt;/place>
-        &lt;/fact>
-    &lt;/person>
-    &lt;person extracted="true" id="P-2">
-        &lt;source description="#S-4"/>
-        &lt;name>
-            &lt;nameForm>
-                &lt;fullText>Lo Yau&lt;/fullText>
-            &lt;/nameForm>
-        &lt;/name>
-        &lt;name type="http://gedcomx.org/AlsoKnownAs">
-            &lt;nameForm>
-                &lt;fullText>Young Hong Wong&lt;/fullText>
-            &lt;/nameForm>
-        &lt;/name>
-    &lt;/person>
-    &lt;person id="C-1">
-        &lt;analysis resource="#D-3"/>
-        &lt;evidence resource="#P-1"/>
-    &lt;/person>
-    &lt;relationship type="http://gedcomx.org/ParentChild">
-        &lt;person1 resource="#P-2"/>
-        &lt;person2 resource="#P-1"/>
-    &lt;/relationship>
-    &lt;sourceDescription resourceType="http://gedcomx.org/PhysicalArtifact" id="S-1">
-        &lt;citation>
-            &lt;value>WONG Aloiau gravestone, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii; visited May 1975 by Jane Doe.&lt;/value>
-        &lt;/citation>
-        &lt;title>Grave Marker of WONG Aloiau, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii&lt;/title>
-        &lt;repository resource="#A-2"/>
-    &lt;/sourceDescription>
-    &lt;sourceDescription resourceType="http://gedcomx.org/DigitalArtifact" id="S-2">
-        &lt;citation>
-            &lt;value>WONG Aloiau gravestone (digital photograph), Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii; visited May 1975 by Jane Doe.&lt;/value>
-        &lt;/citation>
-        &lt;source description="#S-1"/>
-        &lt;title>Grave Marker of WONG Aloiau, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii&lt;/title>
-    &lt;/sourceDescription>
-    &lt;sourceDescription about="#D-1" resourceType="http://gedcomx.org/DigitalArtifact" id="S-3">
-        &lt;citation>
-            &lt;value>WONG Aloiau gravestone (transcription), Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii; visited May 1975 by Jane Doe.&lt;/value>
-        &lt;/citation>
-        &lt;source description="#S-2"/>
-        &lt;title>Transcription of Grave Marker of WONG Aloiau, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii&lt;/title>
-    &lt;/sourceDescription>
+    ...
     &lt;sourceDescription about="#D-2" resourceType="http://gedcomx.org/DigitalArtifact" id="S-4">
         &lt;citation>
             &lt;value>WONG Aloiau gravestone, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii; visited May 1975 by Jane Doe. Translation by HANYU Pinyin 王大年.&lt;/value>
@@ -1318,30 +485,12 @@ The translation of the transcription is provided as a [`Document`](https://githu
             &lt;modified>2014-03-27T00:00:00-06:00&lt;/modified>
         &lt;/attribution>
     &lt;/sourceDescription>
-    &lt;agent id="A-1">
-        &lt;email resource="mailto:example@example.org"/>
-        &lt;name>Jane Doe&lt;/name>
-    &lt;/agent>
+    ...
     &lt;agent id="A-3">
         &lt;email resource="mailto:example@example.org"/>
         &lt;name>HANYU Pinyin 王大年&lt;/name>
     &lt;/agent>
-    &lt;agent id="A-2">
-        &lt;address>
-            &lt;city>Honolulu&lt;/city>
-            &lt;stateOrProvince>Hawaii&lt;/stateOrProvince>
-        &lt;/address>
-        &lt;name>Lin Yee Chung Cemetery&lt;/name>
-    &lt;/agent>
-    &lt;document xml:lang="zh" id="D-1">
-        &lt;source description="#S-2"/>
-        &lt;text>WONG ALOIAU
-NOV. 22, 1848 – AUG. 3, 1920
-中山  大字都  泮沙鄉
-生  於  前  清 戊申 年 十一 月 廿二（日）子   時
-終  於  民國  庚申 年     七月    十二 (日)    午    時
-先考  諱 羅有  字 容康 王 府 君 之 墓&lt;/text>
-    &lt;/document>
+    ...
     &lt;document id="D-2">
         &lt;source description="#S-3"/>
         &lt;text>WONG ALOIAU
@@ -1351,9 +500,7 @@ NOV. 22, 1848 – AUG. 3, 1920 \[lunar dates\]
 \[Life\] ended at Republic of China year 1920 year 7th mo. 12th day 11-13 hour.
 Deceased father avoid \[mention of\] Lo Yau also known as Young Hong Wong \[noble\]residence ruler’s grave.&lt;/text>
     &lt;/document>
-    &lt;document id="D-3">
-        &lt;text>...Jane Doe's analysis document...&lt;/text>
-    &lt;/document>
+    ...
 &lt;/gedcomx>
 </pre>
 
@@ -1361,119 +508,8 @@ Deceased father avoid \[mention of\] Lo Yau also known as Young Hong Wong \[nobl
 
 <pre class="prettyprint lang-javascript" style="max-height: 400px; overflow:auto">
 {
-  "attribution" : {
-    "contributor" : {
-      "resource" : "#A-1"
-    },
-    "modified" : 1395900000000
-  },
-  "persons" : [ {
-    "names" : [ {
-      "nameForms" : [ {
-        "fullText" : "WONG Aloiau"
-      } ]
-    } ],
-    "gender" : {
-      "type" : "http://gedcomx.org/Male"
-    },
-    "facts" : [ {
-      "type" : "http://gedcomx.org/Birth",
-      "date" : {
-        "original" : "former Qing 1848 year 11th month 22nd day 23-1 hour",
-        "formal" : "+1848-11-22"
-      },
-      "place" : {
-        "original" : "Pun Sha Village, See Dai Doo, Chung Shan, Guangdong, China"
-      }
-    }, {
-      "type" : "http://gedcomx.org/Death",
-      "date" : {
-        "original" : "Republic of China year 1920 year 7th mo. 12th day 11-13 hour",
-        "formal" : "+1920-08-03"
-      }
-    }, {
-      "type" : "http://gedcomx.org/Burial",
-      "place" : {
-        "original" : "Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii"
-      }
-    } ],
-    "extracted" : true,
-    "sources" : [ {
-      "description" : "#S-4"
-    } ],
-    "id" : "P-1"
-  }, {
-    "names" : [ {
-      "nameForms" : [ {
-        "fullText" : "Lo Yau"
-      } ]
-    }, {
-      "type" : "http://gedcomx.org/AlsoKnownAs",
-      "nameForms" : [ {
-        "fullText" : "Young Hong Wong"
-      } ]
-    } ],
-    "extracted" : true,
-    "sources" : [ {
-      "description" : "#S-4"
-    } ],
-    "id" : "P-2"
-  }, {
-    "evidence" : [ {
-      "resource" : "#P-1"
-    } ],
-    "analysis" : {
-      "resource" : "#D-3"
-    },
-    "id" : "C-1"
-  } ],
-  "relationships" : [ {
-    "type" : "http://gedcomx.org/ParentChild",
-    "person1" : {
-      "resource" : "#P-2"
-    },
-    "person2" : {
-      "resource" : "#P-1"
-    }
-  } ],
+  ...
   "sourceDescriptions" : [ {
-    "resourceType" : "http://gedcomx.org/PhysicalArtifact",
-    "citations" : [ {
-      "value" : "WONG Aloiau gravestone, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii; visited May 1975 by Jane Doe."
-    } ],
-    "titles" : [ {
-      "value" : "Grave Marker of WONG Aloiau, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii"
-    } ],
-    "repository" : {
-      "resource" : "#A-2"
-    },
-    "id" : "S-1"
-  }, {
-    "sources" : [ {
-      "description" : "#S-1"
-    } ],
-    "resourceType" : "http://gedcomx.org/DigitalArtifact",
-    "citations" : [ {
-      "value" : "WONG Aloiau gravestone (digital photograph), Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii; visited May 1975 by Jane Doe."
-    } ],
-    "titles" : [ {
-      "value" : "Grave Marker of WONG Aloiau, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii"
-    } ],
-    "id" : "S-2"
-  }, {
-    "sources" : [ {
-      "description" : "#S-2"
-    } ],
-    "resourceType" : "http://gedcomx.org/DigitalArtifact",
-    "citations" : [ {
-      "value" : "WONG Aloiau gravestone (transcription), Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii; visited May 1975 by Jane Doe."
-    } ],
-    "about" : "#D-1",
-    "titles" : [ {
-      "value" : "Transcription of Grave Marker of WONG Aloiau, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii"
-    } ],
-    "id" : "S-3"
-  }, {
     "sources" : [ {
       "description" : "#S-3"
     } ],
@@ -1493,15 +529,8 @@ Deceased father avoid \[mention of\] Lo Yau also known as Young Hong Wong \[nobl
     },
     "id" : "S-4"
   } ],
+  ...
   "agents" : [ {
-    "names" : [ {
-      "value" : "Jane Doe"
-    } ],
-    "emails" : [ {
-      "resource" : "mailto:example@example.org"
-    } ],
-    "id" : "A-1"
-  }, {
     "names" : [ {
       "value" : "HANYU Pinyin 王大年"
     } ],
@@ -1509,33 +538,15 @@ Deceased father avoid \[mention of\] Lo Yau also known as Young Hong Wong \[nobl
       "resource" : "mailto:example@example.org"
     } ],
     "id" : "A-3"
-  }, {
-    "names" : [ {
-      "value" : "Lin Yee Chung Cemetery"
-    } ],
-    "addresses" : [ {
-      "city" : "Honolulu",
-      "stateOrProvince" : "Hawaii"
-    } ],
-    "id" : "A-2"
-  } ],
+  }, ... ],
+  ...
   "documents" : [ {
-    "text" : "WONG ALOIAU\nNOV. 22, 1848 – AUG. 3, 1920\n中山  大字都  泮沙鄉\n生  於  前  清 戊申 年 十一 月 廿二（日）子   時\n終  於  民國  庚申 年     七月    十二 (日)    午    時\n先考  諱 羅有  字 容康 王 府 君 之 墓",
-    "sources" : [ {
-      "description" : "#S-2"
-    } ],
-    "lang" : "zh",
-    "id" : "D-1"
-  }, {
     "text" : "WONG ALOIAU\nNOV. 22, 1848 – AUG. 3, 1920 \\[lunar dates\\]\n\\[Birthplace\\] \\[China, Guandong, \\]Chung Shan, See Dai Doo, Pun Sha village\n\\[Date of birth\\] Born at former Qing 1848 year 11th month 22nd day 23-1 hour.\n\\[Life\\] ended at Republic of China year 1920 year 7th mo. 12th day 11-13 hour.\nDeceased father avoid \\[mention of\\] Lo Yau also known as Young Hong Wong \\[noble\\]residence ruler’s grave.",
     "sources" : [ {
       "description" : "#S-3"
     } ],
     "id" : "D-2"
-  }, {
-    "text" : "...Jane Doe's analysis document...",
-    "id" : "D-3"
-  } ]
+  }, ... ]
 }
 </pre>
 
@@ -1550,10 +561,7 @@ The following snippet demonstrates how the extracted information is represented 
 
 <pre class="prettyprint lang-xml" style="max-height: 400px; overflow:auto">
 &lt;gedcomx xmlns="http://gedcomx.org/v1/">
-    &lt;attribution>
-        &lt;contributor resource="#A-1"/>
-        &lt;modified>2014-03-27T00:00:00-06:00&lt;/modified>
-    &lt;/attribution>
+    ...
     &lt;person extracted="true" id="P-1">
         &lt;source description="#S-4"/>
         &lt;gender type="http://gedcomx.org/Male"/>
@@ -1596,82 +604,12 @@ The following snippet demonstrates how the extracted information is represented 
             &lt;/nameForm>
         &lt;/name>
     &lt;/person>
-    &lt;person id="C-1">
-        &lt;analysis resource="#D-3"/>
-        &lt;evidence resource="#P-1"/>
-    &lt;/person>
+    ...
     &lt;relationship type="http://gedcomx.org/ParentChild">
         &lt;person1 resource="#P-2"/>
         &lt;person2 resource="#P-1"/>
     &lt;/relationship>
-    &lt;sourceDescription resourceType="http://gedcomx.org/PhysicalArtifact" id="S-1">
-        &lt;citation>
-            &lt;value>WONG Aloiau gravestone, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii; visited May 1975 by Jane Doe.&lt;/value>
-        &lt;/citation>
-        &lt;title>Grave Marker of WONG Aloiau, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii&lt;/title>
-        &lt;repository resource="#A-2"/>
-    &lt;/sourceDescription>
-    &lt;sourceDescription resourceType="http://gedcomx.org/DigitalArtifact" id="S-2">
-        &lt;citation>
-            &lt;value>WONG Aloiau gravestone (digital photograph), Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii; visited May 1975 by Jane Doe.&lt;/value>
-        &lt;/citation>
-        &lt;source description="#S-1"/>
-        &lt;title>Grave Marker of WONG Aloiau, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii&lt;/title>
-    &lt;/sourceDescription>
-    &lt;sourceDescription about="#D-1" resourceType="http://gedcomx.org/DigitalArtifact" id="S-3">
-        &lt;citation>
-            &lt;value>WONG Aloiau gravestone (transcription), Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii; visited May 1975 by Jane Doe.&lt;/value>
-        &lt;/citation>
-        &lt;source description="#S-2"/>
-        &lt;title>Transcription of Grave Marker of WONG Aloiau, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii&lt;/title>
-    &lt;/sourceDescription>
-    &lt;sourceDescription about="#D-2" resourceType="http://gedcomx.org/DigitalArtifact" id="S-4">
-        &lt;citation>
-            &lt;value>WONG Aloiau gravestone, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii; visited May 1975 by Jane Doe. Translation by HANYU Pinyin 王大年.&lt;/value>
-        &lt;/citation>
-        &lt;source description="#S-3"/>
-        &lt;title>Translation of Grave Marker of WONG Aloiau, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii&lt;/title>
-        &lt;attribution>
-            &lt;contributor resource="#A-3"/>
-            &lt;modified>2014-03-27T00:00:00-06:00&lt;/modified>
-        &lt;/attribution>
-    &lt;/sourceDescription>
-    &lt;agent id="A-1">
-        &lt;email resource="mailto:example@example.org"/>
-        &lt;name>Jane Doe&lt;/name>
-    &lt;/agent>
-    &lt;agent id="A-3">
-        &lt;email resource="mailto:example@example.org"/>
-        &lt;name>HANYU Pinyin 王大年&lt;/name>
-    &lt;/agent>
-    &lt;agent id="A-2">
-        &lt;address>
-            &lt;city>Honolulu&lt;/city>
-            &lt;stateOrProvince>Hawaii&lt;/stateOrProvince>
-        &lt;/address>
-        &lt;name>Lin Yee Chung Cemetery&lt;/name>
-    &lt;/agent>
-    &lt;document xml:lang="zh" id="D-1">
-        &lt;source description="#S-2"/>
-        &lt;text>WONG ALOIAU
-NOV. 22, 1848 – AUG. 3, 1920
-中山  大字都  泮沙鄉
-生  於  前  清 戊申 年 十一 月 廿二（日）子   時
-終  於  民國  庚申 年     七月    十二 (日)    午    時
-先考  諱 羅有  字 容康 王 府 君 之 墓&lt;/text>
-    &lt;/document>
-    &lt;document id="D-2">
-        &lt;source description="#S-3"/>
-        &lt;text>WONG ALOIAU
-NOV. 22, 1848 – AUG. 3, 1920 \[lunar dates\]
-\[Birthplace\] \[China, Guandong, \]Chung Shan, See Dai Doo, Pun Sha village
-\[Date of birth\] Born at former Qing 1848 year 11th month 22nd day 23-1 hour.
-\[Life\] ended at Republic of China year 1920 year 7th mo. 12th day 11-13 hour.
-Deceased father avoid \[mention of\] Lo Yau also known as Young Hong Wong \[noble\]residence ruler’s grave.&lt;/text>
-    &lt;/document>
-    &lt;document id="D-3">
-        &lt;text>...Jane Doe's analysis document...&lt;/text>
-    &lt;/document>
+    ...
 &lt;/gedcomx>
 </pre>
 
@@ -1679,12 +617,7 @@ Deceased father avoid \[mention of\] Lo Yau also known as Young Hong Wong \[nobl
 
 <pre class="prettyprint lang-javascript" style="max-height: 400px; overflow:auto">
 {
-  "attribution" : {
-    "contributor" : {
-      "resource" : "#A-1"
-    },
-    "modified" : 1395900000000
-  },
+  ...
   "persons" : [ {
     "names" : [ {
       "nameForms" : [ {
@@ -1736,15 +669,7 @@ Deceased father avoid \[mention of\] Lo Yau also known as Young Hong Wong \[nobl
       "description" : "#S-4"
     } ],
     "id" : "P-2"
-  }, {
-    "evidence" : [ {
-      "resource" : "#P-1"
-    } ],
-    "analysis" : {
-      "resource" : "#D-3"
-    },
-    "id" : "C-1"
-  } ],
+  }, ... ],
   "relationships" : [ {
     "type" : "http://gedcomx.org/ParentChild",
     "person1" : {
@@ -1754,106 +679,7 @@ Deceased father avoid \[mention of\] Lo Yau also known as Young Hong Wong \[nobl
       "resource" : "#P-1"
     }
   } ],
-  "sourceDescriptions" : [ {
-    "resourceType" : "http://gedcomx.org/PhysicalArtifact",
-    "citations" : [ {
-      "value" : "WONG Aloiau gravestone, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii; visited May 1975 by Jane Doe."
-    } ],
-    "titles" : [ {
-      "value" : "Grave Marker of WONG Aloiau, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii"
-    } ],
-    "repository" : {
-      "resource" : "#A-2"
-    },
-    "id" : "S-1"
-  }, {
-    "sources" : [ {
-      "description" : "#S-1"
-    } ],
-    "resourceType" : "http://gedcomx.org/DigitalArtifact",
-    "citations" : [ {
-      "value" : "WONG Aloiau gravestone (digital photograph), Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii; visited May 1975 by Jane Doe."
-    } ],
-    "titles" : [ {
-      "value" : "Grave Marker of WONG Aloiau, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii"
-    } ],
-    "id" : "S-2"
-  }, {
-    "sources" : [ {
-      "description" : "#S-2"
-    } ],
-    "resourceType" : "http://gedcomx.org/DigitalArtifact",
-    "citations" : [ {
-      "value" : "WONG Aloiau gravestone (transcription), Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii; visited May 1975 by Jane Doe."
-    } ],
-    "about" : "#D-1",
-    "titles" : [ {
-      "value" : "Transcription of Grave Marker of WONG Aloiau, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii"
-    } ],
-    "id" : "S-3"
-  }, {
-    "sources" : [ {
-      "description" : "#S-3"
-    } ],
-    "resourceType" : "http://gedcomx.org/DigitalArtifact",
-    "citations" : [ {
-      "value" : "WONG Aloiau gravestone, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii; visited May 1975 by Jane Doe. Translation by HANYU Pinyin 王大年."
-    } ],
-    "about" : "#D-2",
-    "titles" : [ {
-      "value" : "Translation of Grave Marker of WONG Aloiau, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii"
-    } ],
-    "attribution" : {
-      "contributor" : {
-        "resource" : "#A-3"
-      },
-      "modified" : 1395900000000
-    },
-    "id" : "S-4"
-  } ],
-  "agents" : [ {
-    "names" : [ {
-      "value" : "Jane Doe"
-    } ],
-    "emails" : [ {
-      "resource" : "mailto:example@example.org"
-    } ],
-    "id" : "A-1"
-  }, {
-    "names" : [ {
-      "value" : "HANYU Pinyin 王大年"
-    } ],
-    "emails" : [ {
-      "resource" : "mailto:example@example.org"
-    } ],
-    "id" : "A-3"
-  }, {
-    "names" : [ {
-      "value" : "Lin Yee Chung Cemetery"
-    } ],
-    "addresses" : [ {
-      "city" : "Honolulu",
-      "stateOrProvince" : "Hawaii"
-    } ],
-    "id" : "A-2"
-  } ],
-  "documents" : [ {
-    "text" : "WONG ALOIAU\nNOV. 22, 1848 – AUG. 3, 1920\n中山  大字都  泮沙鄉\n生  於  前  清 戊申 年 十一 月 廿二（日）子   時\n終  於  民國  庚申 年     七月    十二 (日)    午    時\n先考  諱 羅有  字 容康 王 府 君 之 墓",
-    "sources" : [ {
-      "description" : "#S-2"
-    } ],
-    "lang" : "zh",
-    "id" : "D-1"
-  }, {
-    "text" : "WONG ALOIAU\nNOV. 22, 1848 – AUG. 3, 1920 \\[lunar dates\\]\n\\[Birthplace\\] \\[China, Guandong, \\]Chung Shan, See Dai Doo, Pun Sha village\n\\[Date of birth\\] Born at former Qing 1848 year 11th month 22nd day 23-1 hour.\n\\[Life\\] ended at Republic of China year 1920 year 7th mo. 12th day 11-13 hour.\nDeceased father avoid \\[mention of\\] Lo Yau also known as Young Hong Wong \\[noble\\]residence ruler’s grave.",
-    "sources" : [ {
-      "description" : "#S-3"
-    } ],
-    "id" : "D-2"
-  }, {
-    "text" : "...Jane Doe's analysis document...",
-    "id" : "D-3"
-  } ]
+  ...
 }
 </pre>
 
@@ -1867,125 +693,13 @@ The aggregated analysis, including the text of the document, is represented with
 
 <pre class="prettyprint lang-xml" style="max-height: 400px; overflow:auto">
 &lt;gedcomx xmlns="http://gedcomx.org/v1/">
-    &lt;attribution>
-        &lt;contributor resource="#A-1"/>
-        &lt;modified>2014-03-27T00:00:00-06:00&lt;/modified>
-    &lt;/attribution>
-    &lt;person extracted="true" id="P-1">
-        &lt;source description="#S-4"/>
-        &lt;gender type="http://gedcomx.org/Male"/>
-        &lt;name>
-            &lt;nameForm>
-                &lt;fullText>WONG Aloiau&lt;/fullText>
-            &lt;/nameForm>
-        &lt;/name>
-        &lt;fact type="http://gedcomx.org/Birth">
-            &lt;date>
-                &lt;original>former Qing 1848 year 11th month 22nd day 23-1 hour&lt;/original>
-                &lt;formal>+1848-11-22&lt;/formal>
-            &lt;/date>
-            &lt;place>
-                &lt;original>Pun Sha Village, See Dai Doo, Chung Shan, Guangdong, China&lt;/original>
-            &lt;/place>
-        &lt;/fact>
-        &lt;fact type="http://gedcomx.org/Death">
-            &lt;date>
-                &lt;original>Republic of China year 1920 year 7th mo. 12th day 11-13 hour&lt;/original>
-                &lt;formal>+1920-08-03&lt;/formal>
-            &lt;/date>
-        &lt;/fact>
-        &lt;fact type="http://gedcomx.org/Burial">
-            &lt;place>
-                &lt;original>Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii&lt;/original>
-            &lt;/place>
-        &lt;/fact>
-    &lt;/person>
-    &lt;person extracted="true" id="P-2">
-        &lt;source description="#S-4"/>
-        &lt;name>
-            &lt;nameForm>
-                &lt;fullText>Lo Yau&lt;/fullText>
-            &lt;/nameForm>
-        &lt;/name>
-        &lt;name type="http://gedcomx.org/AlsoKnownAs">
-            &lt;nameForm>
-                &lt;fullText>Young Hong Wong&lt;/fullText>
-            &lt;/nameForm>
-        &lt;/name>
-    &lt;/person>
+    ...
     &lt;person id="C-1">
         &lt;analysis resource="#D-3"/>
         &lt;evidence resource="#P-1"/>
+        ...
     &lt;/person>
-    &lt;relationship type="http://gedcomx.org/ParentChild">
-        &lt;person1 resource="#P-2"/>
-        &lt;person2 resource="#P-1"/>
-    &lt;/relationship>
-    &lt;sourceDescription resourceType="http://gedcomx.org/PhysicalArtifact" id="S-1">
-        &lt;citation>
-            &lt;value>WONG Aloiau gravestone, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii; visited May 1975 by Jane Doe.&lt;/value>
-        &lt;/citation>
-        &lt;title>Grave Marker of WONG Aloiau, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii&lt;/title>
-        &lt;repository resource="#A-2"/>
-    &lt;/sourceDescription>
-    &lt;sourceDescription resourceType="http://gedcomx.org/DigitalArtifact" id="S-2">
-        &lt;citation>
-            &lt;value>WONG Aloiau gravestone (digital photograph), Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii; visited May 1975 by Jane Doe.&lt;/value>
-        &lt;/citation>
-        &lt;source description="#S-1"/>
-        &lt;title>Grave Marker of WONG Aloiau, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii&lt;/title>
-    &lt;/sourceDescription>
-    &lt;sourceDescription about="#D-1" resourceType="http://gedcomx.org/DigitalArtifact" id="S-3">
-        &lt;citation>
-            &lt;value>WONG Aloiau gravestone (transcription), Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii; visited May 1975 by Jane Doe.&lt;/value>
-        &lt;/citation>
-        &lt;source description="#S-2"/>
-        &lt;title>Transcription of Grave Marker of WONG Aloiau, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii&lt;/title>
-    &lt;/sourceDescription>
-    &lt;sourceDescription about="#D-2" resourceType="http://gedcomx.org/DigitalArtifact" id="S-4">
-        &lt;citation>
-            &lt;value>WONG Aloiau gravestone, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii; visited May 1975 by Jane Doe. Translation by HANYU Pinyin 王大年.&lt;/value>
-        &lt;/citation>
-        &lt;source description="#S-3"/>
-        &lt;title>Translation of Grave Marker of WONG Aloiau, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii&lt;/title>
-        &lt;attribution>
-            &lt;contributor resource="#A-3"/>
-            &lt;modified>2014-03-27T00:00:00-06:00&lt;/modified>
-        &lt;/attribution>
-    &lt;/sourceDescription>
-    &lt;agent id="A-1">
-        &lt;email resource="mailto:example@example.org"/>
-        &lt;name>Jane Doe&lt;/name>
-    &lt;/agent>
-    &lt;agent id="A-3">
-        &lt;email resource="mailto:example@example.org"/>
-        &lt;name>HANYU Pinyin 王大年&lt;/name>
-    &lt;/agent>
-    &lt;agent id="A-2">
-        &lt;address>
-            &lt;city>Honolulu&lt;/city>
-            &lt;stateOrProvince>Hawaii&lt;/stateOrProvince>
-        &lt;/address>
-        &lt;name>Lin Yee Chung Cemetery&lt;/name>
-    &lt;/agent>
-    &lt;document xml:lang="zh" id="D-1">
-        &lt;source description="#S-2"/>
-        &lt;text>WONG ALOIAU
-NOV. 22, 1848 – AUG. 3, 1920
-中山  大字都  泮沙鄉
-生  於  前  清 戊申 年 十一 月 廿二（日）子   時
-終  於  民國  庚申 年     七月    十二 (日)    午    時
-先考  諱 羅有  字 容康 王 府 君 之 墓&lt;/text>
-    &lt;/document>
-    &lt;document id="D-2">
-        &lt;source description="#S-3"/>
-        &lt;text>WONG ALOIAU
-NOV. 22, 1848 – AUG. 3, 1920 \[lunar dates\]
-\[Birthplace\] \[China, Guandong, \]Chung Shan, See Dai Doo, Pun Sha village
-\[Date of birth\] Born at former Qing 1848 year 11th month 22nd day 23-1 hour.
-\[Life\] ended at Republic of China year 1920 year 7th mo. 12th day 11-13 hour.
-Deceased father avoid \[mention of\] Lo Yau also known as Young Hong Wong \[noble\]residence ruler’s grave.&lt;/text>
-    &lt;/document>
+    ...
     &lt;document id="D-3">
         &lt;text>...Jane Doe's analysis document...&lt;/text>
     &lt;/document>
@@ -1996,64 +710,8 @@ Deceased father avoid \[mention of\] Lo Yau also known as Young Hong Wong \[nobl
 
 <pre class="prettyprint lang-javascript" style="max-height: 400px; overflow:auto">
 {
-  "attribution" : {
-    "contributor" : {
-      "resource" : "#A-1"
-    },
-    "modified" : 1395900000000
-  },
+  ...
   "persons" : [ {
-    "names" : [ {
-      "nameForms" : [ {
-        "fullText" : "WONG Aloiau"
-      } ]
-    } ],
-    "gender" : {
-      "type" : "http://gedcomx.org/Male"
-    },
-    "facts" : [ {
-      "type" : "http://gedcomx.org/Birth",
-      "date" : {
-        "original" : "former Qing 1848 year 11th month 22nd day 23-1 hour",
-        "formal" : "+1848-11-22"
-      },
-      "place" : {
-        "original" : "Pun Sha Village, See Dai Doo, Chung Shan, Guangdong, China"
-      }
-    }, {
-      "type" : "http://gedcomx.org/Death",
-      "date" : {
-        "original" : "Republic of China year 1920 year 7th mo. 12th day 11-13 hour",
-        "formal" : "+1920-08-03"
-      }
-    }, {
-      "type" : "http://gedcomx.org/Burial",
-      "place" : {
-        "original" : "Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii"
-      }
-    } ],
-    "extracted" : true,
-    "sources" : [ {
-      "description" : "#S-4"
-    } ],
-    "id" : "P-1"
-  }, {
-    "names" : [ {
-      "nameForms" : [ {
-        "fullText" : "Lo Yau"
-      } ]
-    }, {
-      "type" : "http://gedcomx.org/AlsoKnownAs",
-      "nameForms" : [ {
-        "fullText" : "Young Hong Wong"
-      } ]
-    } ],
-    "extracted" : true,
-    "sources" : [ {
-      "description" : "#S-4"
-    } ],
-    "id" : "P-2"
-  }, {
     "evidence" : [ {
       "resource" : "#P-1"
     } ],
@@ -2061,116 +719,12 @@ Deceased father avoid \[mention of\] Lo Yau also known as Young Hong Wong \[nobl
       "resource" : "#D-3"
     },
     "id" : "C-1"
-  } ],
-  "relationships" : [ {
-    "type" : "http://gedcomx.org/ParentChild",
-    "person1" : {
-      "resource" : "#P-2"
-    },
-    "person2" : {
-      "resource" : "#P-1"
-    }
-  } ],
-  "sourceDescriptions" : [ {
-    "resourceType" : "http://gedcomx.org/PhysicalArtifact",
-    "citations" : [ {
-      "value" : "WONG Aloiau gravestone, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii; visited May 1975 by Jane Doe."
-    } ],
-    "titles" : [ {
-      "value" : "Grave Marker of WONG Aloiau, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii"
-    } ],
-    "repository" : {
-      "resource" : "#A-2"
-    },
-    "id" : "S-1"
-  }, {
-    "sources" : [ {
-      "description" : "#S-1"
-    } ],
-    "resourceType" : "http://gedcomx.org/DigitalArtifact",
-    "citations" : [ {
-      "value" : "WONG Aloiau gravestone (digital photograph), Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii; visited May 1975 by Jane Doe."
-    } ],
-    "titles" : [ {
-      "value" : "Grave Marker of WONG Aloiau, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii"
-    } ],
-    "id" : "S-2"
-  }, {
-    "sources" : [ {
-      "description" : "#S-2"
-    } ],
-    "resourceType" : "http://gedcomx.org/DigitalArtifact",
-    "citations" : [ {
-      "value" : "WONG Aloiau gravestone (transcription), Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii; visited May 1975 by Jane Doe."
-    } ],
-    "about" : "#D-1",
-    "titles" : [ {
-      "value" : "Transcription of Grave Marker of WONG Aloiau, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii"
-    } ],
-    "id" : "S-3"
-  }, {
-    "sources" : [ {
-      "description" : "#S-3"
-    } ],
-    "resourceType" : "http://gedcomx.org/DigitalArtifact",
-    "citations" : [ {
-      "value" : "WONG Aloiau gravestone, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii; visited May 1975 by Jane Doe. Translation by HANYU Pinyin 王大年."
-    } ],
-    "about" : "#D-2",
-    "titles" : [ {
-      "value" : "Translation of Grave Marker of WONG Aloiau, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii"
-    } ],
-    "attribution" : {
-      "contributor" : {
-        "resource" : "#A-3"
-      },
-      "modified" : 1395900000000
-    },
-    "id" : "S-4"
-  } ],
-  "agents" : [ {
-    "names" : [ {
-      "value" : "Jane Doe"
-    } ],
-    "emails" : [ {
-      "resource" : "mailto:example@example.org"
-    } ],
-    "id" : "A-1"
-  }, {
-    "names" : [ {
-      "value" : "HANYU Pinyin 王大年"
-    } ],
-    "emails" : [ {
-      "resource" : "mailto:example@example.org"
-    } ],
-    "id" : "A-3"
-  }, {
-    "names" : [ {
-      "value" : "Lin Yee Chung Cemetery"
-    } ],
-    "addresses" : [ {
-      "city" : "Honolulu",
-      "stateOrProvince" : "Hawaii"
-    } ],
-    "id" : "A-2"
-  } ],
+  }, ... ],
+  ...
   "documents" : [ {
-    "text" : "WONG ALOIAU\nNOV. 22, 1848 – AUG. 3, 1920\n中山  大字都  泮沙鄉\n生  於  前  清 戊申 年 十一 月 廿二（日）子   時\n終  於  民國  庚申 年     七月    十二 (日)    午    時\n先考  諱 羅有  字 容康 王 府 君 之 墓",
-    "sources" : [ {
-      "description" : "#S-2"
-    } ],
-    "lang" : "zh",
-    "id" : "D-1"
-  }, {
-    "text" : "WONG ALOIAU\nNOV. 22, 1848 – AUG. 3, 1920 \\[lunar dates\\]\n\\[Birthplace\\] \\[China, Guandong, \\]Chung Shan, See Dai Doo, Pun Sha village\n\\[Date of birth\\] Born at former Qing 1848 year 11th month 22nd day 23-1 hour.\n\\[Life\\] ended at Republic of China year 1920 year 7th mo. 12th day 11-13 hour.\nDeceased father avoid \\[mention of\\] Lo Yau also known as Young Hong Wong \\[noble\\]residence ruler’s grave.",
-    "sources" : [ {
-      "description" : "#S-3"
-    } ],
-    "id" : "D-2"
-  }, {
     "text" : "...Jane Doe's analysis document...",
     "id" : "D-3"
-  } ]
+  }, ... ]
 }
 </pre>
 
