@@ -1,6 +1,6 @@
 ---
 title: GEDCOM X Representation of Death and Burial Information (Chinese Example)
-date: 2014-03-27 15:00:00
+date: 2014-04-04 17:00:00
 layout: default
 author: Ryan Heaton
 ---
@@ -159,11 +159,11 @@ The transcription is translated as as follows:
 
 <pre>
 WONG ALOIAU
-NOV. 22, 1848 – AUG. 3, 1920 \[lunar dates\]
-\[Birthplace\] \[China, Guandong, \]Chung Shan, See Dai Doo, Pun Sha village
-\[Date of birth\] Born at former Qing 1848 year 11th month 22nd day 23-1 hour.
-\[Life\] ended at Republic of China year 1920 year 7th mo. 12th day 11-13 hour.
-Deceased father avoid \[mention of\] Lo Yau also known as Young Hong Wong \[noble\]residence ruler’s grave.
+NOV. 22, 1848 – AUG. 3, 1920 [lunar dates]
+[Birthplace] [China, Guandong, ]Chung Shan, See Dai Doo, Pun Sha village
+[Date of birth] Born at former Qing 1848 year 11th month 22nd day 23-1 hour.
+[Life] ended at Republic of China year 1920 year 7th mo. 12th day 11-13 hour.
+Deceased father avoid [mention of] Lo Yau also known as Young Hong Wong [noble]residence ruler’s grave.
 </pre>
 
 #### Describing the Translation of the Source
@@ -289,7 +289,7 @@ The following snippet demonstrates how a root document is initialized in both XM
 &lt;gedcomx xmlns="http://gedcomx.org/v1/">
     &lt;attribution>
         &lt;contributor resource="#A-1"/>
-        &lt;modified>2014-03-27T00:00:00-06:00&lt;/modified>
+        &lt;modified>2014-04-04T00:00:00-06:00&lt;/modified>
     &lt;/attribution>
     ...
     &lt;agent id="A-1">
@@ -482,7 +482,7 @@ The translation of the transcription is provided as a [`Document`](https://githu
         &lt;title>Translation of Grave Marker of WONG Aloiau, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii&lt;/title>
         &lt;attribution>
             &lt;contributor resource="#A-3"/>
-            &lt;modified>2014-03-27T00:00:00-06:00&lt;/modified>
+            &lt;modified>2014-04-04T00:00:00-06:00&lt;/modified>
         &lt;/attribution>
     &lt;/sourceDescription>
     ...
@@ -494,11 +494,11 @@ The translation of the transcription is provided as a [`Document`](https://githu
     &lt;document id="D-2">
         &lt;source description="#S-3"/>
         &lt;text>WONG ALOIAU
-NOV. 22, 1848 – AUG. 3, 1920 \[lunar dates\]
-\[Birthplace\] \[China, Guandong, \]Chung Shan, See Dai Doo, Pun Sha village
-\[Date of birth\] Born at former Qing 1848 year 11th month 22nd day 23-1 hour.
-\[Life\] ended at Republic of China year 1920 year 7th mo. 12th day 11-13 hour.
-Deceased father avoid \[mention of\] Lo Yau also known as Young Hong Wong \[noble\]residence ruler’s grave.&lt;/text>
+NOV. 22, 1848 – AUG. 3, 1920 [lunar dates]
+[Birthplace] [China, Guandong, ]Chung Shan, See Dai Doo, Pun Sha village
+[Date of birth] Born at former Qing 1848 year 11th month 22nd day 23-1 hour.
+[Life] ended at Republic of China year 1920 year 7th mo. 12th day 11-13 hour.
+Deceased father avoid [mention of] Lo Yau also known as Young Hong Wong [noble]residence ruler’s grave.&lt;/text>
     &lt;/document>
     ...
 &lt;/gedcomx>
@@ -541,7 +541,7 @@ Deceased father avoid \[mention of\] Lo Yau also known as Young Hong Wong \[nobl
   }, ... ],
   ...
   "documents" : [ {
-    "text" : "WONG ALOIAU\nNOV. 22, 1848 – AUG. 3, 1920 \\[lunar dates\\]\n\\[Birthplace\\] \\[China, Guandong, \\]Chung Shan, See Dai Doo, Pun Sha village\n\\[Date of birth\\] Born at former Qing 1848 year 11th month 22nd day 23-1 hour.\n\\[Life\\] ended at Republic of China year 1920 year 7th mo. 12th day 11-13 hour.\nDeceased father avoid \\[mention of\\] Lo Yau also known as Young Hong Wong \\[noble\\]residence ruler’s grave.",
+    "text" : "WONG ALOIAU\nNOV. 22, 1848 – AUG. 3, 1920 [lunar dates]\n[Birthplace] [China, Guandong, ]Chung Shan, See Dai Doo, Pun Sha village\n[Date of birth] Born at former Qing 1848 year 11th month 22nd day 23-1 hour.\n[Life] ended at Republic of China year 1920 year 7th mo. 12th day 11-13 hour.\nDeceased father avoid [mention of] Lo Yau also known as Young Hong Wong [noble]residence ruler’s grave.",
     "sources" : [ {
       "description" : "#S-3"
     } ],
@@ -738,7 +738,7 @@ Here are the XML and JSON representations of the use case described above.
 &lt;gedcomx xmlns="http://gedcomx.org/v1/">
     &lt;attribution>
         &lt;contributor resource="#A-1"/>
-        &lt;modified>2014-03-27T00:00:00-06:00&lt;/modified>
+        &lt;modified>2014-04-04T00:00:00-06:00&lt;/modified>
     &lt;/attribution>
     &lt;person extracted="true" id="P-1">
         &lt;source description="#S-4"/>
@@ -819,7 +819,7 @@ Here are the XML and JSON representations of the use case described above.
         &lt;title>Translation of Grave Marker of WONG Aloiau, Lin Yee Chung Cemetery, Honolulu, Oahu, Hawaii&lt;/title>
         &lt;attribution>
             &lt;contributor resource="#A-3"/>
-            &lt;modified>2014-03-27T00:00:00-06:00&lt;/modified>
+            &lt;modified>2014-04-04T00:00:00-06:00&lt;/modified>
         &lt;/attribution>
     &lt;/sourceDescription>
     &lt;agent id="A-1">
@@ -849,11 +849,11 @@ NOV. 22, 1848 – AUG. 3, 1920
     &lt;document id="D-2">
         &lt;source description="#S-3"/>
         &lt;text>WONG ALOIAU
-NOV. 22, 1848 – AUG. 3, 1920 \[lunar dates\]
-\[Birthplace\] \[China, Guandong, \]Chung Shan, See Dai Doo, Pun Sha village
-\[Date of birth\] Born at former Qing 1848 year 11th month 22nd day 23-1 hour.
-\[Life\] ended at Republic of China year 1920 year 7th mo. 12th day 11-13 hour.
-Deceased father avoid \[mention of\] Lo Yau also known as Young Hong Wong \[noble\]residence ruler’s grave.&lt;/text>
+NOV. 22, 1848 – AUG. 3, 1920 [lunar dates]
+[Birthplace] [China, Guandong, ]Chung Shan, See Dai Doo, Pun Sha village
+[Date of birth] Born at former Qing 1848 year 11th month 22nd day 23-1 hour.
+[Life] ended at Republic of China year 1920 year 7th mo. 12th day 11-13 hour.
+Deceased father avoid [mention of] Lo Yau also known as Young Hong Wong [noble]residence ruler’s grave.&lt;/text>
     &lt;/document>
     &lt;document id="D-3">
         &lt;text>...Jane Doe's analysis document...&lt;/text>
@@ -1031,7 +1031,7 @@ Deceased father avoid \[mention of\] Lo Yau also known as Young Hong Wong \[nobl
     "lang" : "zh",
     "id" : "D-1"
   }, {
-    "text" : "WONG ALOIAU\nNOV. 22, 1848 – AUG. 3, 1920 \\[lunar dates\\]\n\\[Birthplace\\] \\[China, Guandong, \\]Chung Shan, See Dai Doo, Pun Sha village\n\\[Date of birth\\] Born at former Qing 1848 year 11th month 22nd day 23-1 hour.\n\\[Life\\] ended at Republic of China year 1920 year 7th mo. 12th day 11-13 hour.\nDeceased father avoid \\[mention of\\] Lo Yau also known as Young Hong Wong \\[noble\\]residence ruler’s grave.",
+    "text" : "WONG ALOIAU\nNOV. 22, 1848 – AUG. 3, 1920 [lunar dates]\n[Birthplace] [China, Guandong, ]Chung Shan, See Dai Doo, Pun Sha village\n[Date of birth] Born at former Qing 1848 year 11th month 22nd day 23-1 hour.\n[Life] ended at Republic of China year 1920 year 7th mo. 12th day 11-13 hour.\nDeceased father avoid [mention of] Lo Yau also known as Young Hong Wong [noble]residence ruler’s grave.",
     "sources" : [ {
       "description" : "#S-3"
     } ],
