@@ -4,3 +4,4 @@ target
 *.iml
 settings.xml
 _site
+.idea
