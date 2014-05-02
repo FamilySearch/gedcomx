@@ -5,12 +5,13 @@ layout: default
 author: Ryan Heaton
 ---
 
-This post is part of an initiative to improve the available documentation of GEDCOM X. This particular post describes how death-like information found during a research activity might be represented using GEDCOM X.
+This post is part of an initiative to improve the available documentation of GEDCOM X. This particular post describes how marriage-like information
+found during a research activity might be represented using GEDCOM X.
 
 ## Summary
 
 During research for Samuel Ham of Honiton, Devon, England a researcher visits the Family History Library at Salt Lake City, Utah to view a published
-parish register from Wilton, Somerset, England.  The parish register provides information about the marriage of a Samuel Ham to one Elizabeth Spiller
+parish register from Wilton, Somerset, England.  The parish register provides information about the marriage of one Samuel Ham to one Elizabeth Spiller
 in 1828. The source is described by providing a title, citation, and other metadata. A transcription of the record is provided. Information about the
 names of the persons and the marriage is extracted from the record. The extracted information is assembled together with information extracted from
 other records to aggregate what is presumed to be known about Samuel Ham.
@@ -1157,7 +1158,8 @@ No. 86.&lt;/text>
 
 ## Code Examples
 
-[This Java code example](https://github.com/FamilySearch/gedcomx-java/blob/master/gedcomx-model/src/test/java/org/gedcomx/examples/SamuelHamExampleTest.java#L25), found in [`gedcomx-java`](https://github.com/FamilySearch/gedcomx) repository demonstrates how to produce the above result.
+[This Java code example](https://github.com/FamilySearch/gedcomx-java/blob/master/gedcomx-model/src/test/java/org/gedcomx/examples/SamuelHamExampleTest.java#L25),
+found in the [`gedcomx-java`](https://github.com/FamilySearch/gedcomx) repository demonstrates how to produce the above result.
 
 ## Extra Credit
 
