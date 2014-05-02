@@ -6,7 +6,8 @@ author: Ryan Heaton
 ---
 
 This post is part of an initiative to improve the available documentation of GEDCOM X. This particular post describes how marriage-like information
-found during a research activity might be represented using GEDCOM X.
+found during a research activity might be represented using GEDCOM X. This post is also [available at gedcomx.org](http://www.gedcomx.org/recipe-marriage-information.html),
+where you will find a link to propose edits or updates.
 
 ## Summary
 
