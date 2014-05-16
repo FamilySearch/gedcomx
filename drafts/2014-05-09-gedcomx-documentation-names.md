@@ -22,8 +22,8 @@ name forms, a Spanish name with multiple name parts, and an Icelandic patronymic
 
 ## Basic Western-Style Name
 
-A basic western-style name is typically pronounced and written with given name(s) followed by surname (i.e., family name). For example, the
-name "John Fitzgerald Kennedy" consists of two given names ("John" and "Fitzgerald") followed by a surname ("Kennedy").
+A basic western-style name is typically pronounced and written with given name(s) followed by family name. For example, the
+name "John Fitzgerald Kennedy" consists of two given names ("John" and "Fitzgerald") followed by a family name ("Kennedy").
 
 In GEDCOM X, such a name is represented using an instance of the
 [`Name`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md#name) data type.
@@ -87,7 +87,7 @@ The following snippet demonstrates how the name "John Fitzgerald Kennedy" might 
 
 It is common in some cultures to have multiple forms of the same name. For example, a Japanese name will often be written
 using ideographic characters (e.g., [kanji](http://en.wikipedia.org/wiki/Kanji)) that can have multiple pronunciations. To provide
-additional clarity, a phonetic form of the name is sometimes provided using kana characters (e.g. [katakana](http://en.wikipedia.org/wiki/Katakana)).
+additional clarity, a phonetic form of the name is sometimes provided using kana characters (e.g., [katakana](http://en.wikipedia.org/wiki/Katakana)).
 Furthermore, in order for the name to be understood by western cultures, a romanized form of the same name may also be provided.
 
 Note that it is important to understand the different between a _single_ name with multiple forms and two distinct (alternate) names.
