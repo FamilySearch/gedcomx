@@ -178,7 +178,7 @@ romanized: "Yamada Tarō") by GEDCOM X in both XML and JSON:
 
 ## Multiple Given Names, Multiples Family Names
 
-It is very common for persons to have multiple given names. Some cultures commonly have multiple family names, too. This is common in
+It is very common for persons to have multiple given names. Some cultures commonly have multiple family names too. This is common in
 many areas of South America. For example, María-Jose Carreño Quiñones may be the daughter of Antonio Carreño Rodríguez and
 María Quiñones Marqués.
 
