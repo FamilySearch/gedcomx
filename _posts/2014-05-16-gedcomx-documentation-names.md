@@ -1,6 +1,6 @@
 ---
 title: GEDCOM X Representation of Names of Persons
-date: 2014-05-09 17:00:00
+date: 2014-05-16 17:00:00
 layout: default
 author: Ryan Heaton
 ---
