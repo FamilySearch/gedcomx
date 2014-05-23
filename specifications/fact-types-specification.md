@@ -88,6 +88,7 @@ URI | description
 `http://gedcomx.org/Excommunication`| A fact of a person's excommunication from a church.
 `http://gedcomx.org/FirstCommunion`| A fact of a person's first communion in a church.
 `http://gedcomx.org/Funeral`| A fact of a person's funeral.
+`http://gedcomx.org/GenderChange`| A fact of a person's gender change.
 `http://gedcomx.org/Heimat`| A fact of a person's _heimat_. "Heimat" refers to a person's affiliation by birth to a specific geographic place. Distinct heimaten are often useful as indicators that two persons of the same name are not likely to be closely related genealogically. In English, "heimat" may be described using terms like "ancestral home", "homeland", or "place of origin".
 `http://gedcomx.org/Immigration`| A fact of a person's immigration.
 `http://gedcomx.org/Imprisonment`| A fact of a person's imprisonment.
@@ -120,7 +121,6 @@ URI | description
 `http://gedcomx.org/Residence`| A fact of a person's residence.
 `http://gedcomx.org/Retirement`| A fact of a person's retirement.
 `http://gedcomx.org/Stillbirth`| A fact of a person's stillbirth.
-`http://gedcomx.org/GenderChange`| A fact of a person's gender change.
 `http://gedcomx.org/Will`| A fact of a person's will.
 `http://gedcomx.org/Visit`| A fact of a person's visit to a place different from the person's residence.
 `http://gedcomx.org/Yahrzeit`| A fact of a person's _yahrzeit_ date.  A person's yahzeit is the anniversary of their death as measured by the Hebrew calendar.
