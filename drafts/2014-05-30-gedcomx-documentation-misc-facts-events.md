@@ -6,7 +6,7 @@ author: Ryan Heaton
 ---
 
 This post is part of an initiative to improve the available documentation of GEDCOM X. This particular post describes how the many varieties
-of personal names might be represented using GEDCOM X. This post is also [available at gedcomx.org](http://www.gedcomx.org/recipe-misc-facts-events.html),
+of facts and events found in genealogical data might be represented using GEDCOM X. This post is also [available at gedcomx.org](http://www.gedcomx.org/recipe-misc-facts-events.html),
 where you will find a link to propose edits or updates.
 
 ## Introduction
@@ -1030,11 +1030,11 @@ with additional fact types. Proposals for additional fact types may be submitted
 No matter how comprehensive a list of known fact types might be, some genealogical applications might want to provide an option to users to
 provide "custom" fact types by allowing them to supply text that describes the fact type. The disadvantage of this option is that
 custom fact types can not be semantically processed by software, making the data less amenable to digital analysis and display. For example,
-among the notable disadvantages is that custom fact types can not be presented to users in their native language.
+one of the disadvantages is that custom fact types can not be presented to users in their native language.
 
 In conformance to the best practices of semantic web and other technologies, GEDCOM X fact types are identified using a
 [Uniform Resource Identifier (URI)](http://en.wikipedia.org/wiki/Uniform_resource_identifier). In the case of custom (user-supplied)
-types, [RFC 2397](http://tools.ietf.org/html/rfc2397) is used to encode the text supplied by the user as a URI.
+types, [RFC 2397](http://tools.ietf.org/html/rfc2397) (the "data" URL scheme) is used to encode the text supplied by the user as a URI.
 
 The following snippet demonstrates how custom types might be applied to facts using GEDCOM X in both XML and JSON:
 
@@ -1076,7 +1076,7 @@ The following snippet demonstrates how custom types might be applied to facts us
 ## Events
 
 Many software applications allow users to capture genealogical information in an "event-centric" manner instead of in a "person-centric" manner.
-In other words, users may be allowed provide a description of a specific event, and then reference each of the persons that participated in
+In other words, users may be allowed to provide a description of a specific event, and then reference each of the persons that participated in
 the event. For example, a marriage record might record witnesses and perhaps an officiator without providing any data about their relationship
 to the bride or groom. In such a case, it may be useful to capture information about the event outside the context of the persons that
 participated in the event. An example of such a case is provided in the
