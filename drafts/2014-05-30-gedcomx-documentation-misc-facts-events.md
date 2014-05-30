@@ -11,14 +11,13 @@ where you will find a link to propose edits or updates.
 
 ## Introduction
 
-This guide is intended to supplement the information presented in the guides about
+This guide is intended to supplement the information presented in the other guides regarding
 [birth-like information](http://familysearch.github.io/gedcomx//2014/03/21/gedcomx-documentation-birth-information.html),
 [death-like information](http://familysearch.github.io/gedcomx//2014/04/04/gedcomx-documentation-death-information.html),
 [marriage-like information](http://familysearch.github.io/gedcomx//2014/05/02/gedcomx-documentation-marriage-information.html),
-and [personal names](http://familysearch.github.io/gedcomx//2014/05/16/gedcomx-documentation-names.html) to give a high-level
-overview of the other types of facts and events that are able to be represented using GEDCOM X. In alignment with the genealogical
-research process, the guides about
-[birth-like](http://familysearch.github.io/gedcomx//2014/03/21/gedcomx-documentation-birth-information.html),
+and [personal names](http://familysearch.github.io/gedcomx//2014/05/16/gedcomx-documentation-names.html) by providing a high-level
+overview of the other types of facts and events that are able to be represented using GEDCOM X. In an effort to align with the genealogical
+research process, the guides about [birth-like](http://familysearch.github.io/gedcomx//2014/03/21/gedcomx-documentation-birth-information.html),
 [death-like](http://familysearch.github.io/gedcomx//2014/04/04/gedcomx-documentation-death-information.html), and
 [marriage-like](http://familysearch.github.io/gedcomx//2014/05/02/gedcomx-documentation-marriage-information.html) information
 each follow a particular pattern for capturing genealogical research:
@@ -27,9 +26,9 @@ each follow a particular pattern for capturing genealogical research:
 2. Extract the information from the source.
 3. Analyze the extracted information.
 
-More details regarding how data from each of these steps can be represented using GEDCOM X will be provided in a separate guide.
+More details about how to use GEDCOM X to capture data at each of these steps will be provided in a separate guide.
 This guide will not attempt to supply a narrative that provides the background for these other types of facts and
-events&mdash;it is assumed that good genealogical research practices are followed as this type of information is captured.
+events, but it is assumed that good genealogical research practices are followed as this type of information is captured.
 
 ## Census and Residence-Like Information
 
@@ -57,14 +56,62 @@ The following snippet demonstrates how these types of facts might be captured by
 <pre class="prettyprint lang-xml" style="max-height: 400px; overflow:auto">
 &lt;gedcomx xmlns="http://gedcomx.org/v1/">
     &lt;person>
-        &lt;name>
-            &lt;nameForm xml:lang="en">
-                &lt;fullText>John Fitzgerald Kennedy&lt;/fullText>
-                &lt;part type="http://gedcomx.org/Given" value="John"/>
-                &lt;part type="http://gedcomx.org/Given" value="Fitzgerald"/>
-                &lt;part type="http://gedcomx.org/Surname" value="Kennedy"/>
-            &lt;/nameForm>
-        &lt;/name>
+        &lt;fact type="http://gedcomx.org/Census">
+            &lt;date>
+                &lt;original>...&lt;/original>
+            &lt;/date>
+            &lt;place>
+                &lt;original>...&lt;/original>
+            &lt;/place>
+        &lt;/fact>
+        &lt;fact type="http://gedcomx.org/Emigration">
+            &lt;date>
+                &lt;original>...&lt;/original>
+            &lt;/date>
+            &lt;place>
+                &lt;original>...&lt;/original>
+            &lt;/place>
+        &lt;/fact>
+        &lt;fact type="http://gedcomx.org/Immigration">
+            &lt;date>
+                &lt;original>...&lt;/original>
+            &lt;/date>
+            &lt;place>
+                &lt;original>...&lt;/original>
+            &lt;/place>
+        &lt;/fact>
+        &lt;fact type="http://gedcomx.org/LandTransaction">
+            &lt;date>
+                &lt;original>...&lt;/original>
+            &lt;/date>
+            &lt;place>
+                &lt;original>...&lt;/original>
+            &lt;/place>
+        &lt;/fact>
+        &lt;fact type="http://gedcomx.org/MoveTo">
+            &lt;date>
+                &lt;original>...&lt;/original>
+            &lt;/date>
+            &lt;place>
+                &lt;original>...&lt;/original>
+            &lt;/place>
+        &lt;/fact>
+        &lt;fact type="http://gedcomx.org/MoveFrom">
+            &lt;date>
+                &lt;original>...&lt;/original>
+            &lt;/date>
+            &lt;place>
+                &lt;original>...&lt;/original>
+            &lt;/place>
+        &lt;/fact>
+        &lt;fact type="http://gedcomx.org/Residence">
+            &lt;date>
+                &lt;original>...&lt;/original>
+            &lt;/date>
+            &lt;place>
+                &lt;original>...&lt;/original>
+            &lt;/place>
+        &lt;/fact>
     &lt;/person>
 &lt;/gedcomx>
 </pre>
@@ -74,21 +121,62 @@ The following snippet demonstrates how these types of facts might be captured by
 <pre class="prettyprint lang-javascript" style="max-height: 400px; overflow:auto">
 {
   "persons" : [ {
-    "names" : [ {
-      "nameForms" : [ {
-        "lang" : "en",
-        "fullText" : "John Fitzgerald Kennedy",
-        "parts" : [ {
-          "value" : "John",
-          "type" : "http://gedcomx.org/Given"
-        }, {
-          "value" : "Fitzgerald",
-          "type" : "http://gedcomx.org/Given"
-        }, {
-          "value" : "Kennedy",
-          "type" : "http://gedcomx.org/Surname"
-        } ]
-      } ]
+    "facts" : [ {
+      "type" : "http://gedcomx.org/Census",
+      "date" : {
+        "original" : "..."
+      },
+      "place" : {
+        "original" : "..."
+      }
+    }, {
+      "type" : "http://gedcomx.org/Emigration",
+      "date" : {
+        "original" : "..."
+      },
+      "place" : {
+        "original" : "..."
+      }
+    }, {
+      "type" : "http://gedcomx.org/Immigration",
+      "date" : {
+        "original" : "..."
+      },
+      "place" : {
+        "original" : "..."
+      }
+    }, {
+      "type" : "http://gedcomx.org/LandTransaction",
+      "date" : {
+        "original" : "..."
+      },
+      "place" : {
+        "original" : "..."
+      }
+    }, {
+      "type" : "http://gedcomx.org/MoveTo",
+      "date" : {
+        "original" : "..."
+      },
+      "place" : {
+        "original" : "..."
+      }
+    }, {
+      "type" : "http://gedcomx.org/MoveFrom",
+      "date" : {
+        "original" : "..."
+      },
+      "place" : {
+        "original" : "..."
+      }
+    }, {
+      "type" : "http://gedcomx.org/Residence",
+      "date" : {
+        "original" : "..."
+      },
+      "place" : {
+        "original" : "..."
+      }
     } ]
   } ]
 }
@@ -115,14 +203,46 @@ The following snippet demonstrates how these types of facts might be captured by
 <pre class="prettyprint lang-xml" style="max-height: 400px; overflow:auto">
 &lt;gedcomx xmlns="http://gedcomx.org/v1/">
     &lt;person>
-        &lt;name>
-            &lt;nameForm xml:lang="en">
-                &lt;fullText>John Fitzgerald Kennedy&lt;/fullText>
-                &lt;part type="http://gedcomx.org/Given" value="John"/>
-                &lt;part type="http://gedcomx.org/Given" value="Fitzgerald"/>
-                &lt;part type="http://gedcomx.org/Surname" value="Kennedy"/>
-            &lt;/nameForm>
-        &lt;/name>
+        &lt;fact type="http://gedcomx.org/MilitaryAward">
+            &lt;date>
+                &lt;original>...&lt;/original>
+            &lt;/date>
+            &lt;place>
+                &lt;original>...&lt;/original>
+            &lt;/place>
+        &lt;/fact>
+        &lt;fact type="http://gedcomx.org/MilitaryDischarge">
+            &lt;date>
+                &lt;original>...&lt;/original>
+            &lt;/date>
+            &lt;place>
+                &lt;original>...&lt;/original>
+            &lt;/place>
+        &lt;/fact>
+        &lt;fact type="http://gedcomx.org/MilitaryDraftRegistration">
+            &lt;date>
+                &lt;original>...&lt;/original>
+            &lt;/date>
+            &lt;place>
+                &lt;original>...&lt;/original>
+            &lt;/place>
+        &lt;/fact>
+        &lt;fact type="http://gedcomx.org/MilitaryInduction">
+            &lt;date>
+                &lt;original>...&lt;/original>
+            &lt;/date>
+            &lt;place>
+                &lt;original>...&lt;/original>
+            &lt;/place>
+        &lt;/fact>
+        &lt;fact type="http://gedcomx.org/MilitaryService">
+            &lt;date>
+                &lt;original>...&lt;/original>
+            &lt;/date>
+            &lt;place>
+                &lt;original>...&lt;/original>
+            &lt;/place>
+        &lt;/fact>
     &lt;/person>
 &lt;/gedcomx>
 </pre>
@@ -132,21 +252,46 @@ The following snippet demonstrates how these types of facts might be captured by
 <pre class="prettyprint lang-javascript" style="max-height: 400px; overflow:auto">
 {
   "persons" : [ {
-    "names" : [ {
-      "nameForms" : [ {
-        "lang" : "en",
-        "fullText" : "John Fitzgerald Kennedy",
-        "parts" : [ {
-          "value" : "John",
-          "type" : "http://gedcomx.org/Given"
-        }, {
-          "value" : "Fitzgerald",
-          "type" : "http://gedcomx.org/Given"
-        }, {
-          "value" : "Kennedy",
-          "type" : "http://gedcomx.org/Surname"
-        } ]
-      } ]
+    "facts" : [ {
+      "type" : "http://gedcomx.org/MilitaryAward",
+      "date" : {
+        "original" : "..."
+      },
+      "place" : {
+        "original" : "..."
+      }
+    }, {
+      "type" : "http://gedcomx.org/MilitaryDischarge",
+      "date" : {
+        "original" : "..."
+      },
+      "place" : {
+        "original" : "..."
+      }
+    }, {
+      "type" : "http://gedcomx.org/MilitaryDraftRegistration",
+      "date" : {
+        "original" : "..."
+      },
+      "place" : {
+        "original" : "..."
+      }
+    }, {
+      "type" : "http://gedcomx.org/MilitaryInduction",
+      "date" : {
+        "original" : "..."
+      },
+      "place" : {
+        "original" : "..."
+      }
+    }, {
+      "type" : "http://gedcomx.org/MilitaryService",
+      "date" : {
+        "original" : "..."
+      },
+      "place" : {
+        "original" : "..."
+      }
     } ]
   } ]
 }
@@ -172,14 +317,38 @@ The following snippet demonstrates how these types of facts might be captured by
 <pre class="prettyprint lang-xml" style="max-height: 400px; overflow:auto">
 &lt;gedcomx xmlns="http://gedcomx.org/v1/">
     &lt;person>
-        &lt;name>
-            &lt;nameForm xml:lang="en">
-                &lt;fullText>John Fitzgerald Kennedy&lt;/fullText>
-                &lt;part type="http://gedcomx.org/Given" value="John"/>
-                &lt;part type="http://gedcomx.org/Given" value="Fitzgerald"/>
-                &lt;part type="http://gedcomx.org/Surname" value="Kennedy"/>
-            &lt;/nameForm>
-        &lt;/name>
+        &lt;fact type="http://gedcomx.org/Apprenticeship">
+            &lt;date>
+                &lt;original>...&lt;/original>
+            &lt;/date>
+            &lt;place>
+                &lt;original>...&lt;/original>
+            &lt;/place>
+        &lt;/fact>
+        &lt;fact type="http://gedcomx.org/Education">
+            &lt;date>
+                &lt;original>...&lt;/original>
+            &lt;/date>
+            &lt;place>
+                &lt;original>...&lt;/original>
+            &lt;/place>
+        &lt;/fact>
+        &lt;fact type="http://gedcomx.org/Occupation">
+            &lt;date>
+                &lt;original>...&lt;/original>
+            &lt;/date>
+            &lt;place>
+                &lt;original>...&lt;/original>
+            &lt;/place>
+        &lt;/fact>
+        &lt;fact type="http://gedcomx.org/Retirement">
+            &lt;date>
+                &lt;original>...&lt;/original>
+            &lt;/date>
+            &lt;place>
+                &lt;original>...&lt;/original>
+            &lt;/place>
+        &lt;/fact>
     &lt;/person>
 &lt;/gedcomx>
 </pre>
@@ -189,27 +358,44 @@ The following snippet demonstrates how these types of facts might be captured by
 <pre class="prettyprint lang-javascript" style="max-height: 400px; overflow:auto">
 {
   "persons" : [ {
-    "names" : [ {
-      "nameForms" : [ {
-        "lang" : "en",
-        "fullText" : "John Fitzgerald Kennedy",
-        "parts" : [ {
-          "value" : "John",
-          "type" : "http://gedcomx.org/Given"
-        }, {
-          "value" : "Fitzgerald",
-          "type" : "http://gedcomx.org/Given"
-        }, {
-          "value" : "Kennedy",
-          "type" : "http://gedcomx.org/Surname"
-        } ]
-      } ]
+    "facts" : [ {
+      "type" : "http://gedcomx.org/Apprenticeship",
+      "date" : {
+        "original" : "..."
+      },
+      "place" : {
+        "original" : "..."
+      }
+    }, {
+      "type" : "http://gedcomx.org/Education",
+      "date" : {
+        "original" : "..."
+      },
+      "place" : {
+        "original" : "..."
+      }
+    }, {
+      "type" : "http://gedcomx.org/Occupation",
+      "date" : {
+        "original" : "..."
+      },
+      "place" : {
+        "original" : "..."
+      }
+    }, {
+      "type" : "http://gedcomx.org/Retirement",
+      "date" : {
+        "original" : "..."
+      },
+      "place" : {
+        "original" : "..."
+      }
     } ]
   } ]
 }
 </pre>
 
-## Religious or Cultural Rites
+## Religious or Cultural Information
 
 The following fact types are among those provided by the [GEDCOM X Fact Types](http://gedcomx.org/fact-types/v1) specification for
 capturing information about a person's religious or cultural background:
@@ -239,14 +425,126 @@ The following snippet demonstrates how these types of facts might be captured by
 <pre class="prettyprint lang-xml" style="max-height: 400px; overflow:auto">
 &lt;gedcomx xmlns="http://gedcomx.org/v1/">
     &lt;person>
-        &lt;name>
-            &lt;nameForm xml:lang="en">
-                &lt;fullText>John Fitzgerald Kennedy&lt;/fullText>
-                &lt;part type="http://gedcomx.org/Given" value="John"/>
-                &lt;part type="http://gedcomx.org/Given" value="Fitzgerald"/>
-                &lt;part type="http://gedcomx.org/Surname" value="Kennedy"/>
-            &lt;/nameForm>
-        &lt;/name>
+        &lt;fact type="http://gedcomx.org/AdultChristening">
+            &lt;date>
+                &lt;original>...&lt;/original>
+            &lt;/date>
+            &lt;place>
+                &lt;original>...&lt;/original>
+            &lt;/place>
+        &lt;/fact>
+        &lt;fact type="http://gedcomx.org/Baptism">
+            &lt;date>
+                &lt;original>...&lt;/original>
+            &lt;/date>
+            &lt;place>
+                &lt;original>...&lt;/original>
+            &lt;/place>
+        &lt;/fact>
+        &lt;fact type="http://gedcomx.org/BarMitzvah">
+            &lt;date>
+                &lt;original>...&lt;/original>
+            &lt;/date>
+            &lt;place>
+                &lt;original>...&lt;/original>
+            &lt;/place>
+        &lt;/fact>
+        &lt;fact type="http://gedcomx.org/BatMitzvah">
+            &lt;date>
+                &lt;original>...&lt;/original>
+            &lt;/date>
+            &lt;place>
+                &lt;original>...&lt;/original>
+            &lt;/place>
+        &lt;/fact>
+        &lt;fact type="http://gedcomx.org/Caste">
+            &lt;date>
+                &lt;original>...&lt;/original>
+            &lt;/date>
+            &lt;place>
+                &lt;original>...&lt;/original>
+            &lt;/place>
+        &lt;/fact>
+        &lt;fact type="http://gedcomx.org/Christening">
+            &lt;date>
+                &lt;original>...&lt;/original>
+            &lt;/date>
+            &lt;place>
+                &lt;original>...&lt;/original>
+            &lt;/place>
+        &lt;/fact>
+        &lt;fact type="http://gedcomx.org/Circumcision">
+            &lt;date>
+                &lt;original>...&lt;/original>
+            &lt;/date>
+            &lt;place>
+                &lt;original>...&lt;/original>
+            &lt;/place>
+        &lt;/fact>
+        &lt;fact type="http://gedcomx.org/Clan">
+            &lt;date>
+                &lt;original>...&lt;/original>
+            &lt;/date>
+            &lt;place>
+                &lt;original>...&lt;/original>
+            &lt;/place>
+        &lt;/fact>
+        &lt;fact type="http://gedcomx.org/Confirmation">
+            &lt;date>
+                &lt;original>...&lt;/original>
+            &lt;/date>
+            &lt;place>
+                &lt;original>...&lt;/original>
+            &lt;/place>
+        &lt;/fact>
+        &lt;fact type="http://gedcomx.org/Excommunication">
+            &lt;date>
+                &lt;original>...&lt;/original>
+            &lt;/date>
+            &lt;place>
+                &lt;original>...&lt;/original>
+            &lt;/place>
+        &lt;/fact>
+        &lt;fact type="http://gedcomx.org/FirstCommunion">
+            &lt;date>
+                &lt;original>...&lt;/original>
+            &lt;/date>
+            &lt;place>
+                &lt;original>...&lt;/original>
+            &lt;/place>
+        &lt;/fact>
+        &lt;fact type="http://gedcomx.org/Nationality">
+            &lt;date>
+                &lt;original>...&lt;/original>
+            &lt;/date>
+            &lt;place>
+                &lt;original>...&lt;/original>
+            &lt;/place>
+        &lt;/fact>
+        &lt;fact type="http://gedcomx.org/Ordination">
+            &lt;date>
+                &lt;original>...&lt;/original>
+            &lt;/date>
+            &lt;place>
+                &lt;original>...&lt;/original>
+            &lt;/place>
+        &lt;/fact>
+        &lt;fact type="http://gedcomx.org/Religion">
+            &lt;date>
+                &lt;original>...&lt;/original>
+            &lt;/date>
+            &lt;place>
+                &lt;original>...&lt;/original>
+            &lt;/place>
+        &lt;/fact>
+        &lt;fact type="http://gedcomx.org/Yahrzeit">
+            &lt;date>
+                &lt;original>...&lt;/original>
+            &lt;/date>
+            &lt;place>
+                &lt;original>...&lt;/original>
+            &lt;/place>
+        &lt;/fact>
     &lt;/person>
 &lt;/gedcomx>
 </pre>
@@ -256,21 +554,126 @@ The following snippet demonstrates how these types of facts might be captured by
 <pre class="prettyprint lang-javascript" style="max-height: 400px; overflow:auto">
 {
   "persons" : [ {
-    "names" : [ {
-      "nameForms" : [ {
-        "lang" : "en",
-        "fullText" : "John Fitzgerald Kennedy",
-        "parts" : [ {
-          "value" : "John",
-          "type" : "http://gedcomx.org/Given"
-        }, {
-          "value" : "Fitzgerald",
-          "type" : "http://gedcomx.org/Given"
-        }, {
-          "value" : "Kennedy",
-          "type" : "http://gedcomx.org/Surname"
-        } ]
-      } ]
+    "facts" : [ {
+      "type" : "http://gedcomx.org/AdultChristening",
+      "date" : {
+        "original" : "..."
+      },
+      "place" : {
+        "original" : "..."
+      }
+    }, {
+      "type" : "http://gedcomx.org/Baptism",
+      "date" : {
+        "original" : "..."
+      },
+      "place" : {
+        "original" : "..."
+      }
+    }, {
+      "type" : "http://gedcomx.org/BarMitzvah",
+      "date" : {
+        "original" : "..."
+      },
+      "place" : {
+        "original" : "..."
+      }
+    }, {
+      "type" : "http://gedcomx.org/BatMitzvah",
+      "date" : {
+        "original" : "..."
+      },
+      "place" : {
+        "original" : "..."
+      }
+    }, {
+      "type" : "http://gedcomx.org/Caste",
+      "date" : {
+        "original" : "..."
+      },
+      "place" : {
+        "original" : "..."
+      }
+    }, {
+      "type" : "http://gedcomx.org/Christening",
+      "date" : {
+        "original" : "..."
+      },
+      "place" : {
+        "original" : "..."
+      }
+    }, {
+      "type" : "http://gedcomx.org/Circumcision",
+      "date" : {
+        "original" : "..."
+      },
+      "place" : {
+        "original" : "..."
+      }
+    }, {
+      "type" : "http://gedcomx.org/Clan",
+      "date" : {
+        "original" : "..."
+      },
+      "place" : {
+        "original" : "..."
+      }
+    }, {
+      "type" : "http://gedcomx.org/Confirmation",
+      "date" : {
+        "original" : "..."
+      },
+      "place" : {
+        "original" : "..."
+      }
+    }, {
+      "type" : "http://gedcomx.org/Excommunication",
+      "date" : {
+        "original" : "..."
+      },
+      "place" : {
+        "original" : "..."
+      }
+    }, {
+      "type" : "http://gedcomx.org/FirstCommunion",
+      "date" : {
+        "original" : "..."
+      },
+      "place" : {
+        "original" : "..."
+      }
+    }, {
+      "type" : "http://gedcomx.org/Nationality",
+      "date" : {
+        "original" : "..."
+      },
+      "place" : {
+        "original" : "..."
+      }
+    }, {
+      "type" : "http://gedcomx.org/Ordination",
+      "date" : {
+        "original" : "..."
+      },
+      "place" : {
+        "original" : "..."
+      }
+    }, {
+      "type" : "http://gedcomx.org/Religion",
+      "date" : {
+        "original" : "..."
+      },
+      "place" : {
+        "original" : "..."
+      }
+    }, {
+      "type" : "http://gedcomx.org/Yahrzeit",
+      "date" : {
+        "original" : "..."
+      },
+      "place" : {
+        "original" : "..."
+      }
     } ]
   } ]
 }
@@ -278,7 +681,7 @@ The following snippet demonstrates how these types of facts might be captured by
 
 ### LDS Ordinance Information
 
-The original GEDCOM standard provided specific fact types that recorded a person's participation in LDS ordinances. While GEDCOM X recognizes the
+The original GEDCOM standard provided specific fact types that recorded the LDS ordinances that apply to a person. While GEDCOM X recognizes the
 legitimacy of such fact types, the definition and specification of those fact types is outside the scope of the GEDCOM X specification. It is presumed
 that the [Church of Jesus Christ of Latter-day Saints](http://www.lds.org) will provide a separate specification that defines these fact types.
 
@@ -308,16 +711,106 @@ The following snippet demonstrates how these types of facts might be captured by
 
 <pre class="prettyprint lang-xml" style="max-height: 400px; overflow:auto">
 &lt;gedcomx xmlns="http://gedcomx.org/v1/">
-    &lt;person>
-        &lt;name>
-            &lt;nameForm xml:lang="en">
-                &lt;fullText>John Fitzgerald Kennedy&lt;/fullText>
-                &lt;part type="http://gedcomx.org/Given" value="John"/>
-                &lt;part type="http://gedcomx.org/Given" value="Fitzgerald"/>
-                &lt;part type="http://gedcomx.org/Surname" value="Kennedy"/>
-            &lt;/nameForm>
-        &lt;/name>
-    &lt;/person>
+    &lt;relationship type="http://gedcomx.org/Couple">
+        &lt;fact type="http://gedcomx.org/CivilUnion">
+            &lt;date>
+                &lt;original>...&lt;/original>
+            &lt;/date>
+            &lt;place>
+                &lt;original>...&lt;/original>
+            &lt;/place>
+        &lt;/fact>
+        &lt;fact type="http://gedcomx.org/DomesticPartnership">
+            &lt;date>
+                &lt;original>...&lt;/original>
+            &lt;/date>
+            &lt;place>
+                &lt;original>...&lt;/original>
+            &lt;/place>
+        &lt;/fact>
+        &lt;fact type="http://gedcomx.org/Divorce">
+            &lt;date>
+                &lt;original>...&lt;/original>
+            &lt;/date>
+            &lt;place>
+                &lt;original>...&lt;/original>
+            &lt;/place>
+        &lt;/fact>
+        &lt;fact type="http://gedcomx.org/Marriage">
+            &lt;date>
+                &lt;original>...&lt;/original>
+            &lt;/date>
+            &lt;place>
+                &lt;original>...&lt;/original>
+            &lt;/place>
+        &lt;/fact>
+        &lt;fact type="http://gedcomx.org/MarriageBanns">
+            &lt;date>
+                &lt;original>...&lt;/original>
+            &lt;/date>
+            &lt;place>
+                &lt;original>...&lt;/original>
+            &lt;/place>
+        &lt;/fact>
+        &lt;fact type="http://gedcomx.org/MarriageContract">
+            &lt;date>
+                &lt;original>...&lt;/original>
+            &lt;/date>
+            &lt;place>
+                &lt;original>...&lt;/original>
+            &lt;/place>
+        &lt;/fact>
+        &lt;fact type="http://gedcomx.org/MarriageLicense">
+            &lt;date>
+                &lt;original>...&lt;/original>
+            &lt;/date>
+            &lt;place>
+                &lt;original>...&lt;/original>
+            &lt;/place>
+        &lt;/fact>
+    &lt;/relationship>
+    &lt;relationship type="http://gedcomx.org/ParentChild">
+        &lt;fact type="http://gedcomx.org/AdoptiveParent">
+            &lt;date>
+                &lt;original>...&lt;/original>
+            &lt;/date>
+            &lt;place>
+                &lt;original>...&lt;/original>
+            &lt;/place>
+        &lt;/fact>
+        &lt;fact type="http://gedcomx.org/BiologicalParent">
+            &lt;date>
+                &lt;original>...&lt;/original>
+            &lt;/date>
+            &lt;place>
+                &lt;original>...&lt;/original>
+            &lt;/place>
+        &lt;/fact>
+        &lt;fact type="http://gedcomx.org/FosterParent">
+            &lt;date>
+                &lt;original>...&lt;/original>
+            &lt;/date>
+            &lt;place>
+                &lt;original>...&lt;/original>
+            &lt;/place>
+        &lt;/fact>
+        &lt;fact type="http://gedcomx.org/GuardianParent">
+            &lt;date>
+                &lt;original>...&lt;/original>
+            &lt;/date>
+            &lt;place>
+                &lt;original>...&lt;/original>
+            &lt;/place>
+        &lt;/fact>
+        &lt;fact type="http://gedcomx.org/StepParent">
+            &lt;date>
+                &lt;original>...&lt;/original>
+            &lt;/date>
+            &lt;place>
+                &lt;original>...&lt;/original>
+            &lt;/place>
+        &lt;/fact>
+    &lt;/relationship>
 &lt;/gedcomx>
 </pre>
 
@@ -325,22 +818,107 @@ The following snippet demonstrates how these types of facts might be captured by
 
 <pre class="prettyprint lang-javascript" style="max-height: 400px; overflow:auto">
 {
-  "persons" : [ {
-    "names" : [ {
-      "nameForms" : [ {
-        "lang" : "en",
-        "fullText" : "John Fitzgerald Kennedy",
-        "parts" : [ {
-          "value" : "John",
-          "type" : "http://gedcomx.org/Given"
-        }, {
-          "value" : "Fitzgerald",
-          "type" : "http://gedcomx.org/Given"
-        }, {
-          "value" : "Kennedy",
-          "type" : "http://gedcomx.org/Surname"
-        } ]
-      } ]
+  "relationships" : [ {
+    "type" : "http://gedcomx.org/Couple",
+    "facts" : [ {
+      "type" : "http://gedcomx.org/CivilUnion",
+      "date" : {
+        "original" : "..."
+      },
+      "place" : {
+        "original" : "..."
+      }
+    }, {
+      "type" : "http://gedcomx.org/DomesticPartnership",
+      "date" : {
+        "original" : "..."
+      },
+      "place" : {
+        "original" : "..."
+      }
+    }, {
+      "type" : "http://gedcomx.org/Divorce",
+      "date" : {
+        "original" : "..."
+      },
+      "place" : {
+        "original" : "..."
+      }
+    }, {
+      "type" : "http://gedcomx.org/Marriage",
+      "date" : {
+        "original" : "..."
+      },
+      "place" : {
+        "original" : "..."
+      }
+    }, {
+      "type" : "http://gedcomx.org/MarriageBanns",
+      "date" : {
+        "original" : "..."
+      },
+      "place" : {
+        "original" : "..."
+      }
+    }, {
+      "type" : "http://gedcomx.org/MarriageContract",
+      "date" : {
+        "original" : "..."
+      },
+      "place" : {
+        "original" : "..."
+      }
+    }, {
+      "type" : "http://gedcomx.org/MarriageLicense",
+      "date" : {
+        "original" : "..."
+      },
+      "place" : {
+        "original" : "..."
+      }
+    } ]
+  }, {
+    "type" : "http://gedcomx.org/ParentChild",
+    "facts" : [ {
+      "type" : "http://gedcomx.org/AdoptiveParent",
+      "date" : {
+        "original" : "..."
+      },
+      "place" : {
+        "original" : "..."
+      }
+    }, {
+      "type" : "http://gedcomx.org/BiologicalParent",
+      "date" : {
+        "original" : "..."
+      },
+      "place" : {
+        "original" : "..."
+      }
+    }, {
+      "type" : "http://gedcomx.org/FosterParent",
+      "date" : {
+        "original" : "..."
+      },
+      "place" : {
+        "original" : "..."
+      }
+    }, {
+      "type" : "http://gedcomx.org/GuardianParent",
+      "date" : {
+        "original" : "..."
+      },
+      "place" : {
+        "original" : "..."
+      }
+    }, {
+      "type" : "http://gedcomx.org/StepParent",
+      "date" : {
+        "original" : "..."
+      },
+      "place" : {
+        "original" : "..."
+      }
     } ]
   } ]
 }
@@ -364,14 +942,33 @@ The following snippet demonstrates how these qualifiers might be applied to fact
 <pre class="prettyprint lang-xml" style="max-height: 400px; overflow:auto">
 &lt;gedcomx xmlns="http://gedcomx.org/v1/">
     &lt;person>
-        &lt;name>
-            &lt;nameForm xml:lang="en">
-                &lt;fullText>John Fitzgerald Kennedy&lt;/fullText>
-                &lt;part type="http://gedcomx.org/Given" value="John"/>
-                &lt;part type="http://gedcomx.org/Given" value="Fitzgerald"/>
-                &lt;part type="http://gedcomx.org/Surname" value="Kennedy"/>
-            &lt;/nameForm>
-        &lt;/name>
+        &lt;fact type="http://gedcomx.org/Christening">
+            &lt;date>
+                &lt;original>...&lt;/original>
+            &lt;/date>
+            &lt;place>
+                &lt;original>...&lt;/original>
+            &lt;/place>
+            &lt;qualifier name="http://gedcomx.org/Religion">Catholic&lt;/qualifier>
+        &lt;/fact>
+        &lt;fact type="http://gedcomx.org/Census">
+            &lt;date>
+                &lt;original>...&lt;/original>
+            &lt;/date>
+            &lt;place>
+                &lt;original>...&lt;/original>
+            &lt;/place>
+            &lt;qualifier name="http://gedcomx.org/Age">44&lt;/qualifier>
+        &lt;/fact>
+        &lt;fact type="http://gedcomx.org/Death">
+            &lt;date>
+                &lt;original>...&lt;/original>
+            &lt;/date>
+            &lt;place>
+                &lt;original>...&lt;/original>
+            &lt;/place>
+            &lt;qualifier name="http://gedcomx.org/Cause">Heart failure&lt;/qualifier>
+        &lt;/fact>
     &lt;/person>
 &lt;/gedcomx>
 </pre>
@@ -381,20 +978,41 @@ The following snippet demonstrates how these qualifiers might be applied to fact
 <pre class="prettyprint lang-javascript" style="max-height: 400px; overflow:auto">
 {
   "persons" : [ {
-    "names" : [ {
-      "nameForms" : [ {
-        "lang" : "en",
-        "fullText" : "John Fitzgerald Kennedy",
-        "parts" : [ {
-          "value" : "John",
-          "type" : "http://gedcomx.org/Given"
-        }, {
-          "value" : "Fitzgerald",
-          "type" : "http://gedcomx.org/Given"
-        }, {
-          "value" : "Kennedy",
-          "type" : "http://gedcomx.org/Surname"
-        } ]
+    "facts" : [ {
+      "type" : "http://gedcomx.org/Christening",
+      "date" : {
+        "original" : "..."
+      },
+      "place" : {
+        "original" : "..."
+      },
+      "qualifiers" : [ {
+        "name" : "http://gedcomx.org/Religion",
+        "value" : "Catholic"
+      } ]
+    }, {
+      "type" : "http://gedcomx.org/Census",
+      "date" : {
+        "original" : "..."
+      },
+      "place" : {
+        "original" : "..."
+      },
+      "qualifiers" : [ {
+        "name" : "http://gedcomx.org/Age",
+        "value" : "44"
+      } ]
+    }, {
+      "type" : "http://gedcomx.org/Death",
+      "date" : {
+        "original" : "..."
+      },
+      "place" : {
+        "original" : "..."
+      },
+      "qualifiers" : [ {
+        "name" : "http://gedcomx.org/Cause",
+        "value" : "Heart failure"
       } ]
     } ]
   } ]
@@ -411,12 +1029,12 @@ with additional fact types. Proposals for additional fact types may be submitted
 
 No matter how comprehensive a list of known fact types might be, some genealogical applications might want to provide an option to users to
 provide "custom" fact types by allowing them to supply text that describes the fact type. The disadvantage of this option is that
-custom fact types can not be semantically processed by software, making the data less amenable to digital analysis and display. Among the
-notable disadvantages is that custom fact types can not be presented to users in their native language.
+custom fact types can not be semantically processed by software, making the data less amenable to digital analysis and display. For example,
+among the notable disadvantages is that custom fact types can not be presented to users in their native language.
 
 In conformance to the best practices of semantic web and other technologies, GEDCOM X fact types are identified using a
-[Uniform Resource Identifier (URI)](http://en.wikipedia.org/wiki/Uniform_resource_identifier). [RFC 2397](http://tools.ietf.org/html/rfc2397)
-defines a standard way to encode user-defined data into a URI.
+[Uniform Resource Identifier (URI)](http://en.wikipedia.org/wiki/Uniform_resource_identifier). In the case of custom (user-supplied)
+types, [RFC 2397](http://tools.ietf.org/html/rfc2397) is used to encode the text supplied by the user as a URI.
 
 The following snippet demonstrates how custom types might be applied to facts using GEDCOM X in both XML and JSON:
 
@@ -425,14 +1043,14 @@ The following snippet demonstrates how custom types might be applied to facts us
 <pre class="prettyprint lang-xml" style="max-height: 400px; overflow:auto">
 &lt;gedcomx xmlns="http://gedcomx.org/v1/">
     &lt;person>
-        &lt;name>
-            &lt;nameForm xml:lang="en">
-                &lt;fullText>John Fitzgerald Kennedy&lt;/fullText>
-                &lt;part type="http://gedcomx.org/Given" value="John"/>
-                &lt;part type="http://gedcomx.org/Given" value="Fitzgerald"/>
-                &lt;part type="http://gedcomx.org/Surname" value="Kennedy"/>
-            &lt;/nameForm>
-        &lt;/name>
+        &lt;fact type="data:,Eagle%20Scout">
+            &lt;date>
+                &lt;original>...&lt;/original>
+            &lt;/date>
+            &lt;place>
+                &lt;original>...&lt;/original>
+            &lt;/place>
+        &lt;/fact>
     &lt;/person>
 &lt;/gedcomx>
 </pre>
@@ -442,21 +1060,14 @@ The following snippet demonstrates how custom types might be applied to facts us
 <pre class="prettyprint lang-javascript" style="max-height: 400px; overflow:auto">
 {
   "persons" : [ {
-    "names" : [ {
-      "nameForms" : [ {
-        "lang" : "en",
-        "fullText" : "John Fitzgerald Kennedy",
-        "parts" : [ {
-          "value" : "John",
-          "type" : "http://gedcomx.org/Given"
-        }, {
-          "value" : "Fitzgerald",
-          "type" : "http://gedcomx.org/Given"
-        }, {
-          "value" : "Kennedy",
-          "type" : "http://gedcomx.org/Surname"
-        } ]
-      } ]
+    "facts" : [ {
+      "type" : "data:,Eagle%20Scout",
+      "date" : {
+        "original" : "..."
+      },
+      "place" : {
+        "original" : "..."
+      }
     } ]
   } ]
 }
@@ -464,9 +1075,30 @@ The following snippet demonstrates how custom types might be applied to facts us
 
 ## Events
 
-...
+Many software applications allow users to capture genealogical information in an "event-centric" manner instead of in a "person-centric" manner.
+In other words, users may be allowed provide a description of a specific event, and then reference each of the persons that participated in
+the event. For example, a marriage record might record witnesses and perhaps an officiator without providing any data about their relationship
+to the bride or groom. In such a case, it may be useful to capture information about the event outside the context of the persons that
+participated in the event. An example of such a case is provided in the
+[guide to marriage-like information](http://familysearch.github.io/gedcomx//2014/05/02/gedcomx-documentation-marriage-information.html).
+
+GEDCOM X defines an [`Event` data type](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md#event)
+that can be used to capture event-centric information. In addition to a date and place, the `Event` provides a list of instances of the
+[`EventRole` data type](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md#conclusion-event-role)
+that is used to reference each person that participated in the event. The `EventRole` supports a `details` property for describing the
+nature of the role as well as a `type` the provides a semantic element for describing the role. GEDCOM X specifies the following event role types:
+
+type | description
+-----|------------
+`http://gedcomx.org/Principal`| The person is the principal person of the event. For example, the principal of a birth event is the person that was born.
+`http://gedcomx.org/Participant`| A participant in the event.
+`http://gedcomx.org/Official`| A person officiating the event.
+`http://gedcomx.org/Witness`| A witness of the event.
+
+For an example in both XML and JSON of an `Event`, see the
+[guide to marriage-like information](http://familysearch.github.io/gedcomx//2014/05/02/gedcomx-documentation-marriage-information.html)
 
 ## Code Examples
 
-[This Java code example](https://github.com/FamilySearch/gedcomx-java/blob/master/gedcomx-model/src/test/java/org/gedcomx/examples/NamesExampleTest.java#L25),
-found in the [`gedcomx-java`](https://github.com/FamilySearch/gedcomx) repository demonstrates how to produce the above results.
+[This Java code example](https://github.com/FamilySearch/gedcomx-java/blob/master/gedcomx-model/src/test/java/org/gedcomx/examples/MiscellaneousFactsExampleTest.java#L25),
+found in the [`gedcomx-java`](https://github.com/FamilySearch/gedcomx) repository demonstrates how to produce the serialization examples above.
