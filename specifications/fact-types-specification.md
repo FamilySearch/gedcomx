@@ -123,7 +123,7 @@ URI | description
 `http://gedcomx.org/Stillbirth`| A fact of a person's stillbirth.
 `http://gedcomx.org/Will`| A fact of a person's will.
 `http://gedcomx.org/Visit`| A fact of a person's visit to a place different from the person's residence.
-`http://gedcomx.org/Yahrzeit`| A fact of a person's _yahrzeit_ date.  A person's yahzeit is the anniversary of their death as measured by the Hebrew calendar.
+`http://gedcomx.org/Yahrzeit`| A fact of a person's _yahrzeit_ date.  A person's yahrzeit is the anniversary of their death as measured by the Hebrew calendar.
 
 ## 2.2 Couple Relationship Fact Types
 
