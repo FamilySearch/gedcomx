@@ -58,25 +58,25 @@ specified by [RFC 3986](http://tools.ietf.org/html/rfc3986). This specification 
 
 # 2. Name Part Qualifiers
 
-The following name part qualifiers are specified:
+The following name part qualifiers are specified. Note that in addition to the name of the qualifier,
+the definition of a qualifier includes an optional `value` property. Included in the definition of each name
+part qualifier is information about whether the `value` property should be used.
 
 URI | description
 ----|-------------
-`http://gedcomx.org/Title`|A designation for honorifics (e.g. Dr., Rev., His Majesty, Haji), ranks (e.g. Colonel, General, Knight, Esquire), positions (e.g. Count, Chief, Father, King) or other titles (e.g., PhD, MD).
-`http://gedcomx.org/Primary`|A designation for the name of most prominent in importance among the names of that type (e.g., the primary given name).
-`http://gedcomx.org/Secondary`|A designation for a name that is not primary in its importance among the names of that type (e.g., a secondary given name).
-`http://gedcomx.org/Middle`|A designation useful for cultures that designate a middle name that is distinct from a given name and a surname.
-`http://gedcomx.org/Familiar`|A designation for one's familiar name.
-`http://gedcomx.org/Religious`|A designation for a name given for religious purposes.
-`http://gedcomx.org/Family`|A name that associates a person with a group, such as a clan, tribe, or patriarchal hierarchy.
-`http://gedcomx.org/Maiden`|A designation given by women to their original surname after they adopt a new surname upon marriage.
-`http://gedcomx.org/Patronymic`|A name derived from a father or paternal ancestor.
-`http://gedcomx.org/Matronymic`|A name derived from a mother or maternal ancestor.
-`http://gedcomx.org/Geographic`|A name derived from associated geography.
-`http://gedcomx.org/Occupational`|A name derived from one's occupation.
-`http://gedcomx.org/Characteristic`|A name derived from a characteristic.
-`http://gedcomx.org/Postnom`|A name mandated by law for populations from Congo Free State / Belgian Congo / Congo / Democratic Republic of Congo (formerly Zaire).
-`http://gedcomx.org/Particle`|A grammatical designation for articles (a, the, dem, las, el, etc.), prepositions (of, from, aus, zu, op, etc.), initials, annotations (e.g. twin, wife of, infant, unknown), comparators (e.g. Junior, Senior, younger, little), ordinals (e.g. III, eighth), descendancy words (e.g. ben, ibn, bat, bin, bint, bar), and conjunctions (e.g. and, or, nee, ou, y, o, ne, &amp;).
-
-Note that in addition to the name of the qualifier, the definition of a qualifier includes an
-optional `value` property. Name part qualifiers SHOULD NOT provide a value.
+`http://gedcomx.org/Title`|A designation for honorifics (e.g. Dr., Rev., His Majesty, Haji), ranks (e.g. Colonel, General, Knight, Esquire), positions (e.g. Count, Chief, Father, King) or other titles (e.g., PhD, MD). Name part qualifiers of type `Title` SHOULD NOT provide a value.
+`http://gedcomx.org/Primary`|A designation for the name of most prominent in importance among the names of that type (e.g., the primary given name). Name part qualifiers of type `Primary` SHOULD NOT provide a value.
+`http://gedcomx.org/Secondary`|A designation for a name that is not primary in its importance among the names of that type (e.g., a secondary given name). Name part qualifiers of type `Secondary` SHOULD NOT provide a value.
+`http://gedcomx.org/Middle`|A designation useful for cultures that designate a middle name that is distinct from a given name and a surname. Name part qualifiers of type `Middle` SHOULD NOT provide a value.
+`http://gedcomx.org/Familiar`|A designation for one's familiar name. Name part qualifiers of type `Familiar` SHOULD NOT provide a value.
+`http://gedcomx.org/Religious`|A designation for a name given for religious purposes. Name part qualifiers of type `Religious` SHOULD NOT provide a value.
+`http://gedcomx.org/Family`|A name that associates a person with a group, such as a clan, tribe, or patriarchal hierarchy. Name part qualifiers of type `Family` SHOULD NOT provide a value.
+`http://gedcomx.org/Maiden`|A designation given by women to their original surname after they adopt a new surname upon marriage. Name part qualifiers of type `Maiden` SHOULD NOT provide a value.
+`http://gedcomx.org/Patronymic`|A name derived from a father or paternal ancestor. Name part qualifiers of type `Patronymic` SHOULD NOT provide a value.
+`http://gedcomx.org/Matronymic`|A name derived from a mother or maternal ancestor. Name part qualifiers of type `Matronymic` SHOULD NOT provide a value.
+`http://gedcomx.org/Geographic`|A name derived from associated geography. Name part qualifiers of type `Geographic` SHOULD NOT provide a value.
+`http://gedcomx.org/Occupational`|A name derived from one's occupation. Name part qualifiers of type `Occupational` SHOULD NOT provide a value.
+`http://gedcomx.org/Characteristic`|A name derived from a characteristic. Name part qualifiers of type `Characteristic` SHOULD NOT provide a value.
+`http://gedcomx.org/Postnom`|A name mandated by law for populations from Congo Free State / Belgian Congo / Congo / Democratic Republic of Congo (formerly Zaire). Name part qualifiers of type `Postnom` SHOULD NOT provide a value.
+`http://gedcomx.org/Particle`|A grammatical designation for articles (a, the, dem, las, el, etc.), prepositions (of, from, aus, zu, op, etc.), initials, annotations (e.g. twin, wife of, infant, unknown), comparators (e.g. Junior, Senior, younger, little), ordinals (e.g. III, eighth), descendancy words (e.g. ben, ibn, bat, bin, bint, bar), and conjunctions (e.g. and, or, nee, ou, y, o, ne, &amp;). Name part qualifiers of type `Particle` SHOULD NOT provide a value.
+`http://gedcomx.org/RootName`|The "root" of a name part as distinguished from prefixes or suffixes. For example, the root of the Polish name "Wilkówna" is "Wilk". A `RootName` qualifier MUST provide a `value` property.
