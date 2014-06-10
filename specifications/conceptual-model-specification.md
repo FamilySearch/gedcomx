@@ -360,6 +360,7 @@ The identifier for the `Agent` data type is:
 name  | description | data type | constraints
 ------|-------------|-----------|------------
 id | An identifier for the data structure holding the agent data. | string | OPTIONAL.  The id is to be used as a "fragment identifier" as defined by [RFC 3986, Section 3.5](http://tools.ietf.org/html/rfc3986#section-3.5). As such, the constraints of the id are provided in the definition of the media type (e.g. XML, JSON) of the data structure.
+identifiers | A list of identifiers for the agent. | List of [`http://gedcomx.org/v1/Identifier`](#identifier-type). Order is preserved. | OPTIONAL.
 names | The name(s) of the person or organization.| List of [`http://gedcomx.org/TextValue`](#text-value).  Order is preserved. | OPTIONAL.   If more than one name is provided, names are assumed to be given in order of preference, with the most preferred name in the first position in the list.
 homepage | The homepage of the person or organization. | [URI](#uri) | OPTIONAL.
 openid  | The [openid](http://openid.net/) of the person or organization. | [URI](#uri) | OPTIONAL.
