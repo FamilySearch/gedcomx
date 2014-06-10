@@ -450,6 +450,7 @@ name | description | XML property | XML type
 names | A list of standardized (or normalized), fully-qualified (in terms of what is known of the applicable jurisdictional hierarchy) names for this place that are applicable to this description of this place. | gx:name | [`gx:TextValue`](#text-value)
 type | A uniform resource identifier (URI) identifying the type of the place as it is applicable to this description. | type (attribute) | [`URI`](#uri)
 place | An identifier for the place being described. | gx:place | [`gx:ResourceReference`](#resource-reference)
+jurisdiction | A reference to a description of the jurisdiction of this place. | gx:jurisdiction | [`gx:ResourceReference`](#resource-reference)
 latitude | Angular distance, in degrees, north or south of the Equator. | gx:latitude | xsd:double
 longitude | Angular distance, in degrees, east or west of the Prime Meridian. | gx:latitude | xsd:double
 temporalDescription | A description of the time period to which this place description is relevant. | gx:temporalDescription | [`gx:Date`](#conclusion-date)
@@ -467,6 +468,7 @@ spatialDescription | A reference to a geospatial description of this place. | gx
     </gx:name>
     ...
     <gx:place resource="..."/>
+    <gx:jurisdiction resource="..."/>
     <gx:latitude>27.9883575</gx:latitude>
     <gx:longitude>86.9252014</gx:longitude>
     <gx:temporalDescription>
