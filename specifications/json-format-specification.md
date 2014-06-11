@@ -1117,12 +1117,14 @@ sourceDescriptions | The list of source descriptions contained in the data set. 
 agents | The list of agents contained in the data set. | agents | array of [`Agent`](#agent) | OPTIONAL.
 events | The list of events contained in the data set. | events | array of [`Event`](#event) | OPTIONAL.
 documents | The list of documents contained in the data set. | documents | array of [`Document`](#document) | OPTIONAL.
+description | Reference to the description of this data set. | description | [`URI`](#uri) | OPTIONAL. If provided, MUST resolve to an instance of [`SourceDescription`](#source-description).
 
 ### examples
 
 ```json
 {
   "id" : "local_id",
+  "description" : "...",
   "attribution" : { ... },
   "persons" : [ { ... }, { ... } ],
   "relationships" : [ { ... }, { ... }, ],

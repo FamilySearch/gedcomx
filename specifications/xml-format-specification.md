@@ -1111,11 +1111,12 @@ sourceDescriptions | The list of source descriptions contained in the data set. 
 agents | The list of agents contained in the data set. | gx:agent | [`gx:Agent`](#agent) | OPTIONAL.
 events | The list of events contained in the data set. | gx:event | [`gx:Event`](#event) | OPTIONAL.
 documents | The list of documents contained in the data set. | gx:document | [`gx:Document`](#document) | OPTIONAL.
+description | Reference to the description of this data set. | description (attribute) | [`URI`](#uri) | OPTIONAL. If provided, MUST resolve to an instance of [`gx:SourceDescription`](#source-description).
 
 ### examples
 
 ```xml
-<... id="local_id" lang="en">
+<... id="local_id" lang="en" description="...">
   <gx:attribution>...</gx:attribution>
   <gx:person>...</gx:person>
   <gx:person>...</gx:person>
