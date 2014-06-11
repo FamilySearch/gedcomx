@@ -1092,6 +1092,8 @@ resource | The URI to the resource being referenced. | resource (attribute) | [a
 <... resource="http://uri/to/resource/being/referenced"/>
 ```
 
+<a name="gedcomx-type"/>
+
 ## 4.3 The "Gedcomx" Data Type
 
 The `gx:Gedcomx` XML type is used as a container for a set of GEDCOM X data.

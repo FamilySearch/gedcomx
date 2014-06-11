@@ -1098,6 +1098,8 @@ resource | The URI to the resource being referenced. | resource | [`URI`](#uri)
 }
 ```
 
+<a name="gedcomx-type"/>
+
 ## 4.3 The "Gedcomx" Data Type
 
 The `Gedcomx` JSON type is used as a container for a set of GEDCOM X data.
