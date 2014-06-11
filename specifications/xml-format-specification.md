@@ -290,6 +290,13 @@ componentOf | A reference to the source that contains this source. | gx:componen
 titles | The display name(s) for this source. | gx:title | [`gx:TextValue`](#text-value)
 notes | A list of notes about a source | gx:note | [`gx:Note`](#note)
 attribution | The attribution of this source. | gx:attribution | [`gx:Attribution`](#attribution)
+rights  | The rights for this resource. | gx:rights | [`gx:ResourceReference`](#resource-reference)
+coverage | The coverage of the resource. | gx:coverage | [`gx:Coverage`](#coverage)
+descriptions | Human-readable descriptions of this source. | gx:description | [`gx:TextValue`](#text-value)
+identifiers | A list of identifiers for the resource being described. | gx:identifier | [`gx:Identifier`](#identifier-type)
+created | Timestamp of when the resource being described was created. | gx:created | xsd:dateTime
+modified | Timestamp of when the resource being described was modified. | gx:modified | xsd:dateTime
+repository | A reference to the repository that contains the described resource. | gx:repository | [`gx:ResourceReference`](#resource-reference)
 
 ### examples
 
@@ -317,6 +324,17 @@ attribution | The attribution of this source. | gx:attribution | [`gx:Attributio
     <gx:attribution>
       ...
     </gx:attribution>
+    <gx:rights resource="..."/>
+    ...
+    <gx:coverage>
+      ...
+    </gx:coverage>
+    <gx:description>...</gx:description>
+    ...
+    <gx:identifier>...</gx:identifier>
+    <gx:created>...</gx:created>
+    <gx:modified>...</gx:modified>
+    <gx:repository resource="..."/>
 
     <!-- possibility of extension elements -->
 
@@ -800,9 +818,9 @@ attribution | The attribution of this subject. | gx:attribution | [`gx:Attributi
       ...
     </gx:media>
     ...
-    <gx:identifiers>
+    <gx:identifier>
       ...
-    </gx:identifiers>
+    </gx:identifier>
     ...
     <gx:attribution>
       ...
@@ -1058,6 +1076,35 @@ value | The value of the qualifier. | (child text) | xsd:string
 
 ```xml
   <... name="http://gedcomx.org/QualifierName">...qualifier value...</...>
+```
+
+<a name="coverage"/>
+
+## 3.21 The "Coverage" Data Type
+
+The `gx:Coverage` XML type is used to (de)serialize the `http://gedcomx.org/v1/Coverage`
+data type.
+
+### properties
+
+name | description | XML property | XML type
+-----|-------------|--------------|---------
+spatial | The spatial (i.e., geographic) coverage. | gx:spatial | [`gx:PlaceReference`](#conclusion-place-reference)
+temporal | The temporal coverage. | gx:temporal | [`gx:Date`](#conclusion-date)
+
+### examples
+
+```xml
+  <...>
+    <gx:spatial>
+      ...
+    </gx:spatial>
+    <gx:temporal>
+      ...
+    </gx:temporal>
+
+    <!-- possibility of extension elements -->
+  </...>
 ```
 
 

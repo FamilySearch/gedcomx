@@ -328,6 +328,13 @@ componentOf | A reference to the source that contains this source, i.e. its pare
 titles | The display name(s) for this source. | List of [`http://gedcomx.org/TextValue`](#text-value). Order is preserved. | OPTIONAL. If more than one title is provided, titles are assumed to be given in order of preference, with the most preferred title in the first position in the list.
 notes  | A list of notes about a source. | List of [`http://gedcomx.org/Note`](#note) | OPTIONAL.
 attribution | The attribution of this source description. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing data set (e.g. file) of the source description is assumed.
+rights  | The rights for this resource. | List of [URI](#uri). Order is preserved. | OPTIONAL. If provided, MUST resolve to a resource that describes the rights associated with the resource being described.
+coverage | The coverage of the resource. | [`http://gedcomx.org/v1/Coverage`](#coverage) | OPTIONAL.
+descriptions | Human-readable descriptions of this source. | List of [`http://gedcomx.org/TextValue`](#text-value). Order is preserved. | OPTIONAL. If more than one description is provided, descriptions are assumed to be given in order of preference, with the most preferred description in the first position in the list.
+identifiers | A list of identifiers for the resource being described. | List of [`http://gedcomx.org/v1/Identifier`](#identifier-type). Order is preserved. | OPTIONAL.
+created | Timestamp of when the resource being described was created. | timestamp | OPTIONAL.
+modified | Timestamp of when the resource being described was modified. | timestamp | OPTIONAL.
+repository | A reference to the repository that contains the described resource. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to an instance of [`http://gedcomx.org/v1/Agent`](#agent).
 
 <a name="known-resource-types"/>
 
@@ -1250,6 +1257,25 @@ name  | description | data type | constraints
 ------|-------------|-----------|------------
 name | The name of the qualifier. | [Enumerated Value](#enumerated-value) | REQUIRED. It is RECOMMENDED that the qualifier name resolve to an element of a constrained vocabulary.
 value | The value of the qualifier. | string | OPTIONAL. If provided, the name MAY give the semantic meaning of the value.
+
+<a name="coverage"/>
+
+## 3.21 The "Coverage" Data Type
+
+The `Coverage` data type defines the data structure used to supply information about the coverage of a resource.
+
+### identifier
+
+The identifier for the "Coverage" data type is:
+
+`http://gedcomx.org/v1/Coverage`
+
+### properties
+
+name  | description | data type | constraints
+------|-------------|-----------|------------
+spatial | The spatial (i.e., geographic) coverage. | [`http://gedcomx.org/v1/PlaceReference`](#conclusion-place-reference) | OPTIONAL.
+temporal | The temporal coverage. | [`http://gedcomx.org/v1/Date`](#conclusion-date) | OPTIONAL.
 
 
 <a name="extracted-conclusion-constraints"/>
