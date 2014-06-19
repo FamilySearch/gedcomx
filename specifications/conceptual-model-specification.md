@@ -212,6 +212,11 @@ the `lang` property on the person is used. If the `lang` property is not provide
 value of the `lang` property on the containing dataset is used. If the `lang` property on the containing
 dataset is not provided, the default locale of the processor is used.
 
+For name forms in particular, it is important to distinguish between the transliteration of a name in a
+non-latin script, and a name form that is provided in an unspecified script.  In the unspecified script,
+the `lang` property would be `i-default`, but in the case of the latin transliteration of a Chinese name
+or Russian Cyrillic name, the `lang` property would be `zh-Latn` or `ru-Latn`, respectively.
+
 In order to prevent undue burden on producers and consumers of GEDCOM X data, not all data types
 provide multiple values for properties that are used for user input. For example, the text of
 a note is _not_ defined as a list of language-identified strings. However, some cases have been
