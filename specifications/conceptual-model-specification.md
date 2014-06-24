@@ -214,11 +214,13 @@ dataset is not provided, the default locale of the processor is used.
 
 For name forms in particular, it is important to distinguish between the transliteration of a name in a
 non-latin script, and a name form that is provided in an unspecified script.  In the unspecified script,
-the `lang` property would be `i-default`, but in the case of the latin transliteration of a Chinese name
+the `lang` property would be `und`, but in the case of the latin transliteration of a Chinese name
 or Russian Cyrillic name, the `lang` property would be `zh-Latn` or `ru-Latn`, respectively.  In the
 case where there is a transliterated name and the original language is not known, the generic `x-Latn`
 value can be used to distinguish the transliterated name form from a name form that is provided in an
-unspecified script.
+unspecified script.  In the case where the language is NOT known, but the script is known, then the
+`und-` prefix can be used, for example: `und-Hani` or `und-Cyrl` for the Hani script or Cyrillic script,
+where the language of the name is unknown, despite being written in a particular script.
 
 In order to prevent undue burden on producers and consumers of GEDCOM X data, not all data types
 provide multiple values for properties that are used for user input. For example, the text of
