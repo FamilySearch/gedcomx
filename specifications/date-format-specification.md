@@ -20,6 +20,8 @@ For details, see:
 
 http://creativecommons.org/licenses/by-sa/3.0/
 
+<a name="intro"/>
+
 # 1. Introduction
 
 The GEDCOM X Date specification defines a way of representing dates associated with genealogical data.
@@ -33,6 +35,16 @@ This specification has been provided because each of these standards or proposal
 limitations or omissions that do not fulfill the requirements identified for genealogical date
 representations.
 
+## Table Of Contents
+
+* [1. Introduction](#intro)
+   * [1.1 Identifier And Version](#id-and-version)
+   * [1.2 Notational Conventions](#notational-conventions)
+      * [1.2.1 Keywords](#keywords)
+      * ...
+
+<a name="id-and-version"/>
+
 ## 1.1 Identifier and Version
 
 The identifier for this specification is:
@@ -42,7 +54,11 @@ The identifier for this specification is:
 For convenience, the GEDCOM X date format may be referred to as "GEDCOM X Date 1.0".
 This specification uses "GEDCOM X Date" internally.
 
+<a name="notational-conventions"/>
+
 ## 1.2 Notational Conventions
+
+<a name="keywords"/>
 
 ### 1.2.1 Keywords
 
