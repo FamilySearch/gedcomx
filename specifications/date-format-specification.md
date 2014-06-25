@@ -41,7 +41,19 @@ representations.
    * [1.1 Identifier And Version](#id-and-version)
    * [1.2 Notational Conventions](#notational-conventions)
       * [1.2.1 Keywords](#keywords)
-      * ...
+* [2. Terms and Definitions](#terms-and-definitions)
+  * [2.1 Basic Terms](#basic-terms)
+      * [2.1.1 calendar date](#calendar-date)
+      * [2.1.2 time of day](#time-of-day)
+      * [2.1.3 CE](#CE)
+      * [2.1.4 BCE](#BCE)
+      * [2.1.5 Gregorian calendar](#Gregorian calendar)
+      * [2.1.6 simple date](#simple-date)
+      * [2.1.7 date range](#date-range)
+      * [2.1.8 recurring date](#recurring-date)
+      * [2.1.9 approximate date](#approximate-date)
+      * [2.1.10 approximate date range](#approximate-date-range)
+* [3. Scope](#scope)
 
 <a name="id-and-version"/>
 
@@ -68,17 +80,25 @@ document are to be interpreted as described in BCP 14,
 [RFC2119](http://tools.ietf.org/html/rfc2119), as scoped to those conformance
 targets.
 
+<a name="terms-and-definitions"/>
+
 # 2. Terms and Definitions
 
 For the purpose of this document, the following terms and definitions apply _in addition to_
 those defined by [ISO 8601](http://dotat.at/tmp/ISO_8601-2004_E.pdf).
 
+<a name="basic-terms"/>
+
 ## 2.1 Basic Terms
+
+<a name="calendar date"/>
 
 ### 2.1.1 calendar date
 
 Portion of a date representing a particular day by specifying its calendar year, its calendar
 month and the ordinal number of the day within its calendar month.
+
+<a name="time-of-day"/>
 
 ### 2.1.2 time of day
 
@@ -87,9 +107,13 @@ units of _hours_, _minutes_, and _seconds_.
 
 NOTE: By implication, time of day must be less than 24 hours
 
+<a name="CE"/>
+
 ### 2.1.3 CE
 
 Abbreviation of "Common Era", "Current Era", or "Christian Era". Equivalent to "Anno Domini", or "AD".
+
+<a name="BCE"/>
 
 ### 2.1.4 BCE
 
@@ -98,17 +122,23 @@ The designation "BCE" is to "CE", as "BC" is to "AD".
 
 NOTE: The year preceding 1 CE is identified as "1 BCE". Neither designation uses year 0 (zero).
 
+<a name="Gregorian"/>
+
 ### 2.1.5 Gregorian calendar
 
 A calendar introduced in 1582 by Pope Gregory XIII that enhanced the Julian calendar with improved leap year rules.
 
 NOTE: The _proleptic_ Gregorian calendar includes dates prior to 1582 using this calendaring system.
 
+<a name="simple-date"/>
+
 ### 2.1.6 simple date
 
 A date representing a single calendar date, and optionally including a time of day. This term is used
 to clarify the distinction between a generic _date_  and the aggregation of the GEDCOM X Date types
 of values (e.g. `simple date`, `date range`, `open-ended date range`, and `approximate date`).
+
+<a name="date-range"/>
 
 ### 2.1.7 date range
 
@@ -125,6 +155,8 @@ Examples of `open-ended date range`
 * Until January 1863 CE
 * Since December 14, 1642 CE
 
+<a name="recurring-date"/>
+
 ### 2.1.8 recurring date
 
 A series of discrete dates, separated by a specified duration.
@@ -134,6 +166,8 @@ Examples:
 * 10 leap years beginning 1924 CE
 * at the same time every day for a week starting at June 18, 1937 CE 10 AM local time
 * every 10 years starting 1820 CE
+
+<a name="approximate-date"/>
 
 ### 2.1.9 approximate date
 
@@ -145,6 +179,8 @@ Examples:
 * Around 1590
 * Sometime in 1920
 
+<a name="approximate-date-range"/>
+
 ### 2.1.10 approximate date range
 
 An indeterminate date with a single occurrence within a specified `date range`.
@@ -152,6 +188,8 @@ An indeterminate date with a single occurrence within a specified `date range`.
 Examples:
 
 * Sometime between December 6, 1940 and December 8, 1940
+
+<a name="scope"/>
 
 # 3. Scope
 
