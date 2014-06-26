@@ -251,7 +251,7 @@ The GEDCOM X Date units of measurement include, and are limited to `year`, `mont
 `day`, `hour`, `minute`, and `second`.  For a given `simple date`, all units of measurement
 larger than the smallest unit specified MUST be provided.
 
-<a name="3-1-date-range"/>
+<a name="3-2-date-range"/>
 
 ## 3.2 Date Range
 
