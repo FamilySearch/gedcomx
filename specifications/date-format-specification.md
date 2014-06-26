@@ -54,8 +54,8 @@ representations.
       * [2.1.9 approximate date](#approximate-date)
       * [2.1.10 approximate date range](#approximate-date-range)
 * [3. Scope](#scope)
-  * [3.1 Simple Date](#simple-date)
-  * [3.2 Date Range](#date-range)
+  * [3.1 Simple Date](#3-1-simple-date)
+  * [3.2 Date Range](#3-2-date-range)
     * [3.2.1 Closed Date Range](#closed-date-range)
     * [3.2.2 Open-Ended Date Range](#open-ended-date-range)
   * [3.3 Recurring Date](#3-3-recurring-date)
@@ -241,7 +241,7 @@ The GEDCOM X Date represents one of the following:
 * an approximate date
 * an approximate date range
 
-<a name="simple-date"/>
+<a name="3-1-simple-date"/>
 
 ## 3.1 Simple Date
 
@@ -251,7 +251,7 @@ The GEDCOM X Date units of measurement include, and are limited to `year`, `mont
 `day`, `hour`, `minute`, and `second`.  For a given `simple date`, all units of measurement
 larger than the smallest unit specified MUST be provided.
 
-<a name="date-range"/>
+<a name="3-1-date-range"/>
 
 ## 3.2 Date Range
 
@@ -273,7 +273,7 @@ A `closed date range` MUST be _one_ of the following:
 An `open-ended date range` MUST include either the _start date_ or
 the _end date_, but NOT both.
 
-<a name="recurring-date"/>
+<a name="3-3-recurring-date"/>
 
 ## 3.3 Recurring Date
 
@@ -285,7 +285,7 @@ A `recurring date` is represented by a `closed date range` providing the followi
 
 NOTE: If no recurrence count is provided, the recurrences are considered _perpetual_.
 
-<a name="approximate-date"/>
+<a name="3-4-approximate-date"/>
 
 ## 3.4 Approximate Date
 
@@ -294,7 +294,7 @@ An `approximate date` is represented by providing _all_ of the following:
 * an indicator that the date is _approximate_
 * a `simple date`
 
-<a name="approximate-date-range"/>
+<a name="3-5-approximate-date-range"/>
 
 ## 3.5 Approximate Date Range
 
