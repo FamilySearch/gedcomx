@@ -54,6 +54,46 @@ representations.
       * [2.1.9 approximate date](#approximate-date)
       * [2.1.10 approximate date range](#approximate-date-range)
 * [3. Scope](#scope)
+  * [3.1 Simple Date](#simple-date)
+  * [3.2 Date Range](#date-range)
+    * [3.2.1 Closed Date Range](#closed-date-range)
+    * [3.2.2 Open-Ended Date Range](#open-ended-date-range)
+  * [3.3 Recurring Date](#3-3-recurring-date)
+  * [3.4 Approximate Date](#3-4-approximate-date)
+  * [3.5 Approximate Date Range](#3-5-approximate-date-range)
+* [4. Calendaring System](#calendaring-system)
+* [5. Format](#format)
+  * [5.1 Characters Used in Date Representation](#characters-used-date representation)
+  * [5.2 Simple Date](#simple-date)
+    * [5.2.1 Representation](#representation)
+    * [5.2.2 Description](#5-2-description)
+      * [5.2.2.1 Calendar date part](#calendar-date-part)
+      * [5.2.2.2 Time of day part](#time-of-day)
+    * [5.2.3 Examples](#examples)
+  * [5.3 Duration](#duration)
+    * [5.3.1 Representation](#representation)
+    * [5.3.2 Description](#5-3-description)
+    * [5.3.3 Examples](#5-3-examples)
+  * [5.4 Closed Date Range](#closed-date-range)
+    * [5.4.1 Representation](#5-4-representation)
+      * [5.4.1.1 Start Date Constraints](#start-date-constraints)
+      * [5.4.1.2 Duration Constraints](#duration-constraints)
+    * [5.4.2 Examples](#5-4-examples)
+  * [5.5 Open-ended Date Range](#open-ended-date-range)
+    * [5.5.1 Representation](#5-5-representation)
+    * [5.5.2 Examples](#5-5-examples)
+  * [5.6 Recurring Date](#5-6-recurring-date)
+    * [5.6.1 Representation](#5-6-representation)
+    * [5.6.2 Description](#5-6-description)
+    * [5.6.3 Examples](#5-6-examples)
+  * [5.7 Approximate Date](#5-7-approximate-date)
+    * [5.7.1 Examples](#5-7-examples)
+  * [5.8 Approximate Date Range](#5-8-approximate-date-range)
+    * [5.8.1 Examples](#-8-examples)
+* [6 URI Representation](#uri-representation)
+  * [6.1 Examples](#6-1-examples)
+* [Appendix A Implementation Hints and Observation](#appendix-a)
+  * [1. Parsing GEDCOM X Dates](#pasing-gedcomx-dates)
 
 <a name="id-and-version"/>
 
@@ -201,6 +241,8 @@ The GEDCOM X Date represents one of the following:
 * an approximate date
 * an approximate date range
 
+<a name="simple-date"/>
+
 ## 3.1 Simple Date
 
 The precision of a `simple date` is based on the smallest provided unit of measure.
@@ -209,9 +251,13 @@ The GEDCOM X Date units of measurement include, and are limited to `year`, `mont
 `day`, `hour`, `minute`, and `second`.  For a given `simple date`, all units of measurement
 larger than the smallest unit specified MUST be provided.
 
+<a name="date-range"/>
+
 ## 3.2 Date Range
 
 A `date range` MUST be either a `closed date range` or an `open-ended date range`.
+
+<a name="closed-date-range"/>
 
 ### 3.2.1 Closed Date Range
 
@@ -220,10 +266,14 @@ A `closed date range` MUST be _one_ of the following:
 * _start date_ and _end date_
 * _start date_ and `duration`
 
+<a name="open-ended-date-range"/>
+
 ### 3.2.2 Open-Ended Date Range
 
 An `open-ended date range` MUST include either the _start date_ or
 the _end date_, but NOT both.
+
+<a name="recurring-date"/>
 
 ## 3.3 Recurring Date
 
@@ -235,12 +285,16 @@ A `recurring date` is represented by a `closed date range` providing the followi
 
 NOTE: If no recurrence count is provided, the recurrences are considered _perpetual_.
 
+<a name="approximate-date"/>
+
 ## 3.4 Approximate Date
 
 An `approximate date` is represented by providing _all_ of the following:
 
 * an indicator that the date is _approximate_
 * a `simple date`
+
+<a name="approximate-date-range"/>
 
 ## 3.5 Approximate Date Range
 
@@ -249,6 +303,7 @@ An `approximate date range` is represented by providing _all_ of the following:
 * an indicator that the date is _approximate_
 * a `date range`
 
+<a name="calendaring-system"/>
 
 # 4. Calendaring System
 
@@ -262,7 +317,11 @@ time system is specified as follows:
     * The year prior to 1 CE ("Common Era or "AD") MUST be represented as the year 0.
     * Any year prior to year 0 MUST be represented as a _negative number_.
 
+<a name="format"/>
+
 # 5. Format
+
+<a name="characters-used-date-representation"/>
 
 ## 5.1 Characters Used in Date Representation
 
@@ -280,7 +339,11 @@ The following characters are used as value separators:
 * [:] - separates the values of the `time of day` portion's units of a date
 * [/] - separates the components of a `date range` or `recurring date range`
 
+<a name="simple-date"/>
+
 ## 5.2 Simple Date
+
+<a name="representation"/>
 
 ### 5.2.1 Representation
 
@@ -302,11 +365,15 @@ The format for a complete `simple date` is defined as follows:
 ±YYYY-MM-DDThh:mm:ss[±hh[:mm]|Z]
 ```
 
+<a name="description"/>
+
 ### 5.2.2 Description
 
 The complete `simple date` format specifies the format of all components and their order (largest to
 smallest units). Unit components MAY be truncated right-to-left, to indicate precision level of the
 date.
+
+<a name="calendar-date-part"/>
 
 #### 5.2.2.1 Calendar date part
 
@@ -319,6 +386,8 @@ The month component MUST be 2 digits when present, with values of between `01` a
 The day of month component MUST be 2 digits when present. The range of valid values is
 determined by the number of days in that proleptic Gregorian calendar month, with the
 first day of the month designated as `01`.
+
+<a name="time-of-day-part"/>
 
 #### 5.2.2.2 Time of day part
 
@@ -339,6 +408,8 @@ When any time of day is specified, there are three options for specifying its ge
    * The first 2 digits represent the hours
    * The last 2 digits represent minutes, and MAY be omitted if zero
 
+<a name="examples"/>
+
 ### 5.2.3 Examples
 
 example | textual description
@@ -350,7 +421,11 @@ example | textual description
 +0186-03 | March 186 CE
 -1321 | 1322 BCE
 
+<a name="duration"/>
+
 ## 5.3 Duration
+
+<a name="representation"/>
 
 ### 5.3.1 Representation
 
@@ -371,6 +446,8 @@ The format for a complete duration is defined as follows:
 PnnnnYnnMnnDTnnHnnMnnS
 ```
 
+<a name="description"/>
+
 ### 5.3.2 Description
 
 A date `duration` can be represented by a combination of components/units with designators, with the following
@@ -387,6 +464,8 @@ NOTE: For a duration, local time and UTC distinction is meaningless.
 
 NOTE: A GEDCOM X Date MAY contain a `duration`, but MUST NOT solely represent a `duration` itself.
  
+<a name="5-3-examples"/>
+
 ### 5.3.3 Examples
 
 example | textual description
@@ -396,7 +475,11 @@ P186D | duration of 186 days
 PT5H17M | lapsed time: 5 hours 17 minutes
 P1000Y18M72DT56H10M1S | 1000 years 18 months 72 days 56 hours 10 minutes 1 second
 
+<a name="closed-date-range"/>
+
 ## 5.4 Closed Date Range
+
+<a name="representation"/>
 
 ### 5.4.1 Representation
 
@@ -415,7 +498,7 @@ _or_ a _start date_ (a `simple date`) and a `duration`, separated by a [/]:
 In either format, the presence of the slash character [/] indicates the date is a `date range`.
 
 
-<a id="range-two-dates" />
+<a id="start-date-constraints" />
 
 #### 5.4.1.1 Start Date Constraints
 
@@ -423,6 +506,8 @@ The _start date_ (the `simple date` preceding the slash) MUST NOT be greater tha
 and MUST be earlier than or equivalent to the _end date_ (the `simple date` following the slash).
 
 NOTE: It is not required that the precision of the two `simple dates` be the same.
+
+<a name="duration-constraints"/>
 
 #### 5.4.1.2 Duration Constraints
 
@@ -432,6 +517,8 @@ NOTE: It is not required that the precision of the _start date_ and the `duratio
 The precision of the equivalent _end date_ is the coarser precision of the _start date_ and the
 `duration`.
 
+<a name="5-4-examples"/>
+
 ### 5.4.2 Examples
 
 example | textual description
@@ -440,7 +527,11 @@ example | textual description
 +1825-04-13/+1825-11-26 | from April 13, 1825 to November 26, 1825
 +1933-02-19/P74Y | 74 years, starting on February 19, 1933, i.e. from February 19, 1933 to February 19, 2007
 
+<a name="open-ended-date-range"/>
+
 ## 5.5 Open-ended Date Range
+
+<a name="5-5-representation"/>
 
 ### 5.5.1 Representation
 
@@ -459,6 +550,8 @@ A trailing slash character [/] is used to specify a date range *after* the provi
 ±YYYY-MM-DDThh:mm:ss[±hh[:mm]|Z]/
 ```
 
+<a name="5-5-examples"/>
+
 ### 5.5.2 Examples
 
 example | textual description
@@ -469,7 +562,11 @@ example | textual description
 /+0000 | until 1 BCE
 -0001-04/ | since May, 2 BCE
 
+<a name="recurring-date"/>
+
 ## 5.6 Recurring Date
+
+<a name="5-6-representation"/>
 
 ### 5.6.1 Representation
 
@@ -485,11 +582,15 @@ or
 R[n]/±YYYY-MM-DDThh:mm:ss[±hh[:mm]|Z]/PnnnnYnnMnnDTnnHnnMnnS
 ```
 
+<a name="description"/>
+
 ### 5.6.2 Description
 
 The `recurring date` is defined in terms of a `closed date range`&mdash; where _start date_ is the _reference date_
 and the recurring _interval_ is calculated as the interval between the _start date_ and the _end date_ or the interval
 specified by the `duration`&mdash;prepended with an [R], an OPTIONAL recurrence count, and a slash [/].
+
+<a name="5-6-examples"/>
 
 ### 5.6.3 Examples
 
@@ -499,9 +600,13 @@ R4/+1776-04-02/+1776-04-09 | every week, for 4 weeks starting on July 2, 1776 CE
 R/+2000/P12Y | the Chinese *Year of the Dragon* occurs every 12 years (perpetually), including the year 2000 CE
 R100/+1830/+1840 | the US census occurs every 10 years starting in 1830, for 100 repetitions
 
+<a name="5-approximate-date"/>
+
 ## 5.7 Approximate Date
 
 The format for an `approximate date` is defined as a `simple date` prepended by the character [A].
+
+<a name="5-7-examples"/>
 
 ### 5.7.1 Examples
 
@@ -512,9 +617,13 @@ A-1400 | year | about 1401 BCE
 A+1980-05-18T18:53Z | minutes | about 4:53 PM [UTC], May 18, 1980
 A+2014-08-19 | days | about August 19, 2014 CE
 
+<a name="5-8-approximate-date-range"/>
+
 ## 5.8 Approximate Date Range
 
 The format for an `approximate date range` is defined as a `date range` prepended by the character [A].
+
+<a name="5-8-examples"/>
 
 ### 5.8.1 Examples
 
@@ -529,6 +638,8 @@ A/-1287 | sometime before 1288 BCE
 A/+0000 | sometime before 1 BCE
 A-0001-04/ | sometime before May, 2 BCE
 
+<a name="URI-representation"/>
+
 # 6. URI Representation
 
 A GEDCOM X Date MAY be identified using a Uniform Resource Identifier (*URI*) as defined by [RFC-2396](http://www.ietf.org/rfc/rfc2396.txt). A URI
@@ -541,6 +652,8 @@ gedcomx-date:<GEDCOM X Date value>
 NOTE: The URI scheme is `gedcomx-date` and the scheme-specific part is the representation of the date as defined
 by this specification.
 
+<a name="6-examples"/>
+
 ## 6.1 Examples
 
 example type | description | applicable URI
@@ -549,9 +662,13 @@ simple date | Sept 14, 1863 | `gedcomx-date:+1863-09-14`
 approx. date | about 1742 | `gedcomx-date:A+1742`
 date range | between October 1834 and May 1835 | `gedcomx-date:+1834-10/+1835-05`
 
+<a name="appendix-a"/>
+
 # APPENDIX A. Implementation Hints and Observations
 
 The following summaries may be beneficial in parsing and composing GEDCOM X Dates using this specification:
+
+<a name="parsing-gedcomx-dates"/>
 
 ## 1. Parsing GEDCOM X Dates
 
