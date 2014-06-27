@@ -82,7 +82,7 @@ http://creativecommons.org/licenses/by-sa/3.0/
 * [5. Extensibility](#extensibility)
   * [5.1 Data Type Extensions](#data-type-extensions)
   * [5.2 Enumerated Value Extensions](#enumerated-value-extensions)
-    * [5.2.1 User-Defined Enumerated Values](#user-defined-enumerated-values)
+    * [5.2.1 User-Defined Enumerated Values](#user-enumerated-values)
   * [5.3 Extension Properties](#extension-properties)
   * [5.4 Processing Extension](#processing-extensions)
 
