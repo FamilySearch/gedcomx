@@ -20,6 +20,15 @@ For details, see:
 
 http://creativecommons.org/licenses/by-sa/3.0/
 
+<a name="intro"/>
+
+# 1. Introduction
+
+The GEDCOM X Conceptual Model is a specification of formal concepts and types
+that are used to provide a standard model and vocabulary for describing genealogical
+data. Genealogical data is structured by data types such as persons, 
+relationships, and sources.
+
 ## Table Of Contents
 
 * [1. Introduction](#intro)
@@ -85,15 +94,6 @@ http://creativecommons.org/licenses/by-sa/3.0/
     * [5.2.1 User-Defined Enumerated Values](#user-enumerated-values)
   * [5.3 Extension Properties](#extension-properties)
   * [5.4 Processing Extension](#processing-extensions)
-
-<a name="intro"/>
-
-# 1. Introduction
-
-The GEDCOM X Conceptual Model is a specification of formal concepts and types
-that are used to provide a standard model and vocabulary for describing genealogical
-data. Genealogical data is structured by data types such as persons, 
-relationships, and sources.
 
 <a name="id-and-version"/>
 
