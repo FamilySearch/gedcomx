@@ -456,7 +456,7 @@ guidelines and restrictions:
 * Each component is OPTIONAL, and MAY be omitted.
     * If any time component is present, the [T] MUST precede the time of day part.
 * All components present MUST appear in hierarchical order, largest to smallest units.
-* Components are **NOT** REQUIRED to be normalized
+* Components are **NOT** REQUIRED to be normalized.
     * Any non-normalized unit MAY be represented with up to four digits.
     * For example, the descriptive values "13 months" and "2 years, 52 days" each contain non-normalized values and both are considered acceptable.
 
@@ -511,7 +511,7 @@ NOTE: It is not required that the precision of the two `simple dates` be the sam
 
 #### 5.4.1.2 Duration Constraints
 
-The `duration` MUST be such that the calculated _end date_ is earlier or equivalent to the maximum `simple date` (+9999-12-31T23:59:59)
+The `duration` MUST be such that the calculated _end date_ is earlier or equivalent to the maximum `simple date` (+9999-12-31T23:59:59).
 
 NOTE: It is not required that the precision of the _start date_ and the `duration` be the same.
 The precision of the equivalent _end date_ is the coarser precision of the _start date_ and the
