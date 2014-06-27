@@ -365,7 +365,7 @@ The format for a complete `simple date` is defined as follows:
 ±YYYY-MM-DDThh:mm:ss[±hh[:mm]|Z]
 ```
 
-<a name="description"/>
+<a name="5-2-description"/>
 
 ### 5.2.2 Description
 
