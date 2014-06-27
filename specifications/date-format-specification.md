@@ -5,7 +5,7 @@
 This document specifies a date representation for exchanging dates associated with genealogical data,
 and requests discussion and suggestions for improvements.
 
-The current state of this document is as a "stable draft", and as such, the document
+The current state of this document is as a "stable draft", and as such the document
 may be subject to limited changes, BUT NOT backwards-incompatible changes, according to the
 discussion and suggestions for improvement.
 
