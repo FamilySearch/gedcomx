@@ -68,7 +68,7 @@ representations.
     * [5.2.1 Representation](#representation)
     * [5.2.2 Description](#5-2-description)
       * [5.2.2.1 Calendar date part](#calendar-date-part)
-      * [5.2.2.2 Time of day part](#time-of-day)
+      * [5.2.2.2 Time of day part](#time-of-day-part)
     * [5.2.3 Examples](#examples)
   * [5.3 Duration](#duration)
     * [5.3.1 Representation](#representation)
