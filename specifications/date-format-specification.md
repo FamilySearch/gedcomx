@@ -425,7 +425,7 @@ example | textual description
 
 ## 5.3 Duration
 
-<a name="representation"/>
+<a name="5-3-representation"/>
 
 ### 5.3.1 Representation
 
