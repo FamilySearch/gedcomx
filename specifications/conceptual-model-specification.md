@@ -23,11 +23,13 @@ http://creativecommons.org/licenses/by-sa/3.0/
 ## Table Of Contents
 
 * [1. Introduction](#intro)
-   * [1.1 Identifier And Version](#id-and-version)
+   * [1.1 Identifier, Version and Dependencies](#id-and-version)
    * [1.2 Notational Conventions](#notational-conventions)
       * [1.2.1 Keywords](#keywords)
 * [2. Terms and Definitions](#terms-and-definitions)
   * [2.1 Basic Terms](#basic-terms)
+
+<a name="intro"/>
 
 # 1. Introduction
 
@@ -36,7 +38,9 @@ that are used to provide a standard model and vocabulary for describing genealog
 data. Genealogical data is structured by data types such as persons, 
 relationships, and sources.
 
-## 1.1 Identifier, Version, and Dependencies
+<a name="id-and-version"/>
+
+## 1.1 Identifier, Version and Dependencies
 
 The identifier for this specification is:
 
@@ -60,7 +64,11 @@ This specification refers to the GEDCOM X Name Part Qualifiers specification ide
 by [`http://gedcomx.org/name-part-qualifiers/v1`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/name-part-qualifiers-specification.md)
 to recommend name part qualifiers to be used.
 
+<a name="notational-conventions"/>
+
 ## 1.2 Notational Conventions
+
+<a name="keywords"/>
 
 ### 1.2.1 Keywords
 
@@ -70,7 +78,11 @@ document are to be interpreted as described in BCP 14,
 [RFC2119](http://tools.ietf.org/html/rfc2119), as scoped to those conformance
 targets.
 
+<a name="definitions"/>
+
 ## 1.3 Definitions
+
+<a name="data-properties"/>
 
 ### 1.3.1 Data Types and Properties
 
@@ -89,11 +101,13 @@ Data type definitions provided by this specification use the following elements:
 2. The *extension* of the data type (if any) which specifies which data type is extended by the data type.
 3. The *properties* of the data type, which define the information the data type encapsulates.
 
+<a name="data-instances"/>
+
 ### 1.3.2 Data Instances
 
 The term "data instance" to refer to a particular instance, or instantiation, of a data type.
 
-<a name="char-string-list"/>
+<a name="data-types"/>
 
 ### 1.3.3 Basic Data Types
 
@@ -156,6 +170,8 @@ is `http://gedcomx.org/`.
 Enumerated values which are neither defined directly from this specification nor indirectly referenced by
 this specification SHOULD be declared in a freely-distributable specification and MUST NOT use the value
 `http://gedcomx.org/` as a base URI.
+
+<a name="controlled-vocab"/>
 
 ### 1.3.7 Controlled Vocabularies
 
@@ -227,6 +243,8 @@ a note is _not_ defined as a list of language-identified strings. However, some 
 identified where multi-valued input is needed for the benefit of exchanging genealogical data
 across cultural boundaries. Such cases include the need to input multiple name forms and the need
 to identify multiple titles for a source.
+
+<a name="top-data-types"/>
 
 # 2. Top-Level Data Types
 
@@ -527,6 +545,7 @@ longitude | Angular distance, in degrees, east or west of the Prime Meridian (0.
 temporalDescription | A description of the time period to which this place description is relevant. | [`http://gedcomx.org/v1/Date`](#conclusion-date) | OPTIONAL.
 spatialDescription | A reference to a geospatial description of this place. | [`URI`](#uri) | OPTIONAL. It is RECOMMENDED that this geospatial description resolve to a [KML](http://en.wikipedia.org/wiki/Keyhole_Markup_Language) document.
 
+<a name="component-data-types"/>
 
 # 3. Component-Level Data Types
 
@@ -1336,6 +1355,8 @@ as a base URI for the enumerated value identifier.
 Specifications that define new enumerated values as GEDCOM X extensions MUST be published and made freely available and
 compatible with the terms and constraints that govern the GEDCOM X Conceptual Model.
 
+<a name="user-enumerated-values"/>
+
 ### 5.2.1 User-Defined Enumerated Values
 
 Some applications MAY allow enumerated values to be provided by a user. For example, a genealogy
@@ -1365,6 +1386,8 @@ Extension properties MUST NOT be defined as "REQUIRED".
 
 Specifications that define new properties as GEDCOM X extensions MUST be published and made freely available and
 compatible with the terms and constraints that govern the GEDCOM X Conceptual Model.
+
+<a name="processing-extensions"/>
 
 ## 5.4 Processing Extensions
 
