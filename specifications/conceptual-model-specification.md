@@ -74,7 +74,7 @@ http://creativecommons.org/licenses/by-sa/3.0/
   * [3.16 The "Date" Data Type](#conclusion-date)
   * [3.17 The "PlaceReference" Data Type](#conclusion-place-reference)
   * [3.18 The "NamePart" Data Type](#name-part)
-    * [3.18.1 Known Name Part Types](# known-name-part-types)
+    * [3.18.1 Known Name Part Types](#known-name-part-types)
   * [3.19 The "NameForm" Data Type](#name-form)
   * [3.20 The "Qualifier" Data Type](#qualifier)
 * [4. Extracted Conclusion Constraints](#extracted-conclusion-constraints)
