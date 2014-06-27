@@ -92,8 +92,8 @@ representations.
     * [5.8.1 Examples](#5-8-examples)
 * [6 URI Representation](#uri-representation)
   * [6.1 Examples](#6-1-examples)
-* [Appendix A Implementation Hints and Observation](#appendix-a)
-  * [1. Parsing GEDCOM X Dates](#pasing-gedcomx-dates)
+* [Appendix A: Implementation Hints and Observation](#appendix-a)
+  * [1. Parsing GEDCOM X Dates](#parsing-gedcomx-dates)
 
 <a name="id-and-version"/>
 
@@ -638,7 +638,7 @@ A/-1287 | sometime before 1288 BCE
 A/+0000 | sometime before 1 BCE
 A-0001-04/ | sometime before May, 2 BCE
 
-<a name="URI-representation"/>
+<a name="uri-representation"/>
 
 # 6. URI Representation
 
@@ -664,7 +664,7 @@ date range | between October 1834 and May 1835 | `gedcomx-date:+1834-10/+1835-05
 
 <a name="appendix-a"/>
 
-# APPENDIX A. Implementation Hints and Observations
+# APPENDIX A: Implementation Hints and Observations
 
 The following summaries may be beneficial in parsing and composing GEDCOM X Dates using this specification:
 
