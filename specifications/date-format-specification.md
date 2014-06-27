@@ -446,7 +446,7 @@ The format for a complete duration is defined as follows:
 PnnnnYnnMnnDTnnHnnMnnS
 ```
 
-<a name="description"/>
+<a name="5-3-description"/>
 
 ### 5.3.2 Description
 
