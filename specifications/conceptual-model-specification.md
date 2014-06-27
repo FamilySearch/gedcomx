@@ -23,11 +23,33 @@ http://creativecommons.org/licenses/by-sa/3.0/
 ## Table Of Contents
 
 * [1. Introduction](#intro)
-   * [1.1 Identifier, Version and Dependencies](#id-and-version)
-   * [1.2 Notational Conventions](#notational-conventions)
-      * [1.2.1 Keywords](#keywords)
-* [2. Terms and Definitions](#terms-and-definitions)
-  * [2.1 Basic Terms](#basic-terms)
+  * [1.1 Identifier, Version and Dependencies](#id-and-version)
+  * [1.2 Notational Conventions](#notational-conventions)
+    * [1.2.1 Keywords](#keywords)
+  * [1.3 Definitions](#definitions)
+    * [1.3.1 Data Types and Properties](#data-properties)
+    * [1.3.2 Data Instances](#data-instances)
+    * [1.3.3 Basic Data Types](#data-types)
+    * [1.3.4 The URI Reference](#uri)
+    * [1.3.5 Original and Normalized Values](#formal-values)
+    * [1.3.6 Enumerated Values](#enumerated-value)
+    * [1.3.7 Controlled Vocabularies](#controlled-vocab)
+    * [1.3.8 Text Types](#text-types)
+  * [1.4 Internationalization Considerations](#il8n)
+* [2. Top-Level Data Types](#top-data-types)
+  * [2.1 The "Person" Data Type](#person)
+  * [2.2 The "Relationship" Data Type](#relationship)
+    * [2.2.1 Known Relationship Types](#known-relationship-types)
+  * [2.3 The "SourceDescription" Data Type](#source-description)
+    * [2.3.1 Known Resource Types](#known-resource-types)
+  * [2.4 The "Agent" Data Type](#agent)
+  * [2.5 The "Event" Data Type](#event)
+    * [2.5.1 Known Event Types](#known-event-types)
+    * [2.5.2 Events Versus Facts](#events-vs-facts)
+  * [2.6 The "Document" Data Type](#document)
+    * [2.6.1 Known Document Types](#known-document-types)
+  * [2.7 The "PlaceDescription" Data Type](#place-description)
+  * 
 
 <a name="intro"/>
 
