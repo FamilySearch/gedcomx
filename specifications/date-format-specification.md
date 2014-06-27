@@ -71,7 +71,7 @@ representations.
       * [5.2.2.2 Time of day part](#time-of-day-part)
     * [5.2.3 Examples](#examples)
   * [5.3 Duration](#duration)
-    * [5.3.1 Representation](#representation)
+    * [5.3.1 Representation](#5-3-representation)
     * [5.3.2 Description](#5-3-description)
     * [5.3.3 Examples](#5-3-examples)
   * [5.4 Closed Date Range](#closed-date-range)
