@@ -40,7 +40,7 @@ to serialize and deserialize the GEDCOM X Conceptual Model to and from
   * [1.2 Examples](#examples)
   * [1.3 Notational Conventions](#notational-conventions)
     * [1.3.1 Keywords](#keywords)
-    * [1.3.2 Namespace prefixes](#namespace-prefixes)
+    * [1.3.2 Namespace Prefixes](#namespace-prefixes)
   * [1.4 Compliance](#compliance)
 * [2. Top-Level Data Types](#top-data-types)
   * [2.1 The "Person" Data Type](#person)
