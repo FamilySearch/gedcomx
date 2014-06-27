@@ -21,6 +21,8 @@ For details, see:
 
 http://creativecommons.org/licenses/by-sa/3.0/
 
+<a name="intro"/>
+
 # 1. Introduction
 
 The GEDCOM X Conceptual Model is a specification of formal concepts and types
@@ -35,9 +37,11 @@ to serialize and deserialize the GEDCOM X Conceptual Model to and from
 
 * [1. Introduction](#intro)
   * [1.1 Identifier, Version and Dependencies](#id-and-version)
-  * [1.2 Notational Conventions](#notational-conventions)
+  * [1.2 Examples](#examples)
     * [1.2.1 Keywords](#keywords)
   * [1.3 Definitions](#definitions)
+
+<a name="id-and-version"/>
 
 ## 1.1 Identifier, Version, and Dependencies
 
@@ -53,6 +57,8 @@ The media type defined by this specification is:
 
 This specification depends on the GEDCOM X Conceptual Model specification identified
 by [`http://gedcomx.org/conceptual-model/v1`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md).
+
+<a name="examples"/>
 
 ## 1.2 Examples
 
@@ -167,8 +173,11 @@ The following example shows an instance of a GEDCOM X serialization in accordanc
 </gedcomx>
 ```
 
+<a name="notational-conventions"/>
 
 ## 1.3 Notational Conventions
+
+<a name="keywords"/>
 
 ### 1.3.1 Keywords
 
@@ -177,6 +186,8 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
 document are to be interpreted as described in BCP 14,
 [RFC2119](http://tools.ietf.org/html/rfc2119), as scoped to those conformance
 targets.
+
+<a name="namespace-prefixes"/>
 
 ### 1.3.2 Namespace Prefixes
 
@@ -191,12 +202,16 @@ For each data type specified by the GEDCOM X conceptual model, an associated [XM
 supplied, which specifies how each of the properties of the data type are to be serialized in XML. The properties of each data type
 are serialized as either an XML attribute or as an XML child element of the containing XML element.
 
+<a name="compliance"/>
+
 ## 1.4 Compliance
 
 In addition to the compliance requirements provided by this specification, all compliance requirements provided by the GEDCOM X Conceptual Model identified by
 [`http://gedcomx.org/conceptual-model/v1`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md)
 are inherited.
 
+
+<a name="top-data-types"/>
 
 # 2. Top-Level Data Types
 
@@ -485,6 +500,8 @@ spatialDescription | A reference to a geospatial description of this place. | gx
   </...>
 ```
 
+
+<a name="component-data-types"/>
 
 # 3. Component-Level Data Types
 
@@ -1204,12 +1221,15 @@ The following is an example of the structure of a GEDCOM X XML Element:
 </gedcomx>
 ```
 
+<a name="extensibility"/>
 
 # 6. Extensibility
 
 In accordance with the [extensibility provisions](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md#extensibility)
 of the GEDCOM X Conceptual Model, extensions MAY be provided as XML elements or attributes on data types where
 extensions are not explicitly prohibited.
+
+<a name="data-type-extensions"/>
 
 ## 6.1 Data Type Extensions
 
@@ -1224,6 +1244,8 @@ as a namespace for the XML element or attribute.
 
 Specifications that define new data types as GEDCOM X XML extensions MUST be published and made freely available and
 compatible with the terms and constraints that govern the GEDCOM X XML Serialization Format.
+
+<a name="known-xml-extensions"/>
 
 ## 6.2 Known XML Element Extensions
 
