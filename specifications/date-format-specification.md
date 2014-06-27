@@ -63,7 +63,7 @@ representations.
   * [3.5 Approximate Date Range](#3-5-approximate-date-range)
 * [4. Calendaring System](#calendaring-system)
 * [5. Format](#format)
-  * [5.1 Characters Used in Date Representation](#characters-used-date representation)
+  * [5.1 Characters Used in Date Representation](#characters-used-date-representation)
   * [5.2 Simple Date](#simple-date)
     * [5.2.1 Representation](#representation)
     * [5.2.2 Description](#5-2-description)
