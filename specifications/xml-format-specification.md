@@ -1211,17 +1211,20 @@ description | Reference to the description of this data set. | description (attr
 
 <a name="gedcomx-element"/>
 
-
 # 5. The GEDCOM X Element
 
 The body of a document compliant with the GEDCOM X XML media type MUST be an instance of the
 root GEDCOM X Element, which is defined by an XML [QName](http://www.w3.org/TR/REC-xml-names/#NT-QName)
 and an XML data types, as follows:
 
+<a name="gedcomx-qname"/>
+
 ## 5.1 GEDCOM X Element QName
 
 The QName of a GEDCOM X element is defined by a `LocalPart` of the value `gedcomx` and the `NamespaceURI`
 of the value `http://gedcomx.org/v1/`.
+
+<a name="gedcomx-data-type"/>
 
 ## 5.2 GEDCOM X Element Data Type
 
@@ -1316,7 +1319,7 @@ gx:fact | [`gx:Fact`](#fact-conclusion)
 
 <a name="fragment-ids"/>
 
-7. Fragment Identifiers
+# 7. Fragment Identifiers
 
 Fragment identifiers are used to identify specific elements (i.e. "fragments") within an XML document. The GEDCOM X
 XML serialization format specifies the use of the "id" attribute as the fragment identifier for any element in
