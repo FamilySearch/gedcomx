@@ -50,7 +50,7 @@ http://creativecommons.org/licenses/by-sa/3.0/
     * [2.6.1 Known Document Types](#known-document-types)
   * [2.7 The "PlaceDescription" Data Type](#place-description)
 * [3. Component-Level Data Types](#component-data-types)
-  * [3.1 The "Identifier Data Type](#identifier-type)
+  * [3.1 The "Identifier" Data Type](#identifier-type)
   * [3.2 The "Attribution" Data Type](#attribution)
   * [3.3 The "Note" Data Type](#note)
   * [3.4 The "TextValue" Data Type](#text-value)
