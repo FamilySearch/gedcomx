@@ -31,6 +31,14 @@ The GEDCOM X XML Serialization Format is a specification that defines the media 
 to serialize and deserialize the GEDCOM X Conceptual Model to and from
 [XML](http://www.w3.org/TR/REC-xml/).
 
+## Table Of Contents
+
+* [1. Introduction](#intro)
+  * [1.1 Identifier, Version and Dependencies](#id-and-version)
+  * [1.2 Notational Conventions](#notational-conventions)
+    * [1.2.1 Keywords](#keywords)
+  * [1.3 Definitions](#definitions)
+
 ## 1.1 Identifier, Version, and Dependencies
 
 The identifier for this specification is:
