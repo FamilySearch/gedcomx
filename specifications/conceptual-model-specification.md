@@ -20,6 +20,15 @@ For details, see:
 
 http://creativecommons.org/licenses/by-sa/3.0/
 
+## Table Of Contents
+
+* [1. Introduction](#intro)
+   * [1.1 Identifier And Version](#id-and-version)
+   * [1.2 Notational Conventions](#notational-conventions)
+      * [1.2.1 Keywords](#keywords)
+* [2. Terms and Definitions](#terms-and-definitions)
+  * [2.1 Basic Terms](#basic-terms)
+
 # 1. Introduction
 
 The GEDCOM X Conceptual Model is a specification of formal concepts and types
