@@ -79,7 +79,7 @@ representations.
       * [5.4.1.1 Start Date Constraints](#start-date-constraints)
       * [5.4.1.2 Duration Constraints](#duration-constraints)
     * [5.4.2 Examples](#5-4-examples)
-  * [5.5 Open-ended Date Range](#open-ended-date-range)
+  * [5.5 Open-Ended Date Range](#open-Ended-date-range)
     * [5.5.1 Representation](#5-5-representation)
     * [5.5.2 Examples](#5-5-examples)
   * [5.6 Recurring Date](#5-6-recurring-date)
@@ -527,9 +527,9 @@ example | textual description
 +1825-04-13/+1825-11-26 | from April 13, 1825 to November 26, 1825
 +1933-02-19/P74Y | 74 years, starting on February 19, 1933, i.e. from February 19, 1933 to February 19, 2007
 
-<a name="open-ended-date-range"/>
+<a name="open-Ended-date-range"/>
 
-## 5.5 Open-ended Date Range
+## 5.5 Open-Ended Date Range
 
 <a name="5-5-representation"/>
 
