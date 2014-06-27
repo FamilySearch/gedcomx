@@ -221,8 +221,7 @@ vocabularies are enumerated values.
 Enumerated values take the form of a URI. The base URI for enumerated values defined by GEDCOM X is
 `http://gedcomx.org/`. As such, if an enumerated value is provided as a relative URI reference as defined
 by [RFC 3986 Section 4.2](http://tools.ietf.org/html/rfc3986#section-4.2), the base URI to be used for
-reference resolution as defined by [RFC 3986 Section 5](http://tools.ietf.org/html/rfc3986#section-5) is
-is `http://gedcomx.org/`.
+reference resolution as defined by [RFC 3986 Section 5](http://tools.ietf.org/html/rfc3986#section-5) is `http://gedcomx.org/`.
 
 Enumerated values which are neither defined directly from this specification nor indirectly referenced by
 this specification SHOULD be declared in a freely-distributable specification and MUST NOT use the value
