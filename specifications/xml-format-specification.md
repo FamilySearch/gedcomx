@@ -49,7 +49,7 @@ to serialize and deserialize the GEDCOM X Conceptual Model to and from
   * [2.4 The "Agent" Data Type](#agent)
   * [2.5 The "Event" Data Type](#event)
   * [2.6 The "Document" Data Type](#document)
-  * [2.7 The "PlaceDescription" Data Type](#description)
+  * [2.7 The "PlaceDescription" Data Type](#place-description)
 * [3. Component-Level Data Types](#component-data-types)
   * [3.1 The "Identifier" Data Type](#identifier-type)
   * [3.2 The "Attribution" Data Type](#attribution)
