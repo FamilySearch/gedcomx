@@ -498,7 +498,7 @@ _or_ a _start date_ (a `simple date`) and a `duration`, separated by a [/]:
 In either format, the presence of the slash character [/] indicates the date is a `date range`.
 
 
-<a id="start-date-constraints" />
+<a name="start-date-constraints" />
 
 #### 5.4.1.1 Start Date Constraints
 
