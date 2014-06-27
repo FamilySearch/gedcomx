@@ -582,7 +582,7 @@ or
 R[n]/±YYYY-MM-DDThh:mm:ss[±hh[:mm]|Z]/PnnnnYnnMnnDTnnHnnMnnS
 ```
 
-<a name="description"/>
+<a name="5-6-description"/>
 
 ### 5.6.2 Description
 
