@@ -475,7 +475,7 @@ P186D | duration of 186 days
 PT5H17M | lapsed time: 5 hours 17 minutes
 P1000Y18M72DT56H10M1S | 1000 years 18 months 72 days 56 hours 10 minutes 1 second
 
-<a name="closed-date-range"/>
+<a name="5-4-closed-date-range"/>
 
 ## 5.4 Closed Date Range
 
