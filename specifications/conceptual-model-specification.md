@@ -1380,6 +1380,8 @@ from error.
 This section defines the constraints by which implementations of the GEDCOM X Conceptual Model SHOULD identify
 and process data types, properties, and enumerated values not defined by this version of GEDCOM X.
 
+<a name="data-type-extensions"/>
+
 ## 5.1 Data Type Extensions
 
 New data types MAY be defined as extensions to GEDCOM X by providing the following:
@@ -1396,6 +1398,8 @@ as a base URI for the data type identifier.
 
 Specifications that define new data types as GEDCOM X extensions MUST be published and made freely available and
 compatible with the terms and constraints that govern the GEDCOM X Conceptual Model.
+
+<a name="enumerated-value-extensions"/>
 
 ## 5.2 Enumerated Value Extensions
 
