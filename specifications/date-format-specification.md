@@ -562,7 +562,7 @@ example | textual description
 /+0000 | until 1 BCE
 -0001-04/ | since May, 2 BCE
 
-<a name="recurring-date"/>
+<a name="5-6-recurring-date"/>
 
 ## 5.6 Recurring Date
 
