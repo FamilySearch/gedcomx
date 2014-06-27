@@ -1127,6 +1127,7 @@ value | The value of the qualifier. | (child text) | xsd:string
   <... name="http://gedcomx.org/QualifierName">...qualifier value...</...>
 ```
 
+<a name="xml-data-types"/>
 
 # 4 XML-Specific Data Types
 
