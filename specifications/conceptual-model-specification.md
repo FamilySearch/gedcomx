@@ -66,7 +66,7 @@ http://creativecommons.org/licenses/by-sa/3.0/
     * [3.12.1 Known Gender Types](#known-gender-types)
   * [3.13 The "Name" Data Type](#name-conclusion)
     * [3.13.1 Known Name Types](#known-name-types)
-  * [3.14 The "Fact" Data Type](#fact-conclusions)
+  * [3.14 The "Fact" Data Type](#3-fact-conclusions)
     * [3.14.1 Known Fact Types](#known-fact-types)
     * [3.14.2 Known Fact Qualifiers](#known-fact-qualifier)
   * [3.15 The "EventRole" Data Type](#conclusion-event-role)
@@ -1061,7 +1061,7 @@ URI | description
 `http://gedcomx.org/ReligiousName` | A name given at a religious rite or ceremony.
 
 
-<a name="fact-conclusion"/>
+<a name="3-fact-conclusion"/>
 
 ## 3.14 The "Fact" Data Type
 
