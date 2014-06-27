@@ -267,7 +267,7 @@ minimize security risks, support for the following subset of modules (defined by
 Support for other XHTML modules is OPTIONAL. Parsers MAY ignore elements from optional modules.
 
 
-<a name="i18n"/>
+<a name="il8n"/>
 
 ## 1.4 Internationalization Considerations
 
