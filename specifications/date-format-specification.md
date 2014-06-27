@@ -64,7 +64,7 @@ representations.
 * [4. Calendaring System](#calendaring-system)
 * [5. Format](#format)
   * [5.1 Characters Used in Date Representation](#characters-used-date-representation)
-  * [5.2 Simple Date](#simple-date)
+  * [5.2 Simple Date](#5-2-simple-date)
     * [5.2.1 Representation](#representation)
     * [5.2.2 Description](#5-2-description)
       * [5.2.2.1 Calendar date part](#calendar-date-part)
@@ -339,7 +339,7 @@ The following characters are used as value separators:
 * [:] - separates the values of the `time of day` portion's units of a date
 * [/] - separates the components of a `date range` or `recurring date range`
 
-<a name="simple-date"/>
+<a name="5-2-simple-date"/>
 
 ## 5.2 Simple Date
 
