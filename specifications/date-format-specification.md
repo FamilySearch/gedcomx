@@ -683,4 +683,4 @@ The following summaries may be beneficial in parsing and composing GEDCOM X Date
 7. Each component of a `simple date` has a fixed width, always preceded by a designated character in the set [±,-,T,:].
     * All components, except the year component have length of 3, including the delimiting prefix character.
     * The year component has length of 5 (and the prefix is always [+] or [-]).
-    * When provided, local time _offset_ has a length of 6, two components (hours and minutes) each of length 3
+    * When provided, local time _offset_ has a length of 6, two components (hours and minutes) each of length 3.
