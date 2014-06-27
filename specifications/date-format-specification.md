@@ -92,7 +92,7 @@ representations.
     * [5.8.1 Examples](#5-8-examples)
 * [6 URI Representation](#uri-representation)
   * [6.1 Examples](#6-1-examples)
-* [Appendix A: Implementation Hints and Observation](#appendix-a)
+* [APPENDIX A: Implementation Hints and Observation](#appendix-a)
   * [1. Parsing GEDCOM X Dates](#parsing-gedcomx-dates)
 
 <a name="id-and-version"/>
@@ -652,7 +652,7 @@ gedcomx-date:<GEDCOM X Date value>
 NOTE: The URI scheme is `gedcomx-date` and the scheme-specific part is the representation of the date as defined
 by this specification.
 
-<a name="6-examples"/>
+<a name="6-1-examples"/>
 
 ## 6.1 Examples
 
