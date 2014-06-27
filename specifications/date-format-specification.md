@@ -145,7 +145,7 @@ month and the ordinal number of the day within its calendar month.
 Portion remaining from a date if the calendar date portion is ignored, represented in
 units of _hours_, _minutes_, and _seconds_.
 
-NOTE: By implication, time of day must be less than 24 hours
+NOTE: By implication, time of day must be less than 24 hours.
 
 <a name="CE"/>
 
