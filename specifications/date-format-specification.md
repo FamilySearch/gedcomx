@@ -26,7 +26,7 @@ http://creativecommons.org/licenses/by-sa/3.0/
 
 The GEDCOM X Date specification defines a way of representing dates associated with genealogical data.
 
-This specification is heavliy based on the [ISO 8601](http://dotat.at/tmp/ISO_8601-2004_E.pdf)
+This specification is heavily based on the [ISO 8601](http://dotat.at/tmp/ISO_8601-2004_E.pdf)
 standard, the [RFC 3339](http://tools.ietf.org/html/rfc3339) proposal, and [W3C's *profile*]
 (http://www.w3.org/TR/NOTE-datetime) of ISO 8601. Concepts from the
 [Dublin Core Date and Time Requirements Wiki](http://www.w3.org/TR/NOTE-datetime) were also leveraged.
