@@ -460,7 +460,7 @@ person | A reference to the person that describes this agent. | person | [`Resou
 
 # 2.5 The "Event" Data Type
 
-the JSON object used to (de)serialize the `http://gedcomx.org/v1/Event` data type
+The JSON object used to (de)serialize the `http://gedcomx.org/v1/Event` data type
 is defined as follows:
 
 ### properties
@@ -566,7 +566,7 @@ conceptual model specification.
 
 ## 3.1 The "Identifier" Data Type
 
-In JSON the `http://gedcomx.org/v1/Identifier` data type is always serialized in the context of a set
+In JSON, the `http://gedcomx.org/v1/Identifier` data type is always serialized in the context of a set
 of identifiers, which is represented using a JSON object. The name of each member of the object is
 the identifier `type`. The value of each member carries the string values of the identifiers of that type.
 All known GEDCOM X identifier types MAY carry multiple values, so the value of the member for each
