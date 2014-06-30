@@ -278,7 +278,7 @@ targets.
 
 <a name="data-types"/>
 
-### Data Types
+### 1.3.2 Data Types
 
 For each data type specified by the GEDCOM X Conceptual Model, a JSON data
 format is supplied which specifies how each of the properties of the data type
