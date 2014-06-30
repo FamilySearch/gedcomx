@@ -21,6 +21,7 @@ For details, see:
 
 http://creativecommons.org/licenses/by-sa/3.0/
 
+<a name="intro"/>
 
 # 1. Introduction
 
@@ -31,6 +32,17 @@ data.
 The GEDCOM X JSON Serialization Format is a specification that defines the media type used
 to serialize and deserialize the GEDCOM X Conceptual Model to and from
 [JSON](http://json.org).
+
+## Table Of Contents
+
+* [1. Introduction](#intro)
+  * [1.1 Identifier, Version and Dependencies](#id-and-version)
+  * [1.2 Examples](#examples)
+  * [1.3 Notational Conventions](#notational-conventions)
+    * [1.2.1 Keywords](#keywords)
+  * [1.3 Definitions](#definitions)
+
+<a name="id-and-version"/>
 
 ## 1.1 Identifier, Version, and Dependencies
 
@@ -46,6 +58,8 @@ The media type defined by this specification is:
 
 This specification is depends on the GEDCOM X Conceptual Model specification identified
 by [`http://gedcomx.org/conceptual-model/v1`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md).
+
+<a name="examples"/>
 
 ## 1.2 Examples
 
@@ -212,7 +226,11 @@ The following example shows an instance of a GEDCOM X serialization in accordanc
 }
 ```
 
+<a name="notational-conventions"/>
+
 ## 1.3 Notational Conventions
+
+<a name="keywords"/>
 
 ### 1.3.1 Keywords
 
@@ -230,6 +248,8 @@ are to be serialized in JSON. Each instance of a data type is serialized as a
 JSON object. The properties of each data type are serialized as members of the
 JSON object.
 
+<a name="compliance"/>
+
 ## 1.4 Compliance
 
 In addition to the compliance requirements provided by this specification, all
@@ -237,6 +257,7 @@ compliance requirements provided by the GEDCOM X Conceptual Model identified by
 [`http://gedcomx.org/conceptual-model/v1`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md)
 are inherited.
 
+<a name="top-data-types"/>
 
 # 2. Top-Level Data Types
 
@@ -497,6 +518,7 @@ spatialDescription | A reference to a geospatial description of this place. | sp
 }
 ```
 
+<a name="component-data-types"/>
 
 # 3. Component-Level Data Types
 
@@ -1018,6 +1040,8 @@ qualifiers | Qualifiers to add additional semantic meaning to the name part. | q
 }
 ```
 
+<a name="nameform-data-type"/>
+
 ## 3.19 The "NameForm" Data Type
 
 The JSON object used to (de)serialize the `http://gedcomx.org/v1/NameForm` data type is defined as follows:
@@ -1064,6 +1088,7 @@ value | The value of the qualifier. | value | string
 }
 ```
 
+<a name="json-specific-data-types"/>
 
 # 4 JSON-Specific Data Types
 
@@ -1138,6 +1163,7 @@ description | Reference to the description of this data set. | description | [`U
 }
 ```
 
+<a name="gedcomx-object"/>
 
 # 5. The GEDCOM X Object
 
@@ -1164,12 +1190,15 @@ The following is an example of the structure of a GEDCOM X JSON Element:
 }
 ```
 
+<a name="extensibility"/>
 
 # 6. Extensibility
 
 In accordance with the [extensibility provisions](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md#extensibility)
 of the GEDCOM X Conceptual Model, extensions MAY be provided as JSON members on data types where extensions are not
 explicitly prohibited.
+
+<a name="data-type-extensions"/>
 
 ## 6.1 Data Type Extensions
 
@@ -1180,6 +1209,8 @@ New data types MAY be defined as extensions to the GEDCOM X JSON Serialization F
 
 Specifications that define new data types as GEDCOM X JSON extensions MUST be published and made freely available and
 compatible with the terms and constraints that govern the GEDCOM X JSON Serialization Format.
+
+<a name="known-json-extension-members"/>
 
 ## 6.2 Known JSON Extension Members
 
@@ -1204,6 +1235,7 @@ genders | array of [`Gender`](#gender-conclusion)
 names | array of [`Name`](#name-conclusion)
 facts | array of [`Fact`](#fact-conclusion)
 
+<a name="fragment-identifiers"/>
 
 7. Fragment Identifiers
 
