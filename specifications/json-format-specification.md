@@ -77,6 +77,7 @@ to serialize and deserialize the GEDCOM X Conceptual Model to and from
   * [4.3 The "Gedcomx" Data Type](#gedcomx-type)
 * [5. The GEDCOM X Object](#gedcomx-object)
 * [6. The Extensibility](#extensibility)
+* [7. Fragment Identifiers](#fragment-identifiers)
 
 <a name="id-and-version"/>
 
