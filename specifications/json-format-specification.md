@@ -93,7 +93,7 @@ The media type defined by this specification is:
 
 `application/x-gedcomx-v1+json`
 
-This specification is depends on the GEDCOM X Conceptual Model specification identified
+This specification depends on the GEDCOM X Conceptual Model specification identified
 by [`http://gedcomx.org/conceptual-model/v1`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md).
 
 <a name="examples"/>
