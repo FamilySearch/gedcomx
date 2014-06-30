@@ -25,6 +25,8 @@ http://creativecommons.org/licenses/by-sa/3.0/
 
 # 1. Introduction
 
+The GEDCOM X Conceptual Model is a specification of formal concepts and types that are used to provide a standard model and vocabulary for describing genealogical data.
+
 The GEDCOM X JSON Serialization Format is a specification that defines the media type used
 to serialize and deserialize the GEDCOM X Conceptual Model to and from
 [JSON](http://json.org).
