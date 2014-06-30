@@ -1275,7 +1275,7 @@ facts | array of [`Fact`](#fact-conclusion)
 
 <a name="fragment-identifiers"/>
 
-7. Fragment Identifiers
+# 7. Fragment Identifiers
 
 Fragment identifiers are used to identify specific objects (i.e. "fragments") within a JSON document. The GEDCOM X
 JSON serialization format specifies the use of the "id" member as the fragment identifier for any object in
