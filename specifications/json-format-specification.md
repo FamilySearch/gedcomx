@@ -40,6 +40,7 @@ to serialize and deserialize the GEDCOM X Conceptual Model to and from
   * [1.2 Examples](#examples)
   * [1.3 Notational Conventions](#notational-conventions)
     * [1.3.1 Keywords](#keywords)
+    * [1.3.2 Data Types](#data-types)
   * [1.4 Compliance](#compliance)
 * [2. Top-Level Data Types](#top-data-types)
   * [2.1 The "Person" Data Type](#person)
@@ -274,6 +275,8 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
 document are to be interpreted as described in BCP 14, 
 [RFC2119](http://tools.ietf.org/html/rfc2119), as scoped to those conformance 
 targets.
+
+<a name="data-types"/>
 
 ### Data Types
 
