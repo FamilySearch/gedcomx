@@ -129,7 +129,7 @@ The manifest is a REQUIRED entry in the GEDCOM X file that provides metadata abo
 resources contained within the file. The manifest is provided as an entry in the file named `META-INF/MANIFEST.MF`.
 
 The metadata about the file and about each entry in the file is supplied in the manifest using "header fields" as defined by
-[RFC 822, Section 3.2](http://tools.ietf.org/html/rfc822#section-3.2) Each header field consists of a name followed by a colon (":")
+[RFC 822, Section 3.2](http://tools.ietf.org/html/rfc822#section-3.2). Each header field consists of a name followed by a colon (":")
 and the field value. Field names are case-insensitive. The field value MAY be preceded by any amount of linear white space, though
 a single space is RECOMMENDED. Header fields can be extended over multiple lines by preceding each extra line with at least one
 space character.
