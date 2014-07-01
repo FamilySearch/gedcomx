@@ -45,12 +45,12 @@ recognized for genealogical resources and the mechanism for providing that metad
 * [1. Introduction](#intro)
   * [1.1 Identifier, Version and Dependencies](#id-and-version)
   * [1.2 Notational Conventions](#notational-conventions)
-* [2. Providing Headers](providing-headers)
-* [3. Header Values](header-values)
-  * [3.1 Text Headers](text-headers)
-  * [3.2 URI Headers](uri-headers)
-  * [3.3 Date Headers](date-headers)
-* [4. The Standard Header Set](standard-header-set)
+* [2. Providing Headers](#providing-headers)
+* [3. Header Values](#header-values)
+  * [3.1 Text Headers](#text-headers)
+  * [3.2 URI Headers](#uri-headers)
+  * [3.3 Date Headers](#date-headers)
+* [4. The Standard Header Set](#standard-header-set)
 
 <a name="id-and-version"/>
 
