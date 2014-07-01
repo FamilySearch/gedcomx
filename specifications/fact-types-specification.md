@@ -20,12 +20,25 @@ For details, see:
 
 http://creativecommons.org/licenses/by-sa/3.0/
 
+<a name="intro"/>
+
 # 1. Introduction
 
 An enumeration of types of facts provides the means for descriptions of facts about persons and
 relationships to be semantically processed by applications, rather than being only interpreted by
 people. This specification provides such an enumeration by identifying specific fact types and defining
 the semantic significance of each type.
+
+## Table Of Contents
+
+* [1. Introduction](#intro)
+  * [1.1 Identifier, Version and Dependencies](#id-and-version)
+  * [1.2 Notational Conventions](#notational-conventions)
+    * [1.3.1 Keywords](#keywords)
+    * [1.3.2 Data Types](#data-types)
+  * [1.4 Compliance](#compliance)
+
+<a name="id-and-version"/>
 
 ## 1.1 Identifier and Version
 
@@ -36,6 +49,8 @@ The identifier for this specification is:
 For convenience, this specification may be referred to as "GEDCOM X Fact Types 1.0".
 This specification uses "GEDCOM X Fact Types" internally.
 
+<a name="notational-conventions"/>
+
 ## 1.2 Notational Conventions
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
@@ -44,18 +59,24 @@ document are to be interpreted as described in BCP 14,
 [RFC2119](http://tools.ietf.org/html/rfc2119), as scoped to those conformance
 targets.
 
-## 1.2.1 The URI Reference
+<a name="uri-reference"/>
+
+### 1.2.1 The URI Reference
 
 The Uniform Resource Identifier ("URI") is used to identify fact types. The URI is
 specified by [RFC 3986](http://tools.ietf.org/html/rfc3986). This specification uses the term
 "URI" to refer to both a "URI" and a "URI Reference" as defined by
 [RFC 3986](http://tools.ietf.org/html/rfc3986).
 
+<a name="fact-types"/>
+
 # 2. Fact Types
 
 This section specifies the set of fact types, grouping the types by 
 whether a fact of the identified type is applicable to a person, couple relationship, 
 or parent-child relationship.
+
+<a name="person-fact-types"/>
 
 ## 2.1 Person Fact Types
 
@@ -125,6 +146,8 @@ URI | description
 `http://gedcomx.org/Visit`| A fact of a person's visit to a place different from the person's residence.
 `http://gedcomx.org/Yahrzeit`| A fact of a person's _yahrzeit_ date.  A person's yahrzeit is the anniversary of their death as measured by the Hebrew calendar.
 
+<a name="couple-relationship-fact-types"/>
+
 ## 2.2 Couple Relationship Fact Types
 
 Facts of the following types are applicable to a couple relationship:
@@ -146,6 +169,8 @@ URI | description
 `http://gedcomx.org/NumberOfChildren`| A fact of the number of children of a person or relationship.
 `http://gedcomx.org/Separation`| A fact of a couple's separation.
 
+<a name="parent-child-relationship-fact-types"/>
+
 ## 2.3 Parent-Child Relationship Fact Types
 
 Facts of the following types are applicable to a parent-child relationship:
@@ -159,6 +184,8 @@ URI | description
 `http://gedcomx.org/StepParent`| A fact about the step relationship between a parent and a child.
 `http://gedcomx.org/SociologicalParent`| A fact about a sociological relationship between a parent and a child, but not definable in typical legal or biological terms.
 `http://gedcomx.org/SurrogateParent`| A fact about a pregnancy surrogate relationship between a parent and a child.
+
+<a name="criteria-new-fact-types"/>
 
 # 3. Criteria for New Fact Types
 
