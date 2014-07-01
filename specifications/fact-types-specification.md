@@ -82,7 +82,7 @@ URI | description
 `http://gedcomx.org/Confirmation`| A fact of a person's confirmation (or other rite of initiation) in a church or religion.
 `http://gedcomx.org/Cremation`| A fact of the cremation of person's body after death.
 `http://gedcomx.org/Death`| A fact of the death of a person.
-`http://gedcomx.org/Education`| A fact of an education or an educational achievement (e.g. diploma, graduation, scholarship, etc.) of a person.
+`http://gedcomx.org/Education`| A fact of an education or an educational achievement (e.g., diploma, graduation, scholarship, etc.) of a person.
 `http://gedcomx.org/Emigration`| A fact of the emigration of a person.
 `http://gedcomx.org/Ethnicity`| A fact of a person's ethnicity or race.
 `http://gedcomx.org/Excommunication`| A fact of a person's excommunication from a church.
@@ -103,12 +103,12 @@ URI | description
 `http://gedcomx.org/MilitaryInduction`| A fact of a person's military induction.
 `http://gedcomx.org/MilitaryService`| A fact of a person's military service.
 `http://gedcomx.org/Mission`| A fact of a person's church mission.
-`http://gedcomx.org/MoveTo`| A fact of a person's move (i.e. change of residence) to a new location.
-`http://gedcomx.org/MoveFrom`| A fact of a person's move (i.e. change of residence) from a location.
-`http://gedcomx.org/MultipleBirth`| A fact that a person was born as part of a multiple birth (e.g. twin, triplet, etc.).
-`http://gedcomx.org/NationalId`| A fact of a person's national id (e.g. social security number).
+`http://gedcomx.org/MoveTo`| A fact of a person's move (i.e., change of residence) to a new location.
+`http://gedcomx.org/MoveFrom`| A fact of a person's move (i.e., change of residence) from a location.
+`http://gedcomx.org/MultipleBirth`| A fact that a person was born as part of a multiple birth (e.g., twin, triplet, etc.).
+`http://gedcomx.org/NationalId`| A fact of a person's national id (e.g., social security number).
 `http://gedcomx.org/Nationality`| A fact of a person's nationality.
-`http://gedcomx.org/Naturalization`| A fact of a person's naturalization (i.e. acquisition of citizenship and nationality).
+`http://gedcomx.org/Naturalization`| A fact of a person's naturalization (i.e., acquisition of citizenship and nationality).
 `http://gedcomx.org/NumberOfChildren`| A fact of the number of children of a person or relationship.
 `http://gedcomx.org/NumberOfMarriages`| A fact of a person's number of marriages.
 `http://gedcomx.org/Occupation`| A fact of a person's occupation or employment.
@@ -152,8 +152,8 @@ Facts of the following types are applicable to a parent-child relationship:
 
 URI | description
 ----|------------
-`http://gedcomx.org/AdoptiveParent`| A fact about an adoptive relationship between a parent an a child.
-`http://gedcomx.org/BiologicalParent`| A fact the biological relationship between a parent and a child.
+`http://gedcomx.org/AdoptiveParent`| A fact about an adoptive relationship between a parent and a child.
+`http://gedcomx.org/BiologicalParent`| A fact about the biological relationship between a parent and a child.
 `http://gedcomx.org/FosterParent`| A fact about a foster relationship between a foster parent and a child.
 `http://gedcomx.org/GuardianParent`| A fact about a legal guardianship between a parent and a child.
 `http://gedcomx.org/StepParent`| A fact about the step relationship between a parent and a child.
