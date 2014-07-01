@@ -119,7 +119,7 @@ identifies the value of the metadata. For cases in which the value of the metada
 may not have an identifier except for its text value, the text value is
 encoded according to the data URI scheme defined by [RFC 2397](http://tools.ietf.org/html/rfc2397).
 
-<a name="data-headers"/>
+<a name="date-headers"/>
 
 ## 3.3. Date Headers
 
