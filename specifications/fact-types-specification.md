@@ -105,7 +105,7 @@ URI | description
 `http://gedcomx.org/Mission`| A fact of a person's church mission.
 `http://gedcomx.org/MoveTo`| A fact of a person's move (i.e. change of residence) to a new location.
 `http://gedcomx.org/MoveFrom`| A fact of a person's move (i.e. change of residence) from a location.
-`http://gedcomx.org/MultipleBirth`| A fact that a person was born as part of a multiple birth (e.g. twin, triplet, etc.)
+`http://gedcomx.org/MultipleBirth`| A fact that a person was born as part of a multiple birth (e.g. twin, triplet, etc.).
 `http://gedcomx.org/NationalId`| A fact of a person's national id (e.g. social security number).
 `http://gedcomx.org/Nationality`| A fact of a person's nationality.
 `http://gedcomx.org/Naturalization`| A fact of a person's naturalization (i.e. acquisition of citizenship and nationality).
