@@ -53,7 +53,7 @@ the same file.
 * [6. Example](#example)
   * [6.1 Example Data References](#example-data-references)
 * [7. GEDCOM X Filename Extension](#gedxomx-filename-extension)
-    * 
+
 <a name="id-and-version"/>
 
 ## 1.1 Identifier, Version, and Dependencies
@@ -342,6 +342,8 @@ illustrating the source reference and source description is provided here:
   ...
 </gedcomx>
 ```
+
+<a name="gedxomx-filename-extension"/>
 
 # 7. GEDCOM X Filename Extension
 
