@@ -34,9 +34,12 @@ the semantic significance of each type.
 * [1. Introduction](#intro)
   * [1.1 Identifier, Version and Dependencies](#id-and-version)
   * [1.2 Notational Conventions](#notational-conventions)
-    * [1.3.1 Keywords](#keywords)
-    * [1.3.2 Data Types](#data-types)
-  * [1.4 Compliance](#compliance)
+    * [1.1.2 The URI Reference](#uri-reference)
+* [2. Fact Types](#fact-types)
+  * [2.1 Person Fact Types](#person-fact-types)
+  * [2.2 Couple Relationship Fact Types](#couple-relationship-fact-types)
+  * [2.3 Parent-Child Relationship Fact Types](#parent-child-relationship-fact-types)
+* [3. Criteria for New Fact Types](# criteria-new-fact-types)
 
 <a name="id-and-version"/>
 
