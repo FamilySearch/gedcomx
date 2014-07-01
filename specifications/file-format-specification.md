@@ -38,9 +38,22 @@ the same file.
   * [1.2 Notational Conventions](#notational-conventions)
 * [2. Zip File](#zip-file)
 * [3. Resources in a GEDCOM X File](#resources-gedcomx-file)
-    * [1.3.1 Keywords](#keywords)
-    * [1.3.2 Data Types](#data-types)
-
+  * [3.1 Resources Defined by GEDCOM X](#resources-gedcomx)
+  * [3.2 Resources Defined Externally to GEDCOM X](#resources-externally-gedcomx-)
+* [4. The Manifest](#manifest)
+  * [4.1 Main Header Fields](#main-header-fields)
+  * [4.2 Individual Resource Header Fields](#individual-resource-header-fields)
+* [5. Data References](#data-references)
+  * [5.1 Absolute References](#absolute-references)
+  * [5.2 Same-Document References](#same-document-references)
+  * [5.3 Relative References](#relative-references)
+    * [5.3.1 Network-Path Relative References](#network-relative-references)
+    * [5.3.2 Absolute-Path Relative References](#absolute-path-relative-references)
+    * [5.3.3 Relative-Path Relative References](#relative-relative-references)
+* [6. Example](#example)
+  * [6.1 Example Data References](#example-data-references)
+* [7. GEDCOM X Filename Extension](#gedxomx-filename-extension)
+    * 
 <a name="id-and-version"/>
 
 ## 1.1 Identifier, Version, and Dependencies
