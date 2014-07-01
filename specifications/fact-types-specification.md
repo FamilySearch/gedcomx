@@ -76,7 +76,7 @@ URI | description
 `http://gedcomx.org/Burial`| A fact of the burial of a person's body after death.
 `http://gedcomx.org/Caste`| A fact of a person's caste.
 `http://gedcomx.org/Census`| A fact of a person's participation in a census.
-`http://gedcomx.org/Christening`| A fact of a person's christening *at birth*. Note: use `AdultChristening` for the christening as an adult.
+`http://gedcomx.org/Christening`| A fact of a person's christening *at birth*. Note: Use `AdultChristening` for the christening as an adult.
 `http://gedcomx.org/Circumcision`| A fact of a person's circumcision.
 `http://gedcomx.org/Clan`| A fact of a person's clan.
 `http://gedcomx.org/Confirmation`| A fact of a person's confirmation (or other rite of initiation) in a church or religion.
