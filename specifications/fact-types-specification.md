@@ -73,7 +73,7 @@ URI | description
 `http://gedcomx.org/BatMitzvah`| A fact of a person's bat mitzvah.
 `http://gedcomx.org/Birth`| A fact of a person's birth.
 `http://gedcomx.org/Blessing`| A fact of an official blessing received by a person, such as at the hands of a clergy member or at another religious rite.
-`http://gedcomx.org/Burial`| A fact of the burial of person's body after death.
+`http://gedcomx.org/Burial`| A fact of the burial of a person's body after death.
 `http://gedcomx.org/Caste`| A fact of a person's caste.
 `http://gedcomx.org/Census`| A fact of a person's participation in a census.
 `http://gedcomx.org/Christening`| A fact of a person's christening *at birth*. Note: use `AdultChristening` for the christening as an adult.
