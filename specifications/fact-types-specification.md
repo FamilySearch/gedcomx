@@ -39,7 +39,7 @@ the semantic significance of each type.
   * [2.1 Person Fact Types](#person-fact-types)
   * [2.2 Couple Relationship Fact Types](#couple-relationship-fact-types)
   * [2.3 Parent-Child Relationship Fact Types](#parent-child-relationship-fact-types)
-* [3. Criteria for New Fact Types](# criteria-new-fact-types)
+* [3. Criteria for New Fact Types](#criteria-new-fact-types)
 
 <a name="id-and-version"/>
 
