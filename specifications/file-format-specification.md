@@ -21,6 +21,8 @@ For details, see:
 
 http://creativecommons.org/licenses/by-sa/3.0/
 
+<a name="intro"/>
+
 # 1. Introduction
 
 A GEDCOM X file is a bundle of digital genealogical resources, such as data that has been gathered
@@ -28,6 +30,18 @@ through the genealogical research process about persons, relationships, sources,
 This specification defines a mechanism to bundle all of these resources into a single file
 and defines a mechanism whereby each resource within the bundle may refer to other resources within
 the same file.
+
+## Table Of Contents
+
+* [1. Introduction](#intro)
+  * [1.1 Identifier, Version and Dependencies](#id-and-version)
+  * [1.2 Notational Conventions](#notational-conventions)
+* [2. Zip File](#zip-file)
+* [3. Resources in a GEDCOM X File](#resources-gedcomx-file)
+    * [1.3.1 Keywords](#keywords)
+    * [1.3.2 Data Types](#data-types)
+
+<a name="id-and-version"/>
 
 ## 1.1 Identifier, Version, and Dependencies
 
@@ -53,6 +67,8 @@ for header fields that are used to define the GEDCOM X file manifest.
 This specification refers to [RFC 3986](http://tools.ietf.org/html/rfc3986) to explain how URI references are to be
 resolved within a GEDCOM X file.
 
+<a name="notational-conventions"/>
+
 ## 1.2 Notational Conventions
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
@@ -61,13 +77,19 @@ document are to be interpreted as described in BCP 14,
 [RFC2119](http://tools.ietf.org/html/rfc2119), as scoped to those conformance
 targets.
 
+<a name="zip-file"/>
+
 # 2. Zip File
 
 The GEDCOM X File Format is an extension of the [ZIP file format](http://www.pkware.com/documents/casestudies/APPNOTE.TXT).
 Each resource in the GEDCOM X file is provided as an entry in the file. A GEDCOM X File MUST include a manifest file that
 provides metadata about the GEDCOM X file and the resources contained in it.
 
+<a name="resources-gedcomx-file"/>
+
 # 3. Resources in a GEDCOM X File
+
+<a name="resources-gedcomx"/>
 
 ## 3.1 Resources Defined by GEDCOM X
 
@@ -78,11 +100,15 @@ As such, each GEDCOM X resource is provided within a valid GEDCOM X XML document
 Each GEDCOM X file MUST contain at least one GEDCOM X XML document. A GEDCOM X file MAY contain more than one GEDCOM X XML document.
 This specification does not specify a maximum number of elements nor a minimum number of elements supplied within each GEDCOM X document.
 
+<a name="resources-externally-gedcomx-"/>
+
 ## 3.2 Resources Defined Externally to GEDCOM X
 
 A GEDCOM X file MAY contain resources other than those defined by the [GEDCOM X Conceptual Model](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md).
 Examples of such resources include images, videos, audio files, etc. For each such resource in the GEDCOM X file,
 a media type MUST be provided using the GEDCOM X file manifest.
+
+<a name="manifest"/>
 
 # 4. The Manifest
 
@@ -104,6 +130,8 @@ MUST NOT contain a header field named "Name".
 Each section for individual resources in the GEDCOM X file MUST start with a header field with the name "Name" and the value being the name
 of the entry for the resource in the GEDCOM X file.
 
+<a name="main-header-fields"/>
+
 ## 4.1 Main Header Fields
 
 All of the headers defined by the [GEDCOM X Standard Header Set](https://github.com/FamilySearch/gedcomx/blob/master/specifications/standard-header-set-specification.md)
@@ -120,6 +148,8 @@ Use of the following headers is RECOMMENDED if the metadata is available:
 * `X-DC-created`, used to determine when the file was created.
 * `X-DC-creator`, used to identify the agent that created the file. The value of the header is interpreted as a URI Reference that resolves to the agent, possibly provided in the GEDCOM X file itself.
 
+<a name="individual-resource-header-fields"/>
+
 ## 4.2 Individual Resource Header Fields
 
 All of the headers defined by the [GEDCOM X Standard Header Set](https://github.com/FamilySearch/gedcomx/blob/master/specifications/standard-header-set-specification.md)
@@ -130,6 +160,8 @@ if the metadata is available:
 * `ETag` is used to supply a version for the resource.
 * `X-DC-modified` is used to supply a timestamp of when the resource was last modified.
 
+<a name="data-references"/>
+
 # 5. Data References
 
 The [GEDCOM X Conceptual Model](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md) specifies
@@ -137,16 +169,22 @@ that instances of data types refer to other instances via [URI Reference](https:
 To support references to instances of data types within a GEDCOM X file, this section clarifies how URI References are to
 be resolved within the context of a file.
 
+<a name="absolute-references"/>
+
 ## 5.1 Absolute References
 
 If an instance of a data type refers to an resource that is external to the file, such as an online resource, the URI Reference MUST be an
 Absolute URI as defined by [RFC 3986 Section 4.3](http://tools.ietf.org/html/rfc3986#section-4.3).
+
+<a name="same-document-references"/>
 
 ## 5.2 Same-Document References
 
 References to instances of data types that are contained within the same GEDCOM X XML Document within a GEDCOM X file
 are referred to as "same-document references". A same-document URI reference is specified by
 [RFC 3986 Section 4.4](http://tools.ietf.org/html/rfc3986#section-4.4).
+
+<a name="relative-references"/>
 
 ## 5.3 Relative References
 
@@ -158,22 +196,30 @@ For the purposes of resolving relative references within a GEDCOM X file, the ba
 the ZIP file. The base URI of a GEDCOM X file aligns with the concept of the "Base URI from the Encapsulating Entity" as defined by
 [RFC 3986 Section 5.1.2](http://tools.ietf.org/html/rfc3986#section-5.1.2).
 
+<a name="network-relative-references"/>
+
 ### 5.3.1 Network-Path Relative References
 
 [RFC 3986 Section 4.2](http://tools.ietf.org/html/rfc3986#section-4.2) specifies that a relative reference that begins with two slash
 characters is termed a network-path reference. Network-path references SHOULD NOT be used within a GEDCOM X file. The resolution mechanism
 for a network-path reference within a GEDCOM X file is not defined by this specification.
 
+<a name="absolute-relative-references"/>
+
 ### 5.3.2 Absolute-Path Relative References
 
 [RFC 3986 Section 4.2](http://tools.ietf.org/html/rfc3986#section-4.2) specifies that a relative reference that begins with a single slash
 character is termed an absolute-path reference. Absolute path references are to be resolved as defined by [RFC 3986 Section 5.2](http://tools.ietf.org/html/rfc3986#section-5.2).
+
+<a name="relative-relative-references"/>
 
 ### 5.3.3 Relative-Path Relative References
 
 [RFC 3986 Section 4.2](http://tools.ietf.org/html/rfc3986#section-4.2) specifies that a relative reference that does not begin with a
 slash character is termed a relative-path reference. Relative path references are to be resolved as defined by [RFC 3986 Section 5.2](http://tools.ietf.org/html/rfc3986#section-5.2).
 
+
+<a name="example"/>
 
 # 6. Example
 
@@ -230,6 +276,8 @@ Content-Type: application/x-gedcomx-v1+xml
 Name: images/alma-birth-certificate.jpg
 Content-Type: image/jpeg
 ```
+
+<a name="example-data-references"/>
 
 ## 6.1 Example Data References
 
