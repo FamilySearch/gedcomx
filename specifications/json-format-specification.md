@@ -75,7 +75,7 @@ to serialize and deserialize the GEDCOM X Conceptual Model to and from
   * [4.3 The "Gedcomx" Data Type](#gedcomx-type)
 * [5. The GEDCOM X Object](#gedcomx-object)
 * [6. Extensibility](#extensibility)
-* [7. Fragment Identifiers](#fragment-identifiers)
+* [7. Fragment Identifiers](#fragment-ids)
 
 <a name="id-and-version"/>
 
@@ -1272,7 +1272,7 @@ genders | array of [`Gender`](#gender-conclusion)
 names | array of [`Name`](#name-conclusion)
 facts | array of [`Fact`](#fact-conclusion)
 
-<a name="fragment-identifiers"/>
+<a name="fragment-ids"/>
 
 # 7. Fragment Identifiers
 
