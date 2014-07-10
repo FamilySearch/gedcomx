@@ -533,6 +533,7 @@ name | description | JSON member | JSON object type
 names | A list of standardized (or normalized), fully-qualified (in terms of what is known of the applicable jurisdictional hierarchy) names for this place that are applicable to this description of this place. | names | array of [`TextValue`](#text-value)
 type | A uniform resource identifier (URI) identifying the type of the place as it is applicable to this description. | type | [`URI`](#uri)
 place | An identifier for the place being described. | place | [`ResourceReference`](#resource-reference)
+jurisdiction | A reference to a description of the jurisdiction of this place. | jurisdiction | [`gx:ResourceReference`](#resource-reference)
 latitude | Angular distance, in degrees, north or south of the Equator. | latitude | number
 longitude | Angular distance, in degrees, east or west of the Prime Meridian. | longitude | number
 temporalDescription | A description of the time period to which this place description is relevant. | temporalDescription | [`Date`](#conclusion-date)
@@ -548,6 +549,7 @@ spatialDescription | A reference to a geospatial description of this place. | sp
   "names" : [ { ... }, { ... } ],
   "type" : "http://identifier/for/the/place/type",
   "place" : { "resource" : "..." },
+  "jurisdiction" : { "resource" : "..." },
   "latitude" : "27.9883575",
   "latitude" : "86.9252014",
   "temporalDescription" : { ... },
