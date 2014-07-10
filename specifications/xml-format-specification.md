@@ -400,6 +400,7 @@ data type.
 name | description | XML property | XML type
 -----|-------------|--------------|---------
 id | An identifier for the XML element holding the agent data. The id attribute MUST conform to the constraints defined in [Section 7, "Fragment Identifiers"](#fragment-ids). | id (attribute) | xsd:string
+identifiers | Identifiers for this agent. | gx:identifier | [`gx:Identifier`](#identifier-type)
 names | The name(s) of the person or organization. | gx:name | [`gx:TextValue`](#text-value)
 homepage | The homepage of the person or organization. | gx:homepage | [`gx:ResourceReference`](#resource-reference)
 openid  | The [openid](http://openid.net/) of the person or organization. | gx:openid | [`gx:ResourceReference`](#resource-reference)
@@ -413,6 +414,8 @@ person | A reference to the person that describes this agent. | gx:person | [`gx
 
 ```xml
   <... id="local_id">
+    <gx:identifier>...</gx:identifier>
+    ...
     <gx:name>...</gx:name>
     ...
     <gx:homepage>...</gx:homepage>

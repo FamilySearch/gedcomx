@@ -424,6 +424,7 @@ The JSON object used to (de)serialize the `http://gedcomx.org/v1/Agent` data typ
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 id | An identifier for the JSON object holding the agent data. The id attribute MUST conform to the constraints defined in [Section 7, "Fragment Identifiers"](#fragment-ids). | id | string
+identifiers | Identifiers for this agent. | identifiers | [`Identifier`](#identifier-type)
 names | The name(s) of the person or organization. | names | array of [`TextValue`](#text-value)
 homepage | The homepage of the person or organization. | homepage | [`ResourceReference`](#resource-reference)
 openid  | The [openid](http://openid.net/) of the person or organization. | openid | [`ResourceReference`](#resource-reference)
@@ -438,6 +439,7 @@ person | A reference to the person that describes this agent. | person | [`Resou
 ```json
 {
   "id" : "local_id",
+  "identifiers" : [ { ... }, { ... } ],
   "names" : [ { ... }, { ... } ],
   "homepage" : {
     "resource" : "..."
