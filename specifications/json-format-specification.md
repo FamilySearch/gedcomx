@@ -386,6 +386,13 @@ componentOf | A reference to the source that contains this source. | componentOf
 titles | The display name(s) for this source. | titles | array of [`TextValue`](#text-value)
 notes | A list of notes about a source | notes | array of [`Note`](#note)
 attribution | The attribution of this source. | attribution | [`Attribution`](#attribution)
+rights  | The rights for this resource. | rights | array of [`ResourceReference`](#resource-reference)
+coverage | The coverage of the resource. | coverage | [`Coverage`](#coverage)
+descriptions | Human-readable descriptions of this source. | descriptions | array of [`TextValue`](#text-value)
+identifiers | A list of identifiers for the resource being described. | identifiers | array of [`Identifier`](#identifier-type)
+created | Timestamp of when the resource being described was created. | created | number (milliseconds since epoch)
+modified | Timestamp of when the resource being described was modified. | modified | number (milliseconds since epoch)
+repository | A reference to the repository that contains the described resource. | repository | [`ResourceReference`](#resource-reference)
 
 ### examples
 
@@ -406,7 +413,14 @@ attribution | The attribution of this source. | attribution | [`Attribution`](#a
   "componentOf" : { ... },
   "titles" : [ { ... }, { ... } ],
   "notes" : [ { ... }, { ... } ],
-  "attribution" : { ... }
+  "attribution" : { ... },
+  "rights" : [ { ... }, { ... }],
+  "coverage" : { ... },
+  "descriptions" : [ { ... }, { ... } ],
+  "identifiers" : { ... }
+  "created" : ...,
+  "modified" : ...,
+  "repository" : { ... }
 
   ...possibility of extension elements...
 
@@ -1128,6 +1142,30 @@ value | The value of the qualifier. | value | string
   "value" : "..."
 }
 ```
+
+<a name="coverage"/>
+
+## 3.21 The "Coverage" Data Type
+
+The `gx:Coverage` XML type is used to (de)serialize the `http://gedcomx.org/v1/Coverage`
+data type.
+
+### properties
+
+name | description | XML property | XML type
+-----|-------------|--------------|---------
+spatial | The spatial (i.e., geographic) coverage. | spatial | [`PlaceReference`](#conclusion-place-reference)
+temporal | The temporal coverage. | temporal | [`Date`](#conclusion-date)
+
+### examples
+
+```json
+{
+  "spatial" : { ... },
+  "temporal" : { ... }
+}
+```
+
 
 <a name="json-specific-data-types"/>
 
