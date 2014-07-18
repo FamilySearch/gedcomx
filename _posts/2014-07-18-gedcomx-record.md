@@ -1,6 +1,6 @@
 ---
-title: Introducing GEDCOM X RS
-date: 2014-07-18 15:46:00
+title: Introducing GEDCOM X Record Extensions
+date: 2014-07-18 15:10:00
 layout: default
 author: Ryan Heaton
 ---
