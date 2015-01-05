@@ -114,7 +114,7 @@ This specification uses "GEDCOM X Date" internally.
 
 ### 1.2.1 Keywords
 
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+The keywords "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
 "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
 document are to be interpreted as described in BCP 14,
 [RFC2119](http://tools.ietf.org/html/rfc2119), as scoped to those conformance
