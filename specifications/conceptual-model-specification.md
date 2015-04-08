@@ -22,7 +22,7 @@ http://creativecommons.org/licenses/by-sa/3.0/
 
 ## Summary
 
-The GEDCOM X Conceptual Model specifies an abstract conceptual model for genealogical data, independent of any serialization format. The concept and data types provided are used to represent genealogical data and are defined independent of their representation, establishing a basis for having different representations (XML and JSON) of the same data. The spec includes notational conventions, definitions, top-level and component-level data types, extracted conclusion constraints, and extensibility.
+The GEDCOM X Conceptual Model spec specifies an abstract conceptual model for genealogical data, independent of any serialization format. The concept and data types provided are used to represent genealogical data and are defined independent of their representation, establishing a basis for having different representations (XML and JSON) of the same data. The spec includes notational conventions, definitions, top-level and component-level data types, extracted conclusion constraints, and extensibility.
 
 <a name="intro"/>
 
