@@ -22,7 +22,7 @@ http://creativecommons.org/licenses/by-sa/3.0/
 
 ## Summary
 
-The GEDCOM X Event Types specifies a set of enumerated values that identify common event types that are relevant to genealogical research. These can include birth, marriage or death events. The spec includes notational conventions, event types, and the URI reference used to identify event types.
+The GEDCOM X Event Types specifies a set of enumerated values that identify common event types that are relevant to genealogical research. An "event" is an occurrence that happened at a specific time or period of time, often at a specific place or set of places. Genealogically relevant events are often described by referencing the persons that played a role in that event. Hence, events often refer to persons and might infer relationships, but events are described independently of those persons and relationships. The spec includes notational conventions, event types, and the URI reference used to identify event types.
 
 # 1. Introduction
 
