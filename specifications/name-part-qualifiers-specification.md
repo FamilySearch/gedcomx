@@ -20,6 +20,10 @@ For details, see:
 
 http://creativecommons.org/licenses/by-sa/3.0/
 
+## Summary
+
+The GEDCOM X Name Part Qualifiers spec provides a set of enumerated values that identify common qualifiers of name parts that are relevant to genealogical research. The spec includes notational conventions, the URI reference, and name part qualifiers. 
+
 # 1. Introduction
 
 An enumeration of name part qualifiers provides the means for parts of names of persons to
