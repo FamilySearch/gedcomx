@@ -21,6 +21,11 @@ For details, see:
 
 http://creativecommons.org/licenses/by-sa/3.0/
 
+## Summary
+
+The GEDCOM X JSON Serialization Format spec specifies how to represent the [GEDCOM X Conceptual
+Model](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md) in JSON. 
+
 <a name="intro"/>
 
 # 1. Introduction
