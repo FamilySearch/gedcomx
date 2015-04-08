@@ -22,7 +22,7 @@ http://creativecommons.org/licenses/by-sa/3.0/
 
 ## Summary
 
-The GEDCOM X Date Format specifies a mechanism for representing dates, especially as they pertain to the need to represent genealogical dates. The spec includes definitions, date ranges, date formats and URI representation examples.
+The GEDCOM X Date Format spec specifies a mechanism for representing dates, especially as they pertain to the need to represent genealogical dates. The spec includes definitions, date ranges, date formats and URI representation examples.
 
 <a name="intro"/>
 
