@@ -20,6 +20,10 @@ For details, see:
 
 http://creativecommons.org/licenses/by-sa/3.0/
 
+## Summary
+
+The GEDCOM X Fact Types spec specifies a set of enumerated values that identify common fact types that are relevant to genealogical research. A "fact" is a data item that is presumed to be true about a specific subject, such as a person or relationship. A time or place is often, but not always, applicable to a fact. Facts do not exist outside the scope of the subject to which they apply. The spec includes notational conventions, fact types, and the URI reference used to identify fact types.
+
 <a name="intro"/>
 
 # 1. Introduction
