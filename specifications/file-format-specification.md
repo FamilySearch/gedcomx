@@ -21,6 +21,10 @@ For details, see:
 
 http://creativecommons.org/licenses/by-sa/3.0/
 
+## Summary
+
+The GEDCOM X File Format spec specifies how to bundle up genealogical data into a file and defines how the resources within the file can link to each other. The spec includes notational conventions, the ZIP file format, the GEDCOM X resources, the manifest, data references, examples, and the GEDCOM X filename extension.
+
 <a name="intro"/>
 
 # 1. Introduction
