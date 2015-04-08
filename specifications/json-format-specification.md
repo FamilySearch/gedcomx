@@ -24,7 +24,7 @@ http://creativecommons.org/licenses/by-sa/3.0/
 ## Summary
 
 The GEDCOM X JSON Serialization Format spec specifies how to represent the [GEDCOM X Conceptual
-Model](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md) in JSON. 
+Model](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md) in JSON. The spec includes examples, notational conventions, top-level data types, component-level data types, JSON-specific data types, the GEDCOM X object, extensibility, and fragment identifiers.
 
 <a name="intro"/>
 
