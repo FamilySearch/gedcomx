@@ -21,6 +21,11 @@ For details, see:
 
 http://creativecommons.org/licenses/by-sa/3.0/
 
+## Summary
+
+The GEDCOM X XML Serialization Format spec specifies how to represent the [GEDCOM X Conceptual
+Model](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md) in XML. The spec includes examples, notational conventions, top-level data types, component-level data types, XML-specific data types, the GEDCOM X element, extensibility, and fragment identifiers.
+
 <a name="intro"/>
 
 # 1. Introduction
