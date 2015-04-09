@@ -22,6 +22,10 @@ For details, see:
 
 http://creativecommons.org/licenses/by-sa/3.0/
 
+## Summary
+
+The GEDCOM X Standard Header Set spec specifies the set of metadata terms that are recognized for genealogical resources and the mechanism for providing that metadata. The spec includes notational conventions, providing headers, header values, and the standard header set.
+
 <a name="intro"/>
 
 # 1. Introduction
