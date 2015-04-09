@@ -24,7 +24,7 @@ http://creativecommons.org/licenses/by-sa/3.0/
 
 ## Summary
 
-The GEDCOM X Standard Header Set spec specifies the set of metadata terms that are recognized for genealogical resources and the mechanism for providing that metadata. It supports the [GEDCOM X file format spec](https://github.com/FamilySearch/gedcomx/blob/master/specifications/file-format-specification.md). The spec includes notational conventions, providing headers, header values, and the standard header set.
+The GEDCOM X Standard Header Set spec specifies the set of metadata terms that are recognized for genealogical resources and the mechanism for providing that metadata. It supports the [GEDCOM X File Format](https://github.com/FamilySearch/gedcomx/blob/master/specifications/file-format-specification.md). The spec includes notational conventions, providing headers, header values, and the standard header set.
 
 <a name="intro"/>
 
