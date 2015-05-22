@@ -55,6 +55,7 @@ to serialize and deserialize the GEDCOM X Conceptual Model to and from
   * [2.5 The "Event" Data Type](#event)
   * [2.6 The "Document" Data Type](#document)
   * [2.7 The "PlaceDescription" Data Type](#place-description)
+  * [2.8 The "Family" Data Type](#family)
 * [3. Component-Level Data Types](#component-data-types)
   * [3.1 The "Identifier" Data Type](#identifier-type)
   * [3.2 The "Attribution" Data Type](#attribution)
@@ -569,6 +570,22 @@ spatialDescription | A reference to a geospatial description of this place. | gx
     ...
   </...>
 ```
+
+<a name="family"/>
+
+## 2.8 The "Family" Data Type
+
+The JSON object used to (de)serialize the `http://gedcomx.org/v1/Family` data type
+is defined as follows:
+
+### properties
+
+name | description | JSON member | JSON object type
+-----|-------------|--------------|---------
+parent1 | Reference to the first parent in the family. | parent1 | [`ResourceReference`](#resource-reference)
+parent2 | Reference to the second parent in the family. | parent2 | [`ResourceReference`](#resource-reference)
+children | The list of references to the children of this family. | children | array of [`ResourceReference`](#resource-reference)
+
 
 
 <a name="component-data-types"/>
@@ -1232,6 +1249,7 @@ lang | The locale identifier for the data set. | xml:lang (attribute) | [IETF BC
 attribution | The attribution of this data set. | gx:attribution | [`gx:Attribution`](#attribution) | OPTIONAL.
 persons | The list of persons contained in the data set. | gx:person | [`gx:Person`](#person) | OPTIONAL.
 relationships | The list of relationships contained in the data set. | gx:relationship | [`gx:Relationship`](#relationship) | OPTIONAL.
+families | The list of families contained in the data set. | gx:family | [`gx:Family`](#family) | OPTIONAL.
 sourceDescriptions | The list of source descriptions contained in the data set. | gx:sourceDescription | [`gx:SourceDescription`](#source-description) | OPTIONAL.
 agents | The list of agents contained in the data set. | gx:agent | [`gx:Agent`](#agent) | OPTIONAL.
 events | The list of events contained in the data set. | gx:event | [`gx:Event`](#event) | OPTIONAL.
@@ -1249,6 +1267,9 @@ description | Reference to the description of this data set. | description (attr
   ...
   <gx:relationship>...</gx:relationship>
   <gx:relationship>...</gx:relationship>
+  ...
+  <gx:family>...</gx:family>
+  <gx:family>...</gx:family>
   ...
   <gx:sourceDescription>...</gx:sourceDescription>
   <gx:sourceDescription>...</gx:sourceDescription>
@@ -1306,6 +1327,10 @@ The following is an example of the structure of a GEDCOM X XML Element:
 
   <relationship>...</relationship>
   <relationship>...</relationship>
+  ...
+
+  <family>...</family>
+  <family>...</family>
   ...
 
   <sourceDescription>...</sourceDescription>
