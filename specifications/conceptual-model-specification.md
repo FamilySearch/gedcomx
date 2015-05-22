@@ -648,7 +648,7 @@ This data type extends the following data type:
 name  | description | data type | constraints
 ------|-------------|-----------|------------
 parent1 | Reference to the first parent in the relationship. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to an instance of [`http://gedcomx.org/v1/Person`](#person)
-parent1 | Reference to the second parent in the relationship. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to an instance of [`http://gedcomx.org/v1/Person`](#person)
+parent2 | Reference to the second parent in the relationship. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to an instance of [`http://gedcomx.org/v1/Person`](#person)
 children | The list of references to the children of this family. | List of [URI](#uri). Order is preserved. | OPTIONAL. If provided, each reference in the list MUST resolve to an instance of [`http://gedcomx.org/v1/Person`](#person).
 
 <a name="component-data-types"/>
