@@ -53,6 +53,7 @@ to serialize and deserialize the GEDCOM X Conceptual Model to and from
   * [2.5 The "Event" Data Type](#event)
   * [2.6 The "Document" Data Type](#document)
   * [2.7 The "PlaceDescription" Data Type](#place-description)
+  * [2.8 The "Family" Data Type](#family)
 * [3. Component-Level Data Types](#component-data-types)
   * [3.1 The "Identifier" Data Type](#identifier-type)
   * [3.2 The "Attribution" Data Type](#attribution)
@@ -577,6 +578,22 @@ spatialDescription | A reference to a geospatial description of this place. | sp
   }
 }
 ```
+
+<a name="family"/>
+
+## 2.8 The "Family" Data Type
+
+The JSON object used to (de)serialize the `http://gedcomx.org/v1/Family` data type
+is defined as follows:
+
+### properties
+
+name | description | JSON member | JSON object type
+-----|-------------|--------------|---------
+parent1 | Reference to the first parent in the family. | parent1 | [`ResourceReference`](#resource-reference)
+parent2 | Reference to the second parent in the family. | parent2 | [`ResourceReference`](#resource-reference)
+children | The list of references to the children of this family. | children | array of [`ResourceReference`](#resource-reference)
+
 
 <a name="component-data-types"/>
 
@@ -1222,6 +1239,7 @@ lang | The locale identifier for the data set. | lang | [IETF BCP 47](http://too
 attribution | The attribution of this data set. | attribution | [`Attribution`](#attribution) | OPTIONAL.
 persons | The list of persons contained in the data set. | persons | array of [`Person`](#person) | OPTIONAL.
 relationships | The list of relationships contained in the data set. | relationships | array of [`Relationship`](#relationship) | OPTIONAL.
+families | The list of families contained in the data set. | families | array of [`Family`](#family) | OPTIONAL.
 sourceDescriptions | The list of source descriptions contained in the data set. | sourceDescriptions | array of [`SourceDescription`](#source-description) | OPTIONAL.
 agents | The list of agents contained in the data set. | agents | array of [`Agent`](#agent) | OPTIONAL.
 events | The list of events contained in the data set. | events | array of [`Event`](#event) | OPTIONAL.
@@ -1238,6 +1256,7 @@ description | Reference to the description of this data set. | description | [`U
   "attribution" : { ... },
   "persons" : [ { ... }, { ... } ],
   "relationships" : [ { ... }, { ... }, ],
+  "families" : [ { ... }, { ... }, ],
   "sourceDescriptions" : [ { ... }, { ... } ],
   "agents" : [ { ... } , { ... } ],
   "events" : [ { ... } , { ... } ],
@@ -1266,6 +1285,7 @@ The following is an example of the structure of a GEDCOM X JSON Element:
   "attribution" : { ... },
   "persons" : [ { ... }, { ... } ],
   "relationships" : [ { ... }, { ... }, ],
+  "families" : [ { ... }, { ... }, ],
   "sourceDescriptions" : [ { ... }, { ... } ],
   "agents" : [ { ... } , { ... } ],
   "events" : [ { ... } , { ... } ],
