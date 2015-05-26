@@ -565,7 +565,14 @@ spatialDescription | A reference to a geospatial description of this place. | sp
 
   ...the members of [Subject](#subject)...,
 
-  "names" : [ { ... }, { ... } ],
+  "names" : [ {
+    "lang" : "en",
+    "value" : "Pope's Creek, Westmoreland, Virginia, United States"
+  } ,
+  {
+    "lang" : "zh",
+    "value" : "教皇的小河，威斯特摩兰，弗吉尼亚州，美国"
+  } ],
   "type" : "http://identifier/for/the/place/type",
   "place" : { "resource" : "..." },
   "jurisdiction" : { "resource" : "..." },

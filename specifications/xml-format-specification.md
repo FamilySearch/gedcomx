@@ -554,9 +554,8 @@ spatialDescription | A reference to a geospatial description of this place. | gx
 
     <!-- ...the members of [gx:Subject](#subject)... -->
 
-    <gx:name>
-      ...
-    </gx:name>
+    <gx:name lang="en">Pope's Creek, Westmoreland, Virginia, United States</gx:name>
+    <gx:name lang="zh">教皇的小河，威斯特摩兰，弗吉尼亚州，美国</gx:name>
     ...
     <gx:place resource="..."/>
     <gx:jurisdiction resource="..."/>
