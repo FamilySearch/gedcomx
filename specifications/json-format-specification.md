@@ -105,7 +105,7 @@ by [`http://gedcomx.org/conceptual-model/v1`](https://github.com/FamilySearch/ge
 
 The following example shows an instance of a GEDCOM X serialization in accordance with this specification:
 
-```json
+```javascript
 {
   "attribution" : {
     "contributor" : {
@@ -323,15 +323,15 @@ facts | The facts of the person. | facts | array of [`Fact`](#fact-conclusion)
 
 ### examples
 
-```json
+```javascript
 {
 
-  ...the members of [Subject](#subject)...,
+  //...the members of [Subject](#subject)/*...*/,
 
   "private" : false,
-  "gender" : { ... },
-  "names" : [ { ... }, { ... } ],
-  "facts" : [ { ... }, { ... } ]
+  "gender" : { /*...*/ },
+  "names" : [ { /*...*/ }, { /*...*/ } ],
+  "facts" : [ { /*...*/ }, { /*...*/ } ]
 }
 ```
 
@@ -352,10 +352,10 @@ facts | The facts about the relationship. | facts | array of [`Fact`](#fact-conc
 
 ### examples
 
-```json
+```javascript
 {
 
-  ...the members of [Subject](#subject)...,
+  //...the members of [Subject](#subject)/*...*/,
 
   "type" : "http://gedcomx.org/Couple",
   "person1" : {
@@ -364,7 +364,7 @@ facts | The facts about the relationship. | facts | array of [`Fact`](#fact-conc
   "person2" : {
     "resource" : "http://identifier/for/person/2"
   },
-  "facts" : [ { ... }, { ... } ]
+  "facts" : [ { /*...*/ }, { /*...*/ } ]
 }
 ```
 
@@ -401,33 +401,33 @@ repository | A reference to the repository that contains the described resource.
 
 ### examples
 
-```json
+```javascript
 {
   "id" : "local_id",
   "resourceType" : "...",
-  "citations" : [ { ... }, { ... } ],
+  "citations" : [ { /*...*/ }, { /*...*/ } ],
   "mediaType" : "...",
   "about" : "http://identifier/for/the/source/being/described",
   "mediator" : {
     "resource" : "http://identifier/for/the/mediator/of/source/being/described"
   },
-  "sources" : [ { ... }, { ... } ],
+  "sources" : [ { /*...*/ }, { /*...*/ } ],
   "analysis" : {
     "resource" : "http://identifier/for/analysis/document"
   },
-  "componentOf" : { ... },
-  "titles" : [ { ... }, { ... } ],
-  "notes" : [ { ... }, { ... } ],
-  "attribution" : { ... },
-  "rights" : [ { ... }, { ... }],
-  "coverage" : { ... },
-  "descriptions" : [ { ... }, { ... } ],
-  "identifiers" : { ... }
-  "created" : ...,
-  "modified" : ...,
-  "repository" : { ... }
+  "componentOf" : { /*...*/ },
+  "titles" : [ { /*...*/ }, { /*...*/ } ],
+  "notes" : [ { /*...*/ }, { /*...*/ } ],
+  "attribution" : { /*...*/ },
+  "rights" : [ { /*...*/ }, { /*...*/ }],
+  "coverage" : { /*...*/ },
+  "descriptions" : [ { /*...*/ }, { /*...*/ } ],
+  "identifiers" : { /*...*/ }
+  "created" : /*...*/,
+  "modified" : /*...*/,
+  "repository" : { /*...*/ }
 
-  ...possibility of extension elements...
+  //...possibility of extension elements...
 
 }
 ```
@@ -455,24 +455,24 @@ person | A reference to the person that describes this agent. | person | [`Resou
 
 ### examples
 
-```json
+```javascript
 {
   "id" : "local_id",
-  "identifiers" : [ { ... }, { ... } ],
-  "names" : [ { ... }, { ... } ],
+  "identifiers" : [ { /*...*/ }, { /*...*/ } ],
+  "names" : [ { /*...*/ }, { /*...*/ } ],
   "homepage" : {
     "resource" : "..."
   },
   "openid" : {
     "resource" : "..."
   },
-  "accounts" : [ { ... }, { ... } ],
+  "accounts" : [ { /*...*/ }, { /*...*/ } ],
   "emails" : [ { "resource" : "mailto:someone@gedcomx.org" } , { "resource" : "mailto:someone@somewhere-else.org" } ],
   "phones" : [ { "resource" : "tel:+1-201-555-0123" } , { "resource" : "fax:+1-201-555-5555" } ],
-  "addresses" : [ { ... }, { ... } ],
+  "addresses" : [ { /*...*/ }, { /*...*/ } ],
   "person" : { "resource" : "..." }
 
-  ...possibility of extension elements...
+  //...possibility of extension elements...
 
 }
 ```
@@ -495,15 +495,15 @@ roles | Information about how persons participated in the event. | roles | array
 
 ### examples
 
-```json
+```javascript
 {
 
-  ...the members of [Subject](#subject)...,
+  //...the members of [Subject](#subject)...,
 
   "type" : "http://gedcomx.org/Marriage",
-  "date" : { ... },
-  "place" : { ... },
-  "roles" : [ { ... }, { ... } ]
+  "date" : { /*...*/ },
+  "place" : { /*...*/ },
+  "roles" : [ { /*...*/ }, { /*...*/ } ]
 }
 ```
 
@@ -525,14 +525,14 @@ attribution | The attribution of this document. | attribution | [`Attribution`](
 
 ### examples
 
-```json
+```javascript
 {
 
-  ...the members of [Conclusion](#conclusion)...,
+  //...the members of [Conclusion](#conclusion)...,
 
   "extracted" : false,
   "type" : "http://gedcomx.org/Analysis",
-  "attribution" : { ... },
+  "attribution" : { /*...*/ },
   "textType" : "plain",
   "text" : "...text of the document..."
 }
@@ -560,10 +560,10 @@ spatialDescription | A reference to a geospatial description of this place. | sp
 
 ### examples
 
-```json
+```javascript
 {
 
-  ...the members of [Subject](#subject)...,
+  //...the members of [Subject](#subject)...,
 
   "names" : [ {
     "lang" : "en",
@@ -578,7 +578,7 @@ spatialDescription | A reference to a geospatial description of this place. | sp
   "jurisdiction" : { "resource" : "..." },
   "latitude" : "27.9883575",
   "latitude" : "86.9252014",
-  "temporalDescription" : { ... },
+  "temporalDescription" : { /*...*/ },
   "spatialDescription" : {
     "resource" : "http://uri/for/KML/document"
   }
@@ -609,7 +609,7 @@ type MAY forgo the array and use a single string.
 
 ### example: set of identifiers
 
-```json
+```javascript
 {
   "http://gedcomx.org/IdentifierType" : [ "value_of_identifier" ],
   "http://gedcomx.org/OtherIdentifierType" : [ "value_of_identifier" ],
@@ -634,7 +634,7 @@ changeMessage | A statement of why the attributed data is being provided by the 
 
 ### examples
 
-```json
+```javascript
 {
   "contributor" : {
     "resource" : "http://identifier/for/contributor"
@@ -642,7 +642,7 @@ changeMessage | A statement of why the attributed data is being provided by the 
   "modified" : "1338394969",
   "changeMessage" : "...change message here..."
 
-  ...possibility of extension elements...
+  //...possibility of extension elements...
 
 }
 ```
@@ -664,14 +664,14 @@ attribution | The attribution of this note. | attribution | [`Attribution`](#att
 
 ### examples
 
-```json
+```javascript
 {
   "lang" : "en",
   "subject" : "...",
   "text" : "...",
-  "attribution" : { ... }
+  "attribution" : { /*...*/ }
 
-  ...possibility of extension elements...
+  //...possibility of extension elements...
 
 }
 ```
@@ -693,7 +693,7 @@ value | The text value. | value | string
 
 A value that can be specified as a string:
 
-```json
+```javascript
 {
   "lang" : "en",
   "value" : "...text of the value..."
@@ -716,13 +716,13 @@ value | A rendering of the full citation as a string. | value | string
 
 ### examples
 
-```json
+```javascript
 {
   "lang" : "en",
   "textType" : "plain",
   "value" : "...a rendering of the full citation as a string..."
 
-  ...possibility of extension elements...
+  //...possibility of extension elements...
 
 }
 ```
@@ -743,12 +743,12 @@ attribution | The attribution of this source reference. | attribution | [`Attrib
 
 ### examples
 
-```json
+```javascript
 {
   "description" : "http://identifier/for/description/of/source/being/referenced",
-  "attribution" : { ... }
+  "attribution" : { /*...*/ }
 
-  ...possibility of extension elements...
+  //...possibility of extension elements...
 
 }
 ```
@@ -769,15 +769,15 @@ attribution | The attribution of this evidence reference. | attribution | [`Attr
 
 ### examples
 
-```json
+```javascript
 {
   "resource" : "http://identifier/for/data/being/referenced",
   "analysis" : {
     "resource" : "http://identifier/for/analysis/document"
   },
-  "attribution" : { ... }
+  "attribution" : { /*...*/ }
 
-  ...possibility of extension elements...
+  //...possibility of extension elements...
 
 }
 ```
@@ -797,14 +797,14 @@ accountName | The name, label, or id that uniquely identifies the account mainta
 
 ### examples
 
-```json
+```javascript
 {
   "serviceHomepage" : {
     "resource" : "http://familysearch.org/"
   },
   "accountName" : "..."
 
-  ...possibility of extension elements...
+  //...possibility of extension elements...
 
 }
 ```
@@ -833,7 +833,7 @@ street6 | The street (sixth line). | street6 | string
 
 ### examples
 
-```json
+```javascript
 {
   "value" : "...",
   "city" : "...",
@@ -847,7 +847,7 @@ street6 | The street (sixth line). | street6 | string
   "street5" : "...",
   "street6" : "..."
 
-  ...possibility of extension elements...
+  //...possibility of extension elements...
 
 }
 ```
@@ -871,18 +871,18 @@ confidence  | Reference to a confidence level for this conclusion. | confidence 
 
 ### examples
 
-```json
+```javascript
 {
   "id" : "local_id",
   "lang" : "en",
-  "sources" : [ { ... }, { ... } ],
+  "sources" : [ { /*...*/ }, { /*...*/ } ],
   "analysis" : {
     "resource" : "http://identifier/for/analysis/document"
   },
-  "notes" : [ { ... }, { ... } ],
+  "notes" : [ { /*...*/ }, { /*...*/ } ],
   "confidence" : "http://gedcomx.org/High"
 
-  ...possibility of extension elements...
+  //...possibility of extension elements...
 
 }
 ```
@@ -905,16 +905,16 @@ attribution | The attribution of this subject. | attribution | [`Attribution`](#
 
 ### examples
 
-```json
+```javascript
 {
 
-  ...the members of [Conclusion](#conclusion)...,
+  //...the members of [Conclusion](#conclusion)...,
 
   "extracted" : false,
-  "evidence" : [ { ... }, { ... } ],
-  "media" : [ { ... }, { ... } ],
-  "identifiers" : [ { ... }, { ... } ],
-  "attribution" : { ... }
+  "evidence" : [ { /*...*/ }, { /*...*/ } ],
+  "media" : [ { /*...*/ }, { /*...*/ } ],
+  "identifiers" : [ { /*...*/ }, { /*...*/ } ],
+  "attribution" : { /*...*/ }
 }
 ```
 
@@ -932,10 +932,10 @@ type | URI identifying the gender. | type | [`URI`](#uri)
 
 ### examples
 
-```json
+```javascript
 {
 
-  ...the members of [Conclusion](#conclusion)...,
+  //...the members of [Conclusion](#conclusion)...,
 
   "type" : "http://gedcomx.org/Male"
 }
@@ -957,14 +957,14 @@ nameForms | The name form(s) that best represents this name; representations of 
 
 ### examples
 
-```json
+```javascript
 {
 
   ...the members of [Conclusion](#conclusion)...,
 
   "type" : "http://gedcomx.org/BirthName",
-  "date" : { ... },
-  "nameForms" : [ { ... }, { ... } ]
+  "date" : { /*...*/ },
+  "nameForms" : [ { /*...*/ }, { /*...*/ } ]
 }
 ```
 
@@ -986,14 +986,14 @@ qualifiers | Qualifiers to add additional details about the fact. | qualifiers |
 
 ### examples
 
-```json
+```javascript
 {
 
-  ...the members of [Conclusion](#conclusion)...,
+  //...the members of [Conclusion](#conclusion)...,
 
   "type" : "http://gedcomx.org/Birth",
-  "date" : { ... },
-  "place" : { ... },
+  "date" : { /*...*/ },
+  "place" : { /*...*/ },
   "value" : "...the original value of the fact...",
   "qualifiers" : [ { "name" : "http://gedcomx.org/Age", "value" : "..." } ]
 }
@@ -1016,10 +1016,10 @@ details | Details about the role of participant in the event. | details | string
 
 ### examples
 
-```json
+```javascript
 {
 
-  ...the members of [Conclusion](#conclusion)...,
+  //...the members of [Conclusion](#conclusion)...,
 
   "person" : {
     "resource" : "http://identifier/for/person/1"
@@ -1044,12 +1044,12 @@ formal | The standardized, formal representation of the date. | formal | [GEDCOM
 
 ### examples
 
-```json
+```javascript
 {
   "original" : "...the original text...",
   "formal" : "..."
 
-  ...possibility of extension elements...
+  //...possibility of extension elements...
 
 }
 ```
@@ -1070,12 +1070,12 @@ descriptionRef | A reference to a _description_ of this place. | description | [
 
 ### examples
 
-```json
+```javascript
 {
   "original" : "...the original text...",
   "description" : "http://identifier/of/place-description/being/referenced",
 
-  ...possibility of extension elements...
+  //...possibility of extension elements...
 
 }
 ```
@@ -1096,13 +1096,13 @@ qualifiers | Qualifiers to add additional semantic meaning to the name part. | q
 
 ### examples
 
-```json
+```javascript
 {
   "type" : "http://gedcomx.org/Surname",
   "value" : "...value of the name part..."
   "qualifiers" : [ { "name" : "http://gedcomx.org/Family" }, { "name" : "http://gedcomx.org/Patronymic" } ]
 
-  ...possibility of extension elements...
+  //...possibility of extension elements...
 
 }
 ```
@@ -1123,13 +1123,13 @@ parts | Any identified name parts from the name. | parts | array of [`NamePart`]
 
 ### examples
 
-```json
+```javascript
 {
   "lang" : "en",
   "fullText" : "...full text of the name form...",
-  "parts" : [ { ... }, { ... } ]
+  "parts" : [ { /*...*/ }, { /*...*/ } ]
 
-  ...possibility of extension elements...
+  //...possibility of extension elements...
 
 }
 ```
@@ -1148,7 +1148,7 @@ value | The value of the qualifier. | value | string
 
 ### examples
 
-```json
+```javascript
 {
   "name" : "http://gedcomx.org/QualifierName",
   "value" : "..."
@@ -1171,10 +1171,10 @@ temporal | The temporal coverage. | temporal | [`Date`](#conclusion-date)
 
 ### examples
 
-```json
+```javascript
 {
-  "spatial" : { ... },
-  "temporal" : { ... }
+  "spatial" : { /*...*/ },
+  "temporal" : { /*...*/ }
 }
 ```
 
@@ -1208,7 +1208,7 @@ resource | The URI to the resource being referenced. | resource | [`URI`](#uri)
 
 ### examples
 
-```json
+```javascript
 {
   "resource" : "http://uri/to/resource/being/referenced"
 }
@@ -1238,20 +1238,20 @@ description | Reference to the description of this data set. | description | [`U
 
 ### examples
 
-```json
+```javascript
 {
   "id" : "local_id",
   "description" : "...",
-  "attribution" : { ... },
-  "persons" : [ { ... }, { ... } ],
-  "relationships" : [ { ... }, { ... }, ],
-  "sourceDescriptions" : [ { ... }, { ... } ],
-  "agents" : [ { ... } , { ... } ],
-  "events" : [ { ... } , { ... } ],
-  "documents" : [ { ... } , { ... } ],
-  "places" : [ { ... } , { ... } ],
+  "attribution" : { /*...*/ },
+  "persons" : [ { /*...*/ }, { /*...*/ } ],
+  "relationships" : [ { /*...*/ }, { /*...*/ }, ],
+  "sourceDescriptions" : [ { /*...*/ }, { /*...*/ } ],
+  "agents" : [ { /*...*/ } , { /*...*/ } ],
+  "events" : [ { /*...*/ } , { /*...*/ } ],
+  "documents" : [ { /*...*/ } , { /*...*/ } ],
+  "places" : [ { /*...*/ } , { /*...*/ } ],
 
-    ...possibility of extension elements...
+  //...possibility of extension elements...
 
 }
 ```
@@ -1267,19 +1267,19 @@ GEDCOM X Object, which is defined by an JSON object of the `Gedcomx` data type.
 
 The following is an example of the structure of a GEDCOM X JSON Element:
 
-```json
+```javascript
 {
   "id" : "local_id",
-  "attribution" : { ... },
-  "persons" : [ { ... }, { ... } ],
-  "relationships" : [ { ... }, { ... }, ],
-  "sourceDescriptions" : [ { ... }, { ... } ],
-  "agents" : [ { ... } , { ... } ],
-  "events" : [ { ... } , { ... } ],
-  "documents" : [ { ... } , { ... } ],
-  "places" : [ { ... } , { ... } ],
+  "attribution" : { /*...*/ },
+  "persons" : [ { /*...*/ }, { /*...*/ } ],
+  "relationships" : [ { /*...*/ }, { /*...*/ }, ],
+  "sourceDescriptions" : [ { /*...*/ }, { /*...*/ } ],
+  "agents" : [ { /*...*/ } , { /*...*/ } ],
+  "events" : [ { /*...*/ } , { /*...*/ } ],
+  "documents" : [ { /*...*/ } , { /*...*/ } ],
+  "places" : [ { /*...*/ } , { /*...*/ } ],
 
-    ...possibility of extension elements...
+  //...possibility of extension elements...
 
 }
 ```
