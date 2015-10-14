@@ -772,9 +772,6 @@ attribution | The attribution of this evidence reference. | attribution | [`Attr
 ```javascript
 {
   "resource" : "http://identifier/for/data/being/referenced",
-  "analysis" : {
-    "resource" : "http://identifier/for/analysis/document"
-  },
   "attribution" : { /*...*/ }
 
   //...possibility of extension elements...
