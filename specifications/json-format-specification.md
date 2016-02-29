@@ -72,7 +72,7 @@ to serialize and deserialize the GEDCOM X Conceptual Model to and from
   * [3.16 The "Date" Data Type](#conclusion-date)
   * [3.17 The "PlaceReferece" Data Type](#conclusion-place-reference)
   * [3.18 The "NamePart" Data Type](#name-part)
-  * [3.19 The "NameForm" Data Type](#nameform-data-type)
+  * [3.19 The "NameForm" Data Type](#name-form)
   * [3.20 The "Qualifier" Data Type](#qualifier)
 * [4. JSON-Specific Data Types](#json-specific-data-types)
   * [4.1 The URI](#uri)
@@ -203,9 +203,10 @@ The following example shows an instance of a GEDCOM X serialization in accordanc
   } ],
   "relationships" : [ {
     "facts" : [ {
+      "type" : "http://gedcomx.org/Marriage",
       "date" : {
         "original" : "January 6, 1759",
-        "formal" : "+01-06-1759"
+        "formal" : "+1759-01-06"
       },
       "place" : {
         "original" : "White House Plantation"
@@ -317,7 +318,7 @@ The JSON object used to (de)serialize the `http://gedcomx.org/v1/Person` data ty
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 private | Whether this instance of `Person` has been designated for limited distribution or display. | private | boolean
-gender | The gender of the person. | gender | [`Gender`](#gender)
+gender | The gender of the person. | gender | [`Gender`](#gender-conclusion)
 names | The names of the person. | names | array of [`Name`](#name-conclusion)
 facts | The facts of the person. | facts | array of [`Fact`](#fact-conclusion)
 
@@ -394,7 +395,7 @@ attribution | The attribution of this source. | attribution | [`Attribution`](#a
 rights  | The rights for this resource. | rights | array of [`ResourceReference`](#resource-reference)
 coverage | The coverage of the resource. | coverage | [`Coverage`](#coverage)
 descriptions | Human-readable descriptions of this source. | descriptions | array of [`TextValue`](#text-value)
-identifiers | A list of identifiers for the resource being described. | identifiers | array of [`Identifier`](#identifier-type)
+identifiers | A list of identifiers for the resource being described. | identifiers | [`Identifier`](#identifier-type)
 created | Timestamp of when the resource being described was created. | created | number (milliseconds since epoch)
 modified | Timestamp of when the resource being described was modified. | modified | number (milliseconds since epoch)
 repository | A reference to the repository that contains the described resource. | repository | [`ResourceReference`](#resource-reference)
@@ -458,7 +459,7 @@ person | A reference to the person that describes this agent. | person | [`Resou
 ```javascript
 {
   "id" : "local_id",
-  "identifiers" : [ { /*...*/ }, { /*...*/ } ],
+  "identifiers" : { /*...*/ }
   "names" : [ { /*...*/ }, { /*...*/ } ],
   "homepage" : {
     "resource" : "..."
@@ -490,7 +491,7 @@ name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 type | URI identifying the type of the event. | type | [`URI`](#uri)
 date | The date of the event. | date | [`Date`](#conclusion-date)
-place | The place of the event. | place | [`Place`](#conclusion-place)
+place | The place of the event. | place | [`PlaceReference`](#conclusion-place-reference)
 roles | Information about how persons participated in the event. | roles | array of [`EventRole`](#conclusion-event-role)
 
 ### examples
@@ -552,7 +553,7 @@ name | description | JSON member | JSON object type
 names | A list of standardized (or normalized), fully-qualified (in terms of what is known of the applicable jurisdictional hierarchy) names for this place that are applicable to this description of this place. | names | array of [`TextValue`](#text-value)
 type | A uniform resource identifier (URI) identifying the type of the place as it is applicable to this description. | type | [`URI`](#uri)
 place | An identifier for the place being described. | place | [`ResourceReference`](#resource-reference)
-jurisdiction | A reference to a description of the jurisdiction of this place. | jurisdiction | [`gx:ResourceReference`](#resource-reference)
+jurisdiction | A reference to a description of the jurisdiction of this place. | jurisdiction | [`ResourceReference`](#resource-reference)
 latitude | Angular distance, in degrees, north or south of the Equator. | latitude | number
 longitude | Angular distance, in degrees, east or west of the Prime Meridian. | longitude | number
 temporalDescription | A description of the time period to which this place description is relevant. | temporalDescription | [`Date`](#conclusion-date)
@@ -607,10 +608,14 @@ there MUST NOT be more than one value of the specified identifier type, per enti
 type is specified as a "single-valued" identifier type, the value of the member named by that identifier
 type MAY forgo the array and use a single string.
 
+Since the identifier `type` is an OPTIONAL property, the name of the member that carries untyped identifiers
+SHALL be "$".
+
 ### example: set of identifiers
 
 ```javascript
 {
+  "$" : [ "value_of_untyped_identifier" ],
   "http://gedcomx.org/IdentifierType" : [ "value_of_identifier" ],
   "http://gedcomx.org/OtherIdentifierType" : [ "value_of_identifier" ],
   "http://custom.org/SingleValuedIdentifierType" : "value_of_identifier",
@@ -711,7 +716,6 @@ The JSON object used to (de)serialize the `http://gedcomx.org/v1/SourceCitation`
 name | description | JSON member | JSON object type
 -----|-------------|-------------|-----------------
 lang | The locale identifier for the citation. | lang | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag
-textType | The type of text in the `value` property. | textType | string
 value | A rendering of the full citation as a string. | value | string
 
 ### examples
@@ -719,7 +723,6 @@ value | A rendering of the full citation as a string. | value | string
 ```javascript
 {
   "lang" : "en",
-  "textType" : "plain",
   "value" : "...a rendering of the full citation as a string..."
 
   //...possibility of extension elements...
@@ -863,7 +866,7 @@ id | An identifier for the JSON object holding this conclusion's data. The id at
 lang | The locale identifier for the conclusion. | lang | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag
 sources | The list of references to sources related to this conclusion. | sources | array of [`SourceReference`](#source-reference).
 analysis  | Reference to a document containing analysis supporting this conclusion. | analysis | [`ResourceReference`](#resource-reference)
-notes | A list of notes about this conclusion. | note | array of [`Note`](#note)
+notes | A list of notes about this conclusion. | notes | array of [`Note`](#note)
 confidence  | Reference to a confidence level for this conclusion. | confidence | [`URI`](#uri)
 
 ### examples
@@ -895,8 +898,8 @@ The JSON object used to (de)serialize the `http://gedcomx.org/v1/Subject` data t
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 extracted | Whether this subject is to be constrained as an [_extracted conclusion_](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md#4-extracted-conclusion-constraints). | extracted | boolean
-evidence | References to other subjects that support this subject. | evidence | [`EvidenceReference`](#evidence-reference)
-media | References to multimedia resources for this subject, such as photos or videos. | media | [`SourceReference`](#source-reference)
+evidence | References to other subjects that support this subject. | evidence | array of [`EvidenceReference`](#evidence-reference)
+media | References to multimedia resources for this subject, such as photos or videos. | media | array of [`SourceReference`](#source-reference)
 identifiers | Identifiers for this subject. | identifiers | [`Identifier`](#identifier-type)
 attribution | The attribution of this subject. | attribution | [`Attribution`](#attribution)
 
@@ -910,7 +913,7 @@ attribution | The attribution of this subject. | attribution | [`Attribution`](#
   "extracted" : false,
   "evidence" : [ { /*...*/ }, { /*...*/ } ],
   "media" : [ { /*...*/ }, { /*...*/ } ],
-  "identifiers" : [ { /*...*/ }, { /*...*/ } ],
+  "identifiers" : { /*...*/ }
   "attribution" : { /*...*/ }
 }
 ```
@@ -977,8 +980,8 @@ name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 type | URI identifying the type of the fact. | type | [`URI`](#uri)
 date | The date of applicability of the fact. | date | [`Date`](#conclusion-date)
-place | The place of applicability of the fact. | place | [`Place`](#conclusion-place)
-value | The value of the fact. | original | string
+place | The place of applicability of the fact. | place | [`PlaceReference`](#conclusion-place-reference)
+value | The value of the fact. | value | string
 qualifiers | Qualifiers to add additional details about the fact. | qualifiers | array of [`Qualifier`](#qualifier)
 
 ### examples
@@ -1062,7 +1065,7 @@ is defined as follows:
 
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
-original | The original place name text as supplied by the contributor. | string | OPTIONAL.
+original | The original place name text as supplied by the contributor. | original | string.
 descriptionRef | A reference to a _description_ of this place. | description | [`URI`](#uri)
 
 ### examples
@@ -1104,7 +1107,7 @@ qualifiers | Qualifiers to add additional semantic meaning to the name part. | q
 }
 ```
 
-<a name="nameform-data-type"/>
+<a name="name-form"/>
 
 ## 3.19 The "NameForm" Data Type
 
@@ -1156,12 +1159,12 @@ value | The value of the qualifier. | value | string
 
 ## 3.21 The "Coverage" Data Type
 
-The `gx:Coverage` XML type is used to (de)serialize the `http://gedcomx.org/v1/Coverage`
+The `gx:Coverage` JSON type is used to (de)serialize the `http://gedcomx.org/v1/Coverage`
 data type.
 
 ### properties
 
-name | description | XML property | XML type
+name | description | JSON property | JSON type
 -----|-------------|--------------|---------
 spatial | The spatial (i.e., geographic) coverage. | spatial | [`PlaceReference`](#conclusion-place-reference)
 temporal | The temporal coverage. | temporal | [`Date`](#conclusion-date)
