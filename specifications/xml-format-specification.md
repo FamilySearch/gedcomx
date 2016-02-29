@@ -441,8 +441,8 @@ person | A reference to the person that describes this agent. | gx:person | [`gx
     ...
     <gx:name>...</gx:name>
     ...
-    <gx:homepage>...</gx:homepage>
-    <gx:openid>...</gx:openid>
+    <gx:homepage resource="..."/>
+    <gx:openid resource="..."/>
     <gx:account>
       ...
     </gx:account>
@@ -687,14 +687,13 @@ The `gx:SourceCitation` XML type is used to (de)serialize the
 name | description | XML property | XML type
 -----|-------------|--------------|---------
 lang | The locale identifier for the citation. | xml:lang (attribute) | [IETF BCP 47](http://tools.ietf.org/html/bcp47) locale tag
-textType | The type of text in the `value` property. | textType (attribute) | xsd:string
 value | A rendering of the full citation as a string. | gx:value | xsd:string
 
 ### examples
 
 ```xml
   <... xml:lang="en">
-    <gx:value textType="plain">...a rendering of the full citation as a string...</gx:value>
+    <gx:value>...a rendering of the full citation as a string...</gx:value>
 
     <!-- possibility of extension elements -->
 
@@ -746,7 +745,6 @@ attribution | The attribution of this evidence reference. | gx:attribution | [`g
 
 ```xml
   <... resource="http://identifier/for/data/being/referenced">
-    <gx:analysis resource="http://identifier/for/analysis/document"/>
     <gx:attribution>
       ...
     </gx:attribution>
