@@ -611,14 +611,18 @@ name | description | XML property | XML type
 contributor | Reference to the contributor to whom the attributed data is attributed. | gx:contributor | [`gx:ResourceReference`](#resource-reference)
 modified | Timestamp of when the attributed data was contributed. | gx:modified | xsd:dateTime
 changeMessage | A statement of why the attributed data is being provided by the contributor. | gx:changeMessage | xsd:string
+creator | Reference to the agent that created the attributed data. The creator MAY be different from the contributor if changes were made to the attributed data. | gx:creator | [`gx:ResourceReference`](#resource-reference)
+created | Timestamp of when the attributed data was contributed. | gx:created | xsd:dateTime
 
 ### examples
 
 ```xml
   <...>
     <gx:contributor resource="http://identifier/for/contributor"/>
-    <gx:modified>2012-05-29T00:00:00</gx:modified>
+    <gx:modified>2012-06-29T00:00:00</gx:modified>
     <gx:changeMessage>...change message here...</gx:changeMessage>
+    <gx:creator resource="http://identifier/for/creator"/>
+    <gx:created>2012-05-29T00:00:00</gx:created>
 
     <!-- possibility of extension elements -->
 

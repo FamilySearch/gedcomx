@@ -716,6 +716,8 @@ name  | description | data type | constraints
 contributor | Reference to the agent to whom the attributed data is attributed. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to an instance of [`http://gedcomx.org/v1/Agent`](#agent).
 modified | Timestamp of when the attributed data was contributed. | timestamp | OPTIONAL.
 changeMessage | A statement of why the attributed data is being provided by the contributor. | string | OPTIONAL.
+creator | Reference to the agent that created the attributed data. The creator MAY be different from the contributor if changes were made to the attributed data. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to an instance of [`http://gedcomx.org/v1/Agent`](#agent).
+created | Timestamp of when the attributed data was contributed. | timestamp | OPTIONAL.
 
 
 <a name="note"/>

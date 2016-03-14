@@ -636,6 +636,8 @@ name | description | JSON member | JSON object type
 contributor | Reference to the contributor to whom the attributed data is attributed. | contributor | [`ResourceReference`](#resource-reference)
 modified | Timestamp of when the attributed data was contributed. | modified | number (milliseconds since epoch)
 changeMessage | A statement of why the attributed data is being provided by the contributor. | changeMessage | string
+creator | Reference to the agent that created the attributed data. The creator MAY be different from the contributor if changes were made to the attributed data. | creator | [`ResourceReference`](#resource-reference)
+created | Timestamp of when the attributed data was contributed. | gx:created | number (milliseconds since epoch)
 
 ### examples
 
@@ -644,8 +646,12 @@ changeMessage | A statement of why the attributed data is being provided by the 
   "contributor" : {
     "resource" : "http://identifier/for/contributor"
   },
-  "modified" : "1338394969",
+  "modified" : "1338494969",
   "changeMessage" : "...change message here..."
+  "creator" : {
+    "resource" : "http://identifier/for/creator"
+  },
+  "created" : "1338394969",
 
   //...possibility of extension elements...
 
