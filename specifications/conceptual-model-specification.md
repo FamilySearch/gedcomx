@@ -915,6 +915,7 @@ sources | The list of references to the sources of related to this conclusion. |
 analysis  | Reference to a document containing analysis supporting this conclusion. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to an instance of [`http://gedcomx.org/v1/Document`](#document) of type `http://gedcomx.org/Analysis`.
 notes  | A list of notes about this conclusion. | List of [`http://gedcomx.org/Note`](#note) | OPTIONAL.
 confidence  | Reference to a confidence level for this conclusion. | [Enumerated Value](#enumerated-value) | OPTIONAL. If provided, MUST identify a confidence level, and use of a [known confidence level](#known-confidence-levels) is RECOMMENDED.
+attribution | The attribution of this subject. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing data set (e.g. file) of the _conclusion_ is assumed.
 
 <a name="known-confidence-levels"/>
 
