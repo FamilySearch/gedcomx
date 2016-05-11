@@ -646,12 +646,12 @@ created | Timestamp of when the attributed data was contributed. | gx:created | 
   "contributor" : {
     "resource" : "http://identifier/for/contributor"
   },
-  "modified" : "1338494969",
+  "modified" : 1338494969,
   "changeMessage" : "...change message here..."
   "creator" : {
     "resource" : "http://identifier/for/creator"
   },
-  "created" : "1338394969",
+  "created" : 1338394969,
 
   //...possibility of extension elements...
 
