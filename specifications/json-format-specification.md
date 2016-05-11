@@ -874,6 +874,7 @@ sources | The list of references to sources related to this conclusion. | source
 analysis  | Reference to a document containing analysis supporting this conclusion. | analysis | [`ResourceReference`](#resource-reference)
 notes | A list of notes about this conclusion. | notes | array of [`Note`](#note)
 confidence  | Reference to a confidence level for this conclusion. | confidence | [`URI`](#uri)
+attribution | The attribution of this conclusion. | attribution | [`Attribution`](#attribution)
 
 ### examples
 
@@ -887,6 +888,7 @@ confidence  | Reference to a confidence level for this conclusion. | confidence 
   },
   "notes" : [ { /*...*/ }, { /*...*/ } ],
   "confidence" : "http://gedcomx.org/High"
+  "attribution" : { /*...*/ }
 
   //...possibility of extension elements...
 
@@ -907,7 +909,6 @@ extracted | Whether this subject is to be constrained as an [_extracted conclusi
 evidence | References to other subjects that support this subject. | evidence | array of [`EvidenceReference`](#evidence-reference)
 media | References to multimedia resources for this subject, such as photos or videos. | media | array of [`SourceReference`](#source-reference)
 identifiers | Identifiers for this subject. | identifiers | [`Identifier`](#identifier-type)
-attribution | The attribution of this subject. | attribution | [`Attribution`](#attribution)
 
 ### examples
 
@@ -920,7 +921,6 @@ attribution | The attribution of this subject. | attribution | [`Attribution`](#
   "evidence" : [ { /*...*/ }, { /*...*/ } ],
   "media" : [ { /*...*/ }, { /*...*/ } ],
   "identifiers" : { /*...*/ }
-  "attribution" : { /*...*/ }
 }
 ```
 

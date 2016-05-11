@@ -845,6 +845,7 @@ sources | The list of references to sources related to this conclusion. | gx:sou
 analysis  | Reference to a document containing analysis supporting this conclusion. | gx:analysis | [`gx:ResourceReference`](#resource-reference)
 notes | A list of notes about this conclusion. | gx:note | [`gx:Note`](#note)
 confidence  | Reference to a confidence level for this conclusion. | confidence (attribute) | [`URI`](#uri)
+attribution | The attribution of this conclusion. | gx:attribution | [`gx:Attribution`](#attribution)
 
 ### examples
 
@@ -858,6 +859,10 @@ confidence  | Reference to a confidence level for this conclusion. | confidence 
     <gx:note>
       ...
     </gx:note>
+    ...
+    <gx:attribution>
+      ...
+    </gx:attribution>
     ...
 
     <!-- possibility of extension elements -->
@@ -879,7 +884,6 @@ extracted | Whether this subject is to be constrained as an [_extracted conclusi
 evidence | References to other subjects that support this subject. | gx:evidence | [`gx:EvidenceReference`](#evidence-reference)
 media | References to multimedia resources for this subject, such as photos or videos. | gx:media | [`gx:SourceReference`](#source-reference)
 identifiers | Identifiers for this subject. | gx:identifier | [`gx:Identifier`](#identifier-type)
-attribution | The attribution of this subject. | gx:attribution | [`gx:Attribution`](#attribution)
 
 ### examples
 
@@ -899,10 +903,6 @@ attribution | The attribution of this subject. | gx:attribution | [`gx:Attributi
     <gx:identifier>
       ...
     </gx:identifier>
-    ...
-    <gx:attribution>
-      ...
-    </gx:attribution>
 
     <!-- possibility of extension elements -->
 
