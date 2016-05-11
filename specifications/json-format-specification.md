@@ -637,7 +637,7 @@ contributor | Reference to the contributor to whom the attributed data is attrib
 modified | Timestamp of when the attributed data was contributed. | modified | number (milliseconds since epoch)
 changeMessage | A statement of why the attributed data is being provided by the contributor. | changeMessage | string
 creator | Reference to the agent that created the attributed data. The creator MAY be different from the contributor if changes were made to the attributed data. | creator | [`ResourceReference`](#resource-reference)
-created | Timestamp of when the attributed data was contributed. | gx:created | number (milliseconds since epoch)
+created | Timestamp of when the attributed data was contributed. | created | number (milliseconds since epoch)
 
 ### examples
 
