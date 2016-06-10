@@ -145,6 +145,7 @@ URI | description
 `http://gedcomx.org/PhysicalDescription`| A fact of a person's physical description.
 `http://gedcomx.org/Probate`| A fact of a receipt of probate of a person's property.
 `http://gedcomx.org/Property`| A fact of a person's property or possessions.
+`http://gedcomx.org/Race`| A fact of the declaration of a person's race, presumably in a historical document.
 `http://gedcomx.org/Religion`| A fact of a person's religion.
 `http://gedcomx.org/Residence`| A fact of a person's residence.
 `http://gedcomx.org/Retirement`| A fact of a person's retirement.
