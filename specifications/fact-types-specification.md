@@ -112,7 +112,7 @@ URI | description
 `http://gedcomx.org/Death`| A fact of the death of a person.
 `http://gedcomx.org/Education`| A fact of an education or an educational achievement (e.g., diploma, graduation, scholarship, etc.) of a person.
 `http://gedcomx.org/Emigration`| A fact of the emigration of a person.
-`http://gedcomx.org/Ethnicity`| A fact of a person's ethnicity or race.
+`http://gedcomx.org/Ethnicity`| A fact of a person's ethnicity.
 `http://gedcomx.org/Excommunication`| A fact of a person's excommunication from a church.
 `http://gedcomx.org/FirstCommunion`| A fact of a person's first communion in a church.
 `http://gedcomx.org/Funeral`| A fact of a person's funeral.
@@ -145,6 +145,7 @@ URI | description
 `http://gedcomx.org/PhysicalDescription`| A fact of a person's physical description.
 `http://gedcomx.org/Probate`| A fact of a receipt of probate of a person's property.
 `http://gedcomx.org/Property`| A fact of a person's property or possessions.
+`http://gedcomx.org/Race`| A fact of the declaration of a person's race, presumably in a historical document.
 `http://gedcomx.org/Religion`| A fact of a person's religion.
 `http://gedcomx.org/Residence`| A fact of a person's residence.
 `http://gedcomx.org/Retirement`| A fact of a person's retirement.
