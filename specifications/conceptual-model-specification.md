@@ -30,7 +30,7 @@ The GEDCOM X Conceptual Model spec specifies an abstract conceptual model for ge
 
 The GEDCOM X Conceptual Model is a specification of formal concepts and types
 that are used to provide a standard model and vocabulary for describing genealogical
-data. Genealogical data is structured by data types such as persons, 
+data. Genealogical data is structured by data types such as persons,
 relationships, and sources.
 
 ## Table Of Contents
@@ -426,7 +426,7 @@ titles | The display name(s) for this source. | List of [`http://gedcomx.org/Tex
 notes  | A list of notes about a source. | List of [`http://gedcomx.org/Note`](#note) | OPTIONAL.
 attribution | The attribution of this source description. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing data set (e.g. file) of the source description is assumed.
 rights  | The rights for this resource. | List of [URI](#uri). Order is preserved. | OPTIONAL. If provided, MUST resolve to a resource that describes the rights associated with the resource being described.
-coverage | The coverage of the resource. | [`http://gedcomx.org/v1/Coverage`](#coverage) | OPTIONAL.
+coverage | The coverage of the resource. | List of [`http://gedcomx.org/v1/Coverage`](#coverage) | OPTIONAL.
 descriptions | Human-readable descriptions of this source. | List of [`http://gedcomx.org/TextValue`](#text-value). Order is preserved. | OPTIONAL. If more than one description is provided, descriptions are assumed to be given in order of preference, with the most preferred description in the first position in the list.
 identifiers | A list of identifiers for the resource being described. | List of [`http://gedcomx.org/v1/Identifier`](#identifier-type). Order is preserved. | OPTIONAL.
 created | Timestamp of when the resource being described was created. | timestamp | OPTIONAL.
@@ -1299,8 +1299,8 @@ parts | Any identified name parts from the name. | List of [`http://gedcomx.org/
 
 ### examples
 
-Consider the following: the Russian name "Пётр Ильи́ч Чайко́вский" in the Cyrillic script, its Latin-script 
-equivalent "Pyotr Ilyich Tchaikovsky", and its anglicised equivalent "Peter Ilyich Tchaikovsky". Using an 
+Consider the following: the Russian name "Пётр Ильи́ч Чайко́вский" in the Cyrillic script, its Latin-script
+equivalent "Pyotr Ilyich Tchaikovsky", and its anglicised equivalent "Peter Ilyich Tchaikovsky". Using an
 informal pseudo code, these name forms might be modeled as follows:
 
 ```

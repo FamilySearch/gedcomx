@@ -277,8 +277,8 @@ The following example shows an instance of a GEDCOM X serialization in accordanc
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
 "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
-document are to be interpreted as described in BCP 14, 
-[RFC2119](http://tools.ietf.org/html/rfc2119), as scoped to those conformance 
+document are to be interpreted as described in BCP 14,
+[RFC2119](http://tools.ietf.org/html/rfc2119), as scoped to those conformance
 targets.
 
 <a name="data-types"/>
@@ -393,7 +393,7 @@ titles | The display name(s) for this source. | titles | array of [`TextValue`](
 notes | A list of notes about a source | notes | array of [`Note`](#note)
 attribution | The attribution of this source. | attribution | [`Attribution`](#attribution)
 rights  | The rights for this resource. | rights | array of [`ResourceReference`](#resource-reference)
-coverage | The coverage of the resource. | coverage | [`Coverage`](#coverage)
+coverage | The coverage of the resource. | coverage | array of [`Coverage`](#coverage)
 descriptions | Human-readable descriptions of this source. | descriptions | array of [`TextValue`](#text-value)
 identifiers | A list of identifiers for the resource being described. | identifiers | [`Identifier`](#identifier-type)
 created | Timestamp of when the resource being described was created. | created | number (milliseconds since epoch)
@@ -1346,4 +1346,3 @@ allows the option of an "id" property on _all_ objects for the purpose of identi
 The values of all fragment identifiers within a single JSON document MUST be unique.
 
 For more information about fragment identifiers, see [RFC 3986, Section 3.5](http://tools.ietf.org/html/rfc3986#section-3.5).
-
