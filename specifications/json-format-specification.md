@@ -311,7 +311,7 @@ GEDCOM X Conceptual Model specification.
 
 # 2.1 The "Person" Data Type
 
-The JSON object used to (de)serialize the `http://gedcomx.org/v1/Person` data type is defined as follows:
+The JSON object used to (de)serialize the [`http://gedcomx.org/v1/Person`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md#person) data type is defined as follows:
 
 ### properties
 
@@ -340,7 +340,7 @@ facts | The facts of the person. | facts | array of [`Fact`](#fact-conclusion)
 
 ## 2.2 The "Relationship" Data Type
 
-The JSON object used to (de)serialize the `http://gedcomx.org/v1/Relationship` data type is defined as follows:
+The JSON object used to (de)serialize the [`http://gedcomx.org/v1/Relationship`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md#relationship) data type is defined as follows:
 
 ### properties
 
@@ -373,7 +373,7 @@ facts | The facts about the relationship. | facts | array of [`Fact`](#fact-conc
 
 ## 2.3 The "SourceDescription" Data Type
 
-The JSON object used to (de)serialize the `http://gedcomx.org/v1/SourceDescription`
+The JSON object used to (de)serialize the [`http://gedcomx.org/v1/SourceDescription`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md#source-description)
 data type is defined as follows:
 
 ### properties
@@ -437,7 +437,7 @@ repository | A reference to the repository that contains the described resource.
 
 ## 2.4 The "Agent" Data Type
 
-The JSON object used to (de)serialize the `http://gedcomx.org/v1/Agent` data type is defined as follows:
+The JSON object used to (de)serialize the [`http://gedcomx.org/v1/Agent`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md#agent) data type is defined as follows:
 
 ### properties
 
@@ -482,7 +482,7 @@ person | A reference to the person that describes this agent. | person | [`Resou
 
 # 2.5 The "Event" Data Type
 
-The JSON object used to (de)serialize the `http://gedcomx.org/v1/Event` data type
+The JSON object used to (de)serialize the [`http://gedcomx.org/v1/Event`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md#event) data type
 is defined as follows:
 
 ### properties
@@ -512,7 +512,7 @@ roles | Information about how persons participated in the event. | roles | array
 
 ## 2.6 The "Document" Data Type
 
-The JSON object used to (de)serialize the `http://gedcomx.org/v1/Document` data type is defined as follows:
+The JSON object used to (de)serialize the [`http://gedcomx.org/v1/Document`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md#document) data type is defined as follows:
 
 ### properties
 
@@ -543,7 +543,7 @@ attribution | The attribution of this document. | attribution | [`Attribution`](
 
 # 2.7 The "PlaceDescription" Data Type
 
-The JSON object used to (de)serialize the `http://gedcomx.org/v1/PlaceDescription` data type
+The JSON object used to (de)serialize the [`http://gedcomx.org/v1/PlaceDescription`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md#place-description) data type
 is defined as follows:
 
 ### properties
@@ -597,7 +597,8 @@ conceptual model specification.
 
 ## 3.1 The "Identifier" Data Type
 
-In JSON, the `http://gedcomx.org/v1/Identifier` data type is always serialized in the context of a set
+In JSON, the [`http://gedcomx.org/v1/Identifier`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md#identifier-type)
+data type is always serialized in the context of a set
 of identifiers, which is represented using a JSON object. The name of each member of the object is
 the identifier `type`. The value of each member carries the string values of the identifiers of that type.
 All known GEDCOM X identifier types MAY carry multiple values, so the value of the member for each
@@ -627,7 +628,8 @@ SHALL be "$".
 
 ## 3.2 The "Attribution" Data Type
 
-The JSON object used to (de)serialize the `http://gedcomx.org/v1/Attribution` data type is defined as follows:
+The JSON object used to (de)serialize the [`http://gedcomx.org/v1/Attribution`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md#attribution)
+data type is defined as follows:
 
 ### properties
 
@@ -662,7 +664,8 @@ created | Timestamp of when the attributed data was contributed. | created | num
 
 ## 3.3 The "Note" Data Type
 
-The JSON object used to (de)serialize the `http://gedcomx.org/v1/Note` data type is defined as follows:
+The JSON object used to (de)serialize the [`http://gedcomx.org/v1/Note`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md#note)
+data type is defined as follows:
 
 ### properties
 
@@ -691,7 +694,8 @@ attribution | The attribution of this note. | attribution | [`Attribution`](#att
 
 ## 3.4 The "TextValue" Data Type
 
-The JSON object used to (de)serialize the `http://gedcomx.org/v1/TextValue` data type is defined as follows:
+The JSON object used to (de)serialize the [`http://gedcomx.org/v1/TextValue`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md#text-value)
+data type is defined as follows:
 
 ### properties
 
@@ -715,7 +719,8 @@ A value that can be specified as a string:
 
 ## 3.5 The "SourceCitation" Data Type
 
-The JSON object used to (de)serialize the `http://gedcomx.org/v1/SourceCitation` data type is defined as follows:
+The JSON object used to (de)serialize the [`http://gedcomx.org/v1/SourceCitation`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md#source-citation)
+data type is defined as follows:
 
 ### properties
 
@@ -740,7 +745,7 @@ value | A rendering of the full citation as a string. | value | string
 
 ## 3.6 The "SourceReference" Data Type
 
-The JSON object used to (de)serialize the `http://gedcomx.org/v1/SourceReference`
+The JSON object used to (de)serialize the [`http://gedcomx.org/v1/SourceReference`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md#source-reference)
 data type is defined as follows:
 
 ### properties
@@ -766,7 +771,7 @@ attribution | The attribution of this source reference. | attribution | [`Attrib
 
 ## 3.7 The "EvidenceReference" Data Type
 
-The JSON object used to (de)serialize the `http://gedcomx.org/v1/EvidenceReference`
+The JSON object used to (de)serialize the [`http://gedcomx.org/v1/EvidenceReference`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md#evidence-reference)
 data type is defined as follows:
 
 ### properties
@@ -792,7 +797,8 @@ attribution | The attribution of this evidence reference. | attribution | [`Attr
 
 ## 3.8 The "OnlineAccount" Data Type
 
-The JSON object used to (de)serialize the `http://gedcomx.org/v1/OnlineAccount` data type is defined as follows:
+The JSON object used to (de)serialize the [`http://gedcomx.org/v1/OnlineAccount`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md#online-account)
+data type is defined as follows:
 
 ### properties
 
@@ -819,7 +825,8 @@ accountName | The name, label, or id that uniquely identifies the account mainta
 
 ## 3.9 The "Address" Data Type
 
-The JSON object used to (de)serialize the `http://gedcomx.org/v1/Address` data type is defined as follows:
+The JSON object used to (de)serialize the [`http://gedcomx.org/v1/Address`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md#address)
+data type is defined as follows:
 
 ### properties
 
@@ -862,7 +869,8 @@ street6 | The street (sixth line). | street6 | string
 
 ## 3.10 The "Conclusion" Data Type
 
-The JSON object used to (de)serialize the `http://gedcomx.org/v1/Conclusion` data type is defined as follows:
+The JSON object used to (de)serialize the [`http://gedcomx.org/v1/Conclusion`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md#conclusion)
+data type is defined as follows:
 
 ### properties
 
@@ -899,7 +907,8 @@ attribution | The attribution of this conclusion. | attribution | [`Attribution`
 
 ## 3.11 The "Subject" Data Type
 
-The JSON object used to (de)serialize the `http://gedcomx.org/v1/Subject` data type is defined as follows:
+The JSON object used to (de)serialize the [`http://gedcomx.org/v1/Subject`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md#subject)
+data type is defined as follows:
 
 ### properties
 
@@ -928,7 +937,8 @@ identifiers | Identifiers for this subject. | identifiers | [`Identifier`](#iden
 
 ## 3.12 The "Gender" Data Type
 
-The JSON object used to (de)serialize the `http://gedcomx.org/v1/Gender` data type is defined as follows:
+The JSON object used to (de)serialize the [`http://gedcomx.org/v1/Gender`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md#gender)
+data type is defined as follows:
 
 ### properties
 
@@ -951,7 +961,8 @@ type | URI identifying the gender. | type | [`URI`](#uri)
 
 ## 3.13 The "Name" Data Type
 
-The JSON object used to (de)serialize the `http://gedcomx.org/v1/Name` data type is defined as follows:
+The JSON object used to (de)serialize the [`http://gedcomx.org/v1/Name`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md#name-conclusion)
+data type is defined as follows:
 
 ### properties
 
@@ -978,7 +989,8 @@ nameForms | The name form(s) that best represents this name; representations of 
 
 ## 3.14 The "Fact" Data Type
 
-The JSON object used to (de)serialize the `http://gedcomx.org/v1/Fact` data type is defined as follows:
+The JSON object used to (de)serialize the [`http://gedcomx.org/v1/Fact`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md#3-fact-conclusion)
+data type is defined as follows:
 
 ### properties
 
@@ -1009,7 +1021,7 @@ qualifiers | Qualifiers to add additional details about the fact. | qualifiers |
 
 ## 3.15 The "EventRole" Data Type
 
-The JSON object used to (de)serialize the `http://gedcomx.org/v1/EventRole`
+The JSON object used to (de)serialize the [`http://gedcomx.org/v1/EventRole`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md#conclusion-event-role)
 data type is defined as follows:
 
 ### properties
@@ -1039,7 +1051,8 @@ details | Details about the role of participant in the event. | details | string
 
 ## 3.16 The "Date" Data Type
 
-The JSON object used to (de)serialize the `http://gedcomx.org/v1/Date` data type is defined as follows:
+The JSON object used to (de)serialize the [`http://gedcomx.org/v1/Date`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md#conclusion-date)
+data type is defined as follows:
 
 ### properties
 
@@ -1064,8 +1077,8 @@ formal | The standardized, formal representation of the date. | formal | [GEDCOM
 
 # 3.17 The "PlaceReference" Data Type
 
-the JSON object used to (de)serialize the `http://gedcomx.org/v1/PlaceReference` data type
-is defined as follows:
+the JSON object used to (de)serialize the [`http://gedcomx.org/v1/PlaceReference`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md#conclusion-place-reference)
+data type is defined as follows:
 
 ### properties
 
@@ -1090,7 +1103,8 @@ descriptionRef | A reference to a _description_ of this place. | description | [
 
 ## 3.18 The "NamePart" Data Type
 
-The JSON object used to (de)serialize the `http://gedcomx.org/v1/NamePart` data type is defined as follows:
+The JSON object used to (de)serialize the [`http://gedcomx.org/v1/NamePart`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md#name-part)
+data type is defined as follows:
 
 ### properties
 
@@ -1117,7 +1131,8 @@ qualifiers | Qualifiers to add additional semantic meaning to the name part. | q
 
 ## 3.19 The "NameForm" Data Type
 
-The JSON object used to (de)serialize the `http://gedcomx.org/v1/NameForm` data type is defined as follows:
+The JSON object used to (de)serialize the [`http://gedcomx.org/v1/NameForm`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md#name-form)
+data type is defined as follows:
 
 ### properties
 
@@ -1143,7 +1158,8 @@ parts | Any identified name parts from the name. | parts | array of [`NamePart`]
 
 ## 3.20 The "Qualifier" Data Type
 
-The JSON object used to (de)serialize the `http://gedcomx.org/v1/Qualifier` data type is defined as follows:
+The JSON object used to (de)serialize the [`http://gedcomx.org/v1/Qualifier`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md#qualifier)
+data type is defined as follows:
 
 ### properties
 
@@ -1165,13 +1181,13 @@ value | The value of the qualifier. | value | string
 
 ## 3.21 The "Coverage" Data Type
 
-The `gx:Coverage` JSON type is used to (de)serialize the `http://gedcomx.org/v1/Coverage`
+The `gx:Coverage` JSON type is used to (de)serialize the [`http://gedcomx.org/v1/Coverage`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md#user-content-coverage)
 data type.
 
 ### properties
 
-name | description | JSON property | JSON type
------|-------------|--------------|---------
+name | description | JSON member | JSON object type
+-----|-------------|-------------|---------
 spatial | The spatial (i.e., geographic) coverage. | spatial | [`PlaceReference`](#conclusion-place-reference)
 temporal | The temporal coverage. | temporal | [`Date`](#conclusion-date)
 
