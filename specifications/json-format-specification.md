@@ -74,6 +74,7 @@ to serialize and deserialize the GEDCOM X Conceptual Model to and from
   * [3.18 The "NamePart" Data Type](#name-part)
   * [3.19 The "NameForm" Data Type](#name-form)
   * [3.20 The "Qualifier" Data Type](#qualifier)
+  * [3.21 The "Coverage" Data Type](#coverage)
 * [4. JSON-Specific Data Types](#json-specific-data-types)
   * [4.1 The URI](#uri)
   * [4.2 The "ResourceReference" Data Type](#resource-reference)
