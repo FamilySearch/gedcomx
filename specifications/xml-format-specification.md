@@ -716,12 +716,13 @@ data type.
 name | description | XML property | XML type
 -----|-------------|--------------|---------
 descriptionRef  | Reference to a _description_ of the source being referenced. | description (attribute) | [`URI`](#uri)
+descriptionId  | The id of the target source. | descriptionId (attribute) | xsd:string
 attribution | The attribution of this source reference. | gx:attribution | [`gx:Attribution`](#attribution)
 
 ### examples
 
 ```xml
-  <... description="http://identifier/for/description/of/source/being/referenced">
+  <... description="http://identifier/for/description/of/source/being/referenced" descriptionId="...">
     <gx:attribution>
       ...
     </gx:attribution>

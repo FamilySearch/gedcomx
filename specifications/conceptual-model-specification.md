@@ -804,6 +804,7 @@ The identifier for the "SourceReference" data type is:
 name  | description | data type | constraints
 ------|-------------|-----------|------------
 description  | Reference to a _description_ of the target source. | [URI](#uri) | REQUIRED. MUST resolve to an instance of [`http://gedcomx.org/v1/SourceDescription`](#source-description).
+descriptionId  | The id of the target source. | string | OPTIONAL.
 attribution | The attribution of this source reference. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing resource of the source reference is assumed.
 
 

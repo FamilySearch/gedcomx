@@ -754,6 +754,7 @@ data type is defined as follows:
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 descriptionRef  | Reference to a _description_ of the source being referenced. | description | [`URI`](#uri)
+descriptionId  | The id of the target source. | descriptionId | string
 attribution | The attribution of this source reference. | attribution | [`Attribution`](#attribution)
 
 ### examples
@@ -761,6 +762,7 @@ attribution | The attribution of this source reference. | attribution | [`Attrib
 ```javascript
 {
   "description" : "http://identifier/for/description/of/source/being/referenced",
+  "descriptionId" : "...",
   "attribution" : { /*...*/ }
 
   //...possibility of extension elements...
