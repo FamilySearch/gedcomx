@@ -90,6 +90,7 @@ relationships, and sources.
     * [3.18.1 Known Name Part Types](#known-name-part-types)
   * [3.19 The "NameForm" Data Type](#name-form)
   * [3.20 The "Qualifier" Data Type](#qualifier)
+  * [3.21 The "Coverage" Data Type](#user-content-coverage)
 * [4. Extracted Conclusion Constraints](#extracted-conclusion-constraints)
   * [4.1 Persona](#persona)
 * [5. Extensibility](#extensibility)
