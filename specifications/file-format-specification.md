@@ -12,7 +12,7 @@ discussion and suggestions for improvement.
 
 ## Copyright Notice
 
-Copyright 2011-2013 Intellectual Reserve, Inc.
+Copyright Intellectual Reserve, Inc.
 
 ## License
 
