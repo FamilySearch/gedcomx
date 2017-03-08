@@ -72,8 +72,8 @@ This specification uses "GEDCOM X File Format" internally.
 This specification depends on the [ZIP file format](http://www.pkware.com/documents/casestudies/APPNOTE.TXT)
 defined by PKWARE, Inc.
 
-This specification depends on the GEDCOM X XML Serialization Format identified
-by [`http://gedcomx.org/xml/v1`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/xml-format-specification.md).
+This specification depends on the GEDCOM X JSON Serialization Format identified
+by [`http://gedcomx.org/json/v1`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/json-format-specification.md).
 
 This specification depends on the GEDCOM X Standard Header Set identified
 by [`http://gedcomx.org/headers/v1`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/standard-header-set-specification.md).
@@ -111,11 +111,11 @@ provides metadata about the GEDCOM X file and the resources contained in it.
 ## 3.1 Resources Defined by GEDCOM X
 
 All resources defined by the [GEDCOM X Conceptual Model](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md)
-MUST be represented using the GEDCOM X XML media type as defined by the [GEDCOM X XML Format specification](https://github.com/FamilySearch/gedcomx/blob/master/specifications/xml-format-specification.md).
-As such, each GEDCOM X resource is provided within a valid GEDCOM X XML document with the
-[GEDCOM X XML Element](https://github.com/FamilySearch/gedcomx/blob/master/specifications/xml-format-specification.md) as the root element.
-Each GEDCOM X file MUST contain at least one GEDCOM X XML document. A GEDCOM X file MAY contain more than one GEDCOM X XML document.
-This specification does not specify a maximum number of elements nor a minimum number of elements supplied within each GEDCOM X document.
+MUST be represented using the GEDCOM X JSON media type as defined by the [GEDCOM X JSON Format specification](https://github.com/FamilySearch/gedcomx/blob/master/specifications/json-format-specification.md).
+As such, each GEDCOM X resource is provided within a valid GEDCOM X JSON document with the
+[GEDCOM X Object](https://github.com/FamilySearch/gedcomx/blob/master/specifications/json-format-specification.md#gedcomx-object) as the root element.
+Each GEDCOM X file MUST contain at least one GEDCOM X JSON document. A GEDCOM X file MAY contain more than one GEDCOM X JSON document.
+This specification does not specify a maximum number of elements nor a minimum number of elements supplied within each GEDCOM X file.
 
 <a name="resources-externally-gedcomx-"/>
 
@@ -173,7 +173,7 @@ All of the headers defined by the [GEDCOM X Standard Header Set](https://github.
 MAY be used as header fields applicable to the resource to which the section applies. Use of the following headers is RECOMMENDED for each individual resource
 if the metadata is available:
 
-* `Content-Type` is used to determine the media type of the resource in the file. If a `Content-Type` header field is not provided, the media type of the resource is assumed to be `application/x-gedcomx-v1+xml`.
+* `Content-Type` is used to determine the media type of the resource in the file. If a `Content-Type` header field is not provided, the media type of the resource is assumed to be `application/x-gedcomx-v1+json`.
 * `ETag` is used to supply a version for the resource.
 * `X-DC-modified` is used to supply a timestamp of when the resource was last modified.
 
@@ -197,7 +197,7 @@ Absolute URI as defined by [RFC 3986 Section 4.3](http://tools.ietf.org/html/rfc
 
 ## 5.2 Same-Document References
 
-References to instances of data types that are contained within the same GEDCOM X XML Document within a GEDCOM X file
+References to instances of data types that are contained within the same GEDCOM X JSON Document within a GEDCOM X file
 are referred to as "same-document references". A same-document URI reference is specified by
 [RFC 3986 Section 4.4](http://tools.ietf.org/html/rfc3986#section-4.4).
 
@@ -246,14 +246,14 @@ manifest, as follows:
 
 (ZIP) File Entry | Description
 -----------------|------------
-`bishop/tree.xml` | A GEDCOM X XML document containing a single person.
+`bishop/tree.json` | A GEDCOM X JSON document containing a single person.
 `images/alma-birth-certificate.jpg` | A JPEG image that represents a digital copy of a birth certificate.
-`tree.xml` | A GEDCOM X XML document containing a person, a relationship, and a source description.
+`tree.json` | A GEDCOM X JSON document containing a person, a relationship, and a source description.
 `META-INF/MANIFEST.MF` | The GEDCOM X file manifest.
 
-#### bishop/tree.xml
+#### bishop/tree.json
 
-The resource in the entry `bishop/tree.xml` in the file is a GEDCOM X XML document that contains genealogical information about
+The resource in the entry `bishop/tree.json` in the file is a GEDCOM X JSON document that contains genealogical information about
 a person named Marie Bishop and her ancestry. The instance of `Person` in the document that describes Marie provides the value
 "KWCR-JW3" for its `id` property.
 
@@ -262,9 +262,9 @@ a person named Marie Bishop and her ancestry. The instance of `Person` in the do
 The resource in the entry `images/alma-birth-certificate.jpg` in the file is a JPEG image that is a digital copy of a birth
 certificate for a person named Alma Heaton.
 
-#### tree.xml
+#### tree.json
 
-The resource in the entry `tree.xml` in the file is a GEDCOM X XML document that contains genealogical information about
+The resource in the entry `tree.json` in the file is a GEDCOM X JSON document that contains genealogical information about
 a person named Alma Heaton and his ancestry. The instance of `Person` in the document that describes Alma provides the value
 "KWCR-JWS" for its `id` property.
 
@@ -284,11 +284,11 @@ The resource in the entry `META-INF/MANIFEST.MF` is the GEDCOM X file manifest. 
 ```
 X-DC-created: 2013-05-17T12:31:14
 
-Name: tree.xml
-Content-Type: application/x-gedcomx-v1+xml
+Name: tree.json
+Content-Type: application/x-gedcomx-v1+json
 
-Name: bishop/tree.xml
-Content-Type: application/x-gedcomx-v1+xml
+Name: bishop/tree.json
+Content-Type: application/x-gedcomx-v1+json
 
 Name: images/alma-birth-certificate.jpg
 Content-Type: image/jpeg
@@ -302,24 +302,28 @@ This section describes the data references that are used by the data instances t
 
 #### The couple relationship
 
-In the above example, the instance of `Relationship` contained by the document at `tree.xml` refers to both the instance
+In the above example, the instance of `Relationship` contained by the document at `tree.json` refers to both the instance
 of `Person` that describes Alma and to the instance of `Person` that describes Marie. Because the instance of `Relationship`
 is contained within the same document as the instance of `Person` that describes Alma, the relationship references
 Alma using a _same-document reference_ to the fragment id of Alma, "#KWCR-JWS". The relationship refers to the
 instance of `Person` that describes Marie by using a _relative reference_ that includes the reference fragment id.
-In this case, an _absolute-path relative reference_ is used: "/bishop/tree.xml#KWCR-JW3". For convenience, the XML snippet
-of `tree.xml` illustrating the relationship is provided here:
+In this case, an _absolute-path relative reference_ is used: "/bishop/tree.json#KWCR-JW3". For convenience, the JSON snippet
+of `tree.json` illustrating the relationship is provided here:
 
-```xml
-<gedcomx xmlns="http://gedcomx.org/v1/">
-  ...
-  <relationship type="http://gedcomx.org/Couple">
-    <person1 resource="#KWCR-JWS"/>
-    <person2 resource="/bishop/tree.xml#KWCR-JW3"/>
-    ...
-  </relationship>
-  ...
-</gedcomx>
+```json
+{
+  "relationships" : [
+    {
+      "type" : "http://gedcomx.org/Couple",
+      "person1" : {
+        "resource" : "#KWCR-JWS"
+      },
+      "person2" : {
+        "resource" : "/bishop/tree.json#KWCR-JW3"
+      }
+    }
+  ]
+}
 ```
 
 #### The source reference and source description
@@ -328,23 +332,27 @@ In the above example, the instance of `Person` that describes Alma references a 
 references the image of the birth certificate. Because the source reference and the source description are contained
 within the same document, the source reference refers to the document using a _same-document reference_: "#M8PT-4GP".
 The source description refers to the image using the `about` property. For the purposes of illustration, a _relative-path
-relative reference_ is used: "./images/alma-birth-certificate.jpg". For convenience, the XML snippet of `tree.xml`
+relative reference_ is used: "./images/alma-birth-certificate.jpg". For convenience, the JSON snippet of `tree.json`
 illustrating the source reference and source description is provided here:
 
-```xml
-<gedcomx xmlns="http://gedcomx.org/v1/">
-  ...
-  <person id="KWCR-JWS">
-    ...
-    <source description="#M8PT-4GP"/>
-    ...
-  </person>
-  ...
-  <sourceDescription about="./images/alma-birth-certificate.jpg">
-    ...
-  </sourceDescription>
-  ...
-</gedcomx>
+```json
+{
+  "persons" : [
+    {
+      "id" : "KWCR-JWS",
+      "sources" : [
+        {
+          "description" : "#M8PT-4GP"
+        }
+      ]
+    }
+  ],
+  "sourceDescriptions" : [
+    {
+      "about" : "./images/alma-birth-certificate.jpg"
+    }
+  ]
+}
 ```
 
 <a name="gedxomx-filename-extension"/>
