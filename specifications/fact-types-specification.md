@@ -79,8 +79,8 @@ specified by [RFC 3986](http://tools.ietf.org/html/rfc3986). This specification 
 
 # 2. Fact Types
 
-This section specifies the set of fact types, grouping the types by 
-whether a fact of the identified type is applicable to a person, couple relationship, 
+This section specifies the set of fact types, grouping the types by
+whether a fact of the identified type is applicable to a person, couple relationship,
 or parent-child relationship.
 
 <a name="person-fact-types"/>
@@ -89,7 +89,7 @@ or parent-child relationship.
 
 Facts of the following types are applicable to a person:
 
-URI | description 
+URI | description
 ----|------------
 `http://gedcomx.org/Adoption`| A fact of a person's adoption.
 `http://gedcomx.org/AdultChristening`| A fact of a person's christening or baptism as an adult.
@@ -100,6 +100,7 @@ URI | description
 `http://gedcomx.org/BarMitzvah`| A fact of a person's bar mitzvah.
 `http://gedcomx.org/BatMitzvah`| A fact of a person's bat mitzvah.
 `http://gedcomx.org/Birth`| A fact of a person's birth.
+`http://gedcomx.org/Birth`| A fact of a person's birth notice, such as posted in a newspaper or other publishing medium.
 `http://gedcomx.org/Blessing`| A fact of an official blessing received by a person, such as at the hands of a clergy member or at another religious rite.
 `http://gedcomx.org/Burial`| A fact of the burial of a person's body after death.
 `http://gedcomx.org/Caste`| A fact of a person's caste.
