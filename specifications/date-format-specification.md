@@ -51,7 +51,7 @@ representations.
       * [2.1.2 time of day](#time-of-day)
       * [2.1.3 CE](#CE)
       * [2.1.4 BCE](#BCE)
-      * [2.1.5 Gregorian calendar](#Gregorian calendar)
+      * [2.1.5 Gregorian calendar](#Gregorian)
       * [2.1.6 simple date](#simple-date)
       * [2.1.7 date range](#date-range)
       * [2.1.8 recurring date](#recurring-date)
