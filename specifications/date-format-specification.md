@@ -366,7 +366,7 @@ In the format for a `simple date`, letters are used to represent digits of the d
 The format for a complete `simple date` is defined as follows:
 
 ```
-±YYYY-MM-DDThh:mm:ss[±hh[:mm]|Z]
+±YYYY[-MM[-DD[Thh:[mm[:ss[±hh[:mm]|Z]]]]]]
 ```
 
 <a name="5-2-description"/>
@@ -401,7 +401,7 @@ Hours are based on a 24-hour day, and MUST have a value between 00 and 23. In th
 minute and second components have zero values, the value 24 is valid, representing midnight at
 the end of the calendar day. Likewise, if all three components have the value 00, it represents midnight
 at the beginning of the specified calendar day.
- 
+
 When any time of day is specified, there are three options for specifying its geographical reference:
 
 * No specifier implies local time
@@ -467,7 +467,7 @@ guidelines and restrictions:
 NOTE: For a duration, local time and UTC distinction is meaningless.
 
 NOTE: A GEDCOM X Date MAY contain a `duration`, but MUST NOT solely represent a `duration` itself.
- 
+
 <a name="5-3-examples"/>
 
 ### 5.3.3 Examples
