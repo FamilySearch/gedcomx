@@ -196,8 +196,8 @@ Examples of `closed date range`:
 
 Examples of `open-ended date range`
 
-* Until January 1863 CE
-* Since December 14, 1642 CE
+* Before January 1863 CE
+* After December 14, 1642 CE
 
 <a name="recurring-date"/>
 
@@ -560,11 +560,11 @@ A trailing slash character [/] is used to specify a date range *after* the provi
 
 example | textual description
 --------|--------------------
-/+1887-03 | until May, 1887 CE
-+1976-07-11/ | since July 11, 1976 CE
-/-1287 | until 1288 BCE
-/+0000 | until 1 BCE
--0001-04/ | since May, 2 BCE
+/+1887-03 | before March, 1887 CE
++1976-07-11/ | after July 11, 1976 CE
+/-1287 | before 1288 BCE
+/+0000 | before 1 BCE
+-0001-04/ | after April, 2 BCE
 
 <a name="5-6-recurring-date"/>
 
@@ -633,14 +633,14 @@ The format for an `approximate date range` is defined as a `date range` prepende
 
 example | description, textual equivalent
 --------|--------------------------------
-A+1752/+1823 | sometime between 1752 CE and 1823 CE
-A+1825-04-13/+1825-11-26 | sometime between April 13, 1825 and November 26, 1825
-A+1633-02-19/P74Y | sometime within 74 years after February 19, 1933
-A/+1887-03 | sometime before May, 1887 CE
-A+1976-07-11/ | sometime after July 11, 1976 CE
-A/-1287 | sometime before 1288 BCE
-A/+0000 | sometime before 1 BCE
-A-0001-04/ | sometime before May, 2 BCE
+A+1752/+1823 | approximately between 1752 CE and 1823 CE
+A+1825-04-13/+1825-11-26 | approximately between April 13, 1825 CE and November 26, 1825 CE
+A+1633-02-19/P74Y | approximately within 74 years after February 19, 1633 CE
+A/+1887-03 | approximately before March, 1887 CE
+A+1976-07-11/ | approximately after July 11, 1976 CE
+A/-1287 | approximately before 1288 BCE
+A/+0000 | approximately before 1 BCE
+A-0001-04/ | approximately before April, 2 BCE
 
 <a name="uri-representation"/>
 
