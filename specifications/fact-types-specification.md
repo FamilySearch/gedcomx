@@ -100,7 +100,7 @@ URI | description
 `http://gedcomx.org/BarMitzvah`| A fact of a person's bar mitzvah.
 `http://gedcomx.org/BatMitzvah`| A fact of a person's bat mitzvah.
 `http://gedcomx.org/Birth`| A fact of a person's birth.
-`http://gedcomx.org/Birth`| A fact of a person's birth notice, such as posted in a newspaper or other publishing medium.
+`http://gedcomx.org/BirthNotice`| A fact of a person's birth notice, such as posted in a newspaper or other publishing medium.
 `http://gedcomx.org/Blessing`| A fact of an official blessing received by a person, such as at the hands of a clergy member or at another religious rite.
 `http://gedcomx.org/Burial`| A fact of the burial of a person's body after death.
 `http://gedcomx.org/Caste`| A fact of a person's caste.
@@ -140,6 +140,7 @@ URI | description
 `http://gedcomx.org/Naturalization`| A fact of a person's naturalization (i.e., acquisition of citizenship and nationality).
 `http://gedcomx.org/NumberOfChildren`| A fact of the number of children of a person or relationship.
 `http://gedcomx.org/NumberOfMarriages`| A fact of a person's number of marriages.
+`http://gedcomx.org/Obituary`| A fact of a person's obituary.
 `http://gedcomx.org/Occupation`| A fact of a person's occupation or employment.
 `http://gedcomx.org/Ordination`| A fact of a person's ordination to a stewardship in a church.
 `http://gedcomx.org/Pardon`| A fact of a person's legal pardon.
