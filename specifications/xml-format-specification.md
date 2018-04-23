@@ -354,6 +354,7 @@ citations | The citation(s) for this source. | gx:citation | [`gx:SourceCitation
 mediaType | A hint about the media type of the resource being described. | mediaType (attribute) | xsd:string
 about | A uniform resource identifier (URI) for the resource being described. | about (attribute) | [anyURI](#uri)
 mediator | A reference to the entity that mediates access to the described source. | gx:mediator | [`gx:ResourceReference`](#resource-reference)
+publisher | A reference to the entity responsible for making the described source available. | gx:publisher | [`gx:ResourceReference`](#resource-reference)
 sources | A list of references to any sources from which this source is derived. | gx:source | [`gx:SourceReference`](#source-reference)
 analysis | A reference to a document containing analysis about this source. | gx:analysis | [`gx:ResourceReference`](#resource-reference)
 componentOf | A reference to the source that contains this source. | gx:componentOf | [`gx:SourceReference`](#source-reference)
@@ -377,6 +378,7 @@ repository | A reference to the repository that contains the described resource.
     </gx:citation>
     ...
     <gx:mediator resource="(uri reference to the mediator)"/>
+    <gx:publisher resource="(uri reference to the publilsher)"/>
     <gx:source>
       ...
     </gx:source>
