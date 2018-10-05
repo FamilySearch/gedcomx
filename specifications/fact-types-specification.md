@@ -107,6 +107,7 @@ URI | description
 `http://gedcomx.org/Census`| A fact of a person's participation in a census.
 `http://gedcomx.org/Christening`| A fact of a person's christening *at birth*. Note: Use `AdultChristening` for the christening as an adult.
 `http://gedcomx.org/Circumcision`| A fact of a person's circumcision.
+`http://gedcomx.org/CivilAward`| A fact of a person's civil award (medal, honor).
 `http://gedcomx.org/Clan`| A fact of a person's clan.
 `http://gedcomx.org/Confirmation`| A fact of a person's confirmation (or other rite of initiation) in a church or religion.
 `http://gedcomx.org/Cremation`| A fact of the cremation of person's body after death.
