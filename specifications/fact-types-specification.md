@@ -96,6 +96,7 @@ URI | description
 `http://gedcomx.org/Amnesty`| A fact of a person's amnesty.
 `http://gedcomx.org/Apprenticeship`| A fact of a person's apprenticeship.
 `http://gedcomx.org/Arrest`| A fact of a person's arrest.
+`http://gedcomx.org/Award`| A fact of a person's award (medal, honor).
 `http://gedcomx.org/Baptism`| A fact of a person's baptism.
 `http://gedcomx.org/BarMitzvah`| A fact of a person's bar mitzvah.
 `http://gedcomx.org/BatMitzvah`| A fact of a person's bat mitzvah.
@@ -107,7 +108,6 @@ URI | description
 `http://gedcomx.org/Census`| A fact of a person's participation in a census.
 `http://gedcomx.org/Christening`| A fact of a person's christening *at birth*. Note: Use `AdultChristening` for the christening as an adult.
 `http://gedcomx.org/Circumcision`| A fact of a person's circumcision.
-`http://gedcomx.org/CivilAward`| A fact of a person's civil award (medal, honor).
 `http://gedcomx.org/Clan`| A fact of a person's clan.
 `http://gedcomx.org/Confirmation`| A fact of a person's confirmation (or other rite of initiation) in a church or religion.
 `http://gedcomx.org/Cremation`| A fact of the cremation of person's body after death.
