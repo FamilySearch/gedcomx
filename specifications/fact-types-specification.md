@@ -96,6 +96,7 @@ URI | description
 `http://gedcomx.org/Amnesty`| A fact of a person's amnesty.
 `http://gedcomx.org/Apprenticeship`| A fact of a person's apprenticeship.
 `http://gedcomx.org/Arrest`| A fact of a person's arrest.
+`http://gedcomx.org/Award`| A fact of a person's award (medal, honor).
 `http://gedcomx.org/Baptism`| A fact of a person's baptism.
 `http://gedcomx.org/BarMitzvah`| A fact of a person's bar mitzvah.
 `http://gedcomx.org/BatMitzvah`| A fact of a person's bat mitzvah.
