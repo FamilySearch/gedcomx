@@ -133,8 +133,8 @@ URI | description
 `http://gedcomx.org/MilitaryInduction`| A fact of a person's military induction.
 `http://gedcomx.org/MilitaryService`| A fact of a person's military service.
 `http://gedcomx.org/Mission`| A fact of a person's church mission.
-`http://gedcomx.org/MoveTo`| A fact of a person's move (i.e., change of residence) to a new location.
 `http://gedcomx.org/MoveFrom`| A fact of a person's move (i.e., change of residence) from a location.
+`http://gedcomx.org/MoveTo`| A fact of a person's move (i.e., change of residence) to a new location.
 `http://gedcomx.org/MultipleBirth`| A fact that a person was born as part of a multiple birth (e.g., twin, triplet, etc.).
 `http://gedcomx.org/NationalId`| A fact of a person's national id (e.g., social security number).
 `http://gedcomx.org/Nationality`| A fact of a person's nationality.
@@ -169,9 +169,9 @@ URI | description
 `http://gedcomx.org/Annulment`| The fact of an annulment of a marriage.
 `http://gedcomx.org/CommonLawMarriage`| The fact of a marriage by common law.
 `http://gedcomx.org/CivilUnion`| The fact of a civil union of a couple.
-`http://gedcomx.org/DomesticPartnership`| The fact of a domestic partnership of a couple.
 `http://gedcomx.org/Divorce`| The fact of a divorce of a couple.
 `http://gedcomx.org/DivorceFiling`| The fact of a filing for divorce.
+`http://gedcomx.org/DomesticPartnership`| The fact of a domestic partnership of a couple.
 `http://gedcomx.org/Engagement`| The fact of an engagement to be married.
 `http://gedcomx.org/Marriage`| The fact of a marriage.
 `http://gedcomx.org/MarriageBanns`| The fact of a marriage banns.
