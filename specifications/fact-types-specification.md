@@ -110,8 +110,8 @@ URI | description
 `http://gedcomx.org/Circumcision`| A fact of a person's circumcision.
 `http://gedcomx.org/Clan`| A fact of a person's clan.
 `http://gedcomx.org/Confirmation`| A fact of a person's confirmation (or other rite of initiation) in a church or religion.
-`http://gedcomx.org/Cremation`| A fact of the cremation of person's body after death.
 `http://gedcomx.org/Court`| A fact of the appearance of a person in a court proceeding.
+`http://gedcomx.org/Cremation`| A fact of the cremation of person's body after death.
 `http://gedcomx.org/Death`| A fact of the death of a person.
 `http://gedcomx.org/Education`| A fact of an education or an educational achievement (e.g., diploma, graduation, scholarship, etc.) of a person.
 `http://gedcomx.org/EducationEnrollment`| A fact of a person's enrollment in an educational program or institution.
