@@ -110,18 +110,22 @@ URI | description
 `http://gedcomx.org/Circumcision`| A fact of a person's circumcision.
 `http://gedcomx.org/Clan`| A fact of a person's clan.
 `http://gedcomx.org/Confirmation`| A fact of a person's confirmation (or other rite of initiation) in a church or religion.
+`http://gedcomx.org/Court`| A fact of the appearance of a person in a court proceeding.
 `http://gedcomx.org/Cremation`| A fact of the cremation of person's body after death.
 `http://gedcomx.org/Death`| A fact of the death of a person.
 `http://gedcomx.org/Education`| A fact of an education or an educational achievement (e.g., diploma, graduation, scholarship, etc.) of a person.
+`http://gedcomx.org/EducationEnrollment`| A fact of a person's enrollment in an educational program or institution.
 `http://gedcomx.org/Emigration`| A fact of the emigration of a person.
 `http://gedcomx.org/Ethnicity`| A fact of a person's ethnicity.
 `http://gedcomx.org/Excommunication`| A fact of a person's excommunication from a church.
 `http://gedcomx.org/FirstCommunion`| A fact of a person's first communion in a church.
 `http://gedcomx.org/Funeral`| A fact of a person's funeral.
 `http://gedcomx.org/GenderChange`| A fact of a person's gender change.
+`http://gedcomx.org/Graduation`| A fact of a person's graduation from a scholastic institution.
 `http://gedcomx.org/Heimat`| A fact of a person's _heimat_. "Heimat" refers to a person's affiliation by birth to a specific geographic place. Distinct heimaten are often useful as indicators that two persons of the same name are not likely to be closely related genealogically. In English, "heimat" may be described using terms like "ancestral home", "homeland", or "place of origin".
 `http://gedcomx.org/Immigration`| A fact of a person's immigration.
 `http://gedcomx.org/Imprisonment`| A fact of a person's imprisonment.
+`http://gedcomx.org/Inquest`| A legal inquest. Inquests usually only occur when there’s something suspicious about the death. Inquests might in some instances lead to a murder investigation. Most people that die have a death certificate wherein a doctor indicates the cause of death and often indicates when the decedent was last seen by that physician; these require no inquest.
 `http://gedcomx.org/LandTransaction`| A fact of a land transaction enacted by a person.
 `http://gedcomx.org/Language`| A fact of a language spoken by a person.
 `http://gedcomx.org/Living`| A fact of a record of a person's living for a specific period. This is designed to include "flourish", defined to mean the time period in an adult's life where he was most productive, perhaps as a writer or member of the state assembly. It does not reflect the person's birth and death dates.
@@ -133,8 +137,8 @@ URI | description
 `http://gedcomx.org/MilitaryInduction`| A fact of a person's military induction.
 `http://gedcomx.org/MilitaryService`| A fact of a person's military service.
 `http://gedcomx.org/Mission`| A fact of a person's church mission.
-`http://gedcomx.org/MoveTo`| A fact of a person's move (i.e., change of residence) to a new location.
 `http://gedcomx.org/MoveFrom`| A fact of a person's move (i.e., change of residence) from a location.
+`http://gedcomx.org/MoveTo`| A fact of a person's move (i.e., change of residence) to a new location.
 `http://gedcomx.org/MultipleBirth`| A fact that a person was born as part of a multiple birth (e.g., twin, triplet, etc.).
 `http://gedcomx.org/NationalId`| A fact of a person's national id (e.g., social security number).
 `http://gedcomx.org/Nationality`| A fact of a person's nationality.
@@ -153,6 +157,7 @@ URI | description
 `http://gedcomx.org/Residence`| A fact of a person's residence.
 `http://gedcomx.org/Retirement`| A fact of a person's retirement.
 `http://gedcomx.org/Stillbirth`| A fact of a person's stillbirth.
+`http://gedcomx.org/TaxAssessment`| A fact of a person's tax assessment.
 `http://gedcomx.org/Tribe`| A fact of a person's tribe.
 `http://gedcomx.org/Will`| A fact of a person's will.
 `http://gedcomx.org/Visit`| A fact of a person's visit to a place different from the person's residence.
@@ -169,9 +174,9 @@ URI | description
 `http://gedcomx.org/Annulment`| The fact of an annulment of a marriage.
 `http://gedcomx.org/CommonLawMarriage`| The fact of a marriage by common law.
 `http://gedcomx.org/CivilUnion`| The fact of a civil union of a couple.
-`http://gedcomx.org/DomesticPartnership`| The fact of a domestic partnership of a couple.
 `http://gedcomx.org/Divorce`| The fact of a divorce of a couple.
 `http://gedcomx.org/DivorceFiling`| The fact of a filing for divorce.
+`http://gedcomx.org/DomesticPartnership`| The fact of a domestic partnership of a couple.
 `http://gedcomx.org/Engagement`| The fact of an engagement to be married.
 `http://gedcomx.org/Marriage`| The fact of a marriage.
 `http://gedcomx.org/MarriageBanns`| The fact of a marriage banns.
