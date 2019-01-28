@@ -277,7 +277,7 @@ data type.
 name | description | XML property | XML type
 -----|-------------|--------------|---------
 private | Whether this instance of `Person` has been designated for limited distribution or display. | private (attribute) | xs:boolean
-gender | The gender of the person. | gx:gender | [`gx:Gender`](#gender)
+gender | The sex of the person as assigned at birth. | gx:gender | [`gx:Gender`](#gender)
 names | The names of the person. | gx:name | [`gx:Name`](#name-conclusion)
 facts | The facts of the person. | gx:fact | [`gx:Fact`](#fact-conclusion)
 

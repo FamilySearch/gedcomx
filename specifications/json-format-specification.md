@@ -319,7 +319,7 @@ The JSON object used to (de)serialize the [`http://gedcomx.org/v1/Person`](https
 name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 private | Whether this instance of `Person` has been designated for limited distribution or display. | private | boolean
-gender | The gender of the person. | gender | [`Gender`](#gender-conclusion)
+gender | The sex of the person as assigned at birth | gender | [`Gender`](#gender-conclusion)
 names | The names of the person. | names | array of [`Name`](#name-conclusion)
 facts | The facts of the person. | facts | array of [`Fact`](#fact-conclusion)
 
