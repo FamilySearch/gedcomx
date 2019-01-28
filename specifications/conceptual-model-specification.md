@@ -1006,6 +1006,7 @@ URI | description
 `http://gedcomx.org/Male`| Male gender.
 `http://gedcomx.org/Female`| Female gender.
 `http://gedcomx.org/Unknown`| Unknown gender.
+`http://gedcomx.org/Intersex`| Intersex (assignment at birth).
 
 
 <a name="name-conclusion"/>
