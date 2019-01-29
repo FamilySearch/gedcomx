@@ -53,6 +53,7 @@ to serialize and deserialize the GEDCOM X Conceptual Model to and from
   * [2.5 The "Event" Data Type](#event)
   * [2.6 The "Document" Data Type](#document)
   * [2.7 The "PlaceDescription" Data Type](#place-description)
+  * [2.7 The "Group" Data Type](#group)
 * [3. Component-Level Data Types](#component-data-types)
   * [3.1 The "Identifier" Data Type](#identifier-type)
   * [3.2 The "Attribution" Data Type](#attribution)
@@ -75,6 +76,7 @@ to serialize and deserialize the GEDCOM X Conceptual Model to and from
   * [3.19 The "NameForm" Data Type](#name-form)
   * [3.20 The "Qualifier" Data Type](#qualifier)
   * [3.21 The "Coverage" Data Type](#coverage)
+  * [3.22 The "Coverage" Data Type](#conclusion-group-role)
 * [4. JSON-Specific Data Types](#json-specific-data-types)
   * [4.1 The URI](#uri)
   * [4.2 The "ResourceReference" Data Type](#resource-reference)
@@ -559,6 +561,70 @@ latitude | Angular distance, in degrees, north or south of the Equator. | latitu
 longitude | Angular distance, in degrees, east or west of the Prime Meridian. | longitude | number
 temporalDescription | A description of the time period to which this place description is relevant. | temporalDescription | [`Date`](#conclusion-date)
 spatialDescription | A reference to a geospatial description of this place. | spatialDescription | [`ResourceReference`](#resource-reference)
+
+### examples
+
+```javascript
+{
+
+  //...the members of [Subject](#subject)...,
+
+  "names" : [ {
+    "lang" : "en",
+    "value" : "Pope's Creek, Westmoreland, Virginia, United States"
+  } ,
+  {
+    "lang" : "zh",
+    "value" : "教皇的小河，威斯特摩兰，弗吉尼亚州，美国"
+  } ],
+  "type" : "http://identifier/for/the/place/type",
+  "place" : { "resource" : "..." },
+  "jurisdiction" : { "resource" : "..." },
+  "latitude" : "27.9883575",
+  "latitude" : "86.9252014",
+  "temporalDescription" : { /*...*/ },
+  "spatialDescription" : {
+    "resource" : "http://uri/for/KML/document"
+  }
+}
+```
+
+<a name="group"/>
+
+# 2.8 The "Group" Data Type
+
+The JSON object used to (de)serialize the [`http://gedcomx.org/v1/Group`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md#place-description) data type
+is defined as follows:
+
+### properties
+
+name | description | JSON member | JSON object type
+-----|-------------|--------------|---------
+names | A list of names of the group. | names | array of [`TextValue`](#text-value)
+date | The date of applicability of the group. | date | [`Date`](#conclusion-date)
+place | The place of applicability of the group. | place | [`PlaceReference`](#conclusion-place-reference)
+roles | Information about how persons participated in the event. | roles | array of [`EventRole`](#conclusion-event-role)
+
+### examples
+
+```javascript
+{
+
+  //...the members of [Subject](#subject)...,
+
+  "names" : [ {
+    "lang" : "en",
+    "value" : "Monticello Plantation"
+  } ,
+  {
+    "lang" : "zh",
+    "value" : "monticello种植园"
+  } ],
+  "date" : { /*...*/ },
+  "place" : { /*...*/ },
+  "roles" : [ { /*...*/ }, { /*...*/ } ]
+}
+```
 
 ### examples
 
@@ -1203,6 +1269,33 @@ temporal | The temporal coverage. | temporal | [`Date`](#conclusion-date)
 }
 ```
 
+## 3.22 The "GroupRole" Data Type
+
+The JSON object used to (de)serialize the [`http://gedcomx.org/v1/GroupRole`](https://github.com/FamilySearch/gedcomx/blob/master/specifications/conceptual-model-specification.md#conclusion-group-role)
+data type is defined as follows:
+
+### properties
+
+name | description | JSON member | JSON object type
+-----|-------------|--------------|---------
+person | Reference to the group participant. | person | [`ResourceReference`](#resource-reference)
+type | URI identifying the participant's role. | type | [`URI`](#uri)
+details | Details about the role of participant in the group. | details | string
+
+### examples
+
+```javascript
+{
+
+  //...the members of [Conclusion](#conclusion)...,
+
+  "person" : {
+    "resource" : "http://identifier/for/person/1"
+  },
+  "type" : "...",
+  "details" : "..."
+}
+```
 
 <a name="json-specific-data-types"/>
 

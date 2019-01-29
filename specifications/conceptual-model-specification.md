@@ -62,6 +62,7 @@ relationships, and sources.
   * [2.6 The "Document" Data Type](#document)
     * [2.6.1 Known Document Types](#known-document-types)
   * [2.7 The "PlaceDescription" Data Type](#place-description)
+  * [2.8 The "Group" Data Type](#group)
 * [3. Component-Level Data Types](#component-data-types)
   * [3.1 The "Identifier" Data Type](#identifier-type)
   * [3.2 The "Attribution" Data Type](#attribution)
@@ -90,7 +91,8 @@ relationships, and sources.
     * [3.18.1 Known Name Part Types](#known-name-part-types)
   * [3.19 The "NameForm" Data Type](#name-form)
   * [3.20 The "Qualifier" Data Type](#qualifier)
-  * [3.21 The "Coverage" Data Type](#user-content-coverage)
+  * [3.21 The "Coverage" Data Type](#coverage)
+  * [3.22 The "GroupRole" Data Type](#conclusion-group-role)
 * [4. Extracted Conclusion Constraints](#extracted-conclusion-constraints)
   * [4.1 Persona](#persona)
 * [5. Extensibility](#extensibility)
@@ -624,6 +626,34 @@ latitude | Angular distance, in degrees, north or south of the Equator (0.0 degr
 longitude | Angular distance, in degrees, east or west of the Prime Meridian (0.0 degrees). | double | OPTIONAL.  If provided, MUST provide `latitude` also.  Values range from −180.0 degrees (west of the Meridian) to 180.0 degrees (east of the Meridian). It is assumed that descriptions that provide the same value for the `place` property share identical `latitude` values.
 temporalDescription | A description of the time period to which this place description is relevant. | [`http://gedcomx.org/v1/Date`](#conclusion-date) | OPTIONAL.
 spatialDescription | A reference to a geospatial description of this place. | [`URI`](#uri) | OPTIONAL. It is RECOMMENDED that this geospatial description resolve to a [KML](http://en.wikipedia.org/wiki/Keyhole_Markup_Language) document.
+
+<a name="group"/>
+
+## 2.8 The "Group" Data Type
+
+The `Group` data type describes a group of of persons. The concept of a "group" captures institutional associations between persons that may or may not
+have direct familial relations between each other. Examples of a group could include plantations, orphanages, or military units.
+
+### identifier
+
+The identifier for the `Group` data type is:
+
+`http://gedcomx.org/v1/Group`
+
+### extension
+
+This data type extends the following data type:
+
+`http://gedcomx.org/v1/Subject`
+
+### properties
+
+name  | description | data type | constraints
+------|-------------|-----------|------------
+names | A list of names of the group. | List of [`http://gedcomx.org/v1/TextValue`](#text-value). Order is preserved. | REQUIRED. The list MUST contain at least one name.
+date | The date of applicability of the group. | [`http://gedcomx.org/v1/Date`](#conclusion-date) | OPTIONAL.
+place | A reference to the place applicable to this group. | [`http://gedcomx.org/v1/PlaceReference`](#conclusion-place-reference) | OPTIONAL.
+roles | Information about how persons were associated with the group. | List of [`http://gedcomx.org/v1/GroupRole`](#conclusion-group-role). Order is preserved. | OPTIONAL.
 
 <a name="component-data-types"/>
 
@@ -1381,6 +1411,32 @@ name  | description | data type | constraints
 spatial | The spatial (i.e., geographic) coverage. | [`http://gedcomx.org/v1/PlaceReference`](#conclusion-place-reference) | OPTIONAL.
 temporal | The temporal coverage. | [`http://gedcomx.org/v1/Date`](#conclusion-date) | OPTIONAL.
 
+
+<a name="conclusion-group-role"/>
+
+## 3.22 The "GroupRole" Data Type
+
+The `GroupRole` data type defines a role of a person in a group.
+
+### identifier
+
+The identifier for the `GroupRole` data type is:
+
+`http://gedcomx.org/v1/GroupRole`
+
+### extension
+
+This data type extends the following data type:
+
+`http://gedcomx.org/v1/Conclusion`
+
+### properties
+
+name  | description | data type | constraints
+------|-------------|-----------|------------
+person | Reference to the group participant. | [`URI`](#uri) | REQUIRED. MUST resolve to an instance of [`http://gedcomx.org/v1/Person`](#person).
+type | Enumerated value identifying the participant's role. | [Enumerated Value](#enumerated-value) | OPTIONAL. If provided, MUST identify a role type.
+details | Details about the role of he participant in the group. | string | OPTIONAL.
 
 <a name="extracted-conclusion-constraints"/>
 

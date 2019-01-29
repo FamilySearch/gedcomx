@@ -76,6 +76,8 @@ to serialize and deserialize the GEDCOM X Conceptual Model to and from
   * [3.18 The "NamePart" Data Type](#name-part)
   * [3.19 The "NameForm" Data Type](#name-form)
   * [3.20 The "Qualifier" Data Type](#qualifier)
+  * [3.22 The "Coverage" Data Type](#coverage)
+  * [3.23 The "Coverage" Data Type](#conclusion-group-role)
 * [4. XML-Specific Data Types](#xml-data-types)
   * [4.1 The URI](#uri)
   * [4.2 The "ResourceReference" Data Type](#resource-reference)
@@ -565,6 +567,42 @@ spatialDescription | A reference to a geospatial description of this place. | gx
       ...
     </gx:temporalDescription>
     <gx:spatialDescription resource="http://uri/for/KML/document"/>
+    ...
+  </...>
+```
+
+## 2.8 The "Group" Data Type
+
+The `gx:Group` XML type is used to (de)serialize the `http://gedcomx.org/v1/Group` data type.
+
+
+### properties
+
+name | description | XML property | XML type
+-----|-------------|--------------|---------
+names | A list of names of the group. | gx:name | [`gx:TextValue`](#text-value)
+date | The date of applicability of the group. | gx:date | [`gx:Date`](#conclusion-date)
+place | The place of applicability of the group. | gx:place | [`gx:PlaceReference`](#conclusion-place-reference)
+roles | Information about how persons were associated with the group. | gx:role | [`gx:GroupRole`](#conclusion-group-role)
+
+### examples
+
+```xml
+  <...>
+
+    <!-- ...the members of [gx:Subject](#subject)... -->
+
+    <gx:name lang="en">Monticello Plantation</gx:name>
+    <gx:name lang="zh">monticello种植园</gx:name>
+    <gx:date>
+      ...
+    </gx:date>
+    <gx:place>
+      ...
+    </gx:place>
+    <gx:role>
+      ...
+    </gx:role>
     ...
   </...>
 ```
@@ -1183,6 +1221,33 @@ temporal | The temporal coverage. | gx:temporal | [`gx:Date`](#conclusion-date)
     </gx:temporal>
 
     <!-- possibility of extension elements -->
+  </...>
+```
+
+<a name="conclusion-group-role"/>
+
+## 3.22 The "GroupRole" Data Type
+
+The `gx:GroupRole` XML type is used to (de)serialize the `http://gedcomx.org/v1/GroupRole`
+data type.
+
+### properties
+
+name | description | XML property | XML type
+-----|-------------|--------------|---------
+person | Reference to the group participant. | gx:person | [`gx:ResourceReference`](#resource-reference)
+type | URI identifying the participant's role. | type (attribute) | [`URI`](#uri)
+details | Details about the role of participant in the group. | gx:details | xsd:string
+
+### examples
+
+```xml
+  <... id="local_id" type="...">
+
+    <!-- ...the members of [gx:Conclusion](#conclusion)... -->
+
+    <gx:person resource="http://identifier/for/person/1"/>
+    <gx:details>...</gx:details>
   </...>
 ```
 
