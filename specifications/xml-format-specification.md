@@ -1237,6 +1237,7 @@ name | description | XML property | XML type
 -----|-------------|--------------|---------
 person | Reference to the group participant. | gx:person | [`gx:ResourceReference`](#resource-reference)
 type | URI identifying the participant's role. | type (attribute) | [`URI`](#uri)
+date | The date of applicability of the role. | gx:date | [`gx:Date`](#conclusion-date)
 details | Details about the role of participant in the group. | gx:details | xsd:string
 
 ### examples
@@ -1247,6 +1248,9 @@ details | Details about the role of participant in the group. | gx:details | xsd
     <!-- ...the members of [gx:Conclusion](#conclusion)... -->
 
     <gx:person resource="http://identifier/for/person/1"/>
+    <gx:date>
+      ...
+    </gx:date>
     <gx:details>...</gx:details>
   </...>
 ```

@@ -1436,6 +1436,7 @@ name  | description | data type | constraints
 ------|-------------|-----------|------------
 person | Reference to the group participant. | [`URI`](#uri) | REQUIRED. MUST resolve to an instance of [`http://gedcomx.org/v1/Person`](#person).
 type | Enumerated value identifying the participant's role. | [Enumerated Value](#enumerated-value) | OPTIONAL. If provided, MUST identify a role type.
+date | The date of applicability of the role. | [`http://gedcomx.org/v1/Date`](#conclusion-date) | OPTIONAL.
 details | Details about the role of he participant in the group. | string | OPTIONAL.
 
 <a name="extracted-conclusion-constraints"/>

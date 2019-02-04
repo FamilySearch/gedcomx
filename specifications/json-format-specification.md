@@ -1280,6 +1280,7 @@ name | description | JSON member | JSON object type
 -----|-------------|--------------|---------
 person | Reference to the group participant. | person | [`ResourceReference`](#resource-reference)
 type | URI identifying the participant's role. | type | [`URI`](#uri)
+date | The date of applicability of the role. | date | [`Date`](#conclusion-date)
 details | Details about the role of participant in the group. | details | string
 
 ### examples
@@ -1293,6 +1294,7 @@ details | Details about the role of participant in the group. | details | string
     "resource" : "http://identifier/for/person/1"
   },
   "type" : "...",
+  "date" : { /*...*/ },
   "details" : "..."
 }
 ```
