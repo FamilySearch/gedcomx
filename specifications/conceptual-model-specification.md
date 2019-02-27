@@ -150,7 +150,7 @@ targets.
 
 The term "data type" is used to refer to a formal description of a data structure. The term "property" is used to refer to a
 distinct component or element of a data type. For example, information about a person might be contained within a
-data structure that supplies the person's name, birth date, gender, etc. A "data type" defines the formal "properties" of
+data structure that supplies the person's name, birth date, sex, etc. A "data type" defines the formal "properties" of
 a data structure.
 
 When a property of a data type is specified as being of a particular data type, the value of the property inherits the
@@ -238,7 +238,7 @@ this specification SHOULD be declared in a freely-distributable specification an
 
 GEDCOM X defines a set of controlled vocabularies for the purposes of identifying the semantic
 context of data instances. A controlled vocabulary is often defined to create a set
-of "known types" of data instances such as facts, names, genders, etc. For example, a controlled
+of "known types" of data instances such as facts, names, sex, etc. For example, a controlled
 vocabulary is specified to identify the set of known types of events so applications
 can share semantic context of the event.
 
@@ -349,7 +349,7 @@ This data type extends the following data type:
 name  | description | data type | constraints
 ------|-------------|-----------|------------
 private | Whether this instance of `Person` has been designated for limited distribution or display. | boolean | OPTIONAL. A description of how implementations should use private data is outside the scope of this specification.
-gender | The gender of the person. | [`http://gedcomx.org/v1/Gender`](#gender) | OPTIONAL.
+gender | The sex of the person as assigned at birth (see "[Sex Assignment](https://en.wikipedia.org/wiki/Sex_assignment)"). | [`http://gedcomx.org/v1/Gender`](#gender) | OPTIONAL.
 names | The names of the person. | List of [`http://gedcomx.org/v1/Name`](#name-conclusion). Order is preserved. | OPTIONAL.  If more than one name is provided, names are assumed to be given in order of preference, with the most preferred name in the first position in the list.
 facts | The facts of the person. | List of [`http://gedcomx.org/v1/Fact`](#fact-conclusion). Order is preserved. | OPTIONAL.
 
@@ -941,7 +941,7 @@ The `Subject` data type defines the abstract concept of a genealogical _subject_
 
 A "subject" is something with a unique and intrinsic identity, such as a person or a location on the surface of the earth. We
 identify that subject in time and space using various supporting conclusions. For example, a person is a subject with supporting
-conclusions such as name, birth, gender, etc. We aggregate these supporting conclusions to form an apparently-unique identity by
+conclusions such as name, birth, sex, etc. We aggregate these supporting conclusions to form an apparently-unique identity by
 which we can distinguish our subject from all other possible subjects.
 
 Note that a subject is itself a conclusion and can be used as a supporting conclusion for other subjects (via the `evidence` property).
