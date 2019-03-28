@@ -758,6 +758,7 @@ name | description | XML property | XML type
 descriptionRef  | Reference to a _description_ of the source being referenced. | description (attribute) | [`URI`](#uri)
 descriptionId  | The id of the target source. | descriptionId (attribute) | xsd:string
 attribution | The attribution of this source reference. | gx:attribution | [`gx:Attribution`](#attribution)
+qualifiers | Qualifiers for the reference, used to identify specific fragments of the source that are being referenced. | gx:qualifier | [`gx:Qualifier`](#qualifier)
 
 ### examples
 
@@ -766,6 +767,7 @@ attribution | The attribution of this source reference. | gx:attribution | [`gx:
     <gx:attribution>
       ...
     </gx:attribution>
+    <gx:qualifier name="http://gedcomx.org/RectangleRegion">...</gx:qualifier>
 
     <!-- possibility of extension elements -->
 

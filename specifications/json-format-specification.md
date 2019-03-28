@@ -826,6 +826,7 @@ name | description | JSON member | JSON object type
 descriptionRef  | Reference to a _description_ of the source being referenced. | description | [`URI`](#uri)
 descriptionId  | The id of the target source. | descriptionId | string
 attribution | The attribution of this source reference. | attribution | [`Attribution`](#attribution)
+qualifiers | Qualifiers for the reference, used to identify specific fragments of the source that are being referenced. | qualifiers | array of [`Qualifier`](#qualifier)
 
 ### examples
 
@@ -833,7 +834,8 @@ attribution | The attribution of this source reference. | attribution | [`Attrib
 {
   "description" : "http://identifier/for/description/of/source/being/referenced",
   "descriptionId" : "...",
-  "attribution" : { /*...*/ }
+  "attribution" : { /*...*/ },
+  "qualifiers" : [ { "name" : "http://gedcomx.org/RectangleRegion", "value" : "..." } ],
 
   //...possibility of extension elements...
 

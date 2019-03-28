@@ -837,7 +837,19 @@ name  | description | data type | constraints
 description  | Reference to a _description_ of the target source. | [URI](#uri) | REQUIRED. MUST resolve to an instance of [`http://gedcomx.org/v1/SourceDescription`](#source-description).
 descriptionId  | The id of the target source. | string | OPTIONAL.
 attribution | The attribution of this source reference. | [`http://gedcomx.org/Attribution`](#attribution) | OPTIONAL. If not provided, the attribution of the containing resource of the source reference is assumed.
+qualifiers | Qualifiers for the reference, used to identify specific fragments of the source that are being referenced. | List of [http://gedcomx.org/v1/Qualifier](#qualifier) | OPTIONAL. If present, use of a [known source reference qualifier](#known-source-reference-qualifiers) is RECOMMENDED.
 
+<a id="known-source-reference-qualifiers"/>
+
+### Known Source Reference Qualifiers
+
+The following name part qualifiers are defined by GEDCOM X:
+
+name | value
+-----|-------
+`http://gedcomx.org/CharacterRegion`|A region of text in a digital document, in the form of `a,b` where `a` is the start character and `b` is the end character. The meaning of this qualifier is undefined if the source being referenced is not a digital document.
+`http://gedcomx.org/RectangleRegion`|A rectangular region of a digital image. The value of the qualifier is interpreted as a series of four comma-separated numbers. If all of the numbers is less than 1, the value is interpreted in the form of `x1,y1,x2,y2` where `x1,y1` is the relative percentage-based coordinates of the top-left corner of the rectangle and `x2,y2` is the relative percentage-based coordinates of the bottom-right corner of the rectangle. If any of the numbers is more than 1, the value is interpreted in the form of `x,y,w,h` where `x` is the point on the X axis of the image in pixels, `y` is the point on the Y axis in pixels, `w` is the width of the rectangle in pixels, and `h` in the height of the rectangle in pixels.
+`http://gedcomx.org/TimeRegion`|A region of time of a digital audio or video recording, in the form of `a,b` where `a` is the starting point in milliseconds and `b` is the ending point in milliseconds. The meaning of this qualifier is undefined if the source being referenced is not a digital audio or video recording.
 
 <a name="evidence-reference"/>
 
