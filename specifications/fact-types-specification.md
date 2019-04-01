@@ -115,7 +115,6 @@ URI | description
 `http://gedcomx.org/Death`| A fact of the death of a person.
 `http://gedcomx.org/Education`| A fact of an education or an educational achievement (e.g., diploma, graduation, scholarship, etc.) of a person.
 `http://gedcomx.org/EducationEnrollment`| A fact of a person's enrollment in an educational program or institution.
-`http://gedcomx.org/Emancipation`| A fact of the emancipation, manumission, escape or other route to freedom of a person who was previously enslaved.
 `http://gedcomx.org/Emigration`| A fact of the emigration of a person.
 `http://gedcomx.org/Enslavement`| A fact of the enslavement of a person.
 `http://gedcomx.org/Ethnicity`| A fact of a person's ethnicity.
@@ -158,6 +157,7 @@ URI | description
 `http://gedcomx.org/Religion`| A fact of a person's religion.
 `http://gedcomx.org/Residence`| A fact of a person's residence.
 `http://gedcomx.org/Retirement`| A fact of a person's retirement.
+`http://gedcomx.org/RouteToFreedom`| A fact of the emancipation, manumission, escape or other route to freedom of a person who was previously enslaved.
 `http://gedcomx.org/Stillbirth`| A fact of a person's stillbirth.
 `http://gedcomx.org/TaxAssessment`| A fact of a person's tax assessment.
 `http://gedcomx.org/Tribe`| A fact of a person's tribe.
