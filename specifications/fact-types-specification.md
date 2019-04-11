@@ -157,7 +157,6 @@ URI | description
 `http://gedcomx.org/Religion`| A fact of a person's religion.
 `http://gedcomx.org/Residence`| A fact of a person's residence.
 `http://gedcomx.org/Retirement`| A fact of a person's retirement.
-`http://gedcomx.org/RouteToFreedom`| A fact of the emancipation, manumission, escape or other route to freedom of a person who was previously enslaved.
 `http://gedcomx.org/Stillbirth`| A fact of a person's stillbirth.
 `http://gedcomx.org/TaxAssessment`| A fact of a person's tax assessment.
 `http://gedcomx.org/Tribe`| A fact of a person's tribe.
