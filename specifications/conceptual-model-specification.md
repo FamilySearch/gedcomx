@@ -398,6 +398,7 @@ URI | description
 ----|-------------
 `http://gedcomx.org/Couple`| A relationship of a pair of persons.
 `http://gedcomx.org/ParentChild`| A relationship from a parent to a child.
+`http://gedcomx.org/EnslavedBy`| A relationship from an enslaved person to the enslaver or slaveholder of the person.
 
 
 <a name="source-description"/>
@@ -1191,6 +1192,8 @@ name | value
 `http://gedcomx.org/Age`| The age of a person at the event described by the fact.
 `http://gedcomx.org/Cause`| The cause of the fact, such as the cause of death.
 `http://gedcomx.org/Religion`| The religion associated with a religious event such as a baptism or excommunication.
+`http://gedcomx.org/Transport`| The name of the transport associated with an event that indicates a move.
+`http://gedcomx.org/NonConsensual`| An indicator that the event occurred non-consensually, e.g. under enslavement.
 
 
 <a name="conclusion-event-role"/>

@@ -116,6 +116,7 @@ URI | description
 `http://gedcomx.org/Education`| A fact of an education or an educational achievement (e.g., diploma, graduation, scholarship, etc.) of a person.
 `http://gedcomx.org/EducationEnrollment`| A fact of a person's enrollment in an educational program or institution.
 `http://gedcomx.org/Emigration`| A fact of the emigration of a person.
+`http://gedcomx.org/Enslavement`| A fact of the enslavement of a person.
 `http://gedcomx.org/Ethnicity`| A fact of a person's ethnicity.
 `http://gedcomx.org/Excommunication`| A fact of a person's excommunication from a church.
 `http://gedcomx.org/FirstCommunion`| A fact of a person's first communion in a church.
