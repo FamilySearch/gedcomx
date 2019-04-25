@@ -1312,6 +1312,7 @@ agents | The list of agents contained in the data set. | gx:agent | [`gx:Agent`]
 events | The list of events contained in the data set. | gx:event | [`gx:Event`](#event) | OPTIONAL.
 documents | The list of documents contained in the data set. | gx:document | [`gx:Document`](#document) | OPTIONAL.
 places | The list of places contained in the data set. | gx:place | [`gx:PlaceDescription`](#place-description) | OPTIONAL.
+groups | The list of groups contained in the data set. | gx:group | [`gx:Group`](#group) | OPTIONAL.
 description | Reference to the description of this data set. | description (attribute) | [`URI`](#uri) | OPTIONAL. If provided, MUST resolve to an instance of [`gx:SourceDescription`](#source-description).
 
 ### examples
@@ -1339,6 +1340,9 @@ description | Reference to the description of this data set. | description (attr
   ...
   <gx:place>...</gx:place>
   <gx:place>...</gx:place>
+  ...
+  <gx:group>...</gx:group>
+  <gx:group>...</gx:group>
   ...
 
   <!-- possibility of extension elements -->
@@ -1401,6 +1405,10 @@ The following is an example of the structure of a GEDCOM X XML Element:
 
   <place>...</place>
   <place>...</place>
+  ...
+
+  <group>...</group>
+  <group>...</group>
   ...
 
   <!-- possibility of extension elements -->

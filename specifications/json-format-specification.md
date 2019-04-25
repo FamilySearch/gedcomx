@@ -1360,6 +1360,7 @@ agents | The list of agents contained in the data set. | agents | array of [`Age
 events | The list of events contained in the data set. | events | array of [`Event`](#event) | OPTIONAL.
 documents | The list of documents contained in the data set. | documents | array of [`Document`](#document) | OPTIONAL.
 places | The list of places contained in the data set. | places | array of [`PlaceDescription`](#place-description) | OPTIONAL.
+groups | The list of groups contained in the data set. | groups | array of [`Group`](#group) | OPTIONAL.
 description | Reference to the description of this data set. | description | [`URI`](#uri) | OPTIONAL. If provided, MUST resolve to an instance of [`SourceDescription`](#source-description).
 
 ### examples
@@ -1376,6 +1377,7 @@ description | Reference to the description of this data set. | description | [`U
   "events" : [ { /*...*/ } , { /*...*/ } ],
   "documents" : [ { /*...*/ } , { /*...*/ } ],
   "places" : [ { /*...*/ } , { /*...*/ } ],
+  "groups" : [ { /*...*/ } , { /*...*/ } ],
 
   //...possibility of extension elements...
 
@@ -1404,6 +1406,7 @@ The following is an example of the structure of a GEDCOM X JSON Element:
   "events" : [ { /*...*/ } , { /*...*/ } ],
   "documents" : [ { /*...*/ } , { /*...*/ } ],
   "places" : [ { /*...*/ } , { /*...*/ } ],
+  "groups" : [ { /*...*/ } , { /*...*/ } ],
 
   //...possibility of extension elements...
 
