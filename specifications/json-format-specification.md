@@ -390,7 +390,7 @@ mediaType | A hint about the media type of the resource being described. | media
 about | A uniform resource identifier (URI) for the resource being described. | about | [`URI`](#uri)
 mediator | A reference to the entity that mediates access to the described source. | mediator | [`ResourceReference`](#resource-reference)
 publisher | A reference to the entity responsible for making the described source available. | publisher | [`ResourceReference`](#resource-reference)
-author | A reference to the entity that authored the described source. | author | [`ResourceReference`](#resource-reference)
+authors | A list of references to the entities that authored the described source. | authors | array of [`ResourceReference`](#resource-reference)
 sources | A list of references to any sources from which this source is derived. | sources | array of [`SourceReference`](#source-reference)
 analysis | A reference to a document containing analysis about this source. | analysis | [`ResourceReference`](#resource-reference)
 componentOf | A reference to the source that contains this source. | componentOf | [`SourceReference`](#source-reference)
