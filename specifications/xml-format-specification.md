@@ -357,6 +357,7 @@ mediaType | A hint about the media type of the resource being described. | media
 about | A uniform resource identifier (URI) for the resource being described. | about (attribute) | [anyURI](#uri)
 mediator | A reference to the entity that mediates access to the described source. | gx:mediator | [`gx:ResourceReference`](#resource-reference)
 publisher | A reference to the entity responsible for making the described source available. | gx:publisher | [`gx:ResourceReference`](#resource-reference)
+author | A reference to the entity that authored the described source. | gx:author | [`gx:ResourceReference`](#resource-reference)
 sources | A list of references to any sources from which this source is derived. | gx:source | [`gx:SourceReference`](#source-reference)
 analysis | A reference to a document containing analysis about this source. | gx:analysis | [`gx:ResourceReference`](#resource-reference)
 componentOf | A reference to the source that contains this source. | gx:componentOf | [`gx:SourceReference`](#source-reference)
@@ -369,6 +370,7 @@ descriptions | Human-readable descriptions of this source. | gx:description | [`
 identifiers | A list of identifiers for the resource being described. | gx:identifier | [`gx:Identifier`](#identifier-type)
 created | Timestamp of when the resource being described was created. | gx:created | xsd:dateTime
 modified | Timestamp of when the resource being described was modified. | gx:modified | xsd:dateTime
+published | Timestamp of when the resource being described was published. | gx:published | xsd:dateTime
 repository | A reference to the repository that contains the described resource. | gx:repository | [`gx:ResourceReference`](#resource-reference)
 
 ### examples

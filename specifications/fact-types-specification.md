@@ -94,6 +94,8 @@ URI | description
 `http://gedcomx.org/Adoption`| A fact of a person's adoption.
 `http://gedcomx.org/AdultChristening`| A fact of a person's christening or baptism as an adult.
 `http://gedcomx.org/Amnesty`| A fact of a person's amnesty.
+`http://gedcomx.org/AncestralHall`| A fact of a person's ancestral hall. An ancestral hall refers to a location where the early ancestors of the person originated. It may also refer to the name of an early ancestor. Family clans are often distinguished one from another by the ancestral hall. Clans that cannot prove direct relationships to other clans with the same surname can assume a direct relationship if they share the same ancestral hall. 
+`http://gedcomx.org/AncestralPoem`| A fact of a person's ancestral poem. An ancestral poem (or generation poem) is composed of the "generation characters" that are to be used when choosing names for the members of different generations of an extended family. Ancestral poems are prominent in Asian countries, particularly China. 
 `http://gedcomx.org/Apprenticeship`| A fact of a person's apprenticeship.
 `http://gedcomx.org/Arrest`| A fact of a person's arrest.
 `http://gedcomx.org/Award`| A fact of a person's award (medal, honor).
@@ -103,6 +105,7 @@ URI | description
 `http://gedcomx.org/Birth`| A fact of a person's birth.
 `http://gedcomx.org/BirthNotice`| A fact of a person's birth notice, such as posted in a newspaper or other publishing medium.
 `http://gedcomx.org/Blessing`| A fact of an official blessing received by a person, such as at the hands of a clergy member or at another religious rite.
+`http://gedcomx.org/Branch`| A fact of a person's branch within an extended clan.
 `http://gedcomx.org/Burial`| A fact of the burial of a person's body after death.
 `http://gedcomx.org/Caste`| A fact of a person's caste.
 `http://gedcomx.org/Census`| A fact of a person's participation in a census.
@@ -122,6 +125,7 @@ URI | description
 `http://gedcomx.org/FirstCommunion`| A fact of a person's first communion in a church.
 `http://gedcomx.org/Funeral`| A fact of a person's funeral.
 `http://gedcomx.org/GenderChange`| A fact of a person's gender change.
+`http://gedcomx.org/GenerationNumber`| A fact of a person's generation number, indicating the number of generations the person is removed from a known "first" ancestor.
 `http://gedcomx.org/Graduation`| A fact of a person's graduation from a scholastic institution.
 `http://gedcomx.org/Heimat`| A fact of a person's _heimat_. "Heimat" refers to a person's affiliation by birth to a specific geographic place. Distinct heimaten are often useful as indicators that two persons of the same name are not likely to be closely related genealogically. In English, "heimat" may be described using terms like "ancestral home", "homeland", or "place of origin".
 `http://gedcomx.org/Immigration`| A fact of a person's immigration.
@@ -147,6 +151,7 @@ URI | description
 `http://gedcomx.org/NumberOfChildren`| A fact of the number of children of a person or relationship.
 `http://gedcomx.org/NumberOfMarriages`| A fact of a person's number of marriages.
 `http://gedcomx.org/Obituary`| A fact of a person's obituary.
+`http://gedcomx.org/OfficialPosition`| A fact of a person's official (government) position.
 `http://gedcomx.org/Occupation`| A fact of a person's occupation or employment.
 `http://gedcomx.org/Ordination`| A fact of a person's ordination to a stewardship in a church.
 `http://gedcomx.org/Pardon`| A fact of a person's legal pardon.
@@ -197,6 +202,9 @@ URI | description
 ----|------------
 `http://gedcomx.org/AdoptiveParent`| A fact about an adoptive relationship between a parent and a child.
 `http://gedcomx.org/BiologicalParent`| A fact about the biological relationship between a parent and a child.
+`http://gedcomx.org/ChildOrder`| A fact about the child order between a parent and a child.
+`http://gedcomx.org/EnteringHeir`| A fact about an entering heir relationship between a parent and a child. An entering heir is received from another parent as an "exiting heir" for designation of inheritance.
+`http://gedcomx.org/ExitingHeir`| A fact about an exiting heir relationship between a parent and a child. An exiting heir is given as an "entering heir" to another parent for designation of inheritance.
 `http://gedcomx.org/FosterParent`| A fact about a foster relationship between a foster parent and a child.
 `http://gedcomx.org/GuardianParent`| A fact about a legal guardianship between a parent and a child.
 `http://gedcomx.org/StepParent`| A fact about the step relationship between a parent and a child.

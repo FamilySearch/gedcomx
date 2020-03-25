@@ -390,6 +390,7 @@ mediaType | A hint about the media type of the resource being described. | media
 about | A uniform resource identifier (URI) for the resource being described. | about | [`URI`](#uri)
 mediator | A reference to the entity that mediates access to the described source. | mediator | [`ResourceReference`](#resource-reference)
 publisher | A reference to the entity responsible for making the described source available. | publisher | [`ResourceReference`](#resource-reference)
+author | A reference to the entity that authored the described source. | author | [`ResourceReference`](#resource-reference)
 sources | A list of references to any sources from which this source is derived. | sources | array of [`SourceReference`](#source-reference)
 analysis | A reference to a document containing analysis about this source. | analysis | [`ResourceReference`](#resource-reference)
 componentOf | A reference to the source that contains this source. | componentOf | [`SourceReference`](#source-reference)
@@ -402,6 +403,7 @@ descriptions | Human-readable descriptions of this source. | descriptions | arra
 identifiers | A list of identifiers for the resource being described. | identifiers | [`Identifier`](#identifier-type)
 created | Timestamp of when the resource being described was created. | created | number (milliseconds since epoch)
 modified | Timestamp of when the resource being described was modified. | modified | number (milliseconds since epoch)
+published | Timestamp of when the resource being described was published. | published | number (milliseconds since epoch)
 repository | A reference to the repository that contains the described resource. | repository | [`ResourceReference`](#resource-reference)
 
 ### examples

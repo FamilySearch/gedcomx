@@ -398,8 +398,9 @@ URI | description
 ----|-------------
 `http://gedcomx.org/Couple`| A relationship of a pair of persons.
 `http://gedcomx.org/ParentChild`| A relationship from a parent to a child.
-`http://gedcomx.org/EnslavedBy`| A relationship from an enslaved person to the enslaver or slaveholder of the person.
 
+In addition to these elements, processors SHOULD support any other elements defined by the
+[GEDCOM X Relationship Types](https://github.com/FamilySearch/gedcomx/blob/master/specifications/relationship-types-specification.md) specification.
 
 <a name="source-description"/>
 
@@ -424,6 +425,7 @@ mediaType | A hint about the media type of the resource being described. | strin
 about | A uniform resource identifier (URI) for the resource being described. | [URI](#uri) | OPTIONAL.
 mediator | A reference to the entity that mediates access to the described source. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to an instance of [`http://gedcomx.org/v1/Agent`](#agent).
 publisher | A reference to the entity responsible for making the described source available. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to an instance of [`http://gedcomx.org/v1/Agent`](#agent).
+author | A reference to the entity that authored the described source. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to an instance of [`http://gedcomx.org/v1/Agent`](#agent).
 sources | A list of references to any sources from which this source is derived. | List of [`http://gedcomx.org/v1/SourceReference`](#source-reference) | OPTIONAL.
 analysis  | A reference to a document containing analysis about this source. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to an instance of [`http://gedcomx.org/v1/Document`](#document) of type `http://gedcomx.org/Analysis`.
 componentOf | A reference to the source that contains this source, i.e. its parent context. Used when the description of a source is not complete without the description of its parent (or containing) source. | [`http://gedcomx.org/v1/SourceReference`](#source-reference) | OPTIONAL.
@@ -436,6 +438,7 @@ descriptions | Human-readable descriptions of this source. | List of [`http://ge
 identifiers | A list of identifiers for the resource being described. | List of [`http://gedcomx.org/v1/Identifier`](#identifier-type). Order is preserved. | OPTIONAL.
 created | Timestamp of when the resource being described was created. | timestamp | OPTIONAL.
 modified | Timestamp of when the resource being described was modified. | timestamp | OPTIONAL.
+published | Timestamp of when the resource being described was published. | timestamp | OPTIONAL.
 repository | A reference to the repository that contains the described resource. | [URI](#uri) | OPTIONAL. If provided, MUST resolve to an instance of [`http://gedcomx.org/v1/Agent`](#agent).
 
 <a name="known-resource-types"/>
