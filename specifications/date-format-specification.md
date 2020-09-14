@@ -338,7 +338,7 @@ The following letters are used as value designators, and _precede_ the value:
 The following characters are used as value separators:
 
 * [T] - separates the `calendar date` portion of a `date` or `duration` from the `time of day` portion
-* [Z] - designates the date is based on UTC time
+* [Z] - designates the time is in UTC time
 * [-] - separates the values of the `calendar date` portion's units of a date
 * [:] - separates the values of the `time of day` portion's units of a date
 * [/] - separates the components of a `date range` or `recurring date range`
@@ -366,7 +366,7 @@ In the format for a `simple date`, letters are used to represent digits of the d
 The format for a complete `simple date` is defined as follows:
 
 ```
-±YYYY[-MM[-DD[Thh:[mm[:ss[±hh[:mm]|Z]]]]]]
+±YYYY[-MM[-DD[Thh:[mm[:ss]][±hh[:mm]|Z]]]]
 ```
 
 <a name="5-2-description"/>
@@ -418,7 +418,7 @@ When any time of day is specified, there are three options for specifying its ge
 
 example | textual description
 --------|------------
-+1752-01-18T22:14:3Z | January 18, 1752 CE 10:14 and 3 seconds PM UTC
++1752-01-18T22:14:03Z | January 18, 1752 CE 10:14 and 3 seconds PM UTC
 +1964-11-14T10-07:00 | November 14, 1964 CE 10 AM, Mountain Standard Time
 +1889-05-17T14:23 | May 17, 1889 CE 2:23 PM
 +1492-07-27 | July 27, 1492 CE (presumed to be "local time", honoring the International Date Line)
