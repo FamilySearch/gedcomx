@@ -48,7 +48,7 @@ relationships, and sources.
     * [1.3.6 Enumerated Values](#enumerated-value)
     * [1.3.7 Controlled Vocabularies](#controlled-vocab)
     * [1.3.8 Text Types](#text-types)
-  * [1.4 Internationalization Considerations](#il8n)
+  * [1.4 Internationalization Considerations](#i18n)
 * [2. Top-Level Data Types](#top-data-types)
   * [2.1 The "Person" Data Type](#person)
   * [2.2 The "Relationship" Data Type](#relationship)
@@ -273,7 +273,7 @@ minimize security risks, support for the following subset of modules (defined by
 Support for other XHTML modules is OPTIONAL. Parsers MAY ignore elements from optional modules.
 
 
-<a name="il8n"/>
+<a name="i18n"/>
 
 ## 1.4 Internationalization Considerations
 
