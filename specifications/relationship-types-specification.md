@@ -1,8 +1,8 @@
-# GEDCOM X Event Types
+# GEDCOM X Relationship Types
 
 ## Status
 
-This document enumerates a set of event types to be used for genealogical data exchange,
+This document enumerates a set of relationship types to be used for genealogical data exchange,
 and requests discussion and suggestions for improvements.
 
 The current state of this document is as a "stable draft", and as such, the document
