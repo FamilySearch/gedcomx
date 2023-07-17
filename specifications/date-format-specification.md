@@ -618,7 +618,7 @@ example | unit of approx | textual description
 --------|----------------|--------------------
 A+1680 | year | about 1680 CE
 A-1400 | year | about 1401 BCE
-A+1980-05-18T18:53Z | minutes | about 4:53 PM [UTC], May 18, 1980
+A+1980-05-18T18:53Z | minutes | about 6:53 PM [UTC], May 18, 1980
 A+2014-08-19 | days | about August 19, 2014 CE
 
 <a name="5-8-approximate-date-range"/>
