@@ -2,15 +2,73 @@
 ---
 
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="refresh" content="0; url=http://www.gedcomx.org/blog.html">
-</head>
+<html>
+{% include head.html %}
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
 
-<body>
+{% include nav.html %}
 
-  <p>This page has moved. <a href="http://www.gedcomx.org/blog.html">Click here</a> for redirection.</p>
+<!-- Intro Header -->
+<header class="intro">
+  <div class="intro-body">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <h1 class="brand-heading">{{ site.title }}</h1>
+          <p class="intro-text">{{ site.description }}<br>
+            <a href="#about" class="btn btn-circle page-scroll">
+              <i class="fa fa-angle-double-down animated"></i>
+            </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
 
+<!-- About Section -->
+<section id="about" class="container content-section text-center">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2">
+      <h2>About GEDCOM X</h2>
+      <p>GEDCOM X is a project that hosts a set of open specifications for exchanging genealogical data. Examples of these data include information about persons,
+        the relationships between persons, and the records that support that information.</p>
+      <p>GEDCOM X is proudly sponsored by <a href="https://familysearch.org/">FamilySearch</a>.</p>
+      <a href="https://familysearch.org"><img src="img/tree-logotype-2x.png"></a>
+    </div>
+  </div>
+</section>
+
+<!-- Specification Section -->
+<section id="specs" class="content-section text-center">
+  <div class="specs-section">
+    <div class="container">
+      <div class="col-lg-8 col-lg-offset-2">
+        <h2>Specifications</h2>
+        <p>The specification set is the core of the GEDCOM X project. The specifications define the types of data being exchanged, how the data is formatted, and the protocols for exchanging the data.</p>
+        <a href="Specifications.html" class="btn btn-default btn-lg">See the Specs</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Community Section -->
+<section id="community" class="container content-section text-center">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2">
+      <h2>Community</h2>
+      <p>GEDCOM X is a living project. We'd love to have you contribute to make it better.</p>
+      <ul class="list-inline banner-social-buttons">
+        {% for network in site.social %}
+        <li>
+          <a href="{{ network.url }}" class="btn btn-default btn-lg"><i class="fa fa-{{ network.title }} fa-fw"></i> <span class="network-name">{{ network.title }}</span></a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</section>
+
+{% include footer.html %}
+{% include js.html %}
 </body>
 </html>

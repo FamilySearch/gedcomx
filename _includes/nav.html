@@ -1,0 +1,43 @@
+    <!-- Navigation -->
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <span class="navbar-brand">
+                    <a href="http://gedcomx.org"><span class="light">GEDCOM</span> X</a> <!-- <a href="https://familysearch.org"><img src="img/familysearch-logo-mini.png"></a> -->
+                </span>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                <ul class="nav navbar-nav">
+                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li>
+                        <a href="{{ "/About.html" | prepend: site.baseurl }}">About</a>
+                    </li>
+                    <li>
+                        <a href="{{ "/Specifications.html" | prepend: site.baseurl }}">Specs</a>
+                    </li>
+                    <li>
+                        <a href="{{ "/Documentation.html" | prepend: site.baseurl }}">Docs</a>
+                    </li>
+                    <li>
+                        <a href="{{ "/Code.html" | prepend: site.baseurl }}">Code</a>
+                    </li>
+                    <li>
+                        <a href="{{ "/Community.html" | prepend: site.baseurl }}">Community</a>
+                    </li>
+                    <li>
+                        <a href="{{ "/FAQ.html" | prepend: site.baseurl }}">FAQ</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
