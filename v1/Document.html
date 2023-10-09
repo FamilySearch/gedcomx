@@ -1,0 +1,74 @@
+---
+layout: default
+title: http://gedcomx.org/v1/Document
+---
+
+<div vocab="http://gedcomx.org/v1/" typeof="rdfs:Class" resource="http://gedcomx.org/v1/Document">
+  <p>This document provides the semantic definition for the GEDCOM X Document data type for use in structured data (e.g. RDFa, Microdata, JSON-LD, etc.).
+    This data type is specified by the <a property="rdfs:isDefinedBy" href="http://gedcomx.org/conceptual-model/v1">GEDCOM X Conceptual Model</a>.</p>
+
+  <p>This data type extends the <code property="rdfs:subClassOf">http://gedcomx.org/v1/Conclusion</code> data type.</p>
+  <h3>Description</h3>
+
+  <p property="rdfs:comment">An abstract document that contains derived (conclusionary) text -- for example, a transcription or researcher analysis.</p>
+
+  <h3>Properties</h3>
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th>property</th>
+      <th>expected type</th>
+      <th>description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td colspan="3"><h5 class="text-muted">Properties from <a href="./Document">Document</a></h5></td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/Document#textType">
+      <td property="rdfs:label">textType</td>
+      <td property="rdfs:range" resource="xsd:string">string</td>
+      <td property="rdfs:comment">The text type of the document.</td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/Document#extracted">
+      <td property="rdfs:label">extracted</td>
+      <td property="rdfs:range" resource="xsd:boolean">boolean</td>
+      <td property="rdfs:comment">Whether this document has been identified as "extracted", meaning it captures information extracted from a single source.</td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/Document#type">
+      <td property="rdfs:label">type</td>
+      <td><a property="rdfs:range" href="../types/DocumentType">DocumentType</a></td>
+      <td property="rdfs:comment">The type of the document.</td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/Document#text">
+      <td property="rdfs:label">text</td>
+      <td property="rdfs:range" resource="xsd:string">string</td>
+      <td property="rdfs:comment">The document text.</td>
+    </tr>
+    <tr>
+      <td colspan="3"><h5 class="text-muted">Properties from <a href="./Conclusion">Conclusion</a></h5></td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/Conclusion#confidence">
+      <td property="rdfs:label">confidence</td>
+      <td><a property="rdfs:range" href="../types/ConfidenceLevel">ConfidenceLevel</a></td>
+      <td property="rdfs:comment">The level of confidence the contributor has about the data.</td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/Conclusion#attribution">
+      <td property="rdfs:label">attribution</td>
+      <td><a property="rdfs:range" href="./Attribution">Attribution</a></td>
+      <td property="rdfs:comment">Attribution metadata for a conclusion.</td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/Conclusion#source">
+      <td property="rdfs:label">source</td>
+      <td><a property="rdfs:range" href="./SourceReference">SourceReference</a></td>
+      <td property="rdfs:comment">The source references for a conclusion.</td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/Conclusion#note">
+      <td property="rdfs:label">note</td>
+      <td><a property="rdfs:range" href="./Note">Note</a></td>
+      <td property="rdfs:comment">Notes about a person.</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

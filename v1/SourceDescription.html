@@ -1,0 +1,147 @@
+---
+layout: default
+title: http://gedcomx.org/v1/SourceDescription
+---
+
+<div vocab="http://gedcomx.org/v1/" typeof="rdfs:Class" resource="http://gedcomx.org/v1/SourceDescription">
+  <p>This document provides the semantic definition for the GEDCOM X SourceDescription data type for use in structured data (e.g. RDFa, Microdata, JSON-LD, etc.).
+    This data type is specified by the <a property="rdfs:isDefinedBy" href="http://gedcomx.org/conceptual-model/v1">GEDCOM X Conceptual Model</a>.</p>
+
+  <p>This data type extends the <code property="rdfs:subClassOf">http://gedcomx.org/v1/HypermediaEnabledData</code> data type.</p>
+  <h3>Description</h3>
+
+  <p property="rdfs:comment">Represents a description of a source.</p>
+
+  <h3>Properties</h3>
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th>property</th>
+      <th>expected type</th>
+      <th>description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td colspan="3"><h5 class="text-muted">Properties from <a href="./SourceDescription">SourceDescription</a></h5></td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/SourceDescription#about">
+      <td property="rdfs:label">about</td>
+      <td property="rdfs:range" resource="xsd:anyURI">anyURI</td>
+      <td property="rdfs:comment">The URI (if applicable) of the actual source.</td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/SourceDescription#lang">
+      <td property="rdfs:label">lang</td>
+      <td property="rdfs:range" resource="xsd:string">string</td>
+      <td property="rdfs:comment">The language of this genealogical data set. See <a href="http://www.w3.org/International/articles/language-tags/">http://www.w3.org/International/articles/language-tags/</a>.
+        Note that some language-enabled elements MAY override the language.</td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/SourceDescription#mediaType">
+      <td property="rdfs:label">mediaType</td>
+      <td property="rdfs:range" resource="xsd:string">string</td>
+      <td property="rdfs:comment">Hint about the media (MIME) type of the resource being described.</td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/SourceDescription#version">
+      <td property="rdfs:label">version</td>
+      <td property="rdfs:range" resource="xsd:string">string</td>
+      <td property="rdfs:comment">gets the version of this resource</td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/SourceDescription#resourceType">
+      <td property="rdfs:label">resourceType</td>
+      <td><a property="rdfs:range" href="../types/ResourceType">ResourceType</a></td>
+      <td property="rdfs:comment">The type of the resource being described.</td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/SourceDescription#citation">
+      <td property="rdfs:label">citation</td>
+      <td><a property="rdfs:range" href="./SourceCitation">SourceCitation</a></td>
+      <td property="rdfs:comment">The bibliographic citations for this source.</td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/SourceDescription#mediator">
+      <td property="rdfs:label">mediator</td>
+      <td><a property="rdfs:range" href="./ResourceReference">ResourceReference</a></td>
+      <td property="rdfs:comment">A reference to the entity that mediates access to the described source.</td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/SourceDescription#author">
+      <td property="rdfs:label">publisher</td>
+      <td><a property="rdfs:range" href="./ResourceReference">ResourceReference</a></td>
+      <td property="rdfs:comment">A reference to the entity responsible for making the described source available.</td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/SourceDescription#author">
+      <td property="rdfs:label">author</td>
+      <td><a property="rdfs:range" href="./ResourceReference">ResourceReference</a></td>
+      <td property="rdfs:comment">A reference to the entity that authored the described source.</td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/SourceDescription#source">
+      <td property="rdfs:label">source</td>
+      <td><a property="rdfs:range" href="./SourceReference">SourceReference</a></td>
+      <td property="rdfs:comment">References to any sources to which this source is related (usually applicable to sources that are derived from or contained in another source).</td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/SourceDescription#analysis">
+      <td property="rdfs:label">analysis</td>
+      <td><a property="rdfs:range" href="./ResourceReference">ResourceReference</a></td>
+      <td property="rdfs:comment">A reference to the analysis document explaining the analysis that went into this description of the source.</td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/SourceDescription#componentOf">
+      <td property="rdfs:label">componentOf</td>
+      <td><a property="rdfs:range" href="./SourceReference">SourceReference</a></td>
+      <td property="rdfs:comment">A reference to the source that contains this source.</td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/SourceDescription#title">
+      <td property="rdfs:label">title</td>
+      <td><a property="rdfs:range" href="./TextValue">TextValue</a></td>
+      <td property="rdfs:comment">A list of titles for this source.</td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/SourceDescription#titleLabel">
+      <td property="rdfs:label">titleLabel</td>
+      <td><a property="rdfs:range" href="./TextValue">TextValue</a></td>
+      <td property="rdfs:comment">A label for the title of this description.</td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/SourceDescription#note">
+      <td property="rdfs:label">note</td>
+      <td><a property="rdfs:range" href="./Note">Note</a></td>
+      <td property="rdfs:comment">Notes about a source.</td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/SourceDescription#attribution">
+      <td property="rdfs:label">attribution</td>
+      <td><a property="rdfs:range" href="./Attribution">Attribution</a></td>
+      <td property="rdfs:comment">The attribution metadata for this source description.</td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/SourceDescription#identifier">
+      <td property="rdfs:label">identifier</td>
+      <td><a property="rdfs:range" href="./Identifier">Identifier</a></td>
+      <td property="rdfs:comment">The list of identifiers for the source.</td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/SourceDescription#rights">
+      <td property="rdfs:label">rights</td>
+      <td property="rdfs:range" resource="xsd:string">string</td>
+      <td property="rdfs:comment">The rights for this source.</td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/SourceDescription#replacedBy">
+      <td property="rdfs:label">replacedBy</td>
+      <td property="rdfs:range" resource="xsd:string">string</td>
+      <td property="rdfs:comment">The URI that this resource has been replaced by.</td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/SourceDescription#replaces">
+      <td property="rdfs:label">replaces</td>
+      <td property="rdfs:range" resource="xsd:string">string</td>
+      <td property="rdfs:comment">The list of resources that this resource replaces.</td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/SourceDescription#created">
+      <td property="rdfs:label">created</td>
+      <td property="rdfs:range" resource="xsd:dateTime">timestamp</td>
+      <td property="rdfs:comment">When the resource being described was created.</td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/SourceDescription#modified">
+      <td property="rdfs:label">modified</td>
+      <td property="rdfs:range" resource="xsd:dateTime">timestamp</td>
+      <td property="rdfs:comment">When the resource being described was last modified.</td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/SourceDescription#published">
+      <td property="rdfs:label">published</td>
+      <td property="rdfs:range" resource="xsd:dateTime">timestamp</td>
+      <td property="rdfs:comment">When the resource being described was last published.</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

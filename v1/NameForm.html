@@ -1,0 +1,46 @@
+---
+layout: default
+title: http://gedcomx.org/v1/NameForm
+---
+
+<div vocab="http://gedcomx.org/v1/" typeof="rdfs:Class" resource="http://gedcomx.org/v1/NameForm">
+  <p>This document provides the semantic definition for the GEDCOM X NameForm data type for use in structured data (e.g. RDFa, Microdata, JSON-LD, etc.).
+    This data type is specified by the <a property="rdfs:isDefinedBy" href="http://gedcomx.org/conceptual-model/v1">GEDCOM X Conceptual Model</a>.</p>
+
+  <p>This data type extends the <code property="rdfs:subClassOf">http://gedcomx.org/v1/ExtensibleData</code> data type.</p>
+  <h3>Description</h3>
+
+  <p property="rdfs:comment">A form of a name.</p>
+
+  <h3>Properties</h3>
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th>property</th>
+      <th>expected type</th>
+      <th>description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td colspan="3"><h5 class="text-muted">Properties from <a href="./NameForm">NameForm</a></h5></td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/NameForm#lang">
+      <td property="rdfs:label">lang</td>
+      <td property="rdfs:range" resource="xsd:string">string</td>
+      <td property="rdfs:comment">The language of the conclusion. See <a href="http://www.w3.org/International/articles/language-tags/">http://www.w3.org/International/articles/language-tags/</a></td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/NameForm#fullText">
+      <td property="rdfs:label">fullText</td>
+      <td property="rdfs:range" resource="xsd:string">string</td>
+      <td property="rdfs:comment">The full text of the name form.</td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/NameForm#part">
+      <td property="rdfs:label">part</td>
+      <td><a property="rdfs:range" href="./NamePart">NamePart</a></td>
+      <td property="rdfs:comment">The different parts of the name form.</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

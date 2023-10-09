@@ -1,0 +1,48 @@
+---
+layout: default
+title: http://gedcomx.org/ResourceType
+---
+
+<div vocab="http://gedcomx.org/v1/" typeof="rdfs:Class" resource="http://gedcomx.org/ResourceType">
+  <h3>Description</h3>
+
+  <p property="rdfs:comment">Enumeration of high-level genealogical resource types.</p>
+
+  <h3>Known Types</h3>
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th>type</th>
+      <th>description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr resource="http://gedcomx.org/Record">
+      <td property="rdfs:subClassOf" resource="http://gedcomx.org/ResourceType"><code>http://gedcomx.org/Record</code></td>
+      <td property="rdfs:comment"> A historical record.
+      </td>
+    </tr>
+    <tr resource="http://gedcomx.org/Collection">
+      <td property="rdfs:subClassOf" resource="http://gedcomx.org/ResourceType"><code>http://gedcomx.org/Collection</code></td>
+      <td property="rdfs:comment"> A collection.
+      </td>
+    </tr>
+    <tr resource="http://gedcomx.org/DigitalArtifact">
+      <td property="rdfs:subClassOf" resource="http://gedcomx.org/ResourceType"><code>http://gedcomx.org/DigitalArtifact</code></td>
+      <td property="rdfs:comment"> A digital artifact, such as a digital image or video.
+      </td>
+    </tr>
+    <tr resource="http://gedcomx.org/PhysicalArtifact">
+      <td property="rdfs:subClassOf" resource="http://gedcomx.org/ResourceType"><code>http://gedcomx.org/PhysicalArtifact</code></td>
+      <td property="rdfs:comment"> A physical artifact.
+      </td>
+    </tr>
+    <tr resource="http://gedcomx.org/Person">
+      <td property="rdfs:subClassOf" resource="http://gedcomx.org/ResourceType"><code>http://gedcomx.org/Person</code></td>
+      <td property="rdfs:comment"> A person.
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

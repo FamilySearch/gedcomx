@@ -1,0 +1,39 @@
+---
+layout: default
+title: http://gedcomx.org/GenderType
+---
+
+<div vocab="http://gedcomx.org/v1/" typeof="rdfs:Class" resource="http://gedcomx.org/GenderType">
+  <h3>Description</h3>
+
+  <p property="rdfs:comment">Enumeration of known gender types.</p>
+
+  <h3>Known Types</h3>
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th>type</th>
+      <th>description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr resource="http://gedcomx.org/Male">
+      <td property="rdfs:subClassOf" resource="http://gedcomx.org/GenderType"><code>http://gedcomx.org/Male</code></td>
+      <td property="rdfs:comment"> Male.
+      </td>
+    </tr>
+    <tr resource="http://gedcomx.org/Female">
+      <td property="rdfs:subClassOf" resource="http://gedcomx.org/GenderType"><code>http://gedcomx.org/Female</code></td>
+      <td property="rdfs:comment"> Female.
+      </td>
+    </tr>
+    <tr resource="http://gedcomx.org/Unknown">
+      <td property="rdfs:subClassOf" resource="http://gedcomx.org/GenderType"><code>http://gedcomx.org/Unknown</code></td>
+      <td property="rdfs:comment"> Unknown. Note that this should be used strictly as "unknown" and not to
+        indicate a type that is not set or not understood.
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

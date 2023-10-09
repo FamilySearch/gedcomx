@@ -1,0 +1,41 @@
+---
+layout: default
+title: http://gedcomx.org/v1/SourceCitation
+---
+
+<div vocab="http://gedcomx.org/v1/" typeof="rdfs:Class" resource="http://gedcomx.org/v1/SourceCitation">
+  <p>This document provides the semantic definition for the GEDCOM X SourceCitation data type for use in structured data (e.g. RDFa, Microdata, JSON-LD, etc.).
+    This data type is specified by the <a property="rdfs:isDefinedBy" href="http://gedcomx.org/conceptual-model/v1">GEDCOM X Conceptual Model</a>.</p>
+
+  <p>This data type extends the <code property="rdfs:subClassOf">http://gedcomx.org/v1/HypermediaEnabledData</code> data type.</p>
+  <h3>Description</h3>
+
+  <p property="rdfs:comment">Represents a source citation.</p>
+
+  <h3>Properties</h3>
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th>property</th>
+      <th>expected type</th>
+      <th>description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td colspan="3"><h5 class="text-muted">Properties from <a href="./SourceCitation">SourceCitation</a></h5></td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/SourceCitation#lang">
+      <td property="rdfs:label">lang</td>
+      <td property="rdfs:range" resource="xsd:string">string</td>
+      <td property="rdfs:comment">The language of the citation. See <a href="http://www.w3.org/International/articles/language-tags/">http://www.w3.org/International/articles/language-tags/</a></td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/SourceCitation#value">
+      <td property="rdfs:label">value</td>
+      <td property="rdfs:range" resource="xsd:string">string</td>
+      <td property="rdfs:comment">A rendering (as a string) of a source citation.  This rendering should be the most complete rendering available.</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

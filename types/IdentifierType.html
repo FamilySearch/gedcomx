@@ -1,0 +1,52 @@
+---
+layout: default
+title: http://gedcomx.org/IdentifierType
+---
+
+<div vocab="http://gedcomx.org/v1/" typeof="rdfs:Class" resource="http://gedcomx.org/IdentifierType">
+  <h3>Description</h3>
+
+  <p property="rdfs:comment">Enumeration of standard identifier types.</p>
+
+  <h3>Known Types</h3>
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th>type</th>
+      <th>description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr resource="http://gedcomx.org/Primary">
+      <td property="rdfs:subClassOf" resource="http://gedcomx.org/IdentifierType"><code>http://gedcomx.org/Primary</code></td>
+      <td property="rdfs:comment"> The primary identifier for the resource.
+      </td>
+    </tr>
+    <tr resource="http://gedcomx.org/Evidence">
+      <td property="rdfs:subClassOf" resource="http://gedcomx.org/IdentifierType"><code>http://gedcomx.org/Evidence</code></td>
+      <td property="rdfs:comment"> An identifier for the evidence that supports the resource. For example, when a conclusion
+        about a person is extracted, analyzed and evaluated atomically within the context of a
+        single source, it takes the form of a (extracted) person conclusion, and the extracted conclusion
+        may supply an identifier for the person. As all evidence for the person is gathered, the
+        (working) person conclusion identifies the evidence used to support the conclusion by including
+        each evidence identifier in the list of identifiers for the person.
+      </td>
+    </tr>
+    <tr resource="http://gedcomx.org/Deprecated">
+      <td property="rdfs:subClassOf" resource="http://gedcomx.org/IdentifierType"><code>http://gedcomx.org/Deprecated</code></td>
+      <td property="rdfs:comment"> An identifier that has been relegated, deprecated, or otherwise downgraded. This
+        identifier is commonly used as the result of a merge when what was once a primary
+        identifier for a person is no longer primary.
+      </td>
+    </tr>
+    <tr resource="http://gedcomx.org/Persistent">
+      <td property="rdfs:subClassOf" resource="http://gedcomx.org/IdentifierType"><code>http://gedcomx.org/Persistent</code></td>
+      <td property="rdfs:comment"> An identifier that is considered to be a long-term persistent identifier. Applications
+        that provide persistent identifiers are claiming that links to the resource using the identifier
+        won't break.
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

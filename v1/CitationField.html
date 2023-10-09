@@ -1,0 +1,39 @@
+---
+layout: default
+title: http://gedcomx.org/v1/CitationField
+---
+
+<div vocab="http://gedcomx.org/v1/" typeof="rdfs:Class" resource="http://gedcomx.org/v1/CitationField">
+  <p>This document provides the semantic definition for the GEDCOM X CitationField data type for use in structured data (e.g. RDFa, Microdata, JSON-LD, etc.).
+    This data type is specified by the <a property="rdfs:isDefinedBy" href="http://gedcomx.org/conceptual-model/v1">GEDCOM X Conceptual Model</a>.</p>
+  <h3>Description</h3>
+
+  <p property="rdfs:comment">Represents a citation field -- its name and value.</p>
+
+  <h3>Properties</h3>
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th>property</th>
+      <th>expected type</th>
+      <th>description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td colspan="3"><h5 class="text-muted">Properties from <a href="./CitationField">CitationField</a></h5></td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/CitationField#name">
+      <td property="rdfs:label">name</td>
+      <td property="rdfs:range" resource="xsd:string">string</td>
+      <td property="rdfs:comment">The citation field's name.</td>
+    </tr>
+    <tr>
+      <td>(value)</td>
+      <td property="rdfs:subClassOf" resource="xsd:string">string</td>
+      <td property="rdfs:comment">The citation field's value.</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

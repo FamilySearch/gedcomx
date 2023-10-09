@@ -1,0 +1,46 @@
+---
+layout: default
+title: http://gedcomx.org/v1/Note
+---
+
+<div vocab="http://gedcomx.org/v1/" typeof="rdfs:Class" resource="http://gedcomx.org/v1/Note">
+  <p>This document provides the semantic definition for the GEDCOM X Note data type for use in structured data (e.g. RDFa, Microdata, JSON-LD, etc.).
+    This data type is specified by the <a property="rdfs:isDefinedBy" href="http://gedcomx.org/conceptual-model/v1">GEDCOM X Conceptual Model</a>.</p>
+
+  <p>This data type extends the <code property="rdfs:subClassOf">http://gedcomx.org/v1/HypermediaEnabledData</code> data type.</p>
+  <h3>Description</h3>
+
+  <p property="rdfs:comment">A note about a genealogical resource (e.g. conclusion or source).</p>
+
+  <h3>Properties</h3>
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th>property</th>
+      <th>expected type</th>
+      <th>description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td colspan="3"><h5 class="text-muted">Properties from <a href="./Note">Note</a></h5></td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/Note#subject">
+      <td property="rdfs:label">subject</td>
+      <td property="rdfs:range" resource="xsd:string">string</td>
+      <td property="rdfs:comment">The subject of the note. This is a short title describing the contents of the note text.</td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/Note#text">
+      <td property="rdfs:label">text</td>
+      <td property="rdfs:range" resource="xsd:string">string</td>
+      <td property="rdfs:comment">The text of the note.</td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/Note#attribution">
+      <td property="rdfs:label">attribution</td>
+      <td><a property="rdfs:range" href="./Attribution">Attribution</a></td>
+      <td property="rdfs:comment">Attribution metadata for a note.</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

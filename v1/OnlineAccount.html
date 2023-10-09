@@ -1,0 +1,41 @@
+---
+layout: default
+title: http://gedcomx.org/v1/OnlineAccount
+---
+
+<div vocab="http://gedcomx.org/v1/" typeof="rdfs:Class" resource="http://gedcomx.org/v1/OnlineAccount">
+  <p>This document provides the semantic definition for the GEDCOM X OnlineAccount data type for use in structured data (e.g. RDFa, Microdata, JSON-LD, etc.).
+    This data type is specified by the <a property="rdfs:isDefinedBy" href="http://gedcomx.org/conceptual-model/v1">GEDCOM X Conceptual Model</a>.</p>
+
+  <p>This data type extends the <code property="rdfs:subClassOf">http://gedcomx.org/v1/ExtensibleData</code> data type.</p>
+  <h3>Description</h3>
+
+  <p property="rdfs:comment">An online account for a web application.</p>
+
+  <h3>Properties</h3>
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th>property</th>
+      <th>expected type</th>
+      <th>description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td colspan="3"><h5 class="text-muted">Properties from <a href="./OnlineAccount">OnlineAccount</a></h5></td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/OnlineAccount#accountName">
+      <td property="rdfs:label">accountName</td>
+      <td property="rdfs:range" resource="xsd:string">string</td>
+      <td property="rdfs:comment">The name associated the holder of this account with the account.</td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/OnlineAccount#serviceHomepage">
+      <td property="rdfs:label">serviceHomepage</td>
+      <td><a property="rdfs:range" href="./ResourceReference">ResourceReference</a></td>
+      <td property="rdfs:comment">The homepage of the service that provides this account.</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,45 @@
+---
+layout: default
+title: http://gedcomx.org/v1/Event
+---
+
+<div vocab="http://gedcomx.org/v1/" typeof="rdfs:Class" resource="http://gedcomx.org/v1/Event">
+  <p>This document provides the semantic definition for the GEDCOM X Coverage data type for use in structured data (e.g. RDFa, Microdata, JSON-LD, etc.).
+    This data type is specified by the <a property="rdfs:isDefinedBy" href="http://gedcomx.org/conceptual-model/v1">GEDCOM X Conceptual Model</a>.</p>
+
+  <h3>Description</h3>
+
+  <p property="rdfs:comment">Coverage of a resource.</p>
+
+  <h3>Properties</h3>
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th>property</th>
+      <th>expected type</th>
+      <th>description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td colspan="3"><h5 class="text-muted">Properties from <a href="./Coverage">Coverage</a></h5></td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/Coverage#recordType">
+      <td property="rdfs:label">recordType</td>
+      <td><a property="rdfs:range" href="../types/FactType">FactType</a></td>
+      <td property="rdfs:comment">Describes the type of records covered.</td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/Coverage#temporal">
+      <td property="rdfs:label">temporal</td>
+      <td><a property="rdfs:range" href="./Date">Date</a></td>
+      <td property="rdfs:comment">The temporal coverage (time period).</td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/Coverage#spatial">
+      <td property="rdfs:label">spatial</td>
+      <td><a property="rdfs:range" href="./PlaceReference">PlaceReference</a></td>
+      <td property="rdfs:comment">The spatial (place) coverage.</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

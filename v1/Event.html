@@ -1,0 +1,92 @@
+---
+layout: default
+title: http://gedcomx.org/v1/Event
+---
+
+<div vocab="http://gedcomx.org/v1/" typeof="rdfs:Class" resource="http://gedcomx.org/v1/Event">
+  <p>This document provides the semantic definition for the GEDCOM X Event data type for use in structured data (e.g. RDFa, Microdata, JSON-LD, etc.).
+    This data type is specified by the <a property="rdfs:isDefinedBy" href="http://gedcomx.org/conceptual-model/v1">GEDCOM X Conceptual Model</a>.</p>
+
+  <p>This data type extends the <code property="rdfs:subClassOf">http://gedcomx.org/v1/Subject</code> data type.</p>
+  <h3>Description</h3>
+
+  <p property="rdfs:comment">A historical event.</p>
+
+  <h3>Properties</h3>
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th>property</th>
+      <th>expected type</th>
+      <th>description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td colspan="3"><h5 class="text-muted">Properties from <a href="./Event">Event</a></h5></td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/Event#type">
+      <td property="rdfs:label">type</td>
+      <td><a property="rdfs:range" href="../types/EventType">EventType</a></td>
+      <td property="rdfs:comment">The type of the event.</td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/Event#date">
+      <td property="rdfs:label">date</td>
+      <td><a property="rdfs:range" href="./Date">Date</a></td>
+      <td property="rdfs:comment">The date of this event.</td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/Event#place">
+      <td property="rdfs:label">place</td>
+      <td><a property="rdfs:range" href="./PlaceReference">PlaceReference</a></td>
+      <td property="rdfs:comment">The place of this event.</td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/Event#role">
+      <td property="rdfs:label">role</td>
+      <td><a property="rdfs:range" href="./EventRole">EventRole</a></td>
+      <td property="rdfs:comment">The roles played in this event.</td>
+    </tr>
+    <tr>
+      <td colspan="3"><h5 class="text-muted">Properties from <a href="./Subject">Subject</a></h5></td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/Subject#evidence">
+      <td property="rdfs:label">evidence</td>
+      <td><a property="rdfs:range" href="./EvidenceReference">EvidenceReference</a></td>
+      <td property="rdfs:comment">References to the evidence being referenced for this subject.</td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/Subject#media">
+      <td property="rdfs:label">media</td>
+      <td><a property="rdfs:range" href="./SourceReference">SourceReference</a></td>
+      <td property="rdfs:comment">References to multimedia resources associated with this subject.</td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/Subject#identifier">
+      <td property="rdfs:label">identifier</td>
+      <td><a property="rdfs:range" href="./Identifier">Identifier</a></td>
+      <td property="rdfs:comment">The list of identifiers for the subject.</td>
+    </tr>
+    <tr>
+      <td colspan="3"><h5 class="text-muted">Properties from <a href="./Conclusion">Conclusion</a></h5></td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/Conclusion#confidence">
+      <td property="rdfs:label">confidence</td>
+      <td><a property="rdfs:range" href="../types/ConfidenceLevel">ConfidenceLevel</a></td>
+      <td property="rdfs:comment">The level of confidence the contributor has about the data.</td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/Conclusion#attribution">
+      <td property="rdfs:label">attribution</td>
+      <td><a property="rdfs:range" href="./Attribution">Attribution</a></td>
+      <td property="rdfs:comment">Attribution metadata for a conclusion.</td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/Conclusion#source">
+      <td property="rdfs:label">source</td>
+      <td><a property="rdfs:range" href="./SourceReference">SourceReference</a></td>
+      <td property="rdfs:comment">The source references for a conclusion.</td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/Conclusion#note">
+      <td property="rdfs:label">note</td>
+      <td><a property="rdfs:range" href="./Note">Note</a></td>
+      <td property="rdfs:comment">Notes about a person.</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,73 @@
+---
+layout: default
+title: http://gedcomx.org/v1/Agent
+---
+
+<div vocab="http://gedcomx.org/v1/" typeof="rdfs:Class" resource="http://gedcomx.org/v1/Agent">
+  <p>This document provides the semantic definition for the GEDCOM X Agent data type for use in structured data (e.g. RDFa, Microdata, JSON-LD, etc.).
+    This data type is specified by the <a property="rdfs:isDefinedBy" href="http://gedcomx.org/conceptual-model/v1">GEDCOM X Conceptual Model</a>.</p>
+
+  <p>This data type extends the <code property="rdfs:subClassOf">http://gedcomx.org/v1/HypermediaEnabledData</code> data type.</p>
+  <h3>Description</h3>
+
+  <p property="rdfs:comment">An agent, e.g. person, organization, or group. In genealogical research, an agent often
+    takes the role of a contributor.</p>
+
+  <h3>Properties</h3>
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th>property</th>
+      <th>expected type</th>
+      <th>description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td colspan="3"><h5 class="text-muted">Properties from <a href="./Agent">Agent</a></h5></td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/Agent#account">
+      <td property="rdfs:label">account</td>
+      <td><a property="rdfs:range" href="./OnlineAccount">OnlineAccount</a></td>
+      <td property="rdfs:comment">The accounts that belong to this person or organization.</td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/Agent#address">
+      <td property="rdfs:label">address</td>
+      <td><a property="rdfs:range" href="./Address">Address</a></td>
+      <td property="rdfs:comment">The addresses that belong to this person or organization.</td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/Agent#email">
+      <td property="rdfs:label">email</td>
+      <td><a property="rdfs:range" href="./ResourceReference">ResourceReference</a></td>
+      <td property="rdfs:comment">The emails that belong to this person or organization.</td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/Agent#homepage">
+      <td property="rdfs:label">homepage</td>
+      <td><a property="rdfs:range" href="./ResourceReference">ResourceReference</a></td>
+      <td property="rdfs:comment">The homepage of the person or organization. Note this is different from the
+        homepage of the service where the person or organization has an account.</td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/Agent#identifier">
+      <td property="rdfs:label">identifier</td>
+      <td><a property="rdfs:range" href="./Identifier">Identifier</a></td>
+      <td property="rdfs:comment">The list of identifiers for the agent.</td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/Agent#name">
+      <td property="rdfs:label">name</td>
+      <td><a property="rdfs:range" href="./TextValue">TextValue</a></td>
+      <td property="rdfs:comment">The list of names for the agent.</td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/Agent#openid">
+      <td property="rdfs:label">openid</td>
+      <td><a property="rdfs:range" href="./ResourceReference">ResourceReference</a></td>
+      <td property="rdfs:comment">The <a href="http://openid.net/">openid</a> of the person or organization.</td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/Agent#phone">
+      <td property="rdfs:label">phone</td>
+      <td><a property="rdfs:range" href="./ResourceReference">ResourceReference</a></td>
+      <td property="rdfs:comment">The phones that belong to this person or organization.</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,34 @@
+---
+layout: default
+title: http://gedcomx.org/v1/Qualifier
+---
+
+<div vocab="http://gedcomx.org/v1/" typeof="rdfs:Class" resource="http://gedcomx.org/v1/Qualifier">
+  <p>This document provides the semantic definition for the GEDCOM X Qualifier data type for use in structured data (e.g. RDFa, Microdata, JSON-LD, etc.).
+    This data type is specified by the <a property="rdfs:isDefinedBy" href="http://gedcomx.org/conceptual-model/v1">GEDCOM X Conceptual Model</a>.</p>
+  <h3>Description</h3>
+
+  <p property="rdfs:comment">A data qualifier. Qualifiers are used to "qualify" certain data elements to provide additional context, information, or details.</p>
+
+  <h3>Properties</h3>
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th>property</th>
+      <th>expected type</th>
+      <th>description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td colspan="3"><h5 class="text-muted">Properties from <a href="./Qualifier">Qualifier</a></h5></td>
+    </tr>
+    <tr>
+      <td>(value)</td>
+      <td property="rdfs:subClassOf" resource="xsd:string">string</td>
+      <td property="rdfs:comment">The value of the qualifier. Some qualifiers may not have values, indicating that the qualifier is to be treated more like a "tag".</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,43 @@
+---
+layout: default
+title: http://gedcomx.org/DocumentType
+---
+
+<div vocab="http://gedcomx.org/v1/" typeof="rdfs:Class" resource="http://gedcomx.org/DocumentType">
+  <h3>Description</h3>
+
+  <p property="rdfs:comment">Enumeration of document types.</p>
+
+  <h3>Known Types</h3>
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th>type</th>
+      <th>description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr resource="http://gedcomx.org/Abstract">
+      <td property="rdfs:subClassOf" resource="http://gedcomx.org/DocumentType"><code>http://gedcomx.org/Abstract</code></td>
+      <td property="rdfs:comment"> The document is an abstract of a record or document.
+      </td>
+    </tr>
+    <tr resource="http://gedcomx.org/Translation">
+      <td property="rdfs:subClassOf" resource="http://gedcomx.org/DocumentType"><code>http://gedcomx.org/Translation</code></td>
+      <td property="rdfs:comment"> The document is a translation of a record or document.
+      </td>
+    </tr>
+    <tr resource="http://gedcomx.org/Transcription">
+      <td property="rdfs:subClassOf" resource="http://gedcomx.org/DocumentType"><code>http://gedcomx.org/Transcription</code></td>
+      <td property="rdfs:comment"> The document is a transcription (full or partial) of a record or document.
+      </td>
+    </tr>
+    <tr resource="http://gedcomx.org/Analysis">
+      <td property="rdfs:subClassOf" resource="http://gedcomx.org/DocumentType"><code>http://gedcomx.org/Analysis</code></td>
+      <td property="rdfs:comment"> The document is an analysis done by a researcher, often used as a genealogical proof statement.
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

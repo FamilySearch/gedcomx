@@ -1,0 +1,63 @@
+---
+layout: default
+title: http://gedcomx.org/NameType
+---
+
+<div vocab="http://gedcomx.org/v1/" typeof="rdfs:Class" resource="http://gedcomx.org/NameType">
+  <h3>Description</h3>
+
+  <p property="rdfs:comment">Enumeration of standard name types.</p>
+
+  <h3>Known Types</h3>
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th>type</th>
+      <th>description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr resource="http://gedcomx.org/BirthName">
+      <td property="rdfs:subClassOf" resource="http://gedcomx.org/NameType"><code>http://gedcomx.org/BirthName</code></td>
+      <td property="rdfs:comment"> Name given at birth.
+      </td>
+    </tr>
+    <tr resource="http://gedcomx.org/DeathName">
+      <td property="rdfs:subClassOf" resource="http://gedcomx.org/NameType"><code>http://gedcomx.org/DeathName</code></td>
+      <td property="rdfs:comment"> Name used at the time of death.
+      </td>
+    </tr>
+    <tr resource="http://gedcomx.org/MarriedName">
+      <td property="rdfs:subClassOf" resource="http://gedcomx.org/NameType"><code>http://gedcomx.org/MarriedName</code></td>
+      <td property="rdfs:comment"> Name accepted at marriage.
+      </td>
+    </tr>
+    <tr resource="http://gedcomx.org/AlsoKnownAs">
+      <td property="rdfs:subClassOf" resource="http://gedcomx.org/NameType"><code>http://gedcomx.org/AlsoKnownAs</code></td>
+      <td property="rdfs:comment"> "Also known as" name.
+      </td>
+    </tr>
+    <tr resource="http://gedcomx.org/Nickname">
+      <td property="rdfs:subClassOf" resource="http://gedcomx.org/NameType"><code>http://gedcomx.org/Nickname</code></td>
+      <td property="rdfs:comment"> Nickname.
+      </td>
+    </tr>
+    <tr resource="http://gedcomx.org/AdoptiveName">
+      <td property="rdfs:subClassOf" resource="http://gedcomx.org/NameType"><code>http://gedcomx.org/AdoptiveName</code></td>
+      <td property="rdfs:comment"> Name given at adoption.
+      </td>
+    </tr>
+    <tr resource="http://gedcomx.org/FormalName">
+      <td property="rdfs:subClassOf" resource="http://gedcomx.org/NameType"><code>http://gedcomx.org/FormalName</code></td>
+      <td property="rdfs:comment"> A formal name, usually given to distinguish it from a name more commonly used.
+      </td>
+    </tr>
+    <tr resource="http://gedcomx.org/ReligiousName">
+      <td property="rdfs:subClassOf" resource="http://gedcomx.org/NameType"><code>http://gedcomx.org/ReligiousName</code></td>
+      <td property="rdfs:comment"> A name given at a religious rite or ceremony.
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

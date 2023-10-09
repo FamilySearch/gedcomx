@@ -1,0 +1,46 @@
+---
+layout: default
+title: http://gedcomx.org/v1/SourceReference
+---
+
+<div vocab="http://gedcomx.org/v1/" typeof="rdfs:Class" resource="http://gedcomx.org/v1/SourceReference">
+  <p>This document provides the semantic definition for the GEDCOM X SourceReference data type for use in structured data (e.g. RDFa, Microdata, JSON-LD, etc.).
+    This data type is specified by the <a property="rdfs:isDefinedBy" href="http://gedcomx.org/conceptual-model/v1">GEDCOM X Conceptual Model</a>.</p>
+
+  <p>This data type extends the <code property="rdfs:subClassOf">http://gedcomx.org/v1/HypermediaEnabledData</code> data type.</p>
+  <h3>Description</h3>
+
+  <p property="rdfs:comment">An attributable reference to a description of a source.</p>
+
+  <h3>Properties</h3>
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th>property</th>
+      <th>expected type</th>
+      <th>description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td colspan="3"><h5 class="text-muted">Properties from <a href="./SourceReference">SourceReference</a></h5></td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/SourceReference#description">
+      <td property="rdfs:label">description</td>
+      <td property="rdfs:range" resource="xsd:string">string</td>
+      <td property="rdfs:comment">A reference to a description of the source being referenced.</td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/SourceReference#attribution">
+      <td property="rdfs:label">attribution</td>
+      <td><a property="rdfs:range" href="./Attribution">Attribution</a></td>
+      <td property="rdfs:comment">The attribution metadata for this source reference.</td>
+    </tr>
+    <tr typeof="rdfs:Property" resource="http://gedcomx.org/v1/SourceReference#qualifier">
+      <td property="rdfs:label">qualifier</td>
+      <td><a property="rdfs:range" href="./Qualifier">Qualifier</a></td>
+      <td property="rdfs:comment">The qualifiers associated with this source reference.</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
