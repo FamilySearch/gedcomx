@@ -1,0 +1,27 @@
+---
+title: GEDCOM X Blog
+---
+
+<!DOCTYPE html>
+<html>
+{% include head.html %}
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+{% include nav.html %}
+
+<!-- Content Section -->
+<section id="content" class="container content-section">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2">
+      <ul>
+        {% for post in site.posts %}
+        <li><a href="{{ post.url }}">{{ post.title }}</a> <small>{{ post.date | date_to_string }}</small></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</section>
+
+{% include footer.html %}
+{% include js.html %}
+</body>
+</html>
