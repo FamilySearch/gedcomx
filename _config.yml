@@ -1,0 +1,29 @@
+# Site settings
+title: GEDCOM X
+email: heatonra@gedcomx.org
+url: http://gedcomx.org/
+description: "GEDCOM X is a set of open specifications for exchanging data essential to the genealogical research process."
+destination: target/site
+exclude:
+  - "src"
+  - "*.sh"
+  - "enunciate.xml"
+  - "pom.xml"
+  - "*.iml"
+  - "target"
+
+# Color settings (hex-codes without the leading hash-tag)
+color:
+  primary-dark: '#000000'
+  links: '#219ab3'
+
+# Footer settings
+footer: Intellectual Reserve, Inc.
+
+# Social networks usernames (many more available: google-plus, flickr, dribbble, pinterest, instagram, tumblr, linkedin, etc.)
+social:
+  - title: github
+    url: https://github.com/FamilySearch/gedcomx
+
+gems:
+  - jekyll-feed
