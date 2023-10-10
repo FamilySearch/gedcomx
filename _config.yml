@@ -1,7 +1,6 @@
 # Site settings
 title: GEDCOM X
 email: heatonra@gedcomx.org
-url: http://gedcomx.org/
 description: "GEDCOM X is a set of open specifications for exchanging data essential to the genealogical research process."
 destination: target/site
 exclude:
