@@ -27,3 +27,4 @@ social:
 
 gems:
   - jekyll-feed
+  - jekyll-redirect-from
