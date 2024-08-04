@@ -430,12 +430,15 @@ repository | A reference to the repository that contains the described resource.
   "notes" : [ { /*...*/ }, { /*...*/ } ],
   "attribution" : { /*...*/ },
   "rights" : [ { /*...*/ }, { /*...*/ }],
-  "coverage" : { /*...*/ },
+  "coverage" : [ { /*...*/ }, { /*...*/ }],
   "descriptions" : [ { /*...*/ }, { /*...*/ } ],
-  "identifiers" : { /*...*/ }
+  "identifiers" : [ { /*...*/ }, { /*...*/ } ],
   "created" : /*...*/,
   "modified" : /*...*/,
-  "repository" : { /*...*/ }
+  "published" : /*...*/,
+  "repository" : {
+    "resource" : "http://identifier/for/agent/of/the/repository/containing/the/resource"
+  },
 
   //...possibility of extension elements...
 
