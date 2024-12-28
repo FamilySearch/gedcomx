@@ -277,7 +277,7 @@ Support for other XHTML modules is OPTIONAL. Parsers MAY ignore elements from op
 
 ## 1.4 Internationalization Considerations
 
-GEDCOM X is be designed to accommodate users and software of different languages and cultures.
+GEDCOM X is designed to accommodate users and software of different languages and cultures.
 Genealogical data often needs to be interpreted from the perspective of its cultural context.
 
 To this end, a property named `lang` is supported on relevant GEDCOM X data types. The value
