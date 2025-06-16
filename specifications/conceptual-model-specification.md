@@ -944,7 +944,7 @@ street6 | The street (sixth line). | string | OPTIONAL.
 The `Conclusion` data type defines the abstract concept for a basic genealogical data item.
 
 In formal discussions of the genealogical research process, the term "conclusion" usually has a more specific meaning and is used to refer
-to an "accepted" hypothesis in accordance with the [Genealogical Proof Standard]([http://www.bcgcertification.org/resources/standard.html](https://www.bcgcertification.org/ethics-standards#genealogical-proof-standard-gps)).
+to an "accepted" hypothesis in accordance with the [Genealogical Proof Standard](https://www.bcgcertification.org/ethics-standards#genealogical-proof-standard-gps).
 The name of the `Conclusion` data type is not meant to be associated with the definition of the term "conclusion" as it is described in the
 genealogical research process. Rather, the name refers to the notion that any information that is interpreted from an "original" is in some way
 a "conclusion"&mdash;even if the interpreter was diligent in representing the information verbatim as it was found in the original.
