@@ -1,0 +1,13 @@
+{
+  "name": "gedcomx",
+  "owner": {
+    "name": "Ryan Heaton"
+  },
+  "plugins": [
+    {
+      "name": "gedcomx",
+      "description": "GEDCOM X knowledge, generation, and validation for genealogical data.",
+      "source": "./tools/claude-plugin"
+    }
+  ]
+}
